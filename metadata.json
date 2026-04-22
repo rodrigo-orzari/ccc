@@ -1,0 +1,6 @@
+{
+  "name": "PostgreSQL Full-Stack App",
+  "description": "A full-stack Node.js application with a PostgreSQL backend and a React frontend.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
