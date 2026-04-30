@@ -11,7 +11,7 @@ const { Pool } = pg;
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;
 
   // PostgreSQL Connection Pool
   // Users should set DATABASE_URL in their environment variables (Secrets panel)
@@ -23,9 +23,7 @@ async function startServer() {
     // database: process.env.DB_NAME,
     // password: process.env.DB_PASSWORD,
     // port: parseInt(process.env.DB_PORT || '5432'),
-    ssl: process.env.DATABASE_URL?.includes('render.com') || process.env.DATABASE_URL?.includes('supabase.co') 
-          ? { rejectUnauthorized: false } 
-          : false
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
   });
 
   app.use(cors());
@@ -67,7 +65,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  app.listen(Number(PORT), '0.0.0.0', () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 }
