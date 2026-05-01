@@ -44,7 +44,6 @@ const PROVIDERS = [
   { id: 'gcp', name: 'Google', color: '#34A853' },
   { id: 'oracle', name: 'Oracle', color: '#F80000' },
   { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF' },
-  { id: 'alibaba', name: 'Alibaba', color: '#999999', soon: true }
 ];
 
 const GEOGRAPHIES = ['N. America', 'S. America', 'W. Europe', 'N. Europe', 'Mid East & Africa', 'Asia Pacific', 'Australia'];
@@ -168,6 +167,18 @@ export default function Dashboard() {
   }, []);
 
   const fetchFilteredData = useCallback(async () => {
+    if (
+      selectedProviders.length === 0 ||
+      selectedGeographies.length === 0 ||
+      selectedOS.length === 0 ||
+      selectedArch.length === 0 ||
+      selectedCpuVendors.length === 0 ||
+      selectedCategory.length === 0
+    ) {
+      setData([]);
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -177,13 +188,14 @@ export default function Dashboard() {
       if (selectedArch.length > 0) params.append('arch', selectedArch.join(','));
       if (selectedCpuVendors.length > 0) params.append('cpuVendor', selectedCpuVendors.join(','));
 
-      if (selectedCategory.includes('GPU')) params.append('gpu', 'true');
+      // Only send gpu=true when GPU is explicitly filtered (not when all categories are selected)
+      if (selectedCategory.includes('GPU') && selectedCategory.length < CATEGORIES.length) {
+        params.append('gpu', 'true');
+      }
 
       if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
         params.append('category', selectedCategory.join(','));
       }
-
-      if (showAggregation) params.append('aggregate', 'true');
 
       params.append('minVcpu', vCpuRange.min.toString());
       params.append('maxVcpu', vCpuRange.max.toString());
@@ -385,7 +397,7 @@ export default function Dashboard() {
                     : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                   }`}
                 >
-                  Min / Avg / Max
+                  Yearly
                 </button>
               </div>
             </section>
@@ -657,7 +669,10 @@ export default function Dashboard() {
           {/* Table Toolbar */}
           <div className="px-4 py-3 flex items-center justify-between bg-white dark:bg-[#000000] border-b border-[#e5e5e5] dark:border-[#262626]">
             <div className="flex items-center gap-6">
-              <span className="text-xl font-bold text-black dark:text-white shrink-0">{data.length} <span className="text-[#737373] dark:text-[#a3a3a3] font-normal text-base">instances</span></span>
+              <span className="text-xl font-bold text-black dark:text-white shrink-0">
+                {data.length} <span className="text-[#737373] dark:text-[#a3a3a3] font-normal text-base">instances</span>
+                {data.length === 1000 && <span className="ml-2 text-[10px] font-normal text-[#a3a3a3]">(top 1,000 shown)</span>}
+              </span>
 
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373]" />
@@ -724,22 +739,16 @@ export default function Dashboard() {
                     <th onClick={() => sortData('memory_gb')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
                       Memory <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'memory_gb' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
-                    <th onClick={() => sortData(showAggregation ? 'avg_price' : 'price_per_unit')} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity">
-                      {showAggregation ? 'Avg Hourly price ($)' : 'Hourly price ($)'} <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === (showAggregation ? 'avg_price' : 'price_per_unit') && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                    <th onClick={() => sortData('price_per_unit')} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity">
+                      {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'price_per_unit' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
-                    {showAggregation && (
-                      <>
-                        <th onClick={() => sortData('min_price')} className="px-6 py-4 text-center font-bold text-[#737373] whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">Min Hourly price ($)</th>
-                        <th onClick={() => sortData('max_price')} className="px-6 py-4 text-center font-bold text-[#737373] whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">Max Hourly price ($)</th>
-                      </>
-                    )}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
                   {loading ? (
                     Array.from({ length: 15 }).map((_, i) => (
                       <tr key={i} className="animate-pulse">
-                        {Array.from({ length: showAggregation ? 13 : 11 }).map((_, j) => (
+                        {Array.from({ length: 11 }).map((_, j) => (
                           <td key={j} className="px-6 py-4"><div className="h-3 bg-[#f5f5f5] dark:bg-[#171717] rounded w-16 mx-auto"></div></td>
                         ))}
                       </tr>
@@ -786,24 +795,16 @@ export default function Dashboard() {
                         </td>
                         <td className="px-6 py-4 text-center whitespace-nowrap">
                           <span className="text-xs font-bold text-black dark:text-white">
-                            ${parseFloat(showAggregation ? (record.avg_price || '0') : record.price_per_unit).toFixed(4)}
+                            {showAggregation
+                              ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}`
+                              : `$${parseFloat(record.price_per_unit).toFixed(4)}`}
                           </span>
                         </td>
-                        {showAggregation && (
-                          <>
-                            <td className="px-6 py-4 text-center whitespace-nowrap">
-                              <span className="text-xs text-[#737373] font-mono">${parseFloat(record.min_price || '0').toFixed(4)}</span>
-                            </td>
-                            <td className="px-6 py-4 text-center whitespace-nowrap">
-                              <span className="text-xs text-[#737373] font-mono">${parseFloat(record.max_price || '0').toFixed(4)}</span>
-                            </td>
-                          </>
-                        )}
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={showAggregation ? 13 : 11} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
+                      <td colSpan={11} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
                         <div className="flex flex-col items-center gap-4">
                           <span>No instances match your filters.</span>
                           {dbStatus && dbStatus.total === 0 && (
