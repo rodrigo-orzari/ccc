@@ -55,6 +55,25 @@ async function startServer() {
     }
   });
 
+  // List all tables and their row counts
+  app.get('/api/tables', async (req, res) => {
+    try {
+      const client = await pool.connect();
+      const result = await client.query(`
+        SELECT table_name,
+               (SELECT COUNT(*) FROM information_schema.columns c WHERE c.table_name = t.table_name AND c.table_schema = 'public') AS column_count,
+               (xpath('/row/cnt/text()', query_to_xml(format('SELECT COUNT(*) AS cnt FROM %I', table_name), false, true, '')))[1]::text::int AS row_count
+        FROM information_schema.tables t
+        WHERE table_schema = 'public'
+        ORDER BY table_name
+      `);
+      client.release();
+      res.json({ tables: result.rows });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
