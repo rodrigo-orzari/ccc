@@ -4,7 +4,6 @@ import {
   Search,
   Download,
   ChevronDown,
-  ArrowRight,
   Info,
   Maximize2
 } from 'lucide-react';
@@ -296,8 +295,8 @@ export default function Dashboard() {
               Know the methodology <Maximize2 size={10} />
             </Link>
             <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
-            <a href="mailto:hello@comparecloudcosts.com" className="text-xs font-bold text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              Questions or feedback? <ArrowRight size={10} />
+            <a href="mailto:hello@comparecloudcosts.com" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
+              Questions or feedback? <Maximize2 size={10} />
             </a>
           </div>
         </div>
