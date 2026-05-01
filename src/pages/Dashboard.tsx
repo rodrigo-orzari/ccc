@@ -819,7 +819,7 @@ export default function Dashboard() {
               <span className="text-[10px] text-[#737373] dark:text-[#525252] font-medium">Click a column header to sort</span>
 
               <button className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#e5e5e5] dark:border-[#262626] px-3 py-1.5 rounded hover:bg-[#f5f5f5] dark:hover:bg-[#171717] transition-all">
-                <Download size={12} /> Export CSV
+                <Download size={12} /> Export
               </button>
             </div>
           </div>
