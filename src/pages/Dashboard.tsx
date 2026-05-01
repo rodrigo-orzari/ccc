@@ -777,8 +777,12 @@ export default function Dashboard() {
                     {p.soon && <span className="text-[7px] font-bold bg-[#737373] text-white px-1 rounded ml-1 border border-white/20">SOON</span>}
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-black dark:text-white">{p.soon ? '-' : displayCount}</span>
-                    <span className="text-[10px] text-[#737373] font-medium uppercase tracking-tighter">instances</span>
+                    <span className="text-3xl font-bold text-black dark:text-white">{p.soon ? '-' : displayCount.toLocaleString()}</span>
+                    {!p.soon && (
+                      <span className="text-[10px] text-[#737373] font-medium uppercase tracking-tighter">
+                        of {dbCount.toLocaleString()}
+                      </span>
+                    )}
                   </div>
                 </div>
               );
@@ -789,7 +793,7 @@ export default function Dashboard() {
           <div className="px-4 py-3 flex items-center justify-between bg-white dark:bg-[#000000] border-b border-[#e5e5e5] dark:border-[#262626]">
             <div className="flex items-center gap-6">
               <span className="text-xl font-bold text-black dark:text-white shrink-0">
-                {totalFilteredCount.toLocaleString()} <span className="text-[#737373] dark:text-[#a3a3a3] font-normal text-base">instances</span>
+                {totalFilteredCount.toLocaleString()}
                 {totalFilteredCount > data.length && data.length > 0 && (
                   <span className="ml-2 text-[10px] font-normal text-[#a3a3a3]">(top {data.length.toLocaleString()} shown)</span>
                 )}
@@ -830,7 +834,7 @@ export default function Dashboard() {
                       Provider <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'provider' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
                     <th onClick={() => sortData('instance_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                      Instance <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'instance_type' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                      SKU <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'instance_type' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
                     <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Category</th>
                     <th className="px-6 py-4 text-center font-bold whitespace-nowrap">CPU Vendor</th>
@@ -913,7 +917,7 @@ export default function Dashboard() {
                     <tr>
                       <td colSpan={11} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
                         <div className="flex flex-col items-center gap-4">
-                          <span>No instances match your filters.</span>
+                          <span>No matches for your filters.</span>
                           {dbStatus && dbStatus.total === 0 && (
                             <div className="p-4 border border-amber-200 dark:border-amber-900 bg-amber-50 dark:bg-amber-950/20 rounded-lg max-w-md">
                               <p className="text-amber-800 dark:text-amber-400 font-bold mb-1">⚠️ Database is empty</p>
