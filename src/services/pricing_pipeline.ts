@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Pool } from 'pg';
+import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/oracle_instances.js';
+import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.js';
 
 export interface PricingRecord {
   provider: string;
@@ -255,25 +257,19 @@ export class OracleAdapter extends BaseAdapter {
   providerSlug = 'oracle';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log('Fetching Oracle pricing...');
-    const instances = [
-      { type: 'VM.Standard.E4.Flex', vcpus: 1, memory: 16, price: 0.025, cpuVendor: 'AMD' },
-      { type: 'VM.Standard3.Flex', vcpus: 1, memory: 16, price: 0.04, cpuVendor: 'Intel' },
-      { type: 'VM.Standard.A1.Flex', vcpus: 1, memory: 6, price: 0.015, cpuVendor: 'Ampere' },
-    ];
-
-    return instances.map(inst => ({
+    console.log(`Fetching Oracle pricing (from src/config/oracle_instances.ts, ${ORACLE_INSTANCES.length} entries)...`);
+    return ORACLE_INSTANCES.map(inst => ({
       provider: 'oracle',
       service: 'OCI Compute',
-      region: 'us-phoenix-1',
+      region: ORACLE_REGION,
       instanceType: inst.type,
       vcpus: inst.vcpus,
       memoryGb: inst.memory,
-      arch: inst.cpuVendor === 'Ampere' ? 'ARM' : 'x86 64',
+      arch: inst.cpuVendor === 'Ampere' || inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
       os: 'Linux',
       cpuVendor: inst.cpuVendor,
       gpuCount: 0,
-      geography: 'N. America',
+      geography: ORACLE_GEOGRAPHY,
       category: this.getCategory(inst.type, inst.vcpus, inst.memory),
       price: inst.price,
       unit: 'Hour'
@@ -285,20 +281,11 @@ export class DigitalOceanAdapter extends BaseAdapter {
   providerSlug = 'digitalocean';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log('Fetching DigitalOcean pricing...');
-    const sizes = [
-      { slug: 's-1vcpu-1gb', vcpus: 1, memory: 1, price: 0.00893, category: 'General purpose' },
-      { slug: 's-2vcpu-2gb', vcpus: 2, memory: 2, price: 0.02679, category: 'Compute optimized' },
-      { slug: 's-2vcpu-4gb', vcpus: 2, memory: 4, price: 0.03571, category: 'General purpose' },
-      { slug: 'g-2vcpu-8gb', vcpus: 2, memory: 8, price: 0.08929, category: 'General purpose' },
-      { slug: 'm-2vcpu-16gb', vcpus: 2, memory: 16, price: 0.11905, category: 'Memory optimized' },
-      { slug: 'c-2vcpu-4gb', vcpus: 2, memory: 4, price: 0.05952, category: 'Compute optimized' },
-    ];
-
-    return sizes.map(s => ({
+    console.log(`Fetching DigitalOcean pricing (from src/config/digitalocean_instances.ts, ${DIGITALOCEAN_INSTANCES.length} entries)...`);
+    return DIGITALOCEAN_INSTANCES.map(s => ({
       provider: 'digitalocean',
       service: 'Droplets',
-      region: 'nyc1',
+      region: DIGITALOCEAN_REGION,
       instanceType: s.slug,
       vcpus: s.vcpus,
       memoryGb: s.memory,
@@ -306,7 +293,7 @@ export class DigitalOceanAdapter extends BaseAdapter {
       os: 'Linux',
       cpuVendor: 'Intel',
       gpuCount: 0,
-      geography: 'N. America',
+      geography: DIGITALOCEAN_GEOGRAPHY,
       category: s.category || this.getCategory(s.slug, s.vcpus, s.memory),
       price: s.price,
       unit: 'Hour'

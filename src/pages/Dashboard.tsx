@@ -1,20 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  Cloud,
   Search,
   Download,
   ChevronDown,
-  Filter,
-  Cpu,
-  Database,
-  Globe,
-  Server,
   ArrowRight,
   Info,
-  Maximize2,
-  ShieldCheck,
-  Heart
+  Maximize2
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -132,7 +124,8 @@ export default function Dashboard() {
 
   const [data, setData] = useState<PricingRecord[]>([]);
   const [loading, setLoading] = useState(false);
-  const [dbStatus, setDbStatus] = useState<{ total: number, providers: any[] } | null>(null);
+  const [dbStatus, setDbStatus] = useState<{ total: number, providers: any[], lastUpdated: string | null } | null>(null);
+  const [providerCounts, setProviderCounts] = useState<Record<string, number>>({});
 
   const sortData = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
@@ -165,7 +158,8 @@ export default function Dashboard() {
         console.log('📊 Database Status:', status);
         setDbStatus({
           total: status.total_records || 0,
-          providers: status.by_provider || []
+          providers: status.by_provider || [],
+          lastUpdated: status.last_updated || null
         });
       })
       .catch(err => console.error('❌ Database health check failed:', err));
@@ -181,44 +175,51 @@ export default function Dashboard() {
       selectedGpu.length === 0
     ) {
       setData([]);
+      setProviderCounts({});
       setLoading(false);
       return;
     }
     setLoading(true);
     try {
-      const params = new URLSearchParams();
-      if (selectedProviders.length > 0) params.append('provider', selectedProviders.join(','));
-      if (selectedGeographies.length > 0) params.append('geography', selectedGeographies.join(','));
-      if (selectedOS.length > 0) params.append('os', selectedOS.join(','));
+      // Common filter params shared by /api/pricing and /api/pricing/counts.
+      // The counts endpoint reflects "what would be available per provider" so it
+      // intentionally ignores the provider filter (otherwise unselected providers'
+      // cards would always show 0).
+      const baseParams = new URLSearchParams();
+      if (selectedGeographies.length > 0) baseParams.append('geography', selectedGeographies.join(','));
+      if (selectedOS.length > 0) baseParams.append('os', selectedOS.join(','));
       if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
         const vendors = [...new Set(selectedCpu.map(id => CPU_PROFILES.find(p => p.id === id)!.vendor))];
-        params.append('cpuVendor', vendors.join(','));
+        baseParams.append('cpuVendor', vendors.join(','));
       }
-
       if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
-        params.append('category', selectedCategory.join(','));
+        baseParams.append('category', selectedCategory.join(','));
       }
-
       if (selectedGpu.length === 1) {
-        params.append('gpu', selectedGpu[0] === 'With GPU' ? 'true' : 'false');
+        baseParams.append('gpu', selectedGpu[0] === 'With GPU' ? 'true' : 'false');
+      }
+      baseParams.append('minVcpu', vCpuRange.min.toString());
+      baseParams.append('maxVcpu', vCpuRange.max.toString());
+      baseParams.append('minMemory', memoryRange.min.toString());
+      baseParams.append('maxMemory', memoryRange.max.toString());
+      baseParams.append('minPrice', priceRange.min.toString());
+      baseParams.append('maxPrice', priceRange.max.toString());
+      baseParams.append('search', search);
+
+      // Pricing query adds the provider filter on top of baseParams.
+      const pricingParams = new URLSearchParams(baseParams);
+      pricingParams.append('provider', selectedProviders.join(','));
+
+      const [pricingRes, countsRes] = await Promise.all([
+        fetch(`/api/pricing?${pricingParams.toString()}`),
+        fetch(`/api/pricing/counts?${baseParams.toString()}`)
+      ]);
+
+      if (!pricingRes.ok) {
+        throw new Error(`Server returned ${pricingRes.status}: ${pricingRes.statusText}`);
       }
 
-      params.append('minVcpu', vCpuRange.min.toString());
-      params.append('maxVcpu', vCpuRange.max.toString());
-      params.append('minMemory', memoryRange.min.toString());
-      params.append('maxMemory', memoryRange.max.toString());
-      params.append('minPrice', priceRange.min.toString());
-      params.append('maxPrice', priceRange.max.toString());
-
-      params.append('search', search);
-
-      const response = await fetch(`/api/pricing?${params.toString()}`);
-
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
-      }
-
-      const result = await response.json();
+      const result = await pricingRes.json();
       console.log(`✅ Fetched ${result.length} pricing records`);
 
       if (Array.isArray(result)) {
@@ -227,9 +228,17 @@ export default function Dashboard() {
         console.error('API Error:', result.error || result);
         setData([]);
       }
+
+      if (countsRes.ok) {
+        const countsRows: { slug: string, count: string }[] = await countsRes.json();
+        const countsMap: Record<string, number> = {};
+        countsRows.forEach(r => { countsMap[r.slug] = parseInt(r.count) || 0; });
+        setProviderCounts(countsMap);
+      }
     } catch (err: any) {
       console.error('Fetch error:', err);
       setData([]);
+      setProviderCounts({});
     } finally {
       setLoading(false);
     }
@@ -651,11 +660,12 @@ export default function Dashboard() {
           {/* Provider Summary Cards */}
           <div className="p-4 grid grid-cols-1 md:grid-cols-5 gap-px bg-[#e5e5e5] dark:bg-[#262626]">
             {PROVIDERS.filter(p => !p.soon).map(p => {
+              const filteredCount = providerCounts[p.id];
               const dbProvider = dbStatus?.providers.find(dp => dp.slug === p.id || dp.slug === p.name.toLowerCase());
               const dbCount = dbProvider ? parseInt(dbProvider.count) : 0;
-              const currentCount = data.filter(d => (d.provider || '').toLowerCase() === p.id || d.provider === p.name).length;
-
-              const displayCount = dbStatus ? dbCount : currentCount;
+              // Prefer the filter-aware count from /api/pricing/counts; fall back to total
+              // DB count before the first fetch resolves.
+              const displayCount = filteredCount !== undefined ? filteredCount : dbCount;
 
               const activeNonSoon = PROVIDERS.filter(pr => !pr.soon).map(pr => pr.id);
               const isSelected = selectedProviders.length === activeNonSoon.length || selectedProviders.includes(p.id);
@@ -711,27 +721,12 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="flex items-center gap-4">
+              {dbStatus?.lastUpdated && (
+                <span className="text-[10px] text-[#737373] dark:text-[#525252] font-medium">
+                  Price information as of {new Date(dbStatus.lastUpdated).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                </span>
+              )}
               <span className="text-[10px] text-[#737373] dark:text-[#525252] font-medium">Click a column header to sort</span>
-
-              <button
-                onClick={async () => {
-                  try {
-                    setLoading(true);
-                    const res = await fetch('/api/admin/fetch-pricing', { method: 'POST' });
-                    const result = await res.json();
-                    console.log('🔄 Manual fetch triggered:', result);
-                    fetchFilteredData();
-                  } catch (err) {
-                    console.error('❌ Manual fetch failed:', err);
-                  } finally {
-                    setLoading(false);
-                  }
-                }}
-                title="Refresh Database"
-                className="p-1.5 text-[#737373] hover:text-black dark:hover:text-white opacity-20 hover:opacity-100 transition-all"
-              >
-                <Cloud size={12} className={loading && data.length === 0 ? 'animate-spin' : ''} />
-              </button>
 
               <button className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#e5e5e5] dark:border-[#262626] px-3 py-1.5 rounded hover:bg-[#f5f5f5] dark:hover:bg-[#171717] transition-all">
                 <Download size={12} /> Export CSV
