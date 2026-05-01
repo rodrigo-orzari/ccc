@@ -177,7 +177,10 @@ export default function Dashboard() {
       if (selectedArch.length > 0) params.append('arch', selectedArch.join(','));
       if (selectedCpuVendors.length > 0) params.append('cpuVendor', selectedCpuVendors.join(','));
 
-      if (selectedCategory.includes('GPU')) params.append('gpu', 'true');
+      // Only send gpu=true when GPU is explicitly filtered (not when all categories are selected)
+      if (selectedCategory.includes('GPU') && selectedCategory.length < CATEGORIES.length) {
+        params.append('gpu', 'true');
+      }
 
       if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
         params.append('category', selectedCategory.join(','));
@@ -657,7 +660,10 @@ export default function Dashboard() {
           {/* Table Toolbar */}
           <div className="px-4 py-3 flex items-center justify-between bg-white dark:bg-[#000000] border-b border-[#e5e5e5] dark:border-[#262626]">
             <div className="flex items-center gap-6">
-              <span className="text-xl font-bold text-black dark:text-white shrink-0">{data.length} <span className="text-[#737373] dark:text-[#a3a3a3] font-normal text-base">instances</span></span>
+              <span className="text-xl font-bold text-black dark:text-white shrink-0">
+                {data.length} <span className="text-[#737373] dark:text-[#a3a3a3] font-normal text-base">instances</span>
+                {data.length === 1000 && <span className="ml-2 text-[10px] font-normal text-[#a3a3a3]">(top 1,000 shown)</span>}
+              </span>
 
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#737373]" />
