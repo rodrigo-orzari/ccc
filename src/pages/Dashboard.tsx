@@ -280,12 +280,12 @@ export default function Dashboard() {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 ml-2">
-            <Link to="/methodology" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              Know the methodology <Maximize2 size={10} />
+            <Link to="/about" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
+              What is CompareCloudCosts.com? <Maximize2 size={10} />
             </Link>
             <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
-            <Link to="/about" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              What is CloudCompareCosts? <Maximize2 size={10} />
+            <Link to="/methodology" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
+              Know the methodology <Maximize2 size={10} />
             </Link>
             <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
             <a href="mailto:hello@comparecloudcosts.com" className="text-xs font-bold text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
@@ -344,7 +344,7 @@ export default function Dashboard() {
             <section className="space-y-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Provider <Info size={10} />
+                  Provider <span title="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter."><Info size={10} className="cursor-help" /></span>
                 </h3>
                 <button
                   onClick={() => {
@@ -390,7 +390,7 @@ export default function Dashboard() {
             <section className="space-y-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  PAYG OR YEARLY PRICE <Info size={10} />
+                  PAYG OR YEARLY PRICE <span title="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)."><Info size={10} className="cursor-help" /></span>
                 </h3>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -423,7 +423,7 @@ export default function Dashboard() {
             <section className="space-y-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Category <Info size={10} />
+                  Category <span title="Instance type purpose, derived from each cloud's published instance families: General purpose, Compute optimized (CPU-heavy), Memory optimized (RAM-heavy), Storage optimized (high-IO), Burstable (cheap baseline + bursts), or HPC."><Info size={10} className="cursor-help" /></span>
                 </h3>
                 <button
                   onClick={() => {
@@ -461,7 +461,7 @@ export default function Dashboard() {
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Geography <Info size={10} />
+                  Geography <span title="Geographic region where the VM runs. Each cloud's individual regions (e.g. us-east-1, eastus, europe-west1) are grouped into broader continental areas."><Info size={10} className="cursor-help" /></span>
                 </h3>
                 <button
                   onClick={() => {
@@ -499,7 +499,7 @@ export default function Dashboard() {
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Operating System <Info size={10} />
+                  Operating System <span title="The operating system running on the VM. Linux pricing typically reflects free distributions (Ubuntu, Amazon Linux, Debian). AWS and Azure charge extra for commercial distros like RHEL or SUSE — those are not currently broken out as a filter."><Info size={10} className="cursor-help" /></span>
                 </h3>
                 <button
                   onClick={() => {
@@ -537,7 +537,7 @@ export default function Dashboard() {
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  CPU <Info size={10} />
+                  CPU <span title="Processor vendor and instruction set. Intel and AMD use x86; AWS Graviton and Ampere Altra use ARM. Performance, software compatibility, and price all vary across these."><Info size={10} className="cursor-help" /></span>
                 </h3>
                 <button
                   onClick={() => {
@@ -575,7 +575,7 @@ export default function Dashboard() {
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  GPU <Info size={10} />
+                  GPU <span title="Whether the instance includes a GPU accelerator (e.g. NVIDIA T4, A10, A100, L40S, H100). Common for ML training/inference, rendering, and scientific compute."><Info size={10} className="cursor-help" /></span>
                 </h3>
                 <button
                   onClick={() => {
@@ -613,7 +613,7 @@ export default function Dashboard() {
             <section className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Specs & Price <Info size={10} />
+                  Specs & Price <span title="Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD."><Info size={10} className="cursor-help" /></span>
                 </h3>
               </div>
               <div className="space-y-8 px-1">
@@ -656,6 +656,19 @@ export default function Dashboard() {
 
         {/* Main Content Area */}
         <main className="flex-1 flex flex-col bg-white dark:bg-[#000000] overflow-hidden">
+
+          {/* Ad Slot — reserved space for a leaderboard ad (e.g. Google AdSense
+              728×90 / 970×90). Drop the ad markup inside the inner div when
+              ready. Sized to standard leaderboard height so ad insertion
+              doesn't cause layout shift. */}
+          <div className="px-4 pt-4">
+            <div
+              data-ad-slot="leaderboard-top"
+              className="w-full h-[90px] flex items-center justify-center bg-[#fafafa] dark:bg-[#0a0a0a] border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded text-[10px] font-medium uppercase tracking-widest text-[#a3a3a3] dark:text-[#525252]"
+            >
+              Advertisement
+            </div>
+          </div>
 
           {/* Provider Summary Cards */}
           <div className="p-4 grid grid-cols-1 md:grid-cols-5 gap-px bg-[#e5e5e5] dark:bg-[#262626]">

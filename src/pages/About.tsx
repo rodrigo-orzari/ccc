@@ -3,9 +3,9 @@ import MarkdownPage from '../components/MarkdownPage';
 
 const AboutPage: React.FC = () => {
   const content = `
-# About CloudCompareCosts
+# About CompareCloudCosts.com
 
-**CloudCompareCosts** is an open-source tool designed to help developers and architects understand the real costs of cloud infrastructure.
+**CompareCloudCosts.com** is an open-source tool designed to help developers and architects understand the real costs of cloud infrastructure.
 
 ## Why we built this
 Cloud providers often hide their pricing behind complex calculators and regional variations. We believe in transparency and simplicity.
@@ -19,7 +19,8 @@ Cloud providers often hide their pricing behind complex calculators and regional
 This project is built for the community. If you find discrepancies or want to see a new provider, feel free to contribute.
 `;
 
-  return <MarkdownPage title="What is CloudCompareCosts?" content={content} />;
+  return <MarkdownPage title="What is CompareCloudCosts.com?" content={content} />;
+
 };
 
 export default AboutPage;
