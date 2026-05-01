@@ -48,9 +48,14 @@ const PROVIDERS = [
 
 const GEOGRAPHIES = ['N. America', 'S. America', 'W. Europe', 'N. Europe', 'Mid East & Africa', 'Asia Pacific', 'Australia'];
 const OS_TYPES = ['Linux', 'Windows'];
-const ARCHS = ['x86', 'ARM'];
-const CPU_VENDORS = ['Intel', 'AMD', 'AWS', 'Ampere'];
-const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optimized', 'Storage optimized', 'GPU', 'Burstable', 'HPC'];
+const CPU_PROFILES = [
+  { id: 'intel-x86', label: 'Intel (x86)', vendor: 'Intel', arch: 'x86 64' },
+  { id: 'amd-x86', label: 'AMD (x86)', vendor: 'AMD', arch: 'x86 64' },
+  { id: 'aws-arm', label: 'AWS Graviton (ARM)', vendor: 'AWS', arch: 'ARM' },
+  { id: 'ampere-arm', label: 'Ampere (ARM)', vendor: 'Ampere', arch: 'ARM' },
+];
+const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optimized', 'Storage optimized', 'Burstable', 'HPC'];
+const GPU_OPTIONS = ['With GPU', 'Without GPU'];
 
 const RangeSlider = ({ min, max, value, onChange, step = 1, unit = '' }: {
   min: number,
@@ -115,9 +120,9 @@ export default function Dashboard() {
   const [selectedProviders, setSelectedProviders] = useState<string[]>(PROVIDERS.filter(p => !p.soon).map(p => p.id));
   const [selectedGeographies, setSelectedGeographies] = useState<string[]>([...GEOGRAPHIES]);
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
-  const [selectedArch, setSelectedArch] = useState<string[]>([...ARCHS]);
-  const [selectedCpuVendors, setSelectedCpuVendors] = useState<string[]>([...CPU_VENDORS]);
+  const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
+  const [selectedGpu, setSelectedGpu] = useState<string[]>([...GPU_OPTIONS]);
   const [vCpuRange, setVCpuRange] = useState({ min: 1, max: 128 });
   const [memoryRange, setMemoryRange] = useState({ min: 0, max: 440 });
   const [priceRange, setPriceRange] = useState({ min: 0, max: 510 });
@@ -171,9 +176,9 @@ export default function Dashboard() {
       selectedProviders.length === 0 ||
       selectedGeographies.length === 0 ||
       selectedOS.length === 0 ||
-      selectedArch.length === 0 ||
-      selectedCpuVendors.length === 0 ||
-      selectedCategory.length === 0
+      selectedCpu.length === 0 ||
+      selectedCategory.length === 0 ||
+      selectedGpu.length === 0
     ) {
       setData([]);
       setLoading(false);
@@ -185,16 +190,17 @@ export default function Dashboard() {
       if (selectedProviders.length > 0) params.append('provider', selectedProviders.join(','));
       if (selectedGeographies.length > 0) params.append('geography', selectedGeographies.join(','));
       if (selectedOS.length > 0) params.append('os', selectedOS.join(','));
-      if (selectedArch.length > 0) params.append('arch', selectedArch.join(','));
-      if (selectedCpuVendors.length > 0) params.append('cpuVendor', selectedCpuVendors.join(','));
-
-      // Only send gpu=true when GPU is explicitly filtered (not when all categories are selected)
-      if (selectedCategory.includes('GPU') && selectedCategory.length < CATEGORIES.length) {
-        params.append('gpu', 'true');
+      if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
+        const vendors = [...new Set(selectedCpu.map(id => CPU_PROFILES.find(p => p.id === id)!.vendor))];
+        params.append('cpuVendor', vendors.join(','));
       }
 
       if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
         params.append('category', selectedCategory.join(','));
+      }
+
+      if (selectedGpu.length === 1) {
+        params.append('gpu', selectedGpu[0] === 'With GPU' ? 'true' : 'false');
       }
 
       params.append('minVcpu', vCpuRange.min.toString());
@@ -227,7 +233,7 @@ export default function Dashboard() {
     } finally {
       setLoading(false);
     }
-  }, [selectedProviders, selectedGeographies, selectedOS, selectedArch, selectedCpuVendors, selectedCategory, vCpuRange, memoryRange, priceRange, search, showAggregation]);
+  }, [selectedProviders, selectedGeographies, selectedOS, selectedCpu, selectedCategory, selectedGpu, vCpuRange, memoryRange, priceRange, search, showAggregation]);
 
   useEffect(() => {
     const timeout = setTimeout(fetchFilteredData, 300);
@@ -518,58 +524,77 @@ export default function Dashboard() {
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
-            {/* CPU Architecture Section */}
+            {/* CPU Section */}
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  CPU Architecture <Info size={10} />
+                  CPU <Info size={10} />
                 </h3>
                 <button
                   onClick={() => {
-                    if (selectedArch.length === ARCHS.length && selectedCpuVendors.length === CPU_VENDORS.length) {
-                      setSelectedArch([]);
-                      setSelectedCpuVendors([]);
+                    if (selectedCpu.length === CPU_PROFILES.length) {
+                      setSelectedCpu([]);
                     } else {
-                      setSelectedArch([...ARCHS]);
-                      setSelectedCpuVendors([...CPU_VENDORS]);
+                      setSelectedCpu(CPU_PROFILES.map(p => p.id));
                     }
                   }}
-                  className={`text-[10px] font-bold uppercase transition-colors ${selectedArch.length === ARCHS.length && selectedCpuVendors.length === CPU_VENDORS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
+                  className={`text-[10px] font-bold uppercase transition-colors ${selectedCpu.length === CPU_PROFILES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
                 >
-                  {selectedArch.length === ARCHS.length && selectedCpuVendors.length === CPU_VENDORS.length ? 'Clear All' : 'Select All'}
+                  {selectedCpu.length === CPU_PROFILES.length ? 'Clear All' : 'Select All'}
                 </button>
               </div>
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-2">
-                  {ARCHS.map(arch => (
-                    <button
-                      key={arch}
-                      onClick={() => toggleFilter(selectedArch, setSelectedArch, arch)}
-                      className={`px-3 py-1 rounded text-[10px] font-bold transition-all border ${
-                        selectedArch.includes(arch)
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                        : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                      }`}
-                    >
-                      {arch}
-                    </button>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {CPU_VENDORS.map(vendor => (
-                    <button
-                      key={vendor}
-                      onClick={() => toggleFilter(selectedCpuVendors, setSelectedCpuVendors, vendor)}
-                      className={`px-3 py-1 rounded text-[10px] font-bold transition-all border ${
-                        selectedCpuVendors.includes(vendor)
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                        : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                      }`}
-                    >
-                      {vendor}
-                    </button>
-                  ))}
-                </div>
+              <div className="flex flex-wrap gap-2">
+                {CPU_PROFILES.map(profile => (
+                  <button
+                    key={profile.id}
+                    onClick={() => toggleFilter(selectedCpu, setSelectedCpu, profile.id)}
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                      selectedCpu.includes(profile.id)
+                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                    }`}
+                  >
+                    {profile.label}
+                  </button>
+                ))}
+              </div>
+            </section>
+
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+            {/* GPU Section */}
+            <section className="space-y-3">
+              <div className="flex justify-between items-center">
+                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
+                  GPU <Info size={10} />
+                </h3>
+                <button
+                  onClick={() => {
+                    if (selectedGpu.length === GPU_OPTIONS.length) {
+                      setSelectedGpu([]);
+                    } else {
+                      setSelectedGpu([...GPU_OPTIONS]);
+                    }
+                  }}
+                  className={`text-[10px] font-bold uppercase transition-colors ${selectedGpu.length === GPU_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
+                >
+                  {selectedGpu.length === GPU_OPTIONS.length ? 'Clear All' : 'Select All'}
+                </button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {GPU_OPTIONS.map(opt => (
+                  <button
+                    key={opt}
+                    onClick={() => toggleFilter(selectedGpu, setSelectedGpu, opt)}
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                      selectedGpu.includes(opt)
+                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                ))}
               </div>
             </section>
 
@@ -771,11 +796,12 @@ export default function Dashboard() {
                           <span className="text-xs font-bold text-black dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors">{record.instance_type}</span>
                         </td>
                         <td className="px-6 py-4 text-center whitespace-nowrap">
-                          {record.gpu_count > 0 ? (
-                            <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[8px] font-bold border border-blue-500/20 uppercase tracking-widest">GPU Enabled</span>
-                          ) : (
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General'}</span>
-                          )}
+                          <div className="flex items-center justify-center gap-2">
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
+                            {record.gpu_count > 0 && (
+                              <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[8px] font-bold border border-blue-500/20 uppercase tracking-widest">GPU</span>
+                            )}
+                          </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor}</span>

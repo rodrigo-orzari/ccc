@@ -53,22 +53,60 @@ export abstract class BaseAdapter {
     return 0;
   }
 
-  protected getCategory(sku: string, vcpus: number, memoryGb: number): string {
-    const s = sku.toLowerCase();
+  protected categoryByRatio(vcpus: number, memoryGb: number): string {
     const ratio = vcpus > 0 ? memoryGb / vcpus : 4;
-
-    if (s.startsWith('p') || s.startsWith('g') || s.startsWith('nc') || s.startsWith('nd') || s.startsWith('nv') || s.includes('gpu')) return 'GPU';
-    if (s.includes('hpc')) return 'HPC';
-
-    if (s.startsWith('t1') || s.startsWith('t2') || s.startsWith('t3') || s.startsWith('t4') || s.startsWith('b') || s.includes('burstable')) return 'Burstable';
-
-    if (s.startsWith('i') || s.startsWith('d') || s.includes('storage') || s.includes('highio')) return 'Storage optimized';
-
-    if (ratio >= 7.5 || s.startsWith('r') || s.includes('highmem') || s.includes('memory')) return 'Memory optimized';
-
-    if (ratio <= 2.1 || s.startsWith('c') || s.includes('highcpu') || s.includes('compute')) return 'Compute optimized';
-
+    if (ratio <= 2.1) return 'Compute optimized';
+    if (ratio >= 7.5) return 'Memory optimized';
     return 'General purpose';
+  }
+
+  // AWS instance family → category. Source: AWS EC2 instance type families.
+  protected classifyAws(instanceType: string, vcpus: number, memoryGb: number): string {
+    const family = instanceType.split('.')[0].toLowerCase();
+    const letter = family.replace(/[0-9].*$/, '');
+
+    if (family.startsWith('hpc')) return 'HPC';
+    if (family.startsWith('mac')) return 'General purpose';
+
+    switch (letter) {
+      case 't': return 'Burstable';
+      case 'm': return 'General purpose';
+      case 'c': return 'Compute optimized';
+      case 'r': case 'x': case 'u': case 'z': return 'Memory optimized';
+      case 'i': case 'd': case 'h': return 'Storage optimized';
+      // GPU/accelerator families: g, p, inf, trn, dl, vt, f — fall back to ratio for the underlying CPU profile
+      case 'g': case 'p': case 'inf': case 'trn': case 'dl': case 'vt': case 'f':
+        return this.categoryByRatio(vcpus, memoryGb);
+      default: return this.categoryByRatio(vcpus, memoryGb);
+    }
+  }
+
+  // Azure VM series → category. Source: Azure VM size families (B/D/E/F/G/H/L/M/N).
+  protected classifyAzure(instanceType: string, vcpus: number, memoryGb: number): string {
+    const s = instanceType.toLowerCase();
+    if (s.startsWith('standard_b') || s.startsWith('b')) return 'Burstable';
+    if (s.startsWith('standard_h') || s.startsWith('h')) return 'HPC';
+    if (s.startsWith('standard_l') || s.startsWith('l')) return 'Storage optimized';
+    if (s.startsWith('standard_e') || s.startsWith('standard_m') || s.startsWith('standard_g') || /^[emg]\d/.test(s)) return 'Memory optimized';
+    if (s.startsWith('standard_f') || /^f\d/.test(s)) return 'Compute optimized';
+    if (s.startsWith('standard_d') || /^d\d/.test(s)) return 'General purpose';
+    // N-series (NC/ND/NV) are GPU instances — fall back to ratio for the underlying CPU profile
+    if (s.startsWith('standard_n') || /^n[cdv]/.test(s)) return this.categoryByRatio(vcpus, memoryGb);
+    return this.categoryByRatio(vcpus, memoryGb);
+  }
+
+  // GCP machine series → category. Source: GCP Compute Engine machine families.
+  protected classifyGcp(instanceType: string, vcpus: number, memoryGb: number): string {
+    const s = instanceType.toLowerCase();
+    if (s.startsWith('c2') || s.startsWith('c3') || s.startsWith('c4')) return 'Compute optimized';
+    if (s.startsWith('m1') || s.startsWith('m2') || s.startsWith('m3') || s.includes('highmem')) return 'Memory optimized';
+    if (s.startsWith('a2') || s.startsWith('a3') || s.startsWith('g2')) return this.categoryByRatio(vcpus, memoryGb);
+    if (s.startsWith('e2') || s.startsWith('n1') || s.startsWith('n2') || s.startsWith('n4') || s.startsWith('t2')) return 'General purpose';
+    return this.categoryByRatio(vcpus, memoryGb);
+  }
+
+  protected getCategory(sku: string, vcpus: number, memoryGb: number): string {
+    return this.categoryByRatio(vcpus, memoryGb);
   }
 
   async healthCheck(): Promise<boolean> {
@@ -118,7 +156,7 @@ export class AzureAdapter extends BaseAdapter {
           cpuVendor: this.getCpuVendor(sku),
           gpuCount: this.getGpuCount(sku),
           geography: this.getGeography(item.armRegionName || ''),
-          category: this.getCategory(sku, vcpus, 4),
+          category: this.classifyAzure(sku, vcpus, 4),
           price: price,
           unit: unit
         };
@@ -169,7 +207,7 @@ export class AWSAdapter extends BaseAdapter {
         cpuVendor: this.getCpuVendor(attr.physicalProcessor || ''),
         gpuCount: attr.gpu ? parseInt(attr.gpu) : 0,
         geography: this.getGeography(attr.location || ''),
-        category: this.getCategory(attr.instanceType, vcpus, memoryGb),
+        category: this.classifyAws(attr.instanceType, vcpus, memoryGb),
         price: parseFloat(priceDim.pricePerUnit.USD),
         unit: priceDim.unit
       });
@@ -206,7 +244,7 @@ export class GCPAdapter extends BaseAdapter {
       cpuVendor: inst.type.startsWith('t2a') ? 'Ampere' : (inst.type.startsWith('t2d') ? 'AMD' : 'Intel'),
       gpuCount: 0,
       geography: 'N. America',
-      category: this.getCategory(inst.type, inst.vcpus, inst.memory),
+      category: this.classifyGcp(inst.type, inst.vcpus, inst.memory),
       price: inst.price,
       unit: 'Hour'
     }));
