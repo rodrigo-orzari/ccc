@@ -273,9 +273,9 @@ export default function Dashboard() {
               What is CloudCompareCosts? <Maximize2 size={10} />
             </Link>
             <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
-            <Link to="/support" className="text-xs font-bold text-[#E63946] flex items-center gap-1 hover:opacity-80">
-              Support this project ❤️ <ArrowRight size={10} />
-            </Link>
+            <a href="mailto:hello@comparecloudcosts.com" className="text-xs font-bold text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
+              Questions or feedback? <ArrowRight size={10} />
+            </a>
           </div>
         </div>
       </nav>
@@ -719,7 +719,7 @@ export default function Dashboard() {
             <div className="min-w-fit">
               <table className="min-w-full border-collapse">
                 <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
-                  <tr className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#525252]">
+                  <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
                     <th onClick={() => sortData('provider')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
                       Provider <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'provider' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
@@ -755,7 +755,7 @@ export default function Dashboard() {
                     ))
                   ) : data.length > 0 ? (
                     data.map((record, index) => (
-                      <tr key={index} className="hover:bg-[#f9f9f9] dark:hover:bg-[#0a0a0a] transition-colors group">
+                      <tr key={index} className={`transition-colors group ${index % 2 === 0 ? 'bg-white dark:bg-[#000000]' : 'bg-[#f7f7f7] dark:bg-[#0a0a0a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center justify-center gap-2">
                             <div
