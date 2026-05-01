@@ -167,12 +167,14 @@ async function startServer() {
         LEFT JOIN pricing_records pr ON pr.service_id = s.id
         GROUP BY p.slug
       `);
+      const lastUpdatedRes = await client.query('SELECT MAX(updated_at) as last_updated FROM pricing_records');
       client.release();
       res.json({
         status: 'ok',
         database: 'connected',
         total_records: parseInt(countRes.rows[0].count),
-        by_provider: providerRes.rows
+        by_provider: providerRes.rows,
+        last_updated: lastUpdatedRes.rows[0].last_updated
       });
     } catch (err: any) {
       res.status(500).json({ status: 'error', message: err.message });
@@ -204,16 +206,76 @@ async function startServer() {
     }
   });
 
+  // Build the WHERE-clause fragment + values for pricing filters (shared between
+  // /api/pricing and /api/pricing/counts so filter behaviour stays consistent).
+  function buildPricingFilters(query: any) {
+    const {
+      provider, geography, os, arch, cpuVendor, gpu, category,
+      minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search
+    } = query;
+
+    const conditions: string[] = [];
+    const values: any[] = [];
+    let paramCount = 1;
+
+    if (provider) { conditions.push(`p.slug = ANY($${paramCount++})`); values.push((provider as string).split(',')); }
+    if (geography) { conditions.push(`pr.geography = ANY($${paramCount++})`); values.push((geography as string).split(',')); }
+    if (os) { conditions.push(`pr.os = ANY($${paramCount++})`); values.push((os as string).split(',')); }
+    if (arch) {
+      const archList = (arch as string).split(',').map(a => a === 'x86' ? 'x86 64' : a);
+      conditions.push(`pr.arch = ANY($${paramCount++})`);
+      values.push(archList);
+    }
+    if (cpuVendor) { conditions.push(`pr.cpu_vendor = ANY($${paramCount++})`); values.push((cpuVendor as string).split(',')); }
+    if (category && category !== 'All categories') { conditions.push(`pr.category = ANY($${paramCount++})`); values.push((category as string).split(',')); }
+    if (gpu === 'true') conditions.push(`pr.gpu_count > 0`);
+    else if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
+    if (minVcpu) { conditions.push(`pr.vcpus >= $${paramCount++}`); values.push(minVcpu); }
+    if (maxVcpu) { conditions.push(`pr.vcpus <= $${paramCount++}`); values.push(maxVcpu); }
+    if (minMemory) { conditions.push(`pr.memory_gb >= $${paramCount++}`); values.push(minMemory); }
+    if (maxMemory) { conditions.push(`pr.memory_gb <= $${paramCount++}`); values.push(maxMemory); }
+    if (minPrice) { conditions.push(`pr.price_per_unit >= $${paramCount++}`); values.push(minPrice); }
+    if (maxPrice) { conditions.push(`pr.price_per_unit <= $${paramCount++}`); values.push(maxPrice); }
+    if (search) {
+      conditions.push(`(pr.instance_type ILIKE $${paramCount} OR p.name ILIKE $${paramCount})`);
+      values.push(`%${search}%`);
+      paramCount++;
+    }
+
+    return {
+      whereClause: conditions.length ? 'AND ' + conditions.join(' AND ') : '',
+      values,
+      paramCount
+    };
+  }
+
+  // Per-provider counts respecting current filters (drives the summary cards)
+  app.get('/api/pricing/counts', async (req, res) => {
+    try {
+      const { whereClause, values } = buildPricingFilters(req.query);
+      const query = `
+        SELECT p.slug, COUNT(pr.id) as count
+        FROM providers p
+        LEFT JOIN services s ON s.provider_id = p.id
+        LEFT JOIN pricing_records pr ON pr.service_id = s.id
+        LEFT JOIN regions r ON pr.region_id = r.id
+        WHERE 1=1 ${whereClause}
+        GROUP BY p.slug
+      `;
+      const client = await pool.connect();
+      const result = await client.query(query, values);
+      client.release();
+      res.json(result.rows);
+    } catch (err: any) {
+      console.error('Counts API error:', err);
+      res.status(500).json({ error: 'Failed to fetch counts', details: err.message });
+    }
+  });
+
   // Fetch Pricing Data for Frontend with Filtering
   app.get('/api/pricing', async (req, res) => {
     try {
-      const {
-        provider, geography, os, arch, cpuVendor, gpu, category,
-        minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
-        aggregate
-      } = req.query;
-
-      const isAggregated = aggregate === 'true';
+      const isAggregated = req.query.aggregate === 'true';
 
       let selectClause = `
         p.name as provider,
@@ -265,86 +327,8 @@ async function startServer() {
         WHERE 1=1
       `;
 
-      const values: any[] = [];
-      let paramCount = 1;
-
-      if (provider) {
-        const providers = (provider as string).split(',');
-        query += ` AND p.slug = ANY($${paramCount++})`;
-        values.push(providers);
-      }
-
-      if (geography) {
-        const geographies = (geography as string).split(',');
-        query += ` AND pr.geography = ANY($${paramCount++})`;
-        values.push(geographies);
-      }
-
-      if (os) {
-        const osList = (os as string).split(',');
-        query += ` AND pr.os = ANY($${paramCount++})`;
-        values.push(osList);
-      }
-
-      if (arch) {
-        const archList = (arch as string).split(',').map(a => a === 'x86' ? 'x86 64' : a);
-        query += ` AND pr.arch = ANY($${paramCount++})`;
-        values.push(archList);
-      }
-
-      if (cpuVendor) {
-        const vendorList = (cpuVendor as string).split(',');
-        query += ` AND pr.cpu_vendor = ANY($${paramCount++})`;
-        values.push(vendorList);
-      }
-
-      if (category && category !== 'All categories') {
-        const categories = (category as string).split(',');
-        query += ` AND pr.category = ANY($${paramCount++})`;
-        values.push(categories);
-      }
-
-      if (gpu === 'true') {
-        query += ` AND pr.gpu_count > 0`;
-      } else if (gpu === 'false') {
-        query += ` AND pr.gpu_count = 0`;
-      }
-
-      if (minVcpu) {
-        query += ` AND pr.vcpus >= $${paramCount++}`;
-        values.push(minVcpu);
-      }
-
-      if (maxVcpu) {
-        query += ` AND pr.vcpus <= $${paramCount++}`;
-        values.push(maxVcpu);
-      }
-
-      if (minMemory) {
-        query += ` AND pr.memory_gb >= $${paramCount++}`;
-        values.push(minMemory);
-      }
-
-      if (maxMemory) {
-        query += ` AND pr.memory_gb <= $${paramCount++}`;
-        values.push(maxMemory);
-      }
-
-      if (minPrice) {
-        query += ` AND pr.price_per_unit >= $${paramCount++}`;
-        values.push(minPrice);
-      }
-
-      if (maxPrice) {
-        query += ` AND pr.price_per_unit <= $${paramCount++}`;
-        values.push(maxPrice);
-      }
-
-      if (search) {
-        query += ` AND (pr.instance_type ILIKE $${paramCount} OR p.name ILIKE $${paramCount})`;
-        values.push(`%${search}%`);
-        paramCount++;
-      }
+      const { whereClause, values } = buildPricingFilters(req.query);
+      query += ' ' + whereClause;
 
       if (isAggregated) {
         query += `
