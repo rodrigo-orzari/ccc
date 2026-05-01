@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Search,
@@ -248,6 +248,14 @@ export default function Dashboard() {
     const timeout = setTimeout(fetchFilteredData, 300);
     return () => clearTimeout(timeout);
   }, [fetchFilteredData]);
+
+  // Truthful total across the providers the user has currently selected. Sums
+  // the per-provider counts from /api/pricing/counts (which already respect
+  // every other filter). Used by the toolbar so the displayed total reflects
+  // the actual filtered pool — even when the table is capped at 1,000 rows.
+  const totalFilteredCount = useMemo(() => {
+    return selectedProviders.reduce((sum, providerId) => sum + (providerCounts[providerId] || 0), 0);
+  }, [selectedProviders, providerCounts]);
 
   const toggleFilter = (list: string[], setList: React.Dispatch<React.SetStateAction<string[]>>, item: string) => {
     if (list.includes(item)) {
@@ -673,15 +681,16 @@ export default function Dashboard() {
           {/* Provider Summary Cards */}
           <div className="p-4 grid grid-cols-1 md:grid-cols-5 gap-px bg-[#e5e5e5] dark:bg-[#262626]">
             {PROVIDERS.filter(p => !p.soon).map(p => {
+              const activeNonSoon = PROVIDERS.filter(pr => !pr.soon).map(pr => pr.id);
+              const isSelected = selectedProviders.length === activeNonSoon.length || selectedProviders.includes(p.id);
+
               const filteredCount = providerCounts[p.id];
               const dbProvider = dbStatus?.providers.find(dp => dp.slug === p.id || dp.slug === p.name.toLowerCase());
               const dbCount = dbProvider ? parseInt(dbProvider.count) : 0;
-              // Prefer the filter-aware count from /api/pricing/counts; fall back to total
-              // DB count before the first fetch resolves.
-              const displayCount = filteredCount !== undefined ? filteredCount : dbCount;
-
-              const activeNonSoon = PROVIDERS.filter(pr => !pr.soon).map(pr => pr.id);
-              const isSelected = selectedProviders.length === activeNonSoon.length || selectedProviders.includes(p.id);
+              // Deselected providers contribute 0 to the visible pool. For selected
+              // providers, prefer the filter-aware count; fall back to the DB total
+              // before the first fetch resolves.
+              const displayCount = isSelected ? (filteredCount !== undefined ? filteredCount : dbCount) : 0;
 
               return (
                 <div
@@ -718,8 +727,10 @@ export default function Dashboard() {
           <div className="px-4 py-3 flex items-center justify-between bg-white dark:bg-[#000000] border-b border-[#e5e5e5] dark:border-[#262626]">
             <div className="flex items-center gap-6">
               <span className="text-xl font-bold text-black dark:text-white shrink-0">
-                {data.length} <span className="text-[#737373] dark:text-[#a3a3a3] font-normal text-base">instances</span>
-                {data.length === 1000 && <span className="ml-2 text-[10px] font-normal text-[#a3a3a3]">(top 1,000 shown)</span>}
+                {totalFilteredCount.toLocaleString()} <span className="text-[#737373] dark:text-[#a3a3a3] font-normal text-base">instances</span>
+                {totalFilteredCount > data.length && data.length > 0 && (
+                  <span className="ml-2 text-[10px] font-normal text-[#a3a3a3]">(top {data.length.toLocaleString()} shown)</span>
+                )}
               </span>
 
               <div className="relative">
@@ -862,12 +873,34 @@ export default function Dashboard() {
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 10px; }
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #262626; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #404040; }
+        /* Scrollbar — clearly visible track + brighter thumb so users can see
+           that more content exists in either direction. */
+        .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #a3a3a3 #f0f0f0; }
+        .dark .custom-scrollbar { scrollbar-color: #525252 #171717; }
+        .custom-scrollbar::-webkit-scrollbar { width: 12px; height: 12px; }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f0f0f0;
+          border-left: 1px solid #e5e5e5;
+          border-top: 1px solid #e5e5e5;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+          background: #171717;
+          border-left: 1px solid #262626;
+          border-top: 1px solid #262626;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #a3a3a3;
+          border-radius: 8px;
+          border: 2px solid #f0f0f0;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #525252;
+          border: 2px solid #171717;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #737373; }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
+        .custom-scrollbar::-webkit-scrollbar-corner { background: #f0f0f0; }
+        .dark .custom-scrollbar::-webkit-scrollbar-corner { background: #171717; }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
