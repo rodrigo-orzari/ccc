@@ -126,6 +126,21 @@ export default function Dashboard() {
   const [dbStatus, setDbStatus] = useState<{ total: number, providers: any[], lastUpdated: string | null } | null>(null);
   const [providerCounts, setProviderCounts] = useState<Record<string, number>>({});
 
+  // Sidebar section expand/collapse state — all expanded by default; user can
+  // collapse top sections to make the bottom ones (vCPU/Memory/Price sliders)
+  // more discoverable.
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({
+    provider: true,
+    pricing: true,
+    category: true,
+    geography: true,
+    os: true,
+    cpu: true,
+    gpu: true,
+    specs: true,
+  });
+  const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
+
   const sortData = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
@@ -350,9 +365,13 @@ export default function Dashboard() {
             {/* Providers Section */}
             <section className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Provider <span title="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter."><Info size={10} className="cursor-help" /></span>
-                </h3>
+                <button
+                  onClick={() => toggleSection('provider')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.provider ? '' : '-rotate-90'}`} />
+                  Provider <span title="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                </button>
                 <button
                   onClick={() => {
                     if (selectedProviders.length === PROVIDERS.filter(p => !p.soon).length) {
@@ -366,6 +385,7 @@ export default function Dashboard() {
                   {selectedProviders.length === PROVIDERS.filter(p => !p.soon).length ? 'Clear All' : 'Select All'}
                 </button>
               </div>
+              {expanded.provider && (
               <div className="flex flex-wrap gap-2">
                 {PROVIDERS.map(p => (
                   <button
@@ -389,6 +409,7 @@ export default function Dashboard() {
                   </button>
                 ))}
               </div>
+              )}
             </section>
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
@@ -396,10 +417,15 @@ export default function Dashboard() {
             {/* Pricing Mode Section */}
             <section className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  PAYG OR YEARLY PRICE <span title="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)."><Info size={10} className="cursor-help" /></span>
-                </h3>
+                <button
+                  onClick={() => toggleSection('pricing')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.pricing ? '' : '-rotate-90'}`} />
+                  PAYG OR YEARLY PRICE <span title="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                </button>
               </div>
+              {expanded.pricing && (
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setShowAggregation(false)}
@@ -422,6 +448,7 @@ export default function Dashboard() {
                   Yearly
                 </button>
               </div>
+              )}
             </section>
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
@@ -429,9 +456,13 @@ export default function Dashboard() {
             {/* Category Section */}
             <section className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Category <span title="Instance type purpose, derived from each cloud's published instance families: General purpose, Compute optimized (CPU-heavy), Memory optimized (RAM-heavy), Storage optimized (high-IO), Burstable (cheap baseline + bursts), or HPC."><Info size={10} className="cursor-help" /></span>
-                </h3>
+                <button
+                  onClick={() => toggleSection('category')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.category ? '' : '-rotate-90'}`} />
+                  Category <span title="Instance type purpose, derived from each cloud's published instance families: General purpose, Compute optimized (CPU-heavy), Memory optimized (RAM-heavy), Storage optimized (high-IO), Burstable (cheap baseline + bursts), or HPC." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                </button>
                 <button
                   onClick={() => {
                     if (selectedCategory.length === CATEGORIES.length) {
@@ -445,6 +476,7 @@ export default function Dashboard() {
                   {selectedCategory.length === CATEGORIES.length ? 'Clear All' : 'Select All'}
                 </button>
               </div>
+              {expanded.category && (
               <div className="flex flex-wrap gap-2">
                 {CATEGORIES.map(category => (
                   <button
@@ -460,6 +492,7 @@ export default function Dashboard() {
                   </button>
                 ))}
               </div>
+              )}
             </section>
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
@@ -467,9 +500,13 @@ export default function Dashboard() {
             {/* Geography Section */}
             <section className="space-y-3">
               <div className="flex justify-between items-center">
-                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Geography <span title="Geographic region where the VM runs. Each cloud's individual regions (e.g. us-east-1, eastus, europe-west1) are grouped into broader continental areas."><Info size={10} className="cursor-help" /></span>
-                </h3>
+                <button
+                  onClick={() => toggleSection('geography')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.geography ? '' : '-rotate-90'}`} />
+                  Geography <span title="Geographic region where the VM runs. Each cloud's individual regions (e.g. us-east-1, eastus, europe-west1) are grouped into broader continental areas." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                </button>
                 <button
                   onClick={() => {
                     if (selectedGeographies.length === GEOGRAPHIES.length) {
@@ -483,6 +520,7 @@ export default function Dashboard() {
                   {selectedGeographies.length === GEOGRAPHIES.length ? 'Clear All' : 'Select All'}
                 </button>
               </div>
+              {expanded.geography && (
               <div className="flex flex-wrap gap-2">
                 {GEOGRAPHIES.map(geo => (
                   <button
@@ -498,6 +536,7 @@ export default function Dashboard() {
                   </button>
                 ))}
               </div>
+              )}
             </section>
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
@@ -505,9 +544,13 @@ export default function Dashboard() {
             {/* Operating System Section */}
             <section className="space-y-3">
               <div className="flex justify-between items-center">
-                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Operating System <span title="The operating system running on the VM. Linux pricing typically reflects free distributions (Ubuntu, Amazon Linux, Debian). AWS and Azure charge extra for commercial distros like RHEL or SUSE — those are not currently broken out as a filter."><Info size={10} className="cursor-help" /></span>
-                </h3>
+                <button
+                  onClick={() => toggleSection('os')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.os ? '' : '-rotate-90'}`} />
+                  Operating System <span title="The operating system running on the VM. Linux pricing typically reflects free distributions (Ubuntu, Amazon Linux, Debian). AWS and Azure charge extra for commercial distros like RHEL or SUSE — those are not currently broken out as a filter." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                </button>
                 <button
                   onClick={() => {
                     if (selectedOS.length === OS_TYPES.length) {
@@ -521,6 +564,7 @@ export default function Dashboard() {
                   {selectedOS.length === OS_TYPES.length ? 'Clear All' : 'Select All'}
                 </button>
               </div>
+              {expanded.os && (
               <div className="flex flex-wrap gap-2">
                 {OS_TYPES.map(os => (
                   <button
@@ -536,6 +580,7 @@ export default function Dashboard() {
                   </button>
                 ))}
               </div>
+              )}
             </section>
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
@@ -543,9 +588,13 @@ export default function Dashboard() {
             {/* CPU Section */}
             <section className="space-y-3">
               <div className="flex justify-between items-center">
-                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  CPU <span title="Processor vendor and instruction set. Intel and AMD use x86; AWS Graviton and Ampere Altra use ARM. Performance, software compatibility, and price all vary across these."><Info size={10} className="cursor-help" /></span>
-                </h3>
+                <button
+                  onClick={() => toggleSection('cpu')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.cpu ? '' : '-rotate-90'}`} />
+                  CPU <span title="Processor vendor and instruction set. Intel and AMD use x86; AWS Graviton and Ampere Altra use ARM. Performance, software compatibility, and price all vary across these." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                </button>
                 <button
                   onClick={() => {
                     if (selectedCpu.length === CPU_PROFILES.length) {
@@ -559,6 +608,7 @@ export default function Dashboard() {
                   {selectedCpu.length === CPU_PROFILES.length ? 'Clear All' : 'Select All'}
                 </button>
               </div>
+              {expanded.cpu && (
               <div className="flex flex-wrap gap-2">
                 {CPU_PROFILES.map(profile => (
                   <button
@@ -574,6 +624,7 @@ export default function Dashboard() {
                   </button>
                 ))}
               </div>
+              )}
             </section>
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
@@ -581,9 +632,13 @@ export default function Dashboard() {
             {/* GPU Section */}
             <section className="space-y-3">
               <div className="flex justify-between items-center">
-                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  GPU <span title="Whether the instance includes a GPU accelerator (e.g. NVIDIA T4, A10, A100, L40S, H100). Common for ML training/inference, rendering, and scientific compute."><Info size={10} className="cursor-help" /></span>
-                </h3>
+                <button
+                  onClick={() => toggleSection('gpu')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.gpu ? '' : '-rotate-90'}`} />
+                  GPU <span title="Whether the instance includes a GPU accelerator (e.g. NVIDIA T4, A10, A100, L40S, H100). Common for ML training/inference, rendering, and scientific compute." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                </button>
                 <button
                   onClick={() => {
                     if (selectedGpu.length === GPU_OPTIONS.length) {
@@ -597,6 +652,7 @@ export default function Dashboard() {
                   {selectedGpu.length === GPU_OPTIONS.length ? 'Clear All' : 'Select All'}
                 </button>
               </div>
+              {expanded.gpu && (
               <div className="flex flex-wrap gap-2">
                 {GPU_OPTIONS.map(opt => (
                   <button
@@ -612,6 +668,7 @@ export default function Dashboard() {
                   </button>
                 ))}
               </div>
+              )}
             </section>
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
@@ -619,10 +676,15 @@ export default function Dashboard() {
             {/* Range Sliders Section */}
             <section className="space-y-4">
               <div className="flex justify-between items-center">
-                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                  Specs & Price <span title="Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD."><Info size={10} className="cursor-help" /></span>
-                </h3>
+                <button
+                  onClick={() => toggleSection('specs')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
+                  Specs & Price <span title="Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                </button>
               </div>
+              {expanded.specs && (
               <div className="space-y-8 px-1">
                 <div className="space-y-2">
                   <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
@@ -656,6 +718,7 @@ export default function Dashboard() {
                   />
                 </div>
               </div>
+              )}
             </section>
           </div>
         </aside>
@@ -780,7 +843,7 @@ export default function Dashboard() {
                       vCPU <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'vcpus' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
                     <th onClick={() => sortData('memory_gb')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                      Memory <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'memory_gb' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                      Memory (GB) <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'memory_gb' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
                     <th onClick={() => sortData('price_per_unit')} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity">
                       {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'price_per_unit' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
@@ -835,7 +898,7 @@ export default function Dashboard() {
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus}</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-center">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb} GB</span>
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb}</span>
                         </td>
                         <td className="px-6 py-4 text-center whitespace-nowrap">
                           <span className="text-xs font-bold text-black dark:text-white">
