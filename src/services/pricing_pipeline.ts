@@ -391,23 +391,3 @@ export class PricingPipeline {
     }
   }
 }
-
-  import { Pool } from 'pg';
-
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-  });
-
-  const pipeline = new PricingPipeline(pool);
-
-  console.log('Starting manual ingestion...');
-
-  pipeline.run()
-    .then(results => {
-      console.log('Ingestion complete:', results);
-      process.exit(0); // Success
-    })
-    .catch(err => {
-      console.error('Ingestion failed:', err);
-      process.exit(1); // Error
-    });
