@@ -13,17 +13,22 @@ async function startServer() {
   const app = express();
   const PORT = process.env.PORT || 3000;
 
-  // PostgreSQL Connection Pool
-  // Users should set DATABASE_URL in their environment variables (Secrets panel)
+  // Parse DATABASE_URL manually so pg never sees the sslmode parameter,
+  // which in pg 8.x overrides rejectUnauthorized when set to 'require'.
+  function parseDbUrl(url: string) {
+    const u = new URL(url);
+    return {
+      host: u.hostname,
+      port: u.port ? parseInt(u.port) : 5432,
+      database: u.pathname.replace(/^\//, ''),
+      user: decodeURIComponent(u.username),
+      password: decodeURIComponent(u.password),
+    };
+  }
+
   const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    // Add default values or local config if needed
-    // user: process.env.DB_USER,
-    // host: process.env.DB_HOST,
-    // database: process.env.DB_NAME,
-    // password: process.env.DB_PASSWORD,
-    // port: parseInt(process.env.DB_PORT || '5432'),
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+    ...(process.env.DATABASE_URL ? parseDbUrl(process.env.DATABASE_URL) : {}),
+    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
   });
 
   app.use(cors());
