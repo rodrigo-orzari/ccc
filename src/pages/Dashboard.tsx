@@ -669,7 +669,7 @@ export default function Dashboard() {
               728×90 / 970×90). Drop the ad markup inside the inner div when
               ready. Sized to standard leaderboard height so ad insertion
               doesn't cause layout shift. */}
-          <div className="px-4 pt-4">
+          <div className="px-4 py-4">
             <div
               data-ad-slot="leaderboard-top"
               className="w-full h-[90px] flex items-center justify-center bg-[#fafafa] dark:bg-[#0a0a0a] border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded text-[10px] font-medium uppercase tracking-widest text-[#a3a3a3] dark:text-[#525252]"
