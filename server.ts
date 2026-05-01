@@ -70,13 +70,17 @@ async function startServer() {
         UPDATE pricing_records SET cpu_vendor = 'Ampere' WHERE instance_type ILIKE '%ampere%' OR instance_type ILIKE '%altra%' OR instance_type ILIKE 't2a%';
         UPDATE pricing_records SET cpu_vendor = 'AMD' WHERE instance_type ILIKE '%epyc%' OR instance_type ILIKE '%amd%' OR instance_type ILIKE 't2d%' OR instance_type ~* '[a-z][0-9]a\\..*';
 
-        -- Standardize Categories based on Memory/vCPU ratio
-        -- Compute Optimized: Ratio <= 2.1
-        UPDATE pricing_records SET category = 'Compute optimized' WHERE (CAST(memory_gb AS FLOAT) / NULLIF(vcpus, 0)) <= 2.1 AND category NOT IN ('GPU', 'Burstable');
-        -- Memory Optimized: Ratio >= 7.5
-        UPDATE pricing_records SET category = 'Memory optimized' WHERE (CAST(memory_gb AS FLOAT) / NULLIF(vcpus, 0)) >= 7.5 AND category NOT IN ('GPU', 'Burstable');
-        -- General Purpose: Most others
-        UPDATE pricing_records SET category = 'General purpose' WHERE (CAST(memory_gb AS FLOAT) / NULLIF(vcpus, 0)) > 2.1 AND (CAST(memory_gb AS FLOAT) / NULLIF(vcpus, 0)) < 7.5 AND category NOT IN ('GPU', 'Burstable', 'Storage optimized', 'HPC');
+        -- Backfill gpu_count for legacy rows that were tagged with category='GPU' but missing the flag
+        UPDATE pricing_records SET gpu_count = 1 WHERE category = 'GPU' AND (gpu_count IS NULL OR gpu_count = 0);
+
+        -- Reclassify any legacy category='GPU' rows by memory/vCPU ratio (GPU is now a capability, not a category)
+        UPDATE pricing_records SET category =
+          CASE
+            WHEN (CAST(memory_gb AS FLOAT) / NULLIF(vcpus, 0)) <= 2.1 THEN 'Compute optimized'
+            WHEN (CAST(memory_gb AS FLOAT) / NULLIF(vcpus, 0)) >= 7.5 THEN 'Memory optimized'
+            ELSE 'General purpose'
+          END
+        WHERE category = 'GPU';
       `);
 
       client.release();
@@ -302,6 +306,8 @@ async function startServer() {
 
       if (gpu === 'true') {
         query += ` AND pr.gpu_count > 0`;
+      } else if (gpu === 'false') {
+        query += ` AND pr.gpu_count = 0`;
       }
 
       if (minVcpu) {
