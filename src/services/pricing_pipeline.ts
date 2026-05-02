@@ -327,8 +327,14 @@ export class DigitalOceanAdapter extends BaseAdapter {
     });
 
     const sizes: any[] = response.data?.sizes || [];
-    const records = sizes
-      .filter(s => s.available && s.price_hourly > 0)
+    // The DO API's `available` flag reflects per-account creation eligibility
+    // (e.g. new accounts often can't create GPU or premium tiers without
+    // approval), not whether the size exists in the public catalogue. For a
+    // price-comparison use case we want every size that has a valid hourly
+    // price, regardless of whether this particular token can launch it.
+    const priced = sizes.filter(s => s.price_hourly > 0);
+    console.log(`DO /v2/sizes returned ${sizes.length} sizes; ${priced.length} have a hourly price.`);
+    const records = priced
       .map(s => {
         const slug = String(s.slug || '');
         const vcpus = Number(s.vcpus) || 1;
