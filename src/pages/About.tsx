@@ -5,10 +5,14 @@ const AboutPage: React.FC = () => {
   const content = `
 **CompareCloudCosts.com** is an open-source tool designed to help developers and architects understand the real costs of cloud infrastructure.
 
+---
+
 ## Why we built this
 Cloud infrastructure costs are typically distributed across disparate, vendor-specific calculators. Navigating these individual tools to perform a cross-provider analysis can be time-intensive and complex. We built this platform to expedite that process, providing a centralized interface to evaluate different options efficiently.
 
 [Back to top ↑](#about-us)
+
+---
 
 ## Features
 Comparing cloud instances requires more than just looking at a price tag. Our platform streamlines the technical evaluation process by normalizing diverse data points into a single, actionable view.
@@ -19,6 +23,8 @@ Comparing cloud instances requires more than just looking at a price tag. Our pl
 - **Data Portability**: Export your custom comparison results directly to a **CSV file**, allowing for offline analysis, internal reporting, or integration with your financial spreadsheets.
 
 [Back to top ↑](#about-us)
+
+---
 
 ## Privacy Policy
 
@@ -33,25 +39,35 @@ CompareCloudCosts.com is a free, public price-comparison tool. We aim to collect
 
 [Back to top ↑](#about-us)
 
+---
+
 ### Third-party advertising
-This site displays advertisements served by Google AdSense. Google and its partners may use cookies and other identifiers to serve and personalise ads.
+This site displays advertisements served by Google AdSense. Google and its partners may use cookies and other identifiers to serve and personalise ads based on your browsing activity.
 
 [Back to top ↑](#about-us)
+
+---
 
 ### Cookies
 In addition to advertising cookies, the site may set minimal first-party cookies for basic functionality.
 
 [Back to top ↑](#about-us)
 
+---
+
 ### Children
 This site is not directed at children under 13 and we do not knowingly collect information from children.
 
 [Back to top ↑](#about-us)
 
+---
+
 ### Changes to this policy
-If we update this policy, we will revise the "Last updated" date. Continued use of the site constitutes acceptance of the updated policy.
+If we update this policy, we will revise the "Last updated" date at the top of this section. Continued use of the site constitutes acceptance of the updated policy.
 
 [Back to top ↑](#about-us)
+
+---
 
 ### Contact
 Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
@@ -70,6 +86,7 @@ Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@co
             --border-color: #e5e7eb;
             --link-color: #2563eb;
             --muted-text: #6b7280;
+            --divider-color: #e5e7eb;
           }
 
           @media (prefers-color-scheme: dark) {
@@ -80,6 +97,7 @@ Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@co
               --border-color: #334155;
               --link-color: #60a5fa;
               --muted-text: #94a3b8;
+              --divider-color: #334155;
             }
           }
 
@@ -121,13 +139,21 @@ Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@co
 
           .prose h2, .prose h3 {
             color: var(--text-color);
-            margin-top: 2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+          }
+
+          .prose hr {
+            border: 0;
+            border-top: 1px solid var(--divider-color);
+            margin: 3rem 0;
           }
 
           .prose a {
             color: var(--link-color);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
           }
 
           @media (max-width: 768px) {
