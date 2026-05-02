@@ -48,6 +48,10 @@ const CPU_PROFILES = [
 const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optimized', 'Storage optimized', 'Burstable', 'HPC'];
 const GPU_OPTIONS = ['With GPU', 'Without GPU'];
 
+const DEFAULT_VCPU_RANGE   = { min: 1,   max: 320 };
+const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
+const DEFAULT_PRICE_RANGE  = { min: 0,   max: 510 };
+
 const RangeSlider = ({ min, max, value, onChange, step = 1, unit = '' }: {
   min: number,
   max: number,
@@ -114,9 +118,9 @@ export default function Dashboard() {
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
   const [selectedGpu, setSelectedGpu] = useState<string[]>([...GPU_OPTIONS]);
-  const [vCpuRange, setVCpuRange] = useState({ min: 1, max: 128 });
-  const [memoryRange, setMemoryRange] = useState({ min: 0, max: 440 });
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 510 });
+  const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
+  const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
+  const [priceRange, setPriceRange] = useState({ ...DEFAULT_PRICE_RANGE });
   const [search, setSearch] = useState('');
   const [showAggregation, setShowAggregation] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: keyof PricingRecord | string, direction: 'asc' | 'desc' }>({ key: 'price_per_unit', direction: 'asc' });
@@ -699,14 +703,30 @@ export default function Dashboard() {
                     Specs & Price <span title="Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                   </button>
                 </h2>
+                <button
+                  onClick={() => {
+                    setVCpuRange({ ...DEFAULT_VCPU_RANGE });
+                    setMemoryRange({ ...DEFAULT_MEMORY_RANGE });
+                    setPriceRange({ ...DEFAULT_PRICE_RANGE });
+                  }}
+                  className={`text-[10px] font-bold uppercase transition-colors ${
+                    vCpuRange.min !== DEFAULT_VCPU_RANGE.min || vCpuRange.max !== DEFAULT_VCPU_RANGE.max ||
+                    memoryRange.min !== DEFAULT_MEMORY_RANGE.min || memoryRange.max !== DEFAULT_MEMORY_RANGE.max ||
+                    priceRange.min !== DEFAULT_PRICE_RANGE.min || priceRange.max !== DEFAULT_PRICE_RANGE.max
+                      ? 'text-black dark:text-white'
+                      : 'text-[#737373] hover:text-black dark:hover:text-white'
+                  }`}
+                >
+                  Clear All
+                </button>
               </div>
               {expanded.specs && (
               <div className="space-y-8 px-1">
                 <div className="space-y-2">
                   <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
                   <RangeSlider
-                    min={1}
-                    max={128}
+                    min={DEFAULT_VCPU_RANGE.min}
+                    max={DEFAULT_VCPU_RANGE.max}
                     value={vCpuRange}
                     onChange={setVCpuRange}
                   />
@@ -715,8 +735,8 @@ export default function Dashboard() {
                 <div className="space-y-2">
                   <div className="text-[10px] font-bold text-[#737373]">Memory (GB)</div>
                   <RangeSlider
-                    min={0}
-                    max={440}
+                    min={DEFAULT_MEMORY_RANGE.min}
+                    max={DEFAULT_MEMORY_RANGE.max}
                     value={memoryRange}
                     onChange={setMemoryRange}
                   />
@@ -725,8 +745,8 @@ export default function Dashboard() {
                 <div className="space-y-2">
                   <div className="text-[10px] font-bold text-[#737373]">Hourly price ($)</div>
                   <RangeSlider
-                    min={0}
-                    max={510}
+                    min={DEFAULT_PRICE_RANGE.min}
+                    max={DEFAULT_PRICE_RANGE.max}
                     step={0.1}
                     unit="$"
                     value={priceRange}
