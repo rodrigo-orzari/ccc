@@ -258,29 +258,108 @@ export class OracleAdapter extends BaseAdapter {
 
   async fetchPricing(): Promise<PricingRecord[]> {
     console.log(`Fetching Oracle pricing (from src/config/oracle_instances.ts, ${ORACLE_INSTANCES.length} entries)...`);
-    return ORACLE_INSTANCES.map(inst => ({
-      provider: 'oracle',
-      service: 'OCI Compute',
-      region: ORACLE_REGION,
-      instanceType: inst.type,
-      vcpus: inst.vcpus,
-      memoryGb: inst.memory,
-      arch: inst.cpuVendor === 'Ampere' || inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
-      os: 'Linux',
-      cpuVendor: inst.cpuVendor,
-      gpuCount: 0,
-      geography: ORACLE_GEOGRAPHY,
-      category: this.getCategory(inst.type, inst.vcpus, inst.memory),
-      price: inst.price,
-      unit: 'Hour'
-    }));
+    return ORACLE_INSTANCES.map(inst => {
+      const gpuCount = inst.gpuCount ?? 0;
+      const isHpc = inst.type.toLowerCase().includes('hpc');
+      return {
+        provider: 'oracle',
+        service: 'OCI Compute',
+        region: ORACLE_REGION,
+        instanceType: inst.type,
+        vcpus: inst.vcpus,
+        memoryGb: inst.memory,
+        arch: inst.cpuVendor === 'Ampere' || inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
+        os: 'Linux',
+        cpuVendor: inst.cpuVendor,
+        gpuCount,
+        geography: ORACLE_GEOGRAPHY,
+        category: isHpc ? 'HPC' : this.categoryByRatio(inst.vcpus, inst.memory),
+        price: inst.price,
+        unit: 'Hour'
+      };
+    });
   }
 }
 
 export class DigitalOceanAdapter extends BaseAdapter {
   providerSlug = 'digitalocean';
 
+  // DigitalOcean Droplet families → category. Storage- and Memory-optimized
+  // get matched by slug prefix; everything else falls back to the
+  // memory:vCPU ratio so GPU droplets get a real CPU-profile category.
+  protected classifyDigitalOcean(slug: string, vcpus: number, memoryGb: number): string {
+    const s = slug.toLowerCase();
+    if (s.startsWith('c-') || s.startsWith('c2-')) return 'Compute optimized';
+    if (s.startsWith('m-') || s.startsWith('m3-') || s.startsWith('m6-')) return 'Memory optimized';
+    if (s.startsWith('so-') || s.startsWith('so1-')) return 'Storage optimized';
+    if (s.startsWith('gpu-')) return this.categoryByRatio(vcpus, memoryGb);
+    return 'General purpose';
+  }
+
+  // Detect GPU count from a DigitalOcean GPU droplet slug like
+  // "gpu-h100x1-80gb" or "gpu-mi300x1-192gb" — the number after `x` is
+  // the GPU count.
+  protected gpuCountFromSlug(slug: string): number {
+    const m = slug.toLowerCase().match(/gpu-[a-z0-9]+x(\d+)/);
+    return m ? parseInt(m[1], 10) : 0;
+  }
+
   async fetchPricing(): Promise<PricingRecord[]> {
+    const token = process.env.DIGITALOCEAN_API_TOKEN;
+    if (token) {
+      try {
+        return await this.fetchFromApi(token);
+      } catch (err: any) {
+        console.error(`❌ DigitalOcean live API fetch failed (${err.message}), falling back to static config.`);
+      }
+    } else {
+      console.warn('⚠️  DIGITALOCEAN_API_TOKEN not set — using static fallback in src/config/digitalocean_instances.ts.');
+    }
+    return this.fetchFromConfig();
+  }
+
+  private async fetchFromApi(token: string): Promise<PricingRecord[]> {
+    console.log('Fetching DigitalOcean pricing (live /v2/sizes API)...');
+    const url = 'https://api.digitalocean.com/v2/sizes?per_page=200';
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+      timeout: 30000
+    });
+
+    const sizes: any[] = response.data?.sizes || [];
+    const records = sizes
+      .filter(s => s.available && s.price_hourly > 0)
+      .map(s => {
+        const slug = String(s.slug || '');
+        const vcpus = Number(s.vcpus) || 1;
+        // The DO API returns memory in MB; we store GB.
+        const memoryGb = (Number(s.memory) || 0) / 1024;
+        const isAmd = /(?:^|-)amd(?:-|$)/.test(slug.toLowerCase());
+        const gpuCount = this.gpuCountFromSlug(slug);
+
+        return {
+          provider: 'digitalocean',
+          service: 'Droplets',
+          region: DIGITALOCEAN_REGION,
+          instanceType: slug,
+          vcpus,
+          memoryGb,
+          arch: 'x86 64',
+          os: 'Linux',
+          cpuVendor: isAmd ? 'AMD' : 'Intel',
+          gpuCount,
+          geography: DIGITALOCEAN_GEOGRAPHY,
+          category: this.classifyDigitalOcean(slug, vcpus, memoryGb),
+          price: Number(s.price_hourly),
+          unit: 'Hour'
+        } as PricingRecord;
+      });
+
+    console.log(`✅ Fetched ${records.length} DigitalOcean Droplet sizes from live API.`);
+    return records;
+  }
+
+  private fetchFromConfig(): PricingRecord[] {
     console.log(`Fetching DigitalOcean pricing (from src/config/digitalocean_instances.ts, ${DIGITALOCEAN_INSTANCES.length} entries)...`);
     return DIGITALOCEAN_INSTANCES.map(s => ({
       provider: 'digitalocean',
