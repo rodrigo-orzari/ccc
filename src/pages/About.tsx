@@ -6,12 +6,19 @@ const AboutPage: React.FC = () => {
 **CompareCloudCosts.com** is an open-source tool designed to help developers and architects understand the real costs of cloud infrastructure.
 
 ## Why we built this
-Cloud providers often hide their pricing behind complex calculators and regional variations. We believe in transparency and simplicity.
+Cloud infrastructure costs are typically distributed across disparate, vendor-specific calculators. Navigating these individual tools to perform a cross-provider analysis can be time-intensive and complex. We built this platform to expedite that process, providing a centralized interface to evaluate different options efficiently.
+
+[Back to top ↑](#about-us)
 
 ## Features
-- **Global Comparison**: See prices across different geographies.
-- **Unified Filtering**: Filter by vCPU, Memory, OS, and Architecture regardless of the provider.
-- **Real-time Data**: Directly synced with official price lists.
+Comparing cloud instances requires more than just looking at a price tag. Our platform streamlines the technical evaluation process by normalizing diverse data points into a single, actionable view.
+
+- **Global Comparison**: Access and compare infrastructure costs across different geographies to optimize for regional pricing variations.
+- **Unified Filtering**: Standardize your search by filtering for vCPU, Memory, OS, and Architecture, regardless of specific vendor naming conventions.
+- **Weekly Data Refreshes**: Our platform aggregates and updates pricing information weekly to ensure the data reflects recent changes in the market.
+- **Data Portability**: Export your custom comparison results directly to a **CSV file**, allowing for offline analysis, internal reporting, or integration with your financial spreadsheets.
+
+[Back to top ↑](#about-us)
 
 ## Privacy Policy
 
@@ -24,20 +31,32 @@ CompareCloudCosts.com is a free, public price-comparison tool. We aim to collect
 - **No personal information stored.** We do not ask for your name, email, address, or any other identifying information.
 - **Server logs.** Our hosting provider records standard request logs for operational and security purposes.
 
+[Back to top ↑](#about-us)
+
 ### Third-party advertising
 This site displays advertisements served by Google AdSense. Google and its partners may use cookies and other identifiers to serve and personalise ads.
+
+[Back to top ↑](#about-us)
 
 ### Cookies
 In addition to advertising cookies, the site may set minimal first-party cookies for basic functionality.
 
+[Back to top ↑](#about-us)
+
 ### Children
 This site is not directed at children under 13 and we do not knowingly collect information from children.
+
+[Back to top ↑](#about-us)
 
 ### Changes to this policy
 If we update this policy, we will revise the "Last updated" date. Continued use of the site constitutes acceptance of the updated policy.
 
+[Back to top ↑](#about-us)
+
 ### Contact
 Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
+
+[Back to top ↑](#about-us)
 `;
 
   return (
@@ -105,6 +124,12 @@ Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@co
             margin-top: 2rem;
           }
 
+          .prose a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+          }
+
           @media (max-width: 768px) {
             .sidebar { display: none; }
             .main-content { margin-left: 0; padding: 2rem; }
@@ -112,7 +137,7 @@ Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@co
         `}
       </style>
 
-      <div className="about-container">
+      <div className="about-container" id="about-us">
         <aside className="sidebar">
           <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
             In this article
