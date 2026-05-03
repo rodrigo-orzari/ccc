@@ -27,7 +27,17 @@ interface PricingRecord {
   min_price?: string;
   avg_price?: string;
   max_price?: string;
+  attributes?: {
+    engine?: string;
+    engine_version?: string;
+    deployment_type?: string;
+    ha_mode?: string;
+    storage_type?: string;
+    workload?: string;
+  };
 }
+
+type ProductType = 'vm' | 'database';
 
 const PROVIDERS = [
   { id: 'aws', name: 'AWS', color: '#FF9900' },
@@ -47,6 +57,12 @@ const CPU_PROFILES = [
 ];
 const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optimized', 'Storage optimized', 'Burstable', 'HPC'];
 const GPU_OPTIONS = ['With GPU', 'Without GPU'];
+
+// Database-view constants
+const DB_FAMILIES = ['Relational', 'NoSQL'];
+const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Aurora MySQL', 'Aurora PostgreSQL', 'Cosmos DB'];
+const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless', 'Serverless v2', 'Multi-AZ'];
+const HA_MODES = ['Single-AZ', 'Multi-AZ', 'Zone-Redundant', 'Multi-Region', 'Geo-Redundant'];
 
 const DEFAULT_VCPU_RANGE   = { min: 1,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
@@ -112,12 +128,20 @@ const RangeSlider = ({ min, max, value, onChange, step = 1, unit = '' }: {
 };
 
 export default function Dashboard() {
+  const [activeProductType, setActiveProductType] = useState<ProductType>('vm');
+
   const [selectedProviders, setSelectedProviders] = useState<string[]>(PROVIDERS.filter(p => !p.soon).map(p => p.id));
   const [selectedGeographies, setSelectedGeographies] = useState<string[]>([...GEOGRAPHIES]);
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
   const [selectedGpu, setSelectedGpu] = useState<string[]>([...GPU_OPTIONS]);
+
+  // Database-specific filter state
+  const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...DB_FAMILIES]);
+  const [selectedEngines, setSelectedEngines] = useState<string[]>([...DB_ENGINES]);
+  const [selectedDeploymentTypes, setSelectedDeploymentTypes] = useState<string[]>([...DEPLOYMENT_TYPES]);
+  const [selectedHaModes, setSelectedHaModes] = useState<string[]>([...HA_MODES]);
   const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
   const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...DEFAULT_PRICE_RANGE });
@@ -142,6 +166,10 @@ export default function Dashboard() {
     cpu: true,
     gpu: true,
     specs: true,
+    dbFamily: true,
+    engine: true,
+    deploymentType: true,
+    haMode: true,
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
 
@@ -184,38 +212,63 @@ export default function Dashboard() {
   }, []);
 
   const fetchFilteredData = useCallback(async () => {
-    if (
-      selectedProviders.length === 0 ||
-      selectedGeographies.length === 0 ||
-      selectedOS.length === 0 ||
-      selectedCpu.length === 0 ||
-      selectedCategory.length === 0 ||
-      selectedGpu.length === 0
-    ) {
+    const isDb = activeProductType === 'database';
+
+    // Guard: require at least one selection in every active filter
+    if (selectedProviders.length === 0 || selectedGeographies.length === 0) {
       setData([]);
       setProviderCounts({});
       setLoading(false);
       return;
     }
+    if (!isDb && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0 || selectedGpu.length === 0)) {
+      setData([]);
+      setProviderCounts({});
+      setLoading(false);
+      return;
+    }
+    if (isDb && (selectedDbFamilies.length === 0 || selectedEngines.length === 0 || selectedDeploymentTypes.length === 0 || selectedHaModes.length === 0)) {
+      setData([]);
+      setProviderCounts({});
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
     try {
-      // Common filter params shared by /api/pricing and /api/pricing/counts.
-      // The counts endpoint reflects "what would be available per provider" so it
-      // intentionally ignores the provider filter (otherwise unselected providers'
-      // cards would always show 0).
       const baseParams = new URLSearchParams();
+      baseParams.append('productType', isDb ? 'database' : 'compute');
       if (selectedGeographies.length > 0) baseParams.append('geography', selectedGeographies.join(','));
-      if (selectedOS.length > 0) baseParams.append('os', selectedOS.join(','));
-      if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
-        const vendors = [...new Set(selectedCpu.map(id => CPU_PROFILES.find(p => p.id === id)!.vendor))];
-        baseParams.append('cpuVendor', vendors.join(','));
+
+      if (isDb) {
+        // DB-specific filters
+        if (selectedDbFamilies.length > 0 && selectedDbFamilies.length < DB_FAMILIES.length) {
+          baseParams.append('category', selectedDbFamilies.join(','));
+        }
+        if (selectedEngines.length > 0 && selectedEngines.length < DB_ENGINES.length) {
+          baseParams.append('engine', selectedEngines.join(','));
+        }
+        if (selectedDeploymentTypes.length > 0 && selectedDeploymentTypes.length < DEPLOYMENT_TYPES.length) {
+          baseParams.append('deploymentType', selectedDeploymentTypes.join(','));
+        }
+        if (selectedHaModes.length > 0 && selectedHaModes.length < HA_MODES.length) {
+          baseParams.append('haMode', selectedHaModes.join(','));
+        }
+      } else {
+        // VM-specific filters
+        if (selectedOS.length > 0) baseParams.append('os', selectedOS.join(','));
+        if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
+          const vendors = [...new Set(selectedCpu.map(id => CPU_PROFILES.find(p => p.id === id)!.vendor))];
+          baseParams.append('cpuVendor', vendors.join(','));
+        }
+        if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
+          baseParams.append('category', selectedCategory.join(','));
+        }
+        if (selectedGpu.length === 1) {
+          baseParams.append('gpu', selectedGpu[0] === 'With GPU' ? 'true' : 'false');
+        }
       }
-      if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
-        baseParams.append('category', selectedCategory.join(','));
-      }
-      if (selectedGpu.length === 1) {
-        baseParams.append('gpu', selectedGpu[0] === 'With GPU' ? 'true' : 'false');
-      }
+
       baseParams.append('minVcpu', vCpuRange.min.toString());
       baseParams.append('maxVcpu', vCpuRange.max.toString());
       baseParams.append('minMemory', memoryRange.min.toString());
@@ -224,7 +277,6 @@ export default function Dashboard() {
       baseParams.append('maxPrice', priceRange.max.toString());
       baseParams.append('search', search);
 
-      // Pricing query adds the provider filter on top of baseParams.
       const pricingParams = new URLSearchParams(baseParams);
       pricingParams.append('provider', selectedProviders.join(','));
 
@@ -260,7 +312,13 @@ export default function Dashboard() {
     } finally {
       setLoading(false);
     }
-  }, [selectedProviders, selectedGeographies, selectedOS, selectedCpu, selectedCategory, selectedGpu, vCpuRange, memoryRange, priceRange, search, showAggregation]);
+  }, [
+    activeProductType,
+    selectedProviders, selectedGeographies,
+    selectedOS, selectedCpu, selectedCategory, selectedGpu,
+    selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
+    vCpuRange, memoryRange, priceRange, search, showAggregation,
+  ]);
 
   useEffect(() => {
     const timeout = setTimeout(fetchFilteredData, 300);
@@ -324,18 +382,31 @@ export default function Dashboard() {
       {/* Capabilities Sub-header */}
       <div className="h-10 border-b border-[#e5e5e5] dark:border-[#262626] bg-[#fcfcfc] dark:bg-[#080808] flex items-center px-4 overflow-x-auto no-scrollbar shrink-0">
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#171717] rounded shadow-sm border border-[#e5e5e5] dark:border-[#262626] cursor-default">
-            <span className="text-xs font-bold flex items-center gap-1.5">
+          <button
+            onClick={() => setActiveProductType('vm')}
+            className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
+              activeProductType === 'vm'
+                ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
+                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-white opacity-60 hover:opacity-100'
+            }`}
+          >
+            <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'vm' ? 'font-medium' : ''}`}>
               🖥️ Virtual Machines
             </span>
-          </div>
+          </button>
 
-          <div className="flex items-center gap-2 group opacity-60">
-            <span className="text-xs font-medium text-[#737373] flex items-center gap-1.5">
+          <button
+            onClick={() => setActiveProductType('database')}
+            className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
+              activeProductType === 'database'
+                ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
+                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-white opacity-60 hover:opacity-100'
+            }`}
+          >
+            <span className="text-xs font-bold flex items-center gap-1.5">
               🗄️ Databases
-              <span className="text-[8px] font-bold bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-1 rounded uppercase tracking-tighter">Soon</span>
             </span>
-          </div>
+          </button>
 
           <div className="flex items-center gap-2 group opacity-60">
             <span className="text-xs font-medium text-[#737373] flex items-center gap-1.5">
@@ -461,235 +532,281 @@ export default function Dashboard() {
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
-            {/* Category Section */}
-            <section className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h2 className="m-0">
-                  <button
-                    onClick={() => toggleSection('category')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    <ChevronDown size={10} className={`transition-transform ${expanded.category ? '' : '-rotate-90'}`} />
-                    Category <span title="Instance type purpose, derived from each cloud's published instance families: General purpose, Compute optimized (CPU-heavy), Memory optimized (RAM-heavy), Storage optimized (high-IO), Burstable (cheap baseline + bursts), or HPC." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
-                  </button>
-                </h2>
-                <button
-                  onClick={() => {
-                    if (selectedCategory.length === CATEGORIES.length) {
-                      setSelectedCategory([]);
-                    } else {
-                      setSelectedCategory([...CATEGORIES]);
-                    }
-                  }}
-                  className={`text-[10px] font-bold uppercase transition-colors ${selectedCategory.length === CATEGORIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
-                >
-                  {selectedCategory.length === CATEGORIES.length ? 'Clear All' : 'Select All'}
-                </button>
-              </div>
-              {expanded.category && (
-              <div className="flex flex-wrap gap-2">
-                {CATEGORIES.map(category => (
-                  <button
-                    key={category}
-                    onClick={() => toggleFilter(selectedCategory, setSelectedCategory, category)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      selectedCategory.includes(category)
-                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-              )}
-            </section>
+            {activeProductType === 'vm' ? (
+              <>
+                {/* ── VM: Category ── */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('category')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.category ? '' : '-rotate-90'}`} />
+                        Category <span title="Instance type purpose, derived from each cloud's published instance families." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedCategory.length === CATEGORIES.length ? setSelectedCategory([]) : setSelectedCategory([...CATEGORIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedCategory.length === CATEGORIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedCategory.length === CATEGORIES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.category && (
+                  <div className="flex flex-wrap gap-2">
+                    {CATEGORIES.map(category => (
+                      <button key={category} onClick={() => toggleFilter(selectedCategory, setSelectedCategory, category)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedCategory.includes(category) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
 
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
-            {/* Geography Section */}
-            <section className="space-y-3">
-              <div className="flex justify-between items-center">
-                <h2 className="m-0">
-                  <button
-                    onClick={() => toggleSection('geography')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    <ChevronDown size={10} className={`transition-transform ${expanded.geography ? '' : '-rotate-90'}`} />
-                    Geography <span title="Geographic region where the VM runs. Each cloud's individual regions (e.g. us-east-1, eastus, europe-west1) are grouped into broader continental areas." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
-                  </button>
-                </h2>
-                <button
-                  onClick={() => {
-                    if (selectedGeographies.length === GEOGRAPHIES.length) {
-                      setSelectedGeographies([]);
-                    } else {
-                      setSelectedGeographies([...GEOGRAPHIES]);
-                    }
-                  }}
-                  className={`text-[10px] font-bold uppercase transition-colors ${selectedGeographies.length === GEOGRAPHIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
-                >
-                  {selectedGeographies.length === GEOGRAPHIES.length ? 'Clear All' : 'Select All'}
-                </button>
-              </div>
-              {expanded.geography && (
-              <div className="flex flex-wrap gap-2">
-                {GEOGRAPHIES.map(geo => (
-                  <button
-                    key={geo}
-                    onClick={() => toggleFilter(selectedGeographies, setSelectedGeographies, geo)}
-                    className={`px-3 py-1 rounded text-[10px] font-bold transition-all border ${
-                      selectedGeographies.includes(geo)
-                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
-                  >
-                    {geo}
-                  </button>
-                ))}
-              </div>
-              )}
-            </section>
+                {/* ── VM: Geography ── */}
+                <section className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('geography')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.geography ? '' : '-rotate-90'}`} />
+                        Geography <span title="Geographic region where the VM runs." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedGeographies.length === GEOGRAPHIES.length ? setSelectedGeographies([]) : setSelectedGeographies([...GEOGRAPHIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedGeographies.length === GEOGRAPHIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedGeographies.length === GEOGRAPHIES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.geography && (
+                  <div className="flex flex-wrap gap-2">
+                    {GEOGRAPHIES.map(geo => (
+                      <button key={geo} onClick={() => toggleFilter(selectedGeographies, setSelectedGeographies, geo)}
+                        className={`px-3 py-1 rounded text-[10px] font-bold transition-all border ${selectedGeographies.includes(geo) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {geo}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
 
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
-            {/* Operating System Section */}
-            <section className="space-y-3">
-              <div className="flex justify-between items-center">
-                <h2 className="m-0">
-                  <button
-                    onClick={() => toggleSection('os')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    <ChevronDown size={10} className={`transition-transform ${expanded.os ? '' : '-rotate-90'}`} />
-                    Operating System <span title="The operating system running on the VM. Linux pricing typically reflects free distributions (Ubuntu, Amazon Linux, Debian). AWS and Azure charge extra for commercial distros like RHEL or SUSE — those are not currently broken out as a filter." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
-                  </button>
-                </h2>
-                <button
-                  onClick={() => {
-                    if (selectedOS.length === OS_TYPES.length) {
-                      setSelectedOS([]);
-                    } else {
-                      setSelectedOS([...OS_TYPES]);
-                    }
-                  }}
-                  className={`text-[10px] font-bold uppercase transition-colors ${selectedOS.length === OS_TYPES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
-                >
-                  {selectedOS.length === OS_TYPES.length ? 'Clear All' : 'Select All'}
-                </button>
-              </div>
-              {expanded.os && (
-              <div className="flex flex-wrap gap-2">
-                {OS_TYPES.map(os => (
-                  <button
-                    key={os}
-                    onClick={() => toggleFilter(selectedOS, setSelectedOS, os)}
-                    className={`px-4 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      selectedOS.includes(os)
-                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
-                  >
-                    {os}
-                  </button>
-                ))}
-              </div>
-              )}
-            </section>
+                {/* ── VM: Operating System ── */}
+                <section className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('os')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.os ? '' : '-rotate-90'}`} />
+                        Operating System <span title="The operating system running on the VM." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedOS.length === OS_TYPES.length ? setSelectedOS([]) : setSelectedOS([...OS_TYPES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedOS.length === OS_TYPES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedOS.length === OS_TYPES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.os && (
+                  <div className="flex flex-wrap gap-2">
+                    {OS_TYPES.map(os => (
+                      <button key={os} onClick={() => toggleFilter(selectedOS, setSelectedOS, os)}
+                        className={`px-4 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedOS.includes(os) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {os}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
 
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
-            {/* CPU Section */}
-            <section className="space-y-3">
-              <div className="flex justify-between items-center">
-                <h2 className="m-0">
-                  <button
-                    onClick={() => toggleSection('cpu')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    <ChevronDown size={10} className={`transition-transform ${expanded.cpu ? '' : '-rotate-90'}`} />
-                    CPU <span title="Processor vendor and instruction set. Intel and AMD use x86; AWS Graviton and Ampere Altra use ARM. Performance, software compatibility, and price all vary across these." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
-                  </button>
-                </h2>
-                <button
-                  onClick={() => {
-                    if (selectedCpu.length === CPU_PROFILES.length) {
-                      setSelectedCpu([]);
-                    } else {
-                      setSelectedCpu(CPU_PROFILES.map(p => p.id));
-                    }
-                  }}
-                  className={`text-[10px] font-bold uppercase transition-colors ${selectedCpu.length === CPU_PROFILES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
-                >
-                  {selectedCpu.length === CPU_PROFILES.length ? 'Clear All' : 'Select All'}
-                </button>
-              </div>
-              {expanded.cpu && (
-              <div className="flex flex-wrap gap-2">
-                {CPU_PROFILES.map(profile => (
-                  <button
-                    key={profile.id}
-                    onClick={() => toggleFilter(selectedCpu, setSelectedCpu, profile.id)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      selectedCpu.includes(profile.id)
-                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
-                  >
-                    {profile.label}
-                  </button>
-                ))}
-              </div>
-              )}
-            </section>
+                {/* ── VM: CPU ── */}
+                <section className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('cpu')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.cpu ? '' : '-rotate-90'}`} />
+                        CPU <span title="Processor vendor and instruction set." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedCpu.length === CPU_PROFILES.length ? setSelectedCpu([]) : setSelectedCpu(CPU_PROFILES.map(p => p.id)); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedCpu.length === CPU_PROFILES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedCpu.length === CPU_PROFILES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.cpu && (
+                  <div className="flex flex-wrap gap-2">
+                    {CPU_PROFILES.map(profile => (
+                      <button key={profile.id} onClick={() => toggleFilter(selectedCpu, setSelectedCpu, profile.id)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedCpu.includes(profile.id) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {profile.label}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
 
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
-            {/* GPU Section */}
-            <section className="space-y-3">
-              <div className="flex justify-between items-center">
-                <h2 className="m-0">
-                  <button
-                    onClick={() => toggleSection('gpu')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    <ChevronDown size={10} className={`transition-transform ${expanded.gpu ? '' : '-rotate-90'}`} />
-                    GPU <span title="Whether the instance includes a GPU accelerator (e.g. NVIDIA T4, A10, A100, L40S, H100). Common for ML training/inference, rendering, and scientific compute." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
-                  </button>
-                </h2>
-                <button
-                  onClick={() => {
-                    if (selectedGpu.length === GPU_OPTIONS.length) {
-                      setSelectedGpu([]);
-                    } else {
-                      setSelectedGpu([...GPU_OPTIONS]);
-                    }
-                  }}
-                  className={`text-[10px] font-bold uppercase transition-colors ${selectedGpu.length === GPU_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
-                >
-                  {selectedGpu.length === GPU_OPTIONS.length ? 'Clear All' : 'Select All'}
-                </button>
-              </div>
-              {expanded.gpu && (
-              <div className="flex flex-wrap gap-2">
-                {GPU_OPTIONS.map(opt => (
-                  <button
-                    key={opt}
-                    onClick={() => toggleFilter(selectedGpu, setSelectedGpu, opt)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      selectedGpu.includes(opt)
-                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-              )}
-            </section>
+                {/* ── VM: GPU ── */}
+                <section className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('gpu')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.gpu ? '' : '-rotate-90'}`} />
+                        GPU <span title="Whether the instance includes a GPU accelerator." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedGpu.length === GPU_OPTIONS.length ? setSelectedGpu([]) : setSelectedGpu([...GPU_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedGpu.length === GPU_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedGpu.length === GPU_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.gpu && (
+                  <div className="flex flex-wrap gap-2">
+                    {GPU_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedGpu, setSelectedGpu, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedGpu.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
 
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+              </>
+            ) : (
+              <>
+                {/* ── DB: DB Family ── */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('dbFamily')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.dbFamily ? '' : '-rotate-90'}`} />
+                        DB Family <span title="The broad category of the database system: Relational (SQL-based) or NoSQL." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedDbFamilies.length === DB_FAMILIES.length ? setSelectedDbFamilies([]) : setSelectedDbFamilies([...DB_FAMILIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedDbFamilies.length === DB_FAMILIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedDbFamilies.length === DB_FAMILIES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.dbFamily && (
+                  <div className="flex flex-wrap gap-2">
+                    {DB_FAMILIES.map(f => (
+                      <button key={f} onClick={() => toggleFilter(selectedDbFamilies, setSelectedDbFamilies, f)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedDbFamilies.includes(f) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {f}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* ── DB: Geography ── */}
+                <section className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('geography')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.geography ? '' : '-rotate-90'}`} />
+                        Geography <span title="Geographic region where the database is deployed." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedGeographies.length === GEOGRAPHIES.length ? setSelectedGeographies([]) : setSelectedGeographies([...GEOGRAPHIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedGeographies.length === GEOGRAPHIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedGeographies.length === GEOGRAPHIES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.geography && (
+                  <div className="flex flex-wrap gap-2">
+                    {GEOGRAPHIES.map(geo => (
+                      <button key={geo} onClick={() => toggleFilter(selectedGeographies, setSelectedGeographies, geo)}
+                        className={`px-3 py-1 rounded text-[10px] font-bold transition-all border ${selectedGeographies.includes(geo) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {geo}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* ── DB: Engine ── */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('engine')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.engine ? '' : '-rotate-90'}`} />
+                        Engine <span title="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedEngines.length === DB_ENGINES.length ? setSelectedEngines([]) : setSelectedEngines([...DB_ENGINES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedEngines.length === DB_ENGINES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedEngines.length === DB_ENGINES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.engine && (
+                  <div className="flex flex-wrap gap-2">
+                    {DB_ENGINES.map(eng => (
+                      <button key={eng} onClick={() => toggleFilter(selectedEngines, setSelectedEngines, eng)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedEngines.includes(eng) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {eng}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* ── DB: Deployment Type ── */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('deploymentType')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.deploymentType ? '' : '-rotate-90'}`} />
+                        Deployment <span title="Provisioned: fixed instance size billed hourly. Serverless: auto-scales, billed per compute unit consumed." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedDeploymentTypes.length === DEPLOYMENT_TYPES.length ? setSelectedDeploymentTypes([]) : setSelectedDeploymentTypes([...DEPLOYMENT_TYPES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedDeploymentTypes.length === DEPLOYMENT_TYPES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedDeploymentTypes.length === DEPLOYMENT_TYPES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.deploymentType && (
+                  <div className="flex flex-wrap gap-2">
+                    {DEPLOYMENT_TYPES.map(dt => (
+                      <button key={dt} onClick={() => toggleFilter(selectedDeploymentTypes, setSelectedDeploymentTypes, dt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedDeploymentTypes.includes(dt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {dt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* ── DB: HA Mode ── */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('haMode')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.haMode ? '' : '-rotate-90'}`} />
+                        HA Mode <span title="High-availability configuration: Single-AZ (no redundancy), Multi-AZ (same-region standby), Zone-Redundant, or Multi-Region (geo-redundant)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedHaModes.length === HA_MODES.length ? setSelectedHaModes([]) : setSelectedHaModes([...HA_MODES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedHaModes.length === HA_MODES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedHaModes.length === HA_MODES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.haMode && (
+                  <div className="flex flex-wrap gap-2">
+                    {HA_MODES.map(hm => (
+                      <button key={hm} onClick={() => toggleFilter(selectedHaModes, setSelectedHaModes, hm)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedHaModes.includes(hm) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {hm}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+              </>
+            )}
 
             {/* Range Sliders Section */}
             <section className="space-y-4">
@@ -872,10 +989,21 @@ export default function Dashboard() {
                     <th onClick={() => sortData('instance_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
                       SKU <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'instance_type' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
-                    <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Category</th>
-                    <th className="px-6 py-4 text-center font-bold whitespace-nowrap">CPU Vendor</th>
-                    <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Arch</th>
-                    <th className="px-6 py-4 text-center font-bold whitespace-nowrap">OS</th>
+                    {activeProductType === 'database' ? (
+                      <>
+                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Engine</th>
+                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">DB Family</th>
+                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Deployment</th>
+                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">HA Mode</th>
+                      </>
+                    ) : (
+                      <>
+                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Category</th>
+                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">CPU Vendor</th>
+                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Arch</th>
+                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">OS</th>
+                      </>
+                    )}
                     <th onClick={() => sortData('geography')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
                       Geography <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'geography' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                     </th>
@@ -894,7 +1022,7 @@ export default function Dashboard() {
                   {loading ? (
                     Array.from({ length: 15 }).map((_, i) => (
                       <tr key={i} className="animate-pulse">
-                        {Array.from({ length: 11 }).map((_, j) => (
+                        {Array.from({ length: 10 }).map((_, j) => (
                           <td key={j} className="px-6 py-4"><div className="h-3 bg-[#f5f5f5] dark:bg-[#171717] rounded w-16 mx-auto"></div></td>
                         ))}
                       </tr>
@@ -902,43 +1030,69 @@ export default function Dashboard() {
                   ) : data.length > 0 ? (
                     data.map((record, index) => (
                       <tr key={index} className={`transition-colors group ${index % 2 === 0 ? 'bg-white dark:bg-[#000000]' : 'bg-[#f7f7f7] dark:bg-[#0a0a0a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
+                        {/* Provider — shared */}
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center justify-center gap-2">
-                            <div
-                              className="w-2 h-2 rounded-full"
-                              style={{ backgroundColor: PROVIDERS.find(p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name)?.color || '#525252' }}
-                            />
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">
-                              {record.provider}
-                            </span>
+                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROVIDERS.find(p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name)?.color || '#525252' }} />
+                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.provider}</span>
                           </div>
                         </td>
+                        {/* SKU — shared */}
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-xs font-bold text-black dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors">{record.instance_type}</span>
                         </td>
-                        <td className="px-6 py-4 text-center whitespace-nowrap">
-                          <div className="flex items-center justify-center gap-2">
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
-                            {record.gpu_count > 0 && (
-                              <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[8px] font-bold border border-blue-500/20 uppercase tracking-widest">GPU</span>
-                            )}
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-center">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor}</span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-center">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch}</span>
-                        </td>
-                        <td className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os}</td>
+                        {/* Middle 4 columns — differ by product type */}
+                        {activeProductType === 'database' ? (
+                          <>
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
+                                record.attributes?.deployment_type === 'Serverless' || record.attributes?.deployment_type === 'Serverless v2'
+                                  ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20'
+                                  : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
+                              }`}>{record.attributes?.deployment_type || 'Provisioned'}</span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
+                                record.attributes?.ha_mode === 'Multi-AZ' || record.attributes?.ha_mode === 'Zone-Redundant' || record.attributes?.ha_mode === 'Multi-Region'
+                                  ? 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20'
+                                  : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
+                              }`}>{record.attributes?.ha_mode || '—'}</span>
+                            </td>
+                          </>
+                        ) : (
+                          <>
+                            <td className="px-6 py-4 text-center whitespace-nowrap">
+                              <div className="flex items-center justify-center gap-2">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
+                                {record.gpu_count > 0 && (
+                                  <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[8px] font-bold border border-blue-500/20 uppercase tracking-widest">GPU</span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor}</span>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch}</span>
+                            </td>
+                            <td className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os}</td>
+                          </>
+                        )}
+                        {/* Geography, vCPU, Memory, Price — shared */}
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography}</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-center">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus}</span>
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-center">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb}</span>
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span>
                         </td>
                         <td className="px-6 py-4 text-center whitespace-nowrap">
                           <span className="text-xs font-bold text-black dark:text-white">
@@ -951,7 +1105,7 @@ export default function Dashboard() {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={11} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
+                      <td colSpan={10} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
                         <div className="flex flex-col items-center gap-4">
                           <span>No matches for your filters.</span>
                           {dbStatus && dbStatus.total === 0 && (

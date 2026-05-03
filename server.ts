@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import cron from 'node-cron';
 import { PricingPipeline } from './src/services/pricing_pipeline.ts';
+import { DatabasePricingPipeline } from './src/services/database_pipeline.ts';
 
 dotenv.config();
 
@@ -52,6 +53,15 @@ async function startServer() {
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS cpu_vendor VARCHAR(50);
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS gpu_count INTEGER DEFAULT 0;
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS category VARCHAR(50);
+        ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS attributes JSONB;
+      `);
+
+      // Tag all known compute services so productType filtering works correctly.
+      // Database services get tagged 'database' when DatabasePricingPipeline runs.
+      await client.query(`
+        UPDATE services SET category = 'compute'
+        WHERE name IN ('EC2', 'Virtual Machines', 'Compute Engine', 'OCI Compute', 'Droplets')
+          AND (category IS NULL OR category = 'Compute');
       `);
 
       // Update provider names to preferred display names
@@ -191,13 +201,26 @@ async function startServer() {
     }
   });
 
-  // Run Pipeline Route (Like run_local.py)
+  // Run Pipeline Route — runs both compute and database pipelines.
+  // Pass ?type=compute or ?type=database to run only one.
   app.post('/api/admin/fetch-pricing', async (req, res) => {
     try {
-      const pipeline = new PricingPipeline(pool);
-      const results = await pipeline.run();
+      const type = (req.query.type as string) || 'all';
+      const results: any[] = [];
 
-      // Also trigger the migration/cleanup logic after fetch
+      if (type === 'all' || type === 'compute') {
+        const pipeline = new PricingPipeline(pool);
+        const computeResults = await pipeline.run();
+        results.push(...computeResults.map(r => ({ ...r, pipeline: 'compute' })));
+      }
+
+      if (type === 'all' || type === 'database') {
+        const dbPipeline = new DatabasePricingPipeline(pool);
+        const dbResults = await dbPipeline.run();
+        results.push(...dbResults.map(r => ({ ...r, pipeline: 'database' })));
+      }
+
+      // Refresh schema migrations / column backfills after any fetch
       await initDb();
 
       res.json({ message: 'Pipeline run completed and data migrated', results });
@@ -211,25 +234,53 @@ async function startServer() {
   function buildPricingFilters(query: any) {
     const {
       provider, geography, os, arch, cpuVendor, gpu, category,
-      minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search
+      minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
+      // Database-specific filters
+      productType, engine, deploymentType, haMode,
     } = query;
 
     const conditions: string[] = [];
     const values: any[] = [];
     let paramCount = 1;
 
+    // productType scopes the query to compute or database services.
+    // Defaults to 'compute' so the existing VM dashboard is unaffected.
+    const resolvedProductType = (productType as string) || 'compute';
+    conditions.push(`s.category = $${paramCount++}`);
+    values.push(resolvedProductType);
+
     if (provider) { conditions.push(`p.slug = ANY($${paramCount++})`); values.push((provider as string).split(',')); }
     if (geography) { conditions.push(`pr.geography = ANY($${paramCount++})`); values.push((geography as string).split(',')); }
-    if (os) { conditions.push(`pr.os = ANY($${paramCount++})`); values.push((os as string).split(',')); }
-    if (arch) {
-      const archList = (arch as string).split(',').map(a => a === 'x86' ? 'x86 64' : a);
-      conditions.push(`pr.arch = ANY($${paramCount++})`);
-      values.push(archList);
+
+    // OS / arch / CPU / GPU only apply to the compute product type
+    if (resolvedProductType === 'compute') {
+      if (os) { conditions.push(`pr.os = ANY($${paramCount++})`); values.push((os as string).split(',')); }
+      if (arch) {
+        const archList = (arch as string).split(',').map((a: string) => a === 'x86' ? 'x86 64' : a);
+        conditions.push(`pr.arch = ANY($${paramCount++})`);
+        values.push(archList);
+      }
+      if (cpuVendor) { conditions.push(`pr.cpu_vendor = ANY($${paramCount++})`); values.push((cpuVendor as string).split(',')); }
+      if (gpu === 'true') conditions.push(`pr.gpu_count > 0`);
+      else if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
     }
-    if (cpuVendor) { conditions.push(`pr.cpu_vendor = ANY($${paramCount++})`); values.push((cpuVendor as string).split(',')); }
+
     if (category && category !== 'All categories') { conditions.push(`pr.category = ANY($${paramCount++})`); values.push((category as string).split(',')); }
-    if (gpu === 'true') conditions.push(`pr.gpu_count > 0`);
-    else if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
+
+    // Database-specific JSONB attribute filters
+    if (engine) {
+      conditions.push(`pr.attributes->>'engine' = ANY($${paramCount++})`);
+      values.push((engine as string).split(','));
+    }
+    if (deploymentType) {
+      conditions.push(`pr.attributes->>'deployment_type' = ANY($${paramCount++})`);
+      values.push((deploymentType as string).split(','));
+    }
+    if (haMode) {
+      conditions.push(`pr.attributes->>'ha_mode' = ANY($${paramCount++})`);
+      values.push((haMode as string).split(','));
+    }
+
     if (minVcpu) { conditions.push(`pr.vcpus >= $${paramCount++}`); values.push(minVcpu); }
     if (maxVcpu) { conditions.push(`pr.vcpus <= $${paramCount++}`); values.push(maxVcpu); }
     if (minMemory) { conditions.push(`pr.memory_gb >= $${paramCount++}`); values.push(minMemory); }
@@ -292,6 +343,7 @@ async function startServer() {
         pr.price_per_unit,
         pr.unit,
         pr.category,
+        pr.attributes,
         pr.updated_at
       `;
 
@@ -314,7 +366,8 @@ async function startServer() {
           MIN(pr.price_per_unit) as price_per_unit,
           pr.unit,
           pr.category,
-          MAX(pr.updated_at) as updated_at
+          MAX(pr.updated_at) as updated_at,
+          MAX(pr.attributes::text)::jsonb as attributes
         `;
       }
 
