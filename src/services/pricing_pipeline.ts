@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Pool } from 'pg';
 import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/oracle_instances.js';
 import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.js';
+import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.js';
 
 export interface PricingRecord {
   provider: string;
@@ -222,30 +223,19 @@ export class GCPAdapter extends BaseAdapter {
   providerSlug = 'gcp';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log('Fetching GCP pricing (Compute Engine)...');
-    const instances = [
-      { type: 'n1-standard-1', vcpus: 1, memory: 3.75, price: 0.0475 },
-      { type: 'n1-standard-2', vcpus: 2, memory: 7.5, price: 0.095 },
-      { type: 'e2-medium', vcpus: 2, memory: 4, price: 0.0335 },
-      { type: 'n2-standard-4', vcpus: 4, memory: 16, price: 0.228 },
-      { type: 't2d-standard-1', vcpus: 1, memory: 4, price: 0.0422 },
-      { type: 't2a-standard-1', vcpus: 1, memory: 4, price: 0.0385 },
-      { type: 'n2-highmem-2', vcpus: 2, memory: 16, price: 0.131 },
-      { type: 'c2-standard-4', vcpus: 4, memory: 16, price: 0.208 },
-    ];
-
-    return instances.map(inst => ({
+    console.log(`Fetching GCP pricing (from src/config/gcp_instances.ts, ${GCP_INSTANCES.length} entries)...`);
+    return GCP_INSTANCES.map(inst => ({
       provider: 'gcp',
       service: 'Compute Engine',
-      region: 'us-central1',
+      region: GCP_REGION,
       instanceType: inst.type,
       vcpus: inst.vcpus,
       memoryGb: inst.memory,
-      arch: inst.type.startsWith('t2a') ? 'ARM' : 'x86 64',
+      arch: inst.cpuVendor === 'Ampere' ? 'ARM' : 'x86 64',
       os: 'Linux',
-      cpuVendor: inst.type.startsWith('t2a') ? 'Ampere' : (inst.type.startsWith('t2d') ? 'AMD' : 'Intel'),
-      gpuCount: 0,
-      geography: 'N. America',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: inst.gpuCount ?? 0,
+      geography: GCP_GEOGRAPHY,
       category: this.classifyGcp(inst.type, inst.vcpus, inst.memory),
       price: inst.price,
       unit: 'Hour'
