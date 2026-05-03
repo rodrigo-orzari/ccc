@@ -19,6 +19,7 @@ export interface PricingRecord {
   category: string;
   price: number;
   unit: string;
+  attributes?: Record<string, any>;
 }
 
 export abstract class BaseAdapter {
@@ -377,8 +378,8 @@ export class DigitalOceanAdapter extends BaseAdapter {
 }
 
 export class PricingPipeline {
-  private pool: Pool;
-  private adapters: BaseAdapter[];
+  protected pool: Pool;
+  protected adapters: BaseAdapter[];
 
   constructor(pool: Pool) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -408,7 +409,7 @@ export class PricingPipeline {
     return results;
   }
 
-  private async saveRecords(records: PricingRecord[]) {
+  protected async saveRecords(records: PricingRecord[], serviceCategory = 'compute') {
     if (records.length === 0) return;
 
     const client = await this.pool.connect();
@@ -436,11 +437,12 @@ export class PricingPipeline {
         regionMap.set(regionSlug, res.rows[0].id);
       }
 
-      // 2. Ensure Service exists
+      // 2. Ensure Service exists — use the caller-supplied category so compute
+      //    and database services are correctly tagged from the first insert.
       const serviceName = records[0].service;
       const serviceRes = await client.query(
-        'INSERT INTO services (provider_id, name, category) VALUES ($1, $2, $3) ON CONFLICT (provider_id, name) DO UPDATE SET name = EXCLUDED.name RETURNING id',
-        [providerId, serviceName, 'Compute']
+        'INSERT INTO services (provider_id, name, category) VALUES ($1, $2, $3) ON CONFLICT (provider_id, name) DO UPDATE SET category = EXCLUDED.category RETURNING id',
+        [providerId, serviceName, serviceCategory]
       );
       const serviceId = serviceRes.rows[0].id;
 
@@ -453,7 +455,7 @@ export class PricingPipeline {
         const batch = records.slice(i, i + BATCH_SIZE);
         const values: any[] = [];
         const placeholders = batch.map((r, idx) => {
-          const offset = idx * 13;
+          const offset = idx * 14;
           values.push(
             serviceId,
             regionMap.get(r.region),
@@ -467,21 +469,22 @@ export class PricingPipeline {
             r.geography,
             r.category,
             r.price,
-            r.unit
+            r.unit,
+            r.attributes ? JSON.stringify(r.attributes) : null
           );
-          return `($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5}, $${offset + 6}, $${offset + 7}, $${offset + 8}, $${offset + 9}, $${offset + 10}, $${offset + 11}, $${offset + 12}, $${offset + 13})`;
+          return `($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5}, $${offset + 6}, $${offset + 7}, $${offset + 8}, $${offset + 9}, $${offset + 10}, $${offset + 11}, $${offset + 12}, $${offset + 13}, $${offset + 14})`;
         }).join(',');
 
         await client.query(
           `INSERT INTO pricing_records
-           (service_id, region_id, instance_type, vcpus, memory_gb, arch, os, cpu_vendor, gpu_count, geography, category, price_per_unit, unit)
+           (service_id, region_id, instance_type, vcpus, memory_gb, arch, os, cpu_vendor, gpu_count, geography, category, price_per_unit, unit, attributes)
            VALUES ${placeholders}`,
           values
         );
       }
 
       await client.query('COMMIT');
-      console.log(`✅ Saved ${records.length} records for ${providerSlug}`);
+      console.log(`✅ Saved ${records.length} records for ${providerSlug} (${serviceCategory})`);
     } catch (err) {
       await client.query('ROLLBACK');
       console.error('❌ Batch save failed:', err);
