@@ -36,7 +36,7 @@ export class GCPCloudSQLAdapter extends BaseAdapter {
         engine: inst.engine,
         engine_version: inst.engine === 'PostgreSQL' ? '15' : inst.engine === 'MySQL' ? '8.0' : '2022',
         deployment_type: 'Provisioned',
-        ha_mode: 'Single-AZ',
+        ha_mode: 'Single AZ',
         storage_type: 'SSD',
       },
     }));
@@ -79,7 +79,7 @@ export class OracleAutonomousAdapter extends BaseAdapter {
           engine,
           engine_version: '19c',
           deployment_type: inst.deploymentType,
-          ha_mode: 'Multi-AZ',
+          ha_mode: 'Multi AZ',
           storage_type: 'SSD',
           workload: inst.workload,
         },
@@ -142,7 +142,7 @@ export class AWSRDSAdapter extends BaseAdapter {
       const vcpus = parseInt(attr.vcpu) || 0;
       const memoryGb = attr.memory ? parseFloat(attr.memory.replace(/[^0-9.]/g, '')) : 0;
       const deploymentOption = attr.deploymentOption ?? 'Single-AZ';
-      const haMode = deploymentOption.includes('Multi') ? 'Multi-AZ' : 'Single-AZ';
+      const haMode = deploymentOption.includes('Multi') ? 'Multi AZ' : 'Single AZ';
       const rawEngine = attr.databaseEngine ?? '';
       const engine = RDS_ENGINE_MAP[rawEngine] ?? rawEngine;
 
@@ -164,7 +164,7 @@ export class AWSRDSAdapter extends BaseAdapter {
         attributes: {
           engine,
           engine_version: attr.engineVersion ?? '',
-          deployment_type: deploymentOption.includes('Multi') ? 'Multi-AZ' : 'Single-AZ',
+          deployment_type: 'Provisioned',
           ha_mode: haMode,
           storage_type: 'SSD',
         },
@@ -226,11 +226,11 @@ export class AzureDBAdapter extends BaseAdapter {
       const skuLower = sku.toLowerCase();
 
       // Derive HA mode from SKU/tier description
-      let haMode = 'Single-AZ';
+      let haMode = 'Single AZ';
       if (skuLower.includes('zone redundant') || skuLower.includes('geo-redundant')) {
-        haMode = 'Zone-Redundant';
+        haMode = 'Zone Redundant';
       } else if (skuLower.includes('business critical') || skuLower.includes('premium')) {
-        haMode = 'Multi-AZ';
+        haMode = 'Multi AZ';
       }
 
       // Parse vCPU count from SKU (e.g. "GP_Gen5_4" → 4)
