@@ -8,6 +8,9 @@ import {
   ORACLE_AUTONOMOUS_INSTANCES,
   ORACLE_AUTONOMOUS_REGION,
   ORACLE_AUTONOMOUS_GEOGRAPHY,
+  DIGITALOCEAN_DB_INSTANCES,
+  DIGITALOCEAN_DB_REGION,
+  DIGITALOCEAN_DB_GEOGRAPHY,
 } from '../config/database_instances.js';
 
 // ─── GCP Cloud SQL (static config) ────────────────────────────────────────────
@@ -50,41 +53,30 @@ export class OracleAutonomousAdapter extends BaseAdapter {
 
   async fetchPricing(): Promise<PricingRecord[]> {
     console.log(`Fetching Oracle Autonomous DB pricing (${ORACLE_AUTONOMOUS_INSTANCES.length} entries from static config)...`);
-    return ORACLE_AUTONOMOUS_INSTANCES.map(inst => {
-      // OCPUs: 1 OCPU ≈ 2 vCPUs (hyperthreaded). Report vcpus as 2× OCPUs.
-      // Serverless rows have no fixed allocation, so report 0.
-      const vcpus = inst.deploymentType === 'Serverless' ? 0 : inst.ocpus * 2;
-      const memoryGb = inst.deploymentType === 'Serverless' ? 0 : inst.memory;
-      const engine = inst.workload === 'ATP'
-        ? 'Oracle DB'
-        : 'Oracle DB';
-      const unit = inst.deploymentType === 'Serverless' ? 'per ECPU-Hour' : 'Hour';
-
-      return {
-        provider: 'oracle',
-        service: 'Autonomous Database',
-        region: ORACLE_AUTONOMOUS_REGION,
-        instanceType: inst.type,
-        vcpus,
-        memoryGb,
-        arch: 'x86 64',
-        os: '',
-        cpuVendor: 'Intel',
-        gpuCount: 0,
-        geography: ORACLE_AUTONOMOUS_GEOGRAPHY,
-        category: 'Relational',
-        price: inst.price,
-        unit,
-        attributes: {
-          engine,
-          engine_version: '19c',
-          deployment_type: inst.deploymentType,
-          ha_mode: 'Multi AZ',
-          storage_type: 'SSD',
-          workload: inst.workload,
-        },
-      };
-    });
+    return ORACLE_AUTONOMOUS_INSTANCES.map(inst => ({
+      provider: 'oracle',
+      service: 'Autonomous Database',
+      region: ORACLE_AUTONOMOUS_REGION,
+      instanceType: inst.type,
+      vcpus: 0,
+      memoryGb: 0,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: ORACLE_AUTONOMOUS_GEOGRAPHY,
+      category: 'Relational',
+      price: inst.price,
+      unit: 'ECPU-Hour',
+      attributes: {
+        engine: 'Oracle DB',
+        engine_version: '19c',
+        deployment_type: 'Serverless',
+        ha_mode: 'Multi AZ',
+        storage_type: 'SSD',
+        workload: inst.workload,
+      },
+    }));
   }
 }
 
@@ -104,6 +96,8 @@ const RDS_ENGINE_MAP: Record<string, string> = {
   'Oracle':                 'Oracle DB',
   'Oracle SE2':             'Oracle DB',
   'Oracle EE':              'Oracle DB',
+  'Db2':                    'Db2',
+  'IBM Db2':                'Db2',
 };
 
 export class AWSRDSAdapter extends BaseAdapter {
@@ -186,6 +180,7 @@ const AZURE_DB_SERVICES: { serviceName: string; engine: string }[] = [
   { serviceName: 'Azure Database for MySQL',             engine: 'MySQL'       },
   { serviceName: 'Azure Database for MariaDB',           engine: 'MariaDB'     },
   { serviceName: 'Azure Cosmos DB',                      engine: 'Cosmos DB'   },
+  { serviceName: 'Redis Cache',                          engine: 'Redis'       },
 ];
 
 function buildAzureDbFilter(): string {
@@ -261,7 +256,7 @@ export class AzureDBAdapter extends BaseAdapter {
         cpuVendor: 'Intel',
         gpuCount: 0,
         geography: this.getGeography(item.armRegionName ?? ''),
-        category: engine === 'Cosmos DB' ? 'NoSQL' : 'Relational',
+        category: (engine === 'Cosmos DB' || engine === 'Redis') ? 'NoSQL' : 'Relational',
         price,
         unit,
         attributes: {
@@ -279,6 +274,40 @@ export class AzureDBAdapter extends BaseAdapter {
   }
 }
 
+// ─── DigitalOcean Managed Databases (static config) ───────────────────────────
+
+export class DigitalOceanDBAdapter extends BaseAdapter {
+  providerSlug = 'digitalocean';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching DigitalOcean DB pricing (${DIGITALOCEAN_DB_INSTANCES.length} entries from static config)...`);
+    const NOSQL_ENGINES = new Set(['MongoDB', 'Valkey']);
+    return DIGITALOCEAN_DB_INSTANCES.map(inst => ({
+      provider: 'digitalocean',
+      service: 'Managed Databases',
+      region: DIGITALOCEAN_DB_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: DIGITALOCEAN_DB_GEOGRAPHY,
+      category: NOSQL_ENGINES.has(inst.engine) ? 'NoSQL' : 'Relational',
+      price: inst.price,
+      unit: 'Hour',
+      attributes: {
+        engine: inst.engine,
+        engine_version: '',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Single AZ',
+        storage_type: 'SSD',
+      },
+    }));
+  }
+}
+
 // ─── DatabasePricingPipeline ───────────────────────────────────────────────────
 
 export class DatabasePricingPipeline extends PricingPipeline {
@@ -290,6 +319,7 @@ export class DatabasePricingPipeline extends PricingPipeline {
       new OracleAutonomousAdapter(),
       new AWSRDSAdapter(),
       new AzureDBAdapter(),
+      new DigitalOceanDBAdapter(),
     ];
   }
 
