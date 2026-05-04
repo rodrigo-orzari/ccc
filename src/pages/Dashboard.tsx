@@ -368,12 +368,8 @@ export default function Dashboard() {
               What is CompareCloudCosts.com? <Maximize2 size={10} />
             </Link>
             <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
-            <Link to="/methodology" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              Know the methodology <Maximize2 size={10} />
-            </Link>
-            <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
             <a href="mailto:hello@comparecloudcosts.com" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              Questions or feedback? <Maximize2 size={10} />
+              Contact us <Maximize2 size={10} />
             </a>
           </div>
         </div>
