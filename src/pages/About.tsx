@@ -3,12 +3,12 @@ import MarkdownPage from '../components/MarkdownPage';
 
 const AboutPage: React.FC = () => {
   const content = `
-**CompareCloudCosts.com** is an open-source tool designed to help developers and architects understand the real costs of cloud infrastructure.
+**CompareCloudCosts.com** aggregates pricing from AWS, Azure, Google Cloud, Oracle, and DigitalOcean into a single filterable interface. Rather than toggling between five separate pricing calculators, engineers and finance teams get a unified view where cloud services are normalized to a common schema — vCPUs, memory, geography, and hourly USD price — covering both virtual machines and managed databases.
 
 ---
 
 ## Why we built this
-Cloud infrastructure costs are typically distributed across disparate, vendor-specific calculators. Navigating these individual tools to perform a cross-provider analysis can be time-intensive and complex. We built this platform to expedite that process, providing a centralized interface to evaluate different options efficiently.
+Cloud infrastructure costs are typically distributed across disparate, vendor-specific calculators. Navigating these individual tools to perform a cross-provider analysis can be time-intensive and complex. We built this platform to expedite that process, providing a centralized interface to evaluate different options efficiently and support better-informed infrastructure decisions.
 
 [Back to top ↑](#about-us)
 
@@ -18,9 +18,36 @@ Cloud infrastructure costs are typically distributed across disparate, vendor-sp
 Comparing cloud instances requires more than just looking at a price tag. Our platform streamlines the technical evaluation process by normalizing diverse data points into a single, actionable view.
 
 - **Global Comparison**: Access and compare infrastructure costs across different geographies to optimize for regional pricing variations.
-- **Unified Filtering**: Standardize your search by filtering for vCPU, Memory, OS, and Architecture, regardless of specific vendor naming conventions.
-- **Weekly Data Refreshes**: Our platform aggregates and updates pricing information weekly to ensure the data reflects recent changes in the market.
+- **Unified Filtering**: Standardize your search by filtering for vCPUs, memory, OS, CPU architecture, database engine, and HA mode — regardless of vendor-specific naming conventions.
+- **Weekly Data Refreshes**: Pricing information is aggregated and updated on a weekly basis to reflect recent market changes.
 - **Data Portability**: Export your custom comparison results directly to a **CSV file**, allowing for offline analysis, internal reporting, or integration with your financial spreadsheets.
+
+[Back to top ↑](#about-us)
+
+---
+
+## Pricing Disclaimer
+
+> **Important: Please read before using this tool.**
+
+The pricing data displayed on CompareCloudCosts.com is provided **for informational and consultative purposes only**. It is intended to help users develop a general understanding of relative cloud infrastructure costs and to support high-level, directional decision-making.
+
+### Data accuracy and timeliness
+- Pricing information is collected from publicly available sources on a **weekly automated basis** and is **not real-time**. Prices shown may not reflect the most current rates published by cloud providers.
+- Cloud providers change their pricing frequently and without prior notice. The prices shown may be outdated, incomplete, or inaccurate at the time of your visit.
+- Pricing structures for cloud services are highly complex and vary based on factors not captured here, including reserved/committed-use discounts, savings plans, enterprise agreements, spot/preemptible pricing, egress fees, support tiers, taxes, and regional surcharges.
+
+### Not a substitute for official pricing
+- This tool is **not** a substitute for the official pricing pages, calculators, or quotations provided by each cloud vendor.
+- All pricing, terms, and conditions must be **verified directly with the cloud provider** before making any purchasing, budgeting, or architectural decisions.
+- Final pricing is always subject to individual negotiation and contractual terms agreed upon directly between you and the cloud provider.
+
+### No warranties or liability
+- CompareCloudCosts.com and its operators make **no representations or warranties**, express or implied, as to the accuracy, completeness, reliability, or fitness for a particular purpose of any pricing data displayed on this site.
+- **Use of this tool is entirely at your own risk.** CompareCloudCosts.com, its owners, contributors, and operators accept **no liability whatsoever** for any decisions made, losses incurred, or damages arising — directly or indirectly — from reliance on the information provided here.
+- This site does not constitute financial, legal, or procurement advice.
+
+By using CompareCloudCosts.com, you acknowledge that you have read, understood, and agreed to this disclaimer.
 
 [Back to top ↑](#about-us)
 
@@ -156,6 +183,20 @@ Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@co
             font-weight: 500;
           }
 
+          .prose blockquote {
+            border-left: 4px solid #f59e0b;
+            background-color: #fffbeb;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.375rem 0.375rem 0;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            .prose blockquote {
+              background-color: #1c1a0f;
+            }
+          }
+
           @media (max-width: 768px) {
             .sidebar { display: none; }
             .main-content { margin-left: 0; padding: 2rem; }
@@ -172,6 +213,14 @@ Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@co
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li style={{ marginBottom: '0.6rem' }}><a href="#why-we-built-this">Why we built this</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#features">Features</a></li>
+              <li style={{ marginBottom: '0.6rem' }}>
+                <a href="#pricing-disclaimer" style={{ fontWeight: 'bold', color: '#f59e0b' }}>Pricing Disclaimer</a>
+                <ul style={{ listStyle: 'none', paddingLeft: '1rem', marginTop: '0.5rem' }}>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#data-accuracy-and-timeliness" style={{ fontSize: '0.85rem' }}>Data accuracy</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#not-a-substitute-for-official-pricing" style={{ fontSize: '0.85rem' }}>Official pricing</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#no-warranties-or-liability" style={{ fontSize: '0.85rem' }}>No liability</a></li>
+                </ul>
+              </li>
               <li style={{ marginBottom: '0.6rem' }}>
                 <a href="#privacy-policy" style={{ fontWeight: 'bold' }}>Privacy Policy</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '1rem', marginTop: '0.5rem' }}>
