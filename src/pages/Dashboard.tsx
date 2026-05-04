@@ -61,8 +61,8 @@ const GPU_OPTIONS = ['With GPU', 'Without GPU'];
 // Database-view constants
 const DB_FAMILIES = ['Relational', 'NoSQL'];
 const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Aurora MySQL', 'Aurora PostgreSQL', 'Cosmos DB'];
-const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless', 'Serverless v2', 'Multi-AZ'];
-const HA_MODES = ['Single-AZ', 'Multi-AZ', 'Zone-Redundant', 'Multi-Region', 'Geo-Redundant'];
+const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
+const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
 
 const DEFAULT_VCPU_RANGE   = { min: 1,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
@@ -489,49 +489,6 @@ export default function Dashboard() {
               )}
             </section>
 
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
-
-            {/* Pricing Mode Section */}
-            <section className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h2 className="m-0">
-                  <button
-                    onClick={() => toggleSection('pricing')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
-                  >
-                    <ChevronDown size={10} className={`transition-transform ${expanded.pricing ? '' : '-rotate-90'}`} />
-                    PAYG OR YEARLY PRICE <span title="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
-                  </button>
-                </h2>
-              </div>
-              {expanded.pricing && (
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => setShowAggregation(false)}
-                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                    !showAggregation
-                    ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                    : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                  }`}
-                >
-                  PAYG
-                </button>
-                <button
-                  onClick={() => setShowAggregation(true)}
-                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                    showAggregation
-                    ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                    : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                  }`}
-                >
-                  Yearly
-                </button>
-              </div>
-              )}
-            </section>
-
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
-
             {activeProductType === 'vm' ? (
               <>
                 {/* ── VM: Category ── */}
@@ -785,7 +742,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('haMode')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.haMode ? '' : '-rotate-90'}`} />
-                        HA Mode <span title="High-availability configuration: Single-AZ (no redundancy), Multi-AZ (same-region standby), Zone-Redundant, or Multi-Region (geo-redundant)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        HA Mode <span title="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedHaModes.length === HA_MODES.length ? setSelectedHaModes([]) : setSelectedHaModes([...HA_MODES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedHaModes.length === HA_MODES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -870,6 +827,47 @@ export default function Dashboard() {
                     onChange={setPriceRange}
                   />
                 </div>
+              </div>
+              )}
+            </section>
+
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+            {/* Pricing Mode Section */}
+            <section className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h2 className="m-0">
+                  <button
+                    onClick={() => toggleSection('pricing')}
+                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                  >
+                    <ChevronDown size={10} className={`transition-transform ${expanded.pricing ? '' : '-rotate-90'}`} />
+                    PAYG OR YEARLY PRICE <span title="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                  </button>
+                </h2>
+              </div>
+              {expanded.pricing && (
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setShowAggregation(false)}
+                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                    !showAggregation
+                    ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                    : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                  }`}
+                >
+                  PAYG
+                </button>
+                <button
+                  onClick={() => setShowAggregation(true)}
+                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                    showAggregation
+                    ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                    : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                  }`}
+                >
+                  Yearly
+                </button>
               </div>
               )}
             </section>
@@ -1052,14 +1050,14 @@ export default function Dashboard() {
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-center">
                               <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
-                                record.attributes?.deployment_type === 'Serverless' || record.attributes?.deployment_type === 'Serverless v2'
+                                record.attributes?.deployment_type === 'Serverless'
                                   ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20'
                                   : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
                               }`}>{record.attributes?.deployment_type || 'Provisioned'}</span>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-center">
                               <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
-                                record.attributes?.ha_mode === 'Multi-AZ' || record.attributes?.ha_mode === 'Zone-Redundant' || record.attributes?.ha_mode === 'Multi-Region'
+                                record.attributes?.ha_mode === 'Multi AZ' || record.attributes?.ha_mode === 'Zone Redundant' || record.attributes?.ha_mode === 'Multi Region'
                                   ? 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20'
                                   : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
                               }`}>{record.attributes?.ha_mode || '—'}</span>
