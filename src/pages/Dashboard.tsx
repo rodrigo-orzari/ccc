@@ -198,7 +198,8 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    fetch('/api/health')
+    const productType = activeProductType === 'database' ? 'database' : 'compute';
+    fetch(`/api/health?productType=${productType}`)
       .then(res => res.json())
       .then(status => {
         console.log('📊 Database Status:', status);
@@ -209,7 +210,7 @@ export default function Dashboard() {
         });
       })
       .catch(err => console.error('❌ Database health check failed:', err));
-  }, []);
+  }, [activeProductType]);
 
   const fetchFilteredData = useCallback(async () => {
     const isDb = activeProductType === 'database';

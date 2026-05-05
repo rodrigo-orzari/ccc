@@ -168,13 +168,28 @@ async function startServer() {
 
   app.get('/api/health', async (req, res) => {
     try {
+      const productType = (req.query.productType as string) || '';
       const client = await pool.connect();
-      const countRes = await client.query('SELECT COUNT(*) FROM pricing_records');
+
+      // Build category filter for compute vs database
+      let categoryFilter = '';
+      if (productType === 'compute') {
+        categoryFilter = `AND s.category NOT IN ('PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'Db2')`;
+      } else if (productType === 'database') {
+        categoryFilter = `AND s.category IN ('PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'Db2')`;
+      }
+
+      const countRes = await client.query(
+        `SELECT COUNT(*) FROM pricing_records pr
+         JOIN services s ON pr.service_id = s.id
+         WHERE 1=1 ${categoryFilter}`
+      );
       const providerRes = await client.query(`
         SELECT p.slug, COUNT(pr.id) as count
         FROM providers p
         LEFT JOIN services s ON s.provider_id = p.id
         LEFT JOIN pricing_records pr ON pr.service_id = s.id
+        WHERE 1=1 ${categoryFilter}
         GROUP BY p.slug
       `);
       const lastUpdatedRes = await client.query('SELECT MAX(updated_at) as last_updated FROM pricing_records');
