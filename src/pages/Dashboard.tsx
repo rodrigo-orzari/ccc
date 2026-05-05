@@ -371,6 +371,14 @@ export default function Dashboard() {
             <a href="mailto:hello@comparecloudcosts.com" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
               Contact us <Maximize2 size={10} />
             </a>
+            <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
+            <Link to="/privacy" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
+              Privacy Policy <Maximize2 size={10} />
+            </Link>
+            <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
+            <Link to="/terms" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
+              Terms of Use <Maximize2 size={10} />
+            </Link>
           </div>
         </div>
       </nav>
