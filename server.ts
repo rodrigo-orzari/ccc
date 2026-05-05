@@ -171,12 +171,12 @@ async function startServer() {
       const productType = (req.query.productType as string) || '';
       const client = await pool.connect();
 
-      // Build category filter for compute vs database
+      // Build category filter for compute vs database based on services.category column
       let categoryFilter = '';
       if (productType === 'compute') {
-        categoryFilter = `AND s.category NOT IN ('PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'Db2')`;
+        categoryFilter = `AND s.category = 'compute'`;
       } else if (productType === 'database') {
-        categoryFilter = `AND s.category IN ('PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'Db2')`;
+        categoryFilter = `AND s.category = 'database'`;
       }
 
       const countRes = await client.query(
