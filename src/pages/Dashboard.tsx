@@ -60,7 +60,7 @@ const GPU_OPTIONS = ['With GPU', 'Without GPU'];
 
 // Database-view constants
 const DB_FAMILIES = ['Relational', 'NoSQL'];
-const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Aurora MySQL', 'Aurora PostgreSQL', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'Db2'];
+const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'Db2'];
 const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
 const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
 
