@@ -154,6 +154,22 @@ export default function Dashboard() {
   const [dbStatus, setDbStatus] = useState<{ total: number, providers: any[], lastUpdated: string | null } | null>(null);
   const [providerCounts, setProviderCounts] = useState<Record<string, number>>({});
 
+  // Column resize state
+  const [columnWidths, setColumnWidths] = useState<Record<string, number>>({
+    provider: 120,
+    instance_type: 140,
+    engine_category: 130,
+    db_family_cpu_vendor: 140,
+    deployment_arch: 130,
+    ha_mode_os: 120,
+    geography: 130,
+    vcpus: 90,
+    memory_gb: 110,
+    price_per_unit: 140,
+  });
+  const [resizingColumnId, setResizingColumnId] = useState<string | null>(null);
+  const [resizeStartX, setResizeStartX] = useState(0);
+
   // Sidebar section expand/collapse state — all expanded by default; user can
   // collapse top sections to make the bottom ones (vCPU/Memory/Price sliders)
   // more discoverable.
@@ -172,6 +188,23 @@ export default function Dashboard() {
     haMode: true,
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
+
+  // Load column widths from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem('comparecloudcosts_columnWidths');
+    if (stored) {
+      try {
+        setColumnWidths(JSON.parse(stored));
+      } catch (e) {
+        console.error('Failed to parse stored column widths:', e);
+      }
+    }
+  }, []);
+
+  // Save column widths to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('comparecloudcosts_columnWidths', JSON.stringify(columnWidths));
+  }, [columnWidths]);
 
   const sortData = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
@@ -196,6 +229,41 @@ export default function Dashboard() {
     });
     setData(sorted);
   };
+
+  const handleResizeMouseDown = (columnId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setResizingColumnId(columnId);
+    setResizeStartX(e.clientX);
+  };
+
+  useEffect(() => {
+    if (!resizingColumnId) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const delta = e.clientX - resizeStartX;
+      const currentWidth = columnWidths[resizingColumnId];
+      const newWidth = Math.max(80, Math.min(400, currentWidth + delta));
+
+      setColumnWidths(prev => ({
+        ...prev,
+        [resizingColumnId]: newWidth
+      }));
+      setResizeStartX(e.clientX);
+    };
+
+    const handleMouseUp = () => {
+      setResizingColumnId(null);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [resizingColumnId, resizeStartX, columnWidths]);
 
   useEffect(() => {
     const productType = activeProductType === 'database' ? 'database' : 'compute';
@@ -986,38 +1054,68 @@ export default function Dashboard() {
               <table className="min-w-full border-collapse">
                 <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
                   <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
-                    <th onClick={() => sortData('provider')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                      Provider <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'provider' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                    <th onClick={() => sortData('provider')} style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                      Provider {sortConfig.key === 'provider' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
+                      <div onMouseDown={(e) => handleResizeMouseDown('provider', e)} className="absolute -right-2 top-0 w-4 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                     </th>
-                    <th onClick={() => sortData('instance_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                      SKU <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'instance_type' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                    <th onClick={() => sortData('instance_type')} style={{ width: columnWidths['instance_type'], minWidth: columnWidths['instance_type'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                      SKU {sortConfig.key === 'instance_type' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
+                      <div onMouseDown={(e) => handleResizeMouseDown('instance_type', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                     </th>
                     {activeProductType === 'database' ? (
                       <>
-                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Engine</th>
-                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">DB Family</th>
-                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Deployment</th>
-                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">HA Mode</th>
+                        <th style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                          Engine
+                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                        </th>
+                        <th style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                          DB Family
+                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                        </th>
+                        <th style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                          Deployment
+                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                        </th>
+                        <th style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                          HA Mode
+                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                        </th>
                       </>
                     ) : (
                       <>
-                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Category</th>
-                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">CPU Vendor</th>
-                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">Arch</th>
-                        <th className="px-6 py-4 text-center font-bold whitespace-nowrap">OS</th>
+                        <th style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                          Category
+                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                        </th>
+                        <th style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                          CPU Vendor
+                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                        </th>
+                        <th style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                          Arch
+                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                        </th>
+                        <th style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                          OS
+                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                        </th>
                       </>
                     )}
-                    <th onClick={() => sortData('geography')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                      Geography <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'geography' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                    <th onClick={() => sortData('geography')} style={{ width: columnWidths['geography'], minWidth: columnWidths['geography'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                      Geography {sortConfig.key === 'geography' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
+                      <div onMouseDown={(e) => handleResizeMouseDown('geography', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                     </th>
-                    <th onClick={() => sortData('vcpus')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                      vCPU <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'vcpus' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                    <th onClick={() => sortData('vcpus')} style={{ width: columnWidths['vcpus'], minWidth: columnWidths['vcpus'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                      vCPU {sortConfig.key === 'vcpus' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
+                      <div onMouseDown={(e) => handleResizeMouseDown('vcpus', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                     </th>
-                    <th onClick={() => sortData('memory_gb')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                      Memory (GB) <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'memory_gb' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                    <th onClick={() => sortData('memory_gb')} style={{ width: columnWidths['memory_gb'], minWidth: columnWidths['memory_gb'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                      Memory (GB) {sortConfig.key === 'memory_gb' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
+                      <div onMouseDown={(e) => handleResizeMouseDown('memory_gb', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                     </th>
-                    <th onClick={() => sortData('price_per_unit')} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity">
-                      {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <ChevronDown size={8} className={`inline ml-1 transition-transform ${sortConfig.key === 'price_per_unit' && sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                    <th onClick={() => sortData('price_per_unit')} style={{ width: columnWidths['price_per_unit'], minWidth: columnWidths['price_per_unit'] }} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity relative">
+                      {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} {sortConfig.key === 'price_per_unit' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
+                      <div onMouseDown={(e) => handleResizeMouseDown('price_per_unit', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                     </th>
                   </tr>
                 </thead>
@@ -1034,33 +1132,33 @@ export default function Dashboard() {
                     data.map((record, index) => (
                       <tr key={index} className={`transition-colors group ${index % 2 === 0 ? 'bg-white dark:bg-[#000000]' : 'bg-[#f7f7f7] dark:bg-[#0a0a0a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
                         {/* Provider — shared */}
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center justify-center gap-2">
                             <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROVIDERS.find(p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name)?.color || '#525252' }} />
                             <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.provider}</span>
                           </div>
                         </td>
                         {/* SKU — shared */}
-                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <td style={{ width: columnWidths['instance_type'], minWidth: columnWidths['instance_type'] }} className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-xs font-bold text-black dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors">{record.instance_type}</span>
                         </td>
                         {/* Middle 4 columns — differ by product type */}
                         {activeProductType === 'database' ? (
                           <>
-                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <td style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <td style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <td style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
                                 record.attributes?.deployment_type === 'Serverless'
                                   ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20'
                                   : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
                               }`}>{record.attributes?.deployment_type || 'Provisioned'}</span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <td style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
                                 record.attributes?.ha_mode === 'Multi AZ' || record.attributes?.ha_mode === 'Zone Redundant' || record.attributes?.ha_mode === 'Multi Region'
                                   ? 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20'
@@ -1070,7 +1168,7 @@ export default function Dashboard() {
                           </>
                         ) : (
                           <>
-                            <td className="px-6 py-4 text-center whitespace-nowrap">
+                            <td style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center whitespace-nowrap">
                               <div className="flex items-center justify-center gap-2">
                                 <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
                                 {record.gpu_count > 0 && (
@@ -1078,26 +1176,26 @@ export default function Dashboard() {
                                 )}
                               </div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <td style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor}</span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <td style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch}</span>
                             </td>
-                            <td className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os}</td>
+                            <td style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os}</td>
                           </>
                         )}
                         {/* Geography, vCPU, Memory, Price — shared */}
-                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <td style={{ width: columnWidths['geography'], minWidth: columnWidths['geography'] }} className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography}</span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <td style={{ width: columnWidths['vcpus'], minWidth: columnWidths['vcpus'] }} className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                        <td style={{ width: columnWidths['memory_gb'], minWidth: columnWidths['memory_gb'] }} className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span>
                         </td>
-                        <td className="px-6 py-4 text-center whitespace-nowrap">
+                        <td style={{ width: columnWidths['price_per_unit'], minWidth: columnWidths['price_per_unit'] }} className="px-6 py-4 text-center whitespace-nowrap">
                           <span className="text-xs font-bold text-black dark:text-white">
                             {showAggregation
                               ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}`
