@@ -433,6 +433,14 @@ export default function Dashboard() {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-4 ml-2">
+            {dbStatus?.lastUpdated && (
+              <>
+                <span className="text-xs text-[#737373] flex items-center gap-1">
+                  Price information as of {new Date(dbStatus.lastUpdated).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                </span>
+                <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
+              </>
+            )}
             <Link to="/about" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
               What is CompareCloudCosts.com? <Maximize2 size={10} />
             </Link>
@@ -1035,11 +1043,6 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              {dbStatus?.lastUpdated && (
-                <span className="text-[10px] text-[#737373] dark:text-[#525252] font-medium">
-                  Price information as of {new Date(dbStatus.lastUpdated).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-                </span>
-              )}
               <span className="text-[10px] text-[#737373] dark:text-[#525252] font-medium">Click a column header to sort</span>
 
               <button className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#e5e5e5] dark:border-[#262626] px-3 py-1.5 rounded hover:bg-[#f5f5f5] dark:hover:bg-[#171717] transition-all">
@@ -1244,6 +1247,7 @@ export default function Dashboard() {
                 <h3 className="text-sm font-bold text-[#171717] dark:text-white">Resources</h3>
                 <ul className="space-y-2 text-xs">
                   <li><Link to="/about" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors">About</Link></li>
+                  <li><a href="#how-to" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors">How to</a></li>
                   <li><Link to="/privacy" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors">Privacy Policy</Link></li>
                   <li><Link to="/terms" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors">Terms of Use</Link></li>
                 </ul>
