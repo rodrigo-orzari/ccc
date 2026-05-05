@@ -1231,21 +1231,21 @@ export default function Dashboard() {
           </div>
 
           {/* Footer — placed inside main so it scrolls with content and doesn't overlap ads */}
-          <footer className="border-t border-[#e5e5e5] dark:border-[#262626] bg-white dark:bg-[#000000] px-6 py-16 shrink-0 mt-auto">
+          <footer className="border-t border-[#e5e5e5] dark:border-[#262626] bg-white dark:bg-[#000000] px-6 py-32 shrink-0 mt-auto">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-20 mb-20">
               {/* Product Info */}
-              <div className="space-y-4">
-                <h3 className="text-base font-bold text-[#171717] dark:text-white">About CompareCloudCosts</h3>
-                <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+              <div className="space-y-6">
+                <h3 className="text-lg font-bold text-[#171717] dark:text-white">About CompareCloudCosts</h3>
+                <p className="text-base text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
                   CompareCloudCosts simplifies cloud infrastructure comparison across AWS, Azure, Google Cloud, Oracle, and DigitalOcean. Make informed decisions with unified pricing data updated weekly.
                 </p>
               </div>
 
               {/* Quick Links */}
-              <div className="space-y-4">
-                <h3 className="text-base font-bold text-[#171717] dark:text-white">Resources</h3>
-                <ul className="space-y-2 text-sm">
+              <div className="space-y-6">
+                <h3 className="text-lg font-bold text-[#171717] dark:text-white">Resources</h3>
+                <ul className="space-y-3 text-base">
                   <li><Link to="/about" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors">About</Link></li>
                   <li><a href="#how-to" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors">How to</a></li>
                   <li><Link to="/privacy" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors">Privacy Policy</Link></li>
@@ -1254,22 +1254,22 @@ export default function Dashboard() {
               </div>
 
               {/* Social Media */}
-              <div className="space-y-4">
-                <h3 className="text-base font-bold text-[#171717] dark:text-white">Connect</h3>
-                <div className="flex gap-6">
+              <div className="space-y-6">
+                <h3 className="text-lg font-bold text-[#171717] dark:text-white">Connect</h3>
+                <div className="flex gap-8">
                   <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors" title="LinkedIn">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.731-2.004 1.438-.103.249-.129.597-.129.946v5.421h-3.554s.05-8.736 0-9.646h3.554v1.364c.429-.647 1.194-1.569 2.898-1.569 2.118 0 3.71 1.388 3.71 4.374v5.477zM5.337 8.855c-1.144 0-1.915-.762-1.915-1.715 0-.955.771-1.715 1.921-1.715 1.148 0 1.919.759 1.925 1.715 0 .953-.777 1.715-1.931 1.715zm1.582 11.597H3.635V9.859h3.284v10.593zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" /></svg>
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.475-2.236-1.986-2.236-1.081 0-1.722.731-2.004 1.438-.103.249-.129.597-.129.946v5.421h-3.554s.05-8.736 0-9.646h3.554v1.364c.429-.647 1.194-1.569 2.898-1.569 2.118 0 3.71 1.388 3.71 4.374v5.477zM5.337 8.855c-1.144 0-1.915-.762-1.915-1.715 0-.955.771-1.715 1.921-1.715 1.148 0 1.919.759 1.925 1.715 0 .953-.777 1.715-1.931 1.715zm1.582 11.597H3.635V9.859h3.284v10.593zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" /></svg>
                   </a>
                   <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors" title="YouTube">
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
                   </a>
                 </div>
               </div>
             </div>
 
             {/* Copyright */}
-            <div className="border-t border-[#e5e5e5] dark:border-[#262626] pt-8">
-              <p className="text-sm text-[#737373] dark:text-[#a3a3a3] text-center">
+            <div className="border-t border-[#e5e5e5] dark:border-[#262626] pt-12">
+              <p className="text-base text-[#737373] dark:text-[#a3a3a3] text-center">
                 © 2026 CompareCloudCosts. All rights reserved.
               </p>
             </div>
