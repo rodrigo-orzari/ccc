@@ -881,7 +881,7 @@ export default function Dashboard() {
 
 
         {/* Main Content Area */}
-        <main className="flex-1 flex flex-col bg-white dark:bg-[#000000] overflow-hidden">
+        <main className="flex-1 flex flex-col bg-white dark:bg-[#000000]">
 
           {/* Ad Slot — reserved space for a leaderboard ad (e.g. Google AdSense
               728×90 / 970×90). Drop the ad markup inside the inner div when
@@ -1128,10 +1128,9 @@ export default function Dashboard() {
               </table>
             </div>
           </div>
-        </main>
 
-        {/* Footer */}
-        <footer className="border-t border-[#e5e5e5] dark:border-[#262626] bg-white dark:bg-[#000000] px-6 py-8 shrink-0">
+          {/* Footer — placed inside main so it scrolls with content and doesn't overlap ads */}
+          <footer className="border-t border-[#e5e5e5] dark:border-[#262626] bg-white dark:bg-[#000000] px-6 py-8 shrink-0 mt-auto">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               {/* Product Info */}
@@ -1174,6 +1173,7 @@ export default function Dashboard() {
             </div>
           </div>
         </footer>
+        </main>
       </div>
 
       <style dangerouslySetInlineHTML={{ __html: `
