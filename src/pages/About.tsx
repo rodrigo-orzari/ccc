@@ -3,103 +3,59 @@ import MarkdownPage from '../components/MarkdownPage';
 
 const AboutPage: React.FC = () => {
   const content = `
-**CompareCloudCosts.com** aggregates pricing from AWS, Azure, Google Cloud, Oracle, and DigitalOcean into a single filterable interface. Rather than toggling between five separate pricing calculators, engineers and finance teams get a unified view where cloud services are normalized to a common schema — vCPUs, memory, geography, and hourly USD price — covering both virtual machines and managed databases.
+# About Compare Cloud Costs (CCC)
 
----
+## Our Mission
 
-## Why we built this
-Cloud infrastructure costs are typically distributed across disparate, vendor-specific calculators. Navigating these individual tools to perform a cross-provider analysis can be time-intensive and complex. We built this platform to expedite that process, providing a centralized interface to evaluate different options efficiently and support better-informed infrastructure decisions.
+At Compare Cloud Costs (CCC), our mission is to empower businesses and individuals to make informed decisions about their cloud investments across common services, including virtual machines, databases, serverless, storage, and others. In an era where cloud infrastructure—often spanning multiple providers—is the backbone of digital innovation, we believe that cost should never be a barrier to growth and complexity should never be an excuse for overspending.
 
-[Back to top ↑](#about-us)
+## The Problem: The Cloud Pricing Maze
 
----
+Cloud computing has revolutionized how we build and scale technology, but it has also introduced a new challenge: pricing complexity. While cloud providers offer individual calculators and purchase agreements, calculating the True Cost of Ownership (TCO) for a modern infrastructure remains a monumental task because it often requires:
 
-## Features
-Comparing cloud instances requires more than just looking at a price tag. Our platform streamlines the technical evaluation process by normalizing diverse data points into a single, actionable view.
+**Siloed Manual Research:** Users can find exact pricing for one provider in isolation, but comparing those costs side-by-side requires navigating disparate calculators and performing exhaustive individual studies.
 
-- **Global Comparison**: Access and compare infrastructure costs across different geographies to optimize for regional pricing variations.
-- **Unified Filtering**: Standardize your search by filtering for vCPUs, memory, OS, CPU architecture, database engine, and HA mode — regardless of vendor-specific naming conventions.
-- **Weekly Data Refreshes**: Pricing information is aggregated and updated on a weekly basis to reflect recent market changes.
-- **Data Portability**: Export your custom comparison results directly to a **CSV file**, allowing for offline analysis, internal reporting, or integration with your financial spreadsheets.
+**Fragmented Information:** Data is scattered across different rate cards and service models, making an "apples-to-apples" comparison across the market nearly impossible without manual normalization.
 
-[Back to top ↑](#about-us)
+**Reactive Optimization:** Many organizations rely on traditional FinOps solutions that provide an "after-the-fact" view of spending. While these help optimize existing spend, they don't provide the proactive, comparative clarity needed before a workload is deployed.
 
----
+Furthermore, the modern landscape is increasingly multi-cloud. It is standard practice for companies to run workloads that live across different cloud providers simultaneously to achieve specific performance, redundancy, or strategic goals. Managing costs in this hybrid environment adds a layer of complexity that siloed research simply cannot solve.
 
-## Pricing Disclaimer
+Many organizations find themselves:
 
-> **Important: Please read before using this tool.**
+- Overpaying because they lacked a unified, cross-provider view of their investment options during the planning phase.
+- Struggling to manage the financial implications of workloads distributed across AWS, Azure, and GCP because the data is trapped in separate ecosystems.
+- Lacking the real-time, cross-provider data needed to forecast multi-cloud IT budgets accurately.
 
-The pricing data displayed on CompareCloudCosts.com is provided **for informational and consultative purposes only**. It is intended to help users develop a general understanding of relative cloud infrastructure costs and to support high-level, directional decision-making.
+## Our Solution: Clarity through Comparison
 
-### Data accuracy and timeliness
-- Pricing information is collected from publicly available sources on a **weekly automated basis** and is **not real-time**. Prices shown may not reflect the most current rates published by cloud providers.
-- Cloud providers change their pricing frequently and without prior notice. The prices shown may be outdated, incomplete, or inaccurate at the time of your visit.
-- Pricing structures for cloud services are highly complex and vary based on factors not captured here, including reserved/committed-use discounts, savings plans, enterprise agreements, spot/preemptible pricing, egress fees, support tiers, taxes, and regional surcharges.
+CCC was built to bridge the gap between complex provider rate cards and actionable business intelligence. We provide a centralized, multi-cloud platform where you can instantly compare costs, analyze configurations, and optimize your cloud strategy with a directional view of your investment across multiple providers at the same time.
 
-### Not a substitute for official pricing
-- This tool is **not** a substitute for the official pricing pages, calculators, or quotations provided by each cloud vendor.
-- All pricing, terms, and conditions must be **verified directly with the cloud provider** before making any purchasing, budgeting, or architectural decisions.
-- Final pricing is always subject to individual negotiation and contractual terms agreed upon directly between you and the cloud provider.
+## What We Offer
 
-### No warranties or liability
-- CompareCloudCosts.com and its operators make **no representations or warranties**, express or implied, as to the accuracy, completeness, reliability, or fitness for a particular purpose of any pricing data displayed on this site.
-- **Use of this tool is entirely at your own risk.** CompareCloudCosts.com, its owners, contributors, and operators accept **no liability whatsoever** for any decisions made, losses incurred, or damages arising — directly or indirectly — from reliance on the information provided here.
-- This site does not constitute financial, legal, or procurement advice.
+**Side-by-Side Multi-Cloud Analysis:** Compare identical configurations across the world's leading cloud providers (AWS, Microsoft Azure, Google Cloud, DigitalOcean, and more) in a single view.
 
-By using CompareCloudCosts.com, you acknowledge that you have read, understood, and agreed to this disclaimer.
+**Real-Time Data:** Our engines refresh pricing data frequently to ensure you are seeing the most accurate market rates before you commit to a provider.
 
-[Back to top ↑](#about-us)
+**Granular Breakdown:** We break down compute, storage, networking, and support costs so you see exactly how a workload's cost structure changes across different providers.
 
----
+**Proactive Optimization:** We provide the insights into right-sizing and regional price differences before deployment, complementing your existing reactive FinOps tools.
 
-## Privacy Policy
+## Why CCC?
 
-_Last updated: 1 May 2026._
+**Transparency First:** We are provider-agnostic. Our only goal is to provide the data you need to save money and improve ROI, regardless of where your workload lives.
 
-CompareCloudCosts.com is a free, public price-comparison tool. We aim to collect as little information about visitors as possible.
+**Time Efficiency:** What used to take hours of manual research across multiple, isolated calculators now takes seconds. Our search evaluates thousands of configurations simultaneously.
 
-### Information we collect
-- **No account required.** You can use the site without signing up or logging in.
-- **No personal information stored.** We do not ask for your name, email, address, or any other identifying information.
-- **Server logs.** Our hosting provider records standard request logs for operational and security purposes.
+**Built for Modern Architectures:** We recognize that your infrastructure isn't monolithic. CCC is designed for the multi-cloud reality, helping you choose the best provider for each specific part of your stack by looking at the entire market at once.
 
-[Back to top ↑](#about-us)
+## Our Commitment to Data Integrity
 
----
+We understand that even small price differences scale significantly in distributed environments. CCC functions as an aggregator of publicly available information, gathering data to the best of our ability through official APIs and provider-published rate cards.
 
-### Third-party advertising
-This site displays advertisements served by Google AdSense. Google and its partners may use cookies and other identifiers to serve and personalise ads based on your browsing activity.
+While we strive to provide the most accurate and up-to-date directional view of the market, we are not the primary source of truth for final billing. Because cloud providers frequently update rates and offer private negotiated discounts, we always recommend that users rely on official provider pricing and their own specific purchase agreements for final financial decisions and negotiations.
 
-[Back to top ↑](#about-us)
-
----
-
-### Cookies
-In addition to advertising cookies, the site may set minimal first-party cookies for basic functionality.
-
-[Back to top ↑](#about-us)
-
----
-
-### Children
-This site is not directed at children under 13 and we do not knowingly collect information from children.
-
-[Back to top ↑](#about-us)
-
----
-
-### Changes to this policy
-If we update this policy, we will revise the "Last updated" date at the top of this section. Continued use of the site constitutes acceptance of the updated policy.
-
-[Back to top ↑](#about-us)
-
----
-
-### Contact
-Questions about this policy? Email [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
-
-[Back to top ↑](#about-us)
+[Terms of Usage](#) | [Privacy Policy](#) | [Contact Us](mailto:hello@comparecloudcosts.com)
 `;
 
   return (
