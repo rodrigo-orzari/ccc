@@ -58,7 +58,6 @@ const CPU_PROFILES = [
   { id: 'ampere-arm', label: 'Ampere (ARM)', vendor: 'Ampere', arch: 'ARM' },
 ];
 const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optimized', 'Storage optimized', 'Burstable', 'HPC'];
-const GPU_OPTIONS = ['With GPU', 'Without GPU'];
 
 // Database-view constants
 const DB_FAMILIES = ['Relational', 'NoSQL'];
@@ -137,7 +136,7 @@ export default function Dashboard() {
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
-  const [selectedGpu, setSelectedGpu] = useState<string[]>([...GPU_OPTIONS]);
+  const [gpuFilter, setGpuFilter] = useState<'all' | 'with' | 'without'>('all');
 
   // Database-specific filter state
   const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...DB_FAMILIES]);
@@ -190,7 +189,6 @@ export default function Dashboard() {
     geography: true,
     os: true,
     cpu: true,
-    gpu: true,
     specs: true,
     dbFamily: true,
     engine: true,
@@ -329,8 +327,8 @@ export default function Dashboard() {
       if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
         params.append('category', selectedCategory.join(','));
       }
-      if (selectedGpu.length === 1) {
-        params.append('gpu', selectedGpu[0] === 'With GPU' ? 'true' : 'false');
+      if (gpuFilter !== 'all') {
+        params.append('gpu', gpuFilter === 'with' ? 'true' : 'false');
       }
     }
 
@@ -354,7 +352,7 @@ export default function Dashboard() {
       .catch(err => console.error('❌ Database health check failed:', err));
   }, [
     activeProductType,
-    selectedGeographies, selectedOS, selectedCpu, selectedCategory, selectedGpu,
+    selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuFilter,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     vCpuRange, memoryRange, priceRange,
   ]);
@@ -369,7 +367,7 @@ export default function Dashboard() {
       setLoading(false);
       return;
     }
-    if (!isDb && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0 || selectedGpu.length === 0)) {
+    if (!isDb && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) {
       setData([]);
       setProviderCounts({});
       setLoading(false);
@@ -412,8 +410,8 @@ export default function Dashboard() {
         if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
           baseParams.append('category', selectedCategory.join(','));
         }
-        if (selectedGpu.length === 1) {
-          baseParams.append('gpu', selectedGpu[0] === 'With GPU' ? 'true' : 'false');
+        if (gpuFilter !== 'all') {
+          baseParams.append('gpu', gpuFilter === 'with' ? 'true' : 'false');
         }
       }
 
@@ -463,7 +461,7 @@ export default function Dashboard() {
   }, [
     activeProductType,
     selectedProviders, selectedGeographies,
-    selectedOS, selectedCpu, selectedCategory, selectedGpu,
+    selectedOS, selectedCpu, selectedCategory, gpuFilter,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     vCpuRange, memoryRange, priceRange, search, showAggregation,
   ]);
@@ -760,28 +758,22 @@ export default function Dashboard() {
                 <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
                 {/* ── VM: GPU ── */}
-                <section className="space-y-3">
+                <section>
                   <div className="flex justify-between items-center">
-                    <h2 className="m-0">
-                      <button onClick={() => toggleSection('gpu')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
-                        <ChevronDown size={10} className={`transition-transform ${expanded.gpu ? '' : '-rotate-90'}`} />
-                        GPU <span title="Whether the instance includes a GPU accelerator." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
-                      </button>
-                    </h2>
-                    <button onClick={() => { selectedGpu.length === GPU_OPTIONS.length ? setSelectedGpu([]) : setSelectedGpu([...GPU_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedGpu.length === GPU_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
-                      {selectedGpu.length === GPU_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
+                      GPU <span title="Whether the instance includes a GPU accelerator."><Info size={10} className="cursor-help" /></span>
+                    </span>
+                    <button
+                      onClick={() => setGpuFilter(f => f === 'all' ? 'with' : f === 'with' ? 'without' : 'all')}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                        gpuFilter !== 'all'
+                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                          : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                      }`}
+                    >
+                      {gpuFilter === 'all' ? 'All' : gpuFilter === 'with' ? 'With GPU' : 'No GPU'}
                     </button>
                   </div>
-                  {expanded.gpu && (
-                  <div className="flex flex-wrap gap-2">
-                    {GPU_OPTIONS.map(opt => (
-                      <button key={opt} onClick={() => toggleFilter(selectedGpu, setSelectedGpu, opt)}
-                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedGpu.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                  )}
                 </section>
 
                 <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
