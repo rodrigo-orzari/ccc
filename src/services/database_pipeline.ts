@@ -19,6 +19,51 @@ import {
   DIGITALOCEAN_DB_GEOGRAPHY,
 } from '../config/database_instances.js';
 
+// ─── Tier derivation ──────────────────────────────────────────────────────────
+// Maps provider + instanceType → a human-readable performance-tier label that
+// mirrors the VM category system (General Purpose, Memory Optimized, etc.).
+// Stored in attributes.tier so no schema change is required.
+
+function deriveTier(provider: string, instanceType: string): string {
+  const t = instanceType.toLowerCase();
+
+  if (provider === 'azure') {
+    if (t.startsWith('gp_s_') || t.includes('serverless')) return 'General Purpose (Serverless)';
+    if (t.startsWith('gp_') || t.startsWith('generalpurpose_')) return 'General Purpose';
+    if (t.startsWith('mo_') || t.startsWith('memoryoptimized_')) return 'Memory Optimized';
+    if (t.startsWith('bc_') || t.startsWith('businesscritical_')) return 'Business Critical';
+    if (t.startsWith('b_') || t.startsWith('burstable_')) return 'Burstable';
+    if (t.startsWith('hyperscale_') || t.includes('hyperscale')) return 'Hyperscale';
+    if (t.startsWith('premium_') || /^p\d/.test(t)) return 'Premium';
+    if (t.startsWith('standard_') || /^s\d/.test(t)) return 'Standard';
+    if (t.startsWith('basic_') || /^b\d/.test(t)) return 'Basic';
+    if (/^c\d/.test(t)) return 'Standard';  // Redis C-series
+    return 'General Purpose';
+  }
+
+  if (provider === 'aws') {
+    // db.t3.medium → Burstable, db.r5.large → Memory Optimized, db.m5.xlarge → General Purpose
+    if (t.startsWith('db.t')) return 'Burstable';
+    if (t.startsWith('db.r') || t.startsWith('db.x') || t.startsWith('db.z')) return 'Memory Optimized';
+    if (t.startsWith('db.m')) return 'General Purpose';
+    if (t.startsWith('db.c')) return 'Compute Optimized';
+    return 'General Purpose';
+  }
+
+  if (provider === 'gcp') {
+    if (t === 'db-f1-micro' || t === 'db-g1-small') return 'Shared Core';
+    if (t.includes('highmem')) return 'Memory Optimized';
+    return 'General Purpose';
+  }
+
+  if (provider === 'oracle') {
+    if (t.startsWith('atp-') || t.startsWith('adw-')) return 'Serverless';
+    return 'General Purpose';
+  }
+
+  return 'General Purpose'; // DigitalOcean and any future providers
+}
+
 // ─── GCP Cloud SQL (static config) ────────────────────────────────────────────
 
 export class GCPCloudSQLAdapter extends BaseAdapter {
@@ -48,6 +93,7 @@ export class GCPCloudSQLAdapter extends BaseAdapter {
         deployment_type: 'Provisioned',
         ha_mode: 'Single AZ',
         storage_type: 'SSD',
+        tier: deriveTier('gcp', inst.type),
       },
     }));
   }
@@ -83,6 +129,7 @@ export class OracleAutonomousAdapter extends BaseAdapter {
         ha_mode: 'Multi AZ',
         storage_type: 'SSD',
         workload: inst.workload,
+        tier: deriveTier('oracle', inst.type),
       },
     }));
   }
@@ -117,6 +164,7 @@ export class OracleMySQLHeatWaveAdapter extends BaseAdapter {
         deployment_type: 'Provisioned',
         ha_mode: 'Single AZ',
         storage_type: 'SSD',
+        tier: deriveTier('oracle', inst.type),
       },
     }));
   }
@@ -151,6 +199,7 @@ export class OraclePostgreSQLAdapter extends BaseAdapter {
         deployment_type: 'Provisioned',
         ha_mode: 'Single AZ',
         storage_type: 'SSD',
+        tier: deriveTier('oracle', inst.type),
       },
     }));
   }
@@ -238,6 +287,7 @@ export class AWSRDSAdapter extends BaseAdapter {
           deployment_type: 'Provisioned',
           ha_mode: haMode,
           storage_type: 'SSD',
+          tier: deriveTier('aws', instanceType),
         },
       });
     }
@@ -370,6 +420,7 @@ export class AzureDBAdapter extends BaseAdapter {
           deployment_type: 'Provisioned',
           ha_mode: haMode,
           storage_type: 'SSD',
+          tier: deriveTier('azure', sku),
         },
       });
     }
@@ -409,6 +460,7 @@ export class DigitalOceanDBAdapter extends BaseAdapter {
         deployment_type: 'Provisioned',
         ha_mode: 'Single AZ',
         storage_type: 'SSD',
+        tier: deriveTier('digitalocean', inst.type),
       },
     }));
   }
