@@ -352,7 +352,9 @@ export class DigitalOceanAdapter extends BaseAdapter {
     const token = process.env.DIGITALOCEAN_API_TOKEN;
     if (token) {
       try {
-        return await this.fetchFromApi(token);
+        const records = await this.fetchFromApi(token);
+        if (records.length > 0) return records;
+        console.warn('⚠️  DigitalOcean live API returned 0 priced sizes — falling back to static config.');
       } catch (err: any) {
         console.error(`❌ DigitalOcean live API fetch failed (${err.message}), falling back to static config.`);
       }
@@ -424,7 +426,7 @@ export class DigitalOceanAdapter extends BaseAdapter {
       cpuVendor: 'Intel',
       gpuCount: 0,
       geography: DIGITALOCEAN_GEOGRAPHY,
-      category: s.category || this.getCategory(s.slug, s.vcpus, s.memory),
+      category: s.category || this.classifyDigitalOcean(s.slug, s.vcpus, s.memory),
       price: s.price,
       unit: 'Hour',
       dataSource: 'static_config' as const,
