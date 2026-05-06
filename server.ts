@@ -112,7 +112,14 @@ async function startServer() {
   if (process.env.DATABASE_URL) {
     initDb().then(async (success) => {
       if (success) {
-        // Check if we have data, if not, trigger a fetch "now"
+        // In production, skip auto-fetching to ensure health checks pass during deployment.
+        // Use the scheduled cron job or the /api/admin/fetch-pricing endpoint instead.
+        if (process.env.NODE_ENV === 'production') {
+          console.log('📌 Production mode: skipping auto-pricing fetch. Use /api/admin/fetch-pricing to fetch data.');
+          return;
+        }
+
+        // In development, check if we have data, if not, trigger a fetch "now"
         try {
           const client = await pool.connect();
           const res = await client.query(`
