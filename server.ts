@@ -171,27 +171,25 @@ async function startServer() {
       const productType = (req.query.productType as string) || '';
       const client = await pool.connect();
 
-      // Build category filter for compute vs database based on services.category column
-      let categoryFilter = '';
-      if (productType === 'compute') {
-        categoryFilter = `AND s.category = 'compute'`;
-      } else if (productType === 'database') {
-        categoryFilter = `AND s.category = 'database'`;
-      }
+      // Apply all filters via buildPricingFilters so the per-provider totals
+      // reflect the current filter state. This ensures the "of X" numbers in the UI
+      // match the filtered pool.
+      const { whereClause, values } = buildPricingFilters(req.query);
 
       const countRes = await client.query(
         `SELECT COUNT(*) FROM pricing_records pr
          JOIN services s ON pr.service_id = s.id
-         WHERE 1=1 ${categoryFilter}`
+         WHERE 1=1 ${whereClause}`,
+        values
       );
       const providerRes = await client.query(`
         SELECT p.slug, COUNT(pr.id) as count
         FROM providers p
         LEFT JOIN services s ON s.provider_id = p.id
         LEFT JOIN pricing_records pr ON pr.service_id = s.id
-        WHERE 1=1 ${categoryFilter}
+        WHERE 1=1 ${whereClause}
         GROUP BY p.slug
-      `);
+      `, values);
       const lastUpdatedRes = await client.query('SELECT MAX(updated_at) as last_updated FROM pricing_records');
       client.release();
       res.json({
@@ -324,7 +322,6 @@ async function startServer() {
         FROM providers p
         LEFT JOIN services s ON s.provider_id = p.id
         LEFT JOIN pricing_records pr ON pr.service_id = s.id
-        LEFT JOIN regions r ON pr.region_id = r.id
         WHERE 1=1 ${whereClause}
         GROUP BY p.slug
       `;

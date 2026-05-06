@@ -266,8 +266,53 @@ export default function Dashboard() {
   }, [resizingColumnId, resizeStartX, columnWidths]);
 
   useEffect(() => {
-    const productType = activeProductType === 'database' ? 'database' : 'compute';
-    fetch(`/api/health?productType=${productType}`)
+    const isDb = activeProductType === 'database';
+
+    // Build query params with all active filters to get counts that reflect
+    // the current filter state (ensures "of X" numbers are correct in the UI)
+    const params = new URLSearchParams();
+    params.append('productType', isDb ? 'database' : 'compute');
+    if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) {
+      params.append('geography', selectedGeographies.join(','));
+    }
+
+    if (isDb) {
+      if (selectedDbFamilies.length > 0 && selectedDbFamilies.length < DB_FAMILIES.length) {
+        params.append('category', selectedDbFamilies.join(','));
+      }
+      if (selectedEngines.length > 0 && selectedEngines.length < DB_ENGINES.length) {
+        params.append('engine', selectedEngines.join(','));
+      }
+      if (selectedDeploymentTypes.length > 0 && selectedDeploymentTypes.length < DEPLOYMENT_TYPES.length) {
+        params.append('deploymentType', selectedDeploymentTypes.join(','));
+      }
+      if (selectedHaModes.length > 0 && selectedHaModes.length < HA_MODES.length) {
+        params.append('haMode', selectedHaModes.join(','));
+      }
+    } else {
+      if (selectedOS.length > 0 && selectedOS.length < OS_TYPES.length) {
+        params.append('os', selectedOS.join(','));
+      }
+      if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
+        const vendors = [...new Set(selectedCpu.map(id => CPU_PROFILES.find(p => p.id === id)!.vendor))];
+        params.append('cpuVendor', vendors.join(','));
+      }
+      if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
+        params.append('category', selectedCategory.join(','));
+      }
+      if (selectedGpu.length === 1) {
+        params.append('gpu', selectedGpu[0] === 'With GPU' ? 'true' : 'false');
+      }
+    }
+
+    params.append('minVcpu', vCpuRange.min.toString());
+    params.append('maxVcpu', vCpuRange.max.toString());
+    params.append('minMemory', memoryRange.min.toString());
+    params.append('maxMemory', memoryRange.max.toString());
+    params.append('minPrice', priceRange.min.toString());
+    params.append('maxPrice', priceRange.max.toString());
+
+    fetch(`/api/health?${params.toString()}`)
       .then(res => res.json())
       .then(status => {
         console.log('📊 Database Status:', status);
@@ -278,7 +323,12 @@ export default function Dashboard() {
         });
       })
       .catch(err => console.error('❌ Database health check failed:', err));
-  }, [activeProductType]);
+  }, [
+    activeProductType,
+    selectedGeographies, selectedOS, selectedCpu, selectedCategory, selectedGpu,
+    selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
+    vCpuRange, memoryRange, priceRange,
+  ]);
 
   const fetchFilteredData = useCallback(async () => {
     const isDb = activeProductType === 'database';
