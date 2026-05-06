@@ -307,7 +307,7 @@ export default function Dashboard() {
     try {
       const baseParams = new URLSearchParams();
       baseParams.append('productType', isDb ? 'database' : 'compute');
-      if (selectedGeographies.length > 0) baseParams.append('geography', selectedGeographies.join(','));
+      if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) baseParams.append('geography', selectedGeographies.join(','));
 
       if (isDb) {
         // DB-specific filters
@@ -325,7 +325,7 @@ export default function Dashboard() {
         }
       } else {
         // VM-specific filters
-        if (selectedOS.length > 0) baseParams.append('os', selectedOS.join(','));
+        if (selectedOS.length > 0 && selectedOS.length < OS_TYPES.length) baseParams.append('os', selectedOS.join(','));
         if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
           const vendors = [...new Set(selectedCpu.map(id => CPU_PROFILES.find(p => p.id === id)!.vendor))];
           baseParams.append('cpuVendor', vendors.join(','));
