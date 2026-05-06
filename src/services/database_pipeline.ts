@@ -41,6 +41,7 @@ export class GCPCloudSQLAdapter extends BaseAdapter {
       category: 'Relational',
       price: inst.price,
       unit: 'Hour',
+      dataSource: 'static_config' as const,
       attributes: {
         engine: inst.engine,
         engine_version: inst.engine === 'PostgreSQL' ? '15' : inst.engine === 'MySQL' ? '8.0' : '2022',
@@ -74,6 +75,7 @@ export class OracleAutonomousAdapter extends BaseAdapter {
       category: 'Relational',
       price: inst.price,
       unit: 'ECPU-Hour',
+      dataSource: 'static_config' as const,
       attributes: {
         engine: 'Oracle DB',
         engine_version: '19c',
@@ -108,6 +110,7 @@ export class OracleMySQLHeatWaveAdapter extends BaseAdapter {
       category: 'Relational',
       price: inst.price,
       unit: 'ECPU-Hour',
+      dataSource: 'static_config' as const,
       attributes: {
         engine: 'MySQL',
         engine_version: '9.x',
@@ -141,6 +144,7 @@ export class OraclePostgreSQLAdapter extends BaseAdapter {
       category: 'Relational',
       price: inst.price,
       unit: 'Hour',
+      dataSource: 'static_config' as const,
       attributes: {
         engine: 'PostgreSQL',
         engine_version: '16',
@@ -369,6 +373,7 @@ export class DigitalOceanDBAdapter extends BaseAdapter {
       category: NOSQL_ENGINES.has(inst.engine) ? 'NoSQL' : 'Relational',
       price: inst.price,
       unit: 'Hour',
+      dataSource: 'static_config' as const,
       attributes: {
         engine: inst.engine,
         engine_version: '',
@@ -402,9 +407,8 @@ export class DatabasePricingPipeline extends PricingPipeline {
     for (const adapter of this.adapters) {
       try {
         const records = await adapter.fetchPricing();
-        // Pass 'database' as serviceCategory so services.category is set correctly
-        await this.saveRecords(records, 'database');
-        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length });
+        const driftAlerts = await this.saveRecords(records, 'database');
+        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
       } catch (error: any) {
         console.error(`Error running DB pipeline for ${adapter.providerSlug}:`, error);
         results.push({ provider: adapter.providerSlug, status: 'error', message: error.message });

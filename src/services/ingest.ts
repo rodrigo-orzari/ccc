@@ -1,12 +1,5 @@
 import { Pool } from 'pg';
-import {
-  PricingPipeline,
-  AWSAdapter,
-  AzureAdapter,
-  GCPAdapter,
-  OracleAdapter,
-  DigitalOceanAdapter,
-} from './pricing_pipeline.js';
+import { PricingPipeline } from './pricing_pipeline.js';
 import { DatabasePricingPipeline } from './database_pipeline.js';
 
 async function main() {
@@ -25,13 +18,6 @@ async function main() {
     // Run compute pricing pipeline
     console.log('📊 Computing VM Pricing...');
     const computePipeline = new PricingPipeline(pool);
-    computePipeline.adapters = [
-      new AWSAdapter(),
-      new AzureAdapter(),
-      new GCPAdapter(),
-      new OracleAdapter(),
-      new DigitalOceanAdapter(),
-    ];
     const computeResults = await computePipeline.run();
     computeResults.forEach((result: any) => {
       if (result.status === 'success') {
