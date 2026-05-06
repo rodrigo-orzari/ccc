@@ -496,4 +496,4 @@ export class PricingPipeline {
   }
 }
 
-export { PricingPipeline, DatabasePricingPipeline, AWSAdapter, AzureAdapter, GCPAdapter, OracleAdapter, DigitalOceanAdapter };
+export { PricingPipeline, AWSAdapter, AzureAdapter, GCPAdapter, OracleAdapter, DigitalOceanAdapter };

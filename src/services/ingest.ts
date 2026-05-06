@@ -1,13 +1,13 @@
 import { Pool } from 'pg';
 import {
   PricingPipeline,
-  DatabasePricingPipeline,
   AWSAdapter,
   AzureAdapter,
   GCPAdapter,
   OracleAdapter,
   DigitalOceanAdapter,
 } from './pricing_pipeline.js';
+import { DatabasePricingPipeline } from './database_pipeline.js';
 
 async function main() {
   const dbUrl = process.env.DATABASE_URL;
