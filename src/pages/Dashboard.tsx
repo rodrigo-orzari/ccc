@@ -203,12 +203,14 @@ export default function Dashboard() {
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
 
-  // Load column widths from localStorage on mount
+  // Load column widths from localStorage on mount.
+  // Merge over defaults so any new columns added after the user's last visit
+  // still get their initial widths (e.g. the gpu column added in a later deploy).
   useEffect(() => {
     const stored = localStorage.getItem('comparecloudcosts_columnWidths');
     if (stored) {
       try {
-        setColumnWidths(JSON.parse(stored));
+        setColumnWidths(prev => ({ ...prev, ...JSON.parse(stored) }));
       } catch (e) {
         console.error('Failed to parse stored column widths:', e);
       }
