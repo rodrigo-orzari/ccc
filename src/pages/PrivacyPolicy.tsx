@@ -53,6 +53,10 @@ Our platform uses the following services:
 
 These services have their own privacy policies, and we encourage you to review them.
 
+## Advertising
+
+Currently, we do not serve third-party advertisements on this platform.
+
 ## Changes to This Privacy Policy
 
 We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the "Last updated" date above.
@@ -60,6 +64,10 @@ We may update this Privacy Policy from time to time. We will notify you of signi
 ## Contact Us
 
 For questions about this Privacy Policy or our privacy practices, please email us at [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
+
+---
+
+[Terms of Use](/terms) | [About Us](/about) | [Contact Us](mailto:hello@comparecloudcosts.com)
 `;
 
   return (
@@ -171,7 +179,14 @@ For questions about this Privacy Policy or our privacy practices, please email u
           </h4>
           <nav>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#placeholder">Placeholder</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#overview">Overview</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#information-we-collect">Information We Collect</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#how-we-use-your-information">How We Use Your Information</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#data-sharing-and-disclosure">Data Sharing</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#data-security">Data Security</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#third-party-services">Third-Party Services</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#advertising">Advertising</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#contact-us">Contact Us</a></li>
             </ul>
           </nav>
         </aside>

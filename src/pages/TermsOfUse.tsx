@@ -45,15 +45,29 @@ Compare Cloud Costs may revise these terms of service for its website at any tim
 
 These terms and conditions are governed by and construed in accordance with the laws of the United States, and you irrevocably submit to the exclusive jurisdiction of the courts in that location.
 
-## Pricing Data
+## Pricing Disclaimer
 
-The pricing information provided on this platform is sourced from public APIs and rate cards of cloud providers. While we strive for accuracy, pricing data may not be current at all times. Before making any purchasing decisions, you must verify pricing directly with the cloud provider.
+### Data accuracy and timeliness
 
-Compare Cloud Costs is not responsible for inaccurate pricing data or discrepancies between our platform and official provider pricing.
+We understand that even small price differences scale significantly in distributed environments. CCC functions as an aggregator of publicly available information, gathering data to the best of our ability through official APIs and provider-published rate cards. We refresh pricing data frequently, with updates occurring at least weekly.
+
+However, cloud providers update their pricing constantly. While we strive to provide the most accurate and up-to-date directional view of the market, there may be delays between when a provider updates their rates and when our system reflects those changes.
+
+### Not a substitute for official pricing
+
+CCC is not the primary source of truth for final billing. Because cloud providers frequently update rates and offer private negotiated discounts, we always recommend that you rely on official provider pricing calculators and your own specific purchase agreements for final financial decisions and negotiations.
+
+### No warranties or liability
+
+The pricing data on this platform is provided as-is for informational purposes only. We make no warranties regarding accuracy, completeness, or fitness for any particular purpose. Users should independently verify all pricing before making purchasing decisions.
 
 ## Contact
 
 For questions about these Terms of Use, please email us at [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
+
+---
+
+[Privacy Policy](/privacy) | [Contact Us](mailto:hello@comparecloudcosts.com) | [About Us](/about)
 `;
 
   return (
@@ -165,7 +179,22 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
           </h4>
           <nav>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#placeholder">Placeholder</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#agreement-to-terms">Agreement to Terms</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#use-license">Use License</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#disclaimer">Disclaimer</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#limitations">Limitations</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#accuracy-of-materials">Accuracy of Materials</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#modifications">Modifications</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#governing-law">Governing Law</a></li>
+              <li style={{ marginBottom: '0.6rem' }}>
+                <a href="#pricing-disclaimer">Pricing Disclaimer</a>
+                <ul style={{ listStyle: 'none', paddingLeft: '1rem', marginTop: '0.5rem' }}>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#data-accuracy-and-timeliness" style={{ fontSize: '0.85rem' }}>Data accuracy</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#not-a-substitute-for-official-pricing" style={{ fontSize: '0.85rem' }}>Official pricing</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#no-warranties-or-liability" style={{ fontSize: '0.85rem' }}>No liability</a></li>
+                </ul>
+              </li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#contact">Contact</a></li>
             </ul>
           </nav>
         </aside>

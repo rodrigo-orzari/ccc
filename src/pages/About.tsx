@@ -37,39 +37,6 @@ We break down compute, storage, networking, and support costs so you see exactly
 
 We provide insights into right-sizing and regional price differences before deployment, complementing your existing reactive FinOps tools.
 
-## Pricing Disclaimer
-
-### Data accuracy and timeliness
-
-We understand that even small price differences scale significantly in distributed environments. CCC functions as an aggregator of publicly available information, gathering data to the best of our ability through official APIs and provider-published rate cards. We refresh pricing data frequently, with updates occurring at least weekly.
-
-However, cloud providers update their pricing constantly. While we strive to provide the most accurate and up-to-date directional view of the market, there may be delays between when a provider updates their rates and when our system reflects those changes.
-
-### Not a substitute for official pricing
-
-CCC is not the primary source of truth for final billing. Because cloud providers frequently update rates and offer private negotiated discounts, we always recommend that you rely on official provider pricing calculators and your own specific purchase agreements for final financial decisions and negotiations.
-
-### No warranties or liability
-
-The pricing data on this platform is provided as-is for informational purposes only. We make no warranties regarding accuracy, completeness, or fitness for any particular purpose. Users should independently verify all pricing before making purchasing decisions.
-
-## Privacy Policy
-
-### Information we collect
-
-When you use Compare Cloud Costs, we collect minimal information:
-- Comparison queries and filters you use (to improve our service)
-- Basic analytics data (page views, feature usage)
-- No personal information is required to use the platform
-
-### Advertising
-
-Currently, we do not serve third-party advertisements on this platform.
-
-### Contact
-
-For questions about your privacy or how we handle your data, email us at [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
-
 ---
 
 [Terms of Use](/terms) | [Privacy Policy](/privacy) | [Contact Us](mailto:hello@comparecloudcosts.com)
@@ -186,22 +153,6 @@ For questions about your privacy or how we handle your data, email us at [hello@
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li style={{ marginBottom: '0.6rem' }}><a href="#why-we-built-this">Why we built this</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#features">Features</a></li>
-              <li style={{ marginBottom: '0.6rem' }}>
-                <a href="#pricing-disclaimer" style={{ fontWeight: 'bold', color: '#f59e0b' }}>Pricing Disclaimer</a>
-                <ul style={{ listStyle: 'none', paddingLeft: '1rem', marginTop: '0.5rem' }}>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#data-accuracy-and-timeliness" style={{ fontSize: '0.85rem' }}>Data accuracy</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#not-a-substitute-for-official-pricing" style={{ fontSize: '0.85rem' }}>Official pricing</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#no-warranties-or-liability" style={{ fontSize: '0.85rem' }}>No liability</a></li>
-                </ul>
-              </li>
-              <li style={{ marginBottom: '0.6rem' }}>
-                <a href="#privacy-policy" style={{ fontWeight: 'bold' }}>Privacy Policy</a>
-                <ul style={{ listStyle: 'none', paddingLeft: '1rem', marginTop: '0.5rem' }}>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#information-we-collect" style={{ fontSize: '0.85rem' }}>Information we collect</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#third-party-advertising" style={{ fontSize: '0.85rem' }}>Advertising</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#contact" style={{ fontSize: '0.85rem' }}>Contact</a></li>
-                </ul>
-              </li>
             </ul>
           </nav>
         </aside>
