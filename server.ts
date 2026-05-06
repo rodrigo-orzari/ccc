@@ -6,8 +6,9 @@ import pg from 'pg';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import cron from 'node-cron';
-import { PricingPipeline } from './src/services/pricing_pipeline.ts';
+import { PricingPipeline, PriceDriftResult } from './src/services/pricing_pipeline.ts';
 import { DatabasePricingPipeline } from './src/services/database_pipeline.ts';
+import { sendPriceDriftEmail, sendStalenessEmail, StaleDataAlert } from './src/services/mailer.ts';
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ async function startServer() {
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS gpu_count INTEGER DEFAULT 0;
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS category VARCHAR(50);
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS attributes JSONB;
+        ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS data_source VARCHAR(20) DEFAULT 'live_api';
       `);
 
       // Tag all known compute services so productType filtering works correctly.
@@ -156,15 +158,54 @@ async function startServer() {
     console.warn('⚠️ DATABASE_URL is not set. Database functionality will be limited.');
   }
 
-  // 2. Automated Background Job (Runs every Sunday at midnight)
+  // 2. Automated Background Jobs (Runs every Sunday at midnight)
   cron.schedule('0 0 * * 0', async () => {
     console.log('🕒 Starting scheduled pricing pipeline update...');
     try {
+      const allDriftAlerts: PriceDriftResult[] = [];
       const pipeline = new PricingPipeline(pool);
       const results = await pipeline.run();
+      for (const r of results) {
+        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+      }
+      if (allDriftAlerts.length > 0) {
+        await sendPriceDriftEmail(allDriftAlerts).catch(err =>
+          console.error('❌ Failed to send price drift email:', err)
+        );
+      }
       console.log('✅ Scheduled pipeline completed:', results);
     } catch (err) {
       console.error('❌ Scheduled pipeline failed:', err);
+    }
+
+    // Staleness check — alert if any static-config service hasn't been updated in >7 days
+    try {
+      const client = await pool.connect();
+      const staleRes = await client.query<{ provider: string; service: string; data_source: string; last_updated: Date }>(`
+        SELECT p.slug AS provider, s.name AS service, pr.data_source, MAX(pr.updated_at) AS last_updated
+        FROM pricing_records pr
+        JOIN services s ON pr.service_id = s.id
+        JOIN providers p ON s.provider_id = p.id
+        WHERE pr.data_source = 'static_config'
+        GROUP BY p.slug, s.name, pr.data_source
+        HAVING MAX(pr.updated_at) < NOW() - INTERVAL '7 days'
+      `);
+      client.release();
+
+      if (staleRes.rows.length > 0) {
+        const staleAlerts: StaleDataAlert[] = staleRes.rows.map(row => ({
+          provider: row.provider,
+          service: row.service,
+          dataSource: row.data_source,
+          lastUpdated: row.last_updated,
+          daysSinceUpdate: Math.floor((Date.now() - row.last_updated.getTime()) / 86_400_000),
+        }));
+        await sendStalenessEmail(staleAlerts).catch(err =>
+          console.error('❌ Failed to send staleness email:', err)
+        );
+      }
+    } catch (err) {
+      console.error('❌ Staleness check failed:', err);
     }
   });
 
@@ -227,23 +268,37 @@ async function startServer() {
     try {
       const type = (req.query.type as string) || 'all';
       const results: any[] = [];
+      const allDriftAlerts: PriceDriftResult[] = [];
 
       if (type === 'all' || type === 'compute') {
         const pipeline = new PricingPipeline(pool);
         const computeResults = await pipeline.run();
-        results.push(...computeResults.map(r => ({ ...r, pipeline: 'compute' })));
+        for (const r of computeResults) {
+          if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+          results.push({ ...r, pipeline: 'compute' });
+        }
       }
 
       if (type === 'all' || type === 'database') {
         const dbPipeline = new DatabasePricingPipeline(pool);
         const dbResults = await dbPipeline.run();
-        results.push(...dbResults.map(r => ({ ...r, pipeline: 'database' })));
+        for (const r of dbResults) {
+          if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+          results.push({ ...r, pipeline: 'database' });
+        }
       }
 
       // Refresh schema migrations / column backfills after any fetch
       await initDb();
 
-      res.json({ message: 'Pipeline run completed and data migrated', results });
+      // Send drift email if any significant price changes were detected
+      if (allDriftAlerts.length > 0) {
+        sendPriceDriftEmail(allDriftAlerts).catch(err =>
+          console.error('❌ Failed to send price drift email:', err)
+        );
+      }
+
+      res.json({ message: 'Pipeline run completed and data migrated', results, driftAlerts: allDriftAlerts });
     } catch (err: any) {
       res.status(500).json({ error: 'Pipeline failed', details: err.message });
     }

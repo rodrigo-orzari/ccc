@@ -21,6 +21,16 @@ export interface PricingRecord {
   price: number;
   unit: string;
   attributes?: Record<string, any>;
+  dataSource?: 'live_api' | 'static_config';
+}
+
+export interface PriceDriftResult {
+  provider: string;
+  service: string;
+  instanceType: string;
+  oldPrice: number;
+  newPrice: number;
+  pctChange: number;
 }
 
 export abstract class BaseAdapter {
@@ -240,7 +250,8 @@ export class GCPAdapter extends BaseAdapter {
       geography: GCP_GEOGRAPHY,
       category: this.classifyGcp(inst.type, inst.vcpus, inst.memory),
       price: inst.price,
-      unit: 'Hour'
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
     }));
   }
 }
@@ -267,7 +278,8 @@ export class OracleAdapter extends BaseAdapter {
         geography: ORACLE_GEOGRAPHY,
         category: isHpc ? 'HPC' : this.categoryByRatio(inst.vcpus, inst.memory),
         price: inst.price,
-        unit: 'Hour'
+        unit: 'Hour',
+        dataSource: 'static_config' as const,
       };
     });
   }
@@ -349,7 +361,8 @@ export class DigitalOceanAdapter extends BaseAdapter {
           geography: DIGITALOCEAN_GEOGRAPHY,
           category: this.classifyDigitalOcean(slug, vcpus, memoryGb),
           price: Number(s.price_hourly),
-          unit: 'Hour'
+          unit: 'Hour',
+          dataSource: 'live_api' as const,
         } as PricingRecord;
       });
 
@@ -373,7 +386,8 @@ export class DigitalOceanAdapter extends BaseAdapter {
       geography: DIGITALOCEAN_GEOGRAPHY,
       category: s.category || this.getCategory(s.slug, s.vcpus, s.memory),
       price: s.price,
-      unit: 'Hour'
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
     }));
   }
 }
@@ -395,13 +409,13 @@ export class PricingPipeline {
     ];
   }
 
-  async run() {
+  async run(): Promise<{ provider: string; status: string; count?: number; message?: string; driftAlerts?: PriceDriftResult[] }[]> {
     const results = [];
     for (const adapter of this.adapters) {
       try {
         const records = await adapter.fetchPricing();
-        await this.saveRecords(records);
-        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length });
+        const driftAlerts = await this.saveRecords(records);
+        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
       } catch (error: any) {
         console.error(`Error running ${adapter.providerSlug} pipeline:`, error);
         results.push({ provider: adapter.providerSlug, status: 'error', message: error.message });
@@ -410,9 +424,10 @@ export class PricingPipeline {
     return results;
   }
 
-  protected async saveRecords(records: PricingRecord[], serviceCategory = 'compute') {
-    if (records.length === 0) return;
+  protected async saveRecords(records: PricingRecord[], serviceCategory = 'compute'): Promise<PriceDriftResult[]> {
+    if (records.length === 0) return [];
 
+    const dataSource = records[0].dataSource ?? 'live_api';
     const client = await this.pool.connect();
     try {
       await client.query('BEGIN');
@@ -438,8 +453,7 @@ export class PricingPipeline {
         regionMap.set(regionSlug, res.rows[0].id);
       }
 
-      // 2. Ensure Service exists — use the caller-supplied category so compute
-      //    and database services are correctly tagged from the first insert.
+      // 2. Ensure Service exists
       const serviceName = records[0].service;
       const serviceRes = await client.query(
         'INSERT INTO services (provider_id, name, category) VALUES ($1, $2, $3) ON CONFLICT (provider_id, name) DO UPDATE SET category = EXCLUDED.category RETURNING id',
@@ -447,16 +461,43 @@ export class PricingPipeline {
       );
       const serviceId = serviceRes.rows[0].id;
 
-      // 3. Delete old records for this provider BEFORE batch insert
+      // 3. Fetch old prices for drift detection BEFORE deleting
+      const oldPriceRes = await client.query<{ instance_type: string; price_per_unit: string }>(
+        'SELECT instance_type, price_per_unit FROM pricing_records WHERE service_id = $1',
+        [serviceId]
+      );
+      const oldPriceMap = new Map<string, number>();
+      for (const row of oldPriceRes.rows) {
+        oldPriceMap.set(row.instance_type, parseFloat(row.price_per_unit));
+      }
+
+      // 4. Detect price drift (>20% change)
+      const driftAlerts: PriceDriftResult[] = [];
+      if (oldPriceMap.size > 0) {
+        for (const r of records) {
+          const oldPrice = oldPriceMap.get(r.instanceType);
+          if (oldPrice !== undefined && oldPrice > 0) {
+            const pctChange = ((r.price - oldPrice) / oldPrice) * 100;
+            if (Math.abs(pctChange) > 20) {
+              driftAlerts.push({ provider: providerSlug, service: serviceName, instanceType: r.instanceType, oldPrice, newPrice: r.price, pctChange });
+            }
+          }
+        }
+        if (driftAlerts.length > 0) {
+          console.warn(`⚠️  Price drift detected for ${providerSlug} / ${serviceName}: ${driftAlerts.length} instance(s) changed >20%`);
+        }
+      }
+
+      // 5. Delete old records
       await client.query('DELETE FROM pricing_records WHERE service_id = $1', [serviceId]);
 
-      // 4. Batch Insert Pricing Records
+      // 6. Batch Insert Pricing Records
       const BATCH_SIZE = 100;
       for (let i = 0; i < records.length; i += BATCH_SIZE) {
         const batch = records.slice(i, i + BATCH_SIZE);
         const values: any[] = [];
         const placeholders = batch.map((r, idx) => {
-          const offset = idx * 14;
+          const offset = idx * 15;
           values.push(
             serviceId,
             regionMap.get(r.region),
@@ -471,21 +512,23 @@ export class PricingPipeline {
             r.category,
             r.price,
             r.unit,
-            r.attributes ? JSON.stringify(r.attributes) : null
+            r.attributes ? JSON.stringify(r.attributes) : null,
+            dataSource
           );
-          return `($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5}, $${offset + 6}, $${offset + 7}, $${offset + 8}, $${offset + 9}, $${offset + 10}, $${offset + 11}, $${offset + 12}, $${offset + 13}, $${offset + 14})`;
+          return `($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5}, $${offset + 6}, $${offset + 7}, $${offset + 8}, $${offset + 9}, $${offset + 10}, $${offset + 11}, $${offset + 12}, $${offset + 13}, $${offset + 14}, $${offset + 15})`;
         }).join(',');
 
         await client.query(
           `INSERT INTO pricing_records
-           (service_id, region_id, instance_type, vcpus, memory_gb, arch, os, cpu_vendor, gpu_count, geography, category, price_per_unit, unit, attributes)
+           (service_id, region_id, instance_type, vcpus, memory_gb, arch, os, cpu_vendor, gpu_count, geography, category, price_per_unit, unit, attributes, data_source)
            VALUES ${placeholders}`,
           values
         );
       }
 
       await client.query('COMMIT');
-      console.log(`✅ Saved ${records.length} records for ${providerSlug} (${serviceCategory})`);
+      console.log(`✅ Saved ${records.length} records for ${providerSlug} (${serviceCategory}, source: ${dataSource})`);
+      return driftAlerts;
     } catch (err) {
       await client.query('ROLLBACK');
       console.error('❌ Batch save failed:', err);
