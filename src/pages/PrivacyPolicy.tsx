@@ -7,13 +7,59 @@ const PrivacyPolicyPage: React.FC = () => {
 
 _Last updated: 5 May 2026._
 
-## Placeholder
+## Overview
 
-This page will contain our complete privacy policy. Please check back soon for updates.
+Compare Cloud Costs ("we," "us," "our," or "Company") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and otherwise handle your information when you use our website and services.
 
-For immediate questions about privacy, please email [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
+## Information We Collect
 
-[Back to top ↑](#privacy-policy)
+### Usage Data
+When you use Compare Cloud Costs, we automatically collect certain information about your interactions:
+- Pages visited and time spent on each page
+- Filters and search parameters you use when comparing cloud pricing
+- Device information (browser type, operating system)
+- IP address (anonymized for analytics purposes)
+- Referral source
+
+### Information You Provide
+We do not require you to create an account or provide personal information to use our service. Any information you voluntarily provide (such as through contact forms or emails) will be used only for the purpose you provided it.
+
+### Cookies and Tracking
+We use minimal cookies for essential functionality only. We do not use cookies for tracking or advertising purposes.
+
+## How We Use Your Information
+
+We use collected information to:
+- Improve and optimize our pricing data and user experience
+- Understand how users interact with our platform
+- Debug and troubleshoot technical issues
+- Generate aggregated analytics (never identifying individuals)
+
+## Data Sharing and Disclosure
+
+We do not sell, trade, or rent your personal information to third parties. We may share aggregated, anonymized data with partners to improve our services, but this data cannot identify you.
+
+We may disclose information when required by law, regulation, or legitimate legal process.
+
+## Data Security
+
+We take reasonable measures to protect information from unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure. You use our service at your own risk.
+
+## Third-Party Services
+
+Our platform uses the following services:
+- **Cloud Providers**: AWS, Azure, Google Cloud, Oracle Cloud APIs (for pricing data only)
+- **Analytics**: Basic analytics to understand usage patterns
+
+These services have their own privacy policies, and we encourage you to review them.
+
+## Changes to This Privacy Policy
+
+We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the "Last updated" date above.
+
+## Contact Us
+
+For questions about this Privacy Policy or our privacy practices, please email us at [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
 `;
 
   return (
