@@ -64,7 +64,7 @@ const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB',
 const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
 const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
 
-const DEFAULT_VCPU_RANGE   = { min: 1,   max: 320 };
+const DEFAULT_VCPU_RANGE   = { min: 0,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
 const DEFAULT_PRICE_RANGE  = { min: 0,   max: 510 };
 
