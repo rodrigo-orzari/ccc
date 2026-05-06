@@ -263,10 +263,11 @@ export default function Dashboard() {
   };
 
   // Sort click that no-ops when the user just finished a resize drag.
-  const handleHeaderClick = useCallback((key: string) => {
+  // Not memoized — must close over the current sortData so it sees fresh data.
+  const handleHeaderClick = (key: string) => {
     if (resizeDraggedRef.current) { resizeDraggedRef.current = false; return; }
     sortData(key);
-  }, []);  // sortData is stable (defined outside component)
+  };
 
   // Double-click on a resize handle → auto-fit column to widest visible cell.
   const handleResizeDoubleClick = useCallback((columnId: string, e: React.MouseEvent) => {
@@ -1143,74 +1144,74 @@ export default function Dashboard() {
                   <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
                     <th data-col="provider" onClick={() => handleHeaderClick('provider')} style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                       Provider <SortIcon sortKey="provider" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('provider', e)} onDoubleClick={(e) => handleResizeDoubleClick('provider', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('provider', e)} onDoubleClick={(e) => handleResizeDoubleClick('provider', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th data-col="instance_type" onClick={() => handleHeaderClick('instance_type')} style={{ width: columnWidths['instance_type'], minWidth: columnWidths['instance_type'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                       SKU <SortIcon sortKey="instance_type" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('instance_type', e)} onDoubleClick={(e) => handleResizeDoubleClick('instance_type', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('instance_type', e)} onDoubleClick={(e) => handleResizeDoubleClick('instance_type', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     {activeProductType === 'database' ? (
                       <>
                         <th data-col="engine_category" onClick={() => handleHeaderClick('attributes.engine')} style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           Engine <SortIcon sortKey="attributes.engine" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} onDoubleClick={(e) => handleResizeDoubleClick('engine_category', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} onDoubleClick={(e) => handleResizeDoubleClick('engine_category', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th data-col="db_family_cpu_vendor" onClick={() => handleHeaderClick('attributes.tier')} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           Tier <SortIcon sortKey="attributes.tier" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} onDoubleClick={(e) => handleResizeDoubleClick('db_family_cpu_vendor', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} onDoubleClick={(e) => handleResizeDoubleClick('db_family_cpu_vendor', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th data-col="deployment_arch" onClick={() => handleHeaderClick('attributes.deployment_type')} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           Deployment <SortIcon sortKey="attributes.deployment_type" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} onDoubleClick={(e) => handleResizeDoubleClick('deployment_arch', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} onDoubleClick={(e) => handleResizeDoubleClick('deployment_arch', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th data-col="ha_mode_os" onClick={() => handleHeaderClick('attributes.ha_mode')} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           HA Mode <SortIcon sortKey="attributes.ha_mode" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                       </>
                     ) : (
                       <>
                         <th data-col="engine_category" onClick={() => handleHeaderClick('category')} style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           Category <SortIcon sortKey="category" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} onDoubleClick={(e) => handleResizeDoubleClick('engine_category', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} onDoubleClick={(e) => handleResizeDoubleClick('engine_category', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th data-col="db_family_cpu_vendor" onClick={() => handleHeaderClick('cpu_vendor')} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           CPU Vendor <SortIcon sortKey="cpu_vendor" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} onDoubleClick={(e) => handleResizeDoubleClick('db_family_cpu_vendor', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} onDoubleClick={(e) => handleResizeDoubleClick('db_family_cpu_vendor', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th data-col="deployment_arch" onClick={() => handleHeaderClick('arch')} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           Arch <SortIcon sortKey="arch" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} onDoubleClick={(e) => handleResizeDoubleClick('deployment_arch', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} onDoubleClick={(e) => handleResizeDoubleClick('deployment_arch', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th data-col="ha_mode_os" onClick={() => handleHeaderClick('os')} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           OS <SortIcon sortKey="os" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th data-col="gpu" onClick={() => handleHeaderClick('gpu_count')} style={{ width: columnWidths['gpu'], minWidth: columnWidths['gpu'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                           GPU <SortIcon sortKey="gpu_count" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('gpu', e)} onDoubleClick={(e) => handleResizeDoubleClick('gpu', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('gpu', e)} onDoubleClick={(e) => handleResizeDoubleClick('gpu', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                       </>
                     )}
                     <th data-col="geography" onClick={() => handleHeaderClick('geography')} style={{ width: columnWidths['geography'], minWidth: columnWidths['geography'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                       Geo <SortIcon sortKey="geography" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('geography', e)} onDoubleClick={(e) => handleResizeDoubleClick('geography', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('geography', e)} onDoubleClick={(e) => handleResizeDoubleClick('geography', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th data-col="vcpus" onClick={() => handleHeaderClick('vcpus')} style={{ width: columnWidths['vcpus'], minWidth: columnWidths['vcpus'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                       vCPU <SortIcon sortKey="vcpus" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('vcpus', e)} onDoubleClick={(e) => handleResizeDoubleClick('vcpus', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('vcpus', e)} onDoubleClick={(e) => handleResizeDoubleClick('vcpus', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th data-col="memory_gb" onClick={() => handleHeaderClick('memory_gb')} style={{ width: columnWidths['memory_gb'], minWidth: columnWidths['memory_gb'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                       Memory (GB) <SortIcon sortKey="memory_gb" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('memory_gb', e)} onDoubleClick={(e) => handleResizeDoubleClick('memory_gb', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('memory_gb', e)} onDoubleClick={(e) => handleResizeDoubleClick('memory_gb', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th data-col="price_per_unit" onClick={() => handleHeaderClick('price_per_unit')} style={{ width: columnWidths['price_per_unit'], minWidth: columnWidths['price_per_unit'] }} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity relative">
                       {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <SortIcon sortKey="price_per_unit" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('price_per_unit', e)} onDoubleClick={(e) => handleResizeDoubleClick('price_per_unit', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('price_per_unit', e)} onDoubleClick={(e) => handleResizeDoubleClick('price_per_unit', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th data-col="source" onClick={() => handleHeaderClick('data_source')} style={{ width: columnWidths['source'], minWidth: columnWidths['source'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
                       Source <SortIcon sortKey="data_source" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('source', e)} onDoubleClick={(e) => handleResizeDoubleClick('source', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('source', e)} onDoubleClick={(e) => handleResizeDoubleClick('source', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                   </tr>
                 </thead>
