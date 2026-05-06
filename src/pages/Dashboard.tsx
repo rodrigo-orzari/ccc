@@ -60,7 +60,7 @@ const GPU_OPTIONS = ['With GPU', 'Without GPU'];
 
 // Database-view constants
 const DB_FAMILIES = ['Relational', 'NoSQL'];
-const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'Db2'];
+const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2'];
 const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
 const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
 
@@ -715,7 +715,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('dbFamily')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.dbFamily ? '' : '-rotate-90'}`} />
-                        DB Family <span title="The broad category of the database system: Relational (SQL-based) or NoSQL." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        DATABASE FAMILY <span title="The broad category of the database system: Relational (SQL-based) or NoSQL." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedDbFamilies.length === DB_FAMILIES.length ? setSelectedDbFamilies([]) : setSelectedDbFamilies([...DB_FAMILIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedDbFamilies.length === DB_FAMILIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -769,7 +769,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('engine')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.engine ? '' : '-rotate-90'}`} />
-                        Engine <span title="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        DATABASE ENGINE <span title="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedEngines.length === DB_ENGINES.length ? setSelectedEngines([]) : setSelectedEngines([...DB_ENGINES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedEngines.length === DB_ENGINES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -823,7 +823,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('haMode')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.haMode ? '' : '-rotate-90'}`} />
-                        HA Mode <span title="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        HIGH-AVAILABILITY <span title="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedHaModes.length === HA_MODES.length ? setSelectedHaModes([]) : setSelectedHaModes([...HA_MODES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedHaModes.length === HA_MODES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
