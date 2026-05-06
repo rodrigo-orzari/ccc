@@ -267,10 +267,15 @@ function buildAzureDbFilter(): string {
 export class AzureDBAdapter extends BaseAdapter {
   providerSlug = 'azure';
 
+  // Fetch Azure DB pricing scoped to a single representative region so we
+  // don't inflate the count by duplicating every SKU across all ~60 Azure
+  // regions. eastus is the canonical reference region for Azure pricing.
+  private static readonly REGION = 'eastus';
+
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log('Fetching Azure database pricing...');
+    console.log(`Fetching Azure database pricing (${AzureDBAdapter.REGION} only)...`);
     const filter = encodeURIComponent(
-      `(${buildAzureDbFilter()}) and priceType eq 'Consumption'`
+      `(${buildAzureDbFilter()}) and priceType eq 'Consumption' and armRegionName eq '${AzureDBAdapter.REGION}'`
     );
     let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
     const allItems: any[] = [];
@@ -284,17 +289,43 @@ export class AzureDBAdapter extends BaseAdapter {
     }
 
     const records: PricingRecord[] = [];
+    // Deduplicate by SKU within the single-region response (some services
+    // return multiple meter rows for the same SKU, e.g. different billing
+    // granularities). We keep the first (cheapest) occurrence.
+    const seen = new Set<string>();
 
     for (const item of allItems) {
       if (!item.retailPrice || item.retailPrice <= 0) continue;
 
-      const sku: string = item.armSkuName ?? item.skuName ?? '';
+      // armSkuName is the machine-readable identifier; items without one are
+      // storage / I/O / backup meters, not compute instances — skip them.
+      const sku: string = (item.armSkuName ?? '').trim();
+      if (!sku) continue;
+
       const serviceName: string = item.serviceName ?? '';
       const serviceEntry = AZURE_DB_SERVICES.find(s => s.serviceName === serviceName);
       if (!serviceEntry) continue;
 
       const engine = serviceEntry.engine;
       const skuLower = sku.toLowerCase();
+
+      // Skip storage, I/O, backup and other non-compute meters by checking
+      // the human-readable product/SKU name for disqualifying terms.
+      const productName: string = (item.productName ?? '').toLowerCase();
+      const skuNameHuman: string = (item.skuName ?? '').toLowerCase();
+      const nonComputeKeywords = ['storage', 'backup', 'i/o', 'log', 'snapshot', 'replica', 'lrs', 'grs', 'zrs'];
+      if (nonComputeKeywords.some(kw => productName.includes(kw) || skuNameHuman.includes(kw))) continue;
+
+      // Cosmos DB: only include vCore-provisioned throughput — skip RU/s meters
+      if (engine === 'Cosmos DB' && !skuLower.includes('vcores') && !skuLower.includes('autoscale') && !skuLower.includes('standard')) continue;
+
+      // Redis: only include actual cache-size SKUs, skip bandwidth/operations meters
+      if (engine === 'Redis' && !skuLower.includes('cache')) continue;
+
+      // Deduplicate
+      const key = `${serviceName}::${sku}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
 
       // Derive HA mode from SKU/tier description
       let haMode = 'Single AZ';
@@ -304,7 +335,7 @@ export class AzureDBAdapter extends BaseAdapter {
         haMode = 'Multi AZ';
       }
 
-      // Parse vCPU count from SKU (e.g. "GP_Gen5_4" → 4)
+      // Parse vCPU count from SKU (e.g. "GP_Gen5_4" → 4, "BC_Gen5_8" → 8)
       const vcpuMatch = sku.match(/_(\d+)$/);
       const vcpus = vcpuMatch ? parseInt(vcpuMatch[1]) : 0;
 
@@ -316,14 +347,10 @@ export class AzureDBAdapter extends BaseAdapter {
         unit = '1 Hour (Reserved)';
       }
 
-      // Cosmos DB uses Request Units — skip non-hourly items that aren't useful
-      // for direct comparison; keep vCore-based Cosmos items if present.
-      if (engine === 'Cosmos DB' && !skuLower.includes('vcores') && !skuLower.includes('autoscale') && !skuLower.includes('standard')) continue;
-
       records.push({
         provider: 'azure',
         service: 'Azure Databases',
-        region: item.armRegionName ?? 'Global',
+        region: AzureDBAdapter.REGION,
         instanceType: sku,
         vcpus,
         memoryGb: 0,
@@ -331,10 +358,11 @@ export class AzureDBAdapter extends BaseAdapter {
         os: '',
         cpuVendor: 'Intel',
         gpuCount: 0,
-        geography: this.getGeography(item.armRegionName ?? ''),
+        geography: 'N. America',
         category: (engine === 'Cosmos DB' || engine === 'Redis') ? 'NoSQL' : 'Relational',
         price,
         unit,
+        dataSource: 'live_api' as const,
         attributes: {
           engine,
           engine_version: '',
