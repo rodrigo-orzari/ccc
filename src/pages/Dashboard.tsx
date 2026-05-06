@@ -163,6 +163,7 @@ export default function Dashboard() {
     db_family_cpu_vendor: 150,
     deployment_arch: 130,
     ha_mode_os: 120,
+    gpu: 70,
     geography: 130,
     vcpus: 80,
     memory_gb: 100,
@@ -1160,6 +1161,10 @@ export default function Dashboard() {
                           OS <SortIcon sortKey="os" />
                           <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
+                        <th onClick={() => sortData('gpu_count')} style={{ width: columnWidths['gpu'], minWidth: columnWidths['gpu'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                          GPU <SortIcon sortKey="gpu_count" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('gpu', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
                       </>
                     )}
                     <th onClick={() => sortData('geography')} style={{ width: columnWidths['geography'], minWidth: columnWidths['geography'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
@@ -1188,7 +1193,7 @@ export default function Dashboard() {
                   {loading ? (
                     Array.from({ length: 15 }).map((_, i) => (
                       <tr key={i} className="animate-pulse">
-                        {Array.from({ length: 11 }).map((_, j) => (
+                        {Array.from({ length: 12 }).map((_, j) => (
                           <td key={j} className="px-6 py-4"><div className="h-3 bg-[#f5f5f5] dark:bg-[#171717] rounded w-16 mx-auto"></div></td>
                         ))}
                       </tr>
@@ -1234,20 +1239,23 @@ export default function Dashboard() {
                         ) : (
                           <>
                             <td style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center whitespace-nowrap">
-                              <div className="flex items-center justify-center gap-2">
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
-                                {record.gpu_count > 0 && (
-                                  <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[8px] font-bold border border-blue-500/20 uppercase tracking-widest">GPU</span>
-                                )}
-                              </div>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
                             </td>
                             <td style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor}</span>
                             </td>
                             <td style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 whitespace-nowrap text-center">
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch}</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                                {record.arch === 'x86 64' ? 'x86' : record.arch}
+                              </span>
                             </td>
                             <td style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os}</td>
+                            <td style={{ width: columnWidths['gpu'], minWidth: columnWidths['gpu'] }} className="px-6 py-4 text-center whitespace-nowrap">
+                              {record.gpu_count > 0
+                                ? <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[8px] font-bold border border-blue-500/20 uppercase tracking-widest">GPU</span>
+                                : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>
+                              }
+                            </td>
                           </>
                         )}
                         {/* Geography, vCPU, Memory, Price — shared */}
@@ -1278,7 +1286,7 @@ export default function Dashboard() {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={11} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
+                      <td colSpan={12} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
                         <div className="flex flex-col items-center gap-4">
                           <span>No matches for your filters.</span>
                           {dbStatus && dbStatus.total === 0 && (
