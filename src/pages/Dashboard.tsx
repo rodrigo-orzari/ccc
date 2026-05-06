@@ -654,7 +654,7 @@ export default function Dashboard() {
                       if (p.soon) return;
                       toggleFilter(selectedProviders, setSelectedProviders, p.id);
                     }}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border flex items-center gap-2 ${
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border flex items-center ${
                       p.soon
                       ? 'bg-transparent text-[#737373] border-[#e5e5e5] dark:border-[#262626] cursor-not-allowed opacity-60'
                       : selectedProviders.includes(p.id)
@@ -662,7 +662,6 @@ export default function Dashboard() {
                       : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                     }`}
                   >
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: p.color }} />
                     {p.name}
                     {p.soon && <span className="bg-[#737373] text-white text-[7px] px-1 rounded ml-1">SOON</span>}
                   </button>
@@ -1088,7 +1087,6 @@ export default function Dashboard() {
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: p.color }} />
                     <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{p.name}</span>
                     {p.soon && <span className="text-[7px] font-bold bg-[#737373] text-white px-1 rounded ml-1 border border-white/20">SOON</span>}
                   </div>
