@@ -8,6 +8,12 @@ import {
   ORACLE_AUTONOMOUS_INSTANCES,
   ORACLE_AUTONOMOUS_REGION,
   ORACLE_AUTONOMOUS_GEOGRAPHY,
+  ORACLE_MYSQL_HEATWAVE_INSTANCES,
+  ORACLE_MYSQL_HEATWAVE_REGION,
+  ORACLE_MYSQL_HEATWAVE_GEOGRAPHY,
+  ORACLE_POSTGRESQL_INSTANCES,
+  ORACLE_POSTGRESQL_REGION,
+  ORACLE_POSTGRESQL_GEOGRAPHY,
   DIGITALOCEAN_DB_INSTANCES,
   DIGITALOCEAN_DB_REGION,
   DIGITALOCEAN_DB_GEOGRAPHY,
@@ -75,6 +81,72 @@ export class OracleAutonomousAdapter extends BaseAdapter {
         ha_mode: 'Multi AZ',
         storage_type: 'SSD',
         workload: inst.workload,
+      },
+    }));
+  }
+}
+
+// ─── Oracle MySQL HeatWave (static config) ────────────────────────────────────
+
+export class OracleMySQLHeatWaveAdapter extends BaseAdapter {
+  providerSlug = 'oracle';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Oracle MySQL HeatWave pricing (${ORACLE_MYSQL_HEATWAVE_INSTANCES.length} entries from static config)...`);
+    return ORACLE_MYSQL_HEATWAVE_INSTANCES.map(inst => ({
+      provider: 'oracle',
+      service: 'MySQL HeatWave',
+      region: ORACLE_MYSQL_HEATWAVE_REGION,
+      instanceType: inst.type,
+      vcpus: inst.ecpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: ORACLE_MYSQL_HEATWAVE_GEOGRAPHY,
+      category: 'Relational',
+      price: inst.price,
+      unit: 'ECPU-Hour',
+      attributes: {
+        engine: 'MySQL',
+        engine_version: '9.x',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Single AZ',
+        storage_type: 'SSD',
+      },
+    }));
+  }
+}
+
+// ─── Oracle PostgreSQL (static config) ───────────────────────────────────────
+
+export class OraclePostgreSQLAdapter extends BaseAdapter {
+  providerSlug = 'oracle';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Oracle PostgreSQL pricing (${ORACLE_POSTGRESQL_INSTANCES.length} entries from static config)...`);
+    return ORACLE_POSTGRESQL_INSTANCES.map(inst => ({
+      provider: 'oracle',
+      service: 'OCI Database with PostgreSQL',
+      region: ORACLE_POSTGRESQL_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'AMD',
+      gpuCount: 0,
+      geography: ORACLE_POSTGRESQL_GEOGRAPHY,
+      category: 'Relational',
+      price: inst.price,
+      unit: 'Hour',
+      attributes: {
+        engine: 'PostgreSQL',
+        engine_version: '16',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Single AZ',
+        storage_type: 'SSD',
       },
     }));
   }
@@ -317,6 +389,8 @@ export class DatabasePricingPipeline extends PricingPipeline {
     this.adapters = [
       new GCPCloudSQLAdapter(),
       new OracleAutonomousAdapter(),
+      new OracleMySQLHeatWaveAdapter(),
+      new OraclePostgreSQLAdapter(),
       new AWSRDSAdapter(),
       new AzureDBAdapter(),
       new DigitalOceanDBAdapter(),
