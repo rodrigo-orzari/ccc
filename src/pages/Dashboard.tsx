@@ -1036,7 +1036,7 @@ export default function Dashboard() {
 
 
         {/* Main Content Area */}
-        <main className="flex-1 flex flex-col bg-white dark:bg-[#000000]">
+        <main className="flex-1 min-w-0 overflow-hidden flex flex-col bg-white dark:bg-[#000000]">
 
           {/* Ad Slot — reserved space for a leaderboard ad (e.g. Google AdSense
               728×90 / 970×90). Drop the ad markup inside the inner div when
@@ -1132,7 +1132,6 @@ export default function Dashboard() {
 
           {/* Main Pricing Table */}
           <div className="flex-1 overflow-auto custom-scrollbar">
-            <div className="min-w-fit">
               <table className="border-collapse" style={{ tableLayout: 'fixed', width: totalTableWidth }}>
                 <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
                   <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
@@ -1317,7 +1316,6 @@ export default function Dashboard() {
                   )}
                 </tbody>
               </table>
-            </div>
           </div>
 
         </main>
