@@ -247,6 +247,15 @@ export default function Dashboard() {
     setResizeStartX(e.clientX);
   };
 
+  const SortIcon = ({ sortKey }: { sortKey: string }) => {
+    const isActive = sortConfig.key === sortKey;
+    return (
+      <span className={`ml-1 inline-block transition-opacity ${isActive ? 'opacity-100' : 'opacity-25'}`}>
+        {isActive ? (sortConfig.direction === 'asc' ? '↑' : '↓') : '↕'}
+      </span>
+    );
+  };
+
   useEffect(() => {
     if (!resizingColumnId) return;
 
@@ -1118,67 +1127,67 @@ export default function Dashboard() {
                 <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
                   <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
                     <th onClick={() => sortData('provider')} style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                      Provider {sortConfig.key === 'provider' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                      <div onMouseDown={(e) => handleResizeMouseDown('provider', e)} className="absolute -right-2 top-0 w-4 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                      Provider <SortIcon sortKey="provider" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('provider', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th onClick={() => sortData('instance_type')} style={{ width: columnWidths['instance_type'], minWidth: columnWidths['instance_type'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                      SKU {sortConfig.key === 'instance_type' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                      <div onMouseDown={(e) => handleResizeMouseDown('instance_type', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                      SKU <SortIcon sortKey="instance_type" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('instance_type', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     {activeProductType === 'database' ? (
                       <>
                         <th onClick={() => sortData('attributes.engine')} style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          Engine {sortConfig.key === 'attributes.engine' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                          Engine <SortIcon sortKey="attributes.engine" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th onClick={() => sortData('category')} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          DB Family {sortConfig.key === 'category' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                          DB Family <SortIcon sortKey="category" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th onClick={() => sortData('attributes.deployment_type')} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          Deployment {sortConfig.key === 'attributes.deployment_type' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                          Deployment <SortIcon sortKey="attributes.deployment_type" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th onClick={() => sortData('attributes.ha_mode')} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          HA Mode {sortConfig.key === 'attributes.ha_mode' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                          HA Mode <SortIcon sortKey="attributes.ha_mode" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                       </>
                     ) : (
                       <>
                         <th onClick={() => sortData('category')} style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          Category {sortConfig.key === 'category' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                          Category <SortIcon sortKey="category" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th onClick={() => sortData('cpu_vendor')} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          CPU Vendor {sortConfig.key === 'cpu_vendor' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                          CPU Vendor <SortIcon sortKey="cpu_vendor" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th onClick={() => sortData('arch')} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          Arch {sortConfig.key === 'arch' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                          Arch <SortIcon sortKey="arch" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th onClick={() => sortData('os')} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          OS {sortConfig.key === 'os' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                          OS <SortIcon sortKey="os" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                       </>
                     )}
                     <th onClick={() => sortData('geography')} style={{ width: columnWidths['geography'], minWidth: columnWidths['geography'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                      Geography {sortConfig.key === 'geography' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                      <div onMouseDown={(e) => handleResizeMouseDown('geography', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                      Geography <SortIcon sortKey="geography" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('geography', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th onClick={() => sortData('vcpus')} style={{ width: columnWidths['vcpus'], minWidth: columnWidths['vcpus'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                      vCPU {sortConfig.key === 'vcpus' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                      <div onMouseDown={(e) => handleResizeMouseDown('vcpus', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                      vCPU <SortIcon sortKey="vcpus" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('vcpus', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th onClick={() => sortData('memory_gb')} style={{ width: columnWidths['memory_gb'], minWidth: columnWidths['memory_gb'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                      Memory (GB) {sortConfig.key === 'memory_gb' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                      <div onMouseDown={(e) => handleResizeMouseDown('memory_gb', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                      Memory (GB) <SortIcon sortKey="memory_gb" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('memory_gb', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                     <th onClick={() => sortData('price_per_unit')} style={{ width: columnWidths['price_per_unit'], minWidth: columnWidths['price_per_unit'] }} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity relative">
-                      {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} {sortConfig.key === 'price_per_unit' && <span className="ml-1">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}
-                      <div onMouseDown={(e) => handleResizeMouseDown('price_per_unit', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
+                      {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <SortIcon sortKey="price_per_unit" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('price_per_unit', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
                   </tr>
                 </thead>
