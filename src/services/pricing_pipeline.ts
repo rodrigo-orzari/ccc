@@ -132,50 +132,77 @@ export abstract class BaseAdapter {
 export class AzureAdapter extends BaseAdapter {
   providerSlug = 'azure';
 
+  // Single canonical region — consistent with all other providers using one
+  // reference region (AWS→us-east-1, GCP→us-central1, DO→nyc1).
+  private static readonly REGION = 'eastus';
+
+  // Extract vCPU count from Azure VM SKU name.
+  // Standard_D4s_v3→4, Standard_B2ms→2, Standard_NC6→6, Standard_M64s→64
+  private vcpuFromSku(sku: string): number {
+    const m = sku.match(/Standard_[A-Za-z]+(\d+)/);
+    return m ? parseInt(m[1]) : 0;
+  }
+
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log('Fetching Azure pricing...');
-    let url: string | null = 'https://prices.azure.com/api/retail/prices?$filter=serviceName eq \'Virtual Machines\' and (priceType eq \'Consumption\' or priceType eq \'Reservation\')';
+    console.log(`Fetching Azure VM pricing (${AzureAdapter.REGION} only)...`);
+    const filter = encodeURIComponent(
+      `serviceName eq 'Virtual Machines' and priceType eq 'Consumption' and armRegionName eq '${AzureAdapter.REGION}'`
+    );
+    let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
     const allItems: any[] = [];
 
     let pages = 0;
     while (url && pages < 10) {
-      const response = await axios.get(url);
-      allItems.push(...response.data.Items);
-      url = response.data.NextPageLink;
+      const response = await axios.get(url, { timeout: 30000 });
+      allItems.push(...(response.data.Items ?? []));
+      url = response.data.NextPageLink ?? null;
       pages++;
     }
 
-    return allItems
-      .filter((item: any) => item.retailPrice > 0)
-      .map((item: any) => {
-        const sku = item.armSkuName || '';
-        const vcpus = sku.includes('v') ? parseInt(sku.match(/\d+/)?.[0] || '2') : 2;
-        let price = item.retailPrice;
-        let unit = item.unitOfMeasure || '1 Hour';
+    const records: PricingRecord[] = [];
+    // Deduplicate by SKU + OS — the API occasionally returns the same SKU
+    // under multiple meter names (spot, dev/test, etc.) within one region.
+    const seen = new Set<string>();
 
-        if (unit && unit.includes('Year')) {
-          const years = unit.includes('3') ? 3 : 1;
-          price = price / (years * 365 * 24);
-          unit = '1 Hour (Reserved)';
-        }
+    for (const item of allItems) {
+      if (!item.retailPrice || item.retailPrice <= 0) continue;
 
-        return {
-          provider: 'azure',
-          service: 'Virtual Machines',
-          region: item.armRegionName || 'Global',
-          instanceType: sku,
-          vcpus: vcpus,
-          memoryGb: 4,
-          arch: sku.toLowerCase().includes('arm64') ? 'ARM' : 'x86 64',
-          os: item.productName.toLowerCase().includes('windows') ? 'Windows' : 'Linux',
-          cpuVendor: this.getCpuVendor(sku),
-          gpuCount: this.getGpuCount(sku),
-          geography: this.getGeography(item.armRegionName || ''),
-          category: this.classifyAzure(sku, vcpus, 4),
-          price: price,
-          unit: unit
-        };
+      const sku: string = (item.armSkuName ?? '').trim();
+      if (!sku) continue;
+
+      const productName: string = (item.productName ?? '').toLowerCase();
+      const os = productName.includes('windows') ? 'Windows' : 'Linux';
+
+      // Skip spot/low-priority/dev-test pricing — keep standard on-demand only.
+      if (productName.includes('spot') || productName.includes('low priority') || productName.includes('dev/test')) continue;
+
+      const key = `${sku}::${os}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+
+      const vcpus = this.vcpuFromSku(sku);
+
+      records.push({
+        provider: 'azure',
+        service: 'Virtual Machines',
+        region: AzureAdapter.REGION,
+        instanceType: sku,
+        vcpus,
+        memoryGb: 0,   // Azure Retail Prices API does not expose memory; left as 0
+        arch: sku.toLowerCase().includes('arm64') ? 'ARM' : 'x86 64',
+        os,
+        cpuVendor: this.getCpuVendor(sku),
+        gpuCount: this.getGpuCount(sku),
+        geography: 'N. America',
+        category: this.classifyAzure(sku, vcpus, 0),
+        price: item.retailPrice,
+        unit: '1 Hour',
+        dataSource: 'live_api' as const,
       });
+    }
+
+    console.log(`✅ Fetched ${records.length} Azure VM records`);
+    return records;
   }
 }
 
@@ -224,7 +251,8 @@ export class AWSAdapter extends BaseAdapter {
         geography: this.getGeography(attr.location || ''),
         category: this.classifyAws(attr.instanceType, vcpus, memoryGb),
         price: parseFloat(priceDim.pricePerUnit.USD),
-        unit: priceDim.unit
+        unit: priceDim.unit,
+        dataSource: 'live_api' as const,
       });
     }
     return records;

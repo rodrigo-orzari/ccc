@@ -231,6 +231,7 @@ export class AWSRDSAdapter extends BaseAdapter {
         category: 'Relational',
         price,
         unit: priceDim.unit ?? 'Hrs',
+        dataSource: 'live_api' as const,
         attributes: {
           engine,
           engine_version: attr.engineVersion ?? '',
