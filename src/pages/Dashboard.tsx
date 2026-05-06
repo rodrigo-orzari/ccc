@@ -730,13 +730,13 @@ export default function Dashboard() {
 
                 <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
-                {/* ── VM: CPU ── */}
+                {/* ── VM: CPU | GPU ── */}
                 <section className="space-y-3">
                   <div className="flex justify-between items-center">
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('cpu')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.cpu ? '' : '-rotate-90'}`} />
-                        CPU <span title="Processor vendor and instruction set." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        CPU | GPU <span title="Processor vendor, architecture, and GPU accelerator." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedCpu.length === CPU_PROFILES.length ? setSelectedCpu([]) : setSelectedCpu(CPU_PROFILES.map(p => p.id)); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedCpu.length === CPU_PROFILES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -751,29 +751,14 @@ export default function Dashboard() {
                         {profile.label}
                       </button>
                     ))}
-                  </div>
-                  )}
-                </section>
-
-                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
-
-                {/* ── VM: GPU ── */}
-                <section>
-                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5">
-                      GPU <span title="Whether the instance includes a GPU accelerator."><Info size={10} className="cursor-help" /></span>
-                    </span>
                     <button
-                      onClick={() => setGpuFilter(f => f === 'all' ? 'with' : f === 'with' ? 'without' : 'all')}
-                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                        gpuFilter !== 'all'
-                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                          : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                      }`}
-                    >
-                      {gpuFilter === 'all' ? 'All' : gpuFilter === 'with' ? 'With GPU' : 'No GPU'}
+                      title="Show only instances with a GPU accelerator."
+                      onClick={() => setGpuEnabled(v => !v)}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${gpuEnabled ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                      GPU
                     </button>
                   </div>
+                  )}
                 </section>
 
                 <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
@@ -1124,7 +1109,10 @@ export default function Dashboard() {
 
           {/* Main Pricing Table */}
           <div className="flex-1 overflow-auto custom-scrollbar">
-              <table className="border-collapse" style={{ tableLayout: 'fixed', width: totalTableWidth }}>
+            {/* Explicit-width block wrapper so overflow-auto reliably detects
+                horizontal overflow and shows the scrollbar in all browsers. */}
+            <div style={{ width: totalTableWidth }}>
+              <table className="border-collapse w-full" style={{ tableLayout: 'fixed' }}>
                 <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
                   <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
                     <th onClick={() => sortData('provider')} style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
@@ -1308,6 +1296,7 @@ export default function Dashboard() {
                   )}
                 </tbody>
               </table>
+            </div>
           </div>
 
         </main>
