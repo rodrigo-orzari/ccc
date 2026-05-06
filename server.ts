@@ -418,6 +418,7 @@ async function startServer() {
         pr.unit,
         pr.category,
         pr.attributes,
+        pr.data_source,
         pr.updated_at
       `;
 
@@ -441,7 +442,8 @@ async function startServer() {
           pr.unit,
           pr.category,
           MAX(pr.updated_at) as updated_at,
-          MAX(pr.attributes::text)::jsonb as attributes
+          MAX(pr.attributes::text)::jsonb as attributes,
+          MAX(pr.data_source) as data_source
         `;
       }
 

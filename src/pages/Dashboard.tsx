@@ -27,6 +27,7 @@ interface PricingRecord {
   min_price?: string;
   avg_price?: string;
   max_price?: string;
+  data_source?: string;
   attributes?: {
     engine?: string;
     engine_version?: string;
@@ -34,12 +35,13 @@ interface PricingRecord {
     ha_mode?: string;
     storage_type?: string;
     workload?: string;
+    tier?: string;
   };
 }
 
 type ProductType = 'vm' | 'database';
 
-const PROVIDERS = [
+const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] = [
   { id: 'aws', name: 'AWS', color: '#FF9900' },
   { id: 'azure', name: 'Azure', color: '#00BCFF' },
   { id: 'gcp', name: 'Google', color: '#34A853' },
@@ -157,18 +159,26 @@ export default function Dashboard() {
   // Column resize state
   const [columnWidths, setColumnWidths] = useState<Record<string, number>>({
     provider: 120,
-    instance_type: 140,
+    instance_type: 160,
     engine_category: 130,
-    db_family_cpu_vendor: 140,
+    db_family_cpu_vendor: 150,
     deployment_arch: 130,
     ha_mode_os: 120,
     geography: 130,
-    vcpus: 90,
-    memory_gb: 110,
-    price_per_unit: 140,
+    vcpus: 80,
+    memory_gb: 100,
+    price_per_unit: 130,
+    source: 80,
   });
   const [resizingColumnId, setResizingColumnId] = useState<string | null>(null);
   const [resizeStartX, setResizeStartX] = useState(0);
+
+  // Sum of all column widths — used to give the table an explicit fixed width
+  // so that table-layout: fixed actually respects our per-column widths.
+  const totalTableWidth = useMemo(
+    () => Object.values(columnWidths).reduce((sum, w) => sum + w, 0),
+    [columnWidths]
+  );
 
   // Sidebar section expand/collapse state — all expanded by default; user can
   // collapse top sections to make the bottom ones (vCPU/Memory/Price sliders)
@@ -1123,7 +1133,7 @@ export default function Dashboard() {
           {/* Main Pricing Table */}
           <div className="flex-1 overflow-auto custom-scrollbar">
             <div className="min-w-fit">
-              <table className="min-w-full border-collapse">
+              <table className="border-collapse" style={{ tableLayout: 'fixed', width: totalTableWidth }}>
                 <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
                   <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
                     <th onClick={() => sortData('provider')} style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
@@ -1140,8 +1150,8 @@ export default function Dashboard() {
                           Engine <SortIcon sortKey="attributes.engine" />
                           <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
-                        <th onClick={() => sortData('category')} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          DB Family <SortIcon sortKey="category" />
+                        <th onClick={() => sortData('attributes.tier')} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                          Tier <SortIcon sortKey="attributes.tier" />
                           <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                         <th onClick={() => sortData('attributes.deployment_type')} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
@@ -1189,13 +1199,17 @@ export default function Dashboard() {
                       {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <SortIcon sortKey="price_per_unit" />
                       <div onMouseDown={(e) => handleResizeMouseDown('price_per_unit', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                     </th>
+                    <th onClick={() => sortData('data_source')} style={{ width: columnWidths['source'], minWidth: columnWidths['source'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                      Source <SortIcon sortKey="data_source" />
+                      <div onMouseDown={(e) => handleResizeMouseDown('source', e)} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
                   {loading ? (
                     Array.from({ length: 15 }).map((_, i) => (
                       <tr key={i} className="animate-pulse">
-                        {Array.from({ length: 10 }).map((_, j) => (
+                        {Array.from({ length: 11 }).map((_, j) => (
                           <td key={j} className="px-6 py-4"><div className="h-3 bg-[#f5f5f5] dark:bg-[#171717] rounded w-16 mx-auto"></div></td>
                         ))}
                       </tr>
@@ -1221,7 +1235,7 @@ export default function Dashboard() {
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span>
                             </td>
                             <td style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 whitespace-nowrap text-center">
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span>
                             </td>
                             <td style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
@@ -1274,11 +1288,18 @@ export default function Dashboard() {
                               : `$${parseFloat(record.price_per_unit).toFixed(4)}`}
                           </span>
                         </td>
+                        <td style={{ width: columnWidths['source'], minWidth: columnWidths['source'] }} className="px-6 py-4 text-center whitespace-nowrap">
+                          {record.data_source === 'static_config' ? (
+                            <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Static</span>
+                          ) : (
+                            <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">API</span>
+                          )}
+                        </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={10} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
+                      <td colSpan={11} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
                         <div className="flex flex-col items-center gap-4">
                           <span>No matches for your filters.</span>
                           {dbStatus && dbStatus.total === 0 && (
@@ -1302,7 +1323,7 @@ export default function Dashboard() {
         </main>
       </div>
 
-      <style dangerouslySetInlineHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{ __html: `
         /* Scrollbar — clearly visible track + brighter thumb so users can see
            that more content exists in either direction. */
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #a3a3a3 #f0f0f0; }
