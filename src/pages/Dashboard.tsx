@@ -426,7 +426,7 @@ export default function Dashboard() {
             </div>
             <div className="w-px h-6 bg-[#e5e5e5] dark:bg-[#262626] mx-1 hidden sm:block" />
             <span className="text-xs text-[#737373] hidden lg:block">
-              Know how much it will cost before getting an invoice.
+              Multi-cloud price comparison. Know how much it will cost before getting an invoice.
             </span>
           </Link>
         </div>
@@ -1067,38 +1067,38 @@ export default function Dashboard() {
                     </th>
                     {activeProductType === 'database' ? (
                       <>
-                        <th style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                        <th style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'], position: 'relative' }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative">
                           Engine
                           <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                         </th>
-                        <th style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                        <th style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'], position: 'relative' }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative">
                           DB Family
                           <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                         </th>
-                        <th style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                        <th style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'], position: 'relative' }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative">
                           Deployment
                           <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                         </th>
-                        <th style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                        <th style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'], position: 'relative' }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative">
                           HA Mode
                           <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                         </th>
                       </>
                     ) : (
                       <>
-                        <th style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                        <th style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'], position: 'relative' }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative">
                           Category
                           <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                         </th>
-                        <th style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                        <th style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'], position: 'relative' }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative">
                           CPU Vendor
                           <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                         </th>
-                        <th style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                        <th style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'], position: 'relative' }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative">
                           Arch
                           <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                         </th>
-                        <th style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative" style={{ position: 'relative' }}>
+                        <th style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'], position: 'relative' }} className="px-6 py-4 text-center font-bold whitespace-nowrap relative">
                           OS
                           <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} className="absolute -right-2 top-0 h-full bg-transparent hover:bg-blue-400/50 cursor-col-resize opacity-0 hover:opacity-100 transition-opacity" style={{ width: '6px' }} />
                         </th>
