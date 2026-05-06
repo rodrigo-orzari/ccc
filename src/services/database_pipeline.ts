@@ -235,10 +235,13 @@ export class AWSRDSAdapter extends BaseAdapter {
     const products = response.data.products;
     const terms = response.data.terms?.OnDemand ?? {};
 
-    const records: PricingRecord[] = [];
-    const skuKeys = Object.keys(products);
+    // Deduplicate by (instanceType, engine, haMode) — the AWS pricing API
+    // lists every engine version separately (PostgreSQL 14, 15, 16…) but prices
+    // are identical across versions for the same instance. We keep whichever
+    // version is encountered last (typically the highest/latest).
+    const best = new Map<string, PricingRecord>();
 
-    for (const sku of skuKeys) {
+    for (const sku of Object.keys(products)) {
       const product = products[sku];
       if (product.productFamily !== 'Database Instance') continue;
 
@@ -265,7 +268,8 @@ export class AWSRDSAdapter extends BaseAdapter {
       const rawEngine = attr.databaseEngine ?? '';
       const engine = RDS_ENGINE_MAP[rawEngine] ?? rawEngine;
 
-      records.push({
+      const dedupeKey = `${instanceType}::${engine}::${haMode}`;
+      best.set(dedupeKey, {
         provider: 'aws',
         service: 'RDS',
         region: attr.regionCode || 'us-east-1',
@@ -292,7 +296,8 @@ export class AWSRDSAdapter extends BaseAdapter {
       });
     }
 
-    console.log(`✅ Fetched ${records.length} AWS RDS records`);
+    const records = [...best.values()];
+    console.log(`✅ Fetched ${records.length} AWS RDS records (deduplicated)`);
     return records;
   }
 }

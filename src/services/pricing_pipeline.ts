@@ -216,14 +216,22 @@ export class AWSAdapter extends BaseAdapter {
     const products = response.data.products;
     const terms = response.data.terms.OnDemand;
 
+    // Deduplicate: one record per (instanceType, OS) — standard on-demand only.
+    const seen = new Set<string>();
     const records: PricingRecord[] = [];
-    const skuKeys = Object.keys(products).slice(0, 5000);
 
-    for (const sku of skuKeys) {
+    for (const sku of Object.keys(products)) {
       const product = products[sku];
       if (product.productFamily !== 'Compute Instance') continue;
 
       const attr = product.attributes;
+
+      // Standard on-demand only — skip Dedicated/Host tenancy, capacity
+      // reservations, and instances with pre-installed SQL Server licences.
+      if (attr.tenancy !== 'Shared') continue;
+      if (attr.capacitystatus !== 'Used') continue;
+      if (attr.preInstalledSw !== 'NA') continue;
+
       const term = terms[sku];
       if (!term) continue;
 
@@ -231,8 +239,12 @@ export class AWSAdapter extends BaseAdapter {
       const priceDimKey = Object.keys(term[offerKey].priceDimensions)[0];
       const priceDim = term[offerKey].priceDimensions[priceDimKey];
       const price = parseFloat(priceDim.pricePerUnit.USD);
-
       if (isNaN(price) || price <= 0) continue;
+
+      const os = attr.operatingSystem === 'Windows' ? 'Windows' : 'Linux';
+      const dedupeKey = `${attr.instanceType}::${os}`;
+      if (seen.has(dedupeKey)) continue;
+      seen.add(dedupeKey);
 
       const vcpus = parseInt(attr.vcpu) || 2;
       const memoryGb = attr.memory ? parseFloat(attr.memory.split(' ')[0]) : 4;
@@ -242,15 +254,15 @@ export class AWSAdapter extends BaseAdapter {
         service: 'EC2',
         region: attr.regionCode || 'us-east-1',
         instanceType: attr.instanceType,
-        vcpus: vcpus,
-        memoryGb: memoryGb,
+        vcpus,
+        memoryGb,
         arch: attr.architecture === 'arm64' ? 'ARM' : 'x86 64',
-        os: attr.operatingSystem === 'Windows' ? 'Windows' : 'Linux',
+        os,
         cpuVendor: this.getCpuVendor(attr.physicalProcessor || ''),
         gpuCount: attr.gpu ? parseInt(attr.gpu) : 0,
         geography: this.getGeography(attr.location || ''),
         category: this.classifyAws(attr.instanceType, vcpus, memoryGb),
-        price: parseFloat(priceDim.pricePerUnit.USD),
+        price,
         unit: priceDim.unit,
         dataSource: 'live_api' as const,
       });

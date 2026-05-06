@@ -136,7 +136,7 @@ export default function Dashboard() {
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
-  const [gpuFilter, setGpuFilter] = useState<'all' | 'with' | 'without'>('all');
+  const [gpuEnabled, setGpuEnabled] = useState(false);
 
   // Database-specific filter state
   const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...DB_FAMILIES]);
@@ -327,8 +327,8 @@ export default function Dashboard() {
       if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
         params.append('category', selectedCategory.join(','));
       }
-      if (gpuFilter !== 'all') {
-        params.append('gpu', gpuFilter === 'with' ? 'true' : 'false');
+      if (gpuEnabled) {
+        params.append('gpu', 'true');
       }
     }
 
@@ -352,7 +352,7 @@ export default function Dashboard() {
       .catch(err => console.error('❌ Database health check failed:', err));
   }, [
     activeProductType,
-    selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuFilter,
+    selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuEnabled,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     vCpuRange, memoryRange, priceRange,
   ]);
@@ -410,8 +410,8 @@ export default function Dashboard() {
         if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
           baseParams.append('category', selectedCategory.join(','));
         }
-        if (gpuFilter !== 'all') {
-          baseParams.append('gpu', gpuFilter === 'with' ? 'true' : 'false');
+        if (gpuEnabled) {
+          baseParams.append('gpu', 'true');
         }
       }
 
@@ -461,7 +461,7 @@ export default function Dashboard() {
   }, [
     activeProductType,
     selectedProviders, selectedGeographies,
-    selectedOS, selectedCpu, selectedCategory, gpuFilter,
+    selectedOS, selectedCpu, selectedCategory, gpuEnabled,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     vCpuRange, memoryRange, priceRange, search, showAggregation,
   ]);
