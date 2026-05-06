@@ -1202,11 +1202,18 @@ export default function Dashboard() {
                     data.map((record, index) => (
                       <tr key={index} className={`transition-colors group ${index % 2 === 0 ? 'bg-white dark:bg-[#000000]' : 'bg-[#f7f7f7] dark:bg-[#0a0a0a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
                         {/* Provider — shared */}
-                        <td style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center justify-center gap-2">
-                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: PROVIDERS.find(p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name)?.color || '#525252' }} />
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.provider}</span>
-                          </div>
+                        <td style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                          {(() => {
+                            const color = PROVIDERS.find(p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name)?.color ?? '#525252';
+                            return (
+                              <span
+                                className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border"
+                                style={{ color, borderColor: color + '50', backgroundColor: color + '18' }}
+                              >
+                                {record.provider}
+                              </span>
+                            );
+                          })()}
                         </td>
                         {/* SKU — shared */}
                         <td style={{ width: columnWidths['instance_type'], minWidth: columnWidths['instance_type'] }} className="px-6 py-4 whitespace-nowrap text-center">
@@ -1229,11 +1236,7 @@ export default function Dashboard() {
                               }`}>{record.attributes?.deployment_type || 'Provisioned'}</span>
                             </td>
                             <td style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 whitespace-nowrap text-center">
-                              <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
-                                record.attributes?.ha_mode === 'Multi AZ' || record.attributes?.ha_mode === 'Zone Redundant' || record.attributes?.ha_mode === 'Multi Region'
-                                  ? 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20'
-                                  : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
-                              }`}>{record.attributes?.ha_mode || '—'}</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.ha_mode || '—'}</span>
                             </td>
                           </>
                         ) : (
