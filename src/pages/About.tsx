@@ -5,57 +5,74 @@ const AboutPage: React.FC = () => {
   const content = `
 # About Compare Cloud Costs (CCC)
 
-## Our Mission
+## Why we built this
 
-At Compare Cloud Costs (CCC), our mission is to empower businesses and individuals to make informed decisions about their cloud investments across common services, including virtual machines, databases, serverless, storage, and others. In an era where cloud infrastructure—often spanning multiple providers—is the backbone of digital innovation, we believe that cost should never be a barrier to growth and complexity should never be an excuse for overspending.
+Cloud computing has revolutionized how we build and scale technology, but it has also introduced a new challenge: pricing complexity. While cloud providers offer individual calculators and purchase agreements, calculating the True Cost of Ownership (TCO) for a modern infrastructure remains a monumental task.
 
-## The Problem: The Cloud Pricing Maze
+### The Cloud Pricing Maze
 
-Cloud computing has revolutionized how we build and scale technology, but it has also introduced a new challenge: pricing complexity. While cloud providers offer individual calculators and purchase agreements, calculating the True Cost of Ownership (TCO) for a modern infrastructure remains a monumental task because it often requires:
+Users can find exact pricing for one provider in isolation, but comparing those costs side-by-side requires navigating disparate calculators and performing exhaustive individual studies. Data is scattered across different rate cards and service models, making an "apples-to-apples" comparison nearly impossible without manual normalization.
 
-**Siloed Manual Research:** Users can find exact pricing for one provider in isolation, but comparing those costs side-by-side requires navigating disparate calculators and performing exhaustive individual studies.
+Many organizations rely on traditional FinOps solutions that provide an "after-the-fact" view of spending. While these help optimize existing spend, they don't provide the proactive, comparative clarity needed before a workload is deployed.
 
-**Fragmented Information:** Data is scattered across different rate cards and service models, making an "apples-to-apples" comparison across the market nearly impossible without manual normalization.
+Furthermore, the modern landscape is increasingly multi-cloud. Companies run workloads across different cloud providers simultaneously to achieve specific performance, redundancy, or strategic goals. Many organizations find themselves overpaying because they lacked a unified, cross-provider view during the planning phase.
 
-**Reactive Optimization:** Many organizations rely on traditional FinOps solutions that provide an "after-the-fact" view of spending. While these help optimize existing spend, they don't provide the proactive, comparative clarity needed before a workload is deployed.
+## Features
 
-Furthermore, the modern landscape is increasingly multi-cloud. It is standard practice for companies to run workloads that live across different cloud providers simultaneously to achieve specific performance, redundancy, or strategic goals. Managing costs in this hybrid environment adds a layer of complexity that siloed research simply cannot solve.
+Compare Cloud Costs (CCC) was built to bridge the gap between complex provider rate cards and actionable business intelligence.
 
-Many organizations find themselves:
+### Side-by-Side Multi-Cloud Analysis
 
-- Overpaying because they lacked a unified, cross-provider view of their investment options during the planning phase.
-- Struggling to manage the financial implications of workloads distributed across AWS, Azure, and GCP because the data is trapped in separate ecosystems.
-- Lacking the real-time, cross-provider data needed to forecast multi-cloud IT budgets accurately.
+Compare identical configurations across the world's leading cloud providers (AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean, and more) in a single view.
 
-## Our Solution: Clarity through Comparison
+### Real-Time Data
 
-CCC was built to bridge the gap between complex provider rate cards and actionable business intelligence. We provide a centralized, multi-cloud platform where you can instantly compare costs, analyze configurations, and optimize your cloud strategy with a directional view of your investment across multiple providers at the same time.
+Our engines refresh pricing data frequently to ensure you are seeing the most accurate market rates before you commit to a provider.
 
-## What We Offer
+### Granular Breakdown
 
-**Side-by-Side Multi-Cloud Analysis:** Compare identical configurations across the world's leading cloud providers (AWS, Microsoft Azure, Google Cloud, DigitalOcean, and more) in a single view.
+We break down compute, storage, networking, and support costs so you see exactly how a workload's cost structure changes across different providers.
 
-**Real-Time Data:** Our engines refresh pricing data frequently to ensure you are seeing the most accurate market rates before you commit to a provider.
+### Proactive Optimization
 
-**Granular Breakdown:** We break down compute, storage, networking, and support costs so you see exactly how a workload's cost structure changes across different providers.
+We provide insights into right-sizing and regional price differences before deployment, complementing your existing reactive FinOps tools.
 
-**Proactive Optimization:** We provide the insights into right-sizing and regional price differences before deployment, complementing your existing reactive FinOps tools.
+## Pricing Disclaimer
 
-## Why CCC?
+### Data accuracy and timeliness
 
-**Transparency First:** We are provider-agnostic. Our only goal is to provide the data you need to save money and improve ROI, regardless of where your workload lives.
+We understand that even small price differences scale significantly in distributed environments. CCC functions as an aggregator of publicly available information, gathering data to the best of our ability through official APIs and provider-published rate cards. We refresh pricing data frequently, with updates occurring at least weekly.
 
-**Time Efficiency:** What used to take hours of manual research across multiple, isolated calculators now takes seconds. Our search evaluates thousands of configurations simultaneously.
+However, cloud providers update their pricing constantly. While we strive to provide the most accurate and up-to-date directional view of the market, there may be delays between when a provider updates their rates and when our system reflects those changes.
 
-**Built for Modern Architectures:** We recognize that your infrastructure isn't monolithic. CCC is designed for the multi-cloud reality, helping you choose the best provider for each specific part of your stack by looking at the entire market at once.
+### Not a substitute for official pricing
 
-## Our Commitment to Data Integrity
+CCC is not the primary source of truth for final billing. Because cloud providers frequently update rates and offer private negotiated discounts, we always recommend that you rely on official provider pricing calculators and your own specific purchase agreements for final financial decisions and negotiations.
 
-We understand that even small price differences scale significantly in distributed environments. CCC functions as an aggregator of publicly available information, gathering data to the best of our ability through official APIs and provider-published rate cards.
+### No warranties or liability
 
-While we strive to provide the most accurate and up-to-date directional view of the market, we are not the primary source of truth for final billing. Because cloud providers frequently update rates and offer private negotiated discounts, we always recommend that users rely on official provider pricing and their own specific purchase agreements for final financial decisions and negotiations.
+The pricing data on this platform is provided as-is for informational purposes only. We make no warranties regarding accuracy, completeness, or fitness for any particular purpose. Users should independently verify all pricing before making purchasing decisions.
 
-[Terms of Usage](#) | [Privacy Policy](#) | [Contact Us](mailto:hello@comparecloudcosts.com)
+## Privacy Policy
+
+### Information we collect
+
+When you use Compare Cloud Costs, we collect minimal information:
+- Comparison queries and filters you use (to improve our service)
+- Basic analytics data (page views, feature usage)
+- No personal information is required to use the platform
+
+### Advertising
+
+Currently, we do not serve third-party advertisements on this platform.
+
+### Contact
+
+For questions about your privacy or how we handle your data, email us at [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
+
+---
+
+[Terms of Use](/terms) | [Privacy Policy](/privacy) | [Contact Us](mailto:hello@comparecloudcosts.com)
 `;
 
   return (
