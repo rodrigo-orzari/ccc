@@ -18,6 +18,20 @@ export interface OracleAutonomousConfig {
   workload: 'ATP' | 'ADW';
 }
 
+export interface OracleMySQLHeatWaveConfig {
+  type: string;
+  ecpus: number;
+  memory: number;
+  price: number;
+}
+
+export interface OraclePostgreSQLConfig {
+  type: string;
+  vcpus: number;
+  memory: number;
+  price: number;
+}
+
 export interface DigitalOceanDbInstanceConfig {
   type: string;
   vcpus: number;
@@ -92,6 +106,39 @@ export const ORACLE_AUTONOMOUS_INSTANCES: OracleAutonomousConfig[] = [
 
 export const ORACLE_AUTONOMOUS_REGION    = 'us-phoenix-1';
 export const ORACLE_AUTONOMOUS_GEOGRAPHY = 'N. America';
+
+// ─── Oracle MySQL HeatWave ──────────────────────────────────────────────────────
+// us-ashburn-1, ECPU shapes (OCPU shapes deprecated Sept 2024, removed Mar 2026).
+// Billing: $0.1768/ECPU-hr (derived from confirmed $0.3536/hr for MySQL.2 at 2 ECPUs,
+// sourced from oracle.com search snippet May 2025). Standalone (Single AZ).
+// HA (3-node cluster) triples the cost. Excludes storage & backup.
+export const ORACLE_MYSQL_HEATWAVE_INSTANCES: OracleMySQLHeatWaveConfig[] = [
+  { type: 'MySQL.2',  ecpus: 2,  memory: 16,  price: 0.3536  },
+  { type: 'MySQL.4',  ecpus: 4,  memory: 32,  price: 0.7072  },
+  { type: 'MySQL.8',  ecpus: 8,  memory: 64,  price: 1.4144  },
+  { type: 'MySQL.16', ecpus: 16, memory: 128, price: 2.8288  },
+  { type: 'MySQL.32', ecpus: 32, memory: 256, price: 5.6576  },
+];
+
+export const ORACLE_MYSQL_HEATWAVE_REGION    = 'us-ashburn-1';
+export const ORACLE_MYSQL_HEATWAVE_GEOGRAPHY = 'N. America';
+
+// ─── Oracle PostgreSQL (OCI Database with PostgreSQL) ──────────────────────────
+// us-ashburn-1, PostgreSQL.VM.Standard.E5.Flex shapes.
+// Pricing estimated from OCI standard compute rates ($0.0255/OCPU-hr + $0.0015/GB-hr)
+// plus a managed service fee (~$0.10/OCPU-hr) derived from oracle.com AU pricing
+// (AUD $330/month for 2 OCPU/32 GB). Standalone (Single AZ). Verify at
+// oracle.com/cloud/postgresql/pricing/ before relying on these figures.
+export const ORACLE_POSTGRESQL_INSTANCES: OraclePostgreSQLConfig[] = [
+  { type: 'PostgreSQL.VM.Standard.E5.Flex.2.32GB',   vcpus: 2,  memory: 32,  price: 0.299 },
+  { type: 'PostgreSQL.VM.Standard.E5.Flex.4.64GB',   vcpus: 4,  memory: 64,  price: 0.598 },
+  { type: 'PostgreSQL.VM.Standard.E5.Flex.8.128GB',  vcpus: 8,  memory: 128, price: 1.196 },
+  { type: 'PostgreSQL.VM.Standard.E5.Flex.16.256GB', vcpus: 16, memory: 256, price: 2.392 },
+  { type: 'PostgreSQL.VM.Standard.E5.Flex.32.512GB', vcpus: 32, memory: 512, price: 4.784 },
+];
+
+export const ORACLE_POSTGRESQL_REGION    = 'us-ashburn-1';
+export const ORACLE_POSTGRESQL_GEOGRAPHY = 'N. America';
 
 // ─── DigitalOcean Managed Databases ────────────────────────────────────────────
 // nyc1. Single-node (primary only) hourly prices from digitalocean.com/pricing/managed-databases.
