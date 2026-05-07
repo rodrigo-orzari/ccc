@@ -1173,10 +1173,14 @@ export default function Dashboard() {
           </div>
 
           {/* Main Pricing Table */}
-          {/* overflow-y-auto: vertical scrollbar only when rows overflow.
-              overflow-x-scroll: horizontal scrollbar always visible at the
-              bottom of the viewport (not buried at the bottom of content). */}
-          <div className="flex-1 overflow-y-auto overflow-x-scroll custom-scrollbar">
+          {/* minHeight:0 — flex-1 defaults to min-height:auto which lets this
+              div grow to fit all rows; the parent's overflow-hidden then clips
+              the bottom edge (where the horizontal scrollbar lives). Forcing
+              minHeight:0 keeps the div inside the parent's bounds so the h-scroll
+              bar stays at the bottom of the viewport, not buried under content.
+              overflowX:scroll — always reserve the h-scrollbar track so it's
+              visible even before the user discovers there's more to the right. */}
+          <div className="flex-1 custom-scrollbar" style={{ minHeight: 0, overflowY: 'auto', overflowX: 'scroll' }}>
             {/* Explicit-width block wrapper so overflow-auto reliably detects
                 horizontal overflow and shows the scrollbar in all browsers. */}
             <div style={{ width: totalTableWidth }}>
