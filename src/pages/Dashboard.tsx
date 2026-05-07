@@ -176,6 +176,10 @@ export default function Dashboard() {
   // the th onClick sort that would otherwise fire after every mouseup.
   const resizeDraggedRef = useRef(false);
 
+  // Tracks which product types have already been auto-fitted so we only run
+  // the initial column-width measurement once per tab switch per page session.
+  const autoSizedFor = useRef(new Set<ProductType>());
+
   // Sum of active column widths. The GPU column only exists in VM view, so
   // exclude it from the DB view total to avoid a 70px phantom gap.
   const totalTableWidth = useMemo(() => {
@@ -221,6 +225,38 @@ export default function Dashboard() {
   useEffect(() => {
     localStorage.setItem('comparecloudcosts_columnWidths', JSON.stringify(columnWidths));
   }, [columnWidths]);
+
+  // Auto-fit all column widths to actual rendered content on the first data
+  // load for each product type. Two nested rAFs ensure the DOM has fully
+  // painted before we measure scrollWidth so long SKU names are captured.
+  useEffect(() => {
+    if (loading || data.length === 0) return;
+    if (autoSizedFor.current.has(activeProductType)) return;
+
+    let raf1: number, raf2: number;
+    raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => {
+        const colIds = [
+          'provider', 'instance_type', 'engine_category', 'db_family_cpu_vendor',
+          'deployment_arch', 'ha_mode_os', 'geography', 'vcpus', 'memory_gb',
+          'price_per_unit', 'source',
+        ];
+        if (activeProductType === 'vm') colIds.push('gpu');
+
+        const newWidths: Record<string, number> = {};
+        for (const colId of colIds) {
+          const cells = document.querySelectorAll<HTMLElement>(`[data-col="${colId}"]`);
+          let max = 60;
+          cells.forEach(el => { max = Math.max(max, el.scrollWidth); });
+          newWidths[colId] = max;
+        }
+        setColumnWidths(prev => ({ ...prev, ...newWidths }));
+        autoSizedFor.current.add(activeProductType);
+      });
+    });
+
+    return () => { cancelAnimationFrame(raf1); cancelAnimationFrame(raf2); };
+  }, [loading, data, activeProductType]);
 
   const sortData = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
@@ -1137,7 +1173,10 @@ export default function Dashboard() {
           </div>
 
           {/* Main Pricing Table */}
-          <div className="flex-1 overflow-auto custom-scrollbar">
+          {/* overflow-y-auto: vertical scrollbar only when rows overflow.
+              overflow-x-scroll: horizontal scrollbar always visible at the
+              bottom of the viewport (not buried at the bottom of content). */}
+          <div className="flex-1 overflow-y-auto overflow-x-scroll custom-scrollbar">
             {/* Explicit-width block wrapper so overflow-auto reliably detects
                 horizontal overflow and shows the scrollbar in all browsers. */}
             <div style={{ width: totalTableWidth }}>
