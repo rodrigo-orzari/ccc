@@ -180,6 +180,12 @@ export default function Dashboard() {
   // the initial column-width measurement once per tab switch per page session.
   const autoSizedFor = useRef(new Set<ProductType>());
 
+  // Ref + state for the table scroll container, used to detect whether there
+  // is actual horizontal overflow and to show / hide the right-edge fade hint.
+  const tableScrollRef = useRef<HTMLDivElement | null>(null);
+  const [hasHorizontalOverflow, setHasHorizontalOverflow] = useState(false);
+  const [scrolledToEnd, setScrolledToEnd] = useState(false);
+
   // Sum of active column widths. The GPU column only exists in VM view, so
   // exclude it from the DB view total to avoid a 70px phantom gap.
   const totalTableWidth = useMemo(() => {
@@ -257,6 +263,32 @@ export default function Dashboard() {
 
     return () => { cancelAnimationFrame(raf1); cancelAnimationFrame(raf2); };
   }, [loading, data, activeProductType]);
+
+  // Watch the table scroll container for horizontal overflow + scroll position.
+  // The fade-right hint is shown when the inner content is wider than the
+  // container AND the user hasn't yet scrolled to the right edge. This is a
+  // belt-and-suspenders fallback for environments where the native scrollbar
+  // doesn't render visibly (macOS overlay scrollbars, etc.).
+  useEffect(() => {
+    const el = tableScrollRef.current;
+    if (!el) return;
+
+    const update = () => {
+      const overflow = el.scrollWidth > el.clientWidth + 1;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+      setHasHorizontalOverflow(overflow);
+      setScrolledToEnd(atEnd);
+    };
+
+    update();
+    el.addEventListener('scroll', update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener('scroll', update);
+      ro.disconnect();
+    };
+  }, [totalTableWidth, data.length, activeProductType]);
 
   const sortData = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
@@ -1179,8 +1211,14 @@ export default function Dashboard() {
               minHeight:0 keeps the div inside the parent's bounds so the h-scroll
               bar stays at the bottom of the viewport, not buried under content.
               overflowX:scroll — always reserve the h-scrollbar track so it's
-              visible even before the user discovers there's more to the right. */}
-          <div className="flex-1 custom-scrollbar" style={{ minHeight: 0, overflowY: 'auto', overflowX: 'scroll' }}>
+              visible even before the user discovers there's more to the right.
+              scroll-fade-right (conditional) — adds a right-edge fade as a
+              fallback hint for browsers that hide the native scrollbar. */}
+          <div
+            ref={tableScrollRef}
+            className={`flex-1 custom-scrollbar ${hasHorizontalOverflow && !scrolledToEnd ? 'scroll-fade-right' : ''}`}
+            style={{ minHeight: 0, overflowY: 'auto', overflowX: 'scroll' }}
+          >
             {/* Explicit-width block wrapper so overflow-auto reliably detects
                 horizontal overflow and shows the scrollbar in all browsers. */}
             <div style={{ width: totalTableWidth }}>
@@ -1386,33 +1424,84 @@ export default function Dashboard() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         /* Scrollbar — clearly visible track + brighter thumb so users can see
-           that more content exists in either direction. */
-        .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #a3a3a3 #f0f0f0; }
-        .dark .custom-scrollbar { scrollbar-color: #525252 #171717; }
-        .custom-scrollbar::-webkit-scrollbar { width: 12px; height: 12px; }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #f0f0f0;
-          border-left: 1px solid #e5e5e5;
-          border-top: 1px solid #e5e5e5;
+           that more content exists in either direction. !important defeats the
+           macOS / iOS overlay-scrollbar default which would otherwise hide the
+           bar until the user starts scrolling. The dark variant uses
+           prefers-color-scheme so it matches Tailwind v4's media-based dark
+           mode (there is no .dark class on the document). */
+        .custom-scrollbar {
+          scrollbar-width: auto !important;
+          scrollbar-color: #737373 #d4d4d4 !important;
         }
-        .dark .custom-scrollbar::-webkit-scrollbar-track {
-          background: #171717;
-          border-left: 1px solid #262626;
-          border-top: 1px solid #262626;
+        @media (prefers-color-scheme: dark) {
+          .custom-scrollbar {
+            scrollbar-color: #a3a3a3 #262626 !important;
+          }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 14px !important;
+          height: 14px !important;
+          -webkit-appearance: none !important;
+          background: #d4d4d4 !important;
+        }
+        @media (prefers-color-scheme: dark) {
+          .custom-scrollbar::-webkit-scrollbar { background: #262626 !important; }
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #d4d4d4 !important;
+          border-top: 1px solid #a3a3a3 !important;
+          border-left: 1px solid #a3a3a3 !important;
+        }
+        @media (prefers-color-scheme: dark) {
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: #262626 !important;
+            border-top: 1px solid #404040 !important;
+            border-left: 1px solid #404040 !important;
+          }
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #a3a3a3;
-          border-radius: 8px;
-          border: 2px solid #f0f0f0;
+          background: #737373 !important;
+          border-radius: 7px !important;
+          border: 2px solid #d4d4d4 !important;
+          min-width: 40px !important;
+          min-height: 40px !important;
         }
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #525252;
-          border: 2px solid #171717;
+        @media (prefers-color-scheme: dark) {
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #a3a3a3 !important;
+            border: 2px solid #262626 !important;
+          }
         }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #737373; }
-        .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
-        .custom-scrollbar::-webkit-scrollbar-corner { background: #f0f0f0; }
-        .dark .custom-scrollbar::-webkit-scrollbar-corner { background: #171717; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #525252 !important; }
+        @media (prefers-color-scheme: dark) {
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #d4d4d4 !important; }
+        }
+        .custom-scrollbar::-webkit-scrollbar-corner { background: #d4d4d4 !important; }
+        @media (prefers-color-scheme: dark) {
+          .custom-scrollbar::-webkit-scrollbar-corner { background: #262626 !important; }
+        }
+
+        /* Fallback right-edge fade gradient so users know they can scroll right
+           even on systems / browsers where the native scrollbar won't render. */
+        .scroll-fade-right {
+          position: relative;
+        }
+        .scroll-fade-right::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 24px;
+          height: 100%;
+          pointer-events: none;
+          background: linear-gradient(to right, rgba(255,255,255,0), rgba(0,0,0,0.12));
+          z-index: 5;
+        }
+        @media (prefers-color-scheme: dark) {
+          .scroll-fade-right::after {
+            background: linear-gradient(to right, rgba(0,0,0,0), rgba(255,255,255,0.18));
+          }
+        }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
