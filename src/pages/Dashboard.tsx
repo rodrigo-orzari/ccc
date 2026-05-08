@@ -1448,18 +1448,29 @@ export default function Dashboard() {
 
       <style dangerouslySetInnerHTML={{ __html: `
         /* Scrollbar — clearly visible track + brighter thumb so users can see
-           that more content exists in either direction. !important defeats the
-           macOS / iOS overlay-scrollbar default which would otherwise hide the
-           bar until the user starts scrolling. The dark variant uses
-           prefers-color-scheme so it matches Tailwind v4's media-based dark
-           mode (there is no .dark class on the document). */
-        .custom-scrollbar {
-          scrollbar-width: auto !important;
-          scrollbar-color: #737373 #d4d4d4 !important;
-        }
-        @media (prefers-color-scheme: dark) {
+           that more content exists in either direction.
+
+           CRITICAL: do NOT set the standard scrollbar-width or scrollbar-color
+           properties on .custom-scrollbar. In Chromium, setting either of those
+           routes the element into the modern CSS scrollbar pipeline, which on
+           macOS produces an OVERLAY scrollbar that takes 0px of layout space
+           and disables every ::-webkit-scrollbar rule below. Verified live on
+           Chrome 147 / macOS: removing scrollbar-width:auto restored a 14px
+           layout-reserved scrollbar; reintroducing it collapsed it back to 0.
+
+           Firefox (and any other browser without ::-webkit-scrollbar support)
+           still gets a styled scrollbar via the @supports block below — we
+           only enable the standard properties when webkit pseudo-elements
+           are NOT supported, so the two paths never collide. */
+        @supports not selector(::-webkit-scrollbar) {
           .custom-scrollbar {
-            scrollbar-color: #a3a3a3 #262626 !important;
+            scrollbar-width: thin;
+            scrollbar-color: #737373 #d4d4d4;
+          }
+          @media (prefers-color-scheme: dark) {
+            .custom-scrollbar {
+              scrollbar-color: #a3a3a3 #262626;
+            }
           }
         }
         .custom-scrollbar::-webkit-scrollbar {
