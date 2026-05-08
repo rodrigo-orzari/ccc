@@ -1158,7 +1158,16 @@ export default function Dashboard() {
                   }`}
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{p.name}</span>
+                    {/* Provider label uses the same rounded-pill treatment as
+                        the Provider column in the table — same colour token,
+                        same shape, same uppercase styling — so the cards and
+                        the table read as one coherent visual system. */}
+                    <span
+                      className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest border"
+                      style={{ color: p.color, borderColor: p.color + '50', backgroundColor: p.color + '18' }}
+                    >
+                      {p.name}
+                    </span>
                     {p.soon && <span className="text-[7px] font-bold bg-[#737373] text-white px-1 rounded ml-1 border border-white/20">SOON</span>}
                   </div>
                   <div className="flex items-baseline gap-2">
