@@ -136,7 +136,13 @@ export default function Dashboard() {
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
-  const [gpuEnabled, setGpuEnabled] = useState(false);
+  // gpuIncluded uses INCLUSION semantics matching every other pill in the
+  // sidebar: true = GPU instances are included in the result set (default,
+  // selected pill); false = GPU instances are excluded. This is intentionally
+  // a flip of the older "gpu-only" mode — the GPU pill is now just one of
+  // the CPU | GPU section's filter chips, and Select All / Clear All operate
+  // on it like every other chip.
+  const [gpuIncluded, setGpuIncluded] = useState(true);
 
   // Database-specific filter state
   const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...DB_FAMILIES]);
@@ -422,8 +428,11 @@ export default function Dashboard() {
       if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
         params.append('category', selectedCategory.join(','));
       }
-      if (gpuEnabled) {
-        params.append('gpu', 'true');
+      // Inclusion semantics: only push a gpu filter when the user has
+      // *excluded* GPU instances (pill deselected). Default state =
+      // included = no filter = show all (with or without GPU).
+      if (!gpuIncluded) {
+        params.append('gpu', 'false');
       }
     }
 
@@ -447,7 +456,7 @@ export default function Dashboard() {
       .catch(err => console.error('❌ Database health check failed:', err));
   }, [
     activeProductType,
-    selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuEnabled,
+    selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuIncluded,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     vCpuRange, memoryRange, priceRange,
   ]);
@@ -505,8 +514,9 @@ export default function Dashboard() {
         if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
           baseParams.append('category', selectedCategory.join(','));
         }
-        if (gpuEnabled) {
-          baseParams.append('gpu', 'true');
+        // Inclusion semantics — see useState init for gpuIncluded.
+        if (!gpuIncluded) {
+          baseParams.append('gpu', 'false');
         }
       }
 
@@ -556,7 +566,7 @@ export default function Dashboard() {
   }, [
     activeProductType,
     selectedProviders, selectedGeographies,
-    selectedOS, selectedCpu, selectedCategory, gpuEnabled,
+    selectedOS, selectedCpu, selectedCategory, gpuIncluded,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     vCpuRange, memoryRange, priceRange, search, showAggregation,
   ]);
@@ -834,11 +844,16 @@ export default function Dashboard() {
                       </button>
                     </h2>
                     <button onClick={() => {
-                        const allSelected = selectedCpu.length === CPU_PROFILES.length && !gpuEnabled;
-                        if (allSelected) { setSelectedCpu([]); setGpuEnabled(false); }
-                        else { setSelectedCpu(CPU_PROFILES.map(p => p.id)); setGpuEnabled(false); }
-                      }} className={`text-[10px] font-bold uppercase transition-colors ${selectedCpu.length === CPU_PROFILES.length && !gpuEnabled ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
-                      {selectedCpu.length === CPU_PROFILES.length && !gpuEnabled ? 'Clear All' : 'Select All'}
+                        // GPU pill is treated as just another chip in this section,
+                        // so "all selected" means every CPU profile is in AND the
+                        // GPU pill is on. Clear All turns every chip in the
+                        // section off — including GPU — to match the other
+                        // sidebar sections' Clear All behaviour.
+                        const allSelected = selectedCpu.length === CPU_PROFILES.length && gpuIncluded;
+                        if (allSelected) { setSelectedCpu([]); setGpuIncluded(false); }
+                        else { setSelectedCpu(CPU_PROFILES.map(p => p.id)); setGpuIncluded(true); }
+                      }} className={`text-[10px] font-bold uppercase transition-colors ${selectedCpu.length === CPU_PROFILES.length && gpuIncluded ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedCpu.length === CPU_PROFILES.length && gpuIncluded ? 'Clear All' : 'Select All'}
                     </button>
                   </div>
                   {expanded.cpu && (
@@ -850,9 +865,9 @@ export default function Dashboard() {
                       </button>
                     ))}
                     <button
-                      title="Show only instances with a GPU accelerator."
-                      onClick={() => setGpuEnabled(v => !v)}
-                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${gpuEnabled ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                      title="Include GPU instances in the results. Deselect to exclude GPU instances."
+                      onClick={() => setGpuIncluded(v => !v)}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${gpuIncluded ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
                       GPU
                     </button>
                   </div>
