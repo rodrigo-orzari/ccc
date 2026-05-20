@@ -324,6 +324,7 @@ async function startServer() {
       productType, engine, deploymentType, haMode,
       // Serverless-specific filters
       language, coldStart, timeout, memoryConfig, freeTier,
+      billingGranularity, executionModel, provisionedConcurrency, ephemeralStorage,
     } = query;
 
     const conditions: string[] = [];
@@ -456,6 +457,58 @@ async function startServer() {
 
       if (freeTierConditions.length > 0) {
         conditions.push(`(${freeTierConditions.join(' OR ')})`);
+      }
+    }
+
+    // Serverless-specific execution model filter
+    if (executionModel) {
+      const modelOptions = (executionModel as string).split(',');
+      const modelConditions: string[] = [];
+      for (const opt of modelOptions) {
+        if (opt === 'Both') {
+          modelConditions.push(`pr.attributes->>'execution_model' = 'Both'`);
+        } else if (opt === 'Code (ZIP)') {
+          modelConditions.push(`pr.attributes->>'execution_model' IN ('Both', 'Code (ZIP)')`);
+        } else if (opt === 'Container Image') {
+          modelConditions.push(`pr.attributes->>'execution_model' IN ('Both', 'Container Image')`);
+        }
+      }
+      if (modelConditions.length > 0) {
+        conditions.push(`(${modelConditions.join(' OR ')})`);
+      }
+    }
+
+    // Serverless-specific billing granularity filter
+    if (billingGranularity) {
+      const granularityOptions = (billingGranularity as string).split(',').map(s => s.replace('ms', ''));
+      conditions.push(`pr.attributes->>'billing_granularity_ms' = ANY($${paramCount++})`);
+      values.push(granularityOptions);
+    }
+
+    // Serverless-specific provisioned concurrency filter
+    if (provisionedConcurrency) {
+      const concurrencyOptions = (provisionedConcurrency as string).split(',');
+      conditions.push(`pr.attributes->>'provisioned_concurrency_support' = ANY($${paramCount++})`);
+      values.push(concurrencyOptions);
+    }
+
+    // Serverless-specific ephemeral storage filter
+    if (ephemeralStorage) {
+      const storageOptions = (ephemeralStorage as string).split(',');
+      const storageConditions: string[] = [];
+      
+      for (const opt of storageOptions) {
+        if (opt === '< 1GB') {
+          storageConditions.push(`(pr.attributes->>'max_ephemeral_storage_gb')::numeric < 1`);
+        } else if (opt === '1GB - 5GB') {
+          storageConditions.push(`(pr.attributes->>'max_ephemeral_storage_gb')::numeric BETWEEN 1 AND 5`);
+        } else if (opt === '> 5GB') {
+          storageConditions.push(`(pr.attributes->>'max_ephemeral_storage_gb')::numeric > 5`);
+        }
+      }
+      
+      if (storageConditions.length > 0) {
+        conditions.push(`(${storageConditions.join(' OR ')})`);
       }
     }
 

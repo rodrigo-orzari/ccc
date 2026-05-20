@@ -31,6 +31,11 @@ const addGcpServerlessAttributes = (entry: any) => ({
     free_vcpu_seconds_per_month: 180000,
     free_memory_gb_seconds_per_month: 360000,
     max_memory_gb: 8,
+    billing_granularity_ms: 100,
+    invocation_price_per_1m: 0.40,
+    execution_model: 'Container Image',
+    provisioned_concurrency_support: 'Yes',
+    max_ephemeral_storage_gb: 32,
   }
 });
 

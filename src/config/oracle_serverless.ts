@@ -28,7 +28,11 @@ const addServerlessAttributes = (entry: any) => ({
     memory_configuration: 'user-configurable',
     invocation_price: 0.0000002, // $0.20 per 1M invocations
     free_invocations_per_month: 2000000,
-    max_ephemeral_storage_gb: 1, // Varies
+    max_ephemeral_storage_gb: 0.256, // Updated based on plan
+    billing_granularity_ms: 100,
+    invocation_price_per_1m: 0.20,
+    execution_model: 'Container Image',
+    provisioned_concurrency_support: 'Yes',
   }
 });
 
