@@ -1452,6 +1452,9 @@ export default function Dashboard() {
             <p className="text-[11px] text-[#737373] dark:text-[#a3a3a3] text-center md:text-left max-w-md mt-1 leading-relaxed">
               Compare Cloud Costs (CCC) is a multi-cloud pricing comparison tool that aggregates pricing for our most popular services including database, compute, storage, containers, and serverless across AWS, Microsoft Azure, Google Cloud, Oracle, and DigitalOcean.
             </p>
+            <p className="text-[10px] text-[#a3a3a3] dark:text-[#525252] text-center md:text-left mt-2">
+              © 2026 Rodrigo Orzari. All rights reserved.
+            </p>
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-[#737373] dark:text-[#a3a3a3]">
@@ -1459,6 +1462,19 @@ export default function Dashboard() {
             <Link to="/privacy" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-black dark:hover:text-white transition-colors">Terms of Use</Link>
             <a href="mailto:hello@comparecloudcosts.com" className="hover:text-black dark:hover:text-white transition-colors">Contact</a>
+            
+            <a 
+              href="https://www.digitalocean.com/?refcode=23d2b384f3b1&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors bg-[#f5f5f5] dark:bg-[#171717] px-2.5 py-1 rounded border border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]"
+            >
+              <svg className="w-3.5 h-3.5 fill-[#0080FF]" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12.04 0C5.408-.02.005 5.37.005 11.992h4.638c0-4.923 4.882-8.731 10.064-6.855a6.95 6.95 0 014.147 4.148c1.889 5.177-1.924 10.055-6.84 10.064v-4.61H7.391v4.623h4.61V24c7.86 0 13.967-7.588 11.397-15.83-1.115-3.59-3.985-6.446-7.575-7.575A12.8 12.8 0 0012.039 0zM7.39 19.362H3.828v3.564H7.39zm-3.563 0v-2.978H.85v2.978z"/>
+              </svg>
+              DigitalOcean
+            </a>
+
             <a 
               href="https://github.com/rodrigo-orzari/ccc" 
               target="_blank" 
