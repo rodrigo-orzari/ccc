@@ -5,7 +5,7 @@ const TermsOfUsePage: React.FC = () => {
   const content = `
 # Terms of Use
 
-_Last updated: 5 May 2026._
+_Last updated: 20 May 2026._
 
 ## Agreement to Terms
 
