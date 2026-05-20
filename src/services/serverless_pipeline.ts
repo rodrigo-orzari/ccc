@@ -44,10 +44,7 @@ export class AWSServerlessAdapter extends BaseAdapter {
       unit: 'GB-Hour',
       dataSource: 'static_config' as const,
       supportedLanguages: inst.supportedLanguages,
-      attributes: {
-        deployment_type: 'Serverless',
-        tier: 'Serverless',
-      },
+      attributes: inst.attributes, // Use attributes from config with all dimensions
     }));
   }
 }
@@ -74,10 +71,7 @@ export class GCPServerlessAdapter extends BaseAdapter {
       unit: 'GB-Hour',
       dataSource: 'static_config' as const,
       supportedLanguages: inst.supportedLanguages,
-      attributes: {
-        deployment_type: 'Serverless',
-        tier: 'Serverless',
-      },
+      attributes: inst.attributes, // Use attributes from config with all dimensions
     }));
   }
 }
@@ -104,10 +98,7 @@ export class AzureServerlessAdapter extends BaseAdapter {
       unit: 'GB-Hour',
       dataSource: 'static_config' as const,
       supportedLanguages: inst.supportedLanguages,
-      attributes: {
-        deployment_type: 'Serverless',
-        tier: 'Serverless',
-      },
+      attributes: inst.attributes, // Use attributes from config with all dimensions
     }));
   }
 }
@@ -134,12 +125,7 @@ export class DigitalOceanServerlessAdapter extends BaseAdapter {
       unit: 'GB-Hour',
       dataSource: 'static_config' as const,
       supportedLanguages: inst.supportedLanguages,
-      attributes: {
-        deployment_type: 'Serverless',
-        tier: 'Serverless',
-        invocation_price: 0.0000015, // $0.0000015 per invocation after free tier
-        free_invocations_per_month: 200000000, // 200M free invocations
-      },
+      attributes: inst.attributes, // Use attributes from config with all dimensions
     }));
   }
 }
@@ -151,10 +137,12 @@ export class ServerlessPricingPipeline extends PricingPipeline {
     // Phase 1: AWS Lambda (live API)
     // Phase 2: GCP Cloud Run (live API - placeholder)
     // Phase 3: Azure Functions (live API - placeholder)
+    // DigitalOcean: Static config
     this.adapters = [
       new AWSLambdaLiveAdapter(),
       new GCPCloudRunLiveAdapter(),
       new AzureFunctionsLiveAdapter(),
+      new DigitalOceanServerlessAdapter(),
     ];
   }
 

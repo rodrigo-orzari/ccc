@@ -66,8 +66,8 @@ const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
 const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
 
 // Serverless-view constants
-const SERVERLESS_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'Any (Container)'];
-const SERVERLESS_COLD_START_OPTIONS = ['Fast (< 100ms)', 'Medium (100-200ms)', 'Slow (> 200ms)'];
+const SERVERLESS_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'TypeScript', 'Any (Container)'];
+const SERVERLESS_COLD_START_OPTIONS = ['Fast < 100', 'Medium 100-200', 'Slow > 200'];
 const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5 min)', 'Medium (10 min)', 'Long (15+ min)'];
 const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['User-configurable', 'Fixed tiers', 'Automatic'];
 const SERVERLESS_FREE_TIER_OPTIONS = ['Free tier included', 'No free tier'];
