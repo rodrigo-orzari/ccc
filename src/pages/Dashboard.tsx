@@ -1031,6 +1031,37 @@ export default function Dashboard() {
               </>
             )}
 
+            {/* Serverless: Language Filter */}
+            {activeProductType === 'serverless' && (
+              <>
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('languages')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.languages ? '' : '-rotate-90'}`} />
+                        Language Support <span title="Filter by programming language runtime: Python, Node.js, Go, Java, C#, Ruby, JavaScript, PHP, PowerShell, Rust, TypeScript, or container-based deployments." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessLanguages.length === SERVERLESS_LANGUAGES.length ? setSelectedServerlessLanguages([]) : setSelectedServerlessLanguages([...SERVERLESS_LANGUAGES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessLanguages.length === SERVERLESS_LANGUAGES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessLanguages.length === SERVERLESS_LANGUAGES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.languages && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_LANGUAGES.map(lang => (
+                      <button key={lang} onClick={() => toggleFilter(selectedServerlessLanguages, setSelectedServerlessLanguages, lang)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessLanguages.includes(lang) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {lang}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+              </>
+            )}
+
             {/* Range Sliders Section */}
             <section className="space-y-4">
               <div className="flex justify-between items-center">
