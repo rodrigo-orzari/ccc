@@ -108,3 +108,6 @@ This repository contains the open-source core of Compare Cloud Costs. While this
 
 Email hello@comparecloudcosts.com for questions or feedback.
 
+---
+
+© 2026 [Rodrigo Orzari](https://www.linkedin.com/in/rodrigoorzari/). All rights reserved.
