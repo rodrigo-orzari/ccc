@@ -322,6 +322,8 @@ async function startServer() {
       minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
       // Database-specific filters
       productType, engine, deploymentType, haMode,
+      // Serverless-specific filters
+      language,
     } = query;
 
     const conditions: string[] = [];
@@ -364,6 +366,13 @@ async function startServer() {
     if (haMode) {
       conditions.push(`pr.attributes->>'ha_mode' = ANY($${paramCount++})`);
       values.push((haMode as string).split(','));
+    }
+
+    // Serverless-specific language filter
+    if (language) {
+      const languages = (language as string).split(',');
+      conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
+      values.push(languages);
     }
 
     if (minVcpu) { conditions.push(`pr.vcpus >= $${paramCount++}`); values.push(minVcpu); }
