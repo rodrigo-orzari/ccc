@@ -7,7 +7,11 @@
  *
  * Memory tiers from 128MB to 1792MB (typical allocations)
  * Premium plans available but not shown here
+ *
+ * Supported Languages: C#, JavaScript (Node.js), Python, Java, PowerShell, Go, Rust
  */
+
+const AZURE_FUNCTIONS_LANGUAGES = ['C#', 'JavaScript', 'Python', 'Java', 'PowerShell', 'Go', 'Rust'];
 
 export const AZURE_SERVERLESS = [
   // 128MB tier
@@ -17,6 +21,7 @@ export const AZURE_SERVERLESS = [
     memory: 0.128,
     cpuVendor: 'Intel',
     price: 0.000016 * 3600 * 0.128,
+    supportedLanguages: AZURE_FUNCTIONS_LANGUAGES,
   },
 
   // 256MB tier
@@ -26,6 +31,7 @@ export const AZURE_SERVERLESS = [
     memory: 0.256,
     cpuVendor: 'Intel',
     price: 0.000016 * 3600 * 0.256,
+    supportedLanguages: AZURE_FUNCTIONS_LANGUAGES,
   },
 
   // 512MB tier
@@ -35,6 +41,7 @@ export const AZURE_SERVERLESS = [
     memory: 0.512,
     cpuVendor: 'Intel',
     price: 0.000016 * 3600 * 0.512,
+    supportedLanguages: AZURE_FUNCTIONS_LANGUAGES,
   },
 
   // 1GB tier
@@ -44,6 +51,7 @@ export const AZURE_SERVERLESS = [
     memory: 1,
     cpuVendor: 'Intel',
     price: 0.000016 * 3600 * 1,
+    supportedLanguages: AZURE_FUNCTIONS_LANGUAGES,
   },
 
   // 1.5GB tier
@@ -53,6 +61,7 @@ export const AZURE_SERVERLESS = [
     memory: 1.5,
     cpuVendor: 'Intel',
     price: 0.000016 * 3600 * 1.5,
+    supportedLanguages: AZURE_FUNCTIONS_LANGUAGES,
   },
 
   // 1.75GB tier (Azure max for consumption plan)
@@ -62,6 +71,7 @@ export const AZURE_SERVERLESS = [
     memory: 1.75,
     cpuVendor: 'Intel',
     price: 0.000016 * 3600 * 1.75,
+    supportedLanguages: AZURE_FUNCTIONS_LANGUAGES,
   },
 ];
 

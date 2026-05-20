@@ -22,6 +22,7 @@ export interface PricingRecord {
   unit: string;
   attributes?: Record<string, any>;
   dataSource?: 'live_api' | 'static_config';
+  supportedLanguages?: string[];
 }
 
 export interface PriceDriftResult {

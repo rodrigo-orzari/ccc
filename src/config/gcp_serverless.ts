@@ -7,7 +7,11 @@
  *
  * Common configurations: 1, 2, 4 vCPU with proportional memory
  * Note: GCP pricing is vCPU + Memory combined (not just memory like Lambda)
+ *
+ * Supported Languages: Python, Node.js, Go, Java, C#, PHP, Ruby, and any language via container
  */
+
+const GCP_CLOUD_RUN_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'PHP', 'Ruby', 'Any (Container)'];
 
 export const GCP_SERVERLESS = [
   // 1 vCPU configurations (512MB to 2GB)
@@ -17,6 +21,7 @@ export const GCP_SERVERLESS = [
     memory: 0.512,
     cpuVendor: 'Intel',
     price: (0.00002400 * 1 * 3600) + (0.00000250 * 0.512 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
   {
     type: 'CloudRun-1vCPU-1GB',
@@ -24,6 +29,7 @@ export const GCP_SERVERLESS = [
     memory: 1,
     cpuVendor: 'Intel',
     price: (0.00002400 * 1 * 3600) + (0.00000250 * 1 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
   {
     type: 'CloudRun-1vCPU-2GB',
@@ -31,6 +37,7 @@ export const GCP_SERVERLESS = [
     memory: 2,
     cpuVendor: 'Intel',
     price: (0.00002400 * 1 * 3600) + (0.00000250 * 2 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
 
   // 2 vCPU configurations (1GB to 4GB)
@@ -40,6 +47,7 @@ export const GCP_SERVERLESS = [
     memory: 1,
     cpuVendor: 'Intel',
     price: (0.00002400 * 2 * 3600) + (0.00000250 * 1 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
   {
     type: 'CloudRun-2vCPU-2GB',
@@ -47,6 +55,7 @@ export const GCP_SERVERLESS = [
     memory: 2,
     cpuVendor: 'Intel',
     price: (0.00002400 * 2 * 3600) + (0.00000250 * 2 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
   {
     type: 'CloudRun-2vCPU-4GB',
@@ -54,6 +63,7 @@ export const GCP_SERVERLESS = [
     memory: 4,
     cpuVendor: 'Intel',
     price: (0.00002400 * 2 * 3600) + (0.00000250 * 4 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
 
   // 4 vCPU configurations (2GB to 8GB)
@@ -63,6 +73,7 @@ export const GCP_SERVERLESS = [
     memory: 2,
     cpuVendor: 'Intel',
     price: (0.00002400 * 4 * 3600) + (0.00000250 * 2 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
   {
     type: 'CloudRun-4vCPU-4GB',
@@ -70,6 +81,7 @@ export const GCP_SERVERLESS = [
     memory: 4,
     cpuVendor: 'Intel',
     price: (0.00002400 * 4 * 3600) + (0.00000250 * 4 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
   {
     type: 'CloudRun-4vCPU-8GB',
@@ -77,6 +89,7 @@ export const GCP_SERVERLESS = [
     memory: 8,
     cpuVendor: 'Intel',
     price: (0.00002400 * 4 * 3600) + (0.00000250 * 8 * 3600),
+    supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
 ];
 

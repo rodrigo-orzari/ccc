@@ -38,6 +38,7 @@ export class AWSServerlessAdapter extends BaseAdapter {
       price: inst.price,
       unit: 'GB-Hour',
       dataSource: 'static_config' as const,
+      supportedLanguages: inst.supportedLanguages,
       attributes: {
         deployment_type: 'Serverless',
         tier: 'Serverless',
@@ -67,6 +68,7 @@ export class GCPServerlessAdapter extends BaseAdapter {
       price: inst.price,
       unit: 'GB-Hour',
       dataSource: 'static_config' as const,
+      supportedLanguages: inst.supportedLanguages,
       attributes: {
         deployment_type: 'Serverless',
         tier: 'Serverless',
@@ -96,6 +98,7 @@ export class AzureServerlessAdapter extends BaseAdapter {
       price: inst.price,
       unit: 'GB-Hour',
       dataSource: 'static_config' as const,
+      supportedLanguages: inst.supportedLanguages,
       attributes: {
         deployment_type: 'Serverless',
         tier: 'Serverless',
