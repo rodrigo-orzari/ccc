@@ -21,6 +21,11 @@ import {
   DIGITALOCEAN_SERVERLESS_REGION,
   DIGITALOCEAN_SERVERLESS_GEOGRAPHY,
 } from '../config/digitalocean_serverless.js';
+import {
+  ORACLE_SERVERLESS,
+  ORACLE_SERVERLESS_REGION,
+  ORACLE_SERVERLESS_GEOGRAPHY,
+} from '../config/oracle_serverless.js';
 
 export class AWSServerlessAdapter extends BaseAdapter {
   providerSlug = 'aws';
@@ -120,6 +125,33 @@ export class DigitalOceanServerlessAdapter extends BaseAdapter {
       cpuVendor: inst.cpuVendor,
       gpuCount: 0,
       geography: DIGITALOCEAN_SERVERLESS_GEOGRAPHY,
+      category: 'Serverless Compute',
+      price: inst.price,
+      unit: 'GB-Hour',
+      dataSource: 'static_config' as const,
+      supportedLanguages: inst.supportedLanguages,
+      attributes: inst.attributes, // Use attributes from config with all dimensions
+    }));
+  }
+}
+
+export class OracleServerlessAdapter extends BaseAdapter {
+  providerSlug = 'oracle';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Oracle Serverless pricing (${ORACLE_SERVERLESS.length} entries from static config)...`);
+    return ORACLE_SERVERLESS.map(inst => ({
+      provider: 'oracle',
+      service: 'OCI Functions',
+      region: ORACLE_SERVERLESS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: ORACLE_SERVERLESS_GEOGRAPHY,
       category: 'Serverless Compute',
       price: inst.price,
       unit: 'GB-Hour',
@@ -272,6 +304,32 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       });
     }
 
+    // Oracle OCI Functions
+    try {
+      console.log('⏳ Oracle OCI Functions...');
+      const records = await this.getOracleServerlessStaticRecords();
+      if (records.length > 0) {
+        const driftAlerts = await this.saveRecords(records, 'serverless');
+        results.push({
+          provider: 'oracle',
+          service: 'OCI Functions',
+          status: 'success',
+          count: records.length,
+          driftAlerts,
+          dataSource: 'static_config',
+          note: 'Oracle OCI Functions - static config'
+        });
+      }
+    } catch (error: any) {
+      console.warn(`⚠️  Oracle OCI Functions error:`, error.message);
+      results.push({
+        provider: 'oracle',
+        service: 'OCI Functions',
+        status: 'skipped',
+        message: error.message
+      });
+    }
+
     return results;
   }
 
@@ -304,6 +362,14 @@ export class ServerlessPricingPipeline extends PricingPipeline {
    */
   private async getDigitalOceanServerlessStaticRecords(): Promise<PricingRecord[]> {
     const adapter = new DigitalOceanServerlessAdapter();
+    return adapter.fetchPricing();
+  }
+
+  /**
+   * Static config for Oracle OCI Functions
+   */
+  private async getOracleServerlessStaticRecords(): Promise<PricingRecord[]> {
+    const adapter = new OracleServerlessAdapter();
     return adapter.fetchPricing();
   }
 }
