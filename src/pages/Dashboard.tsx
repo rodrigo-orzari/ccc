@@ -1583,6 +1583,33 @@ export default function Dashboard() {
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.ha_mode || '—'}</span>
                             </td>
                           </>
+                        ) : activeProductType === 'serverless' ? (
+                          <>
+                            <td data-col="engine_category" style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span>
+                            </td>
+                            <td data-col="db_family_cpu_vendor" style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds || '—'}</span>
+                            </td>
+                            <td data-col="deployment_arch" style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration || '—'}</span>
+                            </td>
+                            <td data-col="ha_mode_os" style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              {(() => {
+                                const freeInvocations = record.attributes?.free_invocations_per_month;
+                                const hasFreeTier = freeInvocations && parseInt(freeInvocations) > 0;
+                                return (
+                                  <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
+                                    hasFreeTier
+                                      ? 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20'
+                                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
+                                  }`}>
+                                    {hasFreeTier ? 'Yes' : 'No'}
+                                  </span>
+                                );
+                              })()}
+                            </td>
+                          </>
                         ) : (
                           <>
                             <td data-col="engine_category" style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center whitespace-nowrap">
