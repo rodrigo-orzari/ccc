@@ -596,6 +596,7 @@ export default function Dashboard() {
     selectedProviders, selectedGeographies,
     selectedOS, selectedCpu, selectedCategory, gpuIncluded,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
+    selectedServerlessLanguages,
     vCpuRange, memoryRange, priceRange, search, showAggregation,
   ]);
 
