@@ -5,6 +5,10 @@
  * Execution: $0.000016 per GB-second
  * Free tier: 1M executions + 400K GB-seconds per month
  *
+ * Cold Start: ~200-500ms (Consumption plan slower than Premium)
+ * Timeout: 5 minutes (300 seconds) on Consumption plan
+ * Memory: Fixed allocations from 128MB to 1792MB
+ *
  * Memory tiers from 128MB to 1792MB (typical allocations)
  * Premium plans available but not shown here
  *
@@ -13,7 +17,23 @@
 
 const AZURE_FUNCTIONS_LANGUAGES = ['C#', 'JavaScript', 'Python', 'Java', 'PowerShell', 'Go', 'Rust'];
 
-export const AZURE_SERVERLESS = [
+// Helper function to add serverless-specific attributes to Azure Functions entries
+const addAzureServerlessAttributes = (entry: any) => ({
+  ...entry,
+  attributes: {
+    deployment_type: 'Serverless',
+    tier: 'Serverless',
+    cold_start_overhead_ms: 350,
+    timeout_seconds: 300,
+    memory_configuration: 'fixed-tiers',
+    invocation_price: 0.0000002,
+    free_executions_per_month: 1000000,
+    free_gb_seconds_per_month: 400000,
+    max_memory_gb: 1.75,
+  }
+});
+
+const baseAzureEntries = [
   // 128MB tier
   {
     type: 'Functions-128MB-Consumption',
@@ -74,6 +94,8 @@ export const AZURE_SERVERLESS = [
     supportedLanguages: AZURE_FUNCTIONS_LANGUAGES,
   },
 ];
+
+export const AZURE_SERVERLESS = baseAzureEntries.map(addAzureServerlessAttributes);
 
 export const AZURE_SERVERLESS_REGION = 'eastus';
 export const AZURE_SERVERLESS_GEOGRAPHY = 'N. America';
