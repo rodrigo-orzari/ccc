@@ -110,4 +110,4 @@ Email hello@comparecloudcosts.com for questions or feedback.
 
 ---
 
-<center>© 2026 [Rodrigo Orzari](https://www.linkedin.com/in/rodrigoorzari/). All rights reserved.</center>
+© 2026 [Rodrigo Orzari](https://www.linkedin.com/in/rodrigoorzari/). All rights reserved.
