@@ -528,7 +528,13 @@ export default function Dashboard() {
       setLoading(false);
       return;
     }
-    if (isServerless && selectedServerlessLanguages.length === 0) {
+    if (isServerless && (
+      selectedServerlessLanguages.length === 0 ||
+      selectedServerlessColdStart.length === 0 ||
+      selectedServerlessTimeout.length === 0 ||
+      selectedServerlessMemoryConfig.length === 0 ||
+      selectedServerlessFreeTier.length === 0
+    )) {
       setData([]);
       setProviderCounts({});
       setLoading(false);
