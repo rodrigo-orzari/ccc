@@ -16,6 +16,11 @@ import {
   AZURE_SERVERLESS_REGION,
   AZURE_SERVERLESS_GEOGRAPHY,
 } from '../config/azure_serverless.js';
+import {
+  DIGITALOCEAN_SERVERLESS,
+  DIGITALOCEAN_SERVERLESS_REGION,
+  DIGITALOCEAN_SERVERLESS_GEOGRAPHY,
+} from '../config/digitalocean_serverless.js';
 
 export class AWSServerlessAdapter extends BaseAdapter {
   providerSlug = 'aws';
@@ -102,6 +107,38 @@ export class AzureServerlessAdapter extends BaseAdapter {
       attributes: {
         deployment_type: 'Serverless',
         tier: 'Serverless',
+      },
+    }));
+  }
+}
+
+export class DigitalOceanServerlessAdapter extends BaseAdapter {
+  providerSlug = 'digitalocean';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching DigitalOcean Serverless pricing (${DIGITALOCEAN_SERVERLESS.length} entries from static config)...`);
+    return DIGITALOCEAN_SERVERLESS.map(inst => ({
+      provider: 'digitalocean',
+      service: 'App Platform Functions',
+      region: DIGITALOCEAN_SERVERLESS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: DIGITALOCEAN_SERVERLESS_GEOGRAPHY,
+      category: 'Serverless Compute',
+      price: inst.price,
+      unit: 'GB-Hour',
+      dataSource: 'static_config' as const,
+      supportedLanguages: inst.supportedLanguages,
+      attributes: {
+        deployment_type: 'Serverless',
+        tier: 'Serverless',
+        invocation_price: 0.0000015, // $0.0000015 per invocation after free tier
+        free_invocations_per_month: 200000000, // 200M free invocations
       },
     }));
   }
@@ -221,6 +258,32 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       });
     }
 
+    // DigitalOcean App Platform Functions
+    try {
+      console.log('⏳ DigitalOcean App Platform Functions...');
+      const records = await this.getDigitalOceanServerlessStaticRecords();
+      if (records.length > 0) {
+        const driftAlerts = await this.saveRecords(records, 'serverless');
+        results.push({
+          provider: 'digitalocean',
+          service: 'App Platform Functions',
+          status: 'success',
+          count: records.length,
+          driftAlerts,
+          dataSource: 'static_config',
+          note: 'DigitalOcean App Platform Functions - static config'
+        });
+      }
+    } catch (error: any) {
+      console.warn(`⚠️  DigitalOcean Functions error:`, error.message);
+      results.push({
+        provider: 'digitalocean',
+        service: 'App Platform Functions',
+        status: 'skipped',
+        message: error.message
+      });
+    }
+
     return results;
   }
 
@@ -245,6 +308,14 @@ export class ServerlessPricingPipeline extends PricingPipeline {
    */
   private async getAzureServerlessStaticRecords(): Promise<PricingRecord[]> {
     const adapter = new AzureServerlessAdapter();
+    return adapter.fetchPricing();
+  }
+
+  /**
+   * Static config for DigitalOcean App Platform Functions
+   */
+  private async getDigitalOceanServerlessStaticRecords(): Promise<PricingRecord[]> {
+    const adapter = new DigitalOceanServerlessAdapter();
     return adapter.fetchPricing();
   }
 }
