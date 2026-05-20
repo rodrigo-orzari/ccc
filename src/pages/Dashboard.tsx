@@ -1103,7 +1103,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('coldStart')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.coldStart ? '' : '-rotate-90'}`} />
-                        Cold Start <span title="Filter by cold start latency: Fast (< 100ms), Medium (100-200ms), or Slow (> 200ms)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Cold Start (MS) <span title="Filter by cold start latency: Fast (< 100ms), Medium (100-200ms), or Slow (> 200ms)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessColdStart.length === SERVERLESS_COLD_START_OPTIONS.length ? setSelectedServerlessColdStart([]) : setSelectedServerlessColdStart([...SERVERLESS_COLD_START_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessColdStart.length === SERVERLESS_COLD_START_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
