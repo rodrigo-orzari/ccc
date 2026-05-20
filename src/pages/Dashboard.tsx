@@ -472,6 +472,7 @@ export default function Dashboard() {
     activeProductType,
     selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuIncluded,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
+    selectedServerlessLanguages,
     vCpuRange, memoryRange, priceRange,
   ]);
 
@@ -494,6 +495,12 @@ export default function Dashboard() {
       return;
     }
     if (isDb && (selectedDbFamilies.length === 0 || selectedEngines.length === 0 || selectedDeploymentTypes.length === 0 || selectedHaModes.length === 0)) {
+      setData([]);
+      setProviderCounts({});
+      setLoading(false);
+      return;
+    }
+    if (isServerless && selectedServerlessLanguages.length === 0) {
       setData([]);
       setProviderCounts({});
       setLoading(false);
