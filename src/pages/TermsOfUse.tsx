@@ -75,6 +75,10 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
 ---
 
 [Privacy Policy](/privacy) | [Contact Us](mailto:hello@comparecloudcosts.com) | [About Us](/about)
+
+---
+
+© 2026 [Rodrigo Orzari](https://www.linkedin.com/in/rodrigoorzari/). All rights reserved.
 `;
 
   return (

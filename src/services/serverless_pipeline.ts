@@ -1,5 +1,6 @@
 import { Pool } from 'pg';
 import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
+import { AWSLambdaLiveAdapter, GCPCloudRunLiveAdapter, AzureFunctionsLiveAdapter } from './serverless_adapters_live.js';
 import {
   AWS_SERVERLESS,
   AWS_SERVERLESS_REGION,
@@ -106,26 +107,141 @@ export class AzureServerlessAdapter extends BaseAdapter {
 export class ServerlessPricingPipeline extends PricingPipeline {
   constructor(pool: Pool) {
     super(pool);
-    // Replace the compute adapters with serverless adapters
+    // Use live API adapters with fallback to static configs
+    // Phase 1: AWS Lambda (live API)
+    // Phase 2: GCP Cloud Run (live API - placeholder)
+    // Phase 3: Azure Functions (live API - placeholder)
     this.adapters = [
-      new AWSServerlessAdapter(),
-      new GCPServerlessAdapter(),
-      new AzureServerlessAdapter(),
+      new AWSLambdaLiveAdapter(),
+      new GCPCloudRunLiveAdapter(),
+      new AzureFunctionsLiveAdapter(),
     ];
   }
 
   async run() {
     const results = [];
-    for (const adapter of this.adapters) {
+
+    // AWS Lambda: Try live API first, fall back to static config
+    try {
+      console.log('🔄 Attempting AWS Lambda live API fetch...');
+      const awsAdapter = new AWSLambdaLiveAdapter();
+      let records = await awsAdapter.fetchPricing();
+
+      if (records.length === 0) {
+        console.warn('⚠️  AWS Lambda live API returned empty, using static config fallback');
+        records = await this.getAWSServerlessStaticRecords();
+      }
+
+      const driftAlerts = await this.saveRecords(records, 'serverless');
+      results.push({
+        provider: 'aws',
+        service: 'Lambda',
+        status: 'success',
+        count: records.length,
+        driftAlerts,
+        dataSource: records[0]?.dataSource || 'static_config'
+      });
+    } catch (error: any) {
+      console.warn(`⚠️  AWS Lambda live API failed (${error.message}), falling back to static config...`);
       try {
-        const records = await adapter.fetchPricing();
+        const records = await this.getAWSServerlessStaticRecords();
         const driftAlerts = await this.saveRecords(records, 'serverless');
-        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
-      } catch (error: any) {
-        console.error(`Error running Serverless pipeline for ${adapter.providerSlug}:`, error);
-        results.push({ provider: adapter.providerSlug, status: 'error', message: error.message });
+        results.push({
+          provider: 'aws',
+          service: 'Lambda',
+          status: 'success',
+          count: records.length,
+          driftAlerts,
+          dataSource: 'static_config',
+          note: 'Using static config fallback due to API failure'
+        });
+      } catch (fallbackError: any) {
+        console.error(`❌ AWS Lambda static config also failed:`, fallbackError);
+        results.push({
+          provider: 'aws',
+          service: 'Lambda',
+          status: 'error',
+          message: `Live API failed: ${error.message}, Static fallback failed: ${(fallbackError as Error).message}`
+        });
       }
     }
+
+    // GCP Cloud Run: To be implemented in Phase 2
+    try {
+      console.log('⏳ GCP Cloud Run (Phase 2 - not yet implemented)...');
+      const records = await this.getGCPServerlessStaticRecords();
+      if (records.length > 0) {
+        const driftAlerts = await this.saveRecords(records, 'serverless');
+        results.push({
+          provider: 'gcp',
+          service: 'Cloud Run',
+          status: 'success',
+          count: records.length,
+          driftAlerts,
+          dataSource: 'static_config',
+          note: 'Phase 2 pending - static config only'
+        });
+      }
+    } catch (error: any) {
+      console.warn(`⚠️  GCP Cloud Run error:`, error.message);
+      results.push({
+        provider: 'gcp',
+        service: 'Cloud Run',
+        status: 'skipped',
+        message: 'Phase 2 not yet implemented'
+      });
+    }
+
+    // Azure Functions: To be implemented in Phase 3
+    try {
+      console.log('⏳ Azure Functions (Phase 3 - not yet implemented)...');
+      const records = await this.getAzureServerlessStaticRecords();
+      if (records.length > 0) {
+        const driftAlerts = await this.saveRecords(records, 'serverless');
+        results.push({
+          provider: 'azure',
+          service: 'Azure Functions',
+          status: 'success',
+          count: records.length,
+          driftAlerts,
+          dataSource: 'static_config',
+          note: 'Phase 3 pending - static config only'
+        });
+      }
+    } catch (error: any) {
+      console.warn(`⚠️  Azure Functions error:`, error.message);
+      results.push({
+        provider: 'azure',
+        service: 'Azure Functions',
+        status: 'skipped',
+        message: 'Phase 3 not yet implemented'
+      });
+    }
+
     return results;
+  }
+
+  /**
+   * Static config fallback for AWS Lambda (Phase 1 fallback)
+   */
+  private async getAWSServerlessStaticRecords(): Promise<PricingRecord[]> {
+    const adapter = new AWSServerlessAdapter();
+    return adapter.fetchPricing();
+  }
+
+  /**
+   * Static config for GCP Cloud Run (Phase 2 placeholder)
+   */
+  private async getGCPServerlessStaticRecords(): Promise<PricingRecord[]> {
+    const adapter = new GCPServerlessAdapter();
+    return adapter.fetchPricing();
+  }
+
+  /**
+   * Static config for Azure Functions (Phase 3 placeholder)
+   */
+  private async getAzureServerlessStaticRecords(): Promise<PricingRecord[]> {
+    const adapter = new AzureServerlessAdapter();
+    return adapter.fetchPricing();
   }
 }

@@ -68,6 +68,10 @@ For questions about this Privacy Policy or our privacy practices, please email u
 ---
 
 [Terms of Use](/terms) | [About Us](/about) | [Contact Us](mailto:hello@comparecloudcosts.com)
+
+---
+
+© 2026 [Rodrigo Orzari](https://www.linkedin.com/in/rodrigoorzari/). All rights reserved.
 `;
 
   return (
