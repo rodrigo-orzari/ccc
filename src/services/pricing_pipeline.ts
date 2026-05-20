@@ -541,6 +541,11 @@ export class PricingPipeline {
         const values: any[] = [];
         const placeholders = batch.map((r, idx) => {
           const offset = idx * 15;
+          // Merge supportedLanguages into attributes
+          const attrs = { ...r.attributes };
+          if (r.supportedLanguages && r.supportedLanguages.length > 0) {
+            attrs.supportedLanguages = r.supportedLanguages;
+          }
           values.push(
             serviceId,
             regionMap.get(r.region),
@@ -555,7 +560,7 @@ export class PricingPipeline {
             r.category,
             r.price,
             r.unit,
-            r.attributes ? JSON.stringify(r.attributes) : null,
+            Object.keys(attrs).length > 0 ? JSON.stringify(attrs) : null,
             dataSource
           );
           return `($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5}, $${offset + 6}, $${offset + 7}, $${offset + 8}, $${offset + 9}, $${offset + 10}, $${offset + 11}, $${offset + 12}, $${offset + 13}, $${offset + 14}, $${offset + 15})`;
