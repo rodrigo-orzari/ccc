@@ -444,6 +444,10 @@ export default function Dashboard() {
       if (!gpuIncluded) {
         params.append('gpu', 'false');
       }
+    } else if (isServerless) {
+      if (selectedServerlessLanguages.length > 0 && selectedServerlessLanguages.length < SERVERLESS_LANGUAGES.length) {
+        params.append('language', selectedServerlessLanguages.join(','));
+      }
     }
 
     params.append('minVcpu', vCpuRange.min.toString());
@@ -529,6 +533,11 @@ export default function Dashboard() {
         // Inclusion semantics — see useState init for gpuIncluded.
         if (!gpuIncluded) {
           baseParams.append('gpu', 'false');
+        }
+      } else if (isServerless) {
+        // Serverless-specific filters
+        if (selectedServerlessLanguages.length > 0 && selectedServerlessLanguages.length < SERVERLESS_LANGUAGES.length) {
+          baseParams.append('language', selectedServerlessLanguages.join(','));
         }
       }
 
