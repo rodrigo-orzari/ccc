@@ -35,37 +35,157 @@ The application is structured as a monorepo deploying a **Single Page Applicatio
 
 ## 3. File Directory & Code Organization
 
-The repository's structure is organized as follows:
+### Directory Tree
 
-* [package.json](./package.json): Lists runtime dependencies (`pg`, `express`, `nodemailer`, `axios`, `react`, `react-router-dom`, `motion`) and developer/build scripts.
+```
+_ccc/
+├── 📄 Configuration & Entry Points
+│   ├── server.ts                      # Express server + API routes + cron jobs
+│   ├── vite.config.ts                 # Vite build configuration
+│   ├── tsconfig.json                  # TypeScript compiler options
+│   ├── package.json                   # Dependencies & npm scripts
+│   ├── index.html                     # HTML entry point
+│   └── .env.example                   # Environment variables template
+│
+├── 📖 Documentation (START HERE)
+│   ├── README.md                      # This file — project overview
+│   ├── PROJECT_ANALYSIS.md            # In-depth technical analysis (15 sections)
+│   ├── ARCHITECTURE_DIAGRAMS.md       # Visual ASCII diagrams (13 diagrams)
+│   └── OPERATIONS_RUNBOOK.md          # Deployment & troubleshooting guide
+│
+├── src/
+│   ├── main.tsx                       # React root render
+│   ├── App.tsx                        # Top-level router component
+│   ├── index.css                      # Global Tailwind + custom styles
+│   │
+│   ├── db/
+│   │   └── schema.sql                 # PostgreSQL schema definitions
+│   │
+│   ├── services/
+│   │   ├── pricing_pipeline.ts        # VM instance pricing aggregation
+│   │   ├── database_pipeline.ts       # Database product pricing
+│   │   ├── serverless_pipeline.ts     # Serverless compute pricing
+│   │   ├── mailer.ts                  # Email notifications (SMTP)
+│   │   └── ingest.ts                  # CLI tool for manual pricing fetch
+│   │
+│   ├── config/
+│   │   ├── aws_serverless.ts          # Lambda pricing fallback
+│   │   ├── azure_serverless.ts        # Azure Functions pricing fallback
+│   │   ├── gcp_serverless.ts          # Cloud Functions pricing fallback
+│   │   ├── database_instances.ts      # Database products config
+│   │   ├── digitalocean_instances.ts  # DigitalOcean instances config
+│   │   ├── gcp_instances.ts           # Google Cloud instances config
+│   │   └── oracle_instances.ts        # Oracle instances config
+│   │
+│   ├── pages/
+│   │   ├── Dashboard.tsx              # Main comparison UI (filters + table)
+│   │   ├── About.tsx                  # About page (markdown)
+│   │   ├── Methodology.tsx            # Methodology page (markdown)
+│   │   ├── PrivacyPolicy.tsx          # Privacy policy (markdown)
+│   │   ├── Support.tsx                # Support page (markdown)
+│   │   └── TermsOfUse.tsx             # Terms of use (markdown)
+│   │
+│   └── components/
+│       └── MarkdownPage.tsx           # Reusable markdown renderer
+│
+├── dist/                              # Production build output (generated)
+├── node_modules/                      # Dependencies (generated)
+│
+├── 📜 Project Files
+│   ├── LICENSE                        # AGPL-3.0 license
+│   ├── .gitignore                     # Git exclusions
+│   └── metadata.json                  # Project metadata
+```
+
+### File Descriptions
+
+**Configuration & Entry Points:**
+* [package.json](./package.json): Lists runtime dependencies (`pg`, `express`, `nodemailer`, `axios`, `react`, `react-router-dom`, `motion`) and npm scripts for development/build.
 * [server.ts](./server.ts): The application entrypoint. Configures Express, initializes database connections, handles admin pipeline operations, sets up cron schedules, and routes client traffic.
-* [vite.config.ts](./vite.config.ts) & [tsconfig.json](./tsconfig.json): Configuration files for build processes and TypeScript compilation.
-* [src/db/schema.sql](./src/db/schema.sql): Defines the database schema, setting up standard tables with relational constraints:
-  * `providers`: Maps top-level cloud companies (`aws`, `azure`, `gcp`, `oracle`, `digitalocean`).
-  * `regions`: Maps cloud locations (e.g., `us-east-1` under `aws`).
-  * `services`: Maps service lines (e.g., `EC2` under `aws`, `Cloud SQL` under `gcp`).
-  * `pricing_records`: Holds hardware specification mappings (vCPUs, memory, architecture, operating system, GPU count, unit pricing, pricing data source, and custom JSONB metadata).
-* **`src/services/`**: Implements pricing aggregation pipelines and auxiliary utilities:
-  * [pricing_pipeline.ts](./src/services/pricing_pipeline.ts): Standardizes the ingestion architecture for VM instances. Defines the base class `BaseAdapter` and provider subclasses:
-    * `AWSAdapter` and `AzureAdapter`: Stream live pricing over public catalog APIs (AWS index JSON and Azure Retail Prices API).
-    * `GCPAdapter` and `OracleAdapter`: Fetch configurations from offline configs.
-    * `DigitalOceanAdapter`: Requests droplets from live `/v2/sizes` API when `DIGITALOCEAN_API_TOKEN` is present; falls back to static files otherwise.
-  * [database_pipeline.ts](./src/services/database_pipeline.ts): Extends the VM pricing model to handle database nodes (`AWSRDSAdapter`, `AzureDBAdapter`, `GCPCloudSQLAdapter`, etc.). Incorporates relational database attributes (e.g., databases engines like MySQL/PostgreSQL, High-Availability options, and instance tiers).
-  * [mailer.ts](./src/services/mailer.ts): Configures SMTP notifications for operations teams.
-  * [ingest.ts](./src/services/ingest.ts): A CLI utility script to trigger standalone pricing pipeline runs.
-* **`src/config/`**: Holds hardcoded pricing catalog configs for offline ingestion:
-  * `digitalocean_instances.ts`, `gcp_instances.ts`, `oracle_instances.ts`, and `database_instances.ts` mapping fallback pricing profiles.
-* **`src/pages/`**: The core application pages:
-  * [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx): Main comparative layout interface featuring filters, a dense grid, interactive range sliders, and multi-column sorting.
-  * `About.tsx`, `Methodology.tsx`, `PrivacyPolicy.tsx`, `Support.tsx`, `TermsOfUse.tsx`: Textual, markdown-rendered static informational content pages.
-* [src/components/MarkdownPage.tsx](./src/components/MarkdownPage.tsx): Helper component to format and render markdown texts safely inside the app's dark-mode/light-mode layouts.
+* [vite.config.ts](./vite.config.ts) & [tsconfig.json](./tsconfig.json): Build and TypeScript configuration files.
+
+**Documentation Files (New):**
+* [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md): **Comprehensive technical deep-dive** covering technology stack, architecture, data model, pipelines, API routes, frontend design, performance, and enhancement recommendations. Read this for a complete understanding of how everything works. (~8,000 words)
+* [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md): **Visual ASCII diagrams** showing system architecture, data flows, state machines, deployment pipeline, and more. Useful for understanding interactions at a glance. (13 diagrams)
+* [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md): **Operational guide** for deploying, monitoring, troubleshooting, and maintaining the application. Includes setup, deployment, scaling, disaster recovery, and quick reference commands. Read this to operate the app.
+
+**Database:**
+* [src/db/schema.sql](./src/db/schema.sql): PostgreSQL schema definitions:
+  * `providers`: Cloud companies (aws, azure, gcp, oracle, digitalocean)
+  * `regions`: Cloud regions per provider
+  * `services`: Service lines per provider (EC2, RDS, Virtual Machines, etc.)
+  * `pricing_records`: Instance/database pricing with specs (vCPUs, memory, price, etc.)
+
+**Data Pipelines (`src/services/`):**
+* [pricing_pipeline.ts](./src/services/pricing_pipeline.ts): VM pricing aggregation from AWS, Azure, GCP, Oracle, DigitalOcean. Handles normalization, CPU vendor detection, geography mapping, and price drift alerts.
+* [database_pipeline.ts](./src/services/database_pipeline.ts): Database product pricing (RDS, Cloud SQL, Azure SQL, etc.) with attributes for engines, HA modes, tiers.
+* [serverless_pipeline.ts](./src/services/serverless_pipeline.ts): Serverless compute pricing (Lambda, Cloud Functions, Azure Functions).
+* [mailer.ts](./src/services/mailer.ts): Email notifications for price drift and data staleness alerts.
+* [ingest.ts](./src/services/ingest.ts): CLI utility to manually trigger pricing pipelines.
+
+**Configuration Fallbacks (`src/config/`):**
+* Hardcoded pricing configs for each cloud provider, used when live APIs are unavailable or rate-limited.
+
+**Frontend (`src/pages/` & `src/components/`):**
+* [Dashboard.tsx](./src/pages/Dashboard.tsx): Main UI with filters, interactive table, range sliders, and multi-column sorting.
+* Static pages (About, Methodology, Privacy, Support, Terms) rendered as markdown.
+* [MarkdownPage.tsx](./src/components/MarkdownPage.tsx): Helper component for safe markdown rendering.
 
 ---
 
-## 4. In-Depth Subsystem Walks
+## 4. Documentation Guide
+
+**Confused about where to start?** This table helps you find the right documentation:
+
+| You want to... | Read this | File |
+|---|---|---|
+| Understand how everything works | Complete technical breakdown with all subsystems | [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) |
+| Visualize the architecture | System diagrams, data flows, state machines | [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) |
+| Deploy or operate the app | Setup, deployment, monitoring, troubleshooting, quick commands | [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) |
+| Develop locally | See "Quick Start" section below | — |
+| Understand a specific subsystem | Jump to Section 5 (below) for database, pipelines, API, frontend details | This README |
+
+---
+
+## 5. Quick Start
+
+### Local Development (5 minutes)
+
+```bash
+# 1. Clone & install
+git clone https://github.com/[org]/comparecloudcosts.git
+cd comparecloudcosts
+npm install
+
+# 2. Create .env file
+cp .env.example .env
+# Edit .env and set: DATABASE_URL=postgres://...
+
+# 3. Start dev server
+npm run dev
+# Opens http://localhost:3000 with hot reloading
+
+# 4. Type-check
+npm run lint
+```
+
+### Build for Production
+
+```bash
+npm run build        # Creates optimized dist/ folder
+npm run start        # Serves production build on port 3000
+```
+
+For detailed operational instructions, see [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md).
+
+---
+
+## 6. In-Depth Subsystem Walks
 
 ### A. Database Initialization and Schema Management
 Inside [server.ts](./server.ts), `initDb` parses and runs [schema.sql](./src/db/schema.sql). It performs schema migrations (e.g. adding `cpu_vendor`, `gpu_count`, `category` dynamically) and automatically standardizes classifications to ensure consistency (for example, renaming architecture fields like `x86_64` to `x86 64` and mapping generic instance configurations to Intel, AMD, or ARM vendors).
+
+**For more details**, see [PROJECT_ANALYSIS.md — Section 3 (Data Model)](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — Database Schema Diagram](./ARCHITECTURE_DIAGRAMS.md).
 
 ### B. Ingestion Pipelines & In-Flight Validations
 In [pricing_pipeline.ts](./src/services/pricing_pipeline.ts), `PricingPipeline` executes adapters sequentially:
@@ -76,6 +196,8 @@ In [pricing_pipeline.ts](./src/services/pricing_pipeline.ts), `PricingPipeline` 
 
 `DatabasePricingPipeline` extends this behavior to database products. It maps relational components into custom JSONB `attributes` structures containing engine versions, storage types, HA modes, and deployment options.
 
+**For detailed pipeline diagrams and flow**, see [ARCHITECTURE_DIAGRAMS.md — Data Ingestion Pipeline](./ARCHITECTURE_DIAGRAMS.md) and [PROJECT_ANALYSIS.md — Section 4](./PROJECT_ANALYSIS.md).
+
 ### C. Backend API Routes
 [server.ts](./server.ts) exposes endpoints used by the dashboard:
 * `/api/pricing`: Retrieves list of pricing records. It uses `buildPricingFilters` to parse complex query-parameter arrays and return filtered records. If `aggregate=true` is requested, it averages prices across all region options to present aggregated instance types.
@@ -83,11 +205,47 @@ In [pricing_pipeline.ts](./src/services/pricing_pipeline.ts), `PricingPipeline` 
 * `/api/admin/fetch-pricing` / `/api/admin/init-db`: Admin triggers to force pipeline executions.
 * **Cron Jobs**: The server runs a background cron schedule (every Sunday at midnight) executing `PricingPipeline` and `DatabasePricingPipeline` to fetch fresh pricing data. It runs staleness checks, alerting via `sendStalenessEmail` if offline configurations haven't been reviewed in more than 7 days.
 
+**For API documentation and examples**, see [PROJECT_ANALYSIS.md — Section 5](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — API Request/Response Cycles](./ARCHITECTURE_DIAGRAMS.md).
+
 ### D. The Comparative Frontend Dashboard
 [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) binds this dataset to the UI:
 * **Product Views**: Users can toggle between `Virtual Machines` and `Databases` which dynamically adjusts filters (e.g. OS and CPU vendor filters for VMs vs. Engine, Deployment Type, and HA Mode filters for DBs).
 * **Sidebar Controls**: Features multi-select pills (Providers, Geographies, Engines, categories) and responsive range sliders (`RangeSlider`) to narrow down configurations by minimum/maximum values.
 * **Sortable Dense Grid**: Renders comparison rows in an interactive table supporting multi-column sorting (e.g., sorting by price, vCPUs, or memory) and drag-to-resize column boundaries. Column sizes are persistent, stored in local storage for subsequent visits.
+
+**For frontend architecture and state management**, see [PROJECT_ANALYSIS.md — Section 6](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — Frontend State Flow](./ARCHITECTURE_DIAGRAMS.md).
+
+---
+
+## 7. Resources for Contributors
+
+### Getting Started
+
+1. **Read this README** — Understand what the project does and its architecture overview
+2. **Run locally** — Follow the Quick Start section above
+3. **Explore the codebase** — Start with [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) (frontend) or [server.ts](./server.ts) (backend)
+4. **Deep dive** — Read [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) for comprehensive technical details
+
+### For Specific Tasks
+
+**Want to...** | **Start here**
+---|---
+Understand the data model | [PROJECT_ANALYSIS.md § 3](./PROJECT_ANALYSIS.md) + [src/db/schema.sql](./src/db/schema.sql)
+Work on pricing pipelines | [PROJECT_ANALYSIS.md § 4](./PROJECT_ANALYSIS.md) + [src/services/pricing_pipeline.ts](./src/services/pricing_pipeline.ts)
+Build frontend features | [PROJECT_ANALYSIS.md § 6](./PROJECT_ANALYSIS.md) + [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx)
+Deploy to production | [OPERATIONS_RUNBOOK.md § 4](./OPERATIONS_RUNBOOK.md)
+Add a new cloud provider | [PROJECT_ANALYSIS.md § 4.3](./PROJECT_ANALYSIS.md)
+Troubleshoot issues | [OPERATIONS_RUNBOOK.md § 9](./OPERATIONS_RUNBOOK.md)
+
+### Key Architecture Files
+
+| Purpose | File |
+|---------|------|
+| Server entry point | [server.ts](./server.ts) |
+| Database schema | [src/db/schema.sql](./src/db/schema.sql) |
+| Pricing pipelines | [src/services/pricing_pipeline.ts](./src/services/pricing_pipeline.ts), [database_pipeline.ts](./src/services/database_pipeline.ts) |
+| Frontend UI | [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) |
+| Email alerts | [src/services/mailer.ts](./src/services/mailer.ts) |
 
 ---
 
@@ -104,9 +262,18 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 
 This repository contains the open-source core of Compare Cloud Costs. While this version will remain open and available, future premium features or enterprise modules may be maintained in separate, private repositories.
 
-# Questions or feedback?
+# Support & Feedback
 
-Email hello@comparecloudcosts.com for questions or feedback.
+**Found a bug?** Open a [GitHub Issue](../../issues)
+
+**Have a feature idea?** Open a [GitHub Discussion](../../discussions)
+
+**General questions?** Email hello@comparecloudcosts.com
+
+**Can't find what you're looking for?**
+- Check [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) for technical details
+- Check [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for operational questions
+- Check [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) for system diagrams
 
 ---
 
