@@ -39,7 +39,7 @@ interface PricingRecord {
   };
 }
 
-type ProductType = 'vm' | 'database';
+type ProductType = 'vm' | 'database' | 'serverless';
 
 const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] = [
   { id: 'aws', name: 'AWS', color: '#FF9900' },
@@ -395,11 +395,13 @@ export default function Dashboard() {
 
   useEffect(() => {
     const isDb = activeProductType === 'database';
+    const isVm = activeProductType === 'vm';
+    const isServerless = activeProductType === 'serverless';
 
     // Build query params with all active filters to get counts that reflect
     // the current filter state (ensures "of X" numbers are correct in the UI)
     const params = new URLSearchParams();
-    params.append('productType', isDb ? 'database' : 'compute');
+    params.append('productType', isDb ? 'database' : (isServerless ? 'serverless' : 'compute'));
     if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) {
       params.append('geography', selectedGeographies.join(','));
     }
@@ -417,7 +419,7 @@ export default function Dashboard() {
       if (selectedHaModes.length > 0 && selectedHaModes.length < HA_MODES.length) {
         params.append('haMode', selectedHaModes.join(','));
       }
-    } else {
+    } else if (isVm) {
       if (selectedOS.length > 0 && selectedOS.length < OS_TYPES.length) {
         params.append('os', selectedOS.join(','));
       }
@@ -463,6 +465,8 @@ export default function Dashboard() {
 
   const fetchFilteredData = useCallback(async () => {
     const isDb = activeProductType === 'database';
+    const isVm = activeProductType === 'vm';
+    const isServerless = activeProductType === 'serverless';
 
     // Guard: require at least one selection in every active filter
     if (selectedProviders.length === 0 || selectedGeographies.length === 0) {
@@ -471,7 +475,7 @@ export default function Dashboard() {
       setLoading(false);
       return;
     }
-    if (!isDb && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) {
+    if (isVm && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) {
       setData([]);
       setProviderCounts({});
       setLoading(false);
@@ -487,7 +491,7 @@ export default function Dashboard() {
     setLoading(true);
     try {
       const baseParams = new URLSearchParams();
-      baseParams.append('productType', isDb ? 'database' : 'compute');
+      baseParams.append('productType', isDb ? 'database' : (isServerless ? 'serverless' : 'compute'));
       if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) baseParams.append('geography', selectedGeographies.join(','));
 
       if (isDb) {
@@ -504,7 +508,7 @@ export default function Dashboard() {
         if (selectedHaModes.length > 0 && selectedHaModes.length < HA_MODES.length) {
           baseParams.append('haMode', selectedHaModes.join(','));
         }
-      } else {
+      } else if (isVm) {
         // VM-specific filters
         if (selectedOS.length > 0 && selectedOS.length < OS_TYPES.length) baseParams.append('os', selectedOS.join(','));
         if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
@@ -651,16 +655,22 @@ export default function Dashboard() {
             </span>
           </button>
 
-          <div className="flex items-center gap-2 group opacity-60">
-            <span className="text-xs font-medium text-[#737373] flex items-center gap-1.5">
-              💾 Storage
-              <span className="text-[8px] font-bold bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-1 rounded uppercase tracking-tighter">Soon</span>
+          <button
+            onClick={() => setActiveProductType('serverless')}
+            className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
+              activeProductType === 'serverless'
+                ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
+                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-white opacity-60 hover:opacity-100'
+            }`}
+          >
+            <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'serverless' ? 'font-medium' : ''}`}>
+              ⚡ Serverless
             </span>
-          </div>
+          </button>
 
           <div className="flex items-center gap-2 group opacity-60">
             <span className="text-xs font-medium text-[#737373] flex items-center gap-1.5">
-              ⚡ Serverless
+              💾 Storage
               <span className="text-[8px] font-bold bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-1 rounded uppercase tracking-tighter">Soon</span>
             </span>
           </div>
@@ -731,7 +741,7 @@ export default function Dashboard() {
               )}
             </section>
 
-            {activeProductType === 'vm' ? (
+            {activeProductType === 'vm' && (
               <>
                 {/* ── VM: Category ── */}
                 <section className="space-y-3">
@@ -856,7 +866,9 @@ export default function Dashboard() {
 
                 <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
               </>
-            ) : (
+            )}
+
+            {activeProductType === 'database' && (
               <>
                 {/* ── DB: DB Family ── */}
                 <section className="space-y-3">

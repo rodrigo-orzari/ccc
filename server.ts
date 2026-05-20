@@ -8,6 +8,7 @@ import fs from 'fs';
 import cron from 'node-cron';
 import { PricingPipeline, PriceDriftResult } from './src/services/pricing_pipeline.ts';
 import { DatabasePricingPipeline } from './src/services/database_pipeline.ts';
+import { ServerlessPricingPipeline } from './src/services/serverless_pipeline.ts';
 import { sendPriceDriftEmail, sendStalenessEmail, StaleDataAlert } from './src/services/mailer.ts';
 
 dotenv.config();
@@ -285,6 +286,15 @@ async function startServer() {
         for (const r of dbResults) {
           if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
           results.push({ ...r, pipeline: 'database' });
+        }
+      }
+
+      if (type === 'all' || type === 'serverless') {
+        const serverlessPipeline = new ServerlessPricingPipeline(pool);
+        const serverlessResults = await serverlessPipeline.run();
+        for (const r of serverlessResults) {
+          if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+          results.push({ ...r, pipeline: 'serverless' });
         }
       }
 
