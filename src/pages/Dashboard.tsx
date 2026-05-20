@@ -282,9 +282,25 @@ export default function Dashboard() {
         const newWidths: Record<string, number> = {};
         for (const colId of colIds) {
           const cells = document.querySelectorAll<HTMLElement>(`[data-col="${colId}"]`);
+          
+          // Temporarily remove fixed widths to measure natural content width
+          const originalStyles: {el: HTMLElement, width: string, minWidth: string}[] = [];
+          cells.forEach(el => {
+            originalStyles.push({ el, width: el.style.width, minWidth: el.style.minWidth });
+            el.style.width = 'auto';
+            el.style.minWidth = 'auto';
+          });
+
           let max = 60;
-          cells.forEach(el => { max = Math.max(max, el.scrollWidth); });
+          // Add a small buffer (24px) for padding/borders to ensure proportional but not cramped fit
+          cells.forEach(el => { max = Math.max(max, el.scrollWidth + 24); });
           newWidths[colId] = max;
+
+          // Restore styles
+          originalStyles.forEach(({el, width, minWidth}) => {
+            el.style.width = width;
+            el.style.minWidth = minWidth;
+          });
         }
         setColumnWidths(prev => ({ ...prev, ...newWidths }));
         autoSizedFor.current.add(activeProductType);
@@ -374,8 +390,22 @@ export default function Dashboard() {
     e.stopPropagation();
     e.preventDefault();
     const cells = document.querySelectorAll<HTMLElement>(`[data-col="${columnId}"]`);
+    
+    const originalStyles: {el: HTMLElement, width: string, minWidth: string}[] = [];
+    cells.forEach(el => {
+      originalStyles.push({ el, width: el.style.width, minWidth: el.style.minWidth });
+      el.style.width = 'auto';
+      el.style.minWidth = 'auto';
+    });
+
     let max = 60;
-    cells.forEach(el => { max = Math.max(max, el.scrollWidth); });
+    cells.forEach(el => { max = Math.max(max, el.scrollWidth + 24); });
+
+    originalStyles.forEach(({el, width, minWidth}) => {
+      el.style.width = width;
+      el.style.minWidth = minWidth;
+    });
+
     setColumnWidths(prev => ({ ...prev, [columnId]: max }));
   }, []);
 
