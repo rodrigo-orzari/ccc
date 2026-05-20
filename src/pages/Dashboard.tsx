@@ -65,6 +65,9 @@ const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB',
 const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
 const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
 
+// Serverless-view constants
+const SERVERLESS_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'Any (Container)'];
+
 const DEFAULT_VCPU_RANGE   = { min: 0,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
 const DEFAULT_PRICE_RANGE  = { min: 0,   max: 510 };
@@ -149,6 +152,10 @@ export default function Dashboard() {
   const [selectedEngines, setSelectedEngines] = useState<string[]>([...DB_ENGINES]);
   const [selectedDeploymentTypes, setSelectedDeploymentTypes] = useState<string[]>([...DEPLOYMENT_TYPES]);
   const [selectedHaModes, setSelectedHaModes] = useState<string[]>([...HA_MODES]);
+
+  // Serverless-specific filter state
+  const [selectedServerlessLanguages, setSelectedServerlessLanguages] = useState<string[]>([...SERVERLESS_LANGUAGES]);
+
   const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
   const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...DEFAULT_PRICE_RANGE });
@@ -216,6 +223,7 @@ export default function Dashboard() {
     engine: true,
     deploymentType: true,
     haMode: true,
+    languages: true,
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
 

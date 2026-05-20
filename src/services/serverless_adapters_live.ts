@@ -17,6 +17,9 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
   providerSlug = 'aws';
   private lambdaServiceCode = 'AWSLambda';
 
+  // AWS Lambda supported languages
+  private readonly AWS_LAMBDA_LANGUAGES = ['Python', 'Node.js', 'Java', 'Go', 'Ruby', 'C#'];
+
   /**
    * Fetch AWS Lambda pricing from live API
    *
@@ -154,6 +157,7 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
             price: gbHourPrice,
             unit: 'GB-Hour',
             dataSource: 'live_api' as const,
+            supportedLanguages: this.AWS_LAMBDA_LANGUAGES,
             attributes: {
               deployment_type: 'Serverless',
               memory_mb: memory,
