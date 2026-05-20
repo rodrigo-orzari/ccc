@@ -68,7 +68,7 @@ const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Ge
 // Serverless-view constants
 const SERVERLESS_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'TypeScript', 'Any (Container)'];
 const SERVERLESS_COLD_START_OPTIONS = ['Fast < 100', 'Medium 100-200', 'Slow > 200'];
-const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5 min)', 'Medium (10 min)', 'Long (15+ min)'];
+const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5)', 'Medium (10)', 'Long (15+)'];
 const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['User-configurable', 'Fixed tiers', 'Automatic'];
 const SERVERLESS_FREE_TIER_OPTIONS = ['Free tier included', 'No free tier'];
 
@@ -1130,7 +1130,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('timeout')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.timeout ? '' : '-rotate-90'}`} />
-                        Timeout <span title="Filter by execution timeout: Short (5 min), Medium (10 min), or Long (15+ min)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Timeout (Min) <span title="Filter by execution timeout: Short (5), Medium (10), or Long (15+)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessTimeout.length === SERVERLESS_TIMEOUT_OPTIONS.length ? setSelectedServerlessTimeout([]) : setSelectedServerlessTimeout([...SERVERLESS_TIMEOUT_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessTimeout.length === SERVERLESS_TIMEOUT_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
