@@ -47,19 +47,26 @@ These terms and conditions are governed by and construed in accordance with the 
 
 ## Pricing Disclaimer
 
-### Data accuracy and timeliness
+### Directional and Sample Data Only
 
-We understand that even small price differences scale significantly in distributed environments. CCC functions as an aggregator of publicly available information, gathering data to the best of our ability through official APIs and provider-published rate cards. We refresh pricing data frequently, with updates occurring at least weekly.
+CCC functions as an aggregator of publicly available information, designed to provide a **directional indicator** of cloud costs rather than official pricing quotes. For providers with flexible pricing models (such as custom CPU/RAM configurations), our data represents a curated **sample** of popular instances to enable apples-to-apples comparisons. 
 
-However, cloud providers update their pricing constantly. While we strive to provide the most accurate and up-to-date directional view of the market, there may be delays between when a provider updates their rates and when our system reflects those changes.
+While we refresh data frequently (at least weekly), cloud providers update their pricing, introduce new instances, and offer private negotiated discounts that are not reflected here.
 
-### Not a substitute for official pricing
+### Official Pricing Calculators
 
-CCC is not the primary source of truth for final billing. Because cloud providers frequently update rates and offer private negotiated discounts, we always recommend that you rely on official provider pricing calculators and your own specific purchase agreements for final financial decisions and negotiations.
+Because CCC is not the primary source of truth for final billing, you must **always** rely on official provider pricing calculators and your own specific purchase agreements for final financial decisions. 
+
+Please refer directly to the official tools for exact quotes:
+- **AWS:** [AWS Pricing Calculator](https://calculator.aws/)
+- **Microsoft Azure:** [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)
+- **Google Cloud:** [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
+- **Oracle Cloud:** [Oracle Cloud Cost Estimator](https://www.oracle.com/cloud/costestimator.html)
+- **DigitalOcean:** [DigitalOcean Pricing](https://www.digitalocean.com/pricing)
 
 ### No warranties or liability
 
-The pricing data on this platform is provided as-is for informational purposes only. We make no warranties regarding accuracy, completeness, or fitness for any particular purpose. Users should independently verify all pricing before making purchasing decisions.
+The pricing data on this platform is provided as-is for informational and comparative purposes only. We make no warranties regarding accuracy, completeness, or fitness for any particular purpose. Users should independently verify all pricing before making purchasing decisions.
 
 ## Contact
 
@@ -189,8 +196,8 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
               <li style={{ marginBottom: '0.6rem' }}>
                 <a href="#pricing-disclaimer">Pricing Disclaimer</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '1rem', marginTop: '0.5rem' }}>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#data-accuracy-and-timeliness" style={{ fontSize: '0.85rem' }}>Data accuracy</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#not-a-substitute-for-official-pricing" style={{ fontSize: '0.85rem' }}>Official pricing</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#directional-and-sample-data-only" style={{ fontSize: '0.85rem' }}>Directional data only</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#official-pricing-calculators" style={{ fontSize: '0.85rem' }}>Official calculators</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#no-warranties-or-liability" style={{ fontSize: '0.85rem' }}>No liability</a></li>
                 </ul>
               </li>
