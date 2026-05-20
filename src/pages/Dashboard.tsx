@@ -1453,7 +1453,7 @@ export default function Dashboard() {
               Compare Cloud Costs (CCC) is a multi-cloud pricing comparison tool that aggregates pricing for our most popular services including database, compute, storage, containers, and serverless across AWS, Microsoft Azure, Google Cloud, Oracle, and DigitalOcean.
             </p>
             <p className="text-[10px] text-[#a3a3a3] dark:text-[#525252] text-center md:text-left mt-2">
-              © 2026 Rodrigo Orzari. All rights reserved.
+              © 2026 <a href="https://www.linkedin.com/in/rodrigoorzari/" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors underline decoration-dotted">Rodrigo Orzari</a>. All rights reserved.
             </p>
           </div>
           
