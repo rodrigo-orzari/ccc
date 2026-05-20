@@ -5,6 +5,11 @@
  * CPU: $0.00002400 per vCPU-second
  * Memory: $0.00000250 per GB-second
  *
+ * Cold Start: ~100-200ms (varies by language and container size)
+ * Timeout: 60 minutes (3600 seconds)
+ * Memory: User-configurable (min 128MB, max 8GB)
+ * Free Tier: 180,000 vCPU-seconds + 360,000 GB-seconds per month
+ *
  * Common configurations: 1, 2, 4 vCPU with proportional memory
  * Note: GCP pricing is vCPU + Memory combined (not just memory like Lambda)
  *
@@ -13,7 +18,23 @@
 
 const GCP_CLOUD_RUN_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'PHP', 'Ruby', 'Any (Container)'];
 
-export const GCP_SERVERLESS = [
+// Helper function to add serverless-specific attributes to Cloud Run entries
+const addGcpServerlessAttributes = (entry: any) => ({
+  ...entry,
+  attributes: {
+    deployment_type: 'Serverless',
+    tier: 'Serverless',
+    cold_start_overhead_ms: 150,
+    timeout_seconds: 3600,
+    memory_configuration: 'user-configurable',
+    invocation_price: 0.0000004,
+    free_vcpu_seconds_per_month: 180000,
+    free_memory_gb_seconds_per_month: 360000,
+    max_memory_gb: 8,
+  }
+});
+
+const baseGcpEntries = [
   // 1 vCPU configurations (512MB to 2GB)
   {
     type: 'CloudRun-1vCPU-512MB',
@@ -92,6 +113,8 @@ export const GCP_SERVERLESS = [
     supportedLanguages: GCP_CLOUD_RUN_LANGUAGES,
   },
 ];
+
+export const GCP_SERVERLESS = baseGcpEntries.map(addGcpServerlessAttributes);
 
 export const GCP_SERVERLESS_REGION = 'us-central1';
 export const GCP_SERVERLESS_GEOGRAPHY = 'N. America';

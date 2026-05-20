@@ -9,11 +9,30 @@
  * All tiers include both x86 and ARM architecture options
  *
  * Supported Languages: Python, Node.js, Java, Go, Ruby, C#
+ * Cold Start: ~100ms (ARM faster than x86)
+ * Timeout: 15 minutes (900 seconds)
+ * Memory: User-configurable
+ * Free Tier: 1M invocations/month
  */
 
 const AWS_LAMBDA_LANGUAGES = ['Python', 'Node.js', 'Java', 'Go', 'Ruby', 'C#'];
 
-export const AWS_SERVERLESS = [
+// Helper function to add serverless-specific attributes to entries
+const addServerlessAttributes = (entry: any) => ({
+  ...entry,
+  attributes: {
+    deployment_type: 'Serverless',
+    tier: 'Serverless',
+    cold_start_overhead_ms: entry.cpuVendor === 'AWS' ? 75 : 100, // ARM is ~25% faster
+    timeout_seconds: 900,
+    memory_configuration: 'user-configurable',
+    invocation_price: 0.0000002, // $0.20 per 1M invocations
+    free_invocations_per_month: 1000000,
+    max_ephemeral_storage_gb: 10,
+  }
+});
+
+const baseAwsEntries = [
   // 128MB tier
   { type: 'Lambda-128MB-x86', vcpus: 1, memory: 0.125, cpuVendor: 'Intel', price: 0.0000166667 * 3600 * 0.125, supportedLanguages: AWS_LAMBDA_LANGUAGES },
   { type: 'Lambda-128MB-ARM', vcpus: 1, memory: 0.125, cpuVendor: 'AWS', price: 0.0000133334 * 3600 * 0.125, supportedLanguages: AWS_LAMBDA_LANGUAGES },
@@ -102,6 +121,8 @@ export const AWS_SERVERLESS = [
   { type: 'Lambda-10GB-x86', vcpus: 1, memory: 10, cpuVendor: 'Intel', price: 0.0000166667 * 3600 * 10, supportedLanguages: AWS_LAMBDA_LANGUAGES },
   { type: 'Lambda-10GB-ARM', vcpus: 1, memory: 10, cpuVendor: 'AWS', price: 0.0000133334 * 3600 * 10, supportedLanguages: AWS_LAMBDA_LANGUAGES },
 ];
+
+export const AWS_SERVERLESS = baseAwsEntries.map(addServerlessAttributes);
 
 export const AWS_SERVERLESS_REGION = 'us-east-1';
 export const AWS_SERVERLESS_GEOGRAPHY = 'N. America';

@@ -67,6 +67,10 @@ const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Ge
 
 // Serverless-view constants
 const SERVERLESS_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'Any (Container)'];
+const SERVERLESS_COLD_START_OPTIONS = ['Fast (< 100ms)', 'Medium (100-200ms)', 'Slow (> 200ms)'];
+const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5 min)', 'Medium (10 min)', 'Long (15+ min)'];
+const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['User-configurable', 'Fixed tiers', 'Automatic'];
+const SERVERLESS_FREE_TIER_OPTIONS = ['Free tier included', 'No free tier'];
 
 const DEFAULT_VCPU_RANGE   = { min: 0,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
@@ -155,6 +159,10 @@ export default function Dashboard() {
 
   // Serverless-specific filter state
   const [selectedServerlessLanguages, setSelectedServerlessLanguages] = useState<string[]>([...SERVERLESS_LANGUAGES]);
+  const [selectedServerlessColdStart, setSelectedServerlessColdStart] = useState<string[]>([...SERVERLESS_COLD_START_OPTIONS]);
+  const [selectedServerlessTimeout, setSelectedServerlessTimeout] = useState<string[]>([...SERVERLESS_TIMEOUT_OPTIONS]);
+  const [selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig] = useState<string[]>([...SERVERLESS_MEMORY_CONFIG_OPTIONS]);
+  const [selectedServerlessFreeTier, setSelectedServerlessFreeTier] = useState<string[]>([...SERVERLESS_FREE_TIER_OPTIONS]);
 
   const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
   const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
@@ -224,6 +232,10 @@ export default function Dashboard() {
     deploymentType: true,
     haMode: true,
     languages: true,
+    coldStart: true,
+    timeout: true,
+    memoryConfig: true,
+    freeTier: true,
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
 
@@ -448,6 +460,18 @@ export default function Dashboard() {
       if (selectedServerlessLanguages.length > 0 && selectedServerlessLanguages.length < SERVERLESS_LANGUAGES.length) {
         params.append('language', selectedServerlessLanguages.join(','));
       }
+      if (selectedServerlessColdStart.length > 0 && selectedServerlessColdStart.length < SERVERLESS_COLD_START_OPTIONS.length) {
+        params.append('coldStart', selectedServerlessColdStart.join(','));
+      }
+      if (selectedServerlessTimeout.length > 0 && selectedServerlessTimeout.length < SERVERLESS_TIMEOUT_OPTIONS.length) {
+        params.append('timeout', selectedServerlessTimeout.join(','));
+      }
+      if (selectedServerlessMemoryConfig.length > 0 && selectedServerlessMemoryConfig.length < SERVERLESS_MEMORY_CONFIG_OPTIONS.length) {
+        params.append('memoryConfig', selectedServerlessMemoryConfig.join(','));
+      }
+      if (selectedServerlessFreeTier.length > 0 && selectedServerlessFreeTier.length < SERVERLESS_FREE_TIER_OPTIONS.length) {
+        params.append('freeTier', selectedServerlessFreeTier.join(','));
+      }
     }
 
     params.append('minVcpu', vCpuRange.min.toString());
@@ -472,7 +496,7 @@ export default function Dashboard() {
     activeProductType,
     selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuIncluded,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
-    selectedServerlessLanguages,
+    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     vCpuRange, memoryRange, priceRange,
   ]);
 
@@ -546,6 +570,18 @@ export default function Dashboard() {
         if (selectedServerlessLanguages.length > 0 && selectedServerlessLanguages.length < SERVERLESS_LANGUAGES.length) {
           baseParams.append('language', selectedServerlessLanguages.join(','));
         }
+        if (selectedServerlessColdStart.length > 0 && selectedServerlessColdStart.length < SERVERLESS_COLD_START_OPTIONS.length) {
+          baseParams.append('coldStart', selectedServerlessColdStart.join(','));
+        }
+        if (selectedServerlessTimeout.length > 0 && selectedServerlessTimeout.length < SERVERLESS_TIMEOUT_OPTIONS.length) {
+          baseParams.append('timeout', selectedServerlessTimeout.join(','));
+        }
+        if (selectedServerlessMemoryConfig.length > 0 && selectedServerlessMemoryConfig.length < SERVERLESS_MEMORY_CONFIG_OPTIONS.length) {
+          baseParams.append('memoryConfig', selectedServerlessMemoryConfig.join(','));
+        }
+        if (selectedServerlessFreeTier.length > 0 && selectedServerlessFreeTier.length < SERVERLESS_FREE_TIER_OPTIONS.length) {
+          baseParams.append('freeTier', selectedServerlessFreeTier.join(','));
+        }
       }
 
       baseParams.append('minVcpu', vCpuRange.min.toString());
@@ -596,7 +632,7 @@ export default function Dashboard() {
     selectedProviders, selectedGeographies,
     selectedOS, selectedCpu, selectedCategory, gpuIncluded,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
-    selectedServerlessLanguages,
+    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     vCpuRange, memoryRange, priceRange, search, showAggregation,
   ]);
 
@@ -1060,6 +1096,114 @@ export default function Dashboard() {
                 </section>
 
                 <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* Serverless: Cold Start Filter */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('coldStart')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.coldStart ? '' : '-rotate-90'}`} />
+                        Cold Start <span title="Filter by cold start latency: Fast (< 100ms), Medium (100-200ms), or Slow (> 200ms)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessColdStart.length === SERVERLESS_COLD_START_OPTIONS.length ? setSelectedServerlessColdStart([]) : setSelectedServerlessColdStart([...SERVERLESS_COLD_START_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessColdStart.length === SERVERLESS_COLD_START_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessColdStart.length === SERVERLESS_COLD_START_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.coldStart && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_COLD_START_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedServerlessColdStart, setSelectedServerlessColdStart, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessColdStart.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* Serverless: Timeout Filter */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('timeout')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.timeout ? '' : '-rotate-90'}`} />
+                        Timeout <span title="Filter by execution timeout: Short (5 min), Medium (10 min), or Long (15+ min)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessTimeout.length === SERVERLESS_TIMEOUT_OPTIONS.length ? setSelectedServerlessTimeout([]) : setSelectedServerlessTimeout([...SERVERLESS_TIMEOUT_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessTimeout.length === SERVERLESS_TIMEOUT_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessTimeout.length === SERVERLESS_TIMEOUT_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.timeout && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_TIMEOUT_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedServerlessTimeout, setSelectedServerlessTimeout, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessTimeout.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* Serverless: Memory Configuration Filter */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('memoryConfig')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.memoryConfig ? '' : '-rotate-90'}`} />
+                        Memory Config <span title="Filter by memory configuration: User-configurable, Fixed tiers, or Automatic." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessMemoryConfig.length === SERVERLESS_MEMORY_CONFIG_OPTIONS.length ? setSelectedServerlessMemoryConfig([]) : setSelectedServerlessMemoryConfig([...SERVERLESS_MEMORY_CONFIG_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessMemoryConfig.length === SERVERLESS_MEMORY_CONFIG_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessMemoryConfig.length === SERVERLESS_MEMORY_CONFIG_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.memoryConfig && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_MEMORY_CONFIG_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessMemoryConfig.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* Serverless: Free Tier Filter */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('freeTier')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.freeTier ? '' : '-rotate-90'}`} />
+                        Free Tier <span title="Filter by free tier availability: Free tier included or No free tier." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessFreeTier.length === SERVERLESS_FREE_TIER_OPTIONS.length ? setSelectedServerlessFreeTier([]) : setSelectedServerlessFreeTier([...SERVERLESS_FREE_TIER_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessFreeTier.length === SERVERLESS_FREE_TIER_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessFreeTier.length === SERVERLESS_FREE_TIER_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.freeTier && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_FREE_TIER_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedServerlessFreeTier, setSelectedServerlessFreeTier, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessFreeTier.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
               </>
             )}
 
@@ -1321,6 +1465,25 @@ export default function Dashboard() {
                         </th>
                         <th data-col="ha_mode_os" onClick={() => handleHeaderClick('attributes.ha_mode')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('ha_mode_os', e); }} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           HA Mode <SortIcon sortKey="attributes.ha_mode" />
+                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
+                      </>
+                    ) : activeProductType === 'serverless' ? (
+                      <>
+                        <th data-col="engine_category" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('engine_category', e); }} style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Cold Start (ms)
+                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} onDoubleClick={(e) => handleResizeDoubleClick('engine_category', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
+                        <th data-col="db_family_cpu_vendor" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('db_family_cpu_vendor', e); }} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Timeout (sec)
+                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} onDoubleClick={(e) => handleResizeDoubleClick('db_family_cpu_vendor', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
+                        <th data-col="deployment_arch" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('deployment_arch', e); }} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Memory Config
+                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} onDoubleClick={(e) => handleResizeDoubleClick('deployment_arch', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
+                        <th data-col="ha_mode_os" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('ha_mode_os', e); }} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Free Tier
                           <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
                       </>

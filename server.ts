@@ -323,7 +323,7 @@ async function startServer() {
       // Database-specific filters
       productType, engine, deploymentType, haMode,
       // Serverless-specific filters
-      language,
+      language, coldStart, timeout, memoryConfig, freeTier,
     } = query;
 
     const conditions: string[] = [];
@@ -373,6 +373,84 @@ async function startServer() {
       const languages = (language as string).split(',');
       conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
       values.push(languages);
+    }
+
+    // Serverless-specific cold start filter
+    if (coldStart) {
+      const coldStartOptions = (coldStart as string).split(',');
+      const coldStartConditions: string[] = [];
+
+      for (const opt of coldStartOptions) {
+        if (opt.includes('Fast')) {
+          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int < 100`);
+        } else if (opt.includes('Medium')) {
+          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int BETWEEN 100 AND 200`);
+        } else if (opt.includes('Slow')) {
+          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int > 200`);
+        }
+      }
+
+      if (coldStartConditions.length > 0) {
+        conditions.push(`(${coldStartConditions.join(' OR ')})`);
+      }
+    }
+
+    // Serverless-specific timeout filter
+    if (timeout) {
+      const timeoutOptions = (timeout as string).split(',');
+      const timeoutConditions: string[] = [];
+
+      for (const opt of timeoutOptions) {
+        if (opt.includes('Short')) {
+          timeoutConditions.push(`(pr.attributes->>'timeout_seconds')::int = 300`);
+        } else if (opt.includes('Medium')) {
+          timeoutConditions.push(`(pr.attributes->>'timeout_seconds')::int = 600`);
+        } else if (opt.includes('Long')) {
+          timeoutConditions.push(`(pr.attributes->>'timeout_seconds')::int >= 900`);
+        }
+      }
+
+      if (timeoutConditions.length > 0) {
+        conditions.push(`(${timeoutConditions.join(' OR ')})`);
+      }
+    }
+
+    // Serverless-specific memory configuration filter
+    if (memoryConfig) {
+      const memoryOptions = (memoryConfig as string).split(',');
+      const memoryConditions: string[] = [];
+
+      for (const opt of memoryOptions) {
+        if (opt.includes('User-configurable')) {
+          memoryConditions.push(`pr.attributes->>'memory_configuration' = 'user-configurable'`);
+        } else if (opt.includes('Fixed')) {
+          memoryConditions.push(`pr.attributes->>'memory_configuration' = 'fixed-tiers'`);
+        } else if (opt.includes('Automatic')) {
+          memoryConditions.push(`pr.attributes->>'memory_configuration' = 'automatic'`);
+        }
+      }
+
+      if (memoryConditions.length > 0) {
+        conditions.push(`(${memoryConditions.join(' OR ')})`);
+      }
+    }
+
+    // Serverless-specific free tier filter
+    if (freeTier) {
+      const freeTierOptions = (freeTier as string).split(',');
+      const freeTierConditions: string[] = [];
+
+      for (const opt of freeTierOptions) {
+        if (opt.includes('Free tier included')) {
+          freeTierConditions.push(`(pr.attributes->>'free_invocations_per_month' IS NOT NULL AND (pr.attributes->>'free_invocations_per_month')::bigint > 0)`);
+        } else if (opt.includes('No free')) {
+          freeTierConditions.push(`(pr.attributes->>'free_invocations_per_month' IS NULL OR (pr.attributes->>'free_invocations_per_month')::bigint = 0)`);
+        }
+      }
+
+      if (freeTierConditions.length > 0) {
+        conditions.push(`(${freeTierConditions.join(' OR ')})`);
+      }
     }
 
     if (minVcpu) { conditions.push(`pr.vcpus >= $${paramCount++}`); values.push(minVcpu); }

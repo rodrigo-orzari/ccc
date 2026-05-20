@@ -7,6 +7,11 @@
  * - After free tier: $0.0000015 per invocation
  * - Per-second execution: Included in the App Platform compute
  *
+ * Cold Start: ~100-150ms (fast startup on shared infrastructure)
+ * Timeout: 600 seconds (10 minutes)
+ * Memory: Automatic allocation (not user-configurable)
+ * Free Tier: 200M invocations/month
+ *
  * DigitalOcean Functions run on shared infrastructure
  * Memory allocation is automatic (not user-configurable)
  * Supported runtimes: Node.js, Python, Go
@@ -16,7 +21,22 @@
 
 const DIGITALOCEAN_FUNCTIONS_LANGUAGES = ['JavaScript', 'Python', 'Go', 'TypeScript'];
 
-export const DIGITALOCEAN_SERVERLESS = [
+// Helper function to add serverless-specific attributes to DigitalOcean entries
+const addDigitaloceanServerlessAttributes = (entry: any) => ({
+  ...entry,
+  attributes: {
+    deployment_type: 'Serverless',
+    tier: 'Serverless',
+    cold_start_overhead_ms: 125,
+    timeout_seconds: 600,
+    memory_configuration: 'automatic',
+    invocation_price: 0.0000015,
+    free_invocations_per_month: 200000000,
+    max_memory_gb: 0.512,
+  }
+});
+
+const baseDigitaloceanEntries = [
   // DigitalOcean Functions - Single Tier (Auto-scaled)
   {
     type: 'AppPlatform-Functions-Shared',
@@ -27,6 +47,8 @@ export const DIGITALOCEAN_SERVERLESS = [
     supportedLanguages: DIGITALOCEAN_FUNCTIONS_LANGUAGES,
   },
 ];
+
+export const DIGITALOCEAN_SERVERLESS = baseDigitaloceanEntries.map(addDigitaloceanServerlessAttributes);
 
 export const DIGITALOCEAN_SERVERLESS_REGION = 'nyc';
 export const DIGITALOCEAN_SERVERLESS_GEOGRAPHY = 'N. America';
