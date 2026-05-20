@@ -37,6 +37,17 @@ We break down compute, storage, networking, and support costs so you see exactly
 
 We provide insights into right-sizing and regional price differences before deployment, complementing your existing reactive FinOps tools.
 
+### Directional Estimates, Not Official Quotes
+
+It is important to note that the data on CCC serves as a **directional indicator** or a sample of popular instances, designed to highlight architectural cost differences across clouds. It is not a substitute for an official quote.
+
+Always verify your final estimates using the official calculators:
+- [AWS Pricing Calculator](https://calculator.aws/)
+- [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)
+- [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
+- [Oracle Cloud Cost Estimator](https://www.oracle.com/cloud/costestimator.html)
+- [DigitalOcean Pricing](https://www.digitalocean.com/pricing)
+
 ---
 
 [Terms of Use](/terms) | [Privacy Policy](/privacy) | [Contact Us](mailto:hello@comparecloudcosts.com)
@@ -153,6 +164,7 @@ We provide insights into right-sizing and regional price differences before depl
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li style={{ marginBottom: '0.6rem' }}><a href="#why-we-built-this">Why we built this</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#features">Features</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#directional-estimates-not-official-quotes">Directional Estimates</a></li>
             </ul>
           </nav>
         </aside>
