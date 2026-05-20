@@ -427,9 +427,9 @@ async function startServer() {
       const memoryConditions: string[] = [];
 
       for (const opt of memoryOptions) {
-        if (opt.includes('User-configurable')) {
+        if (opt.includes('Configurable')) {
           memoryConditions.push(`pr.attributes->>'memory_configuration' = 'user-configurable'`);
-        } else if (opt.includes('Fixed')) {
+        } else if (opt.includes('Tiers')) {
           memoryConditions.push(`pr.attributes->>'memory_configuration' = 'fixed-tiers'`);
         } else if (opt.includes('Automatic')) {
           memoryConditions.push(`pr.attributes->>'memory_configuration' = 'automatic'`);
@@ -447,9 +447,9 @@ async function startServer() {
       const freeTierConditions: string[] = [];
 
       for (const opt of freeTierOptions) {
-        if (opt.includes('Free tier included')) {
+        if (opt === 'Included') {
           freeTierConditions.push(`(pr.attributes->>'free_invocations_per_month' IS NOT NULL AND (pr.attributes->>'free_invocations_per_month')::bigint > 0)`);
-        } else if (opt.includes('No free')) {
+        } else if (opt === 'Not included') {
           freeTierConditions.push(`(pr.attributes->>'free_invocations_per_month' IS NULL OR (pr.attributes->>'free_invocations_per_month')::bigint = 0)`);
         }
       }

@@ -36,6 +36,10 @@ interface PricingRecord {
     storage_type?: string;
     workload?: string;
     tier?: string;
+    cold_start_overhead_ms?: string | number;
+    timeout_seconds?: string | number;
+    memory_configuration?: string;
+    free_invocations_per_month?: string | number;
   };
 }
 
@@ -69,8 +73,8 @@ const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Ge
 const SERVERLESS_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'TypeScript', 'Any (Container)'];
 const SERVERLESS_COLD_START_OPTIONS = ['Fast < 100', 'Medium 100-200', 'Slow > 200'];
 const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5)', 'Medium (10)', 'Long (15+)'];
-const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['User-configurable', 'Fixed tiers', 'Automatic'];
-const SERVERLESS_FREE_TIER_OPTIONS = ['Free tier included', 'No free tier'];
+const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['Configurable', 'Tiers', 'Automatic'];
+const SERVERLESS_FREE_TIER_OPTIONS = ['Included', 'Not included'];
 
 const DEFAULT_VCPU_RANGE   = { min: 0,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
@@ -1157,7 +1161,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('memoryConfig')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.memoryConfig ? '' : '-rotate-90'}`} />
-                        Memory Config <span title="Filter by memory configuration: User-configurable, Fixed tiers, or Automatic." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Memory Config <span title="Filter by memory configuration: Configurable, Tiers, or Automatic." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessMemoryConfig.length === SERVERLESS_MEMORY_CONFIG_OPTIONS.length ? setSelectedServerlessMemoryConfig([]) : setSelectedServerlessMemoryConfig([...SERVERLESS_MEMORY_CONFIG_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessMemoryConfig.length === SERVERLESS_MEMORY_CONFIG_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1184,7 +1188,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('freeTier')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.freeTier ? '' : '-rotate-90'}`} />
-                        Free Tier <span title="Filter by free tier availability: Free tier included or No free tier." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Free Tier <span title="Filter by free tier availability: Included or Not included." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessFreeTier.length === SERVERLESS_FREE_TIER_OPTIONS.length ? setSelectedServerlessFreeTier([]) : setSelectedServerlessFreeTier([...SERVERLESS_FREE_TIER_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessFreeTier.length === SERVERLESS_FREE_TIER_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1597,7 +1601,7 @@ export default function Dashboard() {
                             <td data-col="ha_mode_os" style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 whitespace-nowrap text-center">
                               {(() => {
                                 const freeInvocations = record.attributes?.free_invocations_per_month;
-                                const hasFreeTier = freeInvocations && parseInt(freeInvocations) > 0;
+                                const hasFreeTier = freeInvocations && Number(freeInvocations) > 0;
                                 return (
                                   <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
                                     hasFreeTier
