@@ -17,35 +17,6 @@ In modern cloud engineering and FinOps, **apples-to-apples price comparison** ac
 
 ## 2. Architectural Design
 
-```mermaid
-graph TD
-    subgraph Frontend [React SPA (Vite + TypeScript)]
-        UI[Dashboard / Informational Pages]
-        Filter[Sidebar Filter States]
-        UI -->|GET /api/pricing| Filter
-    end
-
-    subgraph Backend [Express API (Node.js + tsx)]
-        Srv[server.ts]
-        Router[API Router]
-        Cron[Weekly node-cron Worker]
-        Pipe[Pricing & Database Pipelines]
-        Mailer[Nodemailer Services]
-        
-        Srv --> Router
-        Srv --> Cron
-        Cron --> Pipe
-        Pipe --> Mailer
-    end
-
-    subgraph Storage [PostgreSQL Database]
-        Schema[schema.sql]
-        Data[(Providers, Regions, Services, Pricing Records)]
-        Router -->|Query Pricing| Data
-        Pipe -->|Batch Insert / Delete| Data
-    end
-```
-
 The application is structured as a monorepo deploying a **Single Page Application (SPA) backend-integration**:
 * **Frontend**: React + TypeScript client built using Vite, styled with Tailwind CSS, and powered by Motion for micro-animations.
 * **Backend**: Express.js server written in TypeScript (executed using `tsx` utility). In development, it acts as a Vite dev-server middleware. In production, it serves precompiled assets and functions as a standard REST API.
