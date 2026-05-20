@@ -614,31 +614,11 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-4 ml-2">
-            {dbStatus?.lastUpdated && (
-              <>
-                <span className="text-xs text-[#737373] flex items-center gap-1">
-                  Price information as of {new Date(dbStatus.lastUpdated).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-                </span>
-                <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
-              </>
-            )}
-            <Link to="/about" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              What is CompareCloudCosts.com? <Maximize2 size={10} />
-            </Link>
-            <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
-            <Link to="/privacy" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              Privacy Policy <Maximize2 size={10} />
-            </Link>
-            <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
-            <Link to="/terms" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              Terms of Use <Maximize2 size={10} />
-            </Link>
-            <div className="w-px h-3 bg-[#e5e5e5] dark:border-[#262626]" />
-            <a href="mailto:hello@comparecloudcosts.com" className="text-xs text-[#737373] flex items-center gap-1 hover:text-black dark:hover:text-white">
-              Contact us <Maximize2 size={10} />
-            </a>
-          </div>
+          {dbStatus?.lastUpdated && (
+            <span className="text-xs text-[#737373] flex items-center gap-1">
+              Price information as of {new Date(dbStatus.lastUpdated).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+            </span>
+          )}
         </div>
       </nav>
 
@@ -1458,7 +1438,7 @@ export default function Dashboard() {
               </span>
             </Link>
             <p className="text-[11px] text-[#737373] dark:text-[#a3a3a3] text-center md:text-left max-w-md mt-1 leading-relaxed">
-              Compare Cloud Costs (CCC) is a multi-cloud pricing comparison tool that aggregates database and compute rates from AWS, Microsoft Azure, Google Cloud, Oracle, and DigitalOcean.
+              Compare Cloud Costs (CCC) is a multi-cloud pricing comparison tool that aggregates pricing for our most popular services including database, compute, storage, containers, and serverless across AWS, Microsoft Azure, Google Cloud, Oracle, and DigitalOcean.
             </p>
           </div>
           
