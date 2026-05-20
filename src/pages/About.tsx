@@ -51,6 +51,10 @@ Always verify your final estimates using the official calculators:
 ---
 
 [Terms of Use](/terms) | [Privacy Policy](/privacy) | [Contact Us](mailto:hello@comparecloudcosts.com)
+
+---
+
+© 2026 [Rodrigo Orzari](https://www.linkedin.com/in/rodrigoorzari/). All rights reserved.
 `;
 
   return (
