@@ -395,6 +395,12 @@ async function startServer() {
       }
     }
 
+    // Ensure serverless product type includes DigitalOcean (which uses 'serverless' category)
+    // DigitalOcean Functions are stored with service category 'serverless'
+    if (resolvedProductType === 'serverless') {
+      // Already filtered by s.category = 'serverless' above
+    }
+
     // Serverless-specific timeout filter
     if (timeout) {
       const timeoutOptions = (timeout as string).split(',');
