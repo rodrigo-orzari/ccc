@@ -1,6 +1,15 @@
 # Compare Cloud Costs
 
-This is a full-stack cloud pricing comparison app. Stack: React + TypeScript (Vite) frontend, Node/Express backend (server.ts), PostgreSQL DB, hosted on DigitalOcean App Platform.
+This is a full-stack cloud pricing comparison app. Stack: React + TypeScript (Vite) frontend, Node/Express backend (server.ts), PostgreSQL DB.
+
+## Live Deployment
+
+The application is deployed live and fully functional at [comparecloudcosts.com](http://comparecloudcosts.com).
+
+This project is hosted on the **DigitalOcean App Platform**. To help keep this service running live without requiring users to host their own instances, please consider using our DigitalOcean referral link when creating a new account to grant the project free hosting credits:
+
+<a href="https://www.digitalocean.com/?refcode=23d2b384f3b1&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%203.svg" alt="DigitalOcean Referral Badge" /></a>
+
 
 ## 1. What Problem Does This Application Solve?
 In modern cloud engineering and FinOps, **apples-to-apples price comparison** across multiple cloud providers is a major pain point. 
