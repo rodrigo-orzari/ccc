@@ -23,11 +23,15 @@ const addServerlessAttributes = (entry: any) => ({
   attributes: {
     deployment_type: 'Serverless',
     tier: 'Serverless',
-    cold_start_overhead_ms: entry.cpuVendor === 'AWS' ? 75 : 100, // ARM is ~25% faster
+    cold_start_overhead_ms: 'Fast < 100', // ARM is ~25% faster
     timeout_seconds: 900,
     memory_configuration: 'user-configurable',
     invocation_price: 0.0000002, // $0.20 per 1M invocations
     free_invocations_per_month: 1000000,
+    billing_granularity_ms: 1,
+    invocation_price_per_1m: 0.20,
+    execution_model: 'Both',
+    provisioned_concurrency_support: 'Yes',
     max_ephemeral_storage_gb: 10,
   }
 });
@@ -48,7 +52,6 @@ const baseAwsEntries = [
   // 1GB tier
   { type: 'Lambda-1GB-x86', vcpus: 1, memory: 1, cpuVendor: 'Intel', price: 0.0000166667 * 3600 * 1, supportedLanguages: AWS_LAMBDA_LANGUAGES },
   { type: 'Lambda-1GB-ARM', vcpus: 1, memory: 1, cpuVendor: 'AWS', price: 0.0000133334 * 3600 * 1, supportedLanguages: AWS_LAMBDA_LANGUAGES },
-
   // 1.5GB tier
   { type: 'Lambda-1536MB-x86', vcpus: 1, memory: 1.5, cpuVendor: 'Intel', price: 0.0000166667 * 3600 * 1.5, supportedLanguages: AWS_LAMBDA_LANGUAGES },
   { type: 'Lambda-1536MB-ARM', vcpus: 1, memory: 1.5, cpuVendor: 'AWS', price: 0.0000133334 * 3600 * 1.5, supportedLanguages: AWS_LAMBDA_LANGUAGES },

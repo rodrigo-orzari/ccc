@@ -33,6 +33,11 @@ const addDigitaloceanServerlessAttributes = (entry: any) => ({
     invocation_price: 0.0000015,
     free_invocations_per_month: 200000000,
     max_memory_gb: 0.512,
+    billing_granularity_ms: 100,
+    invocation_price_per_1m: 1.50,
+    execution_model: 'Both',
+    provisioned_concurrency_support: 'No',
+    max_ephemeral_storage_gb: 0.512,
   }
 });
 

@@ -40,6 +40,11 @@ interface PricingRecord {
     timeout_seconds?: string | number;
     memory_configuration?: string;
     free_invocations_per_month?: string | number;
+    billing_granularity_ms?: number | string;
+    invocation_price_per_1m?: number | string;
+    execution_model?: string;
+    provisioned_concurrency_support?: string;
+    max_ephemeral_storage_gb?: number | string;
   };
 }
 
@@ -75,6 +80,10 @@ const SERVERLESS_COLD_START_OPTIONS = ['Fast < 100', 'Medium 100-200', 'Slow > 2
 const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5)', 'Medium (10)', 'Long (15+)'];
 const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['Configurable', 'Tiers', 'Automatic'];
 const SERVERLESS_FREE_TIER_OPTIONS = ['Included', 'Not included'];
+const SERVERLESS_GRANULARITY_OPTIONS = ['1ms', '100ms'];
+const SERVERLESS_EXECUTION_MODEL_OPTIONS = ['Both', 'Code (ZIP)', 'Container Image'];
+const SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS = ['Yes', 'No'];
+const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1GB', '1GB - 5GB', '> 5GB'];
 
 const DEFAULT_VCPU_RANGE   = { min: 0,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
@@ -167,6 +176,10 @@ export default function Dashboard() {
   const [selectedServerlessTimeout, setSelectedServerlessTimeout] = useState<string[]>([...SERVERLESS_TIMEOUT_OPTIONS]);
   const [selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig] = useState<string[]>([...SERVERLESS_MEMORY_CONFIG_OPTIONS]);
   const [selectedServerlessFreeTier, setSelectedServerlessFreeTier] = useState<string[]>([...SERVERLESS_FREE_TIER_OPTIONS]);
+  const [selectedServerlessGranularity, setSelectedServerlessGranularity] = useState<string[]>([...SERVERLESS_GRANULARITY_OPTIONS]);
+  const [selectedServerlessExecutionModel, setSelectedServerlessExecutionModel] = useState<string[]>([...SERVERLESS_EXECUTION_MODEL_OPTIONS]);
+  const [selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency] = useState<string[]>([...SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]);
+  const [selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage] = useState<string[]>([...SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]);
 
   const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
   const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
@@ -194,6 +207,11 @@ export default function Dashboard() {
     memory_gb: 100,
     price_per_unit: 130,
     source: 80,
+    granularity: 120,
+    exec_model: 120,
+    prov_concurrency: 130,
+    max_storage: 120,
+    inv_price: 130,
   });
   const [resizingColumnId, setResizingColumnId] = useState<string | null>(null);
   const [resizeStartX, setResizeStartX] = useState(0);
@@ -240,6 +258,10 @@ export default function Dashboard() {
     timeout: true,
     memoryConfig: true,
     freeTier: true,
+    granularity: true,
+    executionModel: true,
+    provisionedConcurrency: true,
+    ephemeralStorage: true,
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
 
@@ -506,6 +528,18 @@ export default function Dashboard() {
       if (selectedServerlessFreeTier.length > 0 && selectedServerlessFreeTier.length < SERVERLESS_FREE_TIER_OPTIONS.length) {
         params.append('freeTier', selectedServerlessFreeTier.join(','));
       }
+      if (selectedServerlessGranularity.length > 0 && selectedServerlessGranularity.length < SERVERLESS_GRANULARITY_OPTIONS.length) {
+        params.append('billingGranularity', selectedServerlessGranularity.join(','));
+      }
+      if (selectedServerlessExecutionModel.length > 0 && selectedServerlessExecutionModel.length < SERVERLESS_EXECUTION_MODEL_OPTIONS.length) {
+        params.append('executionModel', selectedServerlessExecutionModel.join(','));
+      }
+      if (selectedServerlessProvisionedConcurrency.length > 0 && selectedServerlessProvisionedConcurrency.length < SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length) {
+        params.append('provisionedConcurrency', selectedServerlessProvisionedConcurrency.join(','));
+      }
+      if (selectedServerlessEphemeralStorage.length > 0 && selectedServerlessEphemeralStorage.length < SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) {
+        params.append('ephemeralStorage', selectedServerlessEphemeralStorage.join(','));
+      }
     }
 
     params.append('minVcpu', vCpuRange.min.toString());
@@ -531,6 +565,7 @@ export default function Dashboard() {
     selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuIncluded,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
+    selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     vCpuRange, memoryRange, priceRange,
   ]);
 
@@ -563,7 +598,11 @@ export default function Dashboard() {
       selectedServerlessColdStart.length === 0 ||
       selectedServerlessTimeout.length === 0 ||
       selectedServerlessMemoryConfig.length === 0 ||
-      selectedServerlessFreeTier.length === 0
+      selectedServerlessFreeTier.length === 0 ||
+      selectedServerlessGranularity.length === 0 ||
+      selectedServerlessExecutionModel.length === 0 ||
+      selectedServerlessProvisionedConcurrency.length === 0 ||
+      selectedServerlessEphemeralStorage.length === 0
     )) {
       setData([]);
       setProviderCounts({});
@@ -622,6 +661,18 @@ export default function Dashboard() {
         if (selectedServerlessFreeTier.length > 0 && selectedServerlessFreeTier.length < SERVERLESS_FREE_TIER_OPTIONS.length) {
           baseParams.append('freeTier', selectedServerlessFreeTier.join(','));
         }
+        if (selectedServerlessGranularity.length > 0 && selectedServerlessGranularity.length < SERVERLESS_GRANULARITY_OPTIONS.length) {
+          baseParams.append('billingGranularity', selectedServerlessGranularity.join(','));
+        }
+        if (selectedServerlessExecutionModel.length > 0 && selectedServerlessExecutionModel.length < SERVERLESS_EXECUTION_MODEL_OPTIONS.length) {
+          baseParams.append('executionModel', selectedServerlessExecutionModel.join(','));
+        }
+        if (selectedServerlessProvisionedConcurrency.length > 0 && selectedServerlessProvisionedConcurrency.length < SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length) {
+          baseParams.append('provisionedConcurrency', selectedServerlessProvisionedConcurrency.join(','));
+        }
+        if (selectedServerlessEphemeralStorage.length > 0 && selectedServerlessEphemeralStorage.length < SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) {
+          baseParams.append('ephemeralStorage', selectedServerlessEphemeralStorage.join(','));
+        }
       }
 
       baseParams.append('minVcpu', vCpuRange.min.toString());
@@ -673,6 +724,7 @@ export default function Dashboard() {
     selectedOS, selectedCpu, selectedCategory, gpuIncluded,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
+    selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     vCpuRange, memoryRange, priceRange, search, showAggregation,
   ]);
 
@@ -1244,6 +1296,113 @@ export default function Dashboard() {
                 </section>
 
                 <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+                {/* Serverless: Granularity Filter */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('granularity')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.granularity ? '' : '-rotate-90'}`} />
+                        Billing Granularity <span title="Filter by minimum billing increment (e.g., 1ms vs 100ms)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessGranularity.length === SERVERLESS_GRANULARITY_OPTIONS.length ? setSelectedServerlessGranularity([]) : setSelectedServerlessGranularity([...SERVERLESS_GRANULARITY_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessGranularity.length === SERVERLESS_GRANULARITY_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessGranularity.length === SERVERLESS_GRANULARITY_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.granularity && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_GRANULARITY_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedServerlessGranularity, setSelectedServerlessGranularity, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessGranularity.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* Serverless: Execution Model Filter */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('executionModel')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.executionModel ? '' : '-rotate-90'}`} />
+                        Execution Model <span title="Filter by supported deployment formats: Code (ZIP), Container Image, or Both." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessExecutionModel.length === SERVERLESS_EXECUTION_MODEL_OPTIONS.length ? setSelectedServerlessExecutionModel([]) : setSelectedServerlessExecutionModel([...SERVERLESS_EXECUTION_MODEL_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessExecutionModel.length === SERVERLESS_EXECUTION_MODEL_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessExecutionModel.length === SERVERLESS_EXECUTION_MODEL_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.executionModel && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_EXECUTION_MODEL_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedServerlessExecutionModel, setSelectedServerlessExecutionModel, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessExecutionModel.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* Serverless: Provisioned Concurrency Filter */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('provisionedConcurrency')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.provisionedConcurrency ? '' : '-rotate-90'}`} />
+                        Prov. Concurrency <span title="Filter by ability to pay for pre-warmed instances." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessProvisionedConcurrency.length === SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length ? setSelectedServerlessProvisionedConcurrency([]) : setSelectedServerlessProvisionedConcurrency([...SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessProvisionedConcurrency.length === SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessProvisionedConcurrency.length === SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.provisionedConcurrency && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessProvisionedConcurrency.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* Serverless: Ephemeral Storage Filter */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('ephemeralStorage')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.ephemeralStorage ? '' : '-rotate-90'}`} />
+                        Max Storage (GB) <span title="Filter by maximum available temporary disk space." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedServerlessEphemeralStorage.length === SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length ? setSelectedServerlessEphemeralStorage([]) : setSelectedServerlessEphemeralStorage([...SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessEphemeralStorage.length === SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedServerlessEphemeralStorage.length === SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.ephemeralStorage && (
+                  <div className="flex flex-wrap gap-2">
+                    {SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedServerlessEphemeralStorage.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
               </>
             )}
 
@@ -1526,6 +1685,26 @@ export default function Dashboard() {
                           Free Tier
                           <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
                         </th>
+                        <th data-col="granularity" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('granularity', e); }} style={{ width: columnWidths['granularity'], minWidth: columnWidths['granularity'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Granularity
+                          <div onMouseDown={(e) => handleResizeMouseDown('granularity', e)} onDoubleClick={(e) => handleResizeDoubleClick('granularity', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
+                        <th data-col="exec_model" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('exec_model', e); }} style={{ width: columnWidths['exec_model'], minWidth: columnWidths['exec_model'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Exec. Model
+                          <div onMouseDown={(e) => handleResizeMouseDown('exec_model', e)} onDoubleClick={(e) => handleResizeDoubleClick('exec_model', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
+                        <th data-col="prov_concurrency" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('prov_concurrency', e); }} style={{ width: columnWidths['prov_concurrency'], minWidth: columnWidths['prov_concurrency'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Prov. Concurrency
+                          <div onMouseDown={(e) => handleResizeMouseDown('prov_concurrency', e)} onDoubleClick={(e) => handleResizeDoubleClick('prov_concurrency', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
+                        <th data-col="max_storage" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('max_storage', e); }} style={{ width: columnWidths['max_storage'], minWidth: columnWidths['max_storage'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Max Storage
+                          <div onMouseDown={(e) => handleResizeMouseDown('max_storage', e)} onDoubleClick={(e) => handleResizeDoubleClick('max_storage', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
+                        <th data-col="inv_price" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('inv_price', e); }} style={{ width: columnWidths['inv_price'], minWidth: columnWidths['inv_price'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Inv. Price ($/1M)
+                          <div onMouseDown={(e) => handleResizeMouseDown('inv_price', e)} onDoubleClick={(e) => handleResizeDoubleClick('inv_price', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                        </th>
                       </>
                     ) : (
                       <>
@@ -1648,6 +1827,32 @@ export default function Dashboard() {
                                   </span>
                                 );
                               })()}
+                            </td>
+                            <td data-col="granularity" style={{ width: columnWidths['granularity'], minWidth: columnWidths['granularity'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity_ms ? `${record.attributes.billing_granularity_ms}ms` : '—'}</span>
+                            </td>
+                            <td data-col="exec_model" style={{ width: columnWidths['exec_model'], minWidth: columnWidths['exec_model'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model || '—'}</span>
+                            </td>
+                            <td data-col="prov_concurrency" style={{ width: columnWidths['prov_concurrency'], minWidth: columnWidths['prov_concurrency'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              {(() => {
+                                const provSupport = record.attributes?.provisioned_concurrency_support;
+                                return (
+                                  <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
+                                    provSupport === 'Yes'
+                                      ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20'
+                                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
+                                  }`}>
+                                    {provSupport || '—'}
+                                  </span>
+                                );
+                              })()}
+                            </td>
+                            <td data-col="max_storage" style={{ width: columnWidths['max_storage'], minWidth: columnWidths['max_storage'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb ? `${record.attributes.max_ephemeral_storage_gb} GB` : '—'}</span>
+                            </td>
+                            <td data-col="inv_price" style={{ width: columnWidths['inv_price'], minWidth: columnWidths['inv_price'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}</span>
                             </td>
                           </>
                         ) : (

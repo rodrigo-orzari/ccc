@@ -30,6 +30,11 @@ const addAzureServerlessAttributes = (entry: any) => ({
     free_executions_per_month: 1000000,
     free_gb_seconds_per_month: 400000,
     max_memory_gb: 1.75,
+    billing_granularity_ms: 1,
+    invocation_price_per_1m: 0.20,
+    execution_model: 'Both',
+    provisioned_concurrency_support: 'Yes',
+    max_ephemeral_storage_gb: 1.5,
   }
 });
 
