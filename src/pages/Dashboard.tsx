@@ -193,35 +193,7 @@ export default function Dashboard() {
   const [dbStatus, setDbStatus] = useState<{ total: number, providers: any[], lastUpdated: string | null } | null>(null);
   const [providerCounts, setProviderCounts] = useState<Record<string, number>>({});
 
-  // Column resize state
-  const [columnWidths, setColumnWidths] = useState<Record<string, number>>({
-    provider: 120,
-    instance_type: 160,
-    engine_category: 130,
-    db_family_cpu_vendor: 150,
-    deployment_arch: 130,
-    ha_mode_os: 120,
-    gpu: 70,
-    geography: 130,
-    vcpus: 80,
-    memory_gb: 100,
-    price_per_unit: 130,
-    source: 80,
-    granularity: 120,
-    exec_model: 120,
-    prov_concurrency: 130,
-    max_storage: 120,
-    inv_price: 130,
-  });
-  const [resizingColumnId, setResizingColumnId] = useState<string | null>(null);
-  const [resizeStartX, setResizeStartX] = useState(0);
-  // True when the pointer actually moved during a resize drag. Used to suppress
-  // the th onClick sort that would otherwise fire after every mouseup.
-  const resizeDraggedRef = useRef(false);
 
-  // Tracks which product types have already been auto-fitted so we only run
-  // the initial column-width measurement once per tab switch per page session.
-  const autoSizedFor = useRef(new Set<ProductType>());
 
   // Ref + state for the table scroll container, used to detect whether there
   // is actual horizontal overflow and to show / hide the right-edge fade hint.
@@ -229,14 +201,6 @@ export default function Dashboard() {
   const [hasHorizontalOverflow, setHasHorizontalOverflow] = useState(false);
   const [scrolledToEnd, setScrolledToEnd] = useState(false);
 
-  // Sum of active column widths. The GPU column only exists in VM view, so
-  // exclude it from the DB view total to avoid a 70px phantom gap.
-  const totalTableWidth = useMemo(() => {
-    const keys = Object.keys(columnWidths).filter(
-      k => k !== 'gpu' || activeProductType === 'vm'
-    );
-    return keys.reduce((sum, k) => sum + columnWidths[k], 0);
-  }, [columnWidths, activeProductType]);
 
   // Sidebar section expand/collapse state — all expanded by default; user can
   // collapse top sections to make the bottom ones (vCPU/Memory/Price sliders)
@@ -265,72 +229,7 @@ export default function Dashboard() {
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
 
-  // Load column widths from localStorage on mount.
-  // Merge over defaults so any new columns added after the user's last visit
-  // still get their initial widths (e.g. the gpu column added in a later deploy).
-  useEffect(() => {
-    const stored = localStorage.getItem('comparecloudcosts_columnWidths');
-    if (stored) {
-      try {
-        setColumnWidths(prev => ({ ...prev, ...JSON.parse(stored) }));
-      } catch (e) {
-        console.error('Failed to parse stored column widths:', e);
-      }
-    }
-  }, []);
 
-  // Save column widths to localStorage whenever they change
-  useEffect(() => {
-    localStorage.setItem('comparecloudcosts_columnWidths', JSON.stringify(columnWidths));
-  }, [columnWidths]);
-
-  // Auto-fit all column widths to actual rendered content on the first data
-  // load for each product type. Two nested rAFs ensure the DOM has fully
-  // painted before we measure scrollWidth so long SKU names are captured.
-  useEffect(() => {
-    if (loading || data.length === 0) return;
-    if (autoSizedFor.current.has(activeProductType)) return;
-
-    let raf1: number, raf2: number;
-    raf1 = requestAnimationFrame(() => {
-      raf2 = requestAnimationFrame(() => {
-        const colIds = [
-          'provider', 'instance_type', 'engine_category', 'db_family_cpu_vendor',
-          'deployment_arch', 'ha_mode_os', 'geography', 'vcpus', 'memory_gb',
-          'price_per_unit', 'source',
-        ];
-        if (activeProductType === 'vm') colIds.push('gpu');
-
-        const newWidths: Record<string, number> = {};
-        for (const colId of colIds) {
-          const cells = document.querySelectorAll<HTMLElement>(`[data-col="${colId}"]`);
-          
-          // Temporarily remove fixed widths to measure natural content width
-          const originalStyles: {el: HTMLElement, width: string, minWidth: string}[] = [];
-          cells.forEach(el => {
-            originalStyles.push({ el, width: el.style.width, minWidth: el.style.minWidth });
-            el.style.width = 'auto';
-            el.style.minWidth = 'auto';
-          });
-
-          let max = 60;
-          // Add a small buffer (24px) for padding/borders to ensure proportional but not cramped fit
-          cells.forEach(el => { max = Math.max(max, el.scrollWidth + 24); });
-          newWidths[colId] = max;
-
-          // Restore styles
-          originalStyles.forEach(({el, width, minWidth}) => {
-            el.style.width = width;
-            el.style.minWidth = minWidth;
-          });
-        }
-        setColumnWidths(prev => ({ ...prev, ...newWidths }));
-        autoSizedFor.current.add(activeProductType);
-      });
-    });
-
-    return () => { cancelAnimationFrame(raf1); cancelAnimationFrame(raf2); };
-  }, [loading, data, activeProductType]);
 
   // Watch the table scroll container for horizontal overflow + scroll position.
   // The fade-right hint is shown when the inner content is wider than the
@@ -356,7 +255,7 @@ export default function Dashboard() {
       el.removeEventListener('scroll', update);
       ro.disconnect();
     };
-  }, [totalTableWidth, data.length, activeProductType]);
+  }, [data.length, activeProductType]);
 
   const sortData = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
@@ -392,44 +291,14 @@ export default function Dashboard() {
     setData(sorted);
   };
 
-  const handleResizeMouseDown = (columnId: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    resizeDraggedRef.current = false;
-    setResizingColumnId(columnId);
-    setResizeStartX(e.clientX);
-  };
 
   // Sort click that no-ops when the user just finished a resize drag.
   // Not memoized — must close over the current sortData so it sees fresh data.
   const handleHeaderClick = (key: string) => {
-    if (resizeDraggedRef.current) { resizeDraggedRef.current = false; return; }
     sortData(key);
   };
 
   // Double-click on a resize handle → auto-fit column to widest visible cell.
-  const handleResizeDoubleClick = useCallback((columnId: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    const cells = document.querySelectorAll<HTMLElement>(`[data-col="${columnId}"]`);
-    
-    const originalStyles: {el: HTMLElement, width: string, minWidth: string}[] = [];
-    cells.forEach(el => {
-      originalStyles.push({ el, width: el.style.width, minWidth: el.style.minWidth });
-      el.style.width = 'auto';
-      el.style.minWidth = 'auto';
-    });
-
-    let max = 60;
-    cells.forEach(el => { max = Math.max(max, el.scrollWidth + 24); });
-
-    originalStyles.forEach(({el, width, minWidth}) => {
-      el.style.width = width;
-      el.style.minWidth = minWidth;
-    });
-
-    setColumnWidths(prev => ({ ...prev, [columnId]: max }));
-  }, []);
 
   const SortIcon = ({ sortKey }: { sortKey: string }) => {
     const isActive = sortConfig.key === sortKey;
@@ -440,34 +309,6 @@ export default function Dashboard() {
     );
   };
 
-  useEffect(() => {
-    if (!resizingColumnId) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      resizeDraggedRef.current = true;
-      const delta = e.clientX - resizeStartX;
-      const currentWidth = columnWidths[resizingColumnId];
-      const newWidth = Math.max(80, Math.min(400, currentWidth + delta));
-
-      setColumnWidths(prev => ({
-        ...prev,
-        [resizingColumnId]: newWidth
-      }));
-      setResizeStartX(e.clientX);
-    };
-
-    const handleMouseUp = () => {
-      setResizingColumnId(null);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [resizingColumnId, resizeStartX, columnWidths]);
 
   useEffect(() => {
     const isDb = activeProductType === 'database';
@@ -1636,119 +1477,119 @@ export default function Dashboard() {
           >
             {/* Explicit-width block wrapper so overflow-auto reliably detects
                 horizontal overflow and shows the scrollbar in all browsers. */}
-            <div style={{ width: totalTableWidth }}>
-              <table className="border-collapse w-full" style={{ tableLayout: 'fixed' }}>
+            <div className="w-full">
+              <table className="border-collapse w-full table-auto">
                 <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
                   <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
-                    <th data-col="provider" onClick={() => handleHeaderClick('provider')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('provider', e); }} style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                    <th data-col="provider" onClick={() => handleHeaderClick('provider')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                       Provider <SortIcon sortKey="provider" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('provider', e)} onDoubleClick={(e) => handleResizeDoubleClick('provider', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      
                     </th>
-                    <th data-col="instance_type" onClick={() => handleHeaderClick('instance_type')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('instance_type', e); }} style={{ width: columnWidths['instance_type'], minWidth: columnWidths['instance_type'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                    <th data-col="instance_type" onClick={() => handleHeaderClick('instance_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                       SKU <SortIcon sortKey="instance_type" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('instance_type', e)} onDoubleClick={(e) => handleResizeDoubleClick('instance_type', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      
                     </th>
                     {activeProductType === 'database' ? (
                       <>
-                        <th data-col="engine_category" onClick={() => handleHeaderClick('attributes.engine')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('engine_category', e); }} style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="engine_category" onClick={() => handleHeaderClick('attributes.engine')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Engine <SortIcon sortKey="attributes.engine" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} onDoubleClick={(e) => handleResizeDoubleClick('engine_category', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="db_family_cpu_vendor" onClick={() => handleHeaderClick('attributes.tier')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('db_family_cpu_vendor', e); }} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="db_family_cpu_vendor" onClick={() => handleHeaderClick('attributes.tier')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Tier <SortIcon sortKey="attributes.tier" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} onDoubleClick={(e) => handleResizeDoubleClick('db_family_cpu_vendor', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="deployment_arch" onClick={() => handleHeaderClick('attributes.deployment_type')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('deployment_arch', e); }} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="deployment_arch" onClick={() => handleHeaderClick('attributes.deployment_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Deployment <SortIcon sortKey="attributes.deployment_type" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} onDoubleClick={(e) => handleResizeDoubleClick('deployment_arch', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="ha_mode_os" onClick={() => handleHeaderClick('attributes.ha_mode')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('ha_mode_os', e); }} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="ha_mode_os" onClick={() => handleHeaderClick('attributes.ha_mode')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           HA Mode <SortIcon sortKey="attributes.ha_mode" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
                       </>
                     ) : activeProductType === 'serverless' ? (
                       <>
-                        <th data-col="engine_category" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('engine_category', e); }} style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Cold Start (ms)
-                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} onDoubleClick={(e) => handleResizeDoubleClick('engine_category', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="db_family_cpu_vendor" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('db_family_cpu_vendor', e); }} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="db_family_cpu_vendor" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Timeout (sec)
-                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} onDoubleClick={(e) => handleResizeDoubleClick('db_family_cpu_vendor', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="deployment_arch" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('deployment_arch', e); }} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="deployment_arch" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Memory Config
-                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} onDoubleClick={(e) => handleResizeDoubleClick('deployment_arch', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="ha_mode_os" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('ha_mode_os', e); }} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="ha_mode_os" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Free Tier
-                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="granularity" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('granularity', e); }} style={{ width: columnWidths['granularity'], minWidth: columnWidths['granularity'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="granularity" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Granularity
-                          <div onMouseDown={(e) => handleResizeMouseDown('granularity', e)} onDoubleClick={(e) => handleResizeDoubleClick('granularity', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="exec_model" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('exec_model', e); }} style={{ width: columnWidths['exec_model'], minWidth: columnWidths['exec_model'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="exec_model" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Exec. Model
-                          <div onMouseDown={(e) => handleResizeMouseDown('exec_model', e)} onDoubleClick={(e) => handleResizeDoubleClick('exec_model', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="prov_concurrency" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('prov_concurrency', e); }} style={{ width: columnWidths['prov_concurrency'], minWidth: columnWidths['prov_concurrency'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="prov_concurrency" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Prov. Concurrency
-                          <div onMouseDown={(e) => handleResizeMouseDown('prov_concurrency', e)} onDoubleClick={(e) => handleResizeDoubleClick('prov_concurrency', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="max_storage" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('max_storage', e); }} style={{ width: columnWidths['max_storage'], minWidth: columnWidths['max_storage'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="max_storage" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Max Storage
-                          <div onMouseDown={(e) => handleResizeMouseDown('max_storage', e)} onDoubleClick={(e) => handleResizeDoubleClick('max_storage', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="inv_price" onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('inv_price', e); }} style={{ width: columnWidths['inv_price'], minWidth: columnWidths['inv_price'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="inv_price" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Inv. Price ($/1M)
-                          <div onMouseDown={(e) => handleResizeMouseDown('inv_price', e)} onDoubleClick={(e) => handleResizeDoubleClick('inv_price', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
                       </>
                     ) : (
                       <>
-                        <th data-col="engine_category" onClick={() => handleHeaderClick('category')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('engine_category', e); }} style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="engine_category" onClick={() => handleHeaderClick('category')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Category <SortIcon sortKey="category" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('engine_category', e)} onDoubleClick={(e) => handleResizeDoubleClick('engine_category', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="db_family_cpu_vendor" onClick={() => handleHeaderClick('cpu_vendor')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('db_family_cpu_vendor', e); }} style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="db_family_cpu_vendor" onClick={() => handleHeaderClick('cpu_vendor')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           CPU Vendor <SortIcon sortKey="cpu_vendor" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('db_family_cpu_vendor', e)} onDoubleClick={(e) => handleResizeDoubleClick('db_family_cpu_vendor', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="deployment_arch" onClick={() => handleHeaderClick('arch')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('deployment_arch', e); }} style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="deployment_arch" onClick={() => handleHeaderClick('arch')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Arch <SortIcon sortKey="arch" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('deployment_arch', e)} onDoubleClick={(e) => handleResizeDoubleClick('deployment_arch', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="ha_mode_os" onClick={() => handleHeaderClick('os')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('ha_mode_os', e); }} style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="ha_mode_os" onClick={() => handleHeaderClick('os')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           OS <SortIcon sortKey="os" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('ha_mode_os', e)} onDoubleClick={(e) => handleResizeDoubleClick('ha_mode_os', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
-                        <th data-col="gpu" onClick={() => handleHeaderClick('gpu_count')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('gpu', e); }} style={{ width: columnWidths['gpu'], minWidth: columnWidths['gpu'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="gpu" onClick={() => handleHeaderClick('gpu_count')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           GPU <SortIcon sortKey="gpu_count" />
-                          <div onMouseDown={(e) => handleResizeMouseDown('gpu', e)} onDoubleClick={(e) => handleResizeDoubleClick('gpu', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                          
                         </th>
                       </>
                     )}
-                    <th data-col="geography" onClick={() => handleHeaderClick('geography')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('geography', e); }} style={{ width: columnWidths['geography'], minWidth: columnWidths['geography'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                    <th data-col="geography" onClick={() => handleHeaderClick('geography')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                       Geo <SortIcon sortKey="geography" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('geography', e)} onDoubleClick={(e) => handleResizeDoubleClick('geography', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      
                     </th>
-                    <th data-col="vcpus" onClick={() => handleHeaderClick('vcpus')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('vcpus', e); }} style={{ width: columnWidths['vcpus'], minWidth: columnWidths['vcpus'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                    <th data-col="vcpus" onClick={() => handleHeaderClick('vcpus')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                       vCPU <SortIcon sortKey="vcpus" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('vcpus', e)} onDoubleClick={(e) => handleResizeDoubleClick('vcpus', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      
                     </th>
-                    <th data-col="memory_gb" onClick={() => handleHeaderClick('memory_gb')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('memory_gb', e); }} style={{ width: columnWidths['memory_gb'], minWidth: columnWidths['memory_gb'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                    <th data-col="memory_gb" onClick={() => handleHeaderClick('memory_gb')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                       Memory (GB) <SortIcon sortKey="memory_gb" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('memory_gb', e)} onDoubleClick={(e) => handleResizeDoubleClick('memory_gb', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      
                     </th>
-                    <th data-col="price_per_unit" onClick={() => handleHeaderClick('price_per_unit')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('price_per_unit', e); }} style={{ width: columnWidths['price_per_unit'], minWidth: columnWidths['price_per_unit'] }} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity relative" title="Double-click to auto-fit column width">
+                    <th data-col="price_per_unit" onClick={() => handleHeaderClick('price_per_unit')} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity relative" title="Double-click to auto-fit column width">
                       {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <SortIcon sortKey="price_per_unit" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('price_per_unit', e)} onDoubleClick={(e) => handleResizeDoubleClick('price_per_unit', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      
                     </th>
-                    <th data-col="source" onClick={() => handleHeaderClick('data_source')} onDoubleClick={(e) => { e.stopPropagation(); handleResizeDoubleClick('source', e); }} style={{ width: columnWidths['source'], minWidth: columnWidths['source'] }} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                    <th data-col="source" onClick={() => handleHeaderClick('data_source')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                       Source <SortIcon sortKey="data_source" />
-                      <div onMouseDown={(e) => handleResizeMouseDown('source', e)} onDoubleClick={(e) => handleResizeDoubleClick('source', e)} onClick={(e) => e.stopPropagation()} className="absolute right-0 top-0 h-full w-[3px] cursor-col-resize bg-[#e5e5e5] dark:bg-[#262626] hover:bg-[#0069FF] transition-colors z-10" />
+                      
                     </th>
                   </tr>
                 </thead>
@@ -1765,7 +1606,7 @@ export default function Dashboard() {
                     data.map((record, index) => (
                       <tr key={index} className={`transition-colors group ${index % 2 === 0 ? 'bg-white dark:bg-[#000000]' : 'bg-[#f7f7f7] dark:bg-[#0a0a0a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
                         {/* Provider — shared */}
-                        <td data-col="provider" style={{ width: columnWidths['provider'], minWidth: columnWidths['provider'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                        <td data-col="provider" className="px-6 py-4 whitespace-nowrap text-center">
                           {(() => {
                             const color = PROVIDERS.find(p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name)?.color ?? '#525252';
                             return (
@@ -1779,41 +1620,41 @@ export default function Dashboard() {
                           })()}
                         </td>
                         {/* SKU — shared */}
-                        <td data-col="instance_type" style={{ width: columnWidths['instance_type'], minWidth: columnWidths['instance_type'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                        <td data-col="instance_type" className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-xs font-bold text-black dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors">{record.instance_type}</span>
                         </td>
                         {/* Middle 4 columns — differ by product type */}
                         {activeProductType === 'database' ? (
                           <>
-                            <td data-col="engine_category" style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="engine_category" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span>
                             </td>
-                            <td data-col="db_family_cpu_vendor" style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span>
                             </td>
-                            <td data-col="deployment_arch" style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
                                 record.attributes?.deployment_type === 'Serverless'
                                   ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20'
                                   : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
                               }`}>{record.attributes?.deployment_type || 'Provisioned'}</span>
                             </td>
-                            <td data-col="ha_mode_os" style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.ha_mode || '—'}</span>
                             </td>
                           </>
                         ) : activeProductType === 'serverless' ? (
                           <>
-                            <td data-col="engine_category" style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="engine_category" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span>
                             </td>
-                            <td data-col="db_family_cpu_vendor" style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds || '—'}</span>
                             </td>
-                            <td data-col="deployment_arch" style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration || '—'}</span>
                             </td>
-                            <td data-col="ha_mode_os" style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
                               {(() => {
                                 const freeInvocations = record.attributes?.free_invocations_per_month;
                                 const hasFreeTier = freeInvocations && Number(freeInvocations) > 0;
@@ -1828,13 +1669,13 @@ export default function Dashboard() {
                                 );
                               })()}
                             </td>
-                            <td data-col="granularity" style={{ width: columnWidths['granularity'], minWidth: columnWidths['granularity'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="granularity" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity_ms ? `${record.attributes.billing_granularity_ms}ms` : '—'}</span>
                             </td>
-                            <td data-col="exec_model" style={{ width: columnWidths['exec_model'], minWidth: columnWidths['exec_model'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="exec_model" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model || '—'}</span>
                             </td>
-                            <td data-col="prov_concurrency" style={{ width: columnWidths['prov_concurrency'], minWidth: columnWidths['prov_concurrency'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="prov_concurrency" className="px-6 py-4 whitespace-nowrap text-center">
                               {(() => {
                                 const provSupport = record.attributes?.provisioned_concurrency_support;
                                 return (
@@ -1848,28 +1689,28 @@ export default function Dashboard() {
                                 );
                               })()}
                             </td>
-                            <td data-col="max_storage" style={{ width: columnWidths['max_storage'], minWidth: columnWidths['max_storage'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="max_storage" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb ? `${record.attributes.max_ephemeral_storage_gb} GB` : '—'}</span>
                             </td>
-                            <td data-col="inv_price" style={{ width: columnWidths['inv_price'], minWidth: columnWidths['inv_price'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="inv_price" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}</span>
                             </td>
                           </>
                         ) : (
                           <>
-                            <td data-col="engine_category" style={{ width: columnWidths['engine_category'], minWidth: columnWidths['engine_category'] }} className="px-6 py-4 text-center whitespace-nowrap">
+                            <td data-col="engine_category" className="px-6 py-4 text-center whitespace-nowrap">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
                             </td>
-                            <td data-col="db_family_cpu_vendor" style={{ width: columnWidths['db_family_cpu_vendor'], minWidth: columnWidths['db_family_cpu_vendor'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor}</span>
                             </td>
-                            <td data-col="deployment_arch" style={{ width: columnWidths['deployment_arch'], minWidth: columnWidths['deployment_arch'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                            <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
                                 {record.arch === 'x86 64' ? 'x86' : record.arch}
                               </span>
                             </td>
-                            <td data-col="ha_mode_os" style={{ width: columnWidths['ha_mode_os'], minWidth: columnWidths['ha_mode_os'] }} className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os}</td>
-                            <td data-col="gpu" style={{ width: columnWidths['gpu'], minWidth: columnWidths['gpu'] }} className="px-6 py-4 text-center whitespace-nowrap">
+                            <td data-col="ha_mode_os" className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os}</td>
+                            <td data-col="gpu" className="px-6 py-4 text-center whitespace-nowrap">
                               {record.gpu_count > 0
                                 ? <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[8px] font-bold border border-blue-500/20 uppercase tracking-widest">GPU</span>
                                 : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>
@@ -1878,23 +1719,23 @@ export default function Dashboard() {
                           </>
                         )}
                         {/* Geography, vCPU, Memory, Price — shared */}
-                        <td data-col="geography" style={{ width: columnWidths['geography'], minWidth: columnWidths['geography'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                        <td data-col="geography" className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography}</span>
                         </td>
-                        <td data-col="vcpus" style={{ width: columnWidths['vcpus'], minWidth: columnWidths['vcpus'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                        <td data-col="vcpus" className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
                         </td>
-                        <td data-col="memory_gb" style={{ width: columnWidths['memory_gb'], minWidth: columnWidths['memory_gb'] }} className="px-6 py-4 whitespace-nowrap text-center">
+                        <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span>
                         </td>
-                        <td data-col="price_per_unit" style={{ width: columnWidths['price_per_unit'], minWidth: columnWidths['price_per_unit'] }} className="px-6 py-4 text-center whitespace-nowrap">
+                        <td data-col="price_per_unit" className="px-6 py-4 text-center whitespace-nowrap">
                           <span className="text-xs font-bold text-black dark:text-white">
                             {showAggregation
                               ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}`
                               : `$${parseFloat(record.price_per_unit).toFixed(4)}`}
                           </span>
                         </td>
-                        <td data-col="source" style={{ width: columnWidths['source'], minWidth: columnWidths['source'] }} className="px-6 py-4 text-center whitespace-nowrap">
+                        <td data-col="source" className="px-6 py-4 text-center whitespace-nowrap">
                           {record.data_source === 'static_config' ? (
                             <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Static</span>
                           ) : (
