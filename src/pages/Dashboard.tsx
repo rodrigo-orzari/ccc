@@ -1658,7 +1658,7 @@ export default function Dashboard() {
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span>
                             </td>
                             <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span>
                             </td>
                             <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
