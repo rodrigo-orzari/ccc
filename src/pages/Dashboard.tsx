@@ -9,6 +9,27 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+
+const Tooltip = ({ text, children }: { text: string, children: React.ReactNode }) => {
+  const [show, setShow] = useState(false);
+  return (
+    <span 
+      className="relative flex items-center"
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+      onClick={(e) => { e.stopPropagation(); setShow(!show); }}
+    >
+      {children}
+      {show && (
+        <div className="absolute right-0 top-full mt-2 w-48 p-2 bg-[#171717] dark:bg-[#e5e5e5] text-white dark:text-black text-[10px] rounded shadow-lg z-50 font-normal tracking-normal normal-case text-left leading-relaxed">
+          {text}
+          <div className="absolute right-1 bottom-full w-0 h-0 border-l-[4px] border-r-[4px] border-b-[4px] border-l-transparent border-r-transparent border-b-[#171717] dark:border-b-[#e5e5e5]"></div>
+        </div>
+      )}
+    </span>
+  );
+};
+
 interface PricingRecord {
   provider: string;
   service: string;
@@ -693,7 +714,7 @@ export default function Dashboard() {
                     className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
                   >
                     <ChevronDown size={10} className={`transition-transform ${expanded.provider ? '' : '-rotate-90'}`} />
-                    Provider <span title="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                    Provider <Tooltip text="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter."><Info size={10} className="cursor-help" /></Tooltip>
                   </button>
                 </h2>
                 <button
@@ -743,7 +764,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('category')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.category ? '' : '-rotate-90'}`} />
-                        Category <span title="Instance type purpose, derived from each cloud's published instance families." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Category <Tooltip text="Instance type purpose, derived from each cloud's published instance families."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedCategory.length === CATEGORIES.length ? setSelectedCategory([]) : setSelectedCategory([...CATEGORIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedCategory.length === CATEGORIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -770,7 +791,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('geography')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.geography ? '' : '-rotate-90'}`} />
-                        Geography <span title="Geographic region where the VM runs." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Geography <Tooltip text="Geographic region where the VM runs."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedGeographies.length === GEOGRAPHIES.length ? setSelectedGeographies([]) : setSelectedGeographies([...GEOGRAPHIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedGeographies.length === GEOGRAPHIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -797,7 +818,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('os')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.os ? '' : '-rotate-90'}`} />
-                        Operating System <span title="The operating system running on the VM." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Operating System <Tooltip text="The operating system running on the VM."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedOS.length === OS_TYPES.length ? setSelectedOS([]) : setSelectedOS([...OS_TYPES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedOS.length === OS_TYPES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -824,7 +845,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('cpu')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.cpu ? '' : '-rotate-90'}`} />
-                        CPU | GPU <span title="Processor vendor, architecture, and GPU accelerator." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        CPU | GPU <Tooltip text="Processor vendor, architecture, and GPU accelerator."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => {
@@ -870,7 +891,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('dbFamily')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.dbFamily ? '' : '-rotate-90'}`} />
-                        DATABASE FAMILY <span title="The broad category of the database system: Relational (SQL-based) or NoSQL." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        DATABASE FAMILY <Tooltip text="The broad category of the database system: Relational (SQL-based) or NoSQL."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedDbFamilies.length === DB_FAMILIES.length ? setSelectedDbFamilies([]) : setSelectedDbFamilies([...DB_FAMILIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedDbFamilies.length === DB_FAMILIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -897,7 +918,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('geography')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.geography ? '' : '-rotate-90'}`} />
-                        Geography <span title="Geographic region where the database is deployed." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Geography <Tooltip text="Geographic region where the database is deployed."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedGeographies.length === GEOGRAPHIES.length ? setSelectedGeographies([]) : setSelectedGeographies([...GEOGRAPHIES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedGeographies.length === GEOGRAPHIES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -924,7 +945,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('engine')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.engine ? '' : '-rotate-90'}`} />
-                        DATABASE ENGINE <span title="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        DATABASE ENGINE <Tooltip text="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedEngines.length === DB_ENGINES.length ? setSelectedEngines([]) : setSelectedEngines([...DB_ENGINES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedEngines.length === DB_ENGINES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -951,7 +972,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('deploymentType')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.deploymentType ? '' : '-rotate-90'}`} />
-                        Deployment <span title="Provisioned: fixed instance size billed hourly. Serverless: auto-scales, billed per compute unit consumed." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Deployment <Tooltip text="Provisioned: fixed instance size billed hourly. Serverless: auto-scales, billed per compute unit consumed."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedDeploymentTypes.length === DEPLOYMENT_TYPES.length ? setSelectedDeploymentTypes([]) : setSelectedDeploymentTypes([...DEPLOYMENT_TYPES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedDeploymentTypes.length === DEPLOYMENT_TYPES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -978,7 +999,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('haMode')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.haMode ? '' : '-rotate-90'}`} />
-                        HIGH-AVAILABILITY <span title="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        HIGH-AVAILABILITY <Tooltip text="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedHaModes.length === HA_MODES.length ? setSelectedHaModes([]) : setSelectedHaModes([...HA_MODES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedHaModes.length === HA_MODES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1009,7 +1030,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('languages')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.languages ? '' : '-rotate-90'}`} />
-                        Language Support <span title="Filter by programming language runtime: Python, Node.js, Go, Java, C#, Ruby, JavaScript, PHP, PowerShell, Rust, TypeScript, or container-based deployments." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Language Support <Tooltip text="Filter by programming language runtime: Python, Node.js, Go, Java, C#, Ruby, JavaScript, PHP, PowerShell, Rust, TypeScript, or container-based deployments."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessLanguages.length === SERVERLESS_LANGUAGES.length ? setSelectedServerlessLanguages([]) : setSelectedServerlessLanguages([...SERVERLESS_LANGUAGES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessLanguages.length === SERVERLESS_LANGUAGES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1036,7 +1057,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('coldStart')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.coldStart ? '' : '-rotate-90'}`} />
-                        Cold Start (MS) <span title="Filter by cold start latency: Fast (< 100ms), Medium (100-200ms), or Slow (> 200ms)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Cold Start (MS) <Tooltip text="Filter by cold start latency: Fast (< 100ms), Medium (100-200ms), or Slow (> 200ms)."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessColdStart.length === SERVERLESS_COLD_START_OPTIONS.length ? setSelectedServerlessColdStart([]) : setSelectedServerlessColdStart([...SERVERLESS_COLD_START_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessColdStart.length === SERVERLESS_COLD_START_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1063,7 +1084,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('timeout')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.timeout ? '' : '-rotate-90'}`} />
-                        Timeout (Min) <span title="Filter by execution timeout: Short (5), Medium (10), or Long (15+)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Timeout (Min) <Tooltip text="Filter by execution timeout: Short (5), Medium (10), or Long (15+)."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessTimeout.length === SERVERLESS_TIMEOUT_OPTIONS.length ? setSelectedServerlessTimeout([]) : setSelectedServerlessTimeout([...SERVERLESS_TIMEOUT_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessTimeout.length === SERVERLESS_TIMEOUT_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1090,7 +1111,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('memoryConfig')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.memoryConfig ? '' : '-rotate-90'}`} />
-                        Memory Config <span title="Filter by memory configuration: Configurable, Tiers, or Automatic." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Memory Config <Tooltip text="Filter by memory configuration: Configurable, Tiers, or Automatic."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessMemoryConfig.length === SERVERLESS_MEMORY_CONFIG_OPTIONS.length ? setSelectedServerlessMemoryConfig([]) : setSelectedServerlessMemoryConfig([...SERVERLESS_MEMORY_CONFIG_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessMemoryConfig.length === SERVERLESS_MEMORY_CONFIG_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1117,7 +1138,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('freeTier')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.freeTier ? '' : '-rotate-90'}`} />
-                        Free Tier <span title="Filter by free tier availability: Included or Not included." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Free Tier <Tooltip text="Filter by free tier availability: Included or Not included."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessFreeTier.length === SERVERLESS_FREE_TIER_OPTIONS.length ? setSelectedServerlessFreeTier([]) : setSelectedServerlessFreeTier([...SERVERLESS_FREE_TIER_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessFreeTier.length === SERVERLESS_FREE_TIER_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1143,7 +1164,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('granularity')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.granularity ? '' : '-rotate-90'}`} />
-                        Billing Granularity <span title="Filter by minimum billing increment (e.g., 1ms vs 100ms)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Billing Granularity <Tooltip text="Filter by minimum billing increment (e.g., 1ms vs 100ms)."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessGranularity.length === SERVERLESS_GRANULARITY_OPTIONS.length ? setSelectedServerlessGranularity([]) : setSelectedServerlessGranularity([...SERVERLESS_GRANULARITY_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessGranularity.length === SERVERLESS_GRANULARITY_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1170,7 +1191,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('executionModel')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.executionModel ? '' : '-rotate-90'}`} />
-                        Execution Model <span title="Filter by supported deployment formats: Code (ZIP), Container Image, or Both." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Execution Model <Tooltip text="Filter by supported deployment formats: Code (ZIP), Container Image, or Both."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessExecutionModel.length === SERVERLESS_EXECUTION_MODEL_OPTIONS.length ? setSelectedServerlessExecutionModel([]) : setSelectedServerlessExecutionModel([...SERVERLESS_EXECUTION_MODEL_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessExecutionModel.length === SERVERLESS_EXECUTION_MODEL_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1197,7 +1218,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('provisionedConcurrency')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.provisionedConcurrency ? '' : '-rotate-90'}`} />
-                        Prov. Concurrency <span title="Filter by ability to pay for pre-warmed instances." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Prov. Concurrency <Tooltip text="Filter by ability to pay for pre-warmed instances."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessProvisionedConcurrency.length === SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length ? setSelectedServerlessProvisionedConcurrency([]) : setSelectedServerlessProvisionedConcurrency([...SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessProvisionedConcurrency.length === SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1224,7 +1245,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('ephemeralStorage')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.ephemeralStorage ? '' : '-rotate-90'}`} />
-                        Max Storage (GB) <span title="Filter by maximum available temporary disk space." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                        Max Storage (GB) <Tooltip text="Filter by maximum available temporary disk space."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessEphemeralStorage.length === SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length ? setSelectedServerlessEphemeralStorage([]) : setSelectedServerlessEphemeralStorage([...SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessEphemeralStorage.length === SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
@@ -1256,7 +1277,7 @@ export default function Dashboard() {
                     className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
                   >
                     <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
-                    Specs & Price <span title="Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                    Specs & Price <Tooltip text="Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD."><Info size={10} className="cursor-help" /></Tooltip>
                   </button>
                 </h2>
                 <button
@@ -1324,7 +1345,7 @@ export default function Dashboard() {
                     className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
                   >
                     <ChevronDown size={10} className={`transition-transform ${expanded.pricing ? '' : '-rotate-90'}`} />
-                    PAYG OR YEARLY PRICE <span title="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)." onClick={(e) => e.stopPropagation()}><Info size={10} className="cursor-help" /></span>
+                    PAYG OR YEARLY PRICE <Tooltip text="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)."><Info size={10} className="cursor-help" /></Tooltip>
                   </button>
                 </h2>
               </div>
