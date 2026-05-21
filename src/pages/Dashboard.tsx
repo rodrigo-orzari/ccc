@@ -102,7 +102,7 @@ const SERVERLESS_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'Ruby', '
 const SERVERLESS_COLD_START_OPTIONS = ['Fast < 100', 'Medium 100-200', 'Slow > 200'];
 const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5)', 'Medium (10)', 'Long (15+)'];
 const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['Configurable', 'Tiers', 'Automatic'];
-const SERVERLESS_FREE_TIER_OPTIONS = ['Included', 'Not included'];
+const SERVERLESS_FREE_TIER_OPTIONS = ['Yes', 'No'];
 const SERVERLESS_GRANULARITY_OPTIONS = ['1ms', '100ms'];
 const SERVERLESS_EXECUTION_MODEL_OPTIONS = ['Both', 'Code (ZIP)', 'Container Image'];
 const SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS = ['Yes', 'No'];
@@ -1682,10 +1682,10 @@ export default function Dashboard() {
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span>
                             </td>
                             <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds || '—'}</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds ? (Number(record.attributes.timeout_seconds) >= 60 ? `${Number(record.attributes.timeout_seconds) / 60} min` : `${record.attributes.timeout_seconds} sec`) : '—'}</span>
                             </td>
                             <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration || '—'}</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration ? (String(record.attributes.memory_configuration).toLowerCase().includes('configurable') ? 'Configurable' : String(record.attributes.memory_configuration).toLowerCase().includes('tier') ? 'Tiers' : String(record.attributes.memory_configuration).toLowerCase().includes('auto') ? 'Automatic' : record.attributes.memory_configuration) : '—'}</span>
                             </td>
                             <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
                               {(() => {
