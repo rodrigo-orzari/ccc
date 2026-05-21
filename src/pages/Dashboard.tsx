@@ -50,6 +50,8 @@ interface PricingRecord {
   max_price?: string;
   data_source?: string;
   attributes?: {
+    supportedLanguages?: string | string[];
+
     engine?: string;
     engine_version?: string;
     deployment_type?: string;
@@ -1531,7 +1533,12 @@ export default function Dashboard() {
                       </>
                     ) : activeProductType === 'serverless' ? (
                       <>
-                        <th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                        <th data-col="languages" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
+                          <Tooltip text="Supported programming languages or runtimes.">
+                            Languages <Info size={10} className="inline cursor-help opacity-50 ml-1" />
+                          </Tooltip>
+                        </th>
+<th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Cold Start (ms)
                           
                         </th>
@@ -1666,6 +1673,11 @@ export default function Dashboard() {
                           </>
                         ) : activeProductType === 'serverless' ? (
                           <>
+                            <td data-col="languages" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                                {record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join(', ') : record.attributes.supportedLanguages) : '—'}
+                              </span>
+                            </td>
                             <td data-col="engine_category" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span>
                             </td>
@@ -1680,11 +1692,7 @@ export default function Dashboard() {
                                 const freeInvocations = record.attributes?.free_invocations_per_month;
                                 const hasFreeTier = freeInvocations && Number(freeInvocations) > 0;
                                 return (
-                                  <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
-                                    hasFreeTier
-                                      ? 'bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20'
-                                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
-                                  }`}>
+                                  <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">
                                     {hasFreeTier ? 'Yes' : 'No'}
                                   </span>
                                 );
@@ -1700,11 +1708,7 @@ export default function Dashboard() {
                               {(() => {
                                 const provSupport = record.attributes?.provisioned_concurrency_support;
                                 return (
-                                  <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
-                                    provSupport === 'Yes'
-                                      ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20'
-                                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
-                                  }`}>
+                                  <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">
                                     {provSupport || '—'}
                                   </span>
                                 );
@@ -1723,17 +1727,17 @@ export default function Dashboard() {
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
                             </td>
                             <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor}</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor || '—'}</span>
                             </td>
                             <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-                                {record.arch === 'x86 64' ? 'x86' : record.arch}
+                                {record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}
                               </span>
                             </td>
-                            <td data-col="ha_mode_os" className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os}</td>
+                            <td data-col="ha_mode_os" className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os || '—'}</td>
                             <td data-col="gpu" className="px-6 py-4 text-center whitespace-nowrap">
                               {record.gpu_count > 0
-                                ? <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 text-[8px] font-bold border border-blue-500/20 uppercase tracking-widest">GPU</span>
+                                ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span>
                                 : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>
                               }
                             </td>
@@ -1741,7 +1745,7 @@ export default function Dashboard() {
                         )}
                         {/* Geography, vCPU, Memory, Price — shared */}
                         <td data-col="geography" className="px-6 py-4 whitespace-nowrap text-center">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography}</span>
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span>
                         </td>
                         <td data-col="vcpus" className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
@@ -1758,9 +1762,9 @@ export default function Dashboard() {
                         </td>
                         <td data-col="source" className="px-6 py-4 text-center whitespace-nowrap">
                           {record.data_source === 'static_config' ? (
-                            <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">Static</span>
+                            <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">Static</span>
                           ) : (
-                            <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20">API</span>
+                            <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">API</span>
                           )}
                         </td>
                       </tr>
