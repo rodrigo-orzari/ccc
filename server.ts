@@ -448,9 +448,9 @@ async function startServer() {
       const freeTierConditions: string[] = [];
 
       for (const opt of freeTierOptions) {
-        if (opt === 'Included') {
+        if (opt === 'Included' || opt === 'Yes') {
           freeTierConditions.push(`(pr.attributes->>'free_invocations_per_month' IS NOT NULL AND (pr.attributes->>'free_invocations_per_month')::bigint > 0)`);
-        } else if (opt === 'Not included') {
+        } else if (opt === 'Not included' || opt === 'No') {
           freeTierConditions.push(`(pr.attributes->>'free_invocations_per_month' IS NULL OR (pr.attributes->>'free_invocations_per_month')::bigint = 0)`);
         }
       }
