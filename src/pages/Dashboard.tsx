@@ -213,6 +213,7 @@ export default function Dashboard() {
 
   const [data, setData] = useState<PricingRecord[]>([]);
   const [loading, setLoading] = useState(false);
+  const [isInitialFetch, setIsInitialFetch] = useState(true);
   const [dbStatus, setDbStatus] = useState<{ total: number, providers: any[], lastUpdated: string | null } | null>(null);
   const [providerCounts, setProviderCounts] = useState<Record<string, number>>({});
 
@@ -443,18 +444,21 @@ export default function Dashboard() {
       setData([]);
       setProviderCounts({});
       setLoading(false);
+      setIsInitialFetch(false);
       return;
     }
     if (isVm && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) {
       setData([]);
       setProviderCounts({});
       setLoading(false);
+      setIsInitialFetch(false);
       return;
     }
     if (isDb && (selectedDbFamilies.length === 0 || selectedEngines.length === 0 || selectedDeploymentTypes.length === 0 || selectedHaModes.length === 0)) {
       setData([]);
       setProviderCounts({});
       setLoading(false);
+      setIsInitialFetch(false);
       return;
     }
     if (isServerless && (
@@ -471,6 +475,7 @@ export default function Dashboard() {
       setData([]);
       setProviderCounts({});
       setLoading(false);
+      setIsInitialFetch(false);
       return;
     }
 
@@ -574,6 +579,7 @@ export default function Dashboard() {
         const countsMap: Record<string, number> = {};
         countsRows.forEach(r => { countsMap[r.slug] = parseInt(r.count) || 0; });
         setProviderCounts(countsMap);
+      setIsInitialFetch(false);
       }
     } catch (err: any) {
       console.error('Fetch error:', err);
@@ -647,7 +653,7 @@ export default function Dashboard() {
       <div className="h-10 border-b border-[#e5e5e5] dark:border-[#262626] bg-[#fcfcfc] dark:bg-[#080808] flex items-center px-4 overflow-x-auto no-scrollbar shrink-0">
         <div className="flex items-center gap-6">
           <button
-            onClick={() => setActiveProductType('vm')}
+            onClick={() => { setIsInitialFetch(true); setActiveProductType('vm'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'vm'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
@@ -660,7 +666,7 @@ export default function Dashboard() {
           </button>
 
           <button
-            onClick={() => setActiveProductType('database')}
+            onClick={() => { setIsInitialFetch(true); setActiveProductType('database'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'database'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
@@ -673,7 +679,7 @@ export default function Dashboard() {
           </button>
 
           <button
-            onClick={() => setActiveProductType('serverless')}
+            onClick={() => { setIsInitialFetch(true); setActiveProductType('serverless'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'serverless'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
@@ -1408,7 +1414,7 @@ export default function Dashboard() {
               // Deselected providers contribute 0 to the visible pool. For selected
               // providers, prefer the filter-aware count; fall back to the DB total
               // before the first fetch resolves.
-              const displayCount = isSelected ? (filteredCount !== undefined ? filteredCount : dbCount) : 0;
+              const displayCount = isSelected ? (isInitialFetch ? dbCount : (filteredCount || 0)) : 0;
 
               return (
                 <div
