@@ -498,11 +498,11 @@ async function startServer() {
       const storageConditions: string[] = [];
       
       for (const opt of storageOptions) {
-        if (opt === '< 1GB') {
+        if (opt === '< 1') {
           storageConditions.push(`(pr.attributes->>'max_ephemeral_storage_gb')::numeric < 1`);
-        } else if (opt === '1GB - 5GB') {
+        } else if (opt === '1 - 5') {
           storageConditions.push(`(pr.attributes->>'max_ephemeral_storage_gb')::numeric BETWEEN 1 AND 5`);
-        } else if (opt === '> 5GB') {
+        } else if (opt === '> 5') {
           storageConditions.push(`(pr.attributes->>'max_ephemeral_storage_gb')::numeric > 5`);
         }
       }

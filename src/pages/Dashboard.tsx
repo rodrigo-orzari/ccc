@@ -99,14 +99,14 @@ const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Ge
 
 // Serverless-view constants
 const SERVERLESS_LANGUAGES = ['Python', 'Node.js', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'TypeScript', 'Any (Container)'];
-const SERVERLESS_COLD_START_OPTIONS = ['Fast < 100', 'Medium 100-200', 'Slow > 200'];
+const SERVERLESS_COLD_START_OPTIONS = ['Fast (<100)', 'Medium (100-200)', 'Slow (>200)'];
 const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5)', 'Medium (10)', 'Long (15+)'];
 const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['Configurable', 'Tiers', 'Automatic'];
 const SERVERLESS_FREE_TIER_OPTIONS = ['Yes', 'No'];
-const SERVERLESS_GRANULARITY_OPTIONS = ['1ms', '100ms'];
+const SERVERLESS_GRANULARITY_OPTIONS = ['1', '100'];
 const SERVERLESS_EXECUTION_MODEL_OPTIONS = ['Both', 'Code (ZIP)', 'Container Image'];
 const SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS = ['Yes', 'No'];
-const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1GB', '1GB - 5GB', '> 5GB'];
+const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1', '1 - 5', '> 5'];
 
 const DEFAULT_VCPU_RANGE   = { min: 0,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
@@ -1172,7 +1172,7 @@ export default function Dashboard() {
                     <h2 className="m-0">
                       <button onClick={() => toggleSection('granularity')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
                         <ChevronDown size={10} className={`transition-transform ${expanded.granularity ? '' : '-rotate-90'}`} />
-                        Billing Granularity <Tooltip text="Filter by minimum billing increment (e.g., 1ms vs 100ms)."><Info size={10} className="cursor-help" /></Tooltip>
+                        Billing Granularity (MS) <Tooltip text="Filter by minimum billing increment (e.g., 1ms vs 100ms)."><Info size={10} className="cursor-help" /></Tooltip>
                       </button>
                     </h2>
                     <button onClick={() => { selectedServerlessGranularity.length === SERVERLESS_GRANULARITY_OPTIONS.length ? setSelectedServerlessGranularity([]) : setSelectedServerlessGranularity([...SERVERLESS_GRANULARITY_OPTIONS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedServerlessGranularity.length === SERVERLESS_GRANULARITY_OPTIONS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
