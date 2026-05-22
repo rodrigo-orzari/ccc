@@ -1539,10 +1539,8 @@ export default function Dashboard() {
                       </>
                     ) : activeProductType === 'serverless' ? (
                       <>
-                        <th data-col="languages" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative">
-                          <Tooltip text="Supported programming languages or runtimes.">
-                            Languages <Info size={10} className="inline cursor-help opacity-50 ml-1" />
-                          </Tooltip>
+                        <th data-col="languages" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Languages
                         </th>
 <th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           Cold Start (ms)
