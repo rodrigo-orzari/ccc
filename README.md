@@ -10,6 +10,14 @@ This project is hosted on the **DigitalOcean App Platform**. To help keep this s
 
 <a href="https://www.digitalocean.com/?refcode=23d2b384f3b1&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%203.svg" alt="DigitalOcean Referral Badge" /></a>
 
+**[❤️ Support this project](https://19722908-3bf1-49af-a0a1-f8f1bc7b11c8.paylinks.godaddy.com/support-ccc)**
+
+If you find Compare Cloud Costs useful and it helped you save money, please consider supporting the project. Your contributions help keep the data up to date and the website running.
+
+You can also support us by scanning the QR code below:
+
+<img src="./support-qr.png" width="200" alt="Scan to Pay">
+
 
 ## 1. What Problem Does This Application Solve?
 In modern cloud engineering and FinOps, **apples-to-apples price comparison** across multiple cloud providers is a major pain point. 
@@ -277,5 +285,6 @@ This repository contains the open-source core of Compare Cloud Costs. While this
 
 ---
 
-<p align="center">© 2026 <a href="https://www.linkedin.com/in/rodrigoorzari/">Rodrigo Orzari</a>. All rights reserved.</p>
+<p align="center"><strong><a href="https://19722908-3bf1-49af-a0a1-f8f1bc7b11c8.paylinks.godaddy.com/support-ccc">❤️ Support this project</a></strong></p>
 
+<p align="center">© 2026 <a href="https://www.linkedin.com/in/rodrigoorzari/">Rodrigo Orzari</a>. All rights reserved.</p>
