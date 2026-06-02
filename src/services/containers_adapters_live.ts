@@ -9,3 +9,30 @@ export class AWSContainersLiveAdapter extends BaseAdapter {
     return [];
   }
 }
+
+export class AzureContainersLiveAdapter extends BaseAdapter {
+  providerSlug = 'azure';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log('⏳ Azure Containers live API fetch not fully implemented. Falling back to empty to trigger static config...');
+    return [];
+  }
+}
+
+export class GCPContainersLiveAdapter extends BaseAdapter {
+  providerSlug = 'gcp';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log('⏳ GCP Containers live API fetch not fully implemented. Falling back to empty to trigger static config...');
+    return [];
+  }
+}
+
+export class DigitalOceanContainersLiveAdapter extends BaseAdapter {
+  providerSlug = 'digitalocean';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log('⏳ DigitalOcean Containers live API fetch not fully implemented. Falling back to empty to trigger static config...');
+    return [];
+  }
+}
