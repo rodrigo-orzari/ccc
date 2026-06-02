@@ -82,7 +82,7 @@ interface PricingRecord {
   };
 }
 
-type ProductType = 'vm' | 'database' | 'serverless' | 'containers' | 'networking';
+type ProductType = 'vm' | 'database' | 'serverless' | 'containers' | 'networking' | 'data-analytics' | 'ai';
 
 const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] = [
   { id: 'aws', name: 'AWS', color: '#FF9900' },
@@ -124,6 +124,11 @@ const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
 const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned'];
 const CONTAINERS_ARCHITECTURES = ['x86_64', 'ARM64'];
 const CONTAINERS_BILLING_GRANULARITY = ['Per Second', 'Per Hour'];
+
+// Data-Analytics-view constants
+const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'BigQuery', 'Redshift', 'Synapse'];
+const ANALYTICS_DEPLOYMENT_TYPES = ['Serverless', 'Provisioned'];
+const ANALYTICS_TIERS = ['Standard', 'Premium', 'Enterprise'];
 
 const DEFAULT_VCPU_RANGE   = { min: 0,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
@@ -227,6 +232,11 @@ export default function Dashboard() {
   const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...CONTAINERS_ARCHITECTURES]);
   const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...CONTAINERS_BILLING_GRANULARITY]);
   const [containersGpuIncluded, setContainersGpuIncluded] = useState(true);
+
+  // Data-Analytics-specific filter state
+  const [selectedAnalyticsEngines, setSelectedAnalyticsEngines] = useState<string[]>([...ANALYTICS_ENGINES]);
+  const [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes] = useState<string[]>([...ANALYTICS_DEPLOYMENT_TYPES]);
+  const [selectedAnalyticsTiers, setSelectedAnalyticsTiers] = useState<string[]>([...ANALYTICS_TIERS]);
 
   const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
   const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
@@ -1615,19 +1625,6 @@ export default function Dashboard() {
 
         {/* Main Content Area */}
         <main className="flex-1 min-w-0 overflow-hidden flex flex-col bg-white dark:bg-[#000000]">
-
-          {/* Ad Slot — reserved space for a leaderboard ad (e.g. Google AdSense
-              728×90 / 970×90). Drop the ad markup inside the inner div when
-              ready. Sized to standard leaderboard height so ad insertion
-              doesn't cause layout shift. */}
-          <div className="px-4 py-4">
-            <div
-              data-ad-slot="leaderboard-top"
-              className="w-full h-[90px] flex items-center justify-center bg-[#fafafa] dark:bg-[#0a0a0a] border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded text-[10px] font-medium uppercase tracking-widest text-[#a3a3a3] dark:text-[#525252]"
-            >
-              Advertisement
-            </div>
-          </div>
 
           {/* Provider Summary Cards */}
           <div className="p-4 grid grid-cols-1 md:grid-cols-5 gap-px bg-[#e5e5e5] dark:bg-[#262626]">
