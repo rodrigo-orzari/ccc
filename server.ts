@@ -37,15 +37,13 @@ async function startServer() {
   // PostgreSQL Connection Pool
   const pool = new Pool({
     ...(process.env.DATABASE_URL ? parseDbUrl(process.env.DATABASE_URL) : {}),
-    ssl: process.env.NODE_ENV === 'production'
-      ? {
-          rejectUnauthorized: true,
-          // If DATABASE_CA_CERT is provided (base64-encoded), use it for validation
-          ca: process.env.DATABASE_CA_CERT
-            ? [Buffer.from(process.env.DATABASE_CA_CERT, 'base64')]
-            : undefined,
-        }
-      : false,
+    ssl: {
+      rejectUnauthorized: true,
+      // If DATABASE_CA_CERT is provided (base64-encoded), use it for validation
+      ca: process.env.DATABASE_CA_CERT
+        ? [Buffer.from(process.env.DATABASE_CA_CERT, 'base64')]
+        : undefined,
+    },
   });
 
   app.use(cors());
