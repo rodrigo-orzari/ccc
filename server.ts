@@ -460,10 +460,10 @@ async function startServer() {
       conditions.push(`s.category = $${paramCount++}`);
       values.push(resolvedProductType);
 
-      // ✅ Validate provider filter
+      // ✅ Validate provider filter (use s.provider_id in subquery)
       const providers = parseFilterList(provider as string);
       if (providers.length > 0) {
-        conditions.push(`p.slug = ANY($${paramCount++})`);
+        conditions.push(`s.provider_id IN (SELECT id FROM providers WHERE slug = ANY($${paramCount++}))`);
         values.push(providers);
       }
 
