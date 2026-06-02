@@ -68,6 +68,17 @@ interface PricingRecord {
     execution_model?: string;
     provisioned_concurrency_support?: string;
     max_ephemeral_storage_gb?: number | string;
+    
+    // Containers
+    orchestrator?: string;
+    compute_type?: string;
+    architecture?: string;
+    billing_granularity?: string;
+    
+    // Networking
+    transfer_tier?: string;
+    destination?: string;
+    included_transfer?: string;
   };
 }
 
