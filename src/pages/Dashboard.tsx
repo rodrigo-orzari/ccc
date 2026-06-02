@@ -2084,7 +2084,7 @@ export default function Dashboard() {
           
           <div className="border-t border-[#e5e5e5]/50 dark:border-[#262626]/50 pt-4 flex justify-center">
             <p className="text-[10px] text-[#a3a3a3] dark:text-[#525252] text-center">
-              © 2026 <a href="https://www.linkedin.com/in/rodrigoorzari/" target="_blank" rel="noopener noreferrer" className="hover:text-black dark:hover:text-white transition-colors underline decoration-dotted">Rodrigo Orzari</a>. All rights reserved.
+              © 2026 Co-Sell Plus LLC. All rights reserved.
             </p>
           </div>
         </div>

@@ -71,7 +71,7 @@ For questions about this Privacy Policy or our privacy practices, please email u
 
 ---
 
-© 2026 [Rodrigo Orzari](https://www.linkedin.com/in/rodrigoorzari/). All rights reserved.
+© 2026 Co-Sell Plus LLC. All rights reserved.
 `;
 
   return (
