@@ -36,3 +36,12 @@ export class DigitalOceanContainersLiveAdapter extends BaseAdapter {
     return [];
   }
 }
+
+export class OracleContainersLiveAdapter extends BaseAdapter {
+  providerSlug = 'oracle';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log('⏳ Oracle Containers live API fetch not fully implemented. Falling back to empty to trigger static config...');
+    return [];
+  }
+}

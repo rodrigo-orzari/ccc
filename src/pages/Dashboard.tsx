@@ -71,7 +71,7 @@ interface PricingRecord {
   };
 }
 
-type ProductType = 'vm' | 'database' | 'serverless' | 'containers';
+type ProductType = 'vm' | 'database' | 'serverless' | 'containers' | 'networking';
 
 const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] = [
   { id: 'aws', name: 'AWS', color: '#FF9900' },
@@ -356,11 +356,18 @@ export default function Dashboard() {
     const isVm = activeProductType === 'vm';
     const isServerless = activeProductType === 'serverless';
     const isContainers = activeProductType === 'containers';
+    const isNetworking = activeProductType === 'networking';
 
     // Build query params with all active filters to get counts that reflect
     // the current filter state (ensures "of X" numbers are correct in the UI)
     const params = new URLSearchParams();
-    params.append('productType', isDb ? 'database' : (isServerless ? 'serverless' : (isContainers ? 'containers' : 'compute')));
+    let productTypeParam = 'compute';
+    if (isDb) productTypeParam = 'database';
+    if (isServerless) productTypeParam = 'serverless';
+    if (isContainers) productTypeParam = 'containers';
+    if (isNetworking) productTypeParam = 'networking';
+
+    params.append('productType', productTypeParam);
     if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) {
       params.append('geography', selectedGeographies.join(','));
     }
@@ -474,6 +481,7 @@ export default function Dashboard() {
     const isVm = activeProductType === 'vm';
     const isServerless = activeProductType === 'serverless';
     const isContainers = activeProductType === 'containers';
+    const isNetworking = activeProductType === 'networking';
 
     // Guard: require at least one selection in every active filter
     if (selectedProviders.length === 0 || selectedGeographies.length === 0) {
@@ -530,7 +538,18 @@ export default function Dashboard() {
     setLoading(true);
     try {
       const baseParams = new URLSearchParams();
-      baseParams.append('productType', isDb ? 'database' : (isServerless ? 'serverless' : (isContainers ? 'containers' : 'compute')));
+      const isDb = activeProductType === 'database';
+      const isServerless = activeProductType === 'serverless';
+      const isContainers = activeProductType === 'containers';
+      const isNetworking = activeProductType === 'networking';
+      
+      let productTypeParam = 'compute';
+      if (isDb) productTypeParam = 'database';
+      if (isServerless) productTypeParam = 'serverless';
+      if (isContainers) productTypeParam = 'containers';
+      if (isNetworking) productTypeParam = 'networking';
+      
+      baseParams.append('productType', productTypeParam);
       if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) baseParams.append('geography', selectedGeographies.join(','));
 
       if (isDb) {
@@ -770,6 +789,19 @@ export default function Dashboard() {
           >
             <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'containers' ? 'font-medium' : ''}`}>
               📦 Containers
+            </span>
+          </button>
+
+          <button
+            onClick={() => { setIsInitialFetch(true); setActiveProductType('networking'); }}
+            className={`flex-1 py-3 px-4 flex justify-center border-b-2 transition-colors ${
+              activeProductType === 'networking'
+                ? 'border-indigo-500 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-900/20'
+                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:border-slate-600'
+            }`}
+          >
+            <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'networking' ? 'font-medium' : ''}`}>
+              🌐 Networking
             </span>
           </button>
 
@@ -1781,6 +1813,24 @@ export default function Dashboard() {
                           GPU
                         </th>
                       </>
+                    ) : activeProductType === 'networking' ? (
+                      <>
+                        <th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Service
+                        </th>
+                        <th data-col="db_family_cpu_vendor" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Category
+                        </th>
+                        <th data-col="deployment_arch" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Transfer Tier
+                        </th>
+                        <th data-col="ha_mode_os" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Destination
+                        </th>
+                        <th data-col="gpu" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Included
+                        </th>
+                      </>
                     ) : (
                       <>
                         <th data-col="engine_category" onClick={() => handleHeaderClick('category')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
@@ -1809,14 +1859,18 @@ export default function Dashboard() {
                       Geo <SortIcon sortKey="geography" />
                       
                     </th>
-                    <th data-col="vcpus" onClick={() => handleHeaderClick('vcpus')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
-                      vCPU <SortIcon sortKey="vcpus" />
-                      
-                    </th>
-                    <th data-col="memory_gb" onClick={() => handleHeaderClick('memory_gb')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
-                      Memory (GB) <SortIcon sortKey="memory_gb" />
-                      
-                    </th>
+                    {activeProductType !== 'networking' && (
+                      <>
+                        <th data-col="vcpus" onClick={() => handleHeaderClick('vcpus')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          vCPU <SortIcon sortKey="vcpus" />
+                          
+                        </th>
+                        <th data-col="memory_gb" onClick={() => handleHeaderClick('memory_gb')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Memory (GB) <SortIcon sortKey="memory_gb" />
+                          
+                        </th>
+                      </>
+                    )}
                     <th data-col="price_per_unit" onClick={() => handleHeaderClick('price_per_unit')} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity relative" title="Double-click to auto-fit column width">
                       {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <SortIcon sortKey="price_per_unit" />
                       
@@ -1950,6 +2004,24 @@ export default function Dashboard() {
                               }
                             </td>
                           </>
+                        ) : activeProductType === 'networking' ? (
+                          <>
+                            <td data-col="engine_category" className="px-6 py-4 text-center whitespace-nowrap">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span>
+                            </td>
+                            <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span>
+                            </td>
+                            <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_tier || '—'}</span>
+                            </td>
+                            <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.destination || '—'}</span>
+                            </td>
+                            <td data-col="gpu" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.included_transfer || '—'}</span>
+                            </td>
+                          </>
                         ) : (
                           <>
                             <td data-col="engine_category" className="px-6 py-4 text-center whitespace-nowrap">
@@ -1976,12 +2048,16 @@ export default function Dashboard() {
                         <td data-col="geography" className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span>
                         </td>
-                        <td data-col="vcpus" className="px-6 py-4 whitespace-nowrap text-center">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
-                        </td>
-                        <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span>
-                        </td>
+                        {activeProductType !== 'networking' && (
+                          <>
+                            <td data-col="vcpus" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
+                            </td>
+                            <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span>
+                            </td>
+                          </>
+                        )}
                         <td data-col="price_per_unit" className="px-6 py-4 text-center whitespace-nowrap">
                           <span className="text-xs font-bold text-black dark:text-white">
                             {showAggregation

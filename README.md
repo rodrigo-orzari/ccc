@@ -59,7 +59,9 @@ _ccc/
 │   ├── README.md                      # This file — project overview
 │   ├── PROJECT_ANALYSIS.md            # In-depth technical analysis (15 sections)
 │   ├── ARCHITECTURE_DIAGRAMS.md       # Visual ASCII diagrams (13 diagrams)
-│   └── OPERATIONS_RUNBOOK.md          # Deployment & troubleshooting guide
+│   ├── OPERATIONS_RUNBOOK.md          # Deployment, security, troubleshooting guide
+│   ├── SECURITY_AUDIT.md              # Security audit findings & recommendations
+│   └── SECURITY_FIXES.md              # Implementation details of security fixes
 │
 ├── src/
 │   ├── main.tsx                       # React root render
@@ -115,7 +117,9 @@ _ccc/
 **Documentation Files (New):**
 * [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md): **Comprehensive technical deep-dive** covering technology stack, architecture, data model, pipelines, API routes, frontend design, performance, and enhancement recommendations. Read this for a complete understanding of how everything works. (~8,000 words)
 * [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md): **Visual ASCII diagrams** showing system architecture, data flows, state machines, deployment pipeline, and more. Useful for understanding interactions at a glance. (13 diagrams)
-* [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md): **Operational guide** for deploying, monitoring, troubleshooting, and maintaining the application. Includes setup, deployment, scaling, disaster recovery, and quick reference commands. Read this to operate the app.
+* [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md): **Operational & Security guide** for deploying, securing, monitoring, troubleshooting, and maintaining the application. Includes TLS setup, admin authentication, filter validation, and deployment checklist. Read this before deploying to production.
+* [SECURITY_AUDIT.md](./SECURITY_AUDIT.md): **Comprehensive security audit** identifying vulnerabilities in TLS/SSL, authentication, input validation, and secrets management. Documents all findings with risk ratings and recommended fixes.
+* [SECURITY_FIXES.md](./SECURITY_FIXES.md): **Implementation details** of all security fixes applied to the codebase. Covers TLS certificate validation, database connection pooling, admin endpoint authentication, and SQL injection prevention through input validation.
 
 **Database:**
 * [src/db/schema.sql](./src/db/schema.sql): PostgreSQL schema definitions:
@@ -149,13 +153,32 @@ _ccc/
 |---|---|---|
 | Understand how everything works | Complete technical breakdown with all subsystems | [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) |
 | Visualize the architecture | System diagrams, data flows, state machines | [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) |
-| Deploy or operate the app | Setup, deployment, monitoring, troubleshooting, quick commands | [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) |
+| Deploy to production securely | TLS setup, admin auth, input validation, security checklist | [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) |
+| Understand security vulnerabilities | Findings, risk ratings, and remediation recommendations | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) |
+| Learn about security fixes | Details on TLS validation, auth middleware, input filtering | [SECURITY_FIXES.md](./SECURITY_FIXES.md) |
 | Develop locally | See "Quick Start" section below | — |
 | Understand a specific subsystem | Jump to Section 5 (below) for database, pipelines, API, frontend details | This README |
 
 ---
 
-## 5. Quick Start
+## 5. Security & Deployment
+
+### ⚠️ Important: Production Security Requirements
+
+**Before deploying to production**, you MUST:**
+
+1. **Enable TLS/SSL certificate validation** — The application validates PostgreSQL certificate chains. Provide your CA certificate via `DATABASE_CA_CERT` environment variable (base64-encoded).
+2. **Set a secure ADMIN_API_KEY** — Generate using `openssl rand -hex 32`. All `/api/admin/*` endpoints require this token in the `X-Admin-Token` header.
+3. **Configure environment variables** — Use `.env.example` as a template. Never commit `.env` files to version control.
+4. **Review the OPERATIONS_RUNBOOK.md** — Contains TLS troubleshooting, admin authentication setup, filter validation constraints, and a production deployment checklist.
+
+**See [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for security setup and deployment instructions.**
+
+For a detailed audit of all security findings and remediation steps, see [SECURITY_AUDIT.md](./SECURITY_AUDIT.md).
+
+---
+
+## 6. Quick Start
 
 ### Local Development (5 minutes)
 
@@ -168,6 +191,7 @@ npm install
 # 2. Create .env file
 cp .env.example .env
 # Edit .env and set: DATABASE_URL=postgres://...
+#                    ADMIN_API_KEY=<generate-with-openssl-rand-hex-32>
 
 # 3. Start dev server
 npm run dev
@@ -188,7 +212,7 @@ For detailed operational instructions, see [OPERATIONS_RUNBOOK.md](./OPERATIONS_
 
 ---
 
-## 6. In-Depth Subsystem Walks
+## 7. In-Depth Subsystem Walks
 
 ### A. Database Initialization and Schema Management
 Inside [server.ts](./server.ts), `initDb` parses and runs [schema.sql](./src/db/schema.sql). It performs schema migrations (e.g. adding `cpu_vendor`, `gpu_count`, `category` dynamically) and automatically standardizes classifications to ensure consistency (for example, renaming architecture fields like `x86_64` to `x86 64` and mapping generic instance configurations to Intel, AMD, or ARM vendors).
@@ -225,7 +249,7 @@ In [pricing_pipeline.ts](./src/services/pricing_pipeline.ts), `PricingPipeline` 
 
 ---
 
-## 7. Resources for Contributors
+## 8. Resources for Contributors
 
 ### Getting Started
 
@@ -241,7 +265,8 @@ In [pricing_pipeline.ts](./src/services/pricing_pipeline.ts), `PricingPipeline` 
 Understand the data model | [PROJECT_ANALYSIS.md § 3](./PROJECT_ANALYSIS.md) + [src/db/schema.sql](./src/db/schema.sql)
 Work on pricing pipelines | [PROJECT_ANALYSIS.md § 4](./PROJECT_ANALYSIS.md) + [src/services/pricing_pipeline.ts](./src/services/pricing_pipeline.ts)
 Build frontend features | [PROJECT_ANALYSIS.md § 6](./PROJECT_ANALYSIS.md) + [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx)
-Deploy to production | [OPERATIONS_RUNBOOK.md § 4](./OPERATIONS_RUNBOOK.md)
+Secure the application | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) + [SECURITY_FIXES.md](./SECURITY_FIXES.md)
+Deploy to production | [OPERATIONS_RUNBOOK.md § 4](./OPERATIONS_RUNBOOK.md) + [Section 5 above](#5-security--deployment)
 Add a new cloud provider | [PROJECT_ANALYSIS.md § 4.3](./PROJECT_ANALYSIS.md)
 Troubleshoot issues | [OPERATIONS_RUNBOOK.md § 9](./OPERATIONS_RUNBOOK.md)
 
@@ -254,6 +279,9 @@ Troubleshoot issues | [OPERATIONS_RUNBOOK.md § 9](./OPERATIONS_RUNBOOK.md)
 | Pricing pipelines | [src/services/pricing_pipeline.ts](./src/services/pricing_pipeline.ts), [database_pipeline.ts](./src/services/database_pipeline.ts) |
 | Frontend UI | [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) |
 | Email alerts | [src/services/mailer.ts](./src/services/mailer.ts) |
+| Security audit | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) |
+| Security fixes | [SECURITY_FIXES.md](./SECURITY_FIXES.md) |
+| Environment template | [.env.example](./.env.example) |
 
 ---
 
@@ -280,8 +308,10 @@ This repository contains the open-source core of Compare Cloud Costs. While this
 
 **Can't find what you're looking for?**
 - Check [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) for technical details
-- Check [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for operational questions
+- Check [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for operational and security questions
 - Check [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) for system diagrams
+- Check [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) for security findings and recommendations
+- Check [SECURITY_FIXES.md](./SECURITY_FIXES.md) for implementation details of applied fixes
 
 ---
 

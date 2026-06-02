@@ -10,6 +10,7 @@ import { PricingPipeline, PriceDriftResult } from './src/services/pricing_pipeli
 import { DatabasePricingPipeline } from './src/services/database_pipeline.ts';
 import { ServerlessPricingPipeline } from './src/services/serverless_pipeline.ts';
 import { ContainersPricingPipeline } from './src/services/containers_pipeline.ts';
+import { NetworkingPricingPipeline } from './src/services/networking_pipeline.ts';
 import { sendPriceDriftEmail, sendStalenessEmail, StaleDataAlert } from './src/services/mailer.ts';
 
 dotenv.config();
@@ -334,6 +335,15 @@ async function startServer() {
         }
       }
 
+      if (type === 'all' || type === 'networking') {
+        const networkingPipeline = new NetworkingPricingPipeline(pool);
+        const networkingResults = await networkingPipeline.run();
+        for (const r of networkingResults) {
+          if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+          results.push({ ...r, pipeline: 'networking' });
+        }
+      }
+
       if (type === 'all' || type === 'containers') {
         const containersPipeline = new ContainersPricingPipeline(pool);
         const containersResults = await containersPipeline.run();
@@ -365,7 +375,7 @@ async function startServer() {
   // ✅ Input validation constants
   const MAX_FILTER_ITEMS = 50;
   const MAX_SEARCH_LENGTH = 200;
-  const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless'];
+  const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers'];
 
   // ✅ Helper: Safely split and validate comma-separated lists
   function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
