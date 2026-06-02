@@ -34,6 +34,40 @@ ls -la .env
 grep -E "DATABASE_URL|ADMIN_API_KEY" .env
 ```
 
+### Grant Database Permissions (One-Time Setup)
+
+If you're using a managed database service (DigitalOcean, AWS RDS, etc.) with separate admin and app users, you need to grant permissions **once**.
+
+Connect as the **admin user** (e.g., `doadmin` on DigitalOcean):
+
+```bash
+psql "postgresql://doadmin:ADMIN_PASSWORD@your-host:5432/ccc?sslmode=require"
+```
+
+Then run these SQL commands:
+
+```sql
+-- Grant schema permissions
+GRANT USAGE ON SCHEMA public TO "ccc-db";
+GRANT CREATE ON SCHEMA public TO "ccc-db";
+
+-- Transfer ownership of existing tables
+ALTER TABLE providers OWNER TO "ccc-db";
+ALTER TABLE regions OWNER TO "ccc-db";
+ALTER TABLE pricing_records OWNER TO "ccc-db";
+
+-- Transfer ownership of sequences
+ALTER SEQUENCE providers_id_seq OWNER TO "ccc-db";
+ALTER SEQUENCE regions_id_seq OWNER TO "ccc-db";
+ALTER SEQUENCE pricing_records_id_seq OWNER TO "ccc-db";
+
+-- Set default permissions for future tables
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO "ccc-db";
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO "ccc-db";
+```
+
+Exit with `\q`. **These changes are permanent and only need to be done once.**
+
 ---
 
 ## Step 2: Initialize the Database Schema
