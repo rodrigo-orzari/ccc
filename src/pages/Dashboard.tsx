@@ -378,6 +378,7 @@ export default function Dashboard() {
     const isServerless = activeProductType === 'serverless';
     const isContainers = activeProductType === 'containers';
     const isNetworking = activeProductType === 'networking';
+    const isDataAnalytics = activeProductType === 'data-analytics';
 
     // Build query params with all active filters to get counts that reflect
     // the current filter state (ensures "of X" numbers are correct in the UI)
@@ -387,6 +388,7 @@ export default function Dashboard() {
     if (isServerless) productTypeParam = 'serverless';
     if (isContainers) productTypeParam = 'containers';
     if (isNetworking) productTypeParam = 'networking';
+    if (isDataAnalytics) productTypeParam = 'data-analytics';
 
     params.append('productType', productTypeParam);
     if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) {
@@ -451,6 +453,16 @@ export default function Dashboard() {
       if (selectedServerlessEphemeralStorage.length > 0 && selectedServerlessEphemeralStorage.length < SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) {
         params.append('ephemeralStorage', selectedServerlessEphemeralStorage.join(','));
       }
+    } else if (isDataAnalytics) {
+      if (selectedAnalyticsEngines.length > 0 && selectedAnalyticsEngines.length < ANALYTICS_ENGINES.length) {
+        params.append('engine', selectedAnalyticsEngines.join(','));
+      }
+      if (selectedAnalyticsDeploymentTypes.length > 0 && selectedAnalyticsDeploymentTypes.length < ANALYTICS_DEPLOYMENT_TYPES.length) {
+        params.append('deploymentType', selectedAnalyticsDeploymentTypes.join(','));
+      }
+      if (selectedAnalyticsTiers.length > 0 && selectedAnalyticsTiers.length < ANALYTICS_TIERS.length) {
+        params.append('tier', selectedAnalyticsTiers.join(','));
+      }
     } else if (isContainers) {
       if (selectedContainersOrchestrators.length > 0 && selectedContainersOrchestrators.length < CONTAINERS_ORCHESTRATORS.length) {
         params.append('orchestrator', selectedContainersOrchestrators.join(','));
@@ -494,6 +506,7 @@ export default function Dashboard() {
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
+    selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     vCpuRange, memoryRange, priceRange,
   ]);
 
@@ -503,6 +516,7 @@ export default function Dashboard() {
     const isServerless = activeProductType === 'serverless';
     const isContainers = activeProductType === 'containers';
     const isNetworking = activeProductType === 'networking';
+    const isDataAnalytics = activeProductType === 'data-analytics';
 
     // Guard: require at least one selection in every active filter
     if (selectedProviders.length === 0 || selectedGeographies.length === 0) {
@@ -555,6 +569,17 @@ export default function Dashboard() {
       setIsInitialFetch(false);
       return;
     }
+    if (isDataAnalytics && (
+      selectedAnalyticsEngines.length === 0 ||
+      selectedAnalyticsDeploymentTypes.length === 0 ||
+      selectedAnalyticsTiers.length === 0
+    )) {
+      setData([]);
+      setProviderCounts({});
+      setLoading(false);
+      setIsInitialFetch(false);
+      return;
+    }
 
     setLoading(true);
     try {
@@ -563,12 +588,14 @@ export default function Dashboard() {
       const isServerless = activeProductType === 'serverless';
       const isContainers = activeProductType === 'containers';
       const isNetworking = activeProductType === 'networking';
+      const isDataAnalytics = activeProductType === 'data-analytics';
       
       let productTypeParam = 'compute';
       if (isDb) productTypeParam = 'database';
       if (isServerless) productTypeParam = 'serverless';
       if (isContainers) productTypeParam = 'containers';
       if (isNetworking) productTypeParam = 'networking';
+      if (isDataAnalytics) productTypeParam = 'data-analytics';
       
       baseParams.append('productType', productTypeParam);
       if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) baseParams.append('geography', selectedGeographies.join(','));
@@ -647,6 +674,17 @@ export default function Dashboard() {
         if (!containersGpuIncluded) {
           baseParams.append('gpu', 'false');
         }
+      } else if (isDataAnalytics) {
+        // Data-Analytics-specific filters
+        if (selectedAnalyticsEngines.length > 0 && selectedAnalyticsEngines.length < ANALYTICS_ENGINES.length) {
+          baseParams.append('engine', selectedAnalyticsEngines.join(','));
+        }
+        if (selectedAnalyticsDeploymentTypes.length > 0 && selectedAnalyticsDeploymentTypes.length < ANALYTICS_DEPLOYMENT_TYPES.length) {
+          baseParams.append('deploymentType', selectedAnalyticsDeploymentTypes.join(','));
+        }
+        if (selectedAnalyticsTiers.length > 0 && selectedAnalyticsTiers.length < ANALYTICS_TIERS.length) {
+          baseParams.append('tier', selectedAnalyticsTiers.join(','));
+        }
       }
 
       baseParams.append('minVcpu', vCpuRange.min.toString());
@@ -701,6 +739,7 @@ export default function Dashboard() {
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
+    selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     vCpuRange, memoryRange, priceRange, search, showAggregation,
   ]);
 
@@ -815,16 +854,36 @@ export default function Dashboard() {
 
           <button
             onClick={() => { setIsInitialFetch(true); setActiveProductType('networking'); }}
-            className={`flex-1 py-3 px-4 flex justify-center border-b-2 transition-colors ${
+            className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'networking'
-                ? 'border-indigo-500 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 bg-indigo-50/50 dark:bg-indigo-900/20'
-                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:border-slate-600'
+                ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
+                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-white opacity-60 hover:opacity-100'
             }`}
           >
             <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'networking' ? 'font-medium' : ''}`}>
               🌐 Networking
             </span>
           </button>
+
+          <button
+            onClick={() => { setIsInitialFetch(true); setActiveProductType('data-analytics'); }}
+            className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
+              activeProductType === 'data-analytics'
+                ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
+                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-white opacity-60 hover:opacity-100'
+            }`}
+          >
+            <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'data-analytics' ? 'font-medium' : ''}`}>
+              📊 Data & Analytics
+            </span>
+          </button>
+
+          <div className="flex items-center gap-2 group opacity-60">
+            <span className="text-xs font-medium text-[#737373] flex items-center gap-1.5">
+              🧠 Artificial Intelligence
+              <span className="text-[8px] font-bold bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-1 rounded uppercase tracking-tighter">Soon</span>
+            </span>
+          </div>
 
           <div className="flex items-center gap-2 group opacity-60">
             <span className="text-xs font-medium text-[#737373] flex items-center gap-1.5">
@@ -1513,6 +1572,91 @@ export default function Dashboard() {
               </>
             )}
 
+            {activeProductType === 'data-analytics' && (
+              <>
+                {/* ── Data-Analytics: Engine ── */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('engine')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.engine ? '' : '-rotate-90'}`} />
+                        ENGINE <Tooltip text="The analytics engine: Databricks, Snowflake, BigQuery, etc."><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedAnalyticsEngines.length === ANALYTICS_ENGINES.length ? setSelectedAnalyticsEngines([]) : setSelectedAnalyticsEngines([...ANALYTICS_ENGINES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedAnalyticsEngines.length === ANALYTICS_ENGINES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedAnalyticsEngines.length === ANALYTICS_ENGINES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.engine && (
+                  <div className="flex flex-wrap gap-2">
+                    {ANALYTICS_ENGINES.map(e => (
+                      <button key={e} onClick={() => toggleFilter(selectedAnalyticsEngines, setSelectedAnalyticsEngines, e)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedAnalyticsEngines.includes(e) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {e}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* ── Data-Analytics: Deployment Type ── */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('deploymentType')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.deploymentType ? '' : '-rotate-90'}`} />
+                        DEPLOYMENT TYPE <Tooltip text="Serverless or Provisioned deployment."><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedAnalyticsDeploymentTypes.length === ANALYTICS_DEPLOYMENT_TYPES.length ? setSelectedAnalyticsDeploymentTypes([]) : setSelectedAnalyticsDeploymentTypes([...ANALYTICS_DEPLOYMENT_TYPES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedAnalyticsDeploymentTypes.length === ANALYTICS_DEPLOYMENT_TYPES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedAnalyticsDeploymentTypes.length === ANALYTICS_DEPLOYMENT_TYPES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.deploymentType && (
+                  <div className="flex flex-wrap gap-2">
+                    {ANALYTICS_DEPLOYMENT_TYPES.map(d => (
+                      <button key={d} onClick={() => toggleFilter(selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes, d)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedAnalyticsDeploymentTypes.includes(d) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {d}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                {/* ── Data-Analytics: Tier ── */}
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('tier')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.tier ? '' : '-rotate-90'}`} />
+                        TIER <Tooltip text="Standard, Premium, or Enterprise tier."><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedAnalyticsTiers.length === ANALYTICS_TIERS.length ? setSelectedAnalyticsTiers([]) : setSelectedAnalyticsTiers([...ANALYTICS_TIERS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedAnalyticsTiers.length === ANALYTICS_TIERS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedAnalyticsTiers.length === ANALYTICS_TIERS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.tier && (
+                  <div className="flex flex-wrap gap-2">
+                    {ANALYTICS_TIERS.map(t => (
+                      <button key={t} onClick={() => toggleFilter(selectedAnalyticsTiers, setSelectedAnalyticsTiers, t)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedAnalyticsTiers.includes(t) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {t}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+              </>
+            )}
+
             {/* Range Sliders Section */}
             <section className="space-y-4">
               <div className="flex justify-between items-center">
@@ -1761,6 +1905,21 @@ export default function Dashboard() {
                           
                         </th>
                       </>
+                    ) : activeProductType === 'data-analytics' ? (
+                      <>
+                        <th data-col="engine_category" onClick={() => handleHeaderClick('attributes.engine')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Engine <SortIcon sortKey="attributes.engine" />
+                        </th>
+                        <th data-col="deployment_arch" onClick={() => handleHeaderClick('attributes.deployment_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Deployment Type <SortIcon sortKey="attributes.deployment_type" />
+                        </th>
+                        <th data-col="db_family_cpu_vendor" onClick={() => handleHeaderClick('attributes.tier')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Tier <SortIcon sortKey="attributes.tier" />
+                        </th>
+                        <th data-col="vcpus" onClick={() => handleHeaderClick('vcpus')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Compute Unit <SortIcon sortKey="vcpus" />
+                        </th>
+                      </>
                     ) : activeProductType === 'serverless' ? (
                       <>
                         <th data-col="languages" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
@@ -1867,7 +2026,7 @@ export default function Dashboard() {
                       Geo <SortIcon sortKey="geography" />
                       
                     </th>
-                    {activeProductType !== 'networking' && (
+                    {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && (
                       <>
                         <th data-col="vcpus" onClick={() => handleHeaderClick('vcpus')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
                           vCPU <SortIcon sortKey="vcpus" />
@@ -1937,6 +2096,25 @@ export default function Dashboard() {
                             </td>
                             <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.ha_mode || '—'}</span>
+                            </td>
+                          </>
+                        ) : activeProductType === 'data-analytics' ? (
+                          <>
+                            <td data-col="engine_category" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span>
+                            </td>
+                            <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
+                                record.attributes?.deployment_type === 'Serverless'
+                                  ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20'
+                                  : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
+                              }`}>{record.attributes?.deployment_type || 'Provisioned'}</span>
+                            </td>
+                            <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span>
+                            </td>
+                            <td data-col="vcpus" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
                             </td>
                           </>
                         ) : activeProductType === 'serverless' ? (
@@ -2056,7 +2234,7 @@ export default function Dashboard() {
                         <td data-col="geography" className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span>
                         </td>
-                        {activeProductType !== 'networking' && (
+                        {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && (
                           <>
                             <td data-col="vcpus" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
