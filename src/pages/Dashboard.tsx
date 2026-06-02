@@ -1351,6 +1351,115 @@ export default function Dashboard() {
               </>
             )}
 
+            {/* Containers Filters */}
+            {activeProductType === 'containers' && (
+              <>
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('containersOrchestrator')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.containersOrchestrator ? '' : '-rotate-90'}`} />
+                        Orchestrator <Tooltip text="The container management system."><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedContainersOrchestrators.length === CONTAINERS_ORCHESTRATORS.length ? setSelectedContainersOrchestrators([]) : setSelectedContainersOrchestrators([...CONTAINERS_ORCHESTRATORS]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedContainersOrchestrators.length === CONTAINERS_ORCHESTRATORS.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedContainersOrchestrators.length === CONTAINERS_ORCHESTRATORS.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.containersOrchestrator && (
+                  <div className="flex flex-wrap gap-2">
+                    {CONTAINERS_ORCHESTRATORS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedContainersOrchestrators, setSelectedContainersOrchestrators, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedContainersOrchestrators.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('containersComputeType')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.containersComputeType ? '' : '-rotate-90'}`} />
+                        Compute Type <Tooltip text="Serverless (pay per request) or Provisioned (pay for nodes)."><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedContainersComputeTypes.length === CONTAINERS_COMPUTE_TYPES.length ? setSelectedContainersComputeTypes([]) : setSelectedContainersComputeTypes([...CONTAINERS_COMPUTE_TYPES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedContainersComputeTypes.length === CONTAINERS_COMPUTE_TYPES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedContainersComputeTypes.length === CONTAINERS_COMPUTE_TYPES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.containersComputeType && (
+                  <div className="flex flex-wrap gap-2">
+                    {CONTAINERS_COMPUTE_TYPES.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedContainersComputeTypes, setSelectedContainersComputeTypes, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedContainersComputeTypes.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('containersArchitecture')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.containersArchitecture ? '' : '-rotate-90'}`} />
+                        Architecture <Tooltip text="CPU Architecture for the container node."><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedContainersArchitectures.length === CONTAINERS_ARCHITECTURES.length ? setSelectedContainersArchitectures([]) : setSelectedContainersArchitectures([...CONTAINERS_ARCHITECTURES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedContainersArchitectures.length === CONTAINERS_ARCHITECTURES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedContainersArchitectures.length === CONTAINERS_ARCHITECTURES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.containersArchitecture && (
+                  <div className="flex flex-wrap gap-2">
+                    {CONTAINERS_ARCHITECTURES.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedContainersArchitectures, setSelectedContainersArchitectures, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedContainersArchitectures.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('containersBillingGranularity')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.containersBillingGranularity ? '' : '-rotate-90'}`} />
+                        Billing Granularity <Tooltip text="Billing granularity for containers."><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedContainersBillingGranularity.length === CONTAINERS_BILLING_GRANULARITY.length ? setSelectedContainersBillingGranularity([]) : setSelectedContainersBillingGranularity([...CONTAINERS_BILLING_GRANULARITY]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedContainersBillingGranularity.length === CONTAINERS_BILLING_GRANULARITY.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedContainersBillingGranularity.length === CONTAINERS_BILLING_GRANULARITY.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.containersBillingGranularity && (
+                  <div className="flex flex-wrap gap-2">
+                    {CONTAINERS_BILLING_GRANULARITY.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedContainersBillingGranularity, setSelectedContainersBillingGranularity, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedContainersBillingGranularity.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+              </>
+            )}
+
             {/* Range Sliders Section */}
             <section className="space-y-4">
               <div className="flex justify-between items-center">
@@ -1654,6 +1763,24 @@ export default function Dashboard() {
                           
                         </th>
                       </>
+                    ) : activeProductType === 'containers' ? (
+                      <>
+                        <th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Orchestrator
+                        </th>
+                        <th data-col="db_family_cpu_vendor" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Compute Type
+                        </th>
+                        <th data-col="deployment_arch" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Architecture
+                        </th>
+                        <th data-col="ha_mode_os" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          Granularity
+                        </th>
+                        <th data-col="gpu" className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
+                          GPU
+                        </th>
+                      </>
                     ) : (
                       <>
                         <th data-col="engine_category" onClick={() => handleHeaderClick('category')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors relative" title="Double-click to auto-fit column width">
@@ -1798,6 +1925,29 @@ export default function Dashboard() {
                             </td>
                             <td data-col="inv_price" className="px-6 py-4 whitespace-nowrap text-center">
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}</span>
+                            </td>
+                          </>
+                        ) : activeProductType === 'containers' ? (
+                          <>
+                            <td data-col="engine_category" className="px-6 py-4 text-center whitespace-nowrap">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.orchestrator || '—'}</span>
+                            </td>
+                            <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span>
+                            </td>
+                            <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                                {record.attributes?.architecture || '—'}
+                              </span>
+                            </td>
+                            <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity || '—'}</span>
+                            </td>
+                            <td data-col="gpu" className="px-6 py-4 text-center whitespace-nowrap">
+                              {record.gpu_count > 0
+                                ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span>
+                                : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>
+                              }
                             </td>
                           </>
                         ) : (

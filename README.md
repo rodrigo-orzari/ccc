@@ -12,11 +12,11 @@ This project is hosted on the **DigitalOcean App Platform**. To help keep this s
 
 **[❤️ Support this project](https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca)**
 
-If you find Compare Cloud Costs useful and it helped you save money, please consider supporting the project. Your contributions help keep the data up to date and the website running.
+If you find Compare Cloud Costs useful and it helped you save money, please consider supporting the project. Donations cover cloud infrastructure costs, as well as tokens for AI coding tools, allowing us to continuously improve this project's capabilities and keep the website running.
 
 You can also support us by scanning the QR code below:
 
-<img src="./support-qr.png" width="200" alt="Scan to Pay">
+<img src="./support-qr.png" width="200" alt="Scan to support this project">
 
 
 ## 1. What Problem Does This Application Solve?
