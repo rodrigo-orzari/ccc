@@ -375,7 +375,7 @@ async function startServer() {
   // ✅ Input validation constants
   const MAX_FILTER_ITEMS = 50;
   const MAX_SEARCH_LENGTH = 200;
-  const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers'];
+  const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai'];
 
   // ✅ Helper: Safely split and validate comma-separated lists
   function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
@@ -412,6 +412,8 @@ async function startServer() {
         billingGranularity, executionModel, provisionedConcurrency, ephemeralStorage,
         // Containers-specific filters
         orchestrator, computeType, architecture,
+        // Data & Analytics filters
+        tier,
       } = query;
 
       const conditions: string[] = [];
@@ -493,6 +495,13 @@ async function startServer() {
       if (haModeFilters.length > 0) {
         conditions.push(`pr.attributes->>'ha_mode' = ANY($${paramCount++})`);
         values.push(haModeFilters);
+      }
+
+      // ✅ Validate data-analytics specific JSONB attribute filters
+      const tierFilters = parseFilterList(tier as string);
+      if (tierFilters.length > 0) {
+        conditions.push(`pr.attributes->>'tier' = ANY($${paramCount++})`);
+        values.push(tierFilters);
       }
 
       // ✅ Validate serverless-specific language filter
