@@ -4,13 +4,15 @@ import {
   AWSContainersLiveAdapter,
   AzureContainersLiveAdapter,
   GCPContainersLiveAdapter,
-  DigitalOceanContainersLiveAdapter
+  DigitalOceanContainersLiveAdapter,
+  OracleContainersLiveAdapter
 } from './containers_adapters_live.js';
 
 import { AWS_CONTAINERS, AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY } from '../config/aws_containers.js';
 import { AZURE_CONTAINERS, AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY } from '../config/azure_containers.js';
 import { GCP_CONTAINERS, GCP_CONTAINERS_REGION, GCP_CONTAINERS_GEOGRAPHY } from '../config/gcp_containers.js';
 import { DIGITALOCEAN_CONTAINERS, DIGITALOCEAN_CONTAINERS_REGION, DIGITALOCEAN_CONTAINERS_GEOGRAPHY } from '../config/digitalocean_containers.js';
+import { ORACLE_CONTAINERS, ORACLE_CONTAINERS_REGION, ORACLE_CONTAINERS_GEOGRAPHY } from '../config/oracle_containers.js';
 
 export class AWSContainersStaticAdapter extends BaseAdapter {
   providerSlug = 'aws';
@@ -112,6 +114,31 @@ export class DigitalOceanContainersStaticAdapter extends BaseAdapter {
   }
 }
 
+export class OracleContainersStaticAdapter extends BaseAdapter {
+  providerSlug = 'oracle';
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Oracle Containers pricing (${ORACLE_CONTAINERS.length} entries from static config)...`);
+    return ORACLE_CONTAINERS.map(inst => ({
+      provider: 'oracle',
+      service: 'Containers',
+      region: ORACLE_CONTAINERS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: ORACLE_CONTAINERS_GEOGRAPHY,
+      category: 'containers',
+      price: inst.price,
+      unit: 'Hourly',
+      dataSource: 'static_config' as const,
+      attributes: inst.attributes,
+    }));
+  }
+}
+
 export class ContainersPricingPipeline extends PricingPipeline {
   constructor(pool: Pool) {
     super(pool);
@@ -121,6 +148,7 @@ export class ContainersPricingPipeline extends PricingPipeline {
       new AzureContainersLiveAdapter(),
       new GCPContainersLiveAdapter(),
       new DigitalOceanContainersLiveAdapter(),
+      new OracleContainersLiveAdapter(),
     ];
   }
 
@@ -131,6 +159,7 @@ export class ContainersPricingPipeline extends PricingPipeline {
       { name: 'azure', LiveAdapter: AzureContainersLiveAdapter, StaticAdapter: AzureContainersStaticAdapter },
       { name: 'gcp', LiveAdapter: GCPContainersLiveAdapter, StaticAdapter: GCPContainersStaticAdapter },
       { name: 'digitalocean', LiveAdapter: DigitalOceanContainersLiveAdapter, StaticAdapter: DigitalOceanContainersStaticAdapter },
+      { name: 'oracle', LiveAdapter: OracleContainersLiveAdapter, StaticAdapter: OracleContainersStaticAdapter },
     ];
 
     for (const provider of providers) {
