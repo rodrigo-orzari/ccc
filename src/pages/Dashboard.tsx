@@ -71,7 +71,7 @@ interface PricingRecord {
   };
 }
 
-type ProductType = 'vm' | 'database' | 'serverless';
+type ProductType = 'vm' | 'database' | 'serverless' | 'containers';
 
 const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] = [
   { id: 'aws', name: 'AWS', color: '#FF9900' },
@@ -107,6 +107,12 @@ const SERVERLESS_GRANULARITY_OPTIONS = ['1', '100'];
 const SERVERLESS_EXECUTION_MODEL_OPTIONS = ['Both', 'Code (ZIP)', 'Container Image'];
 const SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS = ['Yes', 'No'];
 const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1', '1 - 5', '> 5'];
+
+// Containers-view constants
+const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
+const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned'];
+const CONTAINERS_ARCHITECTURES = ['x86_64', 'ARM64'];
+const CONTAINERS_BILLING_GRANULARITY = ['Per Second', 'Per Hour'];
 
 const DEFAULT_VCPU_RANGE   = { min: 0,   max: 320 };
 const DEFAULT_MEMORY_RANGE = { min: 0,   max: 3200 };
@@ -204,6 +210,13 @@ export default function Dashboard() {
   const [selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency] = useState<string[]>([...SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]);
   const [selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage] = useState<string[]>([...SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]);
 
+  // Containers-specific filter state
+  const [selectedContainersOrchestrators, setSelectedContainersOrchestrators] = useState<string[]>([...CONTAINERS_ORCHESTRATORS]);
+  const [selectedContainersComputeTypes, setSelectedContainersComputeTypes] = useState<string[]>([...CONTAINERS_COMPUTE_TYPES]);
+  const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...CONTAINERS_ARCHITECTURES]);
+  const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...CONTAINERS_BILLING_GRANULARITY]);
+  const [containersGpuIncluded, setContainersGpuIncluded] = useState(true);
+
   const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
   const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...DEFAULT_PRICE_RANGE });
@@ -250,6 +263,10 @@ export default function Dashboard() {
     executionModel: true,
     provisionedConcurrency: true,
     ephemeralStorage: true,
+    containersOrchestrator: true,
+    containersComputeType: true,
+    containersArchitecture: true,
+    containersBillingGranularity: true,
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
 
@@ -338,11 +355,12 @@ export default function Dashboard() {
     const isDb = activeProductType === 'database';
     const isVm = activeProductType === 'vm';
     const isServerless = activeProductType === 'serverless';
+    const isContainers = activeProductType === 'containers';
 
     // Build query params with all active filters to get counts that reflect
     // the current filter state (ensures "of X" numbers are correct in the UI)
     const params = new URLSearchParams();
-    params.append('productType', isDb ? 'database' : (isServerless ? 'serverless' : 'compute'));
+    params.append('productType', isDb ? 'database' : (isServerless ? 'serverless' : (isContainers ? 'containers' : 'compute')));
     if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) {
       params.append('geography', selectedGeographies.join(','));
     }
@@ -405,6 +423,22 @@ export default function Dashboard() {
       if (selectedServerlessEphemeralStorage.length > 0 && selectedServerlessEphemeralStorage.length < SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) {
         params.append('ephemeralStorage', selectedServerlessEphemeralStorage.join(','));
       }
+    } else if (isContainers) {
+      if (selectedContainersOrchestrators.length > 0 && selectedContainersOrchestrators.length < CONTAINERS_ORCHESTRATORS.length) {
+        params.append('orchestrator', selectedContainersOrchestrators.join(','));
+      }
+      if (selectedContainersComputeTypes.length > 0 && selectedContainersComputeTypes.length < CONTAINERS_COMPUTE_TYPES.length) {
+        params.append('computeType', selectedContainersComputeTypes.join(','));
+      }
+      if (selectedContainersArchitectures.length > 0 && selectedContainersArchitectures.length < CONTAINERS_ARCHITECTURES.length) {
+        params.append('architecture', selectedContainersArchitectures.join(','));
+      }
+      if (selectedContainersBillingGranularity.length > 0 && selectedContainersBillingGranularity.length < CONTAINERS_BILLING_GRANULARITY.length) {
+        params.append('billingGranularity', selectedContainersBillingGranularity.join(','));
+      }
+      if (!containersGpuIncluded) {
+        params.append('gpu', 'false');
+      }
     }
 
     params.append('minVcpu', vCpuRange.min.toString());
@@ -431,6 +465,7 @@ export default function Dashboard() {
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
+    selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
     vCpuRange, memoryRange, priceRange,
   ]);
 
@@ -438,6 +473,7 @@ export default function Dashboard() {
     const isDb = activeProductType === 'database';
     const isVm = activeProductType === 'vm';
     const isServerless = activeProductType === 'serverless';
+    const isContainers = activeProductType === 'containers';
 
     // Guard: require at least one selection in every active filter
     if (selectedProviders.length === 0 || selectedGeographies.length === 0) {
@@ -478,11 +514,23 @@ export default function Dashboard() {
       setIsInitialFetch(false);
       return;
     }
+    if (isContainers && (
+      selectedContainersOrchestrators.length === 0 ||
+      selectedContainersComputeTypes.length === 0 ||
+      selectedContainersArchitectures.length === 0 ||
+      selectedContainersBillingGranularity.length === 0
+    )) {
+      setData([]);
+      setProviderCounts({});
+      setLoading(false);
+      setIsInitialFetch(false);
+      return;
+    }
 
     setLoading(true);
     try {
       const baseParams = new URLSearchParams();
-      baseParams.append('productType', isDb ? 'database' : (isServerless ? 'serverless' : 'compute'));
+      baseParams.append('productType', isDb ? 'database' : (isServerless ? 'serverless' : (isContainers ? 'containers' : 'compute')));
       if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) baseParams.append('geography', selectedGeographies.join(','));
 
       if (isDb) {
@@ -542,6 +590,23 @@ export default function Dashboard() {
         if (selectedServerlessEphemeralStorage.length > 0 && selectedServerlessEphemeralStorage.length < SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) {
           baseParams.append('ephemeralStorage', selectedServerlessEphemeralStorage.join(','));
         }
+      } else if (isContainers) {
+        // Containers-specific filters
+        if (selectedContainersOrchestrators.length > 0 && selectedContainersOrchestrators.length < CONTAINERS_ORCHESTRATORS.length) {
+          baseParams.append('orchestrator', selectedContainersOrchestrators.join(','));
+        }
+        if (selectedContainersComputeTypes.length > 0 && selectedContainersComputeTypes.length < CONTAINERS_COMPUTE_TYPES.length) {
+          baseParams.append('computeType', selectedContainersComputeTypes.join(','));
+        }
+        if (selectedContainersArchitectures.length > 0 && selectedContainersArchitectures.length < CONTAINERS_ARCHITECTURES.length) {
+          baseParams.append('architecture', selectedContainersArchitectures.join(','));
+        }
+        if (selectedContainersBillingGranularity.length > 0 && selectedContainersBillingGranularity.length < CONTAINERS_BILLING_GRANULARITY.length) {
+          baseParams.append('billingGranularity', selectedContainersBillingGranularity.join(','));
+        }
+        if (!containersGpuIncluded) {
+          baseParams.append('gpu', 'false');
+        }
       }
 
       baseParams.append('minVcpu', vCpuRange.min.toString());
@@ -595,6 +660,7 @@ export default function Dashboard() {
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
+    selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
     vCpuRange, memoryRange, priceRange, search, showAggregation,
   ]);
 
@@ -646,7 +712,7 @@ export default function Dashboard() {
               Price information as of {new Date(dbStatus.lastUpdated).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </span>
           )}
-          <a href="https://19722908-3bf1-49af-a0a1-f8f1bc7b11c8.paylinks.godaddy.com/support-ccc" target="_blank" rel="noopener noreferrer" className="text-xs text-pink-600 dark:text-pink-400 font-medium flex items-center gap-1 hover:text-pink-700 dark:hover:text-pink-300 transition-colors">
+          <a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca" target="_blank" rel="noopener noreferrer" className="text-xs text-pink-600 dark:text-pink-400 font-medium flex items-center gap-1 hover:text-pink-700 dark:hover:text-pink-300 transition-colors">
             Support this project ❤️
           </a>
         </div>
@@ -694,16 +760,22 @@ export default function Dashboard() {
             </span>
           </button>
 
-          <div className="flex items-center gap-2 group opacity-60">
-            <span className="text-xs font-medium text-[#737373] flex items-center gap-1.5">
-              💾 Storage
-              <span className="text-[8px] font-bold bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-1 rounded uppercase tracking-tighter">Soon</span>
+          <button
+            onClick={() => { setIsInitialFetch(true); setActiveProductType('containers'); }}
+            className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
+              activeProductType === 'containers'
+                ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
+                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-white opacity-60 hover:opacity-100'
+            }`}
+          >
+            <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'containers' ? 'font-medium' : ''}`}>
+              📦 Containers
             </span>
-          </div>
+          </button>
 
           <div className="flex items-center gap-2 group opacity-60">
             <span className="text-xs font-medium text-[#737373] flex items-center gap-1.5">
-              📦 Containers
+              💾 Storage
               <span className="text-[8px] font-bold bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-1 rounded uppercase tracking-tighter">Soon</span>
             </span>
           </div>
@@ -1850,7 +1922,7 @@ export default function Dashboard() {
               </a>
 
               <a 
-                href="https://19722908-3bf1-49af-a0a1-f8f1bc7b11c8.paylinks.godaddy.com/support-ccc" 
+                href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="flex items-center gap-1.5 text-pink-600 dark:text-pink-400 hover:text-pink-700 dark:hover:text-pink-300 transition-colors bg-pink-50 dark:bg-pink-950/20 px-2.5 py-1 rounded border border-pink-200 dark:border-pink-900"
