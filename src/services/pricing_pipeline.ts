@@ -440,7 +440,10 @@ export class PricingPipeline {
   protected adapters: BaseAdapter[];
 
   constructor(pool: Pool) {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    // Removed dangerous TLS override — all certificates are now validated properly.
+    // If you encounter certificate validation errors, the root cause is the database
+    // connection or intermediate CA setup, not external cloud provider APIs.
+    // See OPERATIONS_RUNBOOK.md for troubleshooting TLS issues.
 
     this.pool = pool;
     this.adapters = [

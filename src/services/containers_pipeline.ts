@@ -1,15 +1,19 @@
 import { Pool } from 'pg';
 import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
-import { AWSContainersLiveAdapter } from './containers_adapters_live.js';
-import {
-  AWS_CONTAINERS,
-  AWS_CONTAINERS_REGION,
-  AWS_CONTAINERS_GEOGRAPHY,
-} from '../config/aws_containers.js';
+import { 
+  AWSContainersLiveAdapter,
+  AzureContainersLiveAdapter,
+  GCPContainersLiveAdapter,
+  DigitalOceanContainersLiveAdapter
+} from './containers_adapters_live.js';
+
+import { AWS_CONTAINERS, AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY } from '../config/aws_containers.js';
+import { AZURE_CONTAINERS, AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY } from '../config/azure_containers.js';
+import { GCP_CONTAINERS, GCP_CONTAINERS_REGION, GCP_CONTAINERS_GEOGRAPHY } from '../config/gcp_containers.js';
+import { DIGITALOCEAN_CONTAINERS, DIGITALOCEAN_CONTAINERS_REGION, DIGITALOCEAN_CONTAINERS_GEOGRAPHY } from '../config/digitalocean_containers.js';
 
 export class AWSContainersStaticAdapter extends BaseAdapter {
   providerSlug = 'aws';
-
   async fetchPricing(): Promise<PricingRecord[]> {
     console.log(`Fetching AWS Containers pricing (${AWS_CONTAINERS.length} entries from static config)...`);
     return AWS_CONTAINERS.map(inst => ({
@@ -33,68 +37,150 @@ export class AWSContainersStaticAdapter extends BaseAdapter {
   }
 }
 
+export class AzureContainersStaticAdapter extends BaseAdapter {
+  providerSlug = 'azure';
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Azure Containers pricing (${AZURE_CONTAINERS.length} entries from static config)...`);
+    return AZURE_CONTAINERS.map(inst => ({
+      provider: 'azure',
+      service: 'Containers',
+      region: AZURE_CONTAINERS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: AZURE_CONTAINERS_GEOGRAPHY,
+      category: 'containers',
+      price: inst.price,
+      unit: 'Hourly',
+      dataSource: 'static_config' as const,
+      attributes: inst.attributes,
+    }));
+  }
+}
+
+export class GCPContainersStaticAdapter extends BaseAdapter {
+  providerSlug = 'gcp';
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching GCP Containers pricing (${GCP_CONTAINERS.length} entries from static config)...`);
+    return GCP_CONTAINERS.map(inst => ({
+      provider: 'gcp',
+      service: 'Containers',
+      region: GCP_CONTAINERS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: GCP_CONTAINERS_GEOGRAPHY,
+      category: 'containers',
+      price: inst.price,
+      unit: 'Hourly',
+      dataSource: 'static_config' as const,
+      attributes: inst.attributes,
+    }));
+  }
+}
+
+export class DigitalOceanContainersStaticAdapter extends BaseAdapter {
+  providerSlug = 'digitalocean';
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching DigitalOcean Containers pricing (${DIGITALOCEAN_CONTAINERS.length} entries from static config)...`);
+    return DIGITALOCEAN_CONTAINERS.map(inst => ({
+      provider: 'digitalocean',
+      service: 'Containers',
+      region: DIGITALOCEAN_CONTAINERS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: DIGITALOCEAN_CONTAINERS_GEOGRAPHY,
+      category: 'containers',
+      price: inst.price,
+      unit: 'Hourly',
+      dataSource: 'static_config' as const,
+      attributes: inst.attributes,
+    }));
+  }
+}
+
 export class ContainersPricingPipeline extends PricingPipeline {
   constructor(pool: Pool) {
     super(pool);
     // Use live API adapters with fallback to static configs
     this.adapters = [
       new AWSContainersLiveAdapter(),
+      new AzureContainersLiveAdapter(),
+      new GCPContainersLiveAdapter(),
+      new DigitalOceanContainersLiveAdapter(),
     ];
   }
 
   async run() {
     const results = [];
+    const providers = [
+      { name: 'aws', LiveAdapter: AWSContainersLiveAdapter, StaticAdapter: AWSContainersStaticAdapter },
+      { name: 'azure', LiveAdapter: AzureContainersLiveAdapter, StaticAdapter: AzureContainersStaticAdapter },
+      { name: 'gcp', LiveAdapter: GCPContainersLiveAdapter, StaticAdapter: GCPContainersStaticAdapter },
+      { name: 'digitalocean', LiveAdapter: DigitalOceanContainersLiveAdapter, StaticAdapter: DigitalOceanContainersStaticAdapter },
+    ];
 
-    // AWS Containers: Try live API first, fall back to static config
-    try {
-      console.log('🔄 Attempting AWS Containers live API fetch...');
-      const awsAdapter = new AWSContainersLiveAdapter();
-      let records = await awsAdapter.fetchPricing();
-
-      if (records.length === 0) {
-        console.warn('⚠️  AWS Containers live API returned empty, using static config fallback');
-        records = await this.getAWSContainersStaticRecords();
-      }
-
-      const driftAlerts = await this.saveRecords(records, 'containers');
-      results.push({
-        provider: 'aws',
-        service: 'Containers',
-        status: 'success',
-        count: records.length,
-        driftAlerts,
-        dataSource: records[0]?.dataSource || 'static_config'
-      });
-    } catch (error: any) {
-      console.warn(`⚠️  AWS Containers live API failed (${error.message}), falling back to static config...`);
+    for (const provider of providers) {
       try {
-        const records = await this.getAWSContainersStaticRecords();
+        console.log(`🔄 Attempting ${provider.name.toUpperCase()} Containers live API fetch...`);
+        const liveAdapter = new provider.LiveAdapter();
+        let records = await liveAdapter.fetchPricing();
+
+        if (records.length === 0) {
+          console.warn(`⚠️  ${provider.name.toUpperCase()} Containers live API returned empty, using static config fallback`);
+          const staticAdapter = new provider.StaticAdapter();
+          records = await staticAdapter.fetchPricing();
+        }
+
         const driftAlerts = await this.saveRecords(records, 'containers');
         results.push({
-          provider: 'aws',
+          provider: provider.name,
           service: 'Containers',
           status: 'success',
           count: records.length,
           driftAlerts,
-          dataSource: 'static_config',
-          note: 'Using static config fallback due to API failure'
+          dataSource: records[0]?.dataSource || 'static_config'
         });
-      } catch (fallbackError: any) {
-        console.error(`❌ AWS Containers static config also failed:`, fallbackError);
-        results.push({
-          provider: 'aws',
-          service: 'Containers',
-          status: 'error',
-          message: `Live API failed: ${error.message}, Static fallback failed: ${(fallbackError as Error).message}`
-        });
+      } catch (error: any) {
+        console.warn(`⚠️  ${provider.name.toUpperCase()} Containers live API failed (${error.message}), falling back to static config...`);
+        try {
+          const staticAdapter = new provider.StaticAdapter();
+          const records = await staticAdapter.fetchPricing();
+          const driftAlerts = await this.saveRecords(records, 'containers');
+          results.push({
+            provider: provider.name,
+            service: 'Containers',
+            status: 'success',
+            count: records.length,
+            driftAlerts,
+            dataSource: 'static_config',
+            note: 'Using static config fallback due to API failure'
+          });
+        } catch (fallbackError: any) {
+          console.error(`❌ ${provider.name.toUpperCase()} Containers static config also failed:`, fallbackError);
+          results.push({
+            provider: provider.name,
+            service: 'Containers',
+            status: 'error',
+            message: `Live API failed: ${error.message}, Static fallback failed: ${(fallbackError as Error).message}`
+          });
+        }
       }
     }
 
     return results;
-  }
-
-  private async getAWSContainersStaticRecords(): Promise<PricingRecord[]> {
-    const adapter = new AWSContainersStaticAdapter();
-    return adapter.fetchPricing();
   }
 }

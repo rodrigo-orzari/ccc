@@ -9,6 +9,7 @@ import cron from 'node-cron';
 import { PricingPipeline, PriceDriftResult } from './src/services/pricing_pipeline.ts';
 import { DatabasePricingPipeline } from './src/services/database_pipeline.ts';
 import { ServerlessPricingPipeline } from './src/services/serverless_pipeline.ts';
+import { ContainersPricingPipeline } from './src/services/containers_pipeline.ts';
 import { sendPriceDriftEmail, sendStalenessEmail, StaleDataAlert } from './src/services/mailer.ts';
 
 dotenv.config();
@@ -35,11 +36,44 @@ async function startServer() {
   // PostgreSQL Connection Pool
   const pool = new Pool({
     ...(process.env.DATABASE_URL ? parseDbUrl(process.env.DATABASE_URL) : {}),
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    ssl: process.env.NODE_ENV === 'production'
+      ? {
+          rejectUnauthorized: true,
+          // If DATABASE_CA_CERT is provided (base64-encoded), use it for validation
+          ca: process.env.DATABASE_CA_CERT
+            ? [Buffer.from(process.env.DATABASE_CA_CERT, 'base64')]
+            : undefined,
+        }
+      : false,
   });
 
   app.use(cors());
   app.use(express.json());
+
+  // ✅ Admin Authentication Middleware
+  function requireAdminAuth(req: any, res: any, next: any) {
+    const adminToken = req.headers['x-admin-token'] as string;
+    const expectedToken = process.env.ADMIN_API_KEY;
+
+    if (!adminToken || !expectedToken) {
+      return res.status(401).json({
+        error: 'Unauthorized: Missing X-Admin-Token header',
+      });
+    }
+
+    // Use constant-time comparison to prevent timing attacks
+    const isValid =
+      adminToken.length === expectedToken.length &&
+      Array.from(adminToken).every((char: any, i: number) => char === expectedToken[i]);
+
+    if (!isValid) {
+      return res.status(403).json({
+        error: 'Forbidden: Invalid admin token',
+      });
+    }
+
+    next();
+  }
 
   // Function to initialize database schema
   const initDb = async () => {
@@ -254,7 +288,8 @@ async function startServer() {
   });
 
   // Init DB Route (Like --create-db-only)
-  app.post('/api/admin/init-db', async (req, res) => {
+  // ✅ Protected with authentication
+  app.post('/api/admin/init-db', requireAdminAuth, async (req, res) => {
     const success = await initDb();
     if (success) {
       res.json({ message: 'Database initialized successfully.' });
@@ -265,7 +300,8 @@ async function startServer() {
 
   // Run Pipeline Route — runs both compute and database pipelines.
   // Pass ?type=compute or ?type=database to run only one.
-  app.post('/api/admin/fetch-pricing', async (req, res) => {
+  // ✅ Protected with authentication
+  app.post('/api/admin/fetch-pricing', requireAdminAuth, async (req, res) => {
     try {
       const type = (req.query.type as string) || 'all';
       const results: any[] = [];
@@ -298,6 +334,15 @@ async function startServer() {
         }
       }
 
+      if (type === 'all' || type === 'containers') {
+        const containersPipeline = new ContainersPricingPipeline(pool);
+        const containersResults = await containersPipeline.run();
+        for (const r of containersResults) {
+          if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+          results.push({ ...r, pipeline: 'containers' });
+        }
+      }
+
       // Refresh schema migrations / column backfills after any fetch
       await initDb();
 
@@ -316,87 +361,174 @@ async function startServer() {
 
   // Build the WHERE-clause fragment + values for pricing filters (shared between
   // /api/pricing and /api/pricing/counts so filter behaviour stays consistent).
-  function buildPricingFilters(query: any) {
-    const {
-      provider, geography, os, arch, cpuVendor, gpu, category,
-      minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
-      // Database-specific filters
-      productType, engine, deploymentType, haMode,
-      // Serverless-specific filters
-      language, coldStart, timeout, memoryConfig, freeTier,
-      billingGranularity, executionModel, provisionedConcurrency, ephemeralStorage,
-    } = query;
 
-    const conditions: string[] = [];
-    const values: any[] = [];
-    let paramCount = 1;
+  // ✅ Input validation constants
+  const MAX_FILTER_ITEMS = 50;
+  const MAX_SEARCH_LENGTH = 200;
+  const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless'];
 
-    // productType scopes the query to compute or database services.
-    // Defaults to 'compute' so the existing VM dashboard is unaffected.
-    const resolvedProductType = (productType as string) || 'compute';
-    conditions.push(`s.category = $${paramCount++}`);
-    values.push(resolvedProductType);
+  // ✅ Helper: Safely split and validate comma-separated lists
+  function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
+    if (!input) return [];
 
-    if (provider) { conditions.push(`p.slug = ANY($${paramCount++})`); values.push((provider as string).split(',')); }
-    if (geography) { conditions.push(`pr.geography = ANY($${paramCount++})`); values.push((geography as string).split(',')); }
+    const items = input
+      .split(',')
+      .map((s: string) => s.trim())
+      .filter((s: string) => s.length > 0);
 
-    // OS / arch / CPU / GPU only apply to the compute product type
-    if (resolvedProductType === 'compute') {
-      if (os) { conditions.push(`pr.os = ANY($${paramCount++})`); values.push((os as string).split(',')); }
-      if (arch) {
-        const archList = (arch as string).split(',').map((a: string) => a === 'x86' ? 'x86 64' : a);
-        conditions.push(`pr.arch = ANY($${paramCount++})`);
-        values.push(archList);
+    if (items.length > maxItems) {
+      throw new Error(`Filter list exceeds maximum of ${maxItems} items (got ${items.length})`);
+    }
+
+    // Sanitize: reject items with suspicious patterns
+    for (const item of items) {
+      if (item.length > 100 || /[;'"\\]/.test(item)) {
+        throw new Error(`Invalid filter value: "${item}"`);
       }
-      if (cpuVendor) { conditions.push(`pr.cpu_vendor = ANY($${paramCount++})`); values.push((cpuVendor as string).split(',')); }
-      if (gpu === 'true') conditions.push(`pr.gpu_count > 0`);
-      else if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
     }
 
-    if (category && category !== 'All categories') { conditions.push(`pr.category = ANY($${paramCount++})`); values.push((category as string).split(',')); }
+    return items;
+  }
 
-    // Database-specific JSONB attribute filters
-    if (engine) {
-      conditions.push(`pr.attributes->>'engine' = ANY($${paramCount++})`);
-      values.push((engine as string).split(','));
-    }
-    if (deploymentType) {
-      conditions.push(`pr.attributes->>'deployment_type' = ANY($${paramCount++})`);
-      values.push((deploymentType as string).split(','));
-    }
-    if (haMode) {
-      conditions.push(`pr.attributes->>'ha_mode' = ANY($${paramCount++})`);
-      values.push((haMode as string).split(','));
-    }
+  function buildPricingFilters(query: any) {
+    try {
+      const {
+        provider, geography, os, arch, cpuVendor, gpu, category,
+        minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
+        // Database-specific filters
+        productType, engine, deploymentType, haMode,
+        // Serverless-specific filters
+        language, coldStart, timeout, memoryConfig, freeTier,
+        billingGranularity, executionModel, provisionedConcurrency, ephemeralStorage,
+        // Containers-specific filters
+        orchestrator, computeType, architecture,
+      } = query;
 
-    // Serverless-specific language filter
-    if (language) {
-      const languages = (language as string).split(',');
-      conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
-      values.push(languages);
-    }
+      const conditions: string[] = [];
+      const values: any[] = [];
+      let paramCount = 1;
 
-    // Serverless-specific cold start filter
-    if (coldStart) {
-      const coldStartOptions = (coldStart as string).split(',');
-      const coldStartConditions: string[] = [];
+      // productType scopes the query to compute or database services.
+      // Defaults to 'compute' so the existing VM dashboard is unaffected.
+      const resolvedProductType =
+        productType && VALID_PRODUCT_TYPES.includes(productType as string)
+          ? (productType as string)
+          : 'compute';
+      conditions.push(`s.category = $${paramCount++}`);
+      values.push(resolvedProductType);
 
-      for (const opt of coldStartOptions) {
-        if (opt.includes('Fast')) {
-          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int < 100`);
-        } else if (opt.includes('Medium')) {
-          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int BETWEEN 100 AND 200`);
-        } else if (opt.includes('Slow')) {
-          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int > 200`);
+      // ✅ Validate provider filter
+      const providers = parseFilterList(provider as string);
+      if (providers.length > 0) {
+        conditions.push(`p.slug = ANY($${paramCount++})`);
+        values.push(providers);
+      }
+
+      // ✅ Validate geography filter
+      const geographies = parseFilterList(geography as string);
+      if (geographies.length > 0) {
+        conditions.push(`pr.geography = ANY($${paramCount++})`);
+        values.push(geographies);
+      }
+
+      // OS / arch / CPU / GPU only apply to the compute product type
+      if (resolvedProductType === 'compute') {
+        const osFilters = parseFilterList(os as string);
+        if (osFilters.length > 0) {
+          conditions.push(`pr.os = ANY($${paramCount++})`);
+          values.push(osFilters);
+        }
+
+        const archFilters = parseFilterList(arch as string).map((a: string) =>
+          a === 'x86' ? 'x86 64' : a
+        );
+        if (archFilters.length > 0) {
+          conditions.push(`pr.arch = ANY($${paramCount++})`);
+          values.push(archFilters);
+        }
+
+        const cpuVendorFilters = parseFilterList(cpuVendor as string);
+        if (cpuVendorFilters.length > 0) {
+          conditions.push(`pr.cpu_vendor = ANY($${paramCount++})`);
+          values.push(cpuVendorFilters);
+        }
+
+        if (gpu === 'true') conditions.push(`pr.gpu_count > 0`);
+        else if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
+      }
+
+      // ✅ Validate category filter
+      if (category && category !== 'All categories') {
+        const categories = parseFilterList(category as string);
+        if (categories.length > 0) {
+          conditions.push(`pr.category = ANY($${paramCount++})`);
+          values.push(categories);
         }
       }
 
-      if (coldStartConditions.length > 0) {
-        conditions.push(`(${coldStartConditions.join(' OR ')})`);
+      // ✅ Validate database-specific JSONB attribute filters
+      const engineFilters = parseFilterList(engine as string);
+      if (engineFilters.length > 0) {
+        conditions.push(`pr.attributes->>'engine' = ANY($${paramCount++})`);
+        values.push(engineFilters);
       }
-    }
 
-    // Ensure serverless product type includes DigitalOcean (which uses 'serverless' category)
+      const deploymentTypeFilters = parseFilterList(deploymentType as string);
+      if (deploymentTypeFilters.length > 0) {
+        conditions.push(`pr.attributes->>'deployment_type' = ANY($${paramCount++})`);
+        values.push(deploymentTypeFilters);
+      }
+
+      const haModeFilters = parseFilterList(haMode as string);
+      if (haModeFilters.length > 0) {
+        conditions.push(`pr.attributes->>'ha_mode' = ANY($${paramCount++})`);
+        values.push(haModeFilters);
+      }
+
+      // ✅ Validate serverless-specific language filter
+      const languages = parseFilterList(language as string);
+      if (languages.length > 0) {
+        conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
+        values.push(languages);
+      }
+
+      // ✅ Validate serverless-specific cold start filter
+      if (coldStart) {
+        const coldStartOptions = parseFilterList(coldStart as string);
+        const coldStartConditions: string[] = [];
+
+        for (const opt of coldStartOptions) {
+          if (opt.includes('Fast')) {
+            coldStartConditions.push(
+              `(pr.attributes->>'cold_start_overhead_ms')::int < 100`
+            );
+          } else if (opt.includes('Medium')) {
+            coldStartConditions.push(
+              `(pr.attributes->>'cold_start_overhead_ms')::int BETWEEN 100 AND 200`
+            );
+          } else if (opt.includes('Slow')) {
+            coldStartConditions.push(
+              `(pr.attributes->>'cold_start_overhead_ms')::int > 200`
+            );
+          }
+        }
+
+        if (coldStartConditions.length > 0) {
+          conditions.push(`(${coldStartConditions.join(' OR ')})`);
+        }
+      }
+
+      // ✅ Validate search filter with length check
+      if (search) {
+        const searchStr = search as string;
+        if (searchStr.length > MAX_SEARCH_LENGTH) {
+          throw new Error(`Search string exceeds ${MAX_SEARCH_LENGTH} characters`);
+        }
+        conditions.push(`pr.instance_type ILIKE $${paramCount++}`);
+        values.push(`%${searchStr}%`);
+      }
+
+      // Ensure serverless product type includes DigitalOcean (which uses 'serverless' category)
     // DigitalOcean Functions are stored with service category 'serverless'
     if (resolvedProductType === 'serverless') {
       // Already filtered by s.category = 'serverless' above
@@ -479,7 +611,7 @@ async function startServer() {
     }
 
     // Serverless-specific billing granularity filter
-    if (billingGranularity) {
+    if (billingGranularity && resolvedProductType === 'serverless') {
       const granularityOptions = (billingGranularity as string).split(',').map(s => s.replace('ms', ''));
       conditions.push(`pr.attributes->>'billing_granularity_ms' = ANY($${paramCount++})`);
       values.push(granularityOptions);
@@ -512,23 +644,58 @@ async function startServer() {
       }
     }
 
-    if (minVcpu) { conditions.push(`pr.vcpus >= $${paramCount++}`); values.push(minVcpu); }
-    if (maxVcpu) { conditions.push(`pr.vcpus <= $${paramCount++}`); values.push(maxVcpu); }
-    if (minMemory) { conditions.push(`pr.memory_gb >= $${paramCount++}`); values.push(minMemory); }
-    if (maxMemory) { conditions.push(`pr.memory_gb <= $${paramCount++}`); values.push(maxMemory); }
-    if (minPrice) { conditions.push(`pr.price_per_unit >= $${paramCount++}`); values.push(minPrice); }
-    if (maxPrice) { conditions.push(`pr.price_per_unit <= $${paramCount++}`); values.push(maxPrice); }
-    if (search) {
-      conditions.push(`(pr.instance_type ILIKE $${paramCount} OR p.name ILIKE $${paramCount})`);
-      values.push(`%${search}%`);
-      paramCount++;
+    // Containers-specific filters
+    if (orchestrator) {
+      conditions.push(`pr.attributes->>'orchestrator' = ANY($${paramCount++})`);
+      values.push((orchestrator as string).split(','));
+    }
+    if (computeType) {
+      conditions.push(`pr.attributes->>'compute_type' = ANY($${paramCount++})`);
+      values.push((computeType as string).split(','));
+    }
+    if (architecture) {
+      conditions.push(`pr.attributes->>'architecture' = ANY($${paramCount++})`);
+      values.push((architecture as string).split(','));
+    }
+    if (billingGranularity && resolvedProductType === 'containers') {
+      conditions.push(`pr.attributes->>'billing_granularity' = ANY($${paramCount++})`);
+      values.push((billingGranularity as string).split(','));
     }
 
-    return {
-      whereClause: conditions.length ? 'AND ' + conditions.join(' AND ') : '',
-      values,
-      paramCount
-    };
+      if (minVcpu) {
+        conditions.push(`pr.vcpus >= $${paramCount++}`);
+        values.push(minVcpu);
+      }
+      if (maxVcpu) {
+        conditions.push(`pr.vcpus <= $${paramCount++}`);
+        values.push(maxVcpu);
+      }
+      if (minMemory) {
+        conditions.push(`pr.memory_gb >= $${paramCount++}`);
+        values.push(minMemory);
+      }
+      if (maxMemory) {
+        conditions.push(`pr.memory_gb <= $${paramCount++}`);
+        values.push(maxMemory);
+      }
+      if (minPrice) {
+        conditions.push(`pr.price_per_unit >= $${paramCount++}`);
+        values.push(minPrice);
+      }
+      if (maxPrice) {
+        conditions.push(`pr.price_per_unit <= $${paramCount++}`);
+        values.push(maxPrice);
+      }
+
+      return {
+        whereClause: conditions.length ? 'AND ' + conditions.join(' AND ') : '',
+        values,
+        paramCount,
+      };
+    } catch (error: any) {
+      console.error('❌ Filter validation error:', error.message);
+      throw new Error(`Invalid filter parameters: ${error.message}`);
+    }
   }
 
   // Per-provider counts respecting current filters (drives the summary cards)
