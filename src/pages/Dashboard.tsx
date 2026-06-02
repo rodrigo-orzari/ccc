@@ -791,7 +791,7 @@ export default function Dashboard() {
               Price information as of {new Date(dbStatus.lastUpdated).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </span>
           )}
-          <a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca" target="_blank" rel="noopener noreferrer" className="text-xs text-pink-600 dark:text-pink-400 font-medium flex items-center gap-1 hover:text-pink-700 dark:hover:text-pink-300 transition-colors">
+          <a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca" target="_blank" rel="noopener noreferrer" className="text-xs text-black dark:text-white font-medium flex items-center gap-1 hover:opacity-80 transition-opacity">
             Support this project ❤️
           </a>
         </div>
