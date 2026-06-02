@@ -7,7 +7,7 @@ function parseDbUrl(url: string) {
   const isNeon = url.includes('neon.tech');
   return {
     connectionString: url,
-    ssl: isNeon ? { rejectUnauthorized: true } : false,
+    ssl: { rejectUnauthorized: isNeon },
   };
 }
 
