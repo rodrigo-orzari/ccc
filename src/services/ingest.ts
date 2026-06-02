@@ -1,6 +1,8 @@
 import { Pool } from 'pg';
 import { PricingPipeline } from './pricing_pipeline.js';
 import { DatabasePricingPipeline } from './database_pipeline.js';
+import { ServerlessPricingPipeline } from './serverless_pipeline.js';
+import { ContainersPricingPipeline } from './containers_pipeline.js';
 
 async function main() {
   const dbUrl = process.env.DATABASE_URL;
@@ -34,6 +36,30 @@ async function main() {
     dbResults.forEach((result: any) => {
       if (result.status === 'success') {
         console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} DB configurations`);
+      } else {
+        console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Serverless Pricing...');
+    // Run serverless pricing pipeline
+    const serverlessPipeline = new ServerlessPricingPipeline(pool);
+    const serverlessResults = await serverlessPipeline.run();
+    serverlessResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} Serverless configurations`);
+      } else {
+        console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Containers Pricing...');
+    // Run containers pricing pipeline
+    const containersPipeline = new ContainersPricingPipeline(pool);
+    const containersResults = await containersPipeline.run();
+    containersResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} Containers configurations`);
       } else {
         console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
       }
