@@ -6,6 +6,9 @@ import pg from 'pg';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import cron from 'node-cron';
+import crypto from 'crypto';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { PricingPipeline, PriceDriftResult } from './src/services/pricing_pipeline.ts';
 import { DatabasePricingPipeline } from './src/services/database_pipeline.ts';
 import { ServerlessPricingPipeline } from './src/services/serverless_pipeline.ts';
@@ -48,8 +51,32 @@ async function startServer() {
         },
   });
 
-  app.use(cors());
+  // Security Hardening: Helmet adds standard HTTP security headers
+  app.use(helmet());
+
+  // Security Hardening: Restrict CORS
+  const allowedOrigins = ['https://comparecloudcosts.com', 'https://www.comparecloudcosts.com'];
+  app.use(cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      // or if the origin is in our allowed list or localhost (for development)
+      if (!origin || allowedOrigins.includes(origin) || origin.startsWith('http://localhost:')) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    }
+  }));
   app.use(express.json());
+
+  // Security Hardening: Rate Limiting
+  const apiLimiter = rateLimit({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 100, // Limit each IP to 100 requests per `window` (here, per 1 minute)
+    message: 'Too many requests from this IP, please try again after a minute',
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  });
 
   // ✅ Admin Authentication Middleware
   function requireAdminAuth(req: any, res: any, next: any) {
@@ -62,14 +89,18 @@ async function startServer() {
       });
     }
 
-    // Use constant-time comparison to prevent timing attacks
-    const isValid =
-      adminToken.length === expectedToken.length &&
-      Array.from(adminToken).every((char: any, i: number) => char === expectedToken[i]);
-
-    if (!isValid) {
+    // Security Hardening: Use native constant-time comparison to prevent timing attacks
+    try {
+      const a = Buffer.from(adminToken);
+      const b = Buffer.from(expectedToken);
+      if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
+        return res.status(403).json({
+          error: 'Forbidden: Invalid admin token',
+        });
+      }
+    } catch (err) {
       return res.status(403).json({
-        error: 'Forbidden: Invalid admin token',
+        error: 'Forbidden: Invalid admin token format',
       });
     }
 
@@ -246,11 +277,11 @@ async function startServer() {
   });
 
   // API Routes
-  app.get('/api/ping', (req, res) => {
+  app.get('/api/ping', apiLimiter, (req, res) => {
     res.json({ status: 'pong', env: process.env.NODE_ENV, timestamp: new Date().toISOString() });
   });
 
-  app.get('/api/health', async (req, res) => {
+  app.get('/api/health', apiLimiter, async (req, res) => {
     try {
       const productType = (req.query.productType as string) || '';
       const client = await pool.connect();
@@ -718,7 +749,7 @@ async function startServer() {
   }
 
   // Per-provider counts respecting current filters (drives the summary cards)
-  app.get('/api/pricing/counts', async (req, res) => {
+  app.get('/api/pricing/counts', apiLimiter, async (req, res) => {
     try {
       const { whereClause, values } = buildPricingFilters(req.query);
       const query = `
@@ -740,7 +771,7 @@ async function startServer() {
   });
 
   // Fetch Pricing Data for Frontend with Filtering
-  app.get('/api/pricing', async (req, res) => {
+  app.get('/api/pricing', apiLimiter, async (req, res) => {
     try {
       const isAggregated = req.query.aggregate === 'true';
 
