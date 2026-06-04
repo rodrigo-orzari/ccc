@@ -404,15 +404,17 @@ async function startServer() {
       const {
         provider, geography, os, arch, cpuVendor, gpu, category,
         minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
+        // Product Type
+        product,
         // Database-specific filters
-        productType, engine, deploymentType, haMode,
+        dbFamilies, engines, deploymentTypes, haModes,
         // Serverless-specific filters
-        language, coldStart, timeout, memoryConfig, freeTier,
-        billingGranularity, executionModel, provisionedConcurrency, ephemeralStorage,
+        serverlessLanguages, serverlessColdStart, serverlessTimeout, serverlessMemoryConfig, serverlessFreeTier,
+        serverlessGranularity, serverlessExecutionModel, serverlessProvisionedConcurrency, serverlessEphemeralStorage,
         // Containers-specific filters
-        orchestrator, computeType, architecture,
+        containersOrchestrators, containersComputeTypes, containersArchitectures, containersBillingGranularity, containersGpuIncluded,
         // Data & Analytics filters
-        tier,
+        analyticsEngines, analyticsDeploymentTypes, analyticsTiers,
         // Networking filters
         networkingService,
       } = query;
@@ -421,14 +423,16 @@ async function startServer() {
       const values: any[] = [];
       let paramCount = 1;
 
-      // productType scopes the query to compute or database services.
+      // product scopes the query to compute, database, serverless, containers, networking, or data-analytics.
       // Defaults to 'compute' so the existing VM dashboard is unaffected.
       const resolvedProductType =
-        productType && VALID_PRODUCT_TYPES.includes(productType as string)
-          ? (productType as string)
+        product && VALID_PRODUCT_TYPES.includes(product as string)
+          ? (product as string)
           : 'compute';
+          
       conditions.push(`s.category = $${paramCount++}`);
-      values.push(resolvedProductType);
+      // Map data-analytics from the frontend to data_warehouse in the database
+      values.push(resolvedProductType === 'data-analytics' ? 'data_warehouse' : resolvedProductType);
 
       // ✅ Validate provider filter (use s.provider_id in subquery)
       const providers = parseFilterList(provider as string);
@@ -470,43 +474,41 @@ async function startServer() {
         else if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
       }
 
-      // ✅ Validate category filter
-      if (category && category !== 'All categories') {
-        const categories = parseFilterList(category as string);
-        if (categories.length > 0) {
-          conditions.push(`pr.category = ANY($${paramCount++})`);
-          values.push(categories);
-        }
+      // ✅ Validate category filter (VMs / Databases)
+      const categoriesFilter = parseFilterList((category || dbFamilies) as string);
+      if (categoriesFilter.length > 0) {
+        conditions.push(`pr.category = ANY($${paramCount++})`);
+        values.push(categoriesFilter);
       }
 
       // ✅ Validate database-specific JSONB attribute filters
-      const engineFilters = parseFilterList(engine as string);
+      const engineFilters = parseFilterList((engines || analyticsEngines) as string);
       if (engineFilters.length > 0) {
         conditions.push(`pr.attributes->>'engine' = ANY($${paramCount++})`);
         values.push(engineFilters);
       }
 
-      const deploymentTypeFilters = parseFilterList(deploymentType as string);
+      const deploymentTypeFilters = parseFilterList((deploymentTypes || analyticsDeploymentTypes) as string);
       if (deploymentTypeFilters.length > 0) {
         conditions.push(`pr.attributes->>'deployment_type' = ANY($${paramCount++})`);
         values.push(deploymentTypeFilters);
       }
 
-      const haModeFilters = parseFilterList(haMode as string);
+      const haModeFilters = parseFilterList(haModes as string);
       if (haModeFilters.length > 0) {
         conditions.push(`pr.attributes->>'ha_mode' = ANY($${paramCount++})`);
         values.push(haModeFilters);
       }
 
       // ✅ Validate data-analytics specific JSONB attribute filters
-      const tierFilters = parseFilterList(tier as string);
+      const tierFilters = parseFilterList(analyticsTiers as string);
       if (tierFilters.length > 0) {
         conditions.push(`pr.attributes->>'tier' = ANY($${paramCount++})`);
         values.push(tierFilters);
       }
 
       // ✅ Validate serverless-specific language filter
-      const languages = parseFilterList(language as string);
+      const languages = parseFilterList(serverlessLanguages as string);
       if (languages.length > 0) {
         conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
         values.push(languages);
@@ -520,8 +522,8 @@ async function startServer() {
       }
 
       // ✅ Validate serverless-specific cold start filter
-      if (coldStart) {
-        const coldStartOptions = parseFilterList(coldStart as string);
+      if (serverlessColdStart) {
+        const coldStartOptions = parseFilterList(serverlessColdStart as string);
         const coldStartConditions: string[] = [];
 
         for (const opt of coldStartOptions) {

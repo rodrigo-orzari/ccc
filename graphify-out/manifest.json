@@ -15,8 +15,8 @@
     "semantic_hash": "0e084414b83e9bbb7c430d09df573f59"
   },
   "package.json": {
-    "mtime": 1780608991.3299215,
-    "ast_hash": "ba42a3721f75d00b0fc728fdfb18244c",
+    "mtime": 1780609822.1566436,
+    "ast_hash": "a67273ad88402ec55cf6b36f663968fd",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -125,9 +125,9 @@
     "semantic_hash": "25a720a6911b8c4b2d46aa85ac8853ec"
   },
   "src/main.tsx": {
-    "mtime": 1778027801.8254685,
-    "ast_hash": "3b423cdb76a88f58ba55177d3d9c5922",
-    "semantic_hash": "3b423cdb76a88f58ba55177d3d9c5922"
+    "mtime": 1780609829.6111388,
+    "ast_hash": "2965fa3084bd496dfe2809bec6941c6f",
+    "semantic_hash": ""
   },
   "src/pages/About.tsx": {
     "mtime": 1780367902.5721748,
@@ -135,8 +135,8 @@
     "semantic_hash": "cdc91a1a94e7875523717a3765eae9e2"
   },
   "src/pages/Dashboard.tsx": {
-    "mtime": 1780606901.6530113,
-    "ast_hash": "a07c938163525c1113a6dc8e578b8e49",
+    "mtime": 1780610118.8458817,
+    "ast_hash": "68eaad93ecc0815b5effbdba57087c3e",
     "semantic_hash": ""
   },
   "src/pages/Methodology.tsx": {
@@ -347,6 +347,11 @@
   "test_unsafe.ts": {
     "mtime": 1780609078.8302505,
     "ast_hash": "0c126c0c7b4bd331ffda9a4838edaa43",
+    "semantic_hash": ""
+  },
+  "refactor_dashboard.js": {
+    "mtime": 1780610026.3711562,
+    "ast_hash": "e4709d937d4e04f8e6511486f5de1d5e",
     "semantic_hash": ""
   }
 }
