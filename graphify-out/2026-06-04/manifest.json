@@ -135,8 +135,8 @@
     "semantic_hash": "cdc91a1a94e7875523717a3765eae9e2"
   },
   "src/pages/Dashboard.tsx": {
-    "mtime": 1780605830.4714508,
-    "ast_hash": "95fbb8e6eaff3a5f73fcee9de304bfde",
+    "mtime": 1780606901.6530113,
+    "ast_hash": "a07c938163525c1113a6dc8e578b8e49",
     "semantic_hash": ""
   },
   "src/pages/Methodology.tsx": {
@@ -155,9 +155,9 @@
     "semantic_hash": "332128a5ee2d696756f57cd40f5e4211"
   },
   "src/pages/TermsOfUse.tsx": {
-    "mtime": 1780367913.8515441,
-    "ast_hash": "0b0f0f5c322ff1ad880b10b10b552a99",
-    "semantic_hash": "0b0f0f5c322ff1ad880b10b10b552a99"
+    "mtime": 1780606654.0814557,
+    "ast_hash": "00d3bdc4df1db3183425ff8911bb0bfe",
+    "semantic_hash": ""
   },
   "src/services/containers_adapters_live.ts": {
     "mtime": 1780368898.0271754,
@@ -175,8 +175,8 @@
     "semantic_hash": "1623827e682d421b053439795d36956a"
   },
   "src/services/ingest.ts": {
-    "mtime": 1780604885.856564,
-    "ast_hash": "21b5feb6af9a44f413edde0f5303c1aa",
+    "mtime": 1780606397.7676296,
+    "ast_hash": "bf2ccb60aaa5676af27557ff9f842bf6",
     "semantic_hash": ""
   },
   "src/services/mailer.ts": {
@@ -310,13 +310,18 @@
     "semantic_hash": ""
   },
   "src/services/data_analytics_pipeline.ts": {
-    "mtime": 1780604828.79192,
-    "ast_hash": "0fb1e1481f6c27c2aaaf47e302576080",
+    "mtime": 1780606308.8148897,
+    "ast_hash": "fb6a9df6ceade1476b7a86a7b03f3cd3",
     "semantic_hash": ""
   },
   "populate_networking.ts": {
     "mtime": 1780605205.763458,
     "ast_hash": "58102f01942f034fda392ac7f0f36b8d",
+    "semantic_hash": ""
+  },
+  "src/config/native_analytics_instances.ts": {
+    "mtime": 1780606287.8509164,
+    "ast_hash": "130c48920db2fb07d53bc03fe6f30080",
     "semantic_hash": ""
   }
 }
