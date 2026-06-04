@@ -11,8 +11,13 @@ import { NetworkingPricingPipeline } from './networking_pipeline.js';
 
 function parseDbUrl(url: string) {
   const isNeon = url.includes('neon.tech');
+  const u = new URL(url);
   return {
-    connectionString: url,
+    host: u.hostname,
+    port: u.port ? parseInt(u.port) : 5432,
+    database: u.pathname.replace(/^\//, ''),
+    user: decodeURIComponent(u.username),
+    password: decodeURIComponent(u.password),
     ssl: { rejectUnauthorized: isNeon },
   };
 }
