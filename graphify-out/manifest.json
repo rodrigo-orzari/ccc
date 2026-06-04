@@ -155,8 +155,8 @@
     "semantic_hash": "332128a5ee2d696756f57cd40f5e4211"
   },
   "src/pages/TermsOfUse.tsx": {
-    "mtime": 1780606472.4105866,
-    "ast_hash": "77f35051a76f92bba7dbf64f4e2c494b",
+    "mtime": 1780606654.0814557,
+    "ast_hash": "00d3bdc4df1db3183425ff8911bb0bfe",
     "semantic_hash": ""
   },
   "src/services/containers_adapters_live.ts": {
