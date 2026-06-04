@@ -772,11 +772,7 @@ export default function Dashboard() {
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-3">
             <div className="flex items-center">
-              <span className="font-bold text-lg tracking-tight">
-                <span className="text-[#0069FF]">compare</span>
-                <span className="text-black dark:text-white">cloud</span>
-                <span className="text-[#00BCFF]">costs</span>
-              </span>
+              <img src="/logo.png" alt="Compare Cloud Costs" className="h-10 w-auto" />
             </div>
             <div className="w-px h-6 bg-[#e5e5e5] dark:bg-[#262626] mx-1 hidden sm:block" />
             <span className="text-xs text-[#737373] hidden lg:block">
@@ -2292,11 +2288,7 @@ export default function Dashboard() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex flex-col items-center md:items-start gap-1">
               <Link to="/" className="flex items-center gap-2">
-                <span className="font-bold text-base tracking-tight">
-                  <span className="text-[#0069FF]">compare</span>
-                  <span className="text-black dark:text-white">cloud</span>
-                  <span className="text-[#00BCFF]">costs</span>
-                </span>
+                <img src="/logo.png" alt="Compare Cloud Costs" className="h-10 w-auto" />
               </Link>
               <p className="text-[11px] text-[#737373] dark:text-[#a3a3a3] text-center md:text-left max-w-md mt-1 leading-relaxed">
                 Compare Cloud Costs (CCC) is a multi-cloud pricing comparison tool that aggregates pricing for our most popular services including database, compute, storage, containers, and serverless across AWS, Microsoft Azure, Google Cloud, Oracle, and DigitalOcean.
