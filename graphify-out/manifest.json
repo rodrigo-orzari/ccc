@@ -210,14 +210,14 @@
     "semantic_hash": ""
   },
   "test-results/.last-run.json": {
-    "mtime": 1779488322.3482423,
+    "mtime": 1780610555.3660216,
     "ast_hash": "ff6d5dab1dfd50cea584142bc288ce9e",
     "semantic_hash": "ff6d5dab1dfd50cea584142bc288ce9e"
   },
   "tests/filters.spec.ts": {
-    "mtime": 1779488255.0706563,
-    "ast_hash": "7a93620427957f217bd295f2b8443ab6",
-    "semantic_hash": "7a93620427957f217bd295f2b8443ab6"
+    "mtime": 1780610548.0058348,
+    "ast_hash": "c624704eeb423a956eb8f18543a50ac8",
+    "semantic_hash": ""
   },
   "tsconfig.json": {
     "mtime": 1778027801.8269534,
@@ -280,9 +280,9 @@
     "semantic_hash": "a35586ff915cf89fed8f90f4f2a457b1"
   },
   "playwright-report/index.html": {
-    "mtime": 1779488322.347946,
-    "ast_hash": "14eae73d6c6dd47a4903acb8b2586ebc",
-    "semantic_hash": "14eae73d6c6dd47a4903acb8b2586ebc"
+    "mtime": 1780610555.3658113,
+    "ast_hash": "7094be27f4ef9745d0991c7791229001",
+    "semantic_hash": ""
   },
   "support-qr.png": {
     "mtime": 1780366888.933937,
@@ -357,6 +357,11 @@
   "src/workers/scheduler.ts": {
     "mtime": 1780610435.869231,
     "ast_hash": "f0af27ea60f8c5e6f9e5270261257113",
+    "semantic_hash": ""
+  },
+  "tests/api_validation.spec.ts": {
+    "mtime": 1780610537.6466455,
+    "ast_hash": "155a04268ed06c0a67214b15c989ca58",
     "semantic_hash": ""
   }
 }
