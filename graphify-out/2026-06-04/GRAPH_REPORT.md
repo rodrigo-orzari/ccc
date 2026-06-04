@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-04)
 
 ## Corpus Check
-- 56 files · ~72,605 words
+- 59 files · ~73,855 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 448 nodes · 612 edges · 31 communities (21 shown, 10 thin omitted)
+- 466 nodes · 639 edges · 31 communities (21 shown, 10 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.89)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `460eba13`
+- Built from commit: `596b7ab2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,26 +45,26 @@
 - [[_COMMUNITY_Community 31|Community 31]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `BaseAdapter` - 45 edges
-2. `PricingRecord` - 36 edges
+1. `BaseAdapter` - 46 edges
+2. `PricingRecord` - 37 edges
 3. `compilerOptions` - 15 edges
-4. `Compare Cloud Costs` - 12 edges
-5. `Compare Cloud Costs (CCC) — Claude Context` - 12 edges
-6. `PricingPipeline` - 12 edges
+4. `PricingPipeline` - 13 edges
+5. `Compare Cloud Costs` - 12 edges
+6. `Compare Cloud Costs (CCC) — Claude Context` - 12 edges
 7. `ServerlessPricingPipeline` - 12 edges
 8. `Serverless Language Filter` - 9 edges
 9. `scripts` - 8 edges
 10. `ContainersPricingPipeline` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Data Staleness Warning System` --semantically_similar_to--> `supportedLanguages JSONB attribute`  [INFERRED] [semantically similar]
-  ARCHITECTURE_DIAGRAMS.md → IMPLEMENTATION_SUMMARY.md
-- `POST /api/admin/fetch-pricing` --references--> `Pricing Pipeline`  [INFERRED]
-  DATA_POPULATION_GUIDE.md → ARCHITECTURE_DIAGRAMS.md
-- `Normalization Layer` --semantically_similar_to--> `Adapter Pattern for Cloud Providers`  [INFERRED] [semantically similar]
-  ARCHITECTURE_DIAGRAMS.md → PROJECT_ANALYSIS.md
 - `sendPriceDriftEmail` --semantically_similar_to--> `Price Drift Check`  [INFERRED] [semantically similar]
   PROJECT_ANALYSIS.md → ARCHITECTURE_DIAGRAMS.md
+- `Data Staleness Warning System` --semantically_similar_to--> `supportedLanguages JSONB attribute`  [INFERRED] [semantically similar]
+  ARCHITECTURE_DIAGRAMS.md → IMPLEMENTATION_SUMMARY.md
+- `Normalization Layer` --semantically_similar_to--> `Adapter Pattern for Cloud Providers`  [INFERRED] [semantically similar]
+  ARCHITECTURE_DIAGRAMS.md → PROJECT_ANALYSIS.md
+- `POST /api/admin/fetch-pricing` --references--> `Pricing Pipeline`  [INFERRED]
+  DATA_POPULATION_GUIDE.md → ARCHITECTURE_DIAGRAMS.md
 - `Database TLS/SSL Connection Setup` --references--> `PostgreSQL Database`  [INFERRED]
   OPERATIONS_RUNBOOK.md → ARCHITECTURE_DIAGRAMS.md
 
@@ -79,8 +79,8 @@
 ## Communities (31 total, 10 thin omitted)
 
 ### Community 0 - "Serverless Provider Configs"
-Cohesion: 0.06
-Nodes (22): AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries, baseDigitaloceanEntries, DIGITALOCEAN_FUNCTIONS_LANGUAGES (+14 more)
+Cohesion: 0.05
+Nodes (25): AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries, baseDigitaloceanEntries, DIGITALOCEAN_FUNCTIONS_LANGUAGES (+17 more)
 
 ### Community 1 - "Container Provider Configs"
 Cohesion: 0.07
@@ -91,16 +91,16 @@ Cohesion: 0.09
 Nodes (20): CloudSqlInstanceConfig, DIGITALOCEAN_DB_INSTANCES, DigitalOceanDbInstanceConfig, GCP_CLOUD_SQL_INSTANCES, ORACLE_AUTONOMOUS_INSTANCES, ORACLE_MYSQL_HEATWAVE_INSTANCES, ORACLE_POSTGRESQL_INSTANCES, OracleAutonomousConfig (+12 more)
 
 ### Community 3 - "Pricing Pipeline Architecture"
-Cohesion: 0.12
-Nodes (19): buildPricingFilters, DigitalOcean App Platform, Express Server, PostgreSQL Database, Database Initialization Guide, POST /api/admin/fetch-pricing, ingest.ts CLI, POST /api/admin/init-db (+11 more)
+Cohesion: 0.06
+Nodes (37): AWSAdapter, AzureAdapter, Batch Insert, buildPricingFilters, Cron Job (Sunday Midnight), Data Staleness Warning System, DigitalOceanAdapter, DigitalOcean App Platform (+29 more)
 
 ### Community 4 - "Package Dependencies"
-Cohesion: 0.09
-Nodes (23): dependencies, @aws-sdk/client-pricing, axios, cors, dotenv, express, express-rate-limit, @google/genai (+15 more)
+Cohesion: 0.06
+Nodes (35): dependencies, @aws-sdk/client-pricing, axios, cors, dotenv, express, express-rate-limit, @google/genai (+27 more)
 
 ### Community 5 - "Cloud Instance Configs"
-Cohesion: 0.11
-Nodes (7): AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, AWSServerlessAdapter, DigitalOceanServerlessAdapter, GCPServerlessAdapter
+Cohesion: 0.14
+Nodes (5): AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter
 
 ### Community 6 - "Dashboard UI & Filters"
 Cohesion: 0.06
@@ -115,16 +115,16 @@ Cohesion: 0.12
 Nodes (16): compilerOptions, allowImportingTsExtensions, allowJs, experimentalDecorators, isolatedModules, jsx, lib, module (+8 more)
 
 ### Community 10 - "Platform Overview"
-Cohesion: 0.07
-Nodes (31): AWSAdapter, AzureAdapter, Batch Insert, Cron Job (Sunday Midnight), Data Staleness Warning System, DigitalOceanAdapter, Email Alerts, GCPAdapter (+23 more)
+Cohesion: 0.17
+Nodes (13): index.html Entry Point, React Root Mount Point (#root), Compare Cloud Costs Application, Express.js 4.21.2 Backend, FinOps Cloud Price Comparison Challenge, mailer.ts Email Service, node-cron 4.2.1 Scheduler, nodemailer 8.0.7 Email Service (+5 more)
 
 ### Community 11 - "Serverless Implementation"
 Cohesion: 0.13
 Nodes (16): AWSLambdaLiveAdapter, aws_serverless.ts config, azure_serverless.ts config, Dashboard.tsx, digitalocean_serverless.ts config, gcp_serverless.ts config, pricing_pipeline.ts, serverless_adapters_live.ts (+8 more)
 
 ### Community 13 - "Dev Dependencies"
-Cohesion: 0.09
-Nodes (22): devDependencies, autoprefixer, @playwright/test, tailwindcss, @types/cors, @types/express, @types/node, @types/nodemailer (+14 more)
+Cohesion: 0.20
+Nodes (10): devDependencies, autoprefixer, @playwright/test, tailwindcss, @types/cors, @types/express, @types/node, @types/nodemailer (+2 more)
 
 ### Community 14 - "App Metadata"
 Cohesion: 0.40
@@ -143,15 +143,15 @@ Cohesion: 0.15
 Nodes (12): Adding a New Cloud Provider, API Routes, Architecture, Compare Cloud Costs (CCC) — Claude Context, Conventions, Database Schema, Documentation Map, Key Files — Start Here (+4 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.11
-Nodes (18): DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, startServer(), createTransport() (+10 more)
+Cohesion: 0.12
+Nodes (17): DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, startServer(), createTransport() (+9 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.11
-Nodes (7): parseDbUrl(), run(), ContainersPricingPipeline, OracleContainersStaticAdapter, DatabasePricingPipeline, DigitalOceanDBAdapter, PricingPipeline
+Cohesion: 0.07
+Nodes (15): DATABRICKS_INSTANCES, DatabricksConfig, SNOWFLAKE_INSTANCES, SnowflakeConfig, parseDbUrl(), run(), ContainersPricingPipeline, OracleContainersStaticAdapter (+7 more)
 
 ## Knowledge Gaps
-- **185 isolated node(s):** `STATIC_NETWORKING_PRICING`, `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design`, `Directory Tree` (+180 more)
+- **187 isolated node(s):** `DatabricksConfig`, `SnowflakeConfig`, `STATIC_NETWORKING_PRICING`, `Live Deployment`, `1. What Problem Does This Application Solve?` (+182 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -159,16 +159,16 @@ Nodes (7): parseDbUrl(), run(), ContainersPricingPipeline, OracleContainersStati
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `BaseAdapter` connect `Cloud Instance Configs` to `Serverless Provider Configs`, `Container Provider Configs`, `Database Instance Configs`, `Community 30`, `Community 31`?**
-  _High betweenness centrality (0.051) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Container Provider Configs` to `Serverless Provider Configs`, `Database Instance Configs`, `Cloud Instance Configs`, `Community 30`, `Community 31`?**
-  _High betweenness centrality (0.044) - this node is a cross-community bridge._
-- **What connects `STATIC_NETWORKING_PRICING`, `Live Deployment`, `1. What Problem Does This Application Solve?` to the rest of the system?**
-  _186 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Container Provider Configs` to `Serverless Provider Configs`, `Database Instance Configs`, `Community 30`, `Community 31`?**
+  _High betweenness centrality (0.049) - this node is a cross-community bridge._
+- **Why does `Price Drift Check` connect `Pricing Pipeline Architecture` to `Platform Overview`?**
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **What connects `DatabricksConfig`, `SnowflakeConfig`, `STATIC_NETWORKING_PRICING` to the rest of the system?**
+  _188 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
-  _Cohesion score 0.06282051282051282 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05314009661835749 - nodes in this community are weakly interconnected._
 - **Should `Container Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.06857142857142857 - nodes in this community are weakly interconnected._
 - **Should `Database Instance Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.09259259259259259 - nodes in this community are weakly interconnected._
-- **Should `Pricing Pipeline Architecture` be split into smaller, more focused modules?**
-  _Cohesion score 0.12280701754385964 - nodes in this community are weakly interconnected._
