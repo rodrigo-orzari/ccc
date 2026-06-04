@@ -185,9 +185,9 @@
     "semantic_hash": "96fcdece20f945c0bf1c506d4f889ee1"
   },
   "src/services/networking_pipeline.ts": {
-    "mtime": 1780368861.5063956,
-    "ast_hash": "a019a2d3a688b417b0e3ea29d695cfa3",
-    "semantic_hash": "a019a2d3a688b417b0e3ea29d695cfa3"
+    "mtime": 1780601812.128788,
+    "ast_hash": "844f74e993aaf899daed4e627a1a8a93",
+    "semantic_hash": ""
   },
   "src/services/populate_containers.ts": {
     "mtime": 1780367038.2139418,
