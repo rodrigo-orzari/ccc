@@ -1,8 +1,9 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
 import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/oracle_instances.js';
-import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.js';
-import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.js';
+import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.ts';
+import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.ts';
+import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.ts';
 import { DatabasePricingPipeline } from './database_pipeline.js';
 
 export interface PricingRecord {
@@ -360,9 +361,9 @@ export class DigitalOceanAdapter extends BaseAdapter {
         console.error(`❌ DigitalOcean live API fetch failed (${err.message}), falling back to static config.`);
       }
     } else {
-      console.warn('⚠️  DIGITALOCEAN_API_TOKEN not set — using static fallback in src/config/digitalocean_instances.ts.');
+      console.warn('⚠️  DIGITALOCEAN_API_TOKEN not set — using scraper fallback.');
     }
-    return this.fetchFromConfig();
+    return this.fetchFromScraper();
   }
 
   private async fetchFromApi(token: string): Promise<PricingRecord[]> {
@@ -413,9 +414,11 @@ export class DigitalOceanAdapter extends BaseAdapter {
     return records;
   }
 
-  private fetchFromConfig(): PricingRecord[] {
-    console.log(`Fetching DigitalOcean pricing (from src/config/digitalocean_instances.ts, ${DIGITALOCEAN_INSTANCES.length} entries)...`);
-    return DIGITALOCEAN_INSTANCES.map(s => ({
+  private async fetchFromScraper(): Promise<PricingRecord[]> {
+    console.log(`Fetching DigitalOcean pricing (from Playwright Scraper)...`);
+    const scraper = new DigitalOceanDropletsScraper();
+    const scrapedInstances = await scraper.run();
+    return scrapedInstances.map(s => ({
       provider: 'digitalocean',
       service: 'Droplets',
       region: DIGITALOCEAN_REGION,
@@ -430,7 +433,7 @@ export class DigitalOceanAdapter extends BaseAdapter {
       category: s.category || this.classifyDigitalOcean(s.slug, s.vcpus, s.memory),
       price: s.price,
       unit: 'Hour',
-      dataSource: 'static_config' as const,
+      dataSource: 'playwright_scraper' as any,
     }));
   }
 }
