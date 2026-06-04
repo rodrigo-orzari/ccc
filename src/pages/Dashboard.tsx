@@ -1811,13 +1811,13 @@ export default function Dashboard() {
                       setSelectedProviders([p.id]);
                     }
                   }}
-                  className={`bg-white dark:bg-[#000000] py-2.5 px-4 group transition-all border-b-2 ${
+                  className={`bg-white dark:bg-[#000000] py-2.5 px-4 flex items-center justify-between group transition-all border-b-2 ${
                     p.soon ? 'cursor-default opacity-40 grayscale' : 'cursor-pointer'
                   } ${
                     isSelected ? 'border-black dark:border-white' : 'border-transparent opacity-50 grayscale hover:grayscale-0 hover:opacity-100'
                   }`}
                 >
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2">
                     {/* Provider label uses the same rounded-pill treatment as
                         the Provider column in the table — same colour token,
                         same shape, same uppercase styling — so the cards and
@@ -1831,8 +1831,7 @@ export default function Dashboard() {
                     {p.soon && <span className="text-[7px] font-bold bg-[#737373] text-white px-1 rounded ml-1 border border-white/20">SOON</span>}
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-black dark:text-white">{p.soon ? '-' : displayCount.toLocaleString()}</span>
-
+                    <span className="text-xl font-bold text-black dark:text-white">{p.soon ? '-' : displayCount.toLocaleString()}</span>
                   </div>
                 </div>
               );
