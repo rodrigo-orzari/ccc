@@ -1,0 +1,292 @@
+{
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/.claude/launch.json": {
+    "mtime": 1778027801.8229342,
+    "ast_hash": "13d552e9d6e18a8c558c5ad407e91708",
+    "semantic_hash": "13d552e9d6e18a8c558c5ad407e91708"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/.claude/settings.local.json": {
+    "mtime": 1780552521.7010608,
+    "ast_hash": "a2b2f270b32fadd3af719aafd2ac18df",
+    "semantic_hash": "a2b2f270b32fadd3af719aafd2ac18df"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/metadata.json": {
+    "mtime": 1778027801.8233364,
+    "ast_hash": "0e084414b83e9bbb7c430d09df573f59",
+    "semantic_hash": "0e084414b83e9bbb7c430d09df573f59"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/package.json": {
+    "mtime": 1780373867.2786999,
+    "ast_hash": "9c6ad1411de13fe347896567d381cda2",
+    "semantic_hash": "9c6ad1411de13fe347896567d381cda2"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/playwright.config.ts": {
+    "mtime": 1779486310.100889,
+    "ast_hash": "a456d4407ceb665f9797048aa9cf11c4",
+    "semantic_hash": "a456d4407ceb665f9797048aa9cf11c4"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/populate_containers.ts": {
+    "mtime": 1780372264.5235617,
+    "ast_hash": "523ad06d486205b1cd9cdd5cfd13897f",
+    "semantic_hash": "523ad06d486205b1cd9cdd5cfd13897f"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/populate_serverless.ts": {
+    "mtime": 1779303792.147674,
+    "ast_hash": "da4f78be01bbe67a8085d0c1f148b589",
+    "semantic_hash": "da4f78be01bbe67a8085d0c1f148b589"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/server.ts": {
+    "mtime": 1780375016.0684834,
+    "ast_hash": "557c8193163bec88dc254f995918b86e",
+    "semantic_hash": "557c8193163bec88dc254f995918b86e"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/App.tsx": {
+    "mtime": 1778027801.8243022,
+    "ast_hash": "53197a2476f62313e73efe75e9dcdc71",
+    "semantic_hash": "53197a2476f62313e73efe75e9dcdc71"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/components/MarkdownPage.tsx": {
+    "mtime": 1778027801.8244379,
+    "ast_hash": "805866a91b7fcb856e6fdbd88955a9dd",
+    "semantic_hash": "805866a91b7fcb856e6fdbd88955a9dd"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/aws_containers.ts": {
+    "mtime": 1780367004.7379782,
+    "ast_hash": "81d86d44d9479a911364cf8992c257ac",
+    "semantic_hash": "81d86d44d9479a911364cf8992c257ac"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/aws_serverless.ts": {
+    "mtime": 1779319537.0785756,
+    "ast_hash": "64e4a47e5d84fd1efdb20171e93988dd",
+    "semantic_hash": "64e4a47e5d84fd1efdb20171e93988dd"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/azure_containers.ts": {
+    "mtime": 1780368581.4932928,
+    "ast_hash": "5afd96b99ed962fe01cf164abb639d88",
+    "semantic_hash": "5afd96b99ed962fe01cf164abb639d88"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/azure_serverless.ts": {
+    "mtime": 1779319560.4189928,
+    "ast_hash": "dbd06ba640e6a1c62ae5fcd9fbb4369a",
+    "semantic_hash": "dbd06ba640e6a1c62ae5fcd9fbb4369a"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/database_instances.ts": {
+    "mtime": 1778090221.4722037,
+    "ast_hash": "30d5685d1e68398028309d8204e312e9",
+    "semantic_hash": "30d5685d1e68398028309d8204e312e9"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/digitalocean_containers.ts": {
+    "mtime": 1780368581.5268292,
+    "ast_hash": "704db5697d995082a02695b68be376e4",
+    "semantic_hash": "704db5697d995082a02695b68be376e4"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/digitalocean_instances.ts": {
+    "mtime": 1778027801.8247592,
+    "ast_hash": "b9972aaab54fd64d9ca930a5baa82429",
+    "semantic_hash": "b9972aaab54fd64d9ca930a5baa82429"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/digitalocean_serverless.ts": {
+    "mtime": 1779319573.3155067,
+    "ast_hash": "be4cc05fd57be643096aaead729308e9",
+    "semantic_hash": "be4cc05fd57be643096aaead729308e9"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/gcp_containers.ts": {
+    "mtime": 1780368581.500651,
+    "ast_hash": "d04aa685943b6f81e0ef251f14076901",
+    "semantic_hash": "d04aa685943b6f81e0ef251f14076901"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/gcp_instances.ts": {
+    "mtime": 1778027801.8248515,
+    "ast_hash": "f25865ea07afcaa6bff2fd00465ac305",
+    "semantic_hash": "f25865ea07afcaa6bff2fd00465ac305"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/gcp_serverless.ts": {
+    "mtime": 1779319560.3424535,
+    "ast_hash": "c23347c301b68f92285f7a0df4b1b0ab",
+    "semantic_hash": "c23347c301b68f92285f7a0df4b1b0ab"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/oracle_containers.ts": {
+    "mtime": 1780368892.8608503,
+    "ast_hash": "108837de990462b2d307926f23703a26",
+    "semantic_hash": "108837de990462b2d307926f23703a26"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/oracle_instances.ts": {
+    "mtime": 1778027801.825071,
+    "ast_hash": "f000d6cf02f33f18aca58b4ae32e63ad",
+    "semantic_hash": "f000d6cf02f33f18aca58b4ae32e63ad"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/config/oracle_serverless.ts": {
+    "mtime": 1779319573.3916667,
+    "ast_hash": "af136de03275526c5516b3a6ea1846cd",
+    "semantic_hash": "af136de03275526c5516b3a6ea1846cd"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/db/schema.sql": {
+    "mtime": 1778027801.8252618,
+    "ast_hash": "25a720a6911b8c4b2d46aa85ac8853ec",
+    "semantic_hash": "25a720a6911b8c4b2d46aa85ac8853ec"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/main.tsx": {
+    "mtime": 1778027801.8254685,
+    "ast_hash": "3b423cdb76a88f58ba55177d3d9c5922",
+    "semantic_hash": "3b423cdb76a88f58ba55177d3d9c5922"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/pages/About.tsx": {
+    "mtime": 1780367902.5721748,
+    "ast_hash": "cdc91a1a94e7875523717a3765eae9e2",
+    "semantic_hash": "cdc91a1a94e7875523717a3765eae9e2"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/pages/Dashboard.tsx": {
+    "mtime": 1780373629.5456874,
+    "ast_hash": "4e8736c0cd1de27057c3f2e1966f7633",
+    "semantic_hash": "4e8736c0cd1de27057c3f2e1966f7633"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/pages/Methodology.tsx": {
+    "mtime": 1778027801.8260634,
+    "ast_hash": "097a1ed9560bea5e2e0f0b04f04a8342",
+    "semantic_hash": "097a1ed9560bea5e2e0f0b04f04a8342"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/pages/PrivacyPolicy.tsx": {
+    "mtime": 1780367913.8358848,
+    "ast_hash": "7e65471bb180c4d65b1795dcc09ef1c6",
+    "semantic_hash": "7e65471bb180c4d65b1795dcc09ef1c6"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/pages/Support.tsx": {
+    "mtime": 1778027801.8262525,
+    "ast_hash": "332128a5ee2d696756f57cd40f5e4211",
+    "semantic_hash": "332128a5ee2d696756f57cd40f5e4211"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/pages/TermsOfUse.tsx": {
+    "mtime": 1780367913.8515441,
+    "ast_hash": "0b0f0f5c322ff1ad880b10b10b552a99",
+    "semantic_hash": "0b0f0f5c322ff1ad880b10b10b552a99"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/containers_adapters_live.ts": {
+    "mtime": 1780368898.0271754,
+    "ast_hash": "1d8f1ea3f6ffdbe80cf4af7b3060d812",
+    "semantic_hash": "1d8f1ea3f6ffdbe80cf4af7b3060d812"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/containers_pipeline.ts": {
+    "mtime": 1780368910.824921,
+    "ast_hash": "b437413cf218a4680b7093eb105cac7d",
+    "semantic_hash": "b437413cf218a4680b7093eb105cac7d"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/database_pipeline.ts": {
+    "mtime": 1778104530.1519363,
+    "ast_hash": "1623827e682d421b053439795d36956a",
+    "semantic_hash": "1623827e682d421b053439795d36956a"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/ingest.ts": {
+    "mtime": 1780367038.1420202,
+    "ast_hash": "e0d165053568d7733a34770f63d63114",
+    "semantic_hash": "e0d165053568d7733a34770f63d63114"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/mailer.ts": {
+    "mtime": 1778090774.6264212,
+    "ast_hash": "96fcdece20f945c0bf1c506d4f889ee1",
+    "semantic_hash": "96fcdece20f945c0bf1c506d4f889ee1"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/networking_pipeline.ts": {
+    "mtime": 1780368861.5063956,
+    "ast_hash": "a019a2d3a688b417b0e3ea29d695cfa3",
+    "semantic_hash": "a019a2d3a688b417b0e3ea29d695cfa3"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/populate_containers.ts": {
+    "mtime": 1780367038.2139418,
+    "ast_hash": "c5734fa6f0778aad742b63fec1b87edf",
+    "semantic_hash": "c5734fa6f0778aad742b63fec1b87edf"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/pricing_pipeline.ts": {
+    "mtime": 1780368445.4301617,
+    "ast_hash": "37094eaec2d01102c87d953a2892a463",
+    "semantic_hash": "37094eaec2d01102c87d953a2892a463"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/serverless_adapters_live.ts": {
+    "mtime": 1779305875.66979,
+    "ast_hash": "7554dbfa0980a59c773ded256675ea21",
+    "semantic_hash": "7554dbfa0980a59c773ded256675ea21"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/src/services/serverless_pipeline.ts": {
+    "mtime": 1779318461.207873,
+    "ast_hash": "f4aa99b7f582cccf6d11a4dd4e80a097",
+    "semantic_hash": "f4aa99b7f582cccf6d11a4dd4e80a097"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/test-results/.last-run.json": {
+    "mtime": 1779488322.3482423,
+    "ast_hash": "ff6d5dab1dfd50cea584142bc288ce9e",
+    "semantic_hash": "ff6d5dab1dfd50cea584142bc288ce9e"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/tests/filters.spec.ts": {
+    "mtime": 1779488255.0706563,
+    "ast_hash": "7a93620427957f217bd295f2b8443ab6",
+    "semantic_hash": "7a93620427957f217bd295f2b8443ab6"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/tsconfig.json": {
+    "mtime": 1778027801.8269534,
+    "ast_hash": "8827451c4e35790dd3f3538c265e7d15",
+    "semantic_hash": "8827451c4e35790dd3f3538c265e7d15"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/vite.config.ts": {
+    "mtime": 1778027801.8270714,
+    "ast_hash": "6d846ee9a56f568520b7188a70051685",
+    "semantic_hash": "6d846ee9a56f568520b7188a70051685"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/ARCHITECTURE_DIAGRAMS.md": {
+    "mtime": 1779304186.657169,
+    "ast_hash": "f18a10c5a7508b04b728ec92a18184de",
+    "semantic_hash": "f18a10c5a7508b04b728ec92a18184de"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/DATA_POPULATION_GUIDE.md": {
+    "mtime": 1780374603.2319999,
+    "ast_hash": "07e799ec60cea22f0b8a5a56f538d5f4",
+    "semantic_hash": "07e799ec60cea22f0b8a5a56f538d5f4"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/IMPLEMENTATION_SUMMARY.md": {
+    "mtime": 1779306270.3529527,
+    "ast_hash": "6ed07e196ab7864f7ba8450cc679a326",
+    "semantic_hash": "6ed07e196ab7864f7ba8450cc679a326"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/OPERATIONS_RUNBOOK.md": {
+    "mtime": 1780368623.7619476,
+    "ast_hash": "6c53970640065f025e8525ba2dd32e15",
+    "semantic_hash": "6c53970640065f025e8525ba2dd32e15"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/PROJECT_ANALYSIS.md": {
+    "mtime": 1779304119.0199497,
+    "ast_hash": "62afd0cb57da977da9b55f17bac09503",
+    "semantic_hash": "62afd0cb57da977da9b55f17bac09503"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/README.md": {
+    "mtime": 1780368745.9113681,
+    "ast_hash": "063036bb9242b46dcc61c8a712ef13da",
+    "semantic_hash": "063036bb9242b46dcc61c8a712ef13da"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/SECURITY_AUDIT.md": {
+    "mtime": 1780367827.0398045,
+    "ast_hash": "ed4de486a1c5f6ef1f4b116a3e894b27",
+    "semantic_hash": "ed4de486a1c5f6ef1f4b116a3e894b27"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/SECURITY_FIXES.md": {
+    "mtime": 1780367871.479189,
+    "ast_hash": "756729292e5c2665279e6015a2518e06",
+    "semantic_hash": "756729292e5c2665279e6015a2518e06"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/SERVERLESS_IMPLEMENTATION_PLAN.md": {
+    "mtime": 1779304936.0481563,
+    "ast_hash": "282c205ff340bf2f583020ffdce904b1",
+    "semantic_hash": "282c205ff340bf2f583020ffdce904b1"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/index.html": {
+    "mtime": 1778027801.8232572,
+    "ast_hash": "a35586ff915cf89fed8f90f4f2a457b1",
+    "semantic_hash": "a35586ff915cf89fed8f90f4f2a457b1"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/playwright-report/index.html": {
+    "mtime": 1779488322.347946,
+    "ast_hash": "14eae73d6c6dd47a4903acb8b2586ebc",
+    "semantic_hash": "14eae73d6c6dd47a4903acb8b2586ebc"
+  },
+  "/Users/rodrigoorzari/Documents/GitHub/_ccc/support-qr.png": {
+    "mtime": 1780366888.933937,
+    "ast_hash": "bbd006811e0d6f366d712590b31c89d2",
+    "semantic_hash": "bbd006811e0d6f366d712590b31c89d2"
+  }
+}
