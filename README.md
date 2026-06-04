@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/logo.png" alt="Compare Cloud Costs Logo" width="400">
+</p>
+
 # Compare Cloud Costs
 
 This is a full-stack cloud pricing comparison app. Stack: React + TypeScript (Vite) frontend, Node/Express backend (server.ts), PostgreSQL DB.
