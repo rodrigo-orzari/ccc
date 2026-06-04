@@ -58,355 +58,121 @@
   },
   "nodes": [
     {
-      "label": "README.md",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L1",
-      "id": "readme",
-      "community": 7,
-      "norm_label": "readme.md"
-    },
-    {
-      "label": "Compare Cloud Costs",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L5",
-      "id": "readme_compare_cloud_costs",
-      "community": 7,
-      "norm_label": "compare cloud costs"
-    },
-    {
-      "label": "Live Deployment",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L9",
-      "id": "readme_live_deployment",
-      "community": 7,
-      "norm_label": "live deployment"
-    },
-    {
-      "label": "1. What Problem Does This Application Solve?",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L26",
-      "id": "readme_1_what_problem_does_this_application_solve",
-      "community": 7,
-      "norm_label": "1. what problem does this application solve?"
-    },
-    {
-      "label": "2. Architectural Design",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L39",
-      "id": "readme_2_architectural_design",
-      "community": 7,
-      "norm_label": "2. architectural design"
-    },
-    {
-      "label": "3. File Directory & Code Organization",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L48",
-      "id": "readme_3_file_directory_code_organization",
-      "community": 7,
-      "norm_label": "3. file directory & code organization"
-    },
-    {
-      "label": "Directory Tree",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L50",
-      "id": "readme_directory_tree",
-      "community": 7,
-      "norm_label": "directory tree"
-    },
-    {
-      "label": "File Descriptions",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L114",
-      "id": "readme_file_descriptions",
-      "community": 7,
-      "norm_label": "file descriptions"
-    },
-    {
-      "label": "4. Documentation Guide",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L152",
-      "id": "readme_4_documentation_guide",
-      "community": 7,
-      "norm_label": "4. documentation guide"
-    },
-    {
-      "label": "5. Security & Deployment",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L168",
-      "id": "readme_5_security_deployment",
-      "community": 7,
-      "norm_label": "5. security & deployment"
-    },
-    {
-      "label": "\u26a0\ufe0f Important: Production Security Requirements",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L170",
-      "id": "readme_important_production_security_requirements",
-      "community": 7,
-      "norm_label": "\u26a0\ufe0f important: production security requirements"
-    },
-    {
-      "label": "6. Quick Start",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L185",
-      "id": "readme_6_quick_start",
-      "community": 7,
-      "norm_label": "6. quick start"
-    },
-    {
-      "label": "Local Development (5 minutes)",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L187",
-      "id": "readme_local_development_5_minutes",
-      "community": 7,
-      "norm_label": "local development (5 minutes)"
-    },
-    {
-      "label": "Build for Production",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L208",
-      "id": "readme_build_for_production",
-      "community": 7,
-      "norm_label": "build for production"
-    },
-    {
-      "label": "7. In-Depth Subsystem Walks",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L219",
-      "id": "readme_7_in_depth_subsystem_walks",
-      "community": 7,
-      "norm_label": "7. in-depth subsystem walks"
-    },
-    {
-      "label": "A. Database Initialization and Schema Management",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L221",
-      "id": "readme_a_database_initialization_and_schema_management",
-      "community": 7,
-      "norm_label": "a. database initialization and schema management"
-    },
-    {
-      "label": "B. Ingestion Pipelines & In-Flight Validations",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L226",
-      "id": "readme_b_ingestion_pipelines_in_flight_validations",
-      "community": 7,
-      "norm_label": "b. ingestion pipelines & in-flight validations"
-    },
-    {
-      "label": "C. Backend API Routes",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L237",
-      "id": "readme_c_backend_api_routes",
-      "community": 7,
-      "norm_label": "c. backend api routes"
-    },
-    {
-      "label": "D. The Comparative Frontend Dashboard",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L246",
-      "id": "readme_d_the_comparative_frontend_dashboard",
-      "community": 7,
-      "norm_label": "d. the comparative frontend dashboard"
-    },
-    {
-      "label": "8. Resources for Contributors",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L256",
-      "id": "readme_8_resources_for_contributors",
-      "community": 7,
-      "norm_label": "8. resources for contributors"
-    },
-    {
-      "label": "Getting Started",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L258",
-      "id": "readme_getting_started",
-      "community": 7,
-      "norm_label": "getting started"
-    },
-    {
-      "label": "For Specific Tasks",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L265",
-      "id": "readme_for_specific_tasks",
-      "community": 7,
-      "norm_label": "for specific tasks"
-    },
-    {
-      "label": "Key Architecture Files",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L277",
-      "id": "readme_key_architecture_files",
-      "community": 7,
-      "norm_label": "key architecture files"
-    },
-    {
-      "label": "License & Contributions",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L292",
-      "id": "readme_license_contributions",
-      "community": 7,
-      "norm_label": "license & contributions"
-    },
-    {
-      "label": "Project Note",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L301",
-      "id": "readme_project_note",
-      "community": 7,
-      "norm_label": "project note"
-    },
-    {
-      "label": "Support & Feedback",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L305",
-      "id": "readme_support_feedback",
-      "community": 7,
-      "norm_label": "support & feedback"
-    },
-    {
       "label": "CLAUDE.md",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L1",
+      "id": "claude",
       "community": 29,
-      "norm_label": "claude.md",
-      "id": "claude"
+      "norm_label": "claude.md"
     },
     {
       "label": "Compare Cloud Costs (CCC) \u2014 Claude Context",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L1",
+      "id": "claude_compare_cloud_costs_ccc_claude_context",
       "community": 29,
-      "norm_label": "compare cloud costs (ccc) \u2014 claude context",
-      "id": "claude_compare_cloud_costs_ccc_claude_context"
+      "norm_label": "compare cloud costs (ccc) \u2014 claude context"
     },
     {
       "label": "What This Project Does",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L3",
+      "id": "claude_what_this_project_does",
       "community": 29,
-      "norm_label": "what this project does",
-      "id": "claude_what_this_project_does"
+      "norm_label": "what this project does"
     },
     {
       "label": "Stack",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L8",
+      "id": "claude_stack",
       "community": 29,
-      "norm_label": "stack",
-      "id": "claude_stack"
+      "norm_label": "stack"
     },
     {
       "label": "Run Commands",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L14",
+      "id": "claude_run_commands",
       "community": 29,
-      "norm_label": "run commands",
-      "id": "claude_run_commands"
+      "norm_label": "run commands"
     },
     {
       "label": "Key Files \u2014 Start Here",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L22",
+      "id": "claude_key_files_start_here",
       "community": 29,
-      "norm_label": "key files \u2014 start here",
-      "id": "claude_key_files_start_here"
+      "norm_label": "key files \u2014 start here"
     },
     {
       "label": "Architecture",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L34",
+      "id": "claude_architecture",
       "community": 29,
-      "norm_label": "architecture",
-      "id": "claude_architecture"
+      "norm_label": "architecture"
     },
     {
       "label": "Database Schema",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L41",
+      "id": "claude_database_schema",
       "community": 29,
-      "norm_label": "database schema",
-      "id": "claude_database_schema"
+      "norm_label": "database schema"
     },
     {
       "label": "API Routes",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L47",
+      "id": "claude_api_routes",
       "community": 29,
-      "norm_label": "api routes",
-      "id": "claude_api_routes"
+      "norm_label": "api routes"
     },
     {
       "label": "Security Rules \u2014 Never Violate",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L53",
+      "id": "claude_security_rules_never_violate",
       "community": 29,
-      "norm_label": "security rules \u2014 never violate",
-      "id": "claude_security_rules_never_violate"
+      "norm_label": "security rules \u2014 never violate"
     },
     {
       "label": "Documentation Map",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L60",
+      "id": "claude_documentation_map",
       "community": 29,
-      "norm_label": "documentation map",
-      "id": "claude_documentation_map"
+      "norm_label": "documentation map"
     },
     {
       "label": "Adding a New Cloud Provider",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L69",
+      "id": "claude_adding_a_new_cloud_provider",
       "community": 29,
-      "norm_label": "adding a new cloud provider",
-      "id": "claude_adding_a_new_cloud_provider"
+      "norm_label": "adding a new cloud provider"
     },
     {
       "label": "Conventions",
       "file_type": "document",
       "source_file": "CLAUDE.md",
       "source_location": "L72",
+      "id": "claude_conventions",
       "community": 29,
-      "norm_label": "conventions",
-      "id": "claude_conventions"
+      "norm_label": "conventions"
     },
     {
       "label": "launch.json",
@@ -935,7 +701,7 @@
       "file_type": "code",
       "source_file": "populate_containers.ts",
       "source_location": "L1",
-      "community": 31,
+      "community": 1,
       "norm_label": "populate_containers.ts",
       "id": "populate_containers"
     },
@@ -944,7 +710,7 @@
       "file_type": "code",
       "source_file": "populate_containers.ts",
       "source_location": "L6",
-      "community": 31,
+      "community": 1,
       "norm_label": "parsedburl()",
       "id": "populate_containers_parsedburl"
     },
@@ -953,7 +719,7 @@
       "file_type": "code",
       "source_file": "populate_containers.ts",
       "source_location": "L14",
-      "community": 31,
+      "community": 1,
       "norm_label": "run()",
       "id": "populate_containers_run"
     },
@@ -962,7 +728,7 @@
       "file_type": "code",
       "source_file": "populate_serverless.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 7,
       "norm_label": "populate_serverless.ts",
       "id": "populate_serverless"
     },
@@ -971,7 +737,7 @@
       "file_type": "code",
       "source_file": "populate_serverless.ts",
       "source_location": "L6",
-      "community": 0,
+      "community": 7,
       "norm_label": "parsedburl()",
       "id": "populate_serverless_parsedburl"
     },
@@ -980,7 +746,7 @@
       "file_type": "code",
       "source_file": "populate_serverless.ts",
       "source_location": "L14",
-      "community": 0,
+      "community": 7,
       "norm_label": "run()",
       "id": "populate_serverless_run"
     },
@@ -989,7 +755,7 @@
       "file_type": "code",
       "source_file": "server.ts",
       "source_location": "L1",
-      "community": 12,
+      "community": 1,
       "norm_label": "server.ts",
       "id": "server"
     },
@@ -1322,7 +1088,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L1",
-      "community": 33,
+      "community": 1,
       "norm_label": "digitalocean_containers.ts",
       "id": "config_digitalocean_containers"
     },
@@ -1331,7 +1097,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L7",
-      "community": 33,
+      "community": 1,
       "norm_label": "addcontainerattributes()",
       "id": "config_digitalocean_containers_addcontainerattributes"
     },
@@ -1340,7 +1106,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L17",
-      "community": 33,
+      "community": 1,
       "norm_label": "basedigitaloceancontainerentries",
       "id": "config_digitalocean_containers_basedigitaloceancontainerentries"
     },
@@ -1349,7 +1115,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L27",
-      "community": 33,
+      "community": 1,
       "norm_label": "digitalocean_containers",
       "id": "config_digitalocean_containers_digitalocean_containers"
     },
@@ -1358,7 +1124,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L1",
-      "community": 30,
+      "community": 1,
       "norm_label": "digitalocean_instances.ts",
       "id": "config_digitalocean_instances"
     },
@@ -1367,7 +1133,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L9",
-      "community": 30,
+      "community": 1,
       "norm_label": "digitaloceaninstanceconfig",
       "id": "config_digitalocean_instances_digitaloceaninstanceconfig"
     },
@@ -1376,7 +1142,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L20",
-      "community": 30,
+      "community": 1,
       "norm_label": "digitalocean_instances",
       "id": "config_digitalocean_instances_digitalocean_instances"
     },
@@ -1430,7 +1196,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L1",
-      "community": 34,
+      "community": 1,
       "norm_label": "gcp_containers.ts",
       "id": "config_gcp_containers"
     },
@@ -1439,7 +1205,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L7",
-      "community": 34,
+      "community": 1,
       "norm_label": "addcontainerattributes()",
       "id": "config_gcp_containers_addcontainerattributes"
     },
@@ -1448,7 +1214,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L17",
-      "community": 34,
+      "community": 1,
       "norm_label": "basegcpcontainerentries",
       "id": "config_gcp_containers_basegcpcontainerentries"
     },
@@ -1457,7 +1223,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L27",
-      "community": 34,
+      "community": 1,
       "norm_label": "gcp_containers",
       "id": "config_gcp_containers_gcp_containers"
     },
@@ -1466,7 +1232,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L1",
-      "community": 30,
+      "community": 1,
       "norm_label": "gcp_instances.ts",
       "id": "config_gcp_instances"
     },
@@ -1475,7 +1241,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L21",
-      "community": 30,
+      "community": 1,
       "norm_label": "gcpinstanceconfig",
       "id": "config_gcp_instances_gcpinstanceconfig"
     },
@@ -1484,7 +1250,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L33",
-      "community": 30,
+      "community": 1,
       "norm_label": "gcp_instances",
       "id": "config_gcp_instances_gcp_instances"
     },
@@ -1538,7 +1304,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L1",
-      "community": 35,
+      "community": 1,
       "norm_label": "oracle_containers.ts",
       "id": "config_oracle_containers"
     },
@@ -1547,7 +1313,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L7",
-      "community": 35,
+      "community": 1,
       "norm_label": "addcontainerattributes()",
       "id": "config_oracle_containers_addcontainerattributes"
     },
@@ -1556,7 +1322,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L17",
-      "community": 35,
+      "community": 1,
       "norm_label": "baseoraclecontainerentries",
       "id": "config_oracle_containers_baseoraclecontainerentries"
     },
@@ -1565,7 +1331,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L27",
-      "community": 35,
+      "community": 1,
       "norm_label": "oracle_containers",
       "id": "config_oracle_containers_oracle_containers"
     },
@@ -1574,7 +1340,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L1",
-      "community": 30,
+      "community": 1,
       "norm_label": "oracle_instances.ts",
       "id": "config_oracle_instances"
     },
@@ -1583,7 +1349,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L19",
-      "community": 30,
+      "community": 1,
       "norm_label": "oracleinstanceconfig",
       "id": "config_oracle_instances_oracleinstanceconfig"
     },
@@ -1592,7 +1358,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L31",
-      "community": 30,
+      "community": 1,
       "norm_label": "oracle_instances",
       "id": "config_oracle_instances_oracle_instances"
     },
@@ -2069,7 +1835,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L6",
-      "community": 0,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_awscontainersliveadapter_fetchpricing"
     },
@@ -2087,7 +1853,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L16",
-      "community": 0,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_azurecontainersliveadapter_fetchpricing"
     },
@@ -2105,7 +1871,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L25",
-      "community": 0,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_gcpcontainersliveadapter_fetchpricing"
     },
@@ -2123,7 +1889,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L34",
-      "community": 0,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_digitaloceancontainersliveadapter_fetchpricing"
     },
@@ -2141,7 +1907,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L43",
-      "community": 0,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_oraclecontainersliveadapter_fetchpricing"
     },
@@ -2159,7 +1925,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L17",
-      "community": 5,
+      "community": 7,
       "norm_label": "awscontainersstaticadapter",
       "id": "services_containers_pipeline_awscontainersstaticadapter"
     },
@@ -2168,7 +1934,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L19",
-      "community": 5,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_awscontainersstaticadapter_fetchpricing"
     },
@@ -2195,7 +1961,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L67",
-      "community": 5,
+      "community": 7,
       "norm_label": "gcpcontainersstaticadapter",
       "id": "services_containers_pipeline_gcpcontainersstaticadapter"
     },
@@ -2204,7 +1970,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L69",
-      "community": 5,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_gcpcontainersstaticadapter_fetchpricing"
     },
@@ -2213,7 +1979,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L92",
-      "community": 5,
+      "community": 7,
       "norm_label": "digitaloceancontainersstaticadapter",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter"
     },
@@ -2222,7 +1988,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L94",
-      "community": 5,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter_fetchpricing"
     },
@@ -2231,7 +1997,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L117",
-      "community": 31,
+      "community": 1,
       "norm_label": "oraclecontainersstaticadapter",
       "id": "services_containers_pipeline_oraclecontainersstaticadapter"
     },
@@ -2240,7 +2006,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L119",
-      "community": 31,
+      "community": 1,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_oraclecontainersstaticadapter_fetchpricing"
     },
@@ -2249,7 +2015,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L142",
-      "community": 31,
+      "community": 1,
       "norm_label": "containerspricingpipeline",
       "id": "services_containers_pipeline_containerspricingpipeline"
     },
@@ -2258,7 +2024,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L143",
-      "community": 31,
+      "community": 1,
       "norm_label": ".constructor()",
       "id": "services_containers_pipeline_containerspricingpipeline_constructor"
     },
@@ -2267,7 +2033,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L155",
-      "community": 31,
+      "community": 1,
       "norm_label": ".run()",
       "id": "services_containers_pipeline_containerspricingpipeline_run"
     },
@@ -2447,7 +2213,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L476",
-      "community": 32,
+      "community": 1,
       "norm_label": "databasepricingpipeline",
       "id": "services_database_pipeline_databasepricingpipeline"
     },
@@ -2456,7 +2222,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L477",
-      "community": 32,
+      "community": 1,
       "norm_label": ".constructor()",
       "id": "services_database_pipeline_databasepricingpipeline_constructor"
     },
@@ -2474,7 +2240,7 @@
       "file_type": "code",
       "source_file": "src/services/ingest.ts",
       "source_location": "L1",
-      "community": 32,
+      "community": 1,
       "norm_label": "ingest.ts",
       "id": "services_ingest"
     },
@@ -2483,7 +2249,7 @@
       "file_type": "code",
       "source_file": "src/services/ingest.ts",
       "source_location": "L7",
-      "community": 32,
+      "community": 1,
       "norm_label": "main()",
       "id": "services_ingest_main"
     },
@@ -2555,7 +2321,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L1",
-      "community": 30,
+      "community": 1,
       "norm_label": "networking_pipeline.ts",
       "id": "services_networking_pipeline"
     },
@@ -2564,7 +2330,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L4",
-      "community": 36,
+      "community": 1,
       "norm_label": "networkingpricingpipeline",
       "id": "services_networking_pipeline_networkingpricingpipeline"
     },
@@ -2573,7 +2339,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L7",
-      "community": 36,
+      "community": 1,
       "norm_label": ".constructor()",
       "id": "services_networking_pipeline_networkingpricingpipeline_constructor"
     },
@@ -2582,7 +2348,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L11",
-      "community": 36,
+      "community": 1,
       "norm_label": ".run()",
       "id": "services_networking_pipeline_networkingpricingpipeline_run"
     },
@@ -2591,7 +2357,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L36",
-      "community": 36,
+      "community": 1,
       "norm_label": ".setupnetworkingservices()",
       "id": "services_networking_pipeline_networkingpricingpipeline_setupnetworkingservices"
     },
@@ -2600,7 +2366,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_containers.ts",
       "source_location": "L1",
-      "community": 31,
+      "community": 1,
       "norm_label": "populate_containers.ts",
       "id": "services_populate_containers"
     },
@@ -2609,7 +2375,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_containers.ts",
       "source_location": "L4",
-      "community": 31,
+      "community": 1,
       "norm_label": "main()",
       "id": "services_populate_containers_main"
     },
@@ -2618,7 +2384,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L1",
-      "community": 30,
+      "community": 1,
       "norm_label": "pricing_pipeline.ts",
       "id": "services_pricing_pipeline"
     },
@@ -2627,7 +2393,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L8",
-      "community": 0,
+      "community": 7,
       "norm_label": "pricingrecord",
       "id": "services_pricing_pipeline_pricingrecord"
     },
@@ -2636,7 +2402,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L28",
-      "community": 30,
+      "community": 1,
       "norm_label": "pricedriftresult",
       "id": "services_pricing_pipeline_pricedriftresult"
     },
@@ -2870,7 +2636,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L438",
-      "community": 32,
+      "community": 1,
       "norm_label": "pricingpipeline",
       "id": "services_pricing_pipeline_pricingpipeline"
     },
@@ -2879,7 +2645,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L442",
-      "community": 32,
+      "community": 1,
       "norm_label": ".constructor()",
       "id": "services_pricing_pipeline_pricingpipeline_constructor"
     },
@@ -2888,7 +2654,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L458",
-      "community": 32,
+      "community": 1,
       "norm_label": ".run()",
       "id": "services_pricing_pipeline_pricingpipeline_run"
     },
@@ -2897,7 +2663,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L473",
-      "community": 32,
+      "community": 1,
       "norm_label": ".saverecords()",
       "id": "services_pricing_pipeline_pricingpipeline_saverecords"
     },
@@ -3005,7 +2771,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L57",
-      "community": 0,
+      "community": 5,
       "norm_label": "gcpserverlessadapter",
       "id": "services_serverless_pipeline_gcpserverlessadapter"
     },
@@ -3014,7 +2780,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L60",
-      "community": 0,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_gcpserverlessadapter_fetchpricing"
     },
@@ -3041,7 +2807,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L111",
-      "community": 0,
+      "community": 7,
       "norm_label": "digitaloceanserverlessadapter",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter"
     },
@@ -3050,7 +2816,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L114",
-      "community": 0,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter_fetchpricing"
     },
@@ -3068,7 +2834,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L141",
-      "community": 0,
+      "community": 7,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing"
     },
@@ -3077,7 +2843,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L165",
-      "community": 0,
+      "community": 7,
       "norm_label": "serverlesspricingpipeline",
       "id": "services_serverless_pipeline_serverlesspricingpipeline"
     },
@@ -3086,7 +2852,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L166",
-      "community": 0,
+      "community": 7,
       "norm_label": ".constructor()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_constructor"
     },
@@ -3095,7 +2861,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L181",
-      "community": 0,
+      "community": 7,
       "norm_label": ".run()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_run"
     },
@@ -3104,7 +2870,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L339",
-      "community": 0,
+      "community": 7,
       "norm_label": ".getawsserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getawsserverlessstaticrecords"
     },
@@ -3113,7 +2879,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L347",
-      "community": 0,
+      "community": 7,
       "norm_label": ".getgcpserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getgcpserverlessstaticrecords"
     },
@@ -3122,7 +2888,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L355",
-      "community": 0,
+      "community": 7,
       "norm_label": ".getazureserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getazureserverlessstaticrecords"
     },
@@ -3131,7 +2897,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L363",
-      "community": 0,
+      "community": 7,
       "norm_label": ".getdigitaloceanserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getdigitaloceanserverlessstaticrecords"
     },
@@ -3140,7 +2906,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L371",
-      "community": 0,
+      "community": 7,
       "norm_label": ".getoracleserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
     },
@@ -3351,7 +3117,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 10,
       "norm_label": "compare cloud costs platform",
       "id": "architecture_diagrams_compare_cloud_costs_platform"
     },
@@ -4162,6 +3928,32 @@
       "id": "project_analysis_send_staleness_email"
     },
     {
+      "label": "Compare Cloud Costs README",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 10,
+      "norm_label": "compare cloud costs readme",
+      "id": "readme_compare_cloud_costs"
+    },
+    {
+      "label": "AGPL-3.0 License",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "community": 10,
+      "norm_label": "agpl-3.0 license",
+      "id": "readme_agpl_license"
+    },
+    {
       "label": "TLS Certificate Validation Disabled (Critical)",
       "file_type": "document",
       "source_file": "SECURITY_AUDIT.md",
@@ -4413,282 +4205,12 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "readme",
-      "target": "readme_compare_cloud_costs",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L292",
-      "weight": 1.0,
-      "source": "readme",
-      "target": "readme_license_contributions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L301",
-      "weight": 1.0,
-      "source": "readme",
-      "target": "readme_project_note",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L305",
-      "weight": 1.0,
-      "source": "readme",
-      "target": "readme_support_feedback",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "architecture_diagrams_compare_cloud_costs_platform"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "project_analysis_compare_cloud_costs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L26",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_1_what_problem_does_this_application_solve",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L39",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_2_architectural_design",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L48",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_3_file_directory_code_organization",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L152",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_4_documentation_guide",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L168",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_5_security_deployment",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L185",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_6_quick_start",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L219",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_7_in_depth_subsystem_walks",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L256",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_8_resources_for_contributors",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "readme_compare_cloud_costs",
-      "target": "readme_live_deployment",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L50",
-      "weight": 1.0,
-      "source": "readme_3_file_directory_code_organization",
-      "target": "readme_directory_tree",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L114",
-      "weight": 1.0,
-      "source": "readme_3_file_directory_code_organization",
-      "target": "readme_file_descriptions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L170",
-      "weight": 1.0,
-      "source": "readme_5_security_deployment",
-      "target": "readme_important_production_security_requirements",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L208",
-      "weight": 1.0,
-      "source": "readme_6_quick_start",
-      "target": "readme_build_for_production",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L187",
-      "weight": 1.0,
-      "source": "readme_6_quick_start",
-      "target": "readme_local_development_5_minutes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L221",
-      "weight": 1.0,
-      "source": "readme_7_in_depth_subsystem_walks",
-      "target": "readme_a_database_initialization_and_schema_management",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L226",
-      "weight": 1.0,
-      "source": "readme_7_in_depth_subsystem_walks",
-      "target": "readme_b_ingestion_pipelines_in_flight_validations",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L237",
-      "weight": 1.0,
-      "source": "readme_7_in_depth_subsystem_walks",
-      "target": "readme_c_backend_api_routes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L246",
-      "weight": 1.0,
-      "source": "readme_7_in_depth_subsystem_walks",
-      "target": "readme_d_the_comparative_frontend_dashboard",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L265",
-      "weight": 1.0,
-      "source": "readme_8_resources_for_contributors",
-      "target": "readme_for_specific_tasks",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L258",
-      "weight": 1.0,
-      "source": "readme_8_resources_for_contributors",
-      "target": "readme_getting_started",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L277",
-      "weight": 1.0,
-      "source": "readme_8_resources_for_contributors",
-      "target": "readme_key_architecture_files",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude",
-      "target": "claude_compare_cloud_costs_ccc_claude_context"
+      "target": "claude_compare_cloud_costs_ccc_claude_context",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4696,9 +4218,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L69",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_adding_a_new_cloud_provider"
+      "target": "claude_adding_a_new_cloud_provider",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4706,9 +4228,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L47",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_api_routes"
+      "target": "claude_api_routes",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4716,9 +4238,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L34",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_architecture"
+      "target": "claude_architecture",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4726,9 +4248,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L72",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_conventions"
+      "target": "claude_conventions",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4736,9 +4258,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L41",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_database_schema"
+      "target": "claude_database_schema",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4746,9 +4268,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L60",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_documentation_map"
+      "target": "claude_documentation_map",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4756,9 +4278,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L22",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_key_files_start_here"
+      "target": "claude_key_files_start_here",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4766,9 +4288,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L14",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_run_commands"
+      "target": "claude_run_commands",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4776,9 +4298,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L53",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_security_rules_never_violate"
+      "target": "claude_security_rules_never_violate",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4786,9 +4308,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L8",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_stack"
+      "target": "claude_stack",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4796,9 +4318,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "claude_compare_cloud_costs_ccc_claude_context",
-      "target": "claude_what_this_project_does"
+      "target": "claude_what_this_project_does",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9913,6 +9435,16 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_compare_cloud_costs",
+      "target": "architecture_diagrams_compare_cloud_costs_platform"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "ARCHITECTURE_DIAGRAMS.md",
       "source_location": null,
       "weight": 1.0,
@@ -10541,6 +10073,16 @@
     },
     {
       "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_compare_cloud_costs",
+      "target": "project_analysis_compare_cloud_costs"
+    },
+    {
+      "relation": "references",
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "index.html",
@@ -10638,6 +10180,16 @@
       "weight": 1.0,
       "source": "project_analysis_send_staleness_email",
       "target": "project_analysis_mailer_ts"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_compare_cloud_costs",
+      "target": "readme_agpl_license"
     },
     {
       "relation": "references",
@@ -10783,5 +10335,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "5e505fbb085ae7e5fb86615359ad097a524b9dab"
+  "built_at_commit": "014c87701a66a5a52339c9fceb704aab0ca1ad8a"
 }
