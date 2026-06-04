@@ -58,12 +58,102 @@
   },
   "nodes": [
     {
+      "label": "populate_containers.ts",
+      "file_type": "code",
+      "source_file": "populate_containers.ts",
+      "source_location": "L1",
+      "id": "populate_containers",
+      "community": 11,
+      "norm_label": "populate_containers.ts"
+    },
+    {
+      "label": "parseDbUrl()",
+      "file_type": "code",
+      "source_file": "populate_containers.ts",
+      "source_location": "L6",
+      "id": "populate_containers_parsedburl",
+      "community": 11,
+      "norm_label": "parsedburl()"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "populate_containers.ts",
+      "source_location": "L19",
+      "id": "populate_containers_run",
+      "community": 11,
+      "norm_label": "run()"
+    },
+    {
+      "label": "populate_networking.ts",
+      "file_type": "code",
+      "source_file": "populate_networking.ts",
+      "source_location": "L1",
+      "id": "populate_networking",
+      "community": 34,
+      "norm_label": "populate_networking.ts"
+    },
+    {
+      "label": "parseDbUrl()",
+      "file_type": "code",
+      "source_file": "populate_networking.ts",
+      "source_location": "L12",
+      "id": "populate_networking_parsedburl",
+      "community": 34,
+      "norm_label": "parsedburl()"
+    },
+    {
+      "label": "pool",
+      "file_type": "code",
+      "source_file": "populate_networking.ts",
+      "source_location": "L25",
+      "id": "populate_networking_pool",
+      "community": 34,
+      "norm_label": "pool"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "populate_networking.ts",
+      "source_location": "L33",
+      "id": "populate_networking_main",
+      "community": 34,
+      "norm_label": "main()"
+    },
+    {
+      "label": "populate_serverless.ts",
+      "file_type": "code",
+      "source_file": "populate_serverless.ts",
+      "source_location": "L1",
+      "id": "populate_serverless",
+      "community": 12,
+      "norm_label": "populate_serverless.ts"
+    },
+    {
+      "label": "parseDbUrl()",
+      "file_type": "code",
+      "source_file": "populate_serverless.ts",
+      "source_location": "L6",
+      "id": "populate_serverless_parsedburl",
+      "community": 12,
+      "norm_label": "parsedburl()"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "populate_serverless.ts",
+      "source_location": "L19",
+      "id": "populate_serverless_run",
+      "community": 12,
+      "norm_label": "run()"
+    },
+    {
       "label": "ingest.ts",
       "file_type": "code",
       "source_file": "src/services/ingest.ts",
       "source_location": "L1",
       "id": "services_ingest",
-      "community": 30,
+      "community": 33,
       "norm_label": "ingest.ts"
     },
     {
@@ -72,16 +162,16 @@
       "source_file": "src/services/ingest.ts",
       "source_location": "L12",
       "id": "services_ingest_parsedburl",
-      "community": 30,
+      "community": 33,
       "norm_label": "parsedburl()"
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "src/services/ingest.ts",
-      "source_location": "L20",
+      "source_location": "L25",
       "id": "services_ingest_main",
-      "community": 30,
+      "community": 33,
       "norm_label": "main()"
     },
     {
@@ -134,7 +224,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L1",
-      "community": 1,
+      "community": 38,
       "norm_label": "oracle_containers.ts",
       "id": "config_oracle_containers"
     },
@@ -143,7 +233,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L7",
-      "community": 1,
+      "community": 38,
       "norm_label": "addcontainerattributes()",
       "id": "config_oracle_containers_addcontainerattributes"
     },
@@ -152,7 +242,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L20",
-      "community": 1,
+      "community": 38,
       "norm_label": "calculateociprice()",
       "id": "config_oracle_containers_calculateociprice"
     },
@@ -161,7 +251,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L26",
-      "community": 1,
+      "community": 38,
       "norm_label": "baseoraclecontainerentries",
       "id": "config_oracle_containers_baseoraclecontainerentries"
     },
@@ -170,7 +260,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L49",
-      "community": 1,
+      "community": 38,
       "norm_label": "oracle_containers",
       "id": "config_oracle_containers_oracle_containers"
     },
@@ -224,7 +314,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L1",
-      "community": 1,
+      "community": 36,
       "norm_label": "azure_containers.ts",
       "id": "config_azure_containers"
     },
@@ -233,7 +323,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L7",
-      "community": 1,
+      "community": 36,
       "norm_label": "addcontainerattributes()",
       "id": "config_azure_containers_addcontainerattributes"
     },
@@ -242,7 +332,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L19",
-      "community": 1,
+      "community": 36,
       "norm_label": "calculateaciprice()",
       "id": "config_azure_containers_calculateaciprice"
     },
@@ -251,7 +341,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L23",
-      "community": 1,
+      "community": 36,
       "norm_label": "baseazurecontainerentries",
       "id": "config_azure_containers_baseazurecontainerentries"
     },
@@ -260,7 +350,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L50",
-      "community": 1,
+      "community": 36,
       "norm_label": "azure_containers",
       "id": "config_azure_containers_azure_containers"
     },
@@ -494,7 +584,7 @@
       "file_type": "code",
       "source_file": "server.ts",
       "source_location": "L1",
-      "community": 30,
+      "community": 32,
       "norm_label": "server.ts",
       "id": "server"
     },
@@ -503,7 +593,7 @@
       "file_type": "code",
       "source_file": "server.ts",
       "source_location": "L23",
-      "community": 30,
+      "community": 32,
       "norm_label": "startserver()",
       "id": "server_startserver"
     },
@@ -823,33 +913,6 @@
       "id": "pages_dashboard_dashboard"
     },
     {
-      "label": "populate_networking.ts",
-      "file_type": "code",
-      "source_file": "populate_networking.ts",
-      "source_location": "L1",
-      "community": 30,
-      "norm_label": "populate_networking.ts",
-      "id": "populate_networking"
-    },
-    {
-      "label": "pool",
-      "file_type": "code",
-      "source_file": "populate_networking.ts",
-      "source_location": "L12",
-      "community": 30,
-      "norm_label": "pool",
-      "id": "populate_networking_pool"
-    },
-    {
-      "label": "main()",
-      "file_type": "code",
-      "source_file": "populate_networking.ts",
-      "source_location": "L20",
-      "community": 30,
-      "norm_label": "main()",
-      "id": "populate_networking_main"
-    },
-    {
       "label": "databricks_instances.ts",
       "file_type": "code",
       "source_file": "src/config/databricks_instances.ts",
@@ -926,7 +989,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L36",
-      "community": 30,
+      "community": 34,
       "norm_label": "networkingpricingpipeline",
       "id": "services_networking_pipeline_networkingpricingpipeline"
     },
@@ -935,7 +998,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L39",
-      "community": 30,
+      "community": 34,
       "norm_label": ".constructor()",
       "id": "services_networking_pipeline_networkingpricingpipeline_constructor"
     },
@@ -944,7 +1007,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L43",
-      "community": 30,
+      "community": 34,
       "norm_label": ".run()",
       "id": "services_networking_pipeline_networkingpricingpipeline_run"
     },
@@ -953,7 +1016,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L116",
-      "community": 30,
+      "community": 34,
       "norm_label": ".setupnetworkingservices()",
       "id": "services_networking_pipeline_networkingpricingpipeline_setupnetworkingservices"
     },
@@ -1412,7 +1475,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L1",
-      "community": 4,
+      "community": 13,
       "norm_label": "package.json",
       "id": "package"
     },
@@ -1421,7 +1484,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L2",
-      "community": 4,
+      "community": 13,
       "norm_label": "name",
       "id": "package_name"
     },
@@ -1430,7 +1493,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L3",
-      "community": 4,
+      "community": 13,
       "norm_label": "private",
       "id": "package_private"
     },
@@ -1439,7 +1502,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L4",
-      "community": 4,
+      "community": 13,
       "norm_label": "version",
       "id": "package_version"
     },
@@ -1448,7 +1511,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L5",
-      "community": 4,
+      "community": 13,
       "norm_label": "type",
       "id": "package_type"
     },
@@ -1457,7 +1520,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L6",
-      "community": 4,
+      "community": 13,
       "norm_label": "scripts",
       "id": "package_scripts"
     },
@@ -1466,7 +1529,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L7",
-      "community": 4,
+      "community": 13,
       "norm_label": "dev",
       "id": "package_scripts_dev"
     },
@@ -1475,7 +1538,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L8",
-      "community": 4,
+      "community": 13,
       "norm_label": "build",
       "id": "package_scripts_build"
     },
@@ -1484,7 +1547,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L9",
-      "community": 4,
+      "community": 13,
       "norm_label": "start",
       "id": "package_scripts_start"
     },
@@ -1493,7 +1556,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L10",
-      "community": 4,
+      "community": 13,
       "norm_label": "ingest",
       "id": "package_scripts_ingest"
     },
@@ -1502,7 +1565,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L11",
-      "community": 4,
+      "community": 13,
       "norm_label": "preview",
       "id": "package_scripts_preview"
     },
@@ -1511,7 +1574,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L12",
-      "community": 4,
+      "community": 13,
       "norm_label": "clean",
       "id": "package_scripts_clean"
     },
@@ -1520,7 +1583,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L13",
-      "community": 4,
+      "community": 13,
       "norm_label": "lint",
       "id": "package_scripts_lint"
     },
@@ -1831,60 +1894,6 @@
       "id": "playwright_config"
     },
     {
-      "label": "populate_containers.ts",
-      "file_type": "code",
-      "source_file": "populate_containers.ts",
-      "source_location": "L1",
-      "community": 1,
-      "norm_label": "populate_containers.ts",
-      "id": "populate_containers"
-    },
-    {
-      "label": "parseDbUrl()",
-      "file_type": "code",
-      "source_file": "populate_containers.ts",
-      "source_location": "L6",
-      "community": 1,
-      "norm_label": "parsedburl()",
-      "id": "populate_containers_parsedburl"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "populate_containers.ts",
-      "source_location": "L14",
-      "community": 1,
-      "norm_label": "run()",
-      "id": "populate_containers_run"
-    },
-    {
-      "label": "populate_serverless.ts",
-      "file_type": "code",
-      "source_file": "populate_serverless.ts",
-      "source_location": "L1",
-      "community": 12,
-      "norm_label": "populate_serverless.ts",
-      "id": "populate_serverless"
-    },
-    {
-      "label": "parseDbUrl()",
-      "file_type": "code",
-      "source_file": "populate_serverless.ts",
-      "source_location": "L6",
-      "community": 12,
-      "norm_label": "parsedburl()",
-      "id": "populate_serverless_parsedburl"
-    },
-    {
-      "label": "run()",
-      "file_type": "code",
-      "source_file": "populate_serverless.ts",
-      "source_location": "L14",
-      "community": 12,
-      "norm_label": "run()",
-      "id": "populate_serverless_run"
-    },
-    {
       "label": "App.tsx",
       "file_type": "code",
       "source_file": "src/App.tsx",
@@ -1943,7 +1952,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 35,
       "norm_label": "aws_serverless.ts",
       "id": "config_aws_serverless"
     },
@@ -1952,7 +1961,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L18",
-      "community": 0,
+      "community": 35,
       "norm_label": "aws_lambda_languages",
       "id": "config_aws_serverless_aws_lambda_languages"
     },
@@ -1961,7 +1970,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L21",
-      "community": 0,
+      "community": 35,
       "norm_label": "addserverlessattributes()",
       "id": "config_aws_serverless_addserverlessattributes"
     },
@@ -1970,7 +1979,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L39",
-      "community": 0,
+      "community": 35,
       "norm_label": "baseawsentries",
       "id": "config_aws_serverless_baseawsentries"
     },
@@ -1979,7 +1988,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L128",
-      "community": 0,
+      "community": 35,
       "norm_label": "aws_serverless",
       "id": "config_aws_serverless_aws_serverless"
     },
@@ -1988,7 +1997,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 37,
       "norm_label": "azure_serverless.ts",
       "id": "config_azure_serverless"
     },
@@ -1997,7 +2006,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L18",
-      "community": 0,
+      "community": 37,
       "norm_label": "azure_functions_languages",
       "id": "config_azure_serverless_azure_functions_languages"
     },
@@ -2006,7 +2015,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L21",
-      "community": 0,
+      "community": 37,
       "norm_label": "addazureserverlessattributes()",
       "id": "config_azure_serverless_addazureserverlessattributes"
     },
@@ -2015,7 +2024,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L41",
-      "community": 0,
+      "community": 37,
       "norm_label": "baseazureentries",
       "id": "config_azure_serverless_baseazureentries"
     },
@@ -2024,7 +2033,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L103",
-      "community": 0,
+      "community": 37,
       "norm_label": "azure_serverless",
       "id": "config_azure_serverless_azure_serverless"
     },
@@ -2447,7 +2456,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L1",
-      "community": 1,
+      "community": 12,
       "norm_label": "containers_adapters_live.ts",
       "id": "services_containers_adapters_live"
     },
@@ -2456,7 +2465,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L3",
-      "community": 1,
+      "community": 12,
       "norm_label": "awscontainersliveadapter",
       "id": "services_containers_adapters_live_awscontainersliveadapter"
     },
@@ -2465,7 +2474,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L6",
-      "community": 1,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_awscontainersliveadapter_fetchpricing"
     },
@@ -2474,7 +2483,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L13",
-      "community": 1,
+      "community": 12,
       "norm_label": "azurecontainersliveadapter",
       "id": "services_containers_adapters_live_azurecontainersliveadapter"
     },
@@ -2483,7 +2492,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L16",
-      "community": 1,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_azurecontainersliveadapter_fetchpricing"
     },
@@ -2492,7 +2501,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L22",
-      "community": 1,
+      "community": 12,
       "norm_label": "gcpcontainersliveadapter",
       "id": "services_containers_adapters_live_gcpcontainersliveadapter"
     },
@@ -2501,7 +2510,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L25",
-      "community": 1,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_gcpcontainersliveadapter_fetchpricing"
     },
@@ -2510,7 +2519,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L31",
-      "community": 1,
+      "community": 12,
       "norm_label": "digitaloceancontainersliveadapter",
       "id": "services_containers_adapters_live_digitaloceancontainersliveadapter"
     },
@@ -2519,7 +2528,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L34",
-      "community": 1,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_digitaloceancontainersliveadapter_fetchpricing"
     },
@@ -2528,7 +2537,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L40",
-      "community": 1,
+      "community": 12,
       "norm_label": "oraclecontainersliveadapter",
       "id": "services_containers_adapters_live_oraclecontainersliveadapter"
     },
@@ -2537,7 +2546,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L43",
-      "community": 1,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_oraclecontainersliveadapter_fetchpricing"
     },
@@ -2555,7 +2564,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L17",
-      "community": 1,
+      "community": 5,
       "norm_label": "awscontainersstaticadapter",
       "id": "services_containers_pipeline_awscontainersstaticadapter"
     },
@@ -2564,7 +2573,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L19",
-      "community": 1,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_awscontainersstaticadapter_fetchpricing"
     },
@@ -2573,7 +2582,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L42",
-      "community": 1,
+      "community": 5,
       "norm_label": "azurecontainersstaticadapter",
       "id": "services_containers_pipeline_azurecontainersstaticadapter"
     },
@@ -2582,7 +2591,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L44",
-      "community": 1,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_azurecontainersstaticadapter_fetchpricing"
     },
@@ -2591,7 +2600,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L67",
-      "community": 1,
+      "community": 12,
       "norm_label": "gcpcontainersstaticadapter",
       "id": "services_containers_pipeline_gcpcontainersstaticadapter"
     },
@@ -2600,7 +2609,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L69",
-      "community": 1,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_gcpcontainersstaticadapter_fetchpricing"
     },
@@ -2609,7 +2618,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L92",
-      "community": 1,
+      "community": 5,
       "norm_label": "digitaloceancontainersstaticadapter",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter"
     },
@@ -2618,7 +2627,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L94",
-      "community": 1,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter_fetchpricing"
     },
@@ -2627,7 +2636,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L117",
-      "community": 1,
+      "community": 11,
       "norm_label": "oraclecontainersstaticadapter",
       "id": "services_containers_pipeline_oraclecontainersstaticadapter"
     },
@@ -2636,7 +2645,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L119",
-      "community": 1,
+      "community": 11,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_oraclecontainersstaticadapter_fetchpricing"
     },
@@ -2645,7 +2654,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L142",
-      "community": 1,
+      "community": 11,
       "norm_label": "containerspricingpipeline",
       "id": "services_containers_pipeline_containerspricingpipeline"
     },
@@ -2654,7 +2663,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L143",
-      "community": 1,
+      "community": 11,
       "norm_label": ".constructor()",
       "id": "services_containers_pipeline_containerspricingpipeline_constructor"
     },
@@ -2663,7 +2672,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L155",
-      "community": 1,
+      "community": 11,
       "norm_label": ".run()",
       "id": "services_containers_pipeline_containerspricingpipeline_run"
     },
@@ -2825,7 +2834,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L440",
-      "community": 30,
+      "community": 2,
       "norm_label": "digitaloceandbadapter",
       "id": "services_database_pipeline_digitaloceandbadapter"
     },
@@ -2834,7 +2843,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L443",
-      "community": 30,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_digitaloceandbadapter_fetchpricing"
     },
@@ -2843,7 +2852,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L476",
-      "community": 30,
+      "community": 33,
       "norm_label": "databasepricingpipeline",
       "id": "services_database_pipeline_databasepricingpipeline"
     },
@@ -2852,7 +2861,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L477",
-      "community": 30,
+      "community": 33,
       "norm_label": ".constructor()",
       "id": "services_database_pipeline_databasepricingpipeline_constructor"
     },
@@ -2861,7 +2870,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L491",
-      "community": 30,
+      "community": 2,
       "norm_label": ".run()",
       "id": "services_database_pipeline_databasepricingpipeline_run"
     },
@@ -2870,7 +2879,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L1",
-      "community": 30,
+      "community": 32,
       "norm_label": "mailer.ts",
       "id": "services_mailer"
     },
@@ -2879,7 +2888,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L6",
-      "community": 30,
+      "community": 32,
       "norm_label": "createtransport()",
       "id": "services_mailer_createtransport"
     },
@@ -2888,7 +2897,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L17",
-      "community": 30,
+      "community": 32,
       "norm_label": "ismailerconfigured()",
       "id": "services_mailer_ismailerconfigured"
     },
@@ -2897,7 +2906,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L21",
-      "community": 30,
+      "community": 32,
       "norm_label": "pricedriftalert",
       "id": "services_mailer_pricedriftalert"
     },
@@ -2906,7 +2915,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L30",
-      "community": 30,
+      "community": 32,
       "norm_label": "staledataalert",
       "id": "services_mailer_staledataalert"
     },
@@ -2915,7 +2924,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L38",
-      "community": 30,
+      "community": 32,
       "norm_label": "sendpricedriftemail()",
       "id": "services_mailer_sendpricedriftemail"
     },
@@ -2924,7 +2933,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L69",
-      "community": 30,
+      "community": 32,
       "norm_label": "sendstalenessemail()",
       "id": "services_mailer_sendstalenessemail"
     },
@@ -2933,7 +2942,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_containers.ts",
       "source_location": "L1",
-      "community": 1,
+      "community": 11,
       "norm_label": "populate_containers.ts",
       "id": "services_populate_containers"
     },
@@ -2942,7 +2951,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_containers.ts",
       "source_location": "L4",
-      "community": 1,
+      "community": 11,
       "norm_label": "main()",
       "id": "services_populate_containers_main"
     },
@@ -2960,7 +2969,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L8",
-      "community": 1,
+      "community": 12,
       "norm_label": "pricingrecord",
       "id": "services_pricing_pipeline_pricingrecord"
     },
@@ -3113,7 +3122,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L275",
-      "community": 30,
+      "community": 5,
       "norm_label": "gcpadapter",
       "id": "services_pricing_pipeline_gcpadapter"
     },
@@ -3122,7 +3131,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L278",
-      "community": 30,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_gcpadapter_fetchpricing"
     },
@@ -3203,7 +3212,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L438",
-      "community": 30,
+      "community": 33,
       "norm_label": "pricingpipeline",
       "id": "services_pricing_pipeline_pricingpipeline"
     },
@@ -3212,7 +3221,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L442",
-      "community": 30,
+      "community": 33,
       "norm_label": ".constructor()",
       "id": "services_pricing_pipeline_pricingpipeline_constructor"
     },
@@ -3221,7 +3230,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L458",
-      "community": 30,
+      "community": 33,
       "norm_label": ".run()",
       "id": "services_pricing_pipeline_pricingpipeline_run"
     },
@@ -3230,7 +3239,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L473",
-      "community": 30,
+      "community": 33,
       "norm_label": ".saverecords()",
       "id": "services_pricing_pipeline_pricingpipeline_saverecords"
     },
@@ -3248,7 +3257,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L16",
-      "community": 0,
+      "community": 12,
       "norm_label": "awslambdaliveadapter",
       "id": "services_serverless_adapters_live_awslambdaliveadapter"
     },
@@ -3257,7 +3266,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L54",
-      "community": 0,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing"
     },
@@ -3266,7 +3275,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L197",
-      "community": 0,
+      "community": 12,
       "norm_label": ".mapawslocationtoregion()",
       "id": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
     },
@@ -3284,7 +3293,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L253",
-      "community": 0,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing"
     },
@@ -3302,7 +3311,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L266",
-      "community": 0,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing"
     },
@@ -3338,7 +3347,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L57",
-      "community": 0,
+      "community": 5,
       "norm_label": "gcpserverlessadapter",
       "id": "services_serverless_pipeline_gcpserverlessadapter"
     },
@@ -3347,7 +3356,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L60",
-      "community": 0,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_gcpserverlessadapter_fetchpricing"
     },
@@ -3374,7 +3383,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L111",
-      "community": 0,
+      "community": 5,
       "norm_label": "digitaloceanserverlessadapter",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter"
     },
@@ -3383,7 +3392,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L114",
-      "community": 0,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter_fetchpricing"
     },
@@ -3392,7 +3401,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L138",
-      "community": 0,
+      "community": 5,
       "norm_label": "oracleserverlessadapter",
       "id": "services_serverless_pipeline_oracleserverlessadapter"
     },
@@ -4269,7 +4278,7 @@
       "captured_at": null,
       "author": "Rodrigo Orzari",
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "compare cloud costs application",
       "id": "project_analysis_compare_cloud_costs"
     },
@@ -4282,7 +4291,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "react 19 + typescript frontend",
       "id": "project_analysis_react_frontend"
     },
@@ -4295,7 +4304,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "vite 6.2.0 build tool",
       "id": "project_analysis_vite_build"
     },
@@ -4321,7 +4330,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "express.js 4.21.2 backend",
       "id": "project_analysis_express_backend"
     },
@@ -4334,7 +4343,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "node-cron 4.2.1 scheduler",
       "id": "project_analysis_node_cron"
     },
@@ -4347,7 +4356,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "nodemailer 8.0.7 email service",
       "id": "project_analysis_nodemailer"
     },
@@ -4360,7 +4369,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "postgresql database",
       "id": "project_analysis_postgresql"
     },
@@ -4412,7 +4421,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "finops cloud price comparison challenge",
       "id": "project_analysis_finops_challenge"
     },
@@ -4464,7 +4473,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "mailer.ts email service",
       "id": "project_analysis_mailer_ts"
     },
@@ -4477,7 +4486,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "sendpricedriftemail",
       "id": "project_analysis_send_price_drift_email"
     },
@@ -4490,7 +4499,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "sendstalenessemail",
       "id": "project_analysis_send_staleness_email"
     },
@@ -4724,7 +4733,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "index.html entry point",
       "id": "index_html_entry_point"
     },
@@ -4737,12 +4746,159 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 11,
+      "community": 10,
       "norm_label": "react root mount point (#root)",
       "id": "index_html_root_div"
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_containers.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_containers",
+      "target": "populate_containers_parsedburl"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_containers.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_containers",
+      "target": "populate_containers_run"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_containers.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_containers",
+      "target": "services_containers_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_containers.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_containers",
+      "target": "services_containers_pipeline_containerspricingpipeline"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_containers.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_containers_run",
+      "target": "populate_containers_parsedburl"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_networking.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_networking",
+      "target": "populate_networking_main"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_networking.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "populate_networking",
+      "target": "populate_networking_parsedburl",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_networking.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_networking",
+      "target": "populate_networking_pool"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_networking.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_networking",
+      "target": "services_networking_pipeline_networkingpricingpipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_serverless.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_serverless",
+      "target": "populate_serverless_parsedburl"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_serverless.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_serverless",
+      "target": "populate_serverless_run"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_serverless.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_serverless",
+      "target": "services_serverless_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_serverless.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_serverless",
+      "target": "services_serverless_pipeline_serverlesspricingpipeline"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "populate_serverless.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "populate_serverless_run",
+      "target": "populate_serverless_parsedburl"
+    },
     {
       "relation": "imports_from",
       "context": "import",
@@ -4825,9 +4981,9 @@
       "source_file": "src/services/ingest.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_ingest",
-      "target": "services_ingest_parsedburl",
-      "confidence_score": 1.0
+      "target": "services_ingest_parsedburl"
     },
     {
       "relation": "imports",
@@ -4891,9 +5047,9 @@
       "source_file": "src/services/ingest.ts",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_ingest_main",
-      "target": "services_ingest_parsedburl",
-      "confidence_score": 1.0
+      "target": "services_ingest_parsedburl"
     },
     {
       "relation": "contains",
@@ -6090,37 +6246,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "populate_networking.ts",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_networking",
-      "target": "populate_networking_main"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_networking.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_networking",
-      "target": "populate_networking_pool"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_networking.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_networking",
-      "target": "services_networking_pipeline_networkingpricingpipeline"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/config/databricks_instances.ts",
       "source_location": "L12",
       "weight": 1.0,
@@ -7160,112 +7285,6 @@
       "confidence_score": 1.0,
       "source": "package_devdependencies",
       "target": "package_devdependencies_typescript"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_containers.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_containers",
-      "target": "populate_containers_parsedburl"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_containers.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_containers",
-      "target": "populate_containers_run"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_containers.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_containers",
-      "target": "services_containers_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_containers.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_containers",
-      "target": "services_containers_pipeline_containerspricingpipeline"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_containers.ts",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_containers_run",
-      "target": "populate_containers_parsedburl"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_serverless.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_serverless",
-      "target": "populate_serverless_parsedburl"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_serverless.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_serverless",
-      "target": "populate_serverless_run"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_serverless.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_serverless",
-      "target": "services_serverless_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_serverless.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_serverless",
-      "target": "services_serverless_pipeline_serverlesspricingpipeline"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "populate_serverless.ts",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "populate_serverless_run",
-      "target": "populate_serverless_parsedburl"
     },
     {
       "relation": "imports_from",
@@ -11645,5 +11664,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "bace926711ef6e0bccc7bffbd23d9d2b51150649"
+  "built_at_commit": "df2c0be653ea7ab0d2a2b57bd7025ddec9d7a26b"
 }
