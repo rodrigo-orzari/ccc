@@ -5,7 +5,6 @@ import path from 'path';
 import postgres from 'postgres';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import cron from 'node-cron';
 import crypto from 'crypto';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -14,7 +13,7 @@ import { DatabasePricingPipeline } from './src/services/database_pipeline.ts';
 import { ServerlessPricingPipeline } from './src/services/serverless_pipeline.ts';
 import { ContainersPricingPipeline } from './src/services/containers_pipeline.ts';
 import { NetworkingPricingPipeline } from './src/services/networking_pipeline.ts';
-import { sendPriceDriftEmail, sendStalenessEmail, StaleDataAlert } from './src/services/mailer.ts';
+import { sendPriceDriftEmail } from './src/services/mailer.ts';
 
 dotenv.config();
 
@@ -159,98 +158,15 @@ async function startServer() {
     lastResult: null as any
   };
 
-  // 1. Initial Auto-Init
+  // 1. Database Schema Initialization
   if (process.env.DATABASE_URL) {
-    initDb().then(async (success) => {
-      if (success) {
-        // In production, skip auto-fetching to ensure health checks pass during deployment.
-        // Use the scheduled cron job or the /api/admin/fetch-pricing endpoint instead.
-        if (process.env.NODE_ENV === 'production') {
-          console.log('📌 Production mode: skipping auto-pricing fetch. Use /api/admin/fetch-pricing to fetch data.');
-          return;
-        }
-
-        // In development, check if we have data, if not, trigger a fetch "now"
-        try {
-          const res = await sql.unsafe(`
-            SELECT p.slug, COUNT(pr.id) as count
-            FROM providers p
-            LEFT JOIN services s ON s.provider_id = p.id
-            LEFT JOIN pricing_records pr ON pr.service_id = s.id
-            GROUP BY p.slug
-          `);
-          const needsFetch = res.some(r => parseInt(r.count) < 5);
-
-          if (needsFetch) {
-            console.log('🚀 Some providers have sparse data. Triggering pricing update...');
-            pipelineStatus.running = true;
-            const pipeline = new PricingPipeline(sql as any);
-            pipeline.run().then(results => {
-              pipelineStatus.running = false;
-              pipelineStatus.lastRun = new Date();
-              pipelineStatus.lastResult = results;
-              console.log('✅ Pipeline fetch completed:', results);
-            }).catch(err => {
-              pipelineStatus.running = false;
-              pipelineStatus.lastResult = { error: err.message };
-            });
-          }
-        } catch (err) {
-          console.error('❌ Error checking database state:', err);
-        }
-      }
+    initDb().then((success) => {
+      if (success) console.log('✅ Database connected and schema initialized.');
     });
   } else {
     console.warn('⚠️ DATABASE_URL is not set. Database functionality will be limited.');
   }
 
-  // 2. Automated Background Jobs (Runs every Sunday at midnight)
-  cron.schedule('0 0 * * 0', async () => {
-    console.log('🕒 Starting scheduled pricing pipeline update...');
-    try {
-      const allDriftAlerts: PriceDriftResult[] = [];
-      const pipeline = new PricingPipeline(sql as any);
-      const results = await pipeline.run();
-      for (const r of results) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-      }
-      if (allDriftAlerts.length > 0) {
-        await sendPriceDriftEmail(allDriftAlerts).catch(err =>
-          console.error('❌ Failed to send price drift email:', err)
-        );
-      }
-      console.log('✅ Scheduled pipeline completed:', results);
-    } catch (err) {
-      console.error('❌ Scheduled pipeline failed:', err);
-    }
-
-    // Staleness check — alert if any static-config service hasn't been updated in >7 days
-    try {
-      const staleRes = await sql.unsafe(`
-        SELECT p.slug AS provider, s.name AS service, pr.data_source, MAX(pr.updated_at) AS last_updated
-        FROM pricing_records pr
-        JOIN services s ON pr.service_id = s.id
-        JOIN providers p ON s.provider_id = p.id
-        WHERE pr.data_source = 'static_config'
-        GROUP BY p.slug, s.name, pr.data_source
-        HAVING MAX(pr.updated_at) < NOW() - INTERVAL '7 days'
-      `);
-      if (staleRes.length > 0) {
-        const staleAlerts: StaleDataAlert[] = staleRes.map(row => ({
-          provider: row.provider,
-          service: row.service,
-          dataSource: row.data_source,
-          lastUpdated: row.last_updated,
-          daysSinceUpdate: Math.floor((Date.now() - row.last_updated.getTime()) / 86_400_000),
-        }));
-        await sendStalenessEmail(staleAlerts).catch(err =>
-          console.error('❌ Failed to send staleness email:', err)
-        );
-      }
-    } catch (err) {
-      console.error('❌ Staleness check failed:', err);
-    }
-  });
 
   // API Routes
   app.get('/api/ping', apiLimiter, (req, res) => {
