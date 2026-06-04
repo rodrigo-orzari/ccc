@@ -3,6 +3,7 @@ import { Pool } from 'pg';
 import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
 import { DATABRICKS_INSTANCES, DATABRICKS_AWS_REGION, DATABRICKS_GCP_REGION } from '../config/databricks_instances.js';
 import { SNOWFLAKE_INSTANCES, SNOWFLAKE_AWS_REGION, SNOWFLAKE_AZURE_REGION, SNOWFLAKE_GCP_REGION } from '../config/snowflake_instances.js';
+import { NATIVE_ANALYTICS_INSTANCES, NATIVE_ANALYTICS_AWS_REGION, NATIVE_ANALYTICS_GCP_REGION } from '../config/native_analytics_instances.js';
 
 // ─── Databricks Static Adapters ────────────────────────────────────────────────
 
@@ -161,6 +162,120 @@ export class DatabricksAzureAdapter extends BaseAdapter {
   }
 }
 
+// ─── Native Analytics Static Adapter (Redshift, BigQuery) ──────────────────────
+
+export class NativeAnalyticsStaticAdapter extends BaseAdapter {
+  providerSlug: string;
+  private instances: typeof NATIVE_ANALYTICS_INSTANCES;
+  private region: string;
+
+  constructor(provider: 'aws' | 'gcp') {
+    super();
+    this.providerSlug = provider;
+    this.instances = NATIVE_ANALYTICS_INSTANCES.filter(i => i.provider === provider);
+    this.region = provider === 'aws' ? NATIVE_ANALYTICS_AWS_REGION : NATIVE_ANALYTICS_GCP_REGION;
+  }
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Native Analytics pricing for ${this.providerSlug.toUpperCase()} (static config)...`);
+    return this.instances.map(inst => ({
+      provider: this.providerSlug,
+      service: inst.engine,
+      region: this.region,
+      instanceType: `${inst.engine} ${inst.tier}`,
+      vcpus: 1, // Normalized Compute Unit (1 RPU, 1 Node, or 100 Slots)
+      memoryGb: 0,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: 'N. America',
+      category: 'data_warehouse',
+      price: inst.pricePerNormalizedUnit,
+      unit: inst.computeUnitName,
+      attributes: {
+        engine: inst.engine,
+        tier: inst.tier,
+        deployment_type: inst.deploymentType,
+      },
+      dataSource: 'static_config' as const,
+    }));
+  }
+}
+
+// ─── Azure Synapse Adapter (Live API) ──────────────────────────────────────────
+
+export class SynapseAzureAdapter extends BaseAdapter {
+  providerSlug = 'azure';
+  private static readonly REGION = 'eastus';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Azure Synapse pricing (${SynapseAzureAdapter.REGION} only)...`);
+    const filter = encodeURIComponent(
+      `serviceName eq 'Azure Synapse Analytics' and priceType eq 'Consumption' and armRegionName eq '${SynapseAzureAdapter.REGION}'`
+    );
+    let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
+    const allItems: any[] = [];
+
+    let pages = 0;
+    while (url && pages < 10) {
+      const response = await axios.get(url, { timeout: 30000 });
+      allItems.push(...(response.data.Items ?? []));
+      url = response.data.NextPageLink ?? null;
+      pages++;
+    }
+
+    const records: PricingRecord[] = [];
+    const seen = new Set<string>();
+
+    for (const item of allItems) {
+      if (!item.retailPrice || item.retailPrice <= 0) continue;
+      
+      const skuName: string = (item.skuName ?? '').trim();
+      const productName: string = (item.productName ?? '').trim();
+      if (!skuName || !productName) continue;
+
+      // Filter for Dedicated SQL Pool (DWUs) and map to normalized units (1 Unit = 100 DWU)
+      // Often skuName contains "DW100c", "DW500c"
+      let tier = 'Standard';
+      let computeUnitName = '100 DWU';
+      let price = item.retailPrice;
+
+      if (!skuName.toLowerCase().includes('dw') && !productName.toLowerCase().includes('dw')) continue;
+
+      const dedupeKey = skuName;
+      if (seen.has(dedupeKey)) continue;
+      seen.add(dedupeKey);
+
+      records.push({
+        provider: 'azure',
+        service: 'Azure Synapse',
+        region: SynapseAzureAdapter.REGION,
+        instanceType: skuName,
+        vcpus: 1, // Normalized to 1 Unit (equivalent to the DWU instance itself for simplicity in this demo, or we could parse DW100c to scale `vcpus`)
+        memoryGb: 0,
+        arch: 'x86 64',
+        os: 'Linux',
+        cpuVendor: 'N/A',
+        gpuCount: 0,
+        geography: 'N. America',
+        category: 'data_warehouse',
+        price: price,
+        unit: 'DWU Instance',
+        attributes: {
+          engine: 'Synapse',
+          tier,
+          deployment_type: 'Provisioned',
+        },
+        dataSource: 'live_api' as const,
+      });
+    }
+
+    console.log(`✅ Fetched ${records.length} Azure Synapse records`);
+    return records;
+  }
+}
+
 // ─── Data Analytics Pricing Pipeline ───────────────────────────────────────────
 
 export class DataAnalyticsPricingPipeline extends PricingPipeline {
@@ -173,7 +288,10 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
       new SnowflakeStaticAdapter('aws'),
       new SnowflakeStaticAdapter('azure'),
       new SnowflakeStaticAdapter('gcp'),
-      new DatabricksAzureAdapter()
+      new DatabricksAzureAdapter(),
+      new NativeAnalyticsStaticAdapter('aws'),
+      new NativeAnalyticsStaticAdapter('gcp'),
+      new SynapseAzureAdapter()
     ];
   }
 
