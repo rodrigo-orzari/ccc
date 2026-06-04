@@ -71,4 +71,31 @@ test.describe('Dashboard Filter Validation', () => {
     const newRowCount = await rows.count();
     expect(newRowCount).not.toEqual(initialRowCount);
   });
+
+  test('Networking: Loads successfully without empty state', async ({ page }) => {
+    // Click Networking tab
+    await page.getByRole('button', { name: /Networking/ }).click();
+    await page.waitForFunction(() => !document.querySelector('.animate-spin'));
+
+    // The table should have rows, not "No matches for your filters"
+    const emptyState = page.getByText('No matches for your filters.');
+    await expect(emptyState).toBeHidden();
+
+    const rows = page.locator('table tbody tr');
+    expect(await rows.count()).toBeGreaterThan(0);
+  });
+
+  test('Data & Analytics: Loads successfully without database empty warning', async ({ page }) => {
+    // Click Data & Analytics tab
+    await page.getByRole('button', { name: /Data & Analytics/ }).click();
+    await page.waitForFunction(() => !document.querySelector('.animate-spin'));
+
+    // Should NOT show the Database is empty warning box
+    const databaseEmptyWarning = page.getByText('Database is empty');
+    await expect(databaseEmptyWarning).toBeHidden();
+
+    // The table should have actual rows
+    const rows = page.locator('table tbody tr');
+    expect(await rows.count()).toBeGreaterThan(0);
+  });
 });
