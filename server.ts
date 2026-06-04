@@ -712,19 +712,19 @@ async function startServer() {
       values.push((billingGranularity as string).split(','));
     }
 
-      if (minVcpu) {
+      if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
         conditions.push(`pr.vcpus >= $${paramCount++}`);
         values.push(minVcpu);
       }
-      if (maxVcpu) {
+      if (maxVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
         conditions.push(`pr.vcpus <= $${paramCount++}`);
         values.push(maxVcpu);
       }
-      if (minMemory) {
+      if (minMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
         conditions.push(`pr.memory_gb >= $${paramCount++}`);
         values.push(minMemory);
       }
-      if (maxMemory) {
+      if (maxMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
         conditions.push(`pr.memory_gb <= $${paramCount++}`);
         values.push(maxMemory);
       }
