@@ -7,6 +7,7 @@ import { DatabasePricingPipeline } from './database_pipeline.js';
 import { ServerlessPricingPipeline } from './serverless_pipeline.js';
 import { ContainersPricingPipeline } from './containers_pipeline.js';
 import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline.js';
+import { NetworkingPricingPipeline } from './networking_pipeline.js';
 
 async function main() {
   const dbUrl = process.env.DATABASE_URL;
@@ -78,6 +79,18 @@ async function main() {
         console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} Data Analytics configurations`);
       } else {
         console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Networking Pricing...');
+    // Run networking pricing pipeline
+    const networkingPipeline = new NetworkingPricingPipeline(pool);
+    const networkingResults = await networkingPipeline.run();
+    networkingResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ NETWORKING: ${result.recordsProcessed} configurations inserted`);
+      } else {
+        console.log(`  ❌ NETWORKING: ${result.message}`);
       }
     });
 
