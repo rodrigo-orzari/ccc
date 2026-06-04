@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef, useDeferredValue } from 'react';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Search,
@@ -247,12 +248,8 @@ export default function Dashboard() {
   const [showAggregation, setShowAggregation] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: keyof PricingRecord | string, direction: 'asc' | 'desc' }>({ key: 'price_per_unit', direction: 'asc' });
 
-  const [data, setData] = useState<PricingRecord[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [isInitialFetch, setIsInitialFetch] = useState(true);
-  const [dbStatus, setDbStatus] = useState<{ total: number, providers: any[], lastUpdated: string | null } | null>(null);
-  const [providerCounts, setProviderCounts] = useState<Record<string, number>>({});
-
+      const [isInitialFetch, setIsInitialFetch] = useState(true);
+    
 
 
   // Ref + state for the table scroll container, used to detect whether there
@@ -260,6 +257,156 @@ export default function Dashboard() {
   const tableScrollRef = useRef<HTMLDivElement | null>(null);
   const [hasHorizontalOverflow, setHasHorizontalOverflow] = useState(false);
   const [scrolledToEnd, setScrolledToEnd] = useState(false);
+
+  // Combine all active filters into URLSearchParams for querying
+  const searchParams = useMemo(() => {
+    const params = new URLSearchParams();
+    params.append('product', activeProductType);
+    params.append('geography', selectedGeographies.join(','));
+    params.append('os', selectedOS.join(','));
+    params.append('cpu', selectedCpu.join(','));
+    params.append('category', selectedCategory.join(','));
+    params.append('gpu', gpuIncluded.toString());
+    params.append('dbFamilies', selectedDbFamilies.join(','));
+    params.append('engines', selectedEngines.join(','));
+    params.append('deploymentTypes', selectedDeploymentTypes.join(','));
+    params.append('haModes', selectedHaModes.join(','));
+    params.append('serverlessLanguages', selectedServerlessLanguages.join(','));
+    params.append('serverlessColdStart', selectedServerlessColdStart.join(','));
+    params.append('serverlessTimeout', selectedServerlessTimeout.join(','));
+    params.append('serverlessMemoryConfig', selectedServerlessMemoryConfig.join(','));
+    params.append('serverlessFreeTier', selectedServerlessFreeTier.join(','));
+    params.append('serverlessGranularity', selectedServerlessGranularity.join(','));
+    params.append('serverlessExecutionModel', selectedServerlessExecutionModel.join(','));
+    params.append('serverlessProvisionedConcurrency', selectedServerlessProvisionedConcurrency.join(','));
+    params.append('serverlessEphemeralStorage', selectedServerlessEphemeralStorage.join(','));
+    params.append('containersOrchestrators', selectedContainersOrchestrators.join(','));
+    params.append('containersComputeTypes', selectedContainersComputeTypes.join(','));
+    params.append('containersArchitectures', selectedContainersArchitectures.join(','));
+    params.append('containersBillingGranularity', selectedContainersBillingGranularity.join(','));
+    params.append('containersGpuIncluded', containersGpuIncluded.toString());
+    params.append('analyticsEngines', selectedAnalyticsEngines.join(','));
+    params.append('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes.join(','));
+    params.append('analyticsTiers', selectedAnalyticsTiers.join(','));
+    params.append('minVcpu', vCpuRange.min.toString());
+    params.append('maxVcpu', vCpuRange.max.toString());
+    params.append('minMemory', memoryRange.min.toString());
+    params.append('maxMemory', memoryRange.max.toString());
+    params.append('minPrice', priceRange.min.toString());
+    params.append('maxPrice', priceRange.max.toString());
+    params.append('search', search);
+    return params;
+  }, [
+    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuIncluded,
+    selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
+    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
+    selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
+    selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
+    selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
+    vCpuRange, memoryRange, priceRange, search
+  ]);
+
+  // Debounce the entire query string so fast slider drags don't spam the server
+  const debouncedParamsString = useDeferredValue(searchParams.toString());
+  
+  // Guard condition to prevent fetching if basic requirements aren't met
+  const canFetch = useMemo(() => {
+    if (selectedProviders.length === 0 || selectedGeographies.length === 0) return false;
+    if (activeProductType === 'vm' && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) return false;
+    if (activeProductType === 'database' && (selectedDbFamilies.length === 0 || selectedEngines.length === 0 || selectedDeploymentTypes.length === 0 || selectedHaModes.length === 0)) return false;
+    if (activeProductType === 'serverless' && (selectedServerlessLanguages.length === 0 || selectedServerlessColdStart.length === 0 || selectedServerlessTimeout.length === 0 || selectedServerlessMemoryConfig.length === 0 || selectedServerlessFreeTier.length === 0 || selectedServerlessGranularity.length === 0 || selectedServerlessExecutionModel.length === 0 || selectedServerlessProvisionedConcurrency.length === 0 || selectedServerlessEphemeralStorage.length === 0)) return false;
+    if (activeProductType === 'containers' && (selectedContainersOrchestrators.length === 0 || selectedContainersComputeTypes.length === 0 || selectedContainersArchitectures.length === 0 || selectedContainersBillingGranularity.length === 0)) return false;
+    if (activeProductType === 'data-analytics' && (selectedAnalyticsEngines.length === 0 || selectedAnalyticsDeploymentTypes.length === 0 || selectedAnalyticsTiers.length === 0)) return false;
+    return true;
+  }, [debouncedParamsString, selectedProviders, selectedGeographies]); // Re-eval on debounce
+
+  // 1. Health Status Query
+  const { data: dbStatus } = useQuery({
+    queryKey: ['health', debouncedParamsString],
+    queryFn: async () => {
+      const res = await fetch(`/api/health?${debouncedParamsString}`);
+      const status = await res.json();
+      return {
+        total: status.total_records || 0,
+        providers: status.by_provider || [],
+        lastUpdated: status.last_updated || null
+      };
+    },
+    enabled: canFetch,
+    placeholderData: keepPreviousData,
+  });
+
+  // 2. Provider Counts Query
+  const { data: rawProviderCounts } = useQuery({
+    queryKey: ['counts', debouncedParamsString],
+    queryFn: async () => {
+      const res = await fetch(`/api/pricing/counts?${debouncedParamsString}`);
+      return res.json();
+    },
+    enabled: canFetch,
+    placeholderData: keepPreviousData,
+  });
+
+  const providerCounts = useMemo(() => {
+    if (!rawProviderCounts || !Array.isArray(rawProviderCounts)) return {};
+    const map: Record<string, number> = {};
+    rawProviderCounts.forEach(r => { map[r.slug] = parseInt(r.count) || 0; });
+    return map;
+  }, [rawProviderCounts]);
+
+  // 3. Pricing Data Query
+  const pricingParamsString = useMemo(() => {
+    const p = new URLSearchParams(debouncedParamsString);
+    p.append('provider', selectedProviders.join(','));
+    if (showAggregation) p.append('aggregate', 'true');
+    return p.toString();
+  }, [debouncedParamsString, selectedProviders, showAggregation]);
+
+  const { data: rawData, isFetching: loading } = useQuery({
+    queryKey: ['pricing', pricingParamsString],
+    queryFn: async () => {
+      const res = await fetch(`/api/pricing?${pricingParamsString}`);
+      if (!res.ok) throw new Error(`Server returned ${res.status}`);
+      const json = await res.json();
+      return Array.isArray(json) ? json : [];
+    },
+    enabled: canFetch,
+    placeholderData: keepPreviousData,
+  });
+  
+  const data = useMemo(() => {
+    if (!rawData || rawData.length === 0) return [];
+    
+    return [...rawData].sort((a, b) => {
+      const key = sortConfig.key as string;
+      const direction = sortConfig.direction;
+
+      // Handle nested attributes (e.g., 'attributes.engine')
+      let valA: any = '';
+      let valB: any = '';
+
+      if (key.includes('.')) {
+        const parts = key.split('.');
+        valA = a[parts[0] as keyof PricingRecord]?.[parts[1]] ?? '';
+        valB = b[parts[0] as keyof PricingRecord]?.[parts[1]] ?? '';
+      } else {
+        valA = a[key as keyof PricingRecord] ?? '';
+        valB = b[key as keyof PricingRecord] ?? '';
+      }
+
+      const numericKeys = ['vcpus', 'memory_gb', 'price_per_unit', 'avg_price', 'min_price', 'max_price'];
+      if (numericKeys.includes(key)) {
+        valA = parseFloat(valA.toString().replace(/[^0-9.-]+/g, "")) || 0;
+        valB = parseFloat(valB.toString().replace(/[^0-9.-]+/g, "")) || 0;
+      }
+
+      if (valA < valB) return direction === 'asc' ? -1 : 1;
+      if (valA > valB) return direction === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [rawData, sortConfig]);
+
+
 
 
   // Sidebar section expand/collapse state — all expanded by default; user can
@@ -321,45 +468,12 @@ export default function Dashboard() {
     };
   }, [data.length, activeProductType]);
 
-  const sortData = (key: string) => {
+  const handleHeaderClick = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
       direction = 'desc';
     }
     setSortConfig({ key, direction });
-
-    const sorted = [...data].sort((a, b) => {
-      // Handle nested attributes (e.g., 'attributes.engine')
-      let valA: any = '';
-      let valB: any = '';
-
-      if (key.includes('.')) {
-        const parts = key.split('.');
-        valA = a[parts[0] as keyof PricingRecord]?.[parts[1]] ?? '';
-        valB = b[parts[0] as keyof PricingRecord]?.[parts[1]] ?? '';
-      } else {
-        valA = a[key as keyof PricingRecord] ?? '';
-        valB = b[key as keyof PricingRecord] ?? '';
-      }
-
-      const numericKeys = ['vcpus', 'memory_gb', 'price_per_unit', 'avg_price', 'min_price', 'max_price'];
-      if (numericKeys.includes(key)) {
-        valA = parseFloat(valA.toString().replace(/[^0-9.-]+/g, "")) || 0;
-        valB = parseFloat(valB.toString().replace(/[^0-9.-]+/g, "")) || 0;
-      }
-
-      if (valA < valB) return direction === 'asc' ? -1 : 1;
-      if (valA > valB) return direction === 'asc' ? 1 : -1;
-      return 0;
-    });
-    setData(sorted);
-  };
-
-
-  // Sort click that no-ops when the user just finished a resize drag.
-  // Not memoized — must close over the current sortData so it sees fresh data.
-  const handleHeaderClick = (key: string) => {
-    sortData(key);
   };
 
   // Double-click on a resize handle → auto-fit column to widest visible cell.
@@ -374,389 +488,8 @@ export default function Dashboard() {
   };
 
 
-  useEffect(() => {
-    const isDb = activeProductType === 'database';
-    const isVm = activeProductType === 'vm';
-    const isServerless = activeProductType === 'serverless';
-    const isContainers = activeProductType === 'containers';
-    const isNetworking = activeProductType === 'networking';
-    const isDataAnalytics = activeProductType === 'data-analytics';
 
-    // Build query params with all active filters to get counts that reflect
-    // the current filter state (ensures "of X" numbers are correct in the UI)
-    const params = new URLSearchParams();
-    let productTypeParam = 'compute';
-    if (isDb) productTypeParam = 'database';
-    if (isServerless) productTypeParam = 'serverless';
-    if (isContainers) productTypeParam = 'containers';
-    if (isNetworking) productTypeParam = 'networking';
-    if (isDataAnalytics) productTypeParam = 'data-analytics';
 
-    params.append('productType', productTypeParam);
-    if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) {
-      params.append('geography', selectedGeographies.join(','));
-    }
-
-    if (isDb) {
-      if (selectedDbFamilies.length > 0 && selectedDbFamilies.length < DB_FAMILIES.length) {
-        params.append('category', selectedDbFamilies.join(','));
-      }
-      if (selectedEngines.length > 0 && selectedEngines.length < DB_ENGINES.length) {
-        params.append('engine', selectedEngines.join(','));
-      }
-      if (selectedDeploymentTypes.length > 0 && selectedDeploymentTypes.length < DEPLOYMENT_TYPES.length) {
-        params.append('deploymentType', selectedDeploymentTypes.join(','));
-      }
-      if (selectedHaModes.length > 0 && selectedHaModes.length < HA_MODES.length) {
-        params.append('haMode', selectedHaModes.join(','));
-      }
-    } else if (isVm) {
-      if (selectedOS.length > 0 && selectedOS.length < OS_TYPES.length) {
-        params.append('os', selectedOS.join(','));
-      }
-      if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
-        const vendors = [...new Set(selectedCpu.map(id => CPU_PROFILES.find(p => p.id === id)!.vendor))];
-        params.append('cpuVendor', vendors.join(','));
-      }
-      if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
-        params.append('category', selectedCategory.join(','));
-      }
-      // Inclusion semantics: only push a gpu filter when the user has
-      // *excluded* GPU instances (pill deselected). Default state =
-      // included = no filter = show all (with or without GPU).
-      if (!gpuIncluded) {
-        params.append('gpu', 'false');
-      }
-    } else if (isServerless) {
-      if (selectedServerlessLanguages.length > 0 && selectedServerlessLanguages.length < SERVERLESS_LANGUAGES.length) {
-        params.append('language', selectedServerlessLanguages.join(','));
-      }
-      if (selectedServerlessColdStart.length > 0 && selectedServerlessColdStart.length < SERVERLESS_COLD_START_OPTIONS.length) {
-        params.append('coldStart', selectedServerlessColdStart.join(','));
-      }
-      if (selectedServerlessTimeout.length > 0 && selectedServerlessTimeout.length < SERVERLESS_TIMEOUT_OPTIONS.length) {
-        params.append('timeout', selectedServerlessTimeout.join(','));
-      }
-      if (selectedServerlessMemoryConfig.length > 0 && selectedServerlessMemoryConfig.length < SERVERLESS_MEMORY_CONFIG_OPTIONS.length) {
-        params.append('memoryConfig', selectedServerlessMemoryConfig.join(','));
-      }
-      if (selectedServerlessFreeTier.length > 0 && selectedServerlessFreeTier.length < SERVERLESS_FREE_TIER_OPTIONS.length) {
-        params.append('freeTier', selectedServerlessFreeTier.join(','));
-      }
-      if (selectedServerlessGranularity.length > 0 && selectedServerlessGranularity.length < SERVERLESS_GRANULARITY_OPTIONS.length) {
-        params.append('billingGranularity', selectedServerlessGranularity.join(','));
-      }
-      if (selectedServerlessExecutionModel.length > 0 && selectedServerlessExecutionModel.length < SERVERLESS_EXECUTION_MODEL_OPTIONS.length) {
-        params.append('executionModel', selectedServerlessExecutionModel.join(','));
-      }
-      if (selectedServerlessProvisionedConcurrency.length > 0 && selectedServerlessProvisionedConcurrency.length < SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length) {
-        params.append('provisionedConcurrency', selectedServerlessProvisionedConcurrency.join(','));
-      }
-      if (selectedServerlessEphemeralStorage.length > 0 && selectedServerlessEphemeralStorage.length < SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) {
-        params.append('ephemeralStorage', selectedServerlessEphemeralStorage.join(','));
-      }
-    } else if (isDataAnalytics) {
-      if (selectedAnalyticsEngines.length > 0 && selectedAnalyticsEngines.length < ANALYTICS_ENGINES.length) {
-        params.append('engine', selectedAnalyticsEngines.join(','));
-      }
-      if (selectedAnalyticsDeploymentTypes.length > 0 && selectedAnalyticsDeploymentTypes.length < ANALYTICS_DEPLOYMENT_TYPES.length) {
-        params.append('deploymentType', selectedAnalyticsDeploymentTypes.join(','));
-      }
-      if (selectedAnalyticsTiers.length > 0 && selectedAnalyticsTiers.length < ANALYTICS_TIERS.length) {
-        params.append('tier', selectedAnalyticsTiers.join(','));
-      }
-    } else if (isContainers) {
-      if (selectedContainersOrchestrators.length > 0 && selectedContainersOrchestrators.length < CONTAINERS_ORCHESTRATORS.length) {
-        params.append('orchestrator', selectedContainersOrchestrators.join(','));
-      }
-      if (selectedContainersComputeTypes.length > 0 && selectedContainersComputeTypes.length < CONTAINERS_COMPUTE_TYPES.length) {
-        params.append('computeType', selectedContainersComputeTypes.join(','));
-      }
-      if (selectedContainersArchitectures.length > 0 && selectedContainersArchitectures.length < CONTAINERS_ARCHITECTURES.length) {
-        params.append('architecture', selectedContainersArchitectures.join(','));
-      }
-      if (selectedContainersBillingGranularity.length > 0 && selectedContainersBillingGranularity.length < CONTAINERS_BILLING_GRANULARITY.length) {
-        params.append('billingGranularity', selectedContainersBillingGranularity.join(','));
-      }
-      if (!containersGpuIncluded) {
-        params.append('gpu', 'false');
-      }
-    } else if (activeProductType === 'networking') {
-      if (selectedNetworkingServices.length > 0 && selectedNetworkingServices.length < NETWORKING_SERVICES.length) {
-        params.append('networkingService', selectedNetworkingServices.join(','));
-      }
-    }
-
-    params.append('minVcpu', vCpuRange.min.toString());
-    params.append('maxVcpu', vCpuRange.max.toString());
-    params.append('minMemory', memoryRange.min.toString());
-    params.append('maxMemory', memoryRange.max.toString());
-    params.append('minPrice', priceRange.min.toString());
-    params.append('maxPrice', priceRange.max.toString());
-
-    fetch(`/api/health?${params.toString()}`)
-      .then(res => res.json())
-      .then(status => {
-        console.log('📊 Database Status:', status);
-        setDbStatus({
-          total: status.total_records || 0,
-          providers: status.by_provider || [],
-          lastUpdated: status.last_updated || null
-        });
-      })
-      .catch(err => console.error('❌ Database health check failed:', err));
-  }, [
-    activeProductType,
-    selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuIncluded,
-    selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
-    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
-    selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
-    selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
-    selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
-    vCpuRange, memoryRange, priceRange,
-  ]);
-
-  const fetchFilteredData = useCallback(async () => {
-    const isDb = activeProductType === 'database';
-    const isVm = activeProductType === 'vm';
-    const isServerless = activeProductType === 'serverless';
-    const isContainers = activeProductType === 'containers';
-    const isNetworking = activeProductType === 'networking';
-    const isDataAnalytics = activeProductType === 'data-analytics';
-
-    // Guard: require at least one selection in every active filter
-    if (selectedProviders.length === 0 || selectedGeographies.length === 0) {
-      setData([]);
-      setProviderCounts({});
-      setLoading(false);
-      setIsInitialFetch(false);
-      return;
-    }
-    if (isVm && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) {
-      setData([]);
-      setProviderCounts({});
-      setLoading(false);
-      setIsInitialFetch(false);
-      return;
-    }
-    if (isDb && (selectedDbFamilies.length === 0 || selectedEngines.length === 0 || selectedDeploymentTypes.length === 0 || selectedHaModes.length === 0)) {
-      setData([]);
-      setProviderCounts({});
-      setLoading(false);
-      setIsInitialFetch(false);
-      return;
-    }
-    if (isServerless && (
-      selectedServerlessLanguages.length === 0 ||
-      selectedServerlessColdStart.length === 0 ||
-      selectedServerlessTimeout.length === 0 ||
-      selectedServerlessMemoryConfig.length === 0 ||
-      selectedServerlessFreeTier.length === 0 ||
-      selectedServerlessGranularity.length === 0 ||
-      selectedServerlessExecutionModel.length === 0 ||
-      selectedServerlessProvisionedConcurrency.length === 0 ||
-      selectedServerlessEphemeralStorage.length === 0
-    )) {
-      setData([]);
-      setProviderCounts({});
-      setLoading(false);
-      setIsInitialFetch(false);
-      return;
-    }
-    if (isContainers && (
-      selectedContainersOrchestrators.length === 0 ||
-      selectedContainersComputeTypes.length === 0 ||
-      selectedContainersArchitectures.length === 0 ||
-      selectedContainersBillingGranularity.length === 0
-    )) {
-      setData([]);
-      setProviderCounts({});
-      setLoading(false);
-      setIsInitialFetch(false);
-      return;
-    }
-    if (isDataAnalytics && (
-      selectedAnalyticsEngines.length === 0 ||
-      selectedAnalyticsDeploymentTypes.length === 0 ||
-      selectedAnalyticsTiers.length === 0
-    )) {
-      setData([]);
-      setProviderCounts({});
-      setLoading(false);
-      setIsInitialFetch(false);
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const baseParams = new URLSearchParams();
-      const isDb = activeProductType === 'database';
-      const isServerless = activeProductType === 'serverless';
-      const isContainers = activeProductType === 'containers';
-      const isNetworking = activeProductType === 'networking';
-      const isDataAnalytics = activeProductType === 'data-analytics';
-      
-      let productTypeParam = 'compute';
-      if (isDb) productTypeParam = 'database';
-      if (isServerless) productTypeParam = 'serverless';
-      if (isContainers) productTypeParam = 'containers';
-      if (isNetworking) productTypeParam = 'networking';
-      if (isDataAnalytics) productTypeParam = 'data-analytics';
-      
-      baseParams.append('productType', productTypeParam);
-      if (selectedGeographies.length > 0 && selectedGeographies.length < GEOGRAPHIES.length) baseParams.append('geography', selectedGeographies.join(','));
-
-      if (isDb) {
-        // DB-specific filters
-        if (selectedDbFamilies.length > 0 && selectedDbFamilies.length < DB_FAMILIES.length) {
-          baseParams.append('category', selectedDbFamilies.join(','));
-        }
-        if (selectedEngines.length > 0 && selectedEngines.length < DB_ENGINES.length) {
-          baseParams.append('engine', selectedEngines.join(','));
-        }
-        if (selectedDeploymentTypes.length > 0 && selectedDeploymentTypes.length < DEPLOYMENT_TYPES.length) {
-          baseParams.append('deploymentType', selectedDeploymentTypes.join(','));
-        }
-        if (selectedHaModes.length > 0 && selectedHaModes.length < HA_MODES.length) {
-          baseParams.append('haMode', selectedHaModes.join(','));
-        }
-      } else if (isVm) {
-        // VM-specific filters
-        if (selectedOS.length > 0 && selectedOS.length < OS_TYPES.length) baseParams.append('os', selectedOS.join(','));
-        if (selectedCpu.length > 0 && selectedCpu.length < CPU_PROFILES.length) {
-          const vendors = [...new Set(selectedCpu.map(id => CPU_PROFILES.find(p => p.id === id)!.vendor))];
-          baseParams.append('cpuVendor', vendors.join(','));
-        }
-        if (selectedCategory.length > 0 && selectedCategory.length < CATEGORIES.length) {
-          baseParams.append('category', selectedCategory.join(','));
-        }
-        // Inclusion semantics — see useState init for gpuIncluded.
-        if (!gpuIncluded) {
-          baseParams.append('gpu', 'false');
-        }
-      } else if (isServerless) {
-        // Serverless-specific filters
-        if (selectedServerlessLanguages.length > 0 && selectedServerlessLanguages.length < SERVERLESS_LANGUAGES.length) {
-          baseParams.append('language', selectedServerlessLanguages.join(','));
-        }
-        if (selectedServerlessColdStart.length > 0 && selectedServerlessColdStart.length < SERVERLESS_COLD_START_OPTIONS.length) {
-          baseParams.append('coldStart', selectedServerlessColdStart.join(','));
-        }
-        if (selectedServerlessTimeout.length > 0 && selectedServerlessTimeout.length < SERVERLESS_TIMEOUT_OPTIONS.length) {
-          baseParams.append('timeout', selectedServerlessTimeout.join(','));
-        }
-        if (selectedServerlessMemoryConfig.length > 0 && selectedServerlessMemoryConfig.length < SERVERLESS_MEMORY_CONFIG_OPTIONS.length) {
-          baseParams.append('memoryConfig', selectedServerlessMemoryConfig.join(','));
-        }
-        if (selectedServerlessFreeTier.length > 0 && selectedServerlessFreeTier.length < SERVERLESS_FREE_TIER_OPTIONS.length) {
-          baseParams.append('freeTier', selectedServerlessFreeTier.join(','));
-        }
-        if (selectedServerlessGranularity.length > 0 && selectedServerlessGranularity.length < SERVERLESS_GRANULARITY_OPTIONS.length) {
-          baseParams.append('billingGranularity', selectedServerlessGranularity.join(','));
-        }
-        if (selectedServerlessExecutionModel.length > 0 && selectedServerlessExecutionModel.length < SERVERLESS_EXECUTION_MODEL_OPTIONS.length) {
-          baseParams.append('executionModel', selectedServerlessExecutionModel.join(','));
-        }
-        if (selectedServerlessProvisionedConcurrency.length > 0 && selectedServerlessProvisionedConcurrency.length < SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length) {
-          baseParams.append('provisionedConcurrency', selectedServerlessProvisionedConcurrency.join(','));
-        }
-        if (selectedServerlessEphemeralStorage.length > 0 && selectedServerlessEphemeralStorage.length < SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) {
-          baseParams.append('ephemeralStorage', selectedServerlessEphemeralStorage.join(','));
-        }
-      } else if (isContainers) {
-        // Containers-specific filters
-        if (selectedContainersOrchestrators.length > 0 && selectedContainersOrchestrators.length < CONTAINERS_ORCHESTRATORS.length) {
-          baseParams.append('orchestrator', selectedContainersOrchestrators.join(','));
-        }
-        if (selectedContainersComputeTypes.length > 0 && selectedContainersComputeTypes.length < CONTAINERS_COMPUTE_TYPES.length) {
-          baseParams.append('computeType', selectedContainersComputeTypes.join(','));
-        }
-        if (selectedContainersArchitectures.length > 0 && selectedContainersArchitectures.length < CONTAINERS_ARCHITECTURES.length) {
-          baseParams.append('architecture', selectedContainersArchitectures.join(','));
-        }
-        if (selectedContainersBillingGranularity.length > 0 && selectedContainersBillingGranularity.length < CONTAINERS_BILLING_GRANULARITY.length) {
-          baseParams.append('billingGranularity', selectedContainersBillingGranularity.join(','));
-        }
-        if (!containersGpuIncluded) {
-          baseParams.append('gpu', 'false');
-        }
-      } else if (activeProductType === 'networking') {
-        if (selectedNetworkingServices.length > 0 && selectedNetworkingServices.length < NETWORKING_SERVICES.length) {
-          baseParams.append('networkingService', selectedNetworkingServices.join(','));
-        }
-      } else if (isDataAnalytics) {
-        // Data-Analytics-specific filters
-        if (selectedAnalyticsEngines.length > 0 && selectedAnalyticsEngines.length < ANALYTICS_ENGINES.length) {
-          baseParams.append('engine', selectedAnalyticsEngines.join(','));
-        }
-        if (selectedAnalyticsDeploymentTypes.length > 0 && selectedAnalyticsDeploymentTypes.length < ANALYTICS_DEPLOYMENT_TYPES.length) {
-          baseParams.append('deploymentType', selectedAnalyticsDeploymentTypes.join(','));
-        }
-        if (selectedAnalyticsTiers.length > 0 && selectedAnalyticsTiers.length < ANALYTICS_TIERS.length) {
-          baseParams.append('tier', selectedAnalyticsTiers.join(','));
-        }
-      }
-
-      baseParams.append('minVcpu', vCpuRange.min.toString());
-      baseParams.append('maxVcpu', vCpuRange.max.toString());
-      baseParams.append('minMemory', memoryRange.min.toString());
-      baseParams.append('maxMemory', memoryRange.max.toString());
-      baseParams.append('minPrice', priceRange.min.toString());
-      baseParams.append('maxPrice', priceRange.max.toString());
-      baseParams.append('search', search);
-
-      const pricingParams = new URLSearchParams(baseParams);
-      pricingParams.append('provider', selectedProviders.join(','));
-
-      const [pricingRes, countsRes] = await Promise.all([
-        fetch(`/api/pricing?${pricingParams.toString()}`),
-        fetch(`/api/pricing/counts?${baseParams.toString()}`)
-      ]);
-
-      if (!pricingRes.ok) {
-        throw new Error(`Server returned ${pricingRes.status}: ${pricingRes.statusText}`);
-      }
-
-      const result = await pricingRes.json();
-      console.log(`✅ Fetched ${result.length} pricing records`);
-
-      if (Array.isArray(result)) {
-        setData(result);
-      } else {
-        console.error('API Error:', result.error || result);
-        setData([]);
-      }
-
-      if (countsRes.ok) {
-        const countsRows: { slug: string, count: string }[] = await countsRes.json();
-        const countsMap: Record<string, number> = {};
-        countsRows.forEach(r => { countsMap[r.slug] = parseInt(r.count) || 0; });
-        setProviderCounts(countsMap);
-      setIsInitialFetch(false);
-      }
-    } catch (err: any) {
-      console.error('Fetch error:', err);
-      setData([]);
-      setProviderCounts({});
-    } finally {
-      setLoading(false);
-    }
-  }, [
-    activeProductType,
-    selectedProviders, selectedGeographies,
-    selectedOS, selectedCpu, selectedCategory, gpuIncluded,
-    selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
-    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
-    selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
-    selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
-    selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
-    vCpuRange, memoryRange, priceRange, search, showAggregation,
-  ]);
-
-  useEffect(() => {
-    const timeout = setTimeout(fetchFilteredData, 300);
-    return () => clearTimeout(timeout);
-  }, [fetchFilteredData]);
 
   // Truthful total across the providers the user has currently selected. Sums
   // the per-provider counts from /api/pricing/counts (which already respect
@@ -783,7 +516,7 @@ export default function Dashboard() {
       <div className="h-10 border-b border-[#e5e5e5] dark:border-[#262626] bg-[#fcfcfc] dark:bg-[#080808] flex items-center px-4 overflow-x-auto no-scrollbar shrink-0">
         <div className="flex items-center gap-6">
           <button
-            onClick={() => { setIsInitialFetch(true); setActiveProductType('vm'); }}
+            onClick={() => { setActiveProductType('vm'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'vm'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
@@ -796,7 +529,7 @@ export default function Dashboard() {
           </button>
 
           <button
-            onClick={() => { setIsInitialFetch(true); setActiveProductType('database'); }}
+            onClick={() => { setActiveProductType('database'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'database'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
@@ -809,7 +542,7 @@ export default function Dashboard() {
           </button>
 
           <button
-            onClick={() => { setIsInitialFetch(true); setActiveProductType('serverless'); }}
+            onClick={() => { setActiveProductType('serverless'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'serverless'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
@@ -822,7 +555,7 @@ export default function Dashboard() {
           </button>
 
           <button
-            onClick={() => { setIsInitialFetch(true); setActiveProductType('containers'); }}
+            onClick={() => { setActiveProductType('containers'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'containers'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
@@ -835,7 +568,7 @@ export default function Dashboard() {
           </button>
 
           <button
-            onClick={() => { setIsInitialFetch(true); setActiveProductType('networking'); }}
+            onClick={() => { setActiveProductType('networking'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'networking'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
@@ -848,7 +581,7 @@ export default function Dashboard() {
           </button>
 
           <button
-            onClick={() => { setIsInitialFetch(true); setActiveProductType('data-analytics'); }}
+            onClick={() => { setActiveProductType('data-analytics'); }}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === 'data-analytics'
                 ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
