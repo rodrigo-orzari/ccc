@@ -1788,11 +1788,7 @@ export default function Dashboard() {
                   </div>
                   <div className="flex items-baseline gap-2">
                     <span className="text-3xl font-bold text-black dark:text-white">{p.soon ? '-' : displayCount.toLocaleString()}</span>
-                    {!p.soon && (
-                      <span className="text-[10px] text-[#737373] font-medium uppercase tracking-tighter">
-                        of {dbCount.toLocaleString()}
-                      </span>
-                    )}
+
                   </div>
                 </div>
               );
