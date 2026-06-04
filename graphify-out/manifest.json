@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1780554422.1850274,
-    "ast_hash": "8a66b5d2f903495f1abf00fc981b533f",
+    "mtime": 1780554950.1488826,
+    "ast_hash": "f45a0ce070ae1863182e0baabe74a9da",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -135,9 +135,9 @@
     "semantic_hash": "cdc91a1a94e7875523717a3765eae9e2"
   },
   "src/pages/Dashboard.tsx": {
-    "mtime": 1780373629.5456874,
-    "ast_hash": "4e8736c0cd1de27057c3f2e1966f7633",
-    "semantic_hash": "4e8736c0cd1de27057c3f2e1966f7633"
+    "mtime": 1780598225.9603877,
+    "ast_hash": "d3b4fcae87598b7dc3b1067c6dca82b9",
+    "semantic_hash": ""
   },
   "src/pages/Methodology.tsx": {
     "mtime": 1778027801.8260634,
@@ -225,9 +225,9 @@
     "semantic_hash": "8827451c4e35790dd3f3538c265e7d15"
   },
   "vite.config.ts": {
-    "mtime": 1778027801.8270714,
-    "ast_hash": "6d846ee9a56f568520b7188a70051685",
-    "semantic_hash": "6d846ee9a56f568520b7188a70051685"
+    "mtime": 1780554915.4436758,
+    "ast_hash": "347272aafa44b87e58a14a07627fe4f5",
+    "semantic_hash": ""
   },
   "ARCHITECTURE_DIAGRAMS.md": {
     "mtime": 1779304186.657169,
@@ -292,6 +292,11 @@
   "CLAUDE.md": {
     "mtime": 1780552991.298128,
     "ast_hash": "2e7b2d4cce49e2ccf11299bb4f3e6abb",
+    "semantic_hash": ""
+  },
+  "public/logo.png": {
+    "mtime": 1780598214.9505491,
+    "ast_hash": "ea69c479522e266ac88d8c30a2890773",
     "semantic_hash": ""
   }
 }
