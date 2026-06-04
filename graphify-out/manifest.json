@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1780609286.625559,
-    "ast_hash": "95295f0ae84b9b1fcdac161b212572f9",
+    "mtime": 1780610747.0140522,
+    "ast_hash": "fc8af023dbcd3e6f34047d4c31867d1f",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
@@ -362,6 +362,16 @@
   "tests/api_validation.spec.ts": {
     "mtime": 1780610537.6466455,
     "ast_hash": "155a04268ed06c0a67214b15c989ca58",
+    "semantic_hash": ""
+  },
+  "src/scrapers/base_scraper.ts": {
+    "mtime": 1780610637.1875138,
+    "ast_hash": "985475bd6dc6269a0ad84cd2c93de125",
+    "semantic_hash": ""
+  },
+  "src/scrapers/digitalocean_droplets.ts": {
+    "mtime": 1780610681.446869,
+    "ast_hash": "820030fd2110e6eb553af33c8e484dfc",
     "semantic_hash": ""
   }
 }
