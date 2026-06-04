@@ -135,8 +135,8 @@
     "semantic_hash": "cdc91a1a94e7875523717a3765eae9e2"
   },
   "src/pages/Dashboard.tsx": {
-    "mtime": 1780598484.0822372,
-    "ast_hash": "33701efe703348d10a4151464e11f4f8",
+    "mtime": 1780600989.6789582,
+    "ast_hash": "225f329b50cc96e1349960908e0398cc",
     "semantic_hash": ""
   },
   "src/pages/Methodology.tsx": {
@@ -255,8 +255,8 @@
     "semantic_hash": "62afd0cb57da977da9b55f17bac09503"
   },
   "README.md": {
-    "mtime": 1780598763.344098,
-    "ast_hash": "3f19ebf3c92f8c0495f0beb5d79b2f94",
+    "mtime": 1780599235.3548343,
+    "ast_hash": "5661a669d7f284ba87d25d47954bd86f",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
