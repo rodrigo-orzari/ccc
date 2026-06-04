@@ -9,8 +9,21 @@ if (caCert && !caCert.includes('-----BEGIN CERTIFICATE-----')) {
   } catch (e) {}
 }
 
+function parseDbUrl(url: string) {
+  const isNeon = url.includes('neon.tech');
+  const u = new URL(url);
+  return {
+    host: u.hostname,
+    port: u.port ? parseInt(u.port) : 5432,
+    database: u.pathname.replace(/^\//, ''),
+    user: decodeURIComponent(u.username),
+    password: decodeURIComponent(u.password),
+    ssl: { rejectUnauthorized: isNeon },
+  };
+}
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL?.replace('?sslmode=require', ''),
+  ...parseDbUrl(process.env.DATABASE_URL!),
   ssl: {
     ca: caCert,
     rejectUnauthorized: false
