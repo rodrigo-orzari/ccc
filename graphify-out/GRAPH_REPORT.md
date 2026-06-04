@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-04)
 
 ## Corpus Check
-- 60 files · ~74,156 words
+- 61 files · ~74,884 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 470 nodes · 643 edges · 31 communities (21 shown, 10 thin omitted)
+- 478 nodes · 655 edges · 31 communities (21 shown, 10 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.89)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a9c361f5`
+- Built from commit: `47aed4ea`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -80,15 +80,15 @@
 
 ### Community 0 - "Serverless Provider Configs"
 Cohesion: 0.06
-Nodes (22): AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries, baseDigitaloceanEntries, DIGITALOCEAN_FUNCTIONS_LANGUAGES (+14 more)
+Nodes (28): AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries, baseDigitaloceanEntries, DIGITALOCEAN_FUNCTIONS_LANGUAGES (+20 more)
 
 ### Community 1 - "Container Provider Configs"
 Cohesion: 0.06
-Nodes (25): AWS_CONTAINERS, baseAwsContainerEntries, AZURE_CONTAINERS, baseAzureContainerEntries, baseDigitaloceanContainerEntries, DIGITALOCEAN_CONTAINERS, baseGcpContainerEntries, GCP_CONTAINERS (+17 more)
+Nodes (21): AWS_CONTAINERS, baseAwsContainerEntries, AZURE_CONTAINERS, baseAzureContainerEntries, baseDigitaloceanContainerEntries, DIGITALOCEAN_CONTAINERS, baseGcpContainerEntries, GCP_CONTAINERS (+13 more)
 
 ### Community 2 - "Database Instance Configs"
-Cohesion: 0.09
-Nodes (20): CloudSqlInstanceConfig, DIGITALOCEAN_DB_INSTANCES, DigitalOceanDbInstanceConfig, GCP_CLOUD_SQL_INSTANCES, ORACLE_AUTONOMOUS_INSTANCES, ORACLE_MYSQL_HEATWAVE_INSTANCES, ORACLE_POSTGRESQL_INSTANCES, OracleAutonomousConfig (+12 more)
+Cohesion: 0.08
+Nodes (21): CloudSqlInstanceConfig, DIGITALOCEAN_DB_INSTANCES, DigitalOceanDbInstanceConfig, GCP_CLOUD_SQL_INSTANCES, ORACLE_AUTONOMOUS_INSTANCES, ORACLE_MYSQL_HEATWAVE_INSTANCES, ORACLE_POSTGRESQL_INSTANCES, OracleAutonomousConfig (+13 more)
 
 ### Community 3 - "Pricing Pipeline Architecture"
 Cohesion: 0.06
@@ -99,8 +99,8 @@ Cohesion: 0.09
 Nodes (23): dependencies, @aws-sdk/client-pricing, axios, cors, dotenv, express, express-rate-limit, @google/genai (+15 more)
 
 ### Community 5 - "Cloud Instance Configs"
-Cohesion: 0.08
-Nodes (15): DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, AWSAdapter, AzureAdapter (+7 more)
+Cohesion: 0.11
+Nodes (7): DigitalOceanContainersStaticAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter
 
 ### Community 6 - "Dashboard UI & Filters"
 Cohesion: 0.06
@@ -143,32 +143,32 @@ Cohesion: 0.15
 Nodes (12): Adding a New Cloud Provider, API Routes, Architecture, Compare Cloud Costs (CCC) — Claude Context, Conventions, Database Schema, Documentation Map, Key Files — Start Here (+4 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.18
-Nodes (11): pool, startServer(), createTransport(), isMailerConfigured(), PriceDriftAlert, sendPriceDriftEmail(), sendStalenessEmail(), StaleDataAlert (+3 more)
+Cohesion: 0.09
+Nodes (19): DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, pool, startServer() (+11 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.09
-Nodes (11): DATABRICKS_INSTANCES, DatabricksConfig, SNOWFLAKE_INSTANCES, SnowflakeConfig, DataAnalyticsPricingPipeline, DatabricksAzureAdapter, DatabricksStaticAdapter, SnowflakeStaticAdapter (+3 more)
+Cohesion: 0.10
+Nodes (12): DATABRICKS_INSTANCES, DatabricksConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, SNOWFLAKE_INSTANCES, SnowflakeConfig, DataAnalyticsPricingPipeline, DatabricksAzureAdapter (+4 more)
 
 ## Knowledge Gaps
-- **189 isolated node(s):** `PricingRecord`, `ProductType`, `PROVIDERS`, `GEOGRAPHIES`, `OS_TYPES` (+184 more)
+- **190 isolated node(s):** `NativeAnalyticsConfig`, `PricingRecord`, `ProductType`, `PROVIDERS`, `GEOGRAPHIES` (+185 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `BaseAdapter` connect `Cloud Instance Configs` to `Serverless Provider Configs`, `Container Provider Configs`, `Database Instance Configs`, `Community 31`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Container Provider Configs` to `Serverless Provider Configs`, `Database Instance Configs`, `Cloud Instance Configs`, `Community 31`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
+- **Why does `BaseAdapter` connect `Cloud Instance Configs` to `Serverless Provider Configs`, `Container Provider Configs`, `Database Instance Configs`, `Community 30`, `Community 31`?**
+  _High betweenness centrality (0.060) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Serverless Provider Configs` to `Container Provider Configs`, `Database Instance Configs`, `Cloud Instance Configs`, `Community 30`, `Community 31`?**
+  _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **Why does `Price Drift Check` connect `Pricing Pipeline Architecture` to `Platform Overview`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
-- **What connects `PricingRecord`, `ProductType`, `PROVIDERS` to the rest of the system?**
-  _190 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **What connects `NativeAnalyticsConfig`, `PricingRecord`, `ProductType` to the rest of the system?**
+  _191 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
-  _Cohesion score 0.06282051282051282 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.056261343012704176 - nodes in this community are weakly interconnected._
 - **Should `Container Provider Configs` be split into smaller, more focused modules?**
-  _Cohesion score 0.05593220338983051 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.057004830917874394 - nodes in this community are weakly interconnected._
 - **Should `Database Instance Configs` be split into smaller, more focused modules?**
-  _Cohesion score 0.09259259259259259 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08172043010752689 - nodes in this community are weakly interconnected._

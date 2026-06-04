@@ -35,8 +35,8 @@
     "semantic_hash": "da4f78be01bbe67a8085d0c1f148b589"
   },
   "server.ts": {
-    "mtime": 1780604376.1268632,
-    "ast_hash": "51ee4f6a14935ee4dbd58d73b669d819",
+    "mtime": 1780605333.9124258,
+    "ast_hash": "f74f8b863c9fe0a5c430fe976f365b25",
     "semantic_hash": ""
   },
   "src/App.tsx": {
@@ -135,8 +135,8 @@
     "semantic_hash": "cdc91a1a94e7875523717a3765eae9e2"
   },
   "src/pages/Dashboard.tsx": {
-    "mtime": 1780605245.4140356,
-    "ast_hash": "66883568931907c710acd86080503f74",
+    "mtime": 1780605830.4714508,
+    "ast_hash": "95fbb8e6eaff3a5f73fcee9de304bfde",
     "semantic_hash": ""
   },
   "src/pages/Methodology.tsx": {

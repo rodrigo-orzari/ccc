@@ -58,337 +58,535 @@
   },
   "nodes": [
     {
+      "label": "native_analytics_instances.ts",
+      "file_type": "code",
+      "source_file": "src/config/native_analytics_instances.ts",
+      "source_location": "L1",
+      "id": "config_native_analytics_instances",
+      "community": 31,
+      "norm_label": "native_analytics_instances.ts"
+    },
+    {
+      "label": "NativeAnalyticsConfig",
+      "file_type": "code",
+      "source_file": "src/config/native_analytics_instances.ts",
+      "source_location": "L4",
+      "id": "config_native_analytics_instances_nativeanalyticsconfig",
+      "community": 31,
+      "norm_label": "nativeanalyticsconfig"
+    },
+    {
+      "label": "NATIVE_ANALYTICS_INSTANCES",
+      "file_type": "code",
+      "source_file": "src/config/native_analytics_instances.ts",
+      "source_location": "L13",
+      "id": "config_native_analytics_instances_native_analytics_instances",
+      "community": 31,
+      "norm_label": "native_analytics_instances"
+    },
+    {
+      "label": "data_analytics_pipeline.ts",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L1",
+      "id": "services_data_analytics_pipeline",
+      "community": 31,
+      "norm_label": "data_analytics_pipeline.ts"
+    },
+    {
+      "label": "DatabricksStaticAdapter",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L10",
+      "id": "services_data_analytics_pipeline_databricksstaticadapter",
+      "community": 31,
+      "norm_label": "databricksstaticadapter"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L15",
+      "id": "services_data_analytics_pipeline_databricksstaticadapter_constructor",
+      "community": 31,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L22",
+      "id": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing",
+      "community": 31,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "SnowflakeStaticAdapter",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L51",
+      "id": "services_data_analytics_pipeline_snowflakestaticadapter",
+      "community": 31,
+      "norm_label": "snowflakestaticadapter"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L56",
+      "id": "services_data_analytics_pipeline_snowflakestaticadapter_constructor",
+      "community": 31,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L65",
+      "id": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing",
+      "community": 31,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "DatabricksAzureAdapter",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L94",
+      "id": "services_data_analytics_pipeline_databricksazureadapter",
+      "community": 31,
+      "norm_label": "databricksazureadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L98",
+      "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing",
+      "community": 31,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "NativeAnalyticsStaticAdapter",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L167",
+      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter",
+      "community": 31,
+      "norm_label": "nativeanalyticsstaticadapter"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L172",
+      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_constructor",
+      "community": 31,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L179",
+      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_fetchpricing",
+      "community": 31,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "SynapseAzureAdapter",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L208",
+      "id": "services_data_analytics_pipeline_synapseazureadapter",
+      "community": 31,
+      "norm_label": "synapseazureadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L212",
+      "id": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing",
+      "community": 31,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "DataAnalyticsPricingPipeline",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L281",
+      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline",
+      "community": 31,
+      "norm_label": "dataanalyticspricingpipeline"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L282",
+      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor",
+      "community": 31,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".run()",
+      "file_type": "code",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L298",
+      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run",
+      "community": 31,
+      "norm_label": ".run()"
+    },
+    {
+      "label": "ingest.ts",
+      "file_type": "code",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L1",
+      "id": "services_ingest",
+      "community": 30,
+      "norm_label": "ingest.ts"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L12",
+      "id": "services_ingest_main",
+      "community": 30,
+      "norm_label": "main()"
+    },
+    {
       "label": "server.ts",
       "file_type": "code",
       "source_file": "server.ts",
       "source_location": "L1",
-      "id": "server",
       "community": 30,
-      "norm_label": "server.ts"
+      "norm_label": "server.ts",
+      "id": "server"
     },
     {
       "label": "startServer()",
       "file_type": "code",
       "source_file": "server.ts",
       "source_location": "L23",
-      "id": "server_startserver",
       "community": 30,
-      "norm_label": "startserver()"
+      "norm_label": "startserver()",
+      "id": "server_startserver"
     },
     {
       "label": "Dashboard.tsx",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L1",
-      "id": "pages_dashboard",
       "community": 6,
-      "norm_label": "dashboard.tsx"
+      "norm_label": "dashboard.tsx",
+      "id": "pages_dashboard"
     },
     {
       "label": "Tooltip()",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L13",
-      "id": "pages_dashboard_tooltip",
       "community": 6,
-      "norm_label": "tooltip()"
+      "norm_label": "tooltip()",
+      "id": "pages_dashboard_tooltip"
     },
     {
       "label": "PricingRecord",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L33",
-      "id": "pages_dashboard_pricingrecord",
       "community": 6,
-      "norm_label": "pricingrecord"
+      "norm_label": "pricingrecord",
+      "id": "pages_dashboard_pricingrecord"
     },
     {
       "label": "ProductType",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L85",
-      "id": "pages_dashboard_producttype",
       "community": 6,
-      "norm_label": "producttype"
+      "norm_label": "producttype",
+      "id": "pages_dashboard_producttype"
     },
     {
       "label": "PROVIDERS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L87",
-      "id": "pages_dashboard_providers",
       "community": 6,
-      "norm_label": "providers"
+      "norm_label": "providers",
+      "id": "pages_dashboard_providers"
     },
     {
       "label": "GEOGRAPHIES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L95",
-      "id": "pages_dashboard_geographies",
       "community": 6,
-      "norm_label": "geographies"
+      "norm_label": "geographies",
+      "id": "pages_dashboard_geographies"
     },
     {
       "label": "OS_TYPES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L96",
-      "id": "pages_dashboard_os_types",
       "community": 6,
-      "norm_label": "os_types"
+      "norm_label": "os_types",
+      "id": "pages_dashboard_os_types"
     },
     {
       "label": "CPU_PROFILES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L97",
-      "id": "pages_dashboard_cpu_profiles",
       "community": 6,
-      "norm_label": "cpu_profiles"
+      "norm_label": "cpu_profiles",
+      "id": "pages_dashboard_cpu_profiles"
     },
     {
       "label": "CATEGORIES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L103",
-      "id": "pages_dashboard_categories",
       "community": 6,
-      "norm_label": "categories"
+      "norm_label": "categories",
+      "id": "pages_dashboard_categories"
     },
     {
       "label": "DB_FAMILIES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L106",
-      "id": "pages_dashboard_db_families",
       "community": 6,
-      "norm_label": "db_families"
+      "norm_label": "db_families",
+      "id": "pages_dashboard_db_families"
     },
     {
       "label": "DB_ENGINES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L107",
-      "id": "pages_dashboard_db_engines",
       "community": 6,
-      "norm_label": "db_engines"
+      "norm_label": "db_engines",
+      "id": "pages_dashboard_db_engines"
     },
     {
       "label": "DEPLOYMENT_TYPES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L108",
-      "id": "pages_dashboard_deployment_types",
       "community": 6,
-      "norm_label": "deployment_types"
+      "norm_label": "deployment_types",
+      "id": "pages_dashboard_deployment_types"
     },
     {
       "label": "HA_MODES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L109",
-      "id": "pages_dashboard_ha_modes",
       "community": 6,
-      "norm_label": "ha_modes"
+      "norm_label": "ha_modes",
+      "id": "pages_dashboard_ha_modes"
     },
     {
       "label": "SERVERLESS_LANGUAGES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L112",
-      "id": "pages_dashboard_serverless_languages",
       "community": 6,
-      "norm_label": "serverless_languages"
+      "norm_label": "serverless_languages",
+      "id": "pages_dashboard_serverless_languages"
     },
     {
       "label": "SERVERLESS_COLD_START_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L113",
-      "id": "pages_dashboard_serverless_cold_start_options",
       "community": 6,
-      "norm_label": "serverless_cold_start_options"
+      "norm_label": "serverless_cold_start_options",
+      "id": "pages_dashboard_serverless_cold_start_options"
     },
     {
       "label": "SERVERLESS_TIMEOUT_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L114",
-      "id": "pages_dashboard_serverless_timeout_options",
       "community": 6,
-      "norm_label": "serverless_timeout_options"
+      "norm_label": "serverless_timeout_options",
+      "id": "pages_dashboard_serverless_timeout_options"
     },
     {
       "label": "SERVERLESS_MEMORY_CONFIG_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L115",
-      "id": "pages_dashboard_serverless_memory_config_options",
       "community": 6,
-      "norm_label": "serverless_memory_config_options"
+      "norm_label": "serverless_memory_config_options",
+      "id": "pages_dashboard_serverless_memory_config_options"
     },
     {
       "label": "SERVERLESS_FREE_TIER_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L116",
-      "id": "pages_dashboard_serverless_free_tier_options",
       "community": 6,
-      "norm_label": "serverless_free_tier_options"
+      "norm_label": "serverless_free_tier_options",
+      "id": "pages_dashboard_serverless_free_tier_options"
     },
     {
       "label": "SERVERLESS_GRANULARITY_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L117",
-      "id": "pages_dashboard_serverless_granularity_options",
       "community": 6,
-      "norm_label": "serverless_granularity_options"
+      "norm_label": "serverless_granularity_options",
+      "id": "pages_dashboard_serverless_granularity_options"
     },
     {
       "label": "SERVERLESS_EXECUTION_MODEL_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L118",
-      "id": "pages_dashboard_serverless_execution_model_options",
       "community": 6,
-      "norm_label": "serverless_execution_model_options"
+      "norm_label": "serverless_execution_model_options",
+      "id": "pages_dashboard_serverless_execution_model_options"
     },
     {
       "label": "SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L119",
-      "id": "pages_dashboard_serverless_provisioned_concurrency_options",
       "community": 6,
-      "norm_label": "serverless_provisioned_concurrency_options"
+      "norm_label": "serverless_provisioned_concurrency_options",
+      "id": "pages_dashboard_serverless_provisioned_concurrency_options"
     },
     {
       "label": "SERVERLESS_EPHEMERAL_STORAGE_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L120",
-      "id": "pages_dashboard_serverless_ephemeral_storage_options",
       "community": 6,
-      "norm_label": "serverless_ephemeral_storage_options"
+      "norm_label": "serverless_ephemeral_storage_options",
+      "id": "pages_dashboard_serverless_ephemeral_storage_options"
     },
     {
       "label": "CONTAINERS_ORCHESTRATORS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L123",
-      "id": "pages_dashboard_containers_orchestrators",
       "community": 6,
-      "norm_label": "containers_orchestrators"
+      "norm_label": "containers_orchestrators",
+      "id": "pages_dashboard_containers_orchestrators"
     },
     {
       "label": "CONTAINERS_COMPUTE_TYPES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L124",
-      "id": "pages_dashboard_containers_compute_types",
       "community": 6,
-      "norm_label": "containers_compute_types"
+      "norm_label": "containers_compute_types",
+      "id": "pages_dashboard_containers_compute_types"
     },
     {
       "label": "CONTAINERS_ARCHITECTURES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L125",
-      "id": "pages_dashboard_containers_architectures",
       "community": 6,
-      "norm_label": "containers_architectures"
+      "norm_label": "containers_architectures",
+      "id": "pages_dashboard_containers_architectures"
     },
     {
       "label": "CONTAINERS_BILLING_GRANULARITY",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L126",
-      "id": "pages_dashboard_containers_billing_granularity",
       "community": 6,
-      "norm_label": "containers_billing_granularity"
+      "norm_label": "containers_billing_granularity",
+      "id": "pages_dashboard_containers_billing_granularity"
     },
     {
       "label": "NETWORKING_SERVICES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L127",
-      "id": "pages_dashboard_networking_services",
       "community": 6,
-      "norm_label": "networking_services"
+      "norm_label": "networking_services",
+      "id": "pages_dashboard_networking_services"
     },
     {
       "label": "ANALYTICS_ENGINES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L130",
-      "id": "pages_dashboard_analytics_engines",
       "community": 6,
-      "norm_label": "analytics_engines"
+      "norm_label": "analytics_engines",
+      "id": "pages_dashboard_analytics_engines"
     },
     {
       "label": "ANALYTICS_DEPLOYMENT_TYPES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L131",
-      "id": "pages_dashboard_analytics_deployment_types",
       "community": 6,
-      "norm_label": "analytics_deployment_types"
+      "norm_label": "analytics_deployment_types",
+      "id": "pages_dashboard_analytics_deployment_types"
     },
     {
       "label": "ANALYTICS_TIERS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L132",
-      "id": "pages_dashboard_analytics_tiers",
       "community": 6,
-      "norm_label": "analytics_tiers"
+      "norm_label": "analytics_tiers",
+      "id": "pages_dashboard_analytics_tiers"
     },
     {
       "label": "DEFAULT_VCPU_RANGE",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L134",
-      "id": "pages_dashboard_default_vcpu_range",
       "community": 6,
-      "norm_label": "default_vcpu_range"
+      "norm_label": "default_vcpu_range",
+      "id": "pages_dashboard_default_vcpu_range"
     },
     {
       "label": "DEFAULT_MEMORY_RANGE",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L135",
-      "id": "pages_dashboard_default_memory_range",
       "community": 6,
-      "norm_label": "default_memory_range"
+      "norm_label": "default_memory_range",
+      "id": "pages_dashboard_default_memory_range"
     },
     {
       "label": "DEFAULT_PRICE_RANGE",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L136",
-      "id": "pages_dashboard_default_price_range",
       "community": 6,
-      "norm_label": "default_price_range"
+      "norm_label": "default_price_range",
+      "id": "pages_dashboard_default_price_range"
     },
     {
       "label": "RangeSlider()",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L138",
-      "id": "pages_dashboard_rangeslider",
       "community": 6,
-      "norm_label": "rangeslider()"
+      "norm_label": "rangeslider()",
+      "id": "pages_dashboard_rangeslider"
     },
     {
       "label": "Dashboard()",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L197",
-      "id": "pages_dashboard_dashboard",
       "community": 6,
-      "norm_label": "dashboard()"
+      "norm_label": "dashboard()",
+      "id": "pages_dashboard_dashboard"
     },
     {
       "label": "populate_networking.ts",
@@ -470,132 +668,6 @@
       "community": 31,
       "norm_label": "snowflake_instances",
       "id": "config_snowflake_instances_snowflake_instances"
-    },
-    {
-      "label": "data_analytics_pipeline.ts",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L1",
-      "community": 31,
-      "norm_label": "data_analytics_pipeline.ts",
-      "id": "services_data_analytics_pipeline"
-    },
-    {
-      "label": "DatabricksStaticAdapter",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L9",
-      "community": 31,
-      "norm_label": "databricksstaticadapter",
-      "id": "services_data_analytics_pipeline_databricksstaticadapter"
-    },
-    {
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L14",
-      "community": 31,
-      "norm_label": ".constructor()",
-      "id": "services_data_analytics_pipeline_databricksstaticadapter_constructor"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L21",
-      "community": 31,
-      "norm_label": ".fetchpricing()",
-      "id": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing"
-    },
-    {
-      "label": "SnowflakeStaticAdapter",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L50",
-      "community": 31,
-      "norm_label": "snowflakestaticadapter",
-      "id": "services_data_analytics_pipeline_snowflakestaticadapter"
-    },
-    {
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L55",
-      "community": 31,
-      "norm_label": ".constructor()",
-      "id": "services_data_analytics_pipeline_snowflakestaticadapter_constructor"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L64",
-      "community": 31,
-      "norm_label": ".fetchpricing()",
-      "id": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing"
-    },
-    {
-      "label": "DatabricksAzureAdapter",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L93",
-      "community": 31,
-      "norm_label": "databricksazureadapter",
-      "id": "services_data_analytics_pipeline_databricksazureadapter"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L97",
-      "community": 31,
-      "norm_label": ".fetchpricing()",
-      "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
-    },
-    {
-      "label": "DataAnalyticsPricingPipeline",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L166",
-      "community": 31,
-      "norm_label": "dataanalyticspricingpipeline",
-      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
-    },
-    {
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L167",
-      "community": 31,
-      "norm_label": ".constructor()",
-      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
-    },
-    {
-      "label": ".run()",
-      "file_type": "code",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L180",
-      "community": 31,
-      "norm_label": ".run()",
-      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run"
-    },
-    {
-      "label": "ingest.ts",
-      "file_type": "code",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L1",
-      "community": 31,
-      "norm_label": "ingest.ts",
-      "id": "services_ingest"
-    },
-    {
-      "label": "main()",
-      "file_type": "code",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L11",
-      "community": 31,
-      "norm_label": "main()",
-      "id": "services_ingest_main"
     },
     {
       "label": "networking_pipeline.ts",
@@ -1934,7 +2006,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 30,
       "norm_label": "digitalocean_instances.ts",
       "id": "config_digitalocean_instances"
     },
@@ -1943,7 +2015,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L9",
-      "community": 5,
+      "community": 30,
       "norm_label": "digitaloceaninstanceconfig",
       "id": "config_digitalocean_instances_digitaloceaninstanceconfig"
     },
@@ -1952,7 +2024,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L20",
-      "community": 5,
+      "community": 30,
       "norm_label": "digitalocean_instances",
       "id": "config_digitalocean_instances_digitalocean_instances"
     },
@@ -2042,7 +2114,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 30,
       "norm_label": "gcp_instances.ts",
       "id": "config_gcp_instances"
     },
@@ -2051,7 +2123,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L21",
-      "community": 5,
+      "community": 30,
       "norm_label": "gcpinstanceconfig",
       "id": "config_gcp_instances_gcpinstanceconfig"
     },
@@ -2060,7 +2132,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L33",
-      "community": 5,
+      "community": 30,
       "norm_label": "gcp_instances",
       "id": "config_gcp_instances_gcp_instances"
     },
@@ -2150,7 +2222,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 30,
       "norm_label": "oracle_instances.ts",
       "id": "config_oracle_instances"
     },
@@ -2159,7 +2231,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L19",
-      "community": 5,
+      "community": 30,
       "norm_label": "oracleinstanceconfig",
       "id": "config_oracle_instances_oracleinstanceconfig"
     },
@@ -2168,7 +2240,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L31",
-      "community": 5,
+      "community": 30,
       "norm_label": "oracle_instances",
       "id": "config_oracle_instances_oracle_instances"
     },
@@ -2429,7 +2501,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L17",
-      "community": 1,
+      "community": 0,
       "norm_label": "awscontainersstaticadapter",
       "id": "services_containers_pipeline_awscontainersstaticadapter"
     },
@@ -2438,7 +2510,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L19",
-      "community": 1,
+      "community": 0,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_awscontainersstaticadapter_fetchpricing"
     },
@@ -2483,7 +2555,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L92",
-      "community": 1,
+      "community": 5,
       "norm_label": "digitaloceancontainersstaticadapter",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter"
     },
@@ -2492,7 +2564,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L94",
-      "community": 1,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter_fetchpricing"
     },
@@ -2699,7 +2771,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L440",
-      "community": 31,
+      "community": 2,
       "norm_label": "digitaloceandbadapter",
       "id": "services_database_pipeline_digitaloceandbadapter"
     },
@@ -2708,7 +2780,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L443",
-      "community": 31,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_digitaloceandbadapter_fetchpricing"
     },
@@ -2717,7 +2789,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L476",
-      "community": 31,
+      "community": 30,
       "norm_label": "databasepricingpipeline",
       "id": "services_database_pipeline_databasepricingpipeline"
     },
@@ -2726,7 +2798,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L477",
-      "community": 31,
+      "community": 30,
       "norm_label": ".constructor()",
       "id": "services_database_pipeline_databasepricingpipeline_constructor"
     },
@@ -2735,7 +2807,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L491",
-      "community": 31,
+      "community": 2,
       "norm_label": ".run()",
       "id": "services_database_pipeline_databasepricingpipeline_run"
     },
@@ -2825,7 +2897,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 30,
       "norm_label": "pricing_pipeline.ts",
       "id": "services_pricing_pipeline"
     },
@@ -2834,7 +2906,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L8",
-      "community": 1,
+      "community": 0,
       "norm_label": "pricingrecord",
       "id": "services_pricing_pipeline_pricingrecord"
     },
@@ -3077,7 +3149,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L438",
-      "community": 31,
+      "community": 30,
       "norm_label": "pricingpipeline",
       "id": "services_pricing_pipeline_pricingpipeline"
     },
@@ -3086,7 +3158,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L442",
-      "community": 31,
+      "community": 30,
       "norm_label": ".constructor()",
       "id": "services_pricing_pipeline_pricingpipeline_constructor"
     },
@@ -3095,7 +3167,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L458",
-      "community": 31,
+      "community": 30,
       "norm_label": ".run()",
       "id": "services_pricing_pipeline_pricingpipeline_run"
     },
@@ -3104,7 +3176,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L473",
-      "community": 31,
+      "community": 30,
       "norm_label": ".saverecords()",
       "id": "services_pricing_pipeline_pricingpipeline_saverecords"
     },
@@ -3194,7 +3266,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L30",
-      "community": 5,
+      "community": 0,
       "norm_label": "awsserverlessadapter",
       "id": "services_serverless_pipeline_awsserverlessadapter"
     },
@@ -3203,7 +3275,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L33",
-      "community": 5,
+      "community": 0,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_awsserverlessadapter_fetchpricing"
     },
@@ -3230,7 +3302,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L84",
-      "community": 5,
+      "community": 0,
       "norm_label": "azureserverlessadapter",
       "id": "services_serverless_pipeline_azureserverlessadapter"
     },
@@ -3239,7 +3311,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L87",
-      "community": 5,
+      "community": 0,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing"
     },
@@ -3248,7 +3320,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L111",
-      "community": 5,
+      "community": 0,
       "norm_label": "digitaloceanserverlessadapter",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter"
     },
@@ -3257,7 +3329,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L114",
-      "community": 5,
+      "community": 0,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter_fetchpricing"
     },
@@ -3275,7 +3347,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L141",
-      "community": 1,
+      "community": 0,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing"
     },
@@ -3284,7 +3356,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L165",
-      "community": 1,
+      "community": 0,
       "norm_label": "serverlesspricingpipeline",
       "id": "services_serverless_pipeline_serverlesspricingpipeline"
     },
@@ -3293,7 +3365,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L166",
-      "community": 1,
+      "community": 0,
       "norm_label": ".constructor()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_constructor"
     },
@@ -3302,7 +3374,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L181",
-      "community": 1,
+      "community": 0,
       "norm_label": ".run()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_run"
     },
@@ -3311,7 +3383,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L339",
-      "community": 1,
+      "community": 0,
       "norm_label": ".getawsserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getawsserverlessstaticrecords"
     },
@@ -3320,7 +3392,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L347",
-      "community": 1,
+      "community": 0,
       "norm_label": ".getgcpserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getgcpserverlessstaticrecords"
     },
@@ -3329,7 +3401,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L355",
-      "community": 1,
+      "community": 0,
       "norm_label": ".getazureserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getazureserverlessstaticrecords"
     },
@@ -3338,7 +3410,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L363",
-      "community": 1,
+      "community": 0,
       "norm_label": ".getdigitaloceanserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getdigitaloceanserverlessstaticrecords"
     },
@@ -3347,7 +3419,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L371",
-      "community": 1,
+      "community": 0,
       "norm_label": ".getoracleserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
     },
@@ -4620,6 +4692,471 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/config/native_analytics_instances.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "config_native_analytics_instances",
+      "target": "config_native_analytics_instances_native_analytics_instances",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/native_analytics_instances.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "config_native_analytics_instances",
+      "target": "config_native_analytics_instances_nativeanalyticsconfig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "config_native_analytics_instances",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "config_native_analytics_instances_native_analytics_instances",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L169",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline_nativeanalyticsstaticadapter",
+      "target": "config_native_analytics_instances_native_analytics_instances",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "config_databricks_instances"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "config_databricks_instances_databricks_instances"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "config_snowflake_instances"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "config_snowflake_instances_snowflake_instances"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L166",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_data_analytics_pipeline_databricksazureadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_data_analytics_pipeline_databricksstaticadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L167",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_data_analytics_pipeline_nativeanalyticsstaticadapter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_data_analytics_pipeline_snowflakestaticadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L208",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_data_analytics_pipeline_synapseazureadapter",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_data_analytics_pipeline"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_databricksstaticadapter",
+      "target": "config_databricks_instances_databricks_instances"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_databricksstaticadapter",
+      "target": "services_data_analytics_pipeline_databricksstaticadapter_constructor"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_databricksstaticadapter",
+      "target": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_snowflakestaticadapter",
+      "target": "config_snowflake_instances_snowflake_instances"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_snowflakestaticadapter",
+      "target": "services_data_analytics_pipeline_snowflakestaticadapter_constructor"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L64",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_snowflakestaticadapter",
+      "target": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L97",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_databricksazureadapter",
+      "target": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L194",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run",
+      "target": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L172",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline_nativeanalyticsstaticadapter",
+      "target": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L179",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline_nativeanalyticsstaticadapter",
+      "target": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_fetchpricing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L212",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline_synapseazureadapter",
+      "target": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L312",
+      "weight": 1.0,
+      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run",
+      "target": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L167",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline",
+      "target": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L180",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline",
+      "target": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_containers_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_containers_pipeline_containerspricingpipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_database_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_database_pipeline_databasepricingpipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_ingest_main"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "services_ingest",
+      "target": "services_networking_pipeline_networkingpricingpipeline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_serverless_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_serverless_pipeline_serverlesspricingpipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "server.ts",
       "source_location": "L23",
       "weight": 1.0,
@@ -5000,9 +5537,9 @@
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L127",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pages_dashboard",
-      "target": "pages_dashboard_networking_services",
-      "confidence_score": 1.0
+      "target": "pages_dashboard_networking_services"
     },
     {
       "relation": "contains",
@@ -5217,39 +5754,6 @@
       "target": "config_databricks_instances_databricksconfig"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "config_databricks_instances"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "config_databricks_instances_databricks_instances"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_databricksstaticadapter",
-      "target": "config_databricks_instances_databricks_instances"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/config/snowflake_instances.ts",
@@ -5268,313 +5772,6 @@
       "confidence_score": 1.0,
       "source": "config_snowflake_instances",
       "target": "config_snowflake_instances_snowflakeconfig"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "config_snowflake_instances"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "config_snowflake_instances_snowflake_instances"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L52",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_snowflakestaticadapter",
-      "target": "config_snowflake_instances_snowflake_instances"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L166",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L93",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_data_analytics_pipeline_databricksazureadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_data_analytics_pipeline_databricksstaticadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L50",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_data_analytics_pipeline_snowflakestaticadapter"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_data_analytics_pipeline"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_databricksstaticadapter",
-      "target": "services_data_analytics_pipeline_databricksstaticadapter_constructor"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_databricksstaticadapter",
-      "target": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L55",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_snowflakestaticadapter",
-      "target": "services_data_analytics_pipeline_snowflakestaticadapter_constructor"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L64",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_snowflakestaticadapter",
-      "target": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L97",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_databricksazureadapter",
-      "target": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L194",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run",
-      "target": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L167",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline",
-      "target": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L180",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline",
-      "target": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_containers_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_containers_pipeline_containerspricingpipeline"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_database_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_database_pipeline_databasepricingpipeline"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_ingest_main"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_serverless_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_serverless_pipeline_serverlesspricingpipeline"
     },
     {
       "relation": "contains",
@@ -11323,5 +11520,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "a9c361f5313b0465ff5ed4213e5ddb7c6afed554"
+  "built_at_commit": "47aed4ea031824adfba40eb5cb163ff730b1bb00"
 }
