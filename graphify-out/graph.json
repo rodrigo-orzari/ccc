@@ -58,526 +58,553 @@
   },
   "nodes": [
     {
+      "label": "api_validation.spec.ts",
+      "file_type": "code",
+      "source_file": "tests/api_validation.spec.ts",
+      "source_location": "L1",
+      "id": "tests_api_validation_spec",
+      "community": 36,
+      "norm_label": "api_validation.spec.ts"
+    },
+    {
+      "label": "PRODUCT_TYPES",
+      "file_type": "code",
+      "source_file": "tests/api_validation.spec.ts",
+      "source_location": "L3",
+      "id": "tests_api_validation_spec_product_types",
+      "community": 36,
+      "norm_label": "product_types"
+    },
+    {
+      "label": "filters.spec.ts",
+      "file_type": "code",
+      "source_file": "tests/filters.spec.ts",
+      "source_location": "L1",
+      "id": "tests_filters_spec",
+      "community": 27,
+      "norm_label": "filters.spec.ts"
+    },
+    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L1",
-      "id": "package",
       "community": 4,
-      "norm_label": "package.json"
+      "norm_label": "package.json",
+      "id": "package"
     },
     {
       "label": "name",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L2",
-      "id": "package_name",
       "community": 4,
-      "norm_label": "name"
+      "norm_label": "name",
+      "id": "package_name"
     },
     {
       "label": "private",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L3",
-      "id": "package_private",
       "community": 4,
-      "norm_label": "private"
+      "norm_label": "private",
+      "id": "package_private"
     },
     {
       "label": "version",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L4",
-      "id": "package_version",
       "community": 4,
-      "norm_label": "version"
+      "norm_label": "version",
+      "id": "package_version"
     },
     {
       "label": "type",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L5",
-      "id": "package_type",
       "community": 4,
-      "norm_label": "type"
+      "norm_label": "type",
+      "id": "package_type"
     },
     {
       "label": "scripts",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L6",
-      "id": "package_scripts",
       "community": 4,
-      "norm_label": "scripts"
+      "norm_label": "scripts",
+      "id": "package_scripts"
     },
     {
       "label": "dev",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L7",
-      "id": "package_scripts_dev",
       "community": 4,
-      "norm_label": "dev"
+      "norm_label": "dev",
+      "id": "package_scripts_dev"
     },
     {
       "label": "build",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L8",
-      "id": "package_scripts_build",
       "community": 4,
-      "norm_label": "build"
+      "norm_label": "build",
+      "id": "package_scripts_build"
     },
     {
       "label": "start",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L9",
-      "id": "package_scripts_start",
       "community": 4,
-      "norm_label": "start"
+      "norm_label": "start",
+      "id": "package_scripts_start"
     },
     {
       "label": "ingest",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L10",
-      "id": "package_scripts_ingest",
       "community": 4,
-      "norm_label": "ingest"
+      "norm_label": "ingest",
+      "id": "package_scripts_ingest"
     },
     {
       "label": "worker",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L11",
-      "id": "package_scripts_worker",
       "community": 4,
-      "norm_label": "worker"
+      "norm_label": "worker",
+      "id": "package_scripts_worker"
     },
     {
       "label": "preview",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L12",
-      "id": "package_scripts_preview",
       "community": 4,
-      "norm_label": "preview"
+      "norm_label": "preview",
+      "id": "package_scripts_preview"
     },
     {
       "label": "clean",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L13",
-      "id": "package_scripts_clean",
       "community": 4,
-      "norm_label": "clean"
+      "norm_label": "clean",
+      "id": "package_scripts_clean"
     },
     {
       "label": "lint",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L14",
-      "id": "package_scripts_lint",
       "community": 4,
-      "norm_label": "lint"
+      "norm_label": "lint",
+      "id": "package_scripts_lint"
     },
     {
       "label": "dependencies",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L16",
-      "id": "package_dependencies",
       "community": 4,
-      "norm_label": "dependencies"
+      "norm_label": "dependencies",
+      "id": "package_dependencies"
     },
     {
       "label": "@aws-sdk/client-pricing",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L17",
-      "id": "package_dependencies_aws_sdk_client_pricing",
       "community": 4,
-      "norm_label": "@aws-sdk/client-pricing"
+      "norm_label": "@aws-sdk/client-pricing",
+      "id": "package_dependencies_aws_sdk_client_pricing"
     },
     {
       "label": "@google/genai",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L18",
-      "id": "package_dependencies_google_genai",
       "community": 4,
-      "norm_label": "@google/genai"
+      "norm_label": "@google/genai",
+      "id": "package_dependencies_google_genai"
     },
     {
       "label": "@tailwindcss/typography",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L19",
-      "id": "package_dependencies_tailwindcss_typography",
       "community": 4,
-      "norm_label": "@tailwindcss/typography"
+      "norm_label": "@tailwindcss/typography",
+      "id": "package_dependencies_tailwindcss_typography"
     },
     {
       "label": "@tailwindcss/vite",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L20",
-      "id": "package_dependencies_tailwindcss_vite",
       "community": 4,
-      "norm_label": "@tailwindcss/vite"
+      "norm_label": "@tailwindcss/vite",
+      "id": "package_dependencies_tailwindcss_vite"
     },
     {
       "label": "@tanstack/react-query",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L21",
-      "id": "package_dependencies_tanstack_react_query",
       "community": 4,
-      "norm_label": "@tanstack/react-query"
+      "norm_label": "@tanstack/react-query",
+      "id": "package_dependencies_tanstack_react_query"
     },
     {
       "label": "@vitejs/plugin-react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L22",
-      "id": "package_dependencies_vitejs_plugin_react",
       "community": 4,
-      "norm_label": "@vitejs/plugin-react"
+      "norm_label": "@vitejs/plugin-react",
+      "id": "package_dependencies_vitejs_plugin_react"
     },
     {
       "label": "axios",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L23",
-      "id": "package_dependencies_axios",
       "community": 4,
-      "norm_label": "axios"
+      "norm_label": "axios",
+      "id": "package_dependencies_axios"
     },
     {
       "label": "cors",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L24",
-      "id": "package_dependencies_cors",
       "community": 4,
-      "norm_label": "cors"
+      "norm_label": "cors",
+      "id": "package_dependencies_cors"
     },
     {
       "label": "dotenv",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L25",
-      "id": "package_dependencies_dotenv",
       "community": 4,
-      "norm_label": "dotenv"
+      "norm_label": "dotenv",
+      "id": "package_dependencies_dotenv"
     },
     {
       "label": "express",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L26",
-      "id": "package_dependencies_express",
       "community": 4,
-      "norm_label": "express"
+      "norm_label": "express",
+      "id": "package_dependencies_express"
     },
     {
       "label": "express-rate-limit",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L27",
-      "id": "package_dependencies_express_rate_limit",
       "community": 4,
-      "norm_label": "express-rate-limit"
+      "norm_label": "express-rate-limit",
+      "id": "package_dependencies_express_rate_limit"
     },
     {
       "label": "helmet",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L28",
-      "id": "package_dependencies_helmet",
       "community": 4,
-      "norm_label": "helmet"
+      "norm_label": "helmet",
+      "id": "package_dependencies_helmet"
     },
     {
       "label": "lucide-react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L29",
-      "id": "package_dependencies_lucide_react",
       "community": 4,
-      "norm_label": "lucide-react"
+      "norm_label": "lucide-react",
+      "id": "package_dependencies_lucide_react"
     },
     {
       "label": "motion",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L30",
-      "id": "package_dependencies_motion",
       "community": 4,
-      "norm_label": "motion"
+      "norm_label": "motion",
+      "id": "package_dependencies_motion"
     },
     {
       "label": "node-cron",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L31",
-      "id": "package_dependencies_node_cron",
       "community": 4,
-      "norm_label": "node-cron"
+      "norm_label": "node-cron",
+      "id": "package_dependencies_node_cron"
     },
     {
       "label": "nodemailer",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L32",
-      "id": "package_dependencies_nodemailer",
       "community": 4,
-      "norm_label": "nodemailer"
+      "norm_label": "nodemailer",
+      "id": "package_dependencies_nodemailer"
     },
     {
       "label": "postgres",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L33",
-      "id": "package_dependencies_postgres",
       "community": 4,
-      "norm_label": "postgres"
+      "norm_label": "postgres",
+      "id": "package_dependencies_postgres"
     },
     {
       "label": "react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L34",
-      "id": "package_dependencies_react",
       "community": 4,
-      "norm_label": "react"
+      "norm_label": "react",
+      "id": "package_dependencies_react"
     },
     {
       "label": "react-dom",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L35",
-      "id": "package_dependencies_react_dom",
       "community": 4,
-      "norm_label": "react-dom"
+      "norm_label": "react-dom",
+      "id": "package_dependencies_react_dom"
     },
     {
       "label": "react-markdown",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L36",
-      "id": "package_dependencies_react_markdown",
       "community": 4,
-      "norm_label": "react-markdown"
+      "norm_label": "react-markdown",
+      "id": "package_dependencies_react_markdown"
     },
     {
       "label": "react-router-dom",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L37",
-      "id": "package_dependencies_react_router_dom",
       "community": 4,
-      "norm_label": "react-router-dom"
+      "norm_label": "react-router-dom",
+      "id": "package_dependencies_react_router_dom"
     },
     {
       "label": "tsx",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L38",
-      "id": "package_dependencies_tsx",
       "community": 4,
-      "norm_label": "tsx"
+      "norm_label": "tsx",
+      "id": "package_dependencies_tsx"
     },
     {
       "label": "vite",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L39",
-      "id": "package_dependencies_vite",
       "community": 4,
-      "norm_label": "vite"
+      "norm_label": "vite",
+      "id": "package_dependencies_vite"
     },
     {
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L41",
-      "id": "package_devdependencies",
       "community": 4,
-      "norm_label": "devdependencies"
+      "norm_label": "devdependencies",
+      "id": "package_devdependencies"
     },
     {
       "label": "@playwright/test",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L42",
-      "id": "package_devdependencies_playwright_test",
       "community": 4,
-      "norm_label": "@playwright/test"
+      "norm_label": "@playwright/test",
+      "id": "package_devdependencies_playwright_test"
     },
     {
       "label": "@types/cors",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L43",
-      "id": "package_devdependencies_types_cors",
       "community": 4,
-      "norm_label": "@types/cors"
+      "norm_label": "@types/cors",
+      "id": "package_devdependencies_types_cors"
     },
     {
       "label": "@types/express",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L44",
-      "id": "package_devdependencies_types_express",
       "community": 4,
-      "norm_label": "@types/express"
+      "norm_label": "@types/express",
+      "id": "package_devdependencies_types_express"
     },
     {
       "label": "@types/node",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L45",
-      "id": "package_devdependencies_types_node",
       "community": 4,
-      "norm_label": "@types/node"
+      "norm_label": "@types/node",
+      "id": "package_devdependencies_types_node"
     },
     {
       "label": "@types/nodemailer",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L46",
-      "id": "package_devdependencies_types_nodemailer",
       "community": 4,
-      "norm_label": "@types/nodemailer"
+      "norm_label": "@types/nodemailer",
+      "id": "package_devdependencies_types_nodemailer"
     },
     {
       "label": "autoprefixer",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L47",
-      "id": "package_devdependencies_autoprefixer",
       "community": 4,
-      "norm_label": "autoprefixer"
+      "norm_label": "autoprefixer",
+      "id": "package_devdependencies_autoprefixer"
     },
     {
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L48",
-      "id": "package_devdependencies_tailwindcss",
       "community": 4,
-      "norm_label": "tailwindcss"
+      "norm_label": "tailwindcss",
+      "id": "package_devdependencies_tailwindcss"
     },
     {
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L49",
-      "id": "package_devdependencies_typescript",
       "community": 4,
-      "norm_label": "typescript"
+      "norm_label": "typescript",
+      "id": "package_devdependencies_typescript"
     },
     {
       "label": "refactor_server.js",
       "file_type": "code",
       "source_file": "refactor_server.js",
       "source_location": "L1",
-      "id": "refactor_server",
       "community": 33,
-      "norm_label": "refactor_server.js"
+      "norm_label": "refactor_server.js",
+      "id": "refactor_server"
     },
     {
       "label": "content",
       "file_type": "code",
       "source_file": "refactor_server.js",
       "source_location": "L3",
-      "id": "refactor_server_content",
       "community": 33,
-      "norm_label": "content"
+      "norm_label": "content",
+      "id": "refactor_server_content"
     },
     {
       "label": "lines",
       "file_type": "code",
       "source_file": "refactor_server.js",
       "source_location": "L4",
-      "id": "refactor_server_lines",
       "community": 33,
-      "norm_label": "lines"
+      "norm_label": "lines",
+      "id": "refactor_server_lines"
     },
     {
       "label": "autoInitStart",
       "file_type": "code",
       "source_file": "refactor_server.js",
       "source_location": "L7",
-      "id": "refactor_server_autoinitstart",
       "community": 33,
-      "norm_label": "autoinitstart"
+      "norm_label": "autoinitstart",
+      "id": "refactor_server_autoinitstart"
     },
     {
       "label": "cronStart",
       "file_type": "code",
       "source_file": "refactor_server.js",
       "source_location": "L37",
-      "id": "refactor_server_cronstart",
       "community": 33,
-      "norm_label": "cronstart"
+      "norm_label": "cronstart",
+      "id": "refactor_server_cronstart"
     },
     {
       "label": "cronEnd",
       "file_type": "code",
       "source_file": "refactor_server.js",
       "source_location": "L38",
-      "id": "refactor_server_cronend",
       "community": 33,
-      "norm_label": "cronend"
+      "norm_label": "cronend",
+      "id": "refactor_server_cronend"
     },
     {
       "label": "server.ts",
       "file_type": "code",
       "source_file": "server.ts",
       "source_location": "L1",
-      "id": "server",
       "community": 32,
-      "norm_label": "server.ts"
+      "norm_label": "server.ts",
+      "id": "server"
     },
     {
       "label": "startServer()",
       "file_type": "code",
       "source_file": "server.ts",
       "source_location": "L21",
-      "id": "server_startserver",
       "community": 32,
-      "norm_label": "startserver()"
+      "norm_label": "startserver()",
+      "id": "server_startserver"
     },
     {
       "label": "scheduler.ts",
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L1",
-      "id": "workers_scheduler",
       "community": 32,
-      "norm_label": "scheduler.ts"
+      "norm_label": "scheduler.ts",
+      "id": "workers_scheduler"
     },
     {
       "label": "sql",
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L16",
-      "id": "workers_scheduler_sql",
       "community": 32,
-      "norm_label": "sql"
+      "norm_label": "sql",
+      "id": "workers_scheduler_sql"
     },
     {
       "label": "checkSparseData()",
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L23",
-      "id": "workers_scheduler_checksparsedata",
       "community": 32,
-      "norm_label": "checksparsedata()"
+      "norm_label": "checksparsedata()",
+      "id": "workers_scheduler_checksparsedata"
     },
     {
       "label": "refactor_dashboard.js",
@@ -971,7 +998,7 @@
       "file_type": "code",
       "source_file": "populate_containers.ts",
       "source_location": "L1",
-      "community": 32,
+      "community": 12,
       "norm_label": "populate_containers.ts",
       "id": "populate_containers"
     },
@@ -980,7 +1007,7 @@
       "file_type": "code",
       "source_file": "populate_containers.ts",
       "source_location": "L7",
-      "community": 32,
+      "community": 12,
       "norm_label": "run()",
       "id": "populate_containers_run"
     },
@@ -1097,7 +1124,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L17",
-      "community": 5,
+      "community": 12,
       "norm_label": "awscontainersstaticadapter",
       "id": "services_containers_pipeline_awscontainersstaticadapter"
     },
@@ -1106,7 +1133,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L19",
-      "community": 5,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_awscontainersstaticadapter_fetchpricing"
     },
@@ -1115,7 +1142,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L42",
-      "community": 5,
+      "community": 12,
       "norm_label": "azurecontainersstaticadapter",
       "id": "services_containers_pipeline_azurecontainersstaticadapter"
     },
@@ -1124,7 +1151,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L44",
-      "community": 5,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_azurecontainersstaticadapter_fetchpricing"
     },
@@ -1151,7 +1178,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L92",
-      "community": 5,
+      "community": 12,
       "norm_label": "digitaloceancontainersstaticadapter",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter"
     },
@@ -1160,7 +1187,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L94",
-      "community": 5,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter_fetchpricing"
     },
@@ -1169,7 +1196,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L117",
-      "community": 32,
+      "community": 12,
       "norm_label": "oraclecontainersstaticadapter",
       "id": "services_containers_pipeline_oraclecontainersstaticadapter"
     },
@@ -1178,7 +1205,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L119",
-      "community": 32,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_oraclecontainersstaticadapter_fetchpricing"
     },
@@ -1187,7 +1214,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L142",
-      "community": 32,
+      "community": 12,
       "norm_label": "containerspricingpipeline",
       "id": "services_containers_pipeline_containerspricingpipeline"
     },
@@ -1196,7 +1223,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L143",
-      "community": 32,
+      "community": 12,
       "norm_label": ".constructor()",
       "id": "services_containers_pipeline_containerspricingpipeline_constructor"
     },
@@ -1205,7 +1232,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L155",
-      "community": 32,
+      "community": 12,
       "norm_label": ".run()",
       "id": "services_containers_pipeline_containerspricingpipeline_run"
     },
@@ -1520,7 +1547,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L440",
-      "community": 32,
+      "community": 2,
       "norm_label": "digitaloceandbadapter",
       "id": "services_database_pipeline_digitaloceandbadapter"
     },
@@ -1529,7 +1556,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L443",
-      "community": 32,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_digitaloceandbadapter_fetchpricing"
     },
@@ -1556,7 +1583,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L491",
-      "community": 32,
+      "community": 2,
       "norm_label": ".run()",
       "id": "services_database_pipeline_databasepricingpipeline_run"
     },
@@ -1637,7 +1664,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_containers.ts",
       "source_location": "L1",
-      "community": 32,
+      "community": 12,
       "norm_label": "populate_containers.ts",
       "id": "services_populate_containers"
     },
@@ -1646,7 +1673,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_containers.ts",
       "source_location": "L4",
-      "community": 32,
+      "community": 12,
       "norm_label": "main()",
       "id": "services_populate_containers_main"
     },
@@ -1655,7 +1682,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 32,
       "norm_label": "pricing_pipeline.ts",
       "id": "services_pricing_pipeline"
     },
@@ -1664,7 +1691,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L8",
-      "community": 0,
+      "community": 12,
       "norm_label": "pricingrecord",
       "id": "services_pricing_pipeline_pricingrecord"
     },
@@ -1970,7 +1997,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L57",
-      "community": 0,
+      "community": 5,
       "norm_label": "gcpserverlessadapter",
       "id": "services_serverless_pipeline_gcpserverlessadapter"
     },
@@ -1979,7 +2006,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L60",
-      "community": 0,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_gcpserverlessadapter_fetchpricing"
     },
@@ -2033,7 +2060,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L141",
-      "community": 0,
+      "community": 12,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing"
     },
@@ -2042,7 +2069,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L165",
-      "community": 0,
+      "community": 12,
       "norm_label": "serverlesspricingpipeline",
       "id": "services_serverless_pipeline_serverlesspricingpipeline"
     },
@@ -2051,7 +2078,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L166",
-      "community": 0,
+      "community": 12,
       "norm_label": ".constructor()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_constructor"
     },
@@ -2060,7 +2087,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L181",
-      "community": 0,
+      "community": 12,
       "norm_label": ".run()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_run"
     },
@@ -2069,7 +2096,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L339",
-      "community": 0,
+      "community": 12,
       "norm_label": ".getawsserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getawsserverlessstaticrecords"
     },
@@ -2078,7 +2105,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L347",
-      "community": 0,
+      "community": 12,
       "norm_label": ".getgcpserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getgcpserverlessstaticrecords"
     },
@@ -2087,7 +2114,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L355",
-      "community": 0,
+      "community": 12,
       "norm_label": ".getazureserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getazureserverlessstaticrecords"
     },
@@ -2096,7 +2123,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L363",
-      "community": 0,
+      "community": 12,
       "norm_label": ".getdigitaloceanserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getdigitaloceanserverlessstaticrecords"
     },
@@ -2105,7 +2132,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L371",
-      "community": 0,
+      "community": 12,
       "norm_label": ".getoracleserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
     },
@@ -3149,7 +3176,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 32,
       "norm_label": "digitalocean_instances.ts",
       "id": "config_digitalocean_instances"
     },
@@ -3158,7 +3185,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L9",
-      "community": 5,
+      "community": 32,
       "norm_label": "digitaloceaninstanceconfig",
       "id": "config_digitalocean_instances_digitaloceaninstanceconfig"
     },
@@ -3167,7 +3194,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L20",
-      "community": 5,
+      "community": 32,
       "norm_label": "digitalocean_instances",
       "id": "config_digitalocean_instances_digitalocean_instances"
     },
@@ -3221,7 +3248,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 32,
       "norm_label": "gcp_instances.ts",
       "id": "config_gcp_instances"
     },
@@ -3230,7 +3257,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L21",
-      "community": 5,
+      "community": 32,
       "norm_label": "gcpinstanceconfig",
       "id": "config_gcp_instances_gcpinstanceconfig"
     },
@@ -3239,7 +3266,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L33",
-      "community": 5,
+      "community": 32,
       "norm_label": "gcp_instances",
       "id": "config_gcp_instances_gcp_instances"
     },
@@ -3293,7 +3320,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 32,
       "norm_label": "oracle_instances.ts",
       "id": "config_oracle_instances"
     },
@@ -3302,7 +3329,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L19",
-      "community": 5,
+      "community": 32,
       "norm_label": "oracleinstanceconfig",
       "id": "config_oracle_instances_oracleinstanceconfig"
     },
@@ -3311,7 +3338,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L31",
-      "community": 5,
+      "community": 32,
       "norm_label": "oracle_instances",
       "id": "config_oracle_instances_oracle_instances"
     },
@@ -3710,15 +3737,6 @@
       "community": 19,
       "norm_label": "failedtests",
       "id": "test_results_last_run_failedtests"
-    },
-    {
-      "label": "filters.spec.ts",
-      "file_type": "code",
-      "source_file": "tests/filters.spec.ts",
-      "source_location": "L1",
-      "community": 27,
-      "norm_label": "filters.spec.ts",
-      "id": "tests_filters_spec"
     },
     {
       "label": "tsconfig.json",
@@ -4953,6 +4971,16 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "tests/api_validation.spec.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_api_validation_spec",
+      "target": "tests_api_validation_spec_product_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "package.json",
       "source_location": "L15",
       "weight": 1.0,
@@ -5096,9 +5124,9 @@
       "source_file": "package.json",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_scripts",
-      "target": "package_scripts_worker",
-      "confidence_score": 1.0
+      "target": "package_scripts_worker"
     },
     {
       "relation": "contains",
@@ -5416,9 +5444,9 @@
       "source_file": "refactor_server.js",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "refactor_server",
-      "target": "refactor_server_autoinitstart",
-      "confidence_score": 1.0
+      "target": "refactor_server_autoinitstart"
     },
     {
       "relation": "contains",
@@ -5436,9 +5464,9 @@
       "source_file": "refactor_server.js",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "refactor_server",
-      "target": "refactor_server_cronend",
-      "confidence_score": 1.0
+      "target": "refactor_server_cronend"
     },
     {
       "relation": "contains",
@@ -5446,9 +5474,9 @@
       "source_file": "refactor_server.js",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "refactor_server",
-      "target": "refactor_server_cronstart",
-      "confidence_score": 1.0
+      "target": "refactor_server_cronstart"
     },
     {
       "relation": "contains",
@@ -5456,9 +5484,9 @@
       "source_file": "refactor_server.js",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "refactor_server",
-      "target": "refactor_server_lines",
-      "confidence_score": 1.0
+      "target": "refactor_server_lines"
     },
     {
       "relation": "contains",
@@ -5664,9 +5692,9 @@
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workers_scheduler",
-      "target": "services_mailer_sendpricedriftemail",
-      "confidence_score": 1.0
+      "target": "services_mailer_sendpricedriftemail"
     },
     {
       "relation": "imports",
@@ -5675,9 +5703,9 @@
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workers_scheduler",
-      "target": "services_mailer_sendstalenessemail",
-      "confidence_score": 1.0
+      "target": "services_mailer_sendstalenessemail"
     },
     {
       "relation": "imports",
@@ -5686,9 +5714,9 @@
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workers_scheduler",
-      "target": "services_mailer_staledataalert",
-      "confidence_score": 1.0
+      "target": "services_mailer_staledataalert"
     },
     {
       "relation": "imports",
@@ -5697,9 +5725,9 @@
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workers_scheduler",
-      "target": "services_pricing_pipeline_pricedriftresult",
-      "confidence_score": 1.0
+      "target": "services_pricing_pipeline_pricedriftresult"
     },
     {
       "relation": "imports",
@@ -5708,9 +5736,9 @@
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workers_scheduler",
-      "target": "services_pricing_pipeline_pricingpipeline",
-      "confidence_score": 1.0
+      "target": "services_pricing_pipeline_pricingpipeline"
     },
     {
       "relation": "contains",
@@ -5718,9 +5746,9 @@
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workers_scheduler",
-      "target": "workers_scheduler_checksparsedata",
-      "confidence_score": 1.0
+      "target": "workers_scheduler_checksparsedata"
     },
     {
       "relation": "contains",
@@ -5728,9 +5756,9 @@
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "workers_scheduler",
-      "target": "workers_scheduler_sql",
-      "confidence_score": 1.0
+      "target": "workers_scheduler_sql"
     },
     {
       "relation": "contains",
@@ -12188,5 +12216,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "ac86bf0325c046fc5f379ebf08f9378c9a4cb6f5"
+  "built_at_commit": "77f24a981b72aa54a69910087a47d0dbdc37e79c"
 }
