@@ -175,8 +175,8 @@
     "semantic_hash": "1623827e682d421b053439795d36956a"
   },
   "src/services/ingest.ts": {
-    "mtime": 1780606397.7676296,
-    "ast_hash": "bf2ccb60aaa5676af27557ff9f842bf6",
+    "mtime": 1780607244.079032,
+    "ast_hash": "c8acf350094439fcbab96019e87f800d",
     "semantic_hash": ""
   },
   "src/services/mailer.ts": {
