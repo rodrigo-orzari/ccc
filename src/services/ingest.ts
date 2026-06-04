@@ -9,6 +9,14 @@ import { ContainersPricingPipeline } from './containers_pipeline.js';
 import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline.js';
 import { NetworkingPricingPipeline } from './networking_pipeline.js';
 
+function parseDbUrl(url: string) {
+  const isNeon = url.includes('neon.tech');
+  return {
+    connectionString: url,
+    ssl: { rejectUnauthorized: isNeon },
+  };
+}
+
 async function main() {
   const dbUrl = process.env.DATABASE_URL;
 
@@ -17,7 +25,7 @@ async function main() {
     process.exit(1);
   }
 
-  const pool = new Pool({ connectionString: dbUrl });
+  const pool = new Pool(parseDbUrl(dbUrl));
 
   try {
     console.log('🚀 Starting pricing data ingestion...\n');
