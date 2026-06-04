@@ -11,5 +11,8 @@ export default defineConfig(() => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      target: ['es2020', 'chrome100', 'firefox100', 'safari15'],
+    },
   };
 });
