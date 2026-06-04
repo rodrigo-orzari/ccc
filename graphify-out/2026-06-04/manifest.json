@@ -35,9 +35,9 @@
     "semantic_hash": "da4f78be01bbe67a8085d0c1f148b589"
   },
   "server.ts": {
-    "mtime": 1780375016.0684834,
-    "ast_hash": "557c8193163bec88dc254f995918b86e",
-    "semantic_hash": "557c8193163bec88dc254f995918b86e"
+    "mtime": 1780604376.1268632,
+    "ast_hash": "51ee4f6a14935ee4dbd58d73b669d819",
+    "semantic_hash": ""
   },
   "src/App.tsx": {
     "mtime": 1778027801.8243022,
@@ -185,9 +185,9 @@
     "semantic_hash": "96fcdece20f945c0bf1c506d4f889ee1"
   },
   "src/services/networking_pipeline.ts": {
-    "mtime": 1780368861.5063956,
-    "ast_hash": "a019a2d3a688b417b0e3ea29d695cfa3",
-    "semantic_hash": "a019a2d3a688b417b0e3ea29d695cfa3"
+    "mtime": 1780601812.128788,
+    "ast_hash": "844f74e993aaf899daed4e627a1a8a93",
+    "semantic_hash": ""
   },
   "src/services/populate_containers.ts": {
     "mtime": 1780367038.2139418,
