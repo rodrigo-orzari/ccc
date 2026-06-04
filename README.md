@@ -57,7 +57,9 @@ _ccc/
 │   ├── tsconfig.json                  # TypeScript compiler options
 │   ├── package.json                   # Dependencies & npm scripts
 │   ├── index.html                     # HTML entry point
-│   └── .env.example                   # Environment variables template
+│   ├── .env.example                   # Environment variables template
+│   ├── populate_containers.ts         # Script to populate containers
+│   └── populate_serverless.ts         # Script to populate serverless
 │
 ├── 📖 Documentation (START HERE)
 │   ├── README.md                      # This file — project overview
@@ -65,7 +67,10 @@ _ccc/
 │   ├── ARCHITECTURE_DIAGRAMS.md       # Visual ASCII diagrams (13 diagrams)
 │   ├── OPERATIONS_RUNBOOK.md          # Deployment, security, troubleshooting guide
 │   ├── SECURITY_AUDIT.md              # Security audit findings & recommendations
-│   └── SECURITY_FIXES.md              # Implementation details of security fixes
+│   ├── SECURITY_FIXES.md              # Implementation details of security fixes
+│   ├── SERVERLESS_IMPLEMENTATION_PLAN.md # Serverless implementation plan
+│   ├── DATA_POPULATION_GUIDE.md       # Data population guide
+│   └── IMPLEMENTATION_SUMMARY.md      # Summary of latest implementations
 │
 ├── src/
 │   ├── main.tsx                       # React root render
@@ -79,6 +84,11 @@ _ccc/
 │   │   ├── pricing_pipeline.ts        # VM instance pricing aggregation
 │   │   ├── database_pipeline.ts       # Database product pricing
 │   │   ├── serverless_pipeline.ts     # Serverless compute pricing
+│   │   ├── containers_pipeline.ts     # Containers compute pricing
+│   │   ├── networking_pipeline.ts     # Networking products pricing
+│   │   ├── serverless_adapters_live.ts# Live adapters for Serverless
+│   │   ├── containers_adapters_live.ts# Live adapters for Containers
+│   │   ├── populate_containers.ts     # Container DB population script
 │   │   ├── mailer.ts                  # Email notifications (SMTP)
 │   │   └── ingest.ts                  # CLI tool for manual pricing fetch
 │   │
@@ -86,6 +96,13 @@ _ccc/
 │   │   ├── aws_serverless.ts          # Lambda pricing fallback
 │   │   ├── azure_serverless.ts        # Azure Functions pricing fallback
 │   │   ├── gcp_serverless.ts          # Cloud Functions pricing fallback
+│   │   ├── digitalocean_serverless.ts # DigitalOcean Functions config
+│   │   ├── oracle_serverless.ts       # Oracle Functions config
+│   │   ├── aws_containers.ts          # AWS containers pricing config
+│   │   ├── azure_containers.ts        # Azure containers pricing config
+│   │   ├── gcp_containers.ts          # GCP containers pricing config
+│   │   ├── digitalocean_containers.ts # DigitalOcean containers config
+│   │   ├── oracle_containers.ts       # Oracle containers config
 │   │   ├── database_instances.ts      # Database products config
 │   │   ├── digitalocean_instances.ts  # DigitalOcean instances config
 │   │   ├── gcp_instances.ts           # Google Cloud instances config
@@ -232,6 +249,8 @@ In [pricing_pipeline.ts](./src/services/pricing_pipeline.ts), `PricingPipeline` 
 
 `DatabasePricingPipeline` extends this behavior to database products. It maps relational components into custom JSONB `attributes` structures containing engine versions, storage types, HA modes, and deployment options.
 
+Similarly, `ServerlessPipeline`, `ContainersPipeline`, and `NetworkingPipeline` operate on their respective domain data, aggregating metadata like supported languages for Serverless, or orchestrator types for Containers, into the shared JSONB `attributes`.
+
 **For detailed pipeline diagrams and flow**, see [ARCHITECTURE_DIAGRAMS.md — Data Ingestion Pipeline](./ARCHITECTURE_DIAGRAMS.md) and [PROJECT_ANALYSIS.md — Section 4](./PROJECT_ANALYSIS.md).
 
 ### C. Backend API Routes
@@ -245,7 +264,7 @@ In [pricing_pipeline.ts](./src/services/pricing_pipeline.ts), `PricingPipeline` 
 
 ### D. The Comparative Frontend Dashboard
 [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) binds this dataset to the UI:
-* **Product Views**: Users can toggle between `Virtual Machines` and `Databases` which dynamically adjusts filters (e.g. OS and CPU vendor filters for VMs vs. Engine, Deployment Type, and HA Mode filters for DBs).
+* **Product Views**: Users can toggle between `Virtual Machines`, `Databases`, `Serverless`, `Containers`, `Networking`, and `Data & Analytics`, which dynamically adjusts available filters depending on the selected product (e.g. OS and CPU vendor filters for VMs vs. Execution Model and Cold Start filters for Serverless).
 * **Sidebar Controls**: Features multi-select pills (Providers, Geographies, Engines, categories) and responsive range sliders (`RangeSlider`) to narrow down configurations by minimum/maximum values.
 * **Sortable Dense Grid**: Renders comparison rows in an interactive table supporting multi-column sorting (e.g., sorting by price, vCPUs, or memory) and drag-to-resize column boundaries. Column sizes are persistent, stored in local storage for subsequent visits.
 
