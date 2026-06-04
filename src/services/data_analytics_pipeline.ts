@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Pool } from 'pg';
+import type { Sql } from 'postgres';
 import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
 import { DATABRICKS_INSTANCES, DATABRICKS_AWS_REGION, DATABRICKS_GCP_REGION } from '../config/databricks_instances.js';
 import { SNOWFLAKE_INSTANCES, SNOWFLAKE_AWS_REGION, SNOWFLAKE_AZURE_REGION, SNOWFLAKE_GCP_REGION } from '../config/snowflake_instances.js';
@@ -279,8 +279,8 @@ export class SynapseAzureAdapter extends BaseAdapter {
 // ─── Data Analytics Pricing Pipeline ───────────────────────────────────────────
 
 export class DataAnalyticsPricingPipeline extends PricingPipeline {
-  constructor(pool: Pool) {
-    super(pool);
+  constructor(sql: Sql) {
+    super(sql);
     // Overwrite the base adapters with our data analytics adapters
     this.adapters = [
       new DatabricksStaticAdapter('aws'),

@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
-import pg from 'pg';
+import postgres from 'postgres';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import cron from 'node-cron';
@@ -18,37 +18,21 @@ import { sendPriceDriftEmail, sendStalenessEmail, StaleDataAlert } from './src/s
 
 dotenv.config();
 
-const { Pool } = pg;
 
 async function startServer() {
   const app = express();
   const PORT = process.env.PORT || 3000;
 
-  // Parse DATABASE_URL manually so pg never sees the sslmode parameter,
-  // which in pg 8.x overrides rejectUnauthorized when set to 'require'.
-  function parseDbUrl(url: string) {
-    const u = new URL(url);
-    return {
-      host: u.hostname,
-      port: u.port ? parseInt(u.port) : 5432,
-      database: u.pathname.replace(/^\//, ''),
-      user: decodeURIComponent(u.username),
-      password: decodeURIComponent(u.password),
-    };
-  }
-
-  // PostgreSQL Connection Pool
-  const pool = new Pool({
-    ...(process.env.DATABASE_URL ? parseDbUrl(process.env.DATABASE_URL) : {}),
-    ssl: process.env.DATABASE_CA_CERT
-      ? {
-          rejectUnauthorized: false,
-          // Use the provided CA certificate (base64-encoded)
-          ca: [Buffer.from(process.env.DATABASE_CA_CERT, 'base64')],
-        }
-      : {
-          rejectUnauthorized: true,
-        },
+  // PostgreSQL Connection via Postgres.js
+  const sql = postgres(process.env.DATABASE_URL || '', {
+    ssl: process.env.DATABASE_CA_CERT ? {
+      rejectUnauthorized: false,
+      ca: Buffer.from(process.env.DATABASE_CA_CERT, 'base64')
+    } : {
+      rejectUnauthorized: false
+    },
+    max: 10,
+    idle_timeout: 20
   });
 
   // Security Hardening: Helmet adds standard HTTP security headers
@@ -113,11 +97,10 @@ async function startServer() {
       const schemaPath = path.join(process.cwd(), 'src/db/schema.sql');
       if (!fs.existsSync(schemaPath)) return false;
       const schema = fs.readFileSync(schemaPath, 'utf8');
-      const client = await pool.connect();
-      await client.query(schema);
+      await sql.unsafe(schema);
 
       // Safety: Add columns if they don't exist (since CREATE TABLE IF NOT EXISTS doesn't update schema)
-      await client.query(`
+      await sql.unsafe(`
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS cpu_vendor VARCHAR(50);
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS gpu_count INTEGER DEFAULT 0;
         ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS category VARCHAR(50);
@@ -127,14 +110,14 @@ async function startServer() {
 
       // Tag all known compute services so productType filtering works correctly.
       // Database services get tagged 'database' when DatabasePricingPipeline runs.
-      await client.query(`
+      await sql.unsafe(`
         UPDATE services SET category = 'compute'
         WHERE name IN ('EC2', 'Virtual Machines', 'Compute Engine', 'OCI Compute', 'Droplets')
           AND (category IS NULL OR category = 'Compute');
       `);
 
       // Update provider names to preferred display names
-      await client.query(`
+      await sql.unsafe(`
         UPDATE providers SET name = 'AWS' WHERE slug = 'aws';
         UPDATE providers SET name = 'Azure' WHERE slug = 'azure';
         UPDATE providers SET name = 'Google' WHERE slug = 'gcp';
@@ -162,7 +145,6 @@ async function startServer() {
         WHERE category = 'GPU';
       `);
 
-      client.release();
       console.log('✅ Database schema initialized successfully.');
       return true;
     } catch (err) {
@@ -190,22 +172,19 @@ async function startServer() {
 
         // In development, check if we have data, if not, trigger a fetch "now"
         try {
-          const client = await pool.connect();
-          const res = await client.query(`
+          const res = await sql.unsafe(`
             SELECT p.slug, COUNT(pr.id) as count
             FROM providers p
             LEFT JOIN services s ON s.provider_id = p.id
             LEFT JOIN pricing_records pr ON pr.service_id = s.id
             GROUP BY p.slug
           `);
-          client.release();
-
-          const needsFetch = res.rows.some(r => parseInt(r.count) < 5);
+          const needsFetch = res.some(r => parseInt(r.count) < 5);
 
           if (needsFetch) {
             console.log('🚀 Some providers have sparse data. Triggering pricing update...');
             pipelineStatus.running = true;
-            const pipeline = new PricingPipeline(pool);
+            const pipeline = new PricingPipeline(sql as any);
             pipeline.run().then(results => {
               pipelineStatus.running = false;
               pipelineStatus.lastRun = new Date();
@@ -230,7 +209,7 @@ async function startServer() {
     console.log('🕒 Starting scheduled pricing pipeline update...');
     try {
       const allDriftAlerts: PriceDriftResult[] = [];
-      const pipeline = new PricingPipeline(pool);
+      const pipeline = new PricingPipeline(sql as any);
       const results = await pipeline.run();
       for (const r of results) {
         if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
@@ -247,8 +226,7 @@ async function startServer() {
 
     // Staleness check — alert if any static-config service hasn't been updated in >7 days
     try {
-      const client = await pool.connect();
-      const staleRes = await client.query<{ provider: string; service: string; data_source: string; last_updated: Date }>(`
+      const staleRes = await sql.unsafe(`
         SELECT p.slug AS provider, s.name AS service, pr.data_source, MAX(pr.updated_at) AS last_updated
         FROM pricing_records pr
         JOIN services s ON pr.service_id = s.id
@@ -257,10 +235,8 @@ async function startServer() {
         GROUP BY p.slug, s.name, pr.data_source
         HAVING MAX(pr.updated_at) < NOW() - INTERVAL '7 days'
       `);
-      client.release();
-
-      if (staleRes.rows.length > 0) {
-        const staleAlerts: StaleDataAlert[] = staleRes.rows.map(row => ({
+      if (staleRes.length > 0) {
+        const staleAlerts: StaleDataAlert[] = staleRes.map(row => ({
           provider: row.provider,
           service: row.service,
           dataSource: row.data_source,
@@ -284,20 +260,13 @@ async function startServer() {
   app.get('/api/health', apiLimiter, async (req, res) => {
     try {
       const productType = (req.query.productType as string) || '';
-      const client = await pool.connect();
-
       // Apply all filters via buildPricingFilters so the per-provider totals
       // reflect the current filter state. This ensures the "of X" numbers in the UI
       // match the filtered pool.
       const { whereClause, values } = buildPricingFilters(req.query);
 
-      const countRes = await client.query(
-        `SELECT COUNT(*) FROM pricing_records pr
-         JOIN services s ON pr.service_id = s.id
-         WHERE 1=1 ${whereClause}`,
-        values
-      );
-      const providerRes = await client.query(`
+      const countRes = await sql.unsafe(`SELECT COUNT(*) FROM pricing_records pr JOIN services s ON pr.service_id = s.id WHERE 1=1 ${whereClause}`, values);
+      const providerRes = await sql.unsafe(`
         SELECT p.slug, COUNT(pr.id) as count
         FROM providers p
         LEFT JOIN services s ON s.provider_id = p.id
@@ -305,14 +274,13 @@ async function startServer() {
         WHERE 1=1 ${whereClause}
         GROUP BY p.slug
       `, values);
-      const lastUpdatedRes = await client.query('SELECT MAX(updated_at) as last_updated FROM pricing_records');
-      client.release();
+      const lastUpdatedRes = await sql.unsafe('SELECT MAX(updated_at) as last_updated FROM pricing_records');
       res.json({
         status: 'ok',
         database: 'connected',
-        total_records: parseInt(countRes.rows[0].count),
-        by_provider: providerRes.rows,
-        last_updated: lastUpdatedRes.rows[0].last_updated
+        total_records: parseInt(countRes[0].count),
+        by_provider: providerRes,
+        last_updated: lastUpdatedRes[0].last_updated
       });
     } catch (err: any) {
       res.status(500).json({ status: 'error', message: err.message });
@@ -340,7 +308,7 @@ async function startServer() {
       const allDriftAlerts: PriceDriftResult[] = [];
 
       if (type === 'all' || type === 'compute') {
-        const pipeline = new PricingPipeline(pool);
+        const pipeline = new PricingPipeline(sql as any);
         const computeResults = await pipeline.run();
         for (const r of computeResults) {
           if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
@@ -349,7 +317,7 @@ async function startServer() {
       }
 
       if (type === 'all' || type === 'database') {
-        const dbPipeline = new DatabasePricingPipeline(pool);
+        const dbPipeline = new DatabasePricingPipeline(sql as any);
         const dbResults = await dbPipeline.run();
         for (const r of dbResults) {
           if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
@@ -358,7 +326,7 @@ async function startServer() {
       }
 
       if (type === 'all' || type === 'serverless') {
-        const serverlessPipeline = new ServerlessPricingPipeline(pool);
+        const serverlessPipeline = new ServerlessPricingPipeline(sql as any);
         const serverlessResults = await serverlessPipeline.run();
         for (const r of serverlessResults) {
           if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
@@ -367,7 +335,7 @@ async function startServer() {
       }
 
       if (type === 'all' || type === 'networking') {
-        const networkingPipeline = new NetworkingPricingPipeline(pool);
+        const networkingPipeline = new NetworkingPricingPipeline(sql as any);
         const networkingResults = await networkingPipeline.run();
         for (const r of networkingResults) {
           if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
@@ -376,7 +344,7 @@ async function startServer() {
       }
 
       if (type === 'all' || type === 'containers') {
-        const containersPipeline = new ContainersPricingPipeline(pool);
+        const containersPipeline = new ContainersPricingPipeline(sql as any);
         const containersResults = await containersPipeline.run();
         for (const r of containersResults) {
           if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
@@ -769,10 +737,8 @@ async function startServer() {
         WHERE 1=1 ${whereClause}
         GROUP BY p.slug
       `;
-      const client = await pool.connect();
-      const result = await client.query(query, values);
-      client.release();
-      res.json(result.rows);
+      const result = await sql.unsafe(query, values);
+      res.json(result);
     } catch (err: any) {
       console.error('Counts API error:', err);
       res.status(500).json({ error: 'Failed to fetch counts', details: err.message });
@@ -853,12 +819,10 @@ async function startServer() {
         query += ` ORDER BY pr.price_per_unit ASC LIMIT 1000`;
       }
 
-      const client = await pool.connect();
       console.log('SQL Query:', query);
       console.log('SQL Params:', values);
-      const result = await client.query(query, values);
-      client.release();
-      res.json(result.rows);
+      const result = await sql.unsafe(query, values);
+      res.json(result);
     } catch (err: any) {
       console.error('API Error:', err);
       res.status(500).json({ error: 'Failed to fetch pricing data', details: err.message });

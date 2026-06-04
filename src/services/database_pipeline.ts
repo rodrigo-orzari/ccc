@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Pool } from 'pg';
+import type { Sql } from 'postgres';
 import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
 import {
   GCP_CLOUD_SQL_INSTANCES,
@@ -474,8 +474,8 @@ export class DigitalOceanDBAdapter extends BaseAdapter {
 // ─── DatabasePricingPipeline ───────────────────────────────────────────────────
 
 export class DatabasePricingPipeline extends PricingPipeline {
-  constructor(pool: Pool) {
-    super(pool);
+  constructor(sql: Sql) {
+    super(sql);
     // Replace the compute adapters with database adapters
     this.adapters = [
       new GCPCloudSQLAdapter(),

@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import type { Sql } from 'postgres';
 import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
 import { AWSLambdaLiveAdapter, GCPCloudRunLiveAdapter, AzureFunctionsLiveAdapter } from './serverless_adapters_live.js';
 import {
@@ -163,8 +163,8 @@ export class OracleServerlessAdapter extends BaseAdapter {
 }
 
 export class ServerlessPricingPipeline extends PricingPipeline {
-  constructor(pool: Pool) {
-    super(pool);
+  constructor(sql: Sql) {
+    super(sql);
     // Use live API adapters with fallback to static configs
     // Phase 1: AWS Lambda (live API)
     // Phase 2: GCP Cloud Run (live API - placeholder)
