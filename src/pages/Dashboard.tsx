@@ -767,29 +767,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden transition-colors duration-300">
 
-      {/* Top Navbar */}
-      <nav className="h-14 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center px-4 justify-between bg-white dark:bg-[#000000] shrink-0 z-20">
-        <div className="flex items-center gap-8">
-          <Link to="/" className="flex items-center gap-3">
-            <div className="flex items-center">
-              <img src="/logo.png" alt="Compare Cloud Costs" className="h-10 w-auto" />
-            </div>
-            <div className="w-px h-6 bg-[#e5e5e5] dark:bg-[#262626] mx-1 hidden sm:block" />
-            <span className="text-xs text-[#737373] hidden lg:block">
-              Multi-cloud price comparison made it easier.
-            </span>
-          </Link>
-        </div>
 
-        <div className="flex items-center gap-4">
-          {dbStatus?.lastUpdated && (
-            <span className="text-xs text-[#737373] flex items-center gap-1">
-              Price information as of {new Date(dbStatus.lastUpdated).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-            </span>
-          )}
-
-        </div>
-      </nav>
 
       {/* Capabilities Sub-header */}
       <div className="h-10 border-b border-[#e5e5e5] dark:border-[#262626] bg-[#fcfcfc] dark:bg-[#080808] flex items-center px-4 overflow-x-auto no-scrollbar shrink-0">
