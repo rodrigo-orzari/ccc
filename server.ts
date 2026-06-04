@@ -445,6 +445,8 @@ async function startServer() {
         orchestrator, computeType, architecture,
         // Data & Analytics filters
         tier,
+        // Networking filters
+        networkingService,
       } = query;
 
       const conditions: string[] = [];
@@ -540,6 +542,13 @@ async function startServer() {
       if (languages.length > 0) {
         conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
         values.push(languages);
+      }
+
+      // ✅ Validate networking service filter
+      const networkingServices = parseFilterList(networkingService as string);
+      if (networkingServices.length > 0) {
+        conditions.push(`s.name = ANY($${paramCount++})`);
+        values.push(networkingServices);
       }
 
       // ✅ Validate serverless-specific cold start filter

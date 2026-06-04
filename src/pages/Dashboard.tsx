@@ -124,6 +124,7 @@ const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
 const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned'];
 const CONTAINERS_ARCHITECTURES = ['x86_64', 'ARM64'];
 const CONTAINERS_BILLING_GRANULARITY = ['Per Second', 'Per Hour'];
+const NETWORKING_SERVICES = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4'];
 
 // Data-Analytics-view constants
 const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'BigQuery', 'Redshift', 'Synapse'];
@@ -231,6 +232,7 @@ export default function Dashboard() {
   const [selectedContainersComputeTypes, setSelectedContainersComputeTypes] = useState<string[]>([...CONTAINERS_COMPUTE_TYPES]);
   const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...CONTAINERS_ARCHITECTURES]);
   const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...CONTAINERS_BILLING_GRANULARITY]);
+  const [selectedNetworkingServices, setSelectedNetworkingServices] = useState<string[]>([...NETWORKING_SERVICES]);
   const [containersGpuIncluded, setContainersGpuIncluded] = useState(true);
 
   // Data-Analytics-specific filter state
@@ -479,6 +481,10 @@ export default function Dashboard() {
       if (!containersGpuIncluded) {
         params.append('gpu', 'false');
       }
+    } else if (activeProductType === 'networking') {
+      if (selectedNetworkingServices.length > 0 && selectedNetworkingServices.length < NETWORKING_SERVICES.length) {
+        params.append('networkingService', selectedNetworkingServices.join(','));
+      }
     }
 
     params.append('minVcpu', vCpuRange.min.toString());
@@ -673,6 +679,10 @@ export default function Dashboard() {
         }
         if (!containersGpuIncluded) {
           baseParams.append('gpu', 'false');
+        }
+      } else if (activeProductType === 'networking') {
+        if (selectedNetworkingServices.length > 0 && selectedNetworkingServices.length < NETWORKING_SERVICES.length) {
+          baseParams.append('networkingService', selectedNetworkingServices.join(','));
         }
       } else if (isDataAnalytics) {
         // Data-Analytics-specific filters
@@ -1544,6 +1554,36 @@ export default function Dashboard() {
               </>
             )}
 
+            {activeProductType === 'networking' && (
+              <>
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('networkingService')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.networkingService ? '' : '-rotate-90'}`} />
+                        Service <Tooltip text="Networking Service Type"><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                    <button onClick={() => { selectedNetworkingServices.length === NETWORKING_SERVICES.length ? setSelectedNetworkingServices([]) : setSelectedNetworkingServices([...NETWORKING_SERVICES]); }} className={`text-[10px] font-bold uppercase transition-colors ${selectedNetworkingServices.length === NETWORKING_SERVICES.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}>
+                      {selectedNetworkingServices.length === NETWORKING_SERVICES.length ? 'Clear All' : 'Select All'}
+                    </button>
+                  </div>
+                  {expanded.networkingService && (
+                  <div className="flex flex-wrap gap-2">
+                    {NETWORKING_SERVICES.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedNetworkingServices, setSelectedNetworkingServices, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedNetworkingServices.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+              </>
+            )}
+
             {activeProductType === 'data-analytics' && (
               <>
                 {/* ── Data-Analytics: Engine ── */}
@@ -1660,25 +1700,29 @@ export default function Dashboard() {
               </div>
               {expanded.specs && (
               <div className="space-y-8 px-1">
-                <div className="space-y-2">
-                  <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
-                  <RangeSlider
-                    min={DEFAULT_VCPU_RANGE.min}
-                    max={DEFAULT_VCPU_RANGE.max}
-                    value={vCpuRange}
-                    onChange={setVCpuRange}
-                  />
-                </div>
+                {activeProductType !== 'networking' && (
+                  <>
+                    <div className="space-y-2">
+                      <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
+                      <RangeSlider
+                        min={DEFAULT_VCPU_RANGE.min}
+                        max={DEFAULT_VCPU_RANGE.max}
+                        value={vCpuRange}
+                        onChange={setVCpuRange}
+                      />
+                    </div>
 
-                <div className="space-y-2">
-                  <div className="text-[10px] font-bold text-[#737373]">Memory (GB)</div>
-                  <RangeSlider
-                    min={DEFAULT_MEMORY_RANGE.min}
-                    max={DEFAULT_MEMORY_RANGE.max}
-                    value={memoryRange}
-                    onChange={setMemoryRange}
-                  />
-                </div>
+                    <div className="space-y-2">
+                      <div className="text-[10px] font-bold text-[#737373]">Memory (GB)</div>
+                      <RangeSlider
+                        min={DEFAULT_MEMORY_RANGE.min}
+                        max={DEFAULT_MEMORY_RANGE.max}
+                        value={memoryRange}
+                        onChange={setMemoryRange}
+                      />
+                    </div>
+                  </>
+                )}
 
                 <div className="space-y-2">
                   <div className="text-[10px] font-bold text-[#737373]">Hourly price ($)</div>
@@ -1767,13 +1811,13 @@ export default function Dashboard() {
                       setSelectedProviders([p.id]);
                     }
                   }}
-                  className={`bg-white dark:bg-[#000000] p-4 group transition-all border-b-2 ${
+                  className={`bg-white dark:bg-[#000000] py-2.5 px-4 group transition-all border-b-2 ${
                     p.soon ? 'cursor-default opacity-40 grayscale' : 'cursor-pointer'
                   } ${
                     isSelected ? 'border-black dark:border-white' : 'border-transparent opacity-50 grayscale hover:grayscale-0 hover:opacity-100'
                   }`}
                 >
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-1">
                     {/* Provider label uses the same rounded-pill treatment as
                         the Provider column in the table — same colour token,
                         same shape, same uppercase styling — so the cards and
@@ -1787,7 +1831,7 @@ export default function Dashboard() {
                     {p.soon && <span className="text-[7px] font-bold bg-[#737373] text-white px-1 rounded ml-1 border border-white/20">SOON</span>}
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-black dark:text-white">{p.soon ? '-' : displayCount.toLocaleString()}</span>
+                    <span className="text-2xl font-bold text-black dark:text-white">{p.soon ? '-' : displayCount.toLocaleString()}</span>
 
                   </div>
                 </div>
