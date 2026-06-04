@@ -175,9 +175,9 @@
     "semantic_hash": "1623827e682d421b053439795d36956a"
   },
   "src/services/ingest.ts": {
-    "mtime": 1780367038.1420202,
-    "ast_hash": "e0d165053568d7733a34770f63d63114",
-    "semantic_hash": "e0d165053568d7733a34770f63d63114"
+    "mtime": 1780604885.856564,
+    "ast_hash": "21b5feb6af9a44f413edde0f5303c1aa",
+    "semantic_hash": ""
   },
   "src/services/mailer.ts": {
     "mtime": 1778090774.6264212,
@@ -297,6 +297,21 @@
   "public/logo.png": {
     "mtime": 1780598214.9505491,
     "ast_hash": "ea69c479522e266ac88d8c30a2890773",
+    "semantic_hash": ""
+  },
+  "src/config/databricks_instances.ts": {
+    "mtime": 1780604779.1106527,
+    "ast_hash": "f0c314e6a6c66f7499d75de553a8b652",
+    "semantic_hash": ""
+  },
+  "src/config/snowflake_instances.ts": {
+    "mtime": 1780604786.5486522,
+    "ast_hash": "928a71fac6acbffb45cc62a8d9684e78",
+    "semantic_hash": ""
+  },
+  "src/services/data_analytics_pipeline.ts": {
+    "mtime": 1780604828.79192,
+    "ast_hash": "0fb1e1481f6c27c2aaaf47e302576080",
     "semantic_hash": ""
   }
 }
