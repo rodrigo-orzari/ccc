@@ -1,7 +1,7 @@
 /**
  * Oracle Containers Pricing Configuration (Static Fallback)
  *
- * Example prices for OCI Container Instances and Oracle Kubernetes Engine (OKE)
+ * Comprehensive list of OCI Container Instances and Oracle Kubernetes Engine (OKE) offerings.
  */
 
 const addContainerAttributes = (entry: any) => ({
@@ -14,14 +14,36 @@ const addContainerAttributes = (entry: any) => ({
   }
 });
 
-const baseOracleContainerEntries = [
-  // OCI Container Instances (Serverless Containers)
-  { type: 'Container-Instance-A1', vcpus: 1, memory: 6, cpuVendor: 'Ampere', price: 0.015, orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'ARM64', billing_granularity: 'Per Second' },
-  { type: 'Container-Instance-E4', vcpus: 1, memory: 8, cpuVendor: 'AMD', price: 0.025, orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86_64', billing_granularity: 'Per Second' },
+// OCI uses OCPUs (1 OCPU = 2 vCPU). Prices are typically displayed per OCPU and per GB.
+// ARM: $0.015 per OCPU-hr + $0.0015 per GB-hr
+// AMD: $0.025 per OCPU-hr + $0.0015 per GB-hr
+const calculateOciPrice = (vcpus: number, memoryGb: number, arch: 'x86_64' | 'ARM64') => {
+  const ocpus = vcpus / 2; // Oracle bills per OCPU
+  if (arch === 'ARM64') return (ocpus * 0.015) + (memoryGb * 0.0015);
+  return (ocpus * 0.025) + (memoryGb * 0.0015);
+};
 
-  // OKE (Kubernetes Provisioned)
-  { type: 'OKE-VM.Standard.A1.Flex', vcpus: 2, memory: 12, cpuVendor: 'Ampere', price: 0.03, orchestrator: 'Kubernetes', compute_type: 'Provisioned', architecture: 'ARM64', billing_granularity: 'Per Second' },
-  { type: 'OKE-VM.Standard.E4.Flex', vcpus: 2, memory: 16, cpuVendor: 'AMD', price: 0.05, orchestrator: 'Kubernetes', compute_type: 'Provisioned', architecture: 'x86_64', billing_granularity: 'Per Second' },
+const baseOracleContainerEntries = [
+  // Container Instances (Serverless) - x86
+  { type: 'Container-Instance-E4-1vCPU-2GB', vcpus: 1, memory: 2, cpuVendor: 'AMD', price: calculateOciPrice(1, 2, 'x86_64'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86_64', billing_granularity: 'Per Second' },
+  { type: 'Container-Instance-E4-2vCPU-4GB', vcpus: 2, memory: 4, cpuVendor: 'AMD', price: calculateOciPrice(2, 4, 'x86_64'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86_64', billing_granularity: 'Per Second' },
+  { type: 'Container-Instance-E4-4vCPU-8GB', vcpus: 4, memory: 8, cpuVendor: 'AMD', price: calculateOciPrice(4, 8, 'x86_64'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86_64', billing_granularity: 'Per Second' },
+
+  // Container Instances (Serverless) - ARM
+  { type: 'Container-Instance-A1-1vCPU-2GB', vcpus: 1, memory: 2, cpuVendor: 'Ampere', price: calculateOciPrice(1, 2, 'ARM64'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'ARM64', billing_granularity: 'Per Second' },
+  { type: 'Container-Instance-A1-2vCPU-4GB', vcpus: 2, memory: 4, cpuVendor: 'Ampere', price: calculateOciPrice(2, 4, 'ARM64'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'ARM64', billing_granularity: 'Per Second' },
+  { type: 'Container-Instance-A1-4vCPU-8GB', vcpus: 4, memory: 8, cpuVendor: 'Ampere', price: calculateOciPrice(4, 8, 'ARM64'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'ARM64', billing_granularity: 'Per Second' },
+  { type: 'Container-Instance-A1-8vCPU-16GB', vcpus: 8, memory: 16, cpuVendor: 'Ampere', price: calculateOciPrice(8, 16, 'ARM64'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'ARM64', billing_granularity: 'Per Second' },
+
+  // OKE Nodes (Flex Shapes - ARM)
+  { type: 'OKE-VM.Standard.A1.Flex-2vCPU-8GB', vcpus: 2, memory: 8, cpuVendor: 'Ampere', price: calculateOciPrice(2, 8, 'ARM64'), orchestrator: 'Kubernetes', compute_type: 'Provisioned', architecture: 'ARM64', billing_granularity: 'Per Second' },
+  { type: 'OKE-VM.Standard.A1.Flex-4vCPU-16GB', vcpus: 4, memory: 16, cpuVendor: 'Ampere', price: calculateOciPrice(4, 16, 'ARM64'), orchestrator: 'Kubernetes', compute_type: 'Provisioned', architecture: 'ARM64', billing_granularity: 'Per Second' },
+  { type: 'OKE-VM.Standard.A1.Flex-8vCPU-32GB', vcpus: 8, memory: 32, cpuVendor: 'Ampere', price: calculateOciPrice(8, 32, 'ARM64'), orchestrator: 'Kubernetes', compute_type: 'Provisioned', architecture: 'ARM64', billing_granularity: 'Per Second' },
+
+  // OKE Nodes (Flex Shapes - x86)
+  { type: 'OKE-VM.Standard.E4.Flex-2vCPU-8GB', vcpus: 2, memory: 8, cpuVendor: 'AMD', price: calculateOciPrice(2, 8, 'x86_64'), orchestrator: 'Kubernetes', compute_type: 'Provisioned', architecture: 'x86_64', billing_granularity: 'Per Second' },
+  { type: 'OKE-VM.Standard.E4.Flex-4vCPU-16GB', vcpus: 4, memory: 16, cpuVendor: 'AMD', price: calculateOciPrice(4, 16, 'x86_64'), orchestrator: 'Kubernetes', compute_type: 'Provisioned', architecture: 'x86_64', billing_granularity: 'Per Second' },
+  { type: 'OKE-VM.Standard.E4.Flex-8vCPU-32GB', vcpus: 8, memory: 32, cpuVendor: 'AMD', price: calculateOciPrice(8, 32, 'x86_64'), orchestrator: 'Kubernetes', compute_type: 'Provisioned', architecture: 'x86_64', billing_granularity: 'Per Second' },
 ];
 
 export const ORACLE_CONTAINERS = baseOracleContainerEntries.map(addContainerAttributes);
