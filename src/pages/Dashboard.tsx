@@ -2260,11 +2260,7 @@ export default function Dashboard() {
 
       {/* Footer */}
       <footer className="border-t border-[#e5e5e5] dark:border-[#262626] bg-[#fcfcfc] dark:bg-[#050505] py-2 px-4 shrink-0 z-20 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
-          <Link to="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Compare Cloud Costs" className="h-6 w-auto" />
-          </Link>
-          
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-2">
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] font-medium text-[#737373] dark:text-[#a3a3a3]">
             <Link to="/about" className="hover:text-black dark:hover:text-white transition-colors">About</Link>
             <Link to="/privacy" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</Link>
