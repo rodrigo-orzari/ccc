@@ -564,8 +564,8 @@ async function startServer() {
     }
 
     // Serverless-specific timeout filter
-    if (timeout) {
-      const timeoutOptions = (timeout as string).split(',');
+    if (serverlessTimeout) {
+      const timeoutOptions = (serverlessTimeout as string).split(',');
       const timeoutConditions: string[] = [];
 
       for (const opt of timeoutOptions) {
@@ -584,8 +584,8 @@ async function startServer() {
     }
 
     // Serverless-specific memory configuration filter
-    if (memoryConfig) {
-      const memoryOptions = (memoryConfig as string).split(',');
+    if (serverlessMemoryConfig) {
+      const memoryOptions = (serverlessMemoryConfig as string).split(',');
       const memoryConditions: string[] = [];
 
       for (const opt of memoryOptions) {
@@ -604,8 +604,8 @@ async function startServer() {
     }
 
     // Serverless-specific free tier filter
-    if (freeTier) {
-      const freeTierOptions = (freeTier as string).split(',');
+    if (serverlessFreeTier) {
+      const freeTierOptions = (serverlessFreeTier as string).split(',');
       const freeTierConditions: string[] = [];
 
       for (const opt of freeTierOptions) {
@@ -622,8 +622,8 @@ async function startServer() {
     }
 
     // Serverless-specific execution model filter
-    if (executionModel) {
-      const modelOptions = (executionModel as string).split(',');
+    if (serverlessExecutionModel) {
+      const modelOptions = (serverlessExecutionModel as string).split(',');
       const modelConditions: string[] = [];
       for (const opt of modelOptions) {
         if (opt === 'Both') {
@@ -640,22 +640,22 @@ async function startServer() {
     }
 
     // Serverless-specific billing granularity filter
-    if (billingGranularity && resolvedProductType === 'serverless') {
-      const granularityOptions = (billingGranularity as string).split(',').map(s => s.replace('ms', ''));
+    if (serverlessGranularity && resolvedProductType === 'serverless') {
+      const granularityOptions = (serverlessGranularity as string).split(',').map(s => s.replace('ms', ''));
       conditions.push(`pr.attributes->>'billing_granularity_ms' = ANY($${paramCount++})`);
       values.push(granularityOptions);
     }
 
     // Serverless-specific provisioned concurrency filter
-    if (provisionedConcurrency) {
-      const concurrencyOptions = (provisionedConcurrency as string).split(',');
+    if (serverlessProvisionedConcurrency) {
+      const concurrencyOptions = (serverlessProvisionedConcurrency as string).split(',');
       conditions.push(`pr.attributes->>'provisioned_concurrency_support' = ANY($${paramCount++})`);
       values.push(concurrencyOptions);
     }
 
     // Serverless-specific ephemeral storage filter
-    if (ephemeralStorage) {
-      const storageOptions = (ephemeralStorage as string).split(',');
+    if (serverlessEphemeralStorage) {
+      const storageOptions = (serverlessEphemeralStorage as string).split(',');
       const storageConditions: string[] = [];
       
       for (const opt of storageOptions) {
@@ -674,21 +674,21 @@ async function startServer() {
     }
 
     // Containers-specific filters
-    if (orchestrator) {
+    if (containersOrchestrators) {
       conditions.push(`pr.attributes->>'orchestrator' = ANY($${paramCount++})`);
-      values.push((orchestrator as string).split(','));
+      values.push((containersOrchestrators as string).split(','));
     }
-    if (computeType) {
+    if (containersComputeTypes) {
       conditions.push(`pr.attributes->>'compute_type' = ANY($${paramCount++})`);
-      values.push((computeType as string).split(','));
+      values.push((containersComputeTypes as string).split(','));
     }
-    if (architecture) {
+    if (containersArchitectures) {
       conditions.push(`pr.attributes->>'architecture' = ANY($${paramCount++})`);
-      values.push((architecture as string).split(','));
+      values.push((containersArchitectures as string).split(','));
     }
-    if (billingGranularity && resolvedProductType === 'containers') {
+    if (containersBillingGranularity && resolvedProductType === 'containers') {
       conditions.push(`pr.attributes->>'billing_granularity' = ANY($${paramCount++})`);
-      values.push((billingGranularity as string).split(','));
+      values.push((containersBillingGranularity as string).split(','));
     }
 
       if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
