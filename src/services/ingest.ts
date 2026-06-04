@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { Pool } from 'pg';
+import postgres from 'postgres';
 import { PricingPipeline } from './pricing_pipeline.js';
 import { DatabasePricingPipeline } from './database_pipeline.js';
 import { ServerlessPricingPipeline } from './serverless_pipeline.js';
@@ -9,18 +9,6 @@ import { ContainersPricingPipeline } from './containers_pipeline.js';
 import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline.js';
 import { NetworkingPricingPipeline } from './networking_pipeline.js';
 
-function parseDbUrl(url: string) {
-  const isNeon = url.includes('neon.tech');
-  const u = new URL(url);
-  return {
-    host: u.hostname,
-    port: u.port ? parseInt(u.port) : 5432,
-    database: u.pathname.replace(/^\//, ''),
-    user: decodeURIComponent(u.username),
-    password: decodeURIComponent(u.password),
-    ssl: { rejectUnauthorized: isNeon },
-  };
-}
 
 async function main() {
   const dbUrl = process.env.DATABASE_URL;
@@ -30,14 +18,14 @@ async function main() {
     process.exit(1);
   }
 
-  const pool = new Pool(parseDbUrl(dbUrl));
+  const sql = postgres(dbUrl, { ssl: { rejectUnauthorized: false } });
 
   try {
     console.log('🚀 Starting pricing data ingestion...\n');
 
     // Run compute pricing pipeline
     console.log('📊 Computing VM Pricing...');
-    const computePipeline = new PricingPipeline(pool);
+    const computePipeline = new PricingPipeline(sql as any);
     const computeResults = await computePipeline.run();
     computeResults.forEach((result: any) => {
       if (result.status === 'success') {
@@ -49,7 +37,7 @@ async function main() {
 
     console.log('\n📊 Computing Database Pricing...');
     // Run database pricing pipeline
-    const dbPipeline = new DatabasePricingPipeline(pool);
+    const dbPipeline = new DatabasePricingPipeline(sql as any);
     const dbResults = await dbPipeline.run();
     dbResults.forEach((result: any) => {
       if (result.status === 'success') {
@@ -61,7 +49,7 @@ async function main() {
 
     console.log('\n📊 Computing Serverless Pricing...');
     // Run serverless pricing pipeline
-    const serverlessPipeline = new ServerlessPricingPipeline(pool);
+    const serverlessPipeline = new ServerlessPricingPipeline(sql as any);
     const serverlessResults = await serverlessPipeline.run();
     serverlessResults.forEach((result: any) => {
       if (result.status === 'success') {
@@ -73,7 +61,7 @@ async function main() {
 
     console.log('\n📊 Computing Containers Pricing...');
     // Run containers pricing pipeline
-    const containersPipeline = new ContainersPricingPipeline(pool);
+    const containersPipeline = new ContainersPricingPipeline(sql as any);
     const containersResults = await containersPipeline.run();
     containersResults.forEach((result: any) => {
       if (result.status === 'success') {
@@ -85,7 +73,7 @@ async function main() {
 
     console.log('\n📊 Computing Data Analytics Pricing...');
     // Run data analytics pricing pipeline
-    const analyticsPipeline = new DataAnalyticsPricingPipeline(pool);
+    const analyticsPipeline = new DataAnalyticsPricingPipeline(sql as any);
     const analyticsResults = await analyticsPipeline.run();
     analyticsResults.forEach((result: any) => {
       if (result.status === 'success') {
@@ -97,7 +85,7 @@ async function main() {
 
     console.log('\n📊 Computing Networking Pricing...');
     // Run networking pricing pipeline
-    const networkingPipeline = new NetworkingPricingPipeline(pool);
+    const networkingPipeline = new NetworkingPricingPipeline(sql as any);
     const networkingResults = await networkingPipeline.run();
     networkingResults.forEach((result: any) => {
       if (result.status === 'success') {
@@ -113,7 +101,7 @@ async function main() {
     console.error('❌ Fatal error:', error);
     process.exit(1);
   } finally {
-    await pool.end();
+    await sql.end();
   }
 }
 

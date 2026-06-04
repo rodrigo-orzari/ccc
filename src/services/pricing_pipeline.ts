@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Pool } from 'pg';
+import type { Sql } from 'postgres';
 import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/oracle_instances.js';
 import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.js';
 import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.js';
@@ -436,16 +436,17 @@ export class DigitalOceanAdapter extends BaseAdapter {
 }
 
 export class PricingPipeline {
-  protected pool: Pool;
+  protected sql: Sql;
   protected adapters: BaseAdapter[];
 
-  constructor(pool: Pool) {
+  constructor(sql: Sql) {
+    this.sql = sql;
     // Removed dangerous TLS override — all certificates are now validated properly.
     // If you encounter certificate validation errors, the root cause is the database
     // connection or intermediate CA setup, not external cloud provider APIs.
     // See OPERATIONS_RUNBOOK.md for troubleshooting TLS issues.
 
-    this.pool = pool;
+    
     this.adapters = [
       new AzureAdapter(),
       new AWSAdapter(),
@@ -470,55 +471,58 @@ export class PricingPipeline {
     return results;
   }
 
+  
   protected async saveRecords(records: PricingRecord[], serviceCategory = 'compute'): Promise<PriceDriftResult[]> {
     if (records.length === 0) return [];
 
     const dataSource = records[0].dataSource ?? 'live_api';
-    const client = await this.pool.connect();
-    try {
-      await client.query('BEGIN');
+    let driftAlerts: PriceDriftResult[] = [];
 
+    await this.sql.begin(async (sql) => {
       const providerSlug = records[0].provider;
-      const providerRes = await client.query('SELECT id FROM providers WHERE slug = $1', [providerSlug]);
+      const providerRes = await sql`SELECT id FROM providers WHERE slug = ${providerSlug}`;
 
-      if (providerRes.rows.length === 0) {
+      if (providerRes.length === 0) {
         throw new Error(`Provider ${providerSlug} not found in database`);
       }
-
-      const providerId = providerRes.rows[0].id;
+      const providerId = providerRes[0].id;
 
       // 1. Map Regions
       const regionMap = new Map<string, number>();
       const uniqueRegions = [...new Set(records.map(r => r.region))];
 
       for (const regionSlug of uniqueRegions) {
-        const res = await client.query(
-          'INSERT INTO regions (provider_id, slug) VALUES ($1, $2) ON CONFLICT (provider_id, slug) DO UPDATE SET slug = EXCLUDED.slug RETURNING id',
-          [providerId, regionSlug]
-        );
-        regionMap.set(regionSlug, res.rows[0].id);
+        const res = await sql`
+          INSERT INTO regions (provider_id, slug) 
+          VALUES (${providerId}, ${regionSlug}) 
+          ON CONFLICT (provider_id, slug) DO UPDATE SET slug = EXCLUDED.slug 
+          RETURNING id
+        `;
+        regionMap.set(regionSlug, res[0].id);
       }
 
       // 2. Ensure Service exists
       const serviceName = records[0].service;
-      const serviceRes = await client.query(
-        'INSERT INTO services (provider_id, name, category) VALUES ($1, $2, $3) ON CONFLICT (provider_id, name) DO UPDATE SET category = EXCLUDED.category RETURNING id',
-        [providerId, serviceName, serviceCategory]
-      );
-      const serviceId = serviceRes.rows[0].id;
+      const serviceRes = await sql`
+        INSERT INTO services (provider_id, name, category) 
+        VALUES (${providerId}, ${serviceName}, ${serviceCategory}) 
+        ON CONFLICT (provider_id, name) DO UPDATE SET category = EXCLUDED.category 
+        RETURNING id
+      `;
+      const serviceId = serviceRes[0].id;
 
       // 3. Fetch old prices for drift detection BEFORE deleting
-      const oldPriceRes = await client.query<{ instance_type: string; price_per_unit: string }>(
-        'SELECT instance_type, price_per_unit FROM pricing_records WHERE service_id = $1',
-        [serviceId]
-      );
+      const oldPriceRes = await sql`
+        SELECT instance_type, price_per_unit 
+        FROM pricing_records 
+        WHERE service_id = ${serviceId}
+      `;
       const oldPriceMap = new Map<string, number>();
-      for (const row of oldPriceRes.rows) {
+      for (const row of oldPriceRes) {
         oldPriceMap.set(row.instance_type, parseFloat(row.price_per_unit));
       }
 
       // 4. Detect price drift (>20% change)
-      const driftAlerts: PriceDriftResult[] = [];
       if (oldPriceMap.size > 0) {
         for (const r of records) {
           const oldPrice = oldPriceMap.get(r.instanceType);
@@ -535,57 +539,41 @@ export class PricingPipeline {
       }
 
       // 5. Delete old records
-      await client.query('DELETE FROM pricing_records WHERE service_id = $1', [serviceId]);
+      await sql`DELETE FROM pricing_records WHERE service_id = ${serviceId}`;
 
       // 6. Batch Insert Pricing Records
-      const BATCH_SIZE = 100;
-      for (let i = 0; i < records.length; i += BATCH_SIZE) {
-        const batch = records.slice(i, i + BATCH_SIZE);
-        const values: any[] = [];
-        const placeholders = batch.map((r, idx) => {
-          const offset = idx * 15;
-          // Merge supportedLanguages into attributes
-          const attrs = { ...r.attributes };
-          if (r.supportedLanguages && r.supportedLanguages.length > 0) {
-            attrs.supportedLanguages = r.supportedLanguages;
-          }
-          values.push(
-            serviceId,
-            regionMap.get(r.region),
-            r.instanceType,
-            r.vcpus,
-            r.memoryGb,
-            r.arch,
-            r.os,
-            r.cpuVendor,
-            r.gpuCount,
-            r.geography,
-            r.category,
-            r.price,
-            r.unit,
-            Object.keys(attrs).length > 0 ? JSON.stringify(attrs) : null,
-            dataSource
-          );
-          return `($${offset + 1}, $${offset + 2}, $${offset + 3}, $${offset + 4}, $${offset + 5}, $${offset + 6}, $${offset + 7}, $${offset + 8}, $${offset + 9}, $${offset + 10}, $${offset + 11}, $${offset + 12}, $${offset + 13}, $${offset + 14}, $${offset + 15})`;
-        }).join(',');
+      const rowsToInsert = records.map(r => {
+        const attrs = { ...r.attributes };
+        if (r.supportedLanguages && r.supportedLanguages.length > 0) {
+          attrs.supportedLanguages = r.supportedLanguages;
+        }
+        return {
+          service_id: serviceId,
+          region_id: regionMap.get(r.region),
+          instance_type: r.instanceType,
+          vcpus: r.vcpus,
+          memory_gb: r.memoryGb,
+          arch: r.arch,
+          os: r.os,
+          cpu_vendor: r.cpuVendor,
+          gpu_count: r.gpuCount,
+          geography: r.geography,
+          category: r.category,
+          price_per_unit: r.price,
+          unit: r.unit,
+          attributes: Object.keys(attrs).length > 0 ? JSON.stringify(attrs) : null,
+          data_source: dataSource
+        };
+      });
 
-        await client.query(
-          `INSERT INTO pricing_records
-           (service_id, region_id, instance_type, vcpus, memory_gb, arch, os, cpu_vendor, gpu_count, geography, category, price_per_unit, unit, attributes, data_source)
-           VALUES ${placeholders}`,
-          values
-        );
+      // postgres.js bulk insert!
+      if (rowsToInsert.length > 0) {
+        await sql`INSERT INTO pricing_records ${sql(rowsToInsert)}`;
       }
 
-      await client.query('COMMIT');
       console.log(`✅ Saved ${records.length} records for ${providerSlug} (${serviceCategory}, source: ${dataSource})`);
-      return driftAlerts;
-    } catch (err) {
-      await client.query('ROLLBACK');
-      console.error('❌ Batch save failed:', err);
-      throw err;
-    } finally {
-      client.release();
-    }
+    });
+
+    return driftAlerts;
   }
 }

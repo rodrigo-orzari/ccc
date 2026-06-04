@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import type { Sql } from 'postgres';
 import { PriceDriftResult } from './pricing_pipeline.ts';
 
 const STATIC_NETWORKING_PRICING = [
@@ -34,12 +34,13 @@ const STATIC_NETWORKING_PRICING = [
 ];
 
 export class NetworkingPricingPipeline {
-  private pool: Pool;
+  private sql: Sql;
 
-  constructor(pool: Pool) {
-    this.pool = pool;
+  constructor(sql: Sql) {
+    this.sql = sql;
   }
 
+  
   async run() {
     console.log('🚀 Starting Networking Pricing Pipeline...');
     const results: any[] = [];
@@ -48,84 +49,63 @@ export class NetworkingPricingPipeline {
     // Ensure services exist
     await this.setupNetworkingServices();
 
-    const client = await this.pool.connect();
     let recordsAdded = 0;
 
-    try {
-      await client.query('BEGIN');
-
+    await this.sql.begin(async (sql) => {
       // Clear existing static networking data to avoid duplicates
-      await client.query(`
+      await sql`
         DELETE FROM pricing_records 
         WHERE data_source = 'static_config' 
         AND service_id IN (
           SELECT id FROM services WHERE category = 'networking'
         )
-      `);
+      `;
 
       for (const record of STATIC_NETWORKING_PRICING) {
         // Fetch provider and service IDs
-        const providerRes = await client.query('SELECT id FROM providers WHERE slug = $1', [record.provider]);
-        if (providerRes.rows.length === 0) continue;
+        const providerRes = await sql`SELECT id FROM providers WHERE slug = ${record.provider}`;
+        if (providerRes.length === 0) continue;
 
-        let serviceRes = await client.query('SELECT id FROM services WHERE provider_id = $1 AND name = $2 AND category = $3', [providerRes.rows[0].id, record.service, 'networking']);
+        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerRes[0].id} AND name = ${record.service} AND category = 'networking'`;
         let serviceId: string;
 
-        if (serviceRes.rows.length === 0) {
-          const insertService = await client.query(
-            'INSERT INTO services (provider_id, name, category) VALUES ($1, $2, $3) RETURNING id',
-            [providerRes.rows[0].id, record.service, 'networking']
-          );
-          serviceId = insertService.rows[0].id;
+        if (serviceRes.length === 0) {
+          const insertService = await sql`
+            INSERT INTO services (provider_id, name, category) VALUES (${providerRes[0].id}, ${record.service}, 'networking') RETURNING id
+          `;
+          serviceId = insertService[0].id;
         } else {
-          serviceId = serviceRes.rows[0].id;
+          serviceId = serviceRes[0].id;
         }
 
         // Insert pricing record
-        await client.query(
-          `INSERT INTO pricing_records 
+        await sql`
+          INSERT INTO pricing_records 
             (service_id, instance_type, category, geography, price_per_unit, unit, attributes, data_source, updated_at) 
-           VALUES ($1, $2, $3, $4, $5, $6, $7, 'static_config', NOW())`,
-          [
-            serviceId,
-            record.instance_type,
-            record.category,
-            record.geography,
-            record.price_per_unit,
-            record.unit,
-            JSON.stringify(record.attributes)
-          ]
-        );
+           VALUES (
+             ${serviceId}, ${record.instance_type}, ${record.category}, ${record.geography}, 
+             ${record.price_per_unit}, ${record.unit}, ${JSON.stringify(record.attributes)}, 
+             'static_config', NOW()
+           )
+        `;
         recordsAdded++;
       }
+    });
 
-      await client.query('COMMIT');
-      results.push({ provider: 'all_networking', status: 'success', recordsProcessed: recordsAdded, driftAlerts });
-      console.log(`✅ Networking Pricing Pipeline Completed. Inserted ${recordsAdded} records.`);
-    } catch (e: any) {
-      await client.query('ROLLBACK');
-      console.error('❌ Networking Pipeline failed:', e);
-      throw e;
-    } finally {
-      client.release();
-    }
-
+    results.push({ provider: 'all_networking', status: 'success', recordsProcessed: recordsAdded, driftAlerts });
+    console.log(`✅ Networking Pricing Pipeline Completed. Inserted ${recordsAdded} records.`);
     return results;
   }
 
   private async setupNetworkingServices() {
-    const client = await this.pool.connect();
-    try {
-      const services = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4'];
-      for (const service of services) {
-        await client.query(`
-          INSERT INTO services (provider_id, name, category)
-          SELECT id, $1, 'networking' FROM providers WHERE slug IN ('aws', 'gcp', 'azure', 'oracle', 'digitalocean')
-          ON CONFLICT (provider_id, name) DO UPDATE SET category = 'networking';
-        `, [service]);
-      }
-    } finally {
-      client.release();
+    const services = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4'];
+    for (const service of services) {
+      await this.sql`
+        INSERT INTO services (provider_id, name, category)
+        SELECT id, ${service}, 'networking' FROM providers WHERE slug IN ('aws', 'gcp', 'azure', 'oracle', 'digitalocean')
+        ON CONFLICT (provider_id, name) DO UPDATE SET category = 'networking'
+      `;
     }
   }
+
 }

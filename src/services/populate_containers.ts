@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import postgres from 'postgres';
 import { ContainersPricingPipeline } from './containers_pipeline.js';
 
 async function main() {
@@ -9,13 +9,13 @@ async function main() {
     process.exit(1);
   }
 
-  const pool = new Pool({ connectionString: dbUrl });
+  const sql = postgres(process.env.DATABASE_URL!, { ssl: { rejectUnauthorized: false } });
 
   try {
     console.log('🚀 Starting standalone containers pricing data ingestion...\n');
 
     // Run containers pricing pipeline
-    const containersPipeline = new ContainersPricingPipeline(pool);
+    const containersPipeline = new ContainersPricingPipeline(sql as any);
     const containersResults = await containersPipeline.run();
     
     containersResults.forEach((result: any) => {
@@ -32,7 +32,7 @@ async function main() {
     console.error('❌ Fatal error:', error);
     process.exit(1);
   } finally {
-    await pool.end();
+    await sql.end();
   }
 }
 

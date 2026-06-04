@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import type { Sql } from 'postgres';
 import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
 import { 
   AWSContainersLiveAdapter,
@@ -140,8 +140,8 @@ export class OracleContainersStaticAdapter extends BaseAdapter {
 }
 
 export class ContainersPricingPipeline extends PricingPipeline {
-  constructor(pool: Pool) {
-    super(pool);
+  constructor(sql: Sql) {
+    super(sql);
     // Use live API adapters with fallback to static configs
     this.adapters = [
       new AWSContainersLiveAdapter(),
