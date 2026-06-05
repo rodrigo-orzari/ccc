@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-Compare Cloud Costs is a **full-stack SPA (Single Page Application)** that solves the critical FinOps challenge of comparing cloud infrastructure pricing across AWS, Azure, Google Cloud, Oracle, and DigitalOcean. The application normalizes disparate pricing catalogs into a unified, searchable database and provides interactive filtering and comparison tools.
+Compare Cloud Costs is a **full-stack Next.js application** that solves the critical FinOps challenge of comparing cloud infrastructure pricing across AWS, Azure, Google Cloud, Oracle, and DigitalOcean. The application normalizes disparate pricing catalogs into a unified, searchable database and provides interactive filtering and comparison tools.
 
 **Core Value**: Engineers and FinOps teams can instantly identify the most cost-effective cloud provider, region, instance type, and configuration for their workload **before deployment** — not after.
 
@@ -19,23 +19,22 @@ Compare Cloud Costs is a **full-stack SPA (Single Page Application)** that solve
 
 ### Frontend
 - **Framework**: React 19.0.0 + TypeScript (strict mode)
-- **Build Tool**: Vite 6.2.0 (lightning-fast dev server + optimized production builds)
+- **Build Tool**: Next.js App Router (handles SSR, SSG, and optimized production builds)
 - **Styling**: Tailwind CSS 4.1.14 with Typography plugin
 - **Animations**: Motion 12.23.24 (GPU-accelerated micro-interactions)
-- **Routing**: React Router DOM 7.14.2 (client-side navigation)
+- **State Management**: @tanstack/react-query (sophisticated data fetching and caching)
 - **Icons**: Lucide React 0.546.0 (18 icon set)
 - **Markdown**: React Markdown 10.1.0 (static pages: About, Terms, Privacy, Methodology)
 
 ### Backend
-- **Runtime**: Node.js (executed via `tsx` 4.21.0 for TypeScript support)
-- **HTTP Framework**: Express.js 4.21.2 (REST API + static file serving)
-- **CORS**: cors 2.8.6 (cross-origin requests for development)
-- **Scheduling**: node-cron 4.2.1 (automated data refresh every Sunday midnight)
+- **Runtime**: Node.js
+- **HTTP Framework**: Next.js API Routes (serverless functions architecture)
+- **Worker Process**: Custom scheduler in `src/workers/scheduler.ts` (executed via `tsx` for background data refresh)
 - **HTTP Client**: axios 1.15.2 (API calls to cloud pricing endpoints)
 - **Email**: nodemailer 8.0.7 (SMTP alerts for price drift and data staleness)
 
 ### Database
-- **RDBMS**: PostgreSQL (via pg 8.20.0 driver)
+- **RDBMS**: PostgreSQL (via postgres.js driver)
 - **Schema Management**: SQL migrations (auto-executed in `initDb()`)
 - **Data Types**: JSONB for flexible metadata storage (e.g., database HA modes, engine versions)
 
@@ -53,14 +52,13 @@ Compare Cloud Costs is a **full-stack SPA (Single Page Application)** that solve
 
 ```
 _ccc/
-├── server.ts                      # Express server + API routes + cron jobs
+├── next.config.js                 # Next.js configuration
 ├── package.json                   # Dependencies & npm scripts
 ├── tsconfig.json                  # TypeScript configuration (ES2022, bundler resolution)
-├── vite.config.ts                 # Vite build configuration (React + Tailwind plugins)
-├── index.html                     # HTML entry point (Vite root)
 ├── src/
-│   ├── main.tsx                   # React root render
-│   ├── App.tsx                    # Top-level router
+│   ├── app/                       # Next.js App Router (pages and API routes)
+│   ├── workers/                   # Background worker processes (e.g., cron jobs)
+│   ├── index.css                  # Global Tailwind + custom styles
 │   ├── index.css                  # Global Tailwind + custom styles
 │   ├── db/
 │   │   └── schema.sql             # PostgreSQL schema (providers, regions, services, pricing_records)
@@ -105,11 +103,10 @@ _ccc/
         ┌──────────────┼──────────────┐
         │              │              │
     ┌───▼─────┐   ┌───▼──────┐  ┌──▼──────┐
-    │ Frontend  │   │ Express  │  │ Postgres │
-    │ (Vite    │   │ Server   │  │  (Managed)
-    │ dist/)   │   │ (tsx)    │  │          │
-    │          │   │          │  └──────────┘
-    └───┬─────┘   └───┬──────┘
+    │ Frontend  │   │ Next.js  │  │ Postgres │
+    │ (Next.js) │   │ API      │  │  (Managed)
+    │           │   │ Routes   │  │          │
+    └───────────┘   └──────────┘  └──────────┘
         │             │
         └──────┬──────┘
                │
@@ -122,10 +119,10 @@ _ccc/
 
 **Deployment Flow**:
 1. Code push to GitHub triggers DigitalOcean App Platform
-2. App Platform builds Docker container (npm run build + tsx server.ts)
-3. Frontend (Vite) compiles to optimized `dist/` assets
-4. Express server starts on port 3000, serving `dist/` + API routes
-5. Cron job runs every Sunday at midnight to fetch fresh pricing data
+2. App Platform builds Docker container (npm run build)
+3. Next.js compiles to optimized `.next/` build
+4. Next.js server starts on port 3000
+5. Separate worker process runs scheduled jobs to fetch fresh pricing data
 
 ---
 
@@ -326,17 +323,16 @@ These extend `BaseAdapter` to handle:
 - Runs relevant adapters, detects price drift, sends alerts
 - Response: `{ message: '...', results: [...], driftAlerts: [...] }`
 
-### 5.3 Vite Middleware (Dev vs. Prod)
+### 5.3 Next.js API Routes (Dev vs. Prod)
 
-- **Development**: Express acts as a middleware wrapper around Vite dev server
-  - Vite HMR (Hot Module Reloading) enabled
-  - React Fast Refresh automatic
+- **Development**: Next.js development server (`next dev`) handles requests
+  - Fast Refresh and Hot Module Replacement (HMR) enabled
   - Instant feedback on file changes
+  - API routes mapped seamlessly under `/api`
 
-- **Production**: Express serves static `dist/` assets + API routes
-  - SPA fallback: 404 on routes → return `index.html`
-  - Gzipped assets cached
-  - API routes unaffected
+- **Production**: Next.js optimized production build (`next start`)
+  - Server-side rendering (SSR) and static generation (SSG) applied where optimal
+  - API routes executed efficiently via serverless or Node.js runtime
 
 ---
 
@@ -366,38 +362,31 @@ App.tsx
 5. **Column Resizing** — Drag column borders to adjust widths (persisted to localStorage)
 6. **Horizontal Scrolling** — Fade-right hint for overflow detection
 
-**State Management** (React hooks, no Redux/Zustand):
+**State Management** (React hooks + `@tanstack/react-query`):
 ```typescript
-// Product type
+// Filter state (compute, database, serverless, etc.)
 const [activeProductType, setActiveProductType] = useState<'vm' | 'database' | 'serverless'>('vm');
+// ... other filter states
 
-// Filters (compute-specific)
-const [selectedProviders, setSelectedProviders] = useState<string[]>([...]);
-const [selectedGeographies, setSelectedGeographies] = useState<string[]>([...]);
-const [selectedOS, setSelectedOS] = useState<string[]>([...]);
-const [selectedCpu, setSelectedCpu] = useState<string[]>([...]);
-const [selectedCategory, setSelectedCategory] = useState<string[]>([...]);
-const [gpuIncluded, setGpuIncluded] = useState<boolean>(true);
+// React Query for Data Fetching & Caching
+const searchParams = useMemo(() => { ... }, [/* filters */]);
+const debouncedParamsString = useDeferredValue(searchParams.toString());
 
-// Filters (database-specific)
-const [selectedEngines, setSelectedEngines] = useState<string[]>([...]);
-const [selectedDeploymentTypes, setSelectedDeploymentTypes] = useState<string[]>([...]);
-const [selectedHaModes, setSelectedHaModes] = useState<string[]>([...]);
+const { data: dbStatus } = useQuery({
+  queryKey: ['health', debouncedParamsString],
+  queryFn: async () => fetch(\`/api/health?\${debouncedParamsString}\`).then(r => r.json())
+});
 
-// Numeric ranges
-const [vCpuRange, setVCpuRange] = useState({ min: 0, max: 320 });
-const [memoryRange, setMemoryRange] = useState({ min: 0, max: 3200 });
-const [priceRange, setPriceRange] = useState({ min: 0, max: 510 });
+const { data: rawProviderCounts } = useQuery({
+  queryKey: ['counts', debouncedParamsString],
+  queryFn: async () => fetch(\`/api/pricing/counts?\${debouncedParamsString}\`).then(r => r.json())
+});
 
-// UI state
-const [data, setData] = useState<PricingRecord[]>([]);
-const [loading, setLoading] = useState(false);
-const [sortConfig, setSortConfig] = useState({ key: 'price_per_unit', direction: 'asc' });
-const [showAggregation, setShowAggregation] = useState(false);
-
-// Column resizing & scrolling
-const [columnWidths, setColumnWidths] = useState<Record<string, number>>({...});
-const [hasHorizontalOverflow, setHasHorizontalOverflow] = useState(false);
+const { data: rawData, isFetching: loading } = useQuery({
+  queryKey: ['pricing', pricingParamsString],
+  queryFn: async () => fetch(\`/api/pricing?\${pricingParamsString}\`).then(r => r.json()),
+  placeholderData: keepPreviousData
+});
 ```
 
 **Key Features**:
@@ -431,16 +420,17 @@ const [hasHorizontalOverflow, setHasHorizontalOverflow] = useState(false);
 
 ## 7. Scheduled Jobs & Automation
 
-### 7.1 Cron Schedule
+### 7.1 Background Worker Schedule
 
 ```typescript
-// Every Sunday at midnight UTC
-cron.schedule('0 0 * * 0', async () => {
+// src/workers/scheduler.ts (Runs independently from Next.js)
+// Example logic executed weekly:
+async function runScheduledJobs() {
   console.log('🕒 Starting scheduled pricing pipeline update...');
   
   // 1. Run compute + database + serverless pipelines
   const allDriftAlerts = [];
-  const pipeline = new PricingPipeline(pool);
+  const pipeline = new PricingPipeline(sql);
   const results = await pipeline.run();
   // ...
   
@@ -450,11 +440,11 @@ cron.schedule('0 0 * * 0', async () => {
   }
   
   // 3. Check for stale static configs (>7 days old)
-  const staleRes = await pool.query(`...`);
-  if (staleRes.rows.length > 0) {
+  const staleRes = await sql\`...\`;
+  if (staleRes.length > 0) {
     await sendStalenessEmail(staleAlerts);
   }
-});
+}
 ```
 
 **Benefits**:
@@ -517,7 +507,7 @@ cron.schedule('0 0 * * 0', async () => {
 # Install dependencies
 npm install
 
-# Start dev server (Vite + Express middleware)
+# Start Next.js dev server
 npm run dev
 # → http://localhost:3000
 
@@ -526,33 +516,32 @@ npm run lint
 
 # Build for production
 npm run build
-# → dist/ folder with optimized assets + TypeScript output
+# → .next/ folder with optimized assets + server output
 
 # Start production server
 npm run start
-# → npm run build && NODE_ENV=production tsx server.ts
+# → npm run build && npm start
 
-# Manual pricing pipeline trigger
-npm run ingest
+# Start the background worker (for pipelines)
+npm run worker
 ```
 
 ### 10.2 Build Pipeline
 
-1. **Vite Build** (`npm run build`)
-   - Compiles React + TypeScript → optimized JS bundles
-   - Minifies CSS via Tailwind
-   - Outputs to `dist/` folder
-   - Gzip compression applied automatically
+1. **Next.js Build** (`npm run build`)
+   - Compiles React + TypeScript → optimized JS/Server bundles
+   - Handles CSS and Tailwind processing
+   - Outputs to `.next/` folder
+   - Compression applied automatically
 
-2. **Express Server**
-   - Compiled from TypeScript → executed via `tsx`
-   - Serves `dist/` assets + handles API routes
-   - Initializes database on startup (if `DATABASE_URL` set)
+2. **Serverless APIs / API Routes**
+   - API endpoints are bundled and ready to execute within the Next.js runtime
+   - Server Actions or API routes serve dashboard interactions
 
 3. **DigitalOcean App Platform**
-   - Detects `server.ts` + `package.json`
-   - Runs `npm install` + `npm run build` + `npm start`
-   - Exposes service on public HTTPS URL
+   - Detects `package.json` and runs `npm run build`
+   - Executes `npm start` for the main application
+   - Can run background workers separately (`npm run worker`)
    - Auto-restarts on crashes, health checks every 30s
 
 ---
@@ -572,8 +561,8 @@ npm run ingest
 - `DIGITALOCEAN_API_TOKEN`: For live DigitalOcean API pricing fetch
 
 **Development vs. Production**:
-- **Dev**: Vite middleware mode, auto-fetches pricing on startup if DB empty
-- **Prod**: Skips auto-fetch (requires manual `/api/admin/fetch-pricing` trigger), serves static assets, health checks only
+- **Dev**: Next.js development mode (`next dev`), background jobs must be run explicitly.
+- **Prod**: Serves optimized routes (`next start`), separate deployment runs the worker.
 
 ### 11.2 Feature Flags (Implicit)
 
@@ -668,7 +657,7 @@ curl "https://comparecloudcosts.com/api/pricing?provider=aws&limit=1"
 
 ### Current Performance Characteristics
 
-- **Frontend Build Time**: ~10-15s (Vite + React + Tailwind)
+- **Frontend Build Time**: ~10-20s (Next.js + Tailwind)
 - **Backend Startup**: ~2-5s (database init + schema migration)
 - **Pricing Query Latency**: ~100-500ms (depends on filter complexity)
 - **Database Size**: ~100k-500k pricing records (1-2 GB PostgreSQL)
@@ -706,7 +695,7 @@ curl "https://comparecloudcosts.com/api/pricing?provider=aws&limit=1"
 |--------|-------|-------|
 | **Pricing Pipelines** | Data team | `src/services/pricing_pipeline.ts`, `src/services/database_pipeline.ts`, `src/services/serverless_pipeline.ts` |
 | **Frontend/UI** | Frontend team | `src/pages/Dashboard.tsx`, `src/components/` |
-| **Backend/API** | Backend team | `server.ts`, API routes |
+| **Backend/API** | Backend team | `src/app/api`, `src/workers/scheduler.ts` |
 | **Database** | DevOps/DBA | `src/db/schema.sql`, migrations |
 | **Alerts/Email** | Ops team | `src/services/mailer.ts` |
 
@@ -735,8 +724,8 @@ curl "https://comparecloudcosts.com/api/pricing?provider=aws&limit=1"
 | **vCPU** | Virtual CPU; normalized unit of compute capacity |
 | **Drift Detection** | Comparing current prices to previous fetches to detect anomalies |
 | **JSONB** | PostgreSQL data type for semi-structured JSON with indexing support |
-| **HMR** | Hot Module Replacement; Vite feature for live code updates during dev |
-| **SPA** | Single Page Application; client-side navigation without full page reloads |
+| **HMR** | Hot Module Replacement; Next.js feature for live code updates during dev |
+| **SPA / CSR** | Single Page Application / Client-Side Rendering; Next.js balances this with Server-Side processing |
 | **Adapter Pattern** | OOP design pattern for provider-specific implementations sharing a base interface |
 | **HA Mode** | High-Availability mode; determines fault tolerance (Single-AZ vs. Multi-AZ) |
 
@@ -744,7 +733,7 @@ curl "https://comparecloudcosts.com/api/pricing?provider=aws&limit=1"
 
 ## Conclusion
 
-Compare Cloud Costs is a **mature, production-ready SPA** built on modern technologies. The architecture is clean, modular, and scalable. The data ingestion pipeline is robust with fallback mechanisms. The frontend is responsive and accessible.
+Compare Cloud Costs is a **mature, production-ready Next.js application** built on modern technologies. The architecture is clean, modular, and scalable. The data ingestion pipeline is robust with fallback mechanisms. The frontend is responsive and accessible.
 
 **Key Strengths**:
 - ✅ Multi-provider price normalization solved elegantly

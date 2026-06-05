@@ -13,15 +13,15 @@
 │    CLIENT BROWSER        │         │   DigitalOcean App       │
 │                          │         │   Platform (CDN)         │
 │ - React 19              │◄────────┤ - Docker Container       │
-│ - Vite HMR             │   HTTPS  │ - Auto-scaling           │
+│ - Next.js HMR            │   HTTPS  │ - Auto-scaling           │
 │ - Tailwind CSS         │          │ - Health Checks          │
 │ - Motion Animations    │          │                          │
-│ - Router (SPA)         │          └──────────────────────────┘
+│ - Router (App Router)  │          └──────────────────────────┘
 │                          │                      │
 │ Feature:                │                      │
 │ - Dynamic Filters      │                      ▼
 │ - Table Sorting        │         ┌──────────────────────────┐
-│ - Column Resizing      │         │    EXPRESS SERVER        │
+│ - Column Resizing      │         │     NEXT.JS SERVER       │
 │ - Range Sliders        │         │  (Node.js + TypeScript)  │
 │ - Dark Mode            │         │                          │
 └─────────────┬───────────┘         │ Routes:                  │
@@ -258,16 +258,16 @@
     │  &productType=vm           │
     │  &aggregate=false          │
     │                            │
-    │  → setLoading(true)        │
-    │  → axios.get(...)          │
+    │  → useQuery fetches        │
+    │  → caching via React Query │
     └────────────┬──────────────┘
                  │
         ┌────────┴─────────┐
         │                  │
         ▼ Success          ▼ Error
     ┌─────────┐        ┌──────────┐
-    │ setData │        │ setError │
-    │ (rows)  │        │ message  │
+    │ data    │        │ error    │
+    │ (rows)  │        │ state    │
     └────┬────┘        └──────────┘
          │
          ▼
@@ -317,14 +317,13 @@
              │
              ▼
 ┌─────────────────────────────────────────────────────────────┐
-│              EXPRESS ROUTE HANDLER                          │
+│              NEXT.JS API ROUTE                              │
 │                                                             │
-│  1. Parse req.query                                        │
-│  2. Call buildPricingFilters(req.query)                    │
+│  1. Parse URL query params                                 │
+│  2. Call buildPricingFilters(params)                       │
 │  3. Construct SQL WHERE clause + parameterized values      │
-│  4. Connect to pool: await pool.connect()                  │
-│  5. Execute query with pagination                          │
-│  6. Release connection: client.release()                   │
+│  4. Execute query using postgres.js                        │
+│  5. Return payload                                         │
 └────────┬────────────────────────────────────────────────────┘
          │
          ▼
