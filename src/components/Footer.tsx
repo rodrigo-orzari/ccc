@@ -52,7 +52,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="flex items-center gap-1 hover:text-black dark:hover:text-white transition-colors"
           >
-            Support ❤️
+            Support this project ❤️
           </a>
         </div>
       </div>
