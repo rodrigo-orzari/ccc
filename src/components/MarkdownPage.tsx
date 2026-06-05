@@ -28,11 +28,8 @@ const MarkdownPage: React.FC<MarkdownPageProps> = ({ title, content }) => {
       animate={{ opacity: 1, y: 0 }}
       className="max-w-4xl mx-auto px-6 py-12"
     >
-      <Link
-        to="/"
-        className="inline-flex items-center gap-2 text-sm text-[#737373] hover:text-black dark:hover:text-white transition-colors mb-8 group"
-      >
-        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+      <Link href="/" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors mb-8 group">
+        <ArrowLeft className="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" />
         Back to Comparison
       </Link>
 

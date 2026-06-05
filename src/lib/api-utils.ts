@@ -175,10 +175,17 @@ export function buildPricingFilters(query: any) {
       values.push(categoriesFilter);
     }
 
-    const engineFilters = parseFilterList((engines || analyticsEngines) as string).map((s: string) => s.toLowerCase());
-    if (engineFilters.length > 0) {
+    const engineFiltersRaw = parseFilterList((engines || analyticsEngines) as string).map((s: string) => s.toLowerCase());
+    if (engineFiltersRaw.length > 0) {
+      let engineFilters = new Set(engineFiltersRaw);
+      if (engineFilters.has('native')) {
+        engineFilters.delete('native');
+        engineFilters.add('bigquery');
+        engineFilters.add('redshift');
+        engineFilters.add('synapse');
+      }
       conditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount++})`);
-      values.push(engineFilters);
+      values.push(Array.from(engineFilters));
     }
 
     const deploymentTypeFilters = parseFilterList((deploymentTypes || analyticsDeploymentTypes) as string).map((s: string) => s.toLowerCase());
