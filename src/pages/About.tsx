@@ -86,7 +86,7 @@ Always verify your final estimates using the official calculators:
   return (
     <>
       <style>
-        {\`
+        {`
           :root {
             --bg-color: #ffffff;
             --text-color: #1a1a1a;
