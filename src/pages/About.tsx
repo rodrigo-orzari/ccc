@@ -81,7 +81,7 @@ Always verify your final estimates using the official calculators:
 ---
 
 © 2026 Co-Sell Plus LLC. All rights reserved.
-\`;
+`;
 
   return (
     <>
