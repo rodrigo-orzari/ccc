@@ -597,7 +597,7 @@ export class PricingPipeline {
           category: r.category,
           price_per_unit: r.price,
           unit: r.unit,
-          attributes: Object.keys(attrs).length > 0 ? JSON.stringify(attrs) : null,
+          attributes: Object.keys(attrs).length > 0 ? attrs : null,
           data_source: dataSource
         };
       });
