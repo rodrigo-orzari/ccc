@@ -113,6 +113,3 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const scraper = new GcpInstancesScraper();
   scraper.run().then(res => console.log(res.slice(0, 5))).catch(console.error);
 }
-  const scraper = new GcpInstancesScraper();
-  scraper.run().then(() => console.log('Done')).catch(console.error);
-}
