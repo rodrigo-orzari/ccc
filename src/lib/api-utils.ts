@@ -169,10 +169,12 @@ export function buildPricingFilters(query: any) {
       else if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
     }
 
-    const categoriesFilter = parseFilterList((category || dbFamilies) as string).map((s: string) => s.toLowerCase());
-    if (categoriesFilter.length > 0) {
-      conditions.push(`LOWER(pr.category) = ANY($${paramCount++})`);
-      values.push(categoriesFilter);
+    if (resolvedProductType === 'compute') {
+      const categoriesFilter = parseFilterList(category as string).map((s: string) => s.toLowerCase());
+      if (categoriesFilter.length > 0) {
+        conditions.push(`LOWER(pr.category) = ANY($${paramCount++})`);
+        values.push(categoriesFilter);
+      }
     }
 
     // Database & Analytics product type filters
