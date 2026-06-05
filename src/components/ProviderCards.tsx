@@ -37,7 +37,7 @@ export default function ProviderCards({
   const activeNonSoon = providers.filter(p => !p.soon).map(p => p.id);
 
   return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-5 gap-px bg-[#e5e5e5] dark:bg-[#262626]">
+    <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-[#e5e5e5] dark:bg-[#262626]">
       {providers
         .filter(p => !p.soon)
         .map(p => {
