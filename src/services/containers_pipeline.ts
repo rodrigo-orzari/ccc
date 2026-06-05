@@ -1,18 +1,18 @@
 import type { Sql } from 'postgres';
-import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
+import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline';
 import { 
   AWSContainersLiveAdapter,
   AzureContainersLiveAdapter,
   GCPContainersLiveAdapter,
   DigitalOceanContainersLiveAdapter,
   OracleContainersLiveAdapter
-} from './containers_adapters_live.js';
+} from './containers_adapters_live';
 
-import { AWS_CONTAINERS, AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY } from '../config/aws_containers.js';
-import { AZURE_CONTAINERS, AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY } from '../config/azure_containers.js';
-import { GCP_CONTAINERS, GCP_CONTAINERS_REGION, GCP_CONTAINERS_GEOGRAPHY } from '../config/gcp_containers.js';
-import { DIGITALOCEAN_CONTAINERS, DIGITALOCEAN_CONTAINERS_REGION, DIGITALOCEAN_CONTAINERS_GEOGRAPHY } from '../config/digitalocean_containers.js';
-import { ORACLE_CONTAINERS, ORACLE_CONTAINERS_REGION, ORACLE_CONTAINERS_GEOGRAPHY } from '../config/oracle_containers.js';
+import { AWS_CONTAINERS, AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY } from '../config/aws_containers';
+import { AZURE_CONTAINERS, AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY } from '../config/azure_containers';
+import { GCP_CONTAINERS, GCP_CONTAINERS_REGION, GCP_CONTAINERS_GEOGRAPHY } from '../config/gcp_containers';
+import { DIGITALOCEAN_CONTAINERS, DIGITALOCEAN_CONTAINERS_REGION, DIGITALOCEAN_CONTAINERS_GEOGRAPHY } from '../config/digitalocean_containers';
+import { ORACLE_CONTAINERS, ORACLE_CONTAINERS_REGION, ORACLE_CONTAINERS_GEOGRAPHY } from '../config/oracle_containers';
 
 export class AWSContainersStaticAdapter extends BaseAdapter {
   providerSlug = 'aws';

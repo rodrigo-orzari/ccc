@@ -13,7 +13,7 @@
  * Free Tier: 2M invocations/month, 400,000 GB-seconds/month
  */
 
-const ORACLE_LAMBDA_LANGUAGES = ['Java', 'Python', 'Node.js', 'Go', 'Ruby', 'C#'];
+const ORACLE_LAMBDA_LANGUAGES = ['Java', 'Python', 'Node', 'Go', 'Ruby', 'C#'];
 const ORACLE_EXECUTION_PRICE_PER_GB_SEC = 0.000014974;
 const HOURLY_MULTIPLIER = 3600;
 

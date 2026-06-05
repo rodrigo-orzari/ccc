@@ -1,9 +1,9 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
-import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
-import { DATABRICKS_INSTANCES, DATABRICKS_AWS_REGION, DATABRICKS_GCP_REGION } from '../config/databricks_instances.js';
-import { SNOWFLAKE_INSTANCES, SNOWFLAKE_AWS_REGION, SNOWFLAKE_AZURE_REGION, SNOWFLAKE_GCP_REGION } from '../config/snowflake_instances.js';
-import { NATIVE_ANALYTICS_INSTANCES, NATIVE_ANALYTICS_AWS_REGION, NATIVE_ANALYTICS_GCP_REGION } from '../config/native_analytics_instances.js';
+import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline';
+import { DATABRICKS_INSTANCES, DATABRICKS_AWS_REGION, DATABRICKS_GCP_REGION } from '../config/databricks_instances';
+import { SNOWFLAKE_INSTANCES, SNOWFLAKE_AWS_REGION, SNOWFLAKE_AZURE_REGION, SNOWFLAKE_GCP_REGION } from '../config/snowflake_instances';
+import { NATIVE_ANALYTICS_INSTANCES, NATIVE_ANALYTICS_AWS_REGION, NATIVE_ANALYTICS_GCP_REGION } from '../config/native_analytics_instances';
 
 // ─── Databricks Static Adapters ────────────────────────────────────────────────
 

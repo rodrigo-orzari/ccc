@@ -1,32 +1,37 @@
 import type { Sql } from 'postgres';
-import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
-import { AWSLambdaLiveAdapter, GCPCloudRunLiveAdapter, AzureFunctionsLiveAdapter } from './serverless_adapters_live.js';
+import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline';
+import { AWSLambdaLiveAdapter, GCPCloudRunLiveAdapter, AzureFunctionsLiveAdapter } from './serverless_adapters_live';
 import {
   AWS_SERVERLESS,
   AWS_SERVERLESS_REGION,
   AWS_SERVERLESS_GEOGRAPHY,
-} from '../config/aws_serverless.js';
+} from '../config/aws_serverless';
 import {
   GCP_SERVERLESS,
   GCP_SERVERLESS_REGION,
   GCP_SERVERLESS_GEOGRAPHY,
-} from '../config/gcp_serverless.js';
+} from '../config/gcp_serverless';
 import {
   AZURE_SERVERLESS,
   AZURE_SERVERLESS_REGION,
   AZURE_SERVERLESS_GEOGRAPHY,
-} from '../config/azure_serverless.js';
+} from '../config/azure_serverless';
 import {
   DIGITALOCEAN_SERVERLESS,
   DIGITALOCEAN_SERVERLESS_REGION,
   DIGITALOCEAN_SERVERLESS_GEOGRAPHY,
-} from '../config/digitalocean_serverless.js';
+} from '../config/digitalocean_serverless';
 import {
   ORACLE_SERVERLESS,
   ORACLE_SERVERLESS_REGION,
   ORACLE_SERVERLESS_GEOGRAPHY,
-} from '../config/oracle_serverless.js';
-import { AwsLambdaScraper } from '../scrapers/aws_lambda.js';
+} from '../config/oracle_serverless';
+import {
+  ALIBABA_SERVERLESS,
+  ALIBABA_SERVERLESS_REGION,
+  ALIBABA_SERVERLESS_GEOGRAPHY,
+} from '../config/alibaba_serverless.ts';
+import { AwsLambdaScraper } from '../scrapers/aws_lambda';
 
 export class AWSServerlessLiveAdapter extends BaseAdapter {
   providerSlug = 'aws';
@@ -125,7 +130,7 @@ export class GCPServerlessAdapter extends BaseAdapter {
   }
 }
 
-import { AzureFunctionsScraper } from '../scrapers/azure_functions.js';
+import { AzureFunctionsScraper } from '../scrapers/azure_functions';
 
 export class AzureServerlessAdapter extends BaseAdapter {
   providerSlug = 'azure';
@@ -216,6 +221,33 @@ export class OracleServerlessAdapter extends BaseAdapter {
   }
 }
 
+export class AlibabaServerlessAdapter extends BaseAdapter {
+  providerSlug = 'alibaba';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Alibaba Serverless pricing (${ALIBABA_SERVERLESS.length} entries from static config)...`);
+    return ALIBABA_SERVERLESS.map(inst => ({
+      provider: 'alibaba',
+      service: 'Function Compute',
+      region: ALIBABA_SERVERLESS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: ALIBABA_SERVERLESS_GEOGRAPHY,
+      category: 'Serverless Compute',
+      price: inst.price,
+      unit: inst.unit,
+      dataSource: 'static_config' as const,
+      supportedLanguages: inst.supportedLanguages,
+      attributes: inst.attributes,
+    }));
+  }
+}
+
 export class ServerlessPricingPipeline extends PricingPipeline {
   constructor(sql: Sql) {
     super(sql);
@@ -229,6 +261,7 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       new GCPCloudRunLiveAdapter(),
       new AzureFunctionsLiveAdapter(),
       new DigitalOceanServerlessAdapter(),
+      new AlibabaServerlessAdapter(),
     ];
   }
 
@@ -379,6 +412,33 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       results.push({
         provider: 'oracle',
         service: 'OCI Functions',
+        status: 'skipped',
+        message: error.message
+      });
+    }
+
+    // Alibaba Function Compute
+    try {
+      console.log('⏳ Alibaba Function Compute...');
+      const adapter = new AlibabaServerlessAdapter();
+      const records = await adapter.fetchPricing();
+      if (records.length > 0) {
+        const driftAlerts = await this.saveRecords(records, 'serverless');
+        results.push({
+          provider: 'alibaba',
+          service: 'Function Compute',
+          status: 'success',
+          count: records.length,
+          driftAlerts,
+          dataSource: 'static_config',
+          note: 'Alibaba Function Compute - static config'
+        });
+      }
+    } catch (error: any) {
+      console.warn(`⚠️  Alibaba Function Compute error:`, error.message);
+      results.push({
+        provider: 'alibaba',
+        service: 'Function Compute',
         status: 'skipped',
         message: error.message
       });

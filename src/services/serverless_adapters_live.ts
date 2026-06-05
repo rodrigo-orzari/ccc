@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BaseAdapter, PricingRecord } from './pricing_pipeline.js';
+import { BaseAdapter, PricingRecord } from './pricing_pipeline';
 
 /**
  * AWS Lambda Live API Adapter
@@ -18,7 +18,7 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
   private lambdaServiceCode = 'AWSLambda';
 
   // AWS Lambda supported languages
-  private readonly AWS_LAMBDA_LANGUAGES = ['Python', 'Node.js', 'Java', 'Go', 'Ruby', 'C#'];
+  private readonly AWS_LAMBDA_LANGUAGES = ['Python', 'Node', 'Java', 'Go', 'Ruby', 'C#'];
 
   /**
    * Fetch AWS Lambda pricing from live API

@@ -30,7 +30,13 @@ const STATIC_NETWORKING_PRICING = [
   // --- DigitalOcean ---
   { provider: 'digitalocean', service: 'Data Transfer', category: 'Internet Egress', instance_type: 'Overage (Post-Allowance)', price_per_unit: 0.01, unit: 'GB', geography: 'Global', attributes: { transfer_tier: 'Over Allowance', destination: 'Internet', included_transfer: '1TB - 11TB/mo free', connection_type: 'N/A', routing_type: 'N/A', ha_support: 'N/A', vpc_support: 'N/A', transfer_direction: 'Egress' } },
   { provider: 'digitalocean', service: 'Virtual Private Cloud (VPC)', category: 'Internal VPC Transfer', instance_type: 'VPC Transfer', price_per_unit: 0, unit: 'GB', geography: 'Global', attributes: { transfer_tier: 'Flat Rate', destination: 'Same Region (Internal VPC)', included_transfer: 'Unlimited', connection_type: 'Multipoint', routing_type: 'Fixed', ha_support: 'No', vpc_support: 'Yes', transfer_direction: 'Intra-Cloud' } },
-  { provider: 'digitalocean', service: 'Load Balancing', category: 'Managed Load Balancer', instance_type: 'Small (1 Node)', price_per_unit: 0.01785, unit: 'Hour', geography: 'Global', attributes: { transfer_tier: 'Base Rate', destination: 'N/A', included_transfer: '10,000 Concurrent', connection_type: 'Multipoint', routing_type: 'Fixed', ha_support: 'Yes', vpc_support: 'No', transfer_direction: 'Ingress' } }
+  { provider: 'digitalocean', service: 'Load Balancing', category: 'Managed Load Balancer', instance_type: 'Small (1 Node)', price_per_unit: 0.01785, unit: 'Hour', geography: 'Global', attributes: { transfer_tier: 'Base Rate', destination: 'N/A', included_transfer: '10,000 Concurrent', connection_type: 'Multipoint', routing_type: 'Fixed', ha_support: 'Yes', vpc_support: 'No', transfer_direction: 'Ingress' } },
+
+  // --- Alibaba ---
+  { provider: 'alibaba', service: 'Data Transfer', category: 'Internet Egress', instance_type: 'Pay-By-Traffic', price_per_unit: 0.08, unit: 'GB', geography: 'Global', attributes: { transfer_tier: 'Flat Rate', destination: 'Internet', included_transfer: 'None', connection_type: 'N/A', routing_type: 'Dynamic', ha_support: 'N/A', vpc_support: 'N/A', transfer_direction: 'Egress' } },
+  { provider: 'alibaba', service: 'Data Transfer', category: 'Intra-Cloud Transfer', instance_type: 'Cross-AZ Transfer', price_per_unit: 0.01, unit: 'GB', geography: 'Global', attributes: { transfer_tier: 'Flat Rate', destination: 'Same Region (Different AZ)', included_transfer: 'None', connection_type: 'N/A', routing_type: 'N/A', ha_support: 'N/A', vpc_support: 'Yes', transfer_direction: 'Intra-Cloud' } },
+  { provider: 'alibaba', service: 'Load Balancing', category: 'Server Load Balancer', instance_type: 'SLB Hourly', price_per_unit: 0.02, unit: 'Hour', geography: 'Global', attributes: { transfer_tier: 'Base', destination: 'N/A', included_transfer: 'None', connection_type: 'Multipoint', routing_type: 'Dynamic', ha_support: 'Yes', vpc_support: 'Yes', transfer_direction: 'Ingress' } },
+  { provider: 'alibaba', service: 'Public IPv4', category: 'Elastic IP', instance_type: 'EIP (In Use)', price_per_unit: 0.005, unit: 'Hour', geography: 'Global', attributes: { transfer_tier: 'Flat Rate', destination: 'N/A', included_transfer: 'None', connection_type: 'Point-to-Point', routing_type: 'Dynamic', ha_support: 'Yes', vpc_support: 'Yes', transfer_direction: 'N/A' } }
 ];
 
 export class NetworkingPricingPipeline {
@@ -102,7 +108,7 @@ export class NetworkingPricingPipeline {
     for (const service of services) {
       await this.sql`
         INSERT INTO services (provider_id, name, category)
-        SELECT id, ${service}, 'networking' FROM providers WHERE slug IN ('aws', 'gcp', 'azure', 'oracle', 'digitalocean')
+        SELECT id, ${service}, 'networking' FROM providers WHERE slug IN ('aws', 'gcp', 'azure', 'oracle', 'digitalocean', 'alibaba')
         ON CONFLICT (provider_id, name) DO UPDATE SET category = 'networking'
       `;
     }
