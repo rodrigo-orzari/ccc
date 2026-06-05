@@ -50,6 +50,7 @@ interface FilterSectionProps {
   onClearAll: () => void;
   isExpanded: boolean;
   onToggleExpand: () => void;
+  getLabel?: (option: string) => string;
 }
 
 const FilterSection = ({
@@ -62,6 +63,7 @@ const FilterSection = ({
   onClearAll,
   isExpanded,
   onToggleExpand,
+  getLabel,
 }: FilterSectionProps) => (
   <section className="space-y-3">
     <div className="flex items-center justify-between">
@@ -95,7 +97,7 @@ const FilterSection = ({
                 : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
             }`}
           >
-            {option}
+            {getLabel ? getLabel(option) : option}
           </button>
         ))}
       </div>
@@ -273,6 +275,7 @@ export default function FilterSidebar({
           title="Provider"
           tooltip="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter."
           options={PROVIDERS.filter(p => !p.soon).map(p => p.id)}
+          getLabel={(id) => PROVIDERS.find(p => p.id === id)?.name || id}
           selected={selectedProviders}
           onToggle={onProviderToggle}
           onSelectAll={() => {
@@ -436,6 +439,370 @@ export default function FilterSidebar({
               onClearAll={() => {}}
               isExpanded={expanded.haMode ?? true}
               onToggleExpand={() => onToggleSection('haMode')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
+        )}
+
+        {/* Serverless filters */}
+        {activeProductType === 'serverless' && (
+          <>
+            <FilterSection
+              title="Geography"
+              tooltip="Geographic region where the service is deployed."
+              options={GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Languages"
+              tooltip="Supported programming languages."
+              options={SERVERLESS_LANGUAGES}
+              selected={selectedServerlessLanguages}
+              onToggle={onServerlessLanguageToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.languages ?? true}
+              onToggleExpand={() => onToggleSection('languages')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Cold Start"
+              tooltip="Typical cold start overhead."
+              options={SERVERLESS_COLD_START_OPTIONS}
+              selected={selectedServerlessColdStart}
+              onToggle={onServerlessColdStartToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.coldStart ?? true}
+              onToggleExpand={() => onToggleSection('coldStart')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Timeout"
+              tooltip="Maximum execution time."
+              options={SERVERLESS_TIMEOUT_OPTIONS}
+              selected={selectedServerlessTimeout}
+              onToggle={onServerlessTimeoutToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.timeout ?? true}
+              onToggleExpand={() => onToggleSection('timeout')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Memory Config"
+              tooltip="How memory is allocated."
+              options={SERVERLESS_MEMORY_CONFIG_OPTIONS}
+              selected={selectedServerlessMemoryConfig}
+              onToggle={onServerlessMemoryConfigToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.memoryConfig ?? true}
+              onToggleExpand={() => onToggleSection('memoryConfig')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Execution Model"
+              tooltip="How the code runs (ZIP vs Container)."
+              options={SERVERLESS_EXECUTION_MODEL_OPTIONS}
+              selected={selectedServerlessExecutionModel}
+              onToggle={onServerlessExecutionModelToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.executionModel ?? true}
+              onToggleExpand={() => onToggleSection('executionModel')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Provisioned Concurrency"
+              tooltip="Pre-warm instances to avoid cold starts."
+              options={SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS}
+              selected={selectedServerlessProvisionedConcurrency}
+              onToggle={onServerlessProvisionedConcurrencyToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.provisionedConcurrency ?? true}
+              onToggleExpand={() => onToggleSection('provisionedConcurrency')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Ephemeral Storage"
+              tooltip="Local storage available during execution (GB)."
+              options={SERVERLESS_EPHEMERAL_STORAGE_OPTIONS}
+              selected={selectedServerlessEphemeralStorage}
+              onToggle={onServerlessEphemeralStorageToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.ephemeralStorage ?? true}
+              onToggleExpand={() => onToggleSection('ephemeralStorage')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Free Tier"
+              tooltip="Is there a monthly free invocation allowance?"
+              options={SERVERLESS_FREE_TIER_OPTIONS}
+              selected={selectedServerlessFreeTier}
+              onToggle={onServerlessFreeTierToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.freeTier ?? true}
+              onToggleExpand={() => onToggleSection('freeTier')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Granularity (ms)"
+              tooltip="Billing duration granularity."
+              options={SERVERLESS_GRANULARITY_OPTIONS}
+              selected={selectedServerlessGranularity}
+              onToggle={onServerlessGranularityToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.granularity ?? true}
+              onToggleExpand={() => onToggleSection('granularity')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
+        )}
+
+        {/* Containers filters */}
+        {activeProductType === 'containers' && (
+          <>
+            <FilterSection
+              title="Geography"
+              tooltip="Geographic region."
+              options={GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Orchestrator"
+              tooltip="Underlying orchestration platform."
+              options={CONTAINERS_ORCHESTRATORS}
+              selected={selectedContainersOrchestrators}
+              onToggle={onContainersOrchestratorToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.containersOrchestrator ?? true}
+              onToggleExpand={() => onToggleSection('containersOrchestrator')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Compute Type"
+              tooltip="How compute resources are provisioned."
+              options={CONTAINERS_COMPUTE_TYPES}
+              selected={selectedContainersComputeTypes}
+              onToggle={onContainersComputeTypeToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.containersComputeType ?? true}
+              onToggleExpand={() => onToggleSection('containersComputeType')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Architecture"
+              tooltip="CPU architecture."
+              options={CONTAINERS_ARCHITECTURES}
+              selected={selectedContainersArchitectures}
+              onToggle={onContainersArchitectureToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.containersArchitecture ?? true}
+              onToggleExpand={() => onToggleSection('containersArchitecture')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Billing Granularity"
+              tooltip="How billing is calculated."
+              options={CONTAINERS_BILLING_GRANULARITY}
+              selected={selectedContainersBillingGranularity}
+              onToggle={onContainersBillingGranularityToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.containersBillingGranularity ?? true}
+              onToggleExpand={() => onToggleSection('containersBillingGranularity')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <section className="space-y-3">
+              <div className="flex justify-between items-center">
+                <h2 className="m-0">
+                  <button
+                    onClick={() => onToggleSection('containersGpu')}
+                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                  >
+                    <ChevronDown size={10} className={`transition-transform ${expanded.containersGpu ?? true ? '' : '-rotate-90'}`} />
+                    GPU Support
+                  </button>
+                </h2>
+              </div>
+              {(expanded.containersGpu ?? true) && (
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    onClick={() => onContainersGpuToggle(!containersGpuIncluded)}
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                      containersGpuIncluded
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                        : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                    }`}
+                  >
+                    GPU Included
+                  </button>
+                </div>
+              )}
+            </section>
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
+        )}
+
+        {/* Networking filters */}
+        {activeProductType === 'networking' && (
+          <>
+            <FilterSection
+              title="Geography"
+              tooltip="Geographic region."
+              options={GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Service"
+              tooltip="Networking service type."
+              options={NETWORKING_SERVICES}
+              selected={selectedNetworkingServices}
+              onToggle={onNetworkingServiceToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.networkingService ?? true}
+              onToggleExpand={() => onToggleSection('networkingService')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Connection Type"
+              tooltip="Point-to-point or Multipoint."
+              options={NETWORKING_CONNECTION_TYPES}
+              selected={selectedNetworkingConnectionTypes}
+              onToggle={onNetworkingConnectionTypeToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.networkingConnectionType ?? true}
+              onToggleExpand={() => onToggleSection('networkingConnectionType')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Routing Type"
+              tooltip="Dynamic or Fixed routing."
+              options={NETWORKING_ROUTING_TYPES}
+              selected={selectedNetworkingRoutingTypes}
+              onToggle={onNetworkingRoutingTypeToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.networkingRoutingType ?? true}
+              onToggleExpand={() => onToggleSection('networkingRoutingType')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="HA Support"
+              tooltip="High Availability Support."
+              options={NETWORKING_HA_SUPPORT}
+              selected={selectedNetworkingHaSupport}
+              onToggle={onNetworkingHaSupportToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.networkingHaSupport ?? true}
+              onToggleExpand={() => onToggleSection('networkingHaSupport')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="VPC Support"
+              tooltip="VPC Integration Support."
+              options={NETWORKING_VPC_SUPPORT}
+              selected={selectedNetworkingVpcSupport}
+              onToggle={onNetworkingVpcSupportToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.networkingVpcSupport ?? true}
+              onToggleExpand={() => onToggleSection('networkingVpcSupport')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Direction"
+              tooltip="Data transfer direction."
+              options={NETWORKING_DIRECTIONS}
+              selected={selectedNetworkingDirections}
+              onToggle={onNetworkingDirectionToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.networkingTransferDirection ?? true}
+              onToggleExpand={() => onToggleSection('networkingTransferDirection')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
+        )}
+
+        {/* Data Analytics filters */}
+        {activeProductType === 'data-analytics' && (
+          <>
+            <FilterSection
+              title="Geography"
+              tooltip="Geographic region."
+              options={GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Engine"
+              tooltip="Analytics Engine."
+              options={ANALYTICS_ENGINES}
+              selected={selectedAnalyticsEngines}
+              onToggle={onAnalyticsEngineToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.engine ?? true}
+              onToggleExpand={() => onToggleSection('engine')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Deployment"
+              tooltip="Provisioned or Serverless."
+              options={ANALYTICS_DEPLOYMENT_TYPES}
+              selected={selectedAnalyticsDeploymentTypes}
+              onToggle={onAnalyticsDeploymentTypeToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.deploymentType ?? true}
+              onToggleExpand={() => onToggleSection('deploymentType')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Tier"
+              tooltip="Performance Tier."
+              options={ANALYTICS_TIERS}
+              selected={selectedAnalyticsTiers}
+              onToggle={onAnalyticsTierToggle}
+              onSelectAll={() => {}}
+              onClearAll={() => {}}
+              isExpanded={expanded.tier ?? true}
+              onToggleExpand={() => onToggleSection('tier')}
             />
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
           </>
