@@ -54,7 +54,7 @@ export default function Dashboard() {
   const [selectedContainersComputeTypes, setSelectedContainersComputeTypes] = useState<string[]>([...CONTAINERS_COMPUTE_TYPES]);
   const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...CONTAINERS_ARCHITECTURES]);
   const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...CONTAINERS_BILLING_GRANULARITY]);
-  const [containersGpuIncluded, setContainersGpuIncluded] = useState(true);
+  const [containersGpuIncluded, setContainersGpuIncluded] = useState(false);
 
   const [selectedAnalyticsEngines, setSelectedAnalyticsEngines] = useState<string[]>([...ANALYTICS_ENGINES]);
   const [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes] = useState<string[]>([...ANALYTICS_DEPLOYMENT_TYPES]);
@@ -192,7 +192,7 @@ export default function Dashboard() {
     if (activeProductType === 'vm' && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) return false;
     if (activeProductType === 'database' && (selectedDbFamilies.length === 0 || selectedEngines.length === 0 || selectedDeploymentTypes.length === 0 || selectedHaModes.length === 0)) return false;
     return true;
-  }, [debouncedParamsString, selectedProviders, selectedGeographies]);
+  }, [debouncedParamsString, selectedProviders, selectedGeographies, activeProductType]);
 
   // Queries
   const { data: dbStatus } = useQuery({
