@@ -15,8 +15,8 @@
     "semantic_hash": "0e084414b83e9bbb7c430d09df573f59"
   },
   "package.json": {
-    "mtime": 1780684048.497668,
-    "ast_hash": "43f1b135f6ab04119db02efbbf5f6a3f",
+    "mtime": 1780618705.5703912,
+    "ast_hash": "504fac9b4824f5e54dd1cfe192fc8faf",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -170,9 +170,9 @@
     "semantic_hash": ""
   },
   "ARCHITECTURE_DIAGRAMS.md": {
-    "mtime": 1780683295.4404254,
-    "ast_hash": "857867793cbc1cc6b992409ee7805ac3",
-    "semantic_hash": ""
+    "mtime": 1779304186.657169,
+    "ast_hash": "f18a10c5a7508b04b728ec92a18184de",
+    "semantic_hash": "f18a10c5a7508b04b728ec92a18184de"
   },
   "DATA_POPULATION_GUIDE.md": {
     "mtime": 1780374603.2319999,
@@ -190,13 +190,13 @@
     "semantic_hash": "6c53970640065f025e8525ba2dd32e15"
   },
   "PROJECT_ANALYSIS.md": {
-    "mtime": 1780683271.94778,
-    "ast_hash": "2210fe2c0da1a0a9f6d4e6edbfb16152",
-    "semantic_hash": ""
+    "mtime": 1779304119.0199497,
+    "ast_hash": "62afd0cb57da977da9b55f17bac09503",
+    "semantic_hash": "62afd0cb57da977da9b55f17bac09503"
   },
   "README.md": {
-    "mtime": 1780683202.1897562,
-    "ast_hash": "ade0f27b5fe772d9eb66634a66f9156b",
+    "mtime": 1780621854.0495632,
+    "ast_hash": "b08b0fc8033248fe80f7fe74c7379974",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -517,11 +517,6 @@
   "src/types/index.ts": {
     "mtime": 1780622392.276345,
     "ast_hash": "23b04b8b30f636b4f3ea2d86eda0f977",
-    "semantic_hash": ""
-  },
-  "postcss.config.mjs": {
-    "mtime": 1780684048.7359402,
-    "ast_hash": "0f8aa602547b154dc06be77b007c51d2",
     "semantic_hash": ""
   }
 }
