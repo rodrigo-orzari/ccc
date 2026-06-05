@@ -92,6 +92,7 @@ const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] =
   { id: 'gcp', name: 'Google', color: '#34A853' },
   { id: 'oracle', name: 'Oracle', color: '#F80000' },
   { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF' },
+  { id: 'alibaba', name: 'Alibaba Cloud', color: '#FF6A00' },
 ];
 
 const GEOGRAPHIES = ['N. America', 'S. America', 'W. Europe', 'N. Europe', 'Mid East & Africa', 'Asia Pacific', 'Australia'];
@@ -134,7 +135,7 @@ const NETWORKING_VPC_SUPPORT = ['Yes', 'No'];
 const NETWORKING_DIRECTIONS = ['Egress', 'Ingress', 'Intra-Cloud'];
 
 // Data-Analytics-view constants
-const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'BigQuery', 'Redshift', 'Synapse'];
+const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'Native'];
 const ANALYTICS_DEPLOYMENT_TYPES = ['Serverless', 'Provisioned'];
 const ANALYTICS_TIERS = ['Standard', 'Premium', 'Enterprise'];
 
@@ -2174,9 +2175,9 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-2">
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] font-medium text-[#737373] dark:text-[#a3a3a3]">
             <span className="text-[#a3a3a3] dark:text-[#525252]">© 2026 Co-Sell Plus LLC</span>
-            <Link to="/about" className="hover:text-black dark:hover:text-white transition-colors">About</Link>
-            <Link to="/privacy" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-black dark:hover:text-white transition-colors">Terms of Use</Link>
+            <Link href="/about" className="hover:text-black dark:hover:text-white transition-colors">About</Link>
+            <Link href="/privacy" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-black dark:hover:text-white transition-colors">Terms of Use</Link>
             <a href="mailto:hello@comparecloudcosts.com" className="hover:text-black dark:hover:text-white transition-colors">Contact</a>
             
             <a href="https://www.digitalocean.com/?refcode=23d2b384f3b1&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-black dark:hover:text-white transition-colors">
