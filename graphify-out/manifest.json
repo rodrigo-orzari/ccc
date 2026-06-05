@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   "src/scrapers/gcp_instances.ts": {
-    "mtime": 1780617626.1251647,
-    "ast_hash": "5214591e1618bb295d0dfb14f537fcf5",
+    "mtime": 1780617632.515946,
+    "ast_hash": "7eb05bf1c1c05412da549d115d7b9d1b",
     "semantic_hash": ""
   },
   "test_health.ts": {
@@ -392,6 +392,11 @@
   "test_health_full.ts": {
     "mtime": 1780617598.991713,
     "ast_hash": "6a4432e95f6a0490a1733d3851b10bdb",
+    "semantic_hash": ""
+  },
+  "test_db.ts": {
+    "mtime": 1780617638.2512605,
+    "ast_hash": "cc7c06d78b81dd858e54c1106b1a19c1",
     "semantic_hash": ""
   }
 }

@@ -2034,6 +2034,7 @@ export default function Dashboard() {
       <footer className="border-t border-[#e5e5e5] dark:border-[#262626] bg-[#fcfcfc] dark:bg-[#050505] py-2 px-4 shrink-0 z-20 transition-colors duration-300">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-2">
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] font-medium text-[#737373] dark:text-[#a3a3a3]">
+            <span className="text-[#a3a3a3] dark:text-[#525252]">© 2026 Co-Sell Plus LLC</span>
             <Link to="/about" className="hover:text-black dark:hover:text-white transition-colors">About</Link>
             <Link to="/privacy" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-black dark:hover:text-white transition-colors">Terms of Use</Link>
@@ -2053,7 +2054,6 @@ export default function Dashboard() {
               Support ❤️
             </a>
           </div>
-          <div className="text-[10px] text-[#a3a3a3] dark:text-[#525252]">© 2026 Co-Sell Plus LLC</div>
         </div>
       </footer>
 

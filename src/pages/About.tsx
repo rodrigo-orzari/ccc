@@ -5,6 +5,10 @@ const AboutPage: React.FC = () => {
   const content = `
 # About Compare Cloud Costs (CCC)
 
+Compare Cloud Costs (CCC) is a comprehensive platform designed to demystify cloud pricing across the industry's leading providers. By normalizing complex billing metrics into side-by-side comparisons, CCC empowers users to make data-driven infrastructure decisions, optimize their cloud spend, and confidently navigate a multi-cloud strategy before committing to a specific architecture.
+
+[↑ Go back to the top](#about-us)
+
 ## Why we built this
 
 Cloud computing has revolutionized how we build and scale technology, but it has also introduced a new challenge: pricing complexity. While cloud providers offer individual calculators and purchase agreements, calculating the True Cost of Ownership (TCO) for a modern infrastructure remains a monumental task.
@@ -16,6 +20,8 @@ Users can find exact pricing for one provider in isolation, but comparing those 
 Many organizations rely on traditional FinOps solutions that provide an "after-the-fact" view of spending. While these help optimize existing spend, they don't provide the proactive, comparative clarity needed before a workload is deployed.
 
 Furthermore, the modern landscape is increasingly multi-cloud. Companies run workloads across different cloud providers simultaneously to achieve specific performance, redundancy, or strategic goals. Many organizations find themselves overpaying because they lacked a unified, cross-provider view during the planning phase.
+
+[↑ Go back to the top](#about-us)
 
 ## Features
 
@@ -37,7 +43,25 @@ We break down compute, storage, networking, and support costs so you see exactly
 
 We provide insights into right-sizing and regional price differences before deployment, complementing your existing reactive FinOps tools.
 
-### Directional Estimates, Not Official Quotes
+[↑ Go back to the top](#about-us)
+
+## Who is CCC for?
+
+### IT Managers and CTOs
+IT leaders use CCC during the architectural planning phase to estimate the total cost of ownership (TCO) for new workloads. By seeing "apples-to-apples" cost comparisons for compute, databases, and networking, they can justify budget requests, avoid vendor lock-in, and select the most cost-effective cloud provider for their specific performance needs.
+
+### Azure Sellers (and Cloud Sales Professionals)
+Cloud sales professionals leverage CCC as an independent, third-party benchmark to demonstrate the competitive pricing of their offerings. For example, an Azure seller can quickly show a prospective client how Azure's pricing for a specific database or compute instance stacks up against AWS or Google Cloud, helping to close deals based on transparent cost advantages.
+
+### Managed Service Providers (MSPs)
+MSPs managing infrastructure for multiple clients use CCC to design optimized, cost-effective environments. Whether migrating a client from on-premises to the cloud or optimizing an existing cloud footprint, CCC allows MSPs to rapidly evaluate different providers and present compelling, cost-optimized proposals to their clients, thereby increasing their margins and value-add.
+
+### Consulting Companies (Cloud Deployment Specialists)
+Cloud consultants and architects use CCC as a foundational tool during the discovery and design phases of a digital transformation project. It allows them to quickly model out multi-cloud scenarios, provide clients with accurate directional estimates, and design architectures that balance performance requirements with strict budget constraints.
+
+[↑ Go back to the top](#about-us)
+
+## Directional Estimates, Not Official Quotes
 
 It is important to note that the data on CCC serves as a **directional indicator** or a sample of popular instances, designed to highlight architectural cost differences across clouds. It is not a substitute for an official quote.
 
@@ -48,6 +72,8 @@ Always verify your final estimates using the official calculators:
 - [Oracle Cloud Cost Estimator](https://www.oracle.com/cloud/costestimator.html)
 - [DigitalOcean Pricing](https://www.digitalocean.com/pricing)
 
+[↑ Go back to the top](#about-us)
+
 ---
 
 [Terms of Use](/terms) | [Privacy Policy](/privacy) | [Contact Us](mailto:hello@comparecloudcosts.com)
@@ -55,12 +81,12 @@ Always verify your final estimates using the official calculators:
 ---
 
 © 2026 Co-Sell Plus LLC. All rights reserved.
-`;
+\`;
 
   return (
     <>
       <style>
-        {`
+        {\`
           :root {
             --bg-color: #ffffff;
             --text-color: #1a1a1a;
@@ -156,7 +182,7 @@ Always verify your final estimates using the official calculators:
             .sidebar { display: none; }
             .main-content { margin-left: 0; padding: 2rem; }
           }
-        `}
+        \`}
       </style>
 
       <div className="about-container" id="about-us">
@@ -166,8 +192,10 @@ Always verify your final estimates using the official calculators:
           </h4>
           <nav>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#about-compare-cloud-costs-ccc">About CCC</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#why-we-built-this">Why we built this</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#features">Features</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#who-is-ccc-for">Who is CCC for?</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#directional-estimates-not-official-quotes">Directional Estimates</a></li>
             </ul>
           </nav>
@@ -183,7 +211,7 @@ Always verify your final estimates using the official calculators:
         </main>
       </div>
     </>
-  );
+  );;
 };
 
 export default AboutPage;

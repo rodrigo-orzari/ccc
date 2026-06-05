@@ -58,85 +58,94 @@
   },
   "nodes": [
     {
+      "label": "debug_filters.ts",
+      "file_type": "code",
+      "source_file": "debug_filters.ts",
+      "source_location": "L1",
+      "id": "debug_filters",
+      "community": 45,
+      "norm_label": "debug_filters.ts"
+    },
+    {
       "label": "gcp_instances.ts",
       "file_type": "code",
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L1",
-      "id": "scrapers_gcp_instances",
       "community": 41,
-      "norm_label": "gcp_instances.ts"
+      "norm_label": "gcp_instances.ts",
+      "id": "scrapers_gcp_instances"
     },
     {
       "label": "GcpInstanceConfig",
       "file_type": "code",
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L3",
-      "id": "scrapers_gcp_instances_gcpinstanceconfig",
       "community": 41,
-      "norm_label": "gcpinstanceconfig"
+      "norm_label": "gcpinstanceconfig",
+      "id": "scrapers_gcp_instances_gcpinstanceconfig"
     },
     {
       "label": "GcpInstancesScraper",
       "file_type": "code",
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L12",
-      "id": "scrapers_gcp_instances_gcpinstancesscraper",
       "community": 41,
-      "norm_label": "gcpinstancesscraper"
+      "norm_label": "gcpinstancesscraper",
+      "id": "scrapers_gcp_instances_gcpinstancesscraper"
     },
     {
       "label": ".scrape()",
       "file_type": "code",
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L13",
-      "id": "scrapers_gcp_instances_gcpinstancesscraper_scrape",
       "community": 41,
-      "norm_label": ".scrape()"
+      "norm_label": ".scrape()",
+      "id": "scrapers_gcp_instances_gcpinstancesscraper_scrape"
     },
     {
       "label": "scraper",
       "file_type": "code",
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L116",
-      "id": "scrapers_gcp_instances_scraper",
       "community": 41,
-      "norm_label": "scraper"
+      "norm_label": "scraper",
+      "id": "scrapers_gcp_instances_scraper"
     },
     {
       "label": "test_health.ts",
       "file_type": "code",
       "source_file": "test_health.ts",
       "source_location": "L1",
-      "id": "test_health",
       "community": 40,
-      "norm_label": "test_health.ts"
+      "norm_label": "test_health.ts",
+      "id": "test_health"
     },
     {
       "label": "testHealth()",
       "file_type": "code",
       "source_file": "test_health.ts",
       "source_location": "L3",
-      "id": "test_health_testhealth",
       "community": 40,
-      "norm_label": "testhealth()"
+      "norm_label": "testhealth()",
+      "id": "test_health_testhealth"
     },
     {
       "label": "test_health_full.ts",
       "file_type": "code",
       "source_file": "test_health_full.ts",
       "source_location": "L1",
-      "id": "test_health_full",
       "community": 42,
-      "norm_label": "test_health_full.ts"
+      "norm_label": "test_health_full.ts",
+      "id": "test_health_full"
     },
     {
       "label": "testHealth()",
       "file_type": "code",
       "source_file": "test_health_full.ts",
       "source_location": "L3",
-      "id": "test_health_full_testhealth",
       "community": 42,
-      "norm_label": "testhealth()"
+      "norm_label": "testhealth()",
+      "id": "test_health_full_testhealth"
     },
     {
       "label": "base_scraper.ts",
@@ -5137,9 +5146,9 @@
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scrapers_gcp_instances",
-      "target": "scrapers_base_scraper_basescraper",
-      "confidence_score": 1.0
+      "target": "scrapers_base_scraper_basescraper"
     },
     {
       "relation": "contains",
@@ -5147,9 +5156,9 @@
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scrapers_gcp_instances",
-      "target": "scrapers_gcp_instances_gcpinstanceconfig",
-      "confidence_score": 1.0
+      "target": "scrapers_gcp_instances_gcpinstanceconfig"
     },
     {
       "relation": "contains",
@@ -5157,9 +5166,9 @@
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scrapers_gcp_instances",
-      "target": "scrapers_gcp_instances_gcpinstancesscraper",
-      "confidence_score": 1.0
+      "target": "scrapers_gcp_instances_gcpinstancesscraper"
     },
     {
       "relation": "contains",
@@ -5167,9 +5176,9 @@
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L116",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scrapers_gcp_instances",
-      "target": "scrapers_gcp_instances_scraper",
-      "confidence_score": 1.0
+      "target": "scrapers_gcp_instances_scraper"
     },
     {
       "relation": "method",
@@ -5177,9 +5186,9 @@
       "source_file": "src/scrapers/gcp_instances.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "scrapers_gcp_instances_gcpinstancesscraper",
-      "target": "scrapers_gcp_instances_gcpinstancesscraper_scrape",
-      "confidence_score": 1.0
+      "target": "scrapers_gcp_instances_gcpinstancesscraper_scrape"
     },
     {
       "relation": "contains",
@@ -5187,9 +5196,9 @@
       "source_file": "test_health.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_health",
-      "target": "test_health_testhealth",
-      "confidence_score": 1.0
+      "target": "test_health_testhealth"
     },
     {
       "relation": "contains",
@@ -5197,9 +5206,9 @@
       "source_file": "test_health_full.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_health_full",
-      "target": "test_health_full_testhealth",
-      "confidence_score": 1.0
+      "target": "test_health_full_testhealth"
     },
     {
       "relation": "contains",
@@ -12607,5 +12616,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "f726d79d446af8e16996cb41ed802c9e572b3fa7"
+  "built_at_commit": "89fa89e788031570cfe469601749a1446fea5dc7"
 }
