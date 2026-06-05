@@ -5,15 +5,14 @@ export class AwsFargateScraper extends BaseScraper<any> {
     if (!this.page) throw new Error('Page not initialized');
 
     console.log('[AwsFargateScraper] Navigating to Fargate pricing...');
-    await this.page.goto('https://aws.amazon.com/fargate/pricing/', { waitUntil: 'domcontentloaded' });
-    await this.page.waitForTimeout(5000); 
-
-    const text = await this.page.evaluate(() => document.body.innerText);
-    console.log('[AwsFargateScraper] PAGE TEXT EXTRACT:', text.slice(0, 3000));
     
-    // Attempt to extract vCPU and Memory prices via regex from text
-    const matches = Array.from(text.matchAll(/\\$([0-9.]+)\s*per\s*(vCPU|GB)/gi));
-    console.log('[AwsFargateScraper] Regex Price Matches:', matches.map(m => m[0]));
+    const requestUrls: string[] = [];
+    this.page.on('request', request => requestUrls.push(request.url()));
+
+    await this.page.goto('https://aws.amazon.com/fargate/pricing/', { waitUntil: 'networkidle' });
+    
+    console.log('[AwsFargateScraper] Intercepted requests for JSON:');
+    requestUrls.filter(u => u.endsWith('.json') || u.includes('pricing')).forEach(u => console.log(u));
     
     return [];
   }
