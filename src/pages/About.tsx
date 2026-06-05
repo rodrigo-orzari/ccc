@@ -211,7 +211,7 @@ Always verify your final estimates using the official calculators:
         </main>
       </div>
     </>
-  );;
+  );
 };
 
 export default AboutPage;
