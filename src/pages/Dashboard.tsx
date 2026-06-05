@@ -126,6 +126,11 @@ const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned'];
 const CONTAINERS_ARCHITECTURES = ['x86_64', 'ARM64'];
 const CONTAINERS_BILLING_GRANULARITY = ['Per Second', 'Per Hour'];
 const NETWORKING_SERVICES = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4'];
+const NETWORKING_CONNECTION_TYPES = ['Multipoint', 'Point-to-Point'];
+const NETWORKING_ROUTING_TYPES = ['Dynamic', 'Fixed'];
+const NETWORKING_HA_SUPPORT = ['Yes', 'No'];
+const NETWORKING_VPC_SUPPORT = ['Yes', 'No'];
+const NETWORKING_DIRECTIONS = ['Egress', 'Ingress', 'Intra-Cloud'];
 
 // Data-Analytics-view constants
 const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'BigQuery', 'Redshift', 'Synapse'];
@@ -234,6 +239,11 @@ export default function Dashboard() {
   const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...CONTAINERS_ARCHITECTURES]);
   const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...CONTAINERS_BILLING_GRANULARITY]);
   const [selectedNetworkingServices, setSelectedNetworkingServices] = useState<string[]>([...NETWORKING_SERVICES]);
+  const [selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes] = useState<string[]>([...NETWORKING_CONNECTION_TYPES]);
+  const [selectedNetworkingRoutingTypes, setSelectedNetworkingRoutingTypes] = useState<string[]>([...NETWORKING_ROUTING_TYPES]);
+  const [selectedNetworkingHaSupport, setSelectedNetworkingHaSupport] = useState<string[]>([...NETWORKING_HA_SUPPORT]);
+  const [selectedNetworkingVpcSupport, setSelectedNetworkingVpcSupport] = useState<string[]>([...NETWORKING_VPC_SUPPORT]);
+  const [selectedNetworkingDirections, setSelectedNetworkingDirections] = useState<string[]>([...NETWORKING_DIRECTIONS]);
   const [containersGpuIncluded, setContainersGpuIncluded] = useState(true);
 
   // Data-Analytics-specific filter state
@@ -288,6 +298,12 @@ export default function Dashboard() {
     params.append('analyticsEngines', selectedAnalyticsEngines.join(','));
     params.append('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes.join(','));
     params.append('analyticsTiers', selectedAnalyticsTiers.join(','));
+    params.append('networkingService', selectedNetworkingServices.join(','));
+    params.append('networkingConnectionTypes', selectedNetworkingConnectionTypes.join(','));
+    params.append('networkingRoutingTypes', selectedNetworkingRoutingTypes.join(','));
+    params.append('networkingHaSupport', selectedNetworkingHaSupport.join(','));
+    params.append('networkingVpcSupport', selectedNetworkingVpcSupport.join(','));
+    params.append('networkingTransferDirections', selectedNetworkingDirections.join(','));
     params.append('minVcpu', vCpuRange.min.toString());
     params.append('maxVcpu', vCpuRange.max.toString());
     params.append('minMemory', memoryRange.min.toString());
@@ -303,6 +319,7 @@ export default function Dashboard() {
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
+    selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
     vCpuRange, memoryRange, priceRange, search
   ]);
 
@@ -437,6 +454,12 @@ export default function Dashboard() {
     containersComputeType: true,
     containersArchitecture: true,
     containersBillingGranularity: true,
+    networkingService: true,
+    networkingConnectionType: true,
+    networkingRoutingType: true,
+    networkingHaSupport: true,
+    networkingVpcSupport: true,
+    networkingTransferDirection: true,
   });
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
 
@@ -1306,6 +1329,121 @@ export default function Dashboard() {
                     {NETWORKING_SERVICES.map(opt => (
                       <button key={opt} onClick={() => toggleFilter(selectedNetworkingServices, setSelectedNetworkingServices, opt)}
                         className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedNetworkingServices.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('networkingConnectionType')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.networkingConnectionType ? '' : '-rotate-90'}`} />
+                        Connection Type <Tooltip text="Multipoint vs Point-to-Point"><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                  </div>
+                  {expanded.networkingConnectionType && (
+                  <div className="flex flex-wrap gap-2">
+                    {NETWORKING_CONNECTION_TYPES.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedNetworkingConnectionTypes.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('networkingRoutingType')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.networkingRoutingType ? '' : '-rotate-90'}`} />
+                        Routing Type <Tooltip text="Dynamic (e.g. BGP) vs Fixed"><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                  </div>
+                  {expanded.networkingRoutingType && (
+                  <div className="flex flex-wrap gap-2">
+                    {NETWORKING_ROUTING_TYPES.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedNetworkingRoutingTypes, setSelectedNetworkingRoutingTypes, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedNetworkingRoutingTypes.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('networkingHaSupport')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.networkingHaSupport ? '' : '-rotate-90'}`} />
+                        High Availability <Tooltip text="Built-in redundancy"><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                  </div>
+                  {expanded.networkingHaSupport && (
+                  <div className="flex flex-wrap gap-2">
+                    {NETWORKING_HA_SUPPORT.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedNetworkingHaSupport, setSelectedNetworkingHaSupport, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedNetworkingHaSupport.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('networkingVpcSupport')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.networkingVpcSupport ? '' : '-rotate-90'}`} />
+                        VPC Integration <Tooltip text="Connects to Private VPCs"><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                  </div>
+                  {expanded.networkingVpcSupport && (
+                  <div className="flex flex-wrap gap-2">
+                    {NETWORKING_VPC_SUPPORT.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedNetworkingVpcSupport, setSelectedNetworkingVpcSupport, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedNetworkingVpcSupport.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  )}
+                </section>
+
+                <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+
+                <section className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h2 className="m-0">
+                      <button onClick={() => toggleSection('networkingTransferDirection')} className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors">
+                        <ChevronDown size={10} className={`transition-transform ${expanded.networkingTransferDirection ? '' : '-rotate-90'}`} />
+                        Transfer Direction <Tooltip text="Direction of network traffic"><Info size={10} className="cursor-help" /></Tooltip>
+                      </button>
+                    </h2>
+                  </div>
+                  {expanded.networkingTransferDirection && (
+                  <div className="flex flex-wrap gap-2">
+                    {NETWORKING_DIRECTIONS.map(opt => (
+                      <button key={opt} onClick={() => toggleFilter(selectedNetworkingDirections, setSelectedNetworkingDirections, opt)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${selectedNetworkingDirections.includes(opt) ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white' : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'}`}>
                         {opt}
                       </button>
                     ))}
