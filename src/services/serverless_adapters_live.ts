@@ -57,7 +57,7 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
 
       // Download AWS pricing data
       // Note: This is a large file (~50MB), consider caching in production
-      const pricingUrl = 'https://pricing.us-east-1.amazonaws.com/pricing';
+      const pricingUrl = 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AWSLambda/current/index.json';
       const response = await axios.get(pricingUrl, {
         timeout: 30000,
         headers: {
