@@ -175,121 +175,96 @@ export function buildPricingFilters(query: any) {
       values.push(categoriesFilter);
     }
 
-    const engineFiltersRaw = parseFilterList((engines || analyticsEngines) as string).map((s: string) => s.toLowerCase());
-    if (engineFiltersRaw.length > 0) {
-      let engineFilters = new Set(engineFiltersRaw);
-      if (engineFilters.has('native')) {
-        engineFilters.delete('native');
-        engineFilters.add('bigquery');
-        engineFilters.add('redshift');
-        engineFilters.add('synapse');
+    // Database & Analytics product type filters
+    if (resolvedProductType === 'database' || resolvedProductType === 'data-analytics') {
+      const engineFiltersRaw = parseFilterList((engines || analyticsEngines) as string).map((s: string) => s.toLowerCase());
+      if (engineFiltersRaw.length > 0) {
+        let engineFilters = new Set(engineFiltersRaw);
+        if (engineFilters.has('native')) {
+          engineFilters.delete('native');
+          engineFilters.add('bigquery');
+          engineFilters.add('redshift');
+          engineFilters.add('synapse');
+        }
+        conditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount++})`);
+        values.push(Array.from(engineFilters));
       }
-      conditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount++})`);
-      values.push(Array.from(engineFilters));
-    }
 
-    const deploymentTypeFilters = parseFilterList((deploymentTypes || analyticsDeploymentTypes) as string).map((s: string) => s.toLowerCase());
-    if (deploymentTypeFilters.length > 0) {
-      conditions.push(`LOWER(pr.attributes->>'deployment_type') = ANY($${paramCount++})`);
-      values.push(deploymentTypeFilters);
-    }
+      const deploymentTypeFilters = parseFilterList((deploymentTypes || analyticsDeploymentTypes) as string).map((s: string) => s.toLowerCase());
+      if (deploymentTypeFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'deployment_type') = ANY($${paramCount++})`);
+        values.push(deploymentTypeFilters);
+      }
 
-    // Database family filtering (Relational vs NoSQL)
-    const dbFamilyFilters = parseFilterList(dbFamilies as string);
-    if (dbFamilyFilters.length > 0) {
-      const familyConditions: string[] = [];
+      // Database family filtering (Relational vs NoSQL) - only for 'database' type
+      if (resolvedProductType === 'database') {
+        const dbFamilyFilters = parseFilterList(dbFamilies as string);
+        if (dbFamilyFilters.length > 0) {
+          const familyConditions: string[] = [];
 
-      // Map family types to engine lists
-      const relationalEngines = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB'];
-      const noSqlEngines = ['Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2'];
+          // Map family types to engine lists
+          const relationalEngines = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB'];
+          const noSqlEngines = ['Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2'];
 
-      for (const family of dbFamilyFilters) {
-        if (family.toLowerCase() === 'relational') {
-          familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
-          values.push(relationalEngines.map(e => e.toLowerCase()));
-          paramCount++;
-        } else if (family.toLowerCase() === 'nosql') {
-          familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
-          values.push(noSqlEngines.map(e => e.toLowerCase()));
-          paramCount++;
+          for (const family of dbFamilyFilters) {
+            if (family.toLowerCase() === 'relational') {
+              familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
+              values.push(relationalEngines.map(e => e.toLowerCase()));
+              paramCount++;
+            } else if (family.toLowerCase() === 'nosql') {
+              familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
+              values.push(noSqlEngines.map(e => e.toLowerCase()));
+              paramCount++;
+            }
+          }
+
+          if (familyConditions.length > 0) {
+            conditions.push(`(${familyConditions.join(' OR ')})`);
+          }
+        }
+
+        const haModeFilters = parseFilterList(haModes as string).map((s: string) => s.toLowerCase());
+        if (haModeFilters.length > 0) {
+          conditions.push(`LOWER(pr.attributes->>'ha_mode') = ANY($${paramCount++})`);
+          values.push(haModeFilters);
         }
       }
 
-      if (familyConditions.length > 0) {
-        conditions.push(`(${familyConditions.join(' OR ')})`);
-      }
-    }
-
-    const haModeFilters = parseFilterList(haModes as string).map((s: string) => s.toLowerCase());
-    if (haModeFilters.length > 0) {
-      conditions.push(`LOWER(pr.attributes->>'ha_mode') = ANY($${paramCount++})`);
-      values.push(haModeFilters);
-    }
-
-    const tierFilters = parseFilterList(analyticsTiers as string).map((s: string) => s.toLowerCase());
-    if (tierFilters.length > 0) {
-      conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
-      values.push(tierFilters);
-    }
-
-    const languages = parseFilterList(serverlessLanguages as string);
-    if (languages.length > 0) {
-      conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
-      values.push(languages);
-    }
-
-    const networkingServices = parseFilterList(networkingService as string);
-    if (networkingServices.length > 0) {
-      conditions.push(`s.name = ANY($${paramCount++})`);
-      values.push(networkingServices);
-    }
-
-    const networkingConnectionTypesFilters = parseFilterList(networkingConnectionTypes as string);
-    if (networkingConnectionTypesFilters.length > 0) {
-      conditions.push(`pr.attributes->>'connection_type' = ANY($${paramCount++})`);
-      values.push(networkingConnectionTypesFilters);
-    }
-
-    const networkingRoutingTypesFilters = parseFilterList(networkingRoutingTypes as string);
-    if (networkingRoutingTypesFilters.length > 0) {
-      conditions.push(`pr.attributes->>'routing_type' = ANY($${paramCount++})`);
-      values.push(networkingRoutingTypesFilters);
-    }
-
-    const networkingHaSupportFilters = parseFilterList(networkingHaSupport as string);
-    if (networkingHaSupportFilters.length > 0) {
-      conditions.push(`pr.attributes->>'ha_support' = ANY($${paramCount++})`);
-      values.push(networkingHaSupportFilters);
-    }
-
-    const networkingVpcSupportFilters = parseFilterList(networkingVpcSupport as string);
-    if (networkingVpcSupportFilters.length > 0) {
-      conditions.push(`pr.attributes->>'vpc_support' = ANY($${paramCount++})`);
-      values.push(networkingVpcSupportFilters);
-    }
-
-    const networkingTransferDirectionsFilters = parseFilterList(networkingTransferDirections as string);
-    if (networkingTransferDirectionsFilters.length > 0) {
-      conditions.push(`pr.attributes->>'transfer_direction' = ANY($${paramCount++})`);
-      values.push(networkingTransferDirectionsFilters);
-    }
-
-    if (serverlessColdStart) {
-      const coldStartOptions = parseFilterList(serverlessColdStart as string);
-      const coldStartConditions: string[] = [];
-
-      for (const opt of coldStartOptions) {
-        if (opt.includes('Fast')) {
-          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int < 100`);
-        } else if (opt.includes('Medium')) {
-          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int BETWEEN 100 AND 200`);
-        } else if (opt.includes('Slow')) {
-          coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int > 200`);
+      // Analytics tier filtering - only for 'data-analytics' type
+      if (resolvedProductType === 'data-analytics') {
+        const tierFilters = parseFilterList(analyticsTiers as string).map((s: string) => s.toLowerCase());
+        if (tierFilters.length > 0) {
+          conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
+          values.push(tierFilters);
         }
       }
+    }
 
-      if (coldStartConditions.length > 0) {
-        conditions.push(`(${coldStartConditions.join(' OR ')})`);
+    // Serverless product type filters
+    if (resolvedProductType === 'serverless') {
+      const languages = parseFilterList(serverlessLanguages as string);
+      if (languages.length > 0) {
+        conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
+        values.push(languages);
+      }
+
+      if (serverlessColdStart) {
+        const coldStartOptions = parseFilterList(serverlessColdStart as string);
+        const coldStartConditions: string[] = [];
+
+        for (const opt of coldStartOptions) {
+          if (opt.includes('Fast')) {
+            coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int < 100`);
+          } else if (opt.includes('Medium')) {
+            coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int BETWEEN 100 AND 200`);
+          } else if (opt.includes('Slow')) {
+            coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int > 200`);
+          }
+        }
+
+        if (coldStartConditions.length > 0) {
+          conditions.push(`(${coldStartConditions.join(' OR ')})`);
+        }
       }
     }
 
@@ -319,7 +294,7 @@ export function buildPricingFilters(query: any) {
       values.push(searchPattern, searchPattern, searchPattern, searchPattern, searchPattern, searchPattern);
     }
 
-    if (serverlessTimeout) {
+    if (serverlessTimeout && resolvedProductType === 'serverless') {
       const timeoutOptions = (serverlessTimeout as string).split(',');
       const timeoutConditions: string[] = [];
 
@@ -338,7 +313,7 @@ export function buildPricingFilters(query: any) {
       }
     }
 
-    if (serverlessMemoryConfig) {
+    if (serverlessMemoryConfig && resolvedProductType === 'serverless') {
       const memoryOptions = (serverlessMemoryConfig as string).split(',');
       const memoryConditions: string[] = [];
 
@@ -357,7 +332,7 @@ export function buildPricingFilters(query: any) {
       }
     }
 
-    if (serverlessFreeTier) {
+    if (serverlessFreeTier && resolvedProductType === 'serverless') {
       const freeTierOptions = (serverlessFreeTier as string).split(',');
       const freeTierConditions: string[] = [];
 
@@ -374,7 +349,7 @@ export function buildPricingFilters(query: any) {
       }
     }
 
-    if (serverlessExecutionModel) {
+    if (serverlessExecutionModel && resolvedProductType === 'serverless') {
       const modelOptions = (serverlessExecutionModel as string).split(',');
       const modelConditions: string[] = [];
       for (const opt of modelOptions) {
@@ -397,16 +372,16 @@ export function buildPricingFilters(query: any) {
       values.push(granularityOptions);
     }
 
-    if (serverlessProvisionedConcurrency) {
+    if (serverlessProvisionedConcurrency && resolvedProductType === 'serverless') {
       const concurrencyOptions = (serverlessProvisionedConcurrency as string).split(',');
       conditions.push(`pr.attributes->>'provisioned_concurrency_support' = ANY($${paramCount++})`);
       values.push(concurrencyOptions);
     }
 
-    if (serverlessEphemeralStorage) {
+    if (serverlessEphemeralStorage && resolvedProductType === 'serverless') {
       const storageOptions = (serverlessEphemeralStorage as string).split(',');
       const storageConditions: string[] = [];
-      
+
       for (const opt of storageOptions) {
         if (opt === '< 1') {
           storageConditions.push(`(pr.attributes->>'max_ephemeral_storage_gb')::numeric < 1`);
@@ -416,34 +391,76 @@ export function buildPricingFilters(query: any) {
           storageConditions.push(`(pr.attributes->>'max_ephemeral_storage_gb')::numeric > 5`);
         }
       }
-      
+
       if (storageConditions.length > 0) {
         conditions.push(`(${storageConditions.join(' OR ')})`);
       }
     }
 
-    if (containersOrchestrators) {
-      conditions.push(`LOWER(pr.attributes->>'orchestrator') = ANY($${paramCount++})`);
-      values.push((containersOrchestrators as string).split(',').map((s: string) => s.toLowerCase()));
-    }
-    if (containersComputeTypes) {
-      conditions.push(`LOWER(pr.attributes->>'compute_type') = ANY($${paramCount++})`);
-      values.push((containersComputeTypes as string).split(',').map((s: string) => s.toLowerCase()));
-    }
-    if (containersArchitectures) {
-      conditions.push(`LOWER(pr.attributes->>'architecture') = ANY($${paramCount++})`);
-      values.push((containersArchitectures as string).split(',').map((s: string) => s.toLowerCase()));
-    }
-    if (containersBillingGranularity && resolvedProductType === 'containers') {
-      conditions.push(`pr.attributes->>'billing_granularity' = ANY($${paramCount++})`);
-      values.push((containersBillingGranularity as string).split(','));
+    // Networking product type filters
+    if (resolvedProductType === 'networking') {
+      const networkingServices = parseFilterList(networkingService as string);
+      if (networkingServices.length > 0) {
+        conditions.push(`s.name = ANY($${paramCount++})`);
+        values.push(networkingServices);
+      }
+
+      const networkingConnectionTypesFilters = parseFilterList(networkingConnectionTypes as string);
+      if (networkingConnectionTypesFilters.length > 0) {
+        conditions.push(`pr.attributes->>'connection_type' = ANY($${paramCount++})`);
+        values.push(networkingConnectionTypesFilters);
+      }
+
+      const networkingRoutingTypesFilters = parseFilterList(networkingRoutingTypes as string);
+      if (networkingRoutingTypesFilters.length > 0) {
+        conditions.push(`pr.attributes->>'routing_type' = ANY($${paramCount++})`);
+        values.push(networkingRoutingTypesFilters);
+      }
+
+      const networkingHaSupportFilters = parseFilterList(networkingHaSupport as string);
+      if (networkingHaSupportFilters.length > 0) {
+        conditions.push(`pr.attributes->>'ha_support' = ANY($${paramCount++})`);
+        values.push(networkingHaSupportFilters);
+      }
+
+      const networkingVpcSupportFilters = parseFilterList(networkingVpcSupport as string);
+      if (networkingVpcSupportFilters.length > 0) {
+        conditions.push(`pr.attributes->>'vpc_support' = ANY($${paramCount++})`);
+        values.push(networkingVpcSupportFilters);
+      }
+
+      const networkingTransferDirectionsFilters = parseFilterList(networkingTransferDirections as string);
+      if (networkingTransferDirectionsFilters.length > 0) {
+        conditions.push(`pr.attributes->>'transfer_direction' = ANY($${paramCount++})`);
+        values.push(networkingTransferDirectionsFilters);
+      }
     }
 
-    // Containers GPU filtering
-    if (containersGpuIncluded === 'true') {
-      conditions.push(`pr.gpu_count > 0`);
-    } else if (containersGpuIncluded === 'false') {
-      conditions.push(`pr.gpu_count = 0`);
+    // Containers product type filters
+    if (resolvedProductType === 'containers') {
+      if (containersOrchestrators) {
+        conditions.push(`LOWER(pr.attributes->>'orchestrator') = ANY($${paramCount++})`);
+        values.push((containersOrchestrators as string).split(',').map((s: string) => s.toLowerCase()));
+      }
+      if (containersComputeTypes) {
+        conditions.push(`LOWER(pr.attributes->>'compute_type') = ANY($${paramCount++})`);
+        values.push((containersComputeTypes as string).split(',').map((s: string) => s.toLowerCase()));
+      }
+      if (containersArchitectures) {
+        conditions.push(`LOWER(pr.attributes->>'architecture') = ANY($${paramCount++})`);
+        values.push((containersArchitectures as string).split(',').map((s: string) => s.toLowerCase()));
+      }
+      if (containersBillingGranularity) {
+        conditions.push(`pr.attributes->>'billing_granularity' = ANY($${paramCount++})`);
+        values.push((containersBillingGranularity as string).split(','));
+      }
+
+      // Containers GPU filtering
+      if (containersGpuIncluded === 'true') {
+        conditions.push(`pr.gpu_count > 0`);
+      } else if (containersGpuIncluded === 'false') {
+        conditions.push(`pr.gpu_count = 0`);
+      }
     }
 
     if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
