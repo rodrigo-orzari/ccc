@@ -8,7 +8,7 @@ import {
   Info,
   Maximize2
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 
 const Tooltip = ({ text, children }: { text: string, children: React.ReactNode }) => {
