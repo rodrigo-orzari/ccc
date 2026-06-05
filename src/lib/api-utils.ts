@@ -117,7 +117,7 @@ export function buildPricingFilters(query: any) {
       serverlessGranularity, serverlessExecutionModel, serverlessProvisionedConcurrency, serverlessEphemeralStorage,
       containersOrchestrators, containersComputeTypes, containersArchitectures, containersBillingGranularity, containersGpuIncluded,
       analyticsEngines, analyticsDeploymentTypes, analyticsTiers,
-      networkingService,
+      networkingService, networkingConnectionTypes, networkingRoutingTypes, networkingHaSupport, networkingVpcSupport, networkingTransferDirections,
     } = query;
 
     const conditions: string[] = [];
@@ -216,6 +216,36 @@ export function buildPricingFilters(query: any) {
     if (networkingServices.length > 0) {
       conditions.push(`s.name = ANY($${paramCount++})`);
       values.push(networkingServices);
+    }
+
+    const networkingConnectionTypesFilters = parseFilterList(networkingConnectionTypes as string);
+    if (networkingConnectionTypesFilters.length > 0) {
+      conditions.push(`pr.attributes->>'connection_type' = ANY($${paramCount++})`);
+      values.push(networkingConnectionTypesFilters);
+    }
+
+    const networkingRoutingTypesFilters = parseFilterList(networkingRoutingTypes as string);
+    if (networkingRoutingTypesFilters.length > 0) {
+      conditions.push(`pr.attributes->>'routing_type' = ANY($${paramCount++})`);
+      values.push(networkingRoutingTypesFilters);
+    }
+
+    const networkingHaSupportFilters = parseFilterList(networkingHaSupport as string);
+    if (networkingHaSupportFilters.length > 0) {
+      conditions.push(`pr.attributes->>'ha_support' = ANY($${paramCount++})`);
+      values.push(networkingHaSupportFilters);
+    }
+
+    const networkingVpcSupportFilters = parseFilterList(networkingVpcSupport as string);
+    if (networkingVpcSupportFilters.length > 0) {
+      conditions.push(`pr.attributes->>'vpc_support' = ANY($${paramCount++})`);
+      values.push(networkingVpcSupportFilters);
+    }
+
+    const networkingTransferDirectionsFilters = parseFilterList(networkingTransferDirections as string);
+    if (networkingTransferDirectionsFilters.length > 0) {
+      conditions.push(`pr.attributes->>'transfer_direction' = ANY($${paramCount++})`);
+      values.push(networkingTransferDirectionsFilters);
     }
 
     if (serverlessColdStart) {
