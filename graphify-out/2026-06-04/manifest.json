@@ -130,13 +130,13 @@
     "semantic_hash": ""
   },
   "src/pages/About.tsx": {
-    "mtime": 1780367902.5721748,
-    "ast_hash": "cdc91a1a94e7875523717a3765eae9e2",
-    "semantic_hash": "cdc91a1a94e7875523717a3765eae9e2"
+    "mtime": 1780617984.2208962,
+    "ast_hash": "dee059f55e039d9d39482d8dd4b10a9f",
+    "semantic_hash": ""
   },
   "src/pages/Dashboard.tsx": {
-    "mtime": 1780610118.8458817,
-    "ast_hash": "68eaad93ecc0815b5effbdba57087c3e",
+    "mtime": 1780617791.5303154,
+    "ast_hash": "dbe7e6c235f2f808b773c90a15456647",
     "semantic_hash": ""
   },
   "src/pages/Methodology.tsx": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1780610747.0140522,
-    "ast_hash": "fc8af023dbcd3e6f34047d4c31867d1f",
+    "mtime": 1780617677.2928045,
+    "ast_hash": "d74a30e57bf9bf8602a7f12dbeff39f9",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "test_health_full.ts": {
-    "mtime": 1780617598.991713,
-    "ast_hash": "6a4432e95f6a0490a1733d3851b10bdb",
+    "mtime": 1780617933.54488,
+    "ast_hash": "77155b706c519b8d055dc67a9f36ca7e",
     "semantic_hash": ""
   },
   "test_db.ts": {

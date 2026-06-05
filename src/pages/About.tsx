@@ -182,7 +182,7 @@ Always verify your final estimates using the official calculators:
             .sidebar { display: none; }
             .main-content { margin-left: 0; padding: 2rem; }
           }
-        \`}
+        `}
       </style>
 
       <div className="about-container" id="about-us">
