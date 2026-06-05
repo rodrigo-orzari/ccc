@@ -4,6 +4,7 @@ import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/ora
 import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.ts';
 import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.ts';
 import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.ts';
+import { GcpInstancesScraper } from '../scrapers/gcp_instances.ts';
 import { DatabasePricingPipeline } from './database_pipeline.js';
 
 export interface PricingRecord {
@@ -277,8 +278,10 @@ export class GCPAdapter extends BaseAdapter {
   providerSlug = 'gcp';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching GCP pricing (from src/config/gcp_instances.ts, ${GCP_INSTANCES.length} entries)...`);
-    return GCP_INSTANCES.map(inst => ({
+    console.log(`Fetching GCP pricing (from Playwright Scraper)...`);
+    const scraper = new GcpInstancesScraper();
+    const scrapedInstances = await scraper.run();
+    return scrapedInstances.map(inst => ({
       provider: 'gcp',
       service: 'Compute Engine',
       region: GCP_REGION,
@@ -293,7 +296,7 @@ export class GCPAdapter extends BaseAdapter {
       category: this.classifyGcp(inst.type, inst.vcpus, inst.memory),
       price: inst.price,
       unit: 'Hour',
-      dataSource: 'static_config' as const,
+      dataSource: 'playwright_scraper' as any,
     }));
   }
 }
