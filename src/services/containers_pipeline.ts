@@ -13,6 +13,7 @@ import { AZURE_CONTAINERS, AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY }
 import { GCP_CONTAINERS, GCP_CONTAINERS_REGION, GCP_CONTAINERS_GEOGRAPHY } from '../config/gcp_containers';
 import { DIGITALOCEAN_CONTAINERS, DIGITALOCEAN_CONTAINERS_REGION, DIGITALOCEAN_CONTAINERS_GEOGRAPHY } from '../config/digitalocean_containers';
 import { ORACLE_CONTAINERS, ORACLE_CONTAINERS_REGION, ORACLE_CONTAINERS_GEOGRAPHY } from '../config/oracle_containers';
+import { ALIBABA_CONTAINERS, ALIBABA_CONTAINERS_REGION, ALIBABA_CONTAINERS_GEOGRAPHY } from '../config/alibaba_containers.ts';
 
 export class AWSContainersStaticAdapter extends BaseAdapter {
   providerSlug = 'aws';
@@ -139,6 +140,31 @@ export class OracleContainersStaticAdapter extends BaseAdapter {
   }
 }
 
+export class AlibabaContainersStaticAdapter extends BaseAdapter {
+  providerSlug = 'alibaba';
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Alibaba Containers pricing (${ALIBABA_CONTAINERS.length} entries from static config)...`);
+    return ALIBABA_CONTAINERS.map(inst => ({
+      provider: 'alibaba',
+      service: 'ACK Serverless',
+      region: ALIBABA_CONTAINERS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: ALIBABA_CONTAINERS_GEOGRAPHY,
+      category: 'containers',
+      price: inst.price,
+      unit: inst.unit,
+      dataSource: 'static_config' as const,
+      attributes: inst.attributes,
+    }));
+  }
+}
+
 export class ContainersPricingPipeline extends PricingPipeline {
   constructor(sql: Sql) {
     super(sql);
@@ -149,6 +175,7 @@ export class ContainersPricingPipeline extends PricingPipeline {
       new GCPContainersLiveAdapter(),
       new DigitalOceanContainersLiveAdapter(),
       new OracleContainersLiveAdapter(),
+      new AlibabaContainersStaticAdapter(), // Use static for Alibaba
     ];
   }
 
@@ -160,6 +187,7 @@ export class ContainersPricingPipeline extends PricingPipeline {
       { name: 'gcp', LiveAdapter: GCPContainersLiveAdapter, StaticAdapter: GCPContainersStaticAdapter },
       { name: 'digitalocean', LiveAdapter: DigitalOceanContainersLiveAdapter, StaticAdapter: DigitalOceanContainersStaticAdapter },
       { name: 'oracle', LiveAdapter: OracleContainersLiveAdapter, StaticAdapter: OracleContainersStaticAdapter },
+      { name: 'alibaba', LiveAdapter: AlibabaContainersStaticAdapter, StaticAdapter: AlibabaContainersStaticAdapter },
     ];
 
     for (const provider of providers) {
