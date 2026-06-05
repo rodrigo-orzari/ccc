@@ -501,6 +501,18 @@ export default function Dashboard() {
     setSortConfig({ key, direction });
   };
 
+  // Calculate the number of columns for the current product type
+  const getColumnCount = (productType: ProductType): number => {
+    switch (productType) {
+      case 'database': return 9; // Provider, SKU, Engine, Category, Deployment, HA Mode, Geography, Price, Source
+      case 'serverless': return 15; // Provider, SKU, Languages, Cold Start, Timeout, Memory Config, Free Tier, Granularity, Execution Model, Concurrency, Storage, Invocation Price, Geography, Price, Source
+      case 'containers': return 10; // Provider, SKU, Orchestrator, Compute Type, Architecture, Billing Granularity, GPU, Geography, Price, Source
+      case 'networking': return 10; // Provider, SKU, Service, Category, Transfer Tier, Destination, Included Transfer, Geography, Price, Source
+      case 'data-analytics': return 9; // Provider, SKU, Engine, Deployment Type, Tier, Compute Unit, Geography, Price, Source
+      default: return 12; // VM: Provider, SKU, Category, CPU Vendor, Arch, OS, GPU, Geography, vCPU, Memory, Price, Source
+    }
+  };
+
   // Double-click on a resize handle → auto-fit column to widest visible cell.
 
   const SortIcon = ({ sortKey }: { sortKey: string }) => {
@@ -530,6 +542,142 @@ export default function Dashboard() {
     } else {
       setList([...list, item]);
     }
+  };
+
+  const handleExport = () => {
+    if (data.length === 0) {
+      alert('No data to export');
+      return;
+    }
+
+    // Build CSV header based on active product type
+    let headers: string[] = ['Provider', 'SKU', 'Geography', 'Price (USD)', 'Source'];
+
+    if (activeProductType === 'database') {
+      headers = ['Provider', 'SKU', 'Engine', 'Tier', 'Deployment', 'HA Mode', 'Geography', 'Price (USD)', 'Source'];
+    } else if (activeProductType === 'serverless') {
+      headers = ['Provider', 'SKU', 'Languages', 'Cold Start (ms)', 'Timeout (sec)', 'Memory Config', 'Free Tier', 'Granularity', 'Execution Model', 'Provisioned Concurrency', 'Max Storage (GB)', 'Invocation Price ($/1M)', 'Geography', 'Price (USD)', 'Source'];
+    } else if (activeProductType === 'containers') {
+      headers = ['Provider', 'SKU', 'Orchestrator', 'Compute Type', 'Architecture', 'Billing Granularity', 'GPU', 'Geography', 'Price (USD)', 'Source'];
+    } else if (activeProductType === 'networking') {
+      headers = ['Provider', 'SKU', 'Service', 'Category', 'Transfer Tier', 'Destination', 'Included Transfer', 'Geography', 'Price (USD)', 'Source'];
+    } else if (activeProductType === 'data-analytics') {
+      headers = ['Provider', 'SKU', 'Engine', 'Deployment Type', 'Tier', 'Compute Unit', 'Geography', 'Price (USD)', 'Source'];
+    } else {
+      // VM/Compute
+      headers = ['Provider', 'SKU', 'Category', 'CPU Vendor', 'Architecture', 'OS', 'GPU', 'vCPU', 'Memory (GB)', 'Geography', 'Price (USD)', 'Source'];
+    }
+
+    // Build CSV rows
+    const rows = data.map(record => {
+      const priceDisplay = showAggregation
+        ? (parseFloat(record.price_per_unit) * 8760).toFixed(2)
+        : parseFloat(record.price_per_unit).toFixed(4);
+
+      if (activeProductType === 'database') {
+        return [
+          record.provider,
+          record.instance_type,
+          record.attributes?.engine || '',
+          record.category || '',
+          record.attributes?.deployment_type || '',
+          record.attributes?.ha_mode || '',
+          record.geography,
+          priceDisplay,
+          record.data_source === 'static_config' ? 'Static' : 'API'
+        ];
+      } else if (activeProductType === 'serverless') {
+        return [
+          record.provider,
+          record.instance_type,
+          record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join('; ') : record.attributes.supportedLanguages) : '',
+          record.attributes?.cold_start_overhead_ms || '',
+          record.attributes?.timeout_seconds || '',
+          record.attributes?.memory_configuration || '',
+          record.attributes?.free_invocations_per_month ? 'Yes' : 'No',
+          record.attributes?.billing_granularity_ms || '',
+          record.attributes?.execution_model || '',
+          record.attributes?.provisioned_concurrency_support || '',
+          record.attributes?.max_ephemeral_storage_gb || '',
+          record.attributes?.invocation_price_per_1m || '',
+          record.geography,
+          priceDisplay,
+          record.data_source === 'static_config' ? 'Static' : 'API'
+        ];
+      } else if (activeProductType === 'containers') {
+        return [
+          record.provider,
+          record.instance_type,
+          record.attributes?.orchestrator || '',
+          record.attributes?.compute_type || '',
+          record.attributes?.architecture || '',
+          record.attributes?.billing_granularity || '',
+          record.gpu_count > 0 ? 'Yes' : 'No',
+          record.geography,
+          priceDisplay,
+          record.data_source === 'static_config' ? 'Static' : 'API'
+        ];
+      } else if (activeProductType === 'networking') {
+        return [
+          record.provider,
+          record.instance_type,
+          record.service || '',
+          record.category || '',
+          record.attributes?.transfer_tier || '',
+          record.attributes?.destination || '',
+          record.attributes?.included_transfer || '',
+          record.geography,
+          priceDisplay,
+          record.data_source === 'static_config' ? 'Static' : 'API'
+        ];
+      } else if (activeProductType === 'data-analytics') {
+        return [
+          record.provider,
+          record.instance_type,
+          record.attributes?.engine || '',
+          record.attributes?.deployment_type || '',
+          record.attributes?.tier || '',
+          record.vcpus || '',
+          record.geography,
+          priceDisplay,
+          record.data_source === 'static_config' ? 'Static' : 'API'
+        ];
+      } else {
+        // VM/Compute
+        return [
+          record.provider,
+          record.instance_type,
+          record.category || '',
+          record.cpu_vendor || '',
+          record.arch === 'x86 64' ? 'x86' : (record.arch || ''),
+          record.os || '',
+          record.gpu_count > 0 ? 'Yes' : 'No',
+          record.vcpus || '',
+          record.memory_gb || '',
+          record.geography,
+          priceDisplay,
+          record.data_source === 'static_config' ? 'Static' : 'API'
+        ];
+      }
+    });
+
+    // Create CSV content
+    const csvContent = [
+      headers.map(h => `"${h}"`).join(','),
+      ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+
+    // Trigger download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `cloud-pricing-${activeProductType}-${timestamp}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -1735,7 +1883,11 @@ export default function Dashboard() {
             <div className="flex items-center gap-4">
               <span className="text-[10px] text-[#737373] dark:text-[#525252] font-medium">Click a column header to sort</span>
 
-              <button className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#e5e5e5] dark:border-[#262626] px-3 py-1.5 rounded hover:bg-[#f5f5f5] dark:hover:bg-[#171717] transition-all">
+              <button
+                onClick={handleExport}
+                disabled={data.length === 0}
+                className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#e5e5e5] dark:border-[#262626] px-3 py-1.5 rounded hover:bg-[#f5f5f5] dark:hover:bg-[#171717] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
                 <Download size={12} /> Export
               </button>
             </div>
@@ -1936,7 +2088,7 @@ export default function Dashboard() {
                   {loading ? (
                     Array.from({ length: 15 }).map((_, i) => (
                       <tr key={i} className="animate-pulse">
-                        {Array.from({ length: 12 }).map((_, j) => (
+                        {Array.from({ length: getColumnCount(activeProductType) }).map((_, j) => (
                           <td key={j} className="px-6 py-4"><div className="h-3 bg-[#f5f5f5] dark:bg-[#171717] rounded w-16 mx-auto"></div></td>
                         ))}
                       </tr>

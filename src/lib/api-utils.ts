@@ -194,6 +194,32 @@ export function buildPricingFilters(query: any) {
       values.push(deploymentTypeFilters);
     }
 
+    // Database family filtering (Relational vs NoSQL)
+    const dbFamilyFilters = parseFilterList(dbFamilies as string);
+    if (dbFamilyFilters.length > 0) {
+      const familyConditions: string[] = [];
+
+      // Map family types to engine lists
+      const relationalEngines = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB'];
+      const noSqlEngines = ['Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2'];
+
+      for (const family of dbFamilyFilters) {
+        if (family.toLowerCase() === 'relational') {
+          familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
+          values.push(relationalEngines.map(e => e.toLowerCase()));
+          paramCount++;
+        } else if (family.toLowerCase() === 'nosql') {
+          familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
+          values.push(noSqlEngines.map(e => e.toLowerCase()));
+          paramCount++;
+        }
+      }
+
+      if (familyConditions.length > 0) {
+        conditions.push(`(${familyConditions.join(' OR ')})`);
+      }
+    }
+
     const haModeFilters = parseFilterList(haModes as string).map((s: string) => s.toLowerCase());
     if (haModeFilters.length > 0) {
       conditions.push(`LOWER(pr.attributes->>'ha_mode') = ANY($${paramCount++})`);
@@ -272,8 +298,25 @@ export function buildPricingFilters(query: any) {
       if (searchStr.length > MAX_SEARCH_LENGTH) {
         throw new Error(`Search string exceeds ${MAX_SEARCH_LENGTH} characters`);
       }
-      conditions.push(`pr.instance_type ILIKE $${paramCount++}`);
-      values.push(`%${searchStr}%`);
+      // Search across multiple fields: instance type, provider, region, service, category, and attributes
+      const searchPattern = `%${searchStr}%`;
+      const p1 = paramCount++;
+      const p2 = paramCount++;
+      const p3 = paramCount++;
+      const p4 = paramCount++;
+      const p5 = paramCount++;
+      const p6 = paramCount++;
+
+      conditions.push(`(
+        pr.instance_type ILIKE $${p1} OR
+        p.name ILIKE $${p2} OR
+        r.slug ILIKE $${p3} OR
+        s.name ILIKE $${p4} OR
+        pr.category ILIKE $${p5} OR
+        pr.attributes::text ILIKE $${p6}
+      )`);
+
+      values.push(searchPattern, searchPattern, searchPattern, searchPattern, searchPattern, searchPattern);
     }
 
     if (serverlessTimeout) {
@@ -394,6 +437,13 @@ export function buildPricingFilters(query: any) {
     if (containersBillingGranularity && resolvedProductType === 'containers') {
       conditions.push(`pr.attributes->>'billing_granularity' = ANY($${paramCount++})`);
       values.push((containersBillingGranularity as string).split(','));
+    }
+
+    // Containers GPU filtering
+    if (containersGpuIncluded === 'true') {
+      conditions.push(`pr.gpu_count > 0`);
+    } else if (containersGpuIncluded === 'false') {
+      conditions.push(`pr.gpu_count = 0`);
     }
 
     if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
