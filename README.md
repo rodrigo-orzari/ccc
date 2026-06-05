@@ -4,7 +4,7 @@
 
 # Welcome!
 
-This is a full-stack cloud pricing comparison app. Stack: React + TypeScript (Vite) frontend, Node/Express backend (server.ts), PostgreSQL DB.
+This is a full-stack cloud pricing comparison app. Stack: Next.js (React + TypeScript) full-stack application, PostgreSQL DB.
 
 ## Live Deployment
 
@@ -39,8 +39,8 @@ In modern cloud engineering and FinOps, **apples-to-apples price comparison** ac
 ## 2. Architectural Design
 
 The application is structured as a monorepo deploying a **Single Page Application (SPA) backend-integration**:
-* **Frontend**: React + TypeScript client built using Vite, styled with Tailwind CSS, and powered by Motion for micro-animations.
-* **Backend**: Express.js server written in TypeScript (executed using `tsx` utility). In development, it acts as a Vite dev-server middleware. In production, it serves precompiled assets and functions as a standard REST API.
+* **Frontend**: React + TypeScript client built using Next.js App Router, styled with Tailwind CSS, and powered by Motion for micro-animations. State management and data fetching use `@tanstack/react-query`.
+* **Backend**: Next.js API Routes handle client requests, while data ingestion and scheduled tasks are managed by a dedicated background worker (`src/workers/scheduler.ts`).
 * **Database**: PostgreSQL storing providers, service lines, geographical regions, and detailed pricing entries.
 
 ---
@@ -52,11 +52,9 @@ The application is structured as a monorepo deploying a **Single Page Applicatio
 ```
 _ccc/
 ├── 📄 Configuration & Entry Points
-│   ├── server.ts                      # Express server + API routes + cron jobs
-│   ├── vite.config.ts                 # Vite build configuration
+│   ├── next.config.js                 # Next.js configuration
 │   ├── tsconfig.json                  # TypeScript compiler options
 │   ├── package.json                   # Dependencies & npm scripts
-│   ├── index.html                     # HTML entry point
 │   ├── .env.example                   # Environment variables template
 │   ├── populate_containers.ts         # Script to populate containers
 │   └── populate_serverless.ts         # Script to populate serverless
@@ -73,8 +71,8 @@ _ccc/
 │   └── IMPLEMENTATION_SUMMARY.md      # Summary of latest implementations
 │
 ├── src/
-│   ├── main.tsx                       # React root render
-│   ├── App.tsx                        # Top-level router component
+│   ├── app/                           # Next.js App Router (pages and API routes)
+│   ├── workers/                       # Background worker processes (e.g., cron jobs)
 │   ├── index.css                      # Global Tailwind + custom styles
 │   │
 │   ├── db/
@@ -119,7 +117,7 @@ _ccc/
 │   └── components/
 │       └── MarkdownPage.tsx           # Reusable markdown renderer
 │
-├── dist/                              # Production build output (generated)
+├── .next/                             # Production build output (generated)
 ├── node_modules/                      # Dependencies (generated)
 │
 ├── 📜 Project Files
@@ -131,9 +129,8 @@ _ccc/
 ### File Descriptions
 
 **Configuration & Entry Points:**
-* [package.json](./package.json): Lists runtime dependencies (`pg`, `express`, `nodemailer`, `axios`, `react`, `react-router-dom`, `motion`) and npm scripts for development/build.
-* [server.ts](./server.ts): The application entrypoint. Configures Express, initializes database connections, handles admin pipeline operations, sets up cron schedules, and routes client traffic.
-* [vite.config.ts](./vite.config.ts) & [tsconfig.json](./tsconfig.json): Build and TypeScript configuration files.
+* [package.json](./package.json): Lists runtime dependencies (`next`, `postgres`, `@tanstack/react-query`, `nodemailer`, `axios`, `react`, `motion`) and npm scripts for development/build.
+* [next.config.js](./next.config.js) & [tsconfig.json](./tsconfig.json): Build and TypeScript configuration files.
 
 **Documentation Files (New):**
 * [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md): **Comprehensive technical deep-dive** covering technology stack, architecture, data model, pipelines, API routes, frontend design, performance, and enhancement recommendations. Read this for a complete understanding of how everything works. (~8,000 words)
@@ -225,7 +222,7 @@ npm run lint
 ### Build for Production
 
 ```bash
-npm run build        # Creates optimized dist/ folder
+npm run build        # Creates optimized Next.js build
 npm run start        # Serves production build on port 3000
 ```
 
@@ -254,18 +251,18 @@ Similarly, `ServerlessPipeline`, `ContainersPipeline`, and `NetworkingPipeline` 
 **For detailed pipeline diagrams and flow**, see [ARCHITECTURE_DIAGRAMS.md — Data Ingestion Pipeline](./ARCHITECTURE_DIAGRAMS.md) and [PROJECT_ANALYSIS.md — Section 4](./PROJECT_ANALYSIS.md).
 
 ### C. Backend API Routes
-[server.ts](./server.ts) exposes endpoints used by the dashboard:
-* `/api/pricing`: Retrieves list of pricing records. It uses `buildPricingFilters` to parse complex query-parameter arrays and return filtered records. If `aggregate=true` is requested, it averages prices across all region options to present aggregated instance types.
+The backend endpoints used by the dashboard are structured as Next.js API Routes (`src/app/api/...`):
+* `/api/pricing`: Retrieves list of pricing records. It parses complex query-parameter arrays and returns filtered records. If `aggregate=true` is requested, it averages prices across all region options to present aggregated instance types.
 * `/api/pricing/counts`: Drives UI status indicators by showing real-time record tallies matching selected criteria.
-* `/api/admin/fetch-pricing` / `/api/admin/init-db`: Admin triggers to force pipeline executions.
-* **Cron Jobs**: The server runs a background cron schedule (every Sunday at midnight) executing `PricingPipeline` and `DatabasePricingPipeline` to fetch fresh pricing data. It runs staleness checks, alerting via `sendStalenessEmail` if offline configurations haven't been reviewed in more than 7 days.
+
+**Background Jobs:** A separate worker process (`src/workers/scheduler.ts`) runs a background cron schedule (every Sunday at midnight) executing `PricingPipeline` and `DatabasePricingPipeline` to fetch fresh pricing data. It runs staleness checks, alerting via `sendStalenessEmail` if offline configurations haven't been reviewed in more than 7 days.
 
 **For API documentation and examples**, see [PROJECT_ANALYSIS.md — Section 5](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — API Request/Response Cycles](./ARCHITECTURE_DIAGRAMS.md).
 
 ### D. The Comparative Frontend Dashboard
 [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) binds this dataset to the UI:
 * **Product Views**: Users can toggle between `Virtual Machines`, `Databases`, `Serverless`, `Containers`, `Networking`, and `Data & Analytics`, which dynamically adjusts available filters depending on the selected product (e.g. OS and CPU vendor filters for VMs vs. Execution Model and Cold Start filters for Serverless).
-* **Sidebar Controls**: Features multi-select pills (Providers, Geographies, Engines, categories) and responsive range sliders (`RangeSlider`) to narrow down configurations by minimum/maximum values.
+* **Sidebar Controls**: Features multi-select pills (Providers, Geographies, Engines, categories) and responsive range sliders (`RangeSlider`) to narrow down configurations by minimum/maximum values. The UI utilizes `@tanstack/react-query` to manage data fetching and intelligently cache responses while interacting with sliders and filters.
 * **Sortable Dense Grid**: Renders comparison rows in an interactive table supporting multi-column sorting (e.g., sorting by price, vCPUs, or memory) and drag-to-resize column boundaries. Column sizes are persistent, stored in local storage for subsequent visits.
 
 **For frontend architecture and state management**, see [PROJECT_ANALYSIS.md — Section 6](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — Frontend State Flow](./ARCHITECTURE_DIAGRAMS.md).
