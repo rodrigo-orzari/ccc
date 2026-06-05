@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1780622492.576246,
-    "ast_hash": "78508852fe53229e06163fcf5beeaa55",
+    "mtime": 1780696105.8868935,
+    "ast_hash": "8478d4c5ca5e618f5e0658f70b6afb4d",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
@@ -490,8 +490,8 @@
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
-    "mtime": 1780622631.5296211,
-    "ast_hash": "1198117e7ba39729a40175bd301fdff2",
+    "mtime": 1780685943.1488948,
+    "ast_hash": "e29e27b98a2e6021ef5d7edb8a8ad972",
     "semantic_hash": ""
   },
   "src/components/RangeSlider.tsx": {
