@@ -210,8 +210,8 @@
     "semantic_hash": "282c205ff340bf2f583020ffdce904b1"
   },
   "playwright-report/index.html": {
-    "mtime": 1780610555.3658113,
-    "ast_hash": "7094be27f4ef9745d0991c7791229001",
+    "mtime": 1780698568.840356,
+    "ast_hash": "1b5d84be83c511357fcbcfcebb521fc4",
     "semantic_hash": ""
   },
   "support-qr.png": {
@@ -522,6 +522,11 @@
   "tests/api.spec.ts": {
     "mtime": 1780698448.474849,
     "ast_hash": "d0ddd9f65368446342cfabb8b4f1f016",
+    "semantic_hash": ""
+  },
+  "test-results/.last-run.json": {
+    "mtime": 1780698568.8408372,
+    "ast_hash": "ff6d5dab1dfd50cea584142bc288ce9e",
     "semantic_hash": ""
   }
 }
