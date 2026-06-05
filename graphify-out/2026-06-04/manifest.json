@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1780609286.625559,
-    "ast_hash": "95295f0ae84b9b1fcdac161b212572f9",
+    "mtime": 1780610747.0140522,
+    "ast_hash": "fc8af023dbcd3e6f34047d4c31867d1f",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
@@ -362,6 +362,36 @@
   "tests/api_validation.spec.ts": {
     "mtime": 1780610537.6466455,
     "ast_hash": "155a04268ed06c0a67214b15c989ca58",
+    "semantic_hash": ""
+  },
+  "src/scrapers/base_scraper.ts": {
+    "mtime": 1780610637.1875138,
+    "ast_hash": "985475bd6dc6269a0ad84cd2c93de125",
+    "semantic_hash": ""
+  },
+  "src/scrapers/digitalocean_droplets.ts": {
+    "mtime": 1780610681.446869,
+    "ast_hash": "820030fd2110e6eb553af33c8e484dfc",
+    "semantic_hash": ""
+  },
+  "debug_filters.ts": {
+    "mtime": 1780617621.3335488,
+    "ast_hash": "36d7147b6489d6c53289f9ea040616a5",
+    "semantic_hash": ""
+  },
+  "src/scrapers/gcp_instances.ts": {
+    "mtime": 1780617626.1251647,
+    "ast_hash": "5214591e1618bb295d0dfb14f537fcf5",
+    "semantic_hash": ""
+  },
+  "test_health.ts": {
+    "mtime": 1780617518.1218903,
+    "ast_hash": "525daa8988652db42012fde8c544fc56",
+    "semantic_hash": ""
+  },
+  "test_health_full.ts": {
+    "mtime": 1780617598.991713,
+    "ast_hash": "6a4432e95f6a0490a1733d3851b10bdb",
     "semantic_hash": ""
   }
 }
