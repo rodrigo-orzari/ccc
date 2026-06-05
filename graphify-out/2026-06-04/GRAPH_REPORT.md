@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-04)
 
 ## Corpus Check
-- 77 files · ~80,074 words
+- 80 files · ~81,425 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 533 nodes · 723 edges · 47 communities (31 shown, 16 thin omitted)
+- 547 nodes · 749 edges · 42 communities (27 shown, 15 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 14 edges (avg confidence: 0.89)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b31452f5`
+- Built from commit: `748f2e6e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -49,12 +49,7 @@
 - [[_COMMUNITY_Community 34|Community 34]]
 - [[_COMMUNITY_Community 35|Community 35]]
 - [[_COMMUNITY_Community 36|Community 36]]
-- [[_COMMUNITY_Community 37|Community 37]]
-- [[_COMMUNITY_Community 38|Community 38]]
-- [[_COMMUNITY_Community 39|Community 39]]
 - [[_COMMUNITY_Community 41|Community 41]]
-- [[_COMMUNITY_Community 43|Community 43]]
-- [[_COMMUNITY_Community 44|Community 44]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `BaseAdapter` - 51 edges
@@ -64,9 +59,9 @@
 5. `ServerlessPricingPipeline` - 12 edges
 6. `Compare Cloud Costs` - 12 edges
 7. `Compare Cloud Costs (CCC) — Claude Context` - 12 edges
-8. `scripts` - 9 edges
-9. `Serverless Language Filter` - 9 edges
-10. `BaseScraper` - 8 edges
+8. `BaseScraper` - 11 edges
+9. `scripts` - 9 edges
+10. `Serverless Language Filter` - 9 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Data Staleness Warning System` --semantically_similar_to--> `supportedLanguages JSONB attribute`  [INFERRED] [semantically similar]
@@ -88,51 +83,51 @@
 - **Security Audit findings map to Security Fixes and Operations Runbook controls** — security_audit_tls_cert_validation_disabled, security_audit_exposed_admin_endpoints, security_audit_sql_injection_risk, security_fixes_enable_strict_tls, security_fixes_require_admin_auth, security_fixes_input_validation, operations_runbook_admin_api_auth, operations_runbook_filter_input_validation [EXTRACTED 1.00]
 - **End-to-end serverless language filter: config files, pipeline, API, frontend** — implementation_summary_aws_serverless_config, implementation_summary_gcp_serverless_config, implementation_summary_azure_serverless_config, implementation_summary_digitalocean_serverless_config, implementation_summary_serverless_pipeline_ts, implementation_summary_server_ts, implementation_summary_dashboard_tsx, implementation_summary_supported_languages_jsonb [EXTRACTED 1.00]
 
-## Communities (47 total, 16 thin omitted)
+## Communities (42 total, 15 thin omitted)
 
 ### Community 0 - "Serverless Provider Configs"
 Cohesion: 0.05
-Nodes (24): AWS_CONTAINERS, baseAwsContainerEntries, AZURE_CONTAINERS, baseAzureContainerEntries, baseDigitaloceanContainerEntries, DIGITALOCEAN_CONTAINERS, baseGcpContainerEntries, GCP_CONTAINERS (+16 more)
+Nodes (17): AWS_CONTAINERS, baseAwsContainerEntries, AZURE_CONTAINERS, baseAzureContainerEntries, baseDigitaloceanContainerEntries, DIGITALOCEAN_CONTAINERS, baseGcpContainerEntries, GCP_CONTAINERS (+9 more)
 
 ### Community 1 - "Container Provider Configs"
 Cohesion: 0.50
 Nodes (3): netContent, pricingContent, subclasses
 
 ### Community 2 - "Database Instance Configs"
-Cohesion: 0.08
-Nodes (21): CloudSqlInstanceConfig, DIGITALOCEAN_DB_INSTANCES, DigitalOceanDbInstanceConfig, GCP_CLOUD_SQL_INSTANCES, ORACLE_AUTONOMOUS_INSTANCES, ORACLE_MYSQL_HEATWAVE_INSTANCES, ORACLE_POSTGRESQL_INSTANCES, OracleAutonomousConfig (+13 more)
+Cohesion: 0.05
+Nodes (29): CloudSqlInstanceConfig, DIGITALOCEAN_DB_INSTANCES, DigitalOceanDbInstanceConfig, GCP_CLOUD_SQL_INSTANCES, ORACLE_AUTONOMOUS_INSTANCES, ORACLE_MYSQL_HEATWAVE_INSTANCES, ORACLE_POSTGRESQL_INSTANCES, OracleAutonomousConfig (+21 more)
 
 ### Community 3 - "Pricing Pipeline Architecture"
-Cohesion: 0.05
-Nodes (45): AWSAdapter, AzureAdapter, Batch Insert, Cron Job (Sunday Midnight), Data Staleness Warning System, DigitalOceanAdapter, DigitalOcean App Platform, Email Alerts (+37 more)
+Cohesion: 0.06
+Nodes (41): AWSAdapter, AzureAdapter, Batch Insert, buildPricingFilters, Cron Job (Sunday Midnight), Data Staleness Warning System, DigitalOceanAdapter, DigitalOcean App Platform (+33 more)
 
 ### Community 4 - "Package Dependencies"
-Cohesion: 0.04
-Nodes (46): dependencies, @aws-sdk/client-pricing, axios, cors, dotenv, express, express-rate-limit, @google/genai (+38 more)
+Cohesion: 0.08
+Nodes (24): dependencies, @aws-sdk/client-pricing, axios, cors, dotenv, express, express-rate-limit, @google/genai (+16 more)
 
 ### Community 5 - "Cloud Instance Configs"
-Cohesion: 0.20
-Nodes (5): AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AzureServerlessAdapter, OracleServerlessAdapter
+Cohesion: 0.05
+Nodes (24): AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries, baseDigitaloceanEntries, DIGITALOCEAN_FUNCTIONS_LANGUAGES (+16 more)
 
 ### Community 6 - "Dashboard UI & Filters"
 Cohesion: 0.06
 Nodes (31): ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_ENGINES, ANALYTICS_TIERS, CATEGORIES, CONTAINERS_ARCHITECTURES, CONTAINERS_BILLING_GRANULARITY, CONTAINERS_COMPUTE_TYPES, CONTAINERS_ORCHESTRATORS (+23 more)
 
 ### Community 7 - "Container Live Adapters"
-Cohesion: 0.07
-Nodes (26): Compare Cloud Costs Platform, 1. What Problem Does This Application Solve?, 2. Architectural Design, 3. File Directory & Code Organization, 4. Documentation Guide, 5. Security & Deployment, 6. Quick Start, 7. In-Depth Subsystem Walks (+18 more)
+Cohesion: 0.06
+Nodes (35): Compare Cloud Costs Platform, index.html Entry Point, React Root Mount Point (#root), Compare Cloud Costs Application, Express.js 4.21.2 Backend, FinOps Cloud Price Comparison Challenge, nodemailer 8.0.7 Email Service, PostgreSQL Database (+27 more)
 
 ### Community 9 - "TypeScript Configuration"
 Cohesion: 0.12
 Nodes (16): compilerOptions, allowImportingTsExtensions, allowJs, experimentalDecorators, isolatedModules, jsx, lib, module (+8 more)
 
 ### Community 10 - "Platform Overview"
-Cohesion: 0.10
-Nodes (21): buildPricingFilters, AWSLambdaLiveAdapter, aws_serverless.ts config, azure_serverless.ts config, Dashboard.tsx, digitalocean_serverless.ts config, gcp_serverless.ts config, pricing_pipeline.ts (+13 more)
+Cohesion: 0.13
+Nodes (16): AWSLambdaLiveAdapter, aws_serverless.ts config, azure_serverless.ts config, Dashboard.tsx, digitalocean_serverless.ts config, gcp_serverless.ts config, pricing_pipeline.ts, serverless_adapters_live.ts (+8 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.12
-Nodes (4): PricingRecord, AWSServerlessAdapter, DigitalOceanServerlessAdapter, GCPServerlessAdapter
+Cohesion: 0.09
+Nodes (22): devDependencies, autoprefixer, @playwright/test, tailwindcss, @types/cors, @types/express, @types/node, @types/nodemailer (+14 more)
 
 ### Community 14 - "App Metadata"
 Cohesion: 0.40
@@ -156,55 +151,39 @@ Nodes (12): DATABRICKS_INSTANCES, DatabricksConfig, NATIVE_ANALYTICS_INSTANCES, 
 
 ### Community 32 - "Community 32"
 Cohesion: 0.07
-Nodes (23): DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, sql, startServer() (+15 more)
+Nodes (22): DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, sql, startServer() (+14 more)
 
 ### Community 33 - "Community 33"
 Cohesion: 0.33
 Nodes (5): autoInitStart, content, cronEnd, cronStart, lines
 
-### Community 37 - "Community 37"
-Cohesion: 0.29
-Nodes (3): AWSLambdaLiveAdapter, AzureFunctionsLiveAdapter, GCPCloudRunLiveAdapter
-
-### Community 38 - "Community 38"
-Cohesion: 0.40
-Nodes (3): AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries
-
-### Community 39 - "Community 39"
-Cohesion: 0.40
-Nodes (3): baseDigitaloceanEntries, DIGITALOCEAN_FUNCTIONS_LANGUAGES, DIGITALOCEAN_SERVERLESS
+### Community 35 - "Community 35"
+Cohesion: 0.17
+Nodes (7): AWSContainersLiveAdapter, AzureContainersLiveAdapter, DigitalOceanContainersLiveAdapter, GCPContainersLiveAdapter, OracleContainersLiveAdapter, PricingRecord, ServerlessPricingPipeline
 
 ### Community 41 - "Community 41"
-Cohesion: 0.15
-Nodes (7): AwsFargateScraper, BaseScraper, DigitalOceanDropletsScraper, DigitalOceanInstanceConfig, GcpInstanceConfig, GcpInstancesScraper, scraper
-
-### Community 43 - "Community 43"
-Cohesion: 0.40
-Nodes (3): baseGcpEntries, GCP_CLOUD_RUN_LANGUAGES, GCP_SERVERLESS
-
-### Community 44 - "Community 44"
-Cohesion: 0.40
-Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
+Cohesion: 0.19
+Nodes (6): BaseScraper, DigitalOceanDropletsScraper, DigitalOceanInstanceConfig, GcpInstanceConfig, GcpInstancesScraper, scraper
 
 ## Knowledge Gaps
 - **211 isolated node(s):** `PricingRecord`, `ProductType`, `PROVIDERS`, `GEOGRAPHIES`, `OS_TYPES` (+206 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `BaseAdapter` connect `Serverless Provider Configs` to `Community 32`, `Database Instance Configs`, `Cloud Instance Configs`, `Community 37`, `Community 12`, `Community 31`?**
-  _High betweenness centrality (0.054) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Community 12` to `Serverless Provider Configs`, `Community 32`, `Database Instance Configs`, `Community 35`, `Community 37`, `Cloud Instance Configs`, `Community 31`?**
-  _High betweenness centrality (0.050) - this node is a cross-community bridge._
+- **Why does `BaseAdapter` connect `Database Instance Configs` to `Serverless Provider Configs`, `Community 32`, `Community 35`, `Cloud Instance Configs`, `Community 31`?**
+  _High betweenness centrality (0.056) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Community 35` to `Serverless Provider Configs`, `Community 32`, `Database Instance Configs`, `Cloud Instance Configs`, `Community 31`?**
+  _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **Why does `PricingPipeline` connect `Community 32` to `Serverless Provider Configs`, `Database Instance Configs`, `Community 35`, `Cloud Instance Configs`, `Community 31`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **What connects `PricingRecord`, `ProductType`, `PROVIDERS` to the rest of the system?**
   _212 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
-  _Cohesion score 0.05191256830601093 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.051418439716312055 - nodes in this community are weakly interconnected._
 - **Should `Database Instance Configs` be split into smaller, more focused modules?**
-  _Cohesion score 0.08172043010752689 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.053246753246753244 - nodes in this community are weakly interconnected._
 - **Should `Pricing Pipeline Architecture` be split into smaller, more focused modules?**
-  _Cohesion score 0.050505050505050504 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05731707317073171 - nodes in this community are weakly interconnected._
