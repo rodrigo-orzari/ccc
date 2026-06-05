@@ -65,16 +65,20 @@ export async function GET(req: NextRequest) {
     const { whereClause, values } = buildPricingFilters(query);
     dbQuery += ' ' + whereClause;
 
+    // Support configurable limit (default 10000, max 50000 to prevent abuse)
+    const rawLimit = query.limit ? parseInt(query.limit as string, 10) : 10000;
+    const limit = Math.min(Math.max(rawLimit, 1), 50000); // Clamp between 1 and 50,000
+
     if (isAggregated) {
       dbQuery += `
         GROUP BY
           p.name, pr.instance_type, pr.vcpus, pr.memory_gb,
           pr.arch, pr.os, pr.cpu_vendor, pr.gpu_count, pr.category, pr.unit
         ORDER BY avg_price ASC
-        LIMIT 1000
+        LIMIT ${limit}
       `;
     } else {
-      dbQuery += ` ORDER BY pr.price_per_unit ASC LIMIT 1000`;
+      dbQuery += ` ORDER BY pr.price_per_unit ASC LIMIT ${limit}`;
     }
 
     console.log('SQL Query:', dbQuery);
