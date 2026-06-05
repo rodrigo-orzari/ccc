@@ -130,8 +130,8 @@
     "semantic_hash": ""
   },
   "src/pages/About.tsx": {
-    "mtime": 1780617984.2208962,
-    "ast_hash": "dee059f55e039d9d39482d8dd4b10a9f",
+    "mtime": 1780618019.6705823,
+    "ast_hash": "914038b3523baafa35230e53ce27f1d6",
     "semantic_hash": ""
   },
   "src/pages/Dashboard.tsx": {
@@ -397,6 +397,11 @@
   "test_db.ts": {
     "mtime": 1780617638.2512605,
     "ast_hash": "cc7c06d78b81dd858e54c1106b1a19c1",
+    "semantic_hash": ""
+  },
+  "src/scrapers/aws_fargate.ts": {
+    "mtime": 1780618034.0763202,
+    "ast_hash": "486e11ffccd26901bb44264d6850124e",
     "semantic_hash": ""
   }
 }

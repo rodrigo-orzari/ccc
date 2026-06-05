@@ -76,625 +76,652 @@
       "norm_label": "aboutpage()"
     },
     {
+      "label": "aws_fargate.ts",
+      "file_type": "code",
+      "source_file": "src/scrapers/aws_fargate.ts",
+      "source_location": "L1",
+      "id": "scrapers_aws_fargate",
+      "community": 41,
+      "norm_label": "aws_fargate.ts"
+    },
+    {
+      "label": "AwsFargateScraper",
+      "file_type": "code",
+      "source_file": "src/scrapers/aws_fargate.ts",
+      "source_location": "L3",
+      "id": "scrapers_aws_fargate_awsfargatescraper",
+      "community": 41,
+      "norm_label": "awsfargatescraper"
+    },
+    {
+      "label": ".scrape()",
+      "file_type": "code",
+      "source_file": "src/scrapers/aws_fargate.ts",
+      "source_location": "L4",
+      "id": "scrapers_aws_fargate_awsfargatescraper_scrape",
+      "community": 41,
+      "norm_label": ".scrape()"
+    },
+    {
       "label": "Dashboard.tsx",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L1",
-      "id": "pages_dashboard",
       "community": 6,
-      "norm_label": "dashboard.tsx"
+      "norm_label": "dashboard.tsx",
+      "id": "pages_dashboard"
     },
     {
       "label": "Tooltip()",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L14",
-      "id": "pages_dashboard_tooltip",
       "community": 6,
-      "norm_label": "tooltip()"
+      "norm_label": "tooltip()",
+      "id": "pages_dashboard_tooltip"
     },
     {
       "label": "PricingRecord",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L34",
-      "id": "pages_dashboard_pricingrecord",
       "community": 6,
-      "norm_label": "pricingrecord"
+      "norm_label": "pricingrecord",
+      "id": "pages_dashboard_pricingrecord"
     },
     {
       "label": "ProductType",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L86",
-      "id": "pages_dashboard_producttype",
       "community": 6,
-      "norm_label": "producttype"
+      "norm_label": "producttype",
+      "id": "pages_dashboard_producttype"
     },
     {
       "label": "PROVIDERS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L88",
-      "id": "pages_dashboard_providers",
       "community": 6,
-      "norm_label": "providers"
+      "norm_label": "providers",
+      "id": "pages_dashboard_providers"
     },
     {
       "label": "GEOGRAPHIES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L96",
-      "id": "pages_dashboard_geographies",
       "community": 6,
-      "norm_label": "geographies"
+      "norm_label": "geographies",
+      "id": "pages_dashboard_geographies"
     },
     {
       "label": "OS_TYPES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L97",
-      "id": "pages_dashboard_os_types",
       "community": 6,
-      "norm_label": "os_types"
+      "norm_label": "os_types",
+      "id": "pages_dashboard_os_types"
     },
     {
       "label": "CPU_PROFILES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L98",
-      "id": "pages_dashboard_cpu_profiles",
       "community": 6,
-      "norm_label": "cpu_profiles"
+      "norm_label": "cpu_profiles",
+      "id": "pages_dashboard_cpu_profiles"
     },
     {
       "label": "CATEGORIES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L104",
-      "id": "pages_dashboard_categories",
       "community": 6,
-      "norm_label": "categories"
+      "norm_label": "categories",
+      "id": "pages_dashboard_categories"
     },
     {
       "label": "DB_FAMILIES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L107",
-      "id": "pages_dashboard_db_families",
       "community": 6,
-      "norm_label": "db_families"
+      "norm_label": "db_families",
+      "id": "pages_dashboard_db_families"
     },
     {
       "label": "DB_ENGINES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L108",
-      "id": "pages_dashboard_db_engines",
       "community": 6,
-      "norm_label": "db_engines"
+      "norm_label": "db_engines",
+      "id": "pages_dashboard_db_engines"
     },
     {
       "label": "DEPLOYMENT_TYPES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L109",
-      "id": "pages_dashboard_deployment_types",
       "community": 6,
-      "norm_label": "deployment_types"
+      "norm_label": "deployment_types",
+      "id": "pages_dashboard_deployment_types"
     },
     {
       "label": "HA_MODES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L110",
-      "id": "pages_dashboard_ha_modes",
       "community": 6,
-      "norm_label": "ha_modes"
+      "norm_label": "ha_modes",
+      "id": "pages_dashboard_ha_modes"
     },
     {
       "label": "SERVERLESS_LANGUAGES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L113",
-      "id": "pages_dashboard_serverless_languages",
       "community": 6,
-      "norm_label": "serverless_languages"
+      "norm_label": "serverless_languages",
+      "id": "pages_dashboard_serverless_languages"
     },
     {
       "label": "SERVERLESS_COLD_START_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L114",
-      "id": "pages_dashboard_serverless_cold_start_options",
       "community": 6,
-      "norm_label": "serverless_cold_start_options"
+      "norm_label": "serverless_cold_start_options",
+      "id": "pages_dashboard_serverless_cold_start_options"
     },
     {
       "label": "SERVERLESS_TIMEOUT_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L115",
-      "id": "pages_dashboard_serverless_timeout_options",
       "community": 6,
-      "norm_label": "serverless_timeout_options"
+      "norm_label": "serverless_timeout_options",
+      "id": "pages_dashboard_serverless_timeout_options"
     },
     {
       "label": "SERVERLESS_MEMORY_CONFIG_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L116",
-      "id": "pages_dashboard_serverless_memory_config_options",
       "community": 6,
-      "norm_label": "serverless_memory_config_options"
+      "norm_label": "serverless_memory_config_options",
+      "id": "pages_dashboard_serverless_memory_config_options"
     },
     {
       "label": "SERVERLESS_FREE_TIER_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L117",
-      "id": "pages_dashboard_serverless_free_tier_options",
       "community": 6,
-      "norm_label": "serverless_free_tier_options"
+      "norm_label": "serverless_free_tier_options",
+      "id": "pages_dashboard_serverless_free_tier_options"
     },
     {
       "label": "SERVERLESS_GRANULARITY_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L118",
-      "id": "pages_dashboard_serverless_granularity_options",
       "community": 6,
-      "norm_label": "serverless_granularity_options"
+      "norm_label": "serverless_granularity_options",
+      "id": "pages_dashboard_serverless_granularity_options"
     },
     {
       "label": "SERVERLESS_EXECUTION_MODEL_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L119",
-      "id": "pages_dashboard_serverless_execution_model_options",
       "community": 6,
-      "norm_label": "serverless_execution_model_options"
+      "norm_label": "serverless_execution_model_options",
+      "id": "pages_dashboard_serverless_execution_model_options"
     },
     {
       "label": "SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L120",
-      "id": "pages_dashboard_serverless_provisioned_concurrency_options",
       "community": 6,
-      "norm_label": "serverless_provisioned_concurrency_options"
+      "norm_label": "serverless_provisioned_concurrency_options",
+      "id": "pages_dashboard_serverless_provisioned_concurrency_options"
     },
     {
       "label": "SERVERLESS_EPHEMERAL_STORAGE_OPTIONS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L121",
-      "id": "pages_dashboard_serverless_ephemeral_storage_options",
       "community": 6,
-      "norm_label": "serverless_ephemeral_storage_options"
+      "norm_label": "serverless_ephemeral_storage_options",
+      "id": "pages_dashboard_serverless_ephemeral_storage_options"
     },
     {
       "label": "CONTAINERS_ORCHESTRATORS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L124",
-      "id": "pages_dashboard_containers_orchestrators",
       "community": 6,
-      "norm_label": "containers_orchestrators"
+      "norm_label": "containers_orchestrators",
+      "id": "pages_dashboard_containers_orchestrators"
     },
     {
       "label": "CONTAINERS_COMPUTE_TYPES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L125",
-      "id": "pages_dashboard_containers_compute_types",
       "community": 6,
-      "norm_label": "containers_compute_types"
+      "norm_label": "containers_compute_types",
+      "id": "pages_dashboard_containers_compute_types"
     },
     {
       "label": "CONTAINERS_ARCHITECTURES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L126",
-      "id": "pages_dashboard_containers_architectures",
       "community": 6,
-      "norm_label": "containers_architectures"
+      "norm_label": "containers_architectures",
+      "id": "pages_dashboard_containers_architectures"
     },
     {
       "label": "CONTAINERS_BILLING_GRANULARITY",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L127",
-      "id": "pages_dashboard_containers_billing_granularity",
       "community": 6,
-      "norm_label": "containers_billing_granularity"
+      "norm_label": "containers_billing_granularity",
+      "id": "pages_dashboard_containers_billing_granularity"
     },
     {
       "label": "NETWORKING_SERVICES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L128",
-      "id": "pages_dashboard_networking_services",
       "community": 6,
-      "norm_label": "networking_services"
+      "norm_label": "networking_services",
+      "id": "pages_dashboard_networking_services"
     },
     {
       "label": "ANALYTICS_ENGINES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L131",
-      "id": "pages_dashboard_analytics_engines",
       "community": 6,
-      "norm_label": "analytics_engines"
+      "norm_label": "analytics_engines",
+      "id": "pages_dashboard_analytics_engines"
     },
     {
       "label": "ANALYTICS_DEPLOYMENT_TYPES",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L132",
-      "id": "pages_dashboard_analytics_deployment_types",
       "community": 6,
-      "norm_label": "analytics_deployment_types"
+      "norm_label": "analytics_deployment_types",
+      "id": "pages_dashboard_analytics_deployment_types"
     },
     {
       "label": "ANALYTICS_TIERS",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L133",
-      "id": "pages_dashboard_analytics_tiers",
       "community": 6,
-      "norm_label": "analytics_tiers"
+      "norm_label": "analytics_tiers",
+      "id": "pages_dashboard_analytics_tiers"
     },
     {
       "label": "DEFAULT_VCPU_RANGE",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L135",
-      "id": "pages_dashboard_default_vcpu_range",
       "community": 6,
-      "norm_label": "default_vcpu_range"
+      "norm_label": "default_vcpu_range",
+      "id": "pages_dashboard_default_vcpu_range"
     },
     {
       "label": "DEFAULT_MEMORY_RANGE",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L136",
-      "id": "pages_dashboard_default_memory_range",
       "community": 6,
-      "norm_label": "default_memory_range"
+      "norm_label": "default_memory_range",
+      "id": "pages_dashboard_default_memory_range"
     },
     {
       "label": "DEFAULT_PRICE_RANGE",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L137",
-      "id": "pages_dashboard_default_price_range",
       "community": 6,
-      "norm_label": "default_price_range"
+      "norm_label": "default_price_range",
+      "id": "pages_dashboard_default_price_range"
     },
     {
       "label": "RangeSlider()",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L139",
-      "id": "pages_dashboard_rangeslider",
       "community": 6,
-      "norm_label": "rangeslider()"
+      "norm_label": "rangeslider()",
+      "id": "pages_dashboard_rangeslider"
     },
     {
       "label": "Dashboard()",
       "file_type": "code",
       "source_file": "src/pages/Dashboard.tsx",
       "source_location": "L198",
-      "id": "pages_dashboard_dashboard",
       "community": 6,
-      "norm_label": "dashboard()"
+      "norm_label": "dashboard()",
+      "id": "pages_dashboard_dashboard"
     },
     {
       "label": "pricing_pipeline.ts",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L1",
-      "id": "services_pricing_pipeline",
-      "community": 5,
-      "norm_label": "pricing_pipeline.ts"
+      "community": 32,
+      "norm_label": "pricing_pipeline.ts",
+      "id": "services_pricing_pipeline"
     },
     {
       "label": "PricingRecord",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L10",
-      "id": "services_pricing_pipeline_pricingrecord",
       "community": 12,
-      "norm_label": "pricingrecord"
+      "norm_label": "pricingrecord",
+      "id": "services_pricing_pipeline_pricingrecord"
     },
     {
       "label": "PriceDriftResult",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L30",
-      "id": "services_pricing_pipeline_pricedriftresult",
       "community": 32,
-      "norm_label": "pricedriftresult"
+      "norm_label": "pricedriftresult",
+      "id": "services_pricing_pipeline_pricedriftresult"
     },
     {
       "label": "BaseAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L39",
-      "id": "services_pricing_pipeline_baseadapter",
       "community": 0,
-      "norm_label": "baseadapter"
+      "norm_label": "baseadapter",
+      "id": "services_pricing_pipeline_baseadapter"
     },
     {
       "label": ".getGeography()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L43",
-      "id": "services_pricing_pipeline_baseadapter_getgeography",
       "community": 0,
-      "norm_label": ".getgeography()"
+      "norm_label": ".getgeography()",
+      "id": "services_pricing_pipeline_baseadapter_getgeography"
     },
     {
       "label": ".getCpuVendor()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L54",
-      "id": "services_pricing_pipeline_baseadapter_getcpuvendor",
       "community": 0,
-      "norm_label": ".getcpuvendor()"
+      "norm_label": ".getcpuvendor()",
+      "id": "services_pricing_pipeline_baseadapter_getcpuvendor"
     },
     {
       "label": ".getGpuCount()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L68",
-      "id": "services_pricing_pipeline_baseadapter_getgpucount",
       "community": 0,
-      "norm_label": ".getgpucount()"
+      "norm_label": ".getgpucount()",
+      "id": "services_pricing_pipeline_baseadapter_getgpucount"
     },
     {
       "label": ".categoryByRatio()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L74",
-      "id": "services_pricing_pipeline_baseadapter_categorybyratio",
       "community": 0,
-      "norm_label": ".categorybyratio()"
+      "norm_label": ".categorybyratio()",
+      "id": "services_pricing_pipeline_baseadapter_categorybyratio"
     },
     {
       "label": ".classifyAws()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L82",
-      "id": "services_pricing_pipeline_baseadapter_classifyaws",
       "community": 0,
-      "norm_label": ".classifyaws()"
+      "norm_label": ".classifyaws()",
+      "id": "services_pricing_pipeline_baseadapter_classifyaws"
     },
     {
       "label": ".classifyAzure()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L103",
-      "id": "services_pricing_pipeline_baseadapter_classifyazure",
       "community": 0,
-      "norm_label": ".classifyazure()"
+      "norm_label": ".classifyazure()",
+      "id": "services_pricing_pipeline_baseadapter_classifyazure"
     },
     {
       "label": ".classifyGcp()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L117",
-      "id": "services_pricing_pipeline_baseadapter_classifygcp",
       "community": 0,
-      "norm_label": ".classifygcp()"
+      "norm_label": ".classifygcp()",
+      "id": "services_pricing_pipeline_baseadapter_classifygcp"
     },
     {
       "label": ".getCategory()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L126",
-      "id": "services_pricing_pipeline_baseadapter_getcategory",
       "community": 0,
-      "norm_label": ".getcategory()"
+      "norm_label": ".getcategory()",
+      "id": "services_pricing_pipeline_baseadapter_getcategory"
     },
     {
       "label": ".healthCheck()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L130",
-      "id": "services_pricing_pipeline_baseadapter_healthcheck",
       "community": 0,
-      "norm_label": ".healthcheck()"
+      "norm_label": ".healthcheck()",
+      "id": "services_pricing_pipeline_baseadapter_healthcheck"
     },
     {
       "label": "AzureAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L135",
-      "id": "services_pricing_pipeline_azureadapter",
       "community": 0,
-      "norm_label": "azureadapter"
+      "norm_label": "azureadapter",
+      "id": "services_pricing_pipeline_azureadapter"
     },
     {
       "label": ".vcpuFromSku()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L144",
-      "id": "services_pricing_pipeline_azureadapter_vcpufromsku",
       "community": 0,
-      "norm_label": ".vcpufromsku()"
+      "norm_label": ".vcpufromsku()",
+      "id": "services_pricing_pipeline_azureadapter_vcpufromsku"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L149",
-      "id": "services_pricing_pipeline_azureadapter_fetchpricing",
       "community": 0,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_azureadapter_fetchpricing"
     },
     {
       "label": "AWSAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L212",
-      "id": "services_pricing_pipeline_awsadapter",
       "community": 0,
-      "norm_label": "awsadapter"
+      "norm_label": "awsadapter",
+      "id": "services_pricing_pipeline_awsadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L215",
-      "id": "services_pricing_pipeline_awsadapter_fetchpricing",
       "community": 0,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_awsadapter_fetchpricing"
     },
     {
       "label": "GCPAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L277",
-      "id": "services_pricing_pipeline_gcpadapter",
-      "community": 35,
-      "norm_label": "gcpadapter"
+      "community": 32,
+      "norm_label": "gcpadapter",
+      "id": "services_pricing_pipeline_gcpadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L280",
-      "id": "services_pricing_pipeline_gcpadapter_fetchpricing",
-      "community": 35,
-      "norm_label": ".fetchpricing()"
+      "community": 32,
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_gcpadapter_fetchpricing"
     },
     {
       "label": "OracleAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L304",
-      "id": "services_pricing_pipeline_oracleadapter",
-      "community": 0,
-      "norm_label": "oracleadapter"
+      "community": 32,
+      "norm_label": "oracleadapter",
+      "id": "services_pricing_pipeline_oracleadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L307",
-      "id": "services_pricing_pipeline_oracleadapter_fetchpricing",
-      "community": 0,
-      "norm_label": ".fetchpricing()"
+      "community": 32,
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_oracleadapter_fetchpricing"
     },
     {
       "label": "DigitalOceanAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L333",
-      "id": "services_pricing_pipeline_digitaloceanadapter",
-      "community": 35,
-      "norm_label": "digitaloceanadapter"
+      "community": 32,
+      "norm_label": "digitaloceanadapter",
+      "id": "services_pricing_pipeline_digitaloceanadapter"
     },
     {
       "label": ".classifyDigitalOcean()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L339",
-      "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean",
       "community": 0,
-      "norm_label": ".classifydigitalocean()"
+      "norm_label": ".classifydigitalocean()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean"
     },
     {
       "label": ".gpuCountFromSlug()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L351",
-      "id": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug",
-      "community": 35,
-      "norm_label": ".gpucountfromslug()"
+      "community": 32,
+      "norm_label": ".gpucountfromslug()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L356",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchpricing",
-      "community": 35,
-      "norm_label": ".fetchpricing()"
+      "community": 32,
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchpricing"
     },
     {
       "label": ".fetchFromApi()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L372",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi",
-      "community": 35,
-      "norm_label": ".fetchfromapi()"
+      "community": 32,
+      "norm_label": ".fetchfromapi()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
     },
     {
       "label": ".fetchFromScraper()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L420",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper",
-      "community": 35,
-      "norm_label": ".fetchfromscraper()"
+      "community": 32,
+      "norm_label": ".fetchfromscraper()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
     },
     {
       "label": "PricingPipeline",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L444",
-      "id": "services_pricing_pipeline_pricingpipeline",
-      "community": 37,
-      "norm_label": "pricingpipeline"
+      "community": 32,
+      "norm_label": "pricingpipeline",
+      "id": "services_pricing_pipeline_pricingpipeline"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L448",
-      "id": "services_pricing_pipeline_pricingpipeline_constructor",
-      "community": 37,
-      "norm_label": ".constructor()"
+      "community": 32,
+      "norm_label": ".constructor()",
+      "id": "services_pricing_pipeline_pricingpipeline_constructor"
     },
     {
       "label": ".run()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L465",
-      "id": "services_pricing_pipeline_pricingpipeline_run",
-      "community": 35,
-      "norm_label": ".run()"
+      "community": 32,
+      "norm_label": ".run()",
+      "id": "services_pricing_pipeline_pricingpipeline_run"
     },
     {
       "label": ".saveRecords()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L481",
-      "id": "services_pricing_pipeline_pricingpipeline_saverecords",
-      "community": 35,
-      "norm_label": ".saverecords()"
+      "community": 32,
+      "norm_label": ".saverecords()",
+      "id": "services_pricing_pipeline_pricingpipeline_saverecords"
     },
     {
       "label": "test_health_full.ts",
       "file_type": "code",
       "source_file": "test_health_full.ts",
       "source_location": "L1",
-      "id": "test_health_full",
       "community": 42,
-      "norm_label": "test_health_full.ts"
+      "norm_label": "test_health_full.ts",
+      "id": "test_health_full"
     },
     {
       "label": "testHealth()",
       "file_type": "code",
       "source_file": "test_health_full.ts",
       "source_location": "L3",
-      "id": "test_health_full_testhealth",
       "community": 42,
-      "norm_label": "testhealth()"
+      "norm_label": "testhealth()",
+      "id": "test_health_full_testhealth"
     },
     {
       "label": "test_db.ts",
@@ -899,7 +926,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L1",
-      "community": 48,
+      "community": 4,
       "norm_label": "package.json",
       "id": "package"
     },
@@ -908,7 +935,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L2",
-      "community": 48,
+      "community": 4,
       "norm_label": "name",
       "id": "package_name"
     },
@@ -917,7 +944,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L3",
-      "community": 48,
+      "community": 4,
       "norm_label": "private",
       "id": "package_private"
     },
@@ -926,7 +953,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L4",
-      "community": 48,
+      "community": 4,
       "norm_label": "version",
       "id": "package_version"
     },
@@ -935,7 +962,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L5",
-      "community": 48,
+      "community": 4,
       "norm_label": "type",
       "id": "package_type"
     },
@@ -944,7 +971,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L6",
-      "community": 48,
+      "community": 4,
       "norm_label": "scripts",
       "id": "package_scripts"
     },
@@ -953,7 +980,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L7",
-      "community": 48,
+      "community": 4,
       "norm_label": "dev",
       "id": "package_scripts_dev"
     },
@@ -962,7 +989,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L8",
-      "community": 48,
+      "community": 4,
       "norm_label": "build",
       "id": "package_scripts_build"
     },
@@ -971,7 +998,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L9",
-      "community": 48,
+      "community": 4,
       "norm_label": "start",
       "id": "package_scripts_start"
     },
@@ -980,7 +1007,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L10",
-      "community": 48,
+      "community": 4,
       "norm_label": "ingest",
       "id": "package_scripts_ingest"
     },
@@ -989,7 +1016,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L11",
-      "community": 48,
+      "community": 4,
       "norm_label": "worker",
       "id": "package_scripts_worker"
     },
@@ -998,7 +1025,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L12",
-      "community": 48,
+      "community": 4,
       "norm_label": "preview",
       "id": "package_scripts_preview"
     },
@@ -1007,7 +1034,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L13",
-      "community": 48,
+      "community": 4,
       "norm_label": "clean",
       "id": "package_scripts_clean"
     },
@@ -1016,7 +1043,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L14",
-      "community": 48,
+      "community": 4,
       "norm_label": "lint",
       "id": "package_scripts_lint"
     },
@@ -1241,7 +1268,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L41",
-      "community": 48,
+      "community": 4,
       "norm_label": "devdependencies",
       "id": "package_devdependencies"
     },
@@ -1250,7 +1277,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L42",
-      "community": 48,
+      "community": 4,
       "norm_label": "@playwright/test",
       "id": "package_devdependencies_playwright_test"
     },
@@ -1259,7 +1286,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L43",
-      "community": 48,
+      "community": 4,
       "norm_label": "@types/cors",
       "id": "package_devdependencies_types_cors"
     },
@@ -1268,7 +1295,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L44",
-      "community": 48,
+      "community": 4,
       "norm_label": "@types/express",
       "id": "package_devdependencies_types_express"
     },
@@ -1277,7 +1304,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L45",
-      "community": 48,
+      "community": 4,
       "norm_label": "@types/node",
       "id": "package_devdependencies_types_node"
     },
@@ -1286,7 +1313,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L46",
-      "community": 48,
+      "community": 4,
       "norm_label": "@types/nodemailer",
       "id": "package_devdependencies_types_nodemailer"
     },
@@ -1295,7 +1322,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L47",
-      "community": 48,
+      "community": 4,
       "norm_label": "autoprefixer",
       "id": "package_devdependencies_autoprefixer"
     },
@@ -1304,7 +1331,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L48",
-      "community": 48,
+      "community": 4,
       "norm_label": "tailwindcss",
       "id": "package_devdependencies_tailwindcss"
     },
@@ -1313,7 +1340,7 @@
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L49",
-      "community": 48,
+      "community": 4,
       "norm_label": "typescript",
       "id": "package_devdependencies_typescript"
     },
@@ -1493,7 +1520,7 @@
       "file_type": "code",
       "source_file": "populate_containers.ts",
       "source_location": "L1",
-      "community": 37,
+      "community": 0,
       "norm_label": "populate_containers.ts",
       "id": "populate_containers"
     },
@@ -1502,7 +1529,7 @@
       "file_type": "code",
       "source_file": "populate_containers.ts",
       "source_location": "L7",
-      "community": 37,
+      "community": 0,
       "norm_label": "run()",
       "id": "populate_containers_run"
     },
@@ -1538,7 +1565,7 @@
       "file_type": "code",
       "source_file": "populate_serverless.ts",
       "source_location": "L1",
-      "community": 12,
+      "community": 5,
       "norm_label": "populate_serverless.ts",
       "id": "populate_serverless"
     },
@@ -1547,7 +1574,7 @@
       "file_type": "code",
       "source_file": "populate_serverless.ts",
       "source_location": "L7",
-      "community": 12,
+      "community": 5,
       "norm_label": "run()",
       "id": "populate_serverless_run"
     },
@@ -1610,7 +1637,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L1",
-      "community": 39,
+      "community": 0,
       "norm_label": "containers_pipeline.ts",
       "id": "services_containers_pipeline"
     },
@@ -1619,7 +1646,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L17",
-      "community": 12,
+      "community": 0,
       "norm_label": "awscontainersstaticadapter",
       "id": "services_containers_pipeline_awscontainersstaticadapter"
     },
@@ -1637,7 +1664,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L42",
-      "community": 12,
+      "community": 0,
       "norm_label": "azurecontainersstaticadapter",
       "id": "services_containers_pipeline_azurecontainersstaticadapter"
     },
@@ -1655,7 +1682,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L67",
-      "community": 12,
+      "community": 0,
       "norm_label": "gcpcontainersstaticadapter",
       "id": "services_containers_pipeline_gcpcontainersstaticadapter"
     },
@@ -1673,7 +1700,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L92",
-      "community": 12,
+      "community": 0,
       "norm_label": "digitaloceancontainersstaticadapter",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter"
     },
@@ -1691,7 +1718,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L117",
-      "community": 38,
+      "community": 0,
       "norm_label": "oraclecontainersstaticadapter",
       "id": "services_containers_pipeline_oraclecontainersstaticadapter"
     },
@@ -1700,7 +1727,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L119",
-      "community": 38,
+      "community": 0,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_oraclecontainersstaticadapter_fetchpricing"
     },
@@ -1709,7 +1736,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L142",
-      "community": 37,
+      "community": 0,
       "norm_label": "containerspricingpipeline",
       "id": "services_containers_pipeline_containerspricingpipeline"
     },
@@ -1718,7 +1745,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L143",
-      "community": 37,
+      "community": 0,
       "norm_label": ".constructor()",
       "id": "services_containers_pipeline_containerspricingpipeline_constructor"
     },
@@ -1727,7 +1754,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L155",
-      "community": 38,
+      "community": 0,
       "norm_label": ".run()",
       "id": "services_containers_pipeline_containerspricingpipeline_run"
     },
@@ -1799,7 +1826,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L94",
-      "community": 12,
+      "community": 31,
       "norm_label": "databricksazureadapter",
       "id": "services_data_analytics_pipeline_databricksazureadapter"
     },
@@ -1808,7 +1835,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L98",
-      "community": 12,
+      "community": 31,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
     },
@@ -1844,7 +1871,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L208",
-      "community": 12,
+      "community": 31,
       "norm_label": "synapseazureadapter",
       "id": "services_data_analytics_pipeline_synapseazureadapter"
     },
@@ -1853,7 +1880,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L212",
-      "community": 12,
+      "community": 31,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing"
     },
@@ -1862,7 +1889,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L281",
-      "community": 37,
+      "community": 31,
       "norm_label": "dataanalyticspricingpipeline",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
     },
@@ -1871,7 +1898,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L282",
-      "community": 37,
+      "community": 31,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
     },
@@ -1880,7 +1907,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L298",
-      "community": 12,
+      "community": 31,
       "norm_label": ".run()",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run"
     },
@@ -2060,7 +2087,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L476",
-      "community": 37,
+      "community": 32,
       "norm_label": "databasepricingpipeline",
       "id": "services_database_pipeline_databasepricingpipeline"
     },
@@ -2069,7 +2096,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L477",
-      "community": 37,
+      "community": 32,
       "norm_label": ".constructor()",
       "id": "services_database_pipeline_databasepricingpipeline_constructor"
     },
@@ -2087,7 +2114,7 @@
       "file_type": "code",
       "source_file": "src/services/ingest.ts",
       "source_location": "L1",
-      "community": 37,
+      "community": 32,
       "norm_label": "ingest.ts",
       "id": "services_ingest"
     },
@@ -2096,7 +2123,7 @@
       "file_type": "code",
       "source_file": "src/services/ingest.ts",
       "source_location": "L13",
-      "community": 37,
+      "community": 32,
       "norm_label": "main()",
       "id": "services_ingest_main"
     },
@@ -2105,7 +2132,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 32,
       "norm_label": "networking_pipeline.ts",
       "id": "services_networking_pipeline"
     },
@@ -2114,7 +2141,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L4",
-      "community": 5,
+      "community": 32,
       "norm_label": "static_networking_pricing",
       "id": "services_networking_pipeline_static_networking_pricing"
     },
@@ -2159,7 +2186,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_containers.ts",
       "source_location": "L1",
-      "community": 37,
+      "community": 0,
       "norm_label": "populate_containers.ts",
       "id": "services_populate_containers"
     },
@@ -2168,7 +2195,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_containers.ts",
       "source_location": "L4",
-      "community": 37,
+      "community": 0,
       "norm_label": "main()",
       "id": "services_populate_containers_main"
     },
@@ -2177,7 +2204,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 5,
       "norm_label": "serverless_pipeline.ts",
       "id": "services_serverless_pipeline"
     },
@@ -2186,7 +2213,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L30",
-      "community": 0,
+      "community": 12,
       "norm_label": "awsserverlessadapter",
       "id": "services_serverless_pipeline_awsserverlessadapter"
     },
@@ -2204,7 +2231,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L57",
-      "community": 0,
+      "community": 12,
       "norm_label": "gcpserverlessadapter",
       "id": "services_serverless_pipeline_gcpserverlessadapter"
     },
@@ -2222,7 +2249,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L84",
-      "community": 0,
+      "community": 5,
       "norm_label": "azureserverlessadapter",
       "id": "services_serverless_pipeline_azureserverlessadapter"
     },
@@ -2231,7 +2258,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L87",
-      "community": 12,
+      "community": 5,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing"
     },
@@ -2240,7 +2267,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L111",
-      "community": 0,
+      "community": 12,
       "norm_label": "digitaloceanserverlessadapter",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter"
     },
@@ -2258,7 +2285,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L138",
-      "community": 0,
+      "community": 5,
       "norm_label": "oracleserverlessadapter",
       "id": "services_serverless_pipeline_oracleserverlessadapter"
     },
@@ -2267,7 +2294,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L141",
-      "community": 12,
+      "community": 35,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing"
     },
@@ -2276,7 +2303,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L165",
-      "community": 12,
+      "community": 35,
       "norm_label": "serverlesspricingpipeline",
       "id": "services_serverless_pipeline_serverlesspricingpipeline"
     },
@@ -2285,7 +2312,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L166",
-      "community": 12,
+      "community": 35,
       "norm_label": ".constructor()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_constructor"
     },
@@ -2294,7 +2321,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L181",
-      "community": 12,
+      "community": 35,
       "norm_label": ".run()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_run"
     },
@@ -2303,7 +2330,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L339",
-      "community": 12,
+      "community": 35,
       "norm_label": ".getawsserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getawsserverlessstaticrecords"
     },
@@ -2312,7 +2339,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L347",
-      "community": 12,
+      "community": 35,
       "norm_label": ".getgcpserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getgcpserverlessstaticrecords"
     },
@@ -2321,7 +2348,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L355",
-      "community": 12,
+      "community": 35,
       "norm_label": ".getazureserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getazureserverlessstaticrecords"
     },
@@ -2330,7 +2357,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L363",
-      "community": 12,
+      "community": 35,
       "norm_label": ".getdigitaloceanserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getdigitaloceanserverlessstaticrecords"
     },
@@ -2339,7 +2366,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L371",
-      "community": 12,
+      "community": 35,
       "norm_label": ".getoracleserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
     },
@@ -2375,7 +2402,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L1",
-      "community": 46,
+      "community": 0,
       "norm_label": "digitalocean_containers.ts",
       "id": "config_digitalocean_containers"
     },
@@ -2384,7 +2411,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L7",
-      "community": 46,
+      "community": 0,
       "norm_label": "addcontainerattributes()",
       "id": "config_digitalocean_containers_addcontainerattributes"
     },
@@ -2393,7 +2420,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L18",
-      "community": 46,
+      "community": 0,
       "norm_label": "calculateappplatformprice()",
       "id": "config_digitalocean_containers_calculateappplatformprice"
     },
@@ -2402,7 +2429,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L22",
-      "community": 46,
+      "community": 0,
       "norm_label": "basedigitaloceancontainerentries",
       "id": "config_digitalocean_containers_basedigitaloceancontainerentries"
     },
@@ -2411,7 +2438,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_containers.ts",
       "source_location": "L44",
-      "community": 46,
+      "community": 0,
       "norm_label": "digitalocean_containers",
       "id": "config_digitalocean_containers_digitalocean_containers"
     },
@@ -2420,7 +2447,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L1",
-      "community": 49,
+      "community": 0,
       "norm_label": "oracle_containers.ts",
       "id": "config_oracle_containers"
     },
@@ -2429,7 +2456,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L7",
-      "community": 49,
+      "community": 0,
       "norm_label": "addcontainerattributes()",
       "id": "config_oracle_containers_addcontainerattributes"
     },
@@ -2438,7 +2465,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L20",
-      "community": 49,
+      "community": 0,
       "norm_label": "calculateociprice()",
       "id": "config_oracle_containers_calculateociprice"
     },
@@ -2447,7 +2474,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L26",
-      "community": 49,
+      "community": 0,
       "norm_label": "baseoraclecontainerentries",
       "id": "config_oracle_containers_baseoraclecontainerentries"
     },
@@ -2456,7 +2483,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_containers.ts",
       "source_location": "L49",
-      "community": 49,
+      "community": 0,
       "norm_label": "oracle_containers",
       "id": "config_oracle_containers_oracle_containers"
     },
@@ -2465,7 +2492,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L1",
-      "community": 43,
+      "community": 0,
       "norm_label": "aws_containers.ts",
       "id": "config_aws_containers"
     },
@@ -2474,7 +2501,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L7",
-      "community": 43,
+      "community": 0,
       "norm_label": "addcontainerattributes()",
       "id": "config_aws_containers_addcontainerattributes"
     },
@@ -2483,7 +2510,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L20",
-      "community": 43,
+      "community": 0,
       "norm_label": "calculatefargateprice()",
       "id": "config_aws_containers_calculatefargateprice"
     },
@@ -2492,7 +2519,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L25",
-      "community": 43,
+      "community": 0,
       "norm_label": "baseawscontainerentries",
       "id": "config_aws_containers_baseawscontainerentries"
     },
@@ -2501,7 +2528,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L69",
-      "community": 43,
+      "community": 0,
       "norm_label": "aws_containers",
       "id": "config_aws_containers_aws_containers"
     },
@@ -2510,7 +2537,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L1",
-      "community": 44,
+      "community": 0,
       "norm_label": "azure_containers.ts",
       "id": "config_azure_containers"
     },
@@ -2519,7 +2546,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L7",
-      "community": 44,
+      "community": 0,
       "norm_label": "addcontainerattributes()",
       "id": "config_azure_containers_addcontainerattributes"
     },
@@ -2528,7 +2555,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L19",
-      "community": 44,
+      "community": 0,
       "norm_label": "calculateaciprice()",
       "id": "config_azure_containers_calculateaciprice"
     },
@@ -2537,7 +2564,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L23",
-      "community": 44,
+      "community": 0,
       "norm_label": "baseazurecontainerentries",
       "id": "config_azure_containers_baseazurecontainerentries"
     },
@@ -2546,7 +2573,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L50",
-      "community": 44,
+      "community": 0,
       "norm_label": "azure_containers",
       "id": "config_azure_containers_azure_containers"
     },
@@ -2555,7 +2582,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L1",
-      "community": 39,
+      "community": 0,
       "norm_label": "gcp_containers.ts",
       "id": "config_gcp_containers"
     },
@@ -2564,7 +2591,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L7",
-      "community": 39,
+      "community": 0,
       "norm_label": "addcontainerattributes()",
       "id": "config_gcp_containers_addcontainerattributes"
     },
@@ -2573,7 +2600,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L19",
-      "community": 39,
+      "community": 0,
       "norm_label": "calculatecloudrunprice()",
       "id": "config_gcp_containers_calculatecloudrunprice"
     },
@@ -2582,7 +2609,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L23",
-      "community": 39,
+      "community": 0,
       "norm_label": "basegcpcontainerentries",
       "id": "config_gcp_containers_basegcpcontainerentries"
     },
@@ -2591,7 +2618,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L49",
-      "community": 39,
+      "community": 0,
       "norm_label": "gcp_containers",
       "id": "config_gcp_containers_gcp_containers"
     },
@@ -3194,7 +3221,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 5,
       "norm_label": "aws_serverless.ts",
       "id": "config_aws_serverless"
     },
@@ -3203,7 +3230,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L18",
-      "community": 0,
+      "community": 5,
       "norm_label": "aws_lambda_languages",
       "id": "config_aws_serverless_aws_lambda_languages"
     },
@@ -3212,7 +3239,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L21",
-      "community": 0,
+      "community": 5,
       "norm_label": "addserverlessattributes()",
       "id": "config_aws_serverless_addserverlessattributes"
     },
@@ -3221,7 +3248,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L39",
-      "community": 0,
+      "community": 5,
       "norm_label": "baseawsentries",
       "id": "config_aws_serverless_baseawsentries"
     },
@@ -3230,7 +3257,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L128",
-      "community": 0,
+      "community": 5,
       "norm_label": "aws_serverless",
       "id": "config_aws_serverless_aws_serverless"
     },
@@ -3239,7 +3266,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 38,
       "norm_label": "azure_serverless.ts",
       "id": "config_azure_serverless"
     },
@@ -3248,7 +3275,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L18",
-      "community": 0,
+      "community": 38,
       "norm_label": "azure_functions_languages",
       "id": "config_azure_serverless_azure_functions_languages"
     },
@@ -3257,7 +3284,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L21",
-      "community": 0,
+      "community": 38,
       "norm_label": "addazureserverlessattributes()",
       "id": "config_azure_serverless_addazureserverlessattributes"
     },
@@ -3266,7 +3293,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L41",
-      "community": 0,
+      "community": 38,
       "norm_label": "baseazureentries",
       "id": "config_azure_serverless_baseazureentries"
     },
@@ -3275,7 +3302,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L103",
-      "community": 0,
+      "community": 38,
       "norm_label": "azure_serverless",
       "id": "config_azure_serverless_azure_serverless"
     },
@@ -3383,7 +3410,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 32,
       "norm_label": "digitalocean_instances.ts",
       "id": "config_digitalocean_instances"
     },
@@ -3392,7 +3419,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L9",
-      "community": 5,
+      "community": 32,
       "norm_label": "digitaloceaninstanceconfig",
       "id": "config_digitalocean_instances_digitaloceaninstanceconfig"
     },
@@ -3401,7 +3428,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L20",
-      "community": 5,
+      "community": 32,
       "norm_label": "digitalocean_instances",
       "id": "config_digitalocean_instances_digitalocean_instances"
     },
@@ -3410,7 +3437,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 39,
       "norm_label": "digitalocean_serverless.ts",
       "id": "config_digitalocean_serverless"
     },
@@ -3419,7 +3446,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L22",
-      "community": 0,
+      "community": 39,
       "norm_label": "digitalocean_functions_languages",
       "id": "config_digitalocean_serverless_digitalocean_functions_languages"
     },
@@ -3428,7 +3455,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L25",
-      "community": 0,
+      "community": 39,
       "norm_label": "adddigitaloceanserverlessattributes()",
       "id": "config_digitalocean_serverless_adddigitaloceanserverlessattributes"
     },
@@ -3437,7 +3464,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L44",
-      "community": 0,
+      "community": 39,
       "norm_label": "basedigitaloceanentries",
       "id": "config_digitalocean_serverless_basedigitaloceanentries"
     },
@@ -3446,7 +3473,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L56",
-      "community": 0,
+      "community": 39,
       "norm_label": "digitalocean_serverless",
       "id": "config_digitalocean_serverless_digitalocean_serverless"
     },
@@ -3455,7 +3482,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 32,
       "norm_label": "gcp_instances.ts",
       "id": "config_gcp_instances"
     },
@@ -3464,7 +3491,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L21",
-      "community": 5,
+      "community": 32,
       "norm_label": "gcpinstanceconfig",
       "id": "config_gcp_instances_gcpinstanceconfig"
     },
@@ -3473,7 +3500,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_instances.ts",
       "source_location": "L33",
-      "community": 5,
+      "community": 32,
       "norm_label": "gcp_instances",
       "id": "config_gcp_instances_gcp_instances"
     },
@@ -3482,7 +3509,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 43,
       "norm_label": "gcp_serverless.ts",
       "id": "config_gcp_serverless"
     },
@@ -3491,7 +3518,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L19",
-      "community": 0,
+      "community": 43,
       "norm_label": "gcp_cloud_run_languages",
       "id": "config_gcp_serverless_gcp_cloud_run_languages"
     },
@@ -3500,7 +3527,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L22",
-      "community": 0,
+      "community": 43,
       "norm_label": "addgcpserverlessattributes()",
       "id": "config_gcp_serverless_addgcpserverlessattributes"
     },
@@ -3509,7 +3536,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L42",
-      "community": 0,
+      "community": 43,
       "norm_label": "basegcpentries",
       "id": "config_gcp_serverless_basegcpentries"
     },
@@ -3518,7 +3545,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L122",
-      "community": 0,
+      "community": 43,
       "norm_label": "gcp_serverless",
       "id": "config_gcp_serverless_gcp_serverless"
     },
@@ -3527,7 +3554,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L1",
-      "community": 5,
+      "community": 32,
       "norm_label": "oracle_instances.ts",
       "id": "config_oracle_instances"
     },
@@ -3536,7 +3563,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L19",
-      "community": 5,
+      "community": 32,
       "norm_label": "oracleinstanceconfig",
       "id": "config_oracle_instances_oracleinstanceconfig"
     },
@@ -3545,7 +3572,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_instances.ts",
       "source_location": "L31",
-      "community": 5,
+      "community": 32,
       "norm_label": "oracle_instances",
       "id": "config_oracle_instances_oracle_instances"
     },
@@ -3554,7 +3581,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 44,
       "norm_label": "oracle_serverless.ts",
       "id": "config_oracle_serverless"
     },
@@ -3563,7 +3590,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L16",
-      "community": 0,
+      "community": 44,
       "norm_label": "oracle_lambda_languages",
       "id": "config_oracle_serverless_oracle_lambda_languages"
     },
@@ -3572,7 +3599,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L21",
-      "community": 0,
+      "community": 44,
       "norm_label": "addserverlessattributes()",
       "id": "config_oracle_serverless_addserverlessattributes"
     },
@@ -3581,7 +3608,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L39",
-      "community": 0,
+      "community": 44,
       "norm_label": "baseoracleentries",
       "id": "config_oracle_serverless_baseoracleentries"
     },
@@ -3590,7 +3617,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L52",
-      "community": 0,
+      "community": 44,
       "norm_label": "oracle_serverless",
       "id": "config_oracle_serverless_oracle_serverless"
     },
@@ -3671,7 +3698,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L1",
-      "community": 39,
+      "community": 0,
       "norm_label": "containers_adapters_live.ts",
       "id": "services_containers_adapters_live"
     },
@@ -3680,7 +3707,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L3",
-      "community": 39,
+      "community": 0,
       "norm_label": "awscontainersliveadapter",
       "id": "services_containers_adapters_live_awscontainersliveadapter"
     },
@@ -3698,7 +3725,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L13",
-      "community": 39,
+      "community": 0,
       "norm_label": "azurecontainersliveadapter",
       "id": "services_containers_adapters_live_azurecontainersliveadapter"
     },
@@ -3716,7 +3743,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L22",
-      "community": 39,
+      "community": 0,
       "norm_label": "gcpcontainersliveadapter",
       "id": "services_containers_adapters_live_gcpcontainersliveadapter"
     },
@@ -3734,7 +3761,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L31",
-      "community": 39,
+      "community": 0,
       "norm_label": "digitaloceancontainersliveadapter",
       "id": "services_containers_adapters_live_digitaloceancontainersliveadapter"
     },
@@ -3752,7 +3779,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L40",
-      "community": 39,
+      "community": 0,
       "norm_label": "oraclecontainersliveadapter",
       "id": "services_containers_adapters_live_oraclecontainersliveadapter"
     },
@@ -3833,7 +3860,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L1",
-      "community": 0,
+      "community": 37,
       "norm_label": "serverless_adapters_live.ts",
       "id": "services_serverless_adapters_live"
     },
@@ -3842,7 +3869,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L16",
-      "community": 0,
+      "community": 37,
       "norm_label": "awslambdaliveadapter",
       "id": "services_serverless_adapters_live_awslambdaliveadapter"
     },
@@ -3851,7 +3878,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L54",
-      "community": 0,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing"
     },
@@ -3860,7 +3887,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L197",
-      "community": 0,
+      "community": 37,
       "norm_label": ".mapawslocationtoregion()",
       "id": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
     },
@@ -3869,7 +3896,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L250",
-      "community": 0,
+      "community": 37,
       "norm_label": "gcpcloudrunliveadapter",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter"
     },
@@ -3878,7 +3905,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L253",
-      "community": 12,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing"
     },
@@ -3887,7 +3914,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L263",
-      "community": 0,
+      "community": 37,
       "norm_label": "azurefunctionsliveadapter",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter"
     },
@@ -3896,7 +3923,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L266",
-      "community": 12,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing"
     },
@@ -4683,7 +4710,7 @@
       "captured_at": null,
       "author": "Rodrigo Orzari",
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "compare cloud costs application",
       "id": "project_analysis_compare_cloud_costs"
     },
@@ -4696,7 +4723,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "react 19 + typescript frontend",
       "id": "project_analysis_react_frontend"
     },
@@ -4709,7 +4736,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "vite 6.2.0 build tool",
       "id": "project_analysis_vite_build"
     },
@@ -4735,7 +4762,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "express.js 4.21.2 backend",
       "id": "project_analysis_express_backend"
     },
@@ -4761,7 +4788,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "nodemailer 8.0.7 email service",
       "id": "project_analysis_nodemailer"
     },
@@ -4774,7 +4801,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "postgresql database",
       "id": "project_analysis_postgresql"
     },
@@ -4826,7 +4853,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "finops cloud price comparison challenge",
       "id": "project_analysis_finops_challenge"
     },
@@ -5138,7 +5165,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "index.html entry point",
       "id": "index_html_entry_point"
     },
@@ -5151,7 +5178,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 7,
+      "community": 3,
       "norm_label": "react root mount point (#root)",
       "id": "index_html_root_div"
     }
@@ -5188,6 +5215,37 @@
       "confidence_score": 1.0,
       "source": "src_app",
       "target": "pages_about"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/scrapers/aws_fargate.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "scrapers_aws_fargate",
+      "target": "scrapers_aws_fargate_awsfargatescraper",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/scrapers/aws_fargate.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "scrapers_aws_fargate",
+      "target": "scrapers_base_scraper_basescraper",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/scrapers/aws_fargate.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "scrapers_aws_fargate_awsfargatescraper",
+      "target": "scrapers_aws_fargate_awsfargatescraper_scrape",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5712,9 +5770,9 @@
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_pricing_pipeline",
-      "target": "scrapers_gcp_instances_gcpinstancesscraper",
-      "confidence_score": 1.0
+      "target": "scrapers_gcp_instances_gcpinstancesscraper"
     },
     {
       "relation": "imports",
@@ -7043,9 +7101,9 @@
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L283",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_pricing_pipeline_gcpadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingpipeline_run",
-      "confidence_score": 1.0
+      "target": "services_pricing_pipeline_pricingpipeline_run"
     },
     {
       "relation": "method",
@@ -12666,5 +12724,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "085b615352defff28732a8f1adadf751df73e945"
+  "built_at_commit": "b31452f5b0c4d423b56936d4de2dd5c206ef89af"
 }
