@@ -358,31 +358,31 @@ async function startServer() {
       }
 
       // ✅ Validate geography filter
-      const geographies = parseFilterList(geography as string);
+      const geographies = parseFilterList(geography as string).map((s: string) => s.toLowerCase());
       if (geographies.length > 0) {
-        conditions.push(`pr.geography = ANY($${paramCount++})`);
+        conditions.push(`LOWER(pr.geography) = ANY($${paramCount++})`);
         values.push(geographies);
       }
 
       // OS / arch / CPU / GPU only apply to the compute product type
       if (resolvedProductType === 'compute') {
-        const osFilters = parseFilterList(os as string);
+        const osFilters = parseFilterList(os as string).map((s: string) => s.toLowerCase());
         if (osFilters.length > 0) {
-          conditions.push(`pr.os = ANY($${paramCount++})`);
+          conditions.push(`LOWER(pr.os) = ANY($${paramCount++})`);
           values.push(osFilters);
         }
 
         const archFilters = parseFilterList(arch as string).map((a: string) =>
-          a === 'x86' ? 'x86 64' : a
+          (a === 'x86' ? 'x86 64' : a).toLowerCase()
         );
         if (archFilters.length > 0) {
-          conditions.push(`pr.arch = ANY($${paramCount++})`);
+          conditions.push(`LOWER(pr.arch) = ANY($${paramCount++})`);
           values.push(archFilters);
         }
 
-        const cpuVendorFilters = parseFilterList(cpuVendor as string);
+        const cpuVendorFilters = parseFilterList(cpu as string).map((s: string) => s.toLowerCase());
         if (cpuVendorFilters.length > 0) {
-          conditions.push(`pr.cpu_vendor = ANY($${paramCount++})`);
+          conditions.push(`LOWER(pr.cpu_vendor) = ANY($${paramCount++})`);
           values.push(cpuVendorFilters);
         }
 
@@ -391,35 +391,35 @@ async function startServer() {
       }
 
       // ✅ Validate category filter (VMs / Databases)
-      const categoriesFilter = parseFilterList((category || dbFamilies) as string);
+      const categoriesFilter = parseFilterList((category || dbFamilies) as string).map((s: string) => s.toLowerCase());
       if (categoriesFilter.length > 0) {
-        conditions.push(`pr.category = ANY($${paramCount++})`);
+        conditions.push(`LOWER(pr.category) = ANY($${paramCount++})`);
         values.push(categoriesFilter);
       }
 
       // ✅ Validate database-specific JSONB attribute filters
-      const engineFilters = parseFilterList((engines || analyticsEngines) as string);
+      const engineFilters = parseFilterList((engines || analyticsEngines) as string).map((s: string) => s.toLowerCase());
       if (engineFilters.length > 0) {
-        conditions.push(`pr.attributes->>'engine' = ANY($${paramCount++})`);
+        conditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount++})`);
         values.push(engineFilters);
       }
 
-      const deploymentTypeFilters = parseFilterList((deploymentTypes || analyticsDeploymentTypes) as string);
+      const deploymentTypeFilters = parseFilterList((deploymentTypes || analyticsDeploymentTypes) as string).map((s: string) => s.toLowerCase());
       if (deploymentTypeFilters.length > 0) {
-        conditions.push(`pr.attributes->>'deployment_type' = ANY($${paramCount++})`);
+        conditions.push(`LOWER(pr.attributes->>'deployment_type') = ANY($${paramCount++})`);
         values.push(deploymentTypeFilters);
       }
 
-      const haModeFilters = parseFilterList(haModes as string);
+      const haModeFilters = parseFilterList(haModes as string).map((s: string) => s.toLowerCase());
       if (haModeFilters.length > 0) {
-        conditions.push(`pr.attributes->>'ha_mode' = ANY($${paramCount++})`);
+        conditions.push(`LOWER(pr.attributes->>'ha_mode') = ANY($${paramCount++})`);
         values.push(haModeFilters);
       }
 
       // ✅ Validate data-analytics specific JSONB attribute filters
-      const tierFilters = parseFilterList(analyticsTiers as string);
+      const tierFilters = parseFilterList(analyticsTiers as string).map((s: string) => s.toLowerCase());
       if (tierFilters.length > 0) {
-        conditions.push(`pr.attributes->>'tier' = ANY($${paramCount++})`);
+        conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
         values.push(tierFilters);
       }
 
@@ -591,16 +591,16 @@ async function startServer() {
 
     // Containers-specific filters
     if (containersOrchestrators) {
-      conditions.push(`pr.attributes->>'orchestrator' = ANY($${paramCount++})`);
-      values.push((containersOrchestrators as string).split(','));
+      conditions.push(`LOWER(pr.attributes->>'orchestrator') = ANY($${paramCount++})`);
+      values.push((containersOrchestrators as string).split(',').map((s: string) => s.toLowerCase()));
     }
     if (containersComputeTypes) {
-      conditions.push(`pr.attributes->>'compute_type' = ANY($${paramCount++})`);
-      values.push((containersComputeTypes as string).split(','));
+      conditions.push(`LOWER(pr.attributes->>'compute_type') = ANY($${paramCount++})`);
+      values.push((containersComputeTypes as string).split(',').map((s: string) => s.toLowerCase()));
     }
     if (containersArchitectures) {
-      conditions.push(`pr.attributes->>'architecture' = ANY($${paramCount++})`);
-      values.push((containersArchitectures as string).split(','));
+      conditions.push(`LOWER(pr.attributes->>'architecture') = ANY($${paramCount++})`);
+      values.push((containersArchitectures as string).split(',').map((s: string) => s.toLowerCase()));
     }
     if (containersBillingGranularity && resolvedProductType === 'containers') {
       conditions.push(`pr.attributes->>'billing_granularity' = ANY($${paramCount++})`);

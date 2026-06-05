@@ -61,6 +61,16 @@ Cloud consultants and architects use CCC as a foundational tool during the disco
 
 [↑ Go back to the top](#about-us)
 
+## About the Creator
+
+Hi, I'm **Rodrigo Orzari** ([Connect with me on LinkedIn](https://www.linkedin.com/in/rodrigoorzari/)). 
+
+I built Compare Cloud Costs as a passion project to deepen my understanding of modern tech stacks and artificial intelligence—transitioning from "vibe-coding" to actively integrating AI into production-grade applications. 
+
+The core motivation behind this tool was to solve a very specific, painful problem for the professionals mentioned above. Instead of forcing IT leaders, sales reps, and consultants to manually hunt down prices across every individual cloud provider's rate card, I wanted to provide a seamless, "apples-to-apples" comparison. CCC makes it significantly easier to navigate complex pricing models and make informed architectural choices without the headache of manual spreadsheet normalization.
+
+[↑ Go back to the top](#about-us)
+
 ## Directional Estimates, Not Official Quotes
 
 It is important to note that the data on CCC serves as a **directional indicator** or a sample of popular instances, designed to highlight architectural cost differences across clouds. It is not a substitute for an official quote.
@@ -196,6 +206,7 @@ Always verify your final estimates using the official calculators:
               <li style={{ marginBottom: '0.6rem' }}><a href="#why-we-built-this">Why we built this</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#features">Features</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#who-is-ccc-for">Who is CCC for?</a></li>
+              <li style={{ marginBottom: '0.6rem' }}><a href="#about-the-creator">About the Creator</a></li>
               <li style={{ marginBottom: '0.6rem' }}><a href="#directional-estimates-not-official-quotes">Directional Estimates</a></li>
             </ul>
           </nav>
