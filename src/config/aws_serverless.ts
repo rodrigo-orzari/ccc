@@ -15,7 +15,7 @@
  * Free Tier: 1M invocations/month
  */
 
-const AWS_LAMBDA_LANGUAGES = ['Python', 'Node.js', 'Java', 'Go', 'Ruby', 'C#'];
+const AWS_LAMBDA_LANGUAGES = ['Python', 'Node', 'Java', 'Go', 'Ruby', 'C#'];
 
 // Helper function to add serverless-specific attributes to entries
 const addServerlessAttributes = (entry: any) => ({

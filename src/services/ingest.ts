@@ -2,12 +2,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import postgres from 'postgres';
-import { PricingPipeline } from './pricing_pipeline.js';
-import { DatabasePricingPipeline } from './database_pipeline.js';
-import { ServerlessPricingPipeline } from './serverless_pipeline.js';
-import { ContainersPricingPipeline } from './containers_pipeline.js';
-import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline.js';
-import { NetworkingPricingPipeline } from './networking_pipeline.js';
+import { PricingPipeline } from './pricing_pipeline';
+import { DatabasePricingPipeline } from './database_pipeline';
+import { ServerlessPricingPipeline } from './serverless_pipeline';
+import { ContainersPricingPipeline } from './containers_pipeline';
+import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline';
+import { NetworkingPricingPipeline } from './networking_pipeline';
 
 
 async function main() {

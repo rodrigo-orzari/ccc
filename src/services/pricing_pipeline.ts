@@ -1,11 +1,12 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
-import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/oracle_instances.js';
+import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/oracle_instances';
 import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.ts';
+import { ALIBABA_INSTANCES, ALIBABA_REGION, ALIBABA_GEOGRAPHY } from '../config/alibaba_instances.ts';
 import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.ts';
 import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.ts';
 import { GcpInstancesScraper } from '../scrapers/gcp_instances.ts';
-import { DatabasePricingPipeline } from './database_pipeline.js';
+import { DatabasePricingPipeline } from './database_pipeline';
 
 export interface PricingRecord {
   provider: string;
@@ -441,6 +442,34 @@ export class DigitalOceanAdapter extends BaseAdapter {
   }
 }
 
+export class AlibabaAdapter extends BaseAdapter {
+  providerSlug = 'alibaba';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Alibaba pricing (from static config, ${ALIBABA_INSTANCES.length} entries)...`);
+    return ALIBABA_INSTANCES.map(inst => {
+      const gpuCount = inst.gpuCount ?? 0;
+      return {
+        provider: 'alibaba',
+        service: 'Elastic Compute Service',
+        region: ALIBABA_REGION,
+        instanceType: inst.type,
+        vcpus: inst.vcpus,
+        memoryGb: inst.memory,
+        arch: inst.cpuVendor === 'Ampere' ? 'ARM' : 'x86 64',
+        os: 'Linux',
+        cpuVendor: inst.cpuVendor,
+        gpuCount,
+        geography: ALIBABA_GEOGRAPHY,
+        category: this.categoryByRatio(inst.vcpus, inst.memory),
+        price: inst.price,
+        unit: 'Hour',
+        dataSource: 'static_config' as const,
+      };
+    });
+  }
+}
+
 export class PricingPipeline {
   protected sql: Sql;
   protected adapters: BaseAdapter[];
@@ -458,7 +487,8 @@ export class PricingPipeline {
       new AWSAdapter(),
       new GCPAdapter(),
       new OracleAdapter(),
-      new DigitalOceanAdapter()
+      new DigitalOceanAdapter(),
+      new AlibabaAdapter()
     ];
   }
 

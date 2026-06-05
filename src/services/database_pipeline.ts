@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
-import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline.js';
+import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline';
 import {
   GCP_CLOUD_SQL_INSTANCES,
   GCP_CLOUD_SQL_REGION,
@@ -17,7 +17,12 @@ import {
   DIGITALOCEAN_DB_INSTANCES,
   DIGITALOCEAN_DB_REGION,
   DIGITALOCEAN_DB_GEOGRAPHY,
-} from '../config/database_instances.js';
+} from '../config/database_instances';
+import {
+  ALIBABA_DB_INSTANCES,
+  ALIBABA_DB_REGION,
+  ALIBABA_DB_GEOGRAPHY,
+} from '../config/alibaba_database_instances.ts';
 
 // ─── Tier derivation ──────────────────────────────────────────────────────────
 // Maps provider + instanceType → a human-readable performance-tier label that
@@ -58,6 +63,10 @@ function deriveTier(provider: string, instanceType: string): string {
 
   if (provider === 'oracle') {
     if (t.startsWith('atp-') || t.startsWith('adw-')) return 'Serverless';
+    return 'General Purpose';
+  }
+
+  if (provider === 'alibaba') {
     return 'General Purpose';
   }
 
@@ -471,6 +480,41 @@ export class DigitalOceanDBAdapter extends BaseAdapter {
   }
 }
 
+// ─── Alibaba ApsaraDB (static config) ───────────────────────────
+
+export class AlibabaDBAdapter extends BaseAdapter {
+  providerSlug = 'alibaba';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Alibaba DB pricing (${ALIBABA_DB_INSTANCES.length} entries from static config)...`);
+    return ALIBABA_DB_INSTANCES.map(inst => ({
+      provider: 'alibaba',
+      service: 'ApsaraDB RDS',
+      region: ALIBABA_DB_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: ALIBABA_DB_GEOGRAPHY,
+      category: 'Relational',
+      price: inst.price,
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: inst.engine,
+        engine_version: '',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Multi AZ',
+        storage_type: 'SSD',
+        tier: deriveTier('alibaba', inst.type),
+      },
+    }));
+  }
+}
+
 // ─── DatabasePricingPipeline ───────────────────────────────────────────────────
 
 export class DatabasePricingPipeline extends PricingPipeline {
@@ -485,6 +529,7 @@ export class DatabasePricingPipeline extends PricingPipeline {
       new AWSRDSAdapter(),
       new AzureDBAdapter(),
       new DigitalOceanDBAdapter(),
+      new AlibabaDBAdapter(),
     ];
   }
 

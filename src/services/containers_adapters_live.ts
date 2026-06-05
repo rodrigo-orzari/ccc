@@ -1,8 +1,8 @@
-import { BaseAdapter, PricingRecord } from './pricing_pipeline.js';
-import { AwsFargateScraper } from '../scrapers/aws_fargate.js';
-import { AzureContainerInstancesScraper } from '../scrapers/azure_container_instances.js';
-import { AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY } from '../config/aws_containers.js';
-import { AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY } from '../config/azure_containers.js';
+import { BaseAdapter, PricingRecord } from './pricing_pipeline';
+import { AwsFargateScraper } from '../scrapers/aws_fargate';
+import { AzureContainerInstancesScraper } from '../scrapers/azure_container_instances';
+import { AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY } from '../config/aws_containers';
+import { AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY } from '../config/azure_containers';
 
 export class AWSContainersLiveAdapter extends BaseAdapter {
   providerSlug = 'aws';

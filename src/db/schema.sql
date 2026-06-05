@@ -52,5 +52,6 @@ INSERT INTO providers (slug, name) VALUES
 ('azure', 'Azure'),
 ('gcp', 'Google'),
 ('oracle', 'Oracle'),
-('digitalocean', 'DigitalOcean')
+('digitalocean', 'DigitalOcean'),
+('alibaba', 'Alibaba Cloud')
 ON CONFLICT (slug) DO UPDATE SET name = EXCLUDED.name;

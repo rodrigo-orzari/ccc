@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { ContainersPricingPipeline } from './containers_pipeline.js';
+import { ContainersPricingPipeline } from './containers_pipeline';
 
 async function main() {
   const dbUrl = process.env.DATABASE_URL;
