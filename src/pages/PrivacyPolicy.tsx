@@ -178,6 +178,11 @@ For questions about this Privacy Policy or our privacy practices, please email u
 
       <div className="privacy-container" id="privacy-policy">
         <aside className="sidebar">
+          <div style={{ marginBottom: '2rem' }}>
+            <a href="/" style={{ display: 'inline-block' }}>
+              <img src="/logo.png" alt="Compare Cloud Costs" style={{ height: '32px', width: 'auto' }} />
+            </a>
+          </div>
           <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
             In this article
           </h4>

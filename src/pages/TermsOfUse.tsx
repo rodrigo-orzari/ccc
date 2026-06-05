@@ -211,6 +211,11 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
 
       <div className="terms-container" id="terms-of-use">
         <aside className="sidebar">
+          <div style={{ marginBottom: '2rem' }}>
+            <a href="/" style={{ display: 'inline-block' }}>
+              <img src="/logo.png" alt="Compare Cloud Costs" style={{ height: '32px', width: 'auto' }} />
+            </a>
+          </div>
           <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
             In this article
           </h4>

@@ -13,46 +13,6 @@ import { AZURE_CONTAINERS, AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY }
 import { GCP_CONTAINERS, GCP_CONTAINERS_REGION, GCP_CONTAINERS_GEOGRAPHY } from '../config/gcp_containers.js';
 import { DIGITALOCEAN_CONTAINERS, DIGITALOCEAN_CONTAINERS_REGION, DIGITALOCEAN_CONTAINERS_GEOGRAPHY } from '../config/digitalocean_containers.js';
 import { ORACLE_CONTAINERS, ORACLE_CONTAINERS_REGION, ORACLE_CONTAINERS_GEOGRAPHY } from '../config/oracle_containers.js';
-import { AwsFargateScraper } from '../scrapers/aws_fargate.js';
-import { AzureContainerInstancesScraper } from '../scrapers/azure_container_instances.js';
-
-export class AWSContainersLiveAdapter extends BaseAdapter {
-  providerSlug = 'aws';
-
-  private classifyAws(type: string, vcpu: number, memory: number): string {
-    return 'containers';
-  }
-
-  async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`🔄 Attempting AWS Containers live API fetch (via AwsFargateScraper)...`);
-    try {
-      const scraper = new AwsFargateScraper();
-      const instances = await scraper.run();
-      
-      return instances.map(inst => ({
-        provider: 'aws',
-        service: 'Fargate',
-        region: AWS_CONTAINERS_REGION,
-        instanceType: inst.type,
-        vcpus: inst.vcpus,
-        memoryGb: inst.memory,
-        arch: inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
-        os: 'Linux',
-        cpuVendor: inst.cpuVendor,
-        gpuCount: 0,
-        geography: AWS_CONTAINERS_GEOGRAPHY,
-        category: this.classifyAws(inst.type, inst.vcpus, inst.memory),
-        price: inst.price,
-        unit: 'Hour',
-        dataSource: 'live_api' as any,
-        attributes: inst.attributes,
-      }));
-    } catch (e) {
-      console.warn('⚠️  AWS Containers live fetch failed. Falling back to empty to trigger static config...');
-      return [];
-    }
-  }
-}
 
 export class AWSContainersStaticAdapter extends BaseAdapter {
   providerSlug = 'aws';
