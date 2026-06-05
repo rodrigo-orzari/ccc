@@ -90,7 +90,7 @@ export class NetworkingPricingPipeline {
             (service_id, instance_type, category, geography, price_per_unit, unit, attributes, data_source, updated_at) 
            VALUES (
              ${serviceId}, ${record.instance_type}, ${record.category}, ${record.geography}, 
-             ${record.price_per_unit}, ${record.unit}, ${JSON.stringify(record.attributes)}, 
+             ${record.price_per_unit}, ${record.unit}, ${sql.json(record.attributes)}, 
              'static_config', NOW()
            )
         `;
