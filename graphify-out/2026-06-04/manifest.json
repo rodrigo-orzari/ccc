@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1780621075.1971564,
-    "ast_hash": "f30e44f8b7efb8a9f4aefa9d3f6a8b22",
+    "mtime": 1780622150.762206,
+    "ast_hash": "35ea3bb0158d3f9335efe41951432bb2",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -195,8 +195,8 @@
     "semantic_hash": "62afd0cb57da977da9b55f17bac09503"
   },
   "README.md": {
-    "mtime": 1780599235.3548343,
-    "ast_hash": "5661a669d7f284ba87d25d47954bd86f",
+    "mtime": 1780621854.0495632,
+    "ast_hash": "b08b0fc8033248fe80f7fe74c7379974",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "src/app/api/pricing/route.ts": {
-    "mtime": 1780618780.207291,
-    "ast_hash": "0ff20f94dfbe1754cca9aec5d2740850",
+    "mtime": 1780621528.511207,
+    "ast_hash": "741ce84fa1e8b3214c9e5e45251bd9ef",
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
@@ -365,7 +365,7 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1780621106.4510074,
+    "mtime": 1780621528.514329,
     "ast_hash": "162f32d182b0035ea84b7317d8784d3b",
     "semantic_hash": ""
   },
@@ -375,7 +375,7 @@
     "semantic_hash": ""
   },
   "next-env.d.ts": {
-    "mtime": 1780619854.2133043,
+    "mtime": 1780621523.2194424,
     "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
     "semantic_hash": ""
   },
@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1780619833.866342,
-    "ast_hash": "da7e3891317f208ef8031c0ae7a7ca70",
+    "mtime": 1780621528.511705,
+    "ast_hash": "d217630f8476cd99ebd22ace11467769",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -430,42 +430,42 @@
     "semantic_hash": ""
   },
   "src/hooks/index.ts": {
-    "mtime": 1780620899.4813495,
+    "mtime": 1780621528.5119889,
     "ast_hash": "895bd8ff14a990c8f2d49e85248bd8ef",
     "semantic_hash": ""
   },
   "src/hooks/useContainersFilters.ts": {
-    "mtime": 1780620882.7907083,
+    "mtime": 1780621528.5121245,
     "ast_hash": "b78fe3ef58863c3017c824d765364681",
     "semantic_hash": ""
   },
   "src/hooks/useDataAnalyticsFilters.ts": {
-    "mtime": 1780620895.476188,
+    "mtime": 1780621528.5123165,
     "ast_hash": "e12526e77fac2c900f19498f6b7017e9",
     "semantic_hash": ""
   },
   "src/hooks/useDatabaseFilters.ts": {
-    "mtime": 1780620869.588933,
+    "mtime": 1780621528.512751,
     "ast_hash": "71ffe6ae23d4b2ff2a58f2e16dcb29a5",
     "semantic_hash": ""
   },
   "src/hooks/useNetworkingFilters.ts": {
-    "mtime": 1780620888.4204016,
+    "mtime": 1780621528.5129683,
     "ast_hash": "48cf013d1fb5e5c607fb5d2cccd1643a",
     "semantic_hash": ""
   },
   "src/hooks/useServerlessFilters.ts": {
-    "mtime": 1780620876.5178354,
+    "mtime": 1780621528.513529,
     "ast_hash": "49820d124825268da14e822ea86f99e8",
     "semantic_hash": ""
   },
   "src/hooks/useSharedFilters.ts": {
-    "mtime": 1780620859.4161625,
+    "mtime": 1780621528.5137212,
     "ast_hash": "57131272f1063ab58e68ae51441abb07",
     "semantic_hash": ""
   },
   "src/hooks/useVMFilters.ts": {
-    "mtime": 1780620864.8138607,
+    "mtime": 1780621528.5139391,
     "ast_hash": "424bf68badc69ec0c6596454c82d0d51",
     "semantic_hash": ""
   }

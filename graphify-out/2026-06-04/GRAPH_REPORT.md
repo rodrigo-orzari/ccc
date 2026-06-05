@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-04)
 
 ## Corpus Check
-- 91 files · ~83,583 words
+- 91 files · ~84,003 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 656 nodes · 878 edges · 48 communities (27 shown, 21 thin omitted)
+- 656 nodes · 879 edges · 48 communities (27 shown, 21 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 13 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b024c0e3`
+- Built from commit: `923a3216`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -107,7 +107,7 @@ Cohesion: 0.05
 Nodes (43): AWSAdapter, AzureAdapter, Batch Insert, Cron Job (Sunday Midnight), Data Staleness Warning System, DigitalOceanAdapter, DigitalOcean App Platform, Email Alerts (+35 more)
 
 ### Community 4 - "Package Dependencies"
-Cohesion: 0.23
+Cohesion: 0.24
 Nodes (7): GET(), GET(), buildPricingFilters(), parseFilterList(), VALID_PRODUCT_TYPES, sql, GET()
 
 ### Community 5 - "Cloud Instance Configs"
@@ -187,7 +187,7 @@ Cohesion: 0.05
 Nodes (28): ALIBABA_SERVERLESS, AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries, baseDigitaloceanEntries (+20 more)
 
 ## Knowledge Gaps
-- **278 isolated node(s):** `CONTAINERS_ORCHESTRATORS`, `CONTAINERS_COMPUTE_TYPES`, `CONTAINERS_ARCHITECTURES`, `CONTAINERS_BILLING_GRANULARITY`, `ANALYTICS_ENGINES` (+273 more)
+- **278 isolated node(s):** `PricingRecord`, `ProductType`, `PROVIDERS`, `GEOGRAPHIES`, `OS_TYPES` (+273 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -200,7 +200,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **Why does `PricingPipeline` connect `Community 32` to `Database Instance Configs`, `Community 35`, `Community 48`, `Community 49`, `Community 31`?**
   _High betweenness centrality (0.029) - this node is a cross-community bridge._
-- **What connects `CONTAINERS_ORCHESTRATORS`, `CONTAINERS_COMPUTE_TYPES`, `CONTAINERS_ARCHITECTURES` to the rest of the system?**
+- **What connects `PricingRecord`, `ProductType`, `PROVIDERS` to the rest of the system?**
   _279 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Database Instance Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.07394957983193277 - nodes in this community are weakly interconnected._

@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1780622150.762206,
-    "ast_hash": "35ea3bb0158d3f9335efe41951432bb2",
+    "mtime": 1780622610.9043393,
+    "ast_hash": "7b9f01530e17ce6a1ef9fcd08f893527",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1780621528.511705,
-    "ast_hash": "d217630f8476cd99ebd22ace11467769",
+    "mtime": 1780622579.9873965,
+    "ast_hash": "fe8880564e7cce3767543a72af7dcf37",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -467,6 +467,56 @@
   "src/hooks/useVMFilters.ts": {
     "mtime": 1780621528.5139391,
     "ast_hash": "424bf68badc69ec0c6596454c82d0d51",
+    "semantic_hash": ""
+  },
+  "src/components/FilterSidebar.tsx": {
+    "mtime": 1780622492.576246,
+    "ast_hash": "78508852fe53229e06163fcf5beeaa55",
+    "semantic_hash": ""
+  },
+  "src/components/Footer.tsx": {
+    "mtime": 1780622522.910189,
+    "ast_hash": "42e0eda90406fa9543d9bd65bf8545a0",
+    "semantic_hash": ""
+  },
+  "src/components/PricingTable.tsx": {
+    "mtime": 1780622450.6683261,
+    "ast_hash": "2340f15aad1e74781f9867ccf663e8c7",
+    "semantic_hash": ""
+  },
+  "src/components/ProductTypeSelector.tsx": {
+    "mtime": 1780622375.869844,
+    "ast_hash": "ae29aa41ee38272f7c368cdf58a885e6",
+    "semantic_hash": ""
+  },
+  "src/components/ProviderCards.tsx": {
+    "mtime": 1780622631.5296211,
+    "ast_hash": "1198117e7ba39729a40175bd301fdff2",
+    "semantic_hash": ""
+  },
+  "src/components/RangeSlider.tsx": {
+    "mtime": 1780622507.4431028,
+    "ast_hash": "a326833aa9d31887181328a0e96945a0",
+    "semantic_hash": ""
+  },
+  "src/components/TableToolbar.tsx": {
+    "mtime": 1780622407.282194,
+    "ast_hash": "30a719ea38b95df74eb33b12274abf7f",
+    "semantic_hash": ""
+  },
+  "src/components/index.ts": {
+    "mtime": 1780622528.920405,
+    "ast_hash": "e86676d91e1ccdd34712adae5e33866c",
+    "semantic_hash": ""
+  },
+  "src/config/index.ts": {
+    "mtime": 1780622620.2690291,
+    "ast_hash": "f5bb24195fc2d1e638cb7efa1b67c643",
+    "semantic_hash": ""
+  },
+  "src/types/index.ts": {
+    "mtime": 1780622392.276345,
+    "ast_hash": "23b04b8b30f636b4f3ea2d86eda0f977",
     "semantic_hash": ""
   }
 }

@@ -58,6 +58,393 @@
   },
   "nodes": [
     {
+      "label": "next-env.d.ts",
+      "file_type": "code",
+      "source_file": "next-env.d.ts",
+      "source_location": "L1",
+      "id": "next_env_d",
+      "community": 38,
+      "norm_label": "next-env.d.ts"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L1",
+      "id": "pricing_route",
+      "community": 4,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L5",
+      "id": "pricing_route_get",
+      "community": 4,
+      "norm_label": "get()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L1",
+      "id": "app_page",
+      "community": 44,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "Tooltip()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "id": "app_page_tooltip",
+      "community": 44,
+      "norm_label": "tooltip()"
+    },
+    {
+      "label": "PricingRecord",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L35",
+      "id": "app_page_pricingrecord",
+      "community": 44,
+      "norm_label": "pricingrecord"
+    },
+    {
+      "label": "ProductType",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L87",
+      "id": "app_page_producttype",
+      "community": 44,
+      "norm_label": "producttype"
+    },
+    {
+      "label": "PROVIDERS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L89",
+      "id": "app_page_providers",
+      "community": 44,
+      "norm_label": "providers"
+    },
+    {
+      "label": "GEOGRAPHIES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L98",
+      "id": "app_page_geographies",
+      "community": 44,
+      "norm_label": "geographies"
+    },
+    {
+      "label": "OS_TYPES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L99",
+      "id": "app_page_os_types",
+      "community": 44,
+      "norm_label": "os_types"
+    },
+    {
+      "label": "CPU_PROFILES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L100",
+      "id": "app_page_cpu_profiles",
+      "community": 44,
+      "norm_label": "cpu_profiles"
+    },
+    {
+      "label": "CATEGORIES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L106",
+      "id": "app_page_categories",
+      "community": 44,
+      "norm_label": "categories"
+    },
+    {
+      "label": "DB_FAMILIES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L109",
+      "id": "app_page_db_families",
+      "community": 44,
+      "norm_label": "db_families"
+    },
+    {
+      "label": "DB_ENGINES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L110",
+      "id": "app_page_db_engines",
+      "community": 44,
+      "norm_label": "db_engines"
+    },
+    {
+      "label": "DEPLOYMENT_TYPES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L111",
+      "id": "app_page_deployment_types",
+      "community": 44,
+      "norm_label": "deployment_types"
+    },
+    {
+      "label": "HA_MODES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L112",
+      "id": "app_page_ha_modes",
+      "community": 44,
+      "norm_label": "ha_modes"
+    },
+    {
+      "label": "SERVERLESS_LANGUAGES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L115",
+      "id": "app_page_serverless_languages",
+      "community": 44,
+      "norm_label": "serverless_languages"
+    },
+    {
+      "label": "SERVERLESS_COLD_START_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L116",
+      "id": "app_page_serverless_cold_start_options",
+      "community": 44,
+      "norm_label": "serverless_cold_start_options"
+    },
+    {
+      "label": "SERVERLESS_TIMEOUT_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L117",
+      "id": "app_page_serverless_timeout_options",
+      "community": 44,
+      "norm_label": "serverless_timeout_options"
+    },
+    {
+      "label": "SERVERLESS_MEMORY_CONFIG_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L118",
+      "id": "app_page_serverless_memory_config_options",
+      "community": 44,
+      "norm_label": "serverless_memory_config_options"
+    },
+    {
+      "label": "SERVERLESS_FREE_TIER_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L119",
+      "id": "app_page_serverless_free_tier_options",
+      "community": 44,
+      "norm_label": "serverless_free_tier_options"
+    },
+    {
+      "label": "SERVERLESS_GRANULARITY_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L120",
+      "id": "app_page_serverless_granularity_options",
+      "community": 44,
+      "norm_label": "serverless_granularity_options"
+    },
+    {
+      "label": "SERVERLESS_EXECUTION_MODEL_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L121",
+      "id": "app_page_serverless_execution_model_options",
+      "community": 44,
+      "norm_label": "serverless_execution_model_options"
+    },
+    {
+      "label": "SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L122",
+      "id": "app_page_serverless_provisioned_concurrency_options",
+      "community": 44,
+      "norm_label": "serverless_provisioned_concurrency_options"
+    },
+    {
+      "label": "SERVERLESS_EPHEMERAL_STORAGE_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L123",
+      "id": "app_page_serverless_ephemeral_storage_options",
+      "community": 44,
+      "norm_label": "serverless_ephemeral_storage_options"
+    },
+    {
+      "label": "CONTAINERS_ORCHESTRATORS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L126",
+      "id": "app_page_containers_orchestrators",
+      "community": 44,
+      "norm_label": "containers_orchestrators"
+    },
+    {
+      "label": "CONTAINERS_COMPUTE_TYPES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L127",
+      "id": "app_page_containers_compute_types",
+      "community": 44,
+      "norm_label": "containers_compute_types"
+    },
+    {
+      "label": "CONTAINERS_ARCHITECTURES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L128",
+      "id": "app_page_containers_architectures",
+      "community": 44,
+      "norm_label": "containers_architectures"
+    },
+    {
+      "label": "CONTAINERS_BILLING_GRANULARITY",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L129",
+      "id": "app_page_containers_billing_granularity",
+      "community": 44,
+      "norm_label": "containers_billing_granularity"
+    },
+    {
+      "label": "NETWORKING_SERVICES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L130",
+      "id": "app_page_networking_services",
+      "community": 44,
+      "norm_label": "networking_services"
+    },
+    {
+      "label": "NETWORKING_CONNECTION_TYPES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L131",
+      "id": "app_page_networking_connection_types",
+      "community": 44,
+      "norm_label": "networking_connection_types"
+    },
+    {
+      "label": "NETWORKING_ROUTING_TYPES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L132",
+      "id": "app_page_networking_routing_types",
+      "community": 44,
+      "norm_label": "networking_routing_types"
+    },
+    {
+      "label": "NETWORKING_HA_SUPPORT",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L133",
+      "id": "app_page_networking_ha_support",
+      "community": 44,
+      "norm_label": "networking_ha_support"
+    },
+    {
+      "label": "NETWORKING_VPC_SUPPORT",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L134",
+      "id": "app_page_networking_vpc_support",
+      "community": 44,
+      "norm_label": "networking_vpc_support"
+    },
+    {
+      "label": "NETWORKING_DIRECTIONS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L135",
+      "id": "app_page_networking_directions",
+      "community": 44,
+      "norm_label": "networking_directions"
+    },
+    {
+      "label": "ANALYTICS_ENGINES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L138",
+      "id": "app_page_analytics_engines",
+      "community": 44,
+      "norm_label": "analytics_engines"
+    },
+    {
+      "label": "ANALYTICS_DEPLOYMENT_TYPES",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L139",
+      "id": "app_page_analytics_deployment_types",
+      "community": 44,
+      "norm_label": "analytics_deployment_types"
+    },
+    {
+      "label": "ANALYTICS_TIERS",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L140",
+      "id": "app_page_analytics_tiers",
+      "community": 44,
+      "norm_label": "analytics_tiers"
+    },
+    {
+      "label": "DEFAULT_VCPU_RANGE",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L142",
+      "id": "app_page_default_vcpu_range",
+      "community": 44,
+      "norm_label": "default_vcpu_range"
+    },
+    {
+      "label": "DEFAULT_MEMORY_RANGE",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L143",
+      "id": "app_page_default_memory_range",
+      "community": 44,
+      "norm_label": "default_memory_range"
+    },
+    {
+      "label": "DEFAULT_PRICE_RANGE",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L144",
+      "id": "app_page_default_price_range",
+      "community": 44,
+      "norm_label": "default_price_range"
+    },
+    {
+      "label": "RangeSlider()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L146",
+      "id": "app_page_rangeslider",
+      "community": 44,
+      "norm_label": "rangeslider()"
+    },
+    {
+      "label": "Dashboard()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L205",
+      "id": "app_page_dashboard",
+      "community": 44,
+      "norm_label": "dashboard()"
+    },
+    {
       "label": "index.ts",
       "file_type": "code",
       "source_file": "src/hooks/index.ts",
@@ -454,364 +841,58 @@
       "norm_label": "usevmfilters()"
     },
     {
-      "label": "page.tsx",
+      "label": "api-utils.ts",
       "file_type": "code",
-      "source_file": "src/app/page.tsx",
+      "source_file": "src/lib/api-utils.ts",
       "source_location": "L1",
-      "community": 44,
-      "norm_label": "page.tsx",
-      "id": "app_page"
+      "id": "lib_api_utils",
+      "community": 4,
+      "norm_label": "api-utils.ts"
     },
     {
-      "label": "Tooltip()",
+      "label": "requireAdminAuth()",
       "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "community": 44,
-      "norm_label": "tooltip()",
-      "id": "app_page_tooltip"
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L8",
+      "id": "lib_api_utils_requireadminauth",
+      "community": 32,
+      "norm_label": "requireadminauth()"
     },
     {
-      "label": "PricingRecord",
+      "label": "initDb()",
       "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L35",
-      "community": 44,
-      "norm_label": "pricingrecord",
-      "id": "app_page_pricingrecord"
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L30",
+      "id": "lib_api_utils_initdb",
+      "community": 32,
+      "norm_label": "initdb()"
     },
     {
-      "label": "ProductType",
+      "label": "VALID_PRODUCT_TYPES",
       "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L87",
-      "community": 44,
-      "norm_label": "producttype",
-      "id": "app_page_producttype"
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L86",
+      "id": "lib_api_utils_valid_product_types",
+      "community": 4,
+      "norm_label": "valid_product_types"
     },
     {
-      "label": "PROVIDERS",
+      "label": "parseFilterList()",
       "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L89",
-      "community": 44,
-      "norm_label": "providers",
-      "id": "app_page_providers"
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L88",
+      "id": "lib_api_utils_parsefilterlist",
+      "community": 4,
+      "norm_label": "parsefilterlist()"
     },
     {
-      "label": "GEOGRAPHIES",
+      "label": "buildPricingFilters()",
       "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L98",
-      "community": 44,
-      "norm_label": "geographies",
-      "id": "app_page_geographies"
-    },
-    {
-      "label": "OS_TYPES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L99",
-      "community": 44,
-      "norm_label": "os_types",
-      "id": "app_page_os_types"
-    },
-    {
-      "label": "CPU_PROFILES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L100",
-      "community": 44,
-      "norm_label": "cpu_profiles",
-      "id": "app_page_cpu_profiles"
-    },
-    {
-      "label": "CATEGORIES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L106",
-      "community": 44,
-      "norm_label": "categories",
-      "id": "app_page_categories"
-    },
-    {
-      "label": "DB_FAMILIES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
+      "source_file": "src/lib/api-utils.ts",
       "source_location": "L109",
-      "community": 44,
-      "norm_label": "db_families",
-      "id": "app_page_db_families"
-    },
-    {
-      "label": "DB_ENGINES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L110",
-      "community": 44,
-      "norm_label": "db_engines",
-      "id": "app_page_db_engines"
-    },
-    {
-      "label": "DEPLOYMENT_TYPES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L111",
-      "community": 44,
-      "norm_label": "deployment_types",
-      "id": "app_page_deployment_types"
-    },
-    {
-      "label": "HA_MODES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L112",
-      "community": 44,
-      "norm_label": "ha_modes",
-      "id": "app_page_ha_modes"
-    },
-    {
-      "label": "SERVERLESS_LANGUAGES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L115",
-      "community": 44,
-      "norm_label": "serverless_languages",
-      "id": "app_page_serverless_languages"
-    },
-    {
-      "label": "SERVERLESS_COLD_START_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L116",
-      "community": 44,
-      "norm_label": "serverless_cold_start_options",
-      "id": "app_page_serverless_cold_start_options"
-    },
-    {
-      "label": "SERVERLESS_TIMEOUT_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L117",
-      "community": 44,
-      "norm_label": "serverless_timeout_options",
-      "id": "app_page_serverless_timeout_options"
-    },
-    {
-      "label": "SERVERLESS_MEMORY_CONFIG_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L118",
-      "community": 44,
-      "norm_label": "serverless_memory_config_options",
-      "id": "app_page_serverless_memory_config_options"
-    },
-    {
-      "label": "SERVERLESS_FREE_TIER_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L119",
-      "community": 44,
-      "norm_label": "serverless_free_tier_options",
-      "id": "app_page_serverless_free_tier_options"
-    },
-    {
-      "label": "SERVERLESS_GRANULARITY_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L120",
-      "community": 44,
-      "norm_label": "serverless_granularity_options",
-      "id": "app_page_serverless_granularity_options"
-    },
-    {
-      "label": "SERVERLESS_EXECUTION_MODEL_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L121",
-      "community": 44,
-      "norm_label": "serverless_execution_model_options",
-      "id": "app_page_serverless_execution_model_options"
-    },
-    {
-      "label": "SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L122",
-      "community": 44,
-      "norm_label": "serverless_provisioned_concurrency_options",
-      "id": "app_page_serverless_provisioned_concurrency_options"
-    },
-    {
-      "label": "SERVERLESS_EPHEMERAL_STORAGE_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L123",
-      "community": 44,
-      "norm_label": "serverless_ephemeral_storage_options",
-      "id": "app_page_serverless_ephemeral_storage_options"
-    },
-    {
-      "label": "CONTAINERS_ORCHESTRATORS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L126",
-      "community": 44,
-      "norm_label": "containers_orchestrators",
-      "id": "app_page_containers_orchestrators"
-    },
-    {
-      "label": "CONTAINERS_COMPUTE_TYPES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L127",
-      "community": 44,
-      "norm_label": "containers_compute_types",
-      "id": "app_page_containers_compute_types"
-    },
-    {
-      "label": "CONTAINERS_ARCHITECTURES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L128",
-      "community": 44,
-      "norm_label": "containers_architectures",
-      "id": "app_page_containers_architectures"
-    },
-    {
-      "label": "CONTAINERS_BILLING_GRANULARITY",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L129",
-      "community": 44,
-      "norm_label": "containers_billing_granularity",
-      "id": "app_page_containers_billing_granularity"
-    },
-    {
-      "label": "NETWORKING_SERVICES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L130",
-      "community": 44,
-      "norm_label": "networking_services",
-      "id": "app_page_networking_services"
-    },
-    {
-      "label": "NETWORKING_CONNECTION_TYPES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L131",
-      "community": 44,
-      "norm_label": "networking_connection_types",
-      "id": "app_page_networking_connection_types"
-    },
-    {
-      "label": "NETWORKING_ROUTING_TYPES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L132",
-      "community": 44,
-      "norm_label": "networking_routing_types",
-      "id": "app_page_networking_routing_types"
-    },
-    {
-      "label": "NETWORKING_HA_SUPPORT",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L133",
-      "community": 44,
-      "norm_label": "networking_ha_support",
-      "id": "app_page_networking_ha_support"
-    },
-    {
-      "label": "NETWORKING_VPC_SUPPORT",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L134",
-      "community": 44,
-      "norm_label": "networking_vpc_support",
-      "id": "app_page_networking_vpc_support"
-    },
-    {
-      "label": "NETWORKING_DIRECTIONS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L135",
-      "community": 44,
-      "norm_label": "networking_directions",
-      "id": "app_page_networking_directions"
-    },
-    {
-      "label": "ANALYTICS_ENGINES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L138",
-      "community": 44,
-      "norm_label": "analytics_engines",
-      "id": "app_page_analytics_engines"
-    },
-    {
-      "label": "ANALYTICS_DEPLOYMENT_TYPES",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L139",
-      "community": 44,
-      "norm_label": "analytics_deployment_types",
-      "id": "app_page_analytics_deployment_types"
-    },
-    {
-      "label": "ANALYTICS_TIERS",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L140",
-      "community": 44,
-      "norm_label": "analytics_tiers",
-      "id": "app_page_analytics_tiers"
-    },
-    {
-      "label": "DEFAULT_VCPU_RANGE",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L142",
-      "community": 44,
-      "norm_label": "default_vcpu_range",
-      "id": "app_page_default_vcpu_range"
-    },
-    {
-      "label": "DEFAULT_MEMORY_RANGE",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L143",
-      "community": 44,
-      "norm_label": "default_memory_range",
-      "id": "app_page_default_memory_range"
-    },
-    {
-      "label": "DEFAULT_PRICE_RANGE",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L144",
-      "community": 44,
-      "norm_label": "default_price_range",
-      "id": "app_page_default_price_range"
-    },
-    {
-      "label": "RangeSlider()",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L146",
-      "community": 44,
-      "norm_label": "rangeslider()",
-      "id": "app_page_rangeslider"
-    },
-    {
-      "label": "Dashboard()",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L205",
-      "community": 44,
-      "norm_label": "dashboard()",
-      "id": "app_page_dashboard"
+      "id": "lib_api_utils_buildpricingfilters",
+      "community": 4,
+      "norm_label": "buildpricingfilters()"
     },
     {
       "label": "MarkdownPage.tsx",
@@ -848,60 +929,6 @@
       "community": 8,
       "norm_label": "markdownpage()",
       "id": "components_markdownpage_markdownpage"
-    },
-    {
-      "label": "api-utils.ts",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L1",
-      "community": 4,
-      "norm_label": "api-utils.ts",
-      "id": "lib_api_utils"
-    },
-    {
-      "label": "requireAdminAuth()",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L8",
-      "community": 32,
-      "norm_label": "requireadminauth()",
-      "id": "lib_api_utils_requireadminauth"
-    },
-    {
-      "label": "initDb()",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L30",
-      "community": 32,
-      "norm_label": "initdb()",
-      "id": "lib_api_utils_initdb"
-    },
-    {
-      "label": "VALID_PRODUCT_TYPES",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L86",
-      "community": 4,
-      "norm_label": "valid_product_types",
-      "id": "lib_api_utils_valid_product_types"
-    },
-    {
-      "label": "parseFilterList()",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L88",
-      "community": 4,
-      "norm_label": "parsefilterlist()",
-      "id": "lib_api_utils_parsefilterlist"
-    },
-    {
-      "label": "buildPricingFilters()",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L109",
-      "community": 4,
-      "norm_label": "buildpricingfilters()",
-      "id": "lib_api_utils_buildpricingfilters"
     },
     {
       "label": "containers_pipeline.ts",
@@ -1046,15 +1073,6 @@
       "community": 28,
       "norm_label": ".run()",
       "id": "services_containers_pipeline_containerspricingpipeline_run"
-    },
-    {
-      "label": "next-env.d.ts",
-      "file_type": "code",
-      "source_file": "next-env.d.ts",
-      "source_location": "L1",
-      "community": 38,
-      "norm_label": "next-env.d.ts",
-      "id": "next_env_d"
     },
     {
       "label": "alibaba_containers.ts",
@@ -3134,24 +3152,6 @@
       "community": 4,
       "norm_label": "get()",
       "id": "counts_route_get"
-    },
-    {
-      "label": "route.ts",
-      "file_type": "code",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L1",
-      "community": 4,
-      "norm_label": "route.ts",
-      "id": "pricing_route"
-    },
-    {
-      "label": "GET()",
-      "file_type": "code",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L5",
-      "community": 4,
-      "norm_label": "get()",
-      "id": "pricing_route_get"
     },
     {
       "label": "layout.tsx",
@@ -6284,518 +6284,47 @@
   ],
   "links": [
     {
-      "relation": "re_exports",
-      "context": "export",
+      "relation": "imports_from",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usecontainersfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usecontainersfilters_usecontainersfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usedataanalyticsfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usedataanalyticsfilters_usedataanalyticsfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
+      "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usedatabasefilters",
+      "source": "pricing_route",
+      "target": "lib_api_utils",
       "confidence_score": 1.0
     },
     {
-      "relation": "re_exports",
-      "context": "re-export",
+      "relation": "imports",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
+      "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L3",
       "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usedatabasefilters_usedatabasefilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usenetworkingfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usenetworkingfilters_usenetworkingfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_useserverlessfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_useserverlessfilters_useserverlessfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usesharedfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usesharedfilters_usesharedfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usevmfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/index.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "hooks_index",
-      "target": "hooks_usevmfilters_usevmfilters",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "pricing_route",
+      "target": "lib_api_utils_buildpricingfilters"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useContainersFilters.ts",
+      "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L5",
       "weight": 1.0,
-      "source": "hooks_usecontainersfilters",
-      "target": "hooks_usecontainersfilters_containers_architectures",
-      "confidence_score": 1.0
+      "confidence_score": 1.0,
+      "source": "pricing_route",
+      "target": "pricing_route_get"
     },
     {
-      "relation": "contains",
+      "relation": "calls",
+      "context": "call",
       "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useContainersFilters.ts",
-      "source_location": "L6",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L65",
       "weight": 1.0,
-      "source": "hooks_usecontainersfilters",
-      "target": "hooks_usecontainersfilters_containers_billing_granularity",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useContainersFilters.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_usecontainersfilters",
-      "target": "hooks_usecontainersfilters_containers_compute_types",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useContainersFilters.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "hooks_usecontainersfilters",
-      "target": "hooks_usecontainersfilters_containers_orchestrators",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useContainersFilters.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "source": "hooks_usecontainersfilters",
-      "target": "hooks_usecontainersfilters_usecontainersfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDataAnalyticsFilters.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_usedataanalyticsfilters",
-      "target": "hooks_usedataanalyticsfilters_analytics_deployment_types",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDataAnalyticsFilters.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "hooks_usedataanalyticsfilters",
-      "target": "hooks_usedataanalyticsfilters_analytics_engines",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDataAnalyticsFilters.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "hooks_usedataanalyticsfilters",
-      "target": "hooks_usedataanalyticsfilters_analytics_tiers",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDataAnalyticsFilters.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "hooks_usedataanalyticsfilters",
-      "target": "hooks_usedataanalyticsfilters_usedataanalyticsfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDatabaseFilters.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_usedatabasefilters",
-      "target": "hooks_usedatabasefilters_db_engines",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDatabaseFilters.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "hooks_usedatabasefilters",
-      "target": "hooks_usedatabasefilters_db_families",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDatabaseFilters.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "hooks_usedatabasefilters",
-      "target": "hooks_usedatabasefilters_deployment_types",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDatabaseFilters.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "hooks_usedatabasefilters",
-      "target": "hooks_usedatabasefilters_ha_modes",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDatabaseFilters.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "source": "hooks_usedatabasefilters",
-      "target": "hooks_usedatabasefilters_usedatabasefilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useNetworkingFilters.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_usenetworkingfilters",
-      "target": "hooks_usenetworkingfilters_networking_connection_types",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useNetworkingFilters.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "hooks_usenetworkingfilters",
-      "target": "hooks_usenetworkingfilters_networking_directions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useNetworkingFilters.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "hooks_usenetworkingfilters",
-      "target": "hooks_usenetworkingfilters_networking_ha_support",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useNetworkingFilters.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "hooks_usenetworkingfilters",
-      "target": "hooks_usenetworkingfilters_networking_routing_types",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useNetworkingFilters.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "hooks_usenetworkingfilters",
-      "target": "hooks_usenetworkingfilters_networking_services",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useNetworkingFilters.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "hooks_usenetworkingfilters",
-      "target": "hooks_usenetworkingfilters_networking_vpc_support",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useNetworkingFilters.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "hooks_usenetworkingfilters",
-      "target": "hooks_usenetworkingfilters_usenetworkingfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_cold_start_options",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L11",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_ephemeral_storage_options",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_execution_model_options",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_free_tier_options",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_granularity_options",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_languages",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_memory_config_options",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_provisioned_concurrency_options",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_serverless_timeout_options",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useServerlessFilters.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "source": "hooks_useserverlessfilters",
-      "target": "hooks_useserverlessfilters_useserverlessfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useSharedFilters.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "hooks_usesharedfilters",
-      "target": "hooks_usesharedfilters_usesharedfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useVMFilters.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "hooks_usevmfilters",
-      "target": "hooks_usevmfilters_categories",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useVMFilters.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "hooks_usevmfilters",
-      "target": "hooks_usevmfilters_cpu_profiles",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useVMFilters.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_usevmfilters",
-      "target": "hooks_usevmfilters_os_types",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useVMFilters.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "hooks_usevmfilters",
-      "target": "hooks_usevmfilters_usevmfilters",
-      "confidence_score": 1.0
+      "source": "pricing_route_get",
+      "target": "lib_api_utils_buildpricingfilters"
     },
     {
       "relation": "contains",
@@ -7188,144 +6717,518 @@
       "target": "app_page_tooltip"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
+      "relation": "re_exports",
+      "context": "export",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L3",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "components_markdownpage"
+      "source": "hooks_index",
+      "target": "hooks_usecontainersfilters"
     },
     {
-      "relation": "contains",
+      "relation": "re_exports",
+      "context": "re-export",
       "confidence": "EXTRACTED",
-      "source_file": "src/components/MarkdownPage.tsx",
-      "source_location": "L14",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L5",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "components_markdownpage",
-      "target": "components_markdownpage_headingtoid"
+      "source": "hooks_index",
+      "target": "hooks_usecontainersfilters_usecontainersfilters"
     },
     {
-      "relation": "contains",
+      "relation": "re_exports",
+      "context": "export",
       "confidence": "EXTRACTED",
-      "source_file": "src/components/MarkdownPage.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_markdownpage",
-      "target": "components_markdownpage_markdownpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/MarkdownPage.tsx",
+      "source_file": "src/hooks/index.ts",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "components_markdownpage",
-      "target": "components_markdownpage_markdownpageprops"
+      "source": "hooks_index",
+      "target": "hooks_usedataanalyticsfilters"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
+      "relation": "re_exports",
+      "context": "re-export",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/methodology/page.tsx",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_usedataanalyticsfilters_usedataanalyticsfilters"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/index.ts",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "methodology_page",
-      "target": "components_markdownpage"
+      "source": "hooks_index",
+      "target": "hooks_usedatabasefilters"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
+      "relation": "re_exports",
+      "context": "re-export",
       "confidence": "EXTRACTED",
-      "source_file": "src/pages/About.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_about",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/Methodology.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_methodology",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/PrivacyPolicy.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_privacypolicy",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/Support.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_support",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/pages/TermsOfUse.tsx",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pages_termsofuse",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/privacy/page.tsx",
+      "source_file": "src/hooks/index.ts",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "privacy_page",
-      "target": "components_markdownpage"
+      "source": "hooks_index",
+      "target": "hooks_usedatabasefilters_usedatabasefilters"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
+      "relation": "re_exports",
+      "context": "export",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/support/page.tsx",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_usenetworkingfilters"
+    },
+    {
+      "relation": "re_exports",
+      "context": "re-export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_usenetworkingfilters_usenetworkingfilters"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_useserverlessfilters"
+    },
+    {
+      "relation": "re_exports",
+      "context": "re-export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_useserverlessfilters_useserverlessfilters"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_usesharedfilters"
+    },
+    {
+      "relation": "re_exports",
+      "context": "re-export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_usesharedfilters_usesharedfilters"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_usevmfilters"
+    },
+    {
+      "relation": "re_exports",
+      "context": "re-export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/index.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_index",
+      "target": "hooks_usevmfilters_usevmfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useContainersFilters.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecontainersfilters",
+      "target": "hooks_usecontainersfilters_containers_architectures"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useContainersFilters.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecontainersfilters",
+      "target": "hooks_usecontainersfilters_containers_billing_granularity"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useContainersFilters.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecontainersfilters",
+      "target": "hooks_usecontainersfilters_containers_compute_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useContainersFilters.ts",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "support_page",
-      "target": "components_markdownpage"
+      "source": "hooks_usecontainersfilters",
+      "target": "hooks_usecontainersfilters_containers_orchestrators"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
+      "source_file": "src/hooks/useContainersFilters.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecontainersfilters",
+      "target": "hooks_usecontainersfilters_usecontainersfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDataAnalyticsFilters.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedataanalyticsfilters",
+      "target": "hooks_usedataanalyticsfilters_analytics_deployment_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDataAnalyticsFilters.ts",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "components_markdownpage"
+      "source": "hooks_usedataanalyticsfilters",
+      "target": "hooks_usedataanalyticsfilters_analytics_engines"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDataAnalyticsFilters.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedataanalyticsfilters",
+      "target": "hooks_usedataanalyticsfilters_analytics_tiers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDataAnalyticsFilters.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedataanalyticsfilters",
+      "target": "hooks_usedataanalyticsfilters_usedataanalyticsfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDatabaseFilters.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedatabasefilters",
+      "target": "hooks_usedatabasefilters_db_engines"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDatabaseFilters.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedatabasefilters",
+      "target": "hooks_usedatabasefilters_db_families"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDatabaseFilters.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedatabasefilters",
+      "target": "hooks_usedatabasefilters_deployment_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDatabaseFilters.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedatabasefilters",
+      "target": "hooks_usedatabasefilters_ha_modes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDatabaseFilters.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedatabasefilters",
+      "target": "hooks_usedatabasefilters_usedatabasefilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNetworkingFilters.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usenetworkingfilters",
+      "target": "hooks_usenetworkingfilters_networking_connection_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNetworkingFilters.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usenetworkingfilters",
+      "target": "hooks_usenetworkingfilters_networking_directions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNetworkingFilters.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usenetworkingfilters",
+      "target": "hooks_usenetworkingfilters_networking_ha_support"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNetworkingFilters.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usenetworkingfilters",
+      "target": "hooks_usenetworkingfilters_networking_routing_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNetworkingFilters.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usenetworkingfilters",
+      "target": "hooks_usenetworkingfilters_networking_services"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNetworkingFilters.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usenetworkingfilters",
+      "target": "hooks_usenetworkingfilters_networking_vpc_support"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNetworkingFilters.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usenetworkingfilters",
+      "target": "hooks_usenetworkingfilters_usenetworkingfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_cold_start_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_ephemeral_storage_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_execution_model_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_free_tier_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_granularity_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_languages"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_memory_config_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_provisioned_concurrency_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_serverless_timeout_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useServerlessFilters.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_useserverlessfilters",
+      "target": "hooks_useserverlessfilters_useserverlessfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useSharedFilters.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usesharedfilters",
+      "target": "hooks_usesharedfilters_usesharedfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useVMFilters.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usevmfilters",
+      "target": "hooks_usevmfilters_categories"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useVMFilters.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usevmfilters",
+      "target": "hooks_usevmfilters_cpu_profiles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useVMFilters.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usevmfilters",
+      "target": "hooks_usevmfilters_os_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useVMFilters.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usevmfilters",
+      "target": "hooks_usevmfilters_usevmfilters"
     },
     {
       "relation": "contains",
@@ -7532,26 +7435,144 @@
       "target": "lib_api_utils_buildpricingfilters"
     },
     {
-      "relation": "imports",
+      "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/api/pricing/route.ts",
+      "source_file": "src/app/about/page.tsx",
       "source_location": "L3",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "pricing_route",
-      "target": "lib_api_utils_buildpricingfilters"
+      "source": "about_page",
+      "target": "components_markdownpage"
     },
     {
-      "relation": "calls",
-      "context": "call",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L65",
+      "source_file": "src/components/MarkdownPage.tsx",
+      "source_location": "L14",
       "weight": 1.0,
-      "source": "pricing_route_get",
-      "target": "lib_api_utils_buildpricingfilters"
+      "confidence_score": 1.0,
+      "source": "components_markdownpage",
+      "target": "components_markdownpage_headingtoid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MarkdownPage.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_markdownpage",
+      "target": "components_markdownpage_markdownpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MarkdownPage.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_markdownpage",
+      "target": "components_markdownpage_markdownpageprops"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/methodology/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "methodology_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/About.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_about",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Methodology.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_methodology",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PrivacyPolicy.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_privacypolicy",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/Support.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_support",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/TermsOfUse.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pages_termsofuse",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/privacy/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "privacy_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/support/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "support_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "components_markdownpage"
     },
     {
       "relation": "imports",
@@ -12486,16 +12507,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pricing_route",
-      "target": "pricing_route_get"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/layout.tsx",
       "source_location": "L5",
       "weight": 1.0,
@@ -15425,5 +15436,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "b024c0e36a121f76f9acf31d24dd39e0177624f8"
+  "built_at_commit": "923a3216c47b68fc734f36eb7e330766c30e4bdf"
 }
