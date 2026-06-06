@@ -117,7 +117,7 @@ export default function ChartsView({ data, activeProductType }: ChartsViewProps)
           </div>
         </div>
 
-        {/* Scatter Plot Section */}
+        {/* Scatter Plot Section: Price vs Memory */}
         {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && scatterData.length > 0 && (
           <div className="bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded-xl p-6 shadow-sm">
             <div className="mb-6">
@@ -126,7 +126,7 @@ export default function ChartsView({ data, activeProductType }: ChartsViewProps)
             </div>
             <div className="h-[400px] w-full pr-4">
               <ResponsiveContainer width="100%" height="100%">
-                <ScatterChart margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                <ScatterChart margin={{ top: 20, right: 30, left: 40, bottom: 25 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#404040" opacity={0.2} />
                   <XAxis 
                     type="number" 
@@ -151,7 +151,51 @@ export default function ChartsView({ data, activeProductType }: ChartsViewProps)
                     tickFormatter={(value) => `$${value}`}
                     dx={-10}
                   >
-                    <Label value="Hourly Price ($)" angle={-90} position="insideLeft" style={{ textAnchor: 'middle' }} fill="#737373" fontSize={12} />
+                    <Label value="Hourly Price ($)" angle={-90} position="insideLeft" offset={-25} style={{ textAnchor: 'middle' }} fill="#737373" fontSize={12} />
+                  </YAxis>
+                  <ZAxis type="number" range={[60, 60]} />
+                  <RechartsTooltip content={<CustomTooltipScatter />} cursor={{ strokeDasharray: '3 3' }} />
+                  <Scatter name="Instances" data={scatterData} fill="#8884d8" />
+                </ScatterChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        )}
+
+        {/* Scatter Plot Section: Price vs vCPU */}
+        {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && scatterData.length > 0 && (
+          <div className="bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded-xl p-6 shadow-sm">
+            <div className="mb-6">
+              <h2 className="text-lg font-bold text-black dark:text-white">Price vs. vCPU (Frontier of Efficiency)</h2>
+              <p className="text-xs text-[#737373]">Instances in the bottom right offer the most compute power (vCPUs) for the lowest price.</p>
+            </div>
+            <div className="h-[400px] w-full pr-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <ScatterChart margin={{ top: 20, right: 30, left: 40, bottom: 25 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#404040" opacity={0.2} />
+                  <XAxis 
+                    type="number" 
+                    dataKey="vcpus" 
+                    name="vCPU" 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{ fontSize: 12, fill: '#737373' }}
+                    dy={10}
+                  >
+                    <Label value="vCPU Count" offset={-20} position="insideBottom" fill="#737373" fontSize={12} />
+                  </XAxis>
+                  <YAxis 
+                    type="number" 
+                    dataKey="price" 
+                    name="Price" 
+                    unit="$" 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{ fontSize: 12, fill: '#737373' }}
+                    tickFormatter={(value) => `$${value}`}
+                    dx={-10}
+                  >
+                    <Label value="Hourly Price ($)" angle={-90} position="insideLeft" offset={-25} style={{ textAnchor: 'middle' }} fill="#737373" fontSize={12} />
                   </YAxis>
                   <ZAxis type="number" range={[60, 60]} />
                   <RechartsTooltip content={<CustomTooltipScatter />} cursor={{ strokeDasharray: '3 3' }} />

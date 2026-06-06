@@ -16,6 +16,7 @@ import {
   NETWORKING_SERVICES, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
   NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
   ANALYTICS_ENGINES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_TIERS,
+  AI_SERVICE_TYPES, AI_MODEL_TIERS, AI_CONTEXT_WINDOWS, AI_MULTIMODAL_OPTIONS,
   DEFAULT_VCPU_RANGE, DEFAULT_MEMORY_RANGE, DEFAULT_PRICE_RANGE,
   PROVIDERS,
 } from '@/config';
@@ -138,6 +139,10 @@ interface FilterSidebarProps {
   selectedAnalyticsEngines: string[];
   selectedAnalyticsDeploymentTypes: string[];
   selectedAnalyticsTiers: string[];
+  selectedAiServiceTypes: string[];
+  selectedAiModelTiers: string[];
+  selectedAiContextWindows: string[];
+  selectedAiMultimodalOptions: string[];
   selectedNetworkingServices: string[];
   selectedNetworkingConnectionTypes: string[];
   selectedNetworkingRoutingTypes: string[];
@@ -178,6 +183,10 @@ interface FilterSidebarProps {
   onAnalyticsEngineToggle: (eng: string) => void;
   onAnalyticsDeploymentTypeToggle: (dt: string) => void;
   onAnalyticsTierToggle: (tier: string) => void;
+  onAiServiceTypeToggle: (val: string) => void;
+  onAiModelTierToggle: (val: string) => void;
+  onAiContextWindowToggle: (val: string) => void;
+  onAiMultimodalOptionToggle: (val: string) => void;
   onNetworkingServiceToggle: (svc: string) => void;
   onNetworkingConnectionTypeToggle: (ct: string) => void;
   onNetworkingRoutingTypeToggle: (rt: string) => void;
@@ -210,6 +219,10 @@ interface FilterSidebarProps {
   onSetAnalyticsEngines: (items: string[]) => void;
   onSetAnalyticsDeploymentTypes: (items: string[]) => void;
   onSetAnalyticsTiers: (items: string[]) => void;
+  onSetAiServiceTypes: (items: string[]) => void;
+  onSetAiModelTiers: (items: string[]) => void;
+  onSetAiContextWindows: (items: string[]) => void;
+  onSetAiMultimodalOptions: (items: string[]) => void;
   onSetNetworkingServices: (items: string[]) => void;
   onSetNetworkingConnectionTypes: (items: string[]) => void;
   onSetNetworkingRoutingTypes: (items: string[]) => void;
@@ -252,6 +265,10 @@ export default function FilterSidebar({
   selectedAnalyticsEngines,
   selectedAnalyticsDeploymentTypes,
   selectedAnalyticsTiers,
+  selectedAiServiceTypes,
+  selectedAiModelTiers,
+  selectedAiContextWindows,
+  selectedAiMultimodalOptions,
   selectedNetworkingServices,
   selectedNetworkingConnectionTypes,
   selectedNetworkingRoutingTypes,
@@ -291,6 +308,10 @@ export default function FilterSidebar({
   onAnalyticsEngineToggle,
   onAnalyticsDeploymentTypeToggle,
   onAnalyticsTierToggle,
+  onAiServiceTypeToggle,
+  onAiModelTierToggle,
+  onAiContextWindowToggle,
+  onAiMultimodalOptionToggle,
   onNetworkingServiceToggle,
   onNetworkingConnectionTypeToggle,
   onNetworkingRoutingTypeToggle,
@@ -322,6 +343,10 @@ export default function FilterSidebar({
   onSetAnalyticsEngines,
   onSetAnalyticsDeploymentTypes,
   onSetAnalyticsTiers,
+  onSetAiServiceTypes,
+  onSetAiModelTiers,
+  onSetAiContextWindows,
+  onSetAiMultimodalOptions,
   onSetNetworkingServices,
   onSetNetworkingConnectionTypes,
   onSetNetworkingRoutingTypes,
@@ -517,6 +542,56 @@ export default function FilterSidebar({
               onSetAll={onSetHaModes}
               isExpanded={expanded.haMode ?? true}
               onToggleExpand={() => onToggleSection('haMode')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
+        )}
+
+        {/* AI filters */}
+        {activeProductType === 'ai' && (
+          <>
+            <FilterSection
+              title="Service Type"
+              tooltip="Type of AI Service."
+              options={AI_SERVICE_TYPES}
+              selected={selectedAiServiceTypes}
+              onToggle={onAiServiceTypeToggle}
+              onSetAll={onSetAiServiceTypes}
+              isExpanded={expanded.aiServiceTypes ?? true}
+              onToggleExpand={() => onToggleSection('aiServiceTypes')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Model Tier"
+              tooltip="Performance and size tier of the model."
+              options={AI_MODEL_TIERS}
+              selected={selectedAiModelTiers}
+              onToggle={onAiModelTierToggle}
+              onSetAll={onSetAiModelTiers}
+              isExpanded={expanded.aiModelTiers ?? true}
+              onToggleExpand={() => onToggleSection('aiModelTiers')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Context Window"
+              tooltip="Maximum token context window supported."
+              options={AI_CONTEXT_WINDOWS}
+              selected={selectedAiContextWindows}
+              onToggle={onAiContextWindowToggle}
+              onSetAll={onSetAiContextWindows}
+              isExpanded={expanded.aiContextWindows ?? true}
+              onToggleExpand={() => onToggleSection('aiContextWindows')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Multimodal"
+              tooltip="Does the model support multimodal inputs (e.g. Image/Audio)?"
+              options={AI_MULTIMODAL_OPTIONS}
+              selected={selectedAiMultimodalOptions}
+              onToggle={onAiMultimodalOptionToggle}
+              onSetAll={onSetAiMultimodalOptions}
+              isExpanded={expanded.aiMultimodalOptions ?? true}
+              onToggleExpand={() => onToggleSection('aiMultimodalOptions')}
             />
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
           </>
