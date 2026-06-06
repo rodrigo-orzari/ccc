@@ -528,5 +528,10 @@
     "mtime": 1780698568.8408372,
     "ast_hash": "ff6d5dab1dfd50cea584142bc288ce9e",
     "semantic_hash": ""
+  },
+  "test-next-api-analytics.ts": {
+    "mtime": 1780710935.5707452,
+    "ast_hash": "f9d673ebbbd2a48e4b1575a4e7057154",
+    "semantic_hash": ""
   }
 }

@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-05)
 
 ## Corpus Check
-- 103 files · ~81,189 words
+- 104 files · ~81,233 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 722 nodes · 1013 edges · 72 communities (49 shown, 23 thin omitted)
+- 724 nodes · 1015 edges · 72 communities (49 shown, 23 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5d255243`
+- Built from commit: `1ff8181c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -129,7 +129,7 @@ Cohesion: 0.12
 Nodes (15): 10. Data Staleness Warning System, 11. Browser Local Storage Persistence, 12. Component Lifecycle & Re-render Triggers, 13. Deployment CI/CD Pipeline, 1. System Architecture Overview, 2. Data Ingestion Pipeline Flow, 3. Database Schema Relationships, 4. Frontend State Flow Diagram (+7 more)
 
 ### Community 4 - "Package Dependencies"
-Cohesion: 0.24
+Cohesion: 0.20
 Nodes (7): GET(), GET(), buildPricingFilters(), parseFilterList(), VALID_PRODUCT_TYPES, sql, GET()
 
 ### Community 5 - "Cloud Instance Configs"
