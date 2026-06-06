@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const NETWORKING_SERVICES = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4'];
+const NETWORKING_SERVICES = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway'];
 const NETWORKING_CONNECTION_TYPES = ['Multipoint', 'Point-to-Point'];
 const NETWORKING_ROUTING_TYPES = ['Dynamic', 'Fixed'];
 const NETWORKING_HA_SUPPORT = ['Yes', 'No'];
