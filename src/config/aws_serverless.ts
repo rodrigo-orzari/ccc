@@ -23,7 +23,7 @@ const addServerlessAttributes = (entry: any) => ({
   attributes: {
     deployment_type: 'Serverless',
     tier: 'Serverless',
-    cold_start_overhead_ms: 'Fast < 100', // ARM is ~25% faster
+    cold_start_overhead_ms: 100,
     timeout_seconds: 900,
     memory_configuration: 'user-configurable',
     invocation_price: 0.0000002, // $0.20 per 1M invocations

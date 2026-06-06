@@ -179,7 +179,10 @@ export function buildPricingFilters(query: any) {
 
     // Database & Analytics product type filters
     if (resolvedProductType === 'database' || resolvedProductType === 'data-analytics') {
-      const engineFiltersRaw = parseFilterList((engines || analyticsEngines) as string).map((s: string) => s.toLowerCase());
+      // Use analyticsEngines exclusively for data-analytics (engines param carries DB engines like
+      // PostgreSQL/MySQL which would produce zero results against analytics records like Databricks/Snowflake).
+      const rawEngineParam = resolvedProductType === 'data-analytics' ? analyticsEngines : engines;
+      const engineFiltersRaw = parseFilterList(rawEngineParam as string).map((s: string) => s.toLowerCase());
       if (engineFiltersRaw.length > 0) {
         let engineFilters = new Set(engineFiltersRaw);
         if (engineFilters.has('native')) {
