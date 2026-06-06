@@ -15,6 +15,9 @@ export default function Footer() {
           <Link href="/docs" className="hover:text-black dark:hover:text-white transition-colors">
             Docs
           </Link>
+          <Link href="/status" className="hover:text-black dark:hover:text-white transition-colors">
+            Status
+          </Link>
           <Link href="/privacy" className="hover:text-black dark:hover:text-white transition-colors">
             Privacy Policy
           </Link>
