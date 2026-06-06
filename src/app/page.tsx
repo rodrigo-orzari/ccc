@@ -188,15 +188,72 @@ export default function Dashboard() {
   const debouncedParamsString = useDeferredValue(searchParams.toString());
 
   const canFetch = useMemo(() => {
-    if (selectedProviders.length === 0 || selectedGeographies.length === 0) return false;
-    if (activeProductType === 'vm' && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) return false;
-    if (activeProductType === 'database' && (selectedDbFamilies.length === 0 || selectedEngines.length === 0 || selectedDeploymentTypes.length === 0 || selectedHaModes.length === 0)) return false;
+    // Providers are always required
+    if (selectedProviders.length === 0) return false;
+    // Geography is required for all tabs
+    if (selectedGeographies.length === 0) return false;
+
+    if (activeProductType === 'vm' && (
+      selectedOS.length === 0 ||
+      selectedCpu.length === 0 ||
+      selectedCategory.length === 0
+    )) return false;
+
+    if (activeProductType === 'database' && (
+      selectedDbFamilies.length === 0 ||
+      selectedEngines.length === 0 ||
+      selectedDeploymentTypes.length === 0 ||
+      selectedHaModes.length === 0
+    )) return false;
+
+    if (activeProductType === 'data-analytics' && (
+      selectedAnalyticsEngines.length === 0 ||
+      selectedAnalyticsDeploymentTypes.length === 0 ||
+      selectedAnalyticsTiers.length === 0
+    )) return false;
+
+    if (activeProductType === 'serverless' && (
+      selectedServerlessLanguages.length === 0 ||
+      selectedServerlessColdStart.length === 0 ||
+      selectedServerlessTimeout.length === 0 ||
+      selectedServerlessMemoryConfig.length === 0 ||
+      selectedServerlessFreeTier.length === 0 ||
+      selectedServerlessGranularity.length === 0 ||
+      selectedServerlessExecutionModel.length === 0 ||
+      selectedServerlessProvisionedConcurrency.length === 0 ||
+      selectedServerlessEphemeralStorage.length === 0
+    )) return false;
+
+    if (activeProductType === 'containers' && (
+      selectedContainersOrchestrators.length === 0 ||
+      selectedContainersComputeTypes.length === 0 ||
+      selectedContainersArchitectures.length === 0 ||
+      selectedContainersBillingGranularity.length === 0
+    )) return false;
+
+    if (activeProductType === 'networking' && (
+      selectedNetworkingServices.length === 0 ||
+      selectedNetworkingConnectionTypes.length === 0 ||
+      selectedNetworkingRoutingTypes.length === 0 ||
+      selectedNetworkingHaSupport.length === 0 ||
+      selectedNetworkingVpcSupport.length === 0 ||
+      selectedNetworkingDirections.length === 0
+    )) return false;
+
     return true;
   }, [
     activeProductType,
     selectedProviders, selectedGeographies,
     selectedOS, selectedCpu, selectedCategory,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
+    selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
+    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout,
+    selectedServerlessMemoryConfig, selectedServerlessFreeTier, selectedServerlessGranularity,
+    selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
+    selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures,
+    selectedContainersBillingGranularity,
+    selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes,
+    selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
   ]);
 
   // Queries
@@ -222,11 +279,11 @@ export default function Dashboard() {
   });
 
   const providerCounts = useMemo(() => {
-    if (!rawProviderCounts || !Array.isArray(rawProviderCounts)) return {};
+    if (!canFetch || !rawProviderCounts || !Array.isArray(rawProviderCounts)) return {};
     const map: Record<string, number> = {};
     rawProviderCounts.forEach(r => { map[r.slug] = parseInt(r.count) || 0; });
     return map;
-  }, [rawProviderCounts]);
+  }, [canFetch, rawProviderCounts]);
 
   const pricingParamsString = useMemo(() => {
     const p = new URLSearchParams(debouncedParamsString);
