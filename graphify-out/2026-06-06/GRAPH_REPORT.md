@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 116 files · ~91,001 words
+- 116 files · ~91,000 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 220 nodes · 286 edges · 21 communities (15 shown, 6 thin omitted)
+- 223 nodes · 288 edges · 22 communities (15 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `28298add`
+- Built from commit: `ad7e6278`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -31,6 +31,7 @@
 - [[_COMMUNITY_Community 17|Community 17]]
 - [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 20|Community 20]]
+- [[_COMMUNITY_Community 21|Community 21]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Serverless Language Filter Implementation Summary` - 13 edges
@@ -50,7 +51,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (21 total, 6 thin omitted)
+## Communities (22 total, 7 thin omitted)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.11
@@ -93,17 +94,17 @@ Cohesion: 0.40
 Nodes (3): DBStatusProvider, ProviderCardProps, ProviderCardsProps
 
 ## Knowledge Gaps
-- **87 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+82 more)
+- **88 isolated node(s):** `TableToolbarProps`, `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS` (+83 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
-  _87 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+- **What connects `TableToolbarProps`, `PipelineStatus`, `ProviderStatus` to the rest of the system?**
+  _88 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 7` be split into smaller, more focused modules?**
   _Cohesion score 0.11207729468599034 - nodes in this community are weakly interconnected._
 - **Should `Community 10` be split into smaller, more focused modules?**
