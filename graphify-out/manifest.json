@@ -240,8 +240,8 @@
     "semantic_hash": ""
   },
   "src/services/data_analytics_pipeline.ts": {
-    "mtime": 1780619052.4602692,
-    "ast_hash": "560eb7bea88d60ce19e3e206d9ef9738",
+    "mtime": 1780722553.6416044,
+    "ast_hash": "4820bcc605674b2515c0f5a71ecba881",
     "semantic_hash": ""
   },
   "src/config/native_analytics_instances.ts": {
@@ -527,6 +527,16 @@
   "test-results/.last-run.json": {
     "mtime": 1780698568.8408372,
     "ast_hash": "ff6d5dab1dfd50cea584142bc288ce9e",
+    "semantic_hash": ""
+  },
+  "src/config/alibaba_data_analytics.ts": {
+    "mtime": 1780722527.981502,
+    "ast_hash": "51af06e95ac64111f129b287630d3262",
+    "semantic_hash": ""
+  },
+  "src/config/oracle_data_analytics.ts": {
+    "mtime": 1780722534.723441,
+    "ast_hash": "d4c616b6b1f7c7b4ccb7ee3275942abe",
     "semantic_hash": ""
   }
 }
