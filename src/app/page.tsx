@@ -192,7 +192,12 @@ export default function Dashboard() {
     if (activeProductType === 'vm' && (selectedOS.length === 0 || selectedCpu.length === 0 || selectedCategory.length === 0)) return false;
     if (activeProductType === 'database' && (selectedDbFamilies.length === 0 || selectedEngines.length === 0 || selectedDeploymentTypes.length === 0 || selectedHaModes.length === 0)) return false;
     return true;
-  }, [debouncedParamsString, selectedProviders, selectedGeographies, activeProductType]);
+  }, [
+    activeProductType,
+    selectedProviders, selectedGeographies,
+    selectedOS, selectedCpu, selectedCategory,
+    selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
+  ]);
 
   // Queries
   const { data: dbStatus } = useQuery({
@@ -243,7 +248,7 @@ export default function Dashboard() {
   });
 
   const data = useMemo(() => {
-    if (!rawData || rawData.length === 0) return [];
+    if (!canFetch || !rawData || rawData.length === 0) return [];
     return [...rawData].sort((a, b) => {
       const key = sortConfig.key as string;
       const direction = sortConfig.direction;
@@ -269,7 +274,7 @@ export default function Dashboard() {
       if (valA > valB) return direction === 'asc' ? 1 : -1;
       return 0;
     });
-  }, [rawData, sortConfig]);
+  }, [canFetch, rawData, sortConfig]);
 
   const totalFilteredCount = useMemo(() => {
     return selectedProviders.reduce((sum, providerId) => sum + (providerCounts[providerId] || 0), 0);
