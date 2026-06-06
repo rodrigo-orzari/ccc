@@ -140,6 +140,23 @@ export function buildPricingFilters(query: any) {
 
     const geographies = parseFilterList(geography as string).map((s: string) => s.toLowerCase());
     if (geographies.length > 0) {
+      // Always include 'global' as many services (like data transfer) are global
+      geographies.push('global');
+      
+      // Fuzzy mappings for un-normalized regions often found in networking/serverless data
+      if (geographies.includes('n. america')) {
+        geographies.push('us east', 'us west', 'us central', 'us south', 'us-east', 'us-west', 'canada', 'north america', 'us');
+      }
+      if (geographies.includes('w. europe') || geographies.includes('n. europe')) {
+        geographies.push('europe', 'eu-west', 'eu-central', 'eu-north', 'uk', 'ireland', 'frankfurt', 'london', 'paris', 'eu');
+      }
+      if (geographies.includes('asia pacific')) {
+        geographies.push('asia', 'apac', 'tokyo', 'singapore', 'sydney', 'mumbai', 'seoul', 'osaka', 'hong kong');
+      }
+      if (geographies.includes('s. america')) {
+        geographies.push('south america', 'sa-east', 'sao paulo');
+      }
+
       conditions.push(`LOWER(pr.geography) = ANY($${paramCount++})`);
       values.push(geographies);
     }
