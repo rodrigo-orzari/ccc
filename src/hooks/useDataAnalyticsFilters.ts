@@ -2,7 +2,19 @@ import { useState } from 'react';
 
 const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'Native'];
 const ANALYTICS_DEPLOYMENT_TYPES = ['Serverless', 'Provisioned'];
-const ANALYTICS_TIERS = ['Standard', 'Premium', 'Enterprise'];
+// Full tier list must stay in sync with ANALYTICS_TIERS in src/config/index.ts
+const ANALYTICS_TIERS = [
+  'Standard',
+  'Standard Edition',
+  'Premium',
+  'Enterprise',
+  'Enterprise Edition',
+  'Enterprise Plus',
+  'Business Critical',
+  'DC2 Node',
+  'RA3 Node',
+  'On-Demand',
+];
 
 /**
  * Data Analytics-specific filter state
