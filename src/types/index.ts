@@ -44,5 +44,10 @@ export interface PricingRecord {
     transfer_tier?: string;
     destination?: string;
     included_transfer?: string;
+    modelTier?: string;
+    contextWindowK?: number | string;
+    multimodal?: string;
+    outputPricePer1M?: number | string;
+    trainingCutoff?: string;
   };
 }
