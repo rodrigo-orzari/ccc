@@ -10,6 +10,8 @@ interface TableToolbarProps {
   onSearchChange: (value: string) => void;
   onExport: () => void;
   isExporting?: boolean;
+  viewMode?: 'table' | 'charts';
+  onViewModeChange?: (mode: 'table' | 'charts') => void;
 }
 
 export default function TableToolbar({
@@ -19,6 +21,8 @@ export default function TableToolbar({
   onSearchChange,
   onExport,
   isExporting = false,
+  viewMode = 'table',
+  onViewModeChange,
 }: TableToolbarProps) {
   return (
     <div className="px-4 py-3 flex items-center justify-between bg-white dark:bg-[#000000] border-b border-[#e5e5e5] dark:border-[#262626]">
@@ -42,7 +46,25 @@ export default function TableToolbar({
         </div>
       </div>
       <div className="flex items-center gap-4">
-        <span className="text-[10px] text-[#737373] dark:text-[#525252] font-medium">Click a column header to sort</span>
+        {onViewModeChange && (
+          <div className="flex bg-[#f5f5f5] dark:bg-[#171717] rounded-lg p-0.5 border border-[#e5e5e5] dark:border-[#262626]">
+            <button
+              onClick={() => onViewModeChange('table')}
+              className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-white dark:bg-[#262626] text-black dark:text-white shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
+            >
+              🗄️ Table
+            </button>
+            <button
+              onClick={() => onViewModeChange('charts')}
+              className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-white dark:bg-[#262626] text-black dark:text-white shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
+            >
+              📊 Charts
+            </button>
+          </div>
+        )}
+        {viewMode === 'table' && (
+          <span className="text-[10px] text-[#737373] dark:text-[#525252] font-medium hidden sm:inline-block">Click a column header to sort</span>
+        )}
 
         <button
           onClick={onExport}
