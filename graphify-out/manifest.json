@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1780782602.8898883,
-    "ast_hash": "6ac3a1685b649efcc571e9fd22dec4d6",
+    "mtime": 1780784396.5058782,
+    "ast_hash": "54a8bacc5f558502aa2c1806d4f2b8dd",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1780783969.5286288,
-    "ast_hash": "bf8ac5e1160f1b620b1a4b8e72f0e7b5",
+    "mtime": 1780784372.2431989,
+    "ast_hash": "46b2cf7908f391d1a6d21c669a7e130a",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1780784057.1396198,
-    "ast_hash": "16e496a5a3ac30adca91660c70f3305e",
+    "mtime": 1780784499.5187564,
+    "ast_hash": "72dea798a9a209da340331af1e3304ec",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -585,8 +585,8 @@
     "semantic_hash": ""
   },
   "src/services/ai_pipeline.ts": {
-    "mtime": 1780782465.1318052,
-    "ast_hash": "3127e71c34d014f4ceedc7b6b2251084",
+    "mtime": 1780784279.0622392,
+    "ast_hash": "123c9507a99b0c1277f9ccb6bdb1ca50",
     "semantic_hash": ""
   },
   "src/services/populate_ai.ts": {
