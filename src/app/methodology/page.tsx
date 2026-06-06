@@ -1,11 +1,10 @@
 'use client';
 import React from 'react';
 import MarkdownPage from '@/components/MarkdownPage';
+import Footer from '@/components/Footer';
 
 const MethodologyPage: React.FC = () => {
   const content = `
-# Pricing Methodology
-
 Our goal is to provide the most accurate and up-to-date cloud pricing data available.
 
 ## Data Sourcing
@@ -17,7 +16,7 @@ We fetch pricing data directly from official cloud provider APIs:
 - **DigitalOcean**: API v2
 
 ## Update Frequency
-The database is refreshed every 24 hours to capture any changes in regional pricing or new instance launches.
+The database is refreshed every week to capture any changes in regional pricing or new instance launches.
 
 ## Pricing Calculations
 - **PAYG**: Standard On-Demand hourly rates.
@@ -30,7 +29,41 @@ The database is refreshed every 24 hours to capture any changes in regional pric
 *Last updated: June 2026*
 `;
 
-  return <MarkdownPage title="Methodology" content={content} />;
+  return (
+    <>
+      <style>{`
+        :root {
+          --mpage-bg: #f7f8ff;
+        }
+        @media (prefers-color-scheme: dark) {
+          :root { --mpage-bg: #06060f; }
+        }
+        .mpage-wrapper {
+          min-height: 100vh;
+          background-color: var(--mpage-bg);
+          display: flex;
+          flex-direction: column;
+        }
+        .mpage-content {
+          flex: 1;
+          padding-bottom: 5rem;
+        }
+        .mpage-wrapper > footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 100;
+        }
+      `}</style>
+      <div className="mpage-wrapper">
+        <div className="mpage-content">
+          <MarkdownPage title="Pricing Methodology" content={content} />
+        </div>
+        <Footer />
+      </div>
+    </>
+  );
 };
 
 export default MethodologyPage;

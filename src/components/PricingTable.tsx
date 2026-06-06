@@ -192,7 +192,7 @@ export default function PricingTable({
     <th
       data-col={colKey}
       onClick={sortKey ? () => onHeaderClick(sortKey) : undefined}
-      className={`px-6 py-4 text-center font-bold whitespace-nowrap ccc-th ${sortKey ? 'cursor-pointer hover:text-black dark:hover:text-white transition-colors' : ''} ${className}`}
+      className={`px-6 py-4 text-center align-middle font-bold whitespace-nowrap ccc-th ${sortKey ? 'cursor-pointer hover:text-black dark:hover:text-white transition-colors' : ''} ${className}`}
       style={{ width: colWidths[colKey] ?? DEFAULT_WIDTHS[colKey] }}
     >
       {label}
@@ -389,44 +389,44 @@ function TableRow({
   return (
     <tr className={`transition-colors group ${index % 2 === 0 ? 'bg-white dark:bg-[#000000]' : 'bg-[#f7f7f7] dark:bg-[#0a0a0a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
       {/* Provider */}
-      <td data-col="provider" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+      <td data-col="provider" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
         <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: providerColor, borderColor: providerColor + '50', backgroundColor: providerColor + '18' }}>
           {record.provider}
         </span>
       </td>
 
       {/* SKU */}
-      <td data-col="instance_type" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+      <td data-col="instance_type" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
         <span className="text-xs font-bold text-black dark:text-white">{record.instance_type}</span>
       </td>
 
       {/* Product-type-specific cells */}
       {activeProductType === 'database' ? (<>
-        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
-        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.deployment_type || 'Provisioned'}</span></td>
-        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.ha_mode || '—'}</span></td>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.deployment_type || 'Provisioned'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.ha_mode || '—'}</span></td>
       </>) : activeProductType === 'data-analytics' ? (<>
-        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span></td>
-        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.deployment_type || 'Provisioned'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
-        <td data-col="vcpus"               className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.deployment_type || 'Provisioned'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
+        <td data-col="vcpus"               className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
       </>) : activeProductType === 'ai' ? (<>
-        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
-        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.modelTier || '—'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.contextWindowK ? `${record.attributes.contextWindowK}K` : '—'}</span></td>
-        <td data-col="geography"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span></td>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.modelTier || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.contextWindowK ? `${record.attributes.contextWindowK}K` : '—'}</span></td>
+        <td data-col="geography"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span></td>
       </>) : activeProductType === 'serverless' ? (<>
-        <td data-col="languages"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join(', ') : record.attributes.supportedLanguages) : '—'}</span></td>
-        <td data-col="engine_category"     className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds ? (Number(record.attributes.timeout_seconds) >= 60 ? `${Number(record.attributes.timeout_seconds) / 60} min` : `${record.attributes.timeout_seconds} sec`) : '—'}</span></td>
-        <td data-col="deployment_arch"     className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration ? (String(record.attributes.memory_configuration).toLowerCase().includes('configurable') ? 'Configurable' : String(record.attributes.memory_configuration).toLowerCase().includes('tier') ? 'Tiers' : String(record.attributes.memory_configuration).toLowerCase().includes('auto') ? 'Automatic' : record.attributes.memory_configuration) : '—'}</span></td>
-        <td data-col="ha_mode_os"          className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">{record.attributes?.free_invocations_per_month && Number(record.attributes.free_invocations_per_month) > 0 ? 'Yes' : 'No'}</span></td>
-        <td data-col="granularity"         className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity_ms ? `${record.attributes.billing_granularity_ms}ms` : '—'}</span></td>
-        <td data-col="exec_model"          className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model || '—'}</span></td>
-        <td data-col="prov_concurrency"    className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">{record.attributes?.provisioned_concurrency_support || '—'}</span></td>
-        <td data-col="max_storage"         className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb ? `${record.attributes.max_ephemeral_storage_gb} GB` : '—'}</span></td>
-        <td data-col="inv_price"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+        <td data-col="languages"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join(', ') : record.attributes.supportedLanguages) : '—'}</span></td>
+        <td data-col="engine_category"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds ? (Number(record.attributes.timeout_seconds) >= 60 ? `${Number(record.attributes.timeout_seconds) / 60} min` : `${record.attributes.timeout_seconds} sec`) : '—'}</span></td>
+        <td data-col="deployment_arch"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration ? (String(record.attributes.memory_configuration).toLowerCase().includes('configurable') ? 'Configurable' : String(record.attributes.memory_configuration).toLowerCase().includes('tier') ? 'Tiers' : String(record.attributes.memory_configuration).toLowerCase().includes('auto') ? 'Automatic' : record.attributes.memory_configuration) : '—'}</span></td>
+        <td data-col="ha_mode_os"          className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">{record.attributes?.free_invocations_per_month && Number(record.attributes.free_invocations_per_month) > 0 ? 'Yes' : 'No'}</span></td>
+        <td data-col="granularity"         className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity_ms ? `${record.attributes.billing_granularity_ms}ms` : '—'}</span></td>
+        <td data-col="exec_model"          className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model || '—'}</span></td>
+        <td data-col="prov_concurrency"    className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">{record.attributes?.provisioned_concurrency_support || '—'}</span></td>
+        <td data-col="max_storage"         className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb ? `${record.attributes.max_ephemeral_storage_gb} GB` : '—'}</span></td>
+        <td data-col="inv_price"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
           <div className="flex flex-col items-center gap-1">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}</span>
             {record.attributes?.invocation_price_per_1m && maxInvPrice !== undefined && maxInvPrice > 0 && (
@@ -437,41 +437,41 @@ function TableRow({
           </div>
         </td>
       </>) : activeProductType === 'containers' ? (<>
-        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.orchestrator || '—'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span></td>
-        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.architecture || '—'}</span></td>
-        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity || '—'}</span></td>
-        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.orchestrator || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.architecture || '—'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity || '—'}</span></td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
       </>) : activeProductType === 'networking' ? (<>
-        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
-        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_tier || '—'}</span></td>
-        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.destination || '—'}</span></td>
-        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.included_transfer || '—'}</span></td>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_tier || '—'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.destination || '—'}</span></td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.included_transfer || '—'}</span></td>
       </>) : (<>
         {/* vm (default) */}
-        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor || '—'}</span></td>
-        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}</span></td>
-        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
-        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
       </>)}
 
       {/* Geography */}
       {activeProductType !== 'ai' && (
-        <td data-col="geography" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+        <td data-col="geography" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span>
         </td>
       )}
 
       {/* vCPU + Memory (not shown for networking / data-analytics / ai) */}
       {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && (<>
-        <td data-col="vcpus"     className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
-        <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span></td>
+        <td data-col="vcpus"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
+        <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span></td>
       </>)}
 
       {/* Price */}
-      <td data-col="price_per_unit" className="px-6 py-4 text-center whitespace-nowrap overflow-hidden">
+      <td data-col="price_per_unit" className="px-6 py-4 text-center align-middle whitespace-nowrap overflow-hidden">
         <div className="flex flex-col items-center gap-1.5">
           <span className="text-xs font-bold text-black dark:text-white">
             {activeProductType === 'ai' ? `$${parseFloat(record.price_per_unit).toFixed(4)}` : (showAggregation ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}` : `$${parseFloat(record.price_per_unit).toFixed(4)}`)}
@@ -486,7 +486,7 @@ function TableRow({
 
       {/* Source / Output Price */}
       {activeProductType === 'serverless' && (
-        <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+        <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
           <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${record.data_source === 'static_config' ? 'bg-[#fffbeb] text-[#d97706] border-[#fde68a] dark:bg-[#422006] dark:text-[#fcd34d] dark:border-[#78350f]' : 'bg-[#f0fdf4] text-[#166534] border-[#bbf7d0] dark:bg-[#052e16] dark:text-[#4ade80] dark:border-[#14532d]'}`}>
             {record.data_source === 'static_config' ? 'Static' : 'API'}
           </span>
@@ -494,13 +494,13 @@ function TableRow({
       )}
 
       {activeProductType === 'ai' && (
-        <td data-col="inv_price" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+        <td data-col="inv_price" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.outputPricePer1M ? `$${Number(record.attributes.outputPricePer1M).toFixed(4)}` : '—'}</span>
         </td>
       )}
 
       {activeProductType !== 'serverless' && activeProductType !== 'ai' && (
-        <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+        <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
           <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${record.data_source === 'static_config' ? 'bg-[#fffbeb] text-[#d97706] border-[#fde68a] dark:bg-[#422006] dark:text-[#fcd34d] dark:border-[#78350f]' : 'bg-[#f0fdf4] text-[#166534] border-[#bbf7d0] dark:bg-[#052e16] dark:text-[#4ade80] dark:border-[#14532d]'}`}>
             {record.data_source === 'static_config' ? 'Static' : 'API'}
           </span>
