@@ -548,7 +548,6 @@
     "mtime": 1780778358.2591867,
     "ast_hash": "d723950f3ffeba9e20eb54bd3f55438c",
     "semantic_hash": ""
-<<<<<<< HEAD
   },
   "scratch_test.js": {
     "mtime": 1780778993.0700026,
@@ -569,7 +568,5 @@
     "mtime": 1780779008.8966718,
     "ast_hash": "1178d87ddbdc54304f6c869f6ddf07e5",
     "semantic_hash": ""
-=======
->>>>>>> 81a663aa3541f722eca8834183780235194f7ac7
   }
 }
