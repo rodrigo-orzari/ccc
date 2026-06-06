@@ -475,9 +475,9 @@ export function buildPricingFilters(query: any) {
       }
 
       // Containers GPU filtering
-      if (containersGpuIncluded === 'true') {
-        conditions.push(`pr.gpu_count > 0`);
-      } else if (containersGpuIncluded === 'false') {
+      // true  → no condition (show all containers, including GPU-capable ones)
+      // false → exclude GPU containers (only non-GPU instances)
+      if (containersGpuIncluded === 'false') {
         conditions.push(`pr.gpu_count = 0`);
       }
     }

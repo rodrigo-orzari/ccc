@@ -701,6 +701,14 @@ export default function FilterSidebar({
                     GPU Support
                   </button>
                 </h2>
+                <button
+                  onClick={() => onContainersGpuToggle(!containersGpuIncluded)}
+                  className={`text-[10px] font-bold uppercase transition-colors ${
+                    containersGpuIncluded ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'
+                  }`}
+                >
+                  {containersGpuIncluded ? 'Clear All' : 'Select All'}
+                </button>
               </div>
               {(expanded.containersGpu ?? true) && (
                 <div className="flex flex-wrap gap-2">
