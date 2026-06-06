@@ -6,6 +6,78 @@
     {
       "label": "page.tsx",
       "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L1",
+      "id": "about_page",
+      "community": 13,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "AboutPage()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "id": "about_page_aboutpage",
+      "community": 13,
+      "norm_label": "aboutpage()"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L1",
+      "id": "status_route",
+      "community": 4,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "PIPELINE_DISPLAY",
+      "file_type": "code",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L4",
+      "id": "status_route_pipeline_display",
+      "community": 4,
+      "norm_label": "pipeline_display"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L14",
+      "id": "status_route_get",
+      "community": 4,
+      "norm_label": "get()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L1",
+      "id": "docs_page",
+      "community": 19,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "id": "docs_page_backtotop",
+      "community": 19,
+      "norm_label": "backtotop()"
+    },
+    {
+      "label": "DocsPage()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L19",
+      "id": "docs_page_docspage",
+      "community": 19,
+      "norm_label": "docspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L1",
       "id": "status_page",
@@ -52,7 +124,7 @@
       "label": "PROVIDER_URLS",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
-      "source_location": "L43",
+      "source_location": "L45",
       "id": "status_page_provider_urls",
       "community": 8,
       "norm_label": "provider_urls"
@@ -61,7 +133,7 @@
       "label": "LinkedInIcon()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
-      "source_location": "L55",
+      "source_location": "L59",
       "id": "status_page_linkedinicon",
       "community": 8,
       "norm_label": "linkedinicon()"
@@ -70,7 +142,7 @@
       "label": "XIcon()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
-      "source_location": "L63",
+      "source_location": "L67",
       "id": "status_page_xicon",
       "community": 8,
       "norm_label": "xicon()"
@@ -79,7 +151,7 @@
       "label": "PIPELINE_ORDER",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
-      "source_location": "L71",
+      "source_location": "L75",
       "id": "status_page_pipeline_order",
       "community": 8,
       "norm_label": "pipeline_order"
@@ -88,7 +160,7 @@
       "label": "freshnessStatus()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
-      "source_location": "L74",
+      "source_location": "L78",
       "id": "status_page_freshnessstatus",
       "community": 8,
       "norm_label": "freshnessstatus()"
@@ -97,7 +169,7 @@
       "label": "StatusDot()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
-      "source_location": "L82",
+      "source_location": "L86",
       "id": "status_page_statusdot",
       "community": 8,
       "norm_label": "statusdot()"
@@ -106,7 +178,7 @@
       "label": "SourceBadge()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
-      "source_location": "L104",
+      "source_location": "L108",
       "id": "status_page_sourcebadge",
       "community": 8,
       "norm_label": "sourcebadge()"
@@ -115,10 +187,100 @@
       "label": "StatusPage()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
-      "source_location": "L143",
+      "source_location": "L147",
       "id": "status_page_statuspage",
       "community": 8,
       "norm_label": "statuspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L1",
+      "id": "terms_page",
+      "community": 13,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "TermsOfUsePage()",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "id": "terms_page_termsofusepage",
+      "community": 13,
+      "norm_label": "termsofusepage()"
+    },
+    {
+      "label": "ChartsView.tsx",
+      "file_type": "code",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L1",
+      "id": "components_chartsview",
+      "community": 18,
+      "norm_label": "chartsview.tsx"
+    },
+    {
+      "label": "ChartsViewProps",
+      "file_type": "code",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L8",
+      "id": "components_chartsview_chartsviewprops",
+      "community": 18,
+      "norm_label": "chartsviewprops"
+    },
+    {
+      "label": "ChartsView()",
+      "file_type": "code",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L13",
+      "id": "components_chartsview_chartsview",
+      "community": 18,
+      "norm_label": "chartsview()"
+    },
+    {
+      "label": "ProviderCards.tsx",
+      "file_type": "code",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L1",
+      "id": "components_providercards",
+      "community": 20,
+      "norm_label": "providercards.tsx"
+    },
+    {
+      "label": "ProviderCardProps",
+      "file_type": "code",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L5",
+      "id": "components_providercards_providercardprops",
+      "community": 20,
+      "norm_label": "providercardprops"
+    },
+    {
+      "label": "DBStatusProvider",
+      "file_type": "code",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L15",
+      "id": "components_providercards_dbstatusprovider",
+      "community": 20,
+      "norm_label": "dbstatusprovider"
+    },
+    {
+      "label": "ProviderCardsProps",
+      "file_type": "code",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L20",
+      "id": "components_providercards_providercardsprops",
+      "community": 20,
+      "norm_label": "providercardsprops"
+    },
+    {
+      "label": "ProviderCards()",
+      "file_type": "code",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L29",
+      "id": "components_providercards_providercards",
+      "community": 20,
+      "norm_label": "providercards()"
     },
     {
       "label": "index.ts",
@@ -164,33 +326,6 @@
       "community": 7,
       "norm_label": "dashboard()",
       "id": "app_page_dashboard"
-    },
-    {
-      "label": "ChartsView.tsx",
-      "file_type": "code",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L1",
-      "community": 7,
-      "norm_label": "chartsview.tsx",
-      "id": "components_chartsview"
-    },
-    {
-      "label": "ChartsViewProps",
-      "file_type": "code",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L8",
-      "community": 7,
-      "norm_label": "chartsviewprops",
-      "id": "components_chartsview_chartsviewprops"
-    },
-    {
-      "label": "ChartsView()",
-      "file_type": "code",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L13",
-      "community": 7,
-      "norm_label": "chartsview()",
-      "id": "components_chartsview_chartsview"
     },
     {
       "label": "FilterSidebar.tsx",
@@ -944,7 +1079,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L67",
-      "community": 7,
+      "community": 18,
       "norm_label": "providers",
       "id": "config_index_providers"
     },
@@ -1671,51 +1806,6 @@
     {
       "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L1",
-      "community": 13,
-      "norm_label": "page.tsx",
-      "id": "about_page"
-    },
-    {
-      "label": "AboutPage()",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L6",
-      "community": 13,
-      "norm_label": "aboutpage()",
-      "id": "about_page_aboutpage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L1",
-      "community": 19,
-      "norm_label": "page.tsx",
-      "id": "docs_page"
-    },
-    {
-      "label": "BackToTop()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "community": 19,
-      "norm_label": "backtotop()",
-      "id": "docs_page_backtotop"
-    },
-    {
-      "label": "DocsPage()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L37",
-      "community": 19,
-      "norm_label": "docspage()",
-      "id": "docs_page_docspage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
       "source_file": "src/app/methodology/page.tsx",
       "source_location": "L1",
       "community": 13,
@@ -1730,24 +1820,6 @@
       "community": 13,
       "norm_label": "methodologypage()",
       "id": "methodology_page_methodologypage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L1",
-      "community": 13,
-      "norm_label": "page.tsx",
-      "id": "terms_page"
-    },
-    {
-      "label": "TermsOfUsePage()",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "community": 13,
-      "norm_label": "termsofusepage()",
-      "id": "terms_page_termsofusepage"
     },
     {
       "label": "MarkdownPage.tsx",
@@ -1838,33 +1910,6 @@
       "community": 5,
       "norm_label": "get()",
       "id": "health_route_get"
-    },
-    {
-      "label": "route.ts",
-      "file_type": "code",
-      "source_file": "src/app/api/status/route.ts",
-      "source_location": "L1",
-      "community": 4,
-      "norm_label": "route.ts",
-      "id": "status_route"
-    },
-    {
-      "label": "PIPELINE_DISPLAY",
-      "file_type": "code",
-      "source_file": "src/app/api/status/route.ts",
-      "source_location": "L4",
-      "community": 4,
-      "norm_label": "pipeline_display",
-      "id": "status_route_pipeline_display"
-    },
-    {
-      "label": "GET()",
-      "file_type": "code",
-      "source_file": "src/app/api/status/route.ts",
-      "source_location": "L13",
-      "community": 4,
-      "norm_label": "get()",
-      "id": "status_route_get"
     },
     {
       "label": "scratch_test.js",
@@ -1958,6 +2003,67 @@
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "about_page_aboutpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_route",
+      "target": "status_route_get"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_route",
+      "target": "status_route_pipeline_display"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_backtotop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_docspage"
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -2088,6 +2194,131 @@
       "confidence_score": 1.0,
       "source": "status_page_statuspage",
       "target": "status_page_freshnessstatus"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "terms_page_termsofusepage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_chartsview",
+      "target": "components_chartsview_chartsview"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_chartsview",
+      "target": "components_chartsview_chartsviewprops"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_chartsview",
+      "target": "config_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_chartsview",
+      "target": "config_index_providers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_chartsview",
+      "target": "types_index_pricingrecord",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_chartsview",
+      "target": "types_index_producttype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "components_providercards",
+      "target": "components_providercards_dbstatusprovider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "components_providercards",
+      "target": "components_providercards_providercardprops",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "components_providercards",
+      "target": "components_providercards_providercards",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProviderCards.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "components_providercards",
+      "target": "components_providercards_providercardsprops",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2514,48 +2745,6 @@
       "confidence_score": 1.0,
       "source": "app_page",
       "target": "config_index_serverless_timeout_options"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_chartsview",
-      "target": "components_chartsview_chartsview"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_chartsview",
-      "target": "components_chartsview_chartsviewprops"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_chartsview",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_chartsview",
-      "target": "config_index_providers"
     },
     {
       "relation": "contains",
@@ -4626,47 +4815,6 @@
       "target": "readme_key_architecture_files"
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "about_page_aboutpage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_backtotop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_docspage"
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -4686,27 +4834,6 @@
       "confidence_score": 1.0,
       "source": "methodology_page",
       "target": "methodology_page_methodologypage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "terms_page_termsofusepage"
     },
     {
       "relation": "contains",
@@ -4767,26 +4894,6 @@
       "confidence_score": 1.0,
       "source": "health_route",
       "target": "health_route_get"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/status/route.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_route",
-      "target": "status_route_get"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/status/route.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_route",
-      "target": "status_route_pipeline_display"
     },
     {
       "relation": "contains",
@@ -4883,5 +4990,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4db3bcd5ade1c0105f482bcdb54ed03ea0463126"
+  "built_at_commit": "13c901b723fd347a34356b195e58b9a17b6a4be3"
 }
