@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
 const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned'];
-const CONTAINERS_ARCHITECTURES = ['x86_64', 'ARM64'];
-const CONTAINERS_BILLING_GRANULARITY = ['Per Second', 'Per Hour'];
+const CONTAINERS_ARCHITECTURES = ['x86', 'ARM'];
+const CONTAINERS_BILLING_GRANULARITY = ['Second', 'Hour'];
 
 /**
  * Containers-specific filter state

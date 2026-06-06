@@ -8,7 +8,7 @@ export function useSharedFilters() {
   const [selectedGeographies, setSelectedGeographies] = useState<string[]>(['N. America', 'S. America', 'W. Europe', 'N. Europe', 'Mid East & Africa', 'Asia Pacific', 'Australia']);
   const [vCpuRange, setVCpuRange] = useState({ min: 0, max: 320 });
   const [memoryRange, setMemoryRange] = useState({ min: 0, max: 3200 });
-  const [priceRange, setPriceRange] = useState({ min: 0, max: 510 });
+  const [priceRange, setPriceRange] = useState({ min: 0, max: 100 });
   const [search, setSearch] = useState('');
   const [showAggregation, setShowAggregation] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }>({

@@ -16,7 +16,7 @@ export function useVMFilters() {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
-  const [gpuIncluded, setGpuIncluded] = useState(true);
+  const [selectedGpu, setSelectedGpu] = useState<string[]>(['GPU', 'No GPU']);
 
   return {
     selectedCategory,
@@ -25,7 +25,7 @@ export function useVMFilters() {
     setSelectedOS,
     selectedCpu,
     setSelectedCpu,
-    gpuIncluded,
-    setGpuIncluded,
+    selectedGpu,
+    setSelectedGpu,
   };
 }

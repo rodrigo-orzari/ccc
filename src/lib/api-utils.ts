@@ -165,9 +165,18 @@ export function buildPricingFilters(query: any) {
         values.push(cpuVendorFilters);
       }
 
-      // gpu=true  → GPU instances included; no extra filter needed (show all)
-      // gpu=false → exclude GPU instances
-      if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
+      // gpu is a comma-separated list: 'GPU', 'No GPU', or both.
+      // 'GPU' only    → gpu_count > 0 (GPU instances only)
+      // 'No GPU' only → gpu_count = 0 (non-GPU instances only)
+      // both or empty → no filter (show all)
+      if (gpu) {
+        const gpuValues = (gpu as string).split(',').map((s: string) => s.trim());
+        const wantsGpu = gpuValues.includes('GPU');
+        const wantsNoGpu = gpuValues.includes('No GPU');
+        if (wantsGpu && !wantsNoGpu) conditions.push(`pr.gpu_count > 0`);
+        else if (wantsNoGpu && !wantsGpu) conditions.push(`pr.gpu_count = 0`);
+        // both selected → no filter
+      }
     }
 
     if (resolvedProductType === 'compute') {

@@ -33,7 +33,7 @@ export default function Dashboard() {
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
-  const [gpuIncluded, setGpuIncluded] = useState(true);
+  const [selectedGpu, setSelectedGpu] = useState<string[]>(['GPU', 'No GPU']);
 
   const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...DB_FAMILIES]);
   const [selectedEngines, setSelectedEngines] = useState<string[]>([...DB_ENGINES]);
@@ -68,9 +68,9 @@ export default function Dashboard() {
   const [selectedNetworkingDirections, setSelectedNetworkingDirections] = useState<string[]>([...NETWORKING_DIRECTIONS]);
 
   // Range filters
-  const DEFAULT_VCPU_RANGE = { min: 0, max: 192 };
-  const DEFAULT_MEMORY_RANGE = { min: 0, max: 6144 };
-  const DEFAULT_PRICE_RANGE = { min: 0, max: 20 };
+  const DEFAULT_VCPU_RANGE = { min: 0, max: 320 };
+  const DEFAULT_MEMORY_RANGE = { min: 0, max: 3200 };
+  const DEFAULT_PRICE_RANGE = { min: 0, max: 100 };
 
   const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
   const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
@@ -142,7 +142,7 @@ export default function Dashboard() {
       .filter((v): v is string => Boolean(v));
     params.append('cpuVendor', selectedVendors.join(','));
     params.append('category', selectedCategory.join(','));
-    params.append('gpu', gpuIncluded.toString());
+    params.append('gpu', selectedGpu.join(','));
     params.append('dbFamilies', selectedDbFamilies.join(','));
     params.append('engines', selectedEngines.join(','));
     params.append('deploymentTypes', selectedDeploymentTypes.join(','));
@@ -170,16 +170,18 @@ export default function Dashboard() {
     params.append('networkingHaSupport', selectedNetworkingHaSupport.join(','));
     params.append('networkingVpcSupport', selectedNetworkingVpcSupport.join(','));
     params.append('networkingTransferDirections', selectedNetworkingDirections.join(','));
-    params.append('minVcpu', vCpuRange.min.toString());
-    params.append('maxVcpu', vCpuRange.max.toString());
-    params.append('minMemory', memoryRange.min.toString());
-    params.append('maxMemory', memoryRange.max.toString());
-    params.append('minPrice', priceRange.min.toString());
-    params.append('maxPrice', priceRange.max.toString());
+    // Only send range params when the user has actively constrained them.
+    // At the slider floor/ceiling → no filter applied (show all).
+    if (vCpuRange.min > DEFAULT_VCPU_RANGE.min) params.append('minVcpu', vCpuRange.min.toString());
+    if (vCpuRange.max < DEFAULT_VCPU_RANGE.max) params.append('maxVcpu', vCpuRange.max.toString());
+    if (memoryRange.min > DEFAULT_MEMORY_RANGE.min) params.append('minMemory', memoryRange.min.toString());
+    if (memoryRange.max < DEFAULT_MEMORY_RANGE.max) params.append('maxMemory', memoryRange.max.toString());
+    if (priceRange.min > DEFAULT_PRICE_RANGE.min) params.append('minPrice', priceRange.min.toString());
+    if (priceRange.max < DEFAULT_PRICE_RANGE.max) params.append('maxPrice', priceRange.max.toString());
     params.append('search', search);
     return params;
   }, [
-    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedCategory, gpuIncluded,
+    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedGpu, selectedCategory,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
@@ -199,7 +201,8 @@ export default function Dashboard() {
 
     if (activeProductType === 'vm' && (
       selectedOS.length === 0 ||
-      selectedCpu.length === 0 ||
+      // CPU and GPU are a combined section — block only when both are completely empty
+      (selectedCpu.length === 0 && selectedGpu.length === 0) ||
       selectedCategory.length === 0
     )) return false;
 
@@ -248,7 +251,7 @@ export default function Dashboard() {
   }, [
     activeProductType,
     selectedProviders, selectedGeographies,
-    selectedOS, selectedCpu, selectedCategory,
+    selectedOS, selectedCpu, selectedGpu, selectedCategory,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout,
@@ -436,7 +439,7 @@ export default function Dashboard() {
           selectedOS={selectedOS}
           selectedCpu={selectedCpu}
           selectedCategory={selectedCategory}
-          gpuIncluded={gpuIncluded}
+          selectedGpu={selectedGpu}
           selectedDbFamilies={selectedDbFamilies}
           selectedEngines={selectedEngines}
           selectedDeploymentTypes={selectedDeploymentTypes}
@@ -474,7 +477,8 @@ export default function Dashboard() {
           onOsToggle={(o) => toggleFilter(selectedOS, setSelectedOS, o)}
           onCpuToggle={(c) => toggleFilter(selectedCpu, setSelectedCpu, c)}
           onCategoryToggle={(c) => toggleFilter(selectedCategory, setSelectedCategory, c)}
-          onGpuToggle={setGpuIncluded}
+          onGpuToggle={(v) => toggleFilter(selectedGpu, setSelectedGpu, v)}
+          onSetGpu={setSelectedGpu}
           onDbFamilyToggle={(f) => toggleFilter(selectedDbFamilies, setSelectedDbFamilies, f)}
           onEngineToggle={(e) => toggleFilter(selectedEngines, setSelectedEngines, e)}
           onDeploymentTypeToggle={(d) => toggleFilter(selectedDeploymentTypes, setSelectedDeploymentTypes, d)}
