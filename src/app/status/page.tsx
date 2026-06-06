@@ -486,12 +486,9 @@ export default function StatusPage() {
                         </span>
                       </div>
                       <div className="provider-header-right">
-                        <span>
-                          Updated: <strong style={{ color: 'var(--text)' }}>{timeAgo(provider.last_updated)}</strong>
-                        </span>
                         {provider.last_updated && (
                           <span style={{ color: 'var(--muted)' }}>
-                            {new Date(provider.last_updated).toLocaleDateString('en-US', {
+                            Updated: {new Date(provider.last_updated).toLocaleDateString('en-US', {
                               year: 'numeric', month: 'short', day: 'numeric',
                             })}
                           </span>
