@@ -22,6 +22,177 @@
       "norm_label": "dashboard()"
     },
     {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L1",
+      "id": "status_page",
+      "community": 8,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "PipelineStatus",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L6",
+      "id": "status_page_pipelinestatus",
+      "community": 8,
+      "norm_label": "pipelinestatus"
+    },
+    {
+      "label": "ProviderStatus",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L16",
+      "id": "status_page_providerstatus",
+      "community": 8,
+      "norm_label": "providerstatus"
+    },
+    {
+      "label": "StatusData",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L24",
+      "id": "status_page_statusdata",
+      "community": 8,
+      "norm_label": "statusdata"
+    },
+    {
+      "label": "PROVIDER_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L33",
+      "id": "status_page_provider_colors",
+      "community": 8,
+      "norm_label": "provider_colors"
+    },
+    {
+      "label": "PIPELINE_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L42",
+      "id": "status_page_pipeline_order",
+      "community": 8,
+      "norm_label": "pipeline_order"
+    },
+    {
+      "label": "timeAgo()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L44",
+      "id": "status_page_timeago",
+      "community": 10,
+      "norm_label": "timeago()"
+    },
+    {
+      "label": "freshnessStatus()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L56",
+      "id": "status_page_freshnessstatus",
+      "community": 10,
+      "norm_label": "freshnessstatus()"
+    },
+    {
+      "label": "StatusDot()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L64",
+      "id": "status_page_statusdot",
+      "community": 8,
+      "norm_label": "statusdot()"
+    },
+    {
+      "label": "SourceBadge()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L86",
+      "id": "status_page_sourcebadge",
+      "community": 8,
+      "norm_label": "sourcebadge()"
+    },
+    {
+      "label": "StatusPage()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L125",
+      "id": "status_page_statuspage",
+      "community": 10,
+      "norm_label": "statuspage()"
+    },
+    {
+      "label": "Footer.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L1",
+      "id": "components_footer",
+      "community": 11,
+      "norm_label": "footer.tsx"
+    },
+    {
+      "label": "Footer()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L6",
+      "id": "components_footer_footer",
+      "community": 11,
+      "norm_label": "footer()"
+    },
+    {
+      "label": "api-utils.ts",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L1",
+      "id": "lib_api_utils",
+      "community": 9,
+      "norm_label": "api-utils.ts"
+    },
+    {
+      "label": "requireAdminAuth()",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L8",
+      "id": "lib_api_utils_requireadminauth",
+      "community": 9,
+      "norm_label": "requireadminauth()"
+    },
+    {
+      "label": "initDb()",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L30",
+      "id": "lib_api_utils_initdb",
+      "community": 9,
+      "norm_label": "initdb()"
+    },
+    {
+      "label": "VALID_PRODUCT_TYPES",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L86",
+      "id": "lib_api_utils_valid_product_types",
+      "community": 9,
+      "norm_label": "valid_product_types"
+    },
+    {
+      "label": "parseFilterList()",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L88",
+      "id": "lib_api_utils_parsefilterlist",
+      "community": 9,
+      "norm_label": "parsefilterlist()"
+    },
+    {
+      "label": "buildPricingFilters()",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L109",
+      "id": "lib_api_utils_buildpricingfilters",
+      "community": 9,
+      "norm_label": "buildpricingfilters()"
+    },
+    {
       "label": "route.ts",
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
@@ -182,8 +353,201 @@
       "source_file": "src/app/page.tsx",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_page",
-      "target": "app_page_dashboard",
+      "target": "app_page_dashboard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_freshnessstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_pipeline_order",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_pipelinestatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_provider_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_providerstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_sourcebadge",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_statusdata",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_statusdot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_statuspage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_timeago",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L320",
+      "weight": 1.0,
+      "source": "status_page_statuspage",
+      "target": "status_page_timeago",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L137",
+      "weight": 1.0,
+      "source": "status_page_statuspage",
+      "target": "status_page_freshnessstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "components_footer",
+      "target": "components_footer_footer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_buildpricingfilters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_initdb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_parsefilterlist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_requireadminauth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L86",
+      "weight": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_valid_product_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L135",
+      "weight": 1.0,
+      "source": "lib_api_utils_buildpricingfilters",
+      "target": "lib_api_utils_parsefilterlist",
       "confidence_score": 1.0
     },
     {
@@ -321,5 +685,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "39eac66ad8e29cefa93a8210923d9890d8e04408"
+  "built_at_commit": "057d4b149a8a2f3a85fe1a083ce80fb779dccd73"
 }
