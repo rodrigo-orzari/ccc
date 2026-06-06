@@ -94,7 +94,7 @@ function SourceBadge({ source, apiCount, staticCount }: { source: string; apiCou
 
   if (source === 'api') return (
     <span style={{ ...badgeStyle, color: '#16a34a', borderColor: '#16a34a40', backgroundColor: '#16a34a18' }}>
-      Live API
+      API
     </span>
   );
   if (source === 'static') return (
@@ -106,10 +106,10 @@ function SourceBadge({ source, apiCount, staticCount }: { source: string; apiCou
   return (
     <span style={{ display: 'inline-flex', gap: 4 }}>
       <span style={{ ...badgeStyle, color: '#16a34a', borderColor: '#16a34a40', backgroundColor: '#16a34a18' }}>
-        API {apiCount.toLocaleString()}
+        API
       </span>
       <span style={{ ...badgeStyle, color: '#d97706', borderColor: '#d9770640', backgroundColor: '#d9770618' }}>
-        Static {staticCount.toLocaleString()}
+        Static
       </span>
     </span>
   );
@@ -511,7 +511,7 @@ export default function StatusPage() {
                 <div className="legend-grid">
                   <div className="legend-item">
                     <span style={{ color: 'var(--muted)' }}>
-                      <strong style={{ color: '#16a34a' }}>Live API</strong> — fetched directly from the provider's pricing API each run
+                      <strong style={{ color: '#16a34a' }}>API</strong> — fetched directly from the provider's pricing API each run
                     </span>
                   </div>
                   <div className="legend-item">
