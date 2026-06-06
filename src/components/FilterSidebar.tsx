@@ -46,8 +46,6 @@ interface FilterSectionProps {
   options: string[];
   selected: string[];
   onToggle: (item: string) => void;
-  onSelectAll: () => void;
-  onClearAll: () => void;
   isExpanded: boolean;
   onToggleExpand: () => void;
   getLabel?: (option: string) => string;
@@ -59,12 +57,17 @@ const FilterSection = ({
   options,
   selected,
   onToggle,
-  onSelectAll,
-  onClearAll,
   isExpanded,
   onToggleExpand,
   getLabel,
-}: FilterSectionProps) => (
+}: FilterSectionProps) => {
+  // Derived select-all / clear-all — no extra props needed
+  const handleSelectAll = () =>
+    options.filter(o => !selected.includes(o)).forEach(o => onToggle(o));
+  const handleClearAll = () =>
+    [...selected].forEach(o => onToggle(o));
+
+  return (
   <section className="space-y-3">
     <div className="flex items-center justify-between">
       <h2 className="m-0">
@@ -77,7 +80,7 @@ const FilterSection = ({
         </button>
       </h2>
       <button
-        onClick={() => (selected.length === options.length ? onClearAll() : onSelectAll())}
+        onClick={() => (selected.length === options.length ? handleClearAll() : handleSelectAll())}
         className={`text-[10px] font-bold uppercase transition-colors ${
           selected.length === options.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'
         }`}
@@ -103,7 +106,8 @@ const FilterSection = ({
       </div>
     )}
   </section>
-);
+  );
+};
 
 interface FilterSidebarProps {
   activeProductType: ProductType;
@@ -278,16 +282,6 @@ export default function FilterSidebar({
           getLabel={(id) => PROVIDERS.find(p => p.id === id)?.name || id}
           selected={selectedProviders}
           onToggle={onProviderToggle}
-          onSelectAll={() => {
-            const activeNonSoonIds = activeNonSoon;
-            // Toggle to select all
-            if (selectedProviders.length === activeNonSoonIds.length) {
-              onProviderToggle('__clear__');
-            } else {
-              // This is a simplified version; in reality you'd need proper handlers
-            }
-          }}
-          onClearAll={() => onProviderToggle('__clear__')}
           isExpanded={expanded.provider ?? true}
           onToggleExpand={() => onToggleSection('provider')}
         />
@@ -301,8 +295,6 @@ export default function FilterSidebar({
               options={CATEGORIES}
               selected={selectedCategory}
               onToggle={onCategoryToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.category ?? true}
               onToggleExpand={() => onToggleSection('category')}
             />
@@ -314,8 +306,6 @@ export default function FilterSidebar({
               options={GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
@@ -327,8 +317,6 @@ export default function FilterSidebar({
               options={OS_TYPES}
               selected={selectedOS}
               onToggle={onOsToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.os ?? true}
               onToggleExpand={() => onToggleSection('os')}
             />
@@ -387,8 +375,6 @@ export default function FilterSidebar({
               options={DB_FAMILIES}
               selected={selectedDbFamilies}
               onToggle={onDbFamilyToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.dbFamily ?? true}
               onToggleExpand={() => onToggleSection('dbFamily')}
             />
@@ -399,8 +385,6 @@ export default function FilterSidebar({
               options={GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
@@ -411,8 +395,6 @@ export default function FilterSidebar({
               options={DB_ENGINES}
               selected={selectedEngines}
               onToggle={onEngineToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.engine ?? true}
               onToggleExpand={() => onToggleSection('engine')}
             />
@@ -423,8 +405,6 @@ export default function FilterSidebar({
               options={DEPLOYMENT_TYPES}
               selected={selectedDeploymentTypes}
               onToggle={onDeploymentTypeToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.deploymentType ?? true}
               onToggleExpand={() => onToggleSection('deploymentType')}
             />
@@ -435,8 +415,6 @@ export default function FilterSidebar({
               options={HA_MODES}
               selected={selectedHaModes}
               onToggle={onHaModeToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.haMode ?? true}
               onToggleExpand={() => onToggleSection('haMode')}
             />
@@ -453,8 +431,6 @@ export default function FilterSidebar({
               options={GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
@@ -465,8 +441,6 @@ export default function FilterSidebar({
               options={SERVERLESS_LANGUAGES}
               selected={selectedServerlessLanguages}
               onToggle={onServerlessLanguageToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.languages ?? true}
               onToggleExpand={() => onToggleSection('languages')}
             />
@@ -477,8 +451,6 @@ export default function FilterSidebar({
               options={SERVERLESS_COLD_START_OPTIONS}
               selected={selectedServerlessColdStart}
               onToggle={onServerlessColdStartToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.coldStart ?? true}
               onToggleExpand={() => onToggleSection('coldStart')}
             />
@@ -489,8 +461,6 @@ export default function FilterSidebar({
               options={SERVERLESS_TIMEOUT_OPTIONS}
               selected={selectedServerlessTimeout}
               onToggle={onServerlessTimeoutToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.timeout ?? true}
               onToggleExpand={() => onToggleSection('timeout')}
             />
@@ -501,8 +471,6 @@ export default function FilterSidebar({
               options={SERVERLESS_MEMORY_CONFIG_OPTIONS}
               selected={selectedServerlessMemoryConfig}
               onToggle={onServerlessMemoryConfigToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.memoryConfig ?? true}
               onToggleExpand={() => onToggleSection('memoryConfig')}
             />
@@ -513,8 +481,6 @@ export default function FilterSidebar({
               options={SERVERLESS_EXECUTION_MODEL_OPTIONS}
               selected={selectedServerlessExecutionModel}
               onToggle={onServerlessExecutionModelToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.executionModel ?? true}
               onToggleExpand={() => onToggleSection('executionModel')}
             />
@@ -525,8 +491,6 @@ export default function FilterSidebar({
               options={SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS}
               selected={selectedServerlessProvisionedConcurrency}
               onToggle={onServerlessProvisionedConcurrencyToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.provisionedConcurrency ?? true}
               onToggleExpand={() => onToggleSection('provisionedConcurrency')}
             />
@@ -537,8 +501,6 @@ export default function FilterSidebar({
               options={SERVERLESS_EPHEMERAL_STORAGE_OPTIONS}
               selected={selectedServerlessEphemeralStorage}
               onToggle={onServerlessEphemeralStorageToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.ephemeralStorage ?? true}
               onToggleExpand={() => onToggleSection('ephemeralStorage')}
             />
@@ -549,8 +511,6 @@ export default function FilterSidebar({
               options={SERVERLESS_FREE_TIER_OPTIONS}
               selected={selectedServerlessFreeTier}
               onToggle={onServerlessFreeTierToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.freeTier ?? true}
               onToggleExpand={() => onToggleSection('freeTier')}
             />
@@ -561,8 +521,6 @@ export default function FilterSidebar({
               options={SERVERLESS_GRANULARITY_OPTIONS}
               selected={selectedServerlessGranularity}
               onToggle={onServerlessGranularityToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.granularity ?? true}
               onToggleExpand={() => onToggleSection('granularity')}
             />
@@ -579,8 +537,6 @@ export default function FilterSidebar({
               options={GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
@@ -591,8 +547,6 @@ export default function FilterSidebar({
               options={CONTAINERS_ORCHESTRATORS}
               selected={selectedContainersOrchestrators}
               onToggle={onContainersOrchestratorToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.containersOrchestrator ?? true}
               onToggleExpand={() => onToggleSection('containersOrchestrator')}
             />
@@ -603,8 +557,6 @@ export default function FilterSidebar({
               options={CONTAINERS_COMPUTE_TYPES}
               selected={selectedContainersComputeTypes}
               onToggle={onContainersComputeTypeToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.containersComputeType ?? true}
               onToggleExpand={() => onToggleSection('containersComputeType')}
             />
@@ -615,8 +567,6 @@ export default function FilterSidebar({
               options={CONTAINERS_ARCHITECTURES}
               selected={selectedContainersArchitectures}
               onToggle={onContainersArchitectureToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.containersArchitecture ?? true}
               onToggleExpand={() => onToggleSection('containersArchitecture')}
             />
@@ -627,8 +577,6 @@ export default function FilterSidebar({
               options={CONTAINERS_BILLING_GRANULARITY}
               selected={selectedContainersBillingGranularity}
               onToggle={onContainersBillingGranularityToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.containersBillingGranularity ?? true}
               onToggleExpand={() => onToggleSection('containersBillingGranularity')}
             />
@@ -673,8 +621,6 @@ export default function FilterSidebar({
               options={GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
@@ -685,8 +631,6 @@ export default function FilterSidebar({
               options={NETWORKING_SERVICES}
               selected={selectedNetworkingServices}
               onToggle={onNetworkingServiceToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.networkingService ?? true}
               onToggleExpand={() => onToggleSection('networkingService')}
             />
@@ -697,8 +641,6 @@ export default function FilterSidebar({
               options={NETWORKING_CONNECTION_TYPES}
               selected={selectedNetworkingConnectionTypes}
               onToggle={onNetworkingConnectionTypeToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.networkingConnectionType ?? true}
               onToggleExpand={() => onToggleSection('networkingConnectionType')}
             />
@@ -709,8 +651,6 @@ export default function FilterSidebar({
               options={NETWORKING_ROUTING_TYPES}
               selected={selectedNetworkingRoutingTypes}
               onToggle={onNetworkingRoutingTypeToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.networkingRoutingType ?? true}
               onToggleExpand={() => onToggleSection('networkingRoutingType')}
             />
@@ -721,8 +661,6 @@ export default function FilterSidebar({
               options={NETWORKING_HA_SUPPORT}
               selected={selectedNetworkingHaSupport}
               onToggle={onNetworkingHaSupportToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.networkingHaSupport ?? true}
               onToggleExpand={() => onToggleSection('networkingHaSupport')}
             />
@@ -733,8 +671,6 @@ export default function FilterSidebar({
               options={NETWORKING_VPC_SUPPORT}
               selected={selectedNetworkingVpcSupport}
               onToggle={onNetworkingVpcSupportToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.networkingVpcSupport ?? true}
               onToggleExpand={() => onToggleSection('networkingVpcSupport')}
             />
@@ -745,8 +681,6 @@ export default function FilterSidebar({
               options={NETWORKING_DIRECTIONS}
               selected={selectedNetworkingDirections}
               onToggle={onNetworkingDirectionToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.networkingTransferDirection ?? true}
               onToggleExpand={() => onToggleSection('networkingTransferDirection')}
             />
@@ -763,8 +697,6 @@ export default function FilterSidebar({
               options={GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
@@ -775,8 +707,6 @@ export default function FilterSidebar({
               options={ANALYTICS_ENGINES}
               selected={selectedAnalyticsEngines}
               onToggle={onAnalyticsEngineToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.engine ?? true}
               onToggleExpand={() => onToggleSection('engine')}
             />
@@ -787,8 +717,6 @@ export default function FilterSidebar({
               options={ANALYTICS_DEPLOYMENT_TYPES}
               selected={selectedAnalyticsDeploymentTypes}
               onToggle={onAnalyticsDeploymentTypeToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.deploymentType ?? true}
               onToggleExpand={() => onToggleSection('deploymentType')}
             />
@@ -799,8 +727,6 @@ export default function FilterSidebar({
               options={ANALYTICS_TIERS}
               selected={selectedAnalyticsTiers}
               onToggle={onAnalyticsTierToggle}
-              onSelectAll={() => {}}
-              onClearAll={() => {}}
               isExpanded={expanded.tier ?? true}
               onToggleExpand={() => onToggleSection('tier')}
             />

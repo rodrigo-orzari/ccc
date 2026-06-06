@@ -77,22 +77,23 @@ export default function ProductTypeSelector({
         ))}
       </div>
 
-      <div className="flex items-center gap-2 ml-4 shrink-0">
+      <div className="flex items-center gap-2 ml-4 shrink-0 bg-[#1a1a1a] rounded-full px-3 py-1">
+        <span className="text-[10px] font-medium text-white whitespace-nowrap hidden sm:inline">
+          Share with friends and family
+        </span>
         <button
           onClick={shareOnLinkedIn}
           title="Share on LinkedIn"
-          className="flex items-center gap-1.5 text-[10px] font-medium text-[#737373] dark:text-[#525252] hover:text-[#0A66C2] dark:hover:text-[#0A66C2] transition-colors px-2 py-1 rounded hover:bg-[#f0f7ff] dark:hover:bg-[#0A66C2]/10"
+          className="text-white hover:text-[#0A66C2] transition-colors flex items-center"
         >
           <LinkedInIcon />
-          <span className="hidden sm:inline">Share</span>
         </button>
         <button
           onClick={shareOnX}
           title="Share on X"
-          className="flex items-center gap-1.5 text-[10px] font-medium text-[#737373] dark:text-[#525252] hover:text-black dark:hover:text-white transition-colors px-2 py-1 rounded hover:bg-[#f5f5f5] dark:hover:bg-[#171717]"
+          className="text-white hover:text-[#a3a3a3] transition-colors flex items-center"
         >
           <XIcon />
-          <span className="hidden sm:inline">Share</span>
         </button>
       </div>
     </div>

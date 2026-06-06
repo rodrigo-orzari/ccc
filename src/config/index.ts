@@ -35,7 +35,7 @@ export const CONTAINERS_ARCHITECTURES = ['x86_64', 'ARM64'];
 export const CONTAINERS_BILLING_GRANULARITY = ['Per Second', 'Per Hour'];
 
 // Networking-specific constants
-export const NETWORKING_SERVICES = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4'];
+export const NETWORKING_SERVICES = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway'];
 export const NETWORKING_CONNECTION_TYPES = ['Multipoint', 'Point-to-Point'];
 export const NETWORKING_ROUTING_TYPES = ['Dynamic', 'Fixed'];
 export const NETWORKING_HA_SUPPORT = ['Yes', 'No'];
