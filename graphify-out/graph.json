@@ -58,6 +58,18 @@
   },
   "nodes": [
     {
+<<<<<<< HEAD
+=======
+      "label": "scratch_test.js",
+      "file_type": "code",
+      "source_file": "scratch_test.js",
+      "source_location": "L1",
+      "id": "scratch_test",
+      "community": 4,
+      "norm_label": "scratch_test.js"
+    },
+    {
+>>>>>>> 81a663aa3541f722eca8834183780235194f7ac7
       "label": "api-utils.ts",
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
@@ -112,6 +124,90 @@
       "norm_label": "buildpricingfilters()"
     },
     {
+<<<<<<< HEAD
+=======
+      "label": "test_db.mjs",
+      "file_type": "code",
+      "source_file": "test_db.mjs",
+      "source_location": "L1",
+      "id": "test_db",
+      "community": 59,
+      "norm_label": "test_db.mjs"
+    },
+    {
+      "label": "sql",
+      "file_type": "code",
+      "source_file": "test_db.mjs",
+      "source_location": "L3",
+      "id": "test_db_sql",
+      "community": 59,
+      "norm_label": "sql"
+    },
+    {
+      "label": "test()",
+      "file_type": "code",
+      "source_file": "test_db.mjs",
+      "source_location": "L5",
+      "id": "test_db_test",
+      "community": 59,
+      "norm_label": "test()"
+    },
+    {
+      "label": "test_db_geo.mjs",
+      "file_type": "code",
+      "source_file": "test_db_geo.mjs",
+      "source_location": "L1",
+      "id": "test_db_geo",
+      "community": 72,
+      "norm_label": "test_db_geo.mjs"
+    },
+    {
+      "label": "sql",
+      "file_type": "code",
+      "source_file": "test_db_geo.mjs",
+      "source_location": "L3",
+      "id": "test_db_geo_sql",
+      "community": 72,
+      "norm_label": "sql"
+    },
+    {
+      "label": "test()",
+      "file_type": "code",
+      "source_file": "test_db_geo.mjs",
+      "source_location": "L5",
+      "id": "test_db_geo_test",
+      "community": 72,
+      "norm_label": "test()"
+    },
+    {
+      "label": "test_db_price.mjs",
+      "file_type": "code",
+      "source_file": "test_db_price.mjs",
+      "source_location": "L1",
+      "id": "test_db_price",
+      "community": 73,
+      "norm_label": "test_db_price.mjs"
+    },
+    {
+      "label": "sql",
+      "file_type": "code",
+      "source_file": "test_db_price.mjs",
+      "source_location": "L3",
+      "id": "test_db_price_sql",
+      "community": 73,
+      "norm_label": "sql"
+    },
+    {
+      "label": "test()",
+      "file_type": "code",
+      "source_file": "test_db_price.mjs",
+      "source_location": "L5",
+      "id": "test_db_price_test",
+      "community": 73,
+      "norm_label": "test()"
+    },
+    {
+>>>>>>> 81a663aa3541f722eca8834183780235194f7ac7
       "label": "package.json",
       "file_type": "code",
       "source_file": "package.json",
@@ -710,7 +806,7 @@
       "file_type": "code",
       "source_file": "src/config/alibaba_containers.ts",
       "source_location": "L1",
-      "community": 48,
+      "community": 15,
       "norm_label": "alibaba_containers.ts",
       "id": "config_alibaba_containers"
     },
@@ -719,7 +815,7 @@
       "file_type": "code",
       "source_file": "src/config/alibaba_containers.ts",
       "source_location": "L4",
-      "community": 48,
+      "community": 15,
       "norm_label": "alibaba_containers",
       "id": "config_alibaba_containers_alibaba_containers"
     },
@@ -1862,7 +1958,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L10",
-      "community": 39,
+      "community": 2,
       "norm_label": "pricingrecord",
       "id": "services_pricing_pipeline_pricingrecord"
     },
@@ -2231,7 +2327,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L1",
-      "community": 39,
+      "community": 40,
       "norm_label": "azure_serverless.ts",
       "id": "config_azure_serverless"
     },
@@ -2240,7 +2336,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L18",
-      "community": 39,
+      "community": 40,
       "norm_label": "azure_functions_languages",
       "id": "config_azure_serverless_azure_functions_languages"
     },
@@ -2249,7 +2345,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L21",
-      "community": 39,
+      "community": 40,
       "norm_label": "addazureserverlessattributes()",
       "id": "config_azure_serverless_addazureserverlessattributes"
     },
@@ -2258,7 +2354,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L41",
-      "community": 39,
+      "community": 40,
       "norm_label": "baseazureentries",
       "id": "config_azure_serverless_baseazureentries"
     },
@@ -2267,7 +2363,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L103",
-      "community": 39,
+      "community": 40,
       "norm_label": "azure_serverless",
       "id": "config_azure_serverless_azure_serverless"
     },
@@ -2285,7 +2381,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L36",
-      "community": 39,
+      "community": 49,
       "norm_label": "awsserverlessliveadapter",
       "id": "services_serverless_pipeline_awsserverlessliveadapter"
     },
@@ -2294,7 +2390,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L39",
-      "community": 39,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_awsserverlessliveadapter_fetchpricing"
     },
@@ -2303,7 +2399,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L71",
-      "community": 39,
+      "community": 49,
       "norm_label": "awsserverlessadapter",
       "id": "services_serverless_pipeline_awsserverlessadapter"
     },
@@ -2312,7 +2408,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L74",
-      "community": 39,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_awsserverlessadapter_fetchpricing"
     },
@@ -2339,7 +2435,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L125",
-      "community": 39,
+      "community": 49,
       "norm_label": "azureserverlessadapter",
       "id": "services_serverless_pipeline_azureserverlessadapter"
     },
@@ -2348,7 +2444,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L128",
-      "community": 39,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing"
     },
@@ -2375,7 +2471,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L179",
-      "community": 39,
+      "community": 49,
       "norm_label": "oracleserverlessadapter",
       "id": "services_serverless_pipeline_oracleserverlessadapter"
     },
@@ -2384,7 +2480,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L182",
-      "community": 39,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing"
     },
@@ -2393,7 +2489,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L206",
-      "community": 39,
+      "community": 49,
       "norm_label": "alibabaserverlessadapter",
       "id": "services_serverless_pipeline_alibabaserverlessadapter"
     },
@@ -2402,7 +2498,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L209",
-      "community": 39,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_alibabaserverlessadapter_fetchpricing"
     },
@@ -2411,7 +2507,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L233",
-      "community": 39,
+      "community": 2,
       "norm_label": "serverlesspricingpipeline",
       "id": "services_serverless_pipeline_serverlesspricingpipeline"
     },
@@ -2420,7 +2516,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L234",
-      "community": 39,
+      "community": 2,
       "norm_label": ".constructor()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_constructor"
     },
@@ -2429,7 +2525,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L250",
-      "community": 39,
+      "community": 2,
       "norm_label": ".run()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_run"
     },
@@ -2438,7 +2534,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L435",
-      "community": 39,
+      "community": 2,
       "norm_label": ".getawsserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getawsserverlessstaticrecords"
     },
@@ -2447,7 +2543,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L443",
-      "community": 39,
+      "community": 2,
       "norm_label": ".getgcpserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getgcpserverlessstaticrecords"
     },
@@ -2456,7 +2552,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L451",
-      "community": 39,
+      "community": 2,
       "norm_label": ".getazureserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getazureserverlessstaticrecords"
     },
@@ -2465,7 +2561,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L459",
-      "community": 39,
+      "community": 2,
       "norm_label": ".getdigitaloceanserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getdigitaloceanserverlessstaticrecords"
     },
@@ -2474,7 +2570,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L467",
-      "community": 39,
+      "community": 2,
       "norm_label": ".getoracleserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
     },
@@ -3698,7 +3794,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L1",
-      "community": 48,
+      "community": 13,
       "norm_label": "containers_pipeline.ts",
       "id": "services_containers_pipeline"
     },
@@ -3707,7 +3803,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L18",
-      "community": 48,
+      "community": 2,
       "norm_label": "awscontainersstaticadapter",
       "id": "services_containers_pipeline_awscontainersstaticadapter"
     },
@@ -3716,7 +3812,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L20",
-      "community": 48,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_awscontainersstaticadapter_fetchpricing"
     },
@@ -3725,7 +3821,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L43",
-      "community": 49,
+      "community": 2,
       "norm_label": "azurecontainersstaticadapter",
       "id": "services_containers_pipeline_azurecontainersstaticadapter"
     },
@@ -3734,7 +3830,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L45",
-      "community": 49,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_azurecontainersstaticadapter_fetchpricing"
     },
@@ -3761,7 +3857,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L93",
-      "community": 48,
+      "community": 2,
       "norm_label": "digitaloceancontainersstaticadapter",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter"
     },
@@ -3770,7 +3866,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L95",
-      "community": 48,
+      "community": 2,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter_fetchpricing"
     },
@@ -3986,7 +4082,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L1",
-      "community": 39,
+      "community": 56,
       "norm_label": "gcp_serverless.ts",
       "id": "config_gcp_serverless"
     },
@@ -3995,7 +4091,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L19",
-      "community": 39,
+      "community": 56,
       "norm_label": "gcp_cloud_run_languages",
       "id": "config_gcp_serverless_gcp_cloud_run_languages"
     },
@@ -4004,7 +4100,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L22",
-      "community": 39,
+      "community": 56,
       "norm_label": "addgcpserverlessattributes()",
       "id": "config_gcp_serverless_addgcpserverlessattributes"
     },
@@ -4013,7 +4109,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L42",
-      "community": 39,
+      "community": 56,
       "norm_label": "basegcpentries",
       "id": "config_gcp_serverless_basegcpentries"
     },
@@ -4022,7 +4118,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_serverless.ts",
       "source_location": "L122",
-      "community": 39,
+      "community": 56,
       "norm_label": "gcp_serverless",
       "id": "config_gcp_serverless_gcp_serverless"
     },
@@ -4031,7 +4127,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L1",
-      "community": 39,
+      "community": 58,
       "norm_label": "oracle_serverless.ts",
       "id": "config_oracle_serverless"
     },
@@ -4040,7 +4136,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L16",
-      "community": 39,
+      "community": 58,
       "norm_label": "oracle_lambda_languages",
       "id": "config_oracle_serverless_oracle_lambda_languages"
     },
@@ -4049,7 +4145,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L21",
-      "community": 39,
+      "community": 58,
       "norm_label": "addserverlessattributes()",
       "id": "config_oracle_serverless_addserverlessattributes"
     },
@@ -4058,7 +4154,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L39",
-      "community": 39,
+      "community": 58,
       "norm_label": "baseoracleentries",
       "id": "config_oracle_serverless_baseoracleentries"
     },
@@ -4067,7 +4163,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_serverless.ts",
       "source_location": "L52",
-      "community": 39,
+      "community": 58,
       "norm_label": "oracle_serverless",
       "id": "config_oracle_serverless_oracle_serverless"
     },
@@ -4427,7 +4523,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L1",
-      "community": 39,
+      "community": 37,
       "norm_label": "serverless_adapters_live.ts",
       "id": "services_serverless_adapters_live"
     },
@@ -4436,7 +4532,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L16",
-      "community": 39,
+      "community": 37,
       "norm_label": "awslambdaliveadapter",
       "id": "services_serverless_adapters_live_awslambdaliveadapter"
     },
@@ -4445,7 +4541,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L54",
-      "community": 39,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing"
     },
@@ -4454,7 +4550,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L197",
-      "community": 39,
+      "community": 37,
       "norm_label": ".mapawslocationtoregion()",
       "id": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
     },
@@ -4463,7 +4559,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L250",
-      "community": 39,
+      "community": 37,
       "norm_label": "gcpcloudrunliveadapter",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter"
     },
@@ -4472,7 +4568,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L253",
-      "community": 39,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing"
     },
@@ -4481,7 +4577,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L263",
-      "community": 39,
+      "community": 37,
       "norm_label": "azurefunctionsliveadapter",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter"
     },
@@ -4490,7 +4586,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L266",
-      "community": 39,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing"
     },
@@ -5246,7 +5342,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/aws_fargate.ts",
       "source_location": "L1",
-      "community": 48,
+      "community": 13,
       "norm_label": "aws_fargate.ts",
       "id": "scrapers_aws_fargate"
     },
@@ -5255,7 +5351,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/aws_fargate.ts",
       "source_location": "L4",
-      "community": 48,
+      "community": 13,
       "norm_label": "awsfargatescraper",
       "id": "scrapers_aws_fargate_awsfargatescraper"
     },
@@ -5264,7 +5360,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/aws_fargate.ts",
       "source_location": "L5",
-      "community": 48,
+      "community": 13,
       "norm_label": ".scrape()",
       "id": "scrapers_aws_fargate_awsfargatescraper_scrape"
     },
@@ -5300,7 +5396,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/azure_container_instances.ts",
       "source_location": "L1",
-      "community": 48,
+      "community": 13,
       "norm_label": "azure_container_instances.ts",
       "id": "scrapers_azure_container_instances"
     },
@@ -5309,7 +5405,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/azure_container_instances.ts",
       "source_location": "L4",
-      "community": 48,
+      "community": 13,
       "norm_label": "azurecontainerinstancesscraper",
       "id": "scrapers_azure_container_instances_azurecontainerinstancesscraper"
     },
@@ -5318,7 +5414,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/azure_container_instances.ts",
       "source_location": "L5",
-      "community": 48,
+      "community": 13,
       "norm_label": ".scrape()",
       "id": "scrapers_azure_container_instances_azurecontainerinstancesscraper_scrape"
     },
@@ -5561,7 +5657,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L1",
-      "community": 32,
+      "community": 35,
       "norm_label": "scheduler.ts",
       "id": "workers_scheduler"
     },
@@ -5570,7 +5666,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L16",
-      "community": 32,
+      "community": 35,
       "norm_label": "sql",
       "id": "workers_scheduler_sql"
     },
@@ -5579,7 +5675,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L23",
-      "community": 32,
+      "community": 35,
       "norm_label": "checksparsedata()",
       "id": "workers_scheduler_checksparsedata"
     },
@@ -6128,7 +6224,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L1",
-      "community": 39,
+      "community": 54,
       "norm_label": "digitalocean_serverless.ts",
       "id": "config_digitalocean_serverless"
     },
@@ -6137,7 +6233,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L22",
-      "community": 39,
+      "community": 54,
       "norm_label": "digitalocean_functions_languages",
       "id": "config_digitalocean_serverless_digitalocean_functions_languages"
     },
@@ -6146,7 +6242,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L25",
-      "community": 39,
+      "community": 54,
       "norm_label": "adddigitaloceanserverlessattributes()",
       "id": "config_digitalocean_serverless_adddigitaloceanserverlessattributes"
     },
@@ -6155,7 +6251,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L44",
-      "community": 39,
+      "community": 54,
       "norm_label": "basedigitaloceanentries",
       "id": "config_digitalocean_serverless_basedigitaloceanentries"
     },
@@ -6164,7 +6260,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_serverless.ts",
       "source_location": "L56",
-      "community": 39,
+      "community": 54,
       "norm_label": "digitalocean_serverless",
       "id": "config_digitalocean_serverless_digitalocean_serverless"
     },
@@ -6299,7 +6395,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L1",
-      "community": 32,
+      "community": 35,
       "norm_label": "mailer.ts",
       "id": "services_mailer"
     },
@@ -6308,7 +6404,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L6",
-      "community": 32,
+      "community": 35,
       "norm_label": "createtransport()",
       "id": "services_mailer_createtransport"
     },
@@ -6317,7 +6413,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L17",
-      "community": 32,
+      "community": 35,
       "norm_label": "ismailerconfigured()",
       "id": "services_mailer_ismailerconfigured"
     },
@@ -6326,7 +6422,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L21",
-      "community": 32,
+      "community": 35,
       "norm_label": "pricedriftalert",
       "id": "services_mailer_pricedriftalert"
     },
@@ -6335,7 +6431,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L30",
-      "community": 32,
+      "community": 35,
       "norm_label": "staledataalert",
       "id": "services_mailer_staledataalert"
     },
@@ -6344,7 +6440,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L38",
-      "community": 32,
+      "community": 35,
       "norm_label": "sendpricedriftemail()",
       "id": "services_mailer_sendpricedriftemail"
     },
@@ -6353,7 +6449,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L69",
-      "community": 32,
+      "community": 35,
       "norm_label": "sendstalenessemail()",
       "id": "services_mailer_sendstalenessemail"
     },
@@ -6880,6 +6976,358 @@
     }
   ],
   "links": [
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scratch_test.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "scratch_test",
+      "target": "lib_api_utils",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scratch_test.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "scratch_test",
+      "target": "lib_api_utils_buildpricingfilters",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L109",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L88",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_parsefilterlist"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_valid_product_types"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_db"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pricing_route",
+      "target": "lib_api_utils"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fetch_pricing_route",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "fetch_pricing_route_post",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/init-db/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "init_db_route",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/init-db/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "init_db_route_post",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fetch_pricing_route",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "fetch_pricing_route_post",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/init-db/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "init_db_route",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/init-db/route.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "init_db_route_post",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils_buildpricingfilters",
+      "target": "lib_api_utils_parsefilterlist"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/counts/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "counts_route",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/pricing/counts/route.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "counts_route_get",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/health/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "health_route",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/health/route.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "health_route_get",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pricing_route",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "pricing_route_get",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "test_db",
+      "target": "test_db_sql",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db.mjs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "test_db",
+      "target": "test_db_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db.mjs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "test_db_test",
+      "target": "test_db_sql",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db_geo.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "test_db_geo",
+      "target": "test_db_geo_sql",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db_geo.mjs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "test_db_geo",
+      "target": "test_db_geo_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db_geo.mjs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "test_db_geo_test",
+      "target": "test_db_geo_sql",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db_price.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "test_db_price",
+      "target": "test_db_price_sql",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db_price.mjs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "test_db_price",
+      "target": "test_db_price_test",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "test_db_price.mjs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "test_db_price_test",
+      "target": "test_db_price_sql",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -17757,5 +18205,9 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
+<<<<<<< HEAD
   "built_at_commit": "822e542ca53f9b38ce7f809e4216b4aa12872314"
+=======
+  "built_at_commit": "233f4f6dde74eda508644968599ace3f8d9dfe8c"
+>>>>>>> 81a663aa3541f722eca8834183780235194f7ac7
 }
