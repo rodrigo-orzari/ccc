@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1780710753.2094064,
-    "ast_hash": "769b7de6de015fe25b7ee1bcfd20a786",
+    "mtime": 1780776722.8456488,
+    "ast_hash": "ce1ea944aa8daf1525e258878d1658f2",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -30,8 +30,8 @@
     "semantic_hash": ""
   },
   "src/config/aws_containers.ts": {
-    "mtime": 1780606921.5929227,
-    "ast_hash": "e8405efc64031ebcf4985d23f8992600",
+    "mtime": 1780776964.607617,
+    "ast_hash": "01a6c46cf3c29537d38b3097536bb38d",
     "semantic_hash": ""
   },
   "src/config/aws_serverless.ts": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "src/config/azure_containers.ts": {
-    "mtime": 1780606921.6008608,
-    "ast_hash": "0c0fa95c0de47c962995c1a07cfa96ec",
+    "mtime": 1780776995.5026126,
+    "ast_hash": "8e48d80f0515eacb26e6a0b5a287d595",
     "semantic_hash": ""
   },
   "src/config/azure_serverless.ts": {
@@ -55,8 +55,8 @@
     "semantic_hash": "30d5685d1e68398028309d8204e312e9"
   },
   "src/config/digitalocean_containers.ts": {
-    "mtime": 1780606945.4255798,
-    "ast_hash": "74eca89fc09568544f69963a9b18e895",
+    "mtime": 1780777049.6851802,
+    "ast_hash": "61712253ce5c47dc00a9f2b8dd74f3da",
     "semantic_hash": ""
   },
   "src/config/digitalocean_instances.ts": {
@@ -70,8 +70,8 @@
     "semantic_hash": "be4cc05fd57be643096aaead729308e9"
   },
   "src/config/gcp_containers.ts": {
-    "mtime": 1780606921.6221194,
-    "ast_hash": "239d4c3e307debec147064e3ebc9e08e",
+    "mtime": 1780777036.35731,
+    "ast_hash": "56c874f47692f81acff4bca293d78cd1",
     "semantic_hash": ""
   },
   "src/config/gcp_instances.ts": {
@@ -85,8 +85,8 @@
     "semantic_hash": ""
   },
   "src/config/oracle_containers.ts": {
-    "mtime": 1780606945.4473226,
-    "ast_hash": "6ff0745cb6354815326588037ddb2656",
+    "mtime": 1780777012.415244,
+    "ast_hash": "8dc4eb32f7f7d919895d9ff83ac7fa0c",
     "semantic_hash": ""
   },
   "src/config/oracle_instances.ts": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1780724429.493563,
-    "ast_hash": "6cb14d5043ad71aa30d78406fa19ac06",
+    "mtime": 1780777460.5041792,
+    "ast_hash": "edfb6f036b0587a72a68b311f8a58783",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "next-env.d.ts": {
-    "mtime": 1780698498.2307281,
-    "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
+    "mtime": 1780777568.1136644,
+    "ast_hash": "2a74d3909800ca5467fa83b0ab4a4890",
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1780724425.260498,
-    "ast_hash": "48e5f7e62932f6847282bb6f9ccb7afd",
+    "mtime": 1780777414.887894,
+    "ast_hash": "cc728ed28ff32552b30873488ef81e45",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "src/config/alibaba_containers.ts": {
-    "mtime": 1780619072.9790149,
-    "ast_hash": "8077be5166ec4355d77e52ccd084c656",
+    "mtime": 1780777056.4062166,
+    "ast_hash": "3ba1c05a3848ea832046a45c826c2bbb",
     "semantic_hash": ""
   },
   "src/config/alibaba_database_instances.ts": {
@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "src/hooks/useContainersFilters.ts": {
-    "mtime": 1780621528.5121245,
-    "ast_hash": "b78fe3ef58863c3017c824d765364681",
+    "mtime": 1780777058.0683844,
+    "ast_hash": "83641b663581b2ac263d48941fd8abea",
     "semantic_hash": ""
   },
   "src/hooks/useDataAnalyticsFilters.ts": {
@@ -455,28 +455,28 @@
     "semantic_hash": ""
   },
   "src/hooks/useSharedFilters.ts": {
-    "mtime": 1780621528.5137212,
-    "ast_hash": "57131272f1063ab58e68ae51441abb07",
+    "mtime": 1780777084.0524879,
+    "ast_hash": "f9c9c09e5adfe8afa727699f9806ce92",
     "semantic_hash": ""
   },
   "src/hooks/useVMFilters.ts": {
-    "mtime": 1780621528.5139391,
-    "ast_hash": "424bf68badc69ec0c6596454c82d0d51",
+    "mtime": 1780777556.113483,
+    "ast_hash": "70b33b38986c2cb139cb0a77549fb8c4",
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1780724437.6695447,
-    "ast_hash": "39e529e8a4bf55798f54a6340be8fc1e",
+    "mtime": 1780777450.859096,
+    "ast_hash": "607d6ca64ec06990160dec7fad61a1ee",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1780721000.478953,
-    "ast_hash": "283afca562173629ed085a54f330f475",
+    "mtime": 1780777540.8067155,
+    "ast_hash": "16e4ce32048d8629ffed0bcb66ae9b42",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1780724465.2618532,
-    "ast_hash": "6b5113397cc82bc560359987205ed967",
+    "mtime": 1780777559.4726377,
+    "ast_hash": "28e0f2a7053b0f4cd4ebaca058a30a8a",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
@@ -505,8 +505,8 @@
     "semantic_hash": ""
   },
   "src/config/index.ts": {
-    "mtime": 1780722595.4012265,
-    "ast_hash": "e192a653b311e08765376a4deafe4033",
+    "mtime": 1780776908.9980145,
+    "ast_hash": "40808d5c7a56fb2e1ab658955d47fb4a",
     "semantic_hash": ""
   },
   "src/types/index.ts": {
@@ -537,6 +537,11 @@
   "src/config/oracle_data_analytics.ts": {
     "mtime": 1780722534.723441,
     "ast_hash": "d4c616b6b1f7c7b4ccb7ee3275942abe",
+    "semantic_hash": ""
+  },
+  "src/app/docs/page.tsx": {
+    "mtime": 1780777535.474153,
+    "ast_hash": "7a4500cbafb9ceb1e8aabe2ed2c7a831",
     "semantic_hash": ""
   }
 }
