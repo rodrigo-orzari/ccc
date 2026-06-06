@@ -64,15 +64,15 @@ export const DEFAULT_MEMORY_RANGE = { min: 0, max: 3200 };
 export const DEFAULT_PRICE_RANGE = { min: 0, max: 100 };
 
 // Cloud providers
-export const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] = [
+export const PROVIDERS: { id: string; name: string; color: string; soon?: boolean; isAIOnly?: boolean }[] = [
   { id: 'aws', name: 'AWS', color: '#FF9900' },
   { id: 'azure', name: 'Azure', color: '#00BCFF' },
   { id: 'gcp', name: 'Google', color: '#34A853' },
   { id: 'oracle', name: 'Oracle', color: '#F80000' },
   { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF' },
   { id: 'alibaba', name: 'Alibaba Cloud', color: '#FF6A00' },
-  { id: 'openai', name: 'OpenAI', color: '#10A37F' },
-  { id: 'anthropic', name: 'Anthropic', color: '#CC9D87' },
+  { id: 'openai', name: 'OpenAI', color: '#10A37F', isAIOnly: true },
+  { id: 'anthropic', name: 'Anthropic', color: '#CC9D87', isAIOnly: true },
 ];
 
 // AI-specific constants

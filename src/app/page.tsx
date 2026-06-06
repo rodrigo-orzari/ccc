@@ -31,7 +31,7 @@ export default function Dashboard() {
   const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');
 
   // Filter state
-  const [selectedProviders, setSelectedProviders] = useState<string[]>(PROVIDERS.filter(p => !p.soon).map(p => p.id));
+  const [selectedProviders, setSelectedProviders] = useState<string[]>(PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id));
   const [selectedGeographies, setSelectedGeographies] = useState<string[]>([...GEOGRAPHIES]);
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
@@ -42,6 +42,21 @@ export default function Dashboard() {
   const [selectedEngines, setSelectedEngines] = useState<string[]>([...DB_ENGINES]);
   const [selectedDeploymentTypes, setSelectedDeploymentTypes] = useState<string[]>([...DEPLOYMENT_TYPES]);
   const [selectedHaModes, setSelectedHaModes] = useState<string[]>([...HA_MODES]);
+
+  // When switching away from AI, ensure AI-only providers are removed from the selection
+  useEffect(() => {
+    if (activeProductType !== 'ai') {
+      setSelectedProviders(prev => {
+        const nonAIProviders = PROVIDERS.filter(p => !p.isAIOnly).map(p => p.id);
+        const next = prev.filter(p => nonAIProviders.includes(p));
+        // If nothing is left (e.g. user was only selecting OpenAI), reset to all non-AI providers
+        if (next.length === 0) {
+          return PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id);
+        }
+        return next;
+      });
+    }
+  }, [activeProductType]);
 
   const [selectedServerlessLanguages, setSelectedServerlessLanguages] = useState<string[]>([...SERVERLESS_LANGUAGES]);
   const [selectedServerlessColdStart, setSelectedServerlessColdStart] = useState<string[]>([...SERVERLESS_COLD_START_OPTIONS]);
@@ -591,13 +606,14 @@ export default function Dashboard() {
 
         <main className="flex-1 min-w-0 overflow-hidden flex flex-col bg-white dark:bg-[#000000]">
           <ProviderCards
-            providers={PROVIDERS}
+            providers={PROVIDERS.filter(p => activeProductType === 'ai' || !p.isAIOnly)}
             selectedProviders={selectedProviders}
             providerCounts={providerCounts}
             dbStatusProviders={dbStatus?.providers}
             isInitialFetch={isInitialFetch}
             onProviderSelect={(providerId) => {
-              const activeNonSoon = PROVIDERS.filter(p => !p.soon).map(p => p.id);
+              const activeProvidersList = PROVIDERS.filter(p => !p.soon && (activeProductType === 'ai' || !p.isAIOnly));
+              const activeNonSoon = activeProvidersList.map(p => p.id);
               if (selectedProviders.includes(providerId) && selectedProviders.length === 1) {
                 setSelectedProviders(activeNonSoon);
               } else {
