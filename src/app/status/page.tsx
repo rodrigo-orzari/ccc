@@ -285,32 +285,6 @@ export default function StatusPage() {
         .pipeline-table tr:hover td {
           background: var(--row-hover);
         }
-        .legend {
-          margin-top: 2.5rem;
-          padding: 1.25rem 1.5rem;
-          border: 1px solid var(--border);
-          border-radius: 8px;
-          background: var(--surface);
-        }
-        .legend-title {
-          font-size: 11px;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          color: var(--muted);
-          margin-bottom: 0.75rem;
-        }
-        .legend-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 0.5rem 1.5rem;
-          font-size: 12px;
-        }
-        .legend-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.5rem;
-        }
         @media (max-width: 640px) {
           .status-header, .status-body { padding: 1.25rem 1rem; }
           .pipeline-table th, .pipeline-table td { padding: 0.55rem 1rem; }
@@ -360,7 +334,7 @@ export default function StatusPage() {
             </h1>
           </div>
           <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0 }}>
-            Live view of pricing records collected per cloud provider and product category.
+            Learn when we last gathered pricing information per cloud provider and product category.
             {status?.last_ingested && (
               <> Last ingestion: {new Date(status.last_ingested).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}.</>
             )}
@@ -430,6 +404,16 @@ export default function StatusPage() {
                   </div>
                   <div className="summary-card-sub">most recent run</div>
                 </div>
+              </div>
+
+              {/* Legend — compact inline note */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.25rem 1rem', marginBottom: '1.5rem', fontSize: 11, color: 'var(--muted)' }}>
+                <span style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', fontSize: 10, marginRight: 4 }}>Key:</span>
+                <span><strong style={{ color: '#16a34a' }}>API</strong> — fetched from the provider's pricing API</span>
+                <span style={{ color: 'var(--border)' }}>·</span>
+                <span><strong style={{ color: '#d97706' }}>Static</strong> — curated config, updated manually</span>
+                <span style={{ color: 'var(--border)' }}>·</span>
+                <span>Prices refreshed weekly · On-demand USD · <Link href="/docs" style={{ color: 'var(--link)' }}>Docs</Link></span>
               </div>
 
               {/* Provider cards */}
@@ -505,27 +489,7 @@ export default function StatusPage() {
                 );
               })}
 
-              {/* Legend */}
-              <div className="legend">
-                <div className="legend-title">How to read this page</div>
-                <div className="legend-grid">
-                  <div className="legend-item">
-                    <span style={{ color: 'var(--muted)' }}>
-                      <strong style={{ color: '#16a34a' }}>API</strong> — fetched directly from the provider's pricing API each run
-                    </span>
-                  </div>
-                  <div className="legend-item">
-                    <span style={{ color: 'var(--muted)' }}>
-                      <strong style={{ color: '#d97706' }}>Static</strong> — sourced from a curated config, updated manually
-                    </span>
-                  </div>
-                </div>
-                <p style={{ fontSize: 11, color: 'var(--muted)', marginTop: '1rem', marginBottom: 0 }}>
-                  Pricing data is refreshed weekly. All prices are on-demand (pay-as-you-go) USD.
-                  Static configs are used as fallbacks when live API fetches fail.
-                  See the <Link href="/docs" style={{ color: 'var(--link)' }}>documentation</Link> for details.
-                </p>
-              </div>
+
 
             </>
           )}
