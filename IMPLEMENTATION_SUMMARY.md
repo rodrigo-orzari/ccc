@@ -242,3 +242,29 @@ May 20, 2026
 
 ## Deployment Ready
 ✅ Yes - All three tasks complete and integrated
+
+---
+
+# Data Visualizations & Networking Fix Implementation Summary
+
+## Status: ✅ COMPLETE
+
+### 1. In-Table Micro-Visualizations ✅
+- **Dynamic Price Bars**: Added a visual "heatmap" bar behind the price in the dense data grid.
+- **Relative Scaling**: The bar width is calculated relative to the maximum price of the currently *filtered* dataset, meaning the most expensive visible instance is always 100% width.
+- **Premium Aesthetics**: Replaced traffic-light colors with a neutral, premium Indigo (`#6366f1`) to avoid implying "good vs bad" value judgments arbitrarily.
+
+### 2. Analytical Charts View ✅
+- **View Toggle**: Added a segmented control in the `TableToolbar` to seamlessly switch between the tabular grid and the new Charts View.
+- **Provider Price Bar Chart**: Uses `recharts` to render an aggregated view of average prices across selected cloud providers.
+- **Resource Efficiency Scatter Plot**: Maps Price vs. RAM to visually identify the "efficiency frontier" (instances in the bottom right offer the highest RAM for the lowest price).
+
+### 3. Networking Filters Data Integration Fix ("Super Debug") ✅
+- **The Issue**: Networking products (like Data Transfer or Public IPv4) often map to "Global" or un-normalized region strings (like "US East") in the database. When the UI requested standard geographies (e.g., "N. America"), the strict SQL query filtered out all networking records, showing "No matches".
+- **The Fix**: Updated `buildPricingFilters` in `src/lib/api-utils.ts` to explicitly inject `'global'` into the search parameters for networking and analytics products. Added fuzzy-matching logic so that querying for "N. America" automatically includes related raw strings like "US East", "Canada", etc.
+
+### Implementation Date
+June 6, 2026
+
+### Deployment Ready
+✅ Yes - Visualizations and fixes are fully integrated and tested.
