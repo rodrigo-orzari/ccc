@@ -5,7 +5,6 @@ import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } f
 import { ALIBABA_INSTANCES, ALIBABA_REGION, ALIBABA_GEOGRAPHY } from '../config/alibaba_instances.ts';
 import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.ts';
 import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.ts';
-import { GcpInstancesScraper } from '../scrapers/gcp_instances.ts';
 import { DatabasePricingPipeline } from './database_pipeline';
 
 export interface PricingRecord {
@@ -279,10 +278,72 @@ export class GCPAdapter extends BaseAdapter {
   providerSlug = 'gcp';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching GCP pricing (from Playwright Scraper)...`);
-    const scraper = new GcpInstancesScraper();
-    const scrapedInstances = await scraper.run();
-    return scrapedInstances.map(inst => ({
+    try {
+      return await this.fetchFromPricingApi();
+    } catch (err: any) {
+      console.warn(`⚠️  GCP live pricing fetch failed (${err.message}), falling back to static config.`);
+      return this.fetchFromStaticConfig();
+    }
+  }
+
+  private async fetchFromPricingApi(): Promise<PricingRecord[]> {
+    console.log('Fetching GCP pricing from Cloud Pricing Calculator...');
+    const response = await axios.get(
+      'https://cloudpricingcalculator.appspot.com/static/data/pricelist.json',
+      { timeout: 30000 }
+    );
+
+    const priceList: Record<string, any> = response.data?.gcp_price_list ?? {};
+    const records: PricingRecord[] = [];
+    const seen = new Set<string>();
+    const PREFIX = 'CP-COMPUTEENGINE-VMIMAGE-';
+
+    for (const [key, val] of Object.entries(priceList)) {
+      if (!key.startsWith(PREFIX)) continue;
+
+      // Prefer region-specific price over the generic 'us' bucket
+      const price: number = Number(val['us-central1'] ?? val['us'] ?? 0);
+      const cores: number = parseInt(String(val['cores'] ?? '0'), 10);
+      const memGb: number = parseFloat(String(val['memory'] ?? '0'));
+
+      if (!price || price <= 0 || cores <= 0 || memGb <= 0) continue;
+
+      // CP-COMPUTEENGINE-VMIMAGE-N2-STANDARD-4 → n2-standard-4
+      const instanceType = key.slice(PREFIX.length).toLowerCase();
+      if (instanceType.length < 3) continue;
+      // Skip preemptible / spot variants — they have a different pricing entry
+      if (instanceType.endsWith('-preemptible') || instanceType.endsWith('-spot')) continue;
+      if (seen.has(instanceType)) continue;
+      seen.add(instanceType);
+
+      const cpuVendor = this.gcpCpuVendor(instanceType);
+      records.push({
+        provider: 'gcp',
+        service: 'Compute Engine',
+        region: GCP_REGION,
+        instanceType,
+        vcpus: cores,
+        memoryGb: memGb,
+        arch: cpuVendor === 'Ampere' ? 'ARM' : 'x86 64',
+        os: 'Linux',
+        cpuVendor,
+        gpuCount: (instanceType.startsWith('a2-') || instanceType.startsWith('a3-') || instanceType.startsWith('g2-')) ? 1 : 0,
+        geography: GCP_GEOGRAPHY,
+        category: this.classifyGcp(instanceType, cores, memGb),
+        price,
+        unit: 'Hour',
+        dataSource: 'live_api' as const,
+      });
+    }
+
+    if (records.length === 0) throw new Error('No GCP VM records parsed from pricing API response');
+    console.log(`✅ Fetched ${records.length} GCP Compute Engine records from Cloud Pricing Calculator`);
+    return records;
+  }
+
+  private fetchFromStaticConfig(): PricingRecord[] {
+    console.log(`Fetching GCP pricing (static config fallback, ${GCP_INSTANCES.length} entries)...`);
+    return GCP_INSTANCES.map(inst => ({
       provider: 'gcp',
       service: 'Compute Engine',
       region: GCP_REGION,
@@ -297,8 +358,14 @@ export class GCPAdapter extends BaseAdapter {
       category: this.classifyGcp(inst.type, inst.vcpus, inst.memory),
       price: inst.price,
       unit: 'Hour',
-      dataSource: 'playwright_scraper' as any,
+      dataSource: 'static_config' as const,
     }));
+  }
+
+  private gcpCpuVendor(instanceType: string): string {
+    if (instanceType.startsWith('t2a')) return 'Ampere';
+    if (instanceType.startsWith('n2d') || instanceType.startsWith('c2d') || instanceType.startsWith('t2d')) return 'AMD';
+    return 'Intel';
   }
 }
 
