@@ -4,6 +4,8 @@ import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline'
 import { DATABRICKS_INSTANCES, DATABRICKS_AWS_REGION, DATABRICKS_GCP_REGION } from '../config/databricks_instances';
 import { SNOWFLAKE_INSTANCES, SNOWFLAKE_AWS_REGION, SNOWFLAKE_AZURE_REGION, SNOWFLAKE_GCP_REGION } from '../config/snowflake_instances';
 import { NATIVE_ANALYTICS_INSTANCES, NATIVE_ANALYTICS_AWS_REGION, NATIVE_ANALYTICS_GCP_REGION } from '../config/native_analytics_instances';
+import { ALIBABA_ANALYTICS_INSTANCES, ALIBABA_ANALYTICS_REGION, ALIBABA_ANALYTICS_GEOGRAPHY } from '../config/alibaba_data_analytics';
+import { ORACLE_ANALYTICS_INSTANCES, ORACLE_ANALYTICS_REGION, ORACLE_ANALYTICS_GEOGRAPHY } from '../config/oracle_data_analytics';
 
 // ─── Databricks Static Adapters ────────────────────────────────────────────────
 
