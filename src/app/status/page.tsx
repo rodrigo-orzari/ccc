@@ -70,17 +70,6 @@ function XIcon() {
 
 const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse'];
 
-function timeAgo(isoString: string | null): string {
-  if (!isoString) return 'Never';
-  const diff = Date.now() - new Date(isoString).getTime();
-  const days = Math.floor(diff / 86400000);
-  const hours = Math.floor(diff / 3600000);
-  const minutes = Math.floor(diff / 60000);
-  if (days > 0) return `${days}d ago`;
-  if (hours > 0) return `${hours}h ago`;
-  if (minutes > 0) return `${minutes}m ago`;
-  return 'Just now';
-}
 
 function freshnessStatus(isoString: string | null): 'fresh' | 'stale' | 'old' | 'missing' {
   if (!isoString) return 'missing';
@@ -536,7 +525,7 @@ export default function StatusPage() {
                                   <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                                     <StatusDot status={pl.record_count === 0 ? 'missing' : pf} />
                                     <span style={{ fontSize: 11, color: 'var(--muted)' }}>
-                                      {pl.record_count === 0 ? 'No data' : timeAgo(pl.last_updated)}
+                                      {pl.record_count === 0 ? 'No data' : pf.charAt(0).toUpperCase() + pf.slice(1)}
                                     </span>
                                   </span>
                                 </td>
