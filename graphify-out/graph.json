@@ -4,106 +4,181 @@
   "graph": {},
   "nodes": [
     {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/health/route.ts",
+      "source_location": "L1",
+      "id": "health_route",
+      "community": 5,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "src/app/api/health/route.ts",
+      "source_location": "L5",
+      "id": "health_route_get",
+      "community": 5,
+      "norm_label": "get()"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L1",
+      "community": 4,
+      "norm_label": "route.ts",
+      "id": "status_route"
+    },
+    {
+      "label": "PIPELINE_DISPLAY",
+      "file_type": "code",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L4",
+      "community": 4,
+      "norm_label": "pipeline_display",
+      "id": "status_route_pipeline_display"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L13",
+      "community": 4,
+      "norm_label": "get()",
+      "id": "status_route_get"
+    },
+    {
       "label": "scratch_test.js",
       "file_type": "code",
       "source_file": "scratch_test.js",
       "source_location": "L1",
-      "id": "scratch_test",
       "community": 3,
-      "norm_label": "scratch_test.js"
+      "norm_label": "scratch_test.js",
+      "id": "scratch_test"
     },
     {
       "label": "test_db.mjs",
       "file_type": "code",
       "source_file": "test_db.mjs",
       "source_location": "L1",
-      "id": "test_db",
       "community": 0,
-      "norm_label": "test_db.mjs"
+      "norm_label": "test_db.mjs",
+      "id": "test_db"
     },
     {
       "label": "sql",
       "file_type": "code",
       "source_file": "test_db.mjs",
       "source_location": "L3",
-      "id": "test_db_sql",
       "community": 0,
-      "norm_label": "sql"
+      "norm_label": "sql",
+      "id": "test_db_sql"
     },
     {
       "label": "test()",
       "file_type": "code",
       "source_file": "test_db.mjs",
       "source_location": "L5",
-      "id": "test_db_test",
       "community": 0,
-      "norm_label": "test()"
+      "norm_label": "test()",
+      "id": "test_db_test"
     },
     {
       "label": "test_db_geo.mjs",
       "file_type": "code",
       "source_file": "test_db_geo.mjs",
       "source_location": "L1",
-      "id": "test_db_geo",
       "community": 1,
-      "norm_label": "test_db_geo.mjs"
+      "norm_label": "test_db_geo.mjs",
+      "id": "test_db_geo"
     },
     {
       "label": "sql",
       "file_type": "code",
       "source_file": "test_db_geo.mjs",
       "source_location": "L3",
-      "id": "test_db_geo_sql",
       "community": 1,
-      "norm_label": "sql"
+      "norm_label": "sql",
+      "id": "test_db_geo_sql"
     },
     {
       "label": "test()",
       "file_type": "code",
       "source_file": "test_db_geo.mjs",
       "source_location": "L5",
-      "id": "test_db_geo_test",
       "community": 1,
-      "norm_label": "test()"
+      "norm_label": "test()",
+      "id": "test_db_geo_test"
     },
     {
       "label": "test_db_price.mjs",
       "file_type": "code",
       "source_file": "test_db_price.mjs",
       "source_location": "L1",
-      "id": "test_db_price",
       "community": 2,
-      "norm_label": "test_db_price.mjs"
+      "norm_label": "test_db_price.mjs",
+      "id": "test_db_price"
     },
     {
       "label": "sql",
       "file_type": "code",
       "source_file": "test_db_price.mjs",
       "source_location": "L3",
-      "id": "test_db_price_sql",
       "community": 2,
-      "norm_label": "sql"
+      "norm_label": "sql",
+      "id": "test_db_price_sql"
     },
     {
       "label": "test()",
       "file_type": "code",
       "source_file": "test_db_price.mjs",
       "source_location": "L5",
-      "id": "test_db_price_test",
       "community": 2,
-      "norm_label": "test()"
+      "norm_label": "test()",
+      "id": "test_db_price_test"
     }
   ],
   "links": [
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/api/health/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "health_route",
+      "target": "health_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_route",
+      "target": "status_route_get"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/status/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_route",
+      "target": "status_route_pipeline_display"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "test_db.mjs",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db",
-      "target": "test_db_sql",
-      "confidence_score": 1.0
+      "target": "test_db_sql"
     },
     {
       "relation": "contains",
@@ -111,9 +186,9 @@
       "source_file": "test_db.mjs",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db",
-      "target": "test_db_test",
-      "confidence_score": 1.0
+      "target": "test_db_test"
     },
     {
       "relation": "calls",
@@ -122,9 +197,9 @@
       "source_file": "test_db.mjs",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db_test",
-      "target": "test_db_sql",
-      "confidence_score": 1.0
+      "target": "test_db_sql"
     },
     {
       "relation": "contains",
@@ -132,9 +207,9 @@
       "source_file": "test_db_geo.mjs",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db_geo",
-      "target": "test_db_geo_sql",
-      "confidence_score": 1.0
+      "target": "test_db_geo_sql"
     },
     {
       "relation": "contains",
@@ -142,9 +217,9 @@
       "source_file": "test_db_geo.mjs",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db_geo",
-      "target": "test_db_geo_test",
-      "confidence_score": 1.0
+      "target": "test_db_geo_test"
     },
     {
       "relation": "calls",
@@ -153,9 +228,9 @@
       "source_file": "test_db_geo.mjs",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db_geo_test",
-      "target": "test_db_geo_sql",
-      "confidence_score": 1.0
+      "target": "test_db_geo_sql"
     },
     {
       "relation": "contains",
@@ -163,9 +238,9 @@
       "source_file": "test_db_price.mjs",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db_price",
-      "target": "test_db_price_sql",
-      "confidence_score": 1.0
+      "target": "test_db_price_sql"
     },
     {
       "relation": "contains",
@@ -173,9 +248,9 @@
       "source_file": "test_db_price.mjs",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db_price",
-      "target": "test_db_price_test",
-      "confidence_score": 1.0
+      "target": "test_db_price_test"
     },
     {
       "relation": "calls",
@@ -184,11 +259,11 @@
       "source_file": "test_db_price.mjs",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "test_db_price_test",
-      "target": "test_db_price_sql",
-      "confidence_score": 1.0
+      "target": "test_db_price_sql"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "ad93eb650be71187870e431bb66d15de666f1bb1"
+  "built_at_commit": "260ed5672644cb0c2411295da522789a10a4c3dd"
 }

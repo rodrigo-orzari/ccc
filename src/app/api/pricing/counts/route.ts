@@ -13,6 +13,7 @@ export async function GET(req: NextRequest) {
       FROM providers p
       LEFT JOIN services s ON s.provider_id = p.id
       LEFT JOIN pricing_records pr ON pr.service_id = s.id
+      LEFT JOIN regions r ON pr.region_id = r.id
       WHERE 1=1 ${whereClause}
       GROUP BY p.slug
     `;

@@ -330,8 +330,8 @@
     "semantic_hash": ""
   },
   "src/app/api/health/route.ts": {
-    "mtime": 1780618759.0144613,
-    "ast_hash": "5f94340d0bb9028745a199a32132a512",
+    "mtime": 1780780874.9304965,
+    "ast_hash": "fb5beb896161262072d019efed2ab011",
     "semantic_hash": ""
   },
   "src/app/api/ping/route.ts": {
@@ -340,8 +340,8 @@
     "semantic_hash": ""
   },
   "src/app/api/pricing/counts/route.ts": {
-    "mtime": 1780618780.1491885,
-    "ast_hash": "c8271f1575eefdb7b825e0495344d6f5",
+    "mtime": 1780780881.460848,
+    "ast_hash": "57d5f2f7c374a441febad8c6898cc72b",
     "semantic_hash": ""
   },
   "src/app/api/pricing/route.ts": {
@@ -567,6 +567,11 @@
   "test_db_price.mjs": {
     "mtime": 1780780852.252123,
     "ast_hash": "1178d87ddbdc54304f6c869f6ddf07e5",
+    "semantic_hash": ""
+  },
+  "src/app/api/status/route.ts": {
+    "mtime": 1780780868.0547996,
+    "ast_hash": "2a9ffba70603ea599ba9dedcc043269c",
     "semantic_hash": ""
   }
 }
