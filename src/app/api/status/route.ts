@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import sql from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 const PIPELINE_DISPLAY: Record<string, string> = {
   compute: 'Virtual Machines',
   database: 'Databases',
