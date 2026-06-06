@@ -58,499 +58,553 @@
   },
   "nodes": [
     {
+      "label": "api-utils.ts",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L1",
+      "id": "lib_api_utils",
+      "community": 4,
+      "norm_label": "api-utils.ts"
+    },
+    {
+      "label": "requireAdminAuth()",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L8",
+      "id": "lib_api_utils_requireadminauth",
+      "community": 32,
+      "norm_label": "requireadminauth()"
+    },
+    {
+      "label": "initDb()",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L30",
+      "id": "lib_api_utils_initdb",
+      "community": 32,
+      "norm_label": "initdb()"
+    },
+    {
+      "label": "VALID_PRODUCT_TYPES",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L86",
+      "id": "lib_api_utils_valid_product_types",
+      "community": 4,
+      "norm_label": "valid_product_types"
+    },
+    {
+      "label": "parseFilterList()",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L88",
+      "id": "lib_api_utils_parsefilterlist",
+      "community": 4,
+      "norm_label": "parsefilterlist()"
+    },
+    {
+      "label": "buildPricingFilters()",
+      "file_type": "code",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L109",
+      "id": "lib_api_utils_buildpricingfilters",
+      "community": 4,
+      "norm_label": "buildpricingfilters()"
+    },
+    {
       "label": "package.json",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L1",
-      "id": "package",
       "community": 12,
-      "norm_label": "package.json"
+      "norm_label": "package.json",
+      "id": "package"
     },
     {
       "label": "name",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L2",
-      "id": "package_name",
       "community": 12,
-      "norm_label": "name"
+      "norm_label": "name",
+      "id": "package_name"
     },
     {
       "label": "private",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L3",
-      "id": "package_private",
       "community": 12,
-      "norm_label": "private"
+      "norm_label": "private",
+      "id": "package_private"
     },
     {
       "label": "version",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L4",
-      "id": "package_version",
       "community": 12,
-      "norm_label": "version"
+      "norm_label": "version",
+      "id": "package_version"
     },
     {
       "label": "type",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L5",
-      "id": "package_type",
       "community": 12,
-      "norm_label": "type"
+      "norm_label": "type",
+      "id": "package_type"
     },
     {
       "label": "scripts",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L6",
-      "id": "package_scripts",
       "community": 12,
-      "norm_label": "scripts"
+      "norm_label": "scripts",
+      "id": "package_scripts"
     },
     {
       "label": "dev",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L7",
-      "id": "package_scripts_dev",
       "community": 12,
-      "norm_label": "dev"
+      "norm_label": "dev",
+      "id": "package_scripts_dev"
     },
     {
       "label": "build",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L8",
-      "id": "package_scripts_build",
       "community": 12,
-      "norm_label": "build"
+      "norm_label": "build",
+      "id": "package_scripts_build"
     },
     {
       "label": "start",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L9",
-      "id": "package_scripts_start",
       "community": 12,
-      "norm_label": "start"
+      "norm_label": "start",
+      "id": "package_scripts_start"
     },
     {
       "label": "ingest",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L10",
-      "id": "package_scripts_ingest",
       "community": 12,
-      "norm_label": "ingest"
+      "norm_label": "ingest",
+      "id": "package_scripts_ingest"
     },
     {
       "label": "worker",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L11",
-      "id": "package_scripts_worker",
       "community": 12,
-      "norm_label": "worker"
+      "norm_label": "worker",
+      "id": "package_scripts_worker"
     },
     {
       "label": "lint",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L12",
-      "id": "package_scripts_lint",
       "community": 12,
-      "norm_label": "lint"
+      "norm_label": "lint",
+      "id": "package_scripts_lint"
     },
     {
       "label": "dependencies",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L14",
-      "id": "package_dependencies",
       "community": 12,
-      "norm_label": "dependencies"
+      "norm_label": "dependencies",
+      "id": "package_dependencies"
     },
     {
       "label": "@aws-sdk/client-pricing",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L15",
-      "id": "package_dependencies_aws_sdk_client_pricing",
       "community": 12,
-      "norm_label": "@aws-sdk/client-pricing"
+      "norm_label": "@aws-sdk/client-pricing",
+      "id": "package_dependencies_aws_sdk_client_pricing"
     },
     {
       "label": "@google/genai",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L16",
-      "id": "package_dependencies_google_genai",
       "community": 12,
-      "norm_label": "@google/genai"
+      "norm_label": "@google/genai",
+      "id": "package_dependencies_google_genai"
     },
     {
       "label": "@tailwindcss/postcss",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L17",
-      "id": "package_dependencies_tailwindcss_postcss",
       "community": 12,
-      "norm_label": "@tailwindcss/postcss"
+      "norm_label": "@tailwindcss/postcss",
+      "id": "package_dependencies_tailwindcss_postcss"
     },
     {
       "label": "@tailwindcss/typography",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L18",
-      "id": "package_dependencies_tailwindcss_typography",
       "community": 12,
-      "norm_label": "@tailwindcss/typography"
+      "norm_label": "@tailwindcss/typography",
+      "id": "package_dependencies_tailwindcss_typography"
     },
     {
       "label": "@tanstack/react-query",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L19",
-      "id": "package_dependencies_tanstack_react_query",
       "community": 12,
-      "norm_label": "@tanstack/react-query"
+      "norm_label": "@tanstack/react-query",
+      "id": "package_dependencies_tanstack_react_query"
     },
     {
       "label": "axios",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L20",
-      "id": "package_dependencies_axios",
       "community": 12,
-      "norm_label": "axios"
+      "norm_label": "axios",
+      "id": "package_dependencies_axios"
     },
     {
       "label": "dotenv",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L21",
-      "id": "package_dependencies_dotenv",
       "community": 12,
-      "norm_label": "dotenv"
+      "norm_label": "dotenv",
+      "id": "package_dependencies_dotenv"
     },
     {
       "label": "lucide-react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L22",
-      "id": "package_dependencies_lucide_react",
       "community": 12,
-      "norm_label": "lucide-react"
+      "norm_label": "lucide-react",
+      "id": "package_dependencies_lucide_react"
     },
     {
       "label": "motion",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L23",
-      "id": "package_dependencies_motion",
       "community": 12,
-      "norm_label": "motion"
+      "norm_label": "motion",
+      "id": "package_dependencies_motion"
     },
     {
       "label": "next",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L24",
-      "id": "package_dependencies_next",
       "community": 12,
-      "norm_label": "next"
+      "norm_label": "next",
+      "id": "package_dependencies_next"
     },
     {
       "label": "node-cron",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L25",
-      "id": "package_dependencies_node_cron",
       "community": 12,
-      "norm_label": "node-cron"
+      "norm_label": "node-cron",
+      "id": "package_dependencies_node_cron"
     },
     {
       "label": "nodemailer",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L26",
-      "id": "package_dependencies_nodemailer",
       "community": 12,
-      "norm_label": "nodemailer"
+      "norm_label": "nodemailer",
+      "id": "package_dependencies_nodemailer"
     },
     {
       "label": "postcss",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L27",
-      "id": "package_dependencies_postcss",
       "community": 12,
-      "norm_label": "postcss"
+      "norm_label": "postcss",
+      "id": "package_dependencies_postcss"
     },
     {
       "label": "postgres",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L28",
-      "id": "package_dependencies_postgres",
       "community": 12,
-      "norm_label": "postgres"
+      "norm_label": "postgres",
+      "id": "package_dependencies_postgres"
     },
     {
       "label": "react",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L29",
-      "id": "package_dependencies_react",
       "community": 12,
-      "norm_label": "react"
+      "norm_label": "react",
+      "id": "package_dependencies_react"
     },
     {
       "label": "react-dom",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L30",
-      "id": "package_dependencies_react_dom",
       "community": 12,
-      "norm_label": "react-dom"
+      "norm_label": "react-dom",
+      "id": "package_dependencies_react_dom"
     },
     {
       "label": "react-markdown",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L31",
-      "id": "package_dependencies_react_markdown",
       "community": 12,
-      "norm_label": "react-markdown"
+      "norm_label": "react-markdown",
+      "id": "package_dependencies_react_markdown"
     },
     {
       "label": "recharts",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L32",
-      "id": "package_dependencies_recharts",
       "community": 12,
-      "norm_label": "recharts"
+      "norm_label": "recharts",
+      "id": "package_dependencies_recharts"
     },
     {
       "label": "tsx",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L33",
-      "id": "package_dependencies_tsx",
       "community": 12,
-      "norm_label": "tsx"
+      "norm_label": "tsx",
+      "id": "package_dependencies_tsx"
     },
     {
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L35",
-      "id": "package_devdependencies",
       "community": 12,
-      "norm_label": "devdependencies"
+      "norm_label": "devdependencies",
+      "id": "package_devdependencies"
     },
     {
       "label": "@playwright/test",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L36",
-      "id": "package_devdependencies_playwright_test",
       "community": 12,
-      "norm_label": "@playwright/test"
+      "norm_label": "@playwright/test",
+      "id": "package_devdependencies_playwright_test"
     },
     {
       "label": "@types/node",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L37",
-      "id": "package_devdependencies_types_node",
       "community": 12,
-      "norm_label": "@types/node"
+      "norm_label": "@types/node",
+      "id": "package_devdependencies_types_node"
     },
     {
       "label": "@types/nodemailer",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L38",
-      "id": "package_devdependencies_types_nodemailer",
       "community": 12,
-      "norm_label": "@types/nodemailer"
+      "norm_label": "@types/nodemailer",
+      "id": "package_devdependencies_types_nodemailer"
     },
     {
       "label": "autoprefixer",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L39",
-      "id": "package_devdependencies_autoprefixer",
       "community": 12,
-      "norm_label": "autoprefixer"
+      "norm_label": "autoprefixer",
+      "id": "package_devdependencies_autoprefixer"
     },
     {
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L40",
-      "id": "package_devdependencies_tailwindcss",
       "community": 12,
-      "norm_label": "tailwindcss"
+      "norm_label": "tailwindcss",
+      "id": "package_devdependencies_tailwindcss"
     },
     {
       "label": "typescript",
       "file_type": "code",
       "source_file": "package.json",
       "source_location": "L41",
-      "id": "package_devdependencies_typescript",
       "community": 12,
-      "norm_label": "typescript"
+      "norm_label": "typescript",
+      "id": "package_devdependencies_typescript"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
       "source_location": "L1",
-      "id": "app_page",
       "community": 44,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "app_page"
     },
     {
       "label": "Dashboard()",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
       "source_location": "L28",
-      "id": "app_page_dashboard",
       "community": 44,
-      "norm_label": "dashboard()"
+      "norm_label": "dashboard()",
+      "id": "app_page_dashboard"
     },
     {
       "label": "ChartsView.tsx",
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L1",
-      "id": "components_chartsview",
       "community": 44,
-      "norm_label": "chartsview.tsx"
+      "norm_label": "chartsview.tsx",
+      "id": "components_chartsview"
     },
     {
       "label": "ChartsViewProps",
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L8",
-      "id": "components_chartsview_chartsviewprops",
       "community": 44,
-      "norm_label": "chartsviewprops"
+      "norm_label": "chartsviewprops",
+      "id": "components_chartsview_chartsviewprops"
     },
     {
       "label": "ChartsView()",
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L13",
-      "id": "components_chartsview_chartsview",
       "community": 44,
-      "norm_label": "chartsview()"
+      "norm_label": "chartsview()",
+      "id": "components_chartsview_chartsview"
     },
     {
       "label": "PricingTable.tsx",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L1",
-      "id": "components_pricingtable",
       "community": 44,
-      "norm_label": "pricingtable.tsx"
+      "norm_label": "pricingtable.tsx",
+      "id": "components_pricingtable"
     },
     {
       "label": "PROVIDERS",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L6",
-      "id": "components_pricingtable_providers",
       "community": 44,
-      "norm_label": "providers"
+      "norm_label": "providers",
+      "id": "components_pricingtable_providers"
     },
     {
       "label": "PricingTableProps",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L15",
-      "id": "components_pricingtable_pricingtableprops",
       "community": 44,
-      "norm_label": "pricingtableprops"
+      "norm_label": "pricingtableprops",
+      "id": "components_pricingtable_pricingtableprops"
     },
     {
       "label": "SortIcon()",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L27",
-      "id": "components_pricingtable_sorticon",
       "community": 44,
-      "norm_label": "sorticon()"
+      "norm_label": "sorticon()",
+      "id": "components_pricingtable_sorticon"
     },
     {
       "label": "getColumnCount()",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L36",
-      "id": "components_pricingtable_getcolumncount",
       "community": 44,
-      "norm_label": "getcolumncount()"
+      "norm_label": "getcolumncount()",
+      "id": "components_pricingtable_getcolumncount"
     },
     {
       "label": "PricingTable()",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L47",
-      "id": "components_pricingtable_pricingtable",
       "community": 44,
-      "norm_label": "pricingtable()"
+      "norm_label": "pricingtable()",
+      "id": "components_pricingtable_pricingtable"
     },
     {
       "label": "TableRow()",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L209",
-      "id": "components_pricingtable_tablerow",
       "community": 44,
-      "norm_label": "tablerow()"
+      "norm_label": "tablerow()",
+      "id": "components_pricingtable_tablerow"
     },
     {
       "label": "TableToolbar.tsx",
       "file_type": "code",
       "source_file": "src/components/TableToolbar.tsx",
       "source_location": "L1",
-      "id": "components_tabletoolbar",
       "community": 44,
-      "norm_label": "tabletoolbar.tsx"
+      "norm_label": "tabletoolbar.tsx",
+      "id": "components_tabletoolbar"
     },
     {
       "label": "TableToolbarProps",
       "file_type": "code",
       "source_file": "src/components/TableToolbar.tsx",
       "source_location": "L6",
-      "id": "components_tabletoolbar_tabletoolbarprops",
       "community": 44,
-      "norm_label": "tabletoolbarprops"
+      "norm_label": "tabletoolbarprops",
+      "id": "components_tabletoolbar_tabletoolbarprops"
     },
     {
       "label": "TableToolbar()",
       "file_type": "code",
       "source_file": "src/components/TableToolbar.tsx",
       "source_location": "L17",
-      "id": "components_tabletoolbar_tabletoolbar",
       "community": 44,
-      "norm_label": "tabletoolbar()"
+      "norm_label": "tabletoolbar()",
+      "id": "components_tabletoolbar_tabletoolbar"
     },
     {
       "label": "index.ts",
       "file_type": "code",
       "source_file": "src/components/index.ts",
       "source_location": "L1",
-      "id": "components_index",
       "community": 44,
-      "norm_label": "index.ts"
+      "norm_label": "index.ts",
+      "id": "components_index"
     },
     {
       "label": "next-env.d.ts",
@@ -1325,60 +1379,6 @@
       "community": 5,
       "norm_label": "usevmfilters()",
       "id": "hooks_usevmfilters_usevmfilters"
-    },
-    {
-      "label": "api-utils.ts",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L1",
-      "community": 4,
-      "norm_label": "api-utils.ts",
-      "id": "lib_api_utils"
-    },
-    {
-      "label": "requireAdminAuth()",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L8",
-      "community": 32,
-      "norm_label": "requireadminauth()",
-      "id": "lib_api_utils_requireadminauth"
-    },
-    {
-      "label": "initDb()",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L30",
-      "community": 32,
-      "norm_label": "initdb()",
-      "id": "lib_api_utils_initdb"
-    },
-    {
-      "label": "VALID_PRODUCT_TYPES",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L86",
-      "community": 4,
-      "norm_label": "valid_product_types",
-      "id": "lib_api_utils_valid_product_types"
-    },
-    {
-      "label": "parseFilterList()",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L88",
-      "community": 4,
-      "norm_label": "parsefilterlist()",
-      "id": "lib_api_utils_parsefilterlist"
-    },
-    {
-      "label": "buildPricingFilters()",
-      "file_type": "code",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L109",
-      "community": 4,
-      "norm_label": "buildpricingfilters()",
-      "id": "lib_api_utils_buildpricingfilters"
     },
     {
       "label": "useDataAnalyticsFilters.ts",
@@ -6883,6 +6883,243 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L109",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L88",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_parsefilterlist"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_api_utils_valid_product_types"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils",
+      "target": "lib_db"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pricing_route",
+      "target": "lib_api_utils"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fetch_pricing_route",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "fetch_pricing_route_post",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/init-db/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "init_db_route",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/init-db/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "init_db_route_post",
+      "target": "lib_api_utils_requireadminauth"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fetch_pricing_route",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "fetch_pricing_route_post",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/init-db/route.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "init_db_route",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/admin/init-db/route.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "init_db_route_post",
+      "target": "lib_api_utils_initdb"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api-utils.ts",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_api_utils_buildpricingfilters",
+      "target": "lib_api_utils_parsefilterlist"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/counts/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "counts_route",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/pricing/counts/route.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "counts_route_get",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/health/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "health_route",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/health/route.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "health_route_get",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pricing_route",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "pricing_route_get",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "package.json",
       "source_location": "L15",
       "weight": 1.0,
@@ -7156,9 +7393,9 @@
       "source_file": "package.json",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_dependencies",
-      "target": "package_dependencies_recharts",
-      "confidence_score": 1.0
+      "target": "package_dependencies_recharts"
     },
     {
       "relation": "contains",
@@ -7672,9 +7909,9 @@
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_chartsview",
-      "target": "components_chartsview_chartsview",
-      "confidence_score": 1.0
+      "target": "components_chartsview_chartsview"
     },
     {
       "relation": "contains",
@@ -7682,9 +7919,9 @@
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_chartsview",
-      "target": "components_chartsview_chartsviewprops",
-      "confidence_score": 1.0
+      "target": "components_chartsview_chartsviewprops"
     },
     {
       "relation": "imports",
@@ -7693,9 +7930,9 @@
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_chartsview",
-      "target": "config_index_providers",
-      "confidence_score": 1.0
+      "target": "config_index_providers"
     },
     {
       "relation": "imports",
@@ -7704,9 +7941,9 @@
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_chartsview",
-      "target": "types_index_pricingrecord",
-      "confidence_score": 1.0
+      "target": "types_index_pricingrecord"
     },
     {
       "relation": "imports",
@@ -7715,9 +7952,9 @@
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_chartsview",
-      "target": "types_index_producttype",
-      "confidence_score": 1.0
+      "target": "types_index_producttype"
     },
     {
       "relation": "re_exports",
@@ -7726,9 +7963,9 @@
       "source_file": "src/components/index.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_index",
-      "target": "components_chartsview",
-      "confidence_score": 1.0
+      "target": "components_chartsview"
     },
     {
       "relation": "re_exports",
@@ -9288,243 +9525,6 @@
       "confidence_score": 1.0,
       "source": "hooks_index",
       "target": "hooks_usevmfilters_usevmfilters"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L109",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_api_utils",
-      "target": "lib_api_utils_buildpricingfilters"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_api_utils",
-      "target": "lib_api_utils_initdb"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L88",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_api_utils",
-      "target": "lib_api_utils_parsefilterlist"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_api_utils",
-      "target": "lib_api_utils_requireadminauth"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L86",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_api_utils",
-      "target": "lib_api_utils_valid_product_types"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_api_utils",
-      "target": "lib_db"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pricing_route",
-      "target": "lib_api_utils"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "fetch_pricing_route",
-      "target": "lib_api_utils_requireadminauth"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
-      "source_location": "L12",
-      "weight": 1.0,
-      "source": "fetch_pricing_route_post",
-      "target": "lib_api_utils_requireadminauth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/admin/init-db/route.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "init_db_route",
-      "target": "lib_api_utils_requireadminauth"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/api/admin/init-db/route.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "init_db_route_post",
-      "target": "lib_api_utils_requireadminauth"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "fetch_pricing_route",
-      "target": "lib_api_utils_initdb"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
-      "source_location": "L67",
-      "weight": 1.0,
-      "source": "fetch_pricing_route_post",
-      "target": "lib_api_utils_initdb"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/admin/init-db/route.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "init_db_route",
-      "target": "lib_api_utils_initdb"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/api/admin/init-db/route.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "init_db_route_post",
-      "target": "lib_api_utils_initdb"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/lib/api-utils.ts",
-      "source_location": "L135",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "lib_api_utils_buildpricingfilters",
-      "target": "lib_api_utils_parsefilterlist"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/pricing/counts/route.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "counts_route",
-      "target": "lib_api_utils_buildpricingfilters"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/api/pricing/counts/route.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "counts_route_get",
-      "target": "lib_api_utils_buildpricingfilters"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/health/route.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "health_route",
-      "target": "lib_api_utils_buildpricingfilters"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/api/health/route.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "health_route_get",
-      "target": "lib_api_utils_buildpricingfilters"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pricing_route",
-      "target": "lib_api_utils_buildpricingfilters"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L65",
-      "weight": 1.0,
-      "source": "pricing_route_get",
-      "target": "lib_api_utils_buildpricingfilters"
     },
     {
       "relation": "re_exports",
@@ -17757,5 +17757,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "6f365d38bf5eeb3cea336603ff8012a109f59230"
+  "built_at_commit": "822e542ca53f9b38ce7f809e4216b4aa12872314"
 }
