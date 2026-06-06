@@ -4,22 +4,40 @@
   "graph": {},
   "nodes": [
     {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L1",
+      "id": "app_page",
+      "community": 7,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "Dashboard()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L28",
+      "id": "app_page_dashboard",
+      "community": 7,
+      "norm_label": "dashboard()"
+    },
+    {
       "label": "route.ts",
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L1",
-      "id": "counts_route",
       "community": 6,
-      "norm_label": "route.ts"
+      "norm_label": "route.ts",
+      "id": "counts_route"
     },
     {
       "label": "GET()",
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L5",
-      "id": "counts_route_get",
       "community": 6,
-      "norm_label": "get()"
+      "norm_label": "get()",
+      "id": "counts_route_get"
     },
     {
       "label": "route.ts",
@@ -161,12 +179,22 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "app_page",
+      "target": "app_page_dashboard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "counts_route",
-      "target": "counts_route_get",
-      "confidence_score": 1.0
+      "target": "counts_route_get"
     },
     {
       "relation": "contains",
@@ -293,5 +321,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fdc1bdd4c9410a09e897d40bbd7d369c905d8ceb"
+  "built_at_commit": "39eac66ad8e29cefa93a8210923d9890d8e04408"
 }
