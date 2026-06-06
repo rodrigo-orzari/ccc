@@ -8,12 +8,13 @@ export async function GET(req: NextRequest) {
     const query = Object.fromEntries(searchParams.entries());
     const { whereClause, values } = buildPricingFilters(query);
 
-    const countRes = await sql.unsafe(`SELECT COUNT(*) FROM pricing_records pr JOIN services s ON pr.service_id = s.id WHERE 1=1 ${whereClause}`, values);
+    const countRes = await sql.unsafe(`SELECT COUNT(*) FROM pricing_records pr JOIN services s ON pr.service_id = s.id LEFT JOIN regions r ON pr.region_id = r.id WHERE 1=1 ${whereClause}`, values);
     const providerRes = await sql.unsafe(`
       SELECT p.slug, COUNT(pr.id) as count
       FROM providers p
       LEFT JOIN services s ON s.provider_id = p.id
       LEFT JOIN pricing_records pr ON pr.service_id = s.id
+      LEFT JOIN regions r ON pr.region_id = r.id
       WHERE 1=1 ${whereClause}
       GROUP BY p.slug
     `, values);
