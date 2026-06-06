@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 116 files · ~91,091 words
+- 116 files · ~91,626 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 223 nodes · 290 edges · 22 communities (15 shown, 7 thin omitted)
+- 227 nodes · 294 edges · 24 communities (17 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3357c821`
+- Built from commit: `dd8c790f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -40,10 +40,10 @@
 4. `End-to-End Integration Verification` - 5 edges
 5. `7. In-Depth Subsystem Walks` - 5 edges
 6. `PROVIDERS` - 4 edges
-7. `AIPricingPipeline` - 4 edges
-8. `Task 2: Backend API Route Updates ✅` - 4 edges
-9. `Files Modified` - 4 edges
-10. `8. Resources for Contributors` - 4 edges
+7. `ProductType` - 4 edges
+8. `PricingRecord` - 4 edges
+9. `AIPricingPipeline` - 4 edges
+10. `Task 2: Backend API Route Updates ✅` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - None detected - all connections are within the same source files.
@@ -51,7 +51,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (22 total, 7 thin omitted)
+## Communities (24 total, 7 thin omitted)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.11
@@ -94,16 +94,20 @@ Cohesion: 0.40
 Nodes (3): DBStatusProvider, ProviderCardProps, ProviderCardsProps
 
 ## Knowledge Gaps
-- **88 isolated node(s):** `PIPELINE_DISPLAY`, `TableToolbarProps`, `PipelineStatus`, `ProviderStatus`, `StatusData` (+83 more)
+- **88 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+83 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `ProductType` connect `Community 18` to `Community 15`, `Community 7`?**
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Community 18` to `Community 15`, `Community 7`?**
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
 - **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **What connects `PIPELINE_DISPLAY`, `TableToolbarProps`, `PipelineStatus` to the rest of the system?**
+  _High betweenness centrality (0.021) - this node is a cross-community bridge._
+- **What connects `PROVIDERS`, `ColDef`, `COL_PROVIDER` to the rest of the system?**
   _88 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 7` be split into smaller, more focused modules?**
   _Cohesion score 0.11207729468599034 - nodes in this community are weakly interconnected._
@@ -111,5 +115,3 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
 - **Should `Community 12` be split into smaller, more focused modules?**
   _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._
-- **Should `Community 15` be split into smaller, more focused modules?**
-  _Cohesion score 0.06417112299465241 - nodes in this community are weakly interconnected._
