@@ -8,6 +8,7 @@ const PIPELINE_DISPLAY: Record<string, string> = {
   containers: 'Containers',
   networking: 'Networking',
   data_warehouse: 'Data & Analytics',
+  ai: 'AI & Machine Learning',
 };
 
 export async function GET() {

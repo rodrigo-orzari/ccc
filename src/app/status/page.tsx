@@ -38,6 +38,8 @@ const PROVIDER_COLORS: Record<string, string> = {
   oracle: '#C74634',
   digitalocean: '#0080FF',
   alibaba: '#FF6A00',
+  openai: '#10A37F',
+  anthropic: '#CC9D87',
 };
 
 const PROVIDER_URLS: Record<string, string> = {
@@ -47,6 +49,8 @@ const PROVIDER_URLS: Record<string, string> = {
   oracle: 'https://www.oracle.com/cloud/',
   digitalocean: 'https://www.digitalocean.com',
   alibaba: 'https://www.alibabacloud.com',
+  openai: 'https://openai.com/api/pricing/',
+  anthropic: 'https://www.anthropic.com/pricing',
 };
 
 const SITE_URL = 'https://comparecloudcosts.com';
@@ -68,7 +72,7 @@ function XIcon() {
   );
 }
 
-const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse'];
+const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse', 'ai'];
 
 
 function freshnessStatus(isoString: string | null): 'fresh' | 'stale' | 'old' | 'missing' {

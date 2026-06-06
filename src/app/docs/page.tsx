@@ -4,34 +4,16 @@ import Link from 'next/link';
 import Footer from '@/components/Footer';
 
 const BackToTop = () => (
-  <div style={{ marginTop: '2rem', paddingTop: '1.25rem', borderTop: '1px solid var(--divider-color)' }}>
-    <a href="#top" style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: 5,
-      fontSize: 10,
-      fontWeight: 700,
-      textTransform: 'uppercase',
-      letterSpacing: '0.08em',
-      color: 'var(--muted-text)',
-      textDecoration: 'none',
-      border: '1px solid var(--border-color)',
-      padding: '3px 9px',
-      borderRadius: 4,
-      transition: 'color 0.15s, border-color 0.15s',
-    }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLAnchorElement).style.color = 'var(--text-color)';
-        (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--text-color)';
-      }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLAnchorElement).style.color = 'var(--muted-text)';
-        (e.currentTarget as HTMLAnchorElement).style.borderColor = 'var(--border-color)';
-      }}
+  <p style={{ marginTop: '1.5rem' }}>
+    <a
+      href="#top"
+      style={{ color: 'var(--link-color)', fontSize: '0.875rem', textDecoration: 'none' }}
+      onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}
     >
-      ↑ Back to top
+      ↑ Go back to the top
     </a>
-  </div>
+  </p>
 );
 
 const DocsPage: React.FC = () => {
@@ -39,23 +21,23 @@ const DocsPage: React.FC = () => {
     <>
       <style>{`
         :root {
-          --bg-color: #ffffff;
+          --bg-color: #f7f8ff;
           --text-color: #1a1a1a;
-          --sidebar-bg: #f9fafb;
-          --border-color: #e5e7eb;
+          --sidebar-bg: #eef0fc;
+          --border-color: #dde0f0;
           --link-color: #2563eb;
           --muted-text: #6b7280;
-          --divider-color: #e5e7eb;
+          --divider-color: #dde0f0;
         }
         @media (prefers-color-scheme: dark) {
           :root {
-            --bg-color: #000000;
+            --bg-color: #06060f;
             --text-color: #f1f5f9;
-            --sidebar-bg: #0f0f0f;
-            --border-color: #1f1f1f;
-            --link-color: #60a5fa;
+            --sidebar-bg: #0c0c1e;
+            --border-color: #1e1e38;
+            --link-color: #818cf8;
             --muted-text: #71717a;
-            --divider-color: #1f1f1f;
+            --divider-color: #1e1e38;
           }
         }
         .docs-container {
@@ -70,7 +52,7 @@ const DocsPage: React.FC = () => {
           border-right: 1px solid var(--border-color);
           padding: 2rem 1.5rem;
           position: fixed;
-          height: 100vh;
+          height: calc(100vh - 48px);
           overflow-y: auto;
           background-color: var(--sidebar-bg);
           flex-shrink: 0;
@@ -86,7 +68,7 @@ const DocsPage: React.FC = () => {
         .docs-main {
           margin-left: 260px;
           flex: 1;
-          padding: 3rem 4rem 5rem;
+          padding: 3rem 4rem 6rem;
           max-width: 820px;
           line-height: 1.7;
           font-size: 0.9375rem;
@@ -131,13 +113,21 @@ const DocsPage: React.FC = () => {
           margin-bottom: 2.5rem;
         }
         .docs-section { margin-bottom: 0; }
+        .docs-wrapper > footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 100;
+        }
+
         @media (max-width: 768px) {
           .docs-sidebar { display: none; }
-          .docs-main { margin-left: 0; padding: 2rem 1.25rem 4rem; }
+          .docs-main { margin-left: 0; padding: 2rem 1.25rem 5rem; }
         }
       `}</style>
 
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div className="docs-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <div className="docs-container" id="top" style={{ flex: 1 }}>
         <aside className="docs-sidebar">
           <div style={{ marginBottom: '1.75rem' }}>

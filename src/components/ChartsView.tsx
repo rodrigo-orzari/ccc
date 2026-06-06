@@ -35,9 +35,24 @@ export default function ChartsView({ data, activeProductType }: ChartsViewProps)
       .sort((a, b) => a.minPrice - b.minPrice);
   }, [data]);
 
-  // Scatter Plot Data
-  const scatterData = useMemo(() => {
+  // Scatter Plot Data: Memory
+  const memoryScatterData = useMemo(() => {
     return data.filter(d => Number(d.price_per_unit) > 0 && Number(d.memory_gb) > 0).map(record => {
+      const pColor = PROVIDERS.find(p => p.id === (record.provider || '').toLowerCase() || p.name === record.provider)?.color || '#6366f1';
+      return {
+        instance: record.instance_type,
+        provider: record.provider,
+        price: Number(record.price_per_unit),
+        memory: Number(record.memory_gb),
+        vcpus: Number(record.vcpus),
+        fill: pColor
+      };
+    });
+  }, [data]);
+
+  // Scatter Plot Data: vCPU
+  const vcpuScatterData = useMemo(() => {
+    return data.filter(d => Number(d.price_per_unit) > 0 && Number(d.vcpus) > 0).map(record => {
       const pColor = PROVIDERS.find(p => p.id === (record.provider || '').toLowerCase() || p.name === record.provider)?.color || '#6366f1';
       return {
         instance: record.instance_type,
@@ -118,7 +133,7 @@ export default function ChartsView({ data, activeProductType }: ChartsViewProps)
         </div>
 
         {/* Scatter Plot Section: Price vs Memory */}
-        {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && scatterData.length > 0 && (
+        {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && memoryScatterData.length > 0 && (
           <div className="bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded-xl p-6 shadow-sm">
             <div className="mb-6">
               <h2 className="text-lg font-bold text-black dark:text-white">Price vs. Memory (Frontier of Efficiency)</h2>
@@ -155,7 +170,7 @@ export default function ChartsView({ data, activeProductType }: ChartsViewProps)
                   </YAxis>
                   <ZAxis type="number" range={[60, 60]} />
                   <RechartsTooltip content={<CustomTooltipScatter />} cursor={{ strokeDasharray: '3 3' }} />
-                  <Scatter name="Instances" data={scatterData} fill="#8884d8" />
+                  <Scatter name="Instances" data={memoryScatterData} fill="#8884d8" />
                 </ScatterChart>
               </ResponsiveContainer>
             </div>
@@ -163,7 +178,7 @@ export default function ChartsView({ data, activeProductType }: ChartsViewProps)
         )}
 
         {/* Scatter Plot Section: Price vs vCPU */}
-        {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && scatterData.length > 0 && (
+        {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && vcpuScatterData.length > 0 && (
           <div className="bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded-xl p-6 shadow-sm">
             <div className="mb-6">
               <h2 className="text-lg font-bold text-black dark:text-white">Price vs. vCPU (Frontier of Efficiency)</h2>
@@ -199,7 +214,7 @@ export default function ChartsView({ data, activeProductType }: ChartsViewProps)
                   </YAxis>
                   <ZAxis type="number" range={[60, 60]} />
                   <RechartsTooltip content={<CustomTooltipScatter />} cursor={{ strokeDasharray: '3 3' }} />
-                  <Scatter name="Instances" data={scatterData} fill="#8884d8" />
+                  <Scatter name="Instances" data={vcpuScatterData} fill="#8884d8" />
                 </ScatterChart>
               </ResponsiveContainer>
             </div>

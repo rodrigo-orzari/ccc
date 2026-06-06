@@ -110,24 +110,24 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
       <style>
         {`
           :root {
-            --bg-color: #ffffff;
+            --bg-color: #f7f8ff;
             --text-color: #1a1a1a;
-            --sidebar-bg: #f9fafb;
-            --border-color: #e5e7eb;
+            --sidebar-bg: #eef0fc;
+            --border-color: #dde0f0;
             --link-color: #2563eb;
             --muted-text: #6b7280;
-            --divider-color: #e5e7eb;
+            --divider-color: #dde0f0;
           }
 
           @media (prefers-color-scheme: dark) {
             :root {
-              --bg-color: #0f172a;
+              --bg-color: #06060f;
               --text-color: #f1f5f9;
-              --sidebar-bg: #1e293b;
-              --border-color: #334155;
-              --link-color: #60a5fa;
+              --sidebar-bg: #0c0c1e;
+              --border-color: #1e1e38;
+              --link-color: #818cf8;
               --muted-text: #94a3b8;
-              --divider-color: #334155;
+              --divider-color: #1e1e38;
             }
           }
 
@@ -166,7 +166,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             padding: 2rem 1.5rem;
             position: fixed;
             top: 44px;
-            height: calc(100vh - 44px);
+            height: calc(100vh - 44px - 48px);
             overflow-y: auto;
             background-color: var(--sidebar-bg);
           }
@@ -185,7 +185,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
           .main-content {
             margin-left: 280px;
             flex: 1;
-            padding: 3rem 4rem;
+            padding: 3rem 4rem 5rem;
             max-width: 850px;
           }
 
@@ -222,9 +222,17 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             }
           }
 
+          .terms-wrapper > footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+          }
+
           @media (max-width: 768px) {
             .sidebar { display: none; }
-            .main-content { margin-left: 0; padding: 2rem; }
+            .main-content { margin-left: 0; padding: 2rem 1.5rem 5rem; }
           }
         `}
       </style>
