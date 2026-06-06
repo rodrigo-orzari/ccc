@@ -375,8 +375,8 @@
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
-    "mtime": 1780782186.7619674,
-    "ast_hash": "63742b7bfa0482f01aa9d0e67238aaab",
+    "mtime": 1780783382.262198,
+    "ast_hash": "2ece24bf9b4a0a76e4ef2fe31e3a0ea1",
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "src/app/terms/page.tsx": {
-    "mtime": 1780782212.8214684,
-    "ast_hash": "b4880ad5b6b0fde8728284fb903b90d6",
+    "mtime": 1780783405.6942613,
+    "ast_hash": "80f61e38d8c89272e32ea0b9c794c4d5",
     "semantic_hash": ""
   },
   "src/config/alibaba_containers.ts": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
-    "mtime": 1780685943.1488948,
-    "ast_hash": "e29e27b98a2e6021ef5d7edb8a8ad972",
+    "mtime": 1780783291.0000768,
+    "ast_hash": "15ac815d8eff988cebd88a38f29803ea",
     "semantic_hash": ""
   },
   "src/components/RangeSlider.tsx": {
@@ -540,13 +540,13 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1780781961.5199037,
-    "ast_hash": "bb0885de4e2d06834de6e5a32a1e63e3",
+    "mtime": 1780783444.5614426,
+    "ast_hash": "ae44169ea1d3a765c56c964d53720aae",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
-    "mtime": 1780782775.0948722,
-    "ast_hash": "d1860e7cc35abf9a2ce393b30bb0f6e8",
+    "mtime": 1780782914.3552725,
+    "ast_hash": "f1afd26a3933a25def315e158ed69a76",
     "semantic_hash": ""
   },
   "scratch_test.js": {
@@ -570,13 +570,13 @@
     "semantic_hash": ""
   },
   "src/app/api/status/route.ts": {
-    "mtime": 1780780868.0547996,
-    "ast_hash": "2a9ffba70603ea599ba9dedcc043269c",
+    "mtime": 1780782993.042439,
+    "ast_hash": "2a9f20464c42fa3557bd04573e62e63f",
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1780782825.3601663,
-    "ast_hash": "7892d453735c8a0fd480e07ffbf504c0",
+    "mtime": 1780783412.5754592,
+    "ast_hash": "2d26d53d388c6d55986179ab47c668eb",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
