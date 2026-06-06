@@ -165,8 +165,9 @@ export function buildPricingFilters(query: any) {
         values.push(cpuVendorFilters);
       }
 
-      if (gpu === 'true') conditions.push(`pr.gpu_count > 0`);
-      else if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
+      // gpu=true  → GPU instances included; no extra filter needed (show all)
+      // gpu=false → exclude GPU instances
+      if (gpu === 'false') conditions.push(`pr.gpu_count = 0`);
     }
 
     if (resolvedProductType === 'compute') {

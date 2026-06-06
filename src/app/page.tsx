@@ -33,7 +33,7 @@ export default function Dashboard() {
   const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
-  const [gpuIncluded, setGpuIncluded] = useState(false);
+  const [gpuIncluded, setGpuIncluded] = useState(true);
 
   const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...DB_FAMILIES]);
   const [selectedEngines, setSelectedEngines] = useState<string[]>([...DB_ENGINES]);
@@ -136,7 +136,11 @@ export default function Dashboard() {
     params.append('product', activeProductType);
     params.append('geography', selectedGeographies.join(','));
     params.append('os', selectedOS.join(','));
-    params.append('cpu', selectedCpu.join(','));
+    // Translate CPU profile IDs → vendor names the API understands
+    const selectedVendors = selectedCpu
+      .map(id => CPU_PROFILES.find(p => p.id === id)?.vendor)
+      .filter((v): v is string => Boolean(v));
+    params.append('cpuVendor', selectedVendors.join(','));
     params.append('category', selectedCategory.join(','));
     params.append('gpu', gpuIncluded.toString());
     params.append('dbFamilies', selectedDbFamilies.join(','));

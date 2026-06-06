@@ -390,7 +390,7 @@ export default function FilterSidebar({
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
             <section className="space-y-3">
-              <div className="flex justify-between items-center">
+              <div className="flex items-center justify-between">
                 <h2 className="m-0">
                   <button
                     onClick={() => onToggleSection('cpu')}
@@ -400,6 +400,28 @@ export default function FilterSidebar({
                     CPU | GPU <Tooltip text="Processor vendor, architecture, and GPU accelerator."><Info size={10} className="cursor-help" /></Tooltip>
                   </button>
                 </h2>
+                {/* Select All / Clear All — all CPU profiles + GPU selected = "all" */}
+                {(() => {
+                  const allSelected = selectedCpu.length === CPU_PROFILES.length && gpuIncluded;
+                  return (
+                    <button
+                      onClick={() => {
+                        if (allSelected) {
+                          onSetCpu([]);
+                          onGpuToggle(false);
+                        } else {
+                          onSetCpu(CPU_PROFILES.map(p => p.id));
+                          onGpuToggle(true);
+                        }
+                      }}
+                      className={`text-[10px] font-bold uppercase transition-colors ${
+                        allSelected ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'
+                      }`}
+                    >
+                      {allSelected ? 'Clear All' : 'Select All'}
+                    </button>
+                  );
+                })()}
               </div>
               {expanded.cpu && (
                 <div className="flex flex-wrap gap-2">
