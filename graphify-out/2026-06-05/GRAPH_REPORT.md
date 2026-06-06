@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-05)
 
 ## Corpus Check
-- 103 files · ~82,410 words
+- 105 files · ~82,934 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 725 nodes · 1020 edges · 65 communities (45 shown, 20 thin omitted)
+- 735 nodes · 1033 edges · 76 communities (44 shown, 32 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b3952378`
+- Built from commit: `b12afe59`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -30,6 +30,7 @@
 - [[_COMMUNITY_Community 12|Community 12]]
 - [[_COMMUNITY_Dev Dependencies|Dev Dependencies]]
 - [[_COMMUNITY_App Metadata|App Metadata]]
+- [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Dashboard State|Dashboard State]]
 - [[_COMMUNITY_Claude Dev Config|Claude Dev Config]]
 - [[_COMMUNITY_Claude Permissions|Claude Permissions]]
@@ -47,6 +48,7 @@
 - [[_COMMUNITY_Community 32|Community 32]]
 - [[_COMMUNITY_Community 33|Community 33]]
 - [[_COMMUNITY_Community 34|Community 34]]
+- [[_COMMUNITY_Community 35|Community 35]]
 - [[_COMMUNITY_Community 36|Community 36]]
 - [[_COMMUNITY_Community 37|Community 37]]
 - [[_COMMUNITY_Community 39|Community 39]]
@@ -58,12 +60,17 @@
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
 - [[_COMMUNITY_Community 49|Community 49]]
 - [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Community 53|Community 53]]
+- [[_COMMUNITY_Community 54|Community 54]]
 - [[_COMMUNITY_Community 55|Community 55]]
+- [[_COMMUNITY_Community 56|Community 56]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
 - [[_COMMUNITY_Community 60|Community 60]]
 - [[_COMMUNITY_Community 61|Community 61]]
 - [[_COMMUNITY_Community 62|Community 62]]
@@ -74,6 +81,10 @@
 - [[_COMMUNITY_Community 67|Community 67]]
 - [[_COMMUNITY_Community 68|Community 68]]
 - [[_COMMUNITY_Community 71|Community 71]]
+- [[_COMMUNITY_Community 72|Community 72]]
+- [[_COMMUNITY_Community 73|Community 73]]
+- [[_COMMUNITY_Community 74|Community 74]]
+- [[_COMMUNITY_Community 75|Community 75]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `BaseAdapter` - 55 edges
@@ -107,15 +118,15 @@
 - **Security Audit findings map to Security Fixes and Operations Runbook controls** — security_audit_tls_cert_validation_disabled, security_audit_exposed_admin_endpoints, security_audit_sql_injection_risk, security_fixes_enable_strict_tls, security_fixes_require_admin_auth, security_fixes_input_validation, operations_runbook_admin_api_auth, operations_runbook_filter_input_validation [EXTRACTED 1.00]
 - **End-to-end serverless language filter: config files, pipeline, API, frontend** — implementation_summary_aws_serverless_config, implementation_summary_gcp_serverless_config, implementation_summary_azure_serverless_config, implementation_summary_digitalocean_serverless_config, implementation_summary_serverless_pipeline_ts, implementation_summary_server_ts, implementation_summary_dashboard_tsx, implementation_summary_supported_languages_jsonb [EXTRACTED 1.00]
 
-## Communities (65 total, 20 thin omitted)
+## Communities (76 total, 32 thin omitted)
 
 ### Community 1 - "Container Provider Configs"
 Cohesion: 0.50
 Nodes (3): netContent, pricingContent, subclasses
 
 ### Community 2 - "Database Instance Configs"
-Cohesion: 0.07
-Nodes (23): ALIBABA_DB_INSTANCES, CloudSqlInstanceConfig, DIGITALOCEAN_DB_INSTANCES, DigitalOceanDbInstanceConfig, GCP_CLOUD_SQL_INSTANCES, ORACLE_AUTONOMOUS_INSTANCES, ORACLE_MYSQL_HEATWAVE_INSTANCES, ORACLE_POSTGRESQL_INSTANCES (+15 more)
+Cohesion: 0.17
+Nodes (13): ALIBABA_DB_INSTANCES, CloudSqlInstanceConfig, DIGITALOCEAN_DB_INSTANCES, DigitalOceanDbInstanceConfig, GCP_CLOUD_SQL_INSTANCES, ORACLE_AUTONOMOUS_INSTANCES, ORACLE_MYSQL_HEATWAVE_INSTANCES, ORACLE_POSTGRESQL_INSTANCES (+5 more)
 
 ### Community 3 - "Pricing Pipeline Architecture"
 Cohesion: 0.12
@@ -150,12 +161,16 @@ Cohesion: 0.05
 Nodes (37): dependencies, @aws-sdk/client-pricing, axios, dotenv, @google/genai, lucide-react, motion, next (+29 more)
 
 ### Community 13 - "Dev Dependencies"
-Cohesion: 0.18
-Nodes (5): AWSContainersLiveAdapter, AzureContainersLiveAdapter, DigitalOceanContainersLiveAdapter, GCPContainersLiveAdapter, OracleContainersLiveAdapter
+Cohesion: 0.17
+Nodes (7): AwsFargateScraper, AzureContainerInstancesScraper, AWSContainersLiveAdapter, AzureContainersLiveAdapter, DigitalOceanContainersLiveAdapter, GCPContainersLiveAdapter, OracleContainersLiveAdapter
 
 ### Community 14 - "App Metadata"
 Cohesion: 0.40
 Nodes (4): description, majorCapabilities, name, requestFramePermissions
+
+### Community 15 - "Community 15"
+Cohesion: 0.33
+Nodes (4): AWSRDSAdapter, AzureDBAdapter, buildAzureDbFilter(), deriveTier()
 
 ### Community 16 - "Dashboard State"
 Cohesion: 0.22
@@ -170,28 +185,20 @@ Cohesion: 0.15
 Nodes (12): Adding a New Cloud Provider, API Routes, Architecture, Compare Cloud Costs (CCC) — Claude Context, Conventions, Database Schema, Documentation Map, Key Files — Start Here (+4 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.10
-Nodes (12): DATABRICKS_INSTANCES, DatabricksConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, SNOWFLAKE_INSTANCES, SnowflakeConfig, DataAnalyticsPricingPipeline, DatabricksAzureAdapter (+4 more)
+Cohesion: 0.08
+Nodes (17): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DATABRICKS_INSTANCES, DatabricksConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig (+9 more)
 
 ### Community 32 - "Community 32"
 Cohesion: 0.06
-Nodes (21): ALIBABA_INSTANCES, DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, POST() (+13 more)
+Nodes (27): ALIBABA_INSTANCES, DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, POST() (+19 more)
 
 ### Community 33 - "Community 33"
 Cohesion: 0.33
 Nodes (5): autoInitStart, content, cronEnd, cronStart, lines
 
-### Community 37 - "Community 37"
-Cohesion: 0.13
-Nodes (7): ALIBABA_CONTAINERS, AWS_CONTAINERS, baseAwsContainerEntries, AwsFargateScraper, AzureContainerInstancesScraper, AWSContainersStaticAdapter, DigitalOceanContainersStaticAdapter
-
 ### Community 39 - "Community 39"
 Cohesion: 0.05
 Nodes (30): ALIBABA_SERVERLESS, AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries, baseDigitaloceanEntries (+22 more)
-
-### Community 40 - "Community 40"
-Cohesion: 0.33
-Nodes (7): createTransport(), isMailerConfigured(), PriceDriftAlert, sendPriceDriftEmail(), sendStalenessEmail(), StaleDataAlert, sql
 
 ### Community 41 - "Community 41"
 Cohesion: 0.19
@@ -218,8 +225,8 @@ Cohesion: 0.18
 Nodes (11): Database Initialization Guide, POST /api/admin/fetch-pricing, ingest.ts CLI, POST /api/admin/init-db, Admin API Authentication, Constant-Time Token Comparison, Deployment Checklist, Database TLS/SSL Connection Setup (+3 more)
 
 ### Community 49 - "Community 49"
-Cohesion: 0.20
-Nodes (4): AzureContainersStaticAdapter, AWSAdapter, AzureAdapter, BaseAdapter
+Cohesion: 0.24
+Nodes (3): AWSAdapter, AzureAdapter, BaseAdapter
 
 ### Community 50 - "Community 50"
 Cohesion: 0.67
@@ -266,24 +273,24 @@ Cohesion: 0.67
 Nodes (3): 6.1 Component Hierarchy, 6.2 Dashboard Deep Dive, 6. Frontend Architecture
 
 ## Knowledge Gaps
-- **293 isolated node(s):** `FilterSectionProps`, `FilterSidebarProps`, `PRODUCT_TYPES`, `NETWORKING_SERVICES`, `NETWORKING_CONNECTION_TYPES` (+288 more)
+- **295 isolated node(s):** `AlibabaAnalyticsConfig`, `OracleAnalyticsConfig`, `FilterSectionProps`, `FilterSidebarProps`, `PRODUCT_TYPES` (+290 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **32 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `BaseAdapter` connect `Community 49` to `Community 32`, `Database Instance Configs`, `Community 37`, `Community 71`, `Community 39`, `Dev Dependencies`, `Vite Config`, `Community 31`?**
-  _High betweenness centrality (0.037) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Community 39` to `Community 32`, `Database Instance Configs`, `Community 37`, `Community 71`, `Dev Dependencies`, `Community 49`, `Vite Config`, `Community 31`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **Why does `PricingPipeline` connect `Community 32` to `Database Instance Configs`, `Community 37`, `Community 39`, `Community 40`, `Community 31`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **What connects `FilterSectionProps`, `FilterSidebarProps`, `PRODUCT_TYPES` to the rest of the system?**
-  _293 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Database Instance Configs` be split into smaller, more focused modules?**
-  _Cohesion score 0.07394957983193277 - nodes in this community are weakly interconnected._
+- **Why does `BaseAdapter` connect `Community 49` to `Community 32`, `Database Instance Configs`, `Community 35`, `Community 71`, `Community 72`, `Community 73`, `Community 74`, `Community 40`, `Community 75`, `Dev Dependencies`, `Community 39`, `Community 15`, `Community 54`, `Community 56`, `Community 58`, `Community 59`, `Vite Config`, `Community 31`?**
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Community 39` to `Community 32`, `Database Instance Configs`, `Community 35`, `Community 71`, `Community 72`, `Community 73`, `Community 74`, `Dev Dependencies`, `Community 15`, `Community 54`, `Community 56`, `Community 58`, `Community 59`, `Vite Config`, `Community 31`?**
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+- **Why does `PricingPipeline` connect `Community 32` to `Database Instance Configs`, `Community 39`, `Dev Dependencies`, `Community 31`?**
+  _High betweenness centrality (0.025) - this node is a cross-community bridge._
+- **What connects `AlibabaAnalyticsConfig`, `OracleAnalyticsConfig`, `FilterSectionProps` to the rest of the system?**
+  _295 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Pricing Pipeline Architecture` be split into smaller, more focused modules?**
   _Cohesion score 0.125 - nodes in this community are weakly interconnected._
 - **Should `Cloud Instance Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.052854122621564484 - nodes in this community are weakly interconnected._
+- **Should `Dashboard UI & Filters` be split into smaller, more focused modules?**
+  _Cohesion score 0.05 - nodes in this community are weakly interconnected._

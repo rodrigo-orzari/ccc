@@ -187,9 +187,17 @@ export function buildPricingFilters(query: any) {
         let engineFilters = new Set(engineFiltersRaw);
         if (engineFilters.has('native')) {
           engineFilters.delete('native');
-          engineFilters.add('bigquery');
+          // AWS
           engineFilters.add('redshift');
+          // GCP
+          engineFilters.add('bigquery');
+          // Azure
           engineFilters.add('synapse');
+          // Alibaba
+          engineFilters.add('maxcompute');
+          engineFilters.add('e-mapreduce');
+          // Oracle
+          engineFilters.add('oracle analytics cloud');
         }
         conditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount++})`);
         values.push(Array.from(engineFilters));
