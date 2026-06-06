@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 15 nodes · 12 edges · 6 communities (2 shown, 4 thin omitted)
+- 17 nodes · 13 edges · 7 communities (3 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `260ed567`
+- Built from commit: `fdc1bdd4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -35,7 +35,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (6 total, 4 thin omitted)
+## Communities (7 total, 4 thin omitted)
 
 ## Knowledge Gaps
 - **1 isolated node(s):** `PIPELINE_DISPLAY`
