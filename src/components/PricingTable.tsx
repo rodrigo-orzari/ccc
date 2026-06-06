@@ -226,11 +226,7 @@ function TableRow({ record, index, activeProductType, showAggregation }: { recor
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span>
           </td>
           <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${
-              record.attributes?.deployment_type === 'Serverless'
-                ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20'
-                : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]'
-            }`}>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
               {record.attributes?.deployment_type || 'Provisioned'}
             </span>
           </td>
