@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-05)
 
 ## Corpus Check
-- 102 files · ~80,966 words
+- 103 files · ~81,189 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 720 nodes · 1011 edges · 71 communities (50 shown, 21 thin omitted)
+- 722 nodes · 1013 edges · 72 communities (49 shown, 23 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `30696aab`
+- Built from commit: `5d255243`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -80,6 +80,7 @@
 - [[_COMMUNITY_Community 66|Community 66]]
 - [[_COMMUNITY_Community 67|Community 67]]
 - [[_COMMUNITY_Community 68|Community 68]]
+- [[_COMMUNITY_Community 71|Community 71]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `BaseAdapter` - 55 edges
@@ -113,7 +114,7 @@
 - **Security Audit findings map to Security Fixes and Operations Runbook controls** — security_audit_tls_cert_validation_disabled, security_audit_exposed_admin_endpoints, security_audit_sql_injection_risk, security_fixes_enable_strict_tls, security_fixes_require_admin_auth, security_fixes_input_validation, operations_runbook_admin_api_auth, operations_runbook_filter_input_validation [EXTRACTED 1.00]
 - **End-to-end serverless language filter: config files, pipeline, API, frontend** — implementation_summary_aws_serverless_config, implementation_summary_gcp_serverless_config, implementation_summary_azure_serverless_config, implementation_summary_digitalocean_serverless_config, implementation_summary_serverless_pipeline_ts, implementation_summary_server_ts, implementation_summary_dashboard_tsx, implementation_summary_supported_languages_jsonb [EXTRACTED 1.00]
 
-## Communities (71 total, 21 thin omitted)
+## Communities (72 total, 23 thin omitted)
 
 ### Community 1 - "Container Provider Configs"
 Cohesion: 0.50
@@ -176,7 +177,7 @@ Cohesion: 0.10
 Nodes (12): DATABRICKS_INSTANCES, DatabricksConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, SNOWFLAKE_INSTANCES, SnowflakeConfig, DataAnalyticsPricingPipeline, DatabricksAzureAdapter (+4 more)
 
 ### Community 32 - "Community 32"
-Cohesion: 0.07
+Cohesion: 0.06
 Nodes (21): ALIBABA_INSTANCES, DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfig, GCP_INSTANCES, GcpInstanceConfig, ORACLE_INSTANCES, OracleInstanceConfig, POST() (+13 more)
 
 ### Community 33 - "Community 33"
@@ -188,12 +189,12 @@ Cohesion: 0.29
 Nodes (3): AWSLambdaLiveAdapter, AzureFunctionsLiveAdapter, GCPCloudRunLiveAdapter
 
 ### Community 37 - "Community 37"
-Cohesion: 0.22
-Nodes (8): ALIBABA_CONTAINERS, AwsFargateScraper, AzureContainerInstancesScraper, AWSContainersLiveAdapter, AzureContainersLiveAdapter, DigitalOceanContainersLiveAdapter, GCPContainersLiveAdapter, OracleContainersLiveAdapter
+Cohesion: 0.12
+Nodes (10): ALIBABA_CONTAINERS, AwsFargateScraper, AzureContainerInstancesScraper, AWSContainersLiveAdapter, AzureContainersLiveAdapter, DigitalOceanContainersLiveAdapter, GCPContainersLiveAdapter, OracleContainersLiveAdapter (+2 more)
 
 ### Community 39 - "Community 39"
-Cohesion: 0.16
-Nodes (8): ALIBABA_SERVERLESS, AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AwsLambdaScraper, AzureFunctionsScraper, AlibabaServerlessAdapter, OracleServerlessAdapter
+Cohesion: 0.14
+Nodes (8): ALIBABA_SERVERLESS, AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AwsLambdaScraper, AzureFunctionsScraper, DigitalOceanServerlessAdapter, GCPServerlessAdapter
 
 ### Community 40 - "Community 40"
 Cohesion: 0.33
@@ -212,7 +213,7 @@ Cohesion: 0.50
 Nodes (4): 13. Deployment Checklist, Deployment Steps, Post-Deployment Verification, Pre-Deployment
 
 ### Community 44 - "Community 44"
-Cohesion: 0.07
+Cohesion: 0.06
 Nodes (45): FilterSectionProps, FilterSidebarProps, PricingTableProps, PROVIDERS, PRODUCT_TYPES, ProductTypeSelectorProps, RangeSlider(), RangeSliderProps (+37 more)
 
 ### Community 45 - "Community 45"
@@ -223,13 +224,9 @@ Nodes (4): 15. Team Collaboration & Code Ownership, Code Organization by Domain,
 Cohesion: 0.18
 Nodes (11): Database Initialization Guide, POST /api/admin/fetch-pricing, ingest.ts CLI, POST /api/admin/init-db, Admin API Authentication, Constant-Time Token Comparison, Deployment Checklist, Database TLS/SSL Connection Setup (+3 more)
 
-### Community 48 - "Community 48"
-Cohesion: 0.10
-Nodes (6): PricingRecord, AWSServerlessAdapter, AWSServerlessLiveAdapter, AzureServerlessAdapter, DigitalOceanServerlessAdapter, GCPServerlessAdapter
-
 ### Community 49 - "Community 49"
 Cohesion: 0.16
-Nodes (7): AWSContainersStaticAdapter, AzureContainersStaticAdapter, DigitalOceanContainersStaticAdapter, GCPContainersStaticAdapter, AWSAdapter, AzureAdapter, BaseAdapter
+Nodes (8): AWSAdapter, AzureAdapter, BaseAdapter, AlibabaServerlessAdapter, AWSServerlessAdapter, AWSServerlessLiveAdapter, AzureServerlessAdapter, OracleServerlessAdapter
 
 ### Community 50 - "Community 50"
 Cohesion: 0.67
@@ -292,20 +289,20 @@ Cohesion: 0.67
 Nodes (3): 6.1 Component Hierarchy, 6.2 Dashboard Deep Dive, 6. Frontend Architecture
 
 ## Knowledge Gaps
-- **293 isolated node(s):** `FilterSectionProps`, `FilterSidebarProps`, `ProviderCardProps`, `DBStatusProvider`, `ProviderCardsProps` (+288 more)
+- **293 isolated node(s):** `PRODUCT_TYPES`, `FilterSectionProps`, `FilterSidebarProps`, `ProviderCardProps`, `DBStatusProvider` (+288 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `BaseAdapter` connect `Community 49` to `Community 32`, `Database Instance Configs`, `Community 35`, `Community 37`, `Community 39`, `Community 48`, `Vite Config`, `Community 31`?**
+- **Why does `BaseAdapter` connect `Community 49` to `Community 32`, `Database Instance Configs`, `Community 35`, `Community 37`, `Community 71`, `Community 39`, `Community 48`, `Vite Config`, `Community 31`?**
   _High betweenness centrality (0.036) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Community 48` to `Community 32`, `Database Instance Configs`, `Community 35`, `Community 37`, `Community 39`, `Database Schema`, `Vite Config`, `Community 31`?**
-  _High betweenness centrality (0.034) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Database Schema` to `Community 32`, `Database Instance Configs`, `Community 35`, `Community 37`, `Community 71`, `Community 39`, `Community 48`, `Vite Config`, `Community 31`?**
+  _High betweenness centrality (0.033) - this node is a cross-community bridge._
 - **Why does `PricingPipeline` connect `Community 32` to `Database Instance Configs`, `Community 37`, `Community 39`, `Community 40`, `Database Schema`, `Community 31`?**
   _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **What connects `FilterSectionProps`, `FilterSidebarProps`, `ProviderCardProps` to the rest of the system?**
+- **What connects `PRODUCT_TYPES`, `FilterSectionProps`, `FilterSidebarProps` to the rest of the system?**
   _293 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Database Instance Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.07394957983193277 - nodes in this community are weakly interconnected._

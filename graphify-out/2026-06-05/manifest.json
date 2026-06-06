@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1780622814.1762955,
-    "ast_hash": "cc8aeceb2c28fa4152be63f14e057cd1",
+    "mtime": 1780710753.2094064,
+    "ast_hash": "769b7de6de015fe25b7ee1bcfd20a786",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1780622375.869844,
-    "ast_hash": "ae29aa41ee38272f7c368cdf58a885e6",
+    "mtime": 1780710070.1118705,
+    "ast_hash": "2da52f28ed99f51d65614684c8180ac0",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {

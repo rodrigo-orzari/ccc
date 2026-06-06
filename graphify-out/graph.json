@@ -58,58 +58,76 @@
   },
   "nodes": [
     {
+      "label": "test-next-api-analytics.ts",
+      "file_type": "code",
+      "source_file": "test-next-api-analytics.ts",
+      "source_location": "L1",
+      "id": "test_next_api_analytics",
+      "community": 4,
+      "norm_label": "test-next-api-analytics.ts"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "test-next-api-analytics.ts",
+      "source_location": "L4",
+      "id": "test_next_api_analytics_main",
+      "community": 4,
+      "norm_label": "main()"
+    },
+    {
       "label": "ProductTypeSelector.tsx",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L1",
-      "id": "components_producttypeselector",
       "community": 44,
-      "norm_label": "producttypeselector.tsx"
+      "norm_label": "producttypeselector.tsx",
+      "id": "components_producttypeselector"
     },
     {
       "label": "PRODUCT_TYPES",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L6",
-      "id": "components_producttypeselector_product_types",
       "community": 44,
-      "norm_label": "product_types"
+      "norm_label": "product_types",
+      "id": "components_producttypeselector_product_types"
     },
     {
       "label": "LinkedInIcon()",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L19",
-      "id": "components_producttypeselector_linkedinicon",
       "community": 44,
-      "norm_label": "linkedinicon()"
+      "norm_label": "linkedinicon()",
+      "id": "components_producttypeselector_linkedinicon"
     },
     {
       "label": "XIcon()",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L27",
-      "id": "components_producttypeselector_xicon",
       "community": 44,
-      "norm_label": "xicon()"
+      "norm_label": "xicon()",
+      "id": "components_producttypeselector_xicon"
     },
     {
       "label": "ProductTypeSelectorProps",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L35",
-      "id": "components_producttypeselector_producttypeselectorprops",
       "community": 44,
-      "norm_label": "producttypeselectorprops"
+      "norm_label": "producttypeselectorprops",
+      "id": "components_producttypeselector_producttypeselectorprops"
     },
     {
       "label": "ProductTypeSelector()",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L40",
-      "id": "components_producttypeselector_producttypeselector",
       "community": 44,
-      "norm_label": "producttypeselector()"
+      "norm_label": "producttypeselector()",
+      "id": "components_producttypeselector_producttypeselector"
     },
     {
       "label": "page.tsx",
@@ -6710,6 +6728,27 @@
   ],
   "links": [
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "test-next-api-analytics.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "test_next_api_analytics",
+      "target": "pricing_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "test-next-api-analytics.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "test_next_api_analytics",
+      "target": "test_next_api_analytics_main",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "re_exports",
       "context": "export",
       "confidence": "EXTRACTED",
@@ -6726,9 +6765,9 @@
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_producttypeselector",
-      "target": "components_producttypeselector_linkedinicon",
-      "confidence_score": 1.0
+      "target": "components_producttypeselector_linkedinicon"
     },
     {
       "relation": "contains",
@@ -6766,9 +6805,9 @@
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_producttypeselector",
-      "target": "components_producttypeselector_xicon",
-      "confidence_score": 1.0
+      "target": "components_producttypeselector_xicon"
     },
     {
       "relation": "imports_from",
@@ -17293,5 +17332,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "5d255243791c58f0c10cc8ce46cd54a3808acbdf"
+  "built_at_commit": "1ff8181c75d63d4aae3b8e57d42f170fc4ffc889"
 }
