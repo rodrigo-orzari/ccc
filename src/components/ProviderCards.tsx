@@ -37,7 +37,7 @@ export default function ProviderCards({
   const activeNonSoon = providers.filter(p => !p.soon).map(p => p.id);
 
   return (
-    <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-[#e5e5e5] dark:bg-[#262626]">
+    <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:flex lg:flex-row gap-px bg-[#e5e5e5] dark:bg-[#262626] overflow-x-auto">
       {providers
         .filter(p => !p.soon)
         .map(p => {
@@ -57,7 +57,7 @@ export default function ProviderCards({
                   onProviderSelect(p.id);
                 }
               }}
-              className={`bg-white dark:bg-[#000000] py-2.5 px-4 flex items-center justify-between group transition-all border-b-2 cursor-pointer ${
+              className={`lg:flex-1 bg-white dark:bg-[#000000] py-2.5 px-4 flex items-center justify-between group transition-all border-b-2 cursor-pointer ${
                 isSelected ? 'border-black dark:border-white' : 'border-transparent opacity-50 grayscale hover:grayscale-0 hover:opacity-100'
               }`}
             >
