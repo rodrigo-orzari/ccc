@@ -285,7 +285,7 @@ export function buildPricingFilters(query: any) {
     if (resolvedProductType === 'ai') {
       const serviceTypeFilters = parseFilterList(aiServiceTypes as string).map((s: string) => s.toLowerCase());
       if (serviceTypeFilters.length > 0) {
-        conditions.push(`LOWER(pr.service) = ANY($${paramCount++})`);
+        conditions.push(`LOWER(s.name) = ANY($${paramCount++})`);
         values.push(serviceTypeFilters);
       }
 

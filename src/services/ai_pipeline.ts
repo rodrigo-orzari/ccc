@@ -49,15 +49,24 @@ export class AIPricingPipeline extends PricingPipeline {
       const staticAdapter = new AIStaticAdapter();
       const records = await staticAdapter.fetchPricing();
       
-      const driftAlerts = await this.saveRecords(records, 'ai');
-      results.push({
-        provider: 'Multiple',
-        service: 'Artificial Intelligence',
-        status: 'success',
-        count: records.length,
-        driftAlerts,
-        dataSource: 'static_config',
-      });
+      // Group records by provider since AIStaticAdapter returns a mix of providers
+      const recordsByProvider: Record<string, typeof records> = {};
+      for (const record of records) {
+        if (!recordsByProvider[record.provider]) recordsByProvider[record.provider] = [];
+        recordsByProvider[record.provider].push(record);
+      }
+
+      for (const [providerSlug, providerRecords] of Object.entries(recordsByProvider)) {
+        const driftAlerts = await this.saveRecords(providerRecords, 'ai');
+        results.push({
+          provider: providerSlug,
+          service: 'Artificial Intelligence',
+          status: 'success',
+          count: providerRecords.length,
+          driftAlerts,
+          dataSource: 'static_config',
+        });
+      }
     } catch (error: any) {
       console.error(`❌ AI static config failed:`, error);
       results.push({

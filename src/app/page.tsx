@@ -43,7 +43,7 @@ export default function Dashboard() {
   const [selectedDeploymentTypes, setSelectedDeploymentTypes] = useState<string[]>([...DEPLOYMENT_TYPES]);
   const [selectedHaModes, setSelectedHaModes] = useState<string[]>([...HA_MODES]);
 
-  // When switching away from AI, ensure AI-only providers are removed from the selection
+  // Handle AI provider selection automatically when tab changes
   useEffect(() => {
     if (activeProductType !== 'ai') {
       setSelectedProviders(prev => {
@@ -54,6 +54,13 @@ export default function Dashboard() {
           return PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id);
         }
         return next;
+      });
+    } else {
+      setSelectedProviders(prev => {
+        const aiOnly = PROVIDERS.filter(p => p.isAIOnly).map(p => p.id);
+        const missing = aiOnly.filter(id => !prev.includes(id));
+        if (missing.length > 0) return [...prev, ...missing];
+        return prev;
       });
     }
   }, [activeProductType]);
