@@ -122,6 +122,12 @@ export default function Dashboard() {
   const [hasHorizontalOverflow, setHasHorizontalOverflow] = useState(false);
   const [scrolledToEnd, setScrolledToEnd] = useState(false);
   const [isInitialFetch, setIsInitialFetch] = useState(true);
+  // Flip off once the first real data (filter-aware counts) arrives
+  useEffect(() => {
+    if (rawProviderCounts && Array.isArray(rawProviderCounts) && rawProviderCounts.length > 0) {
+      setIsInitialFetch(false);
+    }
+  }, [rawProviderCounts]);
 
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
   const toggleFilter = (list: string[], setList: React.Dispatch<React.SetStateAction<string[]>>, item: string) => {
@@ -135,7 +141,8 @@ export default function Dashboard() {
   // Build search params
   const searchParams = useMemo(() => {
     const params = new URLSearchParams();
-    params.append('product', activeProductType);
+    // API uses 'compute' for VMs; React state uses 'vm'
+    params.append('product', activeProductType === 'vm' ? 'compute' : activeProductType);
     params.append('geography', selectedGeographies.join(','));
     params.append('os', selectedOS.join(','));
     // Translate CPU profile IDs → vendor names the API understands

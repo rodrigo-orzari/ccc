@@ -6,20 +6,38 @@
     {
       "label": "route.ts",
       "file_type": "code",
+      "source_file": "src/app/api/pricing/counts/route.ts",
+      "source_location": "L1",
+      "id": "counts_route",
+      "community": 6,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "src/app/api/pricing/counts/route.ts",
+      "source_location": "L5",
+      "id": "counts_route_get",
+      "community": 6,
+      "norm_label": "get()"
+    },
+    {
+      "label": "route.ts",
+      "file_type": "code",
       "source_file": "src/app/api/health/route.ts",
       "source_location": "L1",
-      "id": "health_route",
       "community": 5,
-      "norm_label": "route.ts"
+      "norm_label": "route.ts",
+      "id": "health_route"
     },
     {
       "label": "GET()",
       "file_type": "code",
       "source_file": "src/app/api/health/route.ts",
       "source_location": "L5",
-      "id": "health_route_get",
       "community": 5,
-      "norm_label": "get()"
+      "norm_label": "get()",
+      "id": "health_route_get"
     },
     {
       "label": "route.ts",
@@ -143,12 +161,22 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/counts/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "counts_route",
+      "target": "counts_route_get",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/app/api/health/route.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "health_route",
-      "target": "health_route_get",
-      "confidence_score": 1.0
+      "target": "health_route_get"
     },
     {
       "relation": "contains",
@@ -265,5 +293,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "260ed5672644cb0c2411295da522789a10a4c3dd"
+  "built_at_commit": "fdc1bdd4c9410a09e897d40bbd7d369c905d8ceb"
 }

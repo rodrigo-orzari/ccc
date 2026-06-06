@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 112 files · ~86,146 words
+- 112 files · ~86,154 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 13 nodes · 11 edges · 5 communities (1 shown, 4 thin omitted)
+- 15 nodes · 12 edges · 6 communities (2 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `37f4db61`
+- Built from commit: `260ed567`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -35,7 +35,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (5 total, 4 thin omitted)
+## Communities (6 total, 4 thin omitted)
 
 ## Knowledge Gaps
 - **1 isolated node(s):** `PIPELINE_DISPLAY`
