@@ -436,6 +436,37 @@ export default function Dashboard() {
           onNetworkingHaSupportToggle={(h) => toggleFilter(selectedNetworkingHaSupport, setSelectedNetworkingHaSupport, h)}
           onNetworkingVpcSupportToggle={(v) => toggleFilter(selectedNetworkingVpcSupport, setSelectedNetworkingVpcSupport, v)}
           onNetworkingDirectionToggle={(d) => toggleFilter(selectedNetworkingDirections, setSelectedNetworkingDirections, d)}
+          onSetProviders={setSelectedProviders}
+          onSetGeographies={setSelectedGeographies}
+          onSetOS={setSelectedOS}
+          onSetCpu={setSelectedCpu}
+          onSetCategory={setSelectedCategory}
+          onSetDbFamilies={setSelectedDbFamilies}
+          onSetEngines={setSelectedEngines}
+          onSetDeploymentTypes={setSelectedDeploymentTypes}
+          onSetHaModes={setSelectedHaModes}
+          onSetServerlessLanguages={setSelectedServerlessLanguages}
+          onSetServerlessColdStart={setSelectedServerlessColdStart}
+          onSetServerlessTimeout={setSelectedServerlessTimeout}
+          onSetServerlessMemoryConfig={setSelectedServerlessMemoryConfig}
+          onSetServerlessFreeTier={setSelectedServerlessFreeTier}
+          onSetServerlessGranularity={setSelectedServerlessGranularity}
+          onSetServerlessExecutionModel={setSelectedServerlessExecutionModel}
+          onSetServerlessProvisionedConcurrency={setSelectedServerlessProvisionedConcurrency}
+          onSetServerlessEphemeralStorage={setSelectedServerlessEphemeralStorage}
+          onSetContainersOrchestrators={setSelectedContainersOrchestrators}
+          onSetContainersComputeTypes={setSelectedContainersComputeTypes}
+          onSetContainersArchitectures={setSelectedContainersArchitectures}
+          onSetContainersBillingGranularity={setSelectedContainersBillingGranularity}
+          onSetAnalyticsEngines={setSelectedAnalyticsEngines}
+          onSetAnalyticsDeploymentTypes={setSelectedAnalyticsDeploymentTypes}
+          onSetAnalyticsTiers={setSelectedAnalyticsTiers}
+          onSetNetworkingServices={setSelectedNetworkingServices}
+          onSetNetworkingConnectionTypes={setSelectedNetworkingConnectionTypes}
+          onSetNetworkingRoutingTypes={setSelectedNetworkingRoutingTypes}
+          onSetNetworkingHaSupport={setSelectedNetworkingHaSupport}
+          onSetNetworkingVpcSupport={setSelectedNetworkingVpcSupport}
+          onSetNetworkingDirections={setSelectedNetworkingDirections}
           onVCpuRangeChange={setVCpuRange}
           onMemoryRangeChange={setMemoryRange}
           onPriceRangeChange={setPriceRange}
