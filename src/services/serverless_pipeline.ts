@@ -72,34 +72,26 @@ export class AWSServerlessAdapter extends BaseAdapter {
   providerSlug = 'aws';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`🔄 Attempting AWS Serverless live API fetch (via AwsLambdaScraper)...`);
-    try {
-      const scraper = new AwsLambdaScraper();
-      const instances = await scraper.run();
-      
-      return instances.map(inst => ({
-        provider: 'aws',
-        service: 'Lambda',
-        region: AWS_SERVERLESS_REGION,
-        instanceType: inst.type,
-        vcpus: inst.vcpus,
-        memoryGb: inst.memory,
-        arch: inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
-        os: 'Linux',
-        cpuVendor: inst.cpuVendor,
-        gpuCount: 0,
-        geography: AWS_SERVERLESS_GEOGRAPHY,
-        category: 'Serverless Compute',
-        price: inst.price,
-        unit: 'Hour',
-        dataSource: 'live_api' as const,
-        supportedLanguages: [],
-        attributes: {},
-      }));
-    } catch (e) {
-      console.warn(`⚠️  AWS Serverless live fetch failed: ${e}. Falling back to empty to trigger static config...`);
-      return [];
-    }
+    console.log(`Fetching AWS Lambda pricing (${AWS_SERVERLESS.length} entries from static config)...`);
+    return AWS_SERVERLESS.map(inst => ({
+      provider: 'aws',
+      service: 'Lambda',
+      region: AWS_SERVERLESS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: AWS_SERVERLESS_GEOGRAPHY,
+      category: 'Serverless Compute',
+      price: inst.price,
+      unit: 'GB-Hour',
+      dataSource: 'static_config' as const,
+      supportedLanguages: inst.supportedLanguages || [],
+      attributes: inst.attributes || {},
+    }));
   }
 }
 
@@ -130,40 +122,30 @@ export class GCPServerlessAdapter extends BaseAdapter {
   }
 }
 
-import { AzureFunctionsScraper } from '../scrapers/azure_functions';
-
 export class AzureServerlessAdapter extends BaseAdapter {
   providerSlug = 'azure';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`🔄 Attempting AZURE Serverless live API fetch (via AzureFunctionsScraper)...`);
-    try {
-      const scraper = new AzureFunctionsScraper();
-      const instances = await scraper.run();
-      
-      return instances.map(inst => ({
-        provider: 'azure',
-        service: 'Azure Functions',
-        region: AZURE_SERVERLESS_REGION,
-        instanceType: inst.type,
-        vcpus: inst.vcpus,
-        memoryGb: inst.memory,
-        arch: 'x86 64',
-        os: 'Linux',
-        cpuVendor: inst.cpuVendor,
-        gpuCount: 0,
-        geography: AZURE_SERVERLESS_GEOGRAPHY,
-        category: 'Serverless Compute',
-        price: inst.price,
-        unit: 'Hour',
-        dataSource: 'live_api' as const,
-        supportedLanguages: [],
-        attributes: {},
-      }));
-    } catch (e) {
-      console.warn(`⚠️  AZURE Serverless live fetch failed: ${e}. Falling back to empty to trigger static config...`);
-      return [];
-    }
+    console.log(`Fetching Azure Functions pricing (${AZURE_SERVERLESS.length} entries from static config)...`);
+    return AZURE_SERVERLESS.map(inst => ({
+      provider: 'azure',
+      service: 'Azure Functions',
+      region: AZURE_SERVERLESS_REGION,
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: inst.cpuVendor,
+      gpuCount: 0,
+      geography: AZURE_SERVERLESS_GEOGRAPHY,
+      category: 'Serverless Compute',
+      price: inst.price,
+      unit: 'GB-Hour',
+      dataSource: 'static_config' as const,
+      supportedLanguages: inst.supportedLanguages || [],
+      attributes: inst.attributes || {},
+    }));
   }
 }
 

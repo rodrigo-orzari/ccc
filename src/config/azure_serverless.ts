@@ -27,7 +27,7 @@ const addAzureServerlessAttributes = (entry: any) => ({
     timeout_seconds: 300,
     memory_configuration: 'fixed-tiers',
     invocation_price: 0.0000002,
-    free_executions_per_month: 1000000,
+    free_invocations_per_month: 1000000,
     free_gb_seconds_per_month: 400000,
     max_memory_gb: 1.75,
     billing_granularity_ms: 1,
