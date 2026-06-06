@@ -58,24 +58,6 @@
   },
   "nodes": [
     {
-      "label": "test-next-api-analytics.ts",
-      "file_type": "code",
-      "source_file": "test-next-api-analytics.ts",
-      "source_location": "L1",
-      "id": "test_next_api_analytics",
-      "community": 4,
-      "norm_label": "test-next-api-analytics.ts"
-    },
-    {
-      "label": "main()",
-      "file_type": "code",
-      "source_file": "test-next-api-analytics.ts",
-      "source_location": "L4",
-      "id": "test_next_api_analytics_main",
-      "community": 4,
-      "norm_label": "main()"
-    },
-    {
       "label": "ProductTypeSelector.tsx",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
@@ -6727,27 +6709,6 @@
     }
   ],
   "links": [
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "test-next-api-analytics.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "source": "test_next_api_analytics",
-      "target": "pricing_route_get",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "test-next-api-analytics.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "test_next_api_analytics",
-      "target": "test_next_api_analytics_main",
-      "confidence_score": 1.0
-    },
     {
       "relation": "re_exports",
       "context": "export",
@@ -17332,5 +17293,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "1ff8181c75d63d4aae3b8e57d42f170fc4ffc889"
+  "built_at_commit": "afc7023c84d7e4943f29923701d8f1fad0e8e75d"
 }
