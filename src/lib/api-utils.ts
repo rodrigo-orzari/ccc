@@ -496,8 +496,8 @@ export function buildPricingFilters(query: any) {
         values.push((containersArchitectures as string).split(',').map((s: string) => s.toLowerCase()));
       }
       if (containersBillingGranularity) {
-        conditions.push(`pr.attributes->>'billing_granularity' = ANY($${paramCount++})`);
-        values.push((containersBillingGranularity as string).split(','));
+        conditions.push(`LOWER(pr.attributes->>'billing_granularity') = ANY($${paramCount++})`);
+        values.push((containersBillingGranularity as string).split(',').map((s: string) => s.toLowerCase()));
       }
 
       // Containers GPU filtering

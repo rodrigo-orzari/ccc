@@ -122,12 +122,6 @@ export default function Dashboard() {
   const [hasHorizontalOverflow, setHasHorizontalOverflow] = useState(false);
   const [scrolledToEnd, setScrolledToEnd] = useState(false);
   const [isInitialFetch, setIsInitialFetch] = useState(true);
-  // Flip off once the first real data (filter-aware counts) arrives
-  useEffect(() => {
-    if (rawProviderCounts && Array.isArray(rawProviderCounts) && rawProviderCounts.length > 0) {
-      setIsInitialFetch(false);
-    }
-  }, [rawProviderCounts]);
 
   const toggleSection = (key: string) => setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
   const toggleFilter = (list: string[], setList: React.Dispatch<React.SetStateAction<string[]>>, item: string) => {
@@ -300,6 +294,13 @@ export default function Dashboard() {
     rawProviderCounts.forEach(r => { map[r.slug] = parseInt(r.count) || 0; });
     return map;
   }, [canFetch, rawProviderCounts]);
+
+  // Flip isInitialFetch off once filter-aware counts first arrive
+  useEffect(() => {
+    if (rawProviderCounts && Array.isArray(rawProviderCounts) && rawProviderCounts.length > 0) {
+      setIsInitialFetch(false);
+    }
+  }, [rawProviderCounts]);
 
   const pricingParamsString = useMemo(() => {
     const p = new URLSearchParams(debouncedParamsString);
