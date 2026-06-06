@@ -58,31 +58,85 @@
   },
   "nodes": [
     {
+      "label": "ProductTypeSelector.tsx",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L1",
+      "id": "components_producttypeselector",
+      "community": 44,
+      "norm_label": "producttypeselector.tsx"
+    },
+    {
+      "label": "PRODUCT_TYPES",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L6",
+      "id": "components_producttypeselector_product_types",
+      "community": 44,
+      "norm_label": "product_types"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L19",
+      "id": "components_producttypeselector_linkedinicon",
+      "community": 44,
+      "norm_label": "linkedinicon()"
+    },
+    {
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L27",
+      "id": "components_producttypeselector_xicon",
+      "community": 44,
+      "norm_label": "xicon()"
+    },
+    {
+      "label": "ProductTypeSelectorProps",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L35",
+      "id": "components_producttypeselector_producttypeselectorprops",
+      "community": 44,
+      "norm_label": "producttypeselectorprops"
+    },
+    {
+      "label": "ProductTypeSelector()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L40",
+      "id": "components_producttypeselector_producttypeselector",
+      "community": 44,
+      "norm_label": "producttypeselector()"
+    },
+    {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
       "source_location": "L1",
-      "id": "app_page",
       "community": 44,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "app_page"
     },
     {
       "label": "Dashboard()",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
       "source_location": "L27",
-      "id": "app_page_dashboard",
       "community": 44,
-      "norm_label": "dashboard()"
+      "norm_label": "dashboard()",
+      "id": "app_page_dashboard"
     },
     {
       "label": "api.spec.ts",
       "file_type": "code",
       "source_file": "tests/api.spec.ts",
       "source_location": "L1",
-      "id": "tests_api_spec",
       "community": 70,
-      "norm_label": "api.spec.ts"
+      "norm_label": "api.spec.ts",
+      "id": "tests_api_spec"
     },
     {
       "label": "FilterSidebar.tsx",
@@ -1498,42 +1552,6 @@
       "id": "components_pricingtable_tablerow"
     },
     {
-      "label": "ProductTypeSelector.tsx",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L1",
-      "community": 44,
-      "norm_label": "producttypeselector.tsx",
-      "id": "components_producttypeselector"
-    },
-    {
-      "label": "PRODUCT_TYPES",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L6",
-      "community": 44,
-      "norm_label": "product_types",
-      "id": "components_producttypeselector_product_types"
-    },
-    {
-      "label": "ProductTypeSelectorProps",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L16",
-      "community": 44,
-      "norm_label": "producttypeselectorprops",
-      "id": "components_producttypeselector_producttypeselectorprops"
-    },
-    {
-      "label": "ProductTypeSelector()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L21",
-      "community": 44,
-      "norm_label": "producttypeselector()",
-      "id": "components_producttypeselector_producttypeselector"
-    },
-    {
       "label": "RangeSlider.tsx",
       "file_type": "code",
       "source_file": "src/components/RangeSlider.tsx",
@@ -2465,7 +2483,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L18",
-      "community": 49,
+      "community": 37,
       "norm_label": "awscontainersstaticadapter",
       "id": "services_containers_pipeline_awscontainersstaticadapter"
     },
@@ -2474,7 +2492,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L20",
-      "community": 48,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_awscontainersstaticadapter_fetchpricing"
     },
@@ -2483,7 +2501,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L43",
-      "community": 49,
+      "community": 37,
       "norm_label": "azurecontainersstaticadapter",
       "id": "services_containers_pipeline_azurecontainersstaticadapter"
     },
@@ -2492,7 +2510,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L45",
-      "community": 48,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_azurecontainersstaticadapter_fetchpricing"
     },
@@ -2501,7 +2519,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L68",
-      "community": 49,
+      "community": 71,
       "norm_label": "gcpcontainersstaticadapter",
       "id": "services_containers_pipeline_gcpcontainersstaticadapter"
     },
@@ -2510,7 +2528,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L70",
-      "community": 48,
+      "community": 71,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_pipeline_gcpcontainersstaticadapter_fetchpricing"
     },
@@ -2519,7 +2537,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_pipeline.ts",
       "source_location": "L93",
-      "community": 49,
+      "community": 48,
       "norm_label": "digitaloceancontainersstaticadapter",
       "id": "services_containers_pipeline_digitaloceancontainersstaticadapter"
     },
@@ -2915,7 +2933,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L10",
-      "community": 48,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_awscontainersliveadapter_fetchpricing"
     },
@@ -2933,7 +2951,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L44",
-      "community": 48,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_azurecontainersliveadapter_fetchpricing"
     },
@@ -2951,7 +2969,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L77",
-      "community": 48,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_gcpcontainersliveadapter_fetchpricing"
     },
@@ -2969,7 +2987,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L86",
-      "community": 48,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_digitaloceancontainersliveadapter_fetchpricing"
     },
@@ -2987,7 +3005,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L95",
-      "community": 48,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_oraclecontainersliveadapter_fetchpricing"
     },
@@ -3464,7 +3482,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L11",
-      "community": 48,
+      "community": 15,
       "norm_label": "pricingrecord",
       "id": "services_pricing_pipeline_pricingrecord"
     },
@@ -3662,7 +3680,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L340",
-      "community": 49,
+      "community": 32,
       "norm_label": ".classifydigitalocean()",
       "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean"
     },
@@ -3842,7 +3860,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L36",
-      "community": 48,
+      "community": 49,
       "norm_label": "awsserverlessliveadapter",
       "id": "services_serverless_pipeline_awsserverlessliveadapter"
     },
@@ -3851,7 +3869,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L39",
-      "community": 48,
+      "community": 15,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_awsserverlessliveadapter_fetchpricing"
     },
@@ -3860,7 +3878,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L71",
-      "community": 48,
+      "community": 49,
       "norm_label": "awsserverlessadapter",
       "id": "services_serverless_pipeline_awsserverlessadapter"
     },
@@ -3869,7 +3887,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L74",
-      "community": 48,
+      "community": 15,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_awsserverlessadapter_fetchpricing"
     },
@@ -3878,7 +3896,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L106",
-      "community": 48,
+      "community": 39,
       "norm_label": "gcpserverlessadapter",
       "id": "services_serverless_pipeline_gcpserverlessadapter"
     },
@@ -3887,7 +3905,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L109",
-      "community": 48,
+      "community": 39,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_gcpserverlessadapter_fetchpricing"
     },
@@ -3896,7 +3914,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L135",
-      "community": 48,
+      "community": 49,
       "norm_label": "azureserverlessadapter",
       "id": "services_serverless_pipeline_azureserverlessadapter"
     },
@@ -3905,7 +3923,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L138",
-      "community": 48,
+      "community": 15,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing"
     },
@@ -3914,7 +3932,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L170",
-      "community": 48,
+      "community": 39,
       "norm_label": "digitaloceanserverlessadapter",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter"
     },
@@ -3923,7 +3941,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L173",
-      "community": 48,
+      "community": 39,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter_fetchpricing"
     },
@@ -3932,7 +3950,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L197",
-      "community": 39,
+      "community": 49,
       "norm_label": "oracleserverlessadapter",
       "id": "services_serverless_pipeline_oracleserverlessadapter"
     },
@@ -3950,7 +3968,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L224",
-      "community": 39,
+      "community": 49,
       "norm_label": "alibabaserverlessadapter",
       "id": "services_serverless_pipeline_alibabaserverlessadapter"
     },
@@ -6692,6 +6710,100 @@
   ],
   "links": [
     {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_producttypeselector"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_linkedinicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_product_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_producttypeselector"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_producttypeselectorprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_xicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector_producttypeselectorprops",
+      "target": "types_index_producttype"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/page.tsx",
@@ -9103,80 +9215,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "components_pricingtable_pricingtableprops",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_producttypeselector"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_product_types"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_producttypeselector"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_producttypeselectorprops"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector_producttypeselectorprops",
       "target": "types_index_producttype"
     },
     {
@@ -17255,5 +17293,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "30696aab377486028b2a333b8f2893cd66304040"
+  "built_at_commit": "5d255243791c58f0c10cc8ce46cd54a3808acbdf"
 }
