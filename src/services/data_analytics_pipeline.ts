@@ -278,6 +278,70 @@ export class SynapseAzureAdapter extends BaseAdapter {
   }
 }
 
+// ─── Alibaba MaxCompute / E-MapReduce (static config) ─────────────────────────
+
+export class AlibabaAnalyticsAdapter extends BaseAdapter {
+  providerSlug = 'alibaba';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Alibaba Analytics pricing (${ALIBABA_ANALYTICS_INSTANCES.length} entries from static config)...`);
+    return ALIBABA_ANALYTICS_INSTANCES.map(inst => ({
+      provider: 'alibaba',
+      service: inst.engine === 'E-MapReduce' ? 'E-MapReduce' : 'MaxCompute',
+      region: ALIBABA_ANALYTICS_REGION,
+      instanceType: `${inst.engine} ${inst.tier}`,
+      vcpus: 1, // Normalized: 1 CU / 1 OCPU / 1 Instance-Hr
+      memoryGb: 0,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: ALIBABA_ANALYTICS_GEOGRAPHY,
+      category: 'data_warehouse',
+      price: inst.pricePerUnit,
+      unit: inst.computeUnitName,
+      attributes: {
+        engine: inst.engine,
+        tier: inst.tier,
+        deployment_type: inst.deploymentType,
+      },
+      dataSource: 'static_config' as const,
+    }));
+  }
+}
+
+// ─── Oracle Analytics Cloud (static config) ────────────────────────────────────
+
+export class OracleAnalyticsAdapter extends BaseAdapter {
+  providerSlug = 'oracle';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Oracle Analytics Cloud pricing (${ORACLE_ANALYTICS_INSTANCES.length} entries from static config)...`);
+    return ORACLE_ANALYTICS_INSTANCES.map(inst => ({
+      provider: 'oracle',
+      service: 'Oracle Analytics Cloud',
+      region: ORACLE_ANALYTICS_REGION,
+      instanceType: `${inst.engine} ${inst.tier}`,
+      vcpus: 1, // Normalized: 1 OCPU / 1 ECPU
+      memoryGb: 0,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: ORACLE_ANALYTICS_GEOGRAPHY,
+      category: 'data_warehouse',
+      price: inst.pricePerUnit,
+      unit: inst.computeUnitName,
+      attributes: {
+        engine: inst.engine,
+        tier: inst.tier,
+        deployment_type: inst.deploymentType,
+      },
+      dataSource: 'static_config' as const,
+    }));
+  }
+}
+
 // ─── Data Analytics Pricing Pipeline ───────────────────────────────────────────
 
 export class DataAnalyticsPricingPipeline extends PricingPipeline {
