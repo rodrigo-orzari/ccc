@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-05)
 
 ## Corpus Check
-- 103 files · ~81,345 words
+- 103 files · ~81,602 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 722 nodes · 1013 edges · 72 communities (49 shown, 23 thin omitted)
+- 725 nodes · 1020 edges · 65 communities (45 shown, 20 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 5 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2ff759f1`
+- Built from commit: `061c01f1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -30,7 +30,6 @@
 - [[_COMMUNITY_Community 12|Community 12]]
 - [[_COMMUNITY_Dev Dependencies|Dev Dependencies]]
 - [[_COMMUNITY_App Metadata|App Metadata]]
-- [[_COMMUNITY_Database Schema|Database Schema]]
 - [[_COMMUNITY_Dashboard State|Dashboard State]]
 - [[_COMMUNITY_Claude Dev Config|Claude Dev Config]]
 - [[_COMMUNITY_Claude Permissions|Claude Permissions]]
@@ -48,7 +47,6 @@
 - [[_COMMUNITY_Community 32|Community 32]]
 - [[_COMMUNITY_Community 33|Community 33]]
 - [[_COMMUNITY_Community 34|Community 34]]
-- [[_COMMUNITY_Community 35|Community 35]]
 - [[_COMMUNITY_Community 36|Community 36]]
 - [[_COMMUNITY_Community 37|Community 37]]
 - [[_COMMUNITY_Community 39|Community 39]]
@@ -60,17 +58,12 @@
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 47|Community 47]]
-- [[_COMMUNITY_Community 48|Community 48]]
 - [[_COMMUNITY_Community 49|Community 49]]
 - [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Community 53|Community 53]]
-- [[_COMMUNITY_Community 54|Community 54]]
 - [[_COMMUNITY_Community 55|Community 55]]
-- [[_COMMUNITY_Community 56|Community 56]]
-- [[_COMMUNITY_Community 58|Community 58]]
-- [[_COMMUNITY_Community 59|Community 59]]
 - [[_COMMUNITY_Community 60|Community 60]]
 - [[_COMMUNITY_Community 61|Community 61]]
 - [[_COMMUNITY_Community 62|Community 62]]
@@ -114,7 +107,7 @@
 - **Security Audit findings map to Security Fixes and Operations Runbook controls** — security_audit_tls_cert_validation_disabled, security_audit_exposed_admin_endpoints, security_audit_sql_injection_risk, security_fixes_enable_strict_tls, security_fixes_require_admin_auth, security_fixes_input_validation, operations_runbook_admin_api_auth, operations_runbook_filter_input_validation [EXTRACTED 1.00]
 - **End-to-end serverless language filter: config files, pipeline, API, frontend** — implementation_summary_aws_serverless_config, implementation_summary_gcp_serverless_config, implementation_summary_azure_serverless_config, implementation_summary_digitalocean_serverless_config, implementation_summary_serverless_pipeline_ts, implementation_summary_server_ts, implementation_summary_dashboard_tsx, implementation_summary_supported_languages_jsonb [EXTRACTED 1.00]
 
-## Communities (72 total, 23 thin omitted)
+## Communities (65 total, 20 thin omitted)
 
 ### Community 1 - "Container Provider Configs"
 Cohesion: 0.50
@@ -156,6 +149,10 @@ Nodes (17): AWSLambdaLiveAdapter, aws_serverless.ts config, azure_serverless.ts 
 Cohesion: 0.05
 Nodes (37): dependencies, @aws-sdk/client-pricing, axios, dotenv, @google/genai, lucide-react, motion, next (+29 more)
 
+### Community 13 - "Dev Dependencies"
+Cohesion: 0.18
+Nodes (5): AWSContainersLiveAdapter, AzureContainersLiveAdapter, DigitalOceanContainersLiveAdapter, GCPContainersLiveAdapter, OracleContainersLiveAdapter
+
 ### Community 14 - "App Metadata"
 Cohesion: 0.40
 Nodes (4): description, majorCapabilities, name, requestFramePermissions
@@ -184,17 +181,13 @@ Nodes (21): ALIBABA_INSTANCES, DIGITALOCEAN_INSTANCES, DigitalOceanInstanceConfi
 Cohesion: 0.33
 Nodes (5): autoInitStart, content, cronEnd, cronStart, lines
 
-### Community 35 - "Community 35"
-Cohesion: 0.29
-Nodes (3): AWSLambdaLiveAdapter, AzureFunctionsLiveAdapter, GCPCloudRunLiveAdapter
-
 ### Community 37 - "Community 37"
-Cohesion: 0.12
-Nodes (10): ALIBABA_CONTAINERS, AwsFargateScraper, AzureContainerInstancesScraper, AWSContainersLiveAdapter, AzureContainersLiveAdapter, DigitalOceanContainersLiveAdapter, GCPContainersLiveAdapter, OracleContainersLiveAdapter (+2 more)
+Cohesion: 0.13
+Nodes (7): ALIBABA_CONTAINERS, AWS_CONTAINERS, baseAwsContainerEntries, AwsFargateScraper, AzureContainerInstancesScraper, AWSContainersStaticAdapter, DigitalOceanContainersStaticAdapter
 
 ### Community 39 - "Community 39"
-Cohesion: 0.14
-Nodes (8): ALIBABA_SERVERLESS, AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AwsLambdaScraper, AzureFunctionsScraper, DigitalOceanServerlessAdapter, GCPServerlessAdapter
+Cohesion: 0.05
+Nodes (30): ALIBABA_SERVERLESS, AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries, AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries, baseDigitaloceanEntries (+22 more)
 
 ### Community 40 - "Community 40"
 Cohesion: 0.33
@@ -225,8 +218,8 @@ Cohesion: 0.18
 Nodes (11): Database Initialization Guide, POST /api/admin/fetch-pricing, ingest.ts CLI, POST /api/admin/init-db, Admin API Authentication, Constant-Time Token Comparison, Deployment Checklist, Database TLS/SSL Connection Setup (+3 more)
 
 ### Community 49 - "Community 49"
-Cohesion: 0.16
-Nodes (8): AWSAdapter, AzureAdapter, BaseAdapter, AlibabaServerlessAdapter, AWSServerlessAdapter, AWSServerlessLiveAdapter, AzureServerlessAdapter, OracleServerlessAdapter
+Cohesion: 0.20
+Nodes (4): AzureContainersStaticAdapter, AWSAdapter, AzureAdapter, BaseAdapter
 
 ### Community 50 - "Community 50"
 Cohesion: 0.67
@@ -235,22 +228,6 @@ Nodes (3): Filter Input Validation, SQL Injection Risk via Filter Parameters, Fi
 ### Community 51 - "Community 51"
 Cohesion: 0.40
 Nodes (3): DBStatusProvider, ProviderCardProps, ProviderCardsProps
-
-### Community 54 - "Community 54"
-Cohesion: 0.40
-Nodes (3): AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries
-
-### Community 56 - "Community 56"
-Cohesion: 0.40
-Nodes (3): baseDigitaloceanEntries, DIGITALOCEAN_FUNCTIONS_LANGUAGES, DIGITALOCEAN_SERVERLESS
-
-### Community 58 - "Community 58"
-Cohesion: 0.40
-Nodes (3): baseGcpEntries, GCP_CLOUD_RUN_LANGUAGES, GCP_SERVERLESS
-
-### Community 59 - "Community 59"
-Cohesion: 0.40
-Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
 
 ### Community 60 - "Community 60"
 Cohesion: 0.50
@@ -291,16 +268,16 @@ Nodes (3): 6.1 Component Hierarchy, 6.2 Dashboard Deep Dive, 6. Frontend Archite
 ## Knowledge Gaps
 - **293 isolated node(s):** `AWS_LAMBDA_LANGUAGES`, `baseAwsEntries`, `AZURE_FUNCTIONS_LANGUAGES`, `baseAzureEntries`, `VALID_PRODUCT_TYPES` (+288 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `BaseAdapter` connect `Community 49` to `Community 32`, `Database Instance Configs`, `Community 35`, `Community 37`, `Community 71`, `Community 39`, `Community 48`, `Vite Config`, `Community 31`?**
-  _High betweenness centrality (0.036) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Database Schema` to `Community 32`, `Database Instance Configs`, `Community 35`, `Community 37`, `Community 71`, `Community 39`, `Community 48`, `Vite Config`, `Community 31`?**
+- **Why does `BaseAdapter` connect `Community 49` to `Community 32`, `Database Instance Configs`, `Community 37`, `Community 71`, `Community 39`, `Dev Dependencies`, `Vite Config`, `Community 31`?**
+  _High betweenness centrality (0.037) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Community 39` to `Community 32`, `Database Instance Configs`, `Community 37`, `Community 71`, `Dev Dependencies`, `Community 49`, `Vite Config`, `Community 31`?**
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **Why does `PricingPipeline` connect `Community 32` to `Database Instance Configs`, `Community 37`, `Community 39`, `Community 40`, `Database Schema`, `Community 31`?**
+- **Why does `PricingPipeline` connect `Community 32` to `Database Instance Configs`, `Community 37`, `Community 39`, `Community 40`, `Community 31`?**
   _High betweenness centrality (0.024) - this node is a cross-community bridge._
 - **What connects `AWS_LAMBDA_LANGUAGES`, `baseAwsEntries`, `AZURE_FUNCTIONS_LANGUAGES` to the rest of the system?**
   _293 weakly-connected nodes found - possible documentation gaps or missing edges._
