@@ -58,355 +58,373 @@
   },
   "nodes": [
     {
+      "label": "Footer.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L1",
+      "id": "components_footer",
+      "community": 44,
+      "norm_label": "footer.tsx"
+    },
+    {
+      "label": "Footer()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L9",
+      "id": "components_footer_footer",
+      "community": 44,
+      "norm_label": "footer()"
+    },
+    {
       "label": "aws_serverless.ts",
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L1",
-      "id": "config_aws_serverless",
       "community": 39,
-      "norm_label": "aws_serverless.ts"
+      "norm_label": "aws_serverless.ts",
+      "id": "config_aws_serverless"
     },
     {
       "label": "AWS_LAMBDA_LANGUAGES",
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L18",
-      "id": "config_aws_serverless_aws_lambda_languages",
       "community": 39,
-      "norm_label": "aws_lambda_languages"
+      "norm_label": "aws_lambda_languages",
+      "id": "config_aws_serverless_aws_lambda_languages"
     },
     {
       "label": "addServerlessAttributes()",
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L21",
-      "id": "config_aws_serverless_addserverlessattributes",
       "community": 39,
-      "norm_label": "addserverlessattributes()"
+      "norm_label": "addserverlessattributes()",
+      "id": "config_aws_serverless_addserverlessattributes"
     },
     {
       "label": "baseAwsEntries",
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L39",
-      "id": "config_aws_serverless_baseawsentries",
       "community": 39,
-      "norm_label": "baseawsentries"
+      "norm_label": "baseawsentries",
+      "id": "config_aws_serverless_baseawsentries"
     },
     {
       "label": "AWS_SERVERLESS",
       "file_type": "code",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L128",
-      "id": "config_aws_serverless_aws_serverless",
       "community": 39,
-      "norm_label": "aws_serverless"
+      "norm_label": "aws_serverless",
+      "id": "config_aws_serverless_aws_serverless"
     },
     {
       "label": "azure_serverless.ts",
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L1",
-      "id": "config_azure_serverless",
       "community": 54,
-      "norm_label": "azure_serverless.ts"
+      "norm_label": "azure_serverless.ts",
+      "id": "config_azure_serverless"
     },
     {
       "label": "AZURE_FUNCTIONS_LANGUAGES",
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L18",
-      "id": "config_azure_serverless_azure_functions_languages",
       "community": 54,
-      "norm_label": "azure_functions_languages"
+      "norm_label": "azure_functions_languages",
+      "id": "config_azure_serverless_azure_functions_languages"
     },
     {
       "label": "addAzureServerlessAttributes()",
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L21",
-      "id": "config_azure_serverless_addazureserverlessattributes",
       "community": 54,
-      "norm_label": "addazureserverlessattributes()"
+      "norm_label": "addazureserverlessattributes()",
+      "id": "config_azure_serverless_addazureserverlessattributes"
     },
     {
       "label": "baseAzureEntries",
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L41",
-      "id": "config_azure_serverless_baseazureentries",
       "community": 54,
-      "norm_label": "baseazureentries"
+      "norm_label": "baseazureentries",
+      "id": "config_azure_serverless_baseazureentries"
     },
     {
       "label": "AZURE_SERVERLESS",
       "file_type": "code",
       "source_file": "src/config/azure_serverless.ts",
       "source_location": "L103",
-      "id": "config_azure_serverless_azure_serverless",
       "community": 54,
-      "norm_label": "azure_serverless"
+      "norm_label": "azure_serverless",
+      "id": "config_azure_serverless_azure_serverless"
     },
     {
       "label": "api-utils.ts",
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L1",
-      "id": "lib_api_utils",
       "community": 4,
-      "norm_label": "api-utils.ts"
+      "norm_label": "api-utils.ts",
+      "id": "lib_api_utils"
     },
     {
       "label": "requireAdminAuth()",
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L8",
-      "id": "lib_api_utils_requireadminauth",
       "community": 32,
-      "norm_label": "requireadminauth()"
+      "norm_label": "requireadminauth()",
+      "id": "lib_api_utils_requireadminauth"
     },
     {
       "label": "initDb()",
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L30",
-      "id": "lib_api_utils_initdb",
       "community": 32,
-      "norm_label": "initdb()"
+      "norm_label": "initdb()",
+      "id": "lib_api_utils_initdb"
     },
     {
       "label": "VALID_PRODUCT_TYPES",
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L86",
-      "id": "lib_api_utils_valid_product_types",
       "community": 4,
-      "norm_label": "valid_product_types"
+      "norm_label": "valid_product_types",
+      "id": "lib_api_utils_valid_product_types"
     },
     {
       "label": "parseFilterList()",
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L88",
-      "id": "lib_api_utils_parsefilterlist",
       "community": 4,
-      "norm_label": "parsefilterlist()"
+      "norm_label": "parsefilterlist()",
+      "id": "lib_api_utils_parsefilterlist"
     },
     {
       "label": "buildPricingFilters()",
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L109",
-      "id": "lib_api_utils_buildpricingfilters",
       "community": 4,
-      "norm_label": "buildpricingfilters()"
+      "norm_label": "buildpricingfilters()",
+      "id": "lib_api_utils_buildpricingfilters"
     },
     {
       "label": "serverless_pipeline.ts",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L1",
-      "id": "services_serverless_pipeline",
       "community": 39,
-      "norm_label": "serverless_pipeline.ts"
+      "norm_label": "serverless_pipeline.ts",
+      "id": "services_serverless_pipeline"
     },
     {
       "label": "AWSServerlessLiveAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L36",
-      "id": "services_serverless_pipeline_awsserverlessliveadapter",
       "community": 49,
-      "norm_label": "awsserverlessliveadapter"
+      "norm_label": "awsserverlessliveadapter",
+      "id": "services_serverless_pipeline_awsserverlessliveadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L39",
-      "id": "services_serverless_pipeline_awsserverlessliveadapter_fetchpricing",
       "community": 15,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_serverless_pipeline_awsserverlessliveadapter_fetchpricing"
     },
     {
       "label": "AWSServerlessAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L71",
-      "id": "services_serverless_pipeline_awsserverlessadapter",
       "community": 49,
-      "norm_label": "awsserverlessadapter"
+      "norm_label": "awsserverlessadapter",
+      "id": "services_serverless_pipeline_awsserverlessadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L74",
-      "id": "services_serverless_pipeline_awsserverlessadapter_fetchpricing",
       "community": 15,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_serverless_pipeline_awsserverlessadapter_fetchpricing"
     },
     {
       "label": "GCPServerlessAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L98",
-      "id": "services_serverless_pipeline_gcpserverlessadapter",
       "community": 39,
-      "norm_label": "gcpserverlessadapter"
+      "norm_label": "gcpserverlessadapter",
+      "id": "services_serverless_pipeline_gcpserverlessadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L101",
-      "id": "services_serverless_pipeline_gcpserverlessadapter_fetchpricing",
       "community": 39,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_serverless_pipeline_gcpserverlessadapter_fetchpricing"
     },
     {
       "label": "AzureServerlessAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L125",
-      "id": "services_serverless_pipeline_azureserverlessadapter",
       "community": 49,
-      "norm_label": "azureserverlessadapter"
+      "norm_label": "azureserverlessadapter",
+      "id": "services_serverless_pipeline_azureserverlessadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L128",
-      "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing",
       "community": 15,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing"
     },
     {
       "label": "DigitalOceanServerlessAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L152",
-      "id": "services_serverless_pipeline_digitaloceanserverlessadapter",
       "community": 39,
-      "norm_label": "digitaloceanserverlessadapter"
+      "norm_label": "digitaloceanserverlessadapter",
+      "id": "services_serverless_pipeline_digitaloceanserverlessadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L155",
-      "id": "services_serverless_pipeline_digitaloceanserverlessadapter_fetchpricing",
       "community": 39,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_serverless_pipeline_digitaloceanserverlessadapter_fetchpricing"
     },
     {
       "label": "OracleServerlessAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L179",
-      "id": "services_serverless_pipeline_oracleserverlessadapter",
       "community": 49,
-      "norm_label": "oracleserverlessadapter"
+      "norm_label": "oracleserverlessadapter",
+      "id": "services_serverless_pipeline_oracleserverlessadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L182",
-      "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing",
       "community": 15,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing"
     },
     {
       "label": "AlibabaServerlessAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L206",
-      "id": "services_serverless_pipeline_alibabaserverlessadapter",
       "community": 49,
-      "norm_label": "alibabaserverlessadapter"
+      "norm_label": "alibabaserverlessadapter",
+      "id": "services_serverless_pipeline_alibabaserverlessadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L209",
-      "id": "services_serverless_pipeline_alibabaserverlessadapter_fetchpricing",
       "community": 15,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_serverless_pipeline_alibabaserverlessadapter_fetchpricing"
     },
     {
       "label": "ServerlessPricingPipeline",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L233",
-      "id": "services_serverless_pipeline_serverlesspricingpipeline",
       "community": 15,
-      "norm_label": "serverlesspricingpipeline"
+      "norm_label": "serverlesspricingpipeline",
+      "id": "services_serverless_pipeline_serverlesspricingpipeline"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L234",
-      "id": "services_serverless_pipeline_serverlesspricingpipeline_constructor",
       "community": 15,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "services_serverless_pipeline_serverlesspricingpipeline_constructor"
     },
     {
       "label": ".run()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L250",
-      "id": "services_serverless_pipeline_serverlesspricingpipeline_run",
       "community": 15,
-      "norm_label": ".run()"
+      "norm_label": ".run()",
+      "id": "services_serverless_pipeline_serverlesspricingpipeline_run"
     },
     {
       "label": ".getAWSServerlessStaticRecords()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L435",
-      "id": "services_serverless_pipeline_serverlesspricingpipeline_getawsserverlessstaticrecords",
       "community": 15,
-      "norm_label": ".getawsserverlessstaticrecords()"
+      "norm_label": ".getawsserverlessstaticrecords()",
+      "id": "services_serverless_pipeline_serverlesspricingpipeline_getawsserverlessstaticrecords"
     },
     {
       "label": ".getGCPServerlessStaticRecords()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L443",
-      "id": "services_serverless_pipeline_serverlesspricingpipeline_getgcpserverlessstaticrecords",
       "community": 15,
-      "norm_label": ".getgcpserverlessstaticrecords()"
+      "norm_label": ".getgcpserverlessstaticrecords()",
+      "id": "services_serverless_pipeline_serverlesspricingpipeline_getgcpserverlessstaticrecords"
     },
     {
       "label": ".getAzureServerlessStaticRecords()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L451",
-      "id": "services_serverless_pipeline_serverlesspricingpipeline_getazureserverlessstaticrecords",
       "community": 15,
-      "norm_label": ".getazureserverlessstaticrecords()"
+      "norm_label": ".getazureserverlessstaticrecords()",
+      "id": "services_serverless_pipeline_serverlesspricingpipeline_getazureserverlessstaticrecords"
     },
     {
       "label": ".getDigitalOceanServerlessStaticRecords()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L459",
-      "id": "services_serverless_pipeline_serverlesspricingpipeline_getdigitaloceanserverlessstaticrecords",
       "community": 15,
-      "norm_label": ".getdigitaloceanserverlessstaticrecords()"
+      "norm_label": ".getdigitaloceanserverlessstaticrecords()",
+      "id": "services_serverless_pipeline_serverlesspricingpipeline_getdigitaloceanserverlessstaticrecords"
     },
     {
       "label": ".getOracleServerlessStaticRecords()",
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L467",
-      "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords",
       "community": 15,
-      "norm_label": ".getoracleserverlessstaticrecords()"
+      "norm_label": ".getoracleserverlessstaticrecords()",
+      "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
     },
     {
       "label": "ProductTypeSelector.tsx",
@@ -1820,24 +1838,6 @@
       "community": 69,
       "norm_label": "postcss.config.mjs",
       "id": "postcss_config"
-    },
-    {
-      "label": "Footer.tsx",
-      "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L1",
-      "community": 44,
-      "norm_label": "footer.tsx",
-      "id": "components_footer"
-    },
-    {
-      "label": "Footer()",
-      "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L6",
-      "community": 44,
-      "norm_label": "footer()",
-      "id": "components_footer_footer"
     },
     {
       "label": "PricingTable.tsx",
@@ -6712,6 +6712,27 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_footer",
+      "target": "components_footer_footer"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_footer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/config/aws_serverless.ts",
       "source_location": "L21",
       "weight": 1.0,
@@ -10343,27 +10364,6 @@
       "confidence_score": 1.0,
       "source": "package_devdependencies",
       "target": "package_devdependencies_typescript"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_footer",
-      "target": "components_footer_footer"
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_footer"
     },
     {
       "relation": "re_exports",
@@ -17293,5 +17293,5 @@
       "source_file": "IMPLEMENTATION_SUMMARY.md"
     }
   ],
-  "built_at_commit": "1c87aa71850147a9bc842dd8526fdccc9efc434a"
+  "built_at_commit": "2ff759f1be1f33676e3da9eb8d200b28b7cead7e"
 }
