@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1780777460.5041792,
-    "ast_hash": "edfb6f036b0587a72a68b311f8a58783",
+    "mtime": 1780779121.3343554,
+    "ast_hash": "5f4cccf94d3ffc84aaadbbe5e1a82203",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -547,6 +547,26 @@
   "src/components/ChartsView.tsx": {
     "mtime": 1780778358.2591867,
     "ast_hash": "d723950f3ffeba9e20eb54bd3f55438c",
+    "semantic_hash": ""
+  },
+  "scratch_test.js": {
+    "mtime": 1780778993.0700026,
+    "ast_hash": "cf6641fb9fac9441078d18958b313fc8",
+    "semantic_hash": ""
+  },
+  "test_db.mjs": {
+    "mtime": 1780778940.6589472,
+    "ast_hash": "575c99ee7fdbdcb8526536298136cfde",
+    "semantic_hash": ""
+  },
+  "test_db_geo.mjs": {
+    "mtime": 1780779031.6369247,
+    "ast_hash": "34bbb9815441da0c4a2b6be852829ace",
+    "semantic_hash": ""
+  },
+  "test_db_price.mjs": {
+    "mtime": 1780779008.8966718,
+    "ast_hash": "1178d87ddbdc54304f6c869f6ddf07e5",
     "semantic_hash": ""
   }
 }
