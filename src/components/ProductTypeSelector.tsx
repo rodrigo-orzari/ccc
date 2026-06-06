@@ -47,7 +47,9 @@ export default function ProductTypeSelector({
   };
 
   const shareOnX = () => {
-    const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(SITE_URL)}&text=${encodeURIComponent(SHARE_TEXT)}`;
+    // SHARE_TEXT already contains the domain so we skip the separate `url` param
+    // to avoid the link appearing twice (once inline, once as a t.co append).
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}`;
     window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
   };
 
