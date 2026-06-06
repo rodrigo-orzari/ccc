@@ -45,7 +45,7 @@ export const NETWORKING_DIRECTIONS = ['Egress', 'Ingress', 'Intra-Cloud'];
 // Data Analytics-specific constants
 export const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'Native'];
 export const ANALYTICS_DEPLOYMENT_TYPES = ['Serverless', 'Provisioned'];
-export const ANALYTICS_TIERS = ['Standard', 'Premium', 'Enterprise'];
+export const ANALYTICS_TIERS = ['Standard', 'Standard Edition', 'Premium', 'Enterprise', 'Enterprise Plus', 'Business Critical', 'DC2 Node', 'RA3 Node', 'On-Demand', 'Enterprise Edition'];
 
 // Range defaults
 export const DEFAULT_VCPU_RANGE = { min: 0, max: 320 };

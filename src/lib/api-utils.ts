@@ -407,33 +407,38 @@ export function buildPricingFilters(query: any) {
         values.push(networkingServices);
       }
 
-      const networkingConnectionTypesFilters = parseFilterList(networkingConnectionTypes as string);
+      const networkingConnectionTypesFilters = parseFilterList(networkingConnectionTypes as string).map((s: string) => s.toLowerCase());
       if (networkingConnectionTypesFilters.length > 0) {
-        conditions.push(`pr.attributes->>'connection_type' = ANY($${paramCount++})`);
+        networkingConnectionTypesFilters.push('n/a', 'none');
+        conditions.push(`LOWER(pr.attributes->>'connection_type') = ANY($${paramCount++})`);
         values.push(networkingConnectionTypesFilters);
       }
 
-      const networkingRoutingTypesFilters = parseFilterList(networkingRoutingTypes as string);
+      const networkingRoutingTypesFilters = parseFilterList(networkingRoutingTypes as string).map((s: string) => s.toLowerCase());
       if (networkingRoutingTypesFilters.length > 0) {
-        conditions.push(`pr.attributes->>'routing_type' = ANY($${paramCount++})`);
+        networkingRoutingTypesFilters.push('n/a', 'none');
+        conditions.push(`LOWER(pr.attributes->>'routing_type') = ANY($${paramCount++})`);
         values.push(networkingRoutingTypesFilters);
       }
 
-      const networkingHaSupportFilters = parseFilterList(networkingHaSupport as string);
+      const networkingHaSupportFilters = parseFilterList(networkingHaSupport as string).map((s: string) => s.toLowerCase());
       if (networkingHaSupportFilters.length > 0) {
-        conditions.push(`pr.attributes->>'ha_support' = ANY($${paramCount++})`);
+        networkingHaSupportFilters.push('n/a', 'none');
+        conditions.push(`LOWER(pr.attributes->>'ha_support') = ANY($${paramCount++})`);
         values.push(networkingHaSupportFilters);
       }
 
-      const networkingVpcSupportFilters = parseFilterList(networkingVpcSupport as string);
+      const networkingVpcSupportFilters = parseFilterList(networkingVpcSupport as string).map((s: string) => s.toLowerCase());
       if (networkingVpcSupportFilters.length > 0) {
-        conditions.push(`pr.attributes->>'vpc_support' = ANY($${paramCount++})`);
+        networkingVpcSupportFilters.push('n/a', 'none');
+        conditions.push(`LOWER(pr.attributes->>'vpc_support') = ANY($${paramCount++})`);
         values.push(networkingVpcSupportFilters);
       }
 
-      const networkingTransferDirectionsFilters = parseFilterList(networkingTransferDirections as string);
+      const networkingTransferDirectionsFilters = parseFilterList(networkingTransferDirections as string).map((s: string) => s.toLowerCase());
       if (networkingTransferDirectionsFilters.length > 0) {
-        conditions.push(`pr.attributes->>'transfer_direction' = ANY($${paramCount++})`);
+        networkingTransferDirectionsFilters.push('n/a', 'none');
+        conditions.push(`LOWER(pr.attributes->>'transfer_direction') = ANY($${paramCount++})`);
         values.push(networkingTransferDirectionsFilters);
       }
     }
