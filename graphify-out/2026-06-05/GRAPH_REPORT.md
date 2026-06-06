@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-05)
 
 ## Corpus Check
-- 103 files · ~81,602 words
+- 103 files · ~82,147 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `061c01f1`
+- Built from commit: `fa952a0b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -266,7 +266,7 @@ Cohesion: 0.67
 Nodes (3): 6.1 Component Hierarchy, 6.2 Dashboard Deep Dive, 6. Frontend Architecture
 
 ## Knowledge Gaps
-- **293 isolated node(s):** `AWS_LAMBDA_LANGUAGES`, `baseAwsEntries`, `AZURE_FUNCTIONS_LANGUAGES`, `baseAzureEntries`, `VALID_PRODUCT_TYPES` (+288 more)
+- **293 isolated node(s):** `FilterSectionProps`, `FilterSidebarProps`, `PRODUCT_TYPES`, `NETWORKING_SERVICES`, `NETWORKING_CONNECTION_TYPES` (+288 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -279,7 +279,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
 - **Why does `PricingPipeline` connect `Community 32` to `Database Instance Configs`, `Community 37`, `Community 39`, `Community 40`, `Community 31`?**
   _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **What connects `AWS_LAMBDA_LANGUAGES`, `baseAwsEntries`, `AZURE_FUNCTIONS_LANGUAGES` to the rest of the system?**
+- **What connects `FilterSectionProps`, `FilterSidebarProps`, `PRODUCT_TYPES` to the rest of the system?**
   _293 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Database Instance Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.07394957983193277 - nodes in this community are weakly interconnected._
