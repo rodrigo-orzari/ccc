@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 interface PipelineStatus {
   category: string;
@@ -38,6 +39,34 @@ const PROVIDER_COLORS: Record<string, string> = {
   digitalocean: '#0080FF',
   alibaba: '#FF6A00',
 };
+
+const PROVIDER_URLS: Record<string, string> = {
+  aws: 'https://aws.amazon.com',
+  azure: 'https://azure.microsoft.com',
+  gcp: 'https://cloud.google.com',
+  oracle: 'https://www.oracle.com/cloud/',
+  digitalocean: 'https://www.digitalocean.com',
+  alibaba: 'https://www.alibabacloud.com',
+};
+
+const SITE_URL = 'https://comparecloudcosts.com';
+const SHARE_TEXT = 'Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba Cloud. #FinOps #CCC';
+
+function LinkedInIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
+function XIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
 
 const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse'];
 
@@ -135,6 +164,16 @@ export default function StatusPage() {
   }, []);
 
   const globalFreshness = status ? freshnessStatus(status.last_ingested) : 'missing';
+
+  const shareOnLinkedIn = () => {
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE_URL)}`;
+    window.open(url, '_blank', 'noopener,noreferrer,width=600,height=600');
+  };
+
+  const shareOnX = () => {
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}`;
+    window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
+  };
 
   return (
     <>
@@ -307,7 +346,8 @@ export default function StatusPage() {
         }
       `}</style>
 
-      <div className="status-page">
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div className="status-page" style={{ flex: 1 }}>
         {/* Nav */}
         <div style={{ borderBottom: '1px solid var(--border)', padding: '0.75rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Link href="/" style={{ textDecoration: 'none' }}>
@@ -315,18 +355,35 @@ export default function StatusPage() {
               ← Compare Cloud Costs
             </span>
           </Link>
-          {status && (
-            <span style={{ fontSize: 11, color: 'var(--muted)' }}>
-              Refreshed {timeAgo(status.generated_at)}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--muted)', whiteSpace: 'nowrap' }}>
+              Share with friends and family
             </span>
-          )}
+            <button
+              onClick={shareOnLinkedIn}
+              title="Share on LinkedIn"
+              style={{ color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#0A66C2')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
+            >
+              <LinkedInIcon />
+            </button>
+            <button
+              onClick={shareOnX}
+              title="Share on X"
+              style={{ color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
+            >
+              <XIcon />
+            </button>
+          </div>
         </div>
 
         <div className="status-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.4rem' }}>
-            <StatusDot status={globalFreshness} />
+          <div style={{ marginBottom: '0.4rem' }}>
             <h1 style={{ fontSize: '1.6rem', fontWeight: 800, margin: 0, letterSpacing: '-0.02em' }}>
-              Data Status
+              Last Price Update
             </h1>
           </div>
           <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0 }}>
@@ -415,13 +472,15 @@ export default function StatusPage() {
                   <div key={provider.slug} className="provider-card">
                     <div className="provider-header">
                       <div className="provider-header-left">
-                        <StatusDot status={freshness} />
-                        <span
+                        <a
+                          href={PROVIDER_URLS[provider.slug] ?? '#'}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="provider-badge"
-                          style={{ color, borderColor: color + '50', backgroundColor: color + '18' }}
+                          style={{ color, borderColor: color + '50', backgroundColor: color + '18', textDecoration: 'none' }}
                         >
                           {provider.name}
-                        </span>
+                        </a>
                         <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
                           {provider.total_records.toLocaleString()} records
                         </span>
@@ -538,18 +597,11 @@ export default function StatusPage() {
                 </p>
               </div>
 
-              {/* Footer nav */}
-              <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border)', display: 'flex', gap: '1.5rem', fontSize: 11, color: 'var(--muted)' }}>
-                <Link href="/" style={{ color: 'var(--link)', textDecoration: 'none' }}>Dashboard</Link>
-                <Link href="/about" style={{ color: 'var(--link)', textDecoration: 'none' }}>About</Link>
-                <Link href="/docs" style={{ color: 'var(--link)', textDecoration: 'none' }}>Docs</Link>
-                <Link href="/terms" style={{ color: 'var(--link)', textDecoration: 'none' }}>Terms of Use</Link>
-                <a href="mailto:hello@comparecloudcosts.com" style={{ color: 'var(--link)', textDecoration: 'none' }}>Contact</a>
-                <span>© 2026 Co-Sell Plus LLC</span>
-              </div>
             </>
           )}
         </div>
+      </div>
+      <Footer />
       </div>
     </>
   );

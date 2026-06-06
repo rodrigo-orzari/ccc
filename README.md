@@ -129,7 +129,7 @@ _ccc/
 ### File Descriptions
 
 **Configuration & Entry Points:**
-* [package.json](./package.json): Lists runtime dependencies (`next`, `postgres`, `@tanstack/react-query`, `nodemailer`, `axios`, `react`, `motion`) and npm scripts for development/build.
+* [package.json](./package.json): Lists runtime dependencies (`next`, `postgres`, `@tanstack/react-query`, `nodemailer`, `axios`, `react`, `motion`, `recharts`) and npm scripts for development/build.
 * [next.config.js](./next.config.js) & [tsconfig.json](./tsconfig.json): Build and TypeScript configuration files.
 
 **Documentation Files (New):**
@@ -263,7 +263,9 @@ The backend endpoints used by the dashboard are structured as Next.js API Routes
 [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) binds this dataset to the UI:
 * **Product Views**: Users can toggle between `Virtual Machines`, `Databases`, `Serverless`, `Containers`, `Networking`, and `Data & Analytics`, which dynamically adjusts available filters depending on the selected product (e.g. OS and CPU vendor filters for VMs vs. Execution Model and Cold Start filters for Serverless).
 * **Sidebar Controls**: Features multi-select pills (Providers, Geographies, Engines, categories) and responsive range sliders (`RangeSlider`) to narrow down configurations by minimum/maximum values. The UI utilizes `@tanstack/react-query` to manage data fetching and intelligently cache responses while interacting with sliders and filters.
-* **Sortable Dense Grid**: Renders comparison rows in an interactive table supporting multi-column sorting (e.g., sorting by price, vCPUs, or memory) and drag-to-resize column boundaries. Column sizes are persistent, stored in local storage for subsequent visits.
+* **View Toggles (Table vs. Charts)**: Users can seamlessly switch between a tabular dense grid and analytical charts to understand data visually.
+* **Sortable Dense Grid**: Renders comparison rows in an interactive table supporting multi-column sorting and drag-to-resize column boundaries. It includes **In-Table Micro-Visualizations**, rendering relative price-bar indicators inside the price cells so users can instantly gauge a row's cost relative to the most expensive filtered item.
+* **Analytical Charts**: Powered by `recharts`, provides visual representations of the filtered data such as a Provider Price Bar Chart and a Resource Efficiency Scatter Plot (e.g., Price vs. RAM).
 
 **For frontend architecture and state management**, see [PROJECT_ANALYSIS.md — Section 6](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — Frontend State Flow](./ARCHITECTURE_DIAGRAMS.md).
 

@@ -23,7 +23,11 @@ The database is refreshed every 24 hours to capture any changes in regional pric
 - **PAYG**: Standard On-Demand hourly rates.
 - **Aggregation**: For some comparisons, we average regional prices to give a simplified global view.
 
-*Last updated: April 2026*
+## Data Visualizations
+- **In-Table Micro-Visualizations**: The horizontal color bars beneath instance prices represent the relative magnitude of that price compared to the absolute highest price currently displayed in your active filter. The most expensive instance defines the 100% width baseline.
+- **Efficiency Scatter Plots**: The Price vs. RAM chart is designed to reveal the "efficiency frontier." Instances grouped in the bottom-right quadrant offer the highest resources (e.g., RAM) at the lowest price within your active dataset.
+
+*Last updated: June 2026*
 `;
 
   return <MarkdownPage title="Methodology" content={content} />;

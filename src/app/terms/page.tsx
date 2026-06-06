@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import MarkdownPage from '@/components/MarkdownPage';
+import Footer from '@/components/Footer';
 
 const TermsOfUsePage: React.FC = () => {
   const content = `
@@ -70,6 +71,10 @@ CCC functions as an aggregator of publicly available information, designed to pr
 
 While we refresh data frequently (at least weekly), cloud providers update their pricing, introduce new instances, and offer private negotiated discounts that are not reflected here.
 
+### Visualizations and Charts
+
+The application provides graphical tools, including in-table micro-visualizations and analytical charts (e.g., bar charts and scatter plots), to assist with visual trend analysis. These visualizations are strictly relative indicators calculated dynamically based on your active filters. They do not represent exact financial projections or guaranteed performance ratios. Because the scales (such as maximum price width) constantly shift depending on the selected dataset, you should not rely on visual lengths or chart placements as absolute indicators of value.
+
 ### Data Normalization
 
 To provide a seamless comparison experience across entirely different cloud architectures, CCC normalizes proprietary billing metrics into standard equivalents. For example, in the Data & Analytics category, we map 100 Azure Synapse DWUs (Data Warehouse Units) or 100 Google BigQuery Slots to equal 1 standard "Compute Unit" (equivalent to 1 Databricks DBU or 1 Snowflake Credit). Similar approximations are applied across Virtual Machines, Databases, Serverless, and Networking categories.
@@ -98,14 +103,6 @@ The pricing data on this platform is provided as-is for informational and compar
 For questions about these Terms of Use, please email us at [hello@comparecloudcosts.com](mailto:hello@comparecloudcosts.com).
 
 [↑ Go back to the top](#terms-of-use)
-
----
-
-[Privacy Policy](/privacy) | [Contact Us](mailto:hello@comparecloudcosts.com) | [About Us](/about)
-
----
-
-© 2026 Co-Sell Plus LLC. All rights reserved.
 `;
 
   return (
@@ -134,12 +131,33 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             }
           }
 
+          .terms-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+          }
+
           .terms-container {
             display: flex;
-            min-height: 100vh;
+            flex: 1;
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s, color 0.3s;
+          }
+
+          .terms-topnav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            height: 44px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--sidebar-bg);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            flex-shrink: 0;
           }
 
           .sidebar {
@@ -147,7 +165,8 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             border-right: 1px solid var(--border-color);
             padding: 2rem 1.5rem;
             position: fixed;
-            height: 100vh;
+            top: 44px;
+            height: calc(100vh - 44px);
             overflow-y: auto;
             background-color: var(--sidebar-bg);
           }
@@ -210,6 +229,40 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
         `}
       </style>
 
+      <div className="terms-wrapper">
+        <div className="terms-topnav">
+          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: 'var(--text-color)', textDecoration: 'none', letterSpacing: '-0.01em' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Compare Cloud Costs
+          </a>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--muted-text)', whiteSpace: 'nowrap' }}>
+              Share with friends and family
+            </span>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://comparecloudcosts.com')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Share on LinkedIn"
+              style={{ color: 'var(--muted-text)', display: 'flex', alignItems: 'center' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#0A66C2')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted-text)')}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba Cloud. #FinOps #CCC')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Share on X"
+              style={{ color: 'var(--muted-text)', display: 'flex', alignItems: 'center' }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-color)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted-text)')}
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
       <div className="terms-container" id="terms-of-use">
         <aside className="sidebar">
           <div style={{ marginBottom: '2rem' }}>
@@ -233,6 +286,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
                 <a href="#pricing-disclaimer">Pricing Disclaimer</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '1rem', marginTop: '0.5rem' }}>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#directional-and-sample-data-only" style={{ fontSize: '0.85rem' }}>Directional data only</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#visualizations-and-charts" style={{ fontSize: '0.85rem' }}>Visualizations and charts</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#data-normalization" style={{ fontSize: '0.85rem' }}>Data normalization</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#official-pricing-calculators" style={{ fontSize: '0.85rem' }}>Official calculators</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#no-warranties-or-liability" style={{ fontSize: '0.85rem' }}>No liability</a></li>
@@ -251,6 +305,8 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             <MarkdownPage title="" content={content} />
           </div>
         </main>
+      </div>
+      <Footer />
       </div>
     </>
   );
