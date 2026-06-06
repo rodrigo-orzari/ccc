@@ -11,7 +11,7 @@ export const ALIBABA_CONTAINERS = [
     unit: 'Hourly',
     attributes: {
       compute_type: 'Serverless',
-      architecture: 'x86 64',
+      architecture: 'x86',
       billing_granularity: 'Second',
     }
   },
@@ -24,7 +24,7 @@ export const ALIBABA_CONTAINERS = [
     unit: 'Hourly',
     attributes: {
       compute_type: 'Serverless',
-      architecture: 'x86 64',
+      architecture: 'x86',
       billing_granularity: 'Second',
     }
   }

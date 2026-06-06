@@ -116,7 +116,7 @@ interface FilterSidebarProps {
   selectedOS: string[];
   selectedCpu: string[];
   selectedCategory: string[];
-  gpuIncluded: boolean;
+  selectedGpu: string[];
   selectedDbFamilies: string[];
   selectedEngines: string[];
   selectedDeploymentTypes: string[];
@@ -155,7 +155,8 @@ interface FilterSidebarProps {
   onOsToggle: (os: string) => void;
   onCpuToggle: (cpu: string) => void;
   onCategoryToggle: (cat: string) => void;
-  onGpuToggle: (value: boolean) => void;
+  onGpuToggle: (value: string) => void;
+  onSetGpu: (items: string[]) => void;
   onDbFamilyToggle: (fam: string) => void;
   onEngineToggle: (eng: string) => void;
   onDeploymentTypeToggle: (dt: string) => void;
@@ -229,7 +230,7 @@ export default function FilterSidebar({
   selectedOS,
   selectedCpu,
   selectedCategory,
-  gpuIncluded,
+  selectedGpu,
   selectedDbFamilies,
   selectedEngines,
   selectedDeploymentTypes,
@@ -268,6 +269,7 @@ export default function FilterSidebar({
   onCpuToggle,
   onCategoryToggle,
   onGpuToggle,
+  onSetGpu,
   onDbFamilyToggle,
   onEngineToggle,
   onDeploymentTypeToggle,
@@ -400,18 +402,19 @@ export default function FilterSidebar({
                     CPU | GPU <Tooltip text="Processor vendor, architecture, and GPU accelerator."><Info size={10} className="cursor-help" /></Tooltip>
                   </button>
                 </h2>
-                {/* Select All / Clear All — all CPU profiles + GPU selected = "all" */}
+                {/* Select All / Clear All — all CPU profiles + both GPU options = "all" */}
                 {(() => {
-                  const allSelected = selectedCpu.length === CPU_PROFILES.length && gpuIncluded;
+                  const GPU_OPTIONS = ['GPU', 'No GPU'];
+                  const allSelected = selectedCpu.length === CPU_PROFILES.length && selectedGpu.length === GPU_OPTIONS.length;
                   return (
                     <button
                       onClick={() => {
                         if (allSelected) {
                           onSetCpu([]);
-                          onGpuToggle(false);
+                          onSetGpu([]);
                         } else {
                           onSetCpu(CPU_PROFILES.map(p => p.id));
-                          onGpuToggle(true);
+                          onSetGpu(GPU_OPTIONS);
                         }
                       }}
                       className={`text-[10px] font-bold uppercase transition-colors ${
@@ -438,16 +441,19 @@ export default function FilterSidebar({
                       {profile.label}
                     </button>
                   ))}
-                  <button
-                    onClick={() => onGpuToggle(!gpuIncluded)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      gpuIncluded
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                        : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
-                  >
-                    GPU
-                  </button>
+                  {['GPU', 'No GPU'].map(option => (
+                    <button
+                      key={option}
+                      onClick={() => onGpuToggle(option)}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                        selectedGpu.includes(option)
+                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                          : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
                 </div>
               )}
             </section>

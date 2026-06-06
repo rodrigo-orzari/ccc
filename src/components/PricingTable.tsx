@@ -55,6 +55,11 @@ export default function PricingTable({
   sortConfig,
   onHeaderClick,
 }: PricingTableProps) {
+  const maxPrice = data.length > 0 ? Math.max(...data.map(r => parseFloat(r.price_per_unit) || 0)) : 0;
+  const maxInvPrice = activeProductType === 'serverless' && data.length > 0
+    ? Math.max(...data.map(r => Number(r.attributes?.invocation_price_per_1m) || 0))
+    : 0;
+
   return (
     <div
       ref={tableScrollRef}
@@ -183,7 +188,7 @@ export default function PricingTable({
                 </tr>
               ))
             ) : data.length > 0 ? (
-              data.map((record, index) => <TableRow key={index} record={record} index={index} activeProductType={activeProductType} showAggregation={showAggregation} />)
+              data.map((record, index) => <TableRow key={index} record={record} index={index} activeProductType={activeProductType} showAggregation={showAggregation} maxPrice={maxPrice} maxInvPrice={maxInvPrice} />)
             ) : (
               <tr>
                 <td colSpan={12} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
@@ -201,7 +206,7 @@ export default function PricingTable({
 }
 
 // Table row component for product-type-specific rendering
-function TableRow({ record, index, activeProductType, showAggregation }: { record: PricingRecord; index: number; activeProductType: ProductType; showAggregation: boolean }) {
+function TableRow({ record, index, activeProductType, showAggregation, maxPrice, maxInvPrice }: { record: PricingRecord; index: number; activeProductType: ProductType; showAggregation: boolean; maxPrice?: number; maxInvPrice?: number }) {
   const providerColor = PROVIDERS.find(p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name)?.color ?? '#525252';
 
   return (
@@ -291,7 +296,22 @@ function TableRow({ record, index, activeProductType, showAggregation }: { recor
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb ? `${record.attributes.max_ephemeral_storage_gb} GB` : '—'}</span>
           </td>
           <td data-col="inv_price" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                {record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}
+              </span>
+              {record.attributes?.invocation_price_per_1m && maxInvPrice !== undefined && maxInvPrice > 0 && (
+                <div className="w-12 h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full overflow-hidden flex justify-start">
+                  <div 
+                    className="h-full rounded-full"
+                    style={{ 
+                      width: `${(Number(record.attributes.invocation_price_per_1m) / maxInvPrice) * 100}%`,
+                      backgroundColor: `hsl(${120 - ((Number(record.attributes.invocation_price_per_1m) / maxInvPrice) * 120)}, 80%, 45%)`
+                    }}
+                  />
+                </div>
+              )}
+            </div>
           </td>
         </>
       ) : activeProductType === 'containers' ? (
@@ -372,11 +392,24 @@ function TableRow({ record, index, activeProductType, showAggregation }: { recor
       )}
       {/* Price */}
       <td data-col="price_per_unit" className="px-6 py-4 text-center whitespace-nowrap">
-        <span className="text-xs font-bold text-black dark:text-white">
-          {showAggregation
-            ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}`
-            : `$${parseFloat(record.price_per_unit).toFixed(4)}`}
-        </span>
+        <div className="flex flex-col items-center gap-1.5">
+          <span className="text-xs font-bold text-black dark:text-white">
+            {showAggregation
+              ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}`
+              : `$${parseFloat(record.price_per_unit).toFixed(4)}`}
+          </span>
+          {maxPrice !== undefined && maxPrice > 0 && (
+            <div className="w-16 h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full overflow-hidden flex justify-start">
+              <div 
+                className="h-full rounded-full"
+                style={{ 
+                  width: `${(parseFloat(record.price_per_unit) / maxPrice) * 100}%`,
+                  backgroundColor: `hsl(${120 - ((parseFloat(record.price_per_unit) / maxPrice) * 120)}, 80%, 45%)`
+                }}
+              />
+            </div>
+          )}
+        </div>
       </td>
       {/* Source */}
       <td data-col="source" className="px-6 py-4 text-center whitespace-nowrap">

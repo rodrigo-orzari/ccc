@@ -31,8 +31,8 @@ export const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1', '1 - 5', '> 5'];
 // Containers-specific constants
 export const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
 export const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned'];
-export const CONTAINERS_ARCHITECTURES = ['x86_64', 'ARM64'];
-export const CONTAINERS_BILLING_GRANULARITY = ['Per Second', 'Per Hour'];
+export const CONTAINERS_ARCHITECTURES = ['x86', 'ARM'];
+export const CONTAINERS_BILLING_GRANULARITY = ['Second', 'Hour'];
 
 // Networking-specific constants
 export const NETWORKING_SERVICES = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway'];
@@ -61,7 +61,7 @@ export const ANALYTICS_TIERS = [
 // Range defaults
 export const DEFAULT_VCPU_RANGE = { min: 0, max: 320 };
 export const DEFAULT_MEMORY_RANGE = { min: 0, max: 3200 };
-export const DEFAULT_PRICE_RANGE = { min: 0, max: 510 };
+export const DEFAULT_PRICE_RANGE = { min: 0, max: 100 };
 
 // Cloud providers
 export const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] = [
