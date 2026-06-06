@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 112 files · ~86,197 words
+- 113 files · ~87,886 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 19 nodes · 14 edges · 8 communities (4 shown, 4 thin omitted)
+- 38 nodes · 33 edges · 12 communities (8 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `39eac66a`
+- Built from commit: `057d4b14`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,15 +19,21 @@
 - [[_COMMUNITY_Container Provider Configs|Container Provider Configs]]
 - [[_COMMUNITY_Database Instance Configs|Database Instance Configs]]
 - [[_COMMUNITY_Community 4|Community 4]]
+- [[_COMMUNITY_Community 8|Community 8]]
+- [[_COMMUNITY_Community 9|Community 9]]
+- [[_COMMUNITY_Community 10|Community 10]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `sql` - 2 edges
-2. `test()` - 2 edges
-3. `sql` - 2 edges
-4. `test()` - 2 edges
-5. `sql` - 2 edges
-6. `test()` - 2 edges
-7. `PIPELINE_DISPLAY` - 1 edges
+1. `StatusPage()` - 3 edges
+2. `timeAgo()` - 2 edges
+3. `freshnessStatus()` - 2 edges
+4. `parseFilterList()` - 2 edges
+5. `buildPricingFilters()` - 2 edges
+6. `sql` - 2 edges
+7. `test()` - 2 edges
+8. `sql` - 2 edges
+9. `test()` - 2 edges
+10. `sql` - 2 edges
 
 ## Surprising Connections (you probably didn't know these)
 - None detected - all connections are within the same source files.
@@ -35,15 +41,29 @@
 ## Import Cycles
 - None detected.
 
-## Communities (8 total, 4 thin omitted)
+## Communities (12 total, 4 thin omitted)
+
+### Community 8 - "Community 8"
+Cohesion: 0.25
+Nodes (5): PIPELINE_ORDER, PipelineStatus, PROVIDER_COLORS, ProviderStatus, StatusData
+
+### Community 9 - "Community 9"
+Cohesion: 0.40
+Nodes (3): buildPricingFilters(), parseFilterList(), VALID_PRODUCT_TYPES
+
+### Community 10 - "Community 10"
+Cohesion: 0.67
+Nodes (3): freshnessStatus(), StatusPage(), timeAgo()
 
 ## Knowledge Gaps
-- **1 isolated node(s):** `PIPELINE_DISPLAY`
+- **7 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PIPELINE_ORDER` (+2 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **What connects `PIPELINE_DISPLAY` to the rest of the system?**
-  _1 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Why does `StatusPage()` connect `Community 10` to `Community 8`?**
+  _High betweenness centrality (0.001) - this node is a cross-community bridge._
+- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
+  _7 weakly-connected nodes found - possible documentation gaps or missing edges._
