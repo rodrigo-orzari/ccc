@@ -306,7 +306,7 @@ function TableRow({ record, index, activeProductType, showAggregation, maxPrice,
                     className="h-full rounded-full"
                     style={{ 
                       width: `${(Number(record.attributes.invocation_price_per_1m) / maxInvPrice) * 100}%`,
-                      backgroundColor: `hsl(${120 - ((Number(record.attributes.invocation_price_per_1m) / maxInvPrice) * 120)}, 80%, 45%)`
+                      backgroundColor: '#6366f1'
                     }}
                   />
                 </div>
@@ -404,7 +404,7 @@ function TableRow({ record, index, activeProductType, showAggregation, maxPrice,
                 className="h-full rounded-full"
                 style={{ 
                   width: `${(parseFloat(record.price_per_unit) / maxPrice) * 100}%`,
-                  backgroundColor: `hsl(${120 - ((parseFloat(record.price_per_unit) / maxPrice) * 120)}, 80%, 45%)`
+                  backgroundColor: '#6366f1'
                 }}
               />
             </div>

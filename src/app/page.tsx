@@ -10,6 +10,7 @@ import {
   PricingTable,
   FilterSidebar,
   Footer,
+  ChartsView,
 } from '@/components';
 import {
   GEOGRAPHIES, OS_TYPES, CPU_PROFILES, CATEGORIES,
@@ -26,6 +27,7 @@ import {
 
 export default function Dashboard() {
   const [activeProductType, setActiveProductType] = useState<ProductType>('vm');
+  const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');
 
   // Filter state
   const [selectedProviders, setSelectedProviders] = useState<string[]>(PROVIDERS.filter(p => !p.soon).map(p => p.id));
@@ -567,19 +569,28 @@ export default function Dashboard() {
             search={search}
             onSearchChange={setSearch}
             onExport={handleExport}
+            viewMode={viewMode}
+            onViewModeChange={setViewMode}
           />
 
-          <PricingTable
-            data={data}
-            loading={loading}
-            activeProductType={activeProductType}
-            showAggregation={showAggregation}
-            tableScrollRef={tableScrollRef}
-            hasHorizontalOverflow={hasHorizontalOverflow}
-            scrolledToEnd={scrolledToEnd}
-            sortConfig={sortConfig}
-            onHeaderClick={handleHeaderClick}
-          />
+          {viewMode === 'table' ? (
+            <PricingTable
+              data={data}
+              loading={loading}
+              activeProductType={activeProductType}
+              showAggregation={showAggregation}
+              tableScrollRef={tableScrollRef}
+              hasHorizontalOverflow={hasHorizontalOverflow}
+              scrolledToEnd={scrolledToEnd}
+              sortConfig={sortConfig}
+              onHeaderClick={handleHeaderClick}
+            />
+          ) : (
+            <ChartsView
+              data={data}
+              activeProductType={activeProductType}
+            />
+          )}
         </main>
       </div>
 
