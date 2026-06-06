@@ -10,7 +10,7 @@ const PRODUCT_TYPES: { id: ProductType; label: string; emoji: string; soon?: boo
   { id: 'containers', label: 'Containers', emoji: '📦' },
   { id: 'networking', label: 'Networking', emoji: '🌐' },
   { id: 'data-analytics', label: 'Data & Analytics', emoji: '📊' },
-  { id: 'ai', label: 'Artificial Intelligence', emoji: '🧠', soon: true },
+  { id: 'ai', label: 'Artificial Intelligence', emoji: '🧠' },
 ];
 
 const SITE_URL = 'https://comparecloudcosts.com';

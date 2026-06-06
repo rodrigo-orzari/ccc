@@ -117,6 +117,7 @@ export function buildPricingFilters(query: any) {
       serverlessGranularity, serverlessExecutionModel, serverlessProvisionedConcurrency, serverlessEphemeralStorage,
       containersOrchestrators, containersComputeTypes, containersArchitectures, containersBillingGranularity, containersGpuIncluded,
       analyticsEngines, analyticsDeploymentTypes, analyticsTiers,
+      aiServiceTypes, aiModelTiers, aiContextWindows, aiMultimodalOptions,
       networkingService, networkingConnectionTypes, networkingRoutingTypes, networkingHaSupport, networkingVpcSupport, networkingTransferDirections,
     } = query;
 
@@ -276,6 +277,48 @@ export function buildPricingFilters(query: any) {
         if (tierFilters.length > 0) {
           conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
           values.push(tierFilters);
+        }
+      }
+    }
+
+    // AI product type filters
+    if (resolvedProductType === 'ai') {
+      const serviceTypeFilters = parseFilterList(aiServiceTypes as string).map((s: string) => s.toLowerCase());
+      if (serviceTypeFilters.length > 0) {
+        conditions.push(`LOWER(pr.service) = ANY($${paramCount++})`);
+        values.push(serviceTypeFilters);
+      }
+
+      const modelTierFilters = parseFilterList(aiModelTiers as string).map((s: string) => s.toLowerCase());
+      if (modelTierFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'modelTier') = ANY($${paramCount++})`);
+        values.push(modelTierFilters);
+      }
+
+      const multimodalFilters = parseFilterList(aiMultimodalOptions as string).map((s: string) => s.toLowerCase());
+      if (multimodalFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'multimodal') = ANY($${paramCount++})`);
+        values.push(multimodalFilters);
+      }
+
+      if (aiContextWindows) {
+        const windowOptions = parseFilterList(aiContextWindows as string);
+        const windowConditions: string[] = [];
+
+        for (const opt of windowOptions) {
+          if (opt === '< 32K') {
+            windowConditions.push(`(pr.attributes->>'contextWindowK')::int < 32`);
+          } else if (opt === '32K - 128K') {
+            windowConditions.push(`(pr.attributes->>'contextWindowK')::int BETWEEN 32 AND 128`);
+          } else if (opt === '> 128K') {
+            windowConditions.push(`(pr.attributes->>'contextWindowK')::int > 128`);
+          } else if (opt === '1M+') {
+            windowConditions.push(`(pr.attributes->>'contextWindowK')::int >= 1000`);
+          }
+        }
+
+        if (windowConditions.length > 0) {
+          conditions.push(`(${windowConditions.join(' OR ')})`);
         }
       }
     }

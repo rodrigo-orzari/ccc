@@ -22,6 +22,7 @@ import {
   NETWORKING_SERVICES, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
   NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
   ANALYTICS_ENGINES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_TIERS,
+  AI_SERVICE_TYPES, AI_MODEL_TIERS, AI_CONTEXT_WINDOWS, AI_MULTIMODAL_OPTIONS,
   PROVIDERS,
 } from '@/config';
 
@@ -61,6 +62,12 @@ export default function Dashboard() {
   const [selectedAnalyticsEngines, setSelectedAnalyticsEngines] = useState<string[]>([...ANALYTICS_ENGINES]);
   const [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes] = useState<string[]>([...ANALYTICS_DEPLOYMENT_TYPES]);
   const [selectedAnalyticsTiers, setSelectedAnalyticsTiers] = useState<string[]>([...ANALYTICS_TIERS]);
+
+  // AI
+  const [selectedAiServiceTypes, setSelectedAiServiceTypes] = useState<string[]>([...AI_SERVICE_TYPES]);
+  const [selectedAiModelTiers, setSelectedAiModelTiers] = useState<string[]>([...AI_MODEL_TIERS]);
+  const [selectedAiContextWindows, setSelectedAiContextWindows] = useState<string[]>([...AI_CONTEXT_WINDOWS]);
+  const [selectedAiMultimodalOptions, setSelectedAiMultimodalOptions] = useState<string[]>([...AI_MULTIMODAL_OPTIONS]);
 
   const [selectedNetworkingServices, setSelectedNetworkingServices] = useState<string[]>([...NETWORKING_SERVICES]);
   const [selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes] = useState<string[]>([...NETWORKING_CONNECTION_TYPES]);
@@ -167,6 +174,10 @@ export default function Dashboard() {
     params.append('analyticsEngines', selectedAnalyticsEngines.join(','));
     params.append('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes.join(','));
     params.append('analyticsTiers', selectedAnalyticsTiers.join(','));
+    params.append('aiServiceTypes', selectedAiServiceTypes.join(','));
+    params.append('aiModelTiers', selectedAiModelTiers.join(','));
+    params.append('aiContextWindows', selectedAiContextWindows.join(','));
+    params.append('aiMultimodalOptions', selectedAiMultimodalOptions.join(','));
     params.append('networkingService', selectedNetworkingServices.join(','));
     params.append('networkingConnectionTypes', selectedNetworkingConnectionTypes.join(','));
     params.append('networkingRoutingTypes', selectedNetworkingRoutingTypes.join(','));
@@ -190,6 +201,7 @@ export default function Dashboard() {
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
+    selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
     vCpuRange, memoryRange, priceRange, search
   ]);
@@ -220,6 +232,13 @@ export default function Dashboard() {
       selectedAnalyticsEngines.length === 0 ||
       selectedAnalyticsDeploymentTypes.length === 0 ||
       selectedAnalyticsTiers.length === 0
+    )) return false;
+
+    if (activeProductType === 'ai' && (
+      selectedAiServiceTypes.length === 0 ||
+      selectedAiModelTiers.length === 0 ||
+      selectedAiContextWindows.length === 0 ||
+      selectedAiMultimodalOptions.length === 0
     )) return false;
 
     if (activeProductType === 'serverless' && (
@@ -402,6 +421,8 @@ export default function Dashboard() {
       headers = ['Provider', 'SKU', 'Service', 'Category', 'Transfer Tier', 'Destination', 'Included Transfer', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'data-analytics') {
       headers = ['Provider', 'SKU', 'Engine', 'Deployment Type', 'Tier', 'Compute Unit', 'Geography', 'Price (USD)', 'Source'];
+    } else if (activeProductType === 'ai') {
+      headers = ['Provider', 'SKU', 'Service', 'Model Tier', 'Context Window', 'Multimodal', 'Geography', 'Input Price (/1M)', 'Output Price (/1M)', 'Source'];
     } else {
       headers = ['Provider', 'SKU', 'Category', 'CPU Vendor', 'Architecture', 'OS', 'GPU', 'vCPU', 'Memory (GB)', 'Geography', 'Price (USD)', 'Source'];
     }
@@ -419,6 +440,8 @@ export default function Dashboard() {
         return [record.provider, record.instance_type, record.service || '', record.category || '', record.attributes?.transfer_tier || '', record.attributes?.destination || '', record.attributes?.included_transfer || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'data-analytics') {
         return [record.provider, record.instance_type, record.attributes?.engine || '', record.attributes?.deployment_type || '', record.attributes?.tier || '', record.vcpus || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
+      } else if (activeProductType === 'ai') {
+        return [record.provider, record.instance_type, record.service || '', record.attributes?.modelTier || '', record.attributes?.contextWindowK || '', record.attributes?.multimodal || '', record.geography, priceDisplay, record.attributes?.outputPricePer1M || '', record.data_source === 'static_config' ? 'Static' : 'API'];
       } else {
         return [record.provider, record.instance_type, record.category || '', record.cpu_vendor || '', record.arch === 'x86 64' ? 'x86' : (record.arch || ''), record.os || '', record.gpu_count > 0 ? 'Yes' : 'No', record.vcpus || '', record.memory_gb || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       }
@@ -471,6 +494,10 @@ export default function Dashboard() {
           selectedAnalyticsEngines={selectedAnalyticsEngines}
           selectedAnalyticsDeploymentTypes={selectedAnalyticsDeploymentTypes}
           selectedAnalyticsTiers={selectedAnalyticsTiers}
+          selectedAiServiceTypes={selectedAiServiceTypes}
+          selectedAiModelTiers={selectedAiModelTiers}
+          selectedAiContextWindows={selectedAiContextWindows}
+          selectedAiMultimodalOptions={selectedAiMultimodalOptions}
           selectedNetworkingServices={selectedNetworkingServices}
           selectedNetworkingConnectionTypes={selectedNetworkingConnectionTypes}
           selectedNetworkingRoutingTypes={selectedNetworkingRoutingTypes}
@@ -510,6 +537,10 @@ export default function Dashboard() {
           onAnalyticsEngineToggle={(e) => toggleFilter(selectedAnalyticsEngines, setSelectedAnalyticsEngines, e)}
           onAnalyticsDeploymentTypeToggle={(d) => toggleFilter(selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes, d)}
           onAnalyticsTierToggle={(t) => toggleFilter(selectedAnalyticsTiers, setSelectedAnalyticsTiers, t)}
+          onAiServiceTypeToggle={(s) => toggleFilter(selectedAiServiceTypes, setSelectedAiServiceTypes, s)}
+          onAiModelTierToggle={(m) => toggleFilter(selectedAiModelTiers, setSelectedAiModelTiers, m)}
+          onAiContextWindowToggle={(c) => toggleFilter(selectedAiContextWindows, setSelectedAiContextWindows, c)}
+          onAiMultimodalOptionToggle={(o) => toggleFilter(selectedAiMultimodalOptions, setSelectedAiMultimodalOptions, o)}
           onNetworkingServiceToggle={(s) => toggleFilter(selectedNetworkingServices, setSelectedNetworkingServices, s)}
           onNetworkingConnectionTypeToggle={(c) => toggleFilter(selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes, c)}
           onNetworkingRoutingTypeToggle={(r) => toggleFilter(selectedNetworkingRoutingTypes, setSelectedNetworkingRoutingTypes, r)}
@@ -541,6 +572,10 @@ export default function Dashboard() {
           onSetAnalyticsEngines={setSelectedAnalyticsEngines}
           onSetAnalyticsDeploymentTypes={setSelectedAnalyticsDeploymentTypes}
           onSetAnalyticsTiers={setSelectedAnalyticsTiers}
+          onSetAiServiceTypes={setSelectedAiServiceTypes}
+          onSetAiModelTiers={setSelectedAiModelTiers}
+          onSetAiContextWindows={setSelectedAiContextWindows}
+          onSetAiMultimodalOptions={setSelectedAiMultimodalOptions}
           onSetNetworkingServices={setSelectedNetworkingServices}
           onSetNetworkingConnectionTypes={setSelectedNetworkingConnectionTypes}
           onSetNetworkingRoutingTypes={setSelectedNetworkingRoutingTypes}

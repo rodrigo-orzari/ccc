@@ -1,17 +1,102 @@
 'use client';
 
-import React, { RefObject } from 'react';
+import React, { RefObject, useState, useEffect, useRef, useCallback } from 'react';
 import type { ProductType, PricingRecord } from '@/types';
 
-const PROVIDERS: { id: string; name: string; color: string; soon?: boolean }[] = [
-  { id: 'aws', name: 'AWS', color: '#FF9900' },
-  { id: 'azure', name: 'Azure', color: '#00BCFF' },
-  { id: 'gcp', name: 'Google', color: '#34A853' },
-  { id: 'oracle', name: 'Oracle', color: '#F80000' },
-  { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF' },
-  { id: 'alibaba', name: 'Alibaba Cloud', color: '#FF6A00' },
+// ─── Provider colour map ────────────────────────────────────────────────────
+const PROVIDERS: { id: string; name: string; color: string }[] = [
+  { id: 'aws',          name: 'AWS',           color: '#FF9900' },
+  { id: 'azure',        name: 'Azure',         color: '#00BCFF' },
+  { id: 'gcp',          name: 'Google',        color: '#34A853' },
+  { id: 'oracle',       name: 'Oracle',        color: '#F80000' },
+  { id: 'digitalocean', name: 'DigitalOcean',  color: '#0069FF' },
+  { id: 'alibaba',      name: 'Alibaba Cloud', color: '#FF6A00' },
 ];
 
+// ─── Column definitions ─────────────────────────────────────────────────────
+interface ColDef { key: string; defaultWidth: number; }
+
+const C = (key: string, defaultWidth: number): ColDef => ({ key, defaultWidth });
+
+// Shared columns
+const COL_PROVIDER   = C('provider',             100);
+const COL_SKU        = C('instance_type',         180);
+const COL_GEO        = C('geography',             120);
+const COL_VCPU       = C('vcpus',                  70);
+const COL_MEM        = C('memory_gb',             110);
+const COL_PRICE      = C('price_per_unit',        140);
+const COL_SOURCE     = C('source',                 80);
+
+// Shared middle slots (reused with different labels per product type)
+const COL_MID1       = C('engine_category',       140);
+const COL_MID2       = C('db_family_cpu_vendor',  130);
+const COL_MID3       = C('deployment_arch',       130);
+const COL_MID4       = C('ha_mode_os',            100);
+const COL_GPU        = C('gpu',                    70);
+
+// Serverless-specific
+const COL_LANG       = C('languages',             160);
+const COL_GRAN       = C('granularity',           100);
+const COL_EXEC       = C('exec_model',            130);
+const COL_PROV       = C('prov_concurrency',      140);
+const COL_STOR       = C('max_storage',           110);
+const COL_INV        = C('inv_price',             140);
+
+const ALL_DEFS: ColDef[] = [
+  COL_PROVIDER, COL_SKU, COL_GEO, COL_VCPU, COL_MEM, COL_PRICE, COL_SOURCE,
+  COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU,
+  COL_LANG, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV,
+];
+
+const DEFAULT_WIDTHS: Record<string, number> =
+  Object.fromEntries(ALL_DEFS.map(c => [c.key, c.defaultWidth]));
+
+const MIN_WIDTH = 48;
+
+function getColDefs(pt: ProductType): ColDef[] {
+  const start = [COL_PROVIDER, COL_SKU];
+  const tail  = [COL_GEO, COL_PRICE, COL_SOURCE];
+  const specs = [COL_VCPU, COL_MEM];
+  const tailWithSpecs = [COL_GEO, ...specs, COL_PRICE, COL_SOURCE];
+
+  if (pt === 'vm')           return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tailWithSpecs];
+  if (pt === 'database')     return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, ...tailWithSpecs];
+  if (pt === 'serverless')   return [...start, COL_LANG, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, ...tailWithSpecs];
+  if (pt === 'containers')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tailWithSpecs];
+  if (pt === 'networking')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tail];
+  if (pt === 'data-analytics') return [...start, COL_MID1, COL_MID3, COL_MID2, COL_VCPU, ...tail];
+  if (pt === 'ai')             return [...start, COL_MID1, COL_MID3, COL_MID2, COL_MID4, ...tail, COL_INV];
+  return [...start, ...tail];
+}
+
+// ─── LocalStorage helpers ───────────────────────────────────────────────────
+const lsKey = (pt: string) => `ccc_col_widths_v2_${pt}`;
+
+function loadWidths(pt: string): Record<string, number> {
+  try {
+    const raw = localStorage.getItem(lsKey(pt));
+    if (raw) return { ...DEFAULT_WIDTHS, ...JSON.parse(raw) };
+  } catch { /* ignore */ }
+  return { ...DEFAULT_WIDTHS };
+}
+
+function saveWidths(pt: string, w: Record<string, number>) {
+  try { localStorage.setItem(lsKey(pt), JSON.stringify(w)); } catch { /* ignore */ }
+}
+
+// ─── Sort icon ──────────────────────────────────────────────────────────────
+interface SortConfig { key: string; direction: 'asc' | 'desc'; }
+
+const SortIcon = ({ sortKey, sortConfig }: { sortKey: string; sortConfig: SortConfig }) => {
+  const active = sortConfig.key === sortKey;
+  return (
+    <span className={`ml-1 inline-block transition-opacity ${active ? 'opacity-100' : 'opacity-25'}`}>
+      {active ? (sortConfig.direction === 'asc' ? '↑' : '↓') : '↕'}
+    </span>
+  );
+};
+
+// ─── Props ──────────────────────────────────────────────────────────────────
 interface PricingTableProps {
   data: PricingRecord[];
   loading: boolean;
@@ -20,30 +105,24 @@ interface PricingTableProps {
   tableScrollRef: RefObject<HTMLDivElement>;
   hasHorizontalOverflow: boolean;
   scrolledToEnd: boolean;
-  sortConfig: { key: keyof PricingRecord | string; direction: 'asc' | 'desc' };
+  sortConfig: SortConfig;
   onHeaderClick: (key: string) => void;
 }
 
-const SortIcon = ({ sortKey, sortConfig }: { sortKey: string; sortConfig: PricingTableProps['sortConfig'] }) => {
-  const isActive = sortConfig.key === sortKey;
+// ─── Resize handle ──────────────────────────────────────────────────────────
+function ResizeHandle({ onStart, onReset }: { onStart: (e: React.PointerEvent) => void; onReset: () => void }) {
   return (
-    <span className={`ml-1 inline-block transition-opacity ${isActive ? 'opacity-100' : 'opacity-25'}`}>
-      {isActive ? (sortConfig.direction === 'asc' ? '↑' : '↓') : '↕'}
-    </span>
+    <div
+      className="ccc-rh"
+      onPointerDown={onStart}
+      onDoubleClick={(e) => { e.stopPropagation(); onReset(); }}
+    >
+      <div className="ccc-rh-line" />
+    </div>
   );
-};
+}
 
-const getColumnCount = (productType: ProductType): number => {
-  switch (productType) {
-    case 'database': return 9;
-    case 'serverless': return 15;
-    case 'containers': return 10;
-    case 'networking': return 10;
-    case 'data-analytics': return 9;
-    default: return 12;
-  }
-};
-
+// ─── Main component ─────────────────────────────────────────────────────────
 export default function PricingTable({
   data,
   loading,
@@ -55,370 +134,378 @@ export default function PricingTable({
   sortConfig,
   onHeaderClick,
 }: PricingTableProps) {
+  const [colWidths, setColWidths] = useState<Record<string, number>>(DEFAULT_WIDTHS);
+  const widthsRef = useRef(colWidths);
+  widthsRef.current = colWidths;
+
+  // Reload widths from localStorage whenever the active product type changes
+  useEffect(() => {
+    setColWidths(loadWidths(activeProductType));
+  }, [activeProductType]);
+
+  const startResize = useCallback((e: React.PointerEvent, colKey: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const startX   = e.clientX;
+    const startW   = widthsRef.current[colKey] ?? DEFAULT_WIDTHS[colKey] ?? 100;
+
+    document.body.style.cursor     = 'col-resize';
+    document.body.style.userSelect = 'none';
+
+    const onMove = (ev: PointerEvent) => {
+      const next = Math.max(MIN_WIDTH, startW + ev.clientX - startX);
+      setColWidths(prev => ({ ...prev, [colKey]: next }));
+    };
+
+    const onUp = () => {
+      document.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerup', onUp);
+      document.body.style.cursor     = '';
+      document.body.style.userSelect = '';
+      saveWidths(activeProductType, widthsRef.current);
+    };
+
+    document.addEventListener('pointermove', onMove);
+    document.addEventListener('pointerup', onUp);
+  }, [activeProductType]);
+
+  const resetWidth = useCallback((colKey: string) => {
+    setColWidths(prev => {
+      const next = { ...prev, [colKey]: DEFAULT_WIDTHS[colKey] ?? 100 };
+      saveWidths(activeProductType, next);
+      return next;
+    });
+  }, [activeProductType]);
+
+  const colDefs    = getColDefs(activeProductType);
+  const totalWidth = colDefs.reduce((s, c) => s + (colWidths[c.key] ?? c.defaultWidth), 0);
+
   const maxPrice = data.length > 0 ? Math.max(...data.map(r => parseFloat(r.price_per_unit) || 0)) : 0;
   const maxInvPrice = activeProductType === 'serverless' && data.length > 0
     ? Math.max(...data.map(r => Number(r.attributes?.invocation_price_per_1m) || 0))
     : 0;
 
-  return (
-    <div
-      ref={tableScrollRef}
-      className={`flex-1 custom-scrollbar ${hasHorizontalOverflow && !scrolledToEnd ? 'scroll-fade-right' : ''}`}
-      style={{ minHeight: 0, overflowY: 'auto', overflowX: 'scroll' }}
+  // Helper: build a <th> with sort + resize handle
+  const Th = ({
+    colKey, sortKey, label, className = '',
+  }: { colKey: string; sortKey?: string; label: React.ReactNode; className?: string }) => (
+    <th
+      data-col={colKey}
+      onClick={sortKey ? () => onHeaderClick(sortKey) : undefined}
+      className={`px-6 py-4 text-center font-bold whitespace-nowrap ccc-th ${sortKey ? 'cursor-pointer hover:text-black dark:hover:text-white transition-colors' : ''} ${className}`}
+      style={{ width: colWidths[colKey] ?? DEFAULT_WIDTHS[colKey] }}
     >
-      <div className="w-full">
-        <table className="border-collapse w-full table-auto">
-          <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
-            <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
-              <th data-col="provider" onClick={() => onHeaderClick('provider')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                Provider <SortIcon sortKey="provider" sortConfig={sortConfig} />
-              </th>
-              <th data-col="instance_type" onClick={() => onHeaderClick('instance_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                SKU <SortIcon sortKey="instance_type" sortConfig={sortConfig} />
-              </th>
-              {/* Product-type-specific columns */}
-              {activeProductType === 'database' ? (
-                <>
-                  <th data-col="engine_category" onClick={() => onHeaderClick('attributes.engine')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Engine <SortIcon sortKey="attributes.engine" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="db_family_cpu_vendor" onClick={() => onHeaderClick('attributes.tier')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Tier <SortIcon sortKey="attributes.tier" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="deployment_arch" onClick={() => onHeaderClick('attributes.deployment_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Deployment <SortIcon sortKey="attributes.deployment_type" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="ha_mode_os" onClick={() => onHeaderClick('attributes.ha_mode')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    HA Mode <SortIcon sortKey="attributes.ha_mode" sortConfig={sortConfig} />
-                  </th>
-                </>
-              ) : activeProductType === 'data-analytics' ? (
-                <>
-                  <th data-col="engine_category" onClick={() => onHeaderClick('attributes.engine')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Engine <SortIcon sortKey="attributes.engine" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="deployment_arch" onClick={() => onHeaderClick('attributes.deployment_type')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Deployment Type <SortIcon sortKey="attributes.deployment_type" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="db_family_cpu_vendor" onClick={() => onHeaderClick('attributes.tier')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Tier <SortIcon sortKey="attributes.tier" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="vcpus" onClick={() => onHeaderClick('vcpus')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Compute Unit <SortIcon sortKey="vcpus" sortConfig={sortConfig} />
-                  </th>
-                </>
-              ) : activeProductType === 'serverless' ? (
-                <>
-                  <th data-col="languages" className="px-6 py-4 text-center font-bold whitespace-nowrap">Languages</th>
-                  <th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap">Cold Start (ms)</th>
-                  <th data-col="db_family_cpu_vendor" className="px-6 py-4 text-center font-bold whitespace-nowrap">Timeout (sec)</th>
-                  <th data-col="deployment_arch" className="px-6 py-4 text-center font-bold whitespace-nowrap">Memory Config</th>
-                  <th data-col="ha_mode_os" className="px-6 py-4 text-center font-bold whitespace-nowrap">Free Tier</th>
-                  <th data-col="granularity" className="px-6 py-4 text-center font-bold whitespace-nowrap">Granularity</th>
-                  <th data-col="exec_model" className="px-6 py-4 text-center font-bold whitespace-nowrap">Exec. Model</th>
-                  <th data-col="prov_concurrency" className="px-6 py-4 text-center font-bold whitespace-nowrap">Prov. Concurrency</th>
-                  <th data-col="max_storage" className="px-6 py-4 text-center font-bold whitespace-nowrap">Max Storage</th>
-                  <th data-col="inv_price" className="px-6 py-4 text-center font-bold whitespace-nowrap">Inv. Price ($/1M)</th>
-                </>
-              ) : activeProductType === 'containers' ? (
-                <>
-                  <th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap">Orchestrator</th>
-                  <th data-col="db_family_cpu_vendor" className="px-6 py-4 text-center font-bold whitespace-nowrap">Compute Type</th>
-                  <th data-col="deployment_arch" className="px-6 py-4 text-center font-bold whitespace-nowrap">Architecture</th>
-                  <th data-col="ha_mode_os" className="px-6 py-4 text-center font-bold whitespace-nowrap">Granularity</th>
-                  <th data-col="gpu" className="px-6 py-4 text-center font-bold whitespace-nowrap">GPU</th>
-                </>
-              ) : activeProductType === 'networking' ? (
-                <>
-                  <th data-col="engine_category" className="px-6 py-4 text-center font-bold whitespace-nowrap">Service</th>
-                  <th data-col="db_family_cpu_vendor" className="px-6 py-4 text-center font-bold whitespace-nowrap">Category</th>
-                  <th data-col="deployment_arch" className="px-6 py-4 text-center font-bold whitespace-nowrap">Transfer Tier</th>
-                  <th data-col="ha_mode_os" className="px-6 py-4 text-center font-bold whitespace-nowrap">Destination</th>
-                  <th data-col="gpu" className="px-6 py-4 text-center font-bold whitespace-nowrap">Included</th>
-                </>
-              ) : (
-                <>
-                  <th data-col="engine_category" onClick={() => onHeaderClick('category')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Category <SortIcon sortKey="category" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="db_family_cpu_vendor" onClick={() => onHeaderClick('cpu_vendor')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    CPU Vendor <SortIcon sortKey="cpu_vendor" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="deployment_arch" onClick={() => onHeaderClick('arch')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Arch <SortIcon sortKey="arch" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="ha_mode_os" onClick={() => onHeaderClick('os')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    OS <SortIcon sortKey="os" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="gpu" onClick={() => onHeaderClick('gpu_count')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    GPU <SortIcon sortKey="gpu_count" sortConfig={sortConfig} />
-                  </th>
-                </>
-              )}
-              <th data-col="geography" onClick={() => onHeaderClick('geography')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                Geo <SortIcon sortKey="geography" sortConfig={sortConfig} />
-              </th>
-              {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && (
-                <>
-                  <th data-col="vcpus" onClick={() => onHeaderClick('vcpus')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    vCPU <SortIcon sortKey="vcpus" sortConfig={sortConfig} />
-                  </th>
-                  <th data-col="memory_gb" onClick={() => onHeaderClick('memory_gb')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                    Memory (GB) <SortIcon sortKey="memory_gb" sortConfig={sortConfig} />
-                  </th>
-                </>
-              )}
-              <th data-col="price_per_unit" onClick={() => onHeaderClick('price_per_unit')} className="px-6 py-4 text-center font-bold text-black dark:text-white whitespace-nowrap cursor-pointer hover:opacity-80 transition-opacity">
-                {showAggregation ? 'Yearly price ($)' : 'Hourly price ($)'} <SortIcon sortKey="price_per_unit" sortConfig={sortConfig} />
-              </th>
-              <th data-col="source" onClick={() => onHeaderClick('data_source')} className="px-6 py-4 text-center font-bold whitespace-nowrap cursor-pointer hover:text-black dark:hover:text-white transition-colors">
-                Source <SortIcon sortKey="data_source" sortConfig={sortConfig} />
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
-            {loading ? (
-              Array.from({ length: 15 }).map((_, i) => (
-                <tr key={i} className="animate-pulse">
-                  {Array.from({ length: getColumnCount(activeProductType) }).map((_, j) => (
-                    <td key={j} className="px-6 py-4">
-                      <div className="h-3 bg-[#f5f5f5] dark:bg-[#171717] rounded w-16 mx-auto"></div>
-                    </td>
-                  ))}
-                </tr>
-              ))
-            ) : data.length > 0 ? (
-              data.map((record, index) => <TableRow key={index} record={record} index={index} activeProductType={activeProductType} showAggregation={showAggregation} maxPrice={maxPrice} maxInvPrice={maxInvPrice} />)
-            ) : (
-              <tr>
-                <td colSpan={12} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
-                  <div className="flex flex-col items-center gap-4">
-                    <span>No matches for your filters.</span>
-                  </div>
-                </td>
+      {label}
+      {sortKey && <SortIcon sortKey={sortKey} sortConfig={sortConfig} />}
+      <ResizeHandle
+        onStart={(e) => startResize(e, colKey)}
+        onReset={() => resetWidth(colKey)}
+      />
+    </th>
+  );
+
+  return (
+    <>
+      {/* Resize handle styles — scoped to CCC table */}
+      <style>{`
+        .ccc-th {
+          position: relative;
+          overflow: hidden;
+        }
+        .ccc-rh {
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 8px;
+          height: 100%;
+          cursor: col-resize;
+          z-index: 2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .ccc-rh-line {
+          width: 2px;
+          height: 55%;
+          background: transparent;
+          border-radius: 1px;
+          pointer-events: none;
+          transition: background 0.12s;
+        }
+        .ccc-th:hover .ccc-rh-line { background: #d4d4d4; }
+        .ccc-rh:hover  .ccc-rh-line { background: #6366f1; }
+        @media (prefers-color-scheme: dark) {
+          .ccc-th:hover .ccc-rh-line { background: #404040; }
+          .ccc-rh:hover  .ccc-rh-line { background: #818cf8; }
+        }
+      `}</style>
+
+      <div
+        ref={tableScrollRef}
+        className={`flex-1 custom-scrollbar ${hasHorizontalOverflow && !scrolledToEnd ? 'scroll-fade-right' : ''}`}
+        style={{ minHeight: 0, overflowY: 'auto', overflowX: 'scroll' }}
+      >
+        {/* Inner div fixes the table width so the scroll container can measure it */}
+        <div style={{ width: totalWidth }}>
+          <table
+            className="border-collapse"
+            style={{ tableLayout: 'fixed', width: totalWidth }}
+          >
+            <colgroup>
+              {colDefs.map(c => (
+                <col key={c.key} style={{ width: colWidths[c.key] ?? c.defaultWidth }} />
+              ))}
+            </colgroup>
+
+            <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
+              <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
+
+                <Th colKey="provider"       sortKey="provider"       label="Provider" />
+                <Th colKey="instance_type"  sortKey="instance_type"  label="SKU" />
+
+                {/* ── Product-type-specific middle columns ── */}
+                {activeProductType === 'database' ? (<>
+                  <Th colKey="engine_category"    sortKey="attributes.engine"          label="Engine" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"          label="Tier" />
+                  <Th colKey="deployment_arch"    sortKey="attributes.deployment_type" label="Deployment" />
+                  <Th colKey="ha_mode_os"         sortKey="attributes.ha_mode"         label="HA Mode" />
+                </>) : activeProductType === 'data-analytics' ? (<>
+                  <Th colKey="engine_category"    sortKey="attributes.engine"          label="Engine" />
+                  <Th colKey="deployment_arch"    sortKey="attributes.deployment_type" label="Deployment Type" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"          label="Tier" />
+                  <Th colKey="vcpus"              sortKey="vcpus"                      label="Compute Unit" />
+                </>) : activeProductType === 'ai' ? (<>
+                  <Th colKey="engine_category"    sortKey="service"                    label="Service" />
+                  <Th colKey="deployment_arch"    sortKey="attributes.modelTier"       label="Model Tier" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.contextWindowK" label="Context Window" />
+                  <Th colKey="ha_mode_os"         sortKey="attributes.multimodal"      label="Multimodal" />
+                </>) : activeProductType === 'serverless' ? (<>
+                  <Th colKey="languages"          label="Languages" />
+                  <Th colKey="engine_category"    label="Cold Start (ms)" />
+                  <Th colKey="db_family_cpu_vendor" label="Timeout (sec)" />
+                  <Th colKey="deployment_arch"    label="Memory Config" />
+                  <Th colKey="ha_mode_os"         label="Free Tier" />
+                  <Th colKey="granularity"        label="Granularity" />
+                  <Th colKey="exec_model"         label="Exec. Model" />
+                  <Th colKey="prov_concurrency"   label="Prov. Concurrency" />
+                  <Th colKey="max_storage"        label="Max Storage" />
+                  <Th colKey="inv_price"          label="Inv. Price ($/1M)" />
+                </>) : activeProductType === 'containers' ? (<>
+                  <Th colKey="engine_category"    label="Orchestrator" />
+                  <Th colKey="db_family_cpu_vendor" label="Compute Type" />
+                  <Th colKey="deployment_arch"    label="Architecture" />
+                  <Th colKey="ha_mode_os"         label="Granularity" />
+                  <Th colKey="gpu"                label="GPU" />
+                </>) : activeProductType === 'networking' ? (<>
+                  <Th colKey="engine_category"    label="Service" />
+                  <Th colKey="db_family_cpu_vendor" label="Category" />
+                  <Th colKey="deployment_arch"    label="Transfer Tier" />
+                  <Th colKey="ha_mode_os"         label="Destination" />
+                  <Th colKey="gpu"                label="Included" />
+                </>) : (<>
+                  {/* vm (default) */}
+                  <Th colKey="engine_category"    sortKey="category"   label="Category" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="cpu_vendor" label="CPU Vendor" />
+                  <Th colKey="deployment_arch"    sortKey="arch"       label="Arch" />
+                  <Th colKey="ha_mode_os"         sortKey="os"         label="OS" />
+                  <Th colKey="gpu"                sortKey="gpu_count"  label="GPU" />
+                </>)}
+
+                {activeProductType !== 'ai' && <Th colKey="geography" sortKey="geography" label="Geo" />}
+
+                {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && (<>
+                  <Th colKey="vcpus"     sortKey="vcpus"     label="vCPU" />
+                  <Th colKey="memory_gb" sortKey="memory_gb" label="Memory (GB)" />
+                </>)}
+
+                <Th
+                  colKey="price_per_unit"
+                  sortKey="price_per_unit"
+                  label={activeProductType === 'ai' ? 'Input Price (/1M)' : (showAggregation ? 'Yearly price ($)' : 'Hourly price ($)')}
+                  className="text-black dark:text-white hover:opacity-80"
+                />
+                
+                {activeProductType === 'serverless' && <Th colKey="source" sortKey="data_source" label="Source" />}
+                {activeProductType === 'ai' && <Th colKey="inv_price" sortKey="attributes.outputPricePer1M" label="Output Price (/1M)" />}
+                {activeProductType !== 'serverless' && activeProductType !== 'ai' && <Th colKey="source" sortKey="data_source" label="Source" />}
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
+              {loading ? (
+                Array.from({ length: 15 }).map((_, i) => (
+                  <tr key={i} className="animate-pulse">
+                    {colDefs.map(c => (
+                      <td key={c.key} className="px-6 py-4">
+                        <div className="h-3 bg-[#f5f5f5] dark:bg-[#171717] rounded w-12 mx-auto" />
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : data.length > 0 ? (
+                data.map((record, index) => (
+                  <TableRow
+                    key={index}
+                    record={record}
+                    index={index}
+                    activeProductType={activeProductType}
+                    showAggregation={showAggregation}
+                    maxPrice={maxPrice}
+                    maxInvPrice={maxInvPrice}
+                  />
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={colDefs.length} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">
+                    <div className="flex flex-col items-center gap-4">
+                      <span>No matches for your filters.</span>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
-// Table row component for product-type-specific rendering
-function TableRow({ record, index, activeProductType, showAggregation, maxPrice, maxInvPrice }: { record: PricingRecord; index: number; activeProductType: ProductType; showAggregation: boolean; maxPrice?: number; maxInvPrice?: number }) {
-  const providerColor = PROVIDERS.find(p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name)?.color ?? '#525252';
+// ─── Table row ───────────────────────────────────────────────────────────────
+function TableRow({
+  record, index, activeProductType, showAggregation, maxPrice, maxInvPrice,
+}: {
+  record: PricingRecord;
+  index: number;
+  activeProductType: ProductType;
+  showAggregation: boolean;
+  maxPrice?: number;
+  maxInvPrice?: number;
+}) {
+  const providerColor = PROVIDERS.find(
+    p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name,
+  )?.color ?? '#525252';
 
   return (
     <tr className={`transition-colors group ${index % 2 === 0 ? 'bg-white dark:bg-[#000000]' : 'bg-[#f7f7f7] dark:bg-[#0a0a0a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
-      {/* Provider — shared */}
-      <td data-col="provider" className="px-6 py-4 whitespace-nowrap text-center">
+      {/* Provider */}
+      <td data-col="provider" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
         <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: providerColor, borderColor: providerColor + '50', backgroundColor: providerColor + '18' }}>
           {record.provider}
         </span>
       </td>
-      {/* SKU — shared */}
-      <td data-col="instance_type" className="px-6 py-4 whitespace-nowrap text-center">
-        <span className="text-xs font-bold text-black dark:text-white group-hover:text-black dark:group-hover:text-white transition-colors">{record.instance_type}</span>
+
+      {/* SKU */}
+      <td data-col="instance_type" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+        <span className="text-xs font-bold text-black dark:text-white">{record.instance_type}</span>
       </td>
-      {/* Product-type-specific columns */}
-      {activeProductType === 'database' ? (
-        <>
-          <td data-col="engine_category" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span>
-          </td>
-          <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span>
-          </td>
-          <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-              {record.attributes?.deployment_type || 'Provisioned'}
-            </span>
-          </td>
-          <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.ha_mode || '—'}</span>
-          </td>
-        </>
-      ) : activeProductType === 'data-analytics' ? (
-        <>
-          <td data-col="engine_category" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span>
-          </td>
-          <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-              {record.attributes?.deployment_type || 'Provisioned'}
-            </span>
-          </td>
-          <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span>
-          </td>
-          <td data-col="vcpus" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
-          </td>
-        </>
-      ) : activeProductType === 'serverless' ? (
-        <>
-          <td data-col="languages" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-              {record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join(', ') : record.attributes.supportedLanguages) : '—'}
-            </span>
-          </td>
-          <td data-col="engine_category" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span>
-          </td>
-          <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-              {record.attributes?.timeout_seconds ? (Number(record.attributes.timeout_seconds) >= 60 ? `${Number(record.attributes.timeout_seconds) / 60} min` : `${record.attributes.timeout_seconds} sec`) : '—'}
-            </span>
-          </td>
-          <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-              {record.attributes?.memory_configuration ? (String(record.attributes.memory_configuration).toLowerCase().includes('configurable') ? 'Configurable' : String(record.attributes.memory_configuration).toLowerCase().includes('tier') ? 'Tiers' : String(record.attributes.memory_configuration).toLowerCase().includes('auto') ? 'Automatic' : record.attributes.memory_configuration) : '—'}
-            </span>
-          </td>
-          <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">
-              {record.attributes?.free_invocations_per_month && Number(record.attributes.free_invocations_per_month) > 0 ? 'Yes' : 'No'}
-            </span>
-          </td>
-          <td data-col="granularity" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity_ms ? `${record.attributes.billing_granularity_ms}ms` : '—'}</span>
-          </td>
-          <td data-col="exec_model" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model || '—'}</span>
-          </td>
-          <td data-col="prov_concurrency" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">
-              {record.attributes?.provisioned_concurrency_support || '—'}
-            </span>
-          </td>
-          <td data-col="max_storage" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb ? `${record.attributes.max_ephemeral_storage_gb} GB` : '—'}</span>
-          </td>
-          <td data-col="inv_price" className="px-6 py-4 whitespace-nowrap text-center">
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-                {record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}
-              </span>
-              {record.attributes?.invocation_price_per_1m && maxInvPrice !== undefined && maxInvPrice > 0 && (
-                <div className="w-12 h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full overflow-hidden flex justify-start">
-                  <div 
-                    className="h-full rounded-full"
-                    style={{ 
-                      width: `${(Number(record.attributes.invocation_price_per_1m) / maxInvPrice) * 100}%`,
-                      backgroundColor: '#6366f1'
-                    }}
-                  />
-                </div>
-              )}
-            </div>
-          </td>
-        </>
-      ) : activeProductType === 'containers' ? (
-        <>
-          <td data-col="engine_category" className="px-6 py-4 text-center whitespace-nowrap">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.orchestrator || '—'}</span>
-          </td>
-          <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span>
-          </td>
-          <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.architecture || '—'}</span>
-          </td>
-          <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity || '—'}</span>
-          </td>
-          <td data-col="gpu" className="px-6 py-4 text-center whitespace-nowrap">
-            {record.gpu_count > 0
-              ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span>
-              : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>
-            }
-          </td>
-        </>
-      ) : activeProductType === 'networking' ? (
-        <>
-          <td data-col="engine_category" className="px-6 py-4 text-center whitespace-nowrap">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span>
-          </td>
-          <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span>
-          </td>
-          <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_tier || '—'}</span>
-          </td>
-          <td data-col="ha_mode_os" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.destination || '—'}</span>
-          </td>
-          <td data-col="gpu" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.included_transfer || '—'}</span>
-          </td>
-        </>
-      ) : (
-        <>
-          <td data-col="engine_category" className="px-6 py-4 text-center whitespace-nowrap">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span>
-          </td>
-          <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor || '—'}</span>
-          </td>
-          <td data-col="deployment_arch" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-              {record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}
-            </span>
-          </td>
-          <td data-col="ha_mode_os" className="px-6 py-4 font-bold text-[#737373] text-[10px] uppercase text-center whitespace-nowrap">{record.os || '—'}</td>
-          <td data-col="gpu" className="px-6 py-4 text-center whitespace-nowrap">
-            {record.gpu_count > 0
-              ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span>
-              : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>
-            }
-          </td>
-        </>
-      )}
+
+      {/* Product-type-specific cells */}
+      {activeProductType === 'database' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.deployment_type || 'Provisioned'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.ha_mode || '—'}</span></td>
+      </>) : activeProductType === 'data-analytics' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.engine || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.deployment_type || 'Provisioned'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
+        <td data-col="vcpus"               className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
+      </>) : activeProductType === 'ai' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.modelTier || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.contextWindowK ? `${record.attributes.contextWindowK}K` : '—'}</span></td>
+        <td data-col="geography"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span></td>
+      </>) : activeProductType === 'serverless' ? (<>
+        <td data-col="languages"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join(', ') : record.attributes.supportedLanguages) : '—'}</span></td>
+        <td data-col="engine_category"     className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds ? (Number(record.attributes.timeout_seconds) >= 60 ? `${Number(record.attributes.timeout_seconds) / 60} min` : `${record.attributes.timeout_seconds} sec`) : '—'}</span></td>
+        <td data-col="deployment_arch"     className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration ? (String(record.attributes.memory_configuration).toLowerCase().includes('configurable') ? 'Configurable' : String(record.attributes.memory_configuration).toLowerCase().includes('tier') ? 'Tiers' : String(record.attributes.memory_configuration).toLowerCase().includes('auto') ? 'Automatic' : record.attributes.memory_configuration) : '—'}</span></td>
+        <td data-col="ha_mode_os"          className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">{record.attributes?.free_invocations_per_month && Number(record.attributes.free_invocations_per_month) > 0 ? 'Yes' : 'No'}</span></td>
+        <td data-col="granularity"         className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity_ms ? `${record.attributes.billing_granularity_ms}ms` : '—'}</span></td>
+        <td data-col="exec_model"          className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model || '—'}</span></td>
+        <td data-col="prov_concurrency"    className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">{record.attributes?.provisioned_concurrency_support || '—'}</span></td>
+        <td data-col="max_storage"         className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb ? `${record.attributes.max_ephemeral_storage_gb} GB` : '—'}</span></td>
+        <td data-col="inv_price"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+          <div className="flex flex-col items-center gap-1">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}</span>
+            {record.attributes?.invocation_price_per_1m && maxInvPrice !== undefined && maxInvPrice > 0 && (
+              <div className="w-12 h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full overflow-hidden flex justify-start">
+                <div className="h-full rounded-full" style={{ width: `${(Number(record.attributes.invocation_price_per_1m) / maxInvPrice) * 100}%`, backgroundColor: '#6366f1' }} />
+              </div>
+            )}
+          </div>
+        </td>
+      </>) : activeProductType === 'containers' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.orchestrator || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.architecture || '—'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity || '—'}</span></td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
+      </>) : activeProductType === 'networking' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_tier || '—'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.destination || '—'}</span></td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.included_transfer || '—'}</span></td>
+      </>) : (<>
+        {/* vm (default) */}
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
+      </>)}
+
       {/* Geography */}
-      <td data-col="geography" className="px-6 py-4 whitespace-nowrap text-center">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span>
-      </td>
-      {/* vCPU, Memory */}
-      {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && (
-        <>
-          <td data-col="vcpus" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span>
-          </td>
-          <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span>
-          </td>
-        </>
+      {activeProductType !== 'ai' && (
+        <td data-col="geography" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span>
+        </td>
       )}
+
+      {/* vCPU + Memory (not shown for networking / data-analytics / ai) */}
+      {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && (<>
+        <td data-col="vcpus"     className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
+        <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span></td>
+      </>)}
+
       {/* Price */}
-      <td data-col="price_per_unit" className="px-6 py-4 text-center whitespace-nowrap">
+      <td data-col="price_per_unit" className="px-6 py-4 text-center whitespace-nowrap overflow-hidden">
         <div className="flex flex-col items-center gap-1.5">
           <span className="text-xs font-bold text-black dark:text-white">
-            {showAggregation
-              ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}`
-              : `$${parseFloat(record.price_per_unit).toFixed(4)}`}
+            {activeProductType === 'ai' ? `$${parseFloat(record.price_per_unit).toFixed(4)}` : (showAggregation ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}` : `$${parseFloat(record.price_per_unit).toFixed(4)}`)}
           </span>
           {maxPrice !== undefined && maxPrice > 0 && (
             <div className="w-16 h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full overflow-hidden flex justify-start">
-              <div 
-                className="h-full rounded-full"
-                style={{ 
-                  width: `${(parseFloat(record.price_per_unit) / maxPrice) * 100}%`,
-                  backgroundColor: '#6366f1'
-                }}
-              />
+              <div className="h-full rounded-full" style={{ width: `${(parseFloat(record.price_per_unit) / maxPrice) * 100}%`, backgroundColor: '#6366f1' }} />
             </div>
           )}
         </div>
       </td>
-      {/* Source */}
-      <td data-col="source" className="px-6 py-4 text-center whitespace-nowrap">
-        {record.data_source === 'static_config' ? (
-          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">Static</span>
-        ) : (
-          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">API</span>
-        )}
-      </td>
+
+      {/* Source / Output Price */}
+      {activeProductType === 'serverless' && (
+        <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+          <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${record.data_source === 'static_config' ? 'bg-[#fffbeb] text-[#d97706] border-[#fde68a] dark:bg-[#422006] dark:text-[#fcd34d] dark:border-[#78350f]' : 'bg-[#f0fdf4] text-[#166534] border-[#bbf7d0] dark:bg-[#052e16] dark:text-[#4ade80] dark:border-[#14532d]'}`}>
+            {record.data_source === 'static_config' ? 'Static' : 'API'}
+          </span>
+        </td>
+      )}
+
+      {activeProductType === 'ai' && (
+        <td data-col="inv_price" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.outputPricePer1M ? `$${Number(record.attributes.outputPricePer1M).toFixed(4)}` : '—'}</span>
+        </td>
+      )}
+
+      {activeProductType !== 'serverless' && activeProductType !== 'ai' && (
+        <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center overflow-hidden">
+          <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${record.data_source === 'static_config' ? 'bg-[#fffbeb] text-[#d97706] border-[#fde68a] dark:bg-[#422006] dark:text-[#fcd34d] dark:border-[#78350f]' : 'bg-[#f0fdf4] text-[#166534] border-[#bbf7d0] dark:bg-[#052e16] dark:text-[#4ade80] dark:border-[#14532d]'}`}>
+            {record.data_source === 'static_config' ? 'Static' : 'API'}
+          </span>
+        </td>
+      )}
     </tr>
   );
 }
