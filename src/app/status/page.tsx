@@ -208,7 +208,14 @@ export default function StatusPage() {
         .status-body {
           max-width: 1100px;
           margin: 0 auto;
-          padding: 2rem 2.5rem 4rem;
+          padding: 2rem 2.5rem 5rem;
+        }
+        .status-wrapper > footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 100;
         }
         .summary-cards {
           display: grid;
@@ -339,7 +346,7 @@ export default function StatusPage() {
         }
       `}</style>
 
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div className="status-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <div className="status-page" style={{ flex: 1 }}>
         {/* Nav */}
         <div style={{ borderBottom: '1px solid var(--border)', padding: '0.75rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
