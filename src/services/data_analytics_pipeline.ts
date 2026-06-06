@@ -357,7 +357,9 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
       new DatabricksAzureAdapter(),
       new NativeAnalyticsStaticAdapter('aws'),
       new NativeAnalyticsStaticAdapter('gcp'),
-      new SynapseAzureAdapter()
+      new SynapseAzureAdapter(),
+      new AlibabaAnalyticsAdapter(),
+      new OracleAnalyticsAdapter(),
     ];
   }
 
