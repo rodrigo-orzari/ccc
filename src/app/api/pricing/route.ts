@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
     let selectClause = `
       p.name as provider,
       s.name as service,
-      r.slug as region,
+      COALESCE(r.slug, 'global') as region,
       pr.instance_type,
       pr.vcpus,
       pr.memory_gb,
@@ -57,7 +57,7 @@ export async function GET(req: NextRequest) {
       SELECT ${selectClause}
       FROM pricing_records pr
       JOIN services s ON pr.service_id = s.id
-      JOIN regions r ON pr.region_id = r.id
+      LEFT JOIN regions r ON pr.region_id = r.id
       JOIN providers p ON s.provider_id = p.id
       WHERE 1=1
     `;
