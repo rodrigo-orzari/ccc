@@ -389,7 +389,7 @@ export default function StatusPage() {
           <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0 }}>
             Live view of pricing records collected per cloud provider and product category.
             {status?.last_ingested && (
-              <> Last full ingestion: <strong style={{ color: 'var(--text)' }}>{timeAgo(status.last_ingested)}</strong> ({new Date(status.last_ingested).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}).</>
+              <> Last full ingestion: <strong style={{ color: 'var(--text)' }}>{new Date(status.last_ingested).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</strong>.</>
             )}
           </p>
         </div>
@@ -455,7 +455,7 @@ export default function StatusPage() {
                       ? new Date(status.last_ingested).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
                       : '—'}
                   </div>
-                  <div className="summary-card-sub">{timeAgo(status.last_ingested)}</div>
+                  <div className="summary-card-sub">most recent run</div>
                 </div>
               </div>
 
