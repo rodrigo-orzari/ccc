@@ -172,25 +172,25 @@ export default function StatusPage() {
     <>
       <style>{`
         :root {
-          --bg: #ffffff;
-          --surface: #f9fafb;
-          --border: #e5e7eb;
+          --bg: #f7f8ff;
+          --surface: #eef0fc;
+          --border: #dde0f0;
           --text: #111827;
           --muted: #6b7280;
           --link: #2563eb;
-          --divider: #e5e7eb;
-          --row-hover: #f3f4f6;
+          --divider: #dde0f0;
+          --row-hover: #e8eaf8;
         }
         @media (prefers-color-scheme: dark) {
           :root {
-            --bg: #000000;
-            --surface: #0f0f0f;
-            --border: #1f1f1f;
+            --bg: #06060f;
+            --surface: #0c0c1e;
+            --border: #1e1e38;
             --text: #f1f5f9;
             --muted: #71717a;
-            --link: #60a5fa;
-            --divider: #1f1f1f;
-            --row-hover: #111111;
+            --link: #818cf8;
+            --divider: #1e1e38;
+            --row-hover: #10102a;
           }
         }
         .status-page {
