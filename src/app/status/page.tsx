@@ -75,35 +75,6 @@ function XIcon() {
 const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse', 'ai'];
 
 
-function freshnessStatus(isoString: string | null): 'fresh' | 'stale' | 'old' | 'missing' {
-  if (!isoString) return 'missing';
-  const days = (Date.now() - new Date(isoString).getTime()) / 86400000;
-  if (days <= 8) return 'fresh';
-  if (days <= 30) return 'stale';
-  return 'old';
-}
-
-function StatusDot({ status }: { status: 'fresh' | 'stale' | 'old' | 'missing' | 'none' }) {
-  const colors: Record<string, string> = {
-    fresh: '#22c55e',
-    stale: '#f59e0b',
-    old: '#ef4444',
-    missing: '#6b7280',
-    none: '#6b7280',
-  };
-  return (
-    <span
-      style={{
-        display: 'inline-block',
-        width: 8,
-        height: 8,
-        borderRadius: '50%',
-        backgroundColor: colors[status] ?? '#6b7280',
-        flexShrink: 0,
-      }}
-    />
-  );
-}
 
 function SourceBadge({ source, apiCount, staticCount }: { source: string; apiCount: number; staticCount: number }) {
   if (source === 'none') return <span style={{ color: 'var(--muted)' }}>—</span>;
@@ -156,7 +127,6 @@ export default function StatusPage() {
       .catch(e => { setError(e.message); setLoading(false); });
   }, []);
 
-  const globalFreshness = status ? freshnessStatus(status.last_ingested) : 'missing';
 
   const shareOnLinkedIn = () => {
     const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE_URL)}`;
@@ -291,7 +261,7 @@ export default function StatusPage() {
           font-size: 12.5px;
         }
         .pipeline-table th {
-          text-align: left;
+          text-align: center;
           font-size: 10px;
           font-weight: 600;
           text-transform: uppercase;
@@ -301,11 +271,14 @@ export default function StatusPage() {
           border-bottom: 1px solid var(--border);
           background: var(--surface);
         }
+        .pipeline-table th:first-child { text-align: left; }
         .pipeline-table td {
           padding: 0.65rem 1.5rem;
           border-bottom: 1px solid var(--divider);
           vertical-align: middle;
+          text-align: center;
         }
+        .pipeline-table td:first-child { text-align: left; }
         .pipeline-table tr:last-child td {
           border-bottom: none;
         }
@@ -389,7 +362,7 @@ export default function StatusPage() {
           <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0 }}>
             Live view of pricing records collected per cloud provider and product category.
             {status?.last_ingested && (
-              <> Last full ingestion: <strong style={{ color: 'var(--text)' }}>{new Date(status.last_ingested).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</strong>.</>
+              <> Last ingestion: {new Date(status.last_ingested).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}.</>
             )}
           </p>
         </div>
@@ -462,7 +435,6 @@ export default function StatusPage() {
               {/* Provider cards */}
               {status.providers.map(provider => {
                 const color = PROVIDER_COLORS[provider.slug] ?? '#888';
-                const freshness = freshnessStatus(provider.last_updated);
                 // Sort pipelines by canonical order
                 const pipelines = [...provider.pipelines].sort(
                   (a, b) => PIPELINE_ORDER.indexOf(a.category) - PIPELINE_ORDER.indexOf(b.category)
@@ -485,15 +457,6 @@ export default function StatusPage() {
                           {provider.total_records.toLocaleString()} records
                         </span>
                       </div>
-                      <div className="provider-header-right">
-                        {provider.last_updated && (
-                          <span style={{ color: 'var(--muted)' }}>
-                            Updated: {new Date(provider.last_updated).toLocaleDateString('en-US', {
-                              year: 'numeric', month: 'short', day: 'numeric',
-                            })}
-                          </span>
-                        )}
-                      </div>
                     </div>
 
                     {pipelines.length > 0 ? (
@@ -504,45 +467,33 @@ export default function StatusPage() {
                             <th>Records</th>
                             <th>Data Source</th>
                             <th>Last Updated</th>
-                            <th>Freshness</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {pipelines.map(pl => {
-                            const pf = freshnessStatus(pl.last_updated);
-                            return (
-                              <tr key={pl.category}>
-                                <td style={{ fontWeight: 500 }}>{pl.display_name}</td>
-                                <td style={{ fontVariantNumeric: 'tabular-nums' }}>
-                                  {pl.record_count > 0 ? pl.record_count.toLocaleString() : (
-                                    <span style={{ color: 'var(--muted)' }}>0</span>
-                                  )}
-                                </td>
-                                <td>
-                                  <SourceBadge
-                                    source={pl.data_source}
-                                    apiCount={pl.api_count}
-                                    staticCount={pl.static_count}
-                                  />
-                                </td>
-                                <td style={{ color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
-                                  {pl.last_updated
-                                    ? new Date(pl.last_updated).toLocaleDateString('en-US', {
-                                        year: 'numeric', month: 'short', day: 'numeric',
-                                      })
-                                    : '—'}
-                                </td>
-                                <td>
-                                  <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                                    <StatusDot status={pl.record_count === 0 ? 'missing' : pf} />
-                                    <span style={{ fontSize: 11, color: 'var(--muted)' }}>
-                                      {pl.record_count === 0 ? 'No data' : pf.charAt(0).toUpperCase() + pf.slice(1)}
-                                    </span>
-                                  </span>
-                                </td>
-                              </tr>
-                            );
-                          })}
+                          {pipelines.map(pl => (
+                            <tr key={pl.category}>
+                              <td style={{ fontWeight: 500 }}>{pl.display_name}</td>
+                              <td style={{ fontVariantNumeric: 'tabular-nums' }}>
+                                {pl.record_count > 0 ? pl.record_count.toLocaleString() : (
+                                  <span style={{ color: 'var(--muted)' }}>0</span>
+                                )}
+                              </td>
+                              <td>
+                                <SourceBadge
+                                  source={pl.data_source}
+                                  apiCount={pl.api_count}
+                                  staticCount={pl.static_count}
+                                />
+                              </td>
+                              <td style={{ color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
+                                {pl.last_updated
+                                  ? new Date(pl.last_updated).toLocaleDateString('en-US', {
+                                      year: 'numeric', month: 'short', day: 'numeric',
+                                    })
+                                  : '—'}
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     ) : (
@@ -559,29 +510,11 @@ export default function StatusPage() {
                 <div className="legend-title">How to read this page</div>
                 <div className="legend-grid">
                   <div className="legend-item">
-                    <StatusDot status="fresh" />
-                    <span style={{ color: 'var(--muted)' }}><strong style={{ color: 'var(--text)' }}>Fresh</strong> — updated within 8 days</span>
-                  </div>
-                  <div className="legend-item">
-                    <StatusDot status="stale" />
-                    <span style={{ color: 'var(--muted)' }}><strong style={{ color: 'var(--text)' }}>Stale</strong> — 8–30 days old</span>
-                  </div>
-                  <div className="legend-item">
-                    <StatusDot status="old" />
-                    <span style={{ color: 'var(--muted)' }}><strong style={{ color: 'var(--text)' }}>Old</strong> — over 30 days old</span>
-                  </div>
-                  <div className="legend-item">
-                    <StatusDot status="missing" />
-                    <span style={{ color: 'var(--muted)' }}><strong style={{ color: 'var(--text)' }}>Missing</strong> — no data collected yet</span>
-                  </div>
-                  <div className="legend-item">
-                    <span style={{ width: 8, flexShrink: 0 }} />
                     <span style={{ color: 'var(--muted)' }}>
-                      <strong style={{ color: '#16a34a' }}>Live API</strong> — fetched directly from provider's pricing API each run
+                      <strong style={{ color: '#16a34a' }}>Live API</strong> — fetched directly from the provider's pricing API each run
                     </span>
                   </div>
                   <div className="legend-item">
-                    <span style={{ width: 8, flexShrink: 0 }} />
                     <span style={{ color: 'var(--muted)' }}>
                       <strong style={{ color: '#d97706' }}>Static</strong> — sourced from a curated config, updated manually
                     </span>
