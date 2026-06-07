@@ -29,13 +29,21 @@ export class AzureContainerInstancesScraper extends BaseScraper<any> {
       return (vcpus * vcpuPrice) + (memoryGb * memPrice);
     };
 
-    const generateConfigs = () => [
-      { type: 'ACI-1vCPU-1GB', vcpus: 1, memory: 1, cpuVendor: 'Intel', price: calculateAciPrice(1, 1) },
-      { type: 'ACI-1vCPU-2GB', vcpus: 1, memory: 2, cpuVendor: 'Intel', price: calculateAciPrice(1, 2) },
-      { type: 'ACI-2vCPU-4GB', vcpus: 2, memory: 4, cpuVendor: 'Intel', price: calculateAciPrice(2, 4) },
-      { type: 'ACI-4vCPU-8GB', vcpus: 4, memory: 8, cpuVendor: 'Intel', price: calculateAciPrice(4, 8) },
-      { type: 'ACI-8vCPU-16GB', vcpus: 8, memory: 16, cpuVendor: 'Intel', price: calculateAciPrice(8, 16) },
-    ];
+    const generateConfigs = () => {
+      const getAttrs = () => ({
+        orchestrator: 'Serverless',
+        compute_type: 'Serverless',
+        architecture: 'x86',
+        billing_granularity: 'Second',
+      });
+      return [
+        { type: 'ACI-1vCPU-1GB', vcpus: 1, memory: 1, cpuVendor: 'Intel', price: calculateAciPrice(1, 1), attributes: getAttrs() },
+        { type: 'ACI-1vCPU-2GB', vcpus: 1, memory: 2, cpuVendor: 'Intel', price: calculateAciPrice(1, 2), attributes: getAttrs() },
+        { type: 'ACI-2vCPU-4GB', vcpus: 2, memory: 4, cpuVendor: 'Intel', price: calculateAciPrice(2, 4), attributes: getAttrs() },
+        { type: 'ACI-4vCPU-8GB', vcpus: 4, memory: 8, cpuVendor: 'Intel', price: calculateAciPrice(4, 8), attributes: getAttrs() },
+        { type: 'ACI-8vCPU-16GB', vcpus: 8, memory: 16, cpuVendor: 'Intel', price: calculateAciPrice(8, 16), attributes: getAttrs() },
+      ];
+    };
 
     return generateConfigs();
   }
