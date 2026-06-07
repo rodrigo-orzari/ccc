@@ -4,292 +4,355 @@
   "graph": {},
   "nodes": [
     {
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L1",
+      "id": "pricing_route",
+      "community": 9,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "GET()",
+      "file_type": "code",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L7",
+      "id": "pricing_route_get",
+      "community": 9,
+      "norm_label": "get()"
+    },
+    {
+      "label": "middleware.ts",
+      "file_type": "code",
+      "source_file": "src/middleware.ts",
+      "source_location": "L1",
+      "id": "src_middleware",
+      "community": 25,
+      "norm_label": "middleware.ts"
+    },
+    {
+      "label": "rateLimitStore",
+      "file_type": "code",
+      "source_file": "src/middleware.ts",
+      "source_location": "L6",
+      "id": "src_middleware_ratelimitstore",
+      "community": 25,
+      "norm_label": "ratelimitstore"
+    },
+    {
+      "label": "getRateLimitStatus()",
+      "file_type": "code",
+      "source_file": "src/middleware.ts",
+      "source_location": "L11",
+      "id": "src_middleware_getratelimitstatus",
+      "community": 25,
+      "norm_label": "getratelimitstatus()"
+    },
+    {
+      "label": "middleware()",
+      "file_type": "code",
+      "source_file": "src/middleware.ts",
+      "source_location": "L42",
+      "id": "src_middleware_middleware",
+      "community": 25,
+      "norm_label": "middleware()"
+    },
+    {
+      "label": "config",
+      "file_type": "code",
+      "source_file": "src/middleware.ts",
+      "source_location": "L82",
+      "id": "src_middleware_config",
+      "community": 25,
+      "norm_label": "config"
+    },
+    {
       "label": "README.md",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L1",
-      "id": "readme",
       "community": 12,
-      "norm_label": "readme.md"
+      "norm_label": "readme.md",
+      "id": "readme"
     },
     {
       "label": "Welcome!",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L5",
-      "id": "readme_welcome",
       "community": 12,
-      "norm_label": "welcome!"
+      "norm_label": "welcome!",
+      "id": "readme_welcome"
     },
     {
       "label": "Live Deployment",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L9",
-      "id": "readme_live_deployment",
       "community": 12,
-      "norm_label": "live deployment"
+      "norm_label": "live deployment",
+      "id": "readme_live_deployment"
     },
     {
       "label": "1. What Problem Does This Application Solve?",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L26",
-      "id": "readme_1_what_problem_does_this_application_solve",
       "community": 12,
-      "norm_label": "1. what problem does this application solve?"
+      "norm_label": "1. what problem does this application solve?",
+      "id": "readme_1_what_problem_does_this_application_solve"
     },
     {
       "label": "2. Architectural Design",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L39",
-      "id": "readme_2_architectural_design",
       "community": 12,
-      "norm_label": "2. architectural design"
+      "norm_label": "2. architectural design",
+      "id": "readme_2_architectural_design"
     },
     {
       "label": "3. File Directory & Code Organization",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L48",
-      "id": "readme_3_file_directory_code_organization",
       "community": 12,
-      "norm_label": "3. file directory & code organization"
+      "norm_label": "3. file directory & code organization",
+      "id": "readme_3_file_directory_code_organization"
     },
     {
       "label": "Directory Tree",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L50",
-      "id": "readme_directory_tree",
       "community": 12,
-      "norm_label": "directory tree"
+      "norm_label": "directory tree",
+      "id": "readme_directory_tree"
     },
     {
       "label": "File Descriptions",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L131",
-      "id": "readme_file_descriptions",
       "community": 12,
-      "norm_label": "file descriptions"
+      "norm_label": "file descriptions",
+      "id": "readme_file_descriptions"
     },
     {
       "label": "4. Documentation Guide",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L168",
-      "id": "readme_4_documentation_guide",
       "community": 12,
-      "norm_label": "4. documentation guide"
+      "norm_label": "4. documentation guide",
+      "id": "readme_4_documentation_guide"
     },
     {
       "label": "5. Security & Deployment",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L184",
-      "id": "readme_5_security_deployment",
       "community": 12,
-      "norm_label": "5. security & deployment"
+      "norm_label": "5. security & deployment",
+      "id": "readme_5_security_deployment"
     },
     {
       "label": "\u26a0\ufe0f Important: Production Security Requirements",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L186",
-      "id": "readme_important_production_security_requirements",
       "community": 12,
-      "norm_label": "\u26a0\ufe0f important: production security requirements"
+      "norm_label": "\u26a0\ufe0f important: production security requirements",
+      "id": "readme_important_production_security_requirements"
     },
     {
       "label": "6. Quick Start",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L201",
-      "id": "readme_6_quick_start",
       "community": 12,
-      "norm_label": "6. quick start"
+      "norm_label": "6. quick start",
+      "id": "readme_6_quick_start"
     },
     {
       "label": "Local Development (5 minutes)",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L203",
-      "id": "readme_local_development_5_minutes",
       "community": 12,
-      "norm_label": "local development (5 minutes)"
+      "norm_label": "local development (5 minutes)",
+      "id": "readme_local_development_5_minutes"
     },
     {
       "label": "Build for Production",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L224",
-      "id": "readme_build_for_production",
       "community": 12,
-      "norm_label": "build for production"
+      "norm_label": "build for production",
+      "id": "readme_build_for_production"
     },
     {
       "label": "7. In-Depth Subsystem Walks",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L235",
-      "id": "readme_7_in_depth_subsystem_walks",
       "community": 12,
-      "norm_label": "7. in-depth subsystem walks"
+      "norm_label": "7. in-depth subsystem walks",
+      "id": "readme_7_in_depth_subsystem_walks"
     },
     {
       "label": "A. Database Initialization and Schema Management",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L237",
-      "id": "readme_a_database_initialization_and_schema_management",
       "community": 12,
-      "norm_label": "a. database initialization and schema management"
+      "norm_label": "a. database initialization and schema management",
+      "id": "readme_a_database_initialization_and_schema_management"
     },
     {
       "label": "B. Ingestion Pipelines & In-Flight Validations",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L242",
-      "id": "readme_b_ingestion_pipelines_in_flight_validations",
       "community": 12,
-      "norm_label": "b. ingestion pipelines & in-flight validations"
+      "norm_label": "b. ingestion pipelines & in-flight validations",
+      "id": "readme_b_ingestion_pipelines_in_flight_validations"
     },
     {
       "label": "C. Backend API Routes",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L255",
-      "id": "readme_c_backend_api_routes",
       "community": 12,
-      "norm_label": "c. backend api routes"
+      "norm_label": "c. backend api routes",
+      "id": "readme_c_backend_api_routes"
     },
     {
       "label": "D. The Comparative Frontend Dashboard",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L264",
-      "id": "readme_d_the_comparative_frontend_dashboard",
       "community": 12,
-      "norm_label": "d. the comparative frontend dashboard"
+      "norm_label": "d. the comparative frontend dashboard",
+      "id": "readme_d_the_comparative_frontend_dashboard"
     },
     {
       "label": "8. Resources for Contributors",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L276",
-      "id": "readme_8_resources_for_contributors",
       "community": 12,
-      "norm_label": "8. resources for contributors"
+      "norm_label": "8. resources for contributors",
+      "id": "readme_8_resources_for_contributors"
     },
     {
       "label": "Getting Started",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L278",
-      "id": "readme_getting_started",
       "community": 12,
-      "norm_label": "getting started"
+      "norm_label": "getting started",
+      "id": "readme_getting_started"
     },
     {
       "label": "For Specific Tasks",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L285",
-      "id": "readme_for_specific_tasks",
       "community": 12,
-      "norm_label": "for specific tasks"
+      "norm_label": "for specific tasks",
+      "id": "readme_for_specific_tasks"
     },
     {
       "label": "Key Architecture Files",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L297",
-      "id": "readme_key_architecture_files",
       "community": 12,
-      "norm_label": "key architecture files"
+      "norm_label": "key architecture files",
+      "id": "readme_key_architecture_files"
     },
     {
       "label": "License & Contributions",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L312",
-      "id": "readme_license_contributions",
       "community": 12,
-      "norm_label": "license & contributions"
+      "norm_label": "license & contributions",
+      "id": "readme_license_contributions"
     },
     {
       "label": "Project Note",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L321",
-      "id": "readme_project_note",
       "community": 12,
-      "norm_label": "project note"
+      "norm_label": "project note",
+      "id": "readme_project_note"
     },
     {
       "label": "Support & Feedback",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L325",
-      "id": "readme_support_feedback",
       "community": 12,
-      "norm_label": "support & feedback"
+      "norm_label": "support & feedback",
+      "id": "readme_support_feedback"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L1",
-      "id": "about_page",
       "community": 13,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "about_page"
     },
     {
       "label": "headingToId()",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L6",
-      "id": "about_page_headingtoid",
       "community": 13,
-      "norm_label": "headingtoid()"
+      "norm_label": "headingtoid()",
+      "id": "about_page_headingtoid"
     },
     {
       "label": "AboutPage()",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L16",
-      "id": "about_page_aboutpage",
       "community": 13,
-      "norm_label": "aboutpage()"
+      "norm_label": "aboutpage()",
+      "id": "about_page_aboutpage"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L1",
-      "id": "terms_page",
       "community": 13,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "terms_page"
     },
     {
       "label": "headingToId()",
       "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L6",
-      "id": "terms_page_headingtoid",
       "community": 13,
-      "norm_label": "headingtoid()"
+      "norm_label": "headingtoid()",
+      "id": "terms_page_headingtoid"
     },
     {
       "label": "TermsOfUsePage()",
       "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L16",
-      "id": "terms_page_termsofusepage",
       "community": 13,
-      "norm_label": "termsofusepage()"
+      "norm_label": "termsofusepage()",
+      "id": "terms_page_termsofusepage"
     },
     {
       "label": "PricingTable.tsx",
@@ -1390,24 +1453,6 @@
       "id": "counts_route_get"
     },
     {
-      "label": "route.ts",
-      "file_type": "code",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L1",
-      "community": 9,
-      "norm_label": "route.ts",
-      "id": "pricing_route"
-    },
-    {
-      "label": "GET()",
-      "file_type": "code",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L7",
-      "community": 9,
-      "norm_label": "get()",
-      "id": "pricing_route_get"
-    },
-    {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
@@ -2273,6 +2318,78 @@
     }
   ],
   "links": [
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pricing_route",
+      "target": "lib_api_utils_buildpricingfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/pricing/route.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "pricing_route",
+      "target": "pricing_route_get"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/middleware.ts",
+      "source_location": "L82",
+      "weight": 1.0,
+      "source": "src_middleware",
+      "target": "src_middleware_config",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/middleware.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "src_middleware",
+      "target": "src_middleware_getratelimitstatus",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/middleware.ts",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "src_middleware",
+      "target": "src_middleware_middleware",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/middleware.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "src_middleware",
+      "target": "src_middleware_ratelimitstore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/middleware.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "src_middleware_middleware",
+      "target": "src_middleware_getratelimitstatus",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -4645,17 +4762,6 @@
       "target": "lib_api_utils_buildpricingfilters"
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pricing_route",
-      "target": "lib_api_utils_buildpricingfilters"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/services/networking_pipeline.ts",
@@ -4808,16 +4914,6 @@
       "confidence_score": 1.0,
       "source": "counts_route",
       "target": "counts_route_get"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/pricing/route.ts",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "pricing_route",
-      "target": "pricing_route_get"
     },
     {
       "relation": "contains",
@@ -5690,5 +5786,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "24966c60b38f11fc2e05d34207e27b0a33a7f203"
+  "built_at_commit": "2ec884afbdda43a82135c1ba4308abb1f8c80a40"
 }
