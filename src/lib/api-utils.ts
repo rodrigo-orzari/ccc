@@ -225,8 +225,14 @@ export function buildPricingFilters(query: any) {
           // Alibaba
           engineFilters.add('maxcompute');
           engineFilters.add('e-mapreduce');
+          engineFilters.add('hologres');
+          engineFilters.add('analyticdb for mysql');
           // Oracle
           engineFilters.add('oracle analytics cloud');
+          engineFilters.add('oracle autonomous data warehouse');
+          // DigitalOcean
+          engineFilters.add('opensearch');
+          engineFilters.add('kafka');
         }
         conditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount++})`);
         values.push(Array.from(engineFilters));

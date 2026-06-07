@@ -6,6 +6,7 @@ import { SNOWFLAKE_INSTANCES, SNOWFLAKE_AWS_REGION, SNOWFLAKE_AZURE_REGION, SNOW
 import { NATIVE_ANALYTICS_INSTANCES, NATIVE_ANALYTICS_AWS_REGION, NATIVE_ANALYTICS_GCP_REGION } from '../config/native_analytics_instances';
 import { ALIBABA_ANALYTICS_INSTANCES, ALIBABA_ANALYTICS_REGION, ALIBABA_ANALYTICS_GEOGRAPHY } from '../config/alibaba_data_analytics';
 import { ORACLE_ANALYTICS_INSTANCES, ORACLE_ANALYTICS_REGION, ORACLE_ANALYTICS_GEOGRAPHY } from '../config/oracle_data_analytics';
+import { DIGITALOCEAN_ANALYTICS_INSTANCES, DIGITALOCEAN_ANALYTICS_REGION, DIGITALOCEAN_ANALYTICS_GEOGRAPHY } from '../config/digitalocean_data_analytics';
 
 // ─── Databricks Static Adapters ────────────────────────────────────────────────
 
@@ -287,7 +288,7 @@ export class AlibabaAnalyticsAdapter extends BaseAdapter {
     console.log(`Fetching Alibaba Analytics pricing (${ALIBABA_ANALYTICS_INSTANCES.length} entries from static config)...`);
     return ALIBABA_ANALYTICS_INSTANCES.map(inst => ({
       provider: 'alibaba',
-      service: inst.engine === 'E-MapReduce' ? 'E-MapReduce' : 'MaxCompute',
+      service: inst.serviceName,
       region: ALIBABA_ANALYTICS_REGION,
       instanceType: `${inst.engine} ${inst.tier}`,
       vcpus: 1, // Normalized: 1 CU / 1 OCPU / 1 Instance-Hr
@@ -319,7 +320,7 @@ export class OracleAnalyticsAdapter extends BaseAdapter {
     console.log(`Fetching Oracle Analytics Cloud pricing (${ORACLE_ANALYTICS_INSTANCES.length} entries from static config)...`);
     return ORACLE_ANALYTICS_INSTANCES.map(inst => ({
       provider: 'oracle',
-      service: 'Oracle Analytics Cloud',
+      service: inst.serviceName,
       region: ORACLE_ANALYTICS_REGION,
       instanceType: `${inst.engine} ${inst.tier}`,
       vcpus: 1, // Normalized: 1 OCPU / 1 ECPU
@@ -329,6 +330,38 @@ export class OracleAnalyticsAdapter extends BaseAdapter {
       cpuVendor: 'N/A',
       gpuCount: 0,
       geography: ORACLE_ANALYTICS_GEOGRAPHY,
+      category: 'data_warehouse',
+      price: inst.pricePerUnit,
+      unit: inst.computeUnitName,
+      attributes: {
+        engine: inst.engine,
+        tier: inst.tier,
+        deployment_type: inst.deploymentType,
+      },
+      dataSource: 'static_config' as const,
+    }));
+  }
+}
+
+// ─── DigitalOcean Analytics (static config) ────────────────────────────────────
+
+export class DigitalOceanAnalyticsAdapter extends BaseAdapter {
+  providerSlug = 'digitalocean';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching DigitalOcean Analytics pricing (${DIGITALOCEAN_ANALYTICS_INSTANCES.length} entries from static config)...`);
+    return DIGITALOCEAN_ANALYTICS_INSTANCES.map(inst => ({
+      provider: 'digitalocean',
+      service: inst.serviceName,
+      region: DIGITALOCEAN_ANALYTICS_REGION,
+      instanceType: `${inst.engine} ${inst.tier}`,
+      vcpus: 1,
+      memoryGb: 0,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: DIGITALOCEAN_ANALYTICS_GEOGRAPHY,
       category: 'data_warehouse',
       price: inst.pricePerUnit,
       unit: inst.computeUnitName,
@@ -360,6 +393,7 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
       new SynapseAzureAdapter(),
       new AlibabaAnalyticsAdapter(),
       new OracleAnalyticsAdapter(),
+      new DigitalOceanAnalyticsAdapter(),
     ];
   }
 
@@ -369,16 +403,29 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
     
     // We will accumulate all records and then save them using the base class `saveRecords` method,
     // but we will do it PER provider to maintain the existing drift logic per provider/service.
-    // However, `DataAnalyticsPricingPipeline` inherits `run()` from `PricingPipeline`, which loops through adapters.
-    // BUT we have multiple adapters for the same provider (e.g. `aws` for Databricks and Snowflake).
-    // `PricingPipeline.run()` executes `saveRecords(records)` which deletes all records for `serviceName` under the provider.
-    // Since each adapter outputs a unique `service` name (e.g. 'Databricks' vs 'Snowflake'), 
-    // the base `saveRecords` will properly isolate deletions to the specific service!
-    
+    //
+    // IMPORTANT: `saveRecords` files an ENTIRE batch under `records[0].service` (it ensures a
+    // single service row per call). Some adapters emit MULTIPLE services in one batch — e.g.
+    // Alibaba returns MaxCompute + E-MapReduce + Hologres + AnalyticDB, Oracle returns OAC +
+    // Autonomous Data Warehouse, DigitalOcean returns OpenSearch + Kafka. So we must group each
+    // adapter's records by `service` and call `saveRecords` once per service, otherwise every SKU
+    // collapses under the first service name (and per-service deletes/drift break).
+
     for (const adapter of this.adapters) {
       try {
         const records = await adapter.fetchPricing();
-        const driftAlerts = await this.saveRecords(records, 'data_warehouse');
+
+        const byService = new Map<string, PricingRecord[]>();
+        for (const rec of records) {
+          const group = byService.get(rec.service) ?? [];
+          group.push(rec);
+          byService.set(rec.service, group);
+        }
+
+        const driftAlerts: any[] = [];
+        for (const group of byService.values()) {
+          driftAlerts.push(...await this.saveRecords(group, 'data_warehouse'));
+        }
         results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
       } catch (error: any) {
         console.error(`❌ Error running ${adapter.providerSlug} adapter:`, error);
