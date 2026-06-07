@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 118 files · ~93,427 words
+- 117 files · ~93,649 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2ec884af`
+- Built from commit: `3677b188`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -45,8 +45,8 @@
 6. `NetworkingPricingPipeline` - 5 edges
 7. `AIPricingPipeline` - 5 edges
 8. `End-to-End Integration Verification` - 5 edges
-9. `8. Resources for Contributors` - 4 edges
-10. `PROVIDERS` - 4 edges
+9. `buildPricingFilters()` - 4 edges
+10. `8. Resources for Contributors` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - None detected - all connections are within the same source files.
@@ -105,7 +105,7 @@ Cohesion: 0.50
 Nodes (4): config, getRateLimitStatus(), middleware(), rateLimitStore
 
 ## Knowledge Gaps
-- **93 isolated node(s):** `rateLimitStore`, `config`, `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design` (+88 more)
+- **93 isolated node(s):** `VALID_PRODUCT_TYPES`, `rateLimitStore`, `config`, `Live Deployment`, `1. What Problem Does This Application Solve?` (+88 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -118,7 +118,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **What connects `rateLimitStore`, `config`, `Live Deployment` to the rest of the system?**
+- **What connects `VALID_PRODUCT_TYPES`, `rateLimitStore`, `config` to the rest of the system?**
   _93 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 7` be split into smaller, more focused modules?**
   _Cohesion score 0.10448979591836735 - nodes in this community are weakly interconnected._
