@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1780784396.5058782,
-    "ast_hash": "54a8bacc5f558502aa2c1806d4f2b8dd",
+    "mtime": 1780791956.6639438,
+    "ast_hash": "36ee5d8bd9208e929d0e7f9d4007aceb",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -375,8 +375,8 @@
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
-    "mtime": 1780791215.3003883,
-    "ast_hash": "65dc15db3c803887f24403e3470a54bb",
+    "mtime": 1780792402.0814245,
+    "ast_hash": "9d71e6e1ac127b96c130fc2bb6786196",
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
@@ -385,13 +385,13 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1780791156.747595,
-    "ast_hash": "46b2cf7908f391d1a6d21c669a7e130a",
+    "mtime": 1780791990.1391876,
+    "ast_hash": "b82fb9a8cd5f5e6150f8077546d8c5ad",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
-    "mtime": 1780785113.4242585,
-    "ast_hash": "1bf3581fae1a51b02a3e8d7922ff274d",
+    "mtime": 1780792412.058922,
+    "ast_hash": "1df7ffd01231292f8cf6908909beac0c",
     "semantic_hash": ""
   },
   "src/app/support/page.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "src/app/terms/page.tsx": {
-    "mtime": 1780791228.8986485,
-    "ast_hash": "cf07639191c5f256a30b092ffaa0313a",
+    "mtime": 1780792421.5235775,
+    "ast_hash": "aaefd44e87ee324656a573488457431d",
     "semantic_hash": ""
   },
   "src/config/alibaba_containers.ts": {
@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1780782581.0679915,
-    "ast_hash": "fd3f8f484ba2bb9fe3b91040a94d4135",
+    "mtime": 1780792013.7236543,
+    "ast_hash": "6b5e5015a635e6b64c25c7448f5137e5",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
@@ -475,13 +475,13 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1780791918.163938,
-    "ast_hash": "2a46a7a153b64344c0a9d27606befb5f",
+    "mtime": 1780792425.7241597,
+    "ast_hash": "ede4aaa04439bd86c875af98f9c3eed1",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1780782410.5759175,
-    "ast_hash": "7bc7ffee648b492a8950c770b6b21280",
+    "mtime": 1780792430.2515721,
+    "ast_hash": "40e3289b38b85f363395d9f583667da2",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
@@ -540,8 +540,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1780791601.680322,
-    "ast_hash": "accbbacfe975d5fb2c5d04a9d4b4fdbc",
+    "mtime": 1780792406.9924853,
+    "ast_hash": "3bd89fa88ae3ea989b63385d9a4d15b7",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1780791064.3895347,
-    "ast_hash": "a26fba99f17dcf5a191e941fd638eea3",
+    "mtime": 1780792416.2848594,
+    "ast_hash": "0f6735dfab95ba1a58cce09127a58659",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -592,6 +592,11 @@
   "src/services/populate_ai.ts": {
     "mtime": 1780782471.463842,
     "ast_hash": "c7623eb46b761ca51b10bbadfc0305c3",
+    "semantic_hash": ""
+  },
+  "run_networking.ts": {
+    "mtime": 1780792056.9025736,
+    "ast_hash": "9e8a3a9da1679c39da3df030ec07d4f7",
     "semantic_hash": ""
   }
 }

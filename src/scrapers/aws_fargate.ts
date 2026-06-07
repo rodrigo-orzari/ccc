@@ -38,14 +38,22 @@ export class AwsFargateScraper extends BaseScraper<any> {
       return (vcpus * vcpuPriceArm) + (memoryGb * memPriceArm);
     };
 
-    const generateConfigs = (arch: 'x86_64' | 'ARM64', vendor: 'Intel' | 'AWS') => [
-      { type: `Fargate-0.5vCPU-1GB-${arch}`, vcpus: 0.5, memory: 1, cpuVendor: vendor, price: calculateFargatePrice(0.5, 1, arch) },
-      { type: `Fargate-1vCPU-2GB-${arch}`, vcpus: 1, memory: 2, cpuVendor: vendor, price: calculateFargatePrice(1, 2, arch) },
-      { type: `Fargate-2vCPU-4GB-${arch}`, vcpus: 2, memory: 4, cpuVendor: vendor, price: calculateFargatePrice(2, 4, arch) },
-      { type: `Fargate-4vCPU-8GB-${arch}`, vcpus: 4, memory: 8, cpuVendor: vendor, price: calculateFargatePrice(4, 8, arch) },
-      { type: `Fargate-8vCPU-16GB-${arch}`, vcpus: 8, memory: 16, cpuVendor: vendor, price: calculateFargatePrice(8, 16, arch) },
-      { type: `Fargate-16vCPU-32GB-${arch}`, vcpus: 16, memory: 32, cpuVendor: vendor, price: calculateFargatePrice(16, 32, arch) },
-    ];
+    const generateConfigs = (arch: 'x86_64' | 'ARM64', vendor: 'Intel' | 'AWS') => {
+      const getAttrs = () => ({
+        orchestrator: 'Serverless',
+        compute_type: 'Serverless',
+        architecture: arch === 'x86_64' ? 'x86' : 'ARM',
+        billing_granularity: 'Second',
+      });
+      return [
+        { type: `Fargate-0.5vCPU-1GB-${arch}`, vcpus: 0.5, memory: 1, cpuVendor: vendor, price: calculateFargatePrice(0.5, 1, arch), attributes: getAttrs() },
+        { type: `Fargate-1vCPU-2GB-${arch}`, vcpus: 1, memory: 2, cpuVendor: vendor, price: calculateFargatePrice(1, 2, arch), attributes: getAttrs() },
+        { type: `Fargate-2vCPU-4GB-${arch}`, vcpus: 2, memory: 4, cpuVendor: vendor, price: calculateFargatePrice(2, 4, arch), attributes: getAttrs() },
+        { type: `Fargate-4vCPU-8GB-${arch}`, vcpus: 4, memory: 8, cpuVendor: vendor, price: calculateFargatePrice(4, 8, arch), attributes: getAttrs() },
+        { type: `Fargate-8vCPU-16GB-${arch}`, vcpus: 8, memory: 16, cpuVendor: vendor, price: calculateFargatePrice(8, 16, arch), attributes: getAttrs() },
+        { type: `Fargate-16vCPU-32GB-${arch}`, vcpus: 16, memory: 32, cpuVendor: vendor, price: calculateFargatePrice(16, 32, arch), attributes: getAttrs() },
+      ];
+    };
 
     const instances = [
       ...generateConfigs('x86_64', 'Intel'),

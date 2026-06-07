@@ -626,6 +626,10 @@ export default function Dashboard() {
           onSetNetworkingHaSupport={setSelectedNetworkingHaSupport}
           onSetNetworkingVpcSupport={setSelectedNetworkingVpcSupport}
           onSetNetworkingDirections={setSelectedNetworkingDirections}
+          onSetNetworkingBillingModels={setSelectedNetworkingBillingModels}
+          onSetNetworkingUsageTiers={setSelectedNetworkingUsageTiers}
+          onSetNetworkingPortCapacities={setSelectedNetworkingPortCapacities}
+          onSetNetworkingTransferScopes={setSelectedNetworkingTransferScopes}
           onVCpuRangeChange={setVCpuRange}
           onMemoryRangeChange={setMemoryRange}
           onPriceRangeChange={setPriceRange}

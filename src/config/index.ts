@@ -74,13 +74,13 @@ export const PROVIDERS: { id: string; name: string; color: string; soon?: boolea
   { id: 'gcp', name: 'Google', color: '#34A853' },
   { id: 'oracle', name: 'Oracle', color: '#F80000' },
   { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF' },
-  { id: 'alibaba', name: 'Alibaba Cloud', color: '#FF6A00' },
+  { id: 'alibaba', name: 'Alibaba', color: '#FF6A00' },
   { id: 'openai', name: 'OpenAI', color: '#10A37F', isAIOnly: true },
   { id: 'anthropic', name: 'Anthropic', color: '#CC9D87', isAIOnly: true },
 ];
 
 // AI-specific constants
 export const AI_SERVICE_TYPES = ['Foundational Models', 'Embeddings', 'Image Generation', 'Speech & Audio'];
-export const AI_MODEL_TIERS = ['Flagship (e.g. GPT-4o)', 'Small/Fast (e.g. Haiku)'];
+export const AI_MODEL_TIERS = ['Frontier', 'Standard', 'Efficient'];
 export const AI_CONTEXT_WINDOWS = ['< 32K', '32K - 128K', '> 128K', '1M+'];
 export const AI_MULTIMODAL_OPTIONS = ['Yes', 'No'];
