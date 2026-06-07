@@ -161,11 +161,7 @@ const PrivacyPolicyPage: React.FC = () => {
         <div className="privacy-body" id="privacy-policy">
           {/* Sidebar */}
           <aside className="privacy-sidebar">
-            <div style={{ marginBottom: '1.75rem' }}>
-              <a href="/" style={{ display: 'inline-block' }}>
-                <img src="/logo.png" alt="Compare Cloud Costs" style={{ height: 28, width: 'auto' }} />
-              </a>
-            </div>
+
             <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: 'var(--muted-text)', marginBottom: '0.875rem' }}>
               On this page
             </div>
