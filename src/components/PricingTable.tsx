@@ -65,7 +65,7 @@ function getColDefs(pt: ProductType): ColDef[] {
   if (pt === 'containers')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tailWithSpecs];
   if (pt === 'networking')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tail];
   if (pt === 'data-analytics') return [...start, COL_MID1, COL_MID3, COL_MID2, COL_VCPU, ...tail];
-  if (pt === 'ai')             return [...start, COL_MID1, COL_MID3, COL_MID2, COL_MID4, ...tail, COL_INV];
+  if (pt === 'ai')             return [...start, COL_MID1, COL_MID3, COL_MID2, COL_MID4, COL_PRICE, COL_INV];
   return [...start, ...tail];
 }
 
@@ -212,11 +212,12 @@ export default function PricingTable({
           position: relative;
           overflow: hidden;
         }
+        /* Hit zone — wider than the visible line so it's easier to grab */
         .ccc-rh {
           position: absolute;
           right: 0;
           top: 0;
-          width: 8px;
+          width: 12px;
           height: 100%;
           cursor: col-resize;
           z-index: 2;
@@ -224,18 +225,22 @@ export default function PricingTable({
           align-items: center;
           justify-content: center;
         }
+        /* Always-visible divider line — signals the resize boundary */
         .ccc-rh-line {
           width: 2px;
-          height: 55%;
-          background: transparent;
+          height: 65%;
+          background: #e5e5e5;
           border-radius: 1px;
           pointer-events: none;
-          transition: background 0.12s;
+          transition: background 0.12s, height 0.12s;
         }
-        .ccc-th:hover .ccc-rh-line { background: #d4d4d4; }
-        .ccc-rh:hover  .ccc-rh-line { background: #6366f1; }
+        /* Full-column hover: nudge the line a bit brighter */
+        .ccc-th:hover .ccc-rh-line { background: #c4b5fd; height: 75%; }
+        /* Direct handle hover: full indigo — "you can drag here" */
+        .ccc-rh:hover  .ccc-rh-line { background: #6366f1; height: 80%; }
         @media (prefers-color-scheme: dark) {
-          .ccc-th:hover .ccc-rh-line { background: #404040; }
+          .ccc-rh-line { background: #2a2a2a; }
+          .ccc-th:hover .ccc-rh-line { background: #4c4570; }
           .ccc-rh:hover  .ccc-rh-line { background: #818cf8; }
         }
       `}</style>
@@ -397,7 +402,7 @@ function TableRow({
 
       {/* SKU */}
       <td data-col="instance_type" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
-        <span className="text-xs font-bold text-black dark:text-white">{record.instance_type}</span>
+        <span className="text-xs font-bold text-[#404040] dark:text-[#d4d4d4]">{record.instance_type}</span>
       </td>
 
       {/* Product-type-specific cells */}
@@ -415,7 +420,7 @@ function TableRow({
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
         <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.modelTier || '—'}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.contextWindowK ? `${record.attributes.contextWindowK}K` : '—'}</span></td>
-        <td data-col="geography"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.geography || '—'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.multimodal || '—'}</span></td>
       </>) : activeProductType === 'serverless' ? (<>
         <td data-col="languages"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join(', ') : record.attributes.supportedLanguages) : '—'}</span></td>
         <td data-col="engine_category"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span></td>
@@ -487,7 +492,7 @@ function TableRow({
       {/* Source / Output Price */}
       {activeProductType === 'serverless' && (
         <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
-          <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${record.data_source === 'static_config' ? 'bg-[#fffbeb] text-[#d97706] border-[#fde68a] dark:bg-[#422006] dark:text-[#fcd34d] dark:border-[#78350f]' : 'bg-[#f0fdf4] text-[#166534] border-[#bbf7d0] dark:bg-[#052e16] dark:text-[#4ade80] dark:border-[#14532d]'}`}>
+          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] dark:text-[#a3a3a3] border-[#e5e5e5] dark:border-[#262626]">
             {record.data_source === 'static_config' ? 'Static' : 'API'}
           </span>
         </td>
@@ -501,7 +506,7 @@ function TableRow({
 
       {activeProductType !== 'serverless' && activeProductType !== 'ai' && (
         <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
-          <span className={`px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest ${record.data_source === 'static_config' ? 'bg-[#fffbeb] text-[#d97706] border-[#fde68a] dark:bg-[#422006] dark:text-[#fcd34d] dark:border-[#78350f]' : 'bg-[#f0fdf4] text-[#166534] border-[#bbf7d0] dark:bg-[#052e16] dark:text-[#4ade80] dark:border-[#14532d]'}`}>
+          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] dark:text-[#a3a3a3] border-[#e5e5e5] dark:border-[#262626]">
             {record.data_source === 'static_config' ? 'Static' : 'API'}
           </span>
         </td>
