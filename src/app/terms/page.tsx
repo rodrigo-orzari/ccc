@@ -1,12 +1,20 @@
 'use client';
 import React from 'react';
-import MarkdownPage from '@/components/MarkdownPage';
+import ReactMarkdown from 'react-markdown';
 import Footer from '@/components/Footer';
+
+const headingToId = (children: React.ReactNode): string => {
+  const collect = (node: any): string => {
+    if (typeof node === 'string') return node;
+    if (Array.isArray(node)) return node.map(collect).join('');
+    if (node?.props?.children) return collect(node.props.children);
+    return '';
+  };
+  return collect(children).toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+};
 
 const TermsOfUsePage: React.FC = () => {
   const content = `
-# Terms of Use
-
 _Last updated: 20 May 2026._
 
 ## Agreement to Terms
@@ -310,7 +318,14 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             Terms of Use
           </h1>
           <div className="prose">
-            <MarkdownPage title="" content={content} />
+            <ReactMarkdown
+              components={{
+                h2: ({ children }) => <h2 id={headingToId(children)}>{children}</h2>,
+                h3: ({ children }) => <h3 id={headingToId(children)}>{children}</h3>,
+              }}
+            >
+              {content}
+            </ReactMarkdown>
           </div>
         </main>
       </div>
