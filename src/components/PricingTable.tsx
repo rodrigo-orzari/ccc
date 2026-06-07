@@ -10,7 +10,7 @@ const PROVIDERS: { id: string; name: string; color: string }[] = [
   { id: 'gcp',          name: 'Google',        color: '#34A853' },
   { id: 'oracle',       name: 'Oracle',        color: '#F80000' },
   { id: 'digitalocean', name: 'DigitalOcean',  color: '#0069FF' },
-  { id: 'alibaba',      name: 'Alibaba Cloud', color: '#FF6A00' },
+  { id: 'alibaba',      name: 'Alibaba', color: '#FF6A00' },
 ];
 
 // ─── Column definitions ─────────────────────────────────────────────────────
