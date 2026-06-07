@@ -30,8 +30,8 @@ In modern cloud engineering and FinOps, **apples-to-apples price comparison** ac
 * Existing FinOps tools generally focus on **reactive analysis** (analyzing bills *after* deployment) rather than **proactive planning** (matching workloads to optimal providers *before* deployment).
 
 **Compare Cloud Costs (CCC)** solves this by:
-1. **Aggregating** raw catalog data from live pricing APIs and offline fallback configs.
-2. **Normalizing** compute categories (Compute Optimized, Memory Optimized, etc.), geographies (e.g., N. America, W. Europe), hardware attributes (vCPUs, RAM size, GPU availability), and database properties (HA modes, Engines, Tiers).
+1. **Aggregating** raw catalog data from live pricing APIs and offline fallback configs across 7 primary domains: VMs, Databases, Serverless, Containers, Networking, Data Analytics, and AI.
+2. **Normalizing** proprietary data such as compute categories, geographies, hardware attributes, networking port capacities, AI context windows, and analytics compute units.
 3. **Comparing** configurations in a single side-by-side dashboard, allowing users to instantly identify the cheapest option for their specified constraint ranges.
 
 ---
@@ -84,6 +84,8 @@ _ccc/
 │   │   ├── serverless_pipeline.ts     # Serverless compute pricing
 │   │   ├── containers_pipeline.ts     # Containers compute pricing
 │   │   ├── networking_pipeline.ts     # Networking products pricing
+│   │   ├── data_analytics_pipeline.ts # Data Analytics pricing
+│   │   ├── ai_pipeline.ts             # AI foundational models pricing
 │   │   ├── serverless_adapters_live.ts# Live adapters for Serverless
 │   │   ├── containers_adapters_live.ts# Live adapters for Containers
 │   │   ├── populate_containers.ts     # Container DB population script

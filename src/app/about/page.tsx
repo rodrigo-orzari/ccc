@@ -283,7 +283,7 @@ Always verify your final estimates using the official calculators:
           <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1.5rem' }}>
             What is CompareCloudCosts.com?
           </h1>
-          <div className="prose">
+          <div className="prose prose-slate dark:prose-invert max-w-none text-black dark:text-white">
             <ReactMarkdown
               components={{
                 h2: ({ children }) => <h2 id={headingToId(children)}>{children}</h2>,
