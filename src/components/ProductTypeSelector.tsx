@@ -14,7 +14,7 @@ const PRODUCT_TYPES: { id: ProductType; label: string; emoji: string; soon?: boo
 ];
 
 const SITE_URL = 'https://comparecloudcosts.com';
-const SHARE_TEXT = 'Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba Cloud. #FinOps #CCC';
+const SHARE_TEXT = 'Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba. #FinOps #CCC';
 
 function LinkedInIcon() {
   return (
