@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
-    "mtime": 1780792295.3076897,
-    "ast_hash": "ed3361dd18c4554574ab356a29fbd2a4",
+    "mtime": 1780792412.058922,
+    "ast_hash": "1df7ffd01231292f8cf6908909beac0c",
     "semantic_hash": ""
   },
   "src/app/support/page.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "src/app/terms/page.tsx": {
-    "mtime": 1780792290.4615903,
-    "ast_hash": "4f938d5aadc3417df9a5cec2c320513d",
+    "mtime": 1780792421.5235775,
+    "ast_hash": "aaefd44e87ee324656a573488457431d",
     "semantic_hash": ""
   },
   "src/config/alibaba_containers.ts": {
@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1780791064.3895347,
-    "ast_hash": "a26fba99f17dcf5a191e941fd638eea3",
+    "mtime": 1780792416.2848594,
+    "ast_hash": "0f6735dfab95ba1a58cce09127a58659",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
