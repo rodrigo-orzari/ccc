@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 116 files · ~91,595 words
+- 116 files · ~91,634 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 231 nodes · 301 edges · 23 communities (16 shown, 7 thin omitted)
+- 232 nodes · 302 edges · 23 communities (16 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7b2e6789`
+- Built from commit: `80796521`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
