@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 116 files · ~92,091 words
+- 116 files · ~92,699 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 233 nodes · 303 edges · 23 communities (16 shown, 7 thin omitted)
+- 243 nodes · 313 edges · 24 communities (16 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4a3c0f01`
+- Built from commit: `1bed793c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -19,6 +19,7 @@
 - [[_COMMUNITY_Container Provider Configs|Container Provider Configs]]
 - [[_COMMUNITY_Database Instance Configs|Database Instance Configs]]
 - [[_COMMUNITY_Community 4|Community 4]]
+- [[_COMMUNITY_Community 6|Community 6]]
 - [[_COMMUNITY_Community 7|Community 7]]
 - [[_COMMUNITY_Community 8|Community 8]]
 - [[_COMMUNITY_Community 9|Community 9]]
@@ -41,9 +42,9 @@
 5. `End-to-End Integration Verification` - 5 edges
 6. `7. In-Depth Subsystem Walks` - 5 edges
 7. `PROVIDERS` - 4 edges
-8. `ProductType` - 4 edges
-9. `PricingRecord` - 4 edges
-10. `buildPricingFilters()` - 4 edges
+8. `NetworkingPricingPipeline` - 4 edges
+9. `ProductType` - 4 edges
+10. `PricingRecord` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - None detected - all connections are within the same source files.
@@ -51,11 +52,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (23 total, 7 thin omitted)
+## Communities (24 total, 8 thin omitted)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.11
-Nodes (39): FilterSectionProps, FilterSidebarProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS, AI_SERVICE_TYPES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_ENGINES (+31 more)
+Cohesion: 0.10
+Nodes (43): FilterSectionProps, FilterSidebarProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS, AI_SERVICE_TYPES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_ENGINES (+35 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.18
@@ -94,9 +95,9 @@ Cohesion: 0.40
 Nodes (3): DBStatusProvider, ProviderCardProps, ProviderCardsProps
 
 ## Knowledge Gaps
-- **88 isolated node(s):** `AIModelConfig`, `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS` (+83 more)
+- **93 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+88 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
@@ -106,11 +107,11 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `PricingRecord` connect `Community 18` to `Community 15`, `Community 7`?**
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
 - **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **What connects `AIModelConfig`, `PipelineStatus`, `ProviderStatus` to the rest of the system?**
-  _88 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **What connects `PROVIDERS`, `ColDef`, `COL_PROVIDER` to the rest of the system?**
+  _93 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.11207729468599034 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09795918367346938 - nodes in this community are weakly interconnected._
 - **Should `Community 10` be split into smaller, more focused modules?**
   _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
 - **Should `Community 12` be split into smaller, more focused modules?**

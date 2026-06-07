@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 116 files · ~92,699 words
+- 117 files · ~93,043 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 243 nodes · 313 edges · 24 communities (16 shown, 8 thin omitted)
+- 246 nodes · 325 edges · 24 communities (17 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1bed793c`
+- Built from commit: `89f13817`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -38,13 +38,13 @@
 1. `Serverless Language Filter Implementation Summary` - 13 edges
 2. `Welcome!` - 10 edges
 3. `Status: ✅ COMPLETE` - 6 edges
-4. `AIPricingPipeline` - 5 edges
-5. `End-to-End Integration Verification` - 5 edges
-6. `7. In-Depth Subsystem Walks` - 5 edges
-7. `PROVIDERS` - 4 edges
-8. `NetworkingPricingPipeline` - 4 edges
-9. `ProductType` - 4 edges
-10. `PricingRecord` - 4 edges
+4. `NetworkingPricingPipeline` - 5 edges
+5. `ProductType` - 5 edges
+6. `AIPricingPipeline` - 5 edges
+7. `End-to-End Integration Verification` - 5 edges
+8. `7. In-Depth Subsystem Walks` - 5 edges
+9. `buildPricingFilters()` - 4 edges
+10. `PROVIDERS` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - None detected - all connections are within the same source files.
@@ -52,7 +52,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (24 total, 8 thin omitted)
+## Communities (24 total, 7 thin omitted)
+
+### Community 6 - "Community 6"
+Cohesion: 0.25
+Nodes (4): pipeline, sql, NetworkingPricingPipeline, STATIC_NETWORKING_PRICING
 
 ### Community 7 - "Community 7"
 Cohesion: 0.10
@@ -95,23 +99,23 @@ Cohesion: 0.40
 Nodes (3): DBStatusProvider, ProviderCardProps, ProviderCardsProps
 
 ## Knowledge Gaps
-- **93 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+88 more)
+- **91 isolated node(s):** `sql`, `pipeline`, `FilterSectionProps`, `FilterSidebarProps`, `PROVIDERS` (+86 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ProductType` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
+  _High betweenness centrality (0.045) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **What connects `PROVIDERS`, `ColDef`, `COL_PROVIDER` to the rest of the system?**
-  _93 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `sql`, `pipeline`, `FilterSectionProps` to the rest of the system?**
+  _91 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.09795918367346938 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10448979591836735 - nodes in this community are weakly interconnected._
 - **Should `Community 10` be split into smaller, more focused modules?**
   _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
 - **Should `Community 12` be split into smaller, more focused modules?**
