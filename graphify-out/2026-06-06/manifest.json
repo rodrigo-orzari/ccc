@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
-    "mtime": 1780781840.9790163,
-    "ast_hash": "92d6b9a036458e4cd8bfc4f39e72d4a9",
+    "mtime": 1780785128.0461607,
+    "ast_hash": "6e5ee72c4d338a18ac408c92a02b6f3a",
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
@@ -390,13 +390,13 @@
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
-    "mtime": 1780619067.4404783,
-    "ast_hash": "18dc5485540b41490b1d2fc4a574dc77",
+    "mtime": 1780785113.4242585,
+    "ast_hash": "1bf3581fae1a51b02a3e8d7922ff274d",
     "semantic_hash": ""
   },
   "src/app/support/page.tsx": {
-    "mtime": 1780619067.450667,
-    "ast_hash": "4479fa7662b80f2a138cbe8fad184820",
+    "mtime": 1780785136.6600018,
+    "ast_hash": "28e260ab44a15e8e8403613beb17bf23",
     "semantic_hash": ""
   },
   "src/app/terms/page.tsx": {
@@ -475,8 +475,8 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1780782668.2836976,
-    "ast_hash": "e3d36d7e4f1b6894e505b3914f9974bd",
+    "mtime": 1780784880.7285526,
+    "ast_hash": "0eda5d6e67681e6b25d3f9840a15d64e",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {

@@ -1,7 +1,17 @@
 'use client';
 import React from 'react';
-import MarkdownPage from '@/components/MarkdownPage';
+import ReactMarkdown from 'react-markdown';
 import Footer from '@/components/Footer';
+
+const headingToId = (children: React.ReactNode): string => {
+  const collect = (node: any): string => {
+    if (typeof node === 'string') return node;
+    if (Array.isArray(node)) return node.map(collect).join('');
+    if (node?.props?.children) return collect(node.props.children);
+    return '';
+  };
+  return collect(children).toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
+};
 
 const AboutPage: React.FC = () => {
   const content = `
