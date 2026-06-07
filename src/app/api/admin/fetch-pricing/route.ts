@@ -6,6 +6,7 @@ import { DatabasePricingPipeline } from '@/services/database_pipeline';
 import { ServerlessPricingPipeline } from '@/services/serverless_pipeline';
 import { ContainersPricingPipeline } from '@/services/containers_pipeline';
 import { NetworkingPricingPipeline } from '@/services/networking_pipeline';
+import { AIPricingPipeline } from '@/services/ai_pipeline';
 import { sendPriceDriftEmail } from '@/services/mailer';
 
 export async function POST(req: NextRequest) {
@@ -60,6 +61,15 @@ export async function POST(req: NextRequest) {
       for (const r of containersResults) {
         if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
         results.push({ ...r, pipeline: 'containers' });
+      }
+    }
+
+    if (type === 'all' || type === 'ai') {
+      const aiPipeline = new AIPricingPipeline(sql as any);
+      const aiResults = await aiPipeline.run();
+      for (const r of aiResults) {
+        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+        results.push({ ...r, pipeline: 'ai' });
       }
     }
 

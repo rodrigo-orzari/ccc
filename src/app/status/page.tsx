@@ -406,16 +406,6 @@ export default function StatusPage() {
                 </div>
               </div>
 
-              {/* Legend — compact inline note */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.25rem 1rem', marginBottom: '1.5rem', fontSize: 11, color: 'var(--muted)' }}>
-                <span style={{ fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em', fontSize: 10, marginRight: 4 }}>Key:</span>
-                <span><strong style={{ color: '#16a34a' }}>API</strong> — fetched from the provider's pricing API</span>
-                <span style={{ color: 'var(--border)' }}>·</span>
-                <span><strong style={{ color: '#d97706' }}>Static</strong> — curated config, updated manually</span>
-                <span style={{ color: 'var(--border)' }}>·</span>
-                <span>Prices refreshed weekly · On-demand USD · <Link href="/docs" style={{ color: 'var(--link)' }}>Docs</Link></span>
-              </div>
-
               {/* Provider cards */}
               {status.providers.map(provider => {
                 const color = PROVIDER_COLORS[provider.slug] ?? '#888';
