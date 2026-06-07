@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 117 files · ~92,935 words
+- 117 files · ~92,999 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 246 nodes · 326 edges · 23 communities (17 shown, 6 thin omitted)
+- 252 nodes · 330 edges · 25 communities (17 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9d855d6a`
+- Built from commit: `844951cf`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,9 +29,11 @@
 - [[_COMMUNITY_Community 14|Community 14]]
 - [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Community 16|Community 16]]
+- [[_COMMUNITY_Community 17|Community 17]]
 - [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 24|Community 24]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Serverless Language Filter Implementation Summary` - 13 edges
@@ -42,8 +44,8 @@
 6. `AIPricingPipeline` - 5 edges
 7. `End-to-End Integration Verification` - 5 edges
 8. `7. In-Depth Subsystem Walks` - 5 edges
-9. `buildPricingFilters()` - 4 edges
-10. `PROVIDERS` - 4 edges
+9. `PROVIDERS` - 4 edges
+10. `buildPricingFilters()` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
 - None detected - all connections are within the same source files.
@@ -51,7 +53,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (23 total, 6 thin omitted)
+## Communities (25 total, 8 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.25
@@ -100,17 +102,17 @@ Nodes (3): DBStatusProvider, ProviderCardProps, ProviderCardsProps
 ## Knowledge Gaps
 - **91 isolated node(s):** `PRODUCT_TYPES`, `ProductTypeSelectorProps`, `sql`, `pipeline`, `FilterSectionProps` (+86 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ProductType` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.063) - this node is a cross-community bridge._
+  _High betweenness centrality (0.060) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
-- **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
+- **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
+  _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **What connects `PRODUCT_TYPES`, `ProductTypeSelectorProps`, `sql` to the rest of the system?**
   _91 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 7` be split into smaller, more focused modules?**

@@ -300,8 +300,8 @@
     "semantic_hash": ""
   },
   "src/scrapers/aws_fargate.ts": {
-    "mtime": 1780618134.6082242,
-    "ast_hash": "2c5a9922a38f244e851c16ea50f1eca2",
+    "mtime": 1780792852.5821025,
+    "ast_hash": "f1f991625991cb31b7cf59fc09b4a3c1",
     "semantic_hash": ""
   },
   "src/scrapers/aws_lambda.ts": {
@@ -310,8 +310,8 @@
     "semantic_hash": ""
   },
   "src/scrapers/azure_container_instances.ts": {
-    "mtime": 1780618261.1590364,
-    "ast_hash": "7292dbac05c3a07387d89795af07f708",
+    "mtime": 1780792859.5677178,
+    "ast_hash": "d1598a90da5c8f2bf58d600fbfabf0f1",
     "semantic_hash": ""
   },
   "src/scrapers/azure_functions.ts": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1780791990.1391876,
-    "ast_hash": "b82fb9a8cd5f5e6150f8077546d8c5ad",
+    "mtime": 1780792850.2782383,
+    "ast_hash": "32cdf2692d9028688bf8676ac0eea7e8",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -505,8 +505,8 @@
     "semantic_hash": ""
   },
   "src/config/index.ts": {
-    "mtime": 1780791936.2875648,
-    "ast_hash": "e54ebc403feb4fe20ab7618f6ec84a76",
+    "mtime": 1780792840.7366285,
+    "ast_hash": "23f3d15559299125c70156d0c15d70a3",
     "semantic_hash": ""
   },
   "src/types/index.ts": {
