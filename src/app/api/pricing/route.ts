@@ -67,9 +67,9 @@ export async function GET(req: NextRequest) {
     const { whereClause, values } = buildPricingFilters(query);
     dbQuery += ' ' + whereClause;
 
-    // Support configurable limit (default 10000, max 50000 to prevent abuse)
-    const rawLimit = query.limit ? parseInt(query.limit as string, 10) : 10000;
-    const limit = Math.min(Math.max(rawLimit, 1), 50000); // Clamp between 1 and 50,000
+    // Support configurable limit (default 5000, max 5000 to prevent abuse)
+    const rawLimit = query.limit ? parseInt(query.limit as string, 10) : 5000;
+    const limit = Math.min(Math.max(rawLimit, 1), 5000); // Clamp between 1 and 5,000
 
     if (isAggregated) {
       dbQuery += `
