@@ -15,8 +15,6 @@ const headingToId = (children: React.ReactNode): string => {
 
 const AboutPage: React.FC = () => {
   const content = `
-# About Compare Cloud Costs (CCC)
-
 Compare Cloud Costs (CCC) is a comprehensive platform designed to demystify cloud pricing across the industry's leading providers. By normalizing complex billing metrics into side-by-side comparisons, CCC empowers users to make data-driven infrastructure decisions, optimize their cloud spend, and confidently navigate a multi-cloud strategy before committing to a specific architecture.
 
 [↑ Go back to the top](#about-us)
@@ -290,7 +288,14 @@ Always verify your final estimates using the official calculators:
             What is CompareCloudCosts.com?
           </h1>
           <div className="prose">
-            <MarkdownPage title="" content={content} />
+            <ReactMarkdown
+              components={{
+                h2: ({ children }) => <h2 id={headingToId(children)}>{children}</h2>,
+                h3: ({ children }) => <h3 id={headingToId(children)}>{children}</h3>,
+              }}
+            >
+              {content}
+            </ReactMarkdown>
           </div>
         </main>
       </div>
