@@ -12,31 +12,49 @@ export interface AIModelConfig {
   trainingCutoff?: string;
 }
 
+// All prices are on-demand (pay-as-you-go) in USD per 1M tokens.
+// Sources (fetched June 2026):
+//   OpenAI    — developers.openai.com/api/docs/models
+//   Anthropic — platform.claude.com/docs/en/about-claude/pricing
+//   GCP       — cloud.google.com/vertex-ai/generative-ai/pricing
+//   Bedrock   — aws.amazon.com/bedrock/pricing/
+//   Azure     — azure.microsoft.com/pricing/details/azure-openai/ (via Microsoft Foundry)
+
 export const AI_MODELS: AIModelConfig[] = [
-  // OpenAI
+
+  // ── OpenAI ────────────────────────────────────────────────────────────
   {
     providerSlug: 'openai',
     serviceName: 'Foundational Models',
     geography: 'Global',
-    modelName: 'GPT-4o',
+    modelName: 'GPT-5.5',
     inputPricePer1M: 5.00,
-    outputPricePer1M: 15.00,
+    outputPricePer1M: 30.00,
     contextWindowK: 128,
-    modelTier: 'Flagship (e.g. GPT-4o)',
+    modelTier: 'Frontier',
     multimodal: 'Yes',
-    trainingCutoff: 'Oct 2023',
   },
   {
     providerSlug: 'openai',
     serviceName: 'Foundational Models',
     geography: 'Global',
-    modelName: 'GPT-4o-mini',
-    inputPricePer1M: 0.15,
-    outputPricePer1M: 0.60,
+    modelName: 'GPT-5.4',
+    inputPricePer1M: 2.50,
+    outputPricePer1M: 15.00,
     contextWindowK: 128,
-    modelTier: 'Small/Fast (e.g. Haiku)',
+    modelTier: 'Standard',
     multimodal: 'Yes',
-    trainingCutoff: 'Oct 2023',
+  },
+  {
+    providerSlug: 'openai',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'GPT-5.4 mini',
+    inputPricePer1M: 0.75,
+    outputPricePer1M: 4.50,
+    contextWindowK: 128,
+    modelTier: 'Efficient',
+    multimodal: 'Yes',
   },
   {
     providerSlug: 'openai',
@@ -44,92 +62,136 @@ export const AI_MODELS: AIModelConfig[] = [
     geography: 'Global',
     modelName: 'text-embedding-3-large',
     inputPricePer1M: 0.13,
-    modelTier: 'Flagship (e.g. GPT-4o)',
+    modelTier: 'Standard',
     multimodal: 'No',
   },
 
-  // Anthropic
+  // ── Anthropic ─────────────────────────────────────────────────────────
   {
     providerSlug: 'anthropic',
     serviceName: 'Foundational Models',
     geography: 'Global',
-    modelName: 'Claude 3.5 Sonnet',
-    inputPricePer1M: 3.00,
-    outputPricePer1M: 15.00,
-    contextWindowK: 200,
-    modelTier: 'Flagship (e.g. GPT-4o)',
-    multimodal: 'Yes',
-  },
-  {
-    providerSlug: 'anthropic',
-    serviceName: 'Foundational Models',
-    geography: 'Global',
-    modelName: 'Claude 3 Haiku',
-    inputPricePer1M: 0.25,
-    outputPricePer1M: 1.25,
-    contextWindowK: 200,
-    modelTier: 'Small/Fast (e.g. Haiku)',
-    multimodal: 'Yes',
-  },
-
-  // Google Vertex AI
-  {
-    providerSlug: 'gcp',
-    serviceName: 'Foundational Models',
-    geography: 'Global',
-    modelName: 'Gemini 1.5 Pro',
-    inputPricePer1M: 3.50,
-    outputPricePer1M: 10.50,
-    contextWindowK: 2000,
-    modelTier: 'Flagship (e.g. GPT-4o)',
-    multimodal: 'Yes',
-  },
-  {
-    providerSlug: 'gcp',
-    serviceName: 'Foundational Models',
-    geography: 'Global',
-    modelName: 'Gemini 1.5 Flash',
-    inputPricePer1M: 0.075,
-    outputPricePer1M: 0.30,
+    modelName: 'Claude Opus 4.8',
+    inputPricePer1M: 5.00,
+    outputPricePer1M: 25.00,
     contextWindowK: 1000,
-    modelTier: 'Small/Fast (e.g. Haiku)',
+    modelTier: 'Frontier',
     multimodal: 'Yes',
   },
-
-  // AWS Bedrock (Anthropic models as an example of Bedrock)
   {
-    providerSlug: 'aws',
+    providerSlug: 'anthropic',
     serviceName: 'Foundational Models',
     geography: 'Global',
-    modelName: 'Claude 3.5 Sonnet (Bedrock)',
+    modelName: 'Claude Sonnet 4.6',
     inputPricePer1M: 3.00,
     outputPricePer1M: 15.00,
+    contextWindowK: 1000,
+    modelTier: 'Standard',
+    multimodal: 'Yes',
+  },
+  {
+    providerSlug: 'anthropic',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Claude Haiku 4.5',
+    inputPricePer1M: 1.00,
+    outputPricePer1M: 5.00,
     contextWindowK: 200,
-    modelTier: 'Flagship (e.g. GPT-4o)',
+    modelTier: 'Efficient',
+    multimodal: 'Yes',
+  },
+
+  // ── Google Vertex AI ──────────────────────────────────────────────────
+  {
+    providerSlug: 'gcp',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Gemini 2.5 Pro',
+    inputPricePer1M: 1.25,
+    outputPricePer1M: 10.00,
+    contextWindowK: 1000,
+    modelTier: 'Frontier',
+    multimodal: 'Yes',
+  },
+  {
+    providerSlug: 'gcp',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Gemini 2.5 Flash',
+    inputPricePer1M: 0.30,
+    outputPricePer1M: 2.50,
+    contextWindowK: 1000,
+    modelTier: 'Standard',
+    multimodal: 'Yes',
+  },
+  {
+    providerSlug: 'gcp',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Gemini 2.0 Flash',
+    inputPricePer1M: 0.15,
+    outputPricePer1M: 0.60,
+    contextWindowK: 1000,
+    modelTier: 'Efficient',
+    multimodal: 'Yes',
+  },
+
+  // ── AWS Bedrock ───────────────────────────────────────────────────────
+  {
+    providerSlug: 'aws',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Claude Sonnet 4.6 (Bedrock)',
+    inputPricePer1M: 3.00,
+    outputPricePer1M: 15.00,
+    contextWindowK: 1000,
+    modelTier: 'Standard',
     multimodal: 'Yes',
   },
   {
     providerSlug: 'aws',
     serviceName: 'Foundational Models',
     geography: 'Global',
-    modelName: 'Llama 3 70B (Bedrock)',
-    inputPricePer1M: 2.65,
-    outputPricePer1M: 3.50,
-    contextWindowK: 8,
-    modelTier: 'Flagship (e.g. GPT-4o)',
-    multimodal: 'No',
+    modelName: 'Llama 4 Maverick (Bedrock)',
+    inputPricePer1M: 0.24,
+    outputPricePer1M: 0.97,
+    contextWindowK: 1000,
+    modelTier: 'Efficient',
+    multimodal: 'Yes',
   },
 
-  // Azure OpenAI
+  // ── Azure (Microsoft Foundry) ─────────────────────────────────────────
   {
     providerSlug: 'azure',
     serviceName: 'Foundational Models',
     geography: 'Global',
-    modelName: 'GPT-4o (Azure)',
+    modelName: 'GPT-5.5 (Azure)',
     inputPricePer1M: 5.00,
+    outputPricePer1M: 30.00,
+    contextWindowK: 128,
+    modelTier: 'Frontier',
+    multimodal: 'Yes',
+  },
+  {
+    providerSlug: 'azure',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'GPT-5.4 (Azure)',
+    inputPricePer1M: 2.50,
     outputPricePer1M: 15.00,
     contextWindowK: 128,
-    modelTier: 'Flagship (e.g. GPT-4o)',
+    modelTier: 'Standard',
     multimodal: 'Yes',
-  }
+  },
+  {
+    providerSlug: 'azure',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'GPT-5.4 mini (Azure)',
+    inputPricePer1M: 0.75,
+    outputPricePer1M: 4.50,
+    contextWindowK: 128,
+    modelTier: 'Efficient',
+    multimodal: 'Yes',
+  },
 ];
