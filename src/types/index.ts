@@ -49,5 +49,9 @@ export interface PricingRecord {
     multimodal?: string;
     outputPricePer1M?: number | string;
     trainingCutoff?: string;
+    billing_model?: string;
+    usage_tier?: string;
+    port_capacity?: string;
+    transfer_scope?: string;
   };
 }
