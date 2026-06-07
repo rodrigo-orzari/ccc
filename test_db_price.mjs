@@ -1,6 +1,9 @@
 import postgres from 'postgres';
+import dotenv from 'dotenv';
 
-const sql = postgres('postgresql://ccc-db:AVNS_urrXEwId1lR8DzpTaji@db-postgresql-ccc-do-user-16521473-0.k.db.ondigitalocean.com:25060/ccc?sslmode=require');
+dotenv.config();
+
+const sql = postgres(process.env.DATABASE_URL || '');
 
 async function test() {
   try {

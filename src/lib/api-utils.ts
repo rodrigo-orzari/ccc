@@ -232,7 +232,12 @@ export function buildPricingFilters(query: any) {
         values.push(Array.from(engineFilters));
       }
 
-      const deploymentTypeFilters = parseFilterList((deploymentTypes || analyticsDeploymentTypes) as string).map((s: string) => s.toLowerCase());
+      // Use the product-specific param. Collapsing with `||` let the database
+      // `deploymentTypes` param mask the analytics one (same bug class that
+      // previously broke analytics engines), making the analytics deployment
+      // filter a no-op.
+      const rawDeploymentParam = resolvedProductType === 'data-analytics' ? analyticsDeploymentTypes : deploymentTypes;
+      const deploymentTypeFilters = parseFilterList(rawDeploymentParam as string).map((s: string) => s.toLowerCase());
       if (deploymentTypeFilters.length > 0) {
         conditions.push(`LOWER(pr.attributes->>'deployment_type') = ANY($${paramCount++})`);
         values.push(deploymentTypeFilters);

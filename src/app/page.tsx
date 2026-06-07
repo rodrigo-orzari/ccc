@@ -175,50 +175,66 @@ export default function Dashboard() {
     const params = new URLSearchParams();
     // API uses 'compute' for VMs; React state uses 'vm'
     params.append('product', activeProductType === 'vm' ? 'compute' : activeProductType);
-    params.append('geography', selectedGeographies.join(','));
-    params.append('os', selectedOS.join(','));
+    // Only send a filter when the user has narrowed it to a STRICT SUBSET of
+    // the available options. When every option is selected we OMIT the param
+    // entirely so the API applies no filter and returns all matching DB rows —
+    // including values the UI doesn't enumerate (e.g. Outpost DB engines,
+    // containers with NULL attributes). Sending the full list as an allow-list
+    // was silently hiding any DB value not present in the hardcoded UI lists.
+    const subset = (name: string, selected: string[], full: readonly string[]) => {
+      if (selected.length > 0 && selected.length < full.length) {
+        params.append(name, selected.join(','));
+      }
+    };
+
+    subset('geography', selectedGeographies, GEOGRAPHIES);
+    subset('os', selectedOS, OS_TYPES);
     // Translate CPU profile IDs → vendor names the API understands
-    const selectedVendors = selectedCpu
-      .map(id => CPU_PROFILES.find(p => p.id === id)?.vendor)
-      .filter((v): v is string => Boolean(v));
-    params.append('cpuVendor', selectedVendors.join(','));
-    params.append('category', selectedCategory.join(','));
-    params.append('gpu', selectedGpu.join(','));
-    params.append('dbFamilies', selectedDbFamilies.join(','));
-    params.append('engines', selectedEngines.join(','));
-    params.append('deploymentTypes', selectedDeploymentTypes.join(','));
-    params.append('haModes', selectedHaModes.join(','));
-    params.append('serverlessLanguages', selectedServerlessLanguages.join(','));
-    params.append('serverlessColdStart', selectedServerlessColdStart.join(','));
-    params.append('serverlessTimeout', selectedServerlessTimeout.join(','));
-    params.append('serverlessMemoryConfig', selectedServerlessMemoryConfig.join(','));
-    params.append('serverlessFreeTier', selectedServerlessFreeTier.join(','));
-    params.append('serverlessGranularity', selectedServerlessGranularity.join(','));
-    params.append('serverlessExecutionModel', selectedServerlessExecutionModel.join(','));
-    params.append('serverlessProvisionedConcurrency', selectedServerlessProvisionedConcurrency.join(','));
-    params.append('serverlessEphemeralStorage', selectedServerlessEphemeralStorage.join(','));
-    params.append('containersOrchestrators', selectedContainersOrchestrators.join(','));
-    params.append('containersComputeTypes', selectedContainersComputeTypes.join(','));
-    params.append('containersArchitectures', selectedContainersArchitectures.join(','));
-    params.append('containersBillingGranularity', selectedContainersBillingGranularity.join(','));
-    params.append('containersGpuIncluded', containersGpuIncluded.toString());
-    params.append('analyticsEngines', selectedAnalyticsEngines.join(','));
-    params.append('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes.join(','));
-    params.append('analyticsTiers', selectedAnalyticsTiers.join(','));
-    params.append('aiServiceTypes', selectedAiServiceTypes.join(','));
-    params.append('aiModelTiers', selectedAiModelTiers.join(','));
-    params.append('aiContextWindows', selectedAiContextWindows.join(','));
-    params.append('aiMultimodalOptions', selectedAiMultimodalOptions.join(','));
-    params.append('networkingService', selectedNetworkingServices.join(','));
-    params.append('networkingConnectionTypes', selectedNetworkingConnectionTypes.join(','));
-    params.append('networkingRoutingTypes', selectedNetworkingRoutingTypes.join(','));
-    params.append('networkingHaSupport', selectedNetworkingHaSupport.join(','));
-    params.append('networkingVpcSupport', selectedNetworkingVpcSupport.join(','));
-    params.append('networkingTransferDirections', selectedNetworkingDirections.join(','));
-    params.append('networkingBillingModels', selectedNetworkingBillingModels.join(','));
-    params.append('networkingUsageTiers', selectedNetworkingUsageTiers.join(','));
-    params.append('networkingPortCapacities', selectedNetworkingPortCapacities.join(','));
-    params.append('networkingTransferScopes', selectedNetworkingTransferScopes.join(','));
+    const allVendors = Array.from(new Set(CPU_PROFILES.map(p => p.vendor)));
+    const selectedVendors = Array.from(new Set(
+      selectedCpu
+        .map(id => CPU_PROFILES.find(p => p.id === id)?.vendor)
+        .filter((v): v is string => Boolean(v))
+    ));
+    subset('cpuVendor', selectedVendors, allVendors);
+    subset('category', selectedCategory, CATEGORIES);
+    subset('gpu', selectedGpu, ['GPU', 'No GPU']);
+    subset('dbFamilies', selectedDbFamilies, DB_FAMILIES);
+    subset('engines', selectedEngines, DB_ENGINES);
+    subset('deploymentTypes', selectedDeploymentTypes, DEPLOYMENT_TYPES);
+    subset('haModes', selectedHaModes, HA_MODES);
+    subset('serverlessLanguages', selectedServerlessLanguages, SERVERLESS_LANGUAGES);
+    subset('serverlessColdStart', selectedServerlessColdStart, SERVERLESS_COLD_START_OPTIONS);
+    subset('serverlessTimeout', selectedServerlessTimeout, SERVERLESS_TIMEOUT_OPTIONS);
+    subset('serverlessMemoryConfig', selectedServerlessMemoryConfig, SERVERLESS_MEMORY_CONFIG_OPTIONS);
+    subset('serverlessFreeTier', selectedServerlessFreeTier, SERVERLESS_FREE_TIER_OPTIONS);
+    subset('serverlessGranularity', selectedServerlessGranularity, SERVERLESS_GRANULARITY_OPTIONS);
+    subset('serverlessExecutionModel', selectedServerlessExecutionModel, SERVERLESS_EXECUTION_MODEL_OPTIONS);
+    subset('serverlessProvisionedConcurrency', selectedServerlessProvisionedConcurrency, SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS);
+    subset('serverlessEphemeralStorage', selectedServerlessEphemeralStorage, SERVERLESS_EPHEMERAL_STORAGE_OPTIONS);
+    subset('containersOrchestrators', selectedContainersOrchestrators, CONTAINERS_ORCHESTRATORS);
+    subset('containersComputeTypes', selectedContainersComputeTypes, CONTAINERS_COMPUTE_TYPES);
+    subset('containersArchitectures', selectedContainersArchitectures, CONTAINERS_ARCHITECTURES);
+    subset('containersBillingGranularity', selectedContainersBillingGranularity, CONTAINERS_BILLING_GRANULARITY);
+    // Boolean toggle: only constrain when GPU containers are excluded.
+    if (!containersGpuIncluded) params.append('containersGpuIncluded', 'false');
+    subset('analyticsEngines', selectedAnalyticsEngines, ANALYTICS_ENGINES);
+    subset('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes, ANALYTICS_DEPLOYMENT_TYPES);
+    subset('analyticsTiers', selectedAnalyticsTiers, ANALYTICS_TIERS);
+    subset('aiServiceTypes', selectedAiServiceTypes, AI_SERVICE_TYPES);
+    subset('aiModelTiers', selectedAiModelTiers, AI_MODEL_TIERS);
+    subset('aiContextWindows', selectedAiContextWindows, AI_CONTEXT_WINDOWS);
+    subset('aiMultimodalOptions', selectedAiMultimodalOptions, AI_MULTIMODAL_OPTIONS);
+    subset('networkingService', selectedNetworkingServices, NETWORKING_SERVICES);
+    subset('networkingConnectionTypes', selectedNetworkingConnectionTypes, NETWORKING_CONNECTION_TYPES);
+    subset('networkingRoutingTypes', selectedNetworkingRoutingTypes, NETWORKING_ROUTING_TYPES);
+    subset('networkingHaSupport', selectedNetworkingHaSupport, NETWORKING_HA_SUPPORT);
+    subset('networkingVpcSupport', selectedNetworkingVpcSupport, NETWORKING_VPC_SUPPORT);
+    subset('networkingTransferDirections', selectedNetworkingDirections, NETWORKING_DIRECTIONS);
+    subset('networkingBillingModels', selectedNetworkingBillingModels, NETWORKING_BILLING_MODELS);
+    subset('networkingUsageTiers', selectedNetworkingUsageTiers, NETWORKING_USAGE_TIERS);
+    subset('networkingPortCapacities', selectedNetworkingPortCapacities, NETWORKING_PORT_CAPACITIES);
+    subset('networkingTransferScopes', selectedNetworkingTransferScopes, NETWORKING_TRANSFER_SCOPES);
     // Only send range params when the user has actively constrained them.
     // At the slider floor/ceiling → no filter applied (show all).
     if (vCpuRange.min > DEFAULT_VCPU_RANGE.min) params.append('minVcpu', vCpuRange.min.toString());
