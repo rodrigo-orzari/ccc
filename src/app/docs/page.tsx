@@ -42,7 +42,7 @@ const DocsPage: React.FC = () => {
         }
         .docs-container {
           display: flex;
-          min-height: 100vh;
+          flex: 1;
           background-color: var(--bg-color);
           color: var(--text-color);
           transition: background-color 0.3s, color 0.3s;
