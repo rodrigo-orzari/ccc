@@ -6,29 +6,83 @@
     {
       "label": "page.tsx",
       "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L1",
+      "id": "docs_page",
+      "community": 19,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "id": "docs_page_backtotop",
+      "community": 19,
+      "norm_label": "backtotop()"
+    },
+    {
+      "label": "DocsPage()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L19",
+      "id": "docs_page_docspage",
+      "community": 19,
+      "norm_label": "docspage()"
+    },
+    {
+      "label": "ai_models.ts",
+      "file_type": "code",
+      "source_file": "src/config/ai_models.ts",
+      "source_location": "L1",
+      "id": "config_ai_models",
+      "community": 16,
+      "norm_label": "ai_models.ts"
+    },
+    {
+      "label": "AIModelConfig",
+      "file_type": "code",
+      "source_file": "src/config/ai_models.ts",
+      "source_location": "L1",
+      "id": "config_ai_models_aimodelconfig",
+      "community": 16,
+      "norm_label": "aimodelconfig"
+    },
+    {
+      "label": "AI_MODELS",
+      "file_type": "code",
+      "source_file": "src/config/ai_models.ts",
+      "source_location": "L23",
+      "id": "config_ai_models_ai_models",
+      "community": 16,
+      "norm_label": "ai_models"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L1",
-      "id": "terms_page",
       "community": 13,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "terms_page"
     },
     {
       "label": "headingToId()",
       "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L6",
-      "id": "terms_page_headingtoid",
       "community": 13,
-      "norm_label": "headingtoid()"
+      "norm_label": "headingtoid()",
+      "id": "terms_page_headingtoid"
     },
     {
       "label": "TermsOfUsePage()",
       "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L16",
-      "id": "terms_page_termsofusepage",
       "community": 13,
-      "norm_label": "termsofusepage()"
+      "norm_label": "termsofusepage()",
+      "id": "terms_page_termsofusepage"
     },
     {
       "label": "page.tsx",
@@ -994,33 +1048,6 @@
       "id": "components_tabletoolbar_tabletoolbar"
     },
     {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L1",
-      "community": 19,
-      "norm_label": "page.tsx",
-      "id": "docs_page"
-    },
-    {
-      "label": "BackToTop()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "community": 19,
-      "norm_label": "backtotop()",
-      "id": "docs_page_backtotop"
-    },
-    {
-      "label": "DocsPage()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L19",
-      "community": 19,
-      "norm_label": "docspage()",
-      "id": "docs_page_docspage"
-    },
-    {
       "label": "ChartsView.tsx",
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
@@ -1226,33 +1253,6 @@
       "community": 17,
       "norm_label": "producttypeselector()",
       "id": "components_producttypeselector_producttypeselector"
-    },
-    {
-      "label": "ai_models.ts",
-      "file_type": "code",
-      "source_file": "src/config/ai_models.ts",
-      "source_location": "L1",
-      "community": 16,
-      "norm_label": "ai_models.ts",
-      "id": "config_ai_models"
-    },
-    {
-      "label": "AIModelConfig",
-      "file_type": "code",
-      "source_file": "src/config/ai_models.ts",
-      "source_location": "L1",
-      "community": 16,
-      "norm_label": "aimodelconfig",
-      "id": "config_ai_models_aimodelconfig"
-    },
-    {
-      "label": "AI_MODELS",
-      "file_type": "code",
-      "source_file": "src/config/ai_models.ts",
-      "source_location": "L15",
-      "community": 16,
-      "norm_label": "ai_models",
-      "id": "config_ai_models_ai_models"
     },
     {
       "label": "api-utils.ts",
@@ -2103,6 +2103,68 @@
   ],
   "links": [
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_backtotop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_docspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/ai_models.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "config_ai_models",
+      "target": "config_ai_models_ai_models"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/ai_models.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "config_ai_models",
+      "target": "config_ai_models_aimodelconfig"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ai_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ai_pipeline",
+      "target": "config_ai_models"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ai_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ai_pipeline",
+      "target": "config_ai_models_ai_models"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -2119,9 +2181,9 @@
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "terms_page",
-      "target": "terms_page_headingtoid",
-      "confidence_score": 1.0
+      "target": "terms_page_headingtoid"
     },
     {
       "relation": "contains",
@@ -4077,26 +4139,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_backtotop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_docspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L13",
       "weight": 1.0,
@@ -4295,48 +4337,6 @@
       "confidence_score": 1.0,
       "source": "components_producttypeselector",
       "target": "components_producttypeselector_xicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/config/ai_models.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "config_ai_models",
-      "target": "config_ai_models_ai_models"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/config/ai_models.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "config_ai_models",
-      "target": "config_ai_models_aimodelconfig"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ai_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ai_pipeline",
-      "target": "config_ai_models"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ai_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ai_pipeline",
-      "target": "config_ai_models_ai_models"
     },
     {
       "relation": "contains",
@@ -5237,5 +5237,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "806dfbfa46ba4a40dbf5c5eb6cc9339a2939d895"
+  "built_at_commit": "4a3c0f0150f27557797a2e67c2181783ebef5c26"
 }
