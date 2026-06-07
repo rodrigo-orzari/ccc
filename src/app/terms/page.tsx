@@ -85,7 +85,7 @@ The application provides graphical tools, including in-table micro-visualization
 
 ### Data Normalization
 
-To provide a seamless comparison experience across entirely different cloud architectures, CCC normalizes proprietary billing metrics into standard equivalents. For example, in the Data & Analytics category, we map 100 Azure Synapse DWUs (Data Warehouse Units) or 100 Google BigQuery Slots to equal 1 standard "Compute Unit" (equivalent to 1 Databricks DBU or 1 Snowflake Credit). Similar approximations are applied across Virtual Machines, Databases, Serverless, and Networking categories.
+To provide a seamless comparison experience across entirely different cloud architectures, CCC normalizes proprietary billing metrics into standard equivalents. For example, in the Data & Analytics category, we map 100 Azure Synapse DWUs (Data Warehouse Units) or 100 Google BigQuery Slots to equal 1 standard "Compute Unit" (equivalent to 1 Databricks DBU or 1 Snowflake Credit). We also normalize AI Context Windows, Serverless executions, Networking throughputs (Port Capacities), and Database deployments. Similar approximations are applied across all categories.
 
 This abstraction means the data you see is an approximation designed to match "like for like" compute power. Actual performance and cost ratios will vary significantly depending on your specific workload.
 
@@ -313,7 +313,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
           <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1.5rem' }}>
             Terms of Use
           </h1>
-          <div className="prose">
+          <div className="prose prose-slate dark:prose-invert max-w-none text-black dark:text-white">
             <ReactMarkdown
               components={{
                 h2: ({ children }) => <h2 id={headingToId(children)}>{children}</h2>,
