@@ -6,29 +6,56 @@
     {
       "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
+      "source_file": "src/app/terms/page.tsx",
       "source_location": "L1",
-      "id": "about_page",
+      "id": "terms_page",
       "community": 13,
       "norm_label": "page.tsx"
     },
     {
       "label": "headingToId()",
       "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
+      "source_file": "src/app/terms/page.tsx",
       "source_location": "L6",
-      "id": "about_page_headingtoid",
+      "id": "terms_page_headingtoid",
       "community": 13,
       "norm_label": "headingtoid()"
+    },
+    {
+      "label": "TermsOfUsePage()",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L16",
+      "id": "terms_page_termsofusepage",
+      "community": 13,
+      "norm_label": "termsofusepage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "page.tsx",
+      "id": "about_page"
+    },
+    {
+      "label": "headingToId()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "community": 13,
+      "norm_label": "headingtoid()",
+      "id": "about_page_headingtoid"
     },
     {
       "label": "AboutPage()",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L16",
-      "id": "about_page_aboutpage",
       "community": 13,
-      "norm_label": "aboutpage()"
+      "norm_label": "aboutpage()",
+      "id": "about_page_aboutpage"
     },
     {
       "label": "route.ts",
@@ -992,24 +1019,6 @@
       "community": 19,
       "norm_label": "docspage()",
       "id": "docs_page_docspage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L1",
-      "community": 13,
-      "norm_label": "page.tsx",
-      "id": "terms_page"
-    },
-    {
-      "label": "TermsOfUsePage()",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "community": 13,
-      "norm_label": "termsofusepage()",
-      "id": "terms_page_termsofusepage"
     },
     {
       "label": "ChartsView.tsx",
@@ -2094,6 +2103,37 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "terms_page",
+      "target": "terms_page_headingtoid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "terms_page_termsofusepage"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/about/page.tsx",
@@ -2109,9 +2149,9 @@
       "source_file": "src/app/about/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "about_page",
-      "target": "about_page_headingtoid",
-      "confidence_score": 1.0
+      "target": "about_page_headingtoid"
     },
     {
       "relation": "imports_from",
@@ -4055,27 +4095,6 @@
       "target": "docs_page_docspage"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "terms_page_termsofusepage"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ChartsView.tsx",
@@ -5218,5 +5237,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "80796521006f3d49c502d93eabe1296b28b54768"
+  "built_at_commit": "806dfbfa46ba4a40dbf5c5eb6cc9339a2939d895"
 }

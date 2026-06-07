@@ -4,157 +4,184 @@
   "graph": {},
   "nodes": [
     {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L1",
+      "id": "about_page",
+      "community": 13,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "headingToId()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "id": "about_page_headingtoid",
+      "community": 13,
+      "norm_label": "headingtoid()"
+    },
+    {
+      "label": "AboutPage()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L16",
+      "id": "about_page_aboutpage",
+      "community": 13,
+      "norm_label": "aboutpage()"
+    },
+    {
       "label": "route.ts",
       "file_type": "code",
       "source_file": "src/app/api/admin/fetch-pricing/route.ts",
       "source_location": "L1",
-      "id": "fetch_pricing_route",
       "community": 9,
-      "norm_label": "route.ts"
+      "norm_label": "route.ts",
+      "id": "fetch_pricing_route"
     },
     {
       "label": "POST()",
       "file_type": "code",
       "source_file": "src/app/api/admin/fetch-pricing/route.ts",
       "source_location": "L12",
-      "id": "fetch_pricing_route_post",
       "community": 9,
-      "norm_label": "post()"
+      "norm_label": "post()",
+      "id": "fetch_pricing_route_post"
     },
     {
       "label": "route.ts",
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L1",
-      "id": "counts_route",
       "community": 9,
-      "norm_label": "route.ts"
+      "norm_label": "route.ts",
+      "id": "counts_route"
     },
     {
       "label": "GET()",
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L7",
-      "id": "counts_route_get",
       "community": 9,
-      "norm_label": "get()"
+      "norm_label": "get()",
+      "id": "counts_route_get"
     },
     {
       "label": "route.ts",
       "file_type": "code",
       "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L1",
-      "id": "pricing_route",
       "community": 9,
-      "norm_label": "route.ts"
+      "norm_label": "route.ts",
+      "id": "pricing_route"
     },
     {
       "label": "GET()",
       "file_type": "code",
       "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L7",
-      "id": "pricing_route_get",
       "community": 9,
-      "norm_label": "get()"
+      "norm_label": "get()",
+      "id": "pricing_route_get"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L1",
-      "id": "status_page",
       "community": 8,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "status_page"
     },
     {
       "label": "PipelineStatus",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L7",
-      "id": "status_page_pipelinestatus",
       "community": 8,
-      "norm_label": "pipelinestatus"
+      "norm_label": "pipelinestatus",
+      "id": "status_page_pipelinestatus"
     },
     {
       "label": "ProviderStatus",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L17",
-      "id": "status_page_providerstatus",
       "community": 8,
-      "norm_label": "providerstatus"
+      "norm_label": "providerstatus",
+      "id": "status_page_providerstatus"
     },
     {
       "label": "StatusData",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L25",
-      "id": "status_page_statusdata",
       "community": 8,
-      "norm_label": "statusdata"
+      "norm_label": "statusdata",
+      "id": "status_page_statusdata"
     },
     {
       "label": "PROVIDER_COLORS",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L34",
-      "id": "status_page_provider_colors",
       "community": 8,
-      "norm_label": "provider_colors"
+      "norm_label": "provider_colors",
+      "id": "status_page_provider_colors"
     },
     {
       "label": "PROVIDER_URLS",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L45",
-      "id": "status_page_provider_urls",
       "community": 8,
-      "norm_label": "provider_urls"
+      "norm_label": "provider_urls",
+      "id": "status_page_provider_urls"
     },
     {
       "label": "LinkedInIcon()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L59",
-      "id": "status_page_linkedinicon",
       "community": 8,
-      "norm_label": "linkedinicon()"
+      "norm_label": "linkedinicon()",
+      "id": "status_page_linkedinicon"
     },
     {
       "label": "XIcon()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L67",
-      "id": "status_page_xicon",
       "community": 8,
-      "norm_label": "xicon()"
+      "norm_label": "xicon()",
+      "id": "status_page_xicon"
     },
     {
       "label": "PIPELINE_ORDER",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L75",
-      "id": "status_page_pipeline_order",
       "community": 8,
-      "norm_label": "pipeline_order"
+      "norm_label": "pipeline_order",
+      "id": "status_page_pipeline_order"
     },
     {
       "label": "SourceBadge()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L79",
-      "id": "status_page_sourcebadge",
       "community": 8,
-      "norm_label": "sourcebadge()"
+      "norm_label": "sourcebadge()",
+      "id": "status_page_sourcebadge"
     },
     {
       "label": "StatusPage()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L118",
-      "id": "status_page_statuspage",
       "community": 8,
-      "norm_label": "statuspage()"
+      "norm_label": "statuspage()",
+      "id": "status_page_statuspage"
     },
     {
       "label": "page.tsx",
@@ -938,24 +965,6 @@
       "community": 21,
       "norm_label": "tabletoolbar()",
       "id": "components_tabletoolbar_tabletoolbar"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L1",
-      "community": 13,
-      "norm_label": "page.tsx",
-      "id": "about_page"
-    },
-    {
-      "label": "AboutPage()",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L6",
-      "community": 13,
-      "norm_label": "aboutpage()",
-      "id": "about_page_aboutpage"
     },
     {
       "label": "page.tsx",
@@ -2087,12 +2096,43 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "about_page_aboutpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "about_page",
+      "target": "about_page_headingtoid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/app/api/admin/fetch-pricing/route.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "fetch_pricing_route",
-      "target": "fetch_pricing_route_post",
-      "confidence_score": 1.0
+      "target": "fetch_pricing_route_post"
     },
     {
       "relation": "imports",
@@ -2101,9 +2141,9 @@
       "source_file": "src/app/api/admin/fetch-pricing/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "fetch_pricing_route",
-      "target": "lib_api_utils_initdb",
-      "confidence_score": 1.0
+      "target": "lib_api_utils_initdb"
     },
     {
       "relation": "imports",
@@ -2112,9 +2152,9 @@
       "source_file": "src/app/api/admin/fetch-pricing/route.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "fetch_pricing_route",
-      "target": "lib_api_utils_requireadminauth",
-      "confidence_score": 1.0
+      "target": "lib_api_utils_requireadminauth"
     },
     {
       "relation": "imports",
@@ -2123,9 +2163,9 @@
       "source_file": "src/app/api/admin/fetch-pricing/route.ts",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "fetch_pricing_route",
-      "target": "services_ai_pipeline_aipricingpipeline",
-      "confidence_score": 1.0
+      "target": "services_ai_pipeline_aipricingpipeline"
     },
     {
       "relation": "contains",
@@ -2144,9 +2184,9 @@
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "counts_route",
-      "target": "lib_api_utils_buildpricingfilters",
-      "confidence_score": 1.0
+      "target": "lib_api_utils_buildpricingfilters"
     },
     {
       "relation": "imports",
@@ -2155,9 +2195,9 @@
       "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pricing_route",
-      "target": "lib_api_utils_buildpricingfilters",
-      "confidence_score": 1.0
+      "target": "lib_api_utils_buildpricingfilters"
     },
     {
       "relation": "contains",
@@ -2165,9 +2205,9 @@
       "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "pricing_route",
-      "target": "pricing_route_get",
-      "confidence_score": 1.0
+      "target": "pricing_route_get"
     },
     {
       "relation": "contains",
@@ -3997,27 +4037,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "about_page_aboutpage"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
@@ -5199,5 +5218,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7b2e6789290f6cc5ea00122fe79abf680b6d04d8"
+  "built_at_commit": "80796521006f3d49c502d93eabe1296b28b54768"
 }
