@@ -303,10 +303,10 @@ export default function PricingTable({
                   <Th colKey="gpu"                label="GPU" />
                 </>) : activeProductType === 'networking' ? (<>
                   <Th colKey="engine_category"    label="Service" />
-                  <Th colKey="db_family_cpu_vendor" label="Category" />
-                  <Th colKey="deployment_arch"    label="Transfer Tier" />
-                  <Th colKey="ha_mode_os"         label="Destination" />
-                  <Th colKey="gpu"                label="Included" />
+                  <Th colKey="db_family_cpu_vendor" label="Billing Model" />
+                  <Th colKey="deployment_arch"    label="Usage Tier" />
+                  <Th colKey="ha_mode_os"         label="Port Capacity" />
+                  <Th colKey="gpu"                label="Transfer Scope" />
                 </>) : (<>
                   {/* vm (default) */}
                   <Th colKey="engine_category"    sortKey="category"   label="Category" />
@@ -449,10 +449,10 @@ function TableRow({
         <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
       </>) : activeProductType === 'networking' ? (<>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
-        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_tier || '—'}</span></td>
-        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.destination || '—'}</span></td>
-        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.included_transfer || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_model || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.usage_tier || '—'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.port_capacity || '—'}</span></td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_scope || '—'}</span></td>
       </>) : (<>
         {/* vm (default) */}
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>

@@ -15,6 +15,7 @@ import {
   CONTAINERS_ORCHESTRATORS, CONTAINERS_COMPUTE_TYPES, CONTAINERS_ARCHITECTURES, CONTAINERS_BILLING_GRANULARITY,
   NETWORKING_SERVICES, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
   NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
+  NETWORKING_BILLING_MODELS, NETWORKING_USAGE_TIERS, NETWORKING_PORT_CAPACITIES, NETWORKING_TRANSFER_SCOPES,
   ANALYTICS_ENGINES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_TIERS,
   AI_SERVICE_TYPES, AI_MODEL_TIERS, AI_CONTEXT_WINDOWS, AI_MULTIMODAL_OPTIONS,
   DEFAULT_VCPU_RANGE, DEFAULT_MEMORY_RANGE, DEFAULT_PRICE_RANGE,
@@ -149,6 +150,10 @@ interface FilterSidebarProps {
   selectedNetworkingHaSupport: string[];
   selectedNetworkingVpcSupport: string[];
   selectedNetworkingDirections: string[];
+  selectedNetworkingBillingModels: string[];
+  selectedNetworkingUsageTiers: string[];
+  selectedNetworkingPortCapacities: string[];
+  selectedNetworkingTransferScopes: string[];
   vCpuRange: { min: number; max: number };
   memoryRange: { min: number; max: number };
   priceRange: { min: number; max: number };
@@ -193,6 +198,10 @@ interface FilterSidebarProps {
   onNetworkingHaSupportToggle: (opt: string) => void;
   onNetworkingVpcSupportToggle: (opt: string) => void;
   onNetworkingDirectionToggle: (opt: string) => void;
+  onNetworkingBillingModelToggle: (opt: string) => void;
+  onNetworkingUsageTierToggle: (opt: string) => void;
+  onNetworkingPortCapacityToggle: (opt: string) => void;
+  onNetworkingTransferScopeToggle: (opt: string) => void;
   // Batch setters for Select All / Clear All
   onSetProviders: (items: string[]) => void;
   onSetGeographies: (items: string[]) => void;
@@ -229,6 +238,10 @@ interface FilterSidebarProps {
   onSetNetworkingHaSupport: (items: string[]) => void;
   onSetNetworkingVpcSupport: (items: string[]) => void;
   onSetNetworkingDirections: (items: string[]) => void;
+  onSetNetworkingBillingModels: (items: string[]) => void;
+  onSetNetworkingUsageTiers: (items: string[]) => void;
+  onSetNetworkingPortCapacities: (items: string[]) => void;
+  onSetNetworkingTransferScopes: (items: string[]) => void;
   onVCpuRangeChange: (range: { min: number; max: number }) => void;
   onMemoryRangeChange: (range: { min: number; max: number }) => void;
   onPriceRangeChange: (range: { min: number; max: number }) => void;
@@ -275,6 +288,10 @@ export default function FilterSidebar({
   selectedNetworkingHaSupport,
   selectedNetworkingVpcSupport,
   selectedNetworkingDirections,
+  selectedNetworkingBillingModels,
+  selectedNetworkingUsageTiers,
+  selectedNetworkingPortCapacities,
+  selectedNetworkingTransferScopes,
   vCpuRange,
   memoryRange,
   priceRange,
@@ -318,6 +335,10 @@ export default function FilterSidebar({
   onNetworkingHaSupportToggle,
   onNetworkingVpcSupportToggle,
   onNetworkingDirectionToggle,
+  onNetworkingBillingModelToggle,
+  onNetworkingUsageTierToggle,
+  onNetworkingPortCapacityToggle,
+  onNetworkingTransferScopeToggle,
   onSetProviders,
   onSetGeographies,
   onSetOS,
@@ -353,6 +374,10 @@ export default function FilterSidebar({
   onSetNetworkingHaSupport,
   onSetNetworkingVpcSupport,
   onSetNetworkingDirections,
+  onSetNetworkingBillingModels,
+  onSetNetworkingUsageTiers,
+  onSetNetworkingPortCapacities,
+  onSetNetworkingTransferScopes,
   onVCpuRangeChange,
   onMemoryRangeChange,
   onPriceRangeChange,
@@ -857,6 +882,49 @@ export default function FilterSidebar({
               onToggleExpand={() => onToggleSection('networkingRoutingType')}
             />
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Billing Model"
+              tooltip="How you are charged (Uptime vs. Data)."
+              options={NETWORKING_BILLING_MODELS}
+              selected={selectedNetworkingBillingModels}
+              onToggle={onNetworkingBillingModelToggle}
+              onSetAll={onSetNetworkingBillingModels}
+              isExpanded={expanded.networkingBillingModel ?? true}
+              onToggleExpand={() => onToggleSection('networkingBillingModel')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Usage Tier"
+              tooltip="Pricing tier or allowance level."
+              options={NETWORKING_USAGE_TIERS}
+              selected={selectedNetworkingUsageTiers}
+              onToggle={onNetworkingUsageTierToggle}
+              onSetAll={onSetNetworkingUsageTiers}
+              isExpanded={expanded.networkingUsageTier ?? true}
+              onToggleExpand={() => onToggleSection('networkingUsageTier')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Port Capacity"
+              tooltip="Throughput capacity for dedicated connections."
+              options={NETWORKING_PORT_CAPACITIES}
+              selected={selectedNetworkingPortCapacities}
+              onToggle={onNetworkingPortCapacityToggle}
+              onSetAll={onSetNetworkingPortCapacities}
+              isExpanded={expanded.networkingPortCapacity ?? true}
+              onToggleExpand={() => onToggleSection('networkingPortCapacity')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Transfer Scope"
+              tooltip="Geographic scope of the data transfer."
+              options={NETWORKING_TRANSFER_SCOPES}
+              selected={selectedNetworkingTransferScopes}
+              onToggle={onNetworkingTransferScopeToggle}
+              onSetAll={onSetNetworkingTransferScopes}
+              isExpanded={expanded.networkingTransferScope ?? true}
+              onToggleExpand={() => onToggleSection('networkingTransferScope')}
+            />
             <FilterSection
               title="HA Support"
               tooltip="High Availability Support."
