@@ -119,6 +119,7 @@ export function buildPricingFilters(query: any) {
       analyticsEngines, analyticsDeploymentTypes, analyticsTiers,
       aiServiceTypes, aiModelTiers, aiContextWindows, aiMultimodalOptions,
       networkingService, networkingConnectionTypes, networkingRoutingTypes, networkingHaSupport, networkingVpcSupport, networkingTransferDirections,
+      networkingBillingModels, networkingUsageTiers, networkingPortCapacities, networkingTransferScopes,
     } = query;
 
     const conditions: string[] = [];
@@ -521,6 +522,30 @@ export function buildPricingFilters(query: any) {
         networkingTransferDirectionsFilters.push('n/a', 'none');
         conditions.push(`LOWER(pr.attributes->>'transfer_direction') = ANY($${paramCount++})`);
         values.push(networkingTransferDirectionsFilters);
+      }
+
+      const billingModelsFilters = parseFilterList(networkingBillingModels as string).map((s: string) => s.toLowerCase());
+      if (billingModelsFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'billing_model') = ANY($${paramCount++})`);
+        values.push(billingModelsFilters);
+      }
+
+      const usageTiersFilters = parseFilterList(networkingUsageTiers as string).map((s: string) => s.toLowerCase());
+      if (usageTiersFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'usage_tier') = ANY($${paramCount++})`);
+        values.push(usageTiersFilters);
+      }
+
+      const portCapacitiesFilters = parseFilterList(networkingPortCapacities as string).map((s: string) => s.toLowerCase());
+      if (portCapacitiesFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'port_capacity') = ANY($${paramCount++})`);
+        values.push(portCapacitiesFilters);
+      }
+
+      const transferScopesFilters = parseFilterList(networkingTransferScopes as string).map((s: string) => s.toLowerCase());
+      if (transferScopesFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'transfer_scope') = ANY($${paramCount++})`);
+        values.push(transferScopesFilters);
       }
     }
 

@@ -21,6 +21,7 @@ import {
   CONTAINERS_ORCHESTRATORS, CONTAINERS_COMPUTE_TYPES, CONTAINERS_ARCHITECTURES, CONTAINERS_BILLING_GRANULARITY,
   NETWORKING_SERVICES, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
   NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
+  NETWORKING_BILLING_MODELS, NETWORKING_USAGE_TIERS, NETWORKING_PORT_CAPACITIES, NETWORKING_TRANSFER_SCOPES,
   ANALYTICS_ENGINES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_TIERS,
   AI_SERVICE_TYPES, AI_MODEL_TIERS, AI_CONTEXT_WINDOWS, AI_MULTIMODAL_OPTIONS,
   PROVIDERS,
@@ -97,6 +98,10 @@ export default function Dashboard() {
   const [selectedNetworkingHaSupport, setSelectedNetworkingHaSupport] = useState<string[]>([...NETWORKING_HA_SUPPORT]);
   const [selectedNetworkingVpcSupport, setSelectedNetworkingVpcSupport] = useState<string[]>([...NETWORKING_VPC_SUPPORT]);
   const [selectedNetworkingDirections, setSelectedNetworkingDirections] = useState<string[]>([...NETWORKING_DIRECTIONS]);
+  const [selectedNetworkingBillingModels, setSelectedNetworkingBillingModels] = useState<string[]>([...NETWORKING_BILLING_MODELS]);
+  const [selectedNetworkingUsageTiers, setSelectedNetworkingUsageTiers] = useState<string[]>([...NETWORKING_USAGE_TIERS]);
+  const [selectedNetworkingPortCapacities, setSelectedNetworkingPortCapacities] = useState<string[]>([...NETWORKING_PORT_CAPACITIES]);
+  const [selectedNetworkingTransferScopes, setSelectedNetworkingTransferScopes] = useState<string[]>([...NETWORKING_TRANSFER_SCOPES]);
 
   // Range filters
   const DEFAULT_VCPU_RANGE = { min: 0, max: 320 };
@@ -145,6 +150,10 @@ export default function Dashboard() {
     networkingHaSupport: true,
     networkingVpcSupport: true,
     networkingTransferDirection: true,
+    networkingBillingModel: true,
+    networkingUsageTier: true,
+    networkingPortCapacity: true,
+    networkingTransferScope: true,
   });
 
   const tableScrollRef = useRef<HTMLDivElement | null>(null);
@@ -206,6 +215,10 @@ export default function Dashboard() {
     params.append('networkingHaSupport', selectedNetworkingHaSupport.join(','));
     params.append('networkingVpcSupport', selectedNetworkingVpcSupport.join(','));
     params.append('networkingTransferDirections', selectedNetworkingDirections.join(','));
+    params.append('networkingBillingModels', selectedNetworkingBillingModels.join(','));
+    params.append('networkingUsageTiers', selectedNetworkingUsageTiers.join(','));
+    params.append('networkingPortCapacities', selectedNetworkingPortCapacities.join(','));
+    params.append('networkingTransferScopes', selectedNetworkingTransferScopes.join(','));
     // Only send range params when the user has actively constrained them.
     // At the slider floor/ceiling → no filter applied (show all).
     if (vCpuRange.min > DEFAULT_VCPU_RANGE.min) params.append('minVcpu', vCpuRange.min.toString());
@@ -225,6 +238,7 @@ export default function Dashboard() {
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
+    selectedNetworkingBillingModels, selectedNetworkingUsageTiers, selectedNetworkingPortCapacities, selectedNetworkingTransferScopes,
     vCpuRange, memoryRange, priceRange, search
   ]);
 
@@ -526,6 +540,10 @@ export default function Dashboard() {
           selectedNetworkingHaSupport={selectedNetworkingHaSupport}
           selectedNetworkingVpcSupport={selectedNetworkingVpcSupport}
           selectedNetworkingDirections={selectedNetworkingDirections}
+          selectedNetworkingBillingModels={selectedNetworkingBillingModels}
+          selectedNetworkingUsageTiers={selectedNetworkingUsageTiers}
+          selectedNetworkingPortCapacities={selectedNetworkingPortCapacities}
+          selectedNetworkingTransferScopes={selectedNetworkingTransferScopes}
           vCpuRange={vCpuRange}
           memoryRange={memoryRange}
           priceRange={priceRange}
@@ -569,6 +587,10 @@ export default function Dashboard() {
           onNetworkingHaSupportToggle={(h) => toggleFilter(selectedNetworkingHaSupport, setSelectedNetworkingHaSupport, h)}
           onNetworkingVpcSupportToggle={(v) => toggleFilter(selectedNetworkingVpcSupport, setSelectedNetworkingVpcSupport, v)}
           onNetworkingDirectionToggle={(d) => toggleFilter(selectedNetworkingDirections, setSelectedNetworkingDirections, d)}
+          onNetworkingBillingModelToggle={(b) => toggleFilter(selectedNetworkingBillingModels, setSelectedNetworkingBillingModels, b)}
+          onNetworkingUsageTierToggle={(u) => toggleFilter(selectedNetworkingUsageTiers, setSelectedNetworkingUsageTiers, u)}
+          onNetworkingPortCapacityToggle={(p) => toggleFilter(selectedNetworkingPortCapacities, setSelectedNetworkingPortCapacities, p)}
+          onNetworkingTransferScopeToggle={(s) => toggleFilter(selectedNetworkingTransferScopes, setSelectedNetworkingTransferScopes, s)}
           onSetProviders={setSelectedProviders}
           onSetGeographies={setSelectedGeographies}
           onSetOS={setSelectedOS}
