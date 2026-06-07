@@ -41,6 +41,10 @@ export const NETWORKING_ROUTING_TYPES = ['Dynamic', 'Fixed'];
 export const NETWORKING_HA_SUPPORT = ['Yes', 'No'];
 export const NETWORKING_VPC_SUPPORT = ['Yes', 'No'];
 export const NETWORKING_DIRECTIONS = ['Egress', 'Ingress', 'Intra-Cloud'];
+export const NETWORKING_BILLING_MODELS = ['Hourly Uptime', 'Data Processed (per GB)', 'Per Endpoint/Tunnel', 'Included'];
+export const NETWORKING_USAGE_TIERS = ['Flat Rate', 'First 10TB', '10TB - 50TB', 'Over 10TB', 'Over Allowance', 'Included'];
+export const NETWORKING_PORT_CAPACITIES = ['< 1 Gbps', '1 Gbps - 10 Gbps', '> 10 Gbps', 'N/A'];
+export const NETWORKING_TRANSFER_SCOPES = ['Same Region', 'Cross-AZ', 'Cross-Region', 'Internet', 'On-Premises', 'N/A'];
 
 // Data Analytics-specific constants
 export const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'Native'];
