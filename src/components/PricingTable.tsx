@@ -192,11 +192,13 @@ export default function PricingTable({
     <th
       data-col={colKey}
       onClick={sortKey ? () => onHeaderClick(sortKey) : undefined}
-      className={`px-6 py-4 text-center align-middle font-bold whitespace-nowrap ccc-th ${sortKey ? 'cursor-pointer hover:text-black dark:hover:text-white transition-colors' : ''} ${className}`}
+      className={`px-6 py-4 font-bold whitespace-nowrap ccc-th ${sortKey ? 'cursor-pointer hover:text-black dark:hover:text-white transition-colors' : ''} ${className}`}
       style={{ width: colWidths[colKey] ?? DEFAULT_WIDTHS[colKey] }}
     >
-      {label}
-      {sortKey && <SortIcon sortKey={sortKey} sortConfig={sortConfig} />}
+      <div className="flex items-center justify-center h-full w-full">
+        {label}
+        {sortKey && <SortIcon sortKey={sortKey} sortConfig={sortConfig} />}
+      </div>
       <ResizeHandle
         onStart={(e) => startResize(e, colKey)}
         onReset={() => resetWidth(colKey)}
