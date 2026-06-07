@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 117 files · ~93,083 words
+- 118 files · ~93,427 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 252 nodes · 330 edges · 25 communities (17 shown, 8 thin omitted)
+- 257 nodes · 335 edges · 26 communities (18 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `24966c60`
+- Built from commit: `2ec884af`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -34,6 +34,7 @@
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Community 24|Community 24]]
+- [[_COMMUNITY_Community 25|Community 25]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Serverless Language Filter Implementation Summary` - 13 edges
@@ -53,7 +54,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (25 total, 8 thin omitted)
+## Communities (26 total, 8 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.25
@@ -99,8 +100,12 @@ Nodes (6): ChartsViewProps, PRODUCT_TYPES, ProductTypeSelectorProps, PROVIDERS, 
 Cohesion: 0.40
 Nodes (3): DBStatusProvider, ProviderCardProps, ProviderCardsProps
 
+### Community 25 - "Community 25"
+Cohesion: 0.50
+Nodes (4): config, getRateLimitStatus(), middleware(), rateLimitStore
+
 ## Knowledge Gaps
-- **91 isolated node(s):** `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design`, `Directory Tree`, `File Descriptions` (+86 more)
+- **93 isolated node(s):** `rateLimitStore`, `config`, `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design` (+88 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -108,13 +113,13 @@ Nodes (3): DBStatusProvider, ProviderCardProps, ProviderCardsProps
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ProductType` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
+  _High betweenness centrality (0.058) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 18` to `Community 15`, `Community 7`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **What connects `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design` to the rest of the system?**
-  _91 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **What connects `rateLimitStore`, `config`, `Live Deployment` to the rest of the system?**
+  _93 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 7` be split into smaller, more focused modules?**
   _Cohesion score 0.10448979591836735 - nodes in this community are weakly interconnected._
 - **Should `Community 10` be split into smaller, more focused modules?**

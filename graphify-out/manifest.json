@@ -345,8 +345,8 @@
     "semantic_hash": ""
   },
   "src/app/api/pricing/route.ts": {
-    "mtime": 1780791185.1580412,
-    "ast_hash": "298356028712f5021c78548ae61fc841",
+    "mtime": 1780793950.7054482,
+    "ast_hash": "0a6dec59cf106a817a4c8f6cb6b863ca",
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
@@ -360,7 +360,7 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1780791956.6639438,
+    "mtime": 1780793982.9350145,
     "ast_hash": "36ee5d8bd9208e929d0e7f9d4007aceb",
     "semantic_hash": ""
   },
@@ -597,6 +597,11 @@
   "run_networking.ts": {
     "mtime": 1780793267.3907728,
     "ast_hash": "1347328f8f360e2b19d33f974acfb5ff",
+    "semantic_hash": ""
+  },
+  "src/middleware.ts": {
+    "mtime": 1780794005.3317475,
+    "ast_hash": "23bf975e5e0743cb19af063bdb9d6f48",
     "semantic_hash": ""
   }
 }
