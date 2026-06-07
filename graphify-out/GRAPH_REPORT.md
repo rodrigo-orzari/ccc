@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-06)
 
 ## Corpus Check
-- 117 files · ~93,649 words
+- 118 files · ~94,109 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 257 nodes · 335 edges · 26 communities (18 shown, 8 thin omitted)
+- 289 nodes · 370 edges · 26 communities (18 shown, 8 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3677b188`
+- Built from commit: `5a6c49b8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -69,8 +69,8 @@ Cohesion: 0.18
 Nodes (6): PIPELINE_ORDER, PipelineStatus, PROVIDER_COLORS, PROVIDER_URLS, ProviderStatus, StatusData
 
 ### Community 9 - "Community 9"
-Cohesion: 0.20
-Nodes (5): buildPricingFilters(), initDb(), parseFilterList(), requireAdminAuth(), VALID_PRODUCT_TYPES
+Cohesion: 0.11
+Nodes (9): AI_MODELS, AIModelConfig, buildPricingFilters(), initDb(), parseFilterList(), requireAdminAuth(), VALID_PRODUCT_TYPES, AIPricingPipeline (+1 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.07
@@ -89,8 +89,8 @@ Cohesion: 0.06
 Nodes (29): ALL_DEFS, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG, COL_MEM (+21 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.24
-Nodes (4): AI_MODELS, AIModelConfig, AIPricingPipeline, AIStaticAdapter
+Cohesion: 0.07
+Nodes (15): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig, AlibabaAnalyticsAdapter, DataAnalyticsPricingPipeline (+7 more)
 
 ### Community 18 - "Community 18"
 Cohesion: 0.17
@@ -105,7 +105,7 @@ Cohesion: 0.50
 Nodes (4): config, getRateLimitStatus(), middleware(), rateLimitStore
 
 ## Knowledge Gaps
-- **93 isolated node(s):** `VALID_PRODUCT_TYPES`, `rateLimitStore`, `config`, `Live Deployment`, `1. What Problem Does This Application Solve?` (+88 more)
+- **96 isolated node(s):** `AlibabaAnalyticsConfig`, `DigitalOceanAnalyticsConfig`, `OracleAnalyticsConfig`, `VALID_PRODUCT_TYPES`, `rateLimitStore` (+91 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **8 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -113,16 +113,16 @@ Nodes (4): config, getRateLimitStatus(), middleware(), rateLimitStore
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ProductType` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.058) - this node is a cross-community bridge._
+  _High betweenness centrality (0.046) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
 - **Why does `Serverless Language Filter Implementation Summary` connect `Community 10` to `Community 14`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **What connects `VALID_PRODUCT_TYPES`, `rateLimitStore`, `config` to the rest of the system?**
-  _93 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
+- **What connects `AlibabaAnalyticsConfig`, `DigitalOceanAnalyticsConfig`, `OracleAnalyticsConfig` to the rest of the system?**
+  _96 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 7` be split into smaller, more focused modules?**
   _Cohesion score 0.10448979591836735 - nodes in this community are weakly interconnected._
+- **Should `Community 9` be split into smaller, more focused modules?**
+  _Cohesion score 0.1067193675889328 - nodes in this community are weakly interconnected._
 - **Should `Community 10` be split into smaller, more focused modules?**
   _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
-- **Should `Community 12` be split into smaller, more focused modules?**
-  _Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected._

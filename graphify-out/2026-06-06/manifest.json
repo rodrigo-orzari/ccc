@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1780791462.7146587,
-    "ast_hash": "3987d586f0c4515e05c703ec30455964",
+    "mtime": 1780801349.485625,
+    "ast_hash": "2516ab9475665ea294f325b914caebce",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1780793982.9350145,
-    "ast_hash": "36ee5d8bd9208e929d0e7f9d4007aceb",
+    "mtime": 1780801167.247712,
+    "ast_hash": "af49f2722d5e193377992fcf422cb157",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "next-env.d.ts": {
-    "mtime": 1780777568.1136644,
-    "ast_hash": "2a74d3909800ca5467fa83b0ab4a4890",
+    "mtime": 1780801227.659514,
+    "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1780792850.2782383,
-    "ast_hash": "32cdf2692d9028688bf8676ac0eea7e8",
+    "mtime": 1780801160.6026742,
+    "ast_hash": "0130e07cc764fba33568f28fd2902d36",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -549,24 +549,19 @@
     "ast_hash": "f1afd26a3933a25def315e158ed69a76",
     "semantic_hash": ""
   },
-  "scratch_test.js": {
-    "mtime": 1780780852.2518601,
-    "ast_hash": "cf6641fb9fac9441078d18958b313fc8",
-    "semantic_hash": ""
-  },
   "test_db.mjs": {
-    "mtime": 1780780852.2519565,
-    "ast_hash": "575c99ee7fdbdcb8526536298136cfde",
+    "mtime": 1780801365.7964115,
+    "ast_hash": "6c55d63638cebb71c13b0975b7742ffa",
     "semantic_hash": ""
   },
   "test_db_geo.mjs": {
-    "mtime": 1780780852.252039,
-    "ast_hash": "34bbb9815441da0c4a2b6be852829ace",
+    "mtime": 1780801368.0917008,
+    "ast_hash": "319cbe4533c73b90046e318a417be078",
     "semantic_hash": ""
   },
   "test_db_price.mjs": {
-    "mtime": 1780780852.252123,
-    "ast_hash": "1178d87ddbdc54304f6c869f6ddf07e5",
+    "mtime": 1780801369.938447,
+    "ast_hash": "9d32a36afc9a3ac6bdfbdcb47a1eee5f",
     "semantic_hash": ""
   },
   "src/app/api/status/route.ts": {
