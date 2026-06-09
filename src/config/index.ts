@@ -80,7 +80,7 @@ export const PROVIDERS: { id: string; name: string; color: string; soon?: boolea
 ];
 
 // AI-specific constants
-export const AI_SERVICE_TYPES = ['Foundational Models', 'Embeddings', 'Image Generation', 'Speech & Audio'];
+export const AI_SERVICE_TYPES = ['Foundational Models', 'Embeddings'];
 export const AI_MODEL_TIERS = ['Frontier', 'Standard', 'Efficient'];
 export const AI_CONTEXT_WINDOWS = ['< 32K', '32K - 128K', '> 128K', '1M+'];
 export const AI_MULTIMODAL_OPTIONS = ['Yes', 'No'];
