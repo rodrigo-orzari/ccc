@@ -603,10 +603,5 @@
     "mtime": 1780803637.1313362,
     "ast_hash": "a5cfa1bae748b4ac62e7ce9946510b9e",
     "semantic_hash": ""
-  },
-  "test_counts.mjs": {
-    "mtime": 1780984147.351248,
-    "ast_hash": "b6bfde9ef706831313b6a54ac5232c50",
-    "semantic_hash": ""
   }
 }
