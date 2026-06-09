@@ -14,6 +14,14 @@ async function main() {
   try {
     console.log('🚀 Starting standalone AI pricing data ingestion...\n');
 
+    // Ensure AI providers exist in the database
+    await sql`
+      INSERT INTO providers (slug, name) VALUES
+      ('openai', 'OpenAI'),
+      ('anthropic', 'Anthropic')
+      ON CONFLICT (slug) DO NOTHING;
+    `;
+
     const aiPipeline = new AIPricingPipeline(sql as any);
     const aiResults = await aiPipeline.run();
     
