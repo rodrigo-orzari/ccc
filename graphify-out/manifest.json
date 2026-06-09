@@ -575,8 +575,8 @@
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
-    "mtime": 1781018880.125523,
-    "ast_hash": "fbbb233217e3cd3bed1661eb38f31186",
+    "mtime": 1781031632.7163951,
+    "ast_hash": "db4ef7830860090a530d55b83951d207",
     "semantic_hash": ""
   },
   "src/services/ai_pipeline.ts": {
