@@ -1045,7 +1045,7 @@ export default function FilterSidebar({
           </div>
           {expanded.specs && (
             <div className="space-y-8 px-1">
-              {activeProductType !== 'networking' && activeProductType !== 'ai' && (
+              {['vm', 'database', 'containers'].includes(activeProductType) && (
                 <>
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
