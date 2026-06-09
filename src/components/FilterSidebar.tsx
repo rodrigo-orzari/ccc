@@ -1068,7 +1068,7 @@ export default function FilterSidebar({
                 </>
               )}
               <div className="space-y-2">
-                <div className="text-[10px] font-bold text-[#737373]">Hourly price ($)</div>
+                <div className="text-[10px] font-bold text-[#737373]">{activeProductType === 'ai' ? 'Input Price ($/1M Tokens)' : 'Hourly price ($)'}</div>
                 <RangeSlider
                   min={DEFAULT_PRICE_RANGE.min}
                   max={DEFAULT_PRICE_RANGE.max}
@@ -1085,43 +1085,45 @@ export default function FilterSidebar({
         <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
 
         {/* Pricing Mode */}
-        <section className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="m-0">
-              <button
-                onClick={() => onToggleSection('pricing')}
-                className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
-              >
-                <ChevronDown size={10} className={`transition-transform ${expanded.pricing ? '' : '-rotate-90'}`} />
-                PAYG OR YEARLY PRICE <Tooltip text="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)."><Info size={10} className="cursor-help" /></Tooltip>
-              </button>
-            </h2>
-          </div>
-          {expanded.pricing && (
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => onShowAggregationChange(false)}
-                className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                  !showAggregation
-                    ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                    : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                }`}
-              >
-                PAYG
-              </button>
-              <button
-                onClick={() => onShowAggregationChange(true)}
-                className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                  showAggregation
-                    ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                    : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                }`}
-              >
-                Yearly
-              </button>
+        {activeProductType !== 'ai' && (
+          <section className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h2 className="m-0">
+                <button
+                  onClick={() => onToggleSection('pricing')}
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                >
+                  <ChevronDown size={10} className={`transition-transform ${expanded.pricing ? '' : '-rotate-90'}`} />
+                  PAYG OR YEARLY PRICE <Tooltip text="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)."><Info size={10} className="cursor-help" /></Tooltip>
+                </button>
+              </h2>
             </div>
-          )}
-        </section>
+            {expanded.pricing && (
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => onShowAggregationChange(false)}
+                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                    !showAggregation
+                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                  }`}
+                >
+                  PAYG
+                </button>
+                <button
+                  onClick={() => onShowAggregationChange(true)}
+                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                    showAggregation
+                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                  }`}
+                >
+                  Yearly
+                </button>
+              </div>
+            )}
+          </section>
+        )}
       </div>
     </aside>
   );
