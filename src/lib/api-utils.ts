@@ -587,19 +587,19 @@ export function buildPricingFilters(query: any) {
       }
     }
 
-    if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
+    if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai') {
       conditions.push(`pr.vcpus >= $${paramCount++}`);
       values.push(minVcpu);
     }
-    if (maxVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
+    if (maxVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai') {
       conditions.push(`pr.vcpus <= $${paramCount++}`);
       values.push(maxVcpu);
     }
-    if (minMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
+    if (minMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai') {
       conditions.push(`pr.memory_gb >= $${paramCount++}`);
       values.push(minMemory);
     }
-    if (maxMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless') {
+    if (maxMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai') {
       conditions.push(`pr.memory_gb <= $${paramCount++}`);
       values.push(maxMemory);
     }
