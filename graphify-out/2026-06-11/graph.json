@@ -4,49 +4,22 @@
   "graph": {},
   "nodes": [
     {
-      "label": "layout.tsx",
-      "file_type": "code",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L1",
-      "id": "app_layout",
-      "community": 26,
-      "norm_label": "layout.tsx"
-    },
-    {
-      "label": "metadata",
-      "file_type": "code",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L6",
-      "id": "app_layout_metadata",
-      "community": 26,
-      "norm_label": "metadata"
-    },
-    {
-      "label": "RootLayout()",
-      "file_type": "code",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L11",
-      "id": "app_layout_rootlayout",
-      "community": 26,
-      "norm_label": "rootlayout()"
-    },
-    {
       "label": "test_counts.mjs",
       "file_type": "code",
       "source_file": "test_counts.mjs",
       "source_location": "L1",
+      "id": "test_counts",
       "community": 9,
-      "norm_label": "test_counts.mjs",
-      "id": "test_counts"
+      "norm_label": "test_counts.mjs"
     },
     {
       "label": "testCounts()",
       "file_type": "code",
       "source_file": "test_counts.mjs",
       "source_location": "L4",
+      "id": "test_counts_testcounts",
       "community": 9,
-      "norm_label": "testcounts()",
-      "id": "test_counts_testcounts"
+      "norm_label": "testcounts()"
     },
     {
       "label": "alibaba_data_analytics.ts",
@@ -1817,7 +1790,7 @@
       "file_type": "code",
       "source_file": "src/config/ai_models.ts",
       "source_location": "L1",
-      "community": 9,
+      "community": 26,
       "norm_label": "ai_models.ts",
       "id": "config_ai_models"
     },
@@ -1826,7 +1799,7 @@
       "file_type": "code",
       "source_file": "src/config/ai_models.ts",
       "source_location": "L1",
-      "community": 9,
+      "community": 26,
       "norm_label": "aimodelconfig",
       "id": "config_ai_models_aimodelconfig"
     },
@@ -1835,7 +1808,7 @@
       "file_type": "code",
       "source_file": "src/config/ai_models.ts",
       "source_location": "L23",
-      "community": 9,
+      "community": 26,
       "norm_label": "ai_models",
       "id": "config_ai_models_ai_models"
     },
@@ -2186,7 +2159,7 @@
       "file_type": "code",
       "source_file": "src/services/ai_pipeline.ts",
       "source_location": "L1",
-      "community": 9,
+      "community": 26,
       "norm_label": "ai_pipeline.ts",
       "id": "services_ai_pipeline"
     },
@@ -2195,7 +2168,7 @@
       "file_type": "code",
       "source_file": "src/services/ai_pipeline.ts",
       "source_location": "L5",
-      "community": 9,
+      "community": 26,
       "norm_label": "aistaticadapter",
       "id": "services_ai_pipeline_aistaticadapter"
     },
@@ -2204,7 +2177,7 @@
       "file_type": "code",
       "source_file": "src/services/ai_pipeline.ts",
       "source_location": "L7",
-      "community": 9,
+      "community": 26,
       "norm_label": ".fetchpricing()",
       "id": "services_ai_pipeline_aistaticadapter_fetchpricing"
     },
@@ -2213,7 +2186,7 @@
       "file_type": "code",
       "source_file": "src/services/ai_pipeline.ts",
       "source_location": "L36",
-      "community": 9,
+      "community": 26,
       "norm_label": "aipricingpipeline",
       "id": "services_ai_pipeline_aipricingpipeline"
     },
@@ -2222,7 +2195,7 @@
       "file_type": "code",
       "source_file": "src/services/ai_pipeline.ts",
       "source_location": "L37",
-      "community": 9,
+      "community": 26,
       "norm_label": ".constructor()",
       "id": "services_ai_pipeline_aipricingpipeline_constructor"
     },
@@ -2231,7 +2204,7 @@
       "file_type": "code",
       "source_file": "src/services/ai_pipeline.ts",
       "source_location": "L44",
-      "community": 9,
+      "community": 26,
       "norm_label": ".run()",
       "id": "services_ai_pipeline_aipricingpipeline_run"
     },
@@ -2240,7 +2213,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_ai.ts",
       "source_location": "L1",
-      "community": 9,
+      "community": 26,
       "norm_label": "populate_ai.ts",
       "id": "services_populate_ai"
     },
@@ -2249,7 +2222,7 @@
       "file_type": "code",
       "source_file": "src/services/populate_ai.ts",
       "source_location": "L4",
-      "community": 9,
+      "community": 26,
       "norm_label": "main()",
       "id": "services_populate_ai_main"
     },
@@ -2652,35 +2625,15 @@
   ],
   "links": [
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "app_layout",
-      "target": "app_layout_metadata",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "source": "app_layout",
-      "target": "app_layout_rootlayout",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "test_counts.mjs",
       "source_location": "L1",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "test_counts",
-      "target": "lib_api_utils_buildpricingfilters"
+      "target": "lib_api_utils_buildpricingfilters",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -2688,9 +2641,9 @@
       "source_file": "test_counts.mjs",
       "source_location": "L4",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "test_counts",
-      "target": "test_counts_testcounts"
+      "target": "test_counts_testcounts",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6517,5 +6470,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c6bd00eb7f657f073bebed2fbb03e3ca565eff85"
+  "built_at_commit": "f877bb576d96184236e427a8bdca26b2d48684d8"
 }
