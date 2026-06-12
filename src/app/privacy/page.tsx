@@ -208,7 +208,7 @@ const PrivacyPolicyPage: React.FC = () => {
               only for the purpose you provided it.
             </p>
             <h3>Cookies and Tracking</h3>
-            <p>We use minimal cookies for essential functionality only. We do not use cookies for tracking or advertising purposes.</p>
+            <p>We use cookies for essential functionality, as well as tracking technologies for analytics and advertising as described below.</p>
 
             <h2 id="how-we-use-your-information">How We Use Your Information</h2>
             <p>We use collected information to:</p>
@@ -242,7 +242,9 @@ const PrivacyPolicyPage: React.FC = () => {
             <p>These services have their own privacy policies, and we encourage you to review them.</p>
 
             <h2 id="advertising">Advertising</h2>
-            <p>Currently, we do not serve third-party advertisements on this platform.</p>
+            <p>
+              We partner with Microsoft Clarity and Microsoft Advertising to capture how you use and interact with our website through behavioral metrics, heatmaps, and session replay to improve and market our products/services. Website usage data is captured using first and third-party cookies and other tracking technologies to determine the popularity of products/services and online activity. Additionally, we use this information for site optimization, fraud/security purposes, and advertising. For more information about how Microsoft collects and uses your data, visit the <a href="https://www.microsoft.com/privacy/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft Privacy Statement</a>.
+            </p>
 
             <h2 id="changes">Changes to This Policy</h2>
             <p>
