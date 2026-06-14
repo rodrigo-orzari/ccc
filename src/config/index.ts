@@ -27,6 +27,11 @@ export const SERVERLESS_GRANULARITY_OPTIONS = ['1', '100'];
 export const SERVERLESS_EXECUTION_MODEL_OPTIONS = ['Both', 'Code (ZIP)', 'Container Image'];
 export const SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS = ['Yes', 'No'];
 export const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1', '1 - 5', '> 5'];
+// Memory-size buckets (GB). Serverless rows span ~0.125 GB → 10 GB, so the shared
+// 0–3200 GB spec slider is useless here; these buckets map to memory_gb ranges in api-utils.
+export const SERVERLESS_MEMORY_TIERS = ['<= 512 MB', '512 MB - 2 GB', '2 - 4 GB', '> 4 GB'];
+// CPU architecture. AWS Lambda is split x86 (Intel/AMD) vs ARM (Graviton); maps to pr.arch.
+export const SERVERLESS_ARCHITECTURES = ['x86', 'ARM'];
 
 // Containers-specific constants
 export const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
