@@ -12,6 +12,7 @@ import {
   SERVERLESS_LANGUAGES, SERVERLESS_COLD_START_OPTIONS, SERVERLESS_TIMEOUT_OPTIONS,
   SERVERLESS_MEMORY_CONFIG_OPTIONS, SERVERLESS_FREE_TIER_OPTIONS, SERVERLESS_GRANULARITY_OPTIONS,
   SERVERLESS_EXECUTION_MODEL_OPTIONS, SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS, SERVERLESS_EPHEMERAL_STORAGE_OPTIONS,
+  SERVERLESS_MEMORY_TIERS, SERVERLESS_ARCHITECTURES,
   CONTAINERS_ORCHESTRATORS, CONTAINERS_COMPUTE_TYPES, CONTAINERS_ARCHITECTURES, CONTAINERS_BILLING_GRANULARITY,
   NETWORKING_SERVICES, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
   NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
@@ -132,6 +133,8 @@ interface FilterSidebarProps {
   selectedServerlessExecutionModel: string[];
   selectedServerlessProvisionedConcurrency: string[];
   selectedServerlessEphemeralStorage: string[];
+  selectedServerlessMemory: string[];
+  selectedServerlessArchitectures: string[];
   selectedContainersOrchestrators: string[];
   selectedContainersComputeTypes: string[];
   selectedContainersArchitectures: string[];
@@ -180,6 +183,8 @@ interface FilterSidebarProps {
   onServerlessExecutionModelToggle: (opt: string) => void;
   onServerlessProvisionedConcurrencyToggle: (opt: string) => void;
   onServerlessEphemeralStorageToggle: (opt: string) => void;
+  onServerlessMemoryToggle: (opt: string) => void;
+  onServerlessArchitectureToggle: (opt: string) => void;
   onContainersOrchestratorToggle: (opt: string) => void;
   onContainersComputeTypeToggle: (opt: string) => void;
   onContainersArchitectureToggle: (opt: string) => void;
@@ -221,6 +226,8 @@ interface FilterSidebarProps {
   onSetServerlessExecutionModel: (items: string[]) => void;
   onSetServerlessProvisionedConcurrency: (items: string[]) => void;
   onSetServerlessEphemeralStorage: (items: string[]) => void;
+  onSetServerlessMemory: (items: string[]) => void;
+  onSetServerlessArchitectures: (items: string[]) => void;
   onSetContainersOrchestrators: (items: string[]) => void;
   onSetContainersComputeTypes: (items: string[]) => void;
   onSetContainersArchitectures: (items: string[]) => void;
@@ -270,6 +277,8 @@ export default function FilterSidebar({
   selectedServerlessExecutionModel,
   selectedServerlessProvisionedConcurrency,
   selectedServerlessEphemeralStorage,
+  selectedServerlessMemory,
+  selectedServerlessArchitectures,
   selectedContainersOrchestrators,
   selectedContainersComputeTypes,
   selectedContainersArchitectures,
@@ -317,6 +326,8 @@ export default function FilterSidebar({
   onServerlessExecutionModelToggle,
   onServerlessProvisionedConcurrencyToggle,
   onServerlessEphemeralStorageToggle,
+  onServerlessMemoryToggle,
+  onServerlessArchitectureToggle,
   onContainersOrchestratorToggle,
   onContainersComputeTypeToggle,
   onContainersArchitectureToggle,
@@ -357,6 +368,8 @@ export default function FilterSidebar({
   onSetServerlessExecutionModel,
   onSetServerlessProvisionedConcurrency,
   onSetServerlessEphemeralStorage,
+  onSetServerlessMemory,
+  onSetServerlessArchitectures,
   onSetContainersOrchestrators,
   onSetContainersComputeTypes,
   onSetContainersArchitectures,
@@ -634,6 +647,28 @@ export default function FilterSidebar({
               onSetAll={onSetGeographies}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Memory Size"
+              tooltip="Allocated memory per function/instance. This is the main driver of serverless price."
+              options={SERVERLESS_MEMORY_TIERS}
+              selected={selectedServerlessMemory}
+              onToggle={onServerlessMemoryToggle}
+              onSetAll={onSetServerlessMemory}
+              isExpanded={expanded.serverlessMemory ?? true}
+              onToggleExpand={() => onToggleSection('serverlessMemory')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Architecture"
+              tooltip="CPU architecture: x86 (Intel/AMD) or ARM (e.g. AWS Graviton). ARM is typically cheaper."
+              options={SERVERLESS_ARCHITECTURES}
+              selected={selectedServerlessArchitectures}
+              onToggle={onServerlessArchitectureToggle}
+              onSetAll={onSetServerlessArchitectures}
+              isExpanded={expanded.serverlessArchitecture ?? true}
+              onToggleExpand={() => onToggleSection('serverlessArchitecture')}
             />
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection

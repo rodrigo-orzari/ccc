@@ -115,6 +115,7 @@ export function buildPricingFilters(query: any) {
       dbFamilies, engines, deploymentTypes, haModes,
       serverlessLanguages, serverlessColdStart, serverlessTimeout, serverlessMemoryConfig, serverlessFreeTier,
       serverlessGranularity, serverlessExecutionModel, serverlessProvisionedConcurrency, serverlessEphemeralStorage,
+      serverlessMemory, serverlessArchitecture,
       containersOrchestrators, containersComputeTypes, containersArchitectures, containersBillingGranularity, containersGpuIncluded,
       analyticsEngines, analyticsDeploymentTypes, analyticsTiers,
       aiServiceTypes, aiModelTiers, aiContextWindows, aiMultimodalOptions,
@@ -360,6 +361,36 @@ export function buildPricingFilters(query: any) {
         if (coldStartConditions.length > 0) {
           conditions.push(`(${coldStartConditions.join(' OR ')})`);
         }
+      }
+
+      // Memory-size buckets → memory_gb ranges (the spec sliders are disabled for
+      // serverless because the dataset tops out at ~10 GB).
+      if (serverlessMemory) {
+        const memoryOptions = parseFilterList(serverlessMemory as string);
+        const memoryConditions: string[] = [];
+        for (const opt of memoryOptions) {
+          if (opt === '<= 512 MB') {
+            memoryConditions.push(`pr.memory_gb <= 0.512`);
+          } else if (opt === '512 MB - 2 GB') {
+            memoryConditions.push(`(pr.memory_gb > 0.512 AND pr.memory_gb <= 2)`);
+          } else if (opt === '2 - 4 GB') {
+            memoryConditions.push(`(pr.memory_gb > 2 AND pr.memory_gb <= 4)`);
+          } else if (opt === '> 4 GB') {
+            memoryConditions.push(`pr.memory_gb > 4`);
+          }
+        }
+        if (memoryConditions.length > 0) {
+          conditions.push(`(${memoryConditions.join(' OR ')})`);
+        }
+      }
+
+      // Architecture x86 / ARM → pr.arch ('x86 64' is stored with a space).
+      const archOptions = parseFilterList(serverlessArchitecture as string).map((a: string) =>
+        (a === 'x86' ? 'x86 64' : a).toLowerCase()
+      );
+      if (archOptions.length > 0) {
+        conditions.push(`LOWER(pr.arch) = ANY($${paramCount++})`);
+        values.push(archOptions);
       }
     }
 

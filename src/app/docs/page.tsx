@@ -79,6 +79,9 @@ const DocsPage: React.FC = () => {
           display: block;
         }
         .docs-sidebar a:hover { color: var(--link-color); }
+        @media (prefers-color-scheme: dark) {
+          .docs-sidebar a { color: #ffffff; }
+        }
         .docs-main {
           margin-left: 260px;
           flex: 1;
@@ -186,20 +189,20 @@ const DocsPage: React.FC = () => {
               <li>
                 <a href="#product-categories" style={{ padding: '3px 0' }}>Product Categories</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
-                  <li><a href="#virtual-machines" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Virtual Machines</a></li>
-                  <li><a href="#databases" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Databases</a></li>
-                  <li><a href="#serverless" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Serverless</a></li>
-                  <li><a href="#containers" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Containers</a></li>
-                  <li><a href="#networking" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Networking</a></li>
-                  <li><a href="#data--analytics" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Data &amp; Analytics</a></li>
+                  <li><a href="#virtual-machines" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Virtual Machines</a></li>
+                  <li><a href="#databases" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Databases</a></li>
+                  <li><a href="#serverless" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Serverless</a></li>
+                  <li><a href="#containers" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Containers</a></li>
+                  <li><a href="#networking" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Networking</a></li>
+                  <li><a href="#data--analytics" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data &amp; Analytics</a></li>
                 </ul>
               </li>
               <li>
                 <a href="#pricing-data" style={{ padding: '3px 0' }}>Pricing Data</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
-                  <li><a href="#sources" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Sources</a></li>
-                  <li><a href="#normalization" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Normalization</a></li>
-                  <li><a href="#accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0', color: 'var(--muted-text)' }}>Accuracy</a></li>
+                  <li><a href="#sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Sources</a></li>
+                  <li><a href="#normalization" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Normalization</a></li>
+                  <li><a href="#accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Accuracy</a></li>
                 </ul>
               </li>
               <li><a href="#filters" style={{ padding: '3px 0' }}>Filters</a></li>

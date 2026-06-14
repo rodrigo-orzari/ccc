@@ -18,6 +18,7 @@ import {
   SERVERLESS_LANGUAGES, SERVERLESS_COLD_START_OPTIONS, SERVERLESS_TIMEOUT_OPTIONS,
   SERVERLESS_MEMORY_CONFIG_OPTIONS, SERVERLESS_FREE_TIER_OPTIONS, SERVERLESS_GRANULARITY_OPTIONS,
   SERVERLESS_EXECUTION_MODEL_OPTIONS, SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS, SERVERLESS_EPHEMERAL_STORAGE_OPTIONS,
+  SERVERLESS_MEMORY_TIERS, SERVERLESS_ARCHITECTURES,
   CONTAINERS_ORCHESTRATORS, CONTAINERS_COMPUTE_TYPES, CONTAINERS_ARCHITECTURES, CONTAINERS_BILLING_GRANULARITY,
   NETWORKING_SERVICES, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
   NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
@@ -75,6 +76,8 @@ export default function Dashboard() {
   const [selectedServerlessExecutionModel, setSelectedServerlessExecutionModel] = useState<string[]>([...SERVERLESS_EXECUTION_MODEL_OPTIONS]);
   const [selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency] = useState<string[]>([...SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]);
   const [selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage] = useState<string[]>([...SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]);
+  const [selectedServerlessMemory, setSelectedServerlessMemory] = useState<string[]>([...SERVERLESS_MEMORY_TIERS]);
+  const [selectedServerlessArchitectures, setSelectedServerlessArchitectures] = useState<string[]>([...SERVERLESS_ARCHITECTURES]);
 
   const [selectedContainersOrchestrators, setSelectedContainersOrchestrators] = useState<string[]>([...CONTAINERS_ORCHESTRATORS]);
   const [selectedContainersComputeTypes, setSelectedContainersComputeTypes] = useState<string[]>([...CONTAINERS_COMPUTE_TYPES]);
@@ -212,6 +215,8 @@ export default function Dashboard() {
     subset('serverlessExecutionModel', selectedServerlessExecutionModel, SERVERLESS_EXECUTION_MODEL_OPTIONS);
     subset('serverlessProvisionedConcurrency', selectedServerlessProvisionedConcurrency, SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS);
     subset('serverlessEphemeralStorage', selectedServerlessEphemeralStorage, SERVERLESS_EPHEMERAL_STORAGE_OPTIONS);
+    subset('serverlessMemory', selectedServerlessMemory, SERVERLESS_MEMORY_TIERS);
+    subset('serverlessArchitecture', selectedServerlessArchitectures, SERVERLESS_ARCHITECTURES);
     subset('containersOrchestrators', selectedContainersOrchestrators, CONTAINERS_ORCHESTRATORS);
     subset('containersComputeTypes', selectedContainersComputeTypes, CONTAINERS_COMPUTE_TYPES);
     subset('containersArchitectures', selectedContainersArchitectures, CONTAINERS_ARCHITECTURES);
@@ -250,6 +255,7 @@ export default function Dashboard() {
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
+    selectedServerlessMemory, selectedServerlessArchitectures,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
@@ -302,7 +308,9 @@ export default function Dashboard() {
       selectedServerlessGranularity.length === 0 ||
       selectedServerlessExecutionModel.length === 0 ||
       selectedServerlessProvisionedConcurrency.length === 0 ||
-      selectedServerlessEphemeralStorage.length === 0
+      selectedServerlessEphemeralStorage.length === 0 ||
+      selectedServerlessMemory.length === 0 ||
+      selectedServerlessArchitectures.length === 0
     )) return false;
 
     if (activeProductType === 'containers' && (
@@ -331,6 +339,7 @@ export default function Dashboard() {
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout,
     selectedServerlessMemoryConfig, selectedServerlessFreeTier, selectedServerlessGranularity,
     selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
+    selectedServerlessMemory, selectedServerlessArchitectures,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures,
     selectedContainersBillingGranularity,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes,
@@ -462,21 +471,21 @@ export default function Dashboard() {
       return;
     }
 
-    let headers: string[] = ['Provider', 'SKU', 'Geography', 'Price (USD)', 'Source'];
+    let headers: string[] = ['Provider', 'Configuration', 'Geography', 'Price (USD)', 'Source'];
     if (activeProductType === 'database') {
-      headers = ['Provider', 'SKU', 'Engine', 'Tier', 'Deployment', 'HA Mode', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Configuration', 'Engine', 'Tier', 'Deployment', 'HA Mode', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'serverless') {
-      headers = ['Provider', 'SKU', 'Languages', 'Cold Start (ms)', 'Timeout (sec)', 'Memory Config', 'Free Tier', 'Granularity', 'Execution Model', 'Provisioned Concurrency', 'Max Storage (GB)', 'Invocation Price ($/1M)', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Configuration', 'Memory (GB)', 'Architecture', 'Languages', 'Cold Start (ms)', 'Timeout (sec)', 'Memory Config', 'Free Tier', 'Granularity', 'Execution Model', 'Provisioned Concurrency', 'Max Storage (GB)', 'Invocation Price ($/1M)', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'containers') {
-      headers = ['Provider', 'SKU', 'Orchestrator', 'Compute Type', 'Architecture', 'Billing Granularity', 'GPU', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Configuration', 'Orchestrator', 'Compute Type', 'Architecture', 'Billing Granularity', 'GPU', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'networking') {
-      headers = ['Provider', 'SKU', 'Service', 'Category', 'Transfer Tier', 'Destination', 'Included Transfer', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Configuration', 'Service', 'Category', 'Transfer Tier', 'Destination', 'Included Transfer', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'data-analytics') {
-      headers = ['Provider', 'SKU', 'Engine', 'Deployment Type', 'Tier', 'Compute Unit', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Configuration', 'Engine', 'Deployment Type', 'Tier', 'Compute Unit', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'ai') {
-      headers = ['Provider', 'SKU', 'Service', 'Model Tier', 'Context Window', 'Multimodal', 'Geography', 'Input Price (/1M)', 'Output Price (/1M)', 'Source'];
+      headers = ['Provider', 'Configuration', 'Service', 'Model Tier', 'Context Window', 'Multimodal', 'Geography', 'Input Price (/1M)', 'Output Price (/1M)', 'Source'];
     } else {
-      headers = ['Provider', 'SKU', 'Category', 'CPU Vendor', 'Architecture', 'OS', 'GPU', 'vCPU', 'Memory (GB)', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Configuration', 'Category', 'CPU Vendor', 'Architecture', 'OS', 'GPU', 'vCPU', 'Memory (GB)', 'Geography', 'Price (USD)', 'Source'];
     }
 
     const rows = data.map(record => {
@@ -485,7 +494,7 @@ export default function Dashboard() {
       if (activeProductType === 'database') {
         return [record.provider, record.instance_type, record.attributes?.engine || '', record.category || '', record.attributes?.deployment_type || '', record.attributes?.ha_mode || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'serverless') {
-        return [record.provider, record.instance_type, record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join('; ') : record.attributes.supportedLanguages) : '', record.attributes?.cold_start_overhead_ms || '', record.attributes?.timeout_seconds || '', record.attributes?.memory_configuration || '', record.attributes?.free_invocations_per_month ? 'Yes' : 'No', record.attributes?.billing_granularity_ms || '', record.attributes?.execution_model || '', record.attributes?.provisioned_concurrency_support || '', record.attributes?.max_ephemeral_storage_gb || '', record.attributes?.invocation_price_per_1m || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
+        return [record.provider, record.instance_type, record.memory_gb || '', record.arch === 'x86 64' ? 'x86' : (record.arch || ''), record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join('; ') : record.attributes.supportedLanguages) : '', record.attributes?.cold_start_overhead_ms || '', record.attributes?.timeout_seconds || '', record.attributes?.memory_configuration || '', record.attributes?.free_invocations_per_month ? 'Yes' : 'No', record.attributes?.billing_granularity_ms || '', record.attributes?.execution_model || '', record.attributes?.provisioned_concurrency_support || '', record.attributes?.max_ephemeral_storage_gb || '', record.attributes?.invocation_price_per_1m || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'containers') {
         return [record.provider, record.instance_type, record.attributes?.orchestrator || '', record.attributes?.compute_type || '', record.attributes?.architecture || '', record.attributes?.billing_granularity || '', record.gpu_count > 0 ? 'Yes' : 'No', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'networking') {
@@ -538,6 +547,8 @@ export default function Dashboard() {
           selectedServerlessExecutionModel={selectedServerlessExecutionModel}
           selectedServerlessProvisionedConcurrency={selectedServerlessProvisionedConcurrency}
           selectedServerlessEphemeralStorage={selectedServerlessEphemeralStorage}
+          selectedServerlessMemory={selectedServerlessMemory}
+          selectedServerlessArchitectures={selectedServerlessArchitectures}
           selectedContainersOrchestrators={selectedContainersOrchestrators}
           selectedContainersComputeTypes={selectedContainersComputeTypes}
           selectedContainersArchitectures={selectedContainersArchitectures}
@@ -585,6 +596,8 @@ export default function Dashboard() {
           onServerlessExecutionModelToggle={(e) => toggleFilter(selectedServerlessExecutionModel, setSelectedServerlessExecutionModel, e)}
           onServerlessProvisionedConcurrencyToggle={(p) => toggleFilter(selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency, p)}
           onServerlessEphemeralStorageToggle={(e) => toggleFilter(selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage, e)}
+          onServerlessMemoryToggle={(m) => toggleFilter(selectedServerlessMemory, setSelectedServerlessMemory, m)}
+          onServerlessArchitectureToggle={(a) => toggleFilter(selectedServerlessArchitectures, setSelectedServerlessArchitectures, a)}
           onContainersOrchestratorToggle={(o) => toggleFilter(selectedContainersOrchestrators, setSelectedContainersOrchestrators, o)}
           onContainersComputeTypeToggle={(c) => toggleFilter(selectedContainersComputeTypes, setSelectedContainersComputeTypes, c)}
           onContainersArchitectureToggle={(a) => toggleFilter(selectedContainersArchitectures, setSelectedContainersArchitectures, a)}
@@ -625,6 +638,8 @@ export default function Dashboard() {
           onSetServerlessExecutionModel={setSelectedServerlessExecutionModel}
           onSetServerlessProvisionedConcurrency={setSelectedServerlessProvisionedConcurrency}
           onSetServerlessEphemeralStorage={setSelectedServerlessEphemeralStorage}
+          onSetServerlessMemory={setSelectedServerlessMemory}
+          onSetServerlessArchitectures={setSelectedServerlessArchitectures}
           onSetContainersOrchestrators={setSelectedContainersOrchestrators}
           onSetContainersComputeTypes={setSelectedContainersComputeTypes}
           onSetContainersArchitectures={setSelectedContainersArchitectures}

@@ -35,6 +35,7 @@ const COL_MID4       = C('ha_mode_os',            100);
 const COL_GPU        = C('gpu',                    70);
 
 // Serverless-specific
+const COL_ARCH       = C('arch',                   90);
 const COL_LANG       = C('languages',             160);
 const COL_GRAN       = C('granularity',           100);
 const COL_EXEC       = C('exec_model',            130);
@@ -45,7 +46,7 @@ const COL_INV        = C('inv_price',             140);
 const ALL_DEFS: ColDef[] = [
   COL_PROVIDER, COL_SKU, COL_GEO, COL_VCPU, COL_MEM, COL_PRICE, COL_SOURCE,
   COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU,
-  COL_LANG, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV,
+  COL_ARCH, COL_LANG, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV,
 ];
 
 const DEFAULT_WIDTHS: Record<string, number> =
@@ -61,7 +62,7 @@ function getColDefs(pt: ProductType): ColDef[] {
 
   if (pt === 'vm')           return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tailWithSpecs];
   if (pt === 'database')     return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, ...tailWithSpecs];
-  if (pt === 'serverless')   return [...start, COL_LANG, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, ...tailWithSpecs];
+  if (pt === 'serverless')   return [...start, COL_ARCH, COL_LANG, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, ...tailWithSpecs];
   if (pt === 'containers')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tailWithSpecs];
   if (pt === 'networking')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tail];
   if (pt === 'data-analytics') return [...start, COL_MID1, COL_MID3, COL_MID2, COL_VCPU, ...tail];
@@ -185,6 +186,16 @@ export default function PricingTable({
     ? Math.max(...data.map(r => Number(r.attributes?.invocation_price_per_1m) || 0))
     : 0;
 
+  // For VMs, databases, and AI the name is the provider's real instance/model
+  // identifier (e.g. m8a.12xlarge, db.r8i.4xlarge, GPT-5.4) and is searchable in
+  // the provider's catalog. For serverless/containers/networking/analytics the
+  // name is a normalized configuration the tool defines for comparison and may not
+  // match an official provider SKU — flag that so users don't search for it in vain.
+  const isRealSku = ['vm', 'database', 'ai'].includes(activeProductType);
+  const skuTooltip = isRealSku
+    ? "Provider instance/model identifier — searchable in the provider's catalog."
+    : "Normalized configuration for cross-provider comparison — not an official provider SKU. Verify exact pricing on the provider's pricing page.";
+
   // Helper: build a <th> with sort + resize handle
   const Th = ({
     colKey, sortKey, label, className = '',
@@ -268,7 +279,7 @@ export default function PricingTable({
               <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
 
                 <Th colKey="provider"       sortKey="provider"       label="Provider" />
-                <Th colKey="instance_type"  sortKey="instance_type"  label="SKU" />
+                <Th colKey="instance_type"  sortKey="instance_type"  label={<span title={skuTooltip} style={{ cursor: 'help' }}>Configuration <span style={{ opacity: 0.45, fontWeight: 400 }}>ⓘ</span></span>} />
 
                 {/* ── Product-type-specific middle columns ── */}
                 {activeProductType === 'database' ? (<>
@@ -287,6 +298,7 @@ export default function PricingTable({
                   <Th colKey="db_family_cpu_vendor" sortKey="attributes.contextWindowK" label="Context Window" />
                   <Th colKey="ha_mode_os"         sortKey="attributes.multimodal"      label="Multimodal" />
                 </>) : activeProductType === 'serverless' ? (<>
+                  <Th colKey="arch"               sortKey="arch"      label="Arch" />
                   <Th colKey="languages"          label="Languages" />
                   <Th colKey="engine_category"    label="Cold Start (ms)" />
                   <Th colKey="db_family_cpu_vendor" label="Timeout (sec)" />
@@ -424,6 +436,7 @@ function TableRow({
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.contextWindowK ? `${record.attributes.contextWindowK}K` : '—'}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.multimodal || '—'}</span></td>
       </>) : activeProductType === 'serverless' ? (<>
+        <td data-col="arch"                className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}</span></td>
         <td data-col="languages"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join(', ') : record.attributes.supportedLanguages) : '—'}</span></td>
         <td data-col="engine_category"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds ? (Number(record.attributes.timeout_seconds) >= 60 ? `${Number(record.attributes.timeout_seconds) / 60} min` : `${record.attributes.timeout_seconds} sec`) : '—'}</span></td>
