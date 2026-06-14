@@ -41,6 +41,13 @@ export const CONTAINERS_BILLING_GRANULARITY = ['Second', 'Hour'];
 
 // Networking-specific constants
 export const NETWORKING_SERVICES = ['Data Transfer', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway'];
+// Display-only grouping for the Service filter chips. Every NETWORKING_SERVICES
+// entry must appear in exactly one group. Filtering logic still uses the flat list.
+export const NETWORKING_SERVICE_GROUPS: { label: string; services: string[] }[] = [
+  { label: 'Core & Transfer', services: ['Data Transfer', 'Virtual Private Cloud (VPC)'] },
+  { label: 'Connectivity & Gateways', services: ['VPN Gateway', 'NAT Gateway', 'Dedicated Connection'] },
+  { label: 'Delivery & Addressing', services: ['Load Balancing', 'Public IPv4'] },
+];
 export const NETWORKING_CONNECTION_TYPES = ['Multipoint', 'Point-to-Point'];
 export const NETWORKING_ROUTING_TYPES = ['Dynamic', 'Fixed'];
 export const NETWORKING_HA_SUPPORT = ['Yes', 'No'];

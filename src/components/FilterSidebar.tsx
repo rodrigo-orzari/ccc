@@ -14,7 +14,7 @@ import {
   SERVERLESS_EXECUTION_MODEL_OPTIONS, SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS, SERVERLESS_EPHEMERAL_STORAGE_OPTIONS,
   SERVERLESS_MEMORY_TIERS, SERVERLESS_ARCHITECTURES,
   CONTAINERS_ORCHESTRATORS, CONTAINERS_COMPUTE_TYPES, CONTAINERS_ARCHITECTURES, CONTAINERS_BILLING_GRANULARITY,
-  NETWORKING_SERVICES, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
+  NETWORKING_SERVICES, NETWORKING_SERVICE_GROUPS, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
   NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
   NETWORKING_BILLING_MODELS, NETWORKING_USAGE_TIERS, NETWORKING_PORT_CAPACITIES, NETWORKING_TRANSFER_SCOPES,
   ANALYTICS_ENGINES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_TIERS,
@@ -109,6 +109,83 @@ const FilterSection = ({
       </div>
     )}
   </section>
+  );
+};
+
+interface GroupedFilterSectionProps {
+  title: string;
+  tooltip: string;
+  groups: { label: string; services: string[] }[];
+  allOptions: string[];
+  selected: string[];
+  onToggle: (item: string) => void;
+  onSetAll: (items: string[]) => void;
+  isExpanded: boolean;
+  onToggleExpand: () => void;
+}
+
+// Like FilterSection, but renders chips organized under labeled sub-groups.
+// Select All / Clear All operate on the full flat option list.
+const GroupedFilterSection = ({
+  title,
+  tooltip,
+  groups,
+  allOptions,
+  selected,
+  onToggle,
+  onSetAll,
+  isExpanded,
+  onToggleExpand,
+}: GroupedFilterSectionProps) => {
+  const allSelected = selected.length === allOptions.length;
+  return (
+    <section className="space-y-3">
+      <div className="flex items-center justify-between">
+        <h2 className="m-0">
+          <button
+            onClick={onToggleExpand}
+            className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+          >
+            <ChevronDown size={10} className={`transition-transform ${isExpanded ? '' : '-rotate-90'}`} />
+            {title} {tooltip && <Tooltip text={tooltip}><Info size={10} className="cursor-help" /></Tooltip>}
+          </button>
+        </h2>
+        <button
+          onClick={() => (allSelected ? onSetAll([]) : onSetAll(allOptions))}
+          className={`text-[10px] font-bold uppercase transition-colors ${
+            allSelected ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'
+          }`}
+        >
+          {allSelected ? 'Clear All' : 'Select All'}
+        </button>
+      </div>
+      {isExpanded && (
+        <div className="flex flex-col gap-3">
+          {groups.map(group => (
+            <div key={group.label} className="space-y-1.5">
+              <div className="text-[9px] font-bold text-[#a3a3a3] dark:text-[#525252] uppercase tracking-widest pl-0.5">
+                {group.label}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {group.services.map(option => (
+                  <button
+                    key={option}
+                    onClick={() => onToggle(option)}
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                      selected.includes(option)
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                        : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
   );
 };
 
@@ -884,10 +961,11 @@ export default function FilterSidebar({
               onToggleExpand={() => onToggleSection('geography')}
             />
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
+            <GroupedFilterSection
               title="Service"
-              tooltip="Networking service type."
-              options={NETWORKING_SERVICES}
+              tooltip="Networking service type, grouped by function."
+              groups={NETWORKING_SERVICE_GROUPS}
+              allOptions={NETWORKING_SERVICES}
               selected={selectedNetworkingServices}
               onToggle={onNetworkingServiceToggle}
               onSetAll={onSetNetworkingServices}
