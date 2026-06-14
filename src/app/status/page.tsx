@@ -406,6 +406,35 @@ export default function StatusPage() {
                 </div>
               </div>
 
+              {/* Data source legend */}
+              <div
+                style={{
+                  border: '1px solid var(--border)',
+                  borderRadius: 8,
+                  background: 'var(--surface)',
+                  padding: '1rem 1.25rem',
+                  marginBottom: '2.5rem',
+                }}
+              >
+                <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', marginBottom: '0.75rem' }}>
+                  What the data sources mean
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: 12.5, color: 'var(--text)' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                    <span style={{ flexShrink: 0 }}><SourceBadge source="api" apiCount={0} staticCount={0} /></span>
+                    <span>Pricing fetched <strong>live from the provider's pricing API</strong> during the most recent ingestion run. Most current and authoritative.</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                    <span style={{ flexShrink: 0 }}><SourceBadge source="static" apiCount={0} staticCount={0} /></span>
+                    <span>Pricing from a <strong>curated fallback we maintain by hand</strong>, used when a provider has no usable live API or a live fetch fails. Accurate as of the last update but not auto-refreshed.</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                    <span style={{ flexShrink: 0 }}><SourceBadge source="mixed" apiCount={0} staticCount={0} /></span>
+                    <span>The category contains <strong>both</strong> live-API and static-config records.</span>
+                  </div>
+                </div>
+              </div>
+
               {/* Provider cards */}
               {status.providers.map(provider => {
                 const color = PROVIDER_COLORS[provider.slug] ?? '#888';
