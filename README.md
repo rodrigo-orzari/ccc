@@ -25,7 +25,7 @@ You can also support us by scanning the QR code below:
 
 ## 1. What Problem Does This Application Solve?
 In modern cloud engineering and FinOps, **apples-to-apples price comparison** across multiple cloud providers is a major pain point. 
-* Cloud providers (AWS, Azure, GCP, Oracle, DigitalOcean) structure their pricing cards differently, publish rate details in disjoint formats, and use proprietary terminology (e.g., Droplets vs. EC2 vs. Virtual Machines).
+* Cloud providers (AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba) structure their pricing cards differently, publish rate details in disjoint formats, and use proprietary terminology (e.g., Droplets vs. EC2 vs. Virtual Machines).
 * Finding the most cost-effective region, instance type, architecture (e.g., x86 vs. ARM), or memory-to-vCPU ratio for a specific workload requires engineers to either browse individual price calculators or build custom spreadsheets.
 * Existing FinOps tools generally focus on **reactive analysis** (analyzing bills *after* deployment) rather than **proactive planning** (matching workloads to optimal providers *before* deployment).
 
@@ -72,11 +72,20 @@ _ccc/
 │
 ├── src/
 │   ├── app/                           # Next.js App Router (pages and API routes)
+│   │   ├── page.tsx                   # Main Dashboard UI
+│   │   ├── api/                       # Backend API routes
+│   │   ├── status/                    # Application Status page
+│   │   └── ...                        # Static documentation pages (about, terms, etc.)
+│   │
 │   ├── workers/                       # Background worker processes (e.g., cron jobs)
 │   ├── index.css                      # Global Tailwind + custom styles
 │   │
 │   ├── db/
 │   │   └── schema.sql                 # PostgreSQL schema definitions
+│   │
+│   ├── lib/
+│   │   ├── api-utils.ts               # Centralized data fetching and filtering hooks
+│   │   └── db.ts                      # Database connection utilities
 │   │
 │   ├── services/
 │   │   ├── pricing_pipeline.ts        # VM instance pricing aggregation
@@ -93,31 +102,14 @@ _ccc/
 │   │   └── ingest.ts                  # CLI tool for manual pricing fetch
 │   │
 │   ├── config/
-│   │   ├── aws_serverless.ts          # Lambda pricing fallback
-│   │   ├── azure_serverless.ts        # Azure Functions pricing fallback
-│   │   ├── gcp_serverless.ts          # Cloud Functions pricing fallback
-│   │   ├── digitalocean_serverless.ts # DigitalOcean Functions config
-│   │   ├── oracle_serverless.ts       # Oracle Functions config
-│   │   ├── aws_containers.ts          # AWS containers pricing config
-│   │   ├── azure_containers.ts        # Azure containers pricing config
-│   │   ├── gcp_containers.ts          # GCP containers pricing config
-│   │   ├── digitalocean_containers.ts # DigitalOcean containers config
-│   │   ├── oracle_containers.ts       # Oracle containers config
-│   │   ├── database_instances.ts      # Database products config
-│   │   ├── digitalocean_instances.ts  # DigitalOcean instances config
-│   │   ├── gcp_instances.ts           # Google Cloud instances config
-│   │   └── oracle_instances.ts        # Oracle instances config
-│   │
-│   ├── pages/
-│   │   ├── Dashboard.tsx              # Main comparison UI (filters + table)
-│   │   ├── About.tsx                  # About page (markdown)
-│   │   ├── Methodology.tsx            # Methodology page (markdown)
-│   │   ├── PrivacyPolicy.tsx          # Privacy policy (markdown)
-│   │   ├── Support.tsx                # Support page (markdown)
-│   │   └── TermsOfUse.tsx             # Terms of use (markdown)
+│   │   ├── *_{serverless,containers,instances}.ts # Provider-specific fallback configs (AWS, Azure, GCP, Oracle, DO, Alibaba)
+│   │   ├── ai_models.ts               # AI Foundation Models config
+│   │   └── *_data_analytics.ts        # Data Analytics & Data Warehouse configs
 │   │
 │   └── components/
-│       └── MarkdownPage.tsx           # Reusable markdown renderer
+│       ├── FilterSidebar.tsx          # Dynamic filter sidebar UI
+│       ├── PricingTable.tsx           # Interactive data table
+│       └── ChartsToggle.tsx           # Data visualizations component
 │
 ├── .next/                             # Production build output (generated)
 ├── node_modules/                      # Dependencies (generated)
@@ -143,13 +135,13 @@ _ccc/
 
 **Database:**
 * [src/db/schema.sql](./src/db/schema.sql): PostgreSQL schema definitions:
-  * `providers`: Cloud companies (aws, azure, gcp, oracle, digitalocean)
+  * `providers`: Cloud companies (aws, azure, gcp, oracle, digitalocean, alibaba)
   * `regions`: Cloud regions per provider
   * `services`: Service lines per provider (EC2, RDS, Virtual Machines, etc.)
   * `pricing_records`: Instance/database pricing with specs (vCPUs, memory, price, etc.)
 
 **Data Pipelines (`src/services/`):**
-* [pricing_pipeline.ts](./src/services/pricing_pipeline.ts): VM pricing aggregation from AWS, Azure, GCP, Oracle, DigitalOcean. Handles normalization, CPU vendor detection, geography mapping, and price drift alerts.
+* [pricing_pipeline.ts](./src/services/pricing_pipeline.ts): VM pricing aggregation from AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba. Handles normalization, CPU vendor detection, geography mapping, and price drift alerts.
 * [database_pipeline.ts](./src/services/database_pipeline.ts): Database product pricing (RDS, Cloud SQL, Azure SQL, etc.) with attributes for engines, HA modes, tiers.
 * [serverless_pipeline.ts](./src/services/serverless_pipeline.ts): Serverless compute pricing (Lambda, Cloud Functions, Azure Functions).
 * [mailer.ts](./src/services/mailer.ts): Email notifications for price drift and data staleness alerts.
@@ -158,10 +150,11 @@ _ccc/
 **Configuration Fallbacks (`src/config/`):**
 * Hardcoded pricing configs for each cloud provider, used when live APIs are unavailable or rate-limited.
 
-**Frontend (`src/pages/` & `src/components/`):**
-* [Dashboard.tsx](./src/pages/Dashboard.tsx): Main UI with filters, interactive table, range sliders, and multi-column sorting.
-* Static pages (About, Methodology, Privacy, Support, Terms) rendered as markdown.
-* [MarkdownPage.tsx](./src/components/MarkdownPage.tsx): Helper component for safe markdown rendering.
+**Frontend (`src/app/` & `src/components/`):**
+* [src/app/page.tsx](./src/app/page.tsx): Main Dashboard entry point mapping state to the main UI.
+* [src/components/FilterSidebar.tsx](./src/components/FilterSidebar.tsx): Dynamic sidebar that adapts filters based on the selected product category.
+* Static pages (`about/`, `methodology/`, `privacy/`, `support/`, `terms/`, `status/`) rendered via App Router.
+* Data fetching and filter hook logic is centralized within [src/lib/api-utils.ts](./src/lib/api-utils.ts).
 
 ---
 
@@ -262,7 +255,7 @@ The backend endpoints used by the dashboard are structured as Next.js API Routes
 **For API documentation and examples**, see [PROJECT_ANALYSIS.md — Section 5](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — API Request/Response Cycles](./ARCHITECTURE_DIAGRAMS.md).
 
 ### D. The Comparative Frontend Dashboard
-[src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) binds this dataset to the UI:
+[src/app/page.tsx](./src/app/page.tsx) binds this dataset to the UI:
 * **Product Views**: Users can toggle between `Virtual Machines`, `Databases`, `Serverless`, `Containers`, `Networking`, and `Data & Analytics`, which dynamically adjusts available filters depending on the selected product (e.g. OS and CPU vendor filters for VMs vs. Execution Model and Cold Start filters for Serverless).
 * **Sidebar Controls**: Features multi-select pills (Providers, Geographies, Engines, categories) and responsive range sliders (`RangeSlider`) to narrow down configurations by minimum/maximum values. The UI utilizes `@tanstack/react-query` to manage data fetching and intelligently cache responses while interacting with sliders and filters.
 * **View Toggles (Table vs. Charts)**: Users can seamlessly switch between a tabular dense grid and analytical charts to understand data visually.
@@ -288,7 +281,7 @@ The backend endpoints used by the dashboard are structured as Next.js API Routes
 ---|---
 Understand the data model | [PROJECT_ANALYSIS.md § 3](./PROJECT_ANALYSIS.md) + [src/db/schema.sql](./src/db/schema.sql)
 Work on pricing pipelines | [PROJECT_ANALYSIS.md § 4](./PROJECT_ANALYSIS.md) + [src/services/pricing_pipeline.ts](./src/services/pricing_pipeline.ts)
-Build frontend features | [PROJECT_ANALYSIS.md § 6](./PROJECT_ANALYSIS.md) + [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx)
+Build frontend features | [PROJECT_ANALYSIS.md § 6](./PROJECT_ANALYSIS.md) + [src/app/page.tsx](./src/app/page.tsx)
 Secure the application | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) + [SECURITY_FIXES.md](./SECURITY_FIXES.md)
 Deploy to production | [OPERATIONS_RUNBOOK.md § 4](./OPERATIONS_RUNBOOK.md) + [Section 5 above](#5-security--deployment)
 Add a new cloud provider | [PROJECT_ANALYSIS.md § 4.3](./PROJECT_ANALYSIS.md)
@@ -301,7 +294,7 @@ Troubleshoot issues | [OPERATIONS_RUNBOOK.md § 9](./OPERATIONS_RUNBOOK.md)
 | Server entry point | [server.ts](./server.ts) |
 | Database schema | [src/db/schema.sql](./src/db/schema.sql) |
 | Pricing pipelines | [src/services/pricing_pipeline.ts](./src/services/pricing_pipeline.ts), [database_pipeline.ts](./src/services/database_pipeline.ts) |
-| Frontend UI | [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) |
+| Frontend UI | [src/app/page.tsx](./src/app/page.tsx) |
 | Email alerts | [src/services/mailer.ts](./src/services/mailer.ts) |
 | Security audit | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) |
 | Security fixes | [SECURITY_FIXES.md](./SECURITY_FIXES.md) |
