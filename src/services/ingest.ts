@@ -9,6 +9,8 @@ import { ContainersPricingPipeline } from './containers_pipeline';
 import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline';
 import { NetworkingPricingPipeline } from './networking_pipeline';
 import { StoragePricingPipeline } from './storage_pipeline';
+import { AppHostingPricingPipeline } from './app_hosting_pipeline';
+import { IntegrationPricingPipeline } from './integration_pipeline';
 
 
 async function main() {
@@ -108,7 +110,31 @@ async function main() {
       }
     });
 
-    console.log('\n✨ Pricing data ingestion complete!');
+    console.log('\n📊 Computing App Hosting Pricing...');
+    // Run app hosting pricing pipeline
+    const appHostingPipeline = new AppHostingPricingPipeline(sql as any);
+    const appHostingResults = await appHostingPipeline.run();
+    appHostingResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} App Hosting configurations`);
+      } else {
+        console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Integration Pricing...');
+    // Run integration pricing pipeline
+    const integrationPipeline = new IntegrationPricingPipeline(sql as any);
+    const integrationResults = await integrationPipeline.run();
+    integrationResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} Integration configurations`);
+      } else {
+        console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
+      }
+    });
+
+    console.log('\n✅ All pipelines completed successfully.');
     process.exit(0);
   } catch (error) {
     console.error('❌ Fatal error:', error);

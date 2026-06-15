@@ -1130,45 +1130,48 @@ export default function FilterSidebar({
               onToggle={onStorageCategoryToggle}
               onSetAll={onSetStorageCategories}
               isExpanded={expanded.storageCategory ?? true}
-              isExpanded={expanded['Storage Types'] ?? true}
-              onToggleExpand={() => onToggleExpand('Storage Types')}
+              onToggleExpand={() => onToggleSection('storageCategory')}
             />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
-              title="Storage Tiers"
-              tooltip="Performance and access frequency tiers"
+              title="Tier"
+              tooltip="Access tier: Standard (hot), Infrequent (cool), or Cold (archive)."
               options={config.STORAGE_TIERS}
               selected={selectedStorageTiers}
               onToggle={onStorageTierToggle}
               onSetAll={onSetStorageTiers}
-              isExpanded={expanded['Storage Tiers'] ?? true}
-              onToggleExpand={() => onToggleExpand('Storage Tiers')}
+              isExpanded={expanded.storageTier ?? true}
+              onToggleExpand={() => onToggleSection('storageTier')}
             />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Redundancy"
-              tooltip="Data replication and redundancy strategy"
+              tooltip="Replication scope: Single-Zone, Zone-Redundant, or Geo-Redundant."
               options={config.STORAGE_REDUNDANCIES}
               selected={selectedStorageRedundancies}
               onToggle={onStorageRedundancyToggle}
               onSetAll={onSetStorageRedundancies}
-              isExpanded={expanded['Redundancy'] ?? true}
-              onToggleExpand={() => onToggleExpand('Redundancy')}
+              isExpanded={expanded.storageRedundancy ?? true}
+              onToggleExpand={() => onToggleSection('storageRedundancy')}
             />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
-              title="Media Type"
-              tooltip="Underlying storage media"
+              title="Media"
+              tooltip="Underlying media (SSD or HDD). Applies to block and some file storage."
               options={config.STORAGE_MEDIA}
               selected={selectedStorageMedia}
               onToggle={onStorageMediaToggle}
               onSetAll={onSetStorageMedia}
-              isExpanded={expanded['Media Type'] ?? true}
-              onToggleExpand={() => onToggleExpand('Media Type')}
+              isExpanded={expanded.storageMedia ?? true}
+              onToggleExpand={() => onToggleSection('storageMedia')}
             />
-          </div>
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
         )}
 
         {/* App Hosting Specific Filters */}
         {activeProductType === 'app-hosting' && (
-          <div className="space-y-6">
+          <>
             <FilterSection
               title="App Hosting Tiers"
               tooltip="Pricing and capability tier of the hosting service"
@@ -1176,9 +1179,10 @@ export default function FilterSidebar({
               selected={selectedAppHostingTiers}
               onToggle={onAppHostingTierToggle}
               onSetAll={onSetAppHostingTiers}
-              isExpanded={expanded['App Hosting Tiers'] ?? true}
-              onToggleExpand={() => onToggleExpand('App Hosting Tiers')}
+              isExpanded={expanded.appHostingTiers ?? true}
+              onToggleExpand={() => onToggleSection('appHostingTiers')}
             />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Compute Type"
               tooltip="Whether the underlying compute resources are shared or dedicated"
@@ -1186,15 +1190,16 @@ export default function FilterSidebar({
               selected={selectedAppHostingComputeTypes}
               onToggle={onAppHostingComputeTypeToggle}
               onSetAll={onSetAppHostingComputeTypes}
-              isExpanded={expanded['Compute Type'] ?? true}
-              onToggleExpand={() => onToggleExpand('Compute Type')}
+              isExpanded={expanded.appHostingComputeTypes ?? true}
+              onToggleExpand={() => onToggleSection('appHostingComputeTypes')}
             />
-          </div>
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
         )}
 
         {/* Integration Specific Filters */}
         {activeProductType === 'integration' && (
-          <div className="space-y-6">
+          <>
             <FilterSection
               title="Integration Categories"
               tooltip="Type of integration service"
@@ -1202,9 +1207,10 @@ export default function FilterSidebar({
               selected={selectedIntegrationCategories}
               onToggle={onIntegrationCategoryToggle}
               onSetAll={onSetIntegrationCategories}
-              isExpanded={expanded['Integration Categories'] ?? true}
-              onToggleExpand={() => onToggleExpand('Integration Categories')}
+              isExpanded={expanded.integrationCategories ?? true}
+              onToggleExpand={() => onToggleSection('integrationCategories')}
             />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Integration Tiers"
               tooltip="Performance and capability tier"
@@ -1212,10 +1218,11 @@ export default function FilterSidebar({
               selected={selectedIntegrationTiers}
               onToggle={onIntegrationTierToggle}
               onSetAll={onSetIntegrationTiers}
-              isExpanded={expanded['Integration Tiers'] ?? true}
-              onToggleExpand={() => onToggleExpand('Integration Tiers')}
+              isExpanded={expanded.integrationTiers ?? true}
+              onToggleExpand={() => onToggleSection('integrationTiers')}
             />
-          </div>
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
         )}
 
         {/* Data Analytics filters */}
