@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "src/services/ingest.ts": {
-    "mtime": 1781501619.7912457,
-    "ast_hash": "055f820e7c64bb88043a79dd3cdf3867",
+    "mtime": 1780619052.4608793,
+    "ast_hash": "21291a6a747a8aa8b53393fbcc8d86d0",
     "semantic_hash": ""
   },
   "src/services/mailer.ts": {
@@ -320,8 +320,8 @@
     "semantic_hash": ""
   },
   "src/app/api/admin/fetch-pricing/route.ts": {
-    "mtime": 1781501631.477459,
-    "ast_hash": "c71e6fbf8cd32ca79e29fddbc6f1e609",
+    "mtime": 1780791112.3445318,
+    "ast_hash": "1199f1ee6ed78b4b949ed7b7d682c475",
     "semantic_hash": ""
   },
   "src/app/api/admin/init-db/route.ts": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1781501602.4482214,
-    "ast_hash": "194e75577756523fe9804e39215f2647",
+    "mtime": 1781414321.7736027,
+    "ast_hash": "710c2f5c97956b68c8f853a29976478d",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "src/config/index.ts": {
-    "mtime": 1781501525.4913783,
-    "ast_hash": "ce69a71afc2017b2a806cff101a206a8",
+    "mtime": 1781416062.375914,
+    "ast_hash": "80373f8911f8005ccb875f54ae906315",
     "semantic_hash": ""
   },
   "src/types/index.ts": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "src/app/api/status/route.ts": {
-    "mtime": 1781501635.8412523,
-    "ast_hash": "02500a9237bc791a54fb22339b7ce4de",
+    "mtime": 1780784680.9891694,
+    "ast_hash": "4cf6811cbec5f9317a7639d465119f73",
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
@@ -567,46 +567,6 @@
   "test_counts.mjs": {
     "mtime": 1780984147.351248,
     "ast_hash": "b6bfde9ef706831313b6a54ac5232c50",
-    "semantic_hash": ""
-  },
-  "scripts_ingest_storage.ts": {
-    "mtime": 1781501653.7825482,
-    "ast_hash": "6a1bb709bd22ecddecb8d6d928fc0be6",
-    "semantic_hash": ""
-  },
-  "src/config/alibaba_storage.ts": {
-    "mtime": 1781501519.507403,
-    "ast_hash": "9103d5bbca4542a69f069ea29d2369ac",
-    "semantic_hash": ""
-  },
-  "src/config/aws_storage.ts": {
-    "mtime": 1781501465.2386432,
-    "ast_hash": "335d4a144d372cecd673be3bd7e7bc4c",
-    "semantic_hash": ""
-  },
-  "src/config/azure_storage.ts": {
-    "mtime": 1781501478.1281857,
-    "ast_hash": "7671ec40b4c3675b9950edbc3b084792",
-    "semantic_hash": ""
-  },
-  "src/config/digitalocean_storage.ts": {
-    "mtime": 1781501508.6631756,
-    "ast_hash": "6a48d022ec5b247ea6f25b1ea29b49e1",
-    "semantic_hash": ""
-  },
-  "src/config/gcp_storage.ts": {
-    "mtime": 1781501491.3891613,
-    "ast_hash": "793df919d2993fff52d7668245363a7e",
-    "semantic_hash": ""
-  },
-  "src/config/oracle_storage.ts": {
-    "mtime": 1781501501.4466388,
-    "ast_hash": "a790c67ccb68ea7bd422aa7b1cfba78b",
-    "semantic_hash": ""
-  },
-  "src/services/storage_pipeline.ts": {
-    "mtime": 1781501558.1408486,
-    "ast_hash": "24d650ea47d6ccd3aa92b5a441e0c72d",
     "semantic_hash": ""
   }
 }
