@@ -72,7 +72,7 @@ function XIcon() {
   );
 }
 
-const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse', 'ai'];
+const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse', 'ai', 'storage'];
 
 
 
