@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 148 files · ~105,864 words
+- 148 files · ~106,621 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 469 nodes · 610 edges · 62 communities (32 shown, 30 thin omitted)
+- 470 nodes · 611 edges · 62 communities (32 shown, 30 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c996728f`
+- Built from commit: `7e05b814`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -150,8 +150,8 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ### Community 38 - "Community 38"
-Cohesion: 0.12
-Nodes (14): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, pipeline, sql (+6 more)
+Cohesion: 0.11
+Nodes (15): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, Row, pipeline (+7 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.29
@@ -186,7 +186,7 @@ Cohesion: 0.67
 Nodes (3): loadWidths(), lsKey(), saveWidths()
 
 ## Knowledge Gaps
-- **142 isolated node(s):** `FilterSectionProps`, `GroupedFilterSectionProps`, `FilterSidebarProps`, `PROVIDERS`, `ColDef` (+137 more)
+- **143 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+138 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -199,8 +199,8 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Why does `AIPricingPipeline` connect `Community 27` to `Community 9`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **What connects `FilterSectionProps`, `GroupedFilterSectionProps`, `FilterSidebarProps` to the rest of the system?**
-  _142 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `PROVIDERS`, `ColDef`, `COL_PROVIDER` to the rest of the system?**
+  _143 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
