@@ -167,7 +167,6 @@ export default function StatusPage() {
           min-height: 100vh;
           background: var(--bg);
           color: var(--text);
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
         .status-header {
           border-bottom: 1px solid var(--border);

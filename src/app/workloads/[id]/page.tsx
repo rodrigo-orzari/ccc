@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { Footer } from '@/components';
+import { Footer, WorkloadHeader } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
-import { WorkloadDefinition, WorkloadParameter } from '@/types';
+import { WorkloadDefinition } from '@/types';
 
 function ArchitectureDiagram({ workload }: { workload: WorkloadDefinition }) {
   return (
@@ -91,20 +90,7 @@ export default function WorkloadDetails() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#111827] dark:text-[#f1f5f9] font-sans">
-      <header className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38] py-4 px-6 flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-            Compare Cloud Costs
-          </h1>
-          <p className="text-sm text-[#6b7280] dark:text-[#71717a]">{workload.name}</p>
-        </div>
-        <Link 
-          href="/workloads" 
-          className="px-4 py-2 bg-[#f7f8ff] dark:bg-[#10102a] border border-[#dde0f0] dark:border-[#1e1e38] hover:bg-[#e8eaf8] dark:hover:bg-[#1e1e38] text-sm font-medium rounded transition-colors"
-        >
-          &larr; Back to Catalog
-        </Link>
-      </header>
+      <WorkloadHeader />
 
       <main className="flex-1 p-6 md:p-10 max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
         
@@ -157,59 +143,66 @@ export default function WorkloadDetails() {
                 <table className="w-full text-left border-collapse whitespace-nowrap">
                   <thead>
                     <tr className="border-b border-[#dde0f0] dark:border-[#1e1e38] text-sm text-[#6b7280] dark:text-[#71717a]">
-                      <th className="py-3 px-4 font-semibold uppercase tracking-wider">Provider</th>
-                      {workload.components.map(c => (
-                        <th key={c.id} className="py-3 px-4 font-semibold uppercase tracking-wider">
-                          {c.name}
+                      <th className="py-3 px-4 font-semibold uppercase tracking-wider">Service</th>
+                      {['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'].map(provider => (
+                        <th key={provider} className="py-3 px-4 font-semibold uppercase tracking-wider">
+                          <div className="flex items-center space-x-2">
+                            <img src={`/providers/${provider}.svg`} alt={provider} className="w-5 h-5 rounded-sm object-contain bg-white p-0.5" onError={(e) => e.currentTarget.style.display='none'} />
+                            <span>{provider === 'aws' ? 'AWS' : provider === 'gcp' ? 'Google Cloud' : provider}</span>
+                          </div>
                         </th>
                       ))}
-                      <th className="py-3 px-4 font-bold text-[#2563eb] dark:text-[#818cf8] uppercase tracking-wider text-right">
-                        Total / Month
-                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#dde0f0] dark:divide-[#1e1e38]">
-                    {['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'].map((provider) => {
-                      if (!results || !results[provider]) return null;
-                      const pData = results[provider];
-                      
-                      // Find if any component is unavailable
-                      const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
-
-                      return (
-                        <tr key={provider} className="hover:bg-[#e8eaf8] dark:hover:bg-[#10102a] transition-colors">
-                          <td className="py-4 px-4 font-medium capitalize flex items-center space-x-2">
-                            <img src={`/providers/${provider}.svg`} alt={provider} className="w-5 h-5 rounded-sm object-contain bg-white p-0.5" onError={(e) => e.currentTarget.style.display='none'} />
-                            <span>{provider === 'aws' ? 'AWS' : provider === 'gcp' ? 'Google Cloud' : provider}</span>
-                          </td>
-                          
-                          {workload.components.map(c => {
-                            const comp = pData.components.find((x: any) => x.componentId === c.id);
-                            if (!comp || comp.monthlyPrice === 0) {
-                              return <td key={c.id} className="py-4 px-4 text-[#6b7280] dark:text-[#71717a] text-sm">Unavailable</td>;
-                            }
-                            return (
-                              <td key={c.id} className="py-4 px-4">
-                                <div className="text-sm text-[#111827] dark:text-[#f1f5f9]">${comp.monthlyPrice.toFixed(2)}</div>
-                                <div className="text-xs text-[#6b7280] dark:text-[#71717a] max-w-[150px] truncate" title={comp.instanceType}>
-                                  {comp.quantity > 1 ? `${comp.quantity}x ` : ''}{comp.instanceType}
-                                </div>
-                              </td>
-                            );
-                          })}
-
-                          <td className="py-4 px-4 text-right font-bold text-lg">
+                    {workload.components.map(c => (
+                      <tr key={c.id} className="hover:bg-[#e8eaf8] dark:hover:bg-[#10102a] transition-colors">
+                        <td className="py-4 px-4 font-medium text-[#111827] dark:text-[#f1f5f9] flex items-center space-x-2">
+                          <span>{c.icon}</span>
+                          <span>{c.name}</span>
+                        </td>
+                        {['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'].map(provider => {
+                          if (!results || !results[provider]) {
+                            return <td key={provider} className="py-4 px-4">...</td>;
+                          }
+                          const comp = results[provider].components.find((x: any) => x.componentId === c.id);
+                          if (!comp || comp.monthlyPrice === 0) {
+                            return <td key={provider} className="py-4 px-4 text-[#6b7280] dark:text-[#71717a] text-sm">Unavailable</td>;
+                          }
+                          return (
+                            <td key={provider} className="py-4 px-4">
+                              <div className="text-sm text-[#111827] dark:text-[#f1f5f9]">${comp.monthlyPrice.toFixed(2)}</div>
+                              <div className="text-xs text-[#6b7280] dark:text-[#71717a] max-w-[150px] truncate" title={comp.instanceType}>
+                                {comp.quantity > 1 ? `${comp.quantity}x ` : ''}{comp.instanceType}
+                              </div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                    
+                    {/* Total Row */}
+                    <tr className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-t-2 border-[#dde0f0] dark:border-[#1e1e38]">
+                      <td className="py-4 px-4 font-bold text-[#111827] dark:text-[#f1f5f9] uppercase tracking-wider">
+                        Total / Month
+                      </td>
+                      {['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'].map(provider => {
+                        if (!results || !results[provider]) return <td key={provider} className="py-4 px-4"></td>;
+                        const pData = results[provider];
+                        const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
+                        return (
+                          <td key={provider} className="py-4 px-4 text-left font-bold text-lg">
                             {isUnavailable || pData.total === 0 ? (
                               <span className="text-[#6b7280] dark:text-[#71717a]">N/A</span>
                             ) : (
-                              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563eb] to-purple-500 dark:from-blue-400 dark:to-purple-400">
                                 ${pData.total.toFixed(2)}
                               </span>
                             )}
                           </td>
-                        </tr>
-                      );
-                    })}
+                        );
+                      })}
+                    </tr>
                   </tbody>
                 </table>
               </div>
