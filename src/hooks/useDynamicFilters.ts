@@ -93,8 +93,7 @@ export function useDynamicFilters() {
     APP_HOSTING_TIERS: merge(config.APP_HOSTING_TIERS, dynamicData?.app_hosting_tiers),
     APP_HOSTING_COMPUTE_TYPES: merge(config.APP_HOSTING_COMPUTE_TYPES, dynamicData?.app_hosting_compute_types),
     
-    // Integration
-    INTEGRATION_CATEGORIES: merge(config.INTEGRATION_CATEGORIES, dynamicData?.integration_categories),
-    INTEGRATION_TIERS: merge(config.INTEGRATION_TIERS, dynamicData?.integration_tiers),
+    // Serverless service-type (Compute / API Gateway / Messaging / Eventing / Workflow)
+    SERVERLESS_SERVICE_TYPES: merge(config.SERVERLESS_SERVICE_TYPES, dynamicData?.serverless_service_types),
   };
 }

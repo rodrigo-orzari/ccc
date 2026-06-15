@@ -27,6 +27,7 @@ const addServerlessAttributes = (entry: any) => ({
   ...entry,
   unit: 'GB-Hour',
   attributes: {
+    service_type: 'Compute',
     deployment_type: 'Serverless',
     tier: 'Serverless',
     cold_start_overhead_ms: 200,

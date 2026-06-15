@@ -71,8 +71,7 @@ export default function Dashboard() {
 
       if (selectedAppHostingTiers.length === staticConfig.APP_HOSTING_TIERS.length) setSelectedAppHostingTiers([...config.APP_HOSTING_TIERS]);
       if (selectedAppHostingComputeTypes.length === staticConfig.APP_HOSTING_COMPUTE_TYPES.length) setSelectedAppHostingComputeTypes([...config.APP_HOSTING_COMPUTE_TYPES]);
-      if (selectedIntegrationCategories.length === config.INTEGRATION_CATEGORIES.length) setSelectedIntegrationCategories([...config.INTEGRATION_CATEGORIES]);
-      if (selectedIntegrationTiers.length === staticConfig.INTEGRATION_TIERS.length) setSelectedIntegrationTiers([...config.INTEGRATION_TIERS]);
+      if (selectedServerlessServiceTypes.length === staticConfig.SERVERLESS_SERVICE_TYPES.length) setSelectedServerlessServiceTypes([...config.SERVERLESS_SERVICE_TYPES]);
 
       setFiltersSynced(true);
     }
@@ -161,8 +160,7 @@ export default function Dashboard() {
 
   const [selectedAppHostingTiers, setSelectedAppHostingTiers] = useState<string[]>([...config.APP_HOSTING_TIERS]);
   const [selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes] = useState<string[]>([...config.APP_HOSTING_COMPUTE_TYPES]);
-  const [selectedIntegrationCategories, setSelectedIntegrationCategories] = useState<string[]>([...config.INTEGRATION_CATEGORIES]);
-  const [selectedIntegrationTiers, setSelectedIntegrationTiers] = useState<string[]>([...config.INTEGRATION_TIERS]);
+  const [selectedServerlessServiceTypes, setSelectedServerlessServiceTypes] = useState<string[]>([...config.SERVERLESS_SERVICE_TYPES]);
 
 
 
@@ -305,8 +303,7 @@ export default function Dashboard() {
 
     subset('appHostingTiers', selectedAppHostingTiers, config.APP_HOSTING_TIERS);
     subset('appHostingComputeTypes', selectedAppHostingComputeTypes, config.APP_HOSTING_COMPUTE_TYPES);
-    subset('integrationCategories', selectedIntegrationCategories, config.INTEGRATION_CATEGORIES);
-    subset('integrationTiers', selectedIntegrationTiers, config.INTEGRATION_TIERS);
+    subset('serverlessServiceTypes', selectedServerlessServiceTypes, config.SERVERLESS_SERVICE_TYPES);
 
 
     // Only send range params when the user has actively constrained them.
@@ -324,7 +321,7 @@ export default function Dashboard() {
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
-    selectedServerlessMemory, selectedServerlessArchitectures,
+    selectedServerlessMemory, selectedServerlessArchitectures, selectedServerlessServiceTypes,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
@@ -409,7 +406,7 @@ export default function Dashboard() {
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout,
     selectedServerlessMemoryConfig, selectedServerlessFreeTier, selectedServerlessGranularity,
     selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
-    selectedServerlessMemory, selectedServerlessArchitectures,
+    selectedServerlessMemory, selectedServerlessArchitectures, selectedServerlessServiceTypes,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures,
     selectedContainersBillingGranularity,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes,
@@ -545,7 +542,7 @@ export default function Dashboard() {
     if (activeProductType === 'database') {
       headers = ['Provider', 'Configuration', 'Engine', 'Tier', 'Deployment', 'HA Mode', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'serverless') {
-      headers = ['Provider', 'Configuration', 'Memory (GB)', 'Architecture', 'Languages', 'Cold Start (ms)', 'Timeout (sec)', 'Memory Config', 'Free Tier', 'Granularity', 'Execution Model', 'Provisioned Concurrency', 'Max Storage (GB)', 'Invocation Price ($/1M)', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Configuration', 'Service Type', 'Memory (GB)', 'Architecture', 'Languages', 'Cold Start (ms)', 'Timeout (sec)', 'Memory Config', 'Free Tier', 'Granularity', 'Execution Model', 'Provisioned Concurrency', 'Max Storage (GB)', 'Invocation Price ($/1M)', 'Geography', 'Pricing Unit', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'containers') {
       headers = ['Provider', 'Configuration', 'Orchestrator', 'Compute Type', 'Architecture', 'Billing Granularity', 'GPU', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'networking') {
@@ -567,7 +564,10 @@ export default function Dashboard() {
       if (activeProductType === 'database') {
         return [record.provider, record.instance_type, record.attributes?.engine || '', record.category || '', record.attributes?.deployment_type || '', record.attributes?.ha_mode || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'serverless') {
-        return [record.provider, record.instance_type, record.memory_gb || '', record.arch === 'x86 64' ? 'x86' : (record.arch || ''), record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join('; ') : record.attributes.supportedLanguages) : '', record.attributes?.cold_start_overhead_ms || '', record.attributes?.timeout_seconds || '', record.attributes?.memory_configuration || '', record.attributes?.free_invocations_per_month ? 'Yes' : 'No', record.attributes?.billing_granularity_ms || '', record.attributes?.execution_model || '', record.attributes?.provisioned_concurrency_support || '', record.attributes?.max_ephemeral_storage_gb || '', record.attributes?.invocation_price_per_1m || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
+        const svcType = record.attributes?.service_type || 'Compute';
+        const isCompute = svcType === 'Compute';
+        const rawPrice = parseFloat(record.price_per_unit).toFixed(4);
+        return [record.provider, record.instance_type, svcType, isCompute ? (record.memory_gb || '') : '', isCompute ? (record.arch === 'x86 64' ? 'x86' : (record.arch || '')) : '', record.attributes?.supportedLanguages ? (Array.isArray(record.attributes.supportedLanguages) ? record.attributes.supportedLanguages.join('; ') : record.attributes.supportedLanguages) : '', record.attributes?.cold_start_overhead_ms || '', record.attributes?.timeout_seconds || '', record.attributes?.memory_configuration || '', isCompute ? (record.attributes?.free_invocations_per_month ? 'Yes' : 'No') : '', record.attributes?.billing_granularity_ms || '', record.attributes?.execution_model || '', record.attributes?.provisioned_concurrency_support || '', record.attributes?.max_ephemeral_storage_gb || '', record.attributes?.invocation_price_per_1m || '', record.geography, record.unit || '', rawPrice, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'containers') {
         return [record.provider, record.instance_type, record.attributes?.orchestrator || '', record.attributes?.compute_type || '', record.attributes?.architecture || '', record.attributes?.billing_granularity || '', record.gpu_count > 0 ? 'Yes' : 'No', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'networking') {
@@ -652,8 +652,7 @@ export default function Dashboard() {
           selectedStorageMedia={selectedStorageMedia}
           selectedAppHostingTiers={selectedAppHostingTiers}
           selectedAppHostingComputeTypes={selectedAppHostingComputeTypes}
-          selectedIntegrationCategories={selectedIntegrationCategories}
-          selectedIntegrationTiers={selectedIntegrationTiers}
+          selectedServerlessServiceTypes={selectedServerlessServiceTypes}
           vCpuRange={vCpuRange}
           memoryRange={memoryRange}
           priceRange={priceRange}
@@ -709,8 +708,7 @@ export default function Dashboard() {
           onStorageMediaToggle={(m) => toggleFilter(selectedStorageMedia, setSelectedStorageMedia, m)}
           onAppHostingTierToggle={(t) => toggleFilter(selectedAppHostingTiers, setSelectedAppHostingTiers, t)}
           onAppHostingComputeTypeToggle={(c) => toggleFilter(selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes, c)}
-          onIntegrationCategoryToggle={(c) => toggleFilter(selectedIntegrationCategories, setSelectedIntegrationCategories, c)}
-          onIntegrationTierToggle={(t) => toggleFilter(selectedIntegrationTiers, setSelectedIntegrationTiers, t)}
+          onServerlessServiceTypeToggle={(s) => toggleFilter(selectedServerlessServiceTypes, setSelectedServerlessServiceTypes, s)}
           onSetProviders={setSelectedProviders}
           onSetGeographies={setSelectedGeographies}
           onSetOS={setSelectedOS}
@@ -758,8 +756,7 @@ export default function Dashboard() {
           onSetStorageMedia={setSelectedStorageMedia}
           onSetAppHostingTiers={setSelectedAppHostingTiers}
           onSetAppHostingComputeTypes={setSelectedAppHostingComputeTypes}
-          onSetIntegrationCategories={setSelectedIntegrationCategories}
-          onSetIntegrationTiers={setSelectedIntegrationTiers}
+          onSetServerlessServiceTypes={setSelectedServerlessServiceTypes}
           onVCpuRangeChange={setVCpuRange}
           onMemoryRangeChange={setMemoryRange}
           onPriceRangeChange={setPriceRange}

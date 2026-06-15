@@ -21,6 +21,7 @@ const HOURLY_MULTIPLIER = 3600;
 const addServerlessAttributes = (entry: any) => ({
   ...entry,
   attributes: {
+    service_type: 'Compute',
     deployment_type: 'Serverless',
     tier: 'Serverless',
     cold_start_overhead_ms: 150, // Medium 100-200 range

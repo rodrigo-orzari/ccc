@@ -83,7 +83,7 @@ export const initDb = async () => {
 
 const MAX_FILTER_ITEMS = 50;
 const MAX_SEARCH_LENGTH = 200;
-const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting', 'integration'];
+const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting'];
 
 function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
   if (!input) return [];
@@ -123,7 +123,7 @@ export function buildPricingFilters(query: any) {
       networkingBillingModels, networkingUsageTiers, networkingPortCapacities, networkingTransferScopes,
       storageTypes, storageTiers, storageRedundancy,
       appHostingTiers, appHostingComputeTypes,
-      integrationCategories, integrationTiers,
+      serverlessServiceTypes,
     } = query;
 
     const conditions: string[] = [];
@@ -341,6 +341,12 @@ export function buildPricingFilters(query: any) {
 
     // Serverless product type filters
     if (resolvedProductType === 'serverless') {
+      const serviceTypeFilters = parseFilterList(serverlessServiceTypes as string).map((s: string) => s.toLowerCase());
+      if (serviceTypeFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'service_type') = ANY($${paramCount++})`);
+        values.push(serviceTypeFilters);
+      }
+
       const languages = parseFilterList(serverlessLanguages as string);
       if (languages.length > 0) {
         conditions.push(`pr.attributes->'supportedLanguages' ?| $${paramCount++}`);
@@ -654,20 +660,7 @@ export function buildPricingFilters(query: any) {
       }
     }
 
-    if (resolvedProductType === 'integration') {
-      const categoryFilters = parseFilterList(integrationCategories as string).map((s: string) => s.toLowerCase());
-      if (categoryFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'category') = ANY($${paramCount++})`);
-        values.push(categoryFilters);
-      }
-      const tierFilters = parseFilterList(integrationTiers as string).map((s: string) => s.toLowerCase());
-      if (tierFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
-        values.push(tierFilters);
-      }
-    }
-
-    const noComputeSliders = ['networking', 'serverless', 'ai', 'storage', 'app-hosting', 'integration'];
+    const noComputeSliders = ['networking', 'serverless', 'ai', 'storage', 'app-hosting'];
 
     if (minVcpu && !noComputeSliders.includes(resolvedProductType)) {
       conditions.push(`pr.vcpus >= $${paramCount++}`);

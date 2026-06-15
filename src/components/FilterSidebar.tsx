@@ -225,8 +225,7 @@ interface FilterSidebarProps {
   selectedStorageMedia: string[];
   selectedAppHostingTiers: string[];
   selectedAppHostingComputeTypes: string[];
-  selectedIntegrationCategories: string[];
-  selectedIntegrationTiers: string[];
+  selectedServerlessServiceTypes: string[];
   vCpuRange: { min: number; max: number };
   memoryRange: { min: number; max: number };
   priceRange: { min: number; max: number };
@@ -283,8 +282,7 @@ interface FilterSidebarProps {
   onStorageMediaToggle: (opt: string) => void;
   onAppHostingTierToggle: (opt: string) => void;
   onAppHostingComputeTypeToggle: (opt: string) => void;
-  onIntegrationCategoryToggle: (opt: string) => void;
-  onIntegrationTierToggle: (opt: string) => void;
+  onServerlessServiceTypeToggle: (opt: string) => void;
   // Batch setters for Select All / Clear All
   onSetProviders: (items: string[]) => void;
   onSetGeographies: (items: string[]) => void;
@@ -333,8 +331,7 @@ interface FilterSidebarProps {
   onSetStorageMedia: (items: string[]) => void;
   onSetAppHostingTiers: (items: string[]) => void;
   onSetAppHostingComputeTypes: (items: string[]) => void;
-  onSetIntegrationCategories: (items: string[]) => void;
-  onSetIntegrationTiers: (items: string[]) => void;
+  onSetServerlessServiceTypes: (items: string[]) => void;
   onVCpuRangeChange: (range: { min: number; max: number }) => void;
   onMemoryRangeChange: (range: { min: number; max: number }) => void;
   onPriceRangeChange: (range: { min: number; max: number }) => void;
@@ -393,8 +390,7 @@ export default function FilterSidebar({
   selectedStorageMedia,
   selectedAppHostingTiers,
   selectedAppHostingComputeTypes,
-  selectedIntegrationCategories,
-  selectedIntegrationTiers,
+  selectedServerlessServiceTypes,
   vCpuRange,
   memoryRange,
   priceRange,
@@ -450,8 +446,7 @@ export default function FilterSidebar({
   onStorageMediaToggle,
   onAppHostingTierToggle,
   onAppHostingComputeTypeToggle,
-  onIntegrationCategoryToggle,
-  onIntegrationTierToggle,
+  onServerlessServiceTypeToggle,
   onSetProviders,
   onSetGeographies,
   onSetOS,
@@ -499,8 +494,7 @@ export default function FilterSidebar({
   onSetStorageMedia,
   onSetAppHostingTiers,
   onSetAppHostingComputeTypes,
-  onSetIntegrationCategories,
-  onSetIntegrationTiers,
+  onSetServerlessServiceTypes,
   onVCpuRangeChange,
   onMemoryRangeChange,
   onPriceRangeChange,
@@ -749,6 +743,17 @@ export default function FilterSidebar({
         {/* Serverless filters */}
         {activeProductType === 'serverless' && (
           <>
+            <FilterSection
+              title="Service Type"
+              tooltip="Compute (Lambda/Functions/Run) plus the API Gateway, Messaging, Eventing, and Workflow services that pair with them."
+              options={config.SERVERLESS_SERVICE_TYPES}
+              selected={selectedServerlessServiceTypes}
+              onToggle={onServerlessServiceTypeToggle}
+              onSetAll={onSetServerlessServiceTypes}
+              isExpanded={expanded.serverlessServiceType ?? true}
+              onToggleExpand={() => onToggleSection('serverlessServiceType')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Geography"
               tooltip="Geographic region where the service is deployed."
@@ -1198,33 +1203,6 @@ export default function FilterSidebar({
         )}
 
         {/* Integration Specific Filters */}
-        {activeProductType === 'integration' && (
-          <>
-            <FilterSection
-              title="Integration Categories"
-              tooltip="Type of integration service"
-              options={config.INTEGRATION_CATEGORIES}
-              selected={selectedIntegrationCategories}
-              onToggle={onIntegrationCategoryToggle}
-              onSetAll={onSetIntegrationCategories}
-              isExpanded={expanded.integrationCategories ?? true}
-              onToggleExpand={() => onToggleSection('integrationCategories')}
-            />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
-              title="Integration Tiers"
-              tooltip="Performance and capability tier"
-              options={config.INTEGRATION_TIERS}
-              selected={selectedIntegrationTiers}
-              onToggle={onIntegrationTierToggle}
-              onSetAll={onSetIntegrationTiers}
-              isExpanded={expanded.integrationTiers ?? true}
-              onToggleExpand={() => onToggleSection('integrationTiers')}
-            />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
-          </>
-        )}
-
         {/* Data Analytics filters */}
         {activeProductType === 'data-analytics' && (
           <>

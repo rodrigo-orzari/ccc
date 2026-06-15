@@ -21,6 +21,7 @@ const AZURE_FUNCTIONS_LANGUAGES = ['C#', 'JavaScript', 'Python', 'Java', 'PowerS
 const addAzureServerlessAttributes = (entry: any) => ({
   ...entry,
   attributes: {
+    service_type: 'Compute',
     deployment_type: 'Serverless',
     tier: 'Serverless',
     cold_start_overhead_ms: 350,

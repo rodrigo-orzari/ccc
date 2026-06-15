@@ -32,6 +32,10 @@ export const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1', '1 - 5', '> 5'];
 export const SERVERLESS_MEMORY_TIERS = ['<= 512 MB', '512 MB - 2 GB', '2 - 4 GB', '> 4 GB'];
 // CPU architecture. AWS Lambda is split x86 (Intel/AMD) vs ARM (Graviton); maps to pr.arch.
 export const SERVERLESS_ARCHITECTURES = ['x86', 'ARM'];
+// Service-type categorization for the Serverless tab. 'Compute' covers Lambda/Functions/Run
+// (the historical Serverless contents); the rest were the standalone Integration category,
+// folded in here so messaging/event/API/workflow services are evaluated alongside compute.
+export const SERVERLESS_SERVICE_TYPES = ['Compute', 'API Gateway', 'Messaging', 'Eventing', 'Workflow'];
 
 // Containers-specific constants
 export const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
@@ -121,6 +125,4 @@ export const STORAGE_MEDIA: string[] = ['SSD', 'HDD'];
 export const APP_HOSTING_TIERS: string[] = ['Basic', 'Standard', 'Premium', 'Professional', 'Shared', 'Dedicated'];
 export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
 
-// --- INTEGRATION ---
-export const INTEGRATION_CATEGORIES: string[] = ['Message Queue', 'Event Bus', 'API Gateway', 'Workflow'];
-export const INTEGRATION_TIERS: string[] = ['Standard', 'Premium', 'FIFO', 'Basic'];
+// (Integration folded into Serverless — see SERVERLESS_SERVICE_TYPES above.)
