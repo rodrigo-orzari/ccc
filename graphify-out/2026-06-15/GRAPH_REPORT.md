@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 129 files · ~99,667 words
+- 134 files · ~101,485 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 354 nodes · 457 edges · 36 communities (21 shown, 15 thin omitted)
+- 369 nodes · 475 edges · 38 communities (21 shown, 17 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `22e75688`
+- Built from commit: `704e6c9a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -42,6 +42,8 @@
 - [[_COMMUNITY_Community 30|Community 30]]
 - [[_COMMUNITY_Community 34|Community 34]]
 - [[_COMMUNITY_Community 35|Community 35]]
+- [[_COMMUNITY_Community 36|Community 36]]
+- [[_COMMUNITY_Community 37|Community 37]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Serverless Language Filter Implementation Summary` - 13 edges
@@ -49,10 +51,10 @@
 3. `ProductType` - 8 edges
 4. `NetworkingPricingPipeline` - 7 edges
 5. `Status: ✅ COMPLETE` - 6 edges
-6. `useDynamicFilters()` - 5 edges
-7. `PricingRecord` - 5 edges
-8. `buildPricingFilters()` - 5 edges
-9. `StoragePricingPipeline` - 5 edges
+6. `StoragePricingPipeline` - 5 edges
+7. `useDynamicFilters()` - 5 edges
+8. `PricingRecord` - 5 edges
+9. `buildPricingFilters()` - 5 edges
 10. `7. In-Depth Subsystem Walks` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -70,11 +72,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (36 total, 15 thin omitted)
+## Communities (38 total, 17 thin omitted)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.13
-Nodes (10): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, mapRows(), STORAGE_PROVIDERS (+2 more)
+Cohesion: 0.09
+Nodes (14): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, AwsStorageScraper, AzureStorageScraper (+6 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.08
@@ -121,23 +123,23 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ## Knowledge Gaps
-- **115 isolated node(s):** `content`, `content`, `content`, `PROVIDERS`, `ColDef` (+110 more)
+- **116 isolated node(s):** `StorageConfigEntry`, `STATIC_PROVIDERS`, `content`, `content`, `content` (+111 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ProductType` connect `Community 15` to `Community 7`?**
-  _High betweenness centrality (0.029) - this node is a cross-community bridge._
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 6`?**
-  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+  _High betweenness centrality (0.031) - this node is a cross-community bridge._
+- **Why does `ProductType` connect `Community 15` to `Community 7`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 9` to `Community 6`?**
   _High betweenness centrality (0.015) - this node is a cross-community bridge._
-- **What connects `content`, `content`, `content` to the rest of the system?**
-  _115 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `StorageConfigEntry`, `STATIC_PROVIDERS`, `content` to the rest of the system?**
+  _116 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
-  _Cohesion score 0.12987012987012986 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08870967741935484 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
   _Cohesion score 0.08196721311475409 - nodes in this community are weakly interconnected._
 - **Should `Community 9` be split into smaller, more focused modules?**
