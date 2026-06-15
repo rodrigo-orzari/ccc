@@ -1,0 +1,16 @@
+/**
+ * Static Fallback Config for App Hosting (PaaS)
+ * Services like Azure App Service, DigitalOcean App Platform, AWS App Runner
+ */
+
+export const AZURE_APP_HOSTING = [
+  { type: 'Basic B1', vcpus: 1, memory_gb: 1.75, price: 54.75, unit: 'Mo', attributes: { os: 'Linux', tier: 'Basic', compute_type: 'Dedicated' } },
+  { type: 'Premium V3 P1v3', vcpus: 2, memory_gb: 8, price: 164.25, unit: 'Mo', attributes: { os: 'Linux', tier: 'Premium', compute_type: 'Dedicated' } },
+  { type: 'Premium V3 P2v3', vcpus: 4, memory_gb: 16, price: 328.50, unit: 'Mo', attributes: { os: 'Linux', tier: 'Premium', compute_type: 'Dedicated' } },
+];
+
+export const DO_APP_HOSTING = [
+  { type: 'Basic App', vcpus: 1, memory_gb: 1, price: 5.00, unit: 'Mo', attributes: { os: 'Linux', tier: 'Basic', compute_type: 'Shared' } },
+  { type: 'Professional App', vcpus: 1, memory_gb: 2, price: 20.00, unit: 'Mo', attributes: { os: 'Linux', tier: 'Professional', compute_type: 'Dedicated' } },
+  { type: 'Professional App', vcpus: 4, memory_gb: 8, price: 80.00, unit: 'Mo', attributes: { os: 'Linux', tier: 'Professional', compute_type: 'Dedicated' } },
+];
