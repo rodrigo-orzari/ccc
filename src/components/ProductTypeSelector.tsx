@@ -4,13 +4,14 @@ import React from 'react';
 import type { ProductType } from '@/types';
 
 const PRODUCT_TYPES: { id: ProductType; label: string; emoji: string; soon?: boolean }[] = [
-  { id: 'vm', label: 'Virtual Machines', emoji: '🖥️' },
-  { id: 'database', label: 'Databases', emoji: '🗄️' },
-  { id: 'serverless', label: 'Serverless', emoji: '⚡' },
-  { id: 'containers', label: 'Containers', emoji: '📦' },
-  { id: 'networking', label: 'Networking', emoji: '🌐' },
-  { id: 'data-analytics', label: 'Data & Analytics', emoji: '📊' },
   { id: 'ai', label: 'Artificial Intelligence', emoji: '🧠' },
+  { id: 'containers', label: 'Containers', emoji: '📦' },
+  { id: 'data-analytics', label: 'Data & Analytics', emoji: '📊' },
+  { id: 'database', label: 'Databases', emoji: '🗄️' },
+  { id: 'networking', label: 'Networking', emoji: '🌐' },
+  { id: 'serverless', label: 'Serverless', emoji: '⚡' },
+  { id: 'storage', label: 'Storage', emoji: '💾' },
+  { id: 'vm', label: 'Virtual Machines', emoji: '🖥️' },
 ];
 
 const SITE_URL = 'https://comparecloudcosts.com';

@@ -84,5 +84,9 @@ export function useDynamicFilters() {
     DEFAULT_PRICE_RANGE: config.DEFAULT_PRICE_RANGE,
     PROVIDERS: config.PROVIDERS,
     DB_FAMILIES: merge(config.DB_FAMILIES, dynamicData?.db_families),
+    STORAGE_CATEGORIES: merge(config.STORAGE_CATEGORIES, dynamicData?.storage_categories),
+    STORAGE_REDUNDANCIES: merge(config.STORAGE_REDUNDANCIES, dynamicData?.storage_redundancies),
+    STORAGE_MEDIA: merge(config.STORAGE_MEDIA, dynamicData?.storage_media),
+    STORAGE_TIERS: merge(config.STORAGE_TIERS, dynamicData?.storage_tiers),
   };
 }
