@@ -435,7 +435,7 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1781548533.348888,
+    "mtime": 1781555084.8148377,
     "ast_hash": "0738d1d82239c29fa1ad78fd1793ea54",
     "semantic_hash": ""
   },
@@ -605,8 +605,8 @@
     "semantic_hash": ""
   },
   "src/services/storage_pipeline.ts": {
-    "mtime": 1781501558.1408486,
-    "ast_hash": "24d650ea47d6ccd3aa92b5a441e0c72d",
+    "mtime": 1781555197.4253926,
+    "ast_hash": "bd6ca978e9c1c4997c301121628e59b2",
     "semantic_hash": ""
   },
   "injectSync.mjs": {
@@ -657,6 +657,31 @@
   "injectStoragePricingTable.mjs": {
     "mtime": 1781548533.2891579,
     "ast_hash": "291ab648146e29df57c9b35687a90266",
+    "semantic_hash": ""
+  },
+  "check_db.mjs": {
+    "mtime": 1781555257.9945488,
+    "ast_hash": "e5bc8787b8cb82f8cb65fef3e9ecf5e4",
+    "semantic_hash": ""
+  },
+  "src/scrapers/aws_storage.ts": {
+    "mtime": 1781555143.9031265,
+    "ast_hash": "4ef037283c58244af3c7b8fe32c0065e",
+    "semantic_hash": ""
+  },
+  "src/scrapers/azure_storage.ts": {
+    "mtime": 1781555156.8034027,
+    "ast_hash": "8b41d794dde7883b006050664110d879",
+    "semantic_hash": ""
+  },
+  "src/scrapers/gcp_storage.ts": {
+    "mtime": 1781555168.9054542,
+    "ast_hash": "2fad8a7378f944951cfd1b44b2590d79",
+    "semantic_hash": ""
+  },
+  "update_table.mjs": {
+    "mtime": 1781555084.5859258,
+    "ast_hash": "41943e7d6891e6775afa331fc71bbee7",
     "semantic_hash": ""
   }
 }
