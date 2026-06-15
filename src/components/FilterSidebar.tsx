@@ -219,6 +219,10 @@ interface FilterSidebarProps {
   selectedNetworkingUsageTiers: string[];
   selectedNetworkingPortCapacities: string[];
   selectedNetworkingTransferScopes: string[];
+  selectedStorageCategories: string[];
+  selectedStorageTiers: string[];
+  selectedStorageRedundancies: string[];
+  selectedStorageMedia: string[];
   vCpuRange: { min: number; max: number };
   memoryRange: { min: number; max: number };
   priceRange: { min: number; max: number };
@@ -269,6 +273,10 @@ interface FilterSidebarProps {
   onNetworkingUsageTierToggle: (opt: string) => void;
   onNetworkingPortCapacityToggle: (opt: string) => void;
   onNetworkingTransferScopeToggle: (opt: string) => void;
+  onStorageCategoryToggle: (opt: string) => void;
+  onStorageTierToggle: (opt: string) => void;
+  onStorageRedundancyToggle: (opt: string) => void;
+  onStorageMediaToggle: (opt: string) => void;
   // Batch setters for Select All / Clear All
   onSetProviders: (items: string[]) => void;
   onSetGeographies: (items: string[]) => void;
@@ -311,6 +319,10 @@ interface FilterSidebarProps {
   onSetNetworkingUsageTiers: (items: string[]) => void;
   onSetNetworkingPortCapacities: (items: string[]) => void;
   onSetNetworkingTransferScopes: (items: string[]) => void;
+  onSetStorageCategories: (items: string[]) => void;
+  onSetStorageTiers: (items: string[]) => void;
+  onSetStorageRedundancies: (items: string[]) => void;
+  onSetStorageMedia: (items: string[]) => void;
   onVCpuRangeChange: (range: { min: number; max: number }) => void;
   onMemoryRangeChange: (range: { min: number; max: number }) => void;
   onPriceRangeChange: (range: { min: number; max: number }) => void;
@@ -363,6 +375,10 @@ export default function FilterSidebar({
   selectedNetworkingUsageTiers,
   selectedNetworkingPortCapacities,
   selectedNetworkingTransferScopes,
+  selectedStorageCategories,
+  selectedStorageTiers,
+  selectedStorageRedundancies,
+  selectedStorageMedia,
   vCpuRange,
   memoryRange,
   priceRange,
@@ -412,6 +428,10 @@ export default function FilterSidebar({
   onNetworkingUsageTierToggle,
   onNetworkingPortCapacityToggle,
   onNetworkingTransferScopeToggle,
+  onStorageCategoryToggle,
+  onStorageTierToggle,
+  onStorageRedundancyToggle,
+  onStorageMediaToggle,
   onSetProviders,
   onSetGeographies,
   onSetOS,
@@ -453,6 +473,10 @@ export default function FilterSidebar({
   onSetNetworkingUsageTiers,
   onSetNetworkingPortCapacities,
   onSetNetworkingTransferScopes,
+  onSetStorageCategories,
+  onSetStorageTiers,
+  onSetStorageRedundancies,
+  onSetStorageMedia,
   onVCpuRangeChange,
   onMemoryRangeChange,
   onPriceRangeChange,
@@ -1055,6 +1079,67 @@ export default function FilterSidebar({
               onSetAll={onSetNetworkingDirections}
               isExpanded={expanded.networkingTransferDirection ?? true}
               onToggleExpand={() => onToggleSection('networkingTransferDirection')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+          </>
+        )}
+
+        {/* Storage filters */}
+        {activeProductType === 'storage' && (
+          <>
+            <FilterSection
+              title="Geography"
+              tooltip="Geographic region where the storage is hosted."
+              options={config.GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSetAll={onSetGeographies}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Storage Type"
+              tooltip="Object (S3-like), Block (disks), File (shared), or Archive (cold)."
+              options={config.STORAGE_CATEGORIES}
+              selected={selectedStorageCategories}
+              onToggle={onStorageCategoryToggle}
+              onSetAll={onSetStorageCategories}
+              isExpanded={expanded.storageCategory ?? true}
+              onToggleExpand={() => onToggleSection('storageCategory')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Tier"
+              tooltip="Access tier: Standard (hot), Infrequent (cool), or Cold (archive)."
+              options={config.STORAGE_TIERS}
+              selected={selectedStorageTiers}
+              onToggle={onStorageTierToggle}
+              onSetAll={onSetStorageTiers}
+              isExpanded={expanded.storageTier ?? true}
+              onToggleExpand={() => onToggleSection('storageTier')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Redundancy"
+              tooltip="Replication scope: Single-Zone, Zone-Redundant, or Geo-Redundant."
+              options={config.STORAGE_REDUNDANCIES}
+              selected={selectedStorageRedundancies}
+              onToggle={onStorageRedundancyToggle}
+              onSetAll={onSetStorageRedundancies}
+              isExpanded={expanded.storageRedundancy ?? true}
+              onToggleExpand={() => onToggleSection('storageRedundancy')}
+            />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Media"
+              tooltip="Underlying media (SSD or HDD). Applies to block and some file storage."
+              options={config.STORAGE_MEDIA}
+              selected={selectedStorageMedia}
+              onToggle={onStorageMediaToggle}
+              onSetAll={onSetStorageMedia}
+              isExpanded={expanded.storageMedia ?? true}
+              onToggleExpand={() => onToggleSection('storageMedia')}
             />
             <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
           </>

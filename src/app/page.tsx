@@ -71,7 +71,7 @@ export default function Dashboard() {
 
       if (selectedAppHostingTiers.length === staticConfig.APP_HOSTING_TIERS.length) setSelectedAppHostingTiers([...config.APP_HOSTING_TIERS]);
       if (selectedAppHostingComputeTypes.length === staticConfig.APP_HOSTING_COMPUTE_TYPES.length) setSelectedAppHostingComputeTypes([...config.APP_HOSTING_COMPUTE_TYPES]);
-      if (selectedIntegrationCategories.length === staticConfig.INTEGRATION_TYPES.length) setSelectedIntegrationCategories([...config.INTEGRATION_CATEGORIES]);
+      if (selectedIntegrationCategories.length === config.INTEGRATION_CATEGORIES.length) setSelectedIntegrationCategories([...config.INTEGRATION_CATEGORIES]);
       if (selectedIntegrationTiers.length === staticConfig.INTEGRATION_TIERS.length) setSelectedIntegrationTiers([...config.INTEGRATION_TIERS]);
 
       setFiltersSynced(true);
@@ -330,6 +330,7 @@ export default function Dashboard() {
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
     selectedNetworkingBillingModels, selectedNetworkingUsageTiers, selectedNetworkingPortCapacities, selectedNetworkingTransferScopes,
+    selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
     vCpuRange, memoryRange, priceRange, search
   ]);
 
@@ -575,6 +576,8 @@ export default function Dashboard() {
         return [record.provider, record.instance_type, record.attributes?.engine || '', record.attributes?.deployment_type || '', record.attributes?.tier || '', record.vcpus || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'ai') {
         return [record.provider, record.instance_type, record.service || '', record.attributes?.modelTier || '', record.attributes?.contextWindowK || '', record.attributes?.multimodal || '', record.geography, priceDisplay, record.attributes?.outputPricePer1M || '', record.data_source === 'static_config' ? 'Static' : 'API'];
+      } else if (activeProductType === 'storage') {
+        return [record.provider, record.instance_type, record.attributes?.storage_type || '', record.attributes?.tier || '', record.attributes?.redundancy || '', record.attributes?.media || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else {
         return [record.provider, record.instance_type, record.category || '', record.cpu_vendor || '', record.arch === 'x86 64' ? 'x86' : (record.arch || ''), record.os || '', record.gpu_count > 0 ? 'Yes' : 'No', record.vcpus || '', record.memory_gb || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       }
@@ -643,6 +646,10 @@ export default function Dashboard() {
           selectedNetworkingUsageTiers={selectedNetworkingUsageTiers}
           selectedNetworkingPortCapacities={selectedNetworkingPortCapacities}
           selectedNetworkingTransferScopes={selectedNetworkingTransferScopes}
+          selectedStorageCategories={selectedStorageCategories}
+          selectedStorageTiers={selectedStorageTiers}
+          selectedStorageRedundancies={selectedStorageRedundancies}
+          selectedStorageMedia={selectedStorageMedia}
           vCpuRange={vCpuRange}
           memoryRange={memoryRange}
           priceRange={priceRange}
@@ -692,6 +699,10 @@ export default function Dashboard() {
           onNetworkingUsageTierToggle={(u) => toggleFilter(selectedNetworkingUsageTiers, setSelectedNetworkingUsageTiers, u)}
           onNetworkingPortCapacityToggle={(p) => toggleFilter(selectedNetworkingPortCapacities, setSelectedNetworkingPortCapacities, p)}
           onNetworkingTransferScopeToggle={(s) => toggleFilter(selectedNetworkingTransferScopes, setSelectedNetworkingTransferScopes, s)}
+          onStorageCategoryToggle={(c) => toggleFilter(selectedStorageCategories, setSelectedStorageCategories, c)}
+          onStorageTierToggle={(t) => toggleFilter(selectedStorageTiers, setSelectedStorageTiers, t)}
+          onStorageRedundancyToggle={(r) => toggleFilter(selectedStorageRedundancies, setSelectedStorageRedundancies, r)}
+          onStorageMediaToggle={(m) => toggleFilter(selectedStorageMedia, setSelectedStorageMedia, m)}
           onSetProviders={setSelectedProviders}
           onSetGeographies={setSelectedGeographies}
           onSetOS={setSelectedOS}
@@ -733,6 +744,10 @@ export default function Dashboard() {
           onSetNetworkingUsageTiers={setSelectedNetworkingUsageTiers}
           onSetNetworkingPortCapacities={setSelectedNetworkingPortCapacities}
           onSetNetworkingTransferScopes={setSelectedNetworkingTransferScopes}
+          onSetStorageCategories={setSelectedStorageCategories}
+          onSetStorageTiers={setSelectedStorageTiers}
+          onSetStorageRedundancies={setSelectedStorageRedundancies}
+          onSetStorageMedia={setSelectedStorageMedia}
           onVCpuRangeChange={setVCpuRange}
           onMemoryRangeChange={setMemoryRange}
           onPriceRangeChange={setPriceRange}

@@ -112,15 +112,15 @@ export const AI_CONTEXT_WINDOWS = ['< 32K', '32K - 128K', '> 128K', '1M+'];
 export const AI_MULTIMODAL_OPTIONS = ['Yes', 'No'];
 
 // --- STORAGE ---
-export const STORAGE_CATEGORIES: string[] = ['Block', 'File', 'Object', 'Archive'];
-export const STORAGE_REDUNDANCIES: string[] = ['LRS', 'ZRS', 'GRS', 'RA-GRS', 'GZRS', 'RA-GZRS', 'Multi-AZ', 'Single-AZ', 'Cross-Region'];
-export const STORAGE_MEDIA: string[] = ['HDD', 'SSD', 'NVMe', 'Magnetic'];
-export const STORAGE_TIERS: string[] = ['Hot', 'Cool', 'Cold', 'Archive', 'Standard', 'Premium', 'Intelligent-Tiering', 'Glacier'];
+export const STORAGE_CATEGORIES: string[] = ['Object', 'Block', 'File', 'Archive'];
+export const STORAGE_TIERS: string[] = ['Standard', 'Infrequent', 'Cold'];
+export const STORAGE_REDUNDANCIES: string[] = ['Single-Zone', 'Zone-Redundant', 'Geo-Redundant'];
+export const STORAGE_MEDIA: string[] = ['SSD', 'HDD'];
 
 // --- APP HOSTING ---
 export const APP_HOSTING_TIERS: string[] = ['Basic', 'Standard', 'Premium', 'Professional', 'Shared', 'Dedicated'];
 export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
 
 // --- INTEGRATION ---
-export const INTEGRATION_TYPES: string[] = ['Message Queue', 'Event Bus', 'API Gateway', 'Workflow'];
+export const INTEGRATION_CATEGORIES: string[] = ['Message Queue', 'Event Bus', 'API Gateway', 'Workflow'];
 export const INTEGRATION_TIERS: string[] = ['Standard', 'Premium', 'FIFO', 'Basic'];
