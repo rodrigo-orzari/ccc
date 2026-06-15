@@ -58,3 +58,37 @@ export interface PricingRecord {
     transfer_scope?: string;
   };
 }
+
+export interface WorkloadParameter {
+  id: string;
+  label: string;
+  type: 'slider' | 'number';
+  min: number;
+  max: number;
+  step: number;
+  defaultValue: number;
+  unit: string;
+}
+
+export interface WorkloadComponent {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  getRequirements: (params: Record<string, number>) => {
+    productType: ProductType;
+    minVcpus?: number;
+    minMemoryGb?: number;
+    category?: string;
+    quantity: number;
+  };
+}
+
+export interface WorkloadDefinition {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  parameters: WorkloadParameter[];
+  components: WorkloadComponent[];
+}
