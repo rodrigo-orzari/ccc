@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 150 files · ~105,819 words
+- 148 files · ~105,864 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 428 nodes · 556 edges · 47 communities (24 shown, 23 thin omitted)
+- 469 nodes · 610 edges · 62 communities (32 shown, 30 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `54a2591e`
+- Built from commit: `c996728f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -52,43 +52,58 @@
 - [[_COMMUNITY_Community 43|Community 43]]
 - [[_COMMUNITY_Community 44|Community 44]]
 - [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
+- [[_COMMUNITY_Community 49|Community 49]]
+- [[_COMMUNITY_Community 50|Community 50]]
+- [[_COMMUNITY_Community 51|Community 51]]
+- [[_COMMUNITY_Community 52|Community 52]]
+- [[_COMMUNITY_Community 53|Community 53]]
+- [[_COMMUNITY_Community 54|Community 54]]
+- [[_COMMUNITY_Community 55|Community 55]]
+- [[_COMMUNITY_Community 56|Community 56]]
+- [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
+- [[_COMMUNITY_Community 60|Community 60]]
+- [[_COMMUNITY_Community 61|Community 61]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Serverless Language Filter Implementation Summary` - 13 edges
 2. `Welcome!` - 10 edges
 3. `buildPricingFilters()` - 9 edges
-4. `ProductType` - 8 edges
-5. `NetworkingPricingPipeline` - 7 edges
-6. `Status: ✅ COMPLETE` - 6 edges
-7. `useDynamicFilters()` - 5 edges
-8. `StoragePricingPipeline` - 5 edges
+4. `ServerlessPricingPipeline` - 9 edges
+5. `ProductType` - 8 edges
+6. `NetworkingPricingPipeline` - 7 edges
+7. `Status: ✅ COMPLETE` - 6 edges
+8. `useDynamicFilters()` - 5 edges
 9. `PricingRecord` - 5 edges
-10. `7. In-Depth Subsystem Walks` - 5 edges
+10. `StoragePricingPipeline` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
   test_api.mjs → src/lib/api-utils.ts
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
   test_filters.mjs → src/lib/api-utils.ts
-- `FilterSidebar()` --calls--> `useDynamicFilters()`  [EXTRACTED]
-  src/components/FilterSidebar.tsx → src/hooks/useDynamicFilters.ts
 - `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/app/page.tsx → src/hooks/useDynamicFilters.ts
+- `FilterSidebar()` --calls--> `useDynamicFilters()`  [EXTRACTED]
+  src/components/FilterSidebar.tsx → src/hooks/useDynamicFilters.ts
 - `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
   src/components/ProductTypeSelector.tsx → src/types/index.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (47 total, 23 thin omitted)
+## Communities (62 total, 30 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
 Nodes (13): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, AwsStorageScraper, AzureStorageScraper (+5 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.07
-Nodes (58): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+50 more)
+Cohesion: 0.08
+Nodes (57): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+49 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.18
@@ -107,8 +122,8 @@ Cohesion: 0.08
 Nodes (25): 1. What Problem Does This Application Solve?, 2. Architectural Design, 3. File Directory & Code Organization, 4. Documentation Guide, 5. Security & Deployment, 6. Quick Start, 7. In-Depth Subsystem Walks, 8. Resources for Contributors (+17 more)
 
 ### Community 15 - "Community 15"
-Cohesion: 0.05
-Nodes (36): ChartsViewProps, ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV (+28 more)
+Cohesion: 0.06
+Nodes (26): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+18 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.07
@@ -123,8 +138,8 @@ Cohesion: 0.50
 Nodes (4): config, getRateLimitStatus(), middleware(), rateLimitStore
 
 ### Community 26 - "Community 26"
-Cohesion: 0.25
-Nodes (4): pipeline, sql, NetworkingPricingPipeline, STATIC_NETWORKING_PRICING
+Cohesion: 0.32
+Nodes (3): AlibabaServerlessAdapter, AWSServerlessLiveAdapter, ServerlessPricingPipeline
 
 ### Community 27 - "Community 27"
 Cohesion: 0.24
@@ -135,28 +150,60 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ### Community 38 - "Community 38"
-Cohesion: 0.10
-Nodes (22): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, ALIBABA_INTEGRATION, AWS_INTEGRATION (+14 more)
+Cohesion: 0.12
+Nodes (14): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, pipeline, sql (+6 more)
+
+### Community 47 - "Community 47"
+Cohesion: 0.29
+Nodes (8): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry
+
+### Community 48 - "Community 48"
+Cohesion: 0.27
+Nodes (5): PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, PricingRecord, ProductType
+
+### Community 49 - "Community 49"
+Cohesion: 0.40
+Nodes (3): AWS_LAMBDA_LANGUAGES, AWS_SERVERLESS, baseAwsEntries
+
+### Community 50 - "Community 50"
+Cohesion: 0.40
+Nodes (3): AZURE_FUNCTIONS_LANGUAGES, AZURE_SERVERLESS, baseAzureEntries
+
+### Community 51 - "Community 51"
+Cohesion: 0.40
+Nodes (3): baseDigitaloceanEntries, DIGITALOCEAN_FUNCTIONS_LANGUAGES, DIGITALOCEAN_SERVERLESS
+
+### Community 52 - "Community 52"
+Cohesion: 0.40
+Nodes (3): baseGcpEntries, GCP_CLOUD_RUN_LANGUAGES, GCP_SERVERLESS
+
+### Community 53 - "Community 53"
+Cohesion: 0.40
+Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
+
+### Community 55 - "Community 55"
+Cohesion: 0.67
+Nodes (3): loadWidths(), lsKey(), saveWidths()
 
 ## Knowledge Gaps
-- **132 isolated node(s):** `PIPELINE_DISPLAY`, `FilterSectionProps`, `GroupedFilterSectionProps`, `FilterSidebarProps`, `VALID_PRODUCT_TYPES` (+127 more)
+- **142 isolated node(s):** `FilterSectionProps`, `GroupedFilterSectionProps`, `FilterSidebarProps`, `PROVIDERS`, `ColDef` (+137 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 38`?**
-  _High betweenness centrality (0.035) - this node is a cross-community bridge._
-- **Why does `NetworkingPricingPipeline` connect `Community 26` to `Community 9`, `Community 38`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
-- **Why does `ProductType` connect `Community 15` to `Community 7`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **What connects `PIPELINE_DISPLAY`, `FilterSectionProps`, `GroupedFilterSectionProps` to the rest of the system?**
-  _132 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+- **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+- **Why does `AIPricingPipeline` connect `Community 27` to `Community 9`?**
+  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **What connects `FilterSectionProps`, `GroupedFilterSectionProps`, `FilterSidebarProps` to the rest of the system?**
+  _142 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.07403846153846154 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07589285714285714 - nodes in this community are weakly interconnected._
 - **Should `Community 9` be split into smaller, more focused modules?**
   _Cohesion score 0.14736842105263157 - nodes in this community are weakly interconnected._
