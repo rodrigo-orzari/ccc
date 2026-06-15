@@ -22,6 +22,7 @@ const GCP_CLOUD_RUN_LANGUAGES = ['Python', 'Node', 'Go', 'Java', 'C#', 'PHP', 'R
 const addGcpServerlessAttributes = (entry: any) => ({
   ...entry,
   attributes: {
+    service_type: 'Compute',
     deployment_type: 'Serverless',
     tier: 'Serverless',
     cold_start_overhead_ms: 150,

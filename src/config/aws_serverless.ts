@@ -21,6 +21,7 @@ const AWS_LAMBDA_LANGUAGES = ['Python', 'Node', 'Java', 'Go', 'Ruby', 'C#'];
 const addServerlessAttributes = (entry: any) => ({
   ...entry,
   attributes: {
+    service_type: 'Compute',
     deployment_type: 'Serverless',
     tier: 'Serverless',
     cold_start_overhead_ms: 100,

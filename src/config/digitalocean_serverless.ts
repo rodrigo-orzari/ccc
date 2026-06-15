@@ -25,6 +25,7 @@ const DIGITALOCEAN_FUNCTIONS_LANGUAGES = ['JavaScript', 'Python', 'Go', 'TypeScr
 const addDigitaloceanServerlessAttributes = (entry: any) => ({
   ...entry,
   attributes: {
+    service_type: 'Compute',
     deployment_type: 'Serverless',
     tier: 'Serverless',
     cold_start_overhead_ms: 125,
