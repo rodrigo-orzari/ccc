@@ -9,27 +9,30 @@ export async function GET() {
   try {
     const query = `
       SELECT
-        ARRAY_AGG(DISTINCT geography) FILTER (WHERE geography IS NOT NULL AND geography != '') as geographies,
-        ARRAY_AGG(DISTINCT os) FILTER (WHERE os IS NOT NULL AND os != '') as os_types,
-        ARRAY_AGG(DISTINCT arch) FILTER (WHERE arch IS NOT NULL AND arch != '') as architectures,
-        ARRAY_AGG(DISTINCT cpu_vendor) FILTER (WHERE cpu_vendor IS NOT NULL AND cpu_vendor != '') as cpu_vendors,
-        ARRAY_AGG(DISTINCT category) FILTER (WHERE category IS NOT NULL AND category != '') as categories,
-        ARRAY_AGG(DISTINCT attributes->>'engine') FILTER (WHERE attributes->>'engine' IS NOT NULL) as engines,
-        ARRAY_AGG(DISTINCT attributes->>'deployment_type') FILTER (WHERE attributes->>'deployment_type' IS NOT NULL) as deployment_types,
-        ARRAY_AGG(DISTINCT attributes->>'ha_mode') FILTER (WHERE attributes->>'ha_mode' IS NOT NULL) as ha_modes,
-        ARRAY_AGG(DISTINCT attributes->>'tier') FILTER (WHERE attributes->>'tier' IS NOT NULL) as tiers,
-        ARRAY_AGG(DISTINCT attributes->>'modelTier') FILTER (WHERE attributes->>'modelTier' IS NOT NULL) as ai_model_tiers,
-        ARRAY_AGG(DISTINCT attributes->>'contextWindowK') FILTER (WHERE attributes->>'contextWindowK' IS NOT NULL) as ai_context_windows,
-        ARRAY_AGG(DISTINCT attributes->>'multimodal') FILTER (WHERE attributes->>'multimodal' IS NOT NULL) as ai_multimodal,
-        ARRAY_AGG(DISTINCT attributes->>'orchestrator') FILTER (WHERE attributes->>'orchestrator' IS NOT NULL) as orchestrators,
-        ARRAY_AGG(DISTINCT attributes->>'compute_type') FILTER (WHERE attributes->>'compute_type' IS NOT NULL) as container_compute_types,
-        ARRAY_AGG(DISTINCT attributes->>'architecture') FILTER (WHERE attributes->>'architecture' IS NOT NULL) as container_architectures,
-        ARRAY_AGG(DISTINCT attributes->>'billing_granularity') FILTER (WHERE attributes->>'billing_granularity' IS NOT NULL) as billing_granularities,
-        ARRAY_AGG(DISTINCT attributes->>'execution_model') FILTER (WHERE attributes->>'execution_model' IS NOT NULL) as execution_models,
-        ARRAY_AGG(DISTINCT attributes->>'provisioned_concurrency_support') FILTER (WHERE attributes->>'provisioned_concurrency_support' IS NOT NULL) as provisioned_concurrency,
-        ARRAY_AGG(DISTINCT attributes->>'transfer_tier') FILTER (WHERE attributes->>'transfer_tier' IS NOT NULL) as transfer_tiers,
-        ARRAY_AGG(DISTINCT attributes->>'destination') FILTER (WHERE attributes->>'destination' IS NOT NULL) as destinations
-      FROM pricing_records;
+        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '') as geographies,
+        ARRAY_AGG(DISTINCT pr.os) FILTER (WHERE pr.os IS NOT NULL AND pr.os != '') as os_types,
+        ARRAY_AGG(DISTINCT pr.arch) FILTER (WHERE pr.arch IS NOT NULL AND pr.arch != '') as architectures,
+        ARRAY_AGG(DISTINCT pr.cpu_vendor) FILTER (WHERE pr.cpu_vendor IS NOT NULL AND pr.cpu_vendor != '') as cpu_vendors,
+        ARRAY_AGG(DISTINCT pr.category) FILTER (WHERE pr.category IS NOT NULL AND pr.category != '' AND s.category = 'compute') as categories,
+        ARRAY_AGG(DISTINCT pr.category) FILTER (WHERE pr.category IS NOT NULL AND pr.category != '' AND s.category = 'database') as db_families,
+        ARRAY_AGG(DISTINCT pr.category) FILTER (WHERE pr.category IS NOT NULL AND pr.category != '' AND s.category = 'networking') as networking_services,
+        ARRAY_AGG(DISTINCT pr.attributes->>'engine') FILTER (WHERE pr.attributes->>'engine' IS NOT NULL) as engines,
+        ARRAY_AGG(DISTINCT pr.attributes->>'deployment_type') FILTER (WHERE pr.attributes->>'deployment_type' IS NOT NULL) as deployment_types,
+        ARRAY_AGG(DISTINCT pr.attributes->>'ha_mode') FILTER (WHERE pr.attributes->>'ha_mode' IS NOT NULL) as ha_modes,
+        ARRAY_AGG(DISTINCT pr.attributes->>'tier') FILTER (WHERE pr.attributes->>'tier' IS NOT NULL) as tiers,
+        ARRAY_AGG(DISTINCT pr.attributes->>'modelTier') FILTER (WHERE pr.attributes->>'modelTier' IS NOT NULL) as ai_model_tiers,
+        ARRAY_AGG(DISTINCT pr.attributes->>'contextWindowK') FILTER (WHERE pr.attributes->>'contextWindowK' IS NOT NULL) as ai_context_windows,
+        ARRAY_AGG(DISTINCT pr.attributes->>'multimodal') FILTER (WHERE pr.attributes->>'multimodal' IS NOT NULL) as ai_multimodal,
+        ARRAY_AGG(DISTINCT pr.attributes->>'orchestrator') FILTER (WHERE pr.attributes->>'orchestrator' IS NOT NULL) as orchestrators,
+        ARRAY_AGG(DISTINCT pr.attributes->>'compute_type') FILTER (WHERE pr.attributes->>'compute_type' IS NOT NULL) as container_compute_types,
+        ARRAY_AGG(DISTINCT pr.attributes->>'architecture') FILTER (WHERE pr.attributes->>'architecture' IS NOT NULL) as container_architectures,
+        ARRAY_AGG(DISTINCT pr.attributes->>'billing_granularity') FILTER (WHERE pr.attributes->>'billing_granularity' IS NOT NULL) as billing_granularities,
+        ARRAY_AGG(DISTINCT pr.attributes->>'execution_model') FILTER (WHERE pr.attributes->>'execution_model' IS NOT NULL) as execution_models,
+        ARRAY_AGG(DISTINCT pr.attributes->>'provisioned_concurrency_support') FILTER (WHERE pr.attributes->>'provisioned_concurrency_support' IS NOT NULL) as provisioned_concurrency,
+        ARRAY_AGG(DISTINCT pr.attributes->>'transfer_tier') FILTER (WHERE pr.attributes->>'transfer_tier' IS NOT NULL) as transfer_tiers,
+        ARRAY_AGG(DISTINCT pr.attributes->>'destination') FILTER (WHERE pr.attributes->>'destination' IS NOT NULL) as destinations
+      FROM pricing_records pr
+      LEFT JOIN services s ON s.id = pr.service_id;
     `;
     
     // Serverless supportedLanguages is an array, we unnest and aggregate separately
