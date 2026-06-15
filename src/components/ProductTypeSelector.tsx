@@ -79,6 +79,17 @@ export default function ProductTypeSelector({
             )}
           </button>
         ))}
+        
+        <div className="h-6 w-px bg-gray-300 dark:bg-gray-700 mx-1"></div>
+        
+        <a
+          href="/workloads"
+          className="flex items-center gap-2 px-3 py-1 rounded border border-transparent text-blue-600 dark:text-blue-400 font-bold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors shrink-0"
+        >
+          <span className="text-xs flex items-center gap-1.5">
+            📦 Workloads Calculator
+          </span>
+        </a>
       </div>
 
       <div className="flex items-center gap-2 ml-4 shrink-0">
