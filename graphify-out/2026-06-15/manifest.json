@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1780719921.472988,
-    "ast_hash": "a394894d96da3c9377d7e9aeeb6f0ea7",
+    "mtime": 1781565343.7875214,
+    "ast_hash": "4982dd7031448182435661472f4b8c91",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
@@ -435,8 +435,8 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1781563575.7080848,
-    "ast_hash": "ecc85db70b415ba5812af5e4242300db",
+    "mtime": 1781565279.939051,
+    "ast_hash": "5dcd76f77055f6febfd040d9f1ce278a",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
@@ -752,6 +752,11 @@
   "src/services/app_hosting_pipeline.ts": {
     "mtime": 1781560204.2933207,
     "ast_hash": "1b1187223c66dcba60a034eaa093b502",
+    "semantic_hash": ""
+  },
+  "ingest_vms.ts": {
+    "mtime": 1781565360.6063702,
+    "ast_hash": "95c9490024e2b04dc0519ff5311c2d73",
     "semantic_hash": ""
   }
 }

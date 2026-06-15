@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 149 files · ~106,825 words
+- 153 files · ~108,961 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 510 nodes · 679 edges · 63 communities (33 shown, 30 thin omitted)
+- 522 nodes · 698 edges · 60 communities (32 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `75f0dcab`
+- Built from commit: `a3fa6952`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -59,9 +59,6 @@
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 52|Community 52]]
 - [[_COMMUNITY_Community 53|Community 53]]
-- [[_COMMUNITY_Community 54|Community 54]]
-- [[_COMMUNITY_Community 55|Community 55]]
-- [[_COMMUNITY_Community 56|Community 56]]
 - [[_COMMUNITY_Community 57|Community 57]]
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 59|Community 59]]
@@ -86,25 +83,25 @@
   test_api.mjs → src/lib/api-utils.ts
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
   test_filters.mjs → src/lib/api-utils.ts
+- `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/ProductTypeSelector.tsx → src/types/index.ts
 - `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/app/page.tsx → src/hooks/useDynamicFilters.ts
 - `FilterSidebar()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/components/FilterSidebar.tsx → src/hooks/useDynamicFilters.ts
-- `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
-  src/components/ProductTypeSelector.tsx → src/types/index.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (63 total, 30 thin omitted)
+## Communities (60 total, 28 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
 Nodes (13): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, AwsStorageScraper, AzureStorageScraper (+5 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.08
-Nodes (57): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+49 more)
+Cohesion: 0.07
+Nodes (58): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+50 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.18
@@ -124,7 +121,7 @@ Nodes (25): 1. What Problem Does This Application Solve?, 2. Architectural Desig
 
 ### Community 15 - "Community 15"
 Cohesion: 0.06
-Nodes (26): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+18 more)
+Nodes (31): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+23 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.07
@@ -159,8 +156,8 @@ Cohesion: 0.29
 Nodes (8): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry
 
 ### Community 48 - "Community 48"
-Cohesion: 0.27
-Nodes (5): PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, PricingRecord, ProductType
+Cohesion: 0.12
+Nodes (10): ChartsViewProps, PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, WORKLOADS, PricingRecord, ProductType, WorkloadComponent (+2 more)
 
 ### Community 49 - "Community 49"
 Cohesion: 0.40
@@ -182,33 +179,29 @@ Nodes (3): baseGcpEntries, GCP_CLOUD_RUN_LANGUAGES, GCP_SERVERLESS
 Cohesion: 0.40
 Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
 
-### Community 55 - "Community 55"
-Cohesion: 0.67
-Nodes (3): loadWidths(), lsKey(), saveWidths()
-
 ### Community 62 - "Community 62"
 Cohesion: 0.09
 Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PriceDriftResult (+2 more)
 
 ## Knowledge Gaps
-- **145 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+140 more)
+- **146 isolated node(s):** `PRODUCT_TYPES`, `WorkloadComponent`, `PROVIDERS`, `ColDef`, `COL_PROVIDER` (+141 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 38`?**
-  _High betweenness centrality (0.036) - this node is a cross-community bridge._
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Why does `AIPricingPipeline` connect `Community 27` to `Community 9`?**
   _High betweenness centrality (0.013) - this node is a cross-community bridge._
-- **What connects `PROVIDERS`, `ColDef`, `COL_PROVIDER` to the rest of the system?**
-  _145 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `PRODUCT_TYPES`, `WorkloadComponent`, `PROVIDERS` to the rest of the system?**
+  _146 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.07589285714285714 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.075 - nodes in this community are weakly interconnected._
 - **Should `Community 9` be split into smaller, more focused modules?**
   _Cohesion score 0.14736842105263157 - nodes in this community are weakly interconnected._

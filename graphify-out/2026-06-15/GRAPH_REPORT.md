@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 148 files · ~106,621 words
+- 149 files · ~106,825 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 470 nodes · 611 edges · 62 communities (32 shown, 30 thin omitted)
+- 510 nodes · 679 edges · 63 communities (33 shown, 30 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7e05b814`
+- Built from commit: `75f0dcab`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -67,18 +67,19 @@
 - [[_COMMUNITY_Community 59|Community 59]]
 - [[_COMMUNITY_Community 60|Community 60]]
 - [[_COMMUNITY_Community 61|Community 61]]
+- [[_COMMUNITY_Community 62|Community 62]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `Serverless Language Filter Implementation Summary` - 13 edges
-2. `Welcome!` - 10 edges
-3. `buildPricingFilters()` - 9 edges
-4. `ServerlessPricingPipeline` - 9 edges
-5. `ProductType` - 8 edges
-6. `NetworkingPricingPipeline` - 7 edges
-7. `Status: ✅ COMPLETE` - 6 edges
-8. `useDynamicFilters()` - 5 edges
-9. `PricingRecord` - 5 edges
-10. `StoragePricingPipeline` - 5 edges
+1. `BaseAdapter` - 16 edges
+2. `Serverless Language Filter Implementation Summary` - 13 edges
+3. `Welcome!` - 10 edges
+4. `buildPricingFilters()` - 9 edges
+5. `ServerlessPricingPipeline` - 9 edges
+6. `ProductType` - 8 edges
+7. `DigitalOceanAdapter` - 7 edges
+8. `NetworkingPricingPipeline` - 7 edges
+9. `GCPAdapter` - 6 edges
+10. `Status: ✅ COMPLETE` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
@@ -95,7 +96,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (62 total, 30 thin omitted)
+## Communities (63 total, 30 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
@@ -185,8 +186,12 @@ Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
 Cohesion: 0.67
 Nodes (3): loadWidths(), lsKey(), saveWidths()
 
+### Community 62 - "Community 62"
+Cohesion: 0.09
+Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PriceDriftResult (+2 more)
+
 ## Knowledge Gaps
-- **143 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+138 more)
+- **145 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+140 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **30 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -194,13 +199,13 @@ Nodes (3): loadWidths(), lsKey(), saveWidths()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 38`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Why does `AIPricingPipeline` connect `Community 27` to `Community 9`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **What connects `PROVIDERS`, `ColDef`, `COL_PROVIDER` to the rest of the system?**
-  _143 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _145 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
