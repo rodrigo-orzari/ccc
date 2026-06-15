@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "src/config/aws_serverless.ts": {
-    "mtime": 1780711957.3286562,
-    "ast_hash": "3532c0349a415978cb100a006d472614",
+    "mtime": 1781561075.511075,
+    "ast_hash": "348f0ae86f041fda5c9e1bb4250e32d1",
     "semantic_hash": ""
   },
   "src/config/azure_containers.ts": {
@@ -45,8 +45,8 @@
     "semantic_hash": ""
   },
   "src/config/azure_serverless.ts": {
-    "mtime": 1780711961.6840916,
-    "ast_hash": "a72a88cfc2c8c6604e0f392976dff10c",
+    "mtime": 1781561088.7087495,
+    "ast_hash": "09890718b137dbce3d3db8487d378866",
     "semantic_hash": ""
   },
   "src/config/database_instances.ts": {
@@ -65,9 +65,9 @@
     "semantic_hash": "b9972aaab54fd64d9ca930a5baa82429"
   },
   "src/config/digitalocean_serverless.ts": {
-    "mtime": 1779319573.3155067,
-    "ast_hash": "be4cc05fd57be643096aaead729308e9",
-    "semantic_hash": "be4cc05fd57be643096aaead729308e9"
+    "mtime": 1781561107.3475697,
+    "ast_hash": "eb77baa672cf6828a9c731c5dfd3fd1f",
+    "semantic_hash": ""
   },
   "src/config/gcp_containers.ts": {
     "mtime": 1780777036.35731,
@@ -80,8 +80,8 @@
     "semantic_hash": "f25865ea07afcaa6bff2fd00465ac305"
   },
   "src/config/gcp_serverless.ts": {
-    "mtime": 1780619052.4592204,
-    "ast_hash": "344499dc65f775ab12090f75e908bf8d",
+    "mtime": 1781561099.3415842,
+    "ast_hash": "e9d84580e0ceebd60c5a5ea68ae62aba",
     "semantic_hash": ""
   },
   "src/config/oracle_containers.ts": {
@@ -95,8 +95,8 @@
     "semantic_hash": "f000d6cf02f33f18aca58b4ae32e63ad"
   },
   "src/config/oracle_serverless.ts": {
-    "mtime": 1780619052.4595788,
-    "ast_hash": "f79d99a84cbdae3b14da245e428b23f1",
+    "mtime": 1781561119.1950238,
+    "ast_hash": "eb9e8cfbecbe38552342516163aa6ea8",
     "semantic_hash": ""
   },
   "src/db/schema.sql": {
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "src/services/ingest.ts": {
-    "mtime": 1781560231.6195486,
-    "ast_hash": "e559d564862efeca6f4275c33a5c09e5",
+    "mtime": 1781561233.4282897,
+    "ast_hash": "8a03e14c191feb8af3b29947c748815e",
     "semantic_hash": ""
   },
   "src/services/mailer.ts": {
@@ -150,8 +150,8 @@
     "semantic_hash": ""
   },
   "src/services/serverless_pipeline.ts": {
-    "mtime": 1780711983.1557062,
-    "ast_hash": "fed26652370f7774b967acf403350e1f",
+    "mtime": 1781561214.3248732,
+    "ast_hash": "7751664a14043a02d4b111f92cf65bd0",
     "semantic_hash": ""
   },
   "tests/filters.spec.ts": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1781560131.071162,
-    "ast_hash": "6bc9f56234280703271dd1c749cc6c99",
+    "mtime": 1781561281.5568135,
+    "ast_hash": "9705e348e3aea707093d9bf9c9a0d84a",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1781559995.6716733,
-    "ast_hash": "4ad522b902468b5d980b1070f9d57b7a",
+    "mtime": 1781561655.0385933,
+    "ast_hash": "869054a8a97e42d8d08b3695b37e5a04",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -420,13 +420,13 @@
     "semantic_hash": ""
   },
   "src/config/alibaba_serverless.ts": {
-    "mtime": 1781414865.61637,
-    "ast_hash": "ed51b066477369284f2aa05fa38556b4",
+    "mtime": 1781561126.9601061,
+    "ast_hash": "cbbc913a595fdcca0f51659d167bfe76",
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1781560070.8078492,
-    "ast_hash": "6563815d4d42d65d7caaf9eb0664558f",
+    "mtime": 1781561475.2313733,
+    "ast_hash": "26f4f66395f3d480b679c5cfd66dbcb1",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
@@ -435,13 +435,13 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1781559838.2072322,
-    "ast_hash": "e50dbb4838cfd469814def7f858ae798",
+    "mtime": 1781561635.990656,
+    "ast_hash": "ac1bc8bd602f78b6dfb2cb49bea33066",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1781555819.39668,
-    "ast_hash": "2aee2f0dbf8d319b2a098592c3b63f46",
+    "mtime": 1781561346.398021,
+    "ast_hash": "e7621bcf6d2a52e09e5f1a43673696e3",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
@@ -465,13 +465,13 @@
     "semantic_hash": ""
   },
   "src/config/index.ts": {
-    "mtime": 1781559895.7934237,
-    "ast_hash": "1348d7bf82281569d40d6a07ac5ed6e0",
+    "mtime": 1781561165.7126794,
+    "ast_hash": "db097a2ad3307fa5781255c6b70e6c0d",
     "semantic_hash": ""
   },
   "src/types/index.ts": {
-    "mtime": 1781559855.4447565,
-    "ast_hash": "063f66d84aeec0a18ce2b1b4856147fd",
+    "mtime": 1781561665.1083195,
+    "ast_hash": "bb4ff932a26effaadaf2e9b65f6b272b",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -625,13 +625,13 @@
     "semantic_hash": ""
   },
   "src/app/api/filters/route.ts": {
-    "mtime": 1781559438.8670087,
-    "ast_hash": "5a93cfc7db07415189dff3595eac4c14",
+    "mtime": 1781561305.2551053,
+    "ast_hash": "f62c608c9ae2aa47c26153ebd43f2dc2",
     "semantic_hash": ""
   },
   "src/hooks/useDynamicFilters.ts": {
-    "mtime": 1781559940.0271256,
-    "ast_hash": "ab962eabfdc69df86ee68ab1817d7fa4",
+    "mtime": 1781561320.27671,
+    "ast_hash": "afbc2df8c5dc656bfdf6e475f71ab62b",
     "semantic_hash": ""
   },
   "check.ts": {
@@ -694,19 +694,14 @@
     "ast_hash": "105c1e4af1edaf43a4f93a0725524cf5",
     "semantic_hash": ""
   },
-  "scripts_ingest_apps.ts": {
-    "mtime": 1781556204.5964754,
-    "ast_hash": "475e5e9cb7cf1d5e60457818d98b16d1",
-    "semantic_hash": ""
-  },
   "src/config/app_hosting.ts": {
     "mtime": 1781560169.8238008,
     "ast_hash": "6968730005a36f1f2e627477e916b3bc",
     "semantic_hash": ""
   },
   "src/config/integration.ts": {
-    "mtime": 1781560182.1761103,
-    "ast_hash": "7094eac77e96572d4e9579ff02ef1b55",
+    "mtime": 1781561152.3130877,
+    "ast_hash": "3070b24f43b3ccefb6f91271b8eb1562",
     "semantic_hash": ""
   },
   "check_engines.mjs": {
@@ -757,11 +752,6 @@
   "src/services/app_hosting_pipeline.ts": {
     "mtime": 1781560204.2933207,
     "ast_hash": "1b1187223c66dcba60a034eaa093b502",
-    "semantic_hash": ""
-  },
-  "src/services/integration_pipeline.ts": {
-    "mtime": 1781560213.9760897,
-    "ast_hash": "abe69ff242af420de1d4ca0df6677cf9",
     "semantic_hash": ""
   }
 }
