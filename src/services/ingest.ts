@@ -8,6 +8,7 @@ import { ServerlessPricingPipeline } from './serverless_pipeline';
 import { ContainersPricingPipeline } from './containers_pipeline';
 import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline';
 import { NetworkingPricingPipeline } from './networking_pipeline';
+import { StoragePricingPipeline } from './storage_pipeline';
 
 
 async function main() {
@@ -92,6 +93,18 @@ async function main() {
         console.log(`  ✅ NETWORKING: ${result.recordsProcessed} configurations inserted`);
       } else {
         console.log(`  ❌ NETWORKING: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Storage Pricing...');
+    // Run storage pricing pipeline
+    const storagePipeline = new StoragePricingPipeline(sql as any);
+    const storageResults = await storagePipeline.run();
+    storageResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} Storage configurations`);
+      } else {
+        console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
       }
     });
 

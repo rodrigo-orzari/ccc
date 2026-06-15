@@ -83,7 +83,7 @@ export const initDb = async () => {
 
 const MAX_FILTER_ITEMS = 50;
 const MAX_SEARCH_LENGTH = 200;
-const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai'];
+const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage'];
 
 function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
   if (!input) return [];
@@ -121,6 +121,7 @@ export function buildPricingFilters(query: any) {
       aiServiceTypes, aiModelTiers, aiContextWindows, aiMultimodalOptions,
       networkingService, networkingConnectionTypes, networkingRoutingTypes, networkingHaSupport, networkingVpcSupport, networkingTransferDirections,
       networkingBillingModels, networkingUsageTiers, networkingPortCapacities, networkingTransferScopes,
+      storageTypes, storageTiers, storageRedundancy,
     } = query;
 
     const conditions: string[] = [];
@@ -618,19 +619,39 @@ export function buildPricingFilters(query: any) {
       }
     }
 
-    if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai') {
+    // Storage product type filters (Object/Block/File/Archive). All driven by
+    // attributes JSONB; capacity price is normalized to $/GB-month.
+    if (resolvedProductType === 'storage') {
+      const typeFilters = parseFilterList(storageTypes as string).map((s: string) => s.toLowerCase());
+      if (typeFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'storage_type') = ANY($${paramCount++})`);
+        values.push(typeFilters);
+      }
+      const tierFilters = parseFilterList(storageTiers as string).map((s: string) => s.toLowerCase());
+      if (tierFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
+        values.push(tierFilters);
+      }
+      const redundancyFilters = parseFilterList(storageRedundancy as string).map((s: string) => s.toLowerCase());
+      if (redundancyFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'redundancy') = ANY($${paramCount++})`);
+        values.push(redundancyFilters);
+      }
+    }
+
+    if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai' && resolvedProductType !== 'storage') {
       conditions.push(`pr.vcpus >= $${paramCount++}`);
       values.push(minVcpu);
     }
-    if (maxVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai') {
+    if (maxVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai' && resolvedProductType !== 'storage') {
       conditions.push(`pr.vcpus <= $${paramCount++}`);
       values.push(maxVcpu);
     }
-    if (minMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai') {
+    if (minMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai' && resolvedProductType !== 'storage') {
       conditions.push(`pr.memory_gb >= $${paramCount++}`);
       values.push(minMemory);
     }
-    if (maxMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai') {
+    if (maxMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai' && resolvedProductType !== 'storage') {
       conditions.push(`pr.memory_gb <= $${paramCount++}`);
       values.push(maxMemory);
     }

@@ -11,6 +11,7 @@ const PIPELINE_DISPLAY: Record<string, string> = {
   networking: 'Networking',
   data_warehouse: 'Data & Analytics',
   ai: 'AI & Machine Learning',
+  storage: 'Storage',
 };
 
 export async function GET() {

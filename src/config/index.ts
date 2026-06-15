@@ -58,6 +58,12 @@ export const NETWORKING_USAGE_TIERS = ['Flat Rate', 'First 10TB', '10TB - 50TB',
 export const NETWORKING_PORT_CAPACITIES = ['< 1 Gbps', '1 Gbps - 10 Gbps', '> 10 Gbps', 'N/A'];
 export const NETWORKING_TRANSFER_SCOPES = ['Same Region', 'Cross-AZ', 'Cross-Region', 'Internet', 'On-Premises', 'N/A'];
 
+// Storage-specific constants. These MUST stay exhaustive vs the DB values, or the
+// "omit-when-all" param logic in page.tsx will silently hide un-enumerated rows.
+export const STORAGE_TYPES = ['Object', 'Block', 'File', 'Archive'];
+export const STORAGE_TIERS = ['Standard', 'Infrequent', 'Cold'];
+export const STORAGE_REDUNDANCY = ['Single-Zone', 'Zone-Redundant', 'Geo-Redundant'];
+
 // Data Analytics-specific constants
 export const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'Native'];
 export const ANALYTICS_DEPLOYMENT_TYPES = ['Serverless', 'Provisioned'];
