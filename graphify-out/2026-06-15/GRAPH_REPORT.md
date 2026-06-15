@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 126 files · ~98,326 words
+- 129 files · ~99,667 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 347 nodes · 446 edges · 34 communities (22 shown, 12 thin omitted)
+- 354 nodes · 457 edges · 36 communities (21 shown, 15 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2e609f55`
+- Built from commit: `22e75688`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -40,33 +40,37 @@
 - [[_COMMUNITY_Community 28|Community 28]]
 - [[_COMMUNITY_Community 29|Community 29]]
 - [[_COMMUNITY_Community 30|Community 30]]
+- [[_COMMUNITY_Community 34|Community 34]]
+- [[_COMMUNITY_Community 35|Community 35]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Serverless Language Filter Implementation Summary` - 13 edges
 2. `Welcome!` - 10 edges
-3. `NetworkingPricingPipeline` - 7 edges
-4. `ProductType` - 6 edges
+3. `ProductType` - 8 edges
+4. `NetworkingPricingPipeline` - 7 edges
 5. `Status: ✅ COMPLETE` - 6 edges
 6. `useDynamicFilters()` - 5 edges
-7. `buildPricingFilters()` - 5 edges
-8. `StoragePricingPipeline` - 5 edges
-9. `7. In-Depth Subsystem Walks` - 5 edges
-10. `AIPricingPipeline` - 5 edges
+7. `PricingRecord` - 5 edges
+8. `buildPricingFilters()` - 5 edges
+9. `StoragePricingPipeline` - 5 edges
+10. `7. In-Depth Subsystem Walks` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/app/page.tsx → src/hooks/useDynamicFilters.ts
+- `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/ProductTypeSelector.tsx → src/types/index.ts
 - `FilterSidebar()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/components/FilterSidebar.tsx → src/hooks/useDynamicFilters.ts
-- `POST()` --calls--> `initDb()`  [EXTRACTED]
-  src/app/api/admin/fetch-pricing/route.ts → src/lib/api-utils.ts
-- `POST()` --calls--> `requireAdminAuth()`  [EXTRACTED]
-  src/app/api/admin/fetch-pricing/route.ts → src/lib/api-utils.ts
+- `PricingTableProps` --references--> `PricingRecord`  [EXTRACTED]
+  src/components/PricingTable.tsx → src/types/index.ts
+- `PricingTableProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/PricingTable.tsx → src/types/index.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (34 total, 12 thin omitted)
+## Communities (36 total, 15 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.13
@@ -74,7 +78,7 @@ Nodes (10): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, G
 
 ### Community 7 - "Community 7"
 Cohesion: 0.08
-Nodes (53): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+45 more)
+Nodes (54): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+46 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.18
@@ -93,16 +97,12 @@ Cohesion: 0.08
 Nodes (25): 1. What Problem Does This Application Solve?, 2. Architectural Design, 3. File Directory & Code Organization, 4. Documentation Guide, 5. Security & Deployment, 6. Quick Start, 7. In-Depth Subsystem Walks, 8. Resources for Contributors (+17 more)
 
 ### Community 15 - "Community 15"
-Cohesion: 0.06
-Nodes (30): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+22 more)
+Cohesion: 0.05
+Nodes (36): ChartsViewProps, ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV (+28 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.07
 Nodes (15): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig, AlibabaAnalyticsAdapter, DataAnalyticsPricingPipeline (+7 more)
-
-### Community 18 - "Community 18"
-Cohesion: 0.17
-Nodes (6): ChartsViewProps, PRODUCT_TYPES, ProductTypeSelectorProps, PROVIDERS, PricingRecord, ProductType
 
 ### Community 20 - "Community 20"
 Cohesion: 0.40
@@ -121,24 +121,24 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ## Knowledge Gaps
-- **113 isolated node(s):** `variables`, `content`, `filePaths`, `variablesToReplace`, `filePaths` (+108 more)
+- **115 isolated node(s):** `content`, `content`, `content`, `PROVIDERS`, `ColDef` (+110 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **12 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `ProductType` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
+- **Why does `ProductType` connect `Community 15` to `Community 7`?**
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 6`?**
-  _High betweenness centrality (0.030) - this node is a cross-community bridge._
+  _High betweenness centrality (0.029) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 9` to `Community 6`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
-- **What connects `variables`, `content`, `filePaths` to the rest of the system?**
-  _113 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **What connects `content`, `content`, `content` to the rest of the system?**
+  _115 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.12987012987012986 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.08361581920903954 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08196721311475409 - nodes in this community are weakly interconnected._
 - **Should `Community 9` be split into smaller, more focused modules?**
   _Cohesion score 0.11067193675889328 - nodes in this community are weakly interconnected._
