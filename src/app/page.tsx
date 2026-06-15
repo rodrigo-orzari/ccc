@@ -552,6 +552,8 @@ export default function Dashboard() {
     
     } else if (activeProductType === 'storage') {
       headers = ['Provider', 'Configuration', 'Category', 'Tier', 'Redundancy', 'Media', 'Geography', 'Price (USD)', 'Source'];
+    } else if (activeProductType === 'app-hosting') {
+      headers = ['Provider', 'Configuration', 'Tier', 'Compute Type', 'OS', 'Geography', 'vCPU', 'Memory (GB)', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'ai') {
       headers = ['Provider', 'Configuration', 'Service', 'Model Tier', 'Context Window', 'Multimodal', 'Geography', 'Input Price (/1M)', 'Output Price (/1M)', 'Source'];
     } else {
@@ -578,6 +580,8 @@ export default function Dashboard() {
         return [record.provider, record.instance_type, record.service || '', record.attributes?.modelTier || '', record.attributes?.contextWindowK || '', record.attributes?.multimodal || '', record.geography, priceDisplay, record.attributes?.outputPricePer1M || '', record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'storage') {
         return [record.provider, record.instance_type, record.attributes?.storage_type || '', record.attributes?.tier || '', record.attributes?.redundancy || '', record.attributes?.media || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
+      } else if (activeProductType === 'app-hosting') {
+        return [record.provider, record.instance_type, record.attributes?.tier || '', record.attributes?.compute_type || '', record.os || '', record.geography, record.vcpus || '', record.memory_gb || '', priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else {
         return [record.provider, record.instance_type, record.category || '', record.cpu_vendor || '', record.arch === 'x86 64' ? 'x86' : (record.arch || ''), record.os || '', record.gpu_count > 0 ? 'Yes' : 'No', record.vcpus || '', record.memory_gb || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       }
