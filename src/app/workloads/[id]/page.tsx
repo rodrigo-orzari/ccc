@@ -9,33 +9,33 @@ import { WorkloadDefinition, WorkloadParameter } from '@/types';
 
 function ArchitectureDiagram({ workload }: { workload: WorkloadDefinition }) {
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-8 flex flex-col items-center overflow-x-auto">
-      <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6 w-full text-left">
+    <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6 mb-8 flex flex-col items-center overflow-x-auto">
+      <h3 className="text-sm font-semibold text-[#6b7280] dark:text-[#71717a] uppercase tracking-wider mb-6 w-full text-left">
         Full Stack Architecture
       </h3>
       <div className="flex flex-col items-center">
-        <div className="bg-gray-700 text-sm py-2 px-6 rounded shadow mb-4">
-          <span className="font-medium text-gray-200">Users / API</span>
+        <div className="bg-[#dde0f0] dark:bg-[#1e1e38] text-sm py-2 px-6 rounded shadow mb-4">
+          <span className="font-medium text-[#111827] dark:text-[#f1f5f9]">Users / API</span>
         </div>
         
         {workload.components.map((component, idx) => (
           <React.Fragment key={component.id}>
-            <div className="text-gray-500 mb-4">&darr;</div>
-            <div className="bg-gray-900 border border-gray-600 rounded-lg py-4 px-6 shadow-lg min-w-[250px] flex items-center space-x-4">
-              <div className="text-3xl text-blue-400 bg-blue-500/10 p-3 rounded-full">
+            <div className="text-[#6b7280] dark:text-[#71717a] mb-4">&darr;</div>
+            <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg py-4 px-6 shadow-lg min-w-[250px] flex items-center space-x-4">
+              <div className="text-3xl text-[#2563eb] dark:text-[#818cf8] bg-blue-500/10 p-3 rounded-full">
                 {component.icon}
               </div>
               <div>
-                <div className="font-semibold text-gray-100">{component.name}</div>
-                <div className="text-xs text-gray-400">{component.description}</div>
+                <div className="font-semibold text-[#111827] dark:text-[#f1f5f9]">{component.name}</div>
+                <div className="text-xs text-[#6b7280] dark:text-[#71717a]">{component.description}</div>
               </div>
             </div>
           </React.Fragment>
         ))}
         
-        <div className="text-gray-500 my-4">&darr;</div>
-        <div className="bg-gray-700 text-sm py-2 px-6 rounded shadow">
-          <span className="font-medium text-gray-200">Result / Response</span>
+        <div className="text-[#6b7280] dark:text-[#71717a] my-4">&darr;</div>
+        <div className="bg-[#dde0f0] dark:bg-[#1e1e38] text-sm py-2 px-6 rounded shadow">
+          <span className="font-medium text-[#111827] dark:text-[#f1f5f9]">Result / Response</span>
         </div>
       </div>
     </div>
@@ -90,17 +90,17 @@ export default function WorkloadDetails() {
   if (!workload) return <div className="p-8 text-center">Workload not found</div>;
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-gray-800 border-b border-gray-700 py-4 px-6 flex justify-between items-center">
+    <div className="flex flex-col min-h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#111827] dark:text-[#f1f5f9] font-sans">
+      <header className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38] py-4 px-6 flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
             Compare Cloud Costs
           </h1>
-          <p className="text-sm text-gray-400">{workload.name}</p>
+          <p className="text-sm text-[#6b7280] dark:text-[#71717a]">{workload.name}</p>
         </div>
         <Link 
           href="/workloads" 
-          className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-sm font-medium rounded transition-colors"
+          className="px-4 py-2 bg-[#f7f8ff] dark:bg-[#10102a] border border-[#dde0f0] dark:border-[#1e1e38] hover:bg-[#e8eaf8] dark:hover:bg-[#1e1e38] text-sm font-medium rounded transition-colors"
         >
           &larr; Back to Catalog
         </Link>
@@ -112,14 +112,14 @@ export default function WorkloadDetails() {
         <div className="lg:col-span-4 flex flex-col space-y-6">
           <ArchitectureDiagram workload={workload} />
 
-          <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-            <h3 className="text-lg font-semibold mb-4 border-b border-gray-700 pb-2">Workload Scale</h3>
+          <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6">
+            <h3 className="text-lg font-semibold mb-4 border-b border-[#dde0f0] dark:border-[#1e1e38] pb-2">Workload Scale</h3>
             <div className="space-y-6">
               {workload.parameters.map((p) => (
                 <div key={p.id}>
                   <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium text-gray-300">{p.label}</label>
-                    <span className="text-xs bg-gray-700 px-2 py-1 rounded text-gray-300">
+                    <label className="text-sm font-medium text-[#111827] dark:text-[#f1f5f9]">{p.label}</label>
+                    <span className="text-xs bg-[#dde0f0] dark:bg-[#1e1e38] px-2 py-1 rounded text-[#111827] dark:text-[#f1f5f9]">
                       {parameters[p.id]} {p.unit}
                     </span>
                   </div>
@@ -130,9 +130,9 @@ export default function WorkloadDetails() {
                     step={p.step}
                     value={parameters[p.id] || p.defaultValue}
                     onChange={(e) => setParameters({...parameters, [p.id]: Number(e.target.value)})}
-                    className="w-full accent-blue-500 cursor-pointer h-2 bg-gray-700 rounded-lg appearance-none"
+                    className="w-full accent-[#2563eb] dark:accent-[#818cf8] cursor-pointer h-2 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-lg appearance-none"
                   />
-                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <div className="flex justify-between text-xs text-[#6b7280] dark:text-[#71717a] mt-1">
                     <span>{p.min}</span>
                     <span>{p.max}</span>
                   </div>
@@ -144,31 +144,31 @@ export default function WorkloadDetails() {
 
         {/* Right Content: Pricing Table */}
         <div className="lg:col-span-8">
-          <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 flex flex-col h-full">
+          <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6 flex flex-col h-full">
             <h3 className="text-lg font-semibold mb-1">Total Monthly Cost</h3>
-            <p className="text-sm text-gray-400 mb-6">Cheapest matching components aggregated across providers</p>
+            <p className="text-sm text-[#6b7280] dark:text-[#71717a] mb-6">Cheapest matching components aggregated across providers</p>
             
             {loading && !results ? (
               <div className="flex-1 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2563eb] dark:border-[#818cf8]"></div>
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse whitespace-nowrap">
                   <thead>
-                    <tr className="border-b border-gray-700 text-sm text-gray-400">
+                    <tr className="border-b border-[#dde0f0] dark:border-[#1e1e38] text-sm text-[#6b7280] dark:text-[#71717a]">
                       <th className="py-3 px-4 font-semibold uppercase tracking-wider">Provider</th>
                       {workload.components.map(c => (
                         <th key={c.id} className="py-3 px-4 font-semibold uppercase tracking-wider">
                           {c.name}
                         </th>
                       ))}
-                      <th className="py-3 px-4 font-bold text-blue-400 uppercase tracking-wider text-right">
+                      <th className="py-3 px-4 font-bold text-[#2563eb] dark:text-[#818cf8] uppercase tracking-wider text-right">
                         Total / Month
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-700">
+                  <tbody className="divide-y divide-[#dde0f0] dark:divide-[#1e1e38]">
                     {['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'].map((provider) => {
                       if (!results || !results[provider]) return null;
                       const pData = results[provider];
@@ -177,7 +177,7 @@ export default function WorkloadDetails() {
                       const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
 
                       return (
-                        <tr key={provider} className="hover:bg-gray-700/50 transition-colors">
+                        <tr key={provider} className="hover:bg-[#e8eaf8] dark:hover:bg-[#10102a] transition-colors">
                           <td className="py-4 px-4 font-medium capitalize flex items-center space-x-2">
                             <img src={`/providers/${provider}.svg`} alt={provider} className="w-5 h-5 rounded-sm object-contain bg-white p-0.5" onError={(e) => e.currentTarget.style.display='none'} />
                             <span>{provider === 'aws' ? 'AWS' : provider === 'gcp' ? 'Google Cloud' : provider}</span>
@@ -186,12 +186,12 @@ export default function WorkloadDetails() {
                           {workload.components.map(c => {
                             const comp = pData.components.find((x: any) => x.componentId === c.id);
                             if (!comp || comp.monthlyPrice === 0) {
-                              return <td key={c.id} className="py-4 px-4 text-gray-500 text-sm">Unavailable</td>;
+                              return <td key={c.id} className="py-4 px-4 text-[#6b7280] dark:text-[#71717a] text-sm">Unavailable</td>;
                             }
                             return (
                               <td key={c.id} className="py-4 px-4">
-                                <div className="text-sm text-gray-200">${comp.monthlyPrice.toFixed(2)}</div>
-                                <div className="text-xs text-gray-500 max-w-[150px] truncate" title={comp.instanceType}>
+                                <div className="text-sm text-[#111827] dark:text-[#f1f5f9]">${comp.monthlyPrice.toFixed(2)}</div>
+                                <div className="text-xs text-[#6b7280] dark:text-[#71717a] max-w-[150px] truncate" title={comp.instanceType}>
                                   {comp.quantity > 1 ? `${comp.quantity}x ` : ''}{comp.instanceType}
                                 </div>
                               </td>
@@ -200,7 +200,7 @@ export default function WorkloadDetails() {
 
                           <td className="py-4 px-4 text-right font-bold text-lg">
                             {isUnavailable || pData.total === 0 ? (
-                              <span className="text-gray-500">N/A</span>
+                              <span className="text-[#6b7280] dark:text-[#71717a]">N/A</span>
                             ) : (
                               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
                                 ${pData.total.toFixed(2)}
@@ -220,8 +220,8 @@ export default function WorkloadDetails() {
       </main>
 
       <div className="max-w-7xl mx-auto w-full px-6 md:px-10 mb-8">
-         <div className="bg-gray-800/50 border border-gray-700/50 rounded p-4 text-xs text-gray-400">
-            <strong className="text-gray-300">Assumptions & Disclaimer:</strong> This architecture calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for complex licensing, bandwidth egress fees, custom integrations, or specific platform limitations. Please consult official provider documentation for exact sizing before production deployments.
+         <div className="bg-[#eef0fc]/50 dark:bg-[#0c0c1e]/50 border border-[#dde0f0] dark:border-[#1e1e38] rounded p-4 text-xs text-[#6b7280] dark:text-[#71717a]">
+            <strong className="text-[#111827] dark:text-[#f1f5f9]">Assumptions & Disclaimer:</strong> This architecture calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for complex licensing, bandwidth egress fees, custom integrations, or specific platform limitations. Please consult official provider documentation for exact sizing before production deployments.
          </div>
       </div>
 
