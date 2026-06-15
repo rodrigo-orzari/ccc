@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1781556055.8958576,
-    "ast_hash": "54178afd2e05653ec6ad7fb59b9970f5",
+    "mtime": 1781559902.1459448,
+    "ast_hash": "2dc767ebd73b5036a55abf8552652cf6",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1781556096.614507,
-    "ast_hash": "a3bbdbc5832e95507e51e81112b3f6cc",
+    "mtime": 1781559355.0719047,
+    "ast_hash": "3f8fbccf453ce464da594fb1bf860aac",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
@@ -435,8 +435,8 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1781556139.9822776,
-    "ast_hash": "0738d1d82239c29fa1ad78fd1793ea54",
+    "mtime": 1781559838.2072322,
+    "ast_hash": "e50dbb4838cfd469814def7f858ae798",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
@@ -465,13 +465,13 @@
     "semantic_hash": ""
   },
   "src/config/index.ts": {
-    "mtime": 1781555849.1979468,
-    "ast_hash": "ab251e369063a312cf52d7858c2805b4",
+    "mtime": 1781559895.7934237,
+    "ast_hash": "1348d7bf82281569d40d6a07ac5ed6e0",
     "semantic_hash": ""
   },
   "src/types/index.ts": {
-    "mtime": 1781555770.3398476,
-    "ast_hash": "6e8ad813e531c976535e81b8da618106",
+    "mtime": 1781559855.4447565,
+    "ast_hash": "063f66d84aeec0a18ce2b1b4856147fd",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -530,8 +530,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1781415737.9788742,
-    "ast_hash": "a6028d9e8aacadc10b8bad878b99b894",
+    "mtime": 1781559946.8848722,
+    "ast_hash": "634fa13f898ed4974ac72b137253d864",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -605,8 +605,8 @@
     "semantic_hash": ""
   },
   "src/services/storage_pipeline.ts": {
-    "mtime": 1781555197.4253926,
-    "ast_hash": "bd6ca978e9c1c4997c301121628e59b2",
+    "mtime": 1781559685.1618538,
+    "ast_hash": "d9416993de6e937974a4fdeea950988b",
     "semantic_hash": ""
   },
   "injectSync.mjs": {
@@ -625,13 +625,13 @@
     "semantic_hash": ""
   },
   "src/app/api/filters/route.ts": {
-    "mtime": 1781555999.156243,
-    "ast_hash": "01d41abfb2df96c837c36e78154b7b9a",
+    "mtime": 1781559438.8670087,
+    "ast_hash": "5a93cfc7db07415189dff3595eac4c14",
     "semantic_hash": ""
   },
   "src/hooks/useDynamicFilters.ts": {
-    "mtime": 1781556009.6116004,
-    "ast_hash": "4c105308ab58e750ff1ad166cb148cbe",
+    "mtime": 1781559940.0271256,
+    "ast_hash": "ab962eabfdc69df86ee68ab1817d7fa4",
     "semantic_hash": ""
   },
   "check.ts": {
