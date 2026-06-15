@@ -6,3 +6,4 @@ export { default as FilterSidebar } from './FilterSidebar';
 export { default as Footer } from './Footer';
 export { RangeSlider } from './RangeSlider';
 export { default as ChartsView } from './ChartsView';
+export { DonationModal } from './DonationModal';

@@ -88,5 +88,13 @@ export function useDynamicFilters() {
     STORAGE_REDUNDANCIES: merge(config.STORAGE_REDUNDANCIES, dynamicData?.storage_redundancies),
     STORAGE_MEDIA: merge(config.STORAGE_MEDIA, dynamicData?.storage_media),
     STORAGE_TIERS: merge(config.STORAGE_TIERS, dynamicData?.storage_tiers),
+    
+    // App Hosting
+    APP_HOSTING_TIERS: merge(config.APP_HOSTING_TIERS, dynamicData?.app_hosting_tiers),
+    APP_HOSTING_COMPUTE_TYPES: merge(config.APP_HOSTING_COMPUTE_TYPES, dynamicData?.app_hosting_compute_types),
+    
+    // Integration
+    INTEGRATION_CATEGORIES: merge(config.INTEGRATION_TYPES, dynamicData?.integration_categories),
+    INTEGRATION_TIERS: merge(config.INTEGRATION_TIERS, dynamicData?.integration_tiers),
   };
 }

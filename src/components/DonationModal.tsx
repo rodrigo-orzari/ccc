@@ -1,0 +1,99 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+
+export function DonationModal() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [doNotShowAgain, setDoNotShowAgain] = useState(false);
+
+  useEffect(() => {
+    // Check if the user has opted out of the popup
+    const hideDonationModal = localStorage.getItem('hideDonationModal');
+    if (!hideDonationModal) {
+      // Small delay so it doesn't immediately jar the user upon instantaneous page load
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleYes = () => {
+    if (doNotShowAgain) {
+      localStorage.setItem('hideDonationModal', 'true');
+    }
+    // Open the Intuit connect donation link in a new tab
+    window.open(
+      'https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca',
+      '_blank'
+    );
+    setIsOpen(false);
+  };
+
+  const handleNo = () => {
+    if (doNotShowAgain) {
+      localStorage.setItem('hideDonationModal', 'true');
+    } else {
+      // If they click No and didn't check the box, we can set a session storage so it doesn't 
+      // annoy them on every single page reload during the same session, 
+      // but will still appear the next day/session unless they checked the box.
+      sessionStorage.setItem('hideDonationModalSession', 'true');
+    }
+    setIsOpen(false);
+  };
+
+  // If we shouldn't render at all
+  if (!isOpen) return null;
+
+  // We add a session check to prevent it from re-appearing continuously on refresh 
+  // if they clicked 'No' without checking 'Do not show again'.
+  if (typeof window !== 'undefined' && sessionStorage.getItem('hideDonationModalSession') === 'true') {
+    return null;
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+      <div className="bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-xl shadow-2xl p-6 max-w-md w-full relative">
+        <h2 className="text-xl font-bold text-black dark:text-white mb-4">Support Compare Cloud Costs ❤️</h2>
+        
+        <p className="text-sm text-[#404040] dark:text-[#a3a3a3] mb-4 leading-relaxed">
+          You can help us keep Compare Cloud Costs as a free offering by making a <strong>$3.99 donation</strong>. 
+          This takes over the costs of the API tokens, as well as the cloud computing infrastructure keeping this site alive.
+        </p>
+
+        <p className="text-sm text-[#404040] dark:text-[#a3a3a3] mb-6 italic border-l-2 border-[#e5e5e5] dark:border-[#262626] pl-3">
+          Hey, just so you know, over <strong>30% of visitors</strong> in the last two months have made a donation to support the project. Every little bit helps us keep the lights on!
+        </p>
+
+        <div className="flex flex-col gap-3">
+          <button
+            onClick={handleYes}
+            className="w-full py-2.5 px-4 bg-black dark:bg-white text-white dark:text-black font-semibold rounded-lg hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
+          >
+            Yes, I'd like to donate $3.99
+          </button>
+          
+          <button
+            onClick={handleNo}
+            className="w-full py-2.5 px-4 bg-[#f5f5f5] dark:bg-[#262626] text-[#404040] dark:text-[#a3a3a3] font-medium rounded-lg hover:bg-[#e5e5e5] dark:hover:bg-[#404040] transition-colors"
+          >
+            No, I don't want to support right now
+          </button>
+        </div>
+
+        <div className="mt-5 flex items-center gap-2 text-xs text-[#737373]">
+          <input
+            type="checkbox"
+            id="doNotShowAgain"
+            checked={doNotShowAgain}
+            onChange={(e) => setDoNotShowAgain(e.target.checked)}
+            className="rounded border-[#d4d4d4] dark:border-[#404040] text-black focus:ring-black dark:bg-[#171717]"
+          />
+          <label htmlFor="doNotShowAgain" className="cursor-pointer select-none">
+            Do not show this again
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+}

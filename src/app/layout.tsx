@@ -3,6 +3,8 @@ import Script from 'next/script';
 import './globals.css';
 import Providers from './providers';
 
+import { DonationModal } from '@/components';
+
 export const metadata: Metadata = {
   title: 'Compare Cloud Costs - AWS, Azure, Google Cloud Pricing',
   description: 'Compare compute, database, and serverless pricing across AWS, Azure, Google Cloud, and more.',
@@ -29,6 +31,7 @@ export default function RootLayout({
       <body className="bg-gray-900 text-gray-100 min-h-screen">
         <Providers>
           {children}
+          <DonationModal />
         </Providers>
       </body>
     </html>
