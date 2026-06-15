@@ -63,6 +63,11 @@ export default function Dashboard() {
       if (selectedNetworkingPortCapacities.length === staticConfig.NETWORKING_PORT_CAPACITIES.length) setSelectedNetworkingPortCapacities([...config.NETWORKING_PORT_CAPACITIES]);
       if (selectedNetworkingTransferScopes.length === staticConfig.NETWORKING_TRANSFER_SCOPES.length) setSelectedNetworkingTransferScopes([...config.NETWORKING_TRANSFER_SCOPES]);
 
+
+      if (selectedStorageCategories.length === staticConfig.STORAGE_CATEGORIES.length) setSelectedStorageCategories([...config.STORAGE_CATEGORIES]);
+      if (selectedStorageRedundancies.length === staticConfig.STORAGE_REDUNDANCIES.length) setSelectedStorageRedundancies([...config.STORAGE_REDUNDANCIES]);
+      if (selectedStorageMedia.length === staticConfig.STORAGE_MEDIA.length) setSelectedStorageMedia([...config.STORAGE_MEDIA]);
+      if (selectedStorageTiers.length === staticConfig.STORAGE_TIERS.length) setSelectedStorageTiers([...config.STORAGE_TIERS]);
       setFiltersSynced(true);
     }
   }, [config.isLoading, filtersSynced, config]);
@@ -142,6 +147,12 @@ export default function Dashboard() {
   const [selectedNetworkingUsageTiers, setSelectedNetworkingUsageTiers] = useState<string[]>([...config.NETWORKING_USAGE_TIERS]);
   const [selectedNetworkingPortCapacities, setSelectedNetworkingPortCapacities] = useState<string[]>([...config.NETWORKING_PORT_CAPACITIES]);
   const [selectedNetworkingTransferScopes, setSelectedNetworkingTransferScopes] = useState<string[]>([...config.NETWORKING_TRANSFER_SCOPES]);
+
+  const [selectedStorageCategories, setSelectedStorageCategories] = useState<string[]>([...config.STORAGE_CATEGORIES]);
+  const [selectedStorageRedundancies, setSelectedStorageRedundancies] = useState<string[]>([...config.STORAGE_REDUNDANCIES]);
+  const [selectedStorageMedia, setSelectedStorageMedia] = useState<string[]>([...config.STORAGE_MEDIA]);
+  const [selectedStorageTiers, setSelectedStorageTiers] = useState<string[]>([...config.STORAGE_TIERS]);
+
 
   // Range filters
       
@@ -274,6 +285,12 @@ export default function Dashboard() {
     subset('networkingUsageTiers', selectedNetworkingUsageTiers, config.NETWORKING_USAGE_TIERS);
     subset('networkingPortCapacities', selectedNetworkingPortCapacities, config.NETWORKING_PORT_CAPACITIES);
     subset('networkingTransferScopes', selectedNetworkingTransferScopes, config.NETWORKING_TRANSFER_SCOPES);
+
+    subset('storageTypes', selectedStorageCategories, config.STORAGE_CATEGORIES);
+    subset('storageRedundancy', selectedStorageRedundancies, config.STORAGE_REDUNDANCIES);
+    subset('storageMedia', selectedStorageMedia, config.STORAGE_MEDIA);
+    subset('storageTiers', selectedStorageTiers, config.STORAGE_TIERS);
+
     // Only send range params when the user has actively constrained them.
     // At the slider floor/ceiling → no filter applied (show all).
     if (vCpuRange.min > config.DEFAULT_VCPU_RANGE.min) params.append('minVcpu', vCpuRange.min.toString());
@@ -516,6 +533,9 @@ export default function Dashboard() {
       headers = ['Provider', 'Configuration', 'Service', 'Category', 'Transfer Tier', 'Destination', 'Included Transfer', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'data-analytics') {
       headers = ['Provider', 'Configuration', 'Engine', 'Deployment Type', 'Tier', 'Compute Unit', 'Geography', 'Price (USD)', 'Source'];
+    
+    } else if (activeProductType === 'storage') {
+      headers = ['Provider', 'Configuration', 'Category', 'Tier', 'Redundancy', 'Media', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'ai') {
       headers = ['Provider', 'Configuration', 'Service', 'Model Tier', 'Context Window', 'Multimodal', 'Geography', 'Input Price (/1M)', 'Output Price (/1M)', 'Source'];
     } else {

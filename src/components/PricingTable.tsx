@@ -65,6 +65,7 @@ function getColDefs(pt: ProductType): ColDef[] {
   if (pt === 'serverless')   return [...start, COL_ARCH, COL_LANG, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, ...tailWithSpecs];
   if (pt === 'containers')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tailWithSpecs];
   if (pt === 'networking')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tail];
+  if (pt === 'storage')        return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, ...tail];
   if (pt === 'data-analytics') return [...start, COL_MID1, COL_MID3, COL_MID2, COL_VCPU, ...tail];
   if (pt === 'ai')             return [...start, COL_MID1, COL_MID3, COL_MID2, COL_MID4, COL_PRICE, COL_INV];
   return [...start, ...tail];

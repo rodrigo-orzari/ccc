@@ -58,11 +58,7 @@ export const NETWORKING_USAGE_TIERS = ['Flat Rate', 'First 10TB', '10TB - 50TB',
 export const NETWORKING_PORT_CAPACITIES = ['< 1 Gbps', '1 Gbps - 10 Gbps', '> 10 Gbps', 'N/A'];
 export const NETWORKING_TRANSFER_SCOPES = ['Same Region', 'Cross-AZ', 'Cross-Region', 'Internet', 'On-Premises', 'N/A'];
 
-// Storage-specific constants. These MUST stay exhaustive vs the DB values, or the
-// "omit-when-all" param logic in page.tsx will silently hide un-enumerated rows.
-export const STORAGE_TYPES = ['Object', 'Block', 'File', 'Archive'];
-export const STORAGE_TIERS = ['Standard', 'Infrequent', 'Cold'];
-export const STORAGE_REDUNDANCY = ['Single-Zone', 'Zone-Redundant', 'Geo-Redundant'];
+
 
 // Data Analytics-specific constants
 export const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'Native'];
@@ -102,3 +98,9 @@ export const AI_SERVICE_TYPES = ['Foundational Models', 'Embeddings'];
 export const AI_MODEL_TIERS = ['Frontier', 'Standard', 'Efficient'];
 export const AI_CONTEXT_WINDOWS = ['< 32K', '32K - 128K', '> 128K', '1M+'];
 export const AI_MULTIMODAL_OPTIONS = ['Yes', 'No'];
+
+// --- STORAGE ---
+export const STORAGE_CATEGORIES: string[] = ['Block', 'File', 'Object', 'Archive'];
+export const STORAGE_REDUNDANCIES: string[] = ['LRS', 'ZRS', 'GRS', 'RA-GRS', 'GZRS', 'RA-GZRS', 'Multi-AZ', 'Single-AZ', 'Cross-Region'];
+export const STORAGE_MEDIA: string[] = ['HDD', 'SSD', 'NVMe', 'Magnetic'];
+export const STORAGE_TIERS: string[] = ['Hot', 'Cool', 'Cold', 'Archive', 'Standard', 'Premium', 'Intelligent-Tiering', 'Glacier'];
