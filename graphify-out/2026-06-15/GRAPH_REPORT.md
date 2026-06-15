@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 134 files · ~101,485 words
+- 134 files · ~101,519 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `704e6c9a`
+- Built from commit: `a8c86535`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -123,7 +123,7 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ## Knowledge Gaps
-- **116 isolated node(s):** `StorageConfigEntry`, `STATIC_PROVIDERS`, `content`, `content`, `content` (+111 more)
+- **116 isolated node(s):** `STORAGE_CATEGORIES`, `STORAGE_REDUNDANCIES`, `STORAGE_MEDIA`, `STORAGE_TIERS`, `StorageConfigEntry` (+111 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -136,7 +136,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 9` to `Community 6`?**
   _High betweenness centrality (0.015) - this node is a cross-community bridge._
-- **What connects `StorageConfigEntry`, `STATIC_PROVIDERS`, `content` to the rest of the system?**
+- **What connects `STORAGE_CATEGORIES`, `STORAGE_REDUNDANCIES`, `STORAGE_MEDIA` to the rest of the system?**
   _116 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.08870967741935484 - nodes in this community are weakly interconnected._
