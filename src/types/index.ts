@@ -26,6 +26,8 @@ export interface PricingRecord {
     deployment_type?: string;
     ha_mode?: string;
     storage_type?: string;
+    redundancy?: string;
+    media?: string;
     workload?: string;
     tier?: string;
     cold_start_overhead_ms?: string | number;

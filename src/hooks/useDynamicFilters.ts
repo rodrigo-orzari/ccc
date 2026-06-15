@@ -94,7 +94,7 @@ export function useDynamicFilters() {
     APP_HOSTING_COMPUTE_TYPES: merge(config.APP_HOSTING_COMPUTE_TYPES, dynamicData?.app_hosting_compute_types),
     
     // Integration
-    INTEGRATION_CATEGORIES: merge(config.INTEGRATION_TYPES, dynamicData?.integration_categories),
+    INTEGRATION_CATEGORIES: merge(config.INTEGRATION_CATEGORIES, dynamicData?.integration_categories),
     INTEGRATION_TIERS: merge(config.INTEGRATION_TIERS, dynamicData?.integration_tiers),
   };
 }

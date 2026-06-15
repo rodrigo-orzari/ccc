@@ -322,6 +322,11 @@ export default function PricingTable({
                   <Th colKey="deployment_arch"    label="Usage Tier" />
                   <Th colKey="ha_mode_os"         label="Port Capacity" />
                   <Th colKey="gpu"                label="Transfer Scope" />
+                </>) : activeProductType === 'storage' ? (<>
+                  <Th colKey="engine_category"    sortKey="attributes.storage_type" label="Type" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"        label="Tier" />
+                  <Th colKey="deployment_arch"    sortKey="attributes.redundancy"  label="Redundancy" />
+                  <Th colKey="ha_mode_os"         sortKey="attributes.media"       label="Media" />
                 </>) : (<>
                   {/* vm (default) */}
                   <Th colKey="engine_category"    sortKey="category"   label="Category" />
@@ -333,7 +338,7 @@ export default function PricingTable({
 
                 {activeProductType !== 'ai' && <Th colKey="geography" sortKey="geography" label="Geo" />}
 
-                {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && (<>
+                {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && (<>
                   <Th colKey="vcpus"     sortKey="vcpus"     label="vCPU" />
                   <Th colKey="memory_gb" sortKey="memory_gb" label="Memory (GB)" />
                 </>)}
@@ -469,6 +474,11 @@ function TableRow({
         <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.usage_tier || '—'}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.port_capacity || '—'}</span></td>
         <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_scope || '—'}</span></td>
+      </>) : activeProductType === 'storage' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.storage_type || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.redundancy || '—'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.media || '—'}</span></td>
       </>) : (<>
         {/* vm (default) */}
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>
@@ -485,8 +495,8 @@ function TableRow({
         </td>
       )}
 
-      {/* vCPU + Memory (not shown for networking / data-analytics / ai) */}
-      {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && (<>
+      {/* vCPU + Memory (not shown for networking / data-analytics / ai / storage) */}
+      {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && (<>
         <td data-col="vcpus"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
         <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span></td>
       </>)}
