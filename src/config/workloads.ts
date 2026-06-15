@@ -2,54 +2,51 @@ import { WorkloadDefinition } from '@/types';
 
 export const WORKLOADS: WorkloadDefinition[] = [
   {
-    id: 'rag-assistant',
-    name: 'RAG Assistant Starter Kit',
-    description: 'Deploy an AI-powered chatbot with document retrieval using App Platform, Serverless Inference, and Knowledge Base.',
-    icon: '🤖',
+    id: 'serverless-web-app',
+    name: 'Serverless Web Application',
+    description: 'A scalable, low-maintenance backend without provisioning servers. Perfect for event-driven web and mobile backends.',
+    icon: '⚡',
     parameters: [
       {
-        id: 'dailyUsers',
-        label: 'Daily Active Users',
+        id: 'monthlyRequests',
+        label: 'Monthly API Requests',
         type: 'slider',
-        min: 100,
-        max: 50000,
-        step: 100,
-        defaultValue: 1000,
-        unit: 'users'
+        min: 100000,
+        max: 10000000,
+        step: 100000,
+        defaultValue: 1000000,
+        unit: 'reqs'
       },
       {
-        id: 'queriesPerUser',
-        label: 'Queries per User/Day',
+        id: 'dbSizeGB',
+        label: 'Database Storage',
         type: 'slider',
-        min: 1,
-        max: 100,
-        step: 1,
-        defaultValue: 10,
-        unit: 'queries'
+        min: 10,
+        max: 500,
+        step: 10,
+        defaultValue: 50,
+        unit: 'GB'
       }
     ],
     components: [
       {
-        id: 'chatbot-app',
-        name: 'Chatbot App',
-        description: 'App Platform / Frontend hosting',
-        icon: '💬',
+        id: 'api-gateway',
+        name: 'API Gateway / Routing',
+        description: 'Entry point for requests',
+        icon: '🚪',
         getRequirements: (params) => {
-          // e.g. 1 vCPU and 2GB RAM per 10k users
-          const loadFactor = Math.max(1, Math.ceil(params.dailyUsers / 10000));
           return {
-            productType: 'app-hosting',
-            minVcpus: 1,
-            minMemoryGb: 2,
-            quantity: loadFactor
+            productType: 'networking',
+            category: 'Gateway',
+            quantity: 1
           };
         }
       },
       {
-        id: 'inference',
-        name: 'Inference Endpoint',
-        description: 'Serverless LLM / Agent Platform',
-        icon: '🧠',
+        id: 'compute',
+        name: 'Serverless Compute',
+        description: 'Event-driven code execution',
+        icon: '⚙️',
         getRequirements: (params) => {
           return {
             productType: 'serverless',
@@ -59,16 +56,14 @@ export const WORKLOADS: WorkloadDefinition[] = [
         }
       },
       {
-        id: 'knowledge-base',
-        name: 'Knowledge Base',
-        description: 'Vector Database for retrieval context',
-        icon: '📚',
+        id: 'database',
+        name: 'Managed NoSQL',
+        description: 'High-throughput document store',
+        icon: '🗄️',
         getRequirements: (params) => {
-          // e.g. more users might mean more cache/memory needed
-          const mem = params.dailyUsers > 10000 ? 8 : 4;
           return {
             productType: 'database',
-            minMemoryGb: mem,
+            minMemoryGb: 4, // Approximating tier based on memory
             quantity: 1
           };
         }
@@ -76,68 +71,72 @@ export const WORKLOADS: WorkloadDefinition[] = [
     ]
   },
   {
-    id: 'observability-stack',
-    name: 'Observability Starter Kit',
-    description: 'Deploy Elasticsearch, Logstash, and Kibana for centralized logging and monitoring.',
-    icon: '📈',
+    id: '3-tier-web',
+    name: 'Classic 3-Tier Web Architecture',
+    description: 'The foundational blueprint for monolithic or traditionally scaled web applications using VMs and relational databases.',
+    icon: '🏢',
     parameters: [
       {
-        id: 'logVolumeGB',
-        label: 'Daily Log Volume',
+        id: 'concurrentUsers',
+        label: 'Peak Concurrent Users',
         type: 'slider',
-        min: 10,
-        max: 1000,
-        step: 10,
-        defaultValue: 50,
-        unit: 'GB/day'
+        min: 100,
+        max: 10000,
+        step: 100,
+        defaultValue: 1000,
+        unit: 'users'
+      },
+      {
+        id: 'dbSizeGB',
+        label: 'Database Storage',
+        type: 'slider',
+        min: 50,
+        max: 2000,
+        step: 50,
+        defaultValue: 250,
+        unit: 'GB'
       }
     ],
     components: [
       {
-        id: 'logstash',
-        name: 'Logstash Ingestion',
-        description: 'Ingest and process logs',
-        icon: '💧',
+        id: 'load-balancer',
+        name: 'Load Balancer',
+        description: 'Distributes incoming traffic',
+        icon: '⚖️',
         getRequirements: (params) => {
-          const vcpus = Math.max(2, Math.ceil(params.logVolumeGB / 100) * 2);
-          const mem = vcpus * 2;
           return {
-            productType: 'vm',
-            category: 'Compute optimized',
-            minVcpus: vcpus,
-            minMemoryGb: mem,
+            productType: 'networking',
+            category: 'Load Balancer',
             quantity: 1
           };
         }
       },
       {
-        id: 'elasticsearch',
-        name: 'Elasticsearch Node',
-        description: 'Store and index logs',
-        icon: '🔍',
+        id: 'web-tier',
+        name: 'Web / App Tier',
+        description: 'Auto-scaling Virtual Machines',
+        icon: '🖥️',
         getRequirements: (params) => {
-          const mem = Math.max(4, Math.ceil(params.logVolumeGB / 50) * 4);
-          const vcpus = Math.max(2, mem / 4);
-          return {
-            productType: 'vm',
-            category: 'Memory optimized',
-            minVcpus: vcpus,
-            minMemoryGb: mem,
-            quantity: 2 // Typical HA setup requires 2+ nodes
-          };
-        }
-      },
-      {
-        id: 'kibana',
-        name: 'Kibana Dashboard',
-        description: 'Search and visualize logs',
-        icon: '📊',
-        getRequirements: (params) => {
+          const loadFactor = Math.max(2, Math.ceil(params.concurrentUsers / 500));
           return {
             productType: 'vm',
             category: 'General purpose',
             minVcpus: 2,
-            minMemoryGb: 4,
+            minMemoryGb: 8,
+            quantity: loadFactor
+          };
+        }
+      },
+      {
+        id: 'database',
+        name: 'Relational Database',
+        description: 'Primary transactional datastore',
+        icon: '🗃️',
+        getRequirements: (params) => {
+          const mem = Math.max(8, Math.ceil(params.concurrentUsers / 250) * 4);
+          return {
+            productType: 'database',
+            minMemoryGb: mem,
             quantity: 1
           };
         }
@@ -145,64 +144,217 @@ export const WORKLOADS: WorkloadDefinition[] = [
     ]
   },
   {
-    id: 'data-workflow',
-    name: 'Data Workflow Starter Kit',
-    description: 'Deploy a production-ready Apache Airflow environment with managed Postgres and Valkey keystore.',
-    icon: '⚙️',
+    id: 'streaming-analytics',
+    name: 'Real-time Streaming Analytics',
+    description: 'A highly demanded architecture for processing IoT telemetry, clickstreams, or financial data in real time.',
+    icon: '🌊',
     parameters: [
       {
-        id: 'concurrentTasks',
-        label: 'Concurrent Tasks',
+        id: 'throughputMB',
+        label: 'Ingestion Throughput',
         type: 'slider',
-        min: 10,
-        max: 1000,
-        step: 10,
-        defaultValue: 50,
-        unit: 'tasks'
+        min: 1,
+        max: 100,
+        step: 1,
+        defaultValue: 10,
+        unit: 'MB/s'
+      },
+      {
+        id: 'storageTB',
+        label: 'Data Lake Size',
+        type: 'slider',
+        min: 1,
+        max: 100,
+        step: 1,
+        defaultValue: 10,
+        unit: 'TB'
       }
     ],
     components: [
       {
-        id: 'airflow',
-        name: 'Workflow Engine',
-        description: 'Airflow Scheduler & Webserver',
-        icon: '🌬️',
+        id: 'streaming',
+        name: 'Event Streaming',
+        description: 'Message broker / streaming platform',
+        icon: '📨',
         getRequirements: (params) => {
-          const vcpus = Math.max(2, Math.ceil(params.concurrentTasks / 50) * 2);
           return {
-            productType: 'vm',
-            category: 'General purpose',
-            minVcpus: vcpus,
-            minMemoryGb: vcpus * 4,
+            productType: 'data-analytics',
+            category: 'Streaming',
             quantity: 1
           };
         }
       },
       {
-        id: 'valkey',
-        name: 'Execution Cache',
-        description: 'Valkey / Redis task dispatcher',
+        id: 'compute',
+        name: 'Stream Processing',
+        description: 'Real-time compute nodes',
+        icon: '🧠',
+        getRequirements: (params) => {
+          const vcpus = Math.max(4, Math.ceil(params.throughputMB / 5) * 2);
+          return {
+            productType: 'vm',
+            category: 'Compute optimized',
+            minVcpus: vcpus,
+            minMemoryGb: vcpus * 2,
+            quantity: 3 // Typically a cluster
+          };
+        }
+      },
+      {
+        id: 'storage',
+        name: 'Object Storage',
+        description: 'Long-term data lake',
+        icon: '🪣',
+        getRequirements: (params) => {
+          return {
+            productType: 'storage',
+            category: 'Object',
+            quantity: params.storageTB * 1024 // Assuming price is per GB
+          };
+        }
+      }
+    ]
+  },
+  {
+    id: 'ecommerce-microservices',
+    name: 'E-Commerce Microservices Stack',
+    description: 'A resilient, decoupled architecture designed for high availability, fast product lookups, and fault tolerance.',
+    icon: '🛒',
+    parameters: [
+      {
+        id: 'dailyTraffic',
+        label: 'Daily Unique Visitors',
+        type: 'slider',
+        min: 5000,
+        max: 500000,
+        step: 5000,
+        defaultValue: 50000,
+        unit: 'visitors'
+      },
+      {
+        id: 'catalogSize',
+        label: 'Product Catalog Size',
+        type: 'slider',
+        min: 1000,
+        max: 1000000,
+        step: 10000,
+        defaultValue: 50000,
+        unit: 'items'
+      }
+    ],
+    components: [
+      {
+        id: 'kubernetes',
+        name: 'Managed Kubernetes',
+        description: 'Container orchestration cluster',
+        icon: '☸️',
+        getRequirements: (params) => {
+          const nodes = Math.max(3, Math.ceil(params.dailyTraffic / 20000));
+          return {
+            productType: 'containers',
+            minVcpus: 4,
+            minMemoryGb: 16,
+            quantity: nodes
+          };
+        }
+      },
+      {
+        id: 'cache',
+        name: 'Distributed Cache',
+        description: 'In-memory datastore for sessions',
         icon: '⚡',
         getRequirements: (params) => {
-          const mem = Math.max(2, Math.ceil(params.concurrentTasks / 100) * 2);
+          return {
+            productType: 'database',
+            category: 'In-memory',
+            minMemoryGb: 4,
+            quantity: 1
+          };
+        }
+      },
+      {
+        id: 'database',
+        name: 'Transactional DB',
+        description: 'Primary persistent store',
+        icon: '🗃️',
+        getRequirements: (params) => {
+          const mem = params.catalogSize > 100000 ? 16 : 8;
           return {
             productType: 'database',
             minMemoryGb: mem,
             quantity: 1
           };
         }
+      }
+    ]
+  },
+  {
+    id: 'ml-training-hosting',
+    name: 'ML Model Training & Hosting',
+    description: 'A heavy-compute pipeline designed for MLOps, training custom models, and serving them via APIs.',
+    icon: '🤖',
+    parameters: [
+      {
+        id: 'trainingHours',
+        label: 'Training Hours per Month',
+        type: 'slider',
+        min: 10,
+        max: 730,
+        step: 10,
+        defaultValue: 100,
+        unit: 'hours'
       },
       {
-        id: 'postgres',
-        name: 'State Database',
-        description: 'PostgreSQL for task state',
-        icon: '🐘',
+        id: 'datasetSizeGB',
+        label: 'Training Dataset Size',
+        type: 'slider',
+        min: 50,
+        max: 5000,
+        step: 50,
+        defaultValue: 500,
+        unit: 'GB'
+      }
+    ],
+    components: [
+      {
+        id: 'training',
+        name: 'Training Environment',
+        description: 'GPU-accelerated VMs',
+        icon: '🔥',
         getRequirements: (params) => {
-          const vcpus = Math.max(2, Math.ceil(params.concurrentTasks / 200) * 2);
+          // Calculate average utilization across the month
+          const fractionalMonth = params.trainingHours / 730;
           return {
-            productType: 'database',
-            minVcpus: vcpus,
-            minMemoryGb: vcpus * 4,
+            productType: 'vm',
+            category: 'GPU instance',
+            minVcpus: 8,
+            minMemoryGb: 32,
+            quantity: fractionalMonth > 0 ? fractionalMonth : 1
+          };
+        }
+      },
+      {
+        id: 'storage',
+        name: 'High-Performance Storage',
+        description: 'Fast file storage for datasets',
+        icon: '📁',
+        getRequirements: (params) => {
+          return {
+            productType: 'storage',
+            category: 'File',
+            quantity: params.datasetSizeGB // GB
+          };
+        }
+      },
+      {
+        id: 'inference',
+        name: 'Inference Endpoint',
+        description: 'Model hosting API',
+        icon: '🧠',
+        getRequirements: (params) => {
+          return {
+            productType: 'ai',
+            category: 'Inference',
             quantity: 1
           };
         }

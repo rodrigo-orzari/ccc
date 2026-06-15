@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Footer } from '@/components';
+import { Footer, WorkloadHeader } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 
 export default function WorkloadsCatalog() {
@@ -15,20 +15,7 @@ export default function WorkloadsCatalog() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#111827] dark:text-[#f1f5f9] font-sans">
-      <header className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38] py-4 px-6 flex justify-between items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-            Compare Cloud Costs
-          </h1>
-          <p className="text-sm text-gray-400">Workload Architecture Catalog</p>
-        </div>
-        <Link 
-          href="/" 
-          className="px-4 py-2 bg-[#f7f8ff] dark:bg-[#10102a] border border-[#dde0f0] dark:border-[#1e1e38] hover:bg-[#e8eaf8] dark:hover:bg-[#1e1e38] text-sm font-medium rounded transition-colors"
-        >
-          &larr; Back to Services
-        </Link>
-      </header>
+      <WorkloadHeader />
 
       <main className="flex-1 p-8 max-w-[1100px] mx-auto w-full">
         <div className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
