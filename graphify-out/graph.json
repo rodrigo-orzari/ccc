@@ -4,85 +4,31 @@
   "graph": {},
   "nodes": [
     {
-      "label": "injectSync.mjs",
+      "label": "check.ts",
       "file_type": "code",
-      "source_file": "injectSync.mjs",
+      "source_file": "check.ts",
       "source_location": "L1",
-      "id": "injectsync",
-      "community": 14,
-      "norm_label": "injectsync.mjs"
+      "id": "check",
+      "community": 33,
+      "norm_label": "check.ts"
     },
     {
-      "label": "variables",
+      "label": "query.ts",
       "file_type": "code",
-      "source_file": "injectSync.mjs",
-      "source_location": "L3",
-      "id": "injectsync_variables",
-      "community": 14,
-      "norm_label": "variables"
-    },
-    {
-      "label": "content",
-      "file_type": "code",
-      "source_file": "injectSync.mjs",
-      "source_location": "L63",
-      "id": "injectsync_content",
-      "community": 14,
-      "norm_label": "content"
-    },
-    {
-      "label": "refactor.mjs",
-      "file_type": "code",
-      "source_file": "refactor.mjs",
+      "source_file": "query.ts",
       "source_location": "L1",
-      "id": "refactor",
-      "community": 29,
-      "norm_label": "refactor.mjs"
+      "id": "query",
+      "community": 32,
+      "norm_label": "query.ts"
     },
     {
-      "label": "filePaths",
+      "label": "main()",
       "file_type": "code",
-      "source_file": "refactor.mjs",
-      "source_location": "L3",
-      "id": "refactor_filepaths",
-      "community": 29,
-      "norm_label": "filepaths"
-    },
-    {
-      "label": "variablesToReplace",
-      "file_type": "code",
-      "source_file": "refactor.mjs",
-      "source_location": "L8",
-      "id": "refactor_variablestoreplace",
-      "community": 29,
-      "norm_label": "variablestoreplace"
-    },
-    {
-      "label": "refactor2.mjs",
-      "file_type": "code",
-      "source_file": "refactor2.mjs",
-      "source_location": "L1",
-      "id": "refactor2",
-      "community": 30,
-      "norm_label": "refactor2.mjs"
-    },
-    {
-      "label": "filePaths",
-      "file_type": "code",
-      "source_file": "refactor2.mjs",
-      "source_location": "L3",
-      "id": "refactor2_filepaths",
-      "community": 30,
-      "norm_label": "filepaths"
-    },
-    {
-      "label": "variablesToReplace",
-      "file_type": "code",
-      "source_file": "refactor2.mjs",
-      "source_location": "L7",
-      "id": "refactor2_variablestoreplace",
-      "community": 30,
-      "norm_label": "variablestoreplace"
+      "source_file": "query.ts",
+      "source_location": "L2",
+      "id": "query_main",
+      "community": 32,
+      "norm_label": "main()"
     },
     {
       "label": "route.ts",
@@ -103,96 +49,6 @@
       "norm_label": "get()"
     },
     {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L1",
-      "id": "app_page",
-      "community": 7,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "Dashboard()",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L18",
-      "id": "app_page_dashboard",
-      "community": 7,
-      "norm_label": "dashboard()"
-    },
-    {
-      "label": "FilterSidebar.tsx",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L1",
-      "id": "components_filtersidebar",
-      "community": 7,
-      "norm_label": "filtersidebar.tsx"
-    },
-    {
-      "label": "Tooltip()",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L11",
-      "id": "components_filtersidebar_tooltip",
-      "community": 7,
-      "norm_label": "tooltip()"
-    },
-    {
-      "label": "FilterSectionProps",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L31",
-      "id": "components_filtersidebar_filtersectionprops",
-      "community": 7,
-      "norm_label": "filtersectionprops"
-    },
-    {
-      "label": "FilterSection()",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L43",
-      "id": "components_filtersidebar_filtersection",
-      "community": 7,
-      "norm_label": "filtersection()"
-    },
-    {
-      "label": "GroupedFilterSectionProps",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L100",
-      "id": "components_filtersidebar_groupedfiltersectionprops",
-      "community": 7,
-      "norm_label": "groupedfiltersectionprops"
-    },
-    {
-      "label": "GroupedFilterSection()",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L114",
-      "id": "components_filtersidebar_groupedfiltersection",
-      "community": 7,
-      "norm_label": "groupedfiltersection()"
-    },
-    {
-      "label": "FilterSidebarProps",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L177",
-      "id": "components_filtersidebar_filtersidebarprops",
-      "community": 7,
-      "norm_label": "filtersidebarprops"
-    },
-    {
-      "label": "FilterSidebar()",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L321",
-      "id": "components_filtersidebar_filtersidebar",
-      "community": 7,
-      "norm_label": "filtersidebar()"
-    },
-    {
       "label": "useDynamicFilters.ts",
       "file_type": "code",
       "source_file": "src/hooks/useDynamicFilters.ts",
@@ -209,6 +65,177 @@
       "id": "hooks_usedynamicfilters_usedynamicfilters",
       "community": 7,
       "norm_label": "usedynamicfilters()"
+    },
+    {
+      "label": "injectSync.mjs",
+      "file_type": "code",
+      "source_file": "injectSync.mjs",
+      "source_location": "L1",
+      "community": 14,
+      "norm_label": "injectsync.mjs",
+      "id": "injectsync"
+    },
+    {
+      "label": "variables",
+      "file_type": "code",
+      "source_file": "injectSync.mjs",
+      "source_location": "L3",
+      "community": 14,
+      "norm_label": "variables",
+      "id": "injectsync_variables"
+    },
+    {
+      "label": "content",
+      "file_type": "code",
+      "source_file": "injectSync.mjs",
+      "source_location": "L63",
+      "community": 14,
+      "norm_label": "content",
+      "id": "injectsync_content"
+    },
+    {
+      "label": "refactor.mjs",
+      "file_type": "code",
+      "source_file": "refactor.mjs",
+      "source_location": "L1",
+      "community": 29,
+      "norm_label": "refactor.mjs",
+      "id": "refactor"
+    },
+    {
+      "label": "filePaths",
+      "file_type": "code",
+      "source_file": "refactor.mjs",
+      "source_location": "L3",
+      "community": 29,
+      "norm_label": "filepaths",
+      "id": "refactor_filepaths"
+    },
+    {
+      "label": "variablesToReplace",
+      "file_type": "code",
+      "source_file": "refactor.mjs",
+      "source_location": "L8",
+      "community": 29,
+      "norm_label": "variablestoreplace",
+      "id": "refactor_variablestoreplace"
+    },
+    {
+      "label": "refactor2.mjs",
+      "file_type": "code",
+      "source_file": "refactor2.mjs",
+      "source_location": "L1",
+      "community": 30,
+      "norm_label": "refactor2.mjs",
+      "id": "refactor2"
+    },
+    {
+      "label": "filePaths",
+      "file_type": "code",
+      "source_file": "refactor2.mjs",
+      "source_location": "L3",
+      "community": 30,
+      "norm_label": "filepaths",
+      "id": "refactor2_filepaths"
+    },
+    {
+      "label": "variablesToReplace",
+      "file_type": "code",
+      "source_file": "refactor2.mjs",
+      "source_location": "L7",
+      "community": 30,
+      "norm_label": "variablestoreplace",
+      "id": "refactor2_variablestoreplace"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L1",
+      "community": 7,
+      "norm_label": "page.tsx",
+      "id": "app_page"
+    },
+    {
+      "label": "Dashboard()",
+      "file_type": "code",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L18",
+      "community": 7,
+      "norm_label": "dashboard()",
+      "id": "app_page_dashboard"
+    },
+    {
+      "label": "FilterSidebar.tsx",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L1",
+      "community": 7,
+      "norm_label": "filtersidebar.tsx",
+      "id": "components_filtersidebar"
+    },
+    {
+      "label": "Tooltip()",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L11",
+      "community": 7,
+      "norm_label": "tooltip()",
+      "id": "components_filtersidebar_tooltip"
+    },
+    {
+      "label": "FilterSectionProps",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L31",
+      "community": 7,
+      "norm_label": "filtersectionprops",
+      "id": "components_filtersidebar_filtersectionprops"
+    },
+    {
+      "label": "FilterSection()",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L43",
+      "community": 7,
+      "norm_label": "filtersection()",
+      "id": "components_filtersidebar_filtersection"
+    },
+    {
+      "label": "GroupedFilterSectionProps",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L100",
+      "community": 7,
+      "norm_label": "groupedfiltersectionprops",
+      "id": "components_filtersidebar_groupedfiltersectionprops"
+    },
+    {
+      "label": "GroupedFilterSection()",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L114",
+      "community": 7,
+      "norm_label": "groupedfiltersection()",
+      "id": "components_filtersidebar_groupedfiltersection"
+    },
+    {
+      "label": "FilterSidebarProps",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L177",
+      "community": 7,
+      "norm_label": "filtersidebarprops",
+      "id": "components_filtersidebar_filtersidebarprops"
+    },
+    {
+      "label": "FilterSidebar()",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L321",
+      "community": 7,
+      "norm_label": "filtersidebar()",
+      "id": "components_filtersidebar_filtersidebar"
     },
     {
       "label": "scripts_ingest_storage.ts",
@@ -3104,61 +3131,11 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "injectSync.mjs",
-      "source_location": "L63",
+      "source_file": "query.ts",
+      "source_location": "L2",
       "weight": 1.0,
-      "source": "injectsync",
-      "target": "injectsync_content",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "injectSync.mjs",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "injectsync",
-      "target": "injectsync_variables",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "refactor.mjs",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "refactor",
-      "target": "refactor_filepaths",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "refactor.mjs",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "refactor",
-      "target": "refactor_variablestoreplace",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "refactor2.mjs",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "refactor2",
-      "target": "refactor2_filepaths",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "refactor2.mjs",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "refactor2",
-      "target": "refactor2_variablestoreplace",
+      "source": "query",
+      "target": "query_main",
       "confidence_score": 1.0
     },
     {
@@ -3167,9 +3144,145 @@
       "source_file": "src/app/api/filters/route.ts",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "filters_route",
-      "target": "filters_route_get",
-      "confidence_score": 1.0
+      "target": "filters_route_get"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "hooks_usedynamicfilters"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_filtersidebar",
+      "target": "hooks_usedynamicfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useDynamicFilters.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usedynamicfilters",
+      "target": "hooks_usedynamicfilters_usedynamicfilters"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "hooks_usedynamicfilters_usedynamicfilters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "app_page_dashboard",
+      "target": "hooks_usedynamicfilters_usedynamicfilters"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_filtersidebar",
+      "target": "hooks_usedynamicfilters_usedynamicfilters"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L462",
+      "weight": 1.0,
+      "source": "components_filtersidebar_filtersidebar",
+      "target": "hooks_usedynamicfilters_usedynamicfilters"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "injectSync.mjs",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "injectsync",
+      "target": "injectsync_content"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "injectSync.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "injectsync",
+      "target": "injectsync_variables"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "refactor.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "refactor",
+      "target": "refactor_filepaths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "refactor.mjs",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "refactor",
+      "target": "refactor_variablestoreplace"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "refactor2.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "refactor2",
+      "target": "refactor2_filepaths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "refactor2.mjs",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "refactor2",
+      "target": "refactor2_variablestoreplace"
     },
     {
       "relation": "contains",
@@ -3644,28 +3757,6 @@
       "target": "config_index_serverless_timeout_options"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "app_page",
-      "target": "hooks_usedynamicfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "source": "app_page",
-      "target": "hooks_usedynamicfilters_usedynamicfilters",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -3686,17 +3777,6 @@
       "confidence_score": 1.0,
       "source": "app_page",
       "target": "types_index_producttype"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/page.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "source": "app_page_dashboard",
-      "target": "hooks_usedynamicfilters_usedynamicfilters"
     },
     {
       "relation": "contains",
@@ -4275,28 +4355,6 @@
       "target": "config_index_serverless_timeout_options"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "components_filtersidebar",
-      "target": "hooks_usedynamicfilters",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "components_filtersidebar",
-      "target": "hooks_usedynamicfilters_usedynamicfilters",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -4306,27 +4364,6 @@
       "confidence_score": 1.0,
       "source": "components_filtersidebar",
       "target": "types_index_producttype"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L462",
-      "weight": 1.0,
-      "source": "components_filtersidebar_filtersidebar",
-      "target": "hooks_usedynamicfilters_usedynamicfilters"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useDynamicFilters.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "source": "hooks_usedynamicfilters",
-      "target": "hooks_usedynamicfilters_usedynamicfilters",
-      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -7713,5 +7750,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "136a52356d961a918fccb2a1dd2a52ec5cdf6968"
+  "built_at_commit": "2e609f55c724796881c142c9a955c059c106aba3"
 }
