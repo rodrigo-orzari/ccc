@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1781548594.1131551,
-    "ast_hash": "0fc6afcbd5181cc74f3c5c494fe5f13a",
+    "mtime": 1781555819.39668,
+    "ast_hash": "2aee2f0dbf8d319b2a098592c3b63f46",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
@@ -465,13 +465,13 @@
     "semantic_hash": ""
   },
   "src/config/index.ts": {
-    "mtime": 1781555582.7634404,
-    "ast_hash": "0c830ece873704cf55b3d3bb6811752f",
+    "mtime": 1781555849.1979468,
+    "ast_hash": "ab251e369063a312cf52d7858c2805b4",
     "semantic_hash": ""
   },
   "src/types/index.ts": {
-    "mtime": 1781548363.171643,
-    "ast_hash": "ab876949f2c4137ed616faf1552f2907",
+    "mtime": 1781555770.3398476,
+    "ast_hash": "6e8ad813e531c976535e81b8da618106",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -682,6 +682,31 @@
   "update_table.mjs": {
     "mtime": 1781555084.5859258,
     "ast_hash": "41943e7d6891e6775afa331fc71bbee7",
+    "semantic_hash": ""
+  },
+  "append_config.mjs": {
+    "mtime": 1781555849.1407828,
+    "ast_hash": "a3e7adb736fd23a0f706a8a549e0ceb3",
+    "semantic_hash": ""
+  },
+  "insert_types.mjs": {
+    "mtime": 1781555819.2592285,
+    "ast_hash": "105c1e4af1edaf43a4f93a0725524cf5",
+    "semantic_hash": ""
+  },
+  "scripts_ingest_apps.ts": {
+    "mtime": 1781555905.56436,
+    "ast_hash": "71d3bc1bfdf5ddd35731d8765d61e5f1",
+    "semantic_hash": ""
+  },
+  "src/config/app_hosting.ts": {
+    "mtime": 1781555826.942483,
+    "ast_hash": "56f30537e777c0ea5aac7996f4f2759d",
+    "semantic_hash": ""
+  },
+  "src/config/integration.ts": {
+    "mtime": 1781555835.741736,
+    "ast_hash": "3580d5000c869a3c5839105e447155e9",
     "semantic_hash": ""
   }
 }
