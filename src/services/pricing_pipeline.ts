@@ -146,6 +146,17 @@ export class AzureAdapter extends BaseAdapter {
     return m ? parseInt(m[1]) : 0;
   }
 
+  // Estimate memory based on Azure VM family ratios since Retail API omits it.
+  private memoryFromSku(sku: string, vcpus: number): number {
+    const s = sku.toLowerCase();
+    if (s.startsWith('standard_e') || s.startsWith('standard_m') || s.startsWith('standard_g') || /^[emg]\d/.test(s)) return vcpus * 8;
+    if (s.startsWith('standard_f') || /^f\d/.test(s)) return vcpus * 2;
+    if (s.startsWith('standard_d') || /^d\d/.test(s)) return vcpus * 4;
+    if (s.startsWith('standard_l') || /^l\d/.test(s)) return vcpus * 8;
+    if (s.startsWith('standard_h') || /^h\d/.test(s)) return vcpus * 7;
+    return vcpus * 4; // Default fallback (e.g. B-series, A-series)
+  }
+
   async fetchPricing(): Promise<PricingRecord[]> {
     console.log(`Fetching Azure VM pricing (${AzureAdapter.REGION} only)...`);
     const filter = encodeURIComponent(
@@ -184,6 +195,7 @@ export class AzureAdapter extends BaseAdapter {
       seen.add(key);
 
       const vcpus = this.vcpuFromSku(sku);
+      const memoryGb = this.memoryFromSku(sku, vcpus);
 
       records.push({
         provider: 'azure',
@@ -191,13 +203,13 @@ export class AzureAdapter extends BaseAdapter {
         region: AzureAdapter.REGION,
         instanceType: sku,
         vcpus,
-        memoryGb: 0,   // Azure Retail Prices API does not expose memory; left as 0
+        memoryGb,
         arch: sku.toLowerCase().includes('arm64') ? 'ARM' : 'x86 64',
         os,
         cpuVendor: this.getCpuVendor(sku),
         gpuCount: this.getGpuCount(sku),
         geography: 'N. America',
-        category: this.classifyAzure(sku, vcpus, 0),
+        category: this.classifyAzure(sku, vcpus, memoryGb),
         price: item.retailPrice,
         unit: '1 Hour',
         dataSource: 'live_api' as const,
@@ -250,8 +262,8 @@ export class AWSAdapter extends BaseAdapter {
       seen.add(dedupeKey);
 
       const vcpus = parseInt(attr.vcpu) || 2;
-      const memoryGb = attr.memory ? parseFloat(attr.memory.split(' ')[0]) : 4;
-
+      let memoryGb = attr.memory ? parseFloat(attr.memory.replace(/,/g, '').split(' ')[0]) : 4;
+      if (isNaN(memoryGb)) memoryGb = 4;
       records.push({
         provider: 'aws',
         service: 'EC2',
@@ -664,7 +676,7 @@ export class PricingPipeline {
           category: r.category,
           price_per_unit: r.price,
           unit: r.unit,
-          attributes: Object.keys(attrs).length > 0 ? attrs : null,
+          attributes: Object.keys(attrs).length > 0 ? this.sql.json(attrs) : null,
           data_source: dataSource
         };
       });
