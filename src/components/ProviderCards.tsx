@@ -38,8 +38,9 @@ export default function ProviderCards({
 
   return (
     <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:flex lg:flex-row gap-px bg-[#e5e5e5] dark:bg-[#262626] overflow-x-auto">
-      {providers
+      {[...providers]
         .filter(p => !p.soon)
+        .sort((a, b) => a.name.localeCompare(b.name))
         .map(p => {
           const isSelected = selectedProviders.length === activeNonSoon.length || selectedProviders.includes(p.id);
           const filteredCount = providerCounts[p.id];

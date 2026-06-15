@@ -83,7 +83,7 @@ export const initDb = async () => {
 
 const MAX_FILTER_ITEMS = 50;
 const MAX_SEARCH_LENGTH = 200;
-const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage'];
+const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting', 'integration'];
 
 function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
   if (!input) return [];
@@ -122,6 +122,8 @@ export function buildPricingFilters(query: any) {
       networkingService, networkingConnectionTypes, networkingRoutingTypes, networkingHaSupport, networkingVpcSupport, networkingTransferDirections,
       networkingBillingModels, networkingUsageTiers, networkingPortCapacities, networkingTransferScopes,
       storageTypes, storageTiers, storageRedundancy,
+      appHostingTiers, appHostingComputeTypes,
+      integrationCategories, integrationTiers,
     } = query;
 
     const conditions: string[] = [];

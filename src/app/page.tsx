@@ -68,6 +68,12 @@ export default function Dashboard() {
       if (selectedStorageRedundancies.length === staticConfig.STORAGE_REDUNDANCIES.length) setSelectedStorageRedundancies([...config.STORAGE_REDUNDANCIES]);
       if (selectedStorageMedia.length === staticConfig.STORAGE_MEDIA.length) setSelectedStorageMedia([...config.STORAGE_MEDIA]);
       if (selectedStorageTiers.length === staticConfig.STORAGE_TIERS.length) setSelectedStorageTiers([...config.STORAGE_TIERS]);
+
+      if (selectedAppHostingTiers.length === staticConfig.APP_HOSTING_TIERS.length) setSelectedAppHostingTiers([...config.APP_HOSTING_TIERS]);
+      if (selectedAppHostingComputeTypes.length === staticConfig.APP_HOSTING_COMPUTE_TYPES.length) setSelectedAppHostingComputeTypes([...config.APP_HOSTING_COMPUTE_TYPES]);
+      if (selectedIntegrationCategories.length === staticConfig.INTEGRATION_TYPES.length) setSelectedIntegrationCategories([...config.INTEGRATION_CATEGORIES]);
+      if (selectedIntegrationTiers.length === staticConfig.INTEGRATION_TIERS.length) setSelectedIntegrationTiers([...config.INTEGRATION_TIERS]);
+
       setFiltersSynced(true);
     }
   }, [config.isLoading, filtersSynced, config]);
@@ -152,6 +158,12 @@ export default function Dashboard() {
   const [selectedStorageRedundancies, setSelectedStorageRedundancies] = useState<string[]>([...config.STORAGE_REDUNDANCIES]);
   const [selectedStorageMedia, setSelectedStorageMedia] = useState<string[]>([...config.STORAGE_MEDIA]);
   const [selectedStorageTiers, setSelectedStorageTiers] = useState<string[]>([...config.STORAGE_TIERS]);
+
+  const [selectedAppHostingTiers, setSelectedAppHostingTiers] = useState<string[]>([...config.APP_HOSTING_TIERS]);
+  const [selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes] = useState<string[]>([...config.APP_HOSTING_COMPUTE_TYPES]);
+  const [selectedIntegrationCategories, setSelectedIntegrationCategories] = useState<string[]>([...config.INTEGRATION_CATEGORIES]);
+  const [selectedIntegrationTiers, setSelectedIntegrationTiers] = useState<string[]>([...config.INTEGRATION_TIERS]);
+
 
 
   // Range filters
@@ -290,6 +302,12 @@ export default function Dashboard() {
     subset('storageRedundancy', selectedStorageRedundancies, config.STORAGE_REDUNDANCIES);
     subset('storageMedia', selectedStorageMedia, config.STORAGE_MEDIA);
     subset('storageTiers', selectedStorageTiers, config.STORAGE_TIERS);
+
+    subset('appHostingTiers', selectedAppHostingTiers, config.APP_HOSTING_TIERS);
+    subset('appHostingComputeTypes', selectedAppHostingComputeTypes, config.APP_HOSTING_COMPUTE_TYPES);
+    subset('integrationCategories', selectedIntegrationCategories, config.INTEGRATION_CATEGORIES);
+    subset('integrationTiers', selectedIntegrationTiers, config.INTEGRATION_TIERS);
+
 
     // Only send range params when the user has actively constrained them.
     // At the slider floor/ceiling → no filter applied (show all).
