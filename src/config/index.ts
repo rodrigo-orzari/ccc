@@ -61,7 +61,19 @@ export const NETWORKING_TRANSFER_SCOPES = ['Same Region', 'Cross-AZ', 'Cross-Reg
 
 
 // Data Analytics-specific constants
-export const ANALYTICS_ENGINES = ['Databricks', 'Snowflake', 'Native'];
+export const ANALYTICS_ENGINES = [
+  'Databricks', 
+  'Snowflake', 
+  'Native',
+  'Oracle Analytics Cloud',
+  'Oracle Autonomous Data Warehouse',
+  'OpenSearch',
+  'Kafka',
+  'MaxCompute',
+  'E-MapReduce',
+  'Hologres',
+  'AnalyticDB for MySQL'
+];
 export const ANALYTICS_DEPLOYMENT_TYPES = ['Serverless', 'Provisioned'];
 export const ANALYTICS_TIERS = [
   'Standard',
