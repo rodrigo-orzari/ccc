@@ -12,6 +12,8 @@ const PIPELINE_DISPLAY: Record<string, string> = {
   data_warehouse: 'Data & Analytics',
   ai: 'AI & Machine Learning',
   storage: 'Storage',
+  'app-hosting': 'App Hosting',
+  integration: 'Integration',
 };
 
 export async function GET() {

@@ -641,19 +641,47 @@ export function buildPricingFilters(query: any) {
       }
     }
 
-    if (minVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai' && resolvedProductType !== 'storage') {
+    if (resolvedProductType === 'app-hosting') {
+      const tierFilters = parseFilterList(appHostingTiers as string).map((s: string) => s.toLowerCase());
+      if (tierFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
+        values.push(tierFilters);
+      }
+      const computeTypeFilters = parseFilterList(appHostingComputeTypes as string).map((s: string) => s.toLowerCase());
+      if (computeTypeFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'compute_type') = ANY($${paramCount++})`);
+        values.push(computeTypeFilters);
+      }
+    }
+
+    if (resolvedProductType === 'integration') {
+      const categoryFilters = parseFilterList(integrationCategories as string).map((s: string) => s.toLowerCase());
+      if (categoryFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'category') = ANY($${paramCount++})`);
+        values.push(categoryFilters);
+      }
+      const tierFilters = parseFilterList(integrationTiers as string).map((s: string) => s.toLowerCase());
+      if (tierFilters.length > 0) {
+        conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
+        values.push(tierFilters);
+      }
+    }
+
+    const noComputeSliders = ['networking', 'serverless', 'ai', 'storage', 'app-hosting', 'integration'];
+
+    if (minVcpu && !noComputeSliders.includes(resolvedProductType)) {
       conditions.push(`pr.vcpus >= $${paramCount++}`);
       values.push(minVcpu);
     }
-    if (maxVcpu && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai' && resolvedProductType !== 'storage') {
+    if (maxVcpu && !noComputeSliders.includes(resolvedProductType)) {
       conditions.push(`pr.vcpus <= $${paramCount++}`);
       values.push(maxVcpu);
     }
-    if (minMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai' && resolvedProductType !== 'storage') {
+    if (minMemory && !noComputeSliders.includes(resolvedProductType)) {
       conditions.push(`pr.memory_gb >= $${paramCount++}`);
       values.push(minMemory);
     }
-    if (maxMemory && resolvedProductType !== 'networking' && resolvedProductType !== 'serverless' && resolvedProductType !== 'ai' && resolvedProductType !== 'storage') {
+    if (maxMemory && !noComputeSliders.includes(resolvedProductType)) {
       conditions.push(`pr.memory_gb <= $${paramCount++}`);
       values.push(maxMemory);
     }
