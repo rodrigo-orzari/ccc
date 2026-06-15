@@ -4,40 +4,148 @@
   "graph": {},
   "nodes": [
     {
-      "label": "check_db.mjs",
+      "label": "append_config.mjs",
       "file_type": "code",
-      "source_file": "check_db.mjs",
+      "source_file": "append_config.mjs",
       "source_location": "L1",
-      "id": "check_db",
-      "community": 36,
-      "norm_label": "check_db.mjs"
+      "id": "append_config",
+      "community": 39,
+      "norm_label": "append_config.mjs"
     },
     {
-      "label": "sql",
+      "label": "content",
       "file_type": "code",
-      "source_file": "check_db.mjs",
+      "source_file": "append_config.mjs",
       "source_location": "L3",
-      "id": "check_db_sql",
-      "community": 36,
-      "norm_label": "sql"
+      "id": "append_config_content",
+      "community": 39,
+      "norm_label": "content"
+    },
+    {
+      "label": "insert_types.mjs",
+      "file_type": "code",
+      "source_file": "insert_types.mjs",
+      "source_location": "L1",
+      "id": "insert_types",
+      "community": 40,
+      "norm_label": "insert_types.mjs"
+    },
+    {
+      "label": "content",
+      "file_type": "code",
+      "source_file": "insert_types.mjs",
+      "source_location": "L3",
+      "id": "insert_types_content",
+      "community": 40,
+      "norm_label": "content"
+    },
+    {
+      "label": "scripts_ingest_apps.ts",
+      "file_type": "code",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L1",
+      "id": "scripts_ingest_apps",
+      "community": 38,
+      "norm_label": "scripts_ingest_apps.ts"
+    },
+    {
+      "label": "saveRecords()",
+      "file_type": "code",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L6",
+      "id": "scripts_ingest_apps_saverecords",
+      "community": 38,
+      "norm_label": "saverecords()"
     },
     {
       "label": "main()",
       "file_type": "code",
-      "source_file": "check_db.mjs",
-      "source_location": "L4",
-      "id": "check_db_main",
-      "community": 36,
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L52",
+      "id": "scripts_ingest_apps_main",
+      "community": 38,
       "norm_label": "main()"
     },
     {
-      "label": "next-env.d.ts",
+      "label": "ProductTypeSelector.tsx",
       "file_type": "code",
-      "source_file": "next-env.d.ts",
+      "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L1",
-      "id": "next_env_d",
-      "community": 3,
-      "norm_label": "next-env.d.ts"
+      "id": "components_producttypeselector",
+      "community": 15,
+      "norm_label": "producttypeselector.tsx"
+    },
+    {
+      "label": "PRODUCT_TYPES",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L6",
+      "id": "components_producttypeselector_product_types",
+      "community": 15,
+      "norm_label": "product_types"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L22",
+      "id": "components_producttypeselector_linkedinicon",
+      "community": 15,
+      "norm_label": "linkedinicon()"
+    },
+    {
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L30",
+      "id": "components_producttypeselector_xicon",
+      "community": 15,
+      "norm_label": "xicon()"
+    },
+    {
+      "label": "ProductTypeSelectorProps",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L38",
+      "id": "components_producttypeselector_producttypeselectorprops",
+      "community": 15,
+      "norm_label": "producttypeselectorprops"
+    },
+    {
+      "label": "ProductTypeSelector()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L43",
+      "id": "components_producttypeselector_producttypeselector",
+      "community": 15,
+      "norm_label": "producttypeselector()"
+    },
+    {
+      "label": "app_hosting.ts",
+      "file_type": "code",
+      "source_file": "src/config/app_hosting.ts",
+      "source_location": "L1",
+      "id": "config_app_hosting",
+      "community": 38,
+      "norm_label": "app_hosting.ts"
+    },
+    {
+      "label": "AZURE_APP_HOSTING",
+      "file_type": "code",
+      "source_file": "src/config/app_hosting.ts",
+      "source_location": "L6",
+      "id": "config_app_hosting_azure_app_hosting",
+      "community": 38,
+      "norm_label": "azure_app_hosting"
+    },
+    {
+      "label": "DO_APP_HOSTING",
+      "file_type": "code",
+      "source_file": "src/config/app_hosting.ts",
+      "source_location": "L12",
+      "id": "config_app_hosting_do_app_hosting",
+      "community": 38,
+      "norm_label": "do_app_hosting"
     },
     {
       "label": "index.ts",
@@ -488,6 +596,132 @@
       "id": "config_index_storage_tiers",
       "community": 7,
       "norm_label": "storage_tiers"
+    },
+    {
+      "label": "APP_HOSTING_TIERS",
+      "file_type": "code",
+      "source_file": "src/config/index.ts",
+      "source_location": "L121",
+      "id": "config_index_app_hosting_tiers",
+      "community": 7,
+      "norm_label": "app_hosting_tiers"
+    },
+    {
+      "label": "APP_HOSTING_COMPUTE_TYPES",
+      "file_type": "code",
+      "source_file": "src/config/index.ts",
+      "source_location": "L122",
+      "id": "config_index_app_hosting_compute_types",
+      "community": 7,
+      "norm_label": "app_hosting_compute_types"
+    },
+    {
+      "label": "INTEGRATION_TYPES",
+      "file_type": "code",
+      "source_file": "src/config/index.ts",
+      "source_location": "L125",
+      "id": "config_index_integration_types",
+      "community": 7,
+      "norm_label": "integration_types"
+    },
+    {
+      "label": "INTEGRATION_TIERS",
+      "file_type": "code",
+      "source_file": "src/config/index.ts",
+      "source_location": "L126",
+      "id": "config_index_integration_tiers",
+      "community": 7,
+      "norm_label": "integration_tiers"
+    },
+    {
+      "label": "integration.ts",
+      "file_type": "code",
+      "source_file": "src/config/integration.ts",
+      "source_location": "L1",
+      "id": "config_integration",
+      "community": 38,
+      "norm_label": "integration.ts"
+    },
+    {
+      "label": "AZURE_INTEGRATION",
+      "file_type": "code",
+      "source_file": "src/config/integration.ts",
+      "source_location": "L6",
+      "id": "config_integration_azure_integration",
+      "community": 38,
+      "norm_label": "azure_integration"
+    },
+    {
+      "label": "AWS_INTEGRATION",
+      "file_type": "code",
+      "source_file": "src/config/integration.ts",
+      "source_location": "L12",
+      "id": "config_integration_aws_integration",
+      "community": 38,
+      "norm_label": "aws_integration"
+    },
+    {
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L1",
+      "id": "types_index",
+      "community": 15,
+      "norm_label": "index.ts"
+    },
+    {
+      "label": "ProductType",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L1",
+      "id": "types_index_producttype",
+      "community": 15,
+      "norm_label": "producttype"
+    },
+    {
+      "label": "PricingRecord",
+      "file_type": "code",
+      "source_file": "src/types/index.ts",
+      "source_location": "L3",
+      "id": "types_index_pricingrecord",
+      "community": 15,
+      "norm_label": "pricingrecord"
+    },
+    {
+      "label": "check_db.mjs",
+      "file_type": "code",
+      "source_file": "check_db.mjs",
+      "source_location": "L1",
+      "community": 36,
+      "norm_label": "check_db.mjs",
+      "id": "check_db"
+    },
+    {
+      "label": "sql",
+      "file_type": "code",
+      "source_file": "check_db.mjs",
+      "source_location": "L3",
+      "community": 36,
+      "norm_label": "sql",
+      "id": "check_db_sql"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "check_db.mjs",
+      "source_location": "L4",
+      "community": 36,
+      "norm_label": "main()",
+      "id": "check_db_main"
+    },
+    {
+      "label": "next-env.d.ts",
+      "file_type": "code",
+      "source_file": "next-env.d.ts",
+      "source_location": "L1",
+      "community": 3,
+      "norm_label": "next-env.d.ts",
+      "id": "next_env_d"
     },
     {
       "label": "aws_storage.ts",
@@ -1075,60 +1309,6 @@
       "id": "components_pricingtable_tablerow"
     },
     {
-      "label": "ProductTypeSelector.tsx",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L1",
-      "community": 15,
-      "norm_label": "producttypeselector.tsx",
-      "id": "components_producttypeselector"
-    },
-    {
-      "label": "PRODUCT_TYPES",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L6",
-      "community": 15,
-      "norm_label": "product_types",
-      "id": "components_producttypeselector_product_types"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L20",
-      "community": 15,
-      "norm_label": "linkedinicon()",
-      "id": "components_producttypeselector_linkedinicon"
-    },
-    {
-      "label": "XIcon()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L28",
-      "community": 15,
-      "norm_label": "xicon()",
-      "id": "components_producttypeselector_xicon"
-    },
-    {
-      "label": "ProductTypeSelectorProps",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L36",
-      "community": 15,
-      "norm_label": "producttypeselectorprops",
-      "id": "components_producttypeselector_producttypeselectorprops"
-    },
-    {
-      "label": "ProductTypeSelector()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L41",
-      "community": 15,
-      "norm_label": "producttypeselector()",
-      "id": "components_producttypeselector_producttypeselector"
-    },
-    {
       "label": "useDynamicFilters.ts",
       "file_type": "code",
       "source_file": "src/hooks/useDynamicFilters.ts",
@@ -1145,33 +1325,6 @@
       "community": 7,
       "norm_label": "usedynamicfilters()",
       "id": "hooks_usedynamicfilters_usedynamicfilters"
-    },
-    {
-      "label": "index.ts",
-      "file_type": "code",
-      "source_file": "src/types/index.ts",
-      "source_location": "L1",
-      "community": 15,
-      "norm_label": "index.ts",
-      "id": "types_index"
-    },
-    {
-      "label": "ProductType",
-      "file_type": "code",
-      "source_file": "src/types/index.ts",
-      "source_location": "L1",
-      "community": 15,
-      "norm_label": "producttype",
-      "id": "types_index_producttype"
-    },
-    {
-      "label": "PricingRecord",
-      "file_type": "code",
-      "source_file": "src/types/index.ts",
-      "source_location": "L3",
-      "community": 15,
-      "norm_label": "pricingrecord",
-      "id": "types_index_pricingrecord"
     },
     {
       "label": "check.ts",
@@ -3329,33 +3482,222 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "check_db.mjs",
-      "source_location": "L4",
+      "source_file": "append_config.mjs",
+      "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "check_db",
-      "target": "check_db_main"
+      "source": "append_config",
+      "target": "append_config_content",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "check_db.mjs",
+      "source_file": "insert_types.mjs",
       "source_location": "L3",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "check_db",
-      "target": "check_db_sql"
+      "source": "insert_types",
+      "target": "insert_types_content",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps",
+      "target": "config_app_hosting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps",
+      "target": "config_app_hosting_azure_app_hosting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps",
+      "target": "config_app_hosting_do_app_hosting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps",
+      "target": "config_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps",
+      "target": "config_integration_aws_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps",
+      "target": "config_integration_azure_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps",
+      "target": "scripts_ingest_apps_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps",
+      "target": "scripts_ingest_apps_saverecords",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
-      "source_file": "check_db.mjs",
-      "source_location": "L5",
+      "source_file": "scripts_ingest_apps.ts",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "scripts_ingest_apps_main",
+      "target": "scripts_ingest_apps_saverecords",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L19",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "check_db_main",
-      "target": "check_db_sql"
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_linkedinicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_product_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_producttypeselector"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_producttypeselectorprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_xicon"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector_producttypeselectorprops",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/app_hosting.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "config_app_hosting",
+      "target": "config_app_hosting_azure_app_hosting",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/app_hosting.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "config_app_hosting",
+      "target": "config_app_hosting_do_app_hosting",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -3459,6 +3801,26 @@
       "confidence_score": 1.0,
       "source": "config_index",
       "target": "config_index_analytics_tiers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/index.ts",
+      "source_location": "L122",
+      "weight": 1.0,
+      "source": "config_index",
+      "target": "config_index_app_hosting_compute_types",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/index.ts",
+      "source_location": "L121",
+      "weight": 1.0,
+      "source": "config_index",
+      "target": "config_index_app_hosting_tiers",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -3599,6 +3961,26 @@
       "confidence_score": 1.0,
       "source": "config_index",
       "target": "config_index_ha_modes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/index.ts",
+      "source_location": "L126",
+      "weight": 1.0,
+      "source": "config_index",
+      "target": "config_index_integration_tiers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/index.ts",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "config_index",
+      "target": "config_index_integration_types",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4851,6 +5233,198 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/config/integration.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "config_integration",
+      "target": "config_integration_aws_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/integration.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "config_integration",
+      "target": "config_integration_azure_integration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "types_index"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "types_index",
+      "target": "types_index_pricingrecord"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/types/index.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "types_index",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_chartsview",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_filtersidebar",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L105",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable_pricingtableprops",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "types_index_pricingrecord"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ChartsView.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_chartsview",
+      "target": "types_index_pricingrecord"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "types_index_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable_pricingtableprops",
+      "target": "types_index_pricingrecord"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "check_db.mjs",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "check_db",
+      "target": "check_db_main"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "check_db.mjs",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "check_db",
+      "target": "check_db_sql"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "check_db.mjs",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "check_db_main",
+      "target": "check_db_sql"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/scrapers/aws_storage.ts",
       "source_location": "L4",
       "weight": 1.0,
@@ -5347,39 +5921,6 @@
       "target": "hooks_usedynamicfilters_usedynamicfilters"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "types_index_pricingrecord"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "types_index_producttype"
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -5731,39 +6272,6 @@
       "target": "components_pricingtable_tablerow"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "types_index_pricingrecord"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "types_index_producttype"
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
@@ -5795,111 +6303,6 @@
       "confidence_score": 1.0,
       "source": "components_pricingtable_savewidths",
       "target": "components_pricingtable_lskey"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L103",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable_pricingtableprops",
-      "target": "types_index_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L105",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable_pricingtableprops",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_linkedinicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_product_types"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_producttypeselector"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L35",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_producttypeselectorprops"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_xicon"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector_producttypeselectorprops",
-      "target": "types_index_producttype"
     },
     {
       "relation": "imports_from",
@@ -5943,59 +6346,6 @@
       "weight": 1.0,
       "source": "components_filtersidebar_filtersidebar",
       "target": "hooks_usedynamicfilters_usedynamicfilters"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/types/index.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "types_index",
-      "target": "types_index_pricingrecord"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/types/index.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "types_index",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_chartsview",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_filtersidebar",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ChartsView.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_chartsview",
-      "target": "types_index_pricingrecord"
     },
     {
       "relation": "contains",
@@ -8253,5 +8603,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a8c865352f2bffe3bb6f971e0a13307ccf3d5243"
+  "built_at_commit": "553ab590396d6db1959df0dc5b813887f2fb0d31"
 }
