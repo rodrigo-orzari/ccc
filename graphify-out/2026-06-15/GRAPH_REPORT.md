@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 124 files · ~98,235 words
+- 126 files · ~98,326 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 344 nodes · 445 edges · 32 communities (20 shown, 12 thin omitted)
+- 347 nodes · 446 edges · 34 communities (22 shown, 12 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `136a5235`
+- Built from commit: `2e609f55`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,7 +66,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (32 total, 12 thin omitted)
+## Communities (34 total, 12 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.13
@@ -129,9 +129,9 @@ Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ProductType` connect `Community 18` to `Community 15`, `Community 7`?**
-  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+  _High betweenness centrality (0.038) - this node is a cross-community bridge._
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 6`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
+  _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 9` to `Community 6`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **What connects `variables`, `content`, `filePaths` to the rest of the system?**
