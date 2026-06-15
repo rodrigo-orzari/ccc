@@ -6,22 +6,7 @@ import type { ProductType } from '@/types';
 import { RangeSlider } from './RangeSlider';
 
 // Import all filter constants from config
-import {
-  GEOGRAPHIES, OS_TYPES, CPU_PROFILES, CATEGORIES,
-  DB_FAMILIES, DB_ENGINES, DEPLOYMENT_TYPES, HA_MODES,
-  SERVERLESS_LANGUAGES, SERVERLESS_COLD_START_OPTIONS, SERVERLESS_TIMEOUT_OPTIONS,
-  SERVERLESS_MEMORY_CONFIG_OPTIONS, SERVERLESS_FREE_TIER_OPTIONS, SERVERLESS_GRANULARITY_OPTIONS,
-  SERVERLESS_EXECUTION_MODEL_OPTIONS, SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS, SERVERLESS_EPHEMERAL_STORAGE_OPTIONS,
-  SERVERLESS_MEMORY_TIERS, SERVERLESS_ARCHITECTURES,
-  CONTAINERS_ORCHESTRATORS, CONTAINERS_COMPUTE_TYPES, CONTAINERS_ARCHITECTURES, CONTAINERS_BILLING_GRANULARITY,
-  NETWORKING_SERVICES, NETWORKING_SERVICE_GROUPS, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
-  NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
-  NETWORKING_BILLING_MODELS, NETWORKING_USAGE_TIERS, NETWORKING_PORT_CAPACITIES, NETWORKING_TRANSFER_SCOPES,
-  ANALYTICS_ENGINES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_TIERS,
-  AI_SERVICE_TYPES, AI_MODEL_TIERS, AI_CONTEXT_WINDOWS, AI_MULTIMODAL_OPTIONS,
-  DEFAULT_VCPU_RANGE, DEFAULT_MEMORY_RANGE, DEFAULT_PRICE_RANGE,
-  PROVIDERS,
-} from '@/config';
+import { useDynamicFilters } from '@/hooks/useDynamicFilters';
 
 const Tooltip = ({ text, children }: { text: string; children: React.ReactNode }) => {
   const [show, setShow] = React.useState(false);
@@ -474,7 +459,8 @@ export default function FilterSidebar({
   onShowAggregationChange,
   onToggleSection,
 }: FilterSidebarProps) {
-  const activeNonSoon = PROVIDERS.filter(p => !p.soon).map(p => p.id);
+  const config = useDynamicFilters();
+  const activeNonSoon = config.PROVIDERS.filter(p => !p.soon).map(p => p.id);
 
   return (
     <aside className="w-72 border-r border-[#e5e5e5] dark:border-[#262626] flex flex-col shrink-0 overflow-y-auto bg-white dark:bg-[#000000] custom-scrollbar pb-10">
@@ -483,8 +469,8 @@ export default function FilterSidebar({
         <FilterSection
           title="Provider"
           tooltip="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter."
-          options={PROVIDERS.filter(p => !p.soon).map(p => p.id)}
-          getLabel={(id) => PROVIDERS.find(p => p.id === id)?.name || id}
+          options={config.PROVIDERS.filter(p => !p.soon).map(p => p.id)}
+          getLabel={(id) => config.PROVIDERS.find(p => p.id === id)?.name || id}
           selected={selectedProviders}
           onToggle={onProviderToggle}
           onSetAll={onSetProviders}
@@ -498,7 +484,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Category"
               tooltip="Instance type purpose, derived from each cloud's published instance families."
-              options={CATEGORIES}
+              options={config.CATEGORIES}
               selected={selectedCategory}
               onToggle={onCategoryToggle}
               onSetAll={onSetCategory}
@@ -510,7 +496,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Geography"
               tooltip="Geographic region where the VM runs."
-              options={GEOGRAPHIES}
+              options={config.GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
               onSetAll={onSetGeographies}
@@ -522,7 +508,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Operating System"
               tooltip="The operating system running on the VM."
-              options={OS_TYPES}
+              options={config.OS_TYPES}
               selected={selectedOS}
               onToggle={onOsToggle}
               onSetAll={onSetOS}
@@ -545,7 +531,7 @@ export default function FilterSidebar({
                 {/* Select All / Clear All — all CPU profiles + both GPU options = "all" */}
                 {(() => {
                   const GPU_OPTIONS = ['GPU', 'No GPU'];
-                  const allSelected = selectedCpu.length === CPU_PROFILES.length && selectedGpu.length === GPU_OPTIONS.length;
+                  const allSelected = selectedCpu.length === config.CPU_PROFILES.length && selectedGpu.length === GPU_OPTIONS.length;
                   return (
                     <button
                       onClick={() => {
@@ -553,7 +539,7 @@ export default function FilterSidebar({
                           onSetCpu([]);
                           onSetGpu([]);
                         } else {
-                          onSetCpu(CPU_PROFILES.map(p => p.id));
+                          onSetCpu(config.CPU_PROFILES.map(p => p.id));
                           onSetGpu(GPU_OPTIONS);
                         }
                       }}
@@ -568,7 +554,7 @@ export default function FilterSidebar({
               </div>
               {expanded.cpu && (
                 <div className="flex flex-wrap gap-2">
-                  {CPU_PROFILES.map(profile => (
+                  {config.CPU_PROFILES.map(profile => (
                     <button
                       key={profile.id}
                       onClick={() => onCpuToggle(profile.id)}
@@ -607,7 +593,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Database Family"
               tooltip="The broad category of the database system: Relational (SQL-based) or NoSQL."
-              options={DB_FAMILIES}
+              options={config.DB_FAMILIES}
               selected={selectedDbFamilies}
               onToggle={onDbFamilyToggle}
               onSetAll={onSetDbFamilies}
@@ -618,7 +604,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Geography"
               tooltip="Geographic region where the database is deployed."
-              options={GEOGRAPHIES}
+              options={config.GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
               onSetAll={onSetGeographies}
@@ -629,7 +615,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Database Engine"
               tooltip="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc."
-              options={DB_ENGINES}
+              options={config.DB_ENGINES}
               selected={selectedEngines}
               onToggle={onEngineToggle}
               onSetAll={onSetEngines}
@@ -640,7 +626,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Deployment"
               tooltip="Provisioned: fixed instance size billed hourly. Serverless: auto-scales, billed per compute unit consumed."
-              options={DEPLOYMENT_TYPES}
+              options={config.DEPLOYMENT_TYPES}
               selected={selectedDeploymentTypes}
               onToggle={onDeploymentTypeToggle}
               onSetAll={onSetDeploymentTypes}
@@ -651,7 +637,7 @@ export default function FilterSidebar({
             <FilterSection
               title="HIGH-AVAILABILITY"
               tooltip="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)."
-              options={HA_MODES}
+              options={config.HA_MODES}
               selected={selectedHaModes}
               onToggle={onHaModeToggle}
               onSetAll={onSetHaModes}
@@ -668,7 +654,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Service Type"
               tooltip="Type of AI Service."
-              options={AI_SERVICE_TYPES}
+              options={config.AI_SERVICE_TYPES}
               selected={selectedAiServiceTypes}
               onToggle={onAiServiceTypeToggle}
               onSetAll={onSetAiServiceTypes}
@@ -679,7 +665,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Model Tier"
               tooltip="Performance and size tier of the model."
-              options={AI_MODEL_TIERS}
+              options={config.AI_MODEL_TIERS}
               selected={selectedAiModelTiers}
               onToggle={onAiModelTierToggle}
               onSetAll={onSetAiModelTiers}
@@ -690,7 +676,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Context Window"
               tooltip="Maximum token context window supported."
-              options={AI_CONTEXT_WINDOWS}
+              options={config.AI_CONTEXT_WINDOWS}
               selected={selectedAiContextWindows}
               onToggle={onAiContextWindowToggle}
               onSetAll={onSetAiContextWindows}
@@ -701,7 +687,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Multimodal"
               tooltip="Does the model support multimodal inputs (e.g. Image/Audio)?"
-              options={AI_MULTIMODAL_OPTIONS}
+              options={config.AI_MULTIMODAL_OPTIONS}
               selected={selectedAiMultimodalOptions}
               onToggle={onAiMultimodalOptionToggle}
               onSetAll={onSetAiMultimodalOptions}
@@ -718,7 +704,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Geography"
               tooltip="Geographic region where the service is deployed."
-              options={GEOGRAPHIES}
+              options={config.GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
               onSetAll={onSetGeographies}
@@ -729,7 +715,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Memory Size"
               tooltip="Allocated memory per function/instance. This is the main driver of serverless price."
-              options={SERVERLESS_MEMORY_TIERS}
+              options={config.SERVERLESS_MEMORY_TIERS}
               selected={selectedServerlessMemory}
               onToggle={onServerlessMemoryToggle}
               onSetAll={onSetServerlessMemory}
@@ -740,7 +726,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Architecture"
               tooltip="CPU architecture: x86 (Intel/AMD) or ARM (e.g. AWS Graviton). ARM is typically cheaper."
-              options={SERVERLESS_ARCHITECTURES}
+              options={config.SERVERLESS_ARCHITECTURES}
               selected={selectedServerlessArchitectures}
               onToggle={onServerlessArchitectureToggle}
               onSetAll={onSetServerlessArchitectures}
@@ -751,7 +737,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Languages"
               tooltip="Supported programming languages."
-              options={SERVERLESS_LANGUAGES}
+              options={config.SERVERLESS_LANGUAGES}
               selected={selectedServerlessLanguages}
               onToggle={onServerlessLanguageToggle}
               onSetAll={onSetServerlessLanguages}
@@ -762,7 +748,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Cold Start"
               tooltip="Typical cold start overhead."
-              options={SERVERLESS_COLD_START_OPTIONS}
+              options={config.SERVERLESS_COLD_START_OPTIONS}
               selected={selectedServerlessColdStart}
               onToggle={onServerlessColdStartToggle}
               onSetAll={onSetServerlessColdStart}
@@ -773,7 +759,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Timeout"
               tooltip="Maximum execution time."
-              options={SERVERLESS_TIMEOUT_OPTIONS}
+              options={config.SERVERLESS_TIMEOUT_OPTIONS}
               selected={selectedServerlessTimeout}
               onToggle={onServerlessTimeoutToggle}
               onSetAll={onSetServerlessTimeout}
@@ -784,7 +770,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Memory Config"
               tooltip="How memory is allocated."
-              options={SERVERLESS_MEMORY_CONFIG_OPTIONS}
+              options={config.SERVERLESS_MEMORY_CONFIG_OPTIONS}
               selected={selectedServerlessMemoryConfig}
               onToggle={onServerlessMemoryConfigToggle}
               onSetAll={onSetServerlessMemoryConfig}
@@ -795,7 +781,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Execution Model"
               tooltip="How the code runs (ZIP vs Container)."
-              options={SERVERLESS_EXECUTION_MODEL_OPTIONS}
+              options={config.SERVERLESS_EXECUTION_MODEL_OPTIONS}
               selected={selectedServerlessExecutionModel}
               onToggle={onServerlessExecutionModelToggle}
               onSetAll={onSetServerlessExecutionModel}
@@ -806,7 +792,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Provisioned Concurrency"
               tooltip="Pre-warm instances to avoid cold starts."
-              options={SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS}
+              options={config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS}
               selected={selectedServerlessProvisionedConcurrency}
               onToggle={onServerlessProvisionedConcurrencyToggle}
               onSetAll={onSetServerlessProvisionedConcurrency}
@@ -817,7 +803,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Ephemeral Storage"
               tooltip="Local storage available during execution (GB)."
-              options={SERVERLESS_EPHEMERAL_STORAGE_OPTIONS}
+              options={config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS}
               selected={selectedServerlessEphemeralStorage}
               onToggle={onServerlessEphemeralStorageToggle}
               onSetAll={onSetServerlessEphemeralStorage}
@@ -828,7 +814,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Free Tier"
               tooltip="Is there a monthly free invocation allowance?"
-              options={SERVERLESS_FREE_TIER_OPTIONS}
+              options={config.SERVERLESS_FREE_TIER_OPTIONS}
               selected={selectedServerlessFreeTier}
               onToggle={onServerlessFreeTierToggle}
               onSetAll={onSetServerlessFreeTier}
@@ -839,7 +825,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Granularity (ms)"
               tooltip="Billing duration granularity."
-              options={SERVERLESS_GRANULARITY_OPTIONS}
+              options={config.SERVERLESS_GRANULARITY_OPTIONS}
               selected={selectedServerlessGranularity}
               onToggle={onServerlessGranularityToggle}
               onSetAll={onSetServerlessGranularity}
@@ -856,7 +842,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Geography"
               tooltip="Geographic region."
-              options={GEOGRAPHIES}
+              options={config.GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
               onSetAll={onSetGeographies}
@@ -867,7 +853,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Orchestrator"
               tooltip="Underlying orchestration platform."
-              options={CONTAINERS_ORCHESTRATORS}
+              options={config.CONTAINERS_ORCHESTRATORS}
               selected={selectedContainersOrchestrators}
               onToggle={onContainersOrchestratorToggle}
               onSetAll={onSetContainersOrchestrators}
@@ -878,7 +864,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Compute Type"
               tooltip="How compute resources are provisioned."
-              options={CONTAINERS_COMPUTE_TYPES}
+              options={config.CONTAINERS_COMPUTE_TYPES}
               selected={selectedContainersComputeTypes}
               onToggle={onContainersComputeTypeToggle}
               onSetAll={onSetContainersComputeTypes}
@@ -889,7 +875,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Architecture"
               tooltip="CPU architecture."
-              options={CONTAINERS_ARCHITECTURES}
+              options={config.CONTAINERS_ARCHITECTURES}
               selected={selectedContainersArchitectures}
               onToggle={onContainersArchitectureToggle}
               onSetAll={onSetContainersArchitectures}
@@ -900,7 +886,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Billing Granularity"
               tooltip="How billing is calculated."
-              options={CONTAINERS_BILLING_GRANULARITY}
+              options={config.CONTAINERS_BILLING_GRANULARITY}
               selected={selectedContainersBillingGranularity}
               onToggle={onContainersBillingGranularityToggle}
               onSetAll={onSetContainersBillingGranularity}
@@ -953,7 +939,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Geography"
               tooltip="Geographic region."
-              options={GEOGRAPHIES}
+              options={config.GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
               onSetAll={onSetGeographies}
@@ -964,8 +950,8 @@ export default function FilterSidebar({
             <GroupedFilterSection
               title="Service"
               tooltip="Networking service type, grouped by function."
-              groups={NETWORKING_SERVICE_GROUPS}
-              allOptions={NETWORKING_SERVICES}
+              groups={config.NETWORKING_SERVICE_GROUPS}
+              allOptions={config.NETWORKING_SERVICES}
               selected={selectedNetworkingServices}
               onToggle={onNetworkingServiceToggle}
               onSetAll={onSetNetworkingServices}
@@ -976,7 +962,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Connection Type"
               tooltip="Point-to-point or Multipoint."
-              options={NETWORKING_CONNECTION_TYPES}
+              options={config.NETWORKING_CONNECTION_TYPES}
               selected={selectedNetworkingConnectionTypes}
               onToggle={onNetworkingConnectionTypeToggle}
               onSetAll={onSetNetworkingConnectionTypes}
@@ -987,7 +973,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Routing Type"
               tooltip="Dynamic or Fixed routing."
-              options={NETWORKING_ROUTING_TYPES}
+              options={config.NETWORKING_ROUTING_TYPES}
               selected={selectedNetworkingRoutingTypes}
               onToggle={onNetworkingRoutingTypeToggle}
               onSetAll={onSetNetworkingRoutingTypes}
@@ -998,7 +984,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Billing Model"
               tooltip="How you are charged (Uptime vs. Data)."
-              options={NETWORKING_BILLING_MODELS}
+              options={config.NETWORKING_BILLING_MODELS}
               selected={selectedNetworkingBillingModels}
               onToggle={onNetworkingBillingModelToggle}
               onSetAll={onSetNetworkingBillingModels}
@@ -1009,7 +995,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Usage Tier"
               tooltip="Pricing tier or allowance level."
-              options={NETWORKING_USAGE_TIERS}
+              options={config.NETWORKING_USAGE_TIERS}
               selected={selectedNetworkingUsageTiers}
               onToggle={onNetworkingUsageTierToggle}
               onSetAll={onSetNetworkingUsageTiers}
@@ -1020,7 +1006,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Port Capacity"
               tooltip="Throughput capacity for dedicated connections."
-              options={NETWORKING_PORT_CAPACITIES}
+              options={config.NETWORKING_PORT_CAPACITIES}
               selected={selectedNetworkingPortCapacities}
               onToggle={onNetworkingPortCapacityToggle}
               onSetAll={onSetNetworkingPortCapacities}
@@ -1031,7 +1017,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Transfer Scope"
               tooltip="Geographic scope of the data transfer."
-              options={NETWORKING_TRANSFER_SCOPES}
+              options={config.NETWORKING_TRANSFER_SCOPES}
               selected={selectedNetworkingTransferScopes}
               onToggle={onNetworkingTransferScopeToggle}
               onSetAll={onSetNetworkingTransferScopes}
@@ -1041,7 +1027,7 @@ export default function FilterSidebar({
             <FilterSection
               title="HA Support"
               tooltip="High Availability Support."
-              options={NETWORKING_HA_SUPPORT}
+              options={config.NETWORKING_HA_SUPPORT}
               selected={selectedNetworkingHaSupport}
               onToggle={onNetworkingHaSupportToggle}
               onSetAll={onSetNetworkingHaSupport}
@@ -1052,7 +1038,7 @@ export default function FilterSidebar({
             <FilterSection
               title="VPC Support"
               tooltip="VPC Integration Support."
-              options={NETWORKING_VPC_SUPPORT}
+              options={config.NETWORKING_VPC_SUPPORT}
               selected={selectedNetworkingVpcSupport}
               onToggle={onNetworkingVpcSupportToggle}
               onSetAll={onSetNetworkingVpcSupport}
@@ -1063,7 +1049,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Direction"
               tooltip="Data transfer direction."
-              options={NETWORKING_DIRECTIONS}
+              options={config.NETWORKING_DIRECTIONS}
               selected={selectedNetworkingDirections}
               onToggle={onNetworkingDirectionToggle}
               onSetAll={onSetNetworkingDirections}
@@ -1080,7 +1066,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Geography"
               tooltip="Geographic region."
-              options={GEOGRAPHIES}
+              options={config.GEOGRAPHIES}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
               onSetAll={onSetGeographies}
@@ -1091,7 +1077,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Engine"
               tooltip="Analytics Engine."
-              options={ANALYTICS_ENGINES}
+              options={config.ANALYTICS_ENGINES}
               selected={selectedAnalyticsEngines}
               onToggle={onAnalyticsEngineToggle}
               onSetAll={onSetAnalyticsEngines}
@@ -1102,7 +1088,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Deployment"
               tooltip="Provisioned or Serverless."
-              options={ANALYTICS_DEPLOYMENT_TYPES}
+              options={config.ANALYTICS_DEPLOYMENT_TYPES}
               selected={selectedAnalyticsDeploymentTypes}
               onToggle={onAnalyticsDeploymentTypeToggle}
               onSetAll={onSetAnalyticsDeploymentTypes}
@@ -1113,7 +1099,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Tier"
               tooltip="Performance Tier."
-              options={ANALYTICS_TIERS}
+              options={config.ANALYTICS_TIERS}
               selected={selectedAnalyticsTiers}
               onToggle={onAnalyticsTierToggle}
               onSetAll={onSetAnalyticsTiers}
@@ -1138,17 +1124,17 @@ export default function FilterSidebar({
             </h2>
             <button
               onClick={() => {
-                onVCpuRangeChange({ ...DEFAULT_VCPU_RANGE });
-                onMemoryRangeChange({ ...DEFAULT_MEMORY_RANGE });
-                onPriceRangeChange({ ...DEFAULT_PRICE_RANGE });
+                onVCpuRangeChange({ ...config.DEFAULT_VCPU_RANGE });
+                onMemoryRangeChange({ ...config.DEFAULT_MEMORY_RANGE });
+                onPriceRangeChange({ ...config.DEFAULT_PRICE_RANGE });
               }}
               className={`text-[10px] font-bold uppercase transition-colors ${
-                vCpuRange.min !== DEFAULT_VCPU_RANGE.min ||
-                vCpuRange.max !== DEFAULT_VCPU_RANGE.max ||
-                memoryRange.min !== DEFAULT_MEMORY_RANGE.min ||
-                memoryRange.max !== DEFAULT_MEMORY_RANGE.max ||
-                priceRange.min !== DEFAULT_PRICE_RANGE.min ||
-                priceRange.max !== DEFAULT_PRICE_RANGE.max
+                vCpuRange.min !== config.DEFAULT_VCPU_RANGE.min ||
+                vCpuRange.max !== config.DEFAULT_VCPU_RANGE.max ||
+                memoryRange.min !== config.DEFAULT_MEMORY_RANGE.min ||
+                memoryRange.max !== config.DEFAULT_MEMORY_RANGE.max ||
+                priceRange.min !== config.DEFAULT_PRICE_RANGE.min ||
+                priceRange.max !== config.DEFAULT_PRICE_RANGE.max
                   ? 'text-black dark:text-white'
                   : 'text-[#737373] hover:text-black dark:hover:text-white'
               }`}
@@ -1163,8 +1149,8 @@ export default function FilterSidebar({
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
                     <RangeSlider
-                      min={DEFAULT_VCPU_RANGE.min}
-                      max={DEFAULT_VCPU_RANGE.max}
+                      min={config.DEFAULT_VCPU_RANGE.min}
+                      max={config.DEFAULT_VCPU_RANGE.max}
                       value={vCpuRange}
                       onChange={onVCpuRangeChange}
                     />
@@ -1172,8 +1158,8 @@ export default function FilterSidebar({
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-[#737373]">Memory (GB)</div>
                     <RangeSlider
-                      min={DEFAULT_MEMORY_RANGE.min}
-                      max={DEFAULT_MEMORY_RANGE.max}
+                      min={config.DEFAULT_MEMORY_RANGE.min}
+                      max={config.DEFAULT_MEMORY_RANGE.max}
                       value={memoryRange}
                       onChange={onMemoryRangeChange}
                     />
@@ -1183,8 +1169,8 @@ export default function FilterSidebar({
               <div className="space-y-2">
                 <div className="text-[10px] font-bold text-[#737373]">{activeProductType === 'ai' ? 'Input Price ($/1M Tokens)' : 'Hourly price ($)'}</div>
                 <RangeSlider
-                  min={DEFAULT_PRICE_RANGE.min}
-                  max={DEFAULT_PRICE_RANGE.max}
+                  min={config.DEFAULT_PRICE_RANGE.min}
+                  max={config.DEFAULT_PRICE_RANGE.max}
                   step={0.1}
                   unit="$"
                   value={priceRange}

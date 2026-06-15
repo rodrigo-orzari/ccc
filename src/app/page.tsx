@@ -12,54 +12,91 @@ import {
   Footer,
   ChartsView,
 } from '@/components';
-import {
-  GEOGRAPHIES, OS_TYPES, CPU_PROFILES, CATEGORIES,
-  DB_FAMILIES, DB_ENGINES, DEPLOYMENT_TYPES, HA_MODES,
-  SERVERLESS_LANGUAGES, SERVERLESS_COLD_START_OPTIONS, SERVERLESS_TIMEOUT_OPTIONS,
-  SERVERLESS_MEMORY_CONFIG_OPTIONS, SERVERLESS_FREE_TIER_OPTIONS, SERVERLESS_GRANULARITY_OPTIONS,
-  SERVERLESS_EXECUTION_MODEL_OPTIONS, SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS, SERVERLESS_EPHEMERAL_STORAGE_OPTIONS,
-  SERVERLESS_MEMORY_TIERS, SERVERLESS_ARCHITECTURES,
-  CONTAINERS_ORCHESTRATORS, CONTAINERS_COMPUTE_TYPES, CONTAINERS_ARCHITECTURES, CONTAINERS_BILLING_GRANULARITY,
-  NETWORKING_SERVICES, NETWORKING_CONNECTION_TYPES, NETWORKING_ROUTING_TYPES,
-  NETWORKING_HA_SUPPORT, NETWORKING_VPC_SUPPORT, NETWORKING_DIRECTIONS,
-  NETWORKING_BILLING_MODELS, NETWORKING_USAGE_TIERS, NETWORKING_PORT_CAPACITIES, NETWORKING_TRANSFER_SCOPES,
-  ANALYTICS_ENGINES, ANALYTICS_DEPLOYMENT_TYPES, ANALYTICS_TIERS,
-  AI_SERVICE_TYPES, AI_MODEL_TIERS, AI_CONTEXT_WINDOWS, AI_MULTIMODAL_OPTIONS,
-  PROVIDERS,
-} from '@/config';
+import { useDynamicFilters } from '@/hooks/useDynamicFilters';
+import * as staticConfig from '@/config';
 
 export default function Dashboard() {
+  const config = useDynamicFilters();
   const [activeProductType, setActiveProductType] = useState<ProductType>('vm');
+
+  const [filtersSynced, setFiltersSynced] = useState(false);
+  useEffect(() => {
+    if (!config.isLoading && !filtersSynced) {
+      if (selectedGeographies.length === staticConfig.GEOGRAPHIES.length) setSelectedGeographies([...config.GEOGRAPHIES]);
+      if (selectedOS.length === staticConfig.OS_TYPES.length) setSelectedOS([...config.OS_TYPES]);
+      if (selectedCpu.length === staticConfig.CPU_PROFILES.length) setSelectedCpu([...config.CPU_PROFILES.map(p => p.id)]);
+      if (selectedCategory.length === staticConfig.CATEGORIES.length) setSelectedCategory([...config.CATEGORIES]);
+      if (selectedDbFamilies.length === staticConfig.DB_FAMILIES.length) setSelectedDbFamilies([...config.DB_FAMILIES]);
+      if (selectedEngines.length === staticConfig.DB_ENGINES.length) setSelectedEngines([...config.DB_ENGINES]);
+      if (selectedDeploymentTypes.length === staticConfig.DEPLOYMENT_TYPES.length) setSelectedDeploymentTypes([...config.DEPLOYMENT_TYPES]);
+      if (selectedHaModes.length === staticConfig.HA_MODES.length) setSelectedHaModes([...config.HA_MODES]);
+      if (selectedServerlessLanguages.length === staticConfig.SERVERLESS_LANGUAGES.length) setSelectedServerlessLanguages([...config.SERVERLESS_LANGUAGES]);
+      if (selectedServerlessColdStart.length === staticConfig.SERVERLESS_COLD_START_OPTIONS.length) setSelectedServerlessColdStart([...config.SERVERLESS_COLD_START_OPTIONS]);
+      if (selectedServerlessTimeout.length === staticConfig.SERVERLESS_TIMEOUT_OPTIONS.length) setSelectedServerlessTimeout([...config.SERVERLESS_TIMEOUT_OPTIONS]);
+      if (selectedServerlessMemoryConfig.length === staticConfig.SERVERLESS_MEMORY_CONFIG_OPTIONS.length) setSelectedServerlessMemoryConfig([...config.SERVERLESS_MEMORY_CONFIG_OPTIONS]);
+      if (selectedServerlessFreeTier.length === staticConfig.SERVERLESS_FREE_TIER_OPTIONS.length) setSelectedServerlessFreeTier([...config.SERVERLESS_FREE_TIER_OPTIONS]);
+      if (selectedServerlessGranularity.length === staticConfig.SERVERLESS_GRANULARITY_OPTIONS.length) setSelectedServerlessGranularity([...config.SERVERLESS_GRANULARITY_OPTIONS]);
+      if (selectedServerlessExecutionModel.length === staticConfig.SERVERLESS_EXECUTION_MODEL_OPTIONS.length) setSelectedServerlessExecutionModel([...config.SERVERLESS_EXECUTION_MODEL_OPTIONS]);
+      if (selectedServerlessProvisionedConcurrency.length === staticConfig.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length) setSelectedServerlessProvisionedConcurrency([...config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]);
+      if (selectedServerlessEphemeralStorage.length === staticConfig.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) setSelectedServerlessEphemeralStorage([...config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]);
+      if (selectedServerlessMemory.length === staticConfig.SERVERLESS_MEMORY_TIERS.length) setSelectedServerlessMemory([...config.SERVERLESS_MEMORY_TIERS]);
+      if (selectedServerlessArchitectures.length === staticConfig.SERVERLESS_ARCHITECTURES.length) setSelectedServerlessArchitectures([...config.SERVERLESS_ARCHITECTURES]);
+      if (selectedContainersOrchestrators.length === staticConfig.CONTAINERS_ORCHESTRATORS.length) setSelectedContainersOrchestrators([...config.CONTAINERS_ORCHESTRATORS]);
+      if (selectedContainersComputeTypes.length === staticConfig.CONTAINERS_COMPUTE_TYPES.length) setSelectedContainersComputeTypes([...config.CONTAINERS_COMPUTE_TYPES]);
+      if (selectedContainersArchitectures.length === staticConfig.CONTAINERS_ARCHITECTURES.length) setSelectedContainersArchitectures([...config.CONTAINERS_ARCHITECTURES]);
+      if (selectedContainersBillingGranularity.length === staticConfig.CONTAINERS_BILLING_GRANULARITY.length) setSelectedContainersBillingGranularity([...config.CONTAINERS_BILLING_GRANULARITY]);
+      if (selectedAnalyticsEngines.length === staticConfig.ANALYTICS_ENGINES.length) setSelectedAnalyticsEngines([...config.ANALYTICS_ENGINES]);
+      if (selectedAnalyticsDeploymentTypes.length === staticConfig.ANALYTICS_DEPLOYMENT_TYPES.length) setSelectedAnalyticsDeploymentTypes([...config.ANALYTICS_DEPLOYMENT_TYPES]);
+      if (selectedAnalyticsTiers.length === staticConfig.ANALYTICS_TIERS.length) setSelectedAnalyticsTiers([...config.ANALYTICS_TIERS]);
+      if (selectedAiServiceTypes.length === staticConfig.AI_SERVICE_TYPES.length) setSelectedAiServiceTypes([...config.AI_SERVICE_TYPES]);
+      if (selectedAiModelTiers.length === staticConfig.AI_MODEL_TIERS.length) setSelectedAiModelTiers([...config.AI_MODEL_TIERS]);
+      if (selectedAiContextWindows.length === staticConfig.AI_CONTEXT_WINDOWS.length) setSelectedAiContextWindows([...config.AI_CONTEXT_WINDOWS]);
+      if (selectedAiMultimodalOptions.length === staticConfig.AI_MULTIMODAL_OPTIONS.length) setSelectedAiMultimodalOptions([...config.AI_MULTIMODAL_OPTIONS]);
+      if (selectedNetworkingServices.length === staticConfig.NETWORKING_SERVICES.length) setSelectedNetworkingServices([...config.NETWORKING_SERVICES]);
+      if (selectedNetworkingConnectionTypes.length === staticConfig.NETWORKING_CONNECTION_TYPES.length) setSelectedNetworkingConnectionTypes([...config.NETWORKING_CONNECTION_TYPES]);
+      if (selectedNetworkingRoutingTypes.length === staticConfig.NETWORKING_ROUTING_TYPES.length) setSelectedNetworkingRoutingTypes([...config.NETWORKING_ROUTING_TYPES]);
+      if (selectedNetworkingHaSupport.length === staticConfig.NETWORKING_HA_SUPPORT.length) setSelectedNetworkingHaSupport([...config.NETWORKING_HA_SUPPORT]);
+      if (selectedNetworkingVpcSupport.length === staticConfig.NETWORKING_VPC_SUPPORT.length) setSelectedNetworkingVpcSupport([...config.NETWORKING_VPC_SUPPORT]);
+      if (selectedNetworkingDirections.length === staticConfig.NETWORKING_DIRECTIONS.length) setSelectedNetworkingDirections([...config.NETWORKING_DIRECTIONS]);
+      if (selectedNetworkingBillingModels.length === staticConfig.NETWORKING_BILLING_MODELS.length) setSelectedNetworkingBillingModels([...config.NETWORKING_BILLING_MODELS]);
+      if (selectedNetworkingUsageTiers.length === staticConfig.NETWORKING_USAGE_TIERS.length) setSelectedNetworkingUsageTiers([...config.NETWORKING_USAGE_TIERS]);
+      if (selectedNetworkingPortCapacities.length === staticConfig.NETWORKING_PORT_CAPACITIES.length) setSelectedNetworkingPortCapacities([...config.NETWORKING_PORT_CAPACITIES]);
+      if (selectedNetworkingTransferScopes.length === staticConfig.NETWORKING_TRANSFER_SCOPES.length) setSelectedNetworkingTransferScopes([...config.NETWORKING_TRANSFER_SCOPES]);
+
+      setFiltersSynced(true);
+    }
+  }, [config.isLoading, filtersSynced, config]);
+
   const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');
 
   // Filter state
-  const [selectedProviders, setSelectedProviders] = useState<string[]>(PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id));
-  const [selectedGeographies, setSelectedGeographies] = useState<string[]>([...GEOGRAPHIES]);
-  const [selectedOS, setSelectedOS] = useState<string[]>([...OS_TYPES]);
-  const [selectedCpu, setSelectedCpu] = useState<string[]>(CPU_PROFILES.map(p => p.id));
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([...CATEGORIES]);
+  const [selectedProviders, setSelectedProviders] = useState<string[]>(config.PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id));
+  const [selectedGeographies, setSelectedGeographies] = useState<string[]>([...config.GEOGRAPHIES]);
+  const [selectedOS, setSelectedOS] = useState<string[]>([...config.OS_TYPES]);
+  const [selectedCpu, setSelectedCpu] = useState<string[]>(config.CPU_PROFILES.map(p => p.id));
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([...config.CATEGORIES]);
   const [selectedGpu, setSelectedGpu] = useState<string[]>(['GPU', 'No GPU']);
 
-  const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...DB_FAMILIES]);
-  const [selectedEngines, setSelectedEngines] = useState<string[]>([...DB_ENGINES]);
-  const [selectedDeploymentTypes, setSelectedDeploymentTypes] = useState<string[]>([...DEPLOYMENT_TYPES]);
-  const [selectedHaModes, setSelectedHaModes] = useState<string[]>([...HA_MODES]);
+  const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...config.DB_FAMILIES]);
+  const [selectedEngines, setSelectedEngines] = useState<string[]>([...config.DB_ENGINES]);
+  const [selectedDeploymentTypes, setSelectedDeploymentTypes] = useState<string[]>([...config.DEPLOYMENT_TYPES]);
+  const [selectedHaModes, setSelectedHaModes] = useState<string[]>([...config.HA_MODES]);
 
   // Handle AI provider selection automatically when tab changes
   useEffect(() => {
     if (activeProductType !== 'ai') {
       setSelectedProviders(prev => {
-        const nonAIProviders = PROVIDERS.filter(p => !p.isAIOnly).map(p => p.id);
+        const nonAIProviders = config.PROVIDERS.filter(p => !p.isAIOnly).map(p => p.id);
         const next = prev.filter(p => nonAIProviders.includes(p));
         // If nothing is left (e.g. user was only selecting OpenAI), reset to all non-AI providers
         if (next.length === 0) {
-          return PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id);
+          return config.PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id);
         }
         return next;
       });
     } else {
       setSelectedProviders(prev => {
-        const aiOnly = PROVIDERS.filter(p => p.isAIOnly).map(p => p.id);
+        const aiOnly = config.PROVIDERS.filter(p => p.isAIOnly).map(p => p.id);
         const missing = aiOnly.filter(id => !prev.includes(id));
         if (missing.length > 0) return [...prev, ...missing];
         return prev;
@@ -67,53 +104,50 @@ export default function Dashboard() {
     }
   }, [activeProductType]);
 
-  const [selectedServerlessLanguages, setSelectedServerlessLanguages] = useState<string[]>([...SERVERLESS_LANGUAGES]);
-  const [selectedServerlessColdStart, setSelectedServerlessColdStart] = useState<string[]>([...SERVERLESS_COLD_START_OPTIONS]);
-  const [selectedServerlessTimeout, setSelectedServerlessTimeout] = useState<string[]>([...SERVERLESS_TIMEOUT_OPTIONS]);
-  const [selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig] = useState<string[]>([...SERVERLESS_MEMORY_CONFIG_OPTIONS]);
-  const [selectedServerlessFreeTier, setSelectedServerlessFreeTier] = useState<string[]>([...SERVERLESS_FREE_TIER_OPTIONS]);
-  const [selectedServerlessGranularity, setSelectedServerlessGranularity] = useState<string[]>([...SERVERLESS_GRANULARITY_OPTIONS]);
-  const [selectedServerlessExecutionModel, setSelectedServerlessExecutionModel] = useState<string[]>([...SERVERLESS_EXECUTION_MODEL_OPTIONS]);
-  const [selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency] = useState<string[]>([...SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]);
-  const [selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage] = useState<string[]>([...SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]);
-  const [selectedServerlessMemory, setSelectedServerlessMemory] = useState<string[]>([...SERVERLESS_MEMORY_TIERS]);
-  const [selectedServerlessArchitectures, setSelectedServerlessArchitectures] = useState<string[]>([...SERVERLESS_ARCHITECTURES]);
+  const [selectedServerlessLanguages, setSelectedServerlessLanguages] = useState<string[]>([...config.SERVERLESS_LANGUAGES]);
+  const [selectedServerlessColdStart, setSelectedServerlessColdStart] = useState<string[]>([...config.SERVERLESS_COLD_START_OPTIONS]);
+  const [selectedServerlessTimeout, setSelectedServerlessTimeout] = useState<string[]>([...config.SERVERLESS_TIMEOUT_OPTIONS]);
+  const [selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig] = useState<string[]>([...config.SERVERLESS_MEMORY_CONFIG_OPTIONS]);
+  const [selectedServerlessFreeTier, setSelectedServerlessFreeTier] = useState<string[]>([...config.SERVERLESS_FREE_TIER_OPTIONS]);
+  const [selectedServerlessGranularity, setSelectedServerlessGranularity] = useState<string[]>([...config.SERVERLESS_GRANULARITY_OPTIONS]);
+  const [selectedServerlessExecutionModel, setSelectedServerlessExecutionModel] = useState<string[]>([...config.SERVERLESS_EXECUTION_MODEL_OPTIONS]);
+  const [selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency] = useState<string[]>([...config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]);
+  const [selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage] = useState<string[]>([...config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]);
+  const [selectedServerlessMemory, setSelectedServerlessMemory] = useState<string[]>([...config.SERVERLESS_MEMORY_TIERS]);
+  const [selectedServerlessArchitectures, setSelectedServerlessArchitectures] = useState<string[]>([...config.SERVERLESS_ARCHITECTURES]);
 
-  const [selectedContainersOrchestrators, setSelectedContainersOrchestrators] = useState<string[]>([...CONTAINERS_ORCHESTRATORS]);
-  const [selectedContainersComputeTypes, setSelectedContainersComputeTypes] = useState<string[]>([...CONTAINERS_COMPUTE_TYPES]);
-  const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...CONTAINERS_ARCHITECTURES]);
-  const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...CONTAINERS_BILLING_GRANULARITY]);
+  const [selectedContainersOrchestrators, setSelectedContainersOrchestrators] = useState<string[]>([...config.CONTAINERS_ORCHESTRATORS]);
+  const [selectedContainersComputeTypes, setSelectedContainersComputeTypes] = useState<string[]>([...config.CONTAINERS_COMPUTE_TYPES]);
+  const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...config.CONTAINERS_ARCHITECTURES]);
+  const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...config.CONTAINERS_BILLING_GRANULARITY]);
   const [containersGpuIncluded, setContainersGpuIncluded] = useState(true);
 
-  const [selectedAnalyticsEngines, setSelectedAnalyticsEngines] = useState<string[]>([...ANALYTICS_ENGINES]);
-  const [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes] = useState<string[]>([...ANALYTICS_DEPLOYMENT_TYPES]);
-  const [selectedAnalyticsTiers, setSelectedAnalyticsTiers] = useState<string[]>([...ANALYTICS_TIERS]);
+  const [selectedAnalyticsEngines, setSelectedAnalyticsEngines] = useState<string[]>([...config.ANALYTICS_ENGINES]);
+  const [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes] = useState<string[]>([...config.ANALYTICS_DEPLOYMENT_TYPES]);
+  const [selectedAnalyticsTiers, setSelectedAnalyticsTiers] = useState<string[]>([...config.ANALYTICS_TIERS]);
 
   // AI
-  const [selectedAiServiceTypes, setSelectedAiServiceTypes] = useState<string[]>([...AI_SERVICE_TYPES]);
-  const [selectedAiModelTiers, setSelectedAiModelTiers] = useState<string[]>([...AI_MODEL_TIERS]);
-  const [selectedAiContextWindows, setSelectedAiContextWindows] = useState<string[]>([...AI_CONTEXT_WINDOWS]);
-  const [selectedAiMultimodalOptions, setSelectedAiMultimodalOptions] = useState<string[]>([...AI_MULTIMODAL_OPTIONS]);
+  const [selectedAiServiceTypes, setSelectedAiServiceTypes] = useState<string[]>([...config.AI_SERVICE_TYPES]);
+  const [selectedAiModelTiers, setSelectedAiModelTiers] = useState<string[]>([...config.AI_MODEL_TIERS]);
+  const [selectedAiContextWindows, setSelectedAiContextWindows] = useState<string[]>([...config.AI_CONTEXT_WINDOWS]);
+  const [selectedAiMultimodalOptions, setSelectedAiMultimodalOptions] = useState<string[]>([...config.AI_MULTIMODAL_OPTIONS]);
 
-  const [selectedNetworkingServices, setSelectedNetworkingServices] = useState<string[]>([...NETWORKING_SERVICES]);
-  const [selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes] = useState<string[]>([...NETWORKING_CONNECTION_TYPES]);
-  const [selectedNetworkingRoutingTypes, setSelectedNetworkingRoutingTypes] = useState<string[]>([...NETWORKING_ROUTING_TYPES]);
-  const [selectedNetworkingHaSupport, setSelectedNetworkingHaSupport] = useState<string[]>([...NETWORKING_HA_SUPPORT]);
-  const [selectedNetworkingVpcSupport, setSelectedNetworkingVpcSupport] = useState<string[]>([...NETWORKING_VPC_SUPPORT]);
-  const [selectedNetworkingDirections, setSelectedNetworkingDirections] = useState<string[]>([...NETWORKING_DIRECTIONS]);
-  const [selectedNetworkingBillingModels, setSelectedNetworkingBillingModels] = useState<string[]>([...NETWORKING_BILLING_MODELS]);
-  const [selectedNetworkingUsageTiers, setSelectedNetworkingUsageTiers] = useState<string[]>([...NETWORKING_USAGE_TIERS]);
-  const [selectedNetworkingPortCapacities, setSelectedNetworkingPortCapacities] = useState<string[]>([...NETWORKING_PORT_CAPACITIES]);
-  const [selectedNetworkingTransferScopes, setSelectedNetworkingTransferScopes] = useState<string[]>([...NETWORKING_TRANSFER_SCOPES]);
+  const [selectedNetworkingServices, setSelectedNetworkingServices] = useState<string[]>([...config.NETWORKING_SERVICES]);
+  const [selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes] = useState<string[]>([...config.NETWORKING_CONNECTION_TYPES]);
+  const [selectedNetworkingRoutingTypes, setSelectedNetworkingRoutingTypes] = useState<string[]>([...config.NETWORKING_ROUTING_TYPES]);
+  const [selectedNetworkingHaSupport, setSelectedNetworkingHaSupport] = useState<string[]>([...config.NETWORKING_HA_SUPPORT]);
+  const [selectedNetworkingVpcSupport, setSelectedNetworkingVpcSupport] = useState<string[]>([...config.NETWORKING_VPC_SUPPORT]);
+  const [selectedNetworkingDirections, setSelectedNetworkingDirections] = useState<string[]>([...config.NETWORKING_DIRECTIONS]);
+  const [selectedNetworkingBillingModels, setSelectedNetworkingBillingModels] = useState<string[]>([...config.NETWORKING_BILLING_MODELS]);
+  const [selectedNetworkingUsageTiers, setSelectedNetworkingUsageTiers] = useState<string[]>([...config.NETWORKING_USAGE_TIERS]);
+  const [selectedNetworkingPortCapacities, setSelectedNetworkingPortCapacities] = useState<string[]>([...config.NETWORKING_PORT_CAPACITIES]);
+  const [selectedNetworkingTransferScopes, setSelectedNetworkingTransferScopes] = useState<string[]>([...config.NETWORKING_TRANSFER_SCOPES]);
 
   // Range filters
-  const DEFAULT_VCPU_RANGE = { min: 0, max: 320 };
-  const DEFAULT_MEMORY_RANGE = { min: 0, max: 3200 };
-  const DEFAULT_PRICE_RANGE = { min: 0, max: 100 };
-
-  const [vCpuRange, setVCpuRange] = useState({ ...DEFAULT_VCPU_RANGE });
-  const [memoryRange, setMemoryRange] = useState({ ...DEFAULT_MEMORY_RANGE });
-  const [priceRange, setPriceRange] = useState({ ...DEFAULT_PRICE_RANGE });
+      
+  const [vCpuRange, setVCpuRange] = useState({ ...config.DEFAULT_VCPU_RANGE });
+  const [memoryRange, setMemoryRange] = useState({ ...config.DEFAULT_MEMORY_RANGE });
+  const [priceRange, setPriceRange] = useState({ ...config.DEFAULT_PRICE_RANGE });
   const [search, setSearch] = useState('');
   const [showAggregation, setShowAggregation] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: keyof PricingRecord | string; direction: 'asc' | 'desc' }>({
@@ -190,64 +224,64 @@ export default function Dashboard() {
       }
     };
 
-    subset('geography', selectedGeographies, GEOGRAPHIES);
-    subset('os', selectedOS, OS_TYPES);
+    subset('geography', selectedGeographies, config.GEOGRAPHIES);
+    subset('os', selectedOS, config.OS_TYPES);
     // Translate CPU profile IDs → vendor names the API understands
-    const allVendors = Array.from(new Set(CPU_PROFILES.map(p => p.vendor)));
+    const allVendors = Array.from(new Set(config.CPU_PROFILES.map(p => p.vendor)));
     const selectedVendors = Array.from(new Set(
       selectedCpu
-        .map(id => CPU_PROFILES.find(p => p.id === id)?.vendor)
+        .map(id => config.CPU_PROFILES.find(p => p.id === id)?.vendor)
         .filter((v): v is string => Boolean(v))
     ));
     subset('cpuVendor', selectedVendors, allVendors);
-    subset('category', selectedCategory, CATEGORIES);
+    subset('category', selectedCategory, config.CATEGORIES);
     subset('gpu', selectedGpu, ['GPU', 'No GPU']);
-    subset('dbFamilies', selectedDbFamilies, DB_FAMILIES);
-    subset('engines', selectedEngines, DB_ENGINES);
-    subset('deploymentTypes', selectedDeploymentTypes, DEPLOYMENT_TYPES);
-    subset('haModes', selectedHaModes, HA_MODES);
-    subset('serverlessLanguages', selectedServerlessLanguages, SERVERLESS_LANGUAGES);
-    subset('serverlessColdStart', selectedServerlessColdStart, SERVERLESS_COLD_START_OPTIONS);
-    subset('serverlessTimeout', selectedServerlessTimeout, SERVERLESS_TIMEOUT_OPTIONS);
-    subset('serverlessMemoryConfig', selectedServerlessMemoryConfig, SERVERLESS_MEMORY_CONFIG_OPTIONS);
-    subset('serverlessFreeTier', selectedServerlessFreeTier, SERVERLESS_FREE_TIER_OPTIONS);
-    subset('serverlessGranularity', selectedServerlessGranularity, SERVERLESS_GRANULARITY_OPTIONS);
-    subset('serverlessExecutionModel', selectedServerlessExecutionModel, SERVERLESS_EXECUTION_MODEL_OPTIONS);
-    subset('serverlessProvisionedConcurrency', selectedServerlessProvisionedConcurrency, SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS);
-    subset('serverlessEphemeralStorage', selectedServerlessEphemeralStorage, SERVERLESS_EPHEMERAL_STORAGE_OPTIONS);
-    subset('serverlessMemory', selectedServerlessMemory, SERVERLESS_MEMORY_TIERS);
-    subset('serverlessArchitecture', selectedServerlessArchitectures, SERVERLESS_ARCHITECTURES);
-    subset('containersOrchestrators', selectedContainersOrchestrators, CONTAINERS_ORCHESTRATORS);
-    subset('containersComputeTypes', selectedContainersComputeTypes, CONTAINERS_COMPUTE_TYPES);
-    subset('containersArchitectures', selectedContainersArchitectures, CONTAINERS_ARCHITECTURES);
-    subset('containersBillingGranularity', selectedContainersBillingGranularity, CONTAINERS_BILLING_GRANULARITY);
+    subset('dbFamilies', selectedDbFamilies, config.DB_FAMILIES);
+    subset('engines', selectedEngines, config.DB_ENGINES);
+    subset('deploymentTypes', selectedDeploymentTypes, config.DEPLOYMENT_TYPES);
+    subset('haModes', selectedHaModes, config.HA_MODES);
+    subset('serverlessLanguages', selectedServerlessLanguages, config.SERVERLESS_LANGUAGES);
+    subset('serverlessColdStart', selectedServerlessColdStart, config.SERVERLESS_COLD_START_OPTIONS);
+    subset('serverlessTimeout', selectedServerlessTimeout, config.SERVERLESS_TIMEOUT_OPTIONS);
+    subset('serverlessMemoryConfig', selectedServerlessMemoryConfig, config.SERVERLESS_MEMORY_CONFIG_OPTIONS);
+    subset('serverlessFreeTier', selectedServerlessFreeTier, config.SERVERLESS_FREE_TIER_OPTIONS);
+    subset('serverlessGranularity', selectedServerlessGranularity, config.SERVERLESS_GRANULARITY_OPTIONS);
+    subset('serverlessExecutionModel', selectedServerlessExecutionModel, config.SERVERLESS_EXECUTION_MODEL_OPTIONS);
+    subset('serverlessProvisionedConcurrency', selectedServerlessProvisionedConcurrency, config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS);
+    subset('serverlessEphemeralStorage', selectedServerlessEphemeralStorage, config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS);
+    subset('serverlessMemory', selectedServerlessMemory, config.SERVERLESS_MEMORY_TIERS);
+    subset('serverlessArchitecture', selectedServerlessArchitectures, config.SERVERLESS_ARCHITECTURES);
+    subset('containersOrchestrators', selectedContainersOrchestrators, config.CONTAINERS_ORCHESTRATORS);
+    subset('containersComputeTypes', selectedContainersComputeTypes, config.CONTAINERS_COMPUTE_TYPES);
+    subset('containersArchitectures', selectedContainersArchitectures, config.CONTAINERS_ARCHITECTURES);
+    subset('containersBillingGranularity', selectedContainersBillingGranularity, config.CONTAINERS_BILLING_GRANULARITY);
     // Boolean toggle: only constrain when GPU containers are excluded.
     if (!containersGpuIncluded) params.append('containersGpuIncluded', 'false');
-    subset('analyticsEngines', selectedAnalyticsEngines, ANALYTICS_ENGINES);
-    subset('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes, ANALYTICS_DEPLOYMENT_TYPES);
-    subset('analyticsTiers', selectedAnalyticsTiers, ANALYTICS_TIERS);
-    subset('aiServiceTypes', selectedAiServiceTypes, AI_SERVICE_TYPES);
-    subset('aiModelTiers', selectedAiModelTiers, AI_MODEL_TIERS);
-    subset('aiContextWindows', selectedAiContextWindows, AI_CONTEXT_WINDOWS);
-    subset('aiMultimodalOptions', selectedAiMultimodalOptions, AI_MULTIMODAL_OPTIONS);
-    subset('networkingService', selectedNetworkingServices, NETWORKING_SERVICES);
-    subset('networkingConnectionTypes', selectedNetworkingConnectionTypes, NETWORKING_CONNECTION_TYPES);
-    subset('networkingRoutingTypes', selectedNetworkingRoutingTypes, NETWORKING_ROUTING_TYPES);
-    subset('networkingHaSupport', selectedNetworkingHaSupport, NETWORKING_HA_SUPPORT);
-    subset('networkingVpcSupport', selectedNetworkingVpcSupport, NETWORKING_VPC_SUPPORT);
-    subset('networkingTransferDirections', selectedNetworkingDirections, NETWORKING_DIRECTIONS);
-    subset('networkingBillingModels', selectedNetworkingBillingModels, NETWORKING_BILLING_MODELS);
-    subset('networkingUsageTiers', selectedNetworkingUsageTiers, NETWORKING_USAGE_TIERS);
-    subset('networkingPortCapacities', selectedNetworkingPortCapacities, NETWORKING_PORT_CAPACITIES);
-    subset('networkingTransferScopes', selectedNetworkingTransferScopes, NETWORKING_TRANSFER_SCOPES);
+    subset('analyticsEngines', selectedAnalyticsEngines, config.ANALYTICS_ENGINES);
+    subset('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes, config.ANALYTICS_DEPLOYMENT_TYPES);
+    subset('analyticsTiers', selectedAnalyticsTiers, config.ANALYTICS_TIERS);
+    subset('aiServiceTypes', selectedAiServiceTypes, config.AI_SERVICE_TYPES);
+    subset('aiModelTiers', selectedAiModelTiers, config.AI_MODEL_TIERS);
+    subset('aiContextWindows', selectedAiContextWindows, config.AI_CONTEXT_WINDOWS);
+    subset('aiMultimodalOptions', selectedAiMultimodalOptions, config.AI_MULTIMODAL_OPTIONS);
+    subset('networkingService', selectedNetworkingServices, config.NETWORKING_SERVICES);
+    subset('networkingConnectionTypes', selectedNetworkingConnectionTypes, config.NETWORKING_CONNECTION_TYPES);
+    subset('networkingRoutingTypes', selectedNetworkingRoutingTypes, config.NETWORKING_ROUTING_TYPES);
+    subset('networkingHaSupport', selectedNetworkingHaSupport, config.NETWORKING_HA_SUPPORT);
+    subset('networkingVpcSupport', selectedNetworkingVpcSupport, config.NETWORKING_VPC_SUPPORT);
+    subset('networkingTransferDirections', selectedNetworkingDirections, config.NETWORKING_DIRECTIONS);
+    subset('networkingBillingModels', selectedNetworkingBillingModels, config.NETWORKING_BILLING_MODELS);
+    subset('networkingUsageTiers', selectedNetworkingUsageTiers, config.NETWORKING_USAGE_TIERS);
+    subset('networkingPortCapacities', selectedNetworkingPortCapacities, config.NETWORKING_PORT_CAPACITIES);
+    subset('networkingTransferScopes', selectedNetworkingTransferScopes, config.NETWORKING_TRANSFER_SCOPES);
     // Only send range params when the user has actively constrained them.
     // At the slider floor/ceiling → no filter applied (show all).
-    if (vCpuRange.min > DEFAULT_VCPU_RANGE.min) params.append('minVcpu', vCpuRange.min.toString());
-    if (vCpuRange.max < DEFAULT_VCPU_RANGE.max) params.append('maxVcpu', vCpuRange.max.toString());
-    if (memoryRange.min > DEFAULT_MEMORY_RANGE.min) params.append('minMemory', memoryRange.min.toString());
-    if (memoryRange.max < DEFAULT_MEMORY_RANGE.max) params.append('maxMemory', memoryRange.max.toString());
-    if (priceRange.min > DEFAULT_PRICE_RANGE.min) params.append('minPrice', priceRange.min.toString());
-    if (priceRange.max < DEFAULT_PRICE_RANGE.max) params.append('maxPrice', priceRange.max.toString());
+    if (vCpuRange.min > config.DEFAULT_VCPU_RANGE.min) params.append('minVcpu', vCpuRange.min.toString());
+    if (vCpuRange.max < config.DEFAULT_VCPU_RANGE.max) params.append('maxVcpu', vCpuRange.max.toString());
+    if (memoryRange.min > config.DEFAULT_MEMORY_RANGE.min) params.append('minMemory', memoryRange.min.toString());
+    if (memoryRange.max < config.DEFAULT_MEMORY_RANGE.max) params.append('maxMemory', memoryRange.max.toString());
+    if (priceRange.min > config.DEFAULT_PRICE_RANGE.min) params.append('minPrice', priceRange.min.toString());
+    if (priceRange.max < config.DEFAULT_PRICE_RANGE.max) params.append('maxPrice', priceRange.max.toString());
     params.append('search', search);
     return params;
   }, [
@@ -670,13 +704,13 @@ export default function Dashboard() {
 
         <main className="flex-1 min-w-0 overflow-hidden flex flex-col bg-white dark:bg-[#000000]">
           <ProviderCards
-            providers={PROVIDERS.filter(p => activeProductType === 'ai' || !p.isAIOnly)}
+            providers={config.PROVIDERS.filter(p => activeProductType === 'ai' || !p.isAIOnly)}
             selectedProviders={selectedProviders}
             providerCounts={providerCounts}
             dbStatusProviders={dbStatus?.providers}
             isInitialFetch={isInitialFetch}
             onProviderSelect={(providerId) => {
-              const activeProvidersList = PROVIDERS.filter(p => !p.soon && (activeProductType === 'ai' || !p.isAIOnly));
+              const activeProvidersList = config.PROVIDERS.filter(p => !p.soon && (activeProductType === 'ai' || !p.isAIOnly));
               const activeNonSoon = activeProvidersList.map(p => p.id);
               if (selectedProviders.includes(providerId) && selectedProviders.length === 1) {
                 setSelectedProviders(activeNonSoon);
