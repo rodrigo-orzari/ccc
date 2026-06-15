@@ -17,7 +17,7 @@ import * as staticConfig from '@/config';
 
 export default function Dashboard() {
   const config = useDynamicFilters();
-  const [activeProductType, setActiveProductType] = useState<ProductType>('vm');
+  const [activeProductType, setActiveProductType] = useState<ProductType>('ai');
 
   const [filtersSynced, setFiltersSynced] = useState(false);
   useEffect(() => {
