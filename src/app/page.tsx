@@ -650,6 +650,10 @@ export default function Dashboard() {
           selectedStorageTiers={selectedStorageTiers}
           selectedStorageRedundancies={selectedStorageRedundancies}
           selectedStorageMedia={selectedStorageMedia}
+          selectedAppHostingTiers={selectedAppHostingTiers}
+          selectedAppHostingComputeTypes={selectedAppHostingComputeTypes}
+          selectedIntegrationCategories={selectedIntegrationCategories}
+          selectedIntegrationTiers={selectedIntegrationTiers}
           vCpuRange={vCpuRange}
           memoryRange={memoryRange}
           priceRange={priceRange}
@@ -703,6 +707,10 @@ export default function Dashboard() {
           onStorageTierToggle={(t) => toggleFilter(selectedStorageTiers, setSelectedStorageTiers, t)}
           onStorageRedundancyToggle={(r) => toggleFilter(selectedStorageRedundancies, setSelectedStorageRedundancies, r)}
           onStorageMediaToggle={(m) => toggleFilter(selectedStorageMedia, setSelectedStorageMedia, m)}
+          onAppHostingTierToggle={(t) => toggleFilter(selectedAppHostingTiers, setSelectedAppHostingTiers, t)}
+          onAppHostingComputeTypeToggle={(c) => toggleFilter(selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes, c)}
+          onIntegrationCategoryToggle={(c) => toggleFilter(selectedIntegrationCategories, setSelectedIntegrationCategories, c)}
+          onIntegrationTierToggle={(t) => toggleFilter(selectedIntegrationTiers, setSelectedIntegrationTiers, t)}
           onSetProviders={setSelectedProviders}
           onSetGeographies={setSelectedGeographies}
           onSetOS={setSelectedOS}
@@ -748,6 +756,10 @@ export default function Dashboard() {
           onSetStorageTiers={setSelectedStorageTiers}
           onSetStorageRedundancies={setSelectedStorageRedundancies}
           onSetStorageMedia={setSelectedStorageMedia}
+          onSetAppHostingTiers={setSelectedAppHostingTiers}
+          onSetAppHostingComputeTypes={setSelectedAppHostingComputeTypes}
+          onSetIntegrationCategories={setSelectedIntegrationCategories}
+          onSetIntegrationTiers={setSelectedIntegrationTiers}
           onVCpuRangeChange={setVCpuRange}
           onMemoryRangeChange={setMemoryRange}
           onPriceRangeChange={setPriceRange}

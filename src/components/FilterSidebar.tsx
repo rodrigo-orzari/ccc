@@ -223,6 +223,10 @@ interface FilterSidebarProps {
   selectedStorageTiers: string[];
   selectedStorageRedundancies: string[];
   selectedStorageMedia: string[];
+  selectedAppHostingTiers: string[];
+  selectedAppHostingComputeTypes: string[];
+  selectedIntegrationCategories: string[];
+  selectedIntegrationTiers: string[];
   vCpuRange: { min: number; max: number };
   memoryRange: { min: number; max: number };
   priceRange: { min: number; max: number };
@@ -277,6 +281,10 @@ interface FilterSidebarProps {
   onStorageTierToggle: (opt: string) => void;
   onStorageRedundancyToggle: (opt: string) => void;
   onStorageMediaToggle: (opt: string) => void;
+  onAppHostingTierToggle: (opt: string) => void;
+  onAppHostingComputeTypeToggle: (opt: string) => void;
+  onIntegrationCategoryToggle: (opt: string) => void;
+  onIntegrationTierToggle: (opt: string) => void;
   // Batch setters for Select All / Clear All
   onSetProviders: (items: string[]) => void;
   onSetGeographies: (items: string[]) => void;
@@ -323,6 +331,10 @@ interface FilterSidebarProps {
   onSetStorageTiers: (items: string[]) => void;
   onSetStorageRedundancies: (items: string[]) => void;
   onSetStorageMedia: (items: string[]) => void;
+  onSetAppHostingTiers: (items: string[]) => void;
+  onSetAppHostingComputeTypes: (items: string[]) => void;
+  onSetIntegrationCategories: (items: string[]) => void;
+  onSetIntegrationTiers: (items: string[]) => void;
   onVCpuRangeChange: (range: { min: number; max: number }) => void;
   onMemoryRangeChange: (range: { min: number; max: number }) => void;
   onPriceRangeChange: (range: { min: number; max: number }) => void;
@@ -379,6 +391,10 @@ export default function FilterSidebar({
   selectedStorageTiers,
   selectedStorageRedundancies,
   selectedStorageMedia,
+  selectedAppHostingTiers,
+  selectedAppHostingComputeTypes,
+  selectedIntegrationCategories,
+  selectedIntegrationTiers,
   vCpuRange,
   memoryRange,
   priceRange,
@@ -432,6 +448,10 @@ export default function FilterSidebar({
   onStorageTierToggle,
   onStorageRedundancyToggle,
   onStorageMediaToggle,
+  onAppHostingTierToggle,
+  onAppHostingComputeTypeToggle,
+  onIntegrationCategoryToggle,
+  onIntegrationTierToggle,
   onSetProviders,
   onSetGeographies,
   onSetOS,
@@ -477,6 +497,10 @@ export default function FilterSidebar({
   onSetStorageTiers,
   onSetStorageRedundancies,
   onSetStorageMedia,
+  onSetAppHostingTiers,
+  onSetAppHostingComputeTypes,
+  onSetIntegrationCategories,
+  onSetIntegrationTiers,
   onVCpuRangeChange,
   onMemoryRangeChange,
   onPriceRangeChange,
@@ -1106,43 +1130,92 @@ export default function FilterSidebar({
               onToggle={onStorageCategoryToggle}
               onSetAll={onSetStorageCategories}
               isExpanded={expanded.storageCategory ?? true}
-              onToggleExpand={() => onToggleSection('storageCategory')}
+              isExpanded={expanded['Storage Types'] ?? true}
+              onToggleExpand={() => onToggleExpand('Storage Types')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
-              title="Tier"
-              tooltip="Access tier: Standard (hot), Infrequent (cool), or Cold (archive)."
+              title="Storage Tiers"
+              tooltip="Performance and access frequency tiers"
               options={config.STORAGE_TIERS}
               selected={selectedStorageTiers}
               onToggle={onStorageTierToggle}
               onSetAll={onSetStorageTiers}
-              isExpanded={expanded.storageTier ?? true}
-              onToggleExpand={() => onToggleSection('storageTier')}
+              isExpanded={expanded['Storage Tiers'] ?? true}
+              onToggleExpand={() => onToggleExpand('Storage Tiers')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Redundancy"
-              tooltip="Replication scope: Single-Zone, Zone-Redundant, or Geo-Redundant."
+              tooltip="Data replication and redundancy strategy"
               options={config.STORAGE_REDUNDANCIES}
               selected={selectedStorageRedundancies}
               onToggle={onStorageRedundancyToggle}
               onSetAll={onSetStorageRedundancies}
-              isExpanded={expanded.storageRedundancy ?? true}
-              onToggleExpand={() => onToggleSection('storageRedundancy')}
+              isExpanded={expanded['Redundancy'] ?? true}
+              onToggleExpand={() => onToggleExpand('Redundancy')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
-              title="Media"
-              tooltip="Underlying media (SSD or HDD). Applies to block and some file storage."
+              title="Media Type"
+              tooltip="Underlying storage media"
               options={config.STORAGE_MEDIA}
               selected={selectedStorageMedia}
               onToggle={onStorageMediaToggle}
               onSetAll={onSetStorageMedia}
-              isExpanded={expanded.storageMedia ?? true}
-              onToggleExpand={() => onToggleSection('storageMedia')}
+              isExpanded={expanded['Media Type'] ?? true}
+              onToggleExpand={() => onToggleExpand('Media Type')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
-          </>
+          </div>
+        )}
+
+        {/* App Hosting Specific Filters */}
+        {activeProductType === 'app-hosting' && (
+          <div className="space-y-6">
+            <FilterSection
+              title="App Hosting Tiers"
+              tooltip="Pricing and capability tier of the hosting service"
+              options={config.APP_HOSTING_TIERS}
+              selected={selectedAppHostingTiers}
+              onToggle={onAppHostingTierToggle}
+              onSetAll={onSetAppHostingTiers}
+              isExpanded={expanded['App Hosting Tiers'] ?? true}
+              onToggleExpand={() => onToggleExpand('App Hosting Tiers')}
+            />
+            <FilterSection
+              title="Compute Type"
+              tooltip="Whether the underlying compute resources are shared or dedicated"
+              options={config.APP_HOSTING_COMPUTE_TYPES}
+              selected={selectedAppHostingComputeTypes}
+              onToggle={onAppHostingComputeTypeToggle}
+              onSetAll={onSetAppHostingComputeTypes}
+              isExpanded={expanded['Compute Type'] ?? true}
+              onToggleExpand={() => onToggleExpand('Compute Type')}
+            />
+          </div>
+        )}
+
+        {/* Integration Specific Filters */}
+        {activeProductType === 'integration' && (
+          <div className="space-y-6">
+            <FilterSection
+              title="Integration Categories"
+              tooltip="Type of integration service"
+              options={config.INTEGRATION_CATEGORIES}
+              selected={selectedIntegrationCategories}
+              onToggle={onIntegrationCategoryToggle}
+              onSetAll={onSetIntegrationCategories}
+              isExpanded={expanded['Integration Categories'] ?? true}
+              onToggleExpand={() => onToggleExpand('Integration Categories')}
+            />
+            <FilterSection
+              title="Integration Tiers"
+              tooltip="Performance and capability tier"
+              options={config.INTEGRATION_TIERS}
+              selected={selectedIntegrationTiers}
+              onToggle={onIntegrationTierToggle}
+              onSetAll={onSetIntegrationTiers}
+              isExpanded={expanded['Integration Tiers'] ?? true}
+              onToggleExpand={() => onToggleExpand('Integration Tiers')}
+            />
+          </div>
         )}
 
         {/* Data Analytics filters */}
