@@ -116,3 +116,11 @@ export const STORAGE_CATEGORIES: string[] = ['Block', 'File', 'Object', 'Archive
 export const STORAGE_REDUNDANCIES: string[] = ['LRS', 'ZRS', 'GRS', 'RA-GRS', 'GZRS', 'RA-GZRS', 'Multi-AZ', 'Single-AZ', 'Cross-Region'];
 export const STORAGE_MEDIA: string[] = ['HDD', 'SSD', 'NVMe', 'Magnetic'];
 export const STORAGE_TIERS: string[] = ['Hot', 'Cool', 'Cold', 'Archive', 'Standard', 'Premium', 'Intelligent-Tiering', 'Glacier'];
+
+// --- APP HOSTING ---
+export const APP_HOSTING_TIERS: string[] = ['Basic', 'Standard', 'Premium', 'Professional', 'Shared', 'Dedicated'];
+export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
+
+// --- INTEGRATION ---
+export const INTEGRATION_TYPES: string[] = ['Message Queue', 'Event Bus', 'API Gateway', 'Workflow'];
+export const INTEGRATION_TIERS: string[] = ['Standard', 'Premium', 'FIFO', 'Basic'];

@@ -5,9 +5,11 @@ import type { ProductType } from '@/types';
 
 const PRODUCT_TYPES: { id: ProductType; label: string; emoji: string; soon?: boolean }[] = [
   { id: 'ai', label: 'Artificial Intelligence', emoji: '🧠' },
+  { id: 'app-hosting', label: 'App Hosting', emoji: '🚀' },
   { id: 'containers', label: 'Containers', emoji: '📦' },
   { id: 'data-analytics', label: 'Data & Analytics', emoji: '📊' },
   { id: 'database', label: 'Databases', emoji: '🗄️' },
+  { id: 'integration', label: 'Integration', emoji: '🔗' },
   { id: 'networking', label: 'Networking', emoji: '🌐' },
   { id: 'serverless', label: 'Serverless', emoji: '⚡' },
   { id: 'storage', label: 'Storage', emoji: '💾' },
