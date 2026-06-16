@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "next-env.d.ts": {
-    "mtime": 1781578604.3185616,
-    "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
+    "mtime": 1781583690.6780152,
+    "ast_hash": "2a74d3909800ca5467fa83b0ab4a4890",
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1781567897.675949,
-    "ast_hash": "9d59391cbc644afdd60b890d6e3b12bf",
+    "mtime": 1781583654.5677433,
+    "ast_hash": "b03021ac55b0215fbbd266aef92b5541",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1781582021.8504493,
-    "ast_hash": "3b6f253a99c1affa91b048af73b6b375",
+    "mtime": 1781583682.8718066,
+    "ast_hash": "3bb0e11689b98c8e82e510964b23c646",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
