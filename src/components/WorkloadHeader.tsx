@@ -6,6 +6,16 @@ import Link from 'next/link';
 const SITE_URL = 'https://comparecloudcosts.com';
 const SHARE_TEXT = 'Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba. #FinOps #CCC';
 
+// Resolve the absolute URL to share. On a detail page with query params this captures
+// the user's exact configuration so the recipient lands on the same scale/region/pricing.
+// Falls back to the canonical site URL when running in SSR or before hydration.
+function getShareUrl(): string {
+  if (typeof window === 'undefined') return SITE_URL;
+  const { pathname, search } = window.location;
+  // Always pin the host to the canonical domain — preview/staging hostnames shouldn't leak.
+  return `${SITE_URL}${pathname}${search}`;
+}
+
 function LinkedInIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -24,38 +34,53 @@ function XIcon() {
 
 export function WorkloadHeader() {
   const shareOnLinkedIn = () => {
-    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE_URL)}`;
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(getShareUrl())}`;
     window.open(url, '_blank', 'noopener,noreferrer,width=600,height=600');
   };
-
   const shareOnX = () => {
-    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}`;
+    // X strips repeated URLs, so include the configured link explicitly so the deep
+    // link is what recipients click rather than the bare domain in SHARE_TEXT.
+    const text = `${SHARE_TEXT}\n${getShareUrl()}`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank', 'noopener,noreferrer,width=600,height=400');
   };
 
   return (
-    <header className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38] h-[44px] px-[1.5rem] flex justify-between items-center w-full">
-      <Link 
-        href="/" 
-        className="hover:opacity-80 transition-opacity flex items-center gap-1"
-        style={{ textDecoration: 'none' }}
-      >
-        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text, #111827)', letterSpacing: '-0.01em' }} className="dark:text-[#f1f5f9]">
-          &larr; Compare Cloud Costs
+    <div className="h-[44px] border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e] flex items-center px-[1.5rem] shrink-0">
+      <div className="flex items-center gap-6 flex-1 min-w-0">
+        <Link
+          href="/"
+          className="flex items-center gap-2 px-3 py-1 rounded border border-transparent transition-all text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100"
+          style={{ textDecoration: 'none' }}
+        >
+          <span className="text-xs font-medium flex items-center gap-1.5">← Pricing Tables</span>
+        </Link>
+        <span
+          className="flex items-center gap-2 px-3 py-1 rounded border border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm cursor-default"
+        >
+          <span className="text-xs font-bold flex items-center gap-1.5">📦 Workloads</span>
         </span>
-      </Link>
-      
-      <div className="flex items-center gap-2">
-        <span style={{ fontSize: 10, fontWeight: 500, color: '#6b7280', whiteSpace: 'nowrap' }} className="hidden sm:inline dark:text-[#71717a]">
+      </div>
+
+      <div className="flex items-center gap-2 ml-4 shrink-0">
+        <span className="text-[10px] font-medium text-[#737373] dark:text-[#a3a3a3] whitespace-nowrap hidden sm:inline">
           Share with friends and family
         </span>
-        <button onClick={shareOnLinkedIn} className="text-[#6b7280] hover:text-[#0A66C2] dark:text-[#71717a] transition-colors bg-transparent border-none cursor-pointer flex items-center p-0" title="Share on LinkedIn">
+        <button
+          onClick={shareOnLinkedIn}
+          title="Share on LinkedIn"
+          className="text-[#737373] dark:text-[#a3a3a3] hover:text-[#0A66C2] transition-colors flex items-center bg-transparent border-none cursor-pointer p-0"
+        >
           <LinkedInIcon />
         </button>
-        <button onClick={shareOnX} className="text-[#6b7280] hover:text-[#111827] dark:hover:text-[#f1f5f9] dark:text-[#71717a] transition-colors bg-transparent border-none cursor-pointer flex items-center p-0" title="Share on X">
+        <button
+          onClick={shareOnX}
+          title="Share on X"
+          className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-[#f7f8ff] transition-colors flex items-center bg-transparent border-none cursor-pointer p-0"
+        >
           <XIcon />
         </button>
       </div>
-    </header>
+    </div>
   );
 }

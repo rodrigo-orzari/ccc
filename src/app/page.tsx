@@ -170,6 +170,22 @@ export default function Dashboard() {
   const [memoryRange, setMemoryRange] = useState({ ...config.DEFAULT_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...config.DEFAULT_PRICE_RANGE });
   const [search, setSearch] = useState('');
+
+  // Seed product type / provider / search from URL params so deep links from the
+  // workloads pages (and shared URLs) land on a pre-filtered view.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const sp = new URLSearchParams(window.location.search);
+    const product = sp.get('product') as ProductType | null;
+    if (product && product !== activeProductType) setActiveProductType(product);
+    const provider = sp.get('provider');
+    if (provider) setSelectedProviders(provider.split(',').filter(Boolean));
+    const q = sp.get('search');
+    if (q) setSearch(q);
+    // Run only on initial mount; subsequent navigations are driven by user state.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const [showAggregation, setShowAggregation] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: keyof PricingRecord | string; direction: 'asc' | 'desc' }>({
     key: 'price_per_unit',

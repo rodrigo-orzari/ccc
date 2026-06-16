@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       
       for (const provider of providers) {
         let conditions = [
-          sql`pr.provider = ${provider}`,
+          sql`p.slug = ${provider}`,
           sql`s.category = ${dbCategory}`
         ];
 
@@ -60,6 +60,7 @@ export async function POST(request: Request) {
         const match = await sql`
           SELECT pr.* FROM pricing_records pr
           JOIN services s ON pr.service_id = s.id
+          JOIN providers p ON s.provider_id = p.id
           WHERE ${conditionSnippet}
           ORDER BY pr.price_per_unit ASC LIMIT 1
         `;
