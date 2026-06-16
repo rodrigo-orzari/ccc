@@ -447,7 +447,8 @@ export default function StatusPage() {
                 );
 
                 return (
-                  <div key={provider.slug} id={provider.slug} className="provider-card" style={{ scrollMarginTop: '64px' }}>
+                  <React.Fragment key={provider.slug}>
+                  <div id={provider.slug} className="provider-card" style={{ scrollMarginTop: '64px' }}>
                     <div className="provider-header">
                       <div className="provider-header-left">
                         <a
@@ -507,10 +508,11 @@ export default function StatusPage() {
                         No pricing data found for this provider.
                       </div>
                     )}
-                    <BackToTop />
                   </div>
-                );
-              })}
+                  <BackToTop />
+                </React.Fragment>
+              );
+            })}
 
 
 

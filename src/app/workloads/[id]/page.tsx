@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Cell } from 'recharts';
 import { Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Footer, ProductTypeSelector } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
@@ -88,6 +89,7 @@ export default function WorkloadDetails() {
   const [loading, setLoading] = useState(true);
   const [region, setRegion] = useState('Global');
   const [pricingModel, setPricingModel] = useState<'PAYG' | 'Yearly'>('PAYG');
+  const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');
   const [diagramExpanded, setDiagramExpanded] = useState(false);
 
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -300,6 +302,20 @@ export default function WorkloadDetails() {
               </h2>
               <div className="flex items-center gap-3">
                 <span className="text-[10px] text-[#737373] hidden sm:inline">Cheapest match per component</span>
+                <div className="flex bg-[#f5f5f5] dark:bg-[#171717] p-0.5 rounded-lg border border-[#e5e5e5] dark:border-[#262626]">
+                  <button
+                    onClick={() => setViewMode('table')}
+                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
+                  >
+                    Table
+                  </button>
+                  <button
+                    onClick={() => setViewMode('charts')}
+                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
+                  >
+                    Chart
+                  </button>
+                </div>
                 <button
                   onClick={handleExport}
                   disabled={!results}
@@ -314,6 +330,33 @@ export default function WorkloadDetails() {
             {loading && !results ? (
               <div className="flex items-center justify-center min-h-[240px]">
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black dark:border-white"></div>
+              </div>
+            ) : viewMode === 'charts' ? (
+              <div className="p-6 h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart 
+                    data={PROVIDER_IDS.map(p => {
+                      const pData = results && results[p];
+                      if (!pData || pData.total === 0 || pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available')) return null;
+                      return {
+                        provider: providerName(p),
+                        total: pData.total * multiplier,
+                        fill: providerColor(p)
+                      };
+                    }).filter(Boolean)} 
+                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
+                    <XAxis dataKey="provider" tick={{ fill: '#888', fontSize: 12 }} />
+                    <YAxis tick={{ fill: '#888', fontSize: 12 }} tickFormatter={(val) => `$${val}`} />
+                    <RechartsTooltip cursor={{ fill: 'rgba(255, 255, 255, 0.05)' }} contentStyle={{ backgroundColor: '#111', borderColor: '#333', color: '#fff', borderRadius: 8 }} itemStyle={{ color: '#fff', fontWeight: 'bold' }} formatter={(val: number) => [`$${val.toFixed(2)}`, 'Total']} />
+                    <Bar dataKey="total" radius={[4, 4, 0, 0]}>
+                      {PROVIDER_IDS.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={providerColor(entry)} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
               </div>
             ) : (
               <div className="overflow-x-auto flex-1">

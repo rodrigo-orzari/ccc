@@ -65,10 +65,10 @@ export function DonationModal() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div className="bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-xl shadow-2xl p-6 max-w-md w-full relative">
-        <h2 className="text-xl font-bold text-black dark:text-white mb-4">Support Compare Cloud Costs ❤️</h2>
+        <h2 className="text-xl font-bold text-black dark:text-white mb-4">Support comparecloudcosts.com ❤️</h2>
         
         <p className="text-sm text-[#404040] dark:text-[#a3a3a3] mb-4 leading-relaxed">
-          You can help us keep Compare Cloud Costs as a free offering by making a <strong>$3.99 donation</strong>. 
+          You can help us keep comparecloudcosts.com as a free offering by making a <strong>$3.99 donation</strong>. 
           This takes over the costs of the API tokens, as well as the cloud computing infrastructure keeping this site alive.
         </p>
 

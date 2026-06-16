@@ -19,13 +19,13 @@ _Last updated: 15 June 2026._
 
 ## Agreement to Terms
 
-By accessing and using Compare Cloud Costs, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+By accessing and using comparecloudcosts.com, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
 
 [↑ Go back to the top](#terms-of-use)
 
 ## Use License
 
-Permission is granted to temporarily download one copy of the materials (information or software) on Compare Cloud Costs for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+Permission is granted to temporarily download one copy of the materials (information or software) on comparecloudcosts.com for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
 
 - Modify or copy the materials
 - Use the materials for any commercial purpose or for any public display
@@ -37,31 +37,31 @@ Permission is granted to temporarily download one copy of the materials (informa
 
 ## Disclaimer
 
-The materials on Compare Cloud Costs are provided on an 'as is' basis. Compare Cloud Costs makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+The materials on comparecloudcosts.com are provided on an 'as is' basis. comparecloudcosts.com makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
 
 [↑ Go back to the top](#terms-of-use)
 
 ## Limitations
 
-In no event shall Compare Cloud Costs or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Compare Cloud Costs, even if Compare Cloud Costs or an authorized representative has been notified orally or in writing of the possibility of such damage.
+In no event shall comparecloudcosts.com or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on comparecloudcosts.com, even if comparecloudcosts.com or an authorized representative has been notified orally or in writing of the possibility of such damage.
 
 [↑ Go back to the top](#terms-of-use)
 
 ## Accuracy of Materials
 
-The materials appearing on Compare Cloud Costs could include technical, typographical, or photographic errors. Compare Cloud Costs does not warrant that any of the materials on its website are accurate, complete, or current. Compare Cloud Costs may make changes to the materials contained on its website at any time without notice.
+The materials appearing on comparecloudcosts.com could include technical, typographical, or photographic errors. comparecloudcosts.com does not warrant that any of the materials on its website are accurate, complete, or current. comparecloudcosts.com may make changes to the materials contained on its website at any time without notice.
 
 [↑ Go back to the top](#terms-of-use)
 
 ## Links
 
-Compare Cloud Costs has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Compare Cloud Costs of the site. Use of any such linked website is at the user's own risk.
+comparecloudcosts.com has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by comparecloudcosts.com of the site. Use of any such linked website is at the user's own risk.
 
 [↑ Go back to the top](#terms-of-use)
 
 ## Modifications
 
-Compare Cloud Costs may revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.
+comparecloudcosts.com may revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.
 
 [↑ Go back to the top](#terms-of-use)
 
@@ -95,7 +95,7 @@ The Workloads section provides hypothetical architectures to illustrate relative
 
 ### Voluntary Donations
 
-This project accepts voluntary donations to help cover infrastructure and API costs. All donations are processed by third-party payment providers (e.g., Intuit). Donations are non-refundable, strictly voluntary, and do not constitute a purchase of services, nor do they guarantee future uptime, feature development, or service availability of the Compare Cloud Costs platform.
+This project accepts voluntary donations to help cover infrastructure and API costs. All donations are processed by third-party payment providers (e.g., Intuit). Donations are non-refundable, strictly voluntary, and do not constitute a purchase of services, nor do they guarantee future uptime, feature development, or service availability of the comparecloudcosts.com platform.
 
 ### Official Pricing Calculators
 

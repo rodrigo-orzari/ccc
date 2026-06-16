@@ -30,7 +30,7 @@ export default function WorkloadsCatalog() {
                 <li key={w.id}>
                   <Link
                     href={`/workloads/${w.id}`}
-                    className="flex items-center gap-2 text-[11px] font-bold text-[#737373] hover:text-black dark:hover:text-white transition-colors line-clamp-1 uppercase tracking-wider"
+                    className="flex items-center gap-2 text-[13px] font-medium text-[#171717] dark:text-[#e5e7eb] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
                     title={w.name}
                     style={{ textDecoration: 'none' }}
                   >

@@ -15,7 +15,7 @@ const headingToId = (children: React.ReactNode): string => {
 
 const AboutPage: React.FC = () => {
   const content = `
-Compare Cloud Costs (CCC) is a comprehensive platform designed to demystify cloud pricing across the industry's leading providers. By normalizing complex billing metrics into side-by-side comparisons, CCC empowers users to make data-driven infrastructure decisions, optimize their cloud spend, and confidently navigate a multi-cloud strategy before committing to a specific architecture.
+comparecloudcosts.com (CCC) is a comprehensive platform designed to demystify cloud pricing across the industry's leading providers. By normalizing complex billing metrics into side-by-side comparisons, CCC empowers users to make data-driven infrastructure decisions, optimize their cloud spend, and confidently navigate a multi-cloud strategy before committing to a specific architecture.
 
 [↑ Go back to the top](#about-us)
 
@@ -35,7 +35,7 @@ Furthermore, the modern landscape is increasingly multi-cloud. Companies run wor
 
 ## Features
 
-Compare Cloud Costs (CCC) was built to bridge the gap between complex provider rate cards and actionable business intelligence.
+comparecloudcosts.com (CCC) was built to bridge the gap between complex provider rate cards and actionable business intelligence.
 
 ### Side-by-Side Multi-Cloud Analysis
 
@@ -78,7 +78,7 @@ Cloud consultants and architects use CCC as a foundational tool during the disco
 
 Hi, I'm **Rodrigo Orzari** ([Connect with me on LinkedIn](https://www.linkedin.com/in/rodrigoorzari/)). 
 
-I built Compare Cloud Costs as a passion project to deepen my understanding of modern tech stacks and artificial intelligence—transitioning from "vibe-coding" to actively integrating AI into production-grade applications. 
+I built comparecloudcosts.com as a passion project to deepen my understanding of modern tech stacks and artificial intelligence—transitioning from "vibe-coding" to actively integrating AI into production-grade applications. 
 
 The core motivation behind this tool was to solve a very specific, painful problem for the professionals mentioned above. Instead of forcing IT leaders, sales reps, and consultants to manually hunt down prices across every individual cloud provider's rate card, I wanted to provide a seamless, "apples-to-apples" comparison. CCC makes it significantly easier to navigate complex pricing models and make informed architectural choices without the headache of manual spreadsheet normalization.
 
