@@ -360,5 +360,74 @@ export const WORKLOADS: WorkloadDefinition[] = [
         }
       }
     ]
+  },
+  {
+    id: 'data-warehouse-bi',
+    name: 'Data Warehouse & BI Analytics',
+    description: 'A centralized data repository coupled with an analytics engine and BI compute nodes for large-scale reporting and insights.',
+    icon: '📊',
+    parameters: [
+      {
+        id: 'datasetSizeGB',
+        label: 'Data Lake Storage',
+        type: 'slider',
+        min: 100,
+        max: 50000,
+        step: 100,
+        defaultValue: 1000,
+        unit: 'GB'
+      },
+      {
+        id: 'biComputeCores',
+        label: 'BI Compute Cores',
+        type: 'slider',
+        min: 2,
+        max: 32,
+        step: 2,
+        defaultValue: 4,
+        unit: 'vCPU'
+      }
+    ],
+    components: [
+      {
+        id: 'data-warehouse',
+        name: 'Data Warehouse',
+        description: 'Columnar analytics engine',
+        icon: '🗄️',
+        getRequirements: (params) => {
+          return {
+            productType: 'data-analytics',
+            quantity: 1
+          };
+        }
+      },
+      {
+        id: 'data-lake',
+        name: 'Object Storage',
+        description: 'Raw data staging',
+        icon: '🪣',
+        getRequirements: (params) => {
+          return {
+            productType: 'storage',
+            category: 'Object',
+            quantity: 1
+          };
+        }
+      },
+      {
+        id: 'bi-compute',
+        name: 'BI Visualization Node',
+        description: 'Compute instance for dashboards',
+        icon: '📈',
+        getRequirements: (params) => {
+          return {
+            productType: 'vm',
+            minVcpus: params.biComputeCores,
+            minMemoryGb: params.biComputeCores * 2,
+            quantity: 1
+          };
+        }
+      }
+    ]
   }
 ];

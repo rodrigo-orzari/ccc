@@ -5,7 +5,7 @@ import { WORKLOADS } from '@/config/workloads';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { workloadId, parameters } = body;
+    const { workloadId, parameters, region } = body;
 
     const workload = WORKLOADS.find((w) => w.id === workloadId);
     if (!workload) {
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
     for (const component of workload.components) {
       const reqs = component.getRequirements(parameters || {});
-      const dbCategory = reqs.productType === 'vm' ? 'compute' : reqs.productType;
+      const dbCategory = reqs.productType === 'vm' ? 'compute' : reqs.productType === 'data-analytics' ? 'data_warehouse' : reqs.productType;
       
       for (const provider of providers) {
         let conditions = [
@@ -35,6 +35,21 @@ export async function POST(request: Request) {
         }
         if (reqs.category) {
           conditions.push(sql`pr.category ILIKE ${'%' + reqs.category + '%'}`);
+        }
+        
+        if (region && region !== 'Global') {
+          let regionTerms = [region.toLowerCase(), 'global'];
+          const lowerRegion = region.toLowerCase();
+          if (lowerRegion.includes('n. america') || lowerRegion === 'us') {
+            regionTerms.push('us east', 'us west', 'us central', 'us south', 'us-east', 'us-west', 'canada', 'north america', 'us');
+          } else if (lowerRegion.includes('europe') || lowerRegion === 'eu') {
+            regionTerms.push('europe', 'eu-west', 'eu-central', 'eu-north', 'uk', 'ireland', 'frankfurt', 'london', 'paris', 'eu');
+          } else if (lowerRegion.includes('asia') || lowerRegion === 'apac') {
+            regionTerms.push('asia', 'apac', 'tokyo', 'singapore', 'sydney', 'mumbai', 'seoul', 'osaka', 'hong kong');
+          } else if (lowerRegion.includes('south america') || lowerRegion === 'sa') {
+            regionTerms.push('south america', 'sa-east', 'sao paulo');
+          }
+          conditions.push(sql`LOWER(pr.geography) = ANY(${regionTerms})`);
         }
 
         const conditionSnippet = conditions.reduce((acc, condition, index) => {
