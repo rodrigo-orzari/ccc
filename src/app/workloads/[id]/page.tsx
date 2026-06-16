@@ -219,9 +219,10 @@ export default function WorkloadDetails() {
   const multiplier = pricingModel === 'Yearly' ? 12 : 1;
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans">
+    <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
       <ProductTypeSelector activeProductType={"workloads" as any} />
 
+      <div className="flex-1 overflow-auto flex flex-col">
       {/* Workload identity strip — content aligns with the main grid's max-width
           so the title sits flush with the architecture/comparison boxes below. */}
       <div className="border-b border-[#e5e5e5] dark:border-[#262626]">
@@ -246,7 +247,7 @@ export default function WorkloadDetails() {
           {/* Tables */}
           <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
           {/* Combined Configuration + Cost table */}
-          <div className="border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
+          <div className="flex flex-col flex-1 border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
             <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-3">
               <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
                 {pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Comparison
@@ -269,8 +270,8 @@ export default function WorkloadDetails() {
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-black dark:border-white"></div>
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
+              <div className="overflow-x-auto flex-1">
+                <table className="w-full h-full text-left border-collapse">
                   <thead className="bg-[#f5f5f5] dark:bg-[#171717]">
                     <tr className="border-b border-[#e5e5e5] dark:border-[#262626]">
                       <th className="py-3 px-4 text-center">
@@ -480,6 +481,8 @@ export default function WorkloadDetails() {
       <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-8 text-[11px] text-[#737373] leading-relaxed">
         <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
         This calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for workload sizing.
+      </div>
+
       </div>
 
       <Footer />
