@@ -58,8 +58,8 @@ export default function ProductTypeSelector({
   };
 
   return (
-    <div className="h-[44px] sticky top-0 z-50 border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e] flex items-center px-[1.5rem] overflow-x-auto no-scrollbar shrink-0">
-      <div className="flex items-center gap-6 flex-1 min-w-0">
+    <div className="h-[44px] sticky top-0 z-50 border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e] flex items-center justify-center px-[1.5rem] overflow-x-auto no-scrollbar shrink-0">
+      <div className="flex items-center gap-6 min-w-0 justify-center">
         {PRODUCT_TYPES.map(product => {
           const href = `/?product=${product.id === 'vm' ? 'compute' : product.id}`;
           return (
@@ -95,10 +95,10 @@ export default function ProductTypeSelector({
             </Link>
           );
         })}
-        
+
         <Link
           href="/workloads"
-          className={`flex items-center gap-2 px-3 py-1 rounded border transition-all shrink-0 ${
+          className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
             activeProductType === 'workloads' as any
               ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm border-[#dde0f0] dark:border-[#1e1e38] cursor-default'
               : 'border-transparent text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100'
@@ -109,26 +109,6 @@ export default function ProductTypeSelector({
             📦 Workloads
           </span>
         </Link>
-      </div>
-
-      <div className="flex items-center gap-2 ml-4 shrink-0">
-        <span className="text-[10px] font-medium text-[#737373] dark:text-[#a3a3a3] whitespace-nowrap hidden sm:inline">
-          Share with friends and family
-        </span>
-        <button
-          onClick={shareOnLinkedIn}
-          title="Share on LinkedIn"
-          className="text-[#737373] dark:text-[#a3a3a3] hover:text-[#0A66C2] transition-colors flex items-center"
-        >
-          <LinkedInIcon />
-        </button>
-        <button
-          onClick={shareOnX}
-          title="Share on X"
-          className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-[#f7f8ff] transition-colors flex items-center"
-        >
-          <XIcon />
-        </button>
       </div>
     </div>
   );
