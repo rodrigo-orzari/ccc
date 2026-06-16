@@ -34,24 +34,27 @@ export function WorkloadHeader() {
   };
 
   return (
-    <header className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38] h-[44px] px-6 flex justify-between items-center text-sm">
+    <header className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38] h-[44px] px-[1.5rem] flex justify-between items-center w-full">
       <Link 
         href="/" 
-        className="font-bold text-[#111827] dark:text-[#f1f5f9] hover:opacity-80 transition-opacity flex items-center gap-2"
+        className="hover:opacity-80 transition-opacity flex items-center gap-1"
+        style={{ textDecoration: 'none' }}
       >
-        <span className="text-lg">&larr;</span> Compare Cloud Costs
+        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text, #111827)', letterSpacing: '-0.01em' }} className="dark:text-[#f1f5f9]">
+          &larr; Compare Cloud Costs
+        </span>
       </Link>
       
-      <div className="flex items-center gap-4 text-[#6b7280] dark:text-[#71717a]">
-        <span className="hidden sm:inline font-medium">Share with friends and family</span>
-        <div className="flex items-center gap-3">
-          <button onClick={shareOnLinkedIn} className="hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors" title="Share on LinkedIn">
-            <LinkedInIcon />
-          </button>
-          <button onClick={shareOnX} className="hover:text-[#111827] dark:hover:text-[#f1f5f9] transition-colors" title="Share on X">
-            <XIcon />
-          </button>
-        </div>
+      <div className="flex items-center gap-2">
+        <span style={{ fontSize: 10, fontWeight: 500, color: '#6b7280', whiteSpace: 'nowrap' }} className="hidden sm:inline dark:text-[#71717a]">
+          Share with friends and family
+        </span>
+        <button onClick={shareOnLinkedIn} className="text-[#6b7280] hover:text-[#0A66C2] dark:text-[#71717a] transition-colors bg-transparent border-none cursor-pointer flex items-center p-0" title="Share on LinkedIn">
+          <LinkedInIcon />
+        </button>
+        <button onClick={shareOnX} className="text-[#6b7280] hover:text-[#111827] dark:hover:text-[#f1f5f9] dark:text-[#71717a] transition-colors bg-transparent border-none cursor-pointer flex items-center p-0" title="Share on X">
+          <XIcon />
+        </button>
       </div>
     </header>
   );

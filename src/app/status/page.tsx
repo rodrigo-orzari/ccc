@@ -295,7 +295,7 @@ export default function StatusPage() {
       <div className="status-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         
       {/* Fixed Global Nav */}
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '0 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '44px' }}>
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '44px' }}>
         <Link href="/" style={{ textDecoration: 'none' }}>
           <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.01em' }}>
             ← Compare Cloud Costs
