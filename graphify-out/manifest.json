@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1781571402.507891,
-    "ast_hash": "0b5278e313d4234b91c33a024290bef3",
+    "mtime": 1781571417.7029378,
+    "ast_hash": "69e47403a304bebc551cdea7426c5f6d",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1781571317.0354407,
-    "ast_hash": "e3e07e0e64ebbd4f3612843738176846",
+    "mtime": 1781571424.2774034,
+    "ast_hash": "4a0202b48947372786ea97b54a19c613",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
