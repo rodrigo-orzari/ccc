@@ -53,13 +53,16 @@ export function WorkloadHeader() {
           className="flex items-center gap-2 px-3 py-1 rounded border border-transparent transition-all text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100"
           style={{ textDecoration: 'none' }}
         >
-          <span className="text-xs font-medium flex items-center gap-1.5">← Pricing Tables</span>
+          <span className="text-xs font-medium flex items-center gap-1.5">← Compare Cloud Costs</span>
         </Link>
-        <span
-          className="flex items-center gap-2 px-3 py-1 rounded border border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm cursor-default"
+        <Link
+          href="/workloads"
+          className="flex items-center gap-2 px-3 py-1 rounded border border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm hover:opacity-80 transition-opacity"
+          style={{ textDecoration: 'none' }}
+          title="Back to the Workloads catalog"
         >
           <span className="text-xs font-bold flex items-center gap-1.5">📦 Workloads</span>
-        </span>
+        </Link>
       </div>
 
       <div className="flex items-center gap-2 ml-4 shrink-0">
