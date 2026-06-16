@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import { Download } from 'lucide-react';
 import { Footer, WorkloadHeader } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { WorkloadDefinition } from '@/types';
@@ -53,7 +54,7 @@ function ArchitectureStrip({ workload, expanded, onToggle }: { workload: Workloa
         className="w-full px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between text-left bg-transparent hover:bg-[#fafafa] dark:hover:bg-[#0a0a0a] transition-colors"
       >
         <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-          Full Stack Architecture
+          Architecture Diagram
         </h2>
         <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
           {expanded ? 'Hide ▲' : 'Show ▼'}
@@ -256,9 +257,9 @@ export default function WorkloadDetails() {
                   onClick={handleExport}
                   disabled={!results}
                   title="Export the comparison as CSV"
-                  className="px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest border border-[#e5e5e5] dark:border-[#262626] bg-[#f5f5f5] dark:bg-[#171717] text-[#171717] dark:text-[#e5e7eb] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#f5f5f5] disabled:hover:text-[#171717]"
+                  className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#dde0f0] dark:border-[#1e1e38] px-3 py-1.5 rounded hover:bg-[#dde0f0] dark:hover:bg-[#1e1e38] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Export CSV
+                  <Download size={12} /> Export
                 </button>
               </div>
             </div>
@@ -364,6 +365,33 @@ export default function WorkloadDetails() {
             )}
           </div>
 
+          {/* Workload Carousel */}
+          <div className="mt-8 border-t border-[#e5e5e5] dark:border-[#262626] pt-8">
+            <div className="flex items-center justify-between mb-4 px-2">
+              <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                Explore Other Workloads
+              </h3>
+              <Link href="/workloads" className="text-[10px] font-bold text-black dark:text-white uppercase tracking-widest hover:underline">
+                View All →
+              </Link>
+            </div>
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4">
+              {WORKLOADS.filter(w => w.id !== id).map(w => (
+                <Link
+                  key={w.id}
+                  href={`/workloads/${w.id}`}
+                  className="snap-start shrink-0 w-[260px] p-4 bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded flex flex-col gap-2 hover:border-[#a3a3a3] dark:hover:border-[#404040] transition-colors"
+                >
+                  <div className="text-2xl mb-1">{w.icon}</div>
+                  <h4 className="text-sm font-bold text-black dark:text-white leading-tight">{w.name}</h4>
+                  <p className="text-[11px] text-[#737373] line-clamp-2 leading-relaxed">
+                    {w.description}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+
         </div>
 
         {/* Configuration panel — mirrors FilterSidebar chip patterns */}
@@ -388,7 +416,7 @@ export default function WorkloadDetails() {
                 ))}
               </div>
               <p className="text-[10px] text-[#737373] leading-relaxed">
-                PAYG shows monthly on-demand cost. Yearly multiplies by 12 (no committed-use discounts).
+                PAYG shows monthly on-demand cost. Yearly are committed-use discounts.
               </p>
             </section>
 
@@ -449,7 +477,7 @@ export default function WorkloadDetails() {
       {/* Disclaimer — plain text, no box, so it reads as fine-print not a feature panel. */}
       <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-8 text-[11px] text-[#737373] leading-relaxed">
         <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
-        This calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for production sizing.
+        This calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for workload sizing.
       </div>
 
       <Footer />

@@ -198,6 +198,9 @@ const DocsPage: React.FC = () => {
                 </ul>
               </li>
               <li>
+                <a href="#workloads" style={{ padding: '3px 0' }}>Workloads</a>
+              </li>
+              <li>
                 <a href="#pricing-data" style={{ padding: '3px 0' }}>Pricing Data</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
                   <li><a href="#sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Sources</a></li>
@@ -284,6 +287,19 @@ const DocsPage: React.FC = () => {
               Covers managed data warehouse and analytics services (Redshift, BigQuery, Synapse,
               Snowflake, Databricks, and native cloud-provider offerings). Filter by engine,
               deployment type, and service tier.
+            </p>
+
+            <BackToTop />
+          </div>
+
+          {/* Workloads */}
+          <div className="docs-section">
+            <h2 id="workloads">Workloads</h2>
+            <p>
+              The Workloads feature allows you to price end-to-end cloud architectures instead of just individual components. We've defined common application patterns (like a 3-Tier Web App or a Data Processing Pipeline) and their component requirements.
+            </p>
+            <p>
+              By adjusting scale parameters like traffic or data volume, the tool automatically calculates the necessary resource specs (e.g. vCPUs, Memory) and queries the cheapest matching general-purpose instances across AWS, Azure, GCP, DigitalOcean, Oracle, and Alibaba.
             </p>
 
             <BackToTop />
