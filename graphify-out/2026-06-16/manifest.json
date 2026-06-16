@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1781587736.5801435,
-    "ast_hash": "86b0c25f7f523ea4a9fe61590db0767f",
+    "mtime": 1781627394.60535,
+    "ast_hash": "5ce7e143a879a4c5afe4e0078a4f3075",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1781587736.5975914,
-    "ast_hash": "25322a447e578ac905d94589acb2df41",
+    "mtime": 1781627374.5654075,
+    "ast_hash": "d0936e88a8d3e5954b54d1c4b4d475bd",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
