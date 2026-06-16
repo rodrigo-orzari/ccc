@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 155 files · ~111,785 words
+- 156 files · ~112,117 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 535 nodes · 719 edges · 60 communities (32 shown, 28 thin omitted)
+- 540 nodes · 728 edges · 61 communities (33 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `53571c6b`
+- Built from commit: `612bc761`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,7 +66,7 @@
 - [[_COMMUNITY_Community 62|Community 62]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `BaseAdapter` - 16 edges
+1. `BaseAdapter` - 17 edges
 2. `Serverless Language Filter Implementation Summary` - 13 edges
 3. `Welcome!` - 10 edges
 4. `buildPricingFilters()` - 9 edges
@@ -75,7 +75,7 @@
 7. `DigitalOceanAdapter` - 7 edges
 8. `NetworkingPricingPipeline` - 7 edges
 9. `GCPAdapter` - 6 edges
-10. `Status: ✅ COMPLETE` - 6 edges
+10. `PricingPipeline` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
@@ -92,7 +92,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (60 total, 28 thin omitted)
+## Communities (61 total, 28 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
@@ -124,7 +124,7 @@ Nodes (31): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, C
 
 ### Community 16 - "Community 16"
 Cohesion: 0.07
-Nodes (15): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig, AlibabaAnalyticsAdapter, DataAnalyticsPricingPipeline (+7 more)
+Nodes (17): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig (+9 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.50
@@ -179,7 +179,7 @@ Cohesion: 0.09
 Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PriceDriftResult (+2 more)
 
 ## Knowledge Gaps
-- **148 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design` (+143 more)
+- **148 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `NativeAnalyticsConfig`, `VALID_PRODUCT_TYPES`, `Live Deployment` (+143 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -187,12 +187,12 @@ Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanA
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 38`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
+  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+- **Why does `BaseAdapter` connect `Community 62` to `Community 16`?**
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
-  _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `AIPricingPipeline` connect `Community 27` to `Community 9`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `Live Deployment` to the rest of the system?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `NativeAnalyticsConfig` to the rest of the system?**
   _148 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._

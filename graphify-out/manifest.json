@@ -240,13 +240,13 @@
     "semantic_hash": ""
   },
   "src/services/data_analytics_pipeline.ts": {
-    "mtime": 1780804895.0557263,
-    "ast_hash": "48848b4aca11e1fd5bede70cacbade79",
+    "mtime": 1781584192.2142313,
+    "ast_hash": "2376147a31a72db1f74b3572c1bb1de4",
     "semantic_hash": ""
   },
   "src/config/native_analytics_instances.ts": {
-    "mtime": 1780606287.8509164,
-    "ast_hash": "130c48920db2fb07d53bc03fe6f30080",
+    "mtime": 1781584176.7547162,
+    "ast_hash": "09e5001861246b2ce000d427242bbb8a",
     "semantic_hash": ""
   },
   "fix_pipelines.js": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1781561281.5568135,
-    "ast_hash": "9705e348e3aea707093d9bf9c9a0d84a",
+    "mtime": 1781584118.1380014,
+    "ast_hash": "83f59c06fde5366ed5899026a69f3f08",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -375,8 +375,8 @@
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
-    "mtime": 1781567874.117734,
-    "ast_hash": "8f7235fec48c8d7c06991746a0041e55",
+    "mtime": 1781584367.5878532,
+    "ast_hash": "37204fa15aa7bff7bf23982fb8005576",
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
@@ -760,13 +760,13 @@
     "semantic_hash": ""
   },
   "src/app/api/workloads/route.ts": {
-    "mtime": 1781578702.861766,
-    "ast_hash": "d7af78ae1120848f8cd6f372bc66620c",
+    "mtime": 1781584085.8459997,
+    "ast_hash": "87dfc6e0a84931bab7d95261e4dd4047",
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1781583941.879275,
-    "ast_hash": "64b2bf414e0d9148b71a9b0335a61437",
+    "mtime": 1781584243.6268284,
+    "ast_hash": "622dda1a253afc77d6f9abdd1a9fb3e7",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -785,8 +785,13 @@
     "semantic_hash": ""
   },
   "query_db.ts": {
-    "mtime": 1781583894.17293,
-    "ast_hash": "abf70b89d4746d4e72ad726da4e50bcd",
+    "mtime": 1781584070.8547235,
+    "ast_hash": "dfc0f4efbe62b77484173637bbfc6db0",
+    "semantic_hash": ""
+  },
+  "fix_db_categories.ts": {
+    "mtime": 1781584308.3556986,
+    "ast_hash": "b0fa1dabba6d8580f37e67757a7fcced",
     "semantic_hash": ""
   }
 }
