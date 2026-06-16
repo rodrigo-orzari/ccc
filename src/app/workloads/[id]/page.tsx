@@ -355,8 +355,8 @@ export default function WorkloadDetails() {
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="overflow-x-scroll flex-1 scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700 scrollbar-track-transparent">
-                <table className="w-full h-full text-left border-collapse">
+              <div className="overflow-x-scroll flex-1 always-show-scrollbar">
+                <table className="w-full min-w-[900px] h-full text-left border-collapse">
                   <thead className="bg-[#f5f5f5] dark:bg-[#171717]">
                     <tr className="border-b border-[#e5e5e5] dark:border-[#262626]">
                       <th className="py-3 px-4 text-center">
