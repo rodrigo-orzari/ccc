@@ -25,8 +25,8 @@ export default function TableToolbar({
   onViewModeChange,
 }: TableToolbarProps) {
   return (
-    <div className="px-4 py-3 flex items-center justify-between bg-[#f7f8ff] dark:bg-[#06060f] border-b border-[#dde0f0] dark:border-[#1e1e38]">
-      <div className="flex items-center gap-6">
+    <div className="px-4 py-3 flex items-center bg-[#f7f8ff] dark:bg-[#06060f] border-b border-[#dde0f0] dark:border-[#1e1e38]">
+      <div className="flex items-center gap-6 flex-wrap">
         <span className="text-xl font-bold text-black dark:text-[#f7f8ff] shrink-0">
           {totalFilteredCount.toLocaleString()}
           {totalFilteredCount > dataLength && dataLength > 0 && (
@@ -45,35 +45,36 @@ export default function TableToolbar({
           />
         </div>
 
-        {viewMode === 'table' && (
-          <span className="text-[10px] text-[#a3a3a3] dark:text-[#525252] hidden sm:inline-block">Click a column header to sort</span>
-        )}
-      </div>
-      <div className="flex items-center gap-4">
-        {onViewModeChange && (
-          <div className="flex bg-[#dde0f0] dark:bg-[#1e1e38] rounded-lg p-0.5 border border-[#dde0f0] dark:border-[#1e1e38]">
-            <button
-              onClick={() => onViewModeChange('table')}
-              className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-black dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'}`}
-            >
-              🗄️ Table
-            </button>
-            <button
-              onClick={() => onViewModeChange('charts')}
-              className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-black dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'}`}
-            >
-              📊 Charts
-            </button>
-          </div>
-        )}
+        <div className="flex items-center gap-4">
+          {viewMode === 'table' && (
+            <span className="text-[10px] text-[#a3a3a3] dark:text-[#525252] hidden sm:inline-block">Click a column header to sort</span>
+          )}
+          
+          {onViewModeChange && (
+            <div className="flex bg-[#dde0f0] dark:bg-[#1e1e38] rounded-lg p-0.5 border border-[#dde0f0] dark:border-[#1e1e38]">
+              <button
+                onClick={() => onViewModeChange('table')}
+                className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-black dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'}`}
+              >
+                🗄️ Table
+              </button>
+              <button
+                onClick={() => onViewModeChange('charts')}
+                className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-black dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'}`}
+              >
+                📊 Charts
+              </button>
+            </div>
+          )}
 
-        <button
-          onClick={onExport}
-          disabled={dataLength === 0 || isExporting}
-          className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#dde0f0] dark:border-[#1e1e38] px-3 py-1.5 rounded hover:bg-[#dde0f0] dark:hover:bg-[#1e1e38] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <Download size={12} /> {isExporting ? 'Exporting...' : 'Export'}
-        </button>
+          <button
+            onClick={onExport}
+            disabled={dataLength === 0 || isExporting}
+            className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#dde0f0] dark:border-[#1e1e38] px-3 py-1.5 rounded hover:bg-[#dde0f0] dark:hover:bg-[#1e1e38] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Download size={12} /> {isExporting ? 'Exporting...' : 'Export'}
+          </button>
+        </div>
       </div>
     </div>
   );

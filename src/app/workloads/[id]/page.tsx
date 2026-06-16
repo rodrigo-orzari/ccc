@@ -43,47 +43,37 @@ function ProviderTh({ id }: { id: string }) {
   );
 }
 
-function ArchitectureStrip({ workload, expanded, onToggle }: { workload: WorkloadDefinition; expanded: boolean; onToggle: () => void }) {
-  // Horizontal flow chip strip — collapsible. Default collapsed so the comparison
-  // table is the first thing users see; the strip is a "what's in this workload"
-  // disclosure for those who care.
+function ArchitectureStrip({ workload }: { workload: WorkloadDefinition }) {
+  // Horizontal flow chip strip — always visible at the bottom.
   return (
     <div className="border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
-      <button
-        onClick={onToggle}
-        className="w-full px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between text-left bg-transparent hover:bg-[#fafafa] dark:hover:bg-[#0a0a0a] transition-colors"
-      >
+      <div className="w-full px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between text-left">
         <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
           Architecture Diagram
         </h2>
-        <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-          {expanded ? 'Hide ▲' : 'Show ▼'}
-        </span>
-      </button>
-      {expanded && (
-        <div className="px-5 py-5 overflow-x-auto">
-          {/* mx-auto + w-max centers the chip row within the box when content fits;
-              overflow-x-auto on the parent keeps long chains scrollable. */}
-          <div className="flex items-center gap-2 min-w-max w-max mx-auto">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-3 py-2 whitespace-nowrap">
-              Users / API
-            </span>
-            {workload.components.map((component) => (
-              <React.Fragment key={component.id}>
-                <span className="text-[#a3a3a3] dark:text-[#525252] text-xs">→</span>
-                <span className="flex items-center gap-2 bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-3 py-2 whitespace-nowrap" title={component.description}>
-                  <span className="text-sm">{component.icon}</span>
-                  <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{component.name}</span>
-                </span>
-              </React.Fragment>
-            ))}
-            <span className="text-[#a3a3a3] dark:text-[#525252] text-xs">→</span>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-3 py-2 whitespace-nowrap">
-              Result / Response
-            </span>
-          </div>
+      </div>
+      <div className="px-5 py-5 overflow-x-auto">
+        {/* mx-auto + w-max centers the chip row within the box when content fits;
+            overflow-x-auto on the parent keeps long chains scrollable. */}
+        <div className="flex items-center gap-2 min-w-max w-max mx-auto">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-3 py-2 whitespace-nowrap">
+            Users / API
+          </span>
+          {workload.components.map((component) => (
+            <React.Fragment key={component.id}>
+              <span className="text-[#a3a3a3] dark:text-[#525252] text-xs">→</span>
+              <span className="flex items-center gap-2 bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-3 py-2 whitespace-nowrap" title={component.description}>
+                <span className="text-sm">{component.icon}</span>
+                <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{component.name}</span>
+              </span>
+            </React.Fragment>
+          ))}
+          <span className="text-[#a3a3a3] dark:text-[#525252] text-xs">→</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-3 py-2 whitespace-nowrap">
+            Result / Response
+          </span>
         </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -243,6 +233,8 @@ export default function WorkloadDetails() {
   }
 
   const multiplier = pricingModel === 'Yearly' ? 12 : 1;
+  const validTotals = PROVIDER_IDS.map(p => results && results[p] ? results[p].total : 0).filter(t => t > 0);
+  const maxTotalPrice = validTotals.length > 0 ? Math.max(...validTotals) : 0;
 
   return (
     <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
@@ -262,16 +254,44 @@ export default function WorkloadDetails() {
       </div>
 
       <main className="flex-1 p-6 lg:p-10 max-w-[1400px] mx-auto w-full flex flex-col gap-6">
-        {/* Architecture strip — collapsible, sits above the table */}
-        <ArchitectureStrip
-          workload={workload}
-          expanded={diagramExpanded}
-          onToggle={() => setDiagramExpanded(!diagramExpanded)}
-        />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Tables */}
           <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
+          {/* Workload Price Summary Box */}
+          {results && (
+            <div className="flex flex-col sm:flex-row bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded overflow-hidden divide-y sm:divide-y-0 sm:divide-x divide-[#e5e5e5] dark:divide-[#262626]">
+              {PROVIDER_IDS.map(provider => {
+                const pData = results[provider];
+                if (!pData) return null;
+                const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
+                const color = providerColor(provider);
+                
+                return (
+                  <div key={provider} className="flex-1 p-4 flex flex-col justify-between gap-3 min-w-[100px] bg-white dark:bg-[#000000]">
+                    <div className="flex justify-between items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: color, borderColor: color + '50', backgroundColor: color + '18' }}>
+                        {providerName(provider)}
+                      </span>
+                      {isUnavailable || pData.total === 0 ? (
+                        <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">N/A</span>
+                      ) : (
+                        <span className="text-sm font-bold text-black dark:text-white">
+                          ${(pData.total * multiplier).toFixed(0)}
+                        </span>
+                      )}
+                    </div>
+                    {!isUnavailable && pData.total > 0 && maxTotalPrice > 0 && (
+                      <div className="w-full h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start mt-1">
+                        <div className="h-full rounded-full" style={{ width: `${(pData.total / maxTotalPrice) * 100}%`, backgroundColor: color }} />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
           {/* Combined Configuration + Cost table */}
           <div className="flex flex-col flex-1 border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
             <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-3">
@@ -307,7 +327,15 @@ export default function WorkloadDetails() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
-                    {workload.components.map(c => (
+                    {workload.components.map(c => {
+                      const compPrices = PROVIDER_IDS.map(provider => {
+                        if (!results || !results[provider]) return 0;
+                        const comp = results[provider].components.find((x: any) => x.componentId === c.id);
+                        return comp ? comp.monthlyPrice : 0;
+                      }).filter(p => p > 0);
+                      const maxCompPrice = compPrices.length > 0 ? Math.max(...compPrices) : 0;
+                      
+                      return (
                       <tr key={c.id} className="hover:bg-[#fafafa] dark:hover:bg-[#0a0a0a] transition-colors">
                         <td className="py-3 px-4 align-middle whitespace-nowrap text-center">
                           <div className="flex items-center gap-2 justify-center">
@@ -351,15 +379,22 @@ export default function WorkloadDetails() {
                                 <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate max-w-[160px] hover:underline">
                                   {comp.quantity > 1 ? <span className="text-[#737373] font-bold">{comp.quantity}× </span> : ''}{comp.instanceType}
                                 </span>
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-                                  ${(comp.monthlyPrice * multiplier).toFixed(2)}
-                                </span>
+                                <div className="flex flex-col items-center gap-1 w-full mt-1">
+                                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                                    ${(comp.monthlyPrice * multiplier).toFixed(2)}
+                                  </span>
+                                  {comp.monthlyPrice > 0 && maxCompPrice > 0 && (
+                                    <div className="w-12 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start mt-0.5">
+                                      <div className="h-full rounded-full" style={{ width: `${(comp.monthlyPrice / maxCompPrice) * 100}%`, backgroundColor: providerColor(provider) }} />
+                                    </div>
+                                  )}
+                                </div>
                               </Link>
                             </td>
                           );
                         })}
                       </tr>
-                    ))}
+                    )})}
                     {/* Total row */}
                     <tr className="bg-[#f5f5f5] dark:bg-[#171717] border-t border-[#e5e5e5] dark:border-[#262626]">
                       <td className="py-3 px-4 text-center">
@@ -378,9 +413,16 @@ export default function WorkloadDetails() {
                             {isUnavailable || pData.total === 0 ? (
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">N/A</span>
                             ) : (
-                              <span className="text-[13px] font-bold text-black dark:text-white">
-                                ${(pData.total * multiplier).toFixed(2)}
-                              </span>
+                              <div className="flex flex-col items-center gap-1.5 w-full">
+                                <span className="text-[13px] font-bold text-black dark:text-white">
+                                  ${(pData.total * multiplier).toFixed(2)}
+                                </span>
+                                {maxTotalPrice > 0 && (
+                                  <div className="w-16 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start mt-0.5">
+                                    <div className="h-full rounded-full" style={{ width: `${(pData.total / maxTotalPrice) * 100}%`, backgroundColor: providerColor(provider) }} />
+                                  </div>
+                                )}
+                              </div>
                             )}
                           </td>
                         );
