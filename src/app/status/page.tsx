@@ -155,25 +155,25 @@ export default function StatusPage() {
     <>
       <style>{`
         :root {
-          --bg: #f7f8ff;
-          --surface: #eef0fc;
-          --border: #dde0f0;
-          --text: #111827;
-          --muted: #6b7280;
+          --bg: #ffffff;
+          --surface: #ffffff;
+          --border: #e5e5e5;
+          --text: #171717;
+          --muted: #737373;
           --link: #2563eb;
-          --divider: #dde0f0;
-          --row-hover: #e8eaf8;
+          --divider: #e5e5e5;
+          --row-hover: #fafafa;
         }
         @media (prefers-color-scheme: dark) {
           :root {
-            --bg: #06060f;
-            --surface: #0c0c1e;
-            --border: #1e1e38;
-            --text: #f1f5f9;
-            --muted: #71717a;
+            --bg: #000000;
+            --surface: #000000;
+            --border: #262626;
+            --text: #e5e7eb;
+            --muted: #a3a3a3;
             --link: #818cf8;
-            --divider: #1e1e38;
-            --row-hover: #10102a;
+            --divider: #262626;
+            --row-hover: #0a0a0a;
           }
         }
         .status-page {
@@ -330,13 +330,13 @@ export default function StatusPage() {
         {/* Main body */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }} className="md:ml-[280px]">
 
-        <div className="status-header" id="top">
-          <div style={{ marginBottom: '0.4rem' }}>
-            <h1 style={{ fontSize: '1.6rem', fontWeight: 800, margin: 0, letterSpacing: '-0.02em' }}>
+        <div className="status-header border-b border-[#e5e5e5] dark:border-[#262626] pb-6 mb-6" id="top">
+          <div className="mb-2">
+            <h1 className="text-3xl font-bold text-[#171717] dark:text-[#e5e7eb]">
               Last Price Update
             </h1>
           </div>
-          <p style={{ fontSize: 13, color: 'var(--muted)', margin: 0 }}>
+          <p className="text-sm text-[#737373] m-0">
             Learn when we last gathered pricing information per cloud provider and product category.
             {status?.last_ingested && (
               <> Last ingestion: {new Date(status.last_ingested).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}.</>
