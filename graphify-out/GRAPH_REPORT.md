@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 154 files · ~109,544 words
+- 154 files · ~109,717 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7d3a4a9e`
+- Built from commit: `2ce3278f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -179,7 +179,7 @@ Cohesion: 0.09
 Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PriceDriftResult (+2 more)
 
 ## Knowledge Gaps
-- **146 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+141 more)
+- **146 isolated node(s):** `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design`, `Directory Tree`, `File Descriptions` (+141 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -192,7 +192,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **Why does `AIPricingPipeline` connect `Community 27` to `Community 9`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
+- **What connects `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design` to the rest of the system?**
   _146 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
