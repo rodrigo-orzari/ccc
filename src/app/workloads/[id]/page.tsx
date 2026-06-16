@@ -331,7 +331,7 @@ export default function WorkloadDetails() {
 
       <div className="max-w-7xl mx-auto w-full px-6 md:px-10 mb-8">
          <div className="bg-[#eef0fc]/50 dark:bg-[#0c0c1e]/50 border border-[#dde0f0] dark:border-[#1e1e38] rounded p-4 text-xs text-[#6b7280] dark:text-[#71717a]">
-            <strong className="text-[#111827] dark:text-[#f1f5f9]">Assumptions & Disclaimer:</strong> This architecture calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for complex licensing, bandwidth egress fees, custom integrations, or specific platform limitations. Please consult official provider documentation for exact sizing before production deployments.
+            <strong className="text-[#111827] dark:text-[#f1f5f9]">Disclaimer:</strong> This architecture calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for complex licensing, bandwidth egress fees, custom integrations, or specific platform limitations. Please consult official provider documentation for exact sizing before production deployments.
          </div>
       </div>
 
