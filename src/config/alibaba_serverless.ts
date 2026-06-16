@@ -18,7 +18,7 @@
 
 const ALIBABA_FC_VCPU_PER_SECOND = 0.000014;
 const ALIBABA_FC_GB_PER_SECOND = 0.0000015;
-const ALIBABA_FC_LANGUAGES = ['Node', 'Python', 'Java', 'Go', 'PHP', 'C#', 'Any (Container)'];
+const ALIBABA_FC_LANGUAGES = ['Node', 'Python', 'Java', 'Go', 'PHP', 'C#', 'Any'];
 
 const fcPrice = (vcpus: number, memory: number) =>
   (ALIBABA_FC_VCPU_PER_SECOND * vcpus + ALIBABA_FC_GB_PER_SECOND * memory) * 3600;
