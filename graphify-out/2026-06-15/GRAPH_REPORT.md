@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 154 files · ~109,717 words
+- 154 files · ~111,111 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 526 nodes · 707 edges · 59 communities (31 shown, 28 thin omitted)
+- 531 nodes · 714 edges · 59 communities (31 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2ce3278f`
+- Built from commit: `411791f8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -82,10 +82,10 @@
   test_api.mjs → src/lib/api-utils.ts
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
   test_filters.mjs → src/lib/api-utils.ts
-- `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
-  src/components/ProductTypeSelector.tsx → src/types/index.ts
 - `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/app/page.tsx → src/hooks/useDynamicFilters.ts
+- `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/ProductTypeSelector.tsx → src/types/index.ts
 - `FilterSidebar()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/components/FilterSidebar.tsx → src/hooks/useDynamicFilters.ts
 
@@ -151,8 +151,8 @@ Cohesion: 0.29
 Nodes (8): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry
 
 ### Community 48 - "Community 48"
-Cohesion: 0.07
-Nodes (17): metadata, ChartsViewProps, DonationModal(), PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, DBStatusProvider, ProviderCardProps (+9 more)
+Cohesion: 0.06
+Nodes (20): metadata, ChartsViewProps, DonationModal(), PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, DBStatusProvider, ProviderCardProps (+12 more)
 
 ### Community 49 - "Community 49"
 Cohesion: 0.40
@@ -179,7 +179,7 @@ Cohesion: 0.09
 Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PriceDriftResult (+2 more)
 
 ## Knowledge Gaps
-- **146 isolated node(s):** `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design`, `Directory Tree`, `File Descriptions` (+141 more)
+- **147 isolated node(s):** `PROVIDER_IDS`, `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design`, `Directory Tree` (+142 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -187,13 +187,13 @@ Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanA
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 38`?**
-  _High betweenness centrality (0.034) - this node is a cross-community bridge._
+  _High betweenness centrality (0.033) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+  _High betweenness centrality (0.018) - this node is a cross-community bridge._
 - **Why does `AIPricingPipeline` connect `Community 27` to `Community 9`?**
   _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **What connects `Live Deployment`, `1. What Problem Does This Application Solve?`, `2. Architectural Design` to the rest of the system?**
-  _146 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `PROVIDER_IDS`, `Live Deployment`, `1. What Problem Does This Application Solve?` to the rest of the system?**
+  _147 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
