@@ -107,6 +107,9 @@ Please refer directly to the official tools for exact quotes:
 - **Google Cloud:** [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
 - **Oracle Cloud:** [Oracle Cloud Cost Estimator](https://www.oracle.com/cloud/costestimator.html)
 - **DigitalOcean:** [DigitalOcean Pricing](https://www.digitalocean.com/pricing)
+- **Alibaba Cloud:** [Alibaba Cloud Pricing Calculator](https://www.alibabacloud.com/pricing-calculator)
+- **OpenAI:** [OpenAI API Pricing](https://openai.com/api/pricing/)
+- **Anthropic:** [Anthropic Pricing](https://www.anthropic.com/pricing)
 
 ### No warranties or liability
 
