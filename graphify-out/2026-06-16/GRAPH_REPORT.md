@@ -1,16 +1,16 @@
-# Graph Report - _ccc  (2026-06-15)
+# Graph Report - _ccc  (2026-06-16)
 
 ## Corpus Check
-- 156 files · ~111,777 words
+- 156 files · ~111,808 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 537 nodes · 727 edges · 61 communities (33 shown, 28 thin omitted)
+- 538 nodes · 728 edges · 61 communities (33 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8d268a6b`
+- Built from commit: `116f7030`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -86,8 +86,8 @@
   src/components/ProductTypeSelector.tsx → src/types/index.ts
 - `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/app/page.tsx → src/hooks/useDynamicFilters.ts
-- `FilterSidebar()` --calls--> `useDynamicFilters()`  [EXTRACTED]
-  src/components/FilterSidebar.tsx → src/hooks/useDynamicFilters.ts
+- `PricingTableProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/PricingTable.tsx → src/types/index.ts
 
 ## Import Cycles
 - None detected.
@@ -100,7 +100,7 @@ Nodes (13): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, G
 
 ### Community 7 - "Community 7"
 Cohesion: 0.07
-Nodes (58): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+50 more)
+Nodes (58): Dashboard(), ChartsViewProps, FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS (+50 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.17
@@ -120,7 +120,7 @@ Nodes (25): 1. What Problem Does This Application Solve?, 2. Architectural Desig
 
 ### Community 15 - "Community 15"
 Cohesion: 0.06
-Nodes (31): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+23 more)
+Nodes (33): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+25 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.07
@@ -151,8 +151,8 @@ Cohesion: 0.29
 Nodes (8): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry
 
 ### Community 48 - "Community 48"
-Cohesion: 0.06
-Nodes (20): metadata, ChartsViewProps, DonationModal(), PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, DBStatusProvider, ProviderCardProps (+12 more)
+Cohesion: 0.07
+Nodes (18): metadata, DonationModal(), PRODUCT_TYPES, ProductTypeSelectorProps, DBStatusProvider, ProviderCardProps, ProviderCardsProps, GEOGRAPHIES (+10 more)
 
 ### Community 49 - "Community 49"
 Cohesion: 0.40
@@ -179,7 +179,7 @@ Cohesion: 0.09
 Nodes (9): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PricingPipeline (+1 more)
 
 ## Knowledge Gaps
-- **147 isolated node(s):** `metadata`, `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS` (+142 more)
+- **147 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+142 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -189,14 +189,14 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 38`?**
   _High betweenness centrality (0.068) - this node is a cross-community bridge._
 - **Why does `BaseAdapter` connect `Community 62` to `Community 16`?**
-  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+  _High betweenness centrality (0.034) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
-  _High betweenness centrality (0.028) - this node is a cross-community bridge._
-- **What connects `metadata`, `PipelineStatus`, `ProviderStatus` to the rest of the system?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
   _147 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.075 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0710085933966531 - nodes in this community are weakly interconnected._
 - **Should `Community 9` be split into smaller, more focused modules?**
   _Cohesion score 0.14736842105263157 - nodes in this community are weakly interconnected._
