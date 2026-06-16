@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 154 files · ~111,742 words
+- 155 files · ~111,785 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 533 nodes · 718 edges · 59 communities (31 shown, 28 thin omitted)
+- 535 nodes · 719 edges · 60 communities (32 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a3bbf82d`
+- Built from commit: `53571c6b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -92,15 +92,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (59 total, 28 thin omitted)
+## Communities (60 total, 28 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
 Nodes (13): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, AwsStorageScraper, AzureStorageScraper (+5 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.07
-Nodes (58): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+50 more)
+Cohesion: 0.08
+Nodes (56): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+48 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.18
@@ -119,8 +119,8 @@ Cohesion: 0.08
 Nodes (25): 1. What Problem Does This Application Solve?, 2. Architectural Design, 3. File Directory & Code Organization, 4. Documentation Guide, 5. Security & Deployment, 6. Quick Start, 7. In-Depth Subsystem Walks, 8. Resources for Contributors (+17 more)
 
 ### Community 15 - "Community 15"
-Cohesion: 0.05
-Nodes (37): ChartsViewProps, ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV (+29 more)
+Cohesion: 0.06
+Nodes (31): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+23 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.07
@@ -151,8 +151,8 @@ Cohesion: 0.29
 Nodes (8): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry
 
 ### Community 48 - "Community 48"
-Cohesion: 0.08
-Nodes (15): metadata, DonationModal(), DBStatusProvider, ProviderCardProps, ProviderCardsProps, WorkloadHeader(), WORKLOADS, PROVIDER_IDS (+7 more)
+Cohesion: 0.06
+Nodes (23): metadata, ChartsViewProps, DonationModal(), PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, DBStatusProvider, ProviderCardProps (+15 more)
 
 ### Community 49 - "Community 49"
 Cohesion: 0.40
@@ -197,6 +197,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.075 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07680491551459294 - nodes in this community are weakly interconnected._
 - **Should `Community 9` be split into smaller, more focused modules?**
   _Cohesion score 0.14736842105263157 - nodes in this community are weakly interconnected._
