@@ -6,22 +6,36 @@ import Link from 'next/link';
 import { Footer, WorkloadHeader } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { WorkloadDefinition } from '@/types';
-import { PROVIDERS } from '@/config';
+import { PROVIDERS, GEOGRAPHIES } from '@/config';
 
 // Map a workload component's productType to the URL ?product= value the main
 // catalog page expects. Most match 1:1; vm is a special case (catalog uses 'vm'
 // in the UI but the API normalizes to 'compute', and the URL surface uses 'vm').
 const catalogProductType = (productType: string) => productType === 'vm' ? 'vm' : productType;
 
-// Provider order + display names — pulled from the canonical PROVIDERS config so
-// names stay consistent with the main pricing tables (e.g. 'Google', 'DigitalOcean').
+// Region options match the main app's GEOGRAPHIES filter with a 'Global' prepend so
+// workload comparisons can either span everything or scope to a continent. Same names
+// as the FilterSidebar's Geography chips so users see the same vocabulary.
+const REGION_OPTIONS = ['Global', ...GEOGRAPHIES];
+
+const providerColor = (slug: string) =>
+  PROVIDERS.find(p => p.id === slug)?.color ?? '#525252';
+const providerName = (slug: string) => PROVIDERS.find(p => p.id === slug)?.name ?? slug;
+
+// Provider order — pulled from the canonical PROVIDERS config so workload comparisons
+// and main pricing tables show providers in the same sequence and with the same names.
 const PROVIDER_IDS = ['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'] as const;
-const providerName = (id: string) => PROVIDERS.find(p => p.id === id)?.name ?? id;
 
 function ProviderTh({ id }: { id: string }) {
+  // Match the colored pill used in PricingTable's provider column so workload
+  // comparison cells and main-catalog rows share the same provider grammar.
+  const color = providerColor(id);
   return (
-    <th className="py-3 px-4 text-left">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+    <th className="py-3 px-4 text-center">
+      <span
+        className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border"
+        style={{ color, borderColor: color + '50', backgroundColor: color + '18' }}
+      >
         {providerName(id)}
       </span>
     </th>
@@ -47,7 +61,9 @@ function ArchitectureStrip({ workload, expanded, onToggle }: { workload: Workloa
       </button>
       {expanded && (
         <div className="px-5 py-5 overflow-x-auto">
-          <div className="flex items-center gap-2 min-w-max">
+          {/* mx-auto + w-max centers the chip row within the box when content fits;
+              overflow-x-auto on the parent keeps long chains scrollable. */}
+          <div className="flex items-center gap-2 min-w-max w-max mx-auto">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-3 py-2 whitespace-nowrap">
               Users / API
             </span>
@@ -141,6 +157,52 @@ export default function WorkloadDetails() {
     return () => clearTimeout(debounce);
   }, [parameters, region, workload]);
 
+  // CSV export of the current comparison: one row per component × provider plus a
+  // per-provider total row. Honors the active pricing model (PAYG vs Yearly).
+  const handleExport = () => {
+    if (!workload || !results) return;
+    const mult = pricingModel === 'Yearly' ? 12 : 1;
+    const headers = ['Service', ...PROVIDER_IDS.map(p => providerName(p)), ...PROVIDER_IDS.map(p => `${providerName(p)} (${pricingModel === 'Yearly' ? 'USD/yr' : 'USD/mo'})`)];
+    const rows: string[][] = [];
+    workload.components.forEach(c => {
+      const row: string[] = [c.name];
+      const prices: string[] = [];
+      PROVIDER_IDS.forEach(provider => {
+        const comp = results[provider]?.components.find((x: any) => x.componentId === c.id);
+        if (!comp || comp.monthlyPrice === 0) {
+          row.push('Unavailable');
+          prices.push('');
+        } else {
+          row.push(comp.quantity > 1 ? `${comp.quantity}× ${comp.instanceType}` : comp.instanceType);
+          prices.push((comp.monthlyPrice * mult).toFixed(2));
+        }
+      });
+      rows.push([...row, ...prices]);
+    });
+    const totalRow: string[] = [`Total / ${pricingModel === 'Yearly' ? 'Year' : 'Month'}`, ...PROVIDER_IDS.map(() => '')];
+    PROVIDER_IDS.forEach(provider => {
+      const pData = results[provider];
+      if (!pData) { totalRow.push(''); return; }
+      const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
+      totalRow.push(isUnavailable || pData.total === 0 ? 'N/A' : (pData.total * mult).toFixed(2));
+    });
+    rows.push(totalRow);
+
+    const csv = [headers, ...rows]
+      .map(r => r.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+      .join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+    link.download = `workload-${workload.id}-${pricingModel.toLowerCase()}-${ts}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   if (!workload) {
     return (
       <div className="flex flex-col min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb]">
@@ -159,12 +221,15 @@ export default function WorkloadDetails() {
     <div className="flex flex-col min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans">
       <WorkloadHeader />
 
-      {/* Workload identity strip */}
-      <div className="border-b border-[#e5e5e5] dark:border-[#262626] px-6 lg:px-10 py-4 flex items-center gap-3">
-        <span className="text-2xl">{workload.icon}</span>
-        <div className="min-w-0">
-          <h1 className="text-[14px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{workload.name}</h1>
-          <p className="text-[11px] text-[#737373] truncate">{workload.description}</p>
+      {/* Workload identity strip — content aligns with the main grid's max-width
+          so the title sits flush with the architecture/comparison boxes below. */}
+      <div className="border-b border-[#e5e5e5] dark:border-[#262626]">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-4 flex items-center gap-3">
+          <span className="text-2xl">{workload.icon}</span>
+          <div className="min-w-0">
+            <h1 className="text-[14px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{workload.name}</h1>
+            <p className="text-[11px] text-[#737373] truncate">{workload.description}</p>
+          </div>
         </div>
       </div>
 
@@ -181,11 +246,21 @@ export default function WorkloadDetails() {
           <div className="lg:col-span-8 flex flex-col gap-6">
           {/* Combined Configuration + Cost table */}
           <div className="border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
-            <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-baseline justify-between">
+            <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-3">
               <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
                 {pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Comparison
               </h2>
-              <span className="text-[10px] text-[#737373]">Cheapest match per component</span>
+              <div className="flex items-center gap-3">
+                <span className="text-[10px] text-[#737373] hidden sm:inline">Cheapest match per component</span>
+                <button
+                  onClick={handleExport}
+                  disabled={!results}
+                  title="Export the comparison as CSV"
+                  className="px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest border border-[#e5e5e5] dark:border-[#262626] bg-[#f5f5f5] dark:bg-[#171717] text-[#171717] dark:text-[#e5e7eb] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#f5f5f5] disabled:hover:text-[#171717]"
+                >
+                  Export CSV
+                </button>
+              </div>
             </div>
 
             {loading && !results ? (
@@ -197,7 +272,7 @@ export default function WorkloadDetails() {
                 <table className="w-full text-left border-collapse">
                   <thead className="bg-[#f5f5f5] dark:bg-[#171717]">
                     <tr className="border-b border-[#e5e5e5] dark:border-[#262626]">
-                      <th className="py-3 px-4 text-left">
+                      <th className="py-3 px-4 text-center">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">Service</span>
                       </th>
                       {PROVIDER_IDS.map(p => <ProviderTh key={p} id={p} />)}
@@ -206,8 +281,8 @@ export default function WorkloadDetails() {
                   <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
                     {workload.components.map(c => (
                       <tr key={c.id} className="hover:bg-[#fafafa] dark:hover:bg-[#0a0a0a] transition-colors">
-                        <td className="py-3 px-4 align-top whitespace-nowrap">
-                          <div className="flex items-center gap-2">
+                        <td className="py-3 px-4 align-middle whitespace-nowrap text-center">
+                          <div className="flex items-center gap-2 justify-center">
                             <span>{c.icon}</span>
                             <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{c.name}</span>
                           </div>
@@ -215,7 +290,7 @@ export default function WorkloadDetails() {
                         {PROVIDER_IDS.map(provider => {
                           if (!results || !results[provider]) {
                             return (
-                              <td key={provider} className="py-3 px-4 align-top">
+                              <td key={provider} className="py-3 px-4 align-middle text-center">
                                 <span className="text-[10px] uppercase tracking-widest text-[#a3a3a3] dark:text-[#404040]">—</span>
                               </td>
                             );
@@ -223,7 +298,7 @@ export default function WorkloadDetails() {
                           const comp = results[provider].components.find((x: any) => x.componentId === c.id);
                           if (!comp || comp.monthlyPrice === 0) {
                             return (
-                              <td key={provider} className="py-3 px-4 align-top">
+                              <td key={provider} className="py-3 px-4 align-middle text-center">
                                 <span className="text-[10px] uppercase tracking-widest text-[#a3a3a3] dark:text-[#404040]">Unavailable</span>
                               </td>
                             );
@@ -238,11 +313,11 @@ export default function WorkloadDetails() {
                             search: comp.instanceType,
                           });
                           return (
-                            <td key={provider} className="py-3 px-4 align-top">
+                            <td key={provider} className="py-3 px-4 align-middle text-center">
                               <Link
                                 href={`/?${catalogParams.toString()}`}
                                 title={`Open ${comp.instanceType} in the main catalog`}
-                                className="flex flex-col gap-0.5 hover:opacity-80 transition-opacity"
+                                className="flex flex-col gap-0.5 items-center hover:opacity-80 transition-opacity"
                                 style={{ textDecoration: 'none' }}
                               >
                                 <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate max-w-[160px] hover:underline">
@@ -259,19 +334,19 @@ export default function WorkloadDetails() {
                     ))}
                     {/* Total row */}
                     <tr className="bg-[#f5f5f5] dark:bg-[#171717] border-t border-[#e5e5e5] dark:border-[#262626]">
-                      <td className="py-3 px-4">
+                      <td className="py-3 px-4 text-center">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e7eb]">
                           Total / {pricingModel === 'Yearly' ? 'Year' : 'Month'}
                         </span>
                       </td>
                       {PROVIDER_IDS.map(provider => {
                         if (!results || !results[provider]) {
-                          return <td key={provider} className="py-3 px-4"><span className="text-[10px] text-[#a3a3a3]">—</span></td>;
+                          return <td key={provider} className="py-3 px-4 text-center"><span className="text-[10px] text-[#a3a3a3]">—</span></td>;
                         }
                         const pData = results[provider];
                         const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
                         return (
-                          <td key={provider} className="py-3 px-4">
+                          <td key={provider} className="py-3 px-4 text-center">
                             {isUnavailable || pData.total === 0 ? (
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">N/A</span>
                             ) : (
@@ -289,11 +364,6 @@ export default function WorkloadDetails() {
             )}
           </div>
 
-          {/* Disclaimer */}
-          <div className="border border-[#e5e5e5] dark:border-[#262626] rounded p-4 text-[11px] text-[#737373] leading-relaxed">
-            <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px] block mb-1">Disclaimer</strong>
-            This calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for production sizing.
-          </div>
         </div>
 
         {/* Configuration panel — mirrors FilterSidebar chip patterns */}
@@ -326,7 +396,7 @@ export default function WorkloadDetails() {
             <section className="space-y-3">
               <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Region</h3>
               <div className="flex flex-wrap gap-2">
-                {['Global', 'US East', 'US West', 'Europe', 'Asia Pacific', 'South America'].map(opt => (
+                {REGION_OPTIONS.map(opt => (
                   <button
                     key={opt}
                     onClick={() => setRegion(opt)}
@@ -375,6 +445,12 @@ export default function WorkloadDetails() {
         </div>
         </div>
       </main>
+
+      {/* Disclaimer — plain text, no box, so it reads as fine-print not a feature panel. */}
+      <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-8 text-[11px] text-[#737373] leading-relaxed">
+        <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
+        This calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for production sizing.
+      </div>
 
       <Footer />
     </div>
