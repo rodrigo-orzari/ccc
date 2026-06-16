@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 156 files · ~111,372 words
+- 156 files · ~111,777 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 537 nodes · 725 edges · 61 communities (33 shown, 28 thin omitted)
+- 537 nodes · 727 edges · 61 communities (33 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e4975cf5`
+- Built from commit: `8d268a6b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -72,8 +72,8 @@
 4. `buildPricingFilters()` - 9 edges
 5. `ServerlessPricingPipeline` - 9 edges
 6. `ProductType` - 8 edges
-7. `DigitalOceanAdapter` - 7 edges
-8. `NetworkingPricingPipeline` - 7 edges
+7. `NetworkingPricingPipeline` - 7 edges
+8. `DigitalOceanAdapter` - 7 edges
 9. `GCPAdapter` - 6 edges
 10. `PricingPipeline` - 6 edges
 
@@ -143,8 +143,8 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ### Community 38 - "Community 38"
-Cohesion: 0.11
-Nodes (15): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, Row, pipeline (+7 more)
+Cohesion: 0.10
+Nodes (16): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, Row, pipeline (+8 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.29
@@ -176,10 +176,10 @@ Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
 
 ### Community 62 - "Community 62"
 Cohesion: 0.09
-Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PriceDriftResult (+2 more)
+Nodes (9): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PricingPipeline (+1 more)
 
 ## Knowledge Gaps
-- **148 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `TableToolbarProps`, `PipelineStatus`, `ProviderStatus` (+143 more)
+- **147 isolated node(s):** `metadata`, `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS` (+142 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -187,13 +187,13 @@ Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanA
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `DataAnalyticsPricingPipeline` connect `Community 16` to `Community 38`?**
-  _High betweenness centrality (0.078) - this node is a cross-community bridge._
+  _High betweenness centrality (0.068) - this node is a cross-community bridge._
 - **Why does `BaseAdapter` connect `Community 62` to `Community 16`?**
-  _High betweenness centrality (0.041) - this node is a cross-community bridge._
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `TableToolbarProps` to the rest of the system?**
-  _148 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.028) - this node is a cross-community bridge._
+- **What connects `metadata`, `PipelineStatus`, `ProviderStatus` to the rest of the system?**
+  _147 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
