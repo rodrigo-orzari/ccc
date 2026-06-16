@@ -760,13 +760,13 @@
     "semantic_hash": ""
   },
   "src/app/api/workloads/route.ts": {
-    "mtime": 1781566294.6106136,
-    "ast_hash": "e8fb02a3bb7313386ff5d4b54ea91dd0",
+    "mtime": 1781568350.6012747,
+    "ast_hash": "c9e9463daf7155bca91cd196b58829bc",
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1781567619.414039,
-    "ast_hash": "c10cb3545ac27e093806c5302c519853",
+    "mtime": 1781568309.130976,
+    "ast_hash": "a8b64f8d9b78f65896494693028a7a9f",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -775,8 +775,8 @@
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
-    "mtime": 1781567367.259307,
-    "ast_hash": "269b506a8050c85577f29be66fa13b48",
+    "mtime": 1781568361.72099,
+    "ast_hash": "1f4a3a1aac513c33387e6a4c0d510477",
     "semantic_hash": ""
   },
   "src/components/WorkloadHeader.tsx": {
