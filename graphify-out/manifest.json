@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1781563588.9679625,
-    "ast_hash": "9072f22123def6cd5d8d8ff80edc6b57",
+    "mtime": 1781568730.408044,
+    "ast_hash": "826041a4a09f0b12a7693a105a7aa7fb",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1781561475.2313733,
-    "ast_hash": "26f4f66395f3d480b679c5cfd66dbcb1",
+    "mtime": 1781568730.413953,
+    "ast_hash": "fad67c0058712e8b45a2a9056a64c68c",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
@@ -435,18 +435,18 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1781565279.939051,
-    "ast_hash": "5dcd76f77055f6febfd040d9f1ce278a",
+    "mtime": 1781568730.4144845,
+    "ast_hash": "60491fc8cf5ae9694d796401a7297e4a",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1781567174.336075,
-    "ast_hash": "13d40c30673163a8585f78a4f807a8b1",
+    "mtime": 1781568730.4147692,
+    "ast_hash": "9c67fccd2ab4ec5a05afdda62e8fb19c",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
-    "mtime": 1781556153.571783,
-    "ast_hash": "570a49a360ca6af0726e10275d7df726",
+    "mtime": 1781568730.4150429,
+    "ast_hash": "7f7d2cda6561cdc9d43e6acc22e35d58",
     "semantic_hash": ""
   },
   "src/components/RangeSlider.tsx": {
@@ -455,8 +455,8 @@
     "semantic_hash": ""
   },
   "src/components/TableToolbar.tsx": {
-    "mtime": 1780783766.0875297,
-    "ast_hash": "98dee7ac6fe86b7e1ff13154d038719d",
+    "mtime": 1781568730.4153042,
+    "ast_hash": "ba05d351a50a9f35bc8c1a5e045cf6ca",
     "semantic_hash": ""
   },
   "src/components/index.ts": {
@@ -770,8 +770,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1781567585.9801211,
-    "ast_hash": "613aee1048d4709549efffdb74443859",
+    "mtime": 1781568932.3436189,
+    "ast_hash": "5c404aa7f6072c1bc86172f673de8771",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
