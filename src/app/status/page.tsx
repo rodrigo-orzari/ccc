@@ -293,38 +293,59 @@ export default function StatusPage() {
       `}</style>
 
       <div className="status-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <div className="status-page" style={{ flex: 1 }}>
-        {/* Nav */}
-        <div style={{ borderBottom: '1px solid var(--border)', padding: '0.75rem 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.01em' }}>
-              ← Compare Cloud Costs
-            </span>
-          </Link>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--muted)', whiteSpace: 'nowrap' }}>
-              Share with friends and family
-            </span>
-            <button
-              onClick={shareOnLinkedIn}
-              title="Share on LinkedIn"
-              style={{ color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#0A66C2')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
-            >
-              <LinkedInIcon />
-            </button>
-            <button
-              onClick={shareOnX}
-              title="Share on X"
-              style={{ color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
-            >
-              <XIcon />
-            </button>
-          </div>
+        
+      {/* Fixed Global Nav */}
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '0 2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '44px' }}>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.01em' }}>
+            ← Compare Cloud Costs
+          </span>
+        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--muted)', whiteSpace: 'nowrap' }} className="hidden sm:inline">
+            Share with friends and family
+          </span>
+          <button
+            onClick={shareOnLinkedIn}
+            title="Share on LinkedIn"
+            style={{ color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#0A66C2')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
+          >
+            <LinkedInIcon />
+          </button>
+          <button
+            onClick={shareOnX}
+            title="Share on X"
+            style={{ color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
+            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
+          >
+            <XIcon />
+          </button>
         </div>
+      </div>
+
+      <div className="status-page" style={{ flex: 1, display: 'flex', marginTop: '44px' }}>
+        
+        {/* Fixed Sidebar TOC */}
+        <aside className="fixed top-[44px] left-0 w-[280px] h-[calc(100vh-44px)] overflow-y-auto border-r border-[#dde0f0] dark:border-[#1e1e38] p-8 hidden md:block bg-[#f7f8ff] dark:bg-[#06060f] z-40">
+          <h4 className="text-[11px] text-[#6b7280] dark:text-[#71717a] uppercase tracking-wider mb-4 font-bold">Content</h4>
+          <nav>
+            <ul className="space-y-3">
+              {status?.providers.map(p => (
+                <li key={p.slug}>
+                  <a href={`#${p.slug}`} className="text-[13px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
+                    {p.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+
+        {/* Main body */}
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }} className="md:ml-[280px]">
 
         <div className="status-header">
           <div style={{ marginBottom: '0.4rem' }}>
@@ -443,7 +464,7 @@ export default function StatusPage() {
                 );
 
                 return (
-                  <div key={provider.slug} className="provider-card">
+                  <div key={provider.slug} id={provider.slug} className="provider-card" style={{ scrollMarginTop: '64px' }}>
                     <div className="provider-header">
                       <div className="provider-header-left">
                         <a
