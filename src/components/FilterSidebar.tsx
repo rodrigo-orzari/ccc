@@ -61,7 +61,7 @@ const FilterSection = ({
       <h2 className="m-0">
         <button
           onClick={onToggleExpand}
-          className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
+          className="text-left text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
         >
           <ChevronDown size={10} className={`transition-transform ${isExpanded ? '' : '-rotate-90'}`} />
           {title} {tooltip && <Tooltip text={tooltip}><Info size={10} className="cursor-help" /></Tooltip>}
