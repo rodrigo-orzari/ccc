@@ -16,7 +16,7 @@
  * Supported Languages: Python, Node.js, Go, Java, C#, PHP, Ruby, and any language via container
  */
 
-const GCP_CLOUD_RUN_LANGUAGES = ['Python', 'Node', 'Go', 'Java', 'C#', 'PHP', 'Ruby', 'Any (Container)'];
+const GCP_CLOUD_RUN_LANGUAGES = ['Python', 'Node', 'Go', 'Java', 'C#', 'PHP', 'Ruby', 'Any'];
 
 // Helper function to add serverless-specific attributes to Cloud Run entries
 const addGcpServerlessAttributes = (entry: any) => ({

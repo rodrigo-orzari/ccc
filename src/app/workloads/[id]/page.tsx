@@ -96,89 +96,72 @@ export default function WorkloadDetails() {
 
       <main className="flex-1 p-6 md:p-10 max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* Left Sidebar: Filters & Parameters */}
-        <div className="lg:col-span-3 flex flex-col space-y-6">
+        {/* Main Content: Tables */}
+        <div className="lg:col-span-8 flex flex-col space-y-8">
           
-          {/* Pricing Model Toggle */}
-          <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6">
-            <h3 className="text-[10px] font-bold mb-4 border-b border-[#dde0f0] dark:border-[#1e1e38] pb-2 uppercase tracking-widest text-[#737373]">Pricing Model</h3>
-            <div className="flex bg-[#dde0f0] dark:bg-[#1e1e38] rounded p-1 mb-2">
-              <button
-                onClick={() => setPricingModel('PAYG')}
-                className={`flex-1 py-1.5 text-xs font-bold rounded transition-colors ${pricingModel === 'PAYG' ? 'bg-white dark:bg-black text-black dark:text-white shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
-              >
-                PAYG
-              </button>
-              <button
-                onClick={() => setPricingModel('Yearly')}
-                className={`flex-1 py-1.5 text-xs font-bold rounded transition-colors ${pricingModel === 'Yearly' ? 'bg-white dark:bg-black text-black dark:text-white shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
-              >
-                Yearly
-              </button>
-            </div>
-            <p className="text-[10px] text-[#6b7280] dark:text-[#71717a] mt-2 leading-relaxed">
-              PAYG shows the monthly on-demand cost. Yearly multiplies this by 12 (no committed-use discounts applied).
-            </p>
+          {/* Table 1: Recommended Products */}
+          <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6 flex flex-col">
+            <h3 className="text-lg font-semibold mb-1">Recommended Products</h3>
+            <p className="text-sm text-[#6b7280] dark:text-[#71717a] mb-6">Provider-specific services selected for your workload scale</p>
+            
+            {loading && !results ? (
+              <div className="flex-1 flex items-center justify-center min-h-[200px]">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2563eb] dark:border-[#818cf8]"></div>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse whitespace-nowrap">
+                  <thead>
+                    <tr className="border-b border-[#dde0f0] dark:border-[#1e1e38] text-sm text-[#6b7280] dark:text-[#71717a]">
+                      <th className="py-3 px-4 font-semibold uppercase tracking-wider text-xs">Service</th>
+                      {['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'].map(provider => (
+                        <th key={provider} className="py-3 px-4 font-semibold tracking-wider text-xs">
+                          <div className="flex items-center space-x-2 border border-[#dde0f0] dark:border-[#1e1e38] rounded px-2 py-1 w-max bg-[#f7f8ff] dark:bg-[#06060f]">
+                            <img src={`/providers/${provider}.svg`} alt={provider} className="w-4 h-4 rounded-sm object-contain bg-white p-0.5" onError={(e) => e.currentTarget.style.display='none'} />
+                            <span className="capitalize">{provider === 'aws' ? 'AWS' : provider === 'gcp' ? 'Google' : provider === 'digitalocean' ? 'DO' : provider}</span>
+                          </div>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#dde0f0] dark:divide-[#1e1e38]">
+                    {workload.components.map(c => (
+                      <tr key={c.id} className="hover:bg-[#e8eaf8] dark:hover:bg-[#10102a] transition-colors">
+                        <td className="py-4 px-4 font-medium text-[#111827] dark:text-[#f1f5f9] flex items-center space-x-2">
+                          <span>{c.icon}</span>
+                          <span>{c.name}</span>
+                        </td>
+                        {['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'].map(provider => {
+                          if (!results || !results[provider]) {
+                            return <td key={provider} className="py-4 px-4 text-xs text-[#6b7280]">...</td>;
+                          }
+                          const comp = results[provider].components.find((x: any) => x.componentId === c.id);
+                          if (!comp || comp.monthlyPrice === 0) {
+                            return <td key={provider} className="py-4 px-4 text-[#6b7280] dark:text-[#71717a] text-xs">Unavailable</td>;
+                          }
+                          return (
+                            <td key={provider} className="py-4 px-4">
+                              <div className="text-xs text-[#111827] dark:text-[#f1f5f9] max-w-[150px] truncate" title={comp.instanceType}>
+                                {comp.quantity > 1 ? <span className="font-bold text-[#2563eb] dark:text-[#818cf8]">{comp.quantity}x </span> : ''}{comp.instanceType}
+                              </div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
 
-          {/* Region Selector */}
-          <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6">
-            <h3 className="text-[10px] font-bold mb-4 border-b border-[#dde0f0] dark:border-[#1e1e38] pb-2 uppercase tracking-widest text-[#737373]">Region</h3>
-            <div className="flex flex-wrap gap-2">
-              {['Global', 'US East', 'US West', 'Europe', 'Asia Pacific', 'South America'].map(opt => (
-                <button
-                  key={opt}
-                  onClick={() => setRegion(opt)}
-                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                    region === opt
-                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                  }`}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6">
-            <h3 className="text-[10px] font-bold mb-4 border-b border-[#dde0f0] dark:border-[#1e1e38] pb-2 uppercase tracking-widest text-[#737373]">Workload Scale</h3>
-            <div className="space-y-6">
-              {workload.parameters.map((p) => (
-                <div key={p.id}>
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="text-sm font-medium text-[#111827] dark:text-[#f1f5f9]">{p.label}</label>
-                    <span className="text-[10px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] px-2 py-1 rounded text-[#111827] dark:text-[#f1f5f9]">
-                      {parameters[p.id]} {p.unit}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={p.min}
-                    max={p.max}
-                    step={p.step}
-                    value={parameters[p.id] || p.defaultValue}
-                    onChange={(e) => setParameters({...parameters, [p.id]: Number(e.target.value)})}
-                    className="w-full accent-[#2563eb] dark:accent-[#818cf8] cursor-pointer h-1.5 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-lg appearance-none"
-                  />
-                  <div className="flex justify-between text-[10px] text-[#6b7280] dark:text-[#71717a] mt-1 font-mono">
-                    <span>{p.min}</span>
-                    <span>{p.max}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Middle Content: Pricing Table */}
-        <div className="lg:col-span-6 flex flex-col">
-          <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6 flex flex-col h-full">
-            <h3 className="text-lg font-semibold mb-1">Total {pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Cost</h3>
+          {/* Table 2: Cost Breakdown */}
+          <div className="bg-[#eef0fc] dark:bg-[#0c0c1e] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6 flex flex-col">
+            <h3 className="text-lg font-semibold mb-1">{pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Cost Breakdown</h3>
             <p className="text-sm text-[#6b7280] dark:text-[#71717a] mb-6">Cheapest matching components aggregated across providers</p>
             
             {loading && !results ? (
-              <div className="flex-1 flex items-center justify-center">
+              <div className="flex-1 flex items-center justify-center min-h-[200px]">
                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2563eb] dark:border-[#818cf8]"></div>
               </div>
             ) : (
@@ -208,7 +191,7 @@ export default function WorkloadDetails() {
                           </td>
                           {['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'].map(provider => {
                             if (!results || !results[provider]) {
-                              return <td key={provider} className="py-4 px-4">...</td>;
+                              return <td key={provider} className="py-4 px-4 text-xs text-[#6b7280]">...</td>;
                             }
                             const comp = results[provider].components.find((x: any) => x.componentId === c.id);
                             if (!comp || comp.monthlyPrice === 0) {
@@ -216,10 +199,7 @@ export default function WorkloadDetails() {
                             }
                             return (
                               <td key={provider} className="py-4 px-4">
-                                <div className="text-sm text-[#111827] dark:text-[#f1f5f9]">${(comp.monthlyPrice * multiplier).toFixed(2)}</div>
-                                <div className="text-xs text-[#6b7280] dark:text-[#71717a] max-w-[120px] truncate" title={comp.instanceType}>
-                                  {comp.quantity > 1 ? `${comp.quantity}x ` : ''}{comp.instanceType}
-                                </div>
+                                <div className="text-sm font-medium text-[#111827] dark:text-[#f1f5f9]">${(comp.monthlyPrice * multiplier).toFixed(2)}</div>
                               </td>
                             );
                           })}
@@ -228,7 +208,7 @@ export default function WorkloadDetails() {
                     })}
                     
                     {/* Total Row */}
-                    <tr className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-t-2 border-[#dde0f0] dark:border-[#1e1e38]">
+                    <tr className="bg-[#f7f8ff] dark:bg-[#06060f] border-t border-t-[#dde0f0] dark:border-t-[#1e1e38]">
                       <td className="py-4 px-4 font-bold text-[#111827] dark:text-[#f1f5f9] uppercase tracking-wider text-xs">
                         Total / {pricingModel === 'Yearly' ? 'Year' : 'Month'}
                       </td>
@@ -238,7 +218,7 @@ export default function WorkloadDetails() {
                         const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
                         const multiplier = pricingModel === 'Yearly' ? 12 : 1;
                         return (
-                          <td key={provider} className="py-4 px-4 text-left font-bold text-lg">
+                          <td key={provider} className="py-4 px-4 text-left font-bold text-lg border-l border-l-transparent">
                             {isUnavailable || pData.total === 0 ? (
                               <span className="text-[#6b7280] dark:text-[#71717a]">N/A</span>
                             ) : (
@@ -257,9 +237,94 @@ export default function WorkloadDetails() {
           </div>
         </div>
 
-        {/* Right Content: Diagram */}
-        <div className="lg:col-span-3 flex flex-col space-y-6">
+        {/* Right Sidebar: Filters & Diagram */}
+        <div className="lg:col-span-4 flex flex-col space-y-6">
+          
+          {/* Unified Configuration Panel */}
+          <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg p-6 flex flex-col shadow-sm">
+            
+            {/* Pricing Model Section */}
+            <div className="mb-8">
+              <h3 className="text-[10px] font-bold mb-3 uppercase tracking-widest text-[#737373] flex items-center gap-1.5">
+                Pricing Model
+              </h3>
+              <div className="flex bg-[#dde0f0] dark:bg-[#1e1e38] rounded p-1 mb-2">
+                <button
+                  onClick={() => setPricingModel('PAYG')}
+                  className={`flex-1 py-1.5 text-xs font-bold rounded transition-colors ${pricingModel === 'PAYG' ? 'bg-white dark:bg-[#f7f8ff] text-black shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'}`}
+                >
+                  PAYG
+                </button>
+                <button
+                  onClick={() => setPricingModel('Yearly')}
+                  className={`flex-1 py-1.5 text-xs font-bold rounded transition-colors ${pricingModel === 'Yearly' ? 'bg-white dark:bg-[#f7f8ff] text-black shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'}`}
+                >
+                  Yearly
+                </button>
+              </div>
+              <p className="text-[10px] text-[#6b7280] dark:text-[#71717a] mt-1.5 leading-relaxed">
+                PAYG shows monthly on-demand cost. Yearly multiplies this by 12 (no committed-use discounts).
+              </p>
+            </div>
+
+            {/* Region Selector Section */}
+            <div className="mb-8">
+              <h3 className="text-[10px] font-bold mb-3 uppercase tracking-widest text-[#737373] flex items-center gap-1.5">
+                Region
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {['Global', 'US East', 'US West', 'Europe', 'Asia Pacific', 'South America'].map(opt => (
+                  <button
+                    key={opt}
+                    onClick={() => setRegion(opt)}
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                      region === opt
+                        ? 'bg-black dark:bg-[#f7f8ff] text-white dark:text-black border-black dark:border-[#f7f8ff]'
+                        : 'bg-[#eef0fc] dark:bg-[#0c0c1e] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Workload Scale Section */}
+            <div>
+              <h3 className="text-[10px] font-bold mb-4 uppercase tracking-widest text-[#737373] flex items-center gap-1.5">
+                Workload Scale
+              </h3>
+              <div className="space-y-6">
+                {workload.parameters.map((p) => (
+                  <div key={p.id}>
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="text-[13px] font-medium text-[#111827] dark:text-[#f1f5f9]">{p.label}</label>
+                      <span className="text-[10px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] px-2 py-1 rounded text-[#111827] dark:text-[#f1f5f9]">
+                        {parameters[p.id]} {p.unit}
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min={p.min}
+                      max={p.max}
+                      step={p.step}
+                      value={parameters[p.id] || p.defaultValue}
+                      onChange={(e) => setParameters({...parameters, [p.id]: Number(e.target.value)})}
+                      className="w-full accent-[#2563eb] dark:accent-[#818cf8] cursor-pointer h-1.5 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-lg appearance-none outline-none"
+                    />
+                    <div className="flex justify-between text-[10px] text-[#a3a3a3] dark:text-[#525252] mt-1 font-mono">
+                      <span>{p.min}</span>
+                      <span>{p.max}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Architecture Diagram */}
           <ArchitectureDiagram workload={workload} />
+
         </div>
 
       </main>
