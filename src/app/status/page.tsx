@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Footer from '@/components/Footer';
+import { Footer, ProductTypeSelector } from '@/components';
 
 interface PipelineStatus {
   category: string;
@@ -114,6 +114,19 @@ function SourceBadge({ source, apiCount, staticCount }: { source: string; apiCou
     </span>
   );
 }
+
+const BackToTop = () => (
+  <p style={{ marginTop: '1.5rem' }}>
+    <a
+      href="#top"
+      style={{ color: '#2563eb', fontSize: '0.875rem', textDecoration: 'none' }}
+      onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}
+    >
+      ↑ Go back to the top
+    </a>
+  </p>
+);
 
 export default function StatusPage() {
   const [status, setStatus] = useState<StatusData | null>(null);
@@ -292,41 +305,11 @@ export default function StatusPage() {
         }
       `}</style>
 
-      <div className="status-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        
-      {/* Fixed Global Nav */}
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, background: 'var(--surface)', borderBottom: '1px solid var(--border)', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '44px' }}>
-        <Link href="/" style={{ textDecoration: 'none' }}>
-          <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.01em' }}>
-            ← Compare Cloud Costs
-          </span>
-        </Link>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--muted)', whiteSpace: 'nowrap' }} className="hidden sm:inline">
-            Share with friends and family
-          </span>
-          <button
-            onClick={shareOnLinkedIn}
-            title="Share on LinkedIn"
-            style={{ color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#0A66C2')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
-          >
-            <LinkedInIcon />
-          </button>
-          <button
-            onClick={shareOnX}
-            title="Share on X"
-            style={{ color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--text)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
-          >
-            <XIcon />
-          </button>
-        </div>
-      </div>
+      <div className="status-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)' }}>
+        <ProductTypeSelector activeProductType={"status" as any} />
+      {/* Fixed Global Nav Removed */}
 
-      <div className="status-page" style={{ flex: 1, display: 'flex', marginTop: '44px' }}>
+      <div className="status-page" style={{ flex: 1, display: 'flex' }}>
         
         {/* Fixed Sidebar TOC */}
         <aside className="fixed top-[44px] left-0 w-[280px] h-[calc(100vh-44px)] overflow-y-auto border-r border-[#dde0f0] dark:border-[#1e1e38] p-8 hidden md:block bg-[#f7f8ff] dark:bg-[#06060f] z-40">
@@ -347,7 +330,7 @@ export default function StatusPage() {
         {/* Main body */}
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }} className="md:ml-[280px]">
 
-        <div className="status-header">
+        <div className="status-header" id="top">
           <div style={{ marginBottom: '0.4rem' }}>
             <h1 style={{ fontSize: '1.6rem', fontWeight: 800, margin: 0, letterSpacing: '-0.02em' }}>
               Last Price Update
@@ -524,6 +507,7 @@ export default function StatusPage() {
                         No pricing data found for this provider.
                       </div>
                     )}
+                    <BackToTop />
                   </div>
                 );
               })}
