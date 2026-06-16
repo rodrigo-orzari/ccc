@@ -14,10 +14,11 @@ export default function WorkloadsCatalog() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans">
+    <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
       <ProductTypeSelector activeProductType={"workloads" as any} />
 
-      <div className="flex flex-1 w-full">
+      <div className="flex-1 overflow-auto flex flex-col">
+        <div className="flex flex-1 w-full">
         {/* Sidebar — mirrors FilterSidebar pattern */}
         <aside className="w-[280px] border-r border-[#e5e5e5] dark:border-[#262626] p-6 hidden md:block bg-white dark:bg-[#000000]">
           <h2 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-4">
@@ -99,6 +100,7 @@ export default function WorkloadsCatalog() {
             </div>
           )}
         </main>
+        </div>
       </div>
 
       <Footer />
