@@ -364,34 +364,6 @@ export default function WorkloadDetails() {
               </div>
             )}
           </div>
-
-          {/* Workload Carousel */}
-          <div className="mt-8 border-t border-[#e5e5e5] dark:border-[#262626] pt-8">
-            <div className="flex items-center justify-between mb-4 px-2">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-                Explore Other Workloads
-              </h3>
-              <Link href="/workloads" className="text-[10px] font-bold text-black dark:text-white uppercase tracking-widest hover:underline">
-                View All →
-              </Link>
-            </div>
-            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4">
-              {WORKLOADS.filter(w => w.id !== id).map(w => (
-                <Link
-                  key={w.id}
-                  href={`/workloads/${w.id}`}
-                  className="snap-start shrink-0 w-[260px] p-4 bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded flex flex-col gap-2 hover:border-[#a3a3a3] dark:hover:border-[#404040] transition-colors"
-                >
-                  <div className="text-2xl mb-1">{w.icon}</div>
-                  <h4 className="text-sm font-bold text-black dark:text-white leading-tight">{w.name}</h4>
-                  <p className="text-[11px] text-[#737373] line-clamp-2 leading-relaxed">
-                    {w.description}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </div>
-
         </div>
 
         {/* Configuration panel — mirrors FilterSidebar chip patterns */}
@@ -471,6 +443,33 @@ export default function WorkloadDetails() {
             </section>
           </div>
         </div>
+        </div>
+
+        {/* Workload Carousel - Moved outside the grid to span full width below content */}
+        <div className="mt-8 border-t border-[#e5e5e5] dark:border-[#262626] pt-8 w-full">
+          <div className="flex items-center justify-between mb-4 px-2">
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+              Explore Other Workloads
+            </h3>
+            <Link href="/workloads" className="text-[10px] font-bold text-black dark:text-white uppercase tracking-widest hover:underline">
+              View All →
+            </Link>
+          </div>
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4">
+            {WORKLOADS.filter(w => w.id !== id).map(w => (
+              <Link
+                key={w.id}
+                href={`/workloads/${w.id}`}
+                className="snap-start shrink-0 w-[260px] p-4 bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded flex flex-col gap-2 hover:border-[#a3a3a3] dark:hover:border-[#404040] transition-colors"
+              >
+                <div className="text-2xl mb-1">{w.icon}</div>
+                <h4 className="text-sm font-bold text-black dark:text-white leading-tight">{w.name}</h4>
+                <p className="text-[11px] text-[#737373] line-clamp-2 leading-relaxed">
+                  {w.description}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
       </main>
 

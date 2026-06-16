@@ -33,7 +33,11 @@ export async function POST(request: Request) {
         if (reqs.minMemoryGb) {
           conditions.push(sql`pr.memory_gb >= ${reqs.minMemoryGb}`);
         }
-        if (reqs.category) {
+        if (reqs.category === 'GPU instance') {
+          conditions.push(sql`pr.gpu_count > 0`);
+        } else if (reqs.category === 'Inference') {
+          conditions.push(sql`pr.category ILIKE '%ai%'`);
+        } else if (reqs.category) {
           conditions.push(sql`pr.category ILIKE ${'%' + reqs.category + '%'}`);
         }
         

@@ -172,11 +172,11 @@ export class NativeAnalyticsStaticAdapter extends BaseAdapter {
   private instances: typeof NATIVE_ANALYTICS_INSTANCES;
   private region: string;
 
-  constructor(provider: 'aws' | 'gcp') {
+  constructor(provider: 'aws' | 'gcp' | 'azure') {
     super();
     this.providerSlug = provider;
     this.instances = NATIVE_ANALYTICS_INSTANCES.filter(i => i.provider === provider);
-    this.region = provider === 'aws' ? NATIVE_ANALYTICS_AWS_REGION : NATIVE_ANALYTICS_GCP_REGION;
+    this.region = provider === 'aws' ? NATIVE_ANALYTICS_AWS_REGION : provider === 'gcp' ? NATIVE_ANALYTICS_GCP_REGION : 'eastus';
   }
 
   async fetchPricing(): Promise<PricingRecord[]> {
@@ -390,6 +390,7 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
       new DatabricksAzureAdapter(),
       new NativeAnalyticsStaticAdapter('aws'),
       new NativeAnalyticsStaticAdapter('gcp'),
+      new NativeAnalyticsStaticAdapter('azure'),
       new SynapseAzureAdapter(),
       new AlibabaAnalyticsAdapter(),
       new OracleAnalyticsAdapter(),
