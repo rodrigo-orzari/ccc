@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 156 files · ~111,490 words
+- 156 files · ~111,408 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 536 nodes · 724 edges · 61 communities (33 shown, 28 thin omitted)
+- 537 nodes · 725 edges · 61 communities (33 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e15f5c5d`
+- Built from commit: `d8a69acf`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -82,10 +82,10 @@
   test_api.mjs → src/lib/api-utils.ts
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
   test_filters.mjs → src/lib/api-utils.ts
-- `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
-  src/app/page.tsx → src/hooks/useDynamicFilters.ts
 - `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
   src/components/ProductTypeSelector.tsx → src/types/index.ts
+- `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
+  src/app/page.tsx → src/hooks/useDynamicFilters.ts
 - `FilterSidebar()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/components/FilterSidebar.tsx → src/hooks/useDynamicFilters.ts
 
@@ -103,7 +103,7 @@ Cohesion: 0.07
 Nodes (58): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+50 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.18
+Cohesion: 0.17
 Nodes (6): PIPELINE_ORDER, PipelineStatus, PROVIDER_COLORS, PROVIDER_URLS, ProviderStatus, StatusData
 
 ### Community 9 - "Community 9"
@@ -179,7 +179,7 @@ Cohesion: 0.09
 Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PriceDriftResult (+2 more)
 
 ## Knowledge Gaps
-- **148 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `PROVIDERS`, `ColDef`, `COL_PROVIDER` (+143 more)
+- **148 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+143 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -192,7 +192,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `PROVIDERS` to the rest of the system?**
+- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
   _148 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
