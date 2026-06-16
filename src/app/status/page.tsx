@@ -534,8 +534,8 @@ export default function StatusPage() {
           )}
         </div>
       </div>
-      <Footer />
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }
