@@ -56,7 +56,7 @@ export default function ProductTypeSelector({
   };
 
   return (
-    <div className="h-10 border-b border-[#e5e5e5] dark:border-[#262626] bg-[#fcfcfc] dark:bg-[#080808] flex items-center px-4 overflow-x-auto no-scrollbar shrink-0">
+    <div className="h-10 border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e] flex items-center px-4 overflow-x-auto no-scrollbar shrink-0">
       <div className="flex items-center gap-6 flex-1 min-w-0">
         {PRODUCT_TYPES.map(product => (
           <button
@@ -65,15 +65,15 @@ export default function ProductTypeSelector({
             disabled={product.soon}
             className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
               activeProductType === product.id
-                ? 'bg-white dark:bg-[#171717] shadow-sm border-[#e5e5e5] dark:border-[#262626] cursor-default'
-                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-white opacity-60 hover:opacity-100'
+                ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm border-[#dde0f0] dark:border-[#1e1e38] cursor-default'
+                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100'
             } ${product.soon ? 'cursor-not-allowed opacity-60' : ''}`}
           >
             <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== product.id ? 'font-medium' : ''}`}>
               {product.emoji} {product.label}
             </span>
             {product.soon && (
-              <span className="text-[8px] font-bold bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-1 rounded uppercase tracking-tighter">
+              <span className="text-[8px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] px-1 rounded uppercase tracking-tighter">
                 Soon
               </span>
             )}
@@ -82,7 +82,7 @@ export default function ProductTypeSelector({
         
         <a
           href="/workloads"
-          className="flex items-center gap-2 px-3 py-1 rounded border border-transparent transition-all text-[#737373] hover:text-black dark:hover:text-white opacity-60 hover:opacity-100 shrink-0"
+          className="flex items-center gap-2 px-3 py-1 rounded border border-transparent transition-all text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100 shrink-0"
         >
           <span className="text-xs font-medium flex items-center gap-1.5">
             📦 Workloads
@@ -104,7 +104,7 @@ export default function ProductTypeSelector({
         <button
           onClick={shareOnX}
           title="Share on X"
-          className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-white transition-colors flex items-center"
+          className="text-[#737373] dark:text-[#a3a3a3] hover:text-black dark:hover:text-[#f7f8ff] transition-colors flex items-center"
         >
           <XIcon />
         </button>

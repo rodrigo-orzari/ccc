@@ -601,7 +601,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden transition-colors duration-300">
+    <div className="flex flex-col h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans overflow-hidden transition-colors duration-300">
       <ProductTypeSelector activeProductType={activeProductType} onProductTypeChange={setActiveProductType} />
 
       <div className="flex flex-1 overflow-hidden">
@@ -768,7 +768,7 @@ export default function Dashboard() {
           onToggleSection={toggleSection}
         />
 
-        <main className="flex-1 min-w-0 overflow-hidden flex flex-col bg-white dark:bg-[#000000]">
+        <main className="flex-1 min-w-0 overflow-hidden flex flex-col bg-[#f7f8ff] dark:bg-[#06060f]">
           <ProviderCards
             providers={config.PROVIDERS.filter(p => activeProductType === 'ai' || !p.isAIOnly)}
             selectedProviders={selectedProviders}

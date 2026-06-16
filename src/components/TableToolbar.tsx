@@ -25,9 +25,9 @@ export default function TableToolbar({
   onViewModeChange,
 }: TableToolbarProps) {
   return (
-    <div className="px-4 py-3 flex items-center justify-between bg-white dark:bg-[#000000] border-b border-[#e5e5e5] dark:border-[#262626]">
+    <div className="px-4 py-3 flex items-center justify-between bg-[#f7f8ff] dark:bg-[#06060f] border-b border-[#dde0f0] dark:border-[#1e1e38]">
       <div className="flex items-center gap-6">
-        <span className="text-xl font-bold text-black dark:text-white shrink-0">
+        <span className="text-xl font-bold text-black dark:text-[#f7f8ff] shrink-0">
           {totalFilteredCount.toLocaleString()}
           {totalFilteredCount > dataLength && dataLength > 0 && (
             <span className="ml-2 text-[10px] font-normal text-[#a3a3a3]">(top {dataLength.toLocaleString()} shown)</span>
@@ -41,7 +41,7 @@ export default function TableToolbar({
             placeholder="Search..."
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-10 py-2 text-xs w-48 md:w-64 focus:outline-none focus:border-black/10 dark:focus:border-white/20 transition-all placeholder:text-[#a3a3a3]"
+            className="bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] rounded px-10 py-2 text-xs w-48 md:w-64 focus:outline-none focus:border-black/10 dark:focus:border-[#f7f8ff]/20 transition-all placeholder:text-[#a3a3a3]"
           />
         </div>
 
@@ -51,16 +51,16 @@ export default function TableToolbar({
       </div>
       <div className="flex items-center gap-4">
         {onViewModeChange && (
-          <div className="flex bg-[#f5f5f5] dark:bg-[#171717] rounded-lg p-0.5 border border-[#e5e5e5] dark:border-[#262626]">
+          <div className="flex bg-[#dde0f0] dark:bg-[#1e1e38] rounded-lg p-0.5 border border-[#dde0f0] dark:border-[#1e1e38]">
             <button
               onClick={() => onViewModeChange('table')}
-              className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-white dark:bg-[#262626] text-black dark:text-white shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
+              className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-black dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'}`}
             >
               🗄️ Table
             </button>
             <button
               onClick={() => onViewModeChange('charts')}
-              className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-white dark:bg-[#262626] text-black dark:text-white shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-white'}`}
+              className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-black dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'}`}
             >
               📊 Charts
             </button>
@@ -70,7 +70,7 @@ export default function TableToolbar({
         <button
           onClick={onExport}
           disabled={dataLength === 0 || isExporting}
-          className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#e5e5e5] dark:border-[#262626] px-3 py-1.5 rounded hover:bg-[#f5f5f5] dark:hover:bg-[#171717] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#dde0f0] dark:border-[#1e1e38] px-3 py-1.5 rounded hover:bg-[#dde0f0] dark:hover:bg-[#1e1e38] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Download size={12} /> {isExporting ? 'Exporting...' : 'Export'}
         </button>

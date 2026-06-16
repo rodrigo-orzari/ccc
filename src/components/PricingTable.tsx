@@ -207,7 +207,7 @@ export default function PricingTable({
     <th
       data-col={colKey}
       onClick={sortKey ? () => onHeaderClick(sortKey) : undefined}
-      className={`px-6 py-4 font-bold whitespace-nowrap ccc-th ${sortKey ? 'cursor-pointer hover:text-black dark:hover:text-white transition-colors' : ''} ${className}`}
+      className={`px-6 py-4 font-bold whitespace-nowrap ccc-th ${sortKey ? 'cursor-pointer hover:text-black dark:hover:text-[#f7f8ff] transition-colors' : ''} ${className}`}
       style={{ width: colWidths[colKey] ?? DEFAULT_WIDTHS[colKey] }}
     >
       <div className="flex items-center justify-center h-full w-full">
@@ -279,8 +279,8 @@ export default function PricingTable({
               ))}
             </colgroup>
 
-            <thead className="sticky top-0 bg-white dark:bg-[#000000] z-10 border-b border-[#e5e5e5] dark:border-[#262626]">
-              <tr className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e5e5]">
+            <thead className="sticky top-0 bg-[#f7f8ff] dark:bg-[#06060f] z-10 border-b border-[#dde0f0] dark:border-[#1e1e38]">
+              <tr className="text-[10px] font-bold uppercase tracking-widest text-[#1e1e38] dark:text-[#dde0f0]">
 
                 <Th colKey="provider"       sortKey="provider"       label="Provider" />
                 <Th colKey="instance_type"  sortKey="instance_type"  label={<span title={skuTooltip} style={{ cursor: 'help' }}>Configuration <span style={{ opacity: 0.45, fontWeight: 400 }}>ⓘ</span></span>} />
@@ -357,7 +357,7 @@ export default function PricingTable({
                   colKey="price_per_unit"
                   sortKey="price_per_unit"
                   label={activeProductType === 'ai' ? 'Input Price (/1M)' : activeProductType === 'serverless' ? 'Price ($)' : (showAggregation ? 'Yearly price ($)' : 'Hourly price ($)')}
-                  className="text-black dark:text-white hover:opacity-80"
+                  className="text-black dark:text-[#f7f8ff] hover:opacity-80"
                 />
                 
                 {activeProductType === 'serverless' && <Th colKey="source" sortKey="data_source" label="Source" />}
@@ -366,13 +366,13 @@ export default function PricingTable({
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
+            <tbody className="divide-y divide-[#dde0f0] dark:divide-[#181818]">
               {loading ? (
                 Array.from({ length: 15 }).map((_, i) => (
                   <tr key={i} className="animate-pulse">
                     {colDefs.map(c => (
                       <td key={c.key} className="px-6 py-4">
-                        <div className="h-3 bg-[#f5f5f5] dark:bg-[#171717] rounded w-12 mx-auto" />
+                        <div className="h-3 bg-[#dde0f0] dark:bg-[#1e1e38] rounded w-12 mx-auto" />
                       </td>
                     ))}
                   </tr>
@@ -422,7 +422,7 @@ function TableRow({
   )?.color ?? '#525252';
 
   return (
-    <tr className={`transition-colors group ${index % 2 === 0 ? 'bg-white dark:bg-[#000000]' : 'bg-[#f7f7f7] dark:bg-[#0a0a0a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
+    <tr className={`transition-colors group ${index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
       {/* Provider */}
       <td data-col="provider" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
         <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: providerColor, borderColor: providerColor + '50', backgroundColor: providerColor + '18' }}>
@@ -453,7 +453,7 @@ function TableRow({
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.multimodal || '—'}</span></td>
       </>) : activeProductType === 'serverless' ? (<>
         <td data-col="svc_type"            className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
-          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">
+          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]">
             {record.attributes?.service_type || 'Compute'}
           </span>
         </td>
@@ -462,16 +462,16 @@ function TableRow({
         <td data-col="engine_category"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.cold_start_overhead_ms || '—'}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.timeout_seconds ? (Number(record.attributes.timeout_seconds) >= 60 ? `${Number(record.attributes.timeout_seconds) / 60} min` : `${record.attributes.timeout_seconds} sec`) : '—'}</span></td>
         <td data-col="deployment_arch"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration ? (String(record.attributes.memory_configuration).toLowerCase().includes('configurable') ? 'Configurable' : String(record.attributes.memory_configuration).toLowerCase().includes('tier') ? 'Tiers' : String(record.attributes.memory_configuration).toLowerCase().includes('auto') ? 'Automatic' : record.attributes.memory_configuration) : '—'}</span></td>
-        <td data-col="ha_mode_os"          className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.attributes?.service_type && record.attributes.service_type !== 'Compute' ? <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span> : <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">{record.attributes?.free_invocations_per_month && Number(record.attributes.free_invocations_per_month) > 0 ? 'Yes' : 'No'}</span>}</td>
+        <td data-col="ha_mode_os"          className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.attributes?.service_type && record.attributes.service_type !== 'Compute' ? <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span> : <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]">{record.attributes?.free_invocations_per_month && Number(record.attributes.free_invocations_per_month) > 0 ? 'Yes' : 'No'}</span>}</td>
         <td data-col="granularity"         className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity_ms ? `${record.attributes.billing_granularity_ms}ms` : '—'}</span></td>
         <td data-col="exec_model"          className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model || '—'}</span></td>
-        <td data-col="prov_concurrency"    className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.attributes?.provisioned_concurrency_support ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">{record.attributes.provisioned_concurrency_support}</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
+        <td data-col="prov_concurrency"    className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.attributes?.provisioned_concurrency_support ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]">{record.attributes.provisioned_concurrency_support}</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
         <td data-col="max_storage"         className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb ? `${record.attributes.max_ephemeral_storage_gb} GB` : '—'}</span></td>
         <td data-col="inv_price"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
           <div className="flex flex-col items-center gap-1">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}</span>
             {record.attributes?.invocation_price_per_1m && maxInvPrice !== undefined && maxInvPrice > 0 && (
-              <div className="w-12 h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full overflow-hidden flex justify-start">
+              <div className="w-12 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start">
                 <div className="h-full rounded-full" style={{ width: `${(Number(record.attributes.invocation_price_per_1m) / maxInvPrice) * 100}%`, backgroundColor: '#6366f1' }} />
               </div>
             )}
@@ -482,7 +482,7 @@ function TableRow({
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span></td>
         <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.architecture || '—'}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity || '—'}</span></td>
-        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
       </>) : activeProductType === 'networking' ? (<>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_model || '—'}</span></td>
@@ -504,7 +504,7 @@ function TableRow({
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor || '—'}</span></td>
         <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
-        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
       </>)}
 
       {/* Geography */}
@@ -530,11 +530,11 @@ function TableRow({
       {/* Price */}
       <td data-col="price_per_unit" className="px-6 py-4 text-center align-middle whitespace-nowrap overflow-hidden">
         <div className="flex flex-col items-center gap-1.5">
-          <span className="text-xs font-bold text-black dark:text-white">
+          <span className="text-xs font-bold text-black dark:text-[#f7f8ff]">
             {activeProductType === 'ai' || activeProductType === 'serverless' ? `$${parseFloat(record.price_per_unit).toFixed(4)}` : (showAggregation ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}` : `$${parseFloat(record.price_per_unit).toFixed(4)}`)}
           </span>
           {maxPrice !== undefined && maxPrice > 0 && (
-            <div className="w-16 h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full overflow-hidden flex justify-start">
+            <div className="w-16 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start">
               <div className="h-full rounded-full" style={{ width: `${(parseFloat(record.price_per_unit) / maxPrice) * 100}%`, backgroundColor: '#6366f1' }} />
             </div>
           )}
@@ -544,7 +544,7 @@ function TableRow({
       {/* Source / Output Price */}
       {activeProductType === 'serverless' && (
         <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
-          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] dark:text-[#a3a3a3] border-[#e5e5e5] dark:border-[#262626]">
+          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] dark:text-[#a3a3a3] border-[#dde0f0] dark:border-[#1e1e38]">
             {record.data_source === 'static_config' ? 'Static' : 'API'}
           </span>
         </td>
@@ -558,7 +558,7 @@ function TableRow({
 
       {activeProductType !== 'serverless' && activeProductType !== 'ai' && (
         <td data-col="source" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
-          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] dark:text-[#a3a3a3] border-[#e5e5e5] dark:border-[#262626]">
+          <span className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] dark:text-[#a3a3a3] border-[#dde0f0] dark:border-[#1e1e38]">
             {record.data_source === 'static_config' ? 'Static' : 'API'}
           </span>
         </td>
