@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { Download } from 'lucide-react';
+import { Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Footer, ProductTypeSelector } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { WorkloadDefinition } from '@/types';
@@ -99,6 +99,32 @@ export default function WorkloadDetails() {
   const [region, setRegion] = useState('Global');
   const [pricingModel, setPricingModel] = useState<'PAYG' | 'Yearly'>('PAYG');
   const [diagramExpanded, setDiagramExpanded] = useState(false);
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 2);
+    }
+  };
+
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+    return () => window.removeEventListener('resize', checkScroll);
+  }, []);
+
+  const scrollLeft = () => {
+    carouselRef.current?.scrollBy({ left: -280, behavior: 'smooth' });
+  };
+
+  const scrollRight = () => {
+    carouselRef.current?.scrollBy({ left: 280, behavior: 'smooth' });
+  };
 
   // Seed state from URL params on mount so shared links restore the exact configuration.
   useEffect(() => {
@@ -459,20 +485,47 @@ export default function WorkloadDetails() {
               View All →
             </Link>
           </div>
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4">
-            {WORKLOADS.filter(w => w.id !== id).map(w => (
-              <Link
-                key={w.id}
-                href={`/workloads/${w.id}`}
-                className="snap-start shrink-0 w-[260px] p-4 bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded flex flex-col gap-2 hover:border-[#a3a3a3] dark:hover:border-[#404040] transition-colors"
+          
+          <div className="relative group">
+            {canScrollLeft && (
+              <button
+                onClick={scrollLeft}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
+                aria-label="Scroll left"
               >
-                <div className="text-2xl mb-1">{w.icon}</div>
-                <h4 className="text-sm font-bold text-black dark:text-white leading-tight">{w.name}</h4>
-                <p className="text-[11px] text-[#737373] line-clamp-2 leading-relaxed">
-                  {w.description}
-                </p>
-              </Link>
-            ))}
+                <ChevronLeft size={20} />
+              </button>
+            )}
+
+            <div 
+              ref={carouselRef}
+              onScroll={checkScroll}
+              className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 no-scrollbar"
+            >
+              {WORKLOADS.filter(w => w.id !== id).map(w => (
+                <Link
+                  key={w.id}
+                  href={`/workloads/${w.id}`}
+                  className="snap-start shrink-0 w-[260px] p-4 bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded flex flex-col gap-2 hover:border-[#a3a3a3] dark:hover:border-[#404040] transition-colors"
+                >
+                  <div className="text-2xl mb-1">{w.icon}</div>
+                  <h4 className="text-sm font-bold text-black dark:text-white leading-tight">{w.name}</h4>
+                  <p className="text-[11px] text-[#737373] line-clamp-2 leading-relaxed">
+                    {w.description}
+                  </p>
+                </Link>
+              ))}
+            </div>
+
+            {canScrollRight && (
+              <button
+                onClick={scrollRight}
+                className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
+                aria-label="Scroll right"
+              >
+                <ChevronRight size={20} />
+              </button>
+            )}
           </div>
         </div>
       </div>
