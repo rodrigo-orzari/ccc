@@ -19,7 +19,7 @@ type Row = {
 };
 
 export const AZURE_APP_HOSTING: Row[] = [
-  { type: 'App Service Free F1',      vcpus: 1, memory_gb: 1,    price: 0,      unit: 'Mo', attributes: { os: 'Linux',   tier: 'Shared',   compute_type: 'Shared' } },
+  { type: 'App Service Free F1',      vcpus: 1, memory_gb: 1,    price: 0,      unit: 'Mo', attributes: { os: 'Linux',   tier: 'Free',     compute_type: 'Shared' } },
   { type: 'App Service Basic B1',     vcpus: 1, memory_gb: 1.75, price: 54.75,  unit: 'Mo', attributes: { os: 'Linux',   tier: 'Basic',    compute_type: 'Dedicated' } },
   { type: 'App Service Basic B2',     vcpus: 2, memory_gb: 3.5,  price: 109.50, unit: 'Mo', attributes: { os: 'Linux',   tier: 'Basic',    compute_type: 'Dedicated' } },
   { type: 'App Service Standard S1',  vcpus: 1, memory_gb: 1.75, price: 73.00,  unit: 'Mo', attributes: { os: 'Linux',   tier: 'Standard', compute_type: 'Dedicated' } },
@@ -40,17 +40,17 @@ export const AWS_APP_HOSTING: Row[] = [
 ];
 
 export const GCP_APP_HOSTING: Row[] = [
-  { type: 'App Engine Standard F1 (Free)', vcpus: 1, memory_gb: 0.128, price: 0,      unit: 'Mo', attributes: { os: 'Linux', tier: 'Shared',   compute_type: 'Shared' } },
+  { type: 'App Engine Standard F1 (Free)', vcpus: 1, memory_gb: 0.128, price: 0,      unit: 'Mo', attributes: { os: 'Linux', tier: 'Free',     compute_type: 'Shared' } },
   { type: 'App Engine Standard F2',        vcpus: 1, memory_gb: 0.256, price: 36.50,  unit: 'Mo', attributes: { os: 'Linux', tier: 'Basic',    compute_type: 'Shared' } },
   { type: 'App Engine Standard F4',        vcpus: 1, memory_gb: 0.512, price: 73.00,  unit: 'Mo', attributes: { os: 'Linux', tier: 'Standard', compute_type: 'Shared' } },
   { type: 'App Engine Standard F4_1G',     vcpus: 1, memory_gb: 1,     price: 109.50, unit: 'Mo', attributes: { os: 'Linux', tier: 'Standard', compute_type: 'Shared' } },
   { type: 'App Engine Flex 1vCPU/2GB',     vcpus: 1, memory_gb: 2,     price: 50.00,  unit: 'Mo', attributes: { os: 'Linux', tier: 'Standard', compute_type: 'Dedicated' } },
   { type: 'App Engine Flex 2vCPU/4GB',     vcpus: 2, memory_gb: 4,     price: 85.00,  unit: 'Mo', attributes: { os: 'Linux', tier: 'Premium',  compute_type: 'Dedicated' } },
-  { type: 'Firebase Hosting',              vcpus: 0, memory_gb: 0,     price: 0.026,  unit: 'per GB transferred', attributes: { os: 'Linux', tier: 'Shared', compute_type: 'Shared', runtime: 'Static' } },
+  { type: 'Firebase Hosting',              vcpus: 0, memory_gb: 0,     price: 0.026,  unit: 'per GB transferred', attributes: { os: 'Linux', tier: 'Free',   compute_type: 'Shared', runtime: 'Static' } },
 ];
 
 export const DO_APP_HOSTING: Row[] = [
-  { type: 'App Platform Static',          vcpus: 0, memory_gb: 0,   price: 0,     unit: 'Mo', attributes: { os: 'Linux', tier: 'Shared',       compute_type: 'Shared' } },
+  { type: 'App Platform Static',          vcpus: 0, memory_gb: 0,   price: 0,     unit: 'Mo', attributes: { os: 'Linux', tier: 'Free',         compute_type: 'Shared' } },
   { type: 'App Platform Basic XXS',       vcpus: 1, memory_gb: 0.5, price: 5.00,  unit: 'Mo', attributes: { os: 'Linux', tier: 'Basic',        compute_type: 'Shared' } },
   { type: 'App Platform Basic XS',        vcpus: 1, memory_gb: 1,   price: 10.00, unit: 'Mo', attributes: { os: 'Linux', tier: 'Basic',        compute_type: 'Shared' } },
   { type: 'App Platform Professional XS', vcpus: 1, memory_gb: 2,   price: 20.00, unit: 'Mo', attributes: { os: 'Linux', tier: 'Professional', compute_type: 'Dedicated' } },

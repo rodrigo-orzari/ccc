@@ -29,6 +29,55 @@ import {
 // mirrors the VM category system (General Purpose, Memory Optimized, etc.).
 // Stored in attributes.tier so no schema change is required.
 
+// Azure Redis cache-size lookup — SKU names encode tier+number (e.g. "C1", "P2",
+// "E20") rather than a literal GB figure, so memory_gb can't be parsed numerically
+// like compute SKUs. Sizes are approximate, sourced from Azure Cache for Redis docs.
+const AZURE_REDIS_CACHE_GB: Record<string, number> = {
+  C0: 0.25, C1: 1, C2: 2.5, C3: 6, C4: 13, C5: 26, C6: 53,
+  P1: 6, P2: 13, P3: 26, P4: 53, P5: 120,
+};
+
+function deriveRedisMemoryGb(sku: string): number {
+  // Azure Redis SKUs delimit segments with underscores (e.g. "..._C1_Cache"),
+  // and underscore counts as a \w character so \b boundaries don't apply here.
+  const tierMatch = sku.match(/(?:^|_)([CP]\d+)(?:_|$)/i);
+  if (tierMatch) {
+    const key = tierMatch[1].toUpperCase();
+    if (AZURE_REDIS_CACHE_GB[key] !== undefined) return AZURE_REDIS_CACHE_GB[key];
+  }
+  // Enterprise/Enterprise Flash SKUs (E10, E20, F300, F700...) encode capacity
+  // directly in the trailing number — close enough as an approximate GB figure.
+  const enterpriseMatch = sku.match(/(?:^|_)[EF](\d+)(?:_|$)/i);
+  if (enterpriseMatch) return parseInt(enterpriseMatch[1]);
+  return 0;
+}
+
+// Azure SQL/MySQL/PostgreSQL vCore SKUs never report memory in the Retail Prices
+// API — only the SKU's vCPU count. Approximate GB/vCore by tier so memory-based
+// workload matching (minMemoryGb) doesn't silently exclude every Azure relational row.
+// Azure DB SKU names encode vCPU count in several inconsistent shapes
+// ("..._64_vCore", "20 vCore", "Standard_D32ds_v5", "SQLMI_GP_Compute_Gen5_4").
+// Try each known shape in order; SKUs with no countable vcpu (e.g. "Basic") return 0.
+function parseAzureDbVcpus(sku: string): number {
+  let m = sku.match(/(\d+)_?\s*vCore/i);
+  if (m) return parseInt(m[1]);
+  m = sku.match(/Gen\d+_(\d+)$/i);
+  if (m) return parseInt(m[1]);
+  m = sku.match(/[A-Z](\d+)[a-z]*_v\d+/i);
+  if (m) return parseInt(m[1]);
+  m = sku.match(/_(\d+)$/);
+  if (m) return parseInt(m[1]);
+  return 0;
+}
+
+function deriveAzureDbMemoryGb(tier: string, vcpus: number): number {
+  if (!vcpus) return 0;
+  const gbPerVcpu = tier === 'Memory Optimized' || tier === 'Business Critical' ? 8
+    : tier === 'Burstable' ? 2
+    : 5; // General Purpose / Standard / default
+  return vcpus * gbPerVcpu;
+}
+
 function deriveTier(provider: string, instanceType: string): string {
   const t = instanceType.toLowerCase();
 
@@ -412,19 +461,20 @@ export class AzureDBAdapter extends BaseAdapter {
         unit = '1 Hour (Reserved)';
       }
 
+      const tier = deriveTier('azure', sku);
       records.push({
         provider: 'azure',
         service: 'Azure Databases',
         region: AzureDBAdapter.REGION,
         instanceType: sku,
         vcpus,
-        memoryGb: 0,
+        memoryGb: engine === 'Redis' ? deriveRedisMemoryGb(sku) : deriveAzureDbMemoryGb(tier, vcpus),
         arch: 'x86 64',
         os: '',
         cpuVendor: 'Intel',
         gpuCount: 0,
         geography: 'N. America',
-        category: (engine === 'Cosmos DB' || engine === 'Redis') ? 'NoSQL' : 'Relational',
+        category: engine === 'Cosmos DB' ? 'NoSQL' : engine === 'Redis' ? 'In-memory' : 'Relational',
         price,
         unit,
         dataSource: 'live_api' as const,
@@ -434,7 +484,7 @@ export class AzureDBAdapter extends BaseAdapter {
           deployment_type: 'Provisioned',
           ha_mode: haMode,
           storage_type: 'SSD',
-          tier: deriveTier('azure', sku),
+          tier,
         },
       });
     }
@@ -451,7 +501,8 @@ export class DigitalOceanDBAdapter extends BaseAdapter {
 
   async fetchPricing(): Promise<PricingRecord[]> {
     console.log(`Fetching DigitalOcean DB pricing (${DIGITALOCEAN_DB_INSTANCES.length} entries from static config)...`);
-    const NOSQL_ENGINES = new Set(['MongoDB', 'Valkey']);
+    const NOSQL_ENGINES = new Set(['MongoDB']);
+    const IN_MEMORY_ENGINES = new Set(['Valkey']);
     return DIGITALOCEAN_DB_INSTANCES.map(inst => ({
       provider: 'digitalocean',
       service: 'Managed Databases',
@@ -464,7 +515,7 @@ export class DigitalOceanDBAdapter extends BaseAdapter {
       cpuVendor: 'Intel',
       gpuCount: 0,
       geography: DIGITALOCEAN_DB_GEOGRAPHY,
-      category: NOSQL_ENGINES.has(inst.engine) ? 'NoSQL' : 'Relational',
+      category: NOSQL_ENGINES.has(inst.engine) ? 'NoSQL' : IN_MEMORY_ENGINES.has(inst.engine) ? 'In-memory' : 'Relational',
       price: inst.price,
       unit: 'Hour',
       dataSource: 'static_config' as const,
@@ -515,6 +566,175 @@ export class AlibabaDBAdapter extends BaseAdapter {
   }
 }
 
+// ─── AWS ElastiCache for Redis (static config) ─────────────────────────────────
+
+const AWS_ELASTICACHE_INSTANCES = [
+  { type: 'cache.t3.micro', vcpus: 2, memory: 0.5, price: 0.017 },
+  { type: 'cache.t3.medium', vcpus: 2, memory: 3.09, price: 0.068 },
+  { type: 'cache.m6g.large', vcpus: 2, memory: 6.38, price: 0.151 },
+  { type: 'cache.m6g.xlarge', vcpus: 4, memory: 12.93, price: 0.302 },
+  { type: 'cache.r6g.large', vcpus: 2, memory: 13.07, price: 0.193 },
+  { type: 'cache.r6g.xlarge', vcpus: 4, memory: 26.32, price: 0.386 },
+];
+
+export class AWSElastiCacheAdapter extends BaseAdapter {
+  providerSlug = 'aws';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching AWS ElastiCache pricing (${AWS_ELASTICACHE_INSTANCES.length} entries from static config)...`);
+    return AWS_ELASTICACHE_INSTANCES.map(inst => ({
+      provider: 'aws',
+      service: 'ElastiCache',
+      region: 'us-east-1',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: 'N. America',
+      category: 'In-memory',
+      price: inst.price,
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'Redis',
+        engine_version: '7.0',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Single AZ',
+        storage_type: 'Memory',
+        tier: deriveTier('aws', inst.type),
+      },
+    }));
+  }
+}
+
+// ─── GCP Memorystore for Redis (static config) ─────────────────────────────────
+
+const GCP_MEMORYSTORE_INSTANCES = [
+  { type: 'M1 (Basic, 1GB)', vcpus: 1, memory: 1, price: 0.049 },
+  { type: 'M2 (Basic, 4GB)', vcpus: 1, memory: 4, price: 0.196 },
+  { type: 'M3 (Basic, 5GB)', vcpus: 2, memory: 5, price: 0.245 },
+  { type: 'M4 (Standard HA, 10GB)', vcpus: 4, memory: 10, price: 0.59 },
+  { type: 'M5 (Standard HA, 35GB)', vcpus: 8, memory: 35, price: 2.065 },
+];
+
+export class GCPMemorystoreAdapter extends BaseAdapter {
+  providerSlug = 'gcp';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching GCP Memorystore pricing (${GCP_MEMORYSTORE_INSTANCES.length} entries from static config)...`);
+    return GCP_MEMORYSTORE_INSTANCES.map(inst => ({
+      provider: 'gcp',
+      service: 'Memorystore',
+      region: 'us-central1',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: 'N. America',
+      category: 'In-memory',
+      price: inst.price,
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'Redis',
+        engine_version: '7.0',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Single AZ',
+        storage_type: 'Memory',
+        tier: deriveTier('gcp', inst.type),
+      },
+    }));
+  }
+}
+
+// ─── Oracle Cache with Redis (static config) ───────────────────────────────────
+
+const ORACLE_REDIS_INSTANCES = [
+  { type: '2 OCPU / 16GB', vcpus: 2, memory: 16, price: 0.184 },
+  { type: '4 OCPU / 32GB', vcpus: 4, memory: 32, price: 0.368 },
+  { type: '8 OCPU / 64GB', vcpus: 8, memory: 64, price: 0.736 },
+];
+
+export class OracleRedisAdapter extends BaseAdapter {
+  providerSlug = 'oracle';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Oracle Cache with Redis pricing (${ORACLE_REDIS_INSTANCES.length} entries from static config)...`);
+    return ORACLE_REDIS_INSTANCES.map(inst => ({
+      provider: 'oracle',
+      service: 'Cache with Redis',
+      region: 'us-ashburn-1',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: 'N. America',
+      category: 'In-memory',
+      price: inst.price,
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'Redis',
+        engine_version: '7.0',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Single AZ',
+        storage_type: 'Memory',
+        tier: 'General Purpose',
+      },
+    }));
+  }
+}
+
+// ─── Alibaba ApsaraDB for Redis (static config) ────────────────────────────────
+
+const ALIBABA_REDIS_INSTANCES = [
+  { type: 'redis.standard.2g', vcpus: 1, memory: 2, price: 0.085 },
+  { type: 'redis.standard.8g', vcpus: 2, memory: 8, price: 0.34 },
+  { type: 'redis.standard.32g', vcpus: 4, memory: 32, price: 1.36 },
+];
+
+export class AlibabaRedisAdapter extends BaseAdapter {
+  providerSlug = 'alibaba';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Alibaba ApsaraDB for Redis pricing (${ALIBABA_REDIS_INSTANCES.length} entries from static config)...`);
+    return ALIBABA_REDIS_INSTANCES.map(inst => ({
+      provider: 'alibaba',
+      service: 'ApsaraDB for Redis',
+      region: 'cn-hangzhou',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: 'Asia Pacific',
+      category: 'In-memory',
+      price: inst.price,
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'Redis',
+        engine_version: '7.0',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Single AZ',
+        storage_type: 'Memory',
+        tier: 'General Purpose',
+      },
+    }));
+  }
+}
+
 // ─── DatabasePricingPipeline ───────────────────────────────────────────────────
 
 export class DatabasePricingPipeline extends PricingPipeline {
@@ -526,10 +746,14 @@ export class DatabasePricingPipeline extends PricingPipeline {
       new OracleAutonomousAdapter(),
       new OracleMySQLHeatWaveAdapter(),
       new OraclePostgreSQLAdapter(),
+      new OracleRedisAdapter(),
       new AWSRDSAdapter(),
+      new AWSElastiCacheAdapter(),
+      new GCPMemorystoreAdapter(),
       new AzureDBAdapter(),
       new DigitalOceanDBAdapter(),
       new AlibabaDBAdapter(),
+      new AlibabaRedisAdapter(),
     ];
   }
 

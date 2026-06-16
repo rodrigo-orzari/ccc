@@ -46,7 +46,7 @@ export function useDynamicFilters() {
     SERVERLESS_LANGUAGES: merge(config.SERVERLESS_LANGUAGES, dynamicData?.serverless_languages),
     ANALYTICS_TIERS: merge(config.ANALYTICS_TIERS, dynamicData?.tiers),
     AI_MODEL_TIERS: merge(config.AI_MODEL_TIERS, dynamicData?.ai_model_tiers),
-    AI_CONTEXT_WINDOWS: merge(config.AI_CONTEXT_WINDOWS, dynamicData?.ai_context_windows),
+    AI_CONTEXT_WINDOWS: config.AI_CONTEXT_WINDOWS,
     AI_MULTIMODAL_OPTIONS: merge(config.AI_MULTIMODAL_OPTIONS, dynamicData?.ai_multimodal),
     CONTAINERS_ORCHESTRATORS: merge(config.CONTAINERS_ORCHESTRATORS, dynamicData?.orchestrators),
     CONTAINERS_COMPUTE_TYPES: merge(config.CONTAINERS_COMPUTE_TYPES, dynamicData?.container_compute_types),
@@ -54,8 +54,8 @@ export function useDynamicFilters() {
     CONTAINERS_BILLING_GRANULARITY: merge(config.CONTAINERS_BILLING_GRANULARITY, dynamicData?.billing_granularities),
     SERVERLESS_EXECUTION_MODEL_OPTIONS: merge(config.SERVERLESS_EXECUTION_MODEL_OPTIONS, dynamicData?.execution_models),
     SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS: merge(config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS, dynamicData?.provisioned_concurrency),
-    NETWORKING_USAGE_TIERS: merge(config.NETWORKING_USAGE_TIERS, dynamicData?.transfer_tiers),
-    NETWORKING_TRANSFER_SCOPES: merge(config.NETWORKING_TRANSFER_SCOPES, dynamicData?.destinations),
+    NETWORKING_USAGE_TIERS: merge(config.NETWORKING_USAGE_TIERS, dynamicData?.usage_tiers),
+    NETWORKING_TRANSFER_SCOPES: merge(config.NETWORKING_TRANSFER_SCOPES, dynamicData?.transfer_scopes),
     CPU_PROFILES,
     
     // Pass through unchanged constants

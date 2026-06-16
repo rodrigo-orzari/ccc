@@ -77,7 +77,11 @@ export const initDb = async () => {
       UPDATE pricing_records SET category = 'NoSQL' WHERE category = 'Relational' AND attributes->>'engine' IN ('MongoDB', 'Cassandra', 'DynamoDB', 'Cosmos DB');
 
       -- Fix streaming categories
-      UPDATE pricing_records SET category = 'Streaming' WHERE service_id IN (SELECT id FROM services WHERE category='data_warehouse') AND (instance_type ILIKE '%Kafka%' OR instance_type ILIKE '%Kinesis%' OR instance_type ILIKE '%Event%' OR instance_type ILIKE '%Pub/Sub%');
+      UPDATE pricing_records SET category = 'Streaming' WHERE service_id IN (SELECT id FROM services WHERE category='data_warehouse') AND (instance_type ILIKE '%Kafka%' OR instance_type ILIKE '%Kinesis%' OR instance_type ILIKE '%Event%' OR instance_type ILIKE '%Pub/Sub%' OR instance_type ILIKE '%Streaming%');
+
+      -- Tag remaining data_warehouse rows (Redshift, BigQuery, Synapse, Snowflake, MaxCompute, etc.)
+      -- as 'Warehouse' so the Data Warehouse workload component doesn't accidentally match Streaming rows.
+      UPDATE pricing_records SET category = 'Warehouse' WHERE service_id IN (SELECT id FROM services WHERE category='data_warehouse') AND category != 'Streaming';
     `);
 
     console.log('✅ Database schema initialized successfully.');

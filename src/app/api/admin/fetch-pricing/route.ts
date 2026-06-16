@@ -8,6 +8,7 @@ import { ContainersPricingPipeline } from '@/services/containers_pipeline';
 import { NetworkingPricingPipeline } from '@/services/networking_pipeline';
 import { AIPricingPipeline } from '@/services/ai_pipeline';
 import { StoragePricingPipeline } from '@/services/storage_pipeline';
+import { DataAnalyticsPricingPipeline } from '@/services/data_analytics_pipeline';
 import { sendPriceDriftEmail } from '@/services/mailer';
 
 export async function POST(req: NextRequest) {
@@ -80,6 +81,15 @@ export async function POST(req: NextRequest) {
       for (const r of storageResults) {
         if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
         results.push({ ...r, pipeline: 'storage' });
+      }
+    }
+
+    if (type === 'all' || type === 'data-analytics') {
+      const dataAnalyticsPipeline = new DataAnalyticsPricingPipeline(sql as any);
+      const dataAnalyticsResults = await dataAnalyticsPipeline.run();
+      for (const r of dataAnalyticsResults) {
+        if ((r as any).driftAlerts) allDriftAlerts.push(...(r as any).driftAlerts);
+        results.push({ ...r, pipeline: 'data-analytics' });
       }
     }
 
