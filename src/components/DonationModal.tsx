@@ -1,26 +1,46 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function DonationModal() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [doNotShowAgain, setDoNotShowAgain] = useState(false);
 
   useEffect(() => {
-    // Check if the user has opted out of the popup
+    if (!pathname) return;
+
+    // Check if the user has opted out of the popup permanently
     const hideDonationModal = localStorage.getItem('hideDonationModal');
-    if (!hideDonationModal) {
-      // Small delay so it doesn't immediately jar the user upon instantaneous page load
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, 1500);
-      return () => clearTimeout(timer);
+    if (hideDonationModal === 'true') {
+      return;
     }
-  }, []);
+
+    // Determine current context (workloads vs everywhere else)
+    const context = pathname.startsWith('/workloads') ? 'workloads' : 'main';
+
+    // Check if they already dismissed it in this context during this session
+    const dismissedContext = sessionStorage.getItem(`hideDonationModal_${context}`);
+    if (dismissedContext === 'true') {
+      return;
+    }
+
+    // Otherwise, wait 1.5s and show it
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   const handleYes = () => {
     if (doNotShowAgain) {
       localStorage.setItem('hideDonationModal', 'true');
+    } else {
+      // If they say yes but didn't check 'Do not show again', we still 
+      // want to stop bugging them for this session in this context.
+      const context = pathname?.startsWith('/workloads') ? 'workloads' : 'main';
+      sessionStorage.setItem(`hideDonationModal_${context}`, 'true');
     }
     // Open the Intuit connect donation link in a new tab
     window.open(
@@ -34,22 +54,13 @@ export function DonationModal() {
     if (doNotShowAgain) {
       localStorage.setItem('hideDonationModal', 'true');
     } else {
-      // If they click No and didn't check the box, we can set a session storage so it doesn't 
-      // annoy them on every single page reload during the same session, 
-      // but will still appear the next day/session unless they checked the box.
-      sessionStorage.setItem('hideDonationModalSession', 'true');
+      const context = pathname?.startsWith('/workloads') ? 'workloads' : 'main';
+      sessionStorage.setItem(`hideDonationModal_${context}`, 'true');
     }
     setIsOpen(false);
   };
 
-  // If we shouldn't render at all
   if (!isOpen) return null;
-
-  // We add a session check to prevent it from re-appearing continuously on refresh 
-  // if they clicked 'No' without checking 'Do not show again'.
-  if (typeof window !== 'undefined' && sessionStorage.getItem('hideDonationModalSession') === 'true') {
-    return null;
-  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">

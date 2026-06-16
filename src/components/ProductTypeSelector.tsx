@@ -58,7 +58,7 @@ export default function ProductTypeSelector({
   };
 
   return (
-    <div className="h-[44px] border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e] flex items-center px-[1.5rem] overflow-x-auto no-scrollbar shrink-0">
+    <div className="h-[44px] sticky top-0 z-50 border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e] flex items-center px-[1.5rem] overflow-x-auto no-scrollbar shrink-0">
       <div className="flex items-center gap-6 flex-1 min-w-0">
         {PRODUCT_TYPES.map(product => {
           const href = `/?product=${product.id === 'vm' ? 'compute' : product.id}`;

@@ -22,7 +22,7 @@ export default function WorkloadsCatalog() {
         {/* Sidebar — mirrors FilterSidebar pattern */}
         <aside className="w-[280px] border-r border-[#e5e5e5] dark:border-[#262626] p-6 hidden md:block bg-white dark:bg-[#000000]">
           <h2 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-4">
-            All Workloads
+            Content
           </h2>
           <nav>
             <ul className="space-y-2">
@@ -34,7 +34,6 @@ export default function WorkloadsCatalog() {
                     title={w.name}
                     style={{ textDecoration: 'none' }}
                   >
-                    <span className="text-sm">{w.icon}</span>
                     <span className="truncate">{w.name}</span>
                   </Link>
                 </li>
