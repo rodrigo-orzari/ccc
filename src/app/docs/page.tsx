@@ -180,9 +180,9 @@ const DocsPage: React.FC = () => {
         </div>
       <div className="docs-container" id="top" style={{ flex: 1 }}>
         <aside className="docs-sidebar">
-          <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: 'var(--muted-text)', marginBottom: '0.875rem' }}>
-            On this page
-          </div>
+            <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
+              Content
+            </h4>
           <nav>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
               <li><a href="#getting-started" style={{ padding: '3px 0' }}>Getting Started</a></li>

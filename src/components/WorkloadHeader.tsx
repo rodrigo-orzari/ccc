@@ -34,7 +34,7 @@ export function WorkloadHeader() {
   };
 
   return (
-    <header className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38] py-3 px-6 flex justify-between items-center text-sm">
+    <header className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38] h-[44px] px-6 flex justify-between items-center text-sm">
       <Link 
         href="/" 
         className="font-bold text-[#111827] dark:text-[#f1f5f9] hover:opacity-80 transition-opacity flex items-center gap-2"

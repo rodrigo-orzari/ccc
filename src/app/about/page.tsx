@@ -265,7 +265,7 @@ Always verify your final estimates using the official calculators:
         <aside className="sidebar">
 
           <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
-            In this article
+            Content
           </h4>
           <nav>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
