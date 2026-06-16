@@ -19,25 +19,75 @@ export default function WorkloadsCatalog() {
 
       <div className="flex-1 overflow-auto flex flex-col">
         <div className="flex flex-1 w-full">
-        {/* Sidebar — mirrors FilterSidebar pattern */}
-        <aside className="w-[280px] border-r border-[#e5e5e5] dark:border-[#262626] p-6 hidden md:block bg-white dark:bg-[#000000]">
-          <h2 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-4">
+        {/* Sidebar — hierarchical structure like docs */}
+        <aside className="w-[280px] border-r border-[#e5e5e5] dark:border-[#262626] p-6 hidden md:block bg-white dark:bg-[#000000] overflow-y-auto">
+          <h2 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-6">
             Content
           </h2>
           <nav>
-            <ul className="space-y-2">
-              {WORKLOADS.map(w => (
-                <li key={w.id}>
-                  <Link
-                    href={`/workloads/${w.id}`}
-                    className="flex items-center gap-2 text-[13px] font-medium text-[#171717] dark:text-[#e5e7eb] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
-                    title={w.name}
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <span className="truncate">{w.name}</span>
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-5">
+              {/* Web Applications */}
+              <li>
+                <h3 className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] mb-2.5 uppercase tracking-wide">
+                  Web Applications
+                </h3>
+                <ul className="space-y-1.5 pl-2">
+                  {WORKLOADS.filter(w => ['serverless-web-app', '3-tier-web', 'ecommerce-microservices'].includes(w.id)).map(w => (
+                    <li key={w.id}>
+                      <Link
+                        href={`/workloads/${w.id}`}
+                        className="text-[12px] text-[#737373] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
+                        title={w.name}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        {w.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+
+              {/* Data & Analytics */}
+              <li>
+                <h3 className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] mb-2.5 uppercase tracking-wide">
+                  Data & Analytics
+                </h3>
+                <ul className="space-y-1.5 pl-2">
+                  {WORKLOADS.filter(w => ['streaming-analytics', 'data-warehouse'].includes(w.id)).map(w => (
+                    <li key={w.id}>
+                      <Link
+                        href={`/workloads/${w.id}`}
+                        className="text-[12px] text-[#737373] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
+                        title={w.name}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        {w.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+
+              {/* Machine Learning */}
+              <li>
+                <h3 className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] mb-2.5 uppercase tracking-wide">
+                  Machine Learning
+                </h3>
+                <ul className="space-y-1.5 pl-2">
+                  {WORKLOADS.filter(w => ['ml-training'].includes(w.id)).map(w => (
+                    <li key={w.id}>
+                      <Link
+                        href={`/workloads/${w.id}`}
+                        className="text-[12px] text-[#737373] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
+                        title={w.name}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        {w.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
             </ul>
           </nav>
         </aside>

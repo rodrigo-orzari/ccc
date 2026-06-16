@@ -509,12 +509,11 @@ export default function StatusPage() {
                       </div>
                     )}
                   </div>
-                  <BackToTop />
                 </React.Fragment>
               );
             })}
 
-
+            <BackToTop />
 
             </>
           )}
