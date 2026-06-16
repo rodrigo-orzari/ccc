@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1781579789.6889188,
-    "ast_hash": "1850b6365829a3c8f4a3f6566c5654c0",
+    "mtime": 1781582021.8504493,
+    "ast_hash": "3b6f253a99c1affa91b048af73b6b375",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -780,8 +780,8 @@
     "semantic_hash": ""
   },
   "src/components/WorkloadHeader.tsx": {
-    "mtime": 1781579848.087085,
-    "ast_hash": "ea9c4786aac4d6a7abc14e1955344980",
+    "mtime": 1781582015.3324497,
+    "ast_hash": "1dd0730764237af05f9ff7fef4888098",
     "semantic_hash": ""
   }
 }

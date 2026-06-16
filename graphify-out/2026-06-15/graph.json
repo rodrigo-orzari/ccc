@@ -4,337 +4,130 @@
   "graph": {},
   "nodes": [
     {
-      "label": "README.md",
-      "file_type": "document",
-      "source_file": "README.md",
+      "label": "next-env.d.ts",
+      "file_type": "code",
+      "source_file": "next-env.d.ts",
       "source_location": "L1",
-      "id": "readme",
-      "community": 12,
-      "norm_label": "readme.md"
+      "id": "next_env_d",
+      "community": 3,
+      "norm_label": "next-env.d.ts"
     },
     {
-      "label": "Welcome!",
-      "file_type": "document",
-      "source_file": "README.md",
+      "label": "route.ts",
+      "file_type": "code",
+      "source_file": "src/app/api/workloads/route.ts",
+      "source_location": "L1",
+      "id": "workloads_route",
+      "community": 48,
+      "norm_label": "route.ts"
+    },
+    {
+      "label": "POST()",
+      "file_type": "code",
+      "source_file": "src/app/api/workloads/route.ts",
       "source_location": "L5",
-      "id": "readme_welcome",
-      "community": 12,
-      "norm_label": "welcome!"
-    },
-    {
-      "label": "Live Deployment",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L9",
-      "id": "readme_live_deployment",
-      "community": 12,
-      "norm_label": "live deployment"
-    },
-    {
-      "label": "1. What Problem Does This Application Solve?",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L26",
-      "id": "readme_1_what_problem_does_this_application_solve",
-      "community": 12,
-      "norm_label": "1. what problem does this application solve?"
-    },
-    {
-      "label": "2. Architectural Design",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L40",
-      "id": "readme_2_architectural_design",
-      "community": 12,
-      "norm_label": "2. architectural design"
-    },
-    {
-      "label": "3. File Directory & Code Organization",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L49",
-      "id": "readme_3_file_directory_code_organization",
-      "community": 12,
-      "norm_label": "3. file directory & code organization"
-    },
-    {
-      "label": "Directory Tree",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L51",
-      "id": "readme_directory_tree",
-      "community": 12,
-      "norm_label": "directory tree"
-    },
-    {
-      "label": "File Descriptions",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L124",
-      "id": "readme_file_descriptions",
-      "community": 12,
-      "norm_label": "file descriptions"
-    },
-    {
-      "label": "4. Documentation Guide",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L162",
-      "id": "readme_4_documentation_guide",
-      "community": 12,
-      "norm_label": "4. documentation guide"
-    },
-    {
-      "label": "5. Security & Deployment",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L178",
-      "id": "readme_5_security_deployment",
-      "community": 12,
-      "norm_label": "5. security & deployment"
-    },
-    {
-      "label": "\u26a0\ufe0f Important: Production Security Requirements",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L180",
-      "id": "readme_important_production_security_requirements",
-      "community": 12,
-      "norm_label": "\u26a0\ufe0f important: production security requirements"
-    },
-    {
-      "label": "6. Quick Start",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L195",
-      "id": "readme_6_quick_start",
-      "community": 12,
-      "norm_label": "6. quick start"
-    },
-    {
-      "label": "Local Development (5 minutes)",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L197",
-      "id": "readme_local_development_5_minutes",
-      "community": 12,
-      "norm_label": "local development (5 minutes)"
-    },
-    {
-      "label": "Build for Production",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L218",
-      "id": "readme_build_for_production",
-      "community": 12,
-      "norm_label": "build for production"
-    },
-    {
-      "label": "7. In-Depth Subsystem Walks",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L229",
-      "id": "readme_7_in_depth_subsystem_walks",
-      "community": 12,
-      "norm_label": "7. in-depth subsystem walks"
-    },
-    {
-      "label": "A. Database Initialization and Schema Management",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L231",
-      "id": "readme_a_database_initialization_and_schema_management",
-      "community": 12,
-      "norm_label": "a. database initialization and schema management"
-    },
-    {
-      "label": "B. Ingestion Pipelines & In-Flight Validations",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L236",
-      "id": "readme_b_ingestion_pipelines_in_flight_validations",
-      "community": 12,
-      "norm_label": "b. ingestion pipelines & in-flight validations"
-    },
-    {
-      "label": "C. Backend API Routes",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L249",
-      "id": "readme_c_backend_api_routes",
-      "community": 12,
-      "norm_label": "c. backend api routes"
-    },
-    {
-      "label": "D. The Comparative Frontend Dashboard",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L258",
-      "id": "readme_d_the_comparative_frontend_dashboard",
-      "community": 12,
-      "norm_label": "d. the comparative frontend dashboard"
-    },
-    {
-      "label": "8. Resources for Contributors",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L270",
-      "id": "readme_8_resources_for_contributors",
-      "community": 12,
-      "norm_label": "8. resources for contributors"
-    },
-    {
-      "label": "Getting Started",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L272",
-      "id": "readme_getting_started",
-      "community": 12,
-      "norm_label": "getting started"
-    },
-    {
-      "label": "For Specific Tasks",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L279",
-      "id": "readme_for_specific_tasks",
-      "community": 12,
-      "norm_label": "for specific tasks"
-    },
-    {
-      "label": "Key Architecture Files",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L291",
-      "id": "readme_key_architecture_files",
-      "community": 12,
-      "norm_label": "key architecture files"
-    },
-    {
-      "label": "License & Contributions",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L306",
-      "id": "readme_license_contributions",
-      "community": 12,
-      "norm_label": "license & contributions"
-    },
-    {
-      "label": "Project Note",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L315",
-      "id": "readme_project_note",
-      "community": 12,
-      "norm_label": "project note"
-    },
-    {
-      "label": "Support & Feedback",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L319",
-      "id": "readme_support_feedback",
-      "community": 12,
-      "norm_label": "support & feedback"
+      "id": "workloads_route_post",
+      "community": 48,
+      "norm_label": "post()"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
+      "source_file": "src/app/page.tsx",
       "source_location": "L1",
-      "id": "about_page",
-      "community": 13,
+      "id": "app_page",
+      "community": 7,
       "norm_label": "page.tsx"
     },
     {
-      "label": "headingToId()",
+      "label": "Dashboard()",
       "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L6",
-      "id": "about_page_headingtoid",
-      "community": 13,
-      "norm_label": "headingtoid()"
-    },
-    {
-      "label": "AboutPage()",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L16",
-      "id": "about_page_aboutpage",
-      "community": 13,
-      "norm_label": "aboutpage()"
+      "source_file": "src/app/page.tsx",
+      "source_location": "L18",
+      "id": "app_page_dashboard",
+      "community": 7,
+      "norm_label": "dashboard()"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
+      "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L1",
-      "id": "docs_page",
-      "community": 19,
+      "id": "id_page",
+      "community": 48,
       "norm_label": "page.tsx"
     },
     {
-      "label": "BackToTop()",
+      "label": "catalogProductType()",
       "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "id": "docs_page_backtotop",
-      "community": 19,
-      "norm_label": "backtotop()"
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L14",
+      "id": "id_page_catalogproducttype",
+      "community": 48,
+      "norm_label": "catalogproducttype()"
     },
     {
-      "label": "DocsPage()",
+      "label": "PROVIDER_IDS",
       "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L18",
+      "id": "id_page_provider_ids",
+      "community": 48,
+      "norm_label": "provider_ids"
+    },
+    {
+      "label": "providerName()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L19",
-      "id": "docs_page_docspage",
-      "community": 19,
-      "norm_label": "docspage()"
+      "id": "id_page_providername",
+      "community": 48,
+      "norm_label": "providername()"
+    },
+    {
+      "label": "ProviderTh()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L21",
+      "id": "id_page_providerth",
+      "community": 48,
+      "norm_label": "providerth()"
+    },
+    {
+      "label": "ArchitectureStrip()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L31",
+      "id": "id_page_architecturestrip",
+      "community": 48,
+      "norm_label": "architecturestrip()"
+    },
+    {
+      "label": "WorkloadDetails()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L74",
+      "id": "id_page_workloaddetails",
+      "community": 48,
+      "norm_label": "workloaddetails()"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/app/privacy/page.tsx",
+      "source_file": "src/app/workloads/page.tsx",
       "source_location": "L1",
-      "id": "privacy_page",
-      "community": 22,
+      "id": "workloads_page",
+      "community": 48,
       "norm_label": "page.tsx"
     },
     {
-      "label": "PrivacyPolicyPage()",
+      "label": "WorkloadsCatalog()",
       "file_type": "code",
-      "source_file": "src/app/privacy/page.tsx",
-      "source_location": "L5",
-      "id": "privacy_page_privacypolicypage",
-      "community": 22,
-      "norm_label": "privacypolicypage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L1",
-      "id": "terms_page",
-      "community": 13,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "headingToId()",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "id": "terms_page_headingtoid",
-      "community": 13,
-      "norm_label": "headingtoid()"
-    },
-    {
-      "label": "TermsOfUsePage()",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L16",
-      "id": "terms_page_termsofusepage",
-      "community": 13,
-      "norm_label": "termsofusepage()"
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "id": "workloads_page_workloadscatalog",
+      "community": 48,
+      "norm_label": "workloadscatalog()"
     },
     {
       "label": "WorkloadHeader.tsx",
@@ -346,10 +139,19 @@
       "norm_label": "workloadheader.tsx"
     },
     {
+      "label": "getShareUrl()",
+      "file_type": "code",
+      "source_file": "src/components/WorkloadHeader.tsx",
+      "source_location": "L12",
+      "id": "components_workloadheader_getshareurl",
+      "community": 48,
+      "norm_label": "getshareurl()"
+    },
+    {
       "label": "LinkedInIcon()",
       "file_type": "code",
       "source_file": "src/components/WorkloadHeader.tsx",
-      "source_location": "L9",
+      "source_location": "L19",
       "id": "components_workloadheader_linkedinicon",
       "community": 48,
       "norm_label": "linkedinicon()"
@@ -358,7 +160,7 @@
       "label": "XIcon()",
       "file_type": "code",
       "source_file": "src/components/WorkloadHeader.tsx",
-      "source_location": "L17",
+      "source_location": "L27",
       "id": "components_workloadheader_xicon",
       "community": 48,
       "norm_label": "xicon()"
@@ -367,10 +169,343 @@
       "label": "WorkloadHeader()",
       "file_type": "code",
       "source_file": "src/components/WorkloadHeader.tsx",
-      "source_location": "L25",
+      "source_location": "L35",
       "id": "components_workloadheader_workloadheader",
       "community": 48,
       "norm_label": "workloadheader()"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "community": 12,
+      "norm_label": "readme.md",
+      "id": "readme"
+    },
+    {
+      "label": "Welcome!",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L5",
+      "community": 12,
+      "norm_label": "welcome!",
+      "id": "readme_welcome"
+    },
+    {
+      "label": "Live Deployment",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L9",
+      "community": 12,
+      "norm_label": "live deployment",
+      "id": "readme_live_deployment"
+    },
+    {
+      "label": "1. What Problem Does This Application Solve?",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L26",
+      "community": 12,
+      "norm_label": "1. what problem does this application solve?",
+      "id": "readme_1_what_problem_does_this_application_solve"
+    },
+    {
+      "label": "2. Architectural Design",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L40",
+      "community": 12,
+      "norm_label": "2. architectural design",
+      "id": "readme_2_architectural_design"
+    },
+    {
+      "label": "3. File Directory & Code Organization",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L49",
+      "community": 12,
+      "norm_label": "3. file directory & code organization",
+      "id": "readme_3_file_directory_code_organization"
+    },
+    {
+      "label": "Directory Tree",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L51",
+      "community": 12,
+      "norm_label": "directory tree",
+      "id": "readme_directory_tree"
+    },
+    {
+      "label": "File Descriptions",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L124",
+      "community": 12,
+      "norm_label": "file descriptions",
+      "id": "readme_file_descriptions"
+    },
+    {
+      "label": "4. Documentation Guide",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L162",
+      "community": 12,
+      "norm_label": "4. documentation guide",
+      "id": "readme_4_documentation_guide"
+    },
+    {
+      "label": "5. Security & Deployment",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L178",
+      "community": 12,
+      "norm_label": "5. security & deployment",
+      "id": "readme_5_security_deployment"
+    },
+    {
+      "label": "\u26a0\ufe0f Important: Production Security Requirements",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L180",
+      "community": 12,
+      "norm_label": "\u26a0\ufe0f important: production security requirements",
+      "id": "readme_important_production_security_requirements"
+    },
+    {
+      "label": "6. Quick Start",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L195",
+      "community": 12,
+      "norm_label": "6. quick start",
+      "id": "readme_6_quick_start"
+    },
+    {
+      "label": "Local Development (5 minutes)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L197",
+      "community": 12,
+      "norm_label": "local development (5 minutes)",
+      "id": "readme_local_development_5_minutes"
+    },
+    {
+      "label": "Build for Production",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L218",
+      "community": 12,
+      "norm_label": "build for production",
+      "id": "readme_build_for_production"
+    },
+    {
+      "label": "7. In-Depth Subsystem Walks",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L229",
+      "community": 12,
+      "norm_label": "7. in-depth subsystem walks",
+      "id": "readme_7_in_depth_subsystem_walks"
+    },
+    {
+      "label": "A. Database Initialization and Schema Management",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L231",
+      "community": 12,
+      "norm_label": "a. database initialization and schema management",
+      "id": "readme_a_database_initialization_and_schema_management"
+    },
+    {
+      "label": "B. Ingestion Pipelines & In-Flight Validations",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L236",
+      "community": 12,
+      "norm_label": "b. ingestion pipelines & in-flight validations",
+      "id": "readme_b_ingestion_pipelines_in_flight_validations"
+    },
+    {
+      "label": "C. Backend API Routes",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L249",
+      "community": 12,
+      "norm_label": "c. backend api routes",
+      "id": "readme_c_backend_api_routes"
+    },
+    {
+      "label": "D. The Comparative Frontend Dashboard",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L258",
+      "community": 12,
+      "norm_label": "d. the comparative frontend dashboard",
+      "id": "readme_d_the_comparative_frontend_dashboard"
+    },
+    {
+      "label": "8. Resources for Contributors",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L270",
+      "community": 12,
+      "norm_label": "8. resources for contributors",
+      "id": "readme_8_resources_for_contributors"
+    },
+    {
+      "label": "Getting Started",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L272",
+      "community": 12,
+      "norm_label": "getting started",
+      "id": "readme_getting_started"
+    },
+    {
+      "label": "For Specific Tasks",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L279",
+      "community": 12,
+      "norm_label": "for specific tasks",
+      "id": "readme_for_specific_tasks"
+    },
+    {
+      "label": "Key Architecture Files",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L291",
+      "community": 12,
+      "norm_label": "key architecture files",
+      "id": "readme_key_architecture_files"
+    },
+    {
+      "label": "License & Contributions",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L306",
+      "community": 12,
+      "norm_label": "license & contributions",
+      "id": "readme_license_contributions"
+    },
+    {
+      "label": "Project Note",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L315",
+      "community": 12,
+      "norm_label": "project note",
+      "id": "readme_project_note"
+    },
+    {
+      "label": "Support & Feedback",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L319",
+      "community": 12,
+      "norm_label": "support & feedback",
+      "id": "readme_support_feedback"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "page.tsx",
+      "id": "about_page"
+    },
+    {
+      "label": "headingToId()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "community": 13,
+      "norm_label": "headingtoid()",
+      "id": "about_page_headingtoid"
+    },
+    {
+      "label": "AboutPage()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L16",
+      "community": 13,
+      "norm_label": "aboutpage()",
+      "id": "about_page_aboutpage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L1",
+      "community": 19,
+      "norm_label": "page.tsx",
+      "id": "docs_page"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "community": 19,
+      "norm_label": "backtotop()",
+      "id": "docs_page_backtotop"
+    },
+    {
+      "label": "DocsPage()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L19",
+      "community": 19,
+      "norm_label": "docspage()",
+      "id": "docs_page_docspage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/privacy/page.tsx",
+      "source_location": "L1",
+      "community": 22,
+      "norm_label": "page.tsx",
+      "id": "privacy_page"
+    },
+    {
+      "label": "PrivacyPolicyPage()",
+      "file_type": "code",
+      "source_file": "src/app/privacy/page.tsx",
+      "source_location": "L5",
+      "community": 22,
+      "norm_label": "privacypolicypage()",
+      "id": "privacy_page_privacypolicypage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "page.tsx",
+      "id": "terms_page"
+    },
+    {
+      "label": "headingToId()",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "community": 13,
+      "norm_label": "headingtoid()",
+      "id": "terms_page_headingtoid"
+    },
+    {
+      "label": "TermsOfUsePage()",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L16",
+      "community": 13,
+      "norm_label": "termsofusepage()",
+      "id": "terms_page_termsofusepage"
     },
     {
       "label": "page.tsx",
@@ -472,51 +607,6 @@
       "id": "status_page_statuspage"
     },
     {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L1",
-      "community": 48,
-      "norm_label": "page.tsx",
-      "id": "id_page"
-    },
-    {
-      "label": "ArchitectureDiagram()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L9",
-      "community": 48,
-      "norm_label": "architecturediagram()",
-      "id": "id_page_architecturediagram"
-    },
-    {
-      "label": "WorkloadDetails()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L44",
-      "community": 48,
-      "norm_label": "workloaddetails()",
-      "id": "id_page_workloaddetails"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L1",
-      "community": 48,
-      "norm_label": "page.tsx",
-      "id": "workloads_page"
-    },
-    {
-      "label": "WorkloadsCatalog()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "community": 48,
-      "norm_label": "workloadscatalog()",
-      "id": "workloads_page_workloadscatalog"
-    },
-    {
       "label": "index.ts",
       "file_type": "code",
       "source_file": "src/components/index.ts",
@@ -542,24 +632,6 @@
       "community": 48,
       "norm_label": "workloads",
       "id": "config_workloads_workloads"
-    },
-    {
-      "label": "route.ts",
-      "file_type": "code",
-      "source_file": "src/app/api/workloads/route.ts",
-      "source_location": "L1",
-      "community": 48,
-      "norm_label": "route.ts",
-      "id": "workloads_route"
-    },
-    {
-      "label": "POST()",
-      "file_type": "code",
-      "source_file": "src/app/api/workloads/route.ts",
-      "source_location": "L5",
-      "community": 48,
-      "norm_label": "post()",
-      "id": "workloads_route_post"
     },
     {
       "label": "ProductTypeSelector.tsx",
@@ -1361,24 +1433,6 @@
       "community": 62,
       "norm_label": ".saverecords()",
       "id": "services_pricing_pipeline_pricingpipeline_saverecords"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L1",
-      "community": 7,
-      "norm_label": "page.tsx",
-      "id": "app_page"
-    },
-    {
-      "label": "Dashboard()",
-      "file_type": "code",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L18",
-      "community": 7,
-      "norm_label": "dashboard()",
-      "id": "app_page_dashboard"
     },
     {
       "label": "app_hosting.ts",
@@ -2684,15 +2738,6 @@
       "community": 26,
       "norm_label": ".getoracleserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
-    },
-    {
-      "label": "next-env.d.ts",
-      "file_type": "code",
-      "source_file": "next-env.d.ts",
-      "source_location": "L1",
-      "community": 3,
-      "norm_label": "next-env.d.ts",
-      "id": "next_env_d"
     },
     {
       "label": "route.ts",
@@ -4740,6 +4785,862 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/workloads/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_route",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/workloads/route.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_route",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/workloads/route.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_route",
+      "target": "workloads_route_post"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "app_page_dashboard"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_ai_context_windows"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_ai_model_tiers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_ai_multimodal_options"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_ai_service_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_analytics_deployment_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_analytics_engines"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_analytics_tiers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_categories"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_containers_architectures"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_containers_billing_granularity"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_containers_compute_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_containers_orchestrators"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_cpu_profiles"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_db_engines"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_db_families"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_deployment_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_geographies"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_ha_modes"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_billing_models"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_connection_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_directions"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_ha_support"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_port_capacities"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_routing_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_services"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_transfer_scopes"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_usage_tiers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_networking_vpc_support"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_os_types"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_providers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_architectures"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_cold_start_options"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_ephemeral_storage_options"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_execution_model_options"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_free_tier_options"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_granularity_options"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_languages"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_memory_config_options"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_memory_tiers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_provisioned_concurrency_options"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "config_index_serverless_timeout_options"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "hooks_usedynamicfilters"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "hooks_usedynamicfilters_usedynamicfilters"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "types_index_pricingrecord"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_page",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "app_page_dashboard",
+      "target": "hooks_usedynamicfilters_usedynamicfilters"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "components_workloadheader_workloadheader"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "id_page",
+      "target": "config_index_providers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "id_page",
+      "target": "id_page_architecturestrip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "id_page",
+      "target": "id_page_catalogproducttype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "id_page",
+      "target": "id_page_provider_ids",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "id_page",
+      "target": "id_page_providername",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "id_page",
+      "target": "id_page_providerth",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_workloaddetails"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "types_index_workloaddefinition"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "types_index_workloadparameter"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "id_page_providerth",
+      "target": "id_page_providername",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_workloadheader_workloadheader"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_workloadscatalog"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_workloadheader"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WorkloadHeader.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "components_workloadheader",
+      "target": "components_workloadheader_getshareurl",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WorkloadHeader.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_workloadheader",
+      "target": "components_workloadheader_linkedinicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WorkloadHeader.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_workloadheader",
+      "target": "components_workloadheader_workloadheader"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WorkloadHeader.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_workloadheader",
+      "target": "components_workloadheader_xicon"
+    },
+    {
+      "relation": "re_exports",
+      "context": "re-export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_workloadheader_workloadheader"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
@@ -5082,80 +5983,6 @@
       "target": "terms_page_termsofusepage"
     },
     {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_workloadheader"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/WorkloadHeader.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_workloadheader",
-      "target": "components_workloadheader_linkedinicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/WorkloadHeader.tsx",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_workloadheader",
-      "target": "components_workloadheader_workloadheader"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/WorkloadHeader.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_workloadheader",
-      "target": "components_workloadheader_xicon"
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_workloadheader_workloadheader"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "components_workloadheader_workloadheader"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_workloadheader_workloadheader"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/status/page.tsx",
@@ -5259,151 +6086,11 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_architecturediagram"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L45",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_workloaddetails"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "types_index_workloaddefinition"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "types_index_workloadparameter"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_workloadscatalog"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/layout.tsx",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "app_layout",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
       "target": "components_index"
     },
     {
@@ -5470,38 +6157,6 @@
       "confidence_score": 1.0,
       "source": "config_workloads",
       "target": "types_index_workloaddefinition"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/workloads/route.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_route",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/workloads/route.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_route",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/workloads/route.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_route",
-      "target": "workloads_route_post"
     },
     {
       "relation": "contains",
@@ -5590,17 +6245,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L5",
       "weight": 1.0,
@@ -5673,17 +6317,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L5",
       "weight": 1.0,
@@ -5723,17 +6356,6 @@
       "confidence_score": 1.0,
       "source": "components_pricingtable_pricingtableprops",
       "target": "types_index_producttype"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "types_index_pricingrecord"
     },
     {
       "relation": "imports",
@@ -6870,511 +7492,6 @@
       "confidence_score": 1.0,
       "source": "services_pricing_pipeline_pricingpipeline_run",
       "target": "services_pricing_pipeline_pricingpipeline_saverecords"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "app_page_dashboard"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_ai_context_windows"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_ai_model_tiers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_ai_multimodal_options"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_ai_service_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_analytics_deployment_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_analytics_engines"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_analytics_tiers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_categories"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_containers_architectures"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_containers_billing_granularity"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_containers_compute_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_containers_orchestrators"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_cpu_profiles"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_db_engines"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_db_families"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_deployment_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_geographies"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_ha_modes"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_billing_models"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_connection_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_directions"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_ha_support"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_port_capacities"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_routing_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_services"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_transfer_scopes"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_usage_tiers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_networking_vpc_support"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_os_types"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_providers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_architectures"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_cold_start_options"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_ephemeral_storage_options"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_execution_model_options"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_free_tier_options"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_granularity_options"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_languages"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_memory_config_options"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_memory_tiers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_provisioned_concurrency_options"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "config_index_serverless_timeout_options"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "hooks_usedynamicfilters"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/page.tsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_page",
-      "target": "hooks_usedynamicfilters_usedynamicfilters"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/page.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "source": "app_page_dashboard",
-      "target": "hooks_usedynamicfilters_usedynamicfilters"
     },
     {
       "relation": "contains",
@@ -12089,5 +12206,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "2ce3278ffdcb3110d79176d1a168ee07c564c223"
+  "built_at_commit": "411791f8749206069532be225292c74b9a1a0aa6"
 }
