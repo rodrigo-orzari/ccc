@@ -244,7 +244,7 @@ export default function WorkloadDetails() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Tables */}
-          <div className="lg:col-span-8 flex flex-col gap-6">
+          <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
           {/* Combined Configuration + Cost table */}
           <div className="border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
             <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-3">
