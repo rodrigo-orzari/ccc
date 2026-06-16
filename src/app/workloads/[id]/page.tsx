@@ -23,6 +23,7 @@ const REGION_OPTIONS = ['Global', ...GEOGRAPHIES];
 const providerColor = (slug: string) =>
   PROVIDERS.find(p => p.id === slug)?.color ?? '#525252';
 const providerName = (slug: string) => PROVIDERS.find(p => p.id === slug)?.name ?? slug;
+const formatNumber = (n: number | string) => Number(n).toLocaleString();
 
 // Provider order — pulled from the canonical PROVIDERS config so workload comparisons
 // and main pricing tables show providers in the same sequence and with the same names.
@@ -283,11 +284,6 @@ export default function WorkloadDetails() {
                         </span>
                       )}
                     </div>
-                    {!isUnavailable && pData.total > 0 && maxTotalPrice > 0 && (
-                      <div className="w-full h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start mt-1">
-                        <div className="h-full rounded-full" style={{ width: `${(pData.total / maxTotalPrice) * 100}%`, backgroundColor: color }} />
-                      </div>
-                    )}
                   </div>
                 );
               })}
@@ -307,13 +303,13 @@ export default function WorkloadDetails() {
                     onClick={() => setViewMode('table')}
                     className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
                   >
-                    Table
+                    📊 Table
                   </button>
                   <button
                     onClick={() => setViewMode('charts')}
                     className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
                   >
-                    Chart
+                    📈 Chart
                   </button>
                 </div>
                 <button
@@ -426,11 +422,6 @@ export default function WorkloadDetails() {
                                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
                                     ${(comp.monthlyPrice * multiplier).toFixed(2)}
                                   </span>
-                                  {comp.monthlyPrice > 0 && maxCompPrice > 0 && (
-                                    <div className="w-12 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start mt-0.5">
-                                      <div className="h-full rounded-full" style={{ width: `${(comp.monthlyPrice / maxCompPrice) * 100}%`, backgroundColor: providerColor(provider) }} />
-                                    </div>
-                                  )}
                                 </div>
                               </Link>
                             </td>
@@ -460,11 +451,6 @@ export default function WorkloadDetails() {
                                 <span className="text-[13px] font-bold text-black dark:text-white">
                                   ${(pData.total * multiplier).toFixed(2)}
                                 </span>
-                                {maxTotalPrice > 0 && (
-                                  <div className="w-16 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start mt-0.5">
-                                    <div className="h-full rounded-full" style={{ width: `${(pData.total / maxTotalPrice) * 100}%`, backgroundColor: providerColor(provider) }} />
-                                  </div>
-                                )}
                               </div>
                             )}
                           </td>
@@ -491,7 +477,7 @@ export default function WorkloadDetails() {
                     onClick={() => setPricingModel(opt)}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       pricingModel === opt
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
                         : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                     }`}
                   >
@@ -514,7 +500,7 @@ export default function WorkloadDetails() {
                     onClick={() => setRegion(opt)}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       region === opt
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
                         : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                     }`}
                   >
@@ -532,8 +518,8 @@ export default function WorkloadDetails() {
                   <div key={p.id}>
                     <div className="flex justify-between items-center mb-2">
                       <label className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{p.label}</label>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e7eb] bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-2 py-0.5 rounded">
-                        {parameters[p.id]} {p.unit}
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e7eb] bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-2 py-0.5 rounded shadow-sm">
+                        {formatNumber(parameters[p.id])} {p.unit}
                       </span>
                     </div>
                     <input
@@ -546,8 +532,8 @@ export default function WorkloadDetails() {
                       className="w-full accent-black dark:accent-white cursor-pointer h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded appearance-none outline-none"
                     />
                     <div className="flex justify-between text-[10px] text-[#a3a3a3] dark:text-[#525252] mt-1 font-mono">
-                      <span>{p.min}</span>
-                      <span>{p.max}</span>
+                      <span>{formatNumber(p.min)}</span>
+                      <span>{formatNumber(p.max)}</span>
                     </div>
                   </div>
                 ))}
