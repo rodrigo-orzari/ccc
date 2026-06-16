@@ -190,7 +190,7 @@ const DocsPage: React.FC = () => {
           <h1>Documentation</h1>
           <p className="docs-meta">Last updated: June 2026.</p>
           <p>
-            Welcome to the Compare Cloud Costs documentation. This page covers how the tool works,
+            Welcome to the comparecloudcosts.com documentation. This page covers how the tool works,
             how pricing data is collected, and how to interpret results. Content will be expanded gradually.
           </p>
 
@@ -198,7 +198,7 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <h2 id="getting-started">Getting Started</h2>
             <p>
-              Compare Cloud Costs is a free, open-source tool that aggregates and normalizes on-demand
+              comparecloudcosts.com is a free, open-source tool that aggregates and normalizes on-demand
               (pay-as-you-go) pricing across AWS, Microsoft Azure, Google Cloud, Oracle Cloud,
               DigitalOcean, and Alibaba in a single side-by-side view.
             </p>
@@ -320,7 +320,7 @@ const DocsPage: React.FC = () => {
             </p>
             <blockquote>
               <strong>Disclaimer:</strong> Price data may be delayed, incomplete, or imprecise.
-              Compare Cloud Costs makes no warranties regarding accuracy. See our{' '}
+              comparecloudcosts.com makes no warranties regarding accuracy. See our{' '}
               <Link href="/terms">Terms of Use</Link> for full details.
             </blockquote>
 

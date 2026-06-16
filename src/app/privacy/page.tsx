@@ -158,14 +158,14 @@ const PrivacyPolicyPage: React.FC = () => {
 
             <h2 id="overview">Overview</h2>
             <p>
-              Compare Cloud Costs ("we," "us," "our," or "Company") is committed to protecting your privacy.
+              comparecloudcosts.com ("we," "us," "our," or "Company") is committed to protecting your privacy.
               This Privacy Policy explains how we collect, use, disclose, and otherwise handle your information
               when you use our website and services.
             </p>
 
             <h2 id="information-we-collect">Information We Collect</h2>
             <h3>Usage Data</h3>
-            <p>When you use Compare Cloud Costs, we automatically collect certain information about your interactions:</p>
+            <p>When you use comparecloudcosts.com, we automatically collect certain information about your interactions:</p>
             <ul>
               <li>Pages visited and time spent on each page</li>
               <li>Filters and search parameters you use when comparing cloud pricing</li>

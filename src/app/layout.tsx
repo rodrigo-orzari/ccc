@@ -6,7 +6,7 @@ import Providers from './providers';
 import { DonationModal } from '@/components';
 
 export const metadata: Metadata = {
-  title: 'Compare Cloud Costs - AWS, Azure, Google Cloud Pricing',
+  title: 'comparecloudcosts.com - AWS, Azure, Google Cloud Pricing',
   description: 'Compare compute, database, and serverless pricing across AWS, Azure, Google Cloud, and more.',
 };
 
