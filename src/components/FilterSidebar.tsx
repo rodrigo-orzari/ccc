@@ -19,9 +19,9 @@ const Tooltip = ({ text, children }: { text: string; children: React.ReactNode }
     >
       {children}
       {show && (
-        <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 w-[140px] p-1.5 bg-[#171717] dark:bg-[#e5e5e5] text-white dark:text-black text-[10px] rounded shadow-lg z-50 font-normal tracking-normal normal-case text-left leading-relaxed">
+        <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 w-[140px] p-1.5 bg-[#1e1e38] dark:bg-[#dde0f0] text-[#f7f8ff] dark:text-black text-[10px] rounded shadow-lg z-50 font-normal tracking-normal normal-case text-left leading-relaxed">
           {text}
-          <div className="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-[4px] border-b-[4px] border-r-[4px] border-t-transparent border-b-transparent border-r-[#171717] dark:border-r-[#e5e5e5]"></div>
+          <div className="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-[4px] border-b-[4px] border-r-[4px] border-t-transparent border-b-transparent border-r-[#1e1e38] dark:border-r-[#dde0f0]"></div>
         </div>
       )}
     </span>
@@ -61,7 +61,7 @@ const FilterSection = ({
       <h2 className="m-0">
         <button
           onClick={onToggleExpand}
-          className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+          className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
         >
           <ChevronDown size={10} className={`transition-transform ${isExpanded ? '' : '-rotate-90'}`} />
           {title} {tooltip && <Tooltip text={tooltip}><Info size={10} className="cursor-help" /></Tooltip>}
@@ -70,7 +70,7 @@ const FilterSection = ({
       <button
         onClick={() => (selected.length === options.length ? handleClearAll() : handleSelectAll())}
         className={`text-[10px] font-bold uppercase transition-colors ${
-          selected.length === options.length ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'
+          selected.length === options.length ? 'text-black dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
         }`}
       >
         {selected.length === options.length ? 'Clear All' : 'Select All'}
@@ -84,8 +84,8 @@ const FilterSection = ({
             onClick={() => onToggle(option)}
             className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
               selected.includes(option)
-                ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
             }`}
           >
             {getLabel ? getLabel(option) : option}
@@ -129,7 +129,7 @@ const GroupedFilterSection = ({
         <h2 className="m-0">
           <button
             onClick={onToggleExpand}
-            className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+            className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
           >
             <ChevronDown size={10} className={`transition-transform ${isExpanded ? '' : '-rotate-90'}`} />
             {title} {tooltip && <Tooltip text={tooltip}><Info size={10} className="cursor-help" /></Tooltip>}
@@ -138,7 +138,7 @@ const GroupedFilterSection = ({
         <button
           onClick={() => (allSelected ? onSetAll([]) : onSetAll(allOptions))}
           className={`text-[10px] font-bold uppercase transition-colors ${
-            allSelected ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'
+            allSelected ? 'text-black dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
           }`}
         >
           {allSelected ? 'Clear All' : 'Select All'}
@@ -158,8 +158,8 @@ const GroupedFilterSection = ({
                     onClick={() => onToggle(option)}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       selected.includes(option)
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                        : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                        ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                        : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                     }`}
                   >
                     {option}
@@ -505,7 +505,7 @@ export default function FilterSidebar({
   const activeNonSoon = config.PROVIDERS.filter(p => !p.soon).map(p => p.id);
 
   return (
-    <aside className="w-72 border-r border-[#e5e5e5] dark:border-[#262626] flex flex-col shrink-0 overflow-y-auto bg-white dark:bg-[#000000] custom-scrollbar pb-10">
+    <aside className="w-72 border-r border-[#dde0f0] dark:border-[#1e1e38] flex flex-col shrink-0 overflow-y-auto bg-[#f7f8ff] dark:bg-[#06060f] custom-scrollbar pb-10">
       <div className="p-4 space-y-8">
         {/* Providers Section */}
         <FilterSection
@@ -533,7 +533,7 @@ export default function FilterSidebar({
               isExpanded={expanded.category ?? true}
               onToggleExpand={() => onToggleSection('category')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
             <FilterSection
               title="Geography"
@@ -545,7 +545,7 @@ export default function FilterSidebar({
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
             <FilterSection
               title="Operating System"
@@ -557,14 +557,14 @@ export default function FilterSidebar({
               isExpanded={expanded.os ?? true}
               onToggleExpand={() => onToggleSection('os')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
             <section className="space-y-3">
               <div className="flex items-center justify-between">
                 <h2 className="m-0">
                   <button
                     onClick={() => onToggleSection('cpu')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
                   >
                     <ChevronDown size={10} className={`transition-transform ${expanded.cpu ? '' : '-rotate-90'}`} />
                     CPU | GPU <Tooltip text="Processor vendor, architecture, and GPU accelerator."><Info size={10} className="cursor-help" /></Tooltip>
@@ -586,7 +586,7 @@ export default function FilterSidebar({
                         }
                       }}
                       className={`text-[10px] font-bold uppercase transition-colors ${
-                        allSelected ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'
+                        allSelected ? 'text-black dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
                       }`}
                     >
                       {allSelected ? 'Clear All' : 'Select All'}
@@ -602,8 +602,8 @@ export default function FilterSidebar({
                       onClick={() => onCpuToggle(profile.id)}
                       className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                         selectedCpu.includes(profile.id)
-                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                          : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                          ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                          : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                       }`}
                     >
                       {profile.label}
@@ -615,8 +615,8 @@ export default function FilterSidebar({
                       onClick={() => onGpuToggle(option)}
                       className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                         selectedGpu.includes(option)
-                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                          : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                          ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                          : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                       }`}
                     >
                       {option}
@@ -625,7 +625,7 @@ export default function FilterSidebar({
                 </div>
               )}
             </section>
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -642,7 +642,7 @@ export default function FilterSidebar({
               isExpanded={expanded.dbFamily ?? true}
               onToggleExpand={() => onToggleSection('dbFamily')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Geography"
               tooltip="Geographic region where the database is deployed."
@@ -653,7 +653,7 @@ export default function FilterSidebar({
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Database Engine"
               tooltip="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc."
@@ -664,7 +664,7 @@ export default function FilterSidebar({
               isExpanded={expanded.engine ?? true}
               onToggleExpand={() => onToggleSection('engine')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Deployment"
               tooltip="Provisioned: fixed instance size billed hourly. Serverless: auto-scales, billed per compute unit consumed."
@@ -675,7 +675,7 @@ export default function FilterSidebar({
               isExpanded={expanded.deploymentType ?? true}
               onToggleExpand={() => onToggleSection('deploymentType')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="HIGH-AVAILABILITY"
               tooltip="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)."
@@ -686,7 +686,7 @@ export default function FilterSidebar({
               isExpanded={expanded.haMode ?? true}
               onToggleExpand={() => onToggleSection('haMode')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -703,7 +703,7 @@ export default function FilterSidebar({
               isExpanded={expanded.aiServiceTypes ?? true}
               onToggleExpand={() => onToggleSection('aiServiceTypes')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Model Tier"
               tooltip="Performance and size tier of the model."
@@ -714,7 +714,7 @@ export default function FilterSidebar({
               isExpanded={expanded.aiModelTiers ?? true}
               onToggleExpand={() => onToggleSection('aiModelTiers')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Context Window"
               tooltip="Maximum token context window supported."
@@ -725,7 +725,7 @@ export default function FilterSidebar({
               isExpanded={expanded.aiContextWindows ?? true}
               onToggleExpand={() => onToggleSection('aiContextWindows')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Multimodal"
               tooltip="Does the model support multimodal inputs (e.g. Image/Audio)?"
@@ -736,7 +736,7 @@ export default function FilterSidebar({
               isExpanded={expanded.aiMultimodalOptions ?? true}
               onToggleExpand={() => onToggleSection('aiMultimodalOptions')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -753,7 +753,7 @@ export default function FilterSidebar({
               isExpanded={expanded.serverlessServiceType ?? true}
               onToggleExpand={() => onToggleSection('serverlessServiceType')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Geography"
               tooltip="Geographic region where the service is deployed."
@@ -764,7 +764,7 @@ export default function FilterSidebar({
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Memory Size"
               tooltip="Allocated memory per function/instance. This is the main driver of serverless price."
@@ -775,7 +775,7 @@ export default function FilterSidebar({
               isExpanded={expanded.serverlessMemory ?? true}
               onToggleExpand={() => onToggleSection('serverlessMemory')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Architecture"
               tooltip="CPU architecture: x86 (Intel/AMD) or ARM (e.g. AWS Graviton). ARM is typically cheaper."
@@ -786,7 +786,7 @@ export default function FilterSidebar({
               isExpanded={expanded.serverlessArchitecture ?? true}
               onToggleExpand={() => onToggleSection('serverlessArchitecture')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Languages"
               tooltip="Supported programming languages."
@@ -797,7 +797,7 @@ export default function FilterSidebar({
               isExpanded={expanded.languages ?? true}
               onToggleExpand={() => onToggleSection('languages')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Cold Start"
               tooltip="Typical cold start overhead."
@@ -808,7 +808,7 @@ export default function FilterSidebar({
               isExpanded={expanded.coldStart ?? true}
               onToggleExpand={() => onToggleSection('coldStart')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Timeout"
               tooltip="Maximum execution time."
@@ -819,7 +819,7 @@ export default function FilterSidebar({
               isExpanded={expanded.timeout ?? true}
               onToggleExpand={() => onToggleSection('timeout')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Memory Config"
               tooltip="How memory is allocated."
@@ -830,7 +830,7 @@ export default function FilterSidebar({
               isExpanded={expanded.memoryConfig ?? true}
               onToggleExpand={() => onToggleSection('memoryConfig')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Execution Model"
               tooltip="How the code runs (ZIP vs Container)."
@@ -841,7 +841,7 @@ export default function FilterSidebar({
               isExpanded={expanded.executionModel ?? true}
               onToggleExpand={() => onToggleSection('executionModel')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Provisioned Concurrency"
               tooltip="Pre-warm instances to avoid cold starts."
@@ -852,7 +852,7 @@ export default function FilterSidebar({
               isExpanded={expanded.provisionedConcurrency ?? true}
               onToggleExpand={() => onToggleSection('provisionedConcurrency')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Ephemeral Storage"
               tooltip="Local storage available during execution (GB)."
@@ -863,7 +863,7 @@ export default function FilterSidebar({
               isExpanded={expanded.ephemeralStorage ?? true}
               onToggleExpand={() => onToggleSection('ephemeralStorage')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Free Tier"
               tooltip="Is there a monthly free invocation allowance?"
@@ -874,7 +874,7 @@ export default function FilterSidebar({
               isExpanded={expanded.freeTier ?? true}
               onToggleExpand={() => onToggleSection('freeTier')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Granularity (ms)"
               tooltip="Billing duration granularity."
@@ -885,7 +885,7 @@ export default function FilterSidebar({
               isExpanded={expanded.granularity ?? true}
               onToggleExpand={() => onToggleSection('granularity')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -902,7 +902,7 @@ export default function FilterSidebar({
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Orchestrator"
               tooltip="Underlying orchestration platform."
@@ -913,7 +913,7 @@ export default function FilterSidebar({
               isExpanded={expanded.containersOrchestrator ?? true}
               onToggleExpand={() => onToggleSection('containersOrchestrator')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Compute Type"
               tooltip="How compute resources are provisioned."
@@ -924,7 +924,7 @@ export default function FilterSidebar({
               isExpanded={expanded.containersComputeType ?? true}
               onToggleExpand={() => onToggleSection('containersComputeType')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Architecture"
               tooltip="CPU architecture."
@@ -935,7 +935,7 @@ export default function FilterSidebar({
               isExpanded={expanded.containersArchitecture ?? true}
               onToggleExpand={() => onToggleSection('containersArchitecture')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Billing Granularity"
               tooltip="How billing is calculated."
@@ -946,13 +946,13 @@ export default function FilterSidebar({
               isExpanded={expanded.containersBillingGranularity ?? true}
               onToggleExpand={() => onToggleSection('containersBillingGranularity')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h2 className="m-0">
                   <button
                     onClick={() => onToggleSection('containersGpu')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
                   >
                     <ChevronDown size={10} className={`transition-transform ${expanded.containersGpu ?? true ? '' : '-rotate-90'}`} />
                     GPU Support
@@ -961,7 +961,7 @@ export default function FilterSidebar({
                 <button
                   onClick={() => onContainersGpuToggle(!containersGpuIncluded)}
                   className={`text-[10px] font-bold uppercase transition-colors ${
-                    containersGpuIncluded ? 'text-black dark:text-white' : 'text-[#737373] hover:text-black dark:hover:text-white'
+                    containersGpuIncluded ? 'text-black dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
                   }`}
                 >
                   {containersGpuIncluded ? 'Clear All' : 'Select All'}
@@ -973,8 +973,8 @@ export default function FilterSidebar({
                     onClick={() => onContainersGpuToggle(!containersGpuIncluded)}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       containersGpuIncluded
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                        : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                        ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                        : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                     }`}
                   >
                     GPU Included
@@ -982,7 +982,7 @@ export default function FilterSidebar({
                 </div>
               )}
             </section>
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -999,7 +999,7 @@ export default function FilterSidebar({
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <GroupedFilterSection
               title="Service"
               tooltip="Networking service type, grouped by function."
@@ -1011,7 +1011,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingService ?? true}
               onToggleExpand={() => onToggleSection('networkingService')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Connection Type"
               tooltip="Point-to-point or Multipoint."
@@ -1022,7 +1022,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingConnectionType ?? true}
               onToggleExpand={() => onToggleSection('networkingConnectionType')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Routing Type"
               tooltip="Dynamic or Fixed routing."
@@ -1033,7 +1033,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingRoutingType ?? true}
               onToggleExpand={() => onToggleSection('networkingRoutingType')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Billing Model"
               tooltip="How you are charged (Uptime vs. Data)."
@@ -1044,7 +1044,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingBillingModel ?? true}
               onToggleExpand={() => onToggleSection('networkingBillingModel')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Usage Tier"
               tooltip="Pricing tier or allowance level."
@@ -1055,7 +1055,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingUsageTier ?? true}
               onToggleExpand={() => onToggleSection('networkingUsageTier')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Port Capacity"
               tooltip="Throughput capacity for dedicated connections."
@@ -1066,7 +1066,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingPortCapacity ?? true}
               onToggleExpand={() => onToggleSection('networkingPortCapacity')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Transfer Scope"
               tooltip="Geographic scope of the data transfer."
@@ -1087,7 +1087,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingHaSupport ?? true}
               onToggleExpand={() => onToggleSection('networkingHaSupport')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="VPC Support"
               tooltip="VPC Integration Support."
@@ -1098,7 +1098,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingVpcSupport ?? true}
               onToggleExpand={() => onToggleSection('networkingVpcSupport')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Direction"
               tooltip="Data transfer direction."
@@ -1109,7 +1109,7 @@ export default function FilterSidebar({
               isExpanded={expanded.networkingTransferDirection ?? true}
               onToggleExpand={() => onToggleSection('networkingTransferDirection')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -1126,7 +1126,7 @@ export default function FilterSidebar({
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Storage Type"
               tooltip="Object (S3-like), Block (disks), File (shared), or Archive (cold)."
@@ -1137,7 +1137,7 @@ export default function FilterSidebar({
               isExpanded={expanded.storageCategory ?? true}
               onToggleExpand={() => onToggleSection('storageCategory')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Tier"
               tooltip="Access tier: Standard (hot), Infrequent (cool), or Cold (archive)."
@@ -1148,7 +1148,7 @@ export default function FilterSidebar({
               isExpanded={expanded.storageTier ?? true}
               onToggleExpand={() => onToggleSection('storageTier')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Redundancy"
               tooltip="Replication scope: Single-Zone, Zone-Redundant, or Geo-Redundant."
@@ -1159,7 +1159,7 @@ export default function FilterSidebar({
               isExpanded={expanded.storageRedundancy ?? true}
               onToggleExpand={() => onToggleSection('storageRedundancy')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Media"
               tooltip="Underlying media (SSD or HDD). Applies to block and some file storage."
@@ -1170,7 +1170,7 @@ export default function FilterSidebar({
               isExpanded={expanded.storageMedia ?? true}
               onToggleExpand={() => onToggleSection('storageMedia')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -1187,7 +1187,7 @@ export default function FilterSidebar({
               isExpanded={expanded.appHostingTiers ?? true}
               onToggleExpand={() => onToggleSection('appHostingTiers')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Compute Type"
               tooltip="Whether the underlying compute resources are shared or dedicated"
@@ -1198,7 +1198,7 @@ export default function FilterSidebar({
               isExpanded={expanded.appHostingComputeTypes ?? true}
               onToggleExpand={() => onToggleSection('appHostingComputeTypes')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -1216,7 +1216,7 @@ export default function FilterSidebar({
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Engine"
               tooltip="Analytics Engine."
@@ -1227,7 +1227,7 @@ export default function FilterSidebar({
               isExpanded={expanded.engine ?? true}
               onToggleExpand={() => onToggleSection('engine')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Deployment"
               tooltip="Provisioned or Serverless."
@@ -1238,7 +1238,7 @@ export default function FilterSidebar({
               isExpanded={expanded.deploymentType ?? true}
               onToggleExpand={() => onToggleSection('deploymentType')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Tier"
               tooltip="Performance Tier."
@@ -1249,7 +1249,7 @@ export default function FilterSidebar({
               isExpanded={expanded.tier ?? true}
               onToggleExpand={() => onToggleSection('tier')}
             />
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -1259,7 +1259,7 @@ export default function FilterSidebar({
             <h2 className="m-0">
               <button
                 onClick={() => onToggleSection('specs')}
-                className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
               >
                 <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
                 Specs & Price <Tooltip text="Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD."><Info size={10} className="cursor-help" /></Tooltip>
@@ -1278,8 +1278,8 @@ export default function FilterSidebar({
                 memoryRange.max !== config.DEFAULT_MEMORY_RANGE.max ||
                 priceRange.min !== config.DEFAULT_PRICE_RANGE.min ||
                 priceRange.max !== config.DEFAULT_PRICE_RANGE.max
-                  ? 'text-black dark:text-white'
-                  : 'text-[#737373] hover:text-black dark:hover:text-white'
+                  ? 'text-black dark:text-[#f7f8ff]'
+                  : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
               }`}
             >
               Clear All
@@ -1324,7 +1324,7 @@ export default function FilterSidebar({
           )}
         </section>
 
-        <div className="h-px bg-[#e5e5e5] dark:bg-[#1f1f1f] mx-1" />
+        <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
         {/* Pricing Mode */}
         {activeProductType !== 'ai' && (
@@ -1333,7 +1333,7 @@ export default function FilterSidebar({
               <h2 className="m-0">
                 <button
                   onClick={() => onToggleSection('pricing')}
-                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
+                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
                 >
                   <ChevronDown size={10} className={`transition-transform ${expanded.pricing ? '' : '-rotate-90'}`} />
                   PAYG OR YEARLY PRICE <Tooltip text="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)."><Info size={10} className="cursor-help" /></Tooltip>
@@ -1346,8 +1346,8 @@ export default function FilterSidebar({
                   onClick={() => onShowAggregationChange(false)}
                   className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                     !showAggregation
-                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                      ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                      : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                   }`}
                 >
                   PAYG
@@ -1356,8 +1356,8 @@ export default function FilterSidebar({
                   onClick={() => onShowAggregationChange(true)}
                   className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                     showAggregation
-                      ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white'
-                      : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                      ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                      : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                   }`}
                 >
                   Yearly
