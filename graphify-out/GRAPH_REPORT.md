@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 155 files · ~111,471 words
+- 156 files · ~111,490 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 535 nodes · 724 edges · 60 communities (32 shown, 28 thin omitted)
+- 536 nodes · 724 edges · 61 communities (33 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `439161df`
+- Built from commit: `e15f5c5d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -92,7 +92,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (60 total, 28 thin omitted)
+## Communities (61 total, 28 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
@@ -191,7 +191,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `BaseAdapter` connect `Community 62` to `Community 16`?**
   _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `PROVIDERS` to the rest of the system?**
   _148 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
