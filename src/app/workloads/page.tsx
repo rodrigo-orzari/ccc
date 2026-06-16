@@ -21,7 +21,7 @@ export default function WorkloadsCatalog() {
 
       <div className="flex flex-1 w-full mt-[44px]">
         {/* Sidebar Navigation */}
-        <aside className="fixed top-[44px] left-0 w-[280px] h-[calc(100vh-44px)] overflow-y-auto border-r border-[#dde0f0] dark:border-[#1e1e38] p-8 hidden md:block bg-[#f7f8ff] dark:bg-[#06060f] z-40">
+        <aside className="fixed top-[44px] left-0 w-[280px] h-[calc(100vh-44px-40px)] pb-10 overflow-y-auto border-r border-[#dde0f0] dark:border-[#1e1e38] p-8 hidden md:block bg-[#f7f8ff] dark:bg-[#06060f] z-40">
           <h4 className="text-[11px] text-[#6b7280] dark:text-[#71717a] uppercase tracking-wider mb-4 font-bold">Content</h4>
           <nav>
             <ul className="space-y-3">
@@ -41,8 +41,8 @@ export default function WorkloadsCatalog() {
         </aside>
 
         {/* Main Area */}
-        <div className="flex-1 flex flex-col md:ml-[280px] min-h-[calc(100vh-44px)]">
-          <main className="flex-1 p-8 lg:p-12 w-full max-w-[1200px] mx-auto">
+        <div className="flex-1 flex flex-col md:ml-[280px] min-h-[calc(100vh-44px)] pb-12">
+          <main className="flex-1 p-8 lg:p-12 pb-20 w-full max-w-[1200px] mx-auto">
             <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
                 <h2 className="text-3xl font-bold mb-3 tracking-tight">Cloud Starter Kits & Workloads</h2>
@@ -100,7 +100,9 @@ export default function WorkloadsCatalog() {
             )}
           </main>
 
-          <Footer />
+          <div className="fixed bottom-0 left-0 right-0 z-50">
+            <Footer />
+          </div>
         </div>
       </div>
     </div>
