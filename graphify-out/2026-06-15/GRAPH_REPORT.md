@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-15)
 
 ## Corpus Check
-- 156 files · ~111,129 words
+- 156 files · ~111,372 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6cbfacc1`
+- Built from commit: `e4975cf5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -179,7 +179,7 @@ Cohesion: 0.09
 Nodes (10): AlibabaAdapter, AWSAdapter, AzureAdapter, BaseAdapter, DigitalOceanAdapter, GCPAdapter, OracleAdapter, PriceDriftResult (+2 more)
 
 ## Knowledge Gaps
-- **148 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+143 more)
+- **148 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `TableToolbarProps`, `PipelineStatus`, `ProviderStatus` (+143 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -192,7 +192,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **Why does `NetworkingPricingPipeline` connect `Community 38` to `Community 9`?**
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
+- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `TableToolbarProps` to the rest of the system?**
   _148 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
