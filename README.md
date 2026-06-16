@@ -33,6 +33,7 @@ In modern cloud engineering and FinOps, **apples-to-apples price comparison** ac
 1. **Aggregating** raw catalog data from live pricing APIs and offline fallback configs across 7 primary domains: VMs, Databases, Serverless, Containers, Networking, Data Analytics, and AI.
 2. **Normalizing** proprietary data such as compute categories, geographies, hardware attributes, networking port capacities, AI context windows, and analytics compute units.
 3. **Comparing** configurations in a single side-by-side dashboard, allowing users to instantly identify the cheapest option for their specified constraint ranges.
+4. **Simulating** full architectures via the Workloads Catalog, providing directional cost estimators for entire deployment scenarios like 3-tier web apps or ML pipelines across clouds.
 
 ---
 

@@ -15,7 +15,7 @@ const headingToId = (children: React.ReactNode): string => {
 
 const TermsOfUsePage: React.FC = () => {
   const content = `
-_Last updated: 20 May 2026._
+_Last updated: 15 June 2026._
 
 ## Agreement to Terms
 
@@ -88,6 +88,14 @@ The application provides graphical tools, including in-table micro-visualization
 To provide a seamless comparison experience across entirely different cloud architectures, CCC normalizes proprietary billing metrics into standard equivalents. For example, in the Data & Analytics category, we map 100 Azure Synapse DWUs (Data Warehouse Units) or 100 Google BigQuery Slots to equal 1 standard "Compute Unit" (equivalent to 1 Databricks DBU or 1 Snowflake Credit). We also normalize AI Context Windows, Serverless executions, Networking throughputs (Port Capacities), and Database deployments. Similar approximations are applied across all categories.
 
 This abstraction means the data you see is an approximation designed to match "like for like" compute power. Actual performance and cost ratios will vary significantly depending on your specific workload.
+
+### Workloads Catalog and Architecture Calculator
+
+The Workloads section provides hypothetical architectures to illustrate relative multi-cloud deployment costs for common scenarios (e.g., Serverless Web Apps, Machine Learning). The provided architectural components and generated cost estimates are conceptual. Real-world implementation costs will vary greatly based on bandwidth consumption, unlisted service dependencies, storage I/O, and architectural variations not represented in the catalog.
+
+### Voluntary Donations
+
+This project accepts voluntary donations to help cover infrastructure and API costs. All donations are processed by third-party payment providers (e.g., Intuit). Donations are non-refundable, strictly voluntary, and do not constitute a purchase of services, nor do they guarantee future uptime, feature development, or service availability of the Compare Cloud Costs platform.
 
 ### Official Pricing Calculators
 
@@ -283,7 +291,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
         <aside className="sidebar">
 
           <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
-            In this article
+            Content
           </h4>
           <nav>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -300,6 +308,8 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
                   <li style={{ marginBottom: '0.4rem' }}><a href="#directional-and-sample-data-only" style={{ fontSize: '0.85rem' }}>Directional data only</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#visualizations-and-charts" style={{ fontSize: '0.85rem' }}>Visualizations and charts</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#data-normalization" style={{ fontSize: '0.85rem' }}>Data normalization</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#workloads-catalog-and-architecture-calculator" style={{ fontSize: '0.85rem' }}>Workloads catalog</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#voluntary-donations" style={{ fontSize: '0.85rem' }}>Voluntary donations</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#official-pricing-calculators" style={{ fontSize: '0.85rem' }}>Official calculators</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#no-warranties-or-liability" style={{ fontSize: '0.85rem' }}>No liability</a></li>
                 </ul>

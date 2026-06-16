@@ -163,7 +163,7 @@ const PrivacyPolicyPage: React.FC = () => {
           <aside className="privacy-sidebar">
 
             <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: 'var(--muted-text)', marginBottom: '0.875rem' }}>
-              On this page
+              Content
             </div>
             <nav>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -182,7 +182,7 @@ const PrivacyPolicyPage: React.FC = () => {
           {/* Main content */}
           <main className="privacy-main">
             <h1>Privacy Policy</h1>
-            <p className="privacy-meta">Last updated: 5 May 2026.</p>
+            <p className="privacy-meta">Last updated: 15 June 2026.</p>
 
             <h2 id="overview">Overview</h2>
             <p>
@@ -237,6 +237,7 @@ const PrivacyPolicyPage: React.FC = () => {
             <p>Our platform uses the following services:</p>
             <ul>
               <li><strong>Cloud Providers</strong>: AWS, Azure, Google Cloud, Oracle Cloud APIs (for pricing data only)</li>
+              <li><strong>Payment Processing</strong>: We use third-party payment processors (e.g., Intuit) for voluntary donations. We do not store or process your credit card information directly.</li>
               <li><strong>Analytics</strong>: Basic analytics to understand usage patterns</li>
             </ul>
             <p>These services have their own privacy policies, and we encourage you to review them.</p>
