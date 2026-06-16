@@ -6,83 +6,110 @@
     {
       "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_file": "src/app/status/page.tsx",
       "source_location": "L1",
-      "id": "id_page",
-      "community": 48,
+      "id": "status_page",
+      "community": 8,
       "norm_label": "page.tsx"
     },
     {
-      "label": "catalogProductType()",
+      "label": "PipelineStatus",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L15",
-      "id": "id_page_catalogproducttype",
-      "community": 48,
-      "norm_label": "catalogproducttype()"
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L7",
+      "id": "status_page_pipelinestatus",
+      "community": 8,
+      "norm_label": "pipelinestatus"
     },
     {
-      "label": "REGION_OPTIONS",
+      "label": "ProviderStatus",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L20",
-      "id": "id_page_region_options",
-      "community": 48,
-      "norm_label": "region_options"
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L17",
+      "id": "status_page_providerstatus",
+      "community": 8,
+      "norm_label": "providerstatus"
     },
     {
-      "label": "providerColor()",
+      "label": "StatusData",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L22",
-      "id": "id_page_providercolor",
-      "community": 48,
-      "norm_label": "providercolor()"
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L25",
+      "id": "status_page_statusdata",
+      "community": 8,
+      "norm_label": "statusdata"
     },
     {
-      "label": "providerName()",
+      "label": "PROVIDER_COLORS",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L24",
-      "id": "id_page_providername",
-      "community": 48,
-      "norm_label": "providername()"
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L34",
+      "id": "status_page_provider_colors",
+      "community": 8,
+      "norm_label": "provider_colors"
     },
     {
-      "label": "PROVIDER_IDS",
+      "label": "PROVIDER_URLS",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L28",
-      "id": "id_page_provider_ids",
-      "community": 48,
-      "norm_label": "provider_ids"
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L45",
+      "id": "status_page_provider_urls",
+      "community": 8,
+      "norm_label": "provider_urls"
     },
     {
-      "label": "ProviderTh()",
+      "label": "LinkedInIcon()",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L30",
-      "id": "id_page_providerth",
-      "community": 48,
-      "norm_label": "providerth()"
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L59",
+      "id": "status_page_linkedinicon",
+      "community": 8,
+      "norm_label": "linkedinicon()"
     },
     {
-      "label": "ArchitectureStrip()",
+      "label": "XIcon()",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L46",
-      "id": "id_page_architecturestrip",
-      "community": 48,
-      "norm_label": "architecturestrip()"
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L67",
+      "id": "status_page_xicon",
+      "community": 8,
+      "norm_label": "xicon()"
     },
     {
-      "label": "WorkloadDetails()",
+      "label": "PIPELINE_ORDER",
       "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L91",
-      "id": "id_page_workloaddetails",
-      "community": 48,
-      "norm_label": "workloaddetails()"
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L75",
+      "id": "status_page_pipeline_order",
+      "community": 8,
+      "norm_label": "pipeline_order"
+    },
+    {
+      "label": "SourceBadge()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L79",
+      "id": "status_page_sourcebadge",
+      "community": 8,
+      "norm_label": "sourcebadge()"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L118",
+      "id": "status_page_backtotop",
+      "community": 8,
+      "norm_label": "backtotop()"
+    },
+    {
+      "label": "StatusPage()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L131",
+      "id": "status_page_statuspage",
+      "community": 8,
+      "norm_label": "statuspage()"
     },
     {
       "label": "page.tsx",
@@ -103,13 +130,166 @@
       "norm_label": "workloadscatalog()"
     },
     {
+      "label": "DonationModal.tsx",
+      "file_type": "code",
+      "source_file": "src/components/DonationModal.tsx",
+      "source_location": "L1",
+      "id": "components_donationmodal",
+      "community": 48,
+      "norm_label": "donationmodal.tsx"
+    },
+    {
+      "label": "DonationModal()",
+      "file_type": "code",
+      "source_file": "src/components/DonationModal.tsx",
+      "source_location": "L6",
+      "id": "components_donationmodal_donationmodal",
+      "community": 48,
+      "norm_label": "donationmodal()"
+    },
+    {
+      "label": "ProductTypeSelector.tsx",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L1",
+      "id": "components_producttypeselector",
+      "community": 48,
+      "norm_label": "producttypeselector.tsx"
+    },
+    {
+      "label": "PRODUCT_TYPES",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L6",
+      "id": "components_producttypeselector_product_types",
+      "community": 48,
+      "norm_label": "product_types"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L21",
+      "id": "components_producttypeselector_linkedinicon",
+      "community": 48,
+      "norm_label": "linkedinicon()"
+    },
+    {
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L29",
+      "id": "components_producttypeselector_xicon",
+      "community": 48,
+      "norm_label": "xicon()"
+    },
+    {
+      "label": "ProductTypeSelectorProps",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L39",
+      "id": "components_producttypeselector_producttypeselectorprops",
+      "community": 48,
+      "norm_label": "producttypeselectorprops"
+    },
+    {
+      "label": "ProductTypeSelector()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L44",
+      "id": "components_producttypeselector_producttypeselector",
+      "community": 48,
+      "norm_label": "producttypeselector()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L1",
+      "community": 48,
+      "norm_label": "page.tsx",
+      "id": "id_page"
+    },
+    {
+      "label": "catalogProductType()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L15",
+      "community": 48,
+      "norm_label": "catalogproducttype()",
+      "id": "id_page_catalogproducttype"
+    },
+    {
+      "label": "REGION_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L20",
+      "community": 48,
+      "norm_label": "region_options",
+      "id": "id_page_region_options"
+    },
+    {
+      "label": "providerColor()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L22",
+      "community": 48,
+      "norm_label": "providercolor()",
+      "id": "id_page_providercolor"
+    },
+    {
+      "label": "providerName()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L24",
+      "community": 48,
+      "norm_label": "providername()",
+      "id": "id_page_providername"
+    },
+    {
+      "label": "PROVIDER_IDS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L28",
+      "community": 48,
+      "norm_label": "provider_ids",
+      "id": "id_page_provider_ids"
+    },
+    {
+      "label": "ProviderTh()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L30",
+      "community": 48,
+      "norm_label": "providerth()",
+      "id": "id_page_providerth"
+    },
+    {
+      "label": "ArchitectureStrip()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L46",
+      "community": 48,
+      "norm_label": "architecturestrip()",
+      "id": "id_page_architecturestrip"
+    },
+    {
+      "label": "WorkloadDetails()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L91",
+      "community": 48,
+      "norm_label": "workloaddetails()",
+      "id": "id_page_workloaddetails"
+    },
+    {
       "label": "temp.tsx",
       "file_type": "code",
       "source_file": "temp.tsx",
       "source_location": "L1",
-      "id": "temp",
       "community": 19,
-      "norm_label": "temp.tsx"
+      "norm_label": "temp.tsx",
+      "id": "temp"
     },
     {
       "label": "page.tsx",
@@ -515,60 +695,6 @@
       "community": 15,
       "norm_label": "tablerow()",
       "id": "components_pricingtable_tablerow"
-    },
-    {
-      "label": "ProductTypeSelector.tsx",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L1",
-      "community": 48,
-      "norm_label": "producttypeselector.tsx",
-      "id": "components_producttypeselector"
-    },
-    {
-      "label": "PRODUCT_TYPES",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L6",
-      "community": 48,
-      "norm_label": "product_types",
-      "id": "components_producttypeselector_product_types"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L21",
-      "community": 48,
-      "norm_label": "linkedinicon()",
-      "id": "components_producttypeselector_linkedinicon"
-    },
-    {
-      "label": "XIcon()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L29",
-      "community": 48,
-      "norm_label": "xicon()",
-      "id": "components_producttypeselector_xicon"
-    },
-    {
-      "label": "ProductTypeSelectorProps",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L39",
-      "community": 48,
-      "norm_label": "producttypeselectorprops",
-      "id": "components_producttypeselector_producttypeselectorprops"
-    },
-    {
-      "label": "ProductTypeSelector()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L44",
-      "community": 48,
-      "norm_label": "producttypeselector()",
-      "id": "components_producttypeselector_producttypeselector"
     },
     {
       "label": "index.ts",
@@ -1208,105 +1334,6 @@
       "community": 13,
       "norm_label": "termsofusepage()",
       "id": "terms_page_termsofusepage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L1",
-      "community": 8,
-      "norm_label": "page.tsx",
-      "id": "status_page"
-    },
-    {
-      "label": "PipelineStatus",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L7",
-      "community": 8,
-      "norm_label": "pipelinestatus",
-      "id": "status_page_pipelinestatus"
-    },
-    {
-      "label": "ProviderStatus",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L17",
-      "community": 8,
-      "norm_label": "providerstatus",
-      "id": "status_page_providerstatus"
-    },
-    {
-      "label": "StatusData",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L25",
-      "community": 8,
-      "norm_label": "statusdata",
-      "id": "status_page_statusdata"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L34",
-      "community": 8,
-      "norm_label": "provider_colors",
-      "id": "status_page_provider_colors"
-    },
-    {
-      "label": "PROVIDER_URLS",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L45",
-      "community": 8,
-      "norm_label": "provider_urls",
-      "id": "status_page_provider_urls"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L59",
-      "community": 8,
-      "norm_label": "linkedinicon()",
-      "id": "status_page_linkedinicon"
-    },
-    {
-      "label": "XIcon()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L67",
-      "community": 8,
-      "norm_label": "xicon()",
-      "id": "status_page_xicon"
-    },
-    {
-      "label": "PIPELINE_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L75",
-      "community": 8,
-      "norm_label": "pipeline_order",
-      "id": "status_page_pipeline_order"
-    },
-    {
-      "label": "SourceBadge()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L79",
-      "community": 8,
-      "norm_label": "sourcebadge()",
-      "id": "status_page_sourcebadge"
-    },
-    {
-      "label": "StatusPage()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L118",
-      "community": 8,
-      "norm_label": "statuspage()",
-      "id": "status_page_statuspage"
     },
     {
       "label": "workloads.ts",
@@ -3262,24 +3289,6 @@
       "id": "app_layout_rootlayout"
     },
     {
-      "label": "DonationModal.tsx",
-      "file_type": "code",
-      "source_file": "src/components/DonationModal.tsx",
-      "source_location": "L1",
-      "community": 48,
-      "norm_label": "donationmodal.tsx",
-      "id": "components_donationmodal"
-    },
-    {
-      "label": "DonationModal()",
-      "file_type": "code",
-      "source_file": "src/components/DonationModal.tsx",
-      "source_location": "L5",
-      "community": 48,
-      "norm_label": "donationmodal()",
-      "id": "components_donationmodal_donationmodal"
-    },
-    {
       "label": "ProviderCards.tsx",
       "file_type": "code",
       "source_file": "src/components/ProviderCards.tsx",
@@ -4830,6 +4839,296 @@
   ],
   "links": [
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "status_page",
+      "target": "status_page_backtotop",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_linkedinicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_pipeline_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_pipelinestatus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_provider_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_provider_urls"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_providerstatus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_sourcebadge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_statusdata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L125",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_statuspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_xicon"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_workloadscatalog"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/DonationModal.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_donationmodal",
+      "target": "components_donationmodal_donationmodal"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_donationmodal"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/layout.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_layout",
+      "target": "components_donationmodal_donationmodal"
+    },
+    {
+      "relation": "re_exports",
+      "context": "re-export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_donationmodal_donationmodal"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_producttypeselector"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_linkedinicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_product_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_producttypeselector"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_producttypeselectorprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_xicon"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector_producttypeselectorprops",
+      "target": "types_index_producttype"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -5018,49 +5317,6 @@
       "confidence_score": 1.0,
       "source": "id_page_providerth",
       "target": "id_page_providername"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_workloadscatalog"
     },
     {
       "relation": "contains",
@@ -6144,100 +6400,6 @@
       "target": "types_index_producttype"
     },
     {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_producttypeselector"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_linkedinicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_product_types"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_producttypeselector"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L35",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_producttypeselectorprops"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_xicon"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector_producttypeselectorprops",
-      "target": "types_index_producttype"
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -6247,28 +6409,6 @@
       "confidence_score": 1.0,
       "source": "app_layout",
       "target": "components_index"
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_donationmodal"
-    },
-    {
-      "relation": "re_exports",
-      "context": "re-export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_donationmodal_donationmodal"
     },
     {
       "relation": "re_exports",
@@ -7232,106 +7372,6 @@
       "confidence_score": 1.0,
       "source": "terms_page",
       "target": "terms_page_termsofusepage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L55",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_linkedinicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L42",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_pipeline_order"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_pipelinestatus"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_provider_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_provider_urls"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_providerstatus"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L86",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_sourcebadge"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_statusdata"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L125",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_statuspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L63",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_xicon"
     },
     {
       "relation": "contains",
@@ -10962,27 +11002,6 @@
       "target": "app_layout_rootlayout"
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_layout",
-      "target": "components_donationmodal_donationmodal"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/DonationModal.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_donationmodal",
-      "target": "components_donationmodal_donationmodal"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/ProviderCards.tsx",
@@ -12359,5 +12378,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "e15f5c5d9ddfc05b33573174517028929eb49888"
+  "built_at_commit": "d8a69acf7495a7629322bf2973eb38a7d9039fd9"
 }
