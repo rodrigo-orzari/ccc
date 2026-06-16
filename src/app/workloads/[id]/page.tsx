@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { Download } from 'lucide-react';
-import { Footer, WorkloadHeader } from '@/components';
+import { Footer, ProductTypeSelector } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { WorkloadDefinition } from '@/types';
 import { PROVIDERS, GEOGRAPHIES } from '@/config';
@@ -207,7 +207,7 @@ export default function WorkloadDetails() {
   if (!workload) {
     return (
       <div className="flex flex-col min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb]">
-        <WorkloadHeader />
+        <ProductTypeSelector activeProductType={"workloads" as any} />
         <div className="flex-1 flex items-center justify-center text-[11px] uppercase tracking-widest text-[#737373]">
           Workload not found
         </div>
@@ -220,7 +220,7 @@ export default function WorkloadDetails() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans">
-      <WorkloadHeader />
+      <ProductTypeSelector activeProductType={"workloads" as any} />
 
       {/* Workload identity strip — content aligns with the main grid's max-width
           so the title sits flush with the architecture/comparison boxes below. */}
@@ -445,8 +445,11 @@ export default function WorkloadDetails() {
         </div>
         </div>
 
-        {/* Workload Carousel - Moved outside the grid to span full width below content */}
-        <div className="mt-8 border-t border-[#e5e5e5] dark:border-[#262626] pt-8 w-full">
+      </main>
+
+      {/* Workload Carousel - Moved completely outside main to guarantee it renders below all content */}
+      <div className="w-full border-t border-[#e5e5e5] dark:border-[#262626] bg-white dark:bg-[#000000]">
+        <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 py-8">
           <div className="flex items-center justify-between mb-4 px-2">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
               Explore Other Workloads
@@ -471,7 +474,7 @@ export default function WorkloadDetails() {
             ))}
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Disclaimer — plain text, no box, so it reads as fine-print not a feature panel. */}
       <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-8 text-[11px] text-[#737373] leading-relaxed">

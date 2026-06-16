@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Footer, WorkloadHeader } from '@/components';
+import { Footer, ProductTypeSelector } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 
 export default function WorkloadsCatalog() {
@@ -15,7 +15,7 @@ export default function WorkloadsCatalog() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans">
-      <WorkloadHeader />
+      <ProductTypeSelector activeProductType={"workloads" as any} />
 
       <div className="flex flex-1 w-full">
         {/* Sidebar — mirrors FilterSidebar pattern */}
