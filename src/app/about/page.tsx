@@ -60,8 +60,11 @@ We provide insights into right-sizing and regional price differences before depl
 ### IT Managers and CTOs
 IT leaders use CCC during the architectural planning phase to estimate the total cost of ownership (TCO) for new workloads. By seeing "apples-to-apples" cost comparisons for compute, databases, and networking, they can justify budget requests, avoid vendor lock-in, and select the most cost-effective cloud provider for their specific performance needs.
 
-### Azure Sellers (and Cloud Sales Professionals)
-Cloud sales professionals leverage CCC as an independent, third-party benchmark to demonstrate the competitive pricing of their offerings. For example, an Azure seller can quickly show a prospective client how Azure's pricing for a specific database or compute instance stacks up against AWS or Google Cloud, helping to close deals based on transparent cost advantages.
+### Cloud Provider Sales
+Cloud sales professionals leverage CCC as an independent, third-party benchmark to demonstrate the competitive pricing of their offerings. For example, a sales representative can quickly show a prospective client how their pricing for a specific database or compute instance stacks up against competitors, helping to close deals based on transparent cost advantages.
+
+### Product Owners
+Product Owners use CCC to align product roadmaps with infrastructure budgets. By easily comparing the cost implications of introducing new features (e.g., adding an AI inference endpoint or switching to a NoSQL database), Product Owners can make data-backed decisions that balance product innovation with operational profitability.
 
 ### Managed Service Providers (MSPs)
 MSPs managing infrastructure for multiple clients use CCC to design optimized, cost-effective environments. Whether migrating a client from on-premises to the cloud or optimizing an existing cloud footprint, CCC allows MSPs to rapidly evaluate different providers and present compelling, cost-optimized proposals to their clients, thereby increasing their margins and value-add.
@@ -91,6 +94,9 @@ Always verify your final estimates using the official calculators:
 - [Google Cloud Pricing Calculator](https://cloud.google.com/products/calculator)
 - [Oracle Cloud Cost Estimator](https://www.oracle.com/cloud/costestimator.html)
 - [DigitalOcean Pricing](https://www.digitalocean.com/pricing)
+- [Alibaba Cloud Pricing Calculator](https://www.alibabacloud.com/pricing-calculator)
+- [OpenAI API Pricing](https://openai.com/api/pricing/)
+- [Anthropic Pricing](https://www.anthropic.com/pricing)
 
 [↑ Go back to the top](#about-us)
 `;
