@@ -122,7 +122,7 @@ export const STORAGE_REDUNDANCIES: string[] = ['Single-Zone', 'Zone-Redundant', 
 export const STORAGE_MEDIA: string[] = ['SSD', 'HDD'];
 
 // --- APP HOSTING ---
-export const APP_HOSTING_TIERS: string[] = ['Basic', 'Standard', 'Premium', 'Professional', 'Shared', 'Dedicated'];
+export const APP_HOSTING_TIERS: string[] = ['Free', 'Basic', 'Standard', 'Premium', 'Professional'];
 export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
 
 // (Integration folded into Serverless — see SERVERLESS_SERVICE_TYPES above.)

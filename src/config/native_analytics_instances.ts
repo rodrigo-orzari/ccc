@@ -2,7 +2,7 @@ export const NATIVE_ANALYTICS_AWS_REGION = 'us-east-1';
 export const NATIVE_ANALYTICS_GCP_REGION = 'us-central1';
 
 export interface NativeAnalyticsConfig {
-  provider: 'aws' | 'gcp' | 'azure';
+  provider: 'aws' | 'gcp' | 'azure' | 'oracle' | 'alibaba';
   engine: string;
   tier: string;
   deploymentType: 'Provisioned' | 'Serverless';
@@ -31,12 +31,14 @@ export const NATIVE_ANALYTICS_INSTANCES: NativeAnalyticsConfig[] = [
 
   // BigQuery On-Demand (Per TiB, but we map to a "Compute Unit" equivalent for the slider if needed, though usually it's hard to map)
   // We'll leave it as Serverless On-Demand mapped to 1 Unit = 1 TiB Scanned equivalent.
-  { provider: 'gcp', engine: 'BigQuery', tier: 'On-Demand', deploymentType: 'Serverless', computeUnitName: 'TiB Scanned', pricePerNormalizedUnit: 6.25 },
+  { provider: 'gcp', engine: 'BigQuery', tier: 'On-Demand', deploymentType: 'Serverless', computeUnitName: 'TiB Scanned-Month', pricePerNormalizedUnit: 6.25 },
 
   // Event Streaming / Messaging (AWS Kinesis, GCP Pub/Sub, Azure Event Hubs)
   { provider: 'aws', engine: 'Kinesis Data Streams', tier: 'Provisioned', deploymentType: 'Provisioned', computeUnitName: 'Shard Hour', pricePerNormalizedUnit: 0.015 },
   { provider: 'aws', engine: 'Kinesis Data Streams', tier: 'On-Demand', deploymentType: 'Serverless', computeUnitName: 'GB', pricePerNormalizedUnit: 0.04 },
-  { provider: 'gcp', engine: 'Pub/Sub', tier: 'Standard', deploymentType: 'Serverless', computeUnitName: 'TiB', pricePerNormalizedUnit: 40.00 }, // $40 per TiB
+  { provider: 'gcp', engine: 'Pub/Sub', tier: 'Standard', deploymentType: 'Serverless', computeUnitName: 'TiB-Month', pricePerNormalizedUnit: 40.00 }, // $40 per TiB processed/month
   { provider: 'azure', engine: 'Event Hubs', tier: 'Standard', deploymentType: 'Provisioned', computeUnitName: 'Throughput Unit', pricePerNormalizedUnit: 0.03 },
   { provider: 'azure', engine: 'Event Hubs', tier: 'Premium', deploymentType: 'Provisioned', computeUnitName: 'Processing Unit', pricePerNormalizedUnit: 0.94 },
+  { provider: 'oracle', engine: 'OCI Streaming', tier: 'Standard', deploymentType: 'Provisioned', computeUnitName: 'Storage GB-Hour', pricePerNormalizedUnit: 0.025 },
+  { provider: 'alibaba', engine: 'ApsaraMQ for Kafka', tier: 'Standard', deploymentType: 'Provisioned', computeUnitName: 'Hour', pricePerNormalizedUnit: 0.2 },
 ];

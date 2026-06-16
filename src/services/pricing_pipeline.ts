@@ -142,7 +142,10 @@ export class AzureAdapter extends BaseAdapter {
   // Extract vCPU count from Azure VM SKU name.
   // Standard_D4s_v3→4, Standard_B2ms→2, Standard_NC6→6, Standard_M64s→64
   private vcpuFromSku(sku: string): number {
-    const m = sku.match(/Standard_[A-Za-z]+(\d+)/);
+    let m = sku.match(/Standard_[A-Za-z]+(\d+)/);
+    if (m) return parseInt(m[1]);
+    // Newer GPU SKU names omit the "Standard_" prefix entirely (e.g. "NC8dsxlRTX6Kv6").
+    m = sku.match(/^[A-Za-z]+(\d+)/);
     return m ? parseInt(m[1]) : 0;
   }
 

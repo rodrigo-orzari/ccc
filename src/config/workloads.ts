@@ -36,8 +36,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
         icon: '🚪',
         getRequirements: (params) => {
           return {
-            productType: 'networking',
-            category: 'Gateway',
+            productType: 'serverless',
+            category: 'API Gateway',
             quantity: 1
           };
         }
@@ -63,6 +63,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         getRequirements: (params) => {
           return {
             productType: 'database',
+            category: 'NoSQL',
             minMemoryGb: 4, // Approximating tier based on memory
             quantity: 1
           };
@@ -136,6 +137,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
           const mem = Math.max(8, Math.ceil(params.concurrentUsers / 250) * 4);
           return {
             productType: 'database',
+            category: 'Relational',
             minMemoryGb: mem,
             quantity: 1
           };
@@ -281,6 +283,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
           const mem = params.catalogSize > 100000 ? 16 : 8;
           return {
             productType: 'database',
+            category: 'Relational',
             minMemoryGb: mem,
             quantity: 1
           };
@@ -397,6 +400,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         getRequirements: (params) => {
           return {
             productType: 'data-analytics',
+            category: 'Warehouse',
             quantity: 1
           };
         }

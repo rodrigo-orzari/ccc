@@ -28,7 +28,6 @@ export async function GET() {
         ARRAY_AGG(DISTINCT pr.attributes->>'ha_mode') FILTER (WHERE pr.attributes->>'ha_mode' IS NOT NULL) as ha_modes,
         ARRAY_AGG(DISTINCT pr.attributes->>'tier') FILTER (WHERE pr.attributes->>'tier' IS NOT NULL) as tiers,
         ARRAY_AGG(DISTINCT pr.attributes->>'modelTier') FILTER (WHERE pr.attributes->>'modelTier' IS NOT NULL) as ai_model_tiers,
-        ARRAY_AGG(DISTINCT pr.attributes->>'contextWindowK') FILTER (WHERE pr.attributes->>'contextWindowK' IS NOT NULL) as ai_context_windows,
         ARRAY_AGG(DISTINCT pr.attributes->>'multimodal') FILTER (WHERE pr.attributes->>'multimodal' IS NOT NULL) as ai_multimodal,
         ARRAY_AGG(DISTINCT pr.attributes->>'orchestrator') FILTER (WHERE pr.attributes->>'orchestrator' IS NOT NULL) as orchestrators,
         ARRAY_AGG(DISTINCT pr.attributes->>'compute_type') FILTER (WHERE pr.attributes->>'compute_type' IS NOT NULL) as container_compute_types,
@@ -36,8 +35,8 @@ export async function GET() {
         ARRAY_AGG(DISTINCT pr.attributes->>'billing_granularity') FILTER (WHERE pr.attributes->>'billing_granularity' IS NOT NULL) as billing_granularities,
         ARRAY_AGG(DISTINCT pr.attributes->>'execution_model') FILTER (WHERE pr.attributes->>'execution_model' IS NOT NULL) as execution_models,
         ARRAY_AGG(DISTINCT pr.attributes->>'provisioned_concurrency_support') FILTER (WHERE pr.attributes->>'provisioned_concurrency_support' IS NOT NULL) as provisioned_concurrency,
-        ARRAY_AGG(DISTINCT pr.attributes->>'transfer_tier') FILTER (WHERE pr.attributes->>'transfer_tier' IS NOT NULL) as transfer_tiers,
-        ARRAY_AGG(DISTINCT pr.attributes->>'destination') FILTER (WHERE pr.attributes->>'destination' IS NOT NULL) as destinations
+        ARRAY_AGG(DISTINCT pr.attributes->>'usage_tier') FILTER (WHERE pr.attributes->>'usage_tier' IS NOT NULL) as usage_tiers,
+        ARRAY_AGG(DISTINCT pr.attributes->>'transfer_scope') FILTER (WHERE pr.attributes->>'transfer_scope' IS NOT NULL) as transfer_scopes
       FROM pricing_records pr
       LEFT JOIN services s ON s.id = pr.service_id;
     `;
