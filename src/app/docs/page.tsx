@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import Footer from '@/components/Footer';
+import { Footer, ProductTypeSelector } from "@/components";
 
 const BackToTop = () => (
   <p style={{ marginTop: '1.5rem' }}>
@@ -145,39 +145,7 @@ const DocsPage: React.FC = () => {
       `}</style>
 
       <div className="docs-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <div className="docs-topnav">
-          <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 700, color: 'var(--text-color)', textDecoration: 'none', letterSpacing: '-0.01em' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-            Compare Cloud Costs
-          </a>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 10, fontWeight: 500, color: 'var(--muted-text)', whiteSpace: 'nowrap' }}>
-              Share with friends and family
-            </span>
-            <a
-              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://comparecloudcosts.com')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Share on LinkedIn"
-              style={{ color: 'var(--muted-text)', display: 'flex', alignItems: 'center' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#0A66C2')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted-text)')}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-            <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent('Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba. #FinOps #CCC')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Share on X"
-              style={{ color: 'var(--muted-text)', display: 'flex', alignItems: 'center' }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-color)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted-text)')}
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-          </div>
-        </div>
+        <ProductTypeSelector />
       <div className="docs-container" id="top" style={{ flex: 1 }}>
         <aside className="docs-sidebar">
             <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
@@ -195,6 +163,9 @@ const DocsPage: React.FC = () => {
                   <li><a href="#containers" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Containers</a></li>
                   <li><a href="#networking" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Networking</a></li>
                   <li><a href="#data--analytics" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data &amp; Analytics</a></li>
+                  <li><a href="#storage" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Storage</a></li>
+                  <li><a href="#app-hosting" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>App Hosting</a></li>
+                  <li><a href="#ai-machine-learning" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>AI &amp; Machine Learning</a></li>
                 </ul>
               </li>
               <li>
@@ -287,6 +258,21 @@ const DocsPage: React.FC = () => {
               Covers managed data warehouse and analytics services (Redshift, BigQuery, Synapse,
               Snowflake, Databricks, and native cloud-provider offerings). Filter by engine,
               deployment type, and service tier.
+            </p>
+
+            <h3 id="storage">Storage</h3>
+            <p>
+              Compares object, block, and file storage pricing (S3, Blob Storage, Cloud Storage, EBS). Filter by storage type, performance tier, redundancy (LRS, ZRS, GRS), and media type.
+            </p>
+
+            <h3 id="app-hosting">App Hosting</h3>
+            <p>
+              Covers managed application hosting and Platform-as-a-Service offerings (App Service, App Engine, Heroku, etc.). Compare by compute tier, operating system, and architecture.
+            </p>
+
+            <h3 id="ai-machine-learning">AI &amp; Machine Learning</h3>
+            <p>
+              Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window size, multimodal capabilities, and compare input/output pricing per 1M tokens.
             </p>
 
             <BackToTop />

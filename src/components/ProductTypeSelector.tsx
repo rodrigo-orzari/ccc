@@ -34,9 +34,11 @@ function XIcon() {
   );
 }
 
+import Link from 'next/link';
+
 interface ProductTypeSelectorProps {
-  activeProductType: ProductType;
-  onProductTypeChange: (type: ProductType) => void;
+  activeProductType?: ProductType | null;
+  onProductTypeChange?: (type: ProductType) => void;
 }
 
 export default function ProductTypeSelector({
@@ -58,36 +60,55 @@ export default function ProductTypeSelector({
   return (
     <div className="h-[44px] border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e] flex items-center px-[1.5rem] overflow-x-auto no-scrollbar shrink-0">
       <div className="flex items-center gap-6 flex-1 min-w-0">
-        {PRODUCT_TYPES.map(product => (
-          <button
-            key={product.id}
-            onClick={() => !product.soon && onProductTypeChange(product.id)}
-            disabled={product.soon}
-            className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
-              activeProductType === product.id
-                ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm border-[#dde0f0] dark:border-[#1e1e38] cursor-default'
-                : 'border-transparent text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100'
-            } ${product.soon ? 'cursor-not-allowed opacity-60' : ''}`}
-          >
-            <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== product.id ? 'font-medium' : ''}`}>
-              {product.emoji} {product.label}
-            </span>
-            {product.soon && (
-              <span className="text-[8px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] px-1 rounded uppercase tracking-tighter">
-                Soon
+        {PRODUCT_TYPES.map(product => {
+          const href = `/?product=${product.id === 'vm' ? 'compute' : product.id}`;
+          return (
+            <Link
+              key={product.id}
+              href={product.soon ? '#' : href}
+              onClick={(e) => {
+                if (product.soon) {
+                  e.preventDefault();
+                  return;
+                }
+                if (onProductTypeChange) {
+                  e.preventDefault();
+                  onProductTypeChange(product.id);
+                  window.history.pushState({}, '', href);
+                }
+              }}
+              className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
+                activeProductType === product.id
+                  ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm border-[#dde0f0] dark:border-[#1e1e38] cursor-default'
+                  : 'border-transparent text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100'
+              } ${product.soon ? 'cursor-not-allowed opacity-60' : ''}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== product.id ? 'font-medium' : ''}`}>
+                {product.emoji} {product.label}
               </span>
-            )}
-          </button>
-        ))}
+              {product.soon && (
+                <span className="text-[8px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] px-1 rounded uppercase tracking-tighter">
+                  Soon
+                </span>
+              )}
+            </Link>
+          );
+        })}
         
-        <a
+        <Link
           href="/workloads"
-          className="flex items-center gap-2 px-3 py-1 rounded border border-transparent transition-all text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100 shrink-0"
+          className={`flex items-center gap-2 px-3 py-1 rounded border transition-all shrink-0 ${
+            activeProductType === 'workloads' as any
+              ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm border-[#dde0f0] dark:border-[#1e1e38] cursor-default'
+              : 'border-transparent text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100'
+          }`}
+          style={{ textDecoration: 'none' }}
         >
-          <span className="text-xs font-medium flex items-center gap-1.5">
+          <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'workloads' as any ? 'font-medium' : ''}`}>
             📦 Workloads
           </span>
-        </a>
+        </Link>
       </div>
 
       <div className="flex items-center gap-2 ml-4 shrink-0">

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useMemo, useRef, useDeferredValue } from 'react';
+import { useSearchParams } from "next/navigation";
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import type { ProductType, PricingRecord } from '@/types';
 import {
@@ -18,6 +19,18 @@ import * as staticConfig from '@/config';
 export default function Dashboard() {
   const config = useDynamicFilters();
   const [activeProductType, setActiveProductType] = useState<ProductType>('ai');
+
+  // Initialize from URL query param if present
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const product = params.get('product');
+      if (product) {
+        // Handle the mapping from 'compute' back to 'vm'
+        setActiveProductType(product === 'compute' ? 'vm' : product as ProductType);
+      }
+    }
+  }, []);
 
   const [filtersSynced, setFiltersSynced] = useState(false);
   useEffect(() => {
