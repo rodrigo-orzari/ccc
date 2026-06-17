@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1781631845.8054397,
-    "ast_hash": "31e4e8e7a30e77d1ae2e075a1054d1f2",
+    "mtime": 1781713910.392802,
+    "ast_hash": "c6fd6a1e6b2f8ab64d06496b15e33cb6",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
@@ -345,8 +345,8 @@
     "semantic_hash": ""
   },
   "src/app/api/pricing/route.ts": {
-    "mtime": 1781587736.3330812,
-    "ast_hash": "0a6dec59cf106a817a4c8f6cb6b863ca",
+    "mtime": 1781714006.4795003,
+    "ast_hash": "30a27d3a0a2fcc164ec86244192fbe34",
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1781631592.8839881,
-    "ast_hash": "f455f94a58394e24f330cfd5e37ccf3b",
+    "mtime": 1781713900.869446,
+    "ast_hash": "e1cdeeac7f09e3dfa684c654a63b032e",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -435,8 +435,8 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1781713684.7207334,
-    "ast_hash": "8208c154ce11e3964ac130c2de1b3200",
+    "mtime": 1781714062.956686,
+    "ast_hash": "9a119a2d8108144a03442ac6d0238168",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
@@ -455,8 +455,8 @@
     "semantic_hash": ""
   },
   "src/components/TableToolbar.tsx": {
-    "mtime": 1781587736.597956,
-    "ast_hash": "6c2184b7740a6f3fe1e1468e52bf4308",
+    "mtime": 1781714050.1403933,
+    "ast_hash": "87027773878a2fc42558ed68bbc91ed2",
     "semantic_hash": ""
   },
   "src/components/index.ts": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "src/types/index.ts": {
-    "mtime": 1781587736.2449832,
-    "ast_hash": "7cd407fada6b3e264ca73f3516527946",
+    "mtime": 1781714015.380578,
+    "ast_hash": "2f4d3cc7c323da44c08d035e1cd70400",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -770,8 +770,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1781627182.6356275,
-    "ast_hash": "1786e5d02057f37d11e054842d0ea747",
+    "mtime": 1781714028.0442,
+    "ast_hash": "3ebbe3445c87bc22ce8aea2e39f95abf",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
