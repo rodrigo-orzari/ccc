@@ -2,6 +2,7 @@
 
 import React, { RefObject, useState, useEffect, useRef, useCallback } from 'react';
 import type { ProductType, PricingRecord } from '@/types';
+import { formatInstanceName } from '@/lib/formatInstanceName';
 
 // ─── Provider colour map ────────────────────────────────────────────────────
 const PROVIDERS: { id: string; name: string; color: string }[] = [
@@ -432,7 +433,7 @@ function TableRow({
 
       {/* SKU */}
       <td data-col="instance_type" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
-        <span className="text-xs font-bold text-[#404040] dark:text-[#d4d4d4]">{record.instance_type}</span>
+        <span className="text-xs font-bold text-[#404040] dark:text-[#d4d4d4]" title={record.instance_type}>{formatInstanceName(record.instance_type, record.provider)}</span>
       </td>
 
       {/* Product-type-specific cells */}

@@ -9,6 +9,7 @@ import { Footer, ProductTypeSelector } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { WorkloadDefinition } from '@/types';
 import { PROVIDERS, GEOGRAPHIES } from '@/config';
+import { formatInstanceName } from '@/lib/formatInstanceName';
 
 // Map a workload component's productType to the URL ?product= value the main
 // catalog page expects. Most match 1:1; vm is a special case (catalog uses 'vm'
@@ -258,38 +259,38 @@ export default function WorkloadDetails() {
 
       <main className="flex-1 p-6 lg:p-10 max-w-[1400px] mx-auto w-full flex flex-col gap-6">
 
+        {/* Workload Price Summary Box — spans full width, above both the table and the filter panel */}
+        {results && (
+          <div className="flex flex-col sm:flex-row bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded overflow-hidden divide-y sm:divide-y-0 sm:divide-x divide-[#e5e5e5] dark:divide-[#262626]">
+            {PROVIDER_IDS.map(provider => {
+              const pData = results[provider];
+              if (!pData) return null;
+              const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
+              const color = providerColor(provider);
+
+              return (
+                <div key={provider} className="flex-1 p-4 flex flex-col justify-between gap-3 min-w-[100px] bg-white dark:bg-[#000000]">
+                  <div className="flex justify-between items-center gap-2">
+                    <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: color, borderColor: color + '50', backgroundColor: color + '18' }}>
+                      {providerName(provider)}
+                    </span>
+                    {isUnavailable || pData.total === 0 ? (
+                      <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">N/A</span>
+                    ) : (
+                      <span className="text-sm font-bold text-black dark:text-white">
+                        ${(pData.total * multiplier).toFixed(0)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Tables */}
           <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
-          {/* Workload Price Summary Box */}
-          {results && (
-            <div className="flex flex-col sm:flex-row bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded overflow-hidden divide-y sm:divide-y-0 sm:divide-x divide-[#e5e5e5] dark:divide-[#262626]">
-              {PROVIDER_IDS.map(provider => {
-                const pData = results[provider];
-                if (!pData) return null;
-                const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
-                const color = providerColor(provider);
-                
-                return (
-                  <div key={provider} className="flex-1 p-4 flex flex-col justify-between gap-3 min-w-[100px] bg-white dark:bg-[#000000]">
-                    <div className="flex justify-between items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: color, borderColor: color + '50', backgroundColor: color + '18' }}>
-                        {providerName(provider)}
-                      </span>
-                      {isUnavailable || pData.total === 0 ? (
-                        <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">N/A</span>
-                      ) : (
-                        <span className="text-sm font-bold text-black dark:text-white">
-                          ${(pData.total * multiplier).toFixed(0)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
           {/* Combined Configuration + Cost table */}
           <div className="flex flex-col flex-1 border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
             <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-3">
@@ -416,7 +417,7 @@ export default function WorkloadDetails() {
                                 style={{ textDecoration: 'none' }}
                               >
                                 <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate max-w-[160px] hover:underline">
-                                  {comp.quantity > 1 ? <span className="text-[#737373] font-bold">{comp.quantity}× </span> : ''}{comp.instanceType}
+                                  {comp.quantity > 1 ? <span className="text-[#737373] font-bold">{comp.quantity}× </span> : ''}{formatInstanceName(comp.instanceType, provider)}
                                 </span>
                                 <div className="flex flex-col items-center gap-1 w-full mt-1">
                                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
@@ -464,7 +465,7 @@ export default function WorkloadDetails() {
           </div>
         </div>
 
-        {/* Configuration panel — mirrors FilterSidebar chip patterns */}
+        {/* Configuration panel — mirrors FilterSidebar's chip patterns and section dividers */}
         <div className="lg:col-span-4 flex flex-col gap-6">
           <div className="border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000] p-5 flex flex-col gap-6">
             {/* Pricing Model */}
@@ -490,6 +491,8 @@ export default function WorkloadDetails() {
               </p>
             </section>
 
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mx-1" />
+
             {/* Region */}
             <section className="space-y-3">
               <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Region</h3>
@@ -510,6 +513,8 @@ export default function WorkloadDetails() {
               </div>
             </section>
 
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mx-1" />
+
             {/* Workload Scale */}
             <section className="space-y-4">
               <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Workload Scale</h3>
@@ -522,15 +527,24 @@ export default function WorkloadDetails() {
                         {formatNumber(parameters[p.id])} {p.unit}
                       </span>
                     </div>
-                    <input
-                      type="range"
-                      min={p.min}
-                      max={p.max}
-                      step={p.step}
-                      value={parameters[p.id] || p.defaultValue}
-                      onChange={(e) => setParameters({ ...parameters, [p.id]: Number(e.target.value) })}
-                      className="w-full accent-black dark:accent-white cursor-pointer h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded appearance-none outline-none"
-                    />
+                    <div className="relative h-6 flex items-center">
+                      <div className="absolute w-full h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full" />
+                      <div
+                        className="absolute h-1 bg-black dark:bg-white rounded-full pointer-events-none"
+                        style={{
+                          width: `${(((parameters[p.id] || p.defaultValue) - p.min) / (p.max - p.min)) * 100}%`
+                        }}
+                      />
+                      <input
+                        type="range"
+                        min={p.min}
+                        max={p.max}
+                        step={p.step}
+                        value={parameters[p.id] || p.defaultValue}
+                        onChange={(e) => setParameters({ ...parameters, [p.id]: Number(e.target.value) })}
+                        className="workload-slider absolute w-full cursor-pointer outline-none"
+                      />
+                    </div>
                     <div className="flex justify-between text-[10px] text-[#a3a3a3] dark:text-[#525252] mt-1 font-mono">
                       <span>{formatNumber(p.min)}</span>
                       <span>{formatNumber(p.max)}</span>
