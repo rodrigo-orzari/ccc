@@ -1,16 +1,16 @@
-# Graph Report - _ccc  (2026-06-16)
+# Graph Report - _ccc  (2026-06-17)
 
 ## Corpus Check
-- 156 files · ~113,121 words
+- 157 files · ~113,559 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 580 nodes · 833 edges · 69 communities (35 shown, 34 thin omitted)
+- 582 nodes · 839 edges · 73 communities (37 shown, 36 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cc9b2e89`
+- Built from commit: `6fc429da`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -72,6 +72,10 @@
 - [[_COMMUNITY_Community 66|Community 66]]
 - [[_COMMUNITY_Community 67|Community 67]]
 - [[_COMMUNITY_Community 68|Community 68]]
+- [[_COMMUNITY_Community 69|Community 69]]
+- [[_COMMUNITY_Community 70|Community 70]]
+- [[_COMMUNITY_Community 71|Community 71]]
+- [[_COMMUNITY_Community 72|Community 72]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `BaseAdapter` - 38 edges
@@ -100,7 +104,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (69 total, 34 thin omitted)
+## Communities (73 total, 36 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
@@ -125,6 +129,10 @@ Nodes (35): 1. Frontend State Management ✅, 1. In-Table Micro-Visualizations �
 ### Community 12 - "Community 12"
 Cohesion: 0.08
 Nodes (25): 1. What Problem Does This Application Solve?, 2. Architectural Design, 3. File Directory & Code Organization, 4. Documentation Guide, 5. Security & Deployment, 6. Quick Start, 7. In-Depth Subsystem Walks, 8. Resources for Contributors (+17 more)
+
+### Community 13 - "Community 13"
+Cohesion: 0.19
+Nodes (8): PROVIDER_IDS, providerColor(), providerName(), ProviderTh(), REGION_OPTIONS, WorkloadComponent, WorkloadDefinition, WorkloadParameter
 
 ### Community 15 - "Community 15"
 Cohesion: 0.06
@@ -151,16 +159,16 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ### Community 38 - "Community 38"
-Cohesion: 0.12
-Nodes (14): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, Row, pipeline (+6 more)
+Cohesion: 0.19
+Nodes (11): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, Row, AppHostingConfigEntry (+3 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.29
 Nodes (8): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry
 
 ### Community 48 - "Community 48"
-Cohesion: 0.06
-Nodes (20): metadata, ChartsViewProps, DonationModal(), PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, DBStatusProvider, ProviderCardProps (+12 more)
+Cohesion: 0.08
+Nodes (6): metadata, DonationModal(), MarkdownPageProps, DBStatusProvider, ProviderCardProps, ProviderCardsProps
 
 ### Community 49 - "Community 49"
 Cohesion: 0.40
@@ -187,28 +195,32 @@ Cohesion: 0.12
 Nodes (9): AlibabaAnalyticsAdapter, AlibabaDBAdapter, AWSElastiCacheAdapter, DigitalOceanDBAdapter, GCPCloudSQLAdapter, GCPMemorystoreAdapter, OracleMySQLHeatWaveAdapter, OraclePostgreSQLAdapter (+1 more)
 
 ### Community 56 - "Community 56"
-Cohesion: 0.23
+Cohesion: 0.22
 Nodes (3): AWSAdapter, AzureAdapter, BaseAdapter
 
 ### Community 62 - "Community 62"
 Cohesion: 0.06
-Nodes (18): POST(), buildPricingFilters(), initDb(), parseFilterList(), requireAdminAuth(), VALID_PRODUCT_TYPES, DatabasePricingPipeline, STATIC_NETWORKING_PRICING (+10 more)
+Nodes (20): POST(), buildPricingFilters(), initDb(), parseFilterList(), requireAdminAuth(), VALID_PRODUCT_TYPES, pipeline, sql (+12 more)
+
+### Community 69 - "Community 69"
+Cohesion: 0.20
+Nodes (6): ChartsViewProps, PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, PricingRecord, ProductType
 
 ## Knowledge Gaps
-- **154 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `Row`, `SERVERLESS_SERVICE_TYPES`, `STORAGE_CATEGORIES` (+149 more)
+- **154 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `PROVIDERS`, `ColDef`, `COL_PROVIDER` (+149 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **34 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ServerlessPricingPipeline` connect `Community 26` to `Community 38`, `Community 62`, `Community 47`?**
   _High betweenness centrality (0.053) - this node is a cross-community bridge._
-- **Why does `BaseAdapter` connect `Community 56` to `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 9`, `Community 16`, `Community 55`, `Community 62`, `Community 63`?**
+- **Why does `BaseAdapter` connect `Community 56` to `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 71`, `Community 9`, `Community 16`, `Community 55`, `Community 62`, `Community 63`?**
   _High betweenness centrality (0.025) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 55` to `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 9`, `Community 16`, `Community 62`, `Community 63`?**
-  _High betweenness centrality (0.021) - this node is a cross-community bridge._
-- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `Row` to the rest of the system?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `PROVIDERS` to the rest of the system?**
   _154 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
