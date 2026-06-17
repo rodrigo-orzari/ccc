@@ -176,6 +176,7 @@ const DocsPage: React.FC = () => {
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
                   <li><a href="#sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Sources</a></li>
                   <li><a href="#normalization" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Normalization</a></li>
+                  <li><a href="#price-trends" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Price Trends</a></li>
                   <li><a href="#accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Accuracy</a></li>
                 </ul>
               </li>
@@ -227,16 +228,15 @@ const DocsPage: React.FC = () => {
 
             <h3 id="databases">Databases</h3>
             <p>
-              Covers managed relational and NoSQL database services (RDS, Cloud SQL, Azure Database,
-              etc.). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
+              Covers managed relational, NoSQL, and In-memory database services (RDS, Cloud SQL, Azure Database,
+              ElastiCache, Memorystore, etc.). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
               Serverless), and HA mode.
             </p>
 
             <h3 id="serverless">Serverless</h3>
             <p>
               Compares function-as-a-service pricing (AWS Lambda, Azure Functions, Google Cloud
-              Functions, etc.). Key attributes include supported runtimes, cold start behavior,
-              billing granularity, and memory configuration.
+              Functions, etc.) alongside integration services like API Gateways, Messaging Queues, Event Buses, and Workflows. Key attributes include supported runtimes, cold start behavior, billing granularity, and memory configuration.
             </p>
 
             <h3 id="containers">Containers</h3>
@@ -311,6 +311,11 @@ const DocsPage: React.FC = () => {
               To enable apples-to-apples comparisons, all prices are normalized to a common unit —
               typically <strong>USD per hour</strong>. Resource specs (vCPUs, RAM, GPU count) are
               standardized across providers where definitions differ (e.g. Oracle OCPUs vs vCPUs).
+            </p>
+
+            <h3 id="price-trends">Price Trends</h3>
+            <p>
+              The application tracks historical price changes across ingestion runs. When viewing the pricing tables, you will see an indicator next to the price: a red up arrow (▲) if the price increased, a green down arrow (▼) if the price decreased, or a grey dot (●) if the price remained unchanged. This allows you to quickly spot pricing shifts and volatility across cloud providers.
             </p>
 
             <h3 id="accuracy">Accuracy</h3>
