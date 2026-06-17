@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1781627170.7552073,
-    "ast_hash": "26a6fa7192534d709212816c2073013c",
+    "mtime": 1781719875.1841118,
+    "ast_hash": "07c97e8276ef97df5830a178600a1059",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -180,9 +180,9 @@
     "semantic_hash": ""
   },
   "OPERATIONS_RUNBOOK.md": {
-    "mtime": 1780368623.7619476,
-    "ast_hash": "6c53970640065f025e8525ba2dd32e15",
-    "semantic_hash": "6c53970640065f025e8525ba2dd32e15"
+    "mtime": 1781715350.1348753,
+    "ast_hash": "1da58c6ea89ef2e0c0c95f8b11837dec",
+    "semantic_hash": ""
   },
   "PROJECT_ANALYSIS.md": {
     "mtime": 1780683271.94778,
@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1781567830.0335155,
-    "ast_hash": "2e7f0548cd2cfc84735a02f684c06f45",
+    "mtime": 1781715121.6610563,
+    "ast_hash": "5a7c084641cfdb9e403bb1bd656d8138",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1781587736.3516552,
-    "ast_hash": "086a36f2adaf5724f63f15dbb890e78d",
+    "mtime": 1781719524.760611,
+    "ast_hash": "dbbd54ac8f70bb7b95cb8fca79ee835c",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1781587736.2742455,
-    "ast_hash": "944d98833ddb407d0e248d2df909f339",
+    "mtime": 1781719129.1259017,
+    "ast_hash": "09af8d11dcce7d7a88b5ef8e44fc228d",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -765,18 +765,18 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1781713697.7694485,
-    "ast_hash": "1a5ab5995da559ae2be377698f9d9fdc",
+    "mtime": 1781719952.7286222,
+    "ast_hash": "17c9e6d5f7412d45d0e8a67ffc1e5205",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1781714028.0442,
-    "ast_hash": "3ebbe3445c87bc22ce8aea2e39f95abf",
+    "mtime": 1781719751.1489472,
+    "ast_hash": "39889ad19ef601804b26a2f7a0b26009",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
-    "mtime": 1781631597.6474931,
-    "ast_hash": "0c7e61e5a328861487c58ac43a169e99",
+    "mtime": 1781719737.4690604,
+    "ast_hash": "07e2a1f999081619fe978b99ae138b44",
     "semantic_hash": ""
   },
   "query_db.ts": {

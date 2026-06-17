@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-17)
 
 ## Corpus Check
-- 157 files · ~114,282 words
+- 157 files · ~114,960 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `aecfdfbe`
+- Built from commit: `0854ae2f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -201,7 +201,7 @@ Cohesion: 0.06
 Nodes (32): Admin API Reference, Admin endpoints return 401, All prices show ● grey arrows after ingest, Before going to production, CCC Operations Runbook, Common Issues, Database connection hangs, Database Schema Migrations (+24 more)
 
 ## Knowledge Gaps
-- **177 isolated node(s):** `Step 1 — Create the app`, `Step 2 — Environment variables`, `Step 3 — Get the CA certificate (DigitalOcean Managed DB)`, `Step 4 — Initialize the schema`, `Step 5 — Populate pricing data` (+172 more)
+- **177 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+172 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -214,7 +214,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 55` to `Community 64`, `Community 65`, `Community 67`, `Community 68`, `Community 69`, `Community 9`, `Community 16`, `Community 62`, `Community 63`?**
   _High betweenness centrality (0.019) - this node is a cross-community bridge._
-- **What connects `Step 1 — Create the app`, `Step 2 — Environment variables`, `Step 3 — Get the CA certificate (DigitalOcean Managed DB)` to the rest of the system?**
+- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
   _177 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
