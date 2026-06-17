@@ -278,7 +278,7 @@ export default function WorkloadDetails() {
                       <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">N/A</span>
                     ) : (
                       <span className="text-sm font-bold text-black dark:text-white">
-                        ${(pData.total * multiplier).toFixed(0)}
+                        ${(pData.total * multiplier).toLocaleString('en-US', { maximumFractionDigits: 0 })}
                       </span>
                     )}
                   </div>
@@ -345,8 +345,8 @@ export default function WorkloadDetails() {
                   >
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
                     <XAxis dataKey="provider" tick={{ fill: '#888', fontSize: 12 }} />
-                    <YAxis tick={{ fill: '#888', fontSize: 12 }} tickFormatter={(val) => `$${val}`} />
-                    <RechartsTooltip cursor={{ fill: 'rgba(255, 255, 255, 0.05)' }} contentStyle={{ backgroundColor: '#111', borderColor: '#333', color: '#fff', borderRadius: 8 }} itemStyle={{ color: '#fff', fontWeight: 'bold' }} formatter={(val: number) => [`$${val.toFixed(2)}`, 'Total']} />
+                    <YAxis tick={{ fill: '#888', fontSize: 12 }} tickFormatter={(val) => `$${val.toLocaleString('en-US')}`} />
+                    <RechartsTooltip cursor={{ fill: 'rgba(255, 255, 255, 0.05)' }} contentStyle={{ backgroundColor: '#111', borderColor: '#333', color: '#fff', borderRadius: 8 }} itemStyle={{ color: '#fff', fontWeight: 'bold' }} formatter={(val: number) => [`$${val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, 'Total']} />
                     <Bar dataKey="total" radius={[4, 4, 0, 0]}>
                       {PROVIDER_IDS.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={providerColor(entry)} />
@@ -421,7 +421,7 @@ export default function WorkloadDetails() {
                                 </span>
                                 <div className="flex flex-col items-center gap-1 w-full mt-1">
                                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-                                    ${(comp.monthlyPrice * multiplier).toFixed(2)}
+                                    ${(comp.monthlyPrice * multiplier).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                   </span>
                                 </div>
                               </Link>
@@ -450,7 +450,7 @@ export default function WorkloadDetails() {
                             ) : (
                               <div className="flex flex-col items-center gap-1.5 w-full">
                                 <span className="text-[13px] font-bold text-black dark:text-white">
-                                  ${(pData.total * multiplier).toFixed(2)}
+                                  ${(pData.total * multiplier).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                 </span>
                               </div>
                             )}
