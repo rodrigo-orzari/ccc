@@ -531,9 +531,19 @@ function TableRow({
       {/* Price */}
       <td data-col="price_per_unit" className="px-6 py-4 text-center align-middle whitespace-nowrap overflow-hidden">
         <div className="flex flex-col items-center gap-1.5">
-          <span className="text-xs font-bold text-black dark:text-[#f7f8ff]">
-            {activeProductType === 'ai' || activeProductType === 'serverless' ? `$${parseFloat(record.price_per_unit).toFixed(4)}` : (showAggregation ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}` : `$${parseFloat(record.price_per_unit).toFixed(4)}`)}
-          </span>
+          <div className="flex items-center gap-1">
+            {(() => {
+              const curr = parseFloat(record.price_per_unit);
+              const prev = record.previous_price_per_unit != null ? parseFloat(record.previous_price_per_unit) : null;
+              if (prev === null || prev === 0) return <span className="text-[10px] text-[#d4d4d4] dark:text-[#404040]" title="No previous price data">●</span>;
+              if (curr > prev) return <span className="text-[10px] text-[#ef4444] font-bold leading-none" title={`Up from $${prev.toFixed(4)}`}>▲</span>;
+              if (curr < prev) return <span className="text-[10px] text-[#22c55e] font-bold leading-none" title={`Down from $${prev.toFixed(4)}`}>▼</span>;
+              return <span className="text-[10px] text-[#a3a3a3] font-bold leading-none" title="Unchanged since last ingest">●</span>;
+            })()}
+            <span className="text-xs font-bold text-black dark:text-[#f7f8ff]">
+              {activeProductType === 'ai' || activeProductType === 'serverless' ? `$${parseFloat(record.price_per_unit).toFixed(4)}` : (showAggregation ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}` : `$${parseFloat(record.price_per_unit).toFixed(4)}`)}
+            </span>
+          </div>
           {maxPrice !== undefined && maxPrice > 0 && (
             <div className="w-16 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start">
               <div className="h-full rounded-full" style={{ width: `${(parseFloat(record.price_per_unit) / maxPrice) * 100}%`, backgroundColor: '#6366f1' }} />

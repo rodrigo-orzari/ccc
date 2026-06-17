@@ -67,6 +67,14 @@ export default function TableToolbar({
             </div>
           )}
 
+          {/* Price change legend */}
+          <div className="hidden md:flex items-center gap-2 text-[10px] text-[#a3a3a3] dark:text-[#525252] border border-[#dde0f0] dark:border-[#1e1e38] px-3 py-1.5 rounded">
+            <span title="Price increased since last ingest" className="text-[#ef4444] font-bold">▲</span>
+            <span title="Price decreased since last ingest" className="text-[#22c55e] font-bold">▼</span>
+            <span title="Price unchanged since last ingest" className="text-[#a3a3a3] font-bold">●</span>
+            <span className="ml-0.5">vs last ingest</span>
+          </div>
+
           <button
             onClick={onExport}
             disabled={dataLength === 0 || isExporting}
