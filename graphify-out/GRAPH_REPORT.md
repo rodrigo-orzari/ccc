@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-17)
 
 ## Corpus Check
-- 157 files · ~113,707 words
+- 157 files · ~113,703 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7fc6808f`
+- Built from commit: `e757a34d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -91,9 +91,9 @@
   test_api.mjs → src/lib/api-utils.ts
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
   test_filters.mjs → src/lib/api-utils.ts
-- `GET()` --calls--> `buildPricingFilters()`  [EXTRACTED]
-  src/app/api/pricing/route.ts → src/lib/api-utils.ts
-- `AlibabaAnalyticsAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+- `DatabricksStaticAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/data_analytics_pipeline.ts → src/services/pricing_pipeline.ts
+- `SnowflakeStaticAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
   src/services/data_analytics_pipeline.ts → src/services/pricing_pipeline.ts
 - `DatabricksAzureAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
   src/services/data_analytics_pipeline.ts → src/services/pricing_pipeline.ts
