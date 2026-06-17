@@ -41,20 +41,11 @@ export function DigitalOceanReferralModal() {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div className="bg-white dark:bg-[#0a0a18] border border-[#dde0f0] dark:border-[#1e1e38] rounded-xl shadow-2xl p-6 max-w-md w-full relative">
 
-        {/* DigitalOcean branding strip */}
-        <div className="flex items-center gap-2 mb-4">
-          <span
-            className="inline-flex items-center justify-center w-8 h-8 rounded-lg text-white text-sm font-black shrink-0"
-            style={{ backgroundColor: '#0069FF' }}
-          >
-            DO
-          </span>
-          <div>
-            <h2 className="text-[15px] font-bold text-[#1a1a2e] dark:text-[#f7f8ff] leading-tight">
-              Another way to support CCC — for free
-            </h2>
-            <p className="text-[10px] text-[#737373]">DigitalOcean referral · no credit card required to explore</p>
-          </div>
+        <div className="mb-4">
+          <h2 className="text-[15px] font-bold text-[#1a1a2e] dark:text-[#f7f8ff] leading-tight">
+            Another way to support CCC — for free
+          </h2>
+          <p className="text-[10px] text-[#737373] mt-0.5">DigitalOcean referral · no credit card required to explore</p>
         </div>
 
         <p className="text-[13px] text-[#404040] dark:text-[#a3a3a3] mb-3 leading-relaxed">
@@ -85,17 +76,14 @@ export function DigitalOceanReferralModal() {
         <div className="flex flex-col gap-3">
           <button
             onClick={handleSignUp}
-            className="w-full py-2.5 px-4 rounded-lg font-semibold text-[13px] text-white transition-colors"
-            style={{ backgroundColor: '#0069FF' }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#0052cc'; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#0069FF'; }}
+            className="w-full py-2.5 px-4 bg-black dark:bg-white text-white dark:text-black font-semibold rounded-lg hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
           >
             Get my $200 free credit →
           </button>
 
           <button
             onClick={handleDismiss}
-            className="w-full py-2.5 px-4 bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#737373] dark:text-[#737373] font-medium rounded-lg hover:bg-[#dde0f0] dark:hover:bg-[#2a2a4a] transition-colors text-[12px]"
+            className="w-full py-2.5 px-4 bg-[#f5f5f5] dark:bg-[#262626] text-[#404040] dark:text-[#a3a3a3] font-medium rounded-lg hover:bg-[#e5e5e5] dark:hover:bg-[#404040] transition-colors"
           >
             Maybe another time
           </button>

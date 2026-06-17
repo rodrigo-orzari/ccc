@@ -70,8 +70,8 @@ function Stat({ label, value, sub }: { label: string; value: string | number; su
 function GeoChip({ geo, count }: { geo: string; count: number }) {
   if (!count) return null;
   return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#c7ccee] dark:border-[#2a2a4a] text-[#525252] dark:text-[#a3a3a3]">
-      {geo} <span className="text-[#1a1a2e] dark:text-[#f7f8ff]">{count}</span>
+    <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#c7ccee] dark:border-[#2a2a4a] text-[#525252] dark:text-[#a3a3a3]">
+      {geo}
     </span>
   );
 }
@@ -156,7 +156,7 @@ function ProviderRow({
           )}
         </td>
         <td className="py-4 px-4">
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-1 justify-center">
             {GEOGRAPHIES.map(geo => (
               <GeoChip key={geo} geo={geo} count={p.geographyCoverage[geo] ?? 0} />
             ))}
@@ -216,6 +216,9 @@ export default function DatacentersPage() {
     regions: PROVIDER_INFRA.reduce((s, p) => s + p.regions, 0),
     azs: PROVIDER_INFRA.reduce((s, p) => s + p.availabilityZones, 0),
     announced: PROVIDER_INFRA.reduce((s, p) => s + p.announcedRegions, 0),
+    edgeLocations: PROVIDER_INFRA.reduce((s, p) => s + p.edgeLocations, 0),
+    countries: PROVIDER_INFRA.reduce((s, p) => s + p.countriesServed, 0),
+    govCloud: PROVIDER_INFRA.reduce((s, p) => s + p.governmentRegions, 0),
   }), []);
 
   return (
@@ -317,6 +320,27 @@ export default function DatacentersPage() {
                     />
                   ))}
                 </tbody>
+                <tfoot>
+                  <tr className="border-t-2 border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#06060f] hover:bg-[#f7f8ff] dark:hover:bg-[#06060f]">
+                    <td className="py-4 px-4 font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Total</td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.regions}</span>
+                    </td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.azs}</span>
+                    </td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.edgeLocations.toLocaleString()}+</span>
+                    </td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.countries}+</span>
+                    </td>
+                    <td className="py-4 px-4 text-center">
+                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.govCloud}</span>
+                    </td>
+                    <td className="py-4 px-4"></td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
 
