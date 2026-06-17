@@ -2,337 +2,382 @@
   <img src="public/logo.png" alt="Compare Cloud Costs Logo" width="400">
 </p>
 
-# Welcome!
+# Compare Cloud Costs
 
-This is a full-stack cloud pricing comparison app. Stack: Next.js (React + TypeScript) full-stack application, PostgreSQL DB.
+A full-stack cloud pricing comparison app that aggregates, normalizes, and compares pricing across **AWS, Azure, Google Cloud, Oracle, DigitalOcean, and Alibaba Cloud** in a single side-by-side dashboard.
 
-## Live Deployment
+**Live at [comparecloudcosts.com](https://comparecloudcosts.com)**
 
-The application is deployed live and fully functional at [comparecloudcosts.com](http://comparecloudcosts.com).
-
-This project is hosted on the **DigitalOcean App Platform**. To help keep this service running live without requiring users to host their own instances, please consider using our DigitalOcean referral link when creating a new account to grant the project free hosting credits:
+Hosted on DigitalOcean App Platform. If you're creating a new account, our referral link gives the project free hosting credits:
 
 <a href="https://www.digitalocean.com/?refcode=23d2b384f3b1&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%203.svg" alt="DigitalOcean Referral Badge" /></a>
 
-**[❤️ Support this project](https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca)**
-
-If you find Compare Cloud Costs useful and it helped you save money, please consider supporting the project. Donations cover cloud infrastructure costs, as well as tokens for AI coding tools, allowing us to continuously improve this project's capabilities and keep the website running.
-
-You can also support us by scanning the QR code below:
-
-<img src="./support-qr.png" width="200" alt="Scan to support this project">
-
-
-## 1. What Problem Does This Application Solve?
-In modern cloud engineering and FinOps, **apples-to-apples price comparison** across multiple cloud providers is a major pain point. 
-* Cloud providers (AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba) structure their pricing cards differently, publish rate details in disjoint formats, and use proprietary terminology (e.g., Droplets vs. EC2 vs. Virtual Machines).
-* Finding the most cost-effective region, instance type, architecture (e.g., x86 vs. ARM), or memory-to-vCPU ratio for a specific workload requires engineers to either browse individual price calculators or build custom spreadsheets.
-* Existing FinOps tools generally focus on **reactive analysis** (analyzing bills *after* deployment) rather than **proactive planning** (matching workloads to optimal providers *before* deployment).
-
-**Compare Cloud Costs (CCC)** solves this by:
-1. **Aggregating** raw catalog data from live pricing APIs and offline fallback configs across 7 primary domains: VMs, Databases, Serverless, Containers, Networking, Data Analytics, and AI.
-2. **Normalizing** proprietary data such as compute categories, geographies, hardware attributes, networking port capacities, AI context windows, and analytics compute units.
-3. **Comparing** configurations in a single side-by-side dashboard, allowing users to instantly identify the cheapest option for their specified constraint ranges.
-4. **Simulating** full architectures via the Workloads Catalog, providing directional cost estimators for entire deployment scenarios like 3-tier web apps or ML pipelines across clouds.
+**[❤️ Support this project](https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295210d2aafb687ca)** — donations cover infrastructure and AI tooling costs.
 
 ---
 
-## 2. Architectural Design
+## What It Does
 
-The application is structured as a monorepo deploying a **Single Page Application (SPA) backend-integration**:
-* **Frontend**: React + TypeScript client built using Next.js App Router, styled with Tailwind CSS, and powered by Motion for micro-animations. State management and data fetching use `@tanstack/react-query`.
-* **Backend**: Next.js API Routes handle client requests, while data ingestion and scheduled tasks are managed by a dedicated background worker (`src/workers/scheduler.ts`).
-* **Database**: PostgreSQL storing providers, service lines, geographical regions, and detailed pricing entries.
+Cloud providers structure, name, and publish pricing data in completely different formats. Finding the cheapest region, instance type, or architecture for a specific workload requires browsing multiple price calculators or maintaining custom spreadsheets.
+
+CCC solves this by:
+
+1. **Aggregating** pricing from live APIs and static fallback configs across 10 product categories
+2. **Normalizing** proprietary terminology into a common schema (CPU vendor, geography, HA mode, etc.)
+3. **Comparing** configurations side-by-side with filters, sorting, and in-table visualizations
+4. **Simulating** full workload costs — e.g. "what does a 3-tier web app cost on each cloud for 1,000 concurrent users?" — via the Workloads catalog
+5. **Tracking** price changes between ingestion runs with per-row trend indicators (▲ / ▼ / ●)
 
 ---
 
-## 3. File Directory & Code Organization
+## Product Categories
 
-### Directory Tree
+| Category | Description | Live API | Static Fallback |
+|---|---|---|---|
+| Virtual Machines | General compute instances | AWS, Azure, GCP, Oracle, DO | All 6 providers |
+| Databases | Managed relational, NoSQL, in-memory, caching | AWS, Azure | All 6 providers |
+| Serverless | Functions, API Gateways, event brokers | AWS Lambda | All 6 providers |
+| Containers | Managed Kubernetes, container instances | — | All 6 providers |
+| Networking | Load balancers, VPN, CDN, data transfer | — | All 6 providers |
+| Data & Analytics | Data warehouses, streaming, Spark/Databricks | — | All 6 providers |
+| AI | Foundation models, inference endpoints | — | All 6 providers |
+| Storage | Object, block, file, archive | — | All 6 providers |
+| App Hosting | PaaS platforms (App Engine, App Runner, etc.) | — | All 6 providers |
+| Workloads | Pre-built multi-service architecture cost estimators | — | Derived |
+
+---
+
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 14 (App Router) · React · TypeScript |
+| Styling | Tailwind CSS · Motion (animations) |
+| Charts | Recharts |
+| Database | PostgreSQL |
+| Data fetching | `@tanstack/react-query` |
+| Pipelines | `tsx` (TypeScript runner) · `playwright` (web scrapers) |
+| Scheduling | `node-cron` (background worker process) |
+| Email | `nodemailer` (price drift + staleness alerts) |
+| Hosting | DigitalOcean App Platform |
+
+---
+
+## Quick Start
+
+### Prerequisites
+- Node.js 18+
+- PostgreSQL 14+ (local or managed, e.g. DigitalOcean Managed Databases)
+
+### 1. Clone & install
+
+```bash
+git clone https://github.com/rodrigo-orzari/ccc.git
+cd ccc
+npm install
+```
+
+### 2. Configure environment
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and set at minimum:
+
+```bash
+DATABASE_URL="postgres://user:password@host:5432/dbname"
+ADMIN_API_KEY="$(openssl rand -hex 32)"   # protects /api/admin/* endpoints
+```
+
+For DigitalOcean Managed Postgres, also set:
+```bash
+DATABASE_CA_CERT="$(cat /path/to/ca-certificate.crt | base64)"
+```
+
+### 3. Initialize the database
+
+```bash
+# Start the dev server first
+npm run dev
+
+# In a separate terminal, run the schema migration
+curl -X POST http://localhost:3000/api/admin/init-db \
+  -H "X-Admin-Token: $ADMIN_API_KEY"
+```
+
+### 4. Populate pricing data
+
+```bash
+# Trigger all pricing pipelines (VM, DB, Serverless, Containers, Networking,
+# Data Analytics, AI, Storage, App Hosting)
+curl -X POST "http://localhost:3000/api/admin/fetch-pricing?type=all" \
+  -H "X-Admin-Token: $ADMIN_API_KEY"
+```
+
+This takes 3–10 minutes. You can also trigger individual pipelines with `?type=compute`, `?type=database`, `?type=serverless`, `?type=containers`, `?type=networking`, `?type=data-analytics`, `?type=ai`, `?type=storage`.
+
+### 5. Open the app
+
+Navigate to [http://localhost:3000](http://localhost:3000).
+
+---
+
+## npm Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Dev server at `http://localhost:3000` with hot reload |
+| `npm run build` | Compile to `.next/` for production |
+| `npm run start` | Serve the production build on port 3000 |
+| `npm run worker` | Run the background cron scheduler (VM pipeline, Sunday midnight) |
+| `npm run ingest` | CLI tool to manually trigger pipelines (installs Playwright first) |
+| `npm run lint` | TypeScript type-check via `next lint` |
+
+> **Note:** `npm run worker` only covers the VM compute pipeline via cron. To refresh all product categories, use the `/api/admin/fetch-pricing?type=all` admin endpoint.
+
+---
+
+## Repository Structure
 
 ```
-_ccc/
-├── 📄 Configuration & Entry Points
-│   ├── next.config.js                 # Next.js configuration
-│   ├── tsconfig.json                  # TypeScript compiler options
-│   ├── package.json                   # Dependencies & npm scripts
-│   ├── .env.example                   # Environment variables template
-│   ├── populate_containers.ts         # Script to populate containers
-│   └── populate_serverless.ts         # Script to populate serverless
-│
-├── 📖 Documentation (START HERE)
-│   ├── README.md                      # This file — project overview
-│   ├── PROJECT_ANALYSIS.md            # In-depth technical analysis (15 sections)
-│   ├── ARCHITECTURE_DIAGRAMS.md       # Visual ASCII diagrams (13 diagrams)
-│   ├── OPERATIONS_RUNBOOK.md          # Deployment, security, troubleshooting guide
-│   ├── SECURITY_AUDIT.md              # Security audit findings & recommendations
-│   ├── SECURITY_FIXES.md              # Implementation details of security fixes
-│   ├── SERVERLESS_IMPLEMENTATION_PLAN.md # Serverless implementation plan
-│   ├── DATA_POPULATION_GUIDE.md       # Data population guide
-│   └── IMPLEMENTATION_SUMMARY.md      # Summary of latest implementations
-│
+ccc/
 ├── src/
-│   ├── app/                           # Next.js App Router (pages and API routes)
-│   │   ├── page.tsx                   # Main Dashboard UI
-│   │   ├── api/                       # Backend API routes
-│   │   ├── status/                    # Application Status page
-│   │   └── ...                        # Static documentation pages (about, terms, etc.)
+│   ├── app/                          # Next.js App Router
+│   │   ├── page.tsx                  # Main catalog UI (filters + pricing table)
+│   │   ├── layout.tsx                # Root layout (fonts, providers, metadata)
+│   │   ├── globals.css               # Global styles + custom scrollbar/slider CSS
+│   │   ├── providers.tsx             # React Query provider wrapper
+│   │   ├── workloads/
+│   │   │   ├── page.tsx              # Workloads catalog (cards grid)
+│   │   │   └── [id]/page.tsx         # Workload detail (comparison table + config panel)
+│   │   ├── api/
+│   │   │   ├── pricing/
+│   │   │   │   ├── route.ts          # GET /api/pricing — filtered pricing records
+│   │   │   │   └── counts/route.ts   # GET /api/pricing/counts — record count for active filters
+│   │   │   ├── workloads/route.ts    # GET /api/workloads — workload cost estimator
+│   │   │   ├── filters/route.ts      # GET /api/filters — dynamic filter option lists
+│   │   │   ├── health/route.ts       # GET /api/health — data freshness check
+│   │   │   ├── status/route.ts       # GET /api/status — pipeline run status
+│   │   │   ├── ping/route.ts         # GET /api/ping — liveness probe
+│   │   │   └── admin/
+│   │   │       ├── fetch-pricing/route.ts  # POST /api/admin/fetch-pricing — trigger pipelines
+│   │   │       └── init-db/route.ts        # POST /api/admin/init-db — schema migration
+│   │   ├── about/page.tsx
+│   │   ├── docs/page.tsx
+│   │   ├── methodology/page.tsx
+│   │   ├── privacy/page.tsx
+│   │   ├── status/page.tsx
+│   │   ├── support/page.tsx
+│   │   └── terms/page.tsx
 │   │
-│   ├── workers/                       # Background worker processes (e.g., cron jobs)
-│   ├── index.css                      # Global Tailwind + custom styles
+│   ├── components/
+│   │   ├── FilterSidebar.tsx         # Dynamic filter sidebar (adapts per product category)
+│   │   ├── PricingTable.tsx          # Sortable, resizable pricing table with trend arrows
+│   │   ├── TableToolbar.tsx          # Search bar, view toggle, legend, export button
+│   │   ├── ChartsView.tsx            # Recharts bar + scatter visualizations
+│   │   ├── ProductTypeSelector.tsx   # Top navigation tabs (VM / DB / Serverless / …)
+│   │   ├── ProviderCards.tsx         # Provider count summary cards
+│   │   ├── RangeSlider.tsx           # Dual-handle range slider (vCPU, memory, price filters)
+│   │   ├── Footer.tsx                # Footer with social share buttons
+│   │   ├── DonationModal.tsx         # Donation prompt modal
+│   │   ├── MarkdownPage.tsx          # Generic markdown renderer for static pages
+│   │   └── index.ts                  # Barrel export
 │   │
-│   ├── db/
-│   │   └── schema.sql                 # PostgreSQL schema definitions
+│   ├── services/                     # Pricing ingestion pipelines
+│   │   ├── pricing_pipeline.ts       # VM / compute pipeline (AWS, Azure, GCP, Oracle, DO, Alibaba)
+│   │   ├── database_pipeline.ts      # Database pipeline (RDS, Cloud SQL, Azure SQL, etc.)
+│   │   ├── serverless_pipeline.ts    # Serverless pipeline (Lambda, Cloud Functions, etc.)
+│   │   ├── containers_pipeline.ts    # Containers pipeline (EKS, AKS, GKE, OKE, etc.)
+│   │   ├── networking_pipeline.ts    # Networking pipeline (load balancers, VPN, CDN, etc.)
+│   │   ├── data_analytics_pipeline.ts# Data Analytics pipeline (Redshift, BigQuery, Synapse, etc.)
+│   │   ├── ai_pipeline.ts            # AI pipeline (foundation models + inference endpoints)
+│   │   ├── storage_pipeline.ts       # Storage pipeline (S3, GCS, Azure Blob, etc.)
+│   │   ├── app_hosting_pipeline.ts   # App Hosting pipeline (App Engine, App Runner, etc.)
+│   │   ├── serverless_adapters_live.ts  # Live API adapters for serverless providers
+│   │   ├── containers_adapters_live.ts  # Live API adapters for containers providers
+│   │   ├── mailer.ts                 # Email alerts (price drift >20%, data staleness)
+│   │   ├── ingest.ts                 # CLI entry point for manual pipeline runs
+│   │   ├── populate_ai.ts            # One-time AI model seed script
+│   │   └── populate_containers.ts    # One-time containers seed script
+│   │
+│   ├── scrapers/                     # Playwright-based web scrapers (fallback data)
+│   │   ├── base_scraper.ts
+│   │   ├── aws_fargate.ts
+│   │   ├── aws_lambda.ts
+│   │   ├── aws_storage.ts
+│   │   ├── azure_container_instances.ts
+│   │   ├── azure_functions.ts
+│   │   ├── azure_storage.ts
+│   │   ├── digitalocean_droplets.ts
+│   │   ├── gcp_instances.ts
+│   │   └── gcp_storage.ts
+│   │
+│   ├── config/                       # Static fallback pricing configs (used when APIs unavailable)
+│   │   ├── workloads.ts              # Workload definitions (components, parameters, requirements)
+│   │   ├── app_hosting.ts            # App Hosting static configs (all 6 providers)
+│   │   ├── ai_models.ts              # AI model configs (all providers)
+│   │   ├── native_analytics_instances.ts  # Data Analytics static configs
+│   │   ├── databricks_instances.ts   # Databricks-specific configs
+│   │   ├── snowflake_instances.ts    # Snowflake-specific configs
+│   │   ├── database_instances.ts     # Database fallback configs
+│   │   ├── integration.ts            # Integration/serverless service type definitions
+│   │   ├── aws_*/                    # AWS static configs (serverless, containers, storage)
+│   │   ├── azure_*/                  # Azure static configs
+│   │   ├── gcp_*/                    # GCP static configs
+│   │   ├── oracle_*/                 # Oracle static configs
+│   │   ├── digitalocean_*/           # DigitalOcean static configs
+│   │   ├── alibaba_*/                # Alibaba Cloud static configs
+│   │   └── index.ts                  # Barrel export (PROVIDERS, GEOGRAPHIES, etc.)
+│   │
+│   ├── hooks/
+│   │   └── useDynamicFilters.ts      # Hook that derives available filter options from the DB
 │   │
 │   ├── lib/
-│   │   ├── api-utils.ts               # Centralized data fetching and filtering hooks
-│   │   └── db.ts                      # Database connection utilities
+│   │   ├── api-utils.ts              # SQL query builder, filter parsing, initDb() migration runner
+│   │   ├── db.ts                     # postgres.js connection singleton
+│   │   └── formatInstanceName.ts     # Display-name cleaner (Azure armSkuName → readable labels)
 │   │
-│   ├── services/
-│   │   ├── pricing_pipeline.ts        # VM instance pricing aggregation
-│   │   ├── database_pipeline.ts       # Database product pricing
-│   │   ├── serverless_pipeline.ts     # Serverless compute pricing
-│   │   ├── containers_pipeline.ts     # Containers compute pricing
-│   │   ├── networking_pipeline.ts     # Networking products pricing
-│   │   ├── data_analytics_pipeline.ts # Data Analytics pricing
-│   │   ├── ai_pipeline.ts             # AI foundational models pricing
-│   │   ├── serverless_adapters_live.ts# Live adapters for Serverless
-│   │   ├── containers_adapters_live.ts# Live adapters for Containers
-│   │   ├── populate_containers.ts     # Container DB population script
-│   │   ├── mailer.ts                  # Email notifications (SMTP)
-│   │   └── ingest.ts                  # CLI tool for manual pricing fetch
+│   ├── db/
+│   │   └── schema.sql                # PostgreSQL schema (providers, regions, services, pricing_records)
 │   │
-│   ├── config/
-│   │   ├── *_{serverless,containers,instances}.ts # Provider-specific fallback configs (AWS, Azure, GCP, Oracle, DO, Alibaba)
-│   │   ├── ai_models.ts               # AI Foundation Models config
-│   │   └── *_data_analytics.ts        # Data Analytics & Data Warehouse configs
+│   ├── types/
+│   │   └── index.ts                  # Shared TypeScript types (PricingRecord, ProductType, etc.)
 │   │
-│   └── components/
-│       ├── FilterSidebar.tsx          # Dynamic filter sidebar UI
-│       ├── PricingTable.tsx           # Interactive data table
-│       └── ChartsToggle.tsx           # Data visualizations component
+│   ├── middleware.ts                 # Next.js middleware (request logging, CORS)
+│   │
+│   └── workers/
+│       └── scheduler.ts              # node-cron background worker (VM pipeline, Sunday midnight)
 │
-├── .next/                             # Production build output (generated)
-├── node_modules/                      # Dependencies (generated)
+├── public/                           # Static assets (logo, favicon, QR code, etc.)
+├── .env.example                      # Environment variable template
+├── .gitignore
+├── next.config.js
+├── package.json
+├── playwright.config.ts
+├── tsconfig.json
 │
-├── 📜 Project Files
-│   ├── LICENSE                        # AGPL-3.0 license
-│   ├── .gitignore                     # Git exclusions
-│   └── metadata.json                  # Project metadata
+└── 📖 Documentation
+    ├── README.md                     # ← You are here
+    ├── OPERATIONS_RUNBOOK.md         # Deployment, security, admin operations
+    ├── SECURITY_AUDIT.md             # Security findings and risk ratings
+    ├── SECURITY_FIXES.md             # Applied security fixes
+    ├── ARCHITECTURE_DIAGRAMS.md      # ASCII system diagrams
+    ├── PROJECT_ANALYSIS.md           # In-depth technical analysis
+    └── DATA_POPULATION_GUIDE.md      # Guide to populating pricing data
 ```
-
-### File Descriptions
-
-**Configuration & Entry Points:**
-* [package.json](./package.json): Lists runtime dependencies (`next`, `postgres`, `@tanstack/react-query`, `nodemailer`, `axios`, `react`, `motion`, `recharts`) and npm scripts for development/build.
-* [next.config.js](./next.config.js) & [tsconfig.json](./tsconfig.json): Build and TypeScript configuration files.
-
-**Documentation Files (New):**
-* [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md): **Comprehensive technical deep-dive** covering technology stack, architecture, data model, pipelines, API routes, frontend design, performance, and enhancement recommendations. Read this for a complete understanding of how everything works. (~8,000 words)
-* [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md): **Visual ASCII diagrams** showing system architecture, data flows, state machines, deployment pipeline, and more. Useful for understanding interactions at a glance. (13 diagrams)
-* [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md): **Operational & Security guide** for deploying, securing, monitoring, troubleshooting, and maintaining the application. Includes TLS setup, admin authentication, filter validation, and deployment checklist. Read this before deploying to production.
-* [SECURITY_AUDIT.md](./SECURITY_AUDIT.md): **Comprehensive security audit** identifying vulnerabilities in TLS/SSL, authentication, input validation, and secrets management. Documents all findings with risk ratings and recommended fixes.
-* [SECURITY_FIXES.md](./SECURITY_FIXES.md): **Implementation details** of all security fixes applied to the codebase. Covers TLS certificate validation, database connection pooling, admin endpoint authentication, and SQL injection prevention through input validation.
-
-**Database:**
-* [src/db/schema.sql](./src/db/schema.sql): PostgreSQL schema definitions:
-  * `providers`: Cloud companies (aws, azure, gcp, oracle, digitalocean, alibaba)
-  * `regions`: Cloud regions per provider
-  * `services`: Service lines per provider (EC2, RDS, Virtual Machines, etc.)
-  * `pricing_records`: Instance/database pricing with specs (vCPUs, memory, price, etc.)
-
-**Data Pipelines (`src/services/`):**
-* [pricing_pipeline.ts](./src/services/pricing_pipeline.ts): VM pricing aggregation from AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba. Handles normalization, CPU vendor detection, geography mapping, and price drift alerts.
-* [database_pipeline.ts](./src/services/database_pipeline.ts): Database product pricing (RDS, Cloud SQL, Azure SQL, etc.) with attributes for engines, HA modes, tiers.
-* [serverless_pipeline.ts](./src/services/serverless_pipeline.ts): Serverless compute pricing (Lambda, Cloud Functions, Azure Functions).
-* [mailer.ts](./src/services/mailer.ts): Email notifications for price drift and data staleness alerts.
-* [ingest.ts](./src/services/ingest.ts): CLI utility to manually trigger pricing pipelines.
-
-**Configuration Fallbacks (`src/config/`):**
-* Hardcoded pricing configs for each cloud provider, used when live APIs are unavailable or rate-limited.
-
-**Frontend (`src/app/` & `src/components/`):**
-* [src/app/page.tsx](./src/app/page.tsx): Main Dashboard entry point mapping state to the main UI.
-* [src/components/FilterSidebar.tsx](./src/components/FilterSidebar.tsx): Dynamic sidebar that adapts filters based on the selected product category.
-* Static pages (`about/`, `methodology/`, `privacy/`, `support/`, `terms/`, `status/`) rendered via App Router.
-* Data fetching and filter hook logic is centralized within [src/lib/api-utils.ts](./src/lib/api-utils.ts).
 
 ---
 
-## 4. Documentation Guide
+## Database Schema
 
-**Confused about where to start?** This table helps you find the right documentation:
+```sql
+providers       -- slug ('aws','azure','gcp','oracle','digitalocean','alibaba'), name
+regions         -- provider_id, slug (e.g. 'us-east-1'), display_name
+services        -- provider_id, name (e.g. 'EC2'), category (e.g. 'compute')
+pricing_records -- instance specs + pricing:
+                --   instance_type, vcpus, memory_gb, arch, os, cpu_vendor,
+                --   gpu_count, geography, category, price_per_unit,
+                --   previous_price_per_unit,   ← tracks price changes between ingests
+                --   unit, attributes (JSONB),  ← engine, ha_mode, tier, etc.
+                --   data_source, updated_at
+```
 
-| You want to... | Read this | File |
+Schema migrations run automatically on every `POST /api/admin/init-db` call via `ALTER TABLE … ADD COLUMN IF NOT EXISTS` statements in `src/lib/api-utils.ts`. You never need to drop and recreate the DB.
+
+---
+
+## Admin API Endpoints
+
+All `/api/admin/*` endpoints require `X-Admin-Token: <ADMIN_API_KEY>` header.
+
+| Endpoint | Method | Description |
 |---|---|---|
-| Understand how everything works | Complete technical breakdown with all subsystems | [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) |
-| Visualize the architecture | System diagrams, data flows, state machines | [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) |
-| Deploy to production securely | TLS setup, admin auth, input validation, security checklist | [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) |
-| Understand security vulnerabilities | Findings, risk ratings, and remediation recommendations | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) |
-| Learn about security fixes | Details on TLS validation, auth middleware, input filtering | [SECURITY_FIXES.md](./SECURITY_FIXES.md) |
-| Develop locally | See "Quick Start" section below | — |
-| Understand a specific subsystem | Jump to Section 5 (below) for database, pipelines, API, frontend details | This README |
+| `/api/admin/init-db` | POST | Run schema migrations, re-apply category tags |
+| `/api/admin/fetch-pricing?type=all` | POST | Trigger all pricing pipelines |
+| `/api/admin/fetch-pricing?type=compute` | POST | VM / compute pipeline only |
+| `/api/admin/fetch-pricing?type=database` | POST | Database pipeline only |
+| `/api/admin/fetch-pricing?type=serverless` | POST | Serverless pipeline only |
+| `/api/admin/fetch-pricing?type=containers` | POST | Containers pipeline only |
+| `/api/admin/fetch-pricing?type=networking` | POST | Networking pipeline only |
+| `/api/admin/fetch-pricing?type=data-analytics` | POST | Data Analytics pipeline only |
+| `/api/admin/fetch-pricing?type=ai` | POST | AI pipeline only |
+| `/api/admin/fetch-pricing?type=storage` | POST | Storage pipeline only |
 
 ---
 
-## 5. Security & Deployment
+## Key Design Decisions
 
-### ⚠️ Important: Production Security Requirements
+**Why no ORM?** The pipelines use raw `postgres.js` queries for bulk inserts and `sql.unsafe()` for dynamic filter building. Query params are always passed separately (no interpolation) to prevent SQL injection.
 
-**Before deploying to production**, you MUST:**
+**Why static fallback configs?** Most provider pricing APIs are either rate-limited, require authentication, or don't exist (Oracle, Alibaba). Each `src/config/<provider>_*.ts` file is the authoritative fallback when the live API is unavailable. The `data_source` column records whether each row came from `'live_api'` or `'static_config'`.
 
-1. **Enable TLS/SSL certificate validation** — The application validates PostgreSQL certificate chains. Provide your CA certificate via `DATABASE_CA_CERT` environment variable (base64-encoded).
-2. **Set a secure ADMIN_API_KEY** — Generate using `openssl rand -hex 32`. All `/api/admin/*` endpoints require this token in the `X-Admin-Token` header.
-3. **Configure environment variables** — Use `.env.example` as a template. Never commit `.env` files to version control.
-4. **Review the OPERATIONS_RUNBOOK.md** — Contains TLS troubleshooting, admin authentication setup, filter validation constraints, and a production deployment checklist.
+**Why `previous_price_per_unit`?** The pricing table shows a trend arrow (▲/▼/●) next to every price comparing it to the previous ingestion run. The column is populated on each pipeline run using the prices read from the DB before the DELETE+INSERT cycle.
 
-**See [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for security setup and deployment instructions.**
+**Why Playwright for scrapers?** Some providers (DigitalOcean, some GCP endpoints) don't expose structured pricing APIs, so `src/scrapers/` contains browser-based scrapers. `npm run ingest` installs the Chromium binary before running them.
 
-For a detailed audit of all security findings and remediation steps, see [SECURITY_AUDIT.md](./SECURITY_AUDIT.md).
+**Why Next.js App Router for the backend?** The app is a monorepo — the same process serves the React frontend and all API routes. In dev mode, Next.js acts as a Vite-equivalent middleware; in production the build output is served statically with API routes handled by Node.js.
 
 ---
 
-## 6. Quick Start
+## Deploying to DigitalOcean App Platform
 
-### Local Development (5 minutes)
+1. Fork this repository
+2. Create a new App on [cloud.digitalocean.com/apps](https://cloud.digitalocean.com/apps)
+3. Connect your fork — set build command `npm run build`, run command `npm run start`
+4. Add a **Managed PostgreSQL** database component (or attach an existing cluster)
+5. Set environment variables (see `.env.example`):
+   - `DATABASE_URL` — provided automatically if you attach a DO Managed DB
+   - `DATABASE_CA_CERT` — download from your DB cluster's Connection Details page, then `cat ca-cert.crt | base64`
+   - `ADMIN_API_KEY` — generate with `openssl rand -hex 32`
+   - `NODE_ENV=production`
+6. Deploy. After first deploy, trigger `init-db` then `fetch-pricing?type=all` via the admin endpoints.
 
-```bash
-# 1. Clone & install
-git clone https://github.com/[org]/comparecloudcosts.git
-cd comparecloudcosts
-npm install
-
-# 2. Create .env file
-cp .env.example .env
-# Edit .env and set: DATABASE_URL=postgres://...
-#                    ADMIN_API_KEY=<generate-with-openssl-rand-hex-32>
-
-# 3. Start dev server
-npm run dev
-# Opens http://localhost:3000 with hot reloading
-
-# 4. Type-check
-npm run lint
-```
-
-### Build for Production
-
-```bash
-npm run build        # Creates optimized Next.js build
-npm run start        # Serves production build on port 3000
-```
-
-For detailed operational instructions, see [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md).
+See [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for a complete production checklist.
 
 ---
 
-## 7. In-Depth Subsystem Walks
+## Adding a New Cloud Provider
 
-### A. Database Initialization and Schema Management
-Inside [server.ts](./server.ts), `initDb` parses and runs [schema.sql](./src/db/schema.sql). It performs schema migrations (e.g. adding `cpu_vendor`, `gpu_count`, `category` dynamically) and automatically standardizes classifications to ensure consistency (for example, renaming architecture fields like `x86_64` to `x86 64` and mapping generic instance configurations to Intel, AMD, or ARM vendors).
+1. Create static config files in `src/config/<provider>_*.ts` (one per product category)
+2. Add provider slug + name to `src/db/schema.sql` INSERT block
+3. Create adapter classes in the relevant `src/services/*_pipeline.ts` files
+4. Add the new provider's filter options to `src/config/index.ts`
+5. Register the adapter in `src/app/api/admin/fetch-pricing/route.ts`
 
-**For more details**, see [PROJECT_ANALYSIS.md — Section 3 (Data Model)](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — Database Schema Diagram](./ARCHITECTURE_DIAGRAMS.md).
-
-### B. Ingestion Pipelines & In-Flight Validations
-In [pricing_pipeline.ts](./src/services/pricing_pipeline.ts), `PricingPipeline` executes adapters sequentially:
-1. Adapters request raw payloads from live JSON payloads or API endpoints, parsing instances, operating systems, pricing points, and metadata.
-2. In-flight categorization functions standardize the records. For example, CPU vendors are extracted from SKU substrings (e.g., detecting `graviton` -> `AWS`), and instance groups are mapped using vCPU-to-Memory ratios (e.g. ratios below 2.1 mapping to `Compute optimized`).
-3. Before writing updates, a **price drift check** is performed by comparing new prices with existing records in the database. If prices vary by **more than 20%**, a warning is logged and `sendPriceDriftEmail` is triggered to alert developers of potential anomalies.
-4. Old pricing is deleted, and the new listings are written using batch inserts to maximize execution performance.
-
-`DatabasePricingPipeline` extends this behavior to database products. It maps relational components into custom JSONB `attributes` structures containing engine versions, storage types, HA modes, and deployment options.
-
-Similarly, `ServerlessPipeline`, `ContainersPipeline`, and `NetworkingPipeline` operate on their respective domain data, aggregating metadata like supported languages for Serverless, or orchestrator types for Containers, into the shared JSONB `attributes`.
-
-**For detailed pipeline diagrams and flow**, see [ARCHITECTURE_DIAGRAMS.md — Data Ingestion Pipeline](./ARCHITECTURE_DIAGRAMS.md) and [PROJECT_ANALYSIS.md — Section 4](./PROJECT_ANALYSIS.md).
-
-### C. Backend API Routes
-The backend endpoints used by the dashboard are structured as Next.js API Routes (`src/app/api/...`):
-* `/api/pricing`: Retrieves list of pricing records. It parses complex query-parameter arrays and returns filtered records. If `aggregate=true` is requested, it averages prices across all region options to present aggregated instance types.
-* `/api/pricing/counts`: Drives UI status indicators by showing real-time record tallies matching selected criteria.
-
-**Background Jobs:** A separate worker process (`src/workers/scheduler.ts`) runs a background cron schedule (every Sunday at midnight) executing `PricingPipeline` and `DatabasePricingPipeline` to fetch fresh pricing data. It runs staleness checks, alerting via `sendStalenessEmail` if offline configurations haven't been reviewed in more than 7 days.
-
-**For API documentation and examples**, see [PROJECT_ANALYSIS.md — Section 5](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — API Request/Response Cycles](./ARCHITECTURE_DIAGRAMS.md).
-
-### D. The Comparative Frontend Dashboard
-[src/app/page.tsx](./src/app/page.tsx) binds this dataset to the UI:
-* **Product Views**: Users can toggle between `Virtual Machines`, `Databases`, `Serverless`, `Containers`, `Networking`, and `Data & Analytics`, which dynamically adjusts available filters depending on the selected product (e.g. OS and CPU vendor filters for VMs vs. Execution Model and Cold Start filters for Serverless).
-* **Sidebar Controls**: Features multi-select pills (Providers, Geographies, Engines, categories) and responsive range sliders (`RangeSlider`) to narrow down configurations by minimum/maximum values. The UI utilizes `@tanstack/react-query` to manage data fetching and intelligently cache responses while interacting with sliders and filters.
-* **View Toggles (Table vs. Charts)**: Users can seamlessly switch between a tabular dense grid and analytical charts to understand data visually.
-* **Sortable Dense Grid**: Renders comparison rows in an interactive table supporting multi-column sorting and drag-to-resize column boundaries. It includes **In-Table Micro-Visualizations**, rendering relative price-bar indicators inside the price cells so users can instantly gauge a row's cost relative to the most expensive filtered item.
-* **Analytical Charts**: Powered by `recharts`, provides visual representations of the filtered data such as a Provider Price Bar Chart and a Resource Efficiency Scatter Plot (e.g., Price vs. RAM).
-
-**For frontend architecture and state management**, see [PROJECT_ANALYSIS.md — Section 6](./PROJECT_ANALYSIS.md) and [ARCHITECTURE_DIAGRAMS.md — Frontend State Flow](./ARCHITECTURE_DIAGRAMS.md).
+See [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) § 4.3 for a step-by-step walkthrough.
 
 ---
 
-## 8. Resources for Contributors
+## Documentation Map
 
-### Getting Started
+| Goal | File |
+|---|---|
+| Deploy to production | [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) |
+| Understand the full architecture | [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) |
+| View system diagrams | [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) |
+| Review security posture | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) |
+| Understand applied security fixes | [SECURITY_FIXES.md](./SECURITY_FIXES.md) |
+| Populate pricing data | [DATA_POPULATION_GUIDE.md](./DATA_POPULATION_GUIDE.md) |
 
-1. **Read this README** — Understand what the project does and its architecture overview
-2. **Run locally** — Follow the Quick Start section above
-3. **Explore the codebase** — Start with [src/pages/Dashboard.tsx](./src/pages/Dashboard.tsx) (frontend) or [server.ts](./server.ts) (backend)
-4. **Deep dive** — Read [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) for comprehensive technical details
-
-### For Specific Tasks
-
-**Want to...** | **Start here**
----|---
-Understand the data model | [PROJECT_ANALYSIS.md § 3](./PROJECT_ANALYSIS.md) + [src/db/schema.sql](./src/db/schema.sql)
-Work on pricing pipelines | [PROJECT_ANALYSIS.md § 4](./PROJECT_ANALYSIS.md) + [src/services/pricing_pipeline.ts](./src/services/pricing_pipeline.ts)
-Build frontend features | [PROJECT_ANALYSIS.md § 6](./PROJECT_ANALYSIS.md) + [src/app/page.tsx](./src/app/page.tsx)
-Secure the application | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) + [SECURITY_FIXES.md](./SECURITY_FIXES.md)
-Deploy to production | [OPERATIONS_RUNBOOK.md § 4](./OPERATIONS_RUNBOOK.md) + [Section 5 above](#5-security--deployment)
-Add a new cloud provider | [PROJECT_ANALYSIS.md § 4.3](./PROJECT_ANALYSIS.md)
-Troubleshoot issues | [OPERATIONS_RUNBOOK.md § 9](./OPERATIONS_RUNBOOK.md)
-
-### Key Architecture Files
-
-| Purpose | File |
-|---------|------|
-| Server entry point | [server.ts](./server.ts) |
-| Database schema | [src/db/schema.sql](./src/db/schema.sql) |
-| Pricing pipelines | [src/services/pricing_pipeline.ts](./src/services/pricing_pipeline.ts), [database_pipeline.ts](./src/services/database_pipeline.ts) |
-| Frontend UI | [src/app/page.tsx](./src/app/page.tsx) |
-| Email alerts | [src/services/mailer.ts](./src/services/mailer.ts) |
-| Security audit | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) |
-| Security fixes | [SECURITY_FIXES.md](./SECURITY_FIXES.md) |
-| Environment template | [.env.example](./.env.example) |
+> **Note:** `PROJECT_ANALYSIS.md` and `ARCHITECTURE_DIAGRAMS.md` reflect an earlier version of the architecture (Express-based). The README above is the most current reference for the Next.js App Router version.
 
 ---
 
-# License & Contributions
+## License & Contributions
 
-This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
+Licensed under **AGPL-3.0**. If you modify this code and host it publicly, you must publish your changes under the same license.
 
-* Usage: You may use, modify, and deploy this source code at no cost.
-* Requirements: If you modify this code and host it on a server for network access, you must make your modified source code available under this same license.
-* Contributions: Submit Pull Requests to this repository to share improvements with the community.
-
-
-# Project Note
-
-This repository contains the open-source core of Compare Cloud Costs. While this version will remain open and available, future premium features or enterprise modules may be maintained in separate, private repositories.
-
-# Support & Feedback
-
-**Found a bug?** Open a [GitHub Issue](../../issues)
-
-**Have a feature idea?** Open a [GitHub Discussion](../../discussions)
-
-**General questions?** Email hello@comparecloudcosts.com
-
-**Can't find what you're looking for?**
-- Check [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) for technical details
-- Check [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for operational and security questions
-- Check [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) for system diagrams
-- Check [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) for security findings and recommendations
-- Check [SECURITY_FIXES.md](./SECURITY_FIXES.md) for implementation details of applied fixes
+Pull Requests are welcome. Please open an Issue first for significant changes.
 
 ---
 
-<p align="center"><strong><a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca">❤️ Support this project</a></strong></p>
+## Support & Feedback
+
+- **Bug?** → [Open a GitHub Issue](../../issues)
+- **Feature idea?** → [Open a GitHub Discussion](../../discussions)
+- **General questions?** → hello@comparecloudcosts.com
+
+<p align="center"><strong><a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295210d2aafb687ca">❤️ Support this project</a></strong></p>
 
 <p align="center">© 2026 <a href="https://www.linkedin.com/in/rodrigoorzari/">Rodrigo Orzari</a>. All rights reserved.</p>
