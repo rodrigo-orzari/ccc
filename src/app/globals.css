@@ -29,3 +29,44 @@
 .dark .always-show-scrollbar::-webkit-scrollbar-thumb {
   background-color: #525252;
 }
+
+/* Slider styled to match the FilterSidebar range slider (hollow circle thumb). */
+input[type="range"].workload-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+input[type="range"].workload-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d4d4d4;
+}
+.dark input[type="range"].workload-slider::-webkit-slider-thumb {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid #404040;
+}
+input[type="range"].workload-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid #d4d4d4;
+}
+.dark input[type="range"].workload-slider::-moz-range-thumb {
+  border: 1px solid #404040;
+}
+input[type="range"].workload-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: transparent;
+}
+input[type="range"].workload-slider::-moz-range-track {
+  height: 4px;
+  background: transparent;
+}

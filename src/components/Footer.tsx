@@ -90,8 +90,6 @@ export default function Footer() {
             Support this project ❤️
           </a>
 
-          <span className="text-[#a3a3a3] dark:text-[#525252]">•</span>
-
           <span className="whitespace-nowrap hidden sm:inline">
             Share with friends and family
           </span>
