@@ -524,18 +524,6 @@ export default function FilterSidebar({
         {activeProductType === 'vm' && (
           <>
             <FilterSection
-              title="Category"
-              tooltip="Instance type purpose, derived from each cloud's published instance families."
-              options={config.CATEGORIES}
-              selected={selectedCategory}
-              onToggle={onCategoryToggle}
-              onSetAll={onSetCategory}
-              isExpanded={expanded.category ?? true}
-              onToggleExpand={() => onToggleSection('category')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-
-            <FilterSection
               title="Geography"
               tooltip="Geographic region where the VM runs."
               options={config.GEOGRAPHIES}
@@ -544,6 +532,18 @@ export default function FilterSidebar({
               onSetAll={onSetGeographies}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
+              title="Category"
+              tooltip="Instance type purpose, derived from each cloud's published instance families."
+              options={config.CATEGORIES}
+              selected={selectedCategory}
+              onToggle={onCategoryToggle}
+              onSetAll={onSetCategory}
+              isExpanded={expanded.category ?? true}
+              onToggleExpand={() => onToggleSection('category')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
@@ -633,17 +633,6 @@ export default function FilterSidebar({
         {activeProductType === 'database' && (
           <>
             <FilterSection
-              title="Database Family"
-              tooltip="The broad category of the database system: Relational (SQL-based) or NoSQL."
-              options={config.DB_FAMILIES}
-              selected={selectedDbFamilies}
-              onToggle={onDbFamilyToggle}
-              onSetAll={onSetDbFamilies}
-              isExpanded={expanded.dbFamily ?? true}
-              onToggleExpand={() => onToggleSection('dbFamily')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
               title="Geography"
               tooltip="Geographic region where the database is deployed."
               options={config.GEOGRAPHIES}
@@ -652,6 +641,17 @@ export default function FilterSidebar({
               onSetAll={onSetGeographies}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Database Family"
+              tooltip="The broad category of the database system: Relational (SQL-based) or NoSQL."
+              options={config.DB_FAMILIES}
+              selected={selectedDbFamilies}
+              onToggle={onDbFamilyToggle}
+              onSetAll={onSetDbFamilies}
+              isExpanded={expanded.dbFamily ?? true}
+              onToggleExpand={() => onToggleSection('dbFamily')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
@@ -744,17 +744,6 @@ export default function FilterSidebar({
         {activeProductType === 'serverless' && (
           <>
             <FilterSection
-              title="Service Type"
-              tooltip="Compute (Lambda/Functions/Run) plus the API Gateway, Messaging, Eventing, and Workflow services that pair with them."
-              options={config.SERVERLESS_SERVICE_TYPES}
-              selected={selectedServerlessServiceTypes}
-              onToggle={onServerlessServiceTypeToggle}
-              onSetAll={onSetServerlessServiceTypes}
-              isExpanded={expanded.serverlessServiceType ?? true}
-              onToggleExpand={() => onToggleSection('serverlessServiceType')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
               title="Geography"
               tooltip="Geographic region where the service is deployed."
               options={config.GEOGRAPHIES}
@@ -763,6 +752,17 @@ export default function FilterSidebar({
               onSetAll={onSetGeographies}
               isExpanded={expanded.geography ?? true}
               onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Service Type"
+              tooltip="Compute (Lambda/Functions/Run) plus the API Gateway, Messaging, Eventing, and Workflow services that pair with them."
+              options={config.SERVERLESS_SERVICE_TYPES}
+              selected={selectedServerlessServiceTypes}
+              onToggle={onServerlessServiceTypeToggle}
+              onSetAll={onSetServerlessServiceTypes}
+              isExpanded={expanded.serverlessServiceType ?? true}
+              onToggleExpand={() => onToggleSection('serverlessServiceType')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
