@@ -258,7 +258,7 @@ Always verify your final estimates using the official calculators:
         </aside>
 
         <main className="main-content">
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1.5rem' }}>
+          <h1 style={{ fontSize: '2.25rem', fontWeight: '800', margin: '0 0 0.5rem', letterSpacing: '-0.02em' }}>
             What is CompareCloudCosts.com?
           </h1>
           <div className="prose prose-slate dark:prose-invert max-w-none text-black dark:text-white">

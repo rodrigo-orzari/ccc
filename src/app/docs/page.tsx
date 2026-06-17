@@ -172,6 +172,14 @@ const DocsPage: React.FC = () => {
                 <a href="#workloads" style={{ padding: '3px 0' }}>Workloads</a>
               </li>
               <li>
+                <a href="#datacenters" style={{ padding: '3px 0' }}>Datacenters</a>
+                <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <li><a href="#datacenter-data-sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data sources</a></li>
+                  <li><a href="#datacenter-accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Accuracy &amp; freshness</a></li>
+                  <li><a href="#datacenter-glossary" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Glossary</a></li>
+                </ul>
+              </li>
+              <li>
                 <a href="#pricing-data" style={{ padding: '3px 0' }}>Pricing Data</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
                   <li><a href="#sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Sources</a></li>
@@ -287,6 +295,66 @@ const DocsPage: React.FC = () => {
             <p>
               By adjusting scale parameters like traffic or data volume, the tool automatically calculates the necessary resource specs (e.g. vCPUs, Memory) and queries the cheapest matching general-purpose instances across AWS, Azure, GCP, DigitalOcean, Oracle, and Alibaba.
             </p>
+
+            <BackToTop />
+          </div>
+
+          {/* Datacenters */}
+          <div className="docs-section">
+            <h2 id="datacenters">Datacenters</h2>
+            <p>
+              The <strong>Datacenters</strong> page is a dedicated infrastructure reference that lets you compare the global physical footprint of each cloud provider side by side — independently of pricing. It is designed to help teams evaluate geographic reach, redundancy posture, and regulatory coverage before committing to a cloud strategy.
+            </p>
+            <p>
+              Unlike the pricing categories, this page does not connect to a live database. All data is sourced manually from each provider's official public infrastructure pages and verified periodically.
+            </p>
+
+            <h3 id="datacenter-data-sources">Data sources</h3>
+            <p>
+              Each figure on the page — region count, Availability Zone count, edge locations, countries served, and government cloud regions — is drawn directly from the provider's own published documentation:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.4rem' }}><strong>AWS</strong> — <a href="https://aws.amazon.com/about-aws/global-infrastructure/" target="_blank" rel="noopener noreferrer">AWS Global Infrastructure</a>, <a href="https://aws.amazon.com/about-aws/global-infrastructure/regions_az/" target="_blank" rel="noopener noreferrer">Regions &amp; Availability Zones</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Azure</strong> — <a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/" target="_blank" rel="noopener noreferrer">Azure Global Infrastructure</a>, <a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/geographies/" target="_blank" rel="noopener noreferrer">Azure Geographies</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Google Cloud</strong> — <a href="https://cloud.google.com/about/locations" target="_blank" rel="noopener noreferrer">Google Cloud Locations</a>, <a href="https://cloud.google.com/infrastructure" target="_blank" rel="noopener noreferrer">Google Network Infrastructure</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Oracle Cloud</strong> — <a href="https://www.oracle.com/cloud/architecture-and-regions/" target="_blank" rel="noopener noreferrer">OCI Cloud Regions</a>, <a href="https://www.oracle.com/cloud/public-cloud-regions/infrastructure/" target="_blank" rel="noopener noreferrer">OCI Infrastructure</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>DigitalOcean</strong> — <a href="https://www.digitalocean.com/docs/platform/availability-matrix/" target="_blank" rel="noopener noreferrer">Regional Availability</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Alibaba Cloud</strong> — <a href="https://www.alibabacloud.com/global-locations" target="_blank" rel="noopener noreferrer">Alibaba Cloud Global Infrastructure</a></li>
+            </ul>
+            <p>
+              Source links are also reproduced at the bottom of the Datacenters page itself, grouped by provider.
+            </p>
+
+            <h3 id="datacenter-accuracy">Accuracy &amp; freshness</h3>
+            <p>
+              Infrastructure figures change frequently as providers expand. Counts shown on the page reflect a manually verified snapshot — the "Last verified" date is displayed at the bottom of the Datacenters page. Key caveats:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Announced regions</strong> are regions the provider has publicly committed to launching but that are not yet generally available. They are marked with an amber indicator and shown as "Planned" in expanded rows.</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Edge locations</strong> (CDN/PoP nodes) are approximate — providers use different terminology and update counts frequently. Figures are rounded.</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Government cloud regions</strong> may have restricted access and are not always open to all customers. Counts refer to publicly announced dedicated compliance regions.</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Region coordinates</strong> on the world map are approximate and intended for geographic orientation only, not precise geolocation.</li>
+            </ul>
+            <blockquote>
+              <strong>Important:</strong> Always verify current infrastructure availability directly with the provider before making architecture or compliance decisions.
+            </blockquote>
+
+            <h3 id="datacenter-glossary">Glossary</h3>
+            <p>The following terms are used throughout the Datacenters page. Hovering the <strong>ⓘ</strong> icon next to any term on the page will also surface its definition inline.</p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Region</strong> — A geographic cluster of data centers in a specific physical location. Each region is completely independent and isolated from failures in other regions. Providers typically publish regions as named locations (e.g. "US East (N. Virginia)", "West Europe").
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Availability Zone (AZ)</strong> — One or more discrete data centers within a region, each with redundant power, networking, and connectivity. Deploying resources across multiple Availability Zones in the same region allows applications to survive a single data center outage. DigitalOcean does not use traditional Availability Zones — each of its regions maps to a single data center.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Edge Location</strong> — A smaller point-of-presence (PoP) node used for content delivery (CDN) and low-latency services such as DNS, DDoS protection, and WAF. Edge locations are distinct from full compute regions and are not independently deployable as compute environments.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Government Cloud</strong> — Dedicated, isolated cloud regions operated specifically to meet government compliance requirements (e.g. FedRAMP High, IL4/IL5 in the US, UK OFFICIAL). Access is typically restricted to vetted public sector customers.
+              </li>
+            </ul>
 
             <BackToTop />
           </div>

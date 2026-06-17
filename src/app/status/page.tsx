@@ -33,10 +33,10 @@ interface StatusData {
 
 const PROVIDER_COLORS: Record<string, string> = {
   aws: '#FF9900',
-  azure: '#0078D4',
-  gcp: '#4285F4',
-  oracle: '#C74634',
-  digitalocean: '#0080FF',
+  azure: '#00BCFF',
+  gcp: '#34A853',
+  oracle: '#F80000',
+  digitalocean: '#0069FF',
   alibaba: '#FF6A00',
   openai: '#10A37F',
   anthropic: '#CC9D87',
