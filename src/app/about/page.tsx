@@ -88,6 +88,10 @@ The core motivation behind this tool was to solve a very specific, painful probl
 
 It is important to note that the data on CCC serves as a **directional indicator** or a sample of popular instances, designed to highlight architectural cost differences across clouds. It is not a substitute for an official quote.
 
+### Comprehensive Coverage & Missing Services
+
+This application is not meant to be a comprehensive catalog of all offerings across all cloud providers. We consolidate data in good faith based on publicly available pricing pages and APIs, but we may inadvertently omit certain services, instance types, or product categories that cloud providers currently offer. If you represent a cloud provider or are a user who detects that a specific service or offering is missing or misrepresented, we welcome your feedback. Please reach out to us so we can continuously improve the accuracy and completeness of our platform.
+
 Always verify your final estimates using the official calculators:
 - [AWS Pricing Calculator](https://calculator.aws/)
 - [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)

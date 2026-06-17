@@ -323,6 +323,9 @@ const DocsPage: React.FC = () => {
               Prices are directional and intended for high-level comparison only. Always verify final
               pricing on the official provider calculator before making purchasing decisions.
             </p>
+            <p>
+              <strong>Comprehensive Coverage & Missing Services:</strong> This application is not meant to be a comprehensive catalog of all offerings across all cloud providers. We consolidate data in good faith based on publicly available pricing pages and APIs, but we may inadvertently omit certain services, instance types, or product categories that cloud providers currently offer. If you represent a cloud provider or are a user who detects that a specific service or offering is missing or misrepresented, we welcome your feedback. Please reach out to us so we can continuously improve the accuracy and completeness of our platform.
+            </p>
             <blockquote>
               <strong>Disclaimer:</strong> Price data may be delayed, incomplete, or imprecise.
               comparecloudcosts.com makes no warranties regarding accuracy. See our{' '}

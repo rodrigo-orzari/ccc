@@ -618,7 +618,7 @@ export default function WorkloadDetails() {
       {/* Disclaimer — plain text, no box, so it reads as fine-print not a feature panel. */}
       <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-8 text-[11px] text-[#737373] leading-relaxed">
         <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
-        This calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for workload sizing.
+        This calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for workload sizing. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
       </div>
 
       </div>
