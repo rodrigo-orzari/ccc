@@ -4,6 +4,69 @@
   "graph": {},
   "nodes": [
     {
+      "label": "WorldMap.tsx",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L1",
+      "id": "datacenters_worldmap",
+      "community": 67,
+      "norm_label": "worldmap.tsx"
+    },
+    {
+      "label": "toXY()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L9",
+      "id": "datacenters_worldmap_toxy",
+      "community": 67,
+      "norm_label": "toxy()"
+    },
+    {
+      "label": "PROVIDER_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L13",
+      "id": "datacenters_worldmap_provider_colors",
+      "community": 67,
+      "norm_label": "provider_colors"
+    },
+    {
+      "label": "CONTINENTS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L24",
+      "id": "datacenters_worldmap_continents",
+      "community": 67,
+      "norm_label": "continents"
+    },
+    {
+      "label": "REGION_COORDS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L54",
+      "id": "datacenters_worldmap_region_coords",
+      "community": 67,
+      "norm_label": "region_coords"
+    },
+    {
+      "label": "Tooltip",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L256",
+      "id": "datacenters_worldmap_tooltip",
+      "community": 67,
+      "norm_label": "tooltip"
+    },
+    {
+      "label": "WorldMap()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L264",
+      "id": "datacenters_worldmap_worldmap",
+      "community": 67,
+      "norm_label": "worldmap()"
+    },
+    {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/datacenters/page.tsx",
@@ -16,7 +79,7 @@
       "label": "Stat()",
       "file_type": "code",
       "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "id": "datacenters_page_stat",
       "community": 67,
       "norm_label": "stat()"
@@ -25,7 +88,7 @@
       "label": "GeoChip()",
       "file_type": "code",
       "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L23",
+      "source_location": "L24",
       "id": "datacenters_page_geochip",
       "community": 67,
       "norm_label": "geochip()"
@@ -34,7 +97,7 @@
       "label": "StatusDot()",
       "file_type": "code",
       "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L32",
+      "source_location": "L33",
       "id": "datacenters_page_statusdot",
       "community": 67,
       "norm_label": "statusdot()"
@@ -43,7 +106,7 @@
       "label": "ProviderRow()",
       "file_type": "code",
       "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L38",
+      "source_location": "L39",
       "id": "datacenters_page_providerrow",
       "community": 67,
       "norm_label": "providerrow()"
@@ -52,7 +115,7 @@
       "label": "DatacentersPage()",
       "file_type": "code",
       "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L179",
+      "source_location": "L180",
       "id": "datacenters_page_datacenterspage",
       "community": 67,
       "norm_label": "datacenterspage()"
@@ -62,117 +125,117 @@
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L1",
-      "id": "components_producttypeselector",
       "community": 68,
-      "norm_label": "producttypeselector.tsx"
+      "norm_label": "producttypeselector.tsx",
+      "id": "components_producttypeselector"
     },
     {
       "label": "PRODUCT_TYPES",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L6",
-      "id": "components_producttypeselector_product_types",
       "community": 68,
-      "norm_label": "product_types"
+      "norm_label": "product_types",
+      "id": "components_producttypeselector_product_types"
     },
     {
       "label": "LinkedInIcon()",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L21",
-      "id": "components_producttypeselector_linkedinicon",
       "community": 68,
-      "norm_label": "linkedinicon()"
+      "norm_label": "linkedinicon()",
+      "id": "components_producttypeselector_linkedinicon"
     },
     {
       "label": "XIcon()",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L29",
-      "id": "components_producttypeselector_xicon",
       "community": 68,
-      "norm_label": "xicon()"
+      "norm_label": "xicon()",
+      "id": "components_producttypeselector_xicon"
     },
     {
       "label": "ProductTypeSelectorProps",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L39",
-      "id": "components_producttypeselector_producttypeselectorprops",
       "community": 68,
-      "norm_label": "producttypeselectorprops"
+      "norm_label": "producttypeselectorprops",
+      "id": "components_producttypeselector_producttypeselectorprops"
     },
     {
       "label": "ProductTypeSelector()",
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L44",
-      "id": "components_producttypeselector_producttypeselector",
       "community": 68,
-      "norm_label": "producttypeselector()"
+      "norm_label": "producttypeselector()",
+      "id": "components_producttypeselector_producttypeselector"
     },
     {
       "label": "datacenter_data.ts",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L1",
-      "id": "config_datacenter_data",
       "community": 67,
-      "norm_label": "datacenter_data.ts"
+      "norm_label": "datacenter_data.ts",
+      "id": "config_datacenter_data"
     },
     {
       "label": "RegionStatus",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L11",
-      "id": "config_datacenter_data_regionstatus",
       "community": 67,
-      "norm_label": "regionstatus"
+      "norm_label": "regionstatus",
+      "id": "config_datacenter_data_regionstatus"
     },
     {
       "label": "DatacenterRegion",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L13",
-      "id": "config_datacenter_data_datacenterregion",
       "community": 67,
-      "norm_label": "datacenterregion"
+      "norm_label": "datacenterregion",
+      "id": "config_datacenter_data_datacenterregion"
     },
     {
       "label": "ProviderInfrastructure",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L22",
-      "id": "config_datacenter_data_providerinfrastructure",
       "community": 67,
-      "norm_label": "providerinfrastructure"
+      "norm_label": "providerinfrastructure",
+      "id": "config_datacenter_data_providerinfrastructure"
     },
     {
       "label": "PROVIDER_INFRA",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L41",
-      "id": "config_datacenter_data_provider_infra",
       "community": 67,
-      "norm_label": "provider_infra"
+      "norm_label": "provider_infra",
+      "id": "config_datacenter_data_provider_infra"
     },
     {
       "label": "GEOGRAPHIES",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L439",
-      "id": "config_datacenter_data_geographies",
       "community": 67,
-      "norm_label": "geographies"
+      "norm_label": "geographies",
+      "id": "config_datacenter_data_geographies"
     },
     {
       "label": "Geography",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L448",
-      "id": "config_datacenter_data_geography",
       "community": 67,
-      "norm_label": "geography"
+      "norm_label": "geography",
+      "id": "config_datacenter_data_geography"
     },
     {
       "label": "FilterSidebar.tsx",
@@ -1448,7 +1511,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "data_analytics_pipeline.ts",
       "id": "services_data_analytics_pipeline"
     },
@@ -1511,7 +1574,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L97",
-      "community": 73,
+      "community": 48,
       "norm_label": "databricksazureadapter",
       "id": "services_data_analytics_pipeline_databricksazureadapter"
     },
@@ -1520,7 +1583,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L101",
-      "community": 73,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
     },
@@ -1529,7 +1592,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L170",
-      "community": 16,
+      "community": 62,
       "norm_label": "nativeanalyticsstaticadapter",
       "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter"
     },
@@ -1538,7 +1601,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L175",
-      "community": 16,
+      "community": 62,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_constructor"
     },
@@ -1547,7 +1610,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L182",
-      "community": 16,
+      "community": 62,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_fetchpricing"
     },
@@ -1556,7 +1619,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L211",
-      "community": 16,
+      "community": 48,
       "norm_label": "synapseazureadapter",
       "id": "services_data_analytics_pipeline_synapseazureadapter"
     },
@@ -1565,7 +1628,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L215",
-      "community": 16,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing"
     },
@@ -1592,7 +1655,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L316",
-      "community": 16,
+      "community": 48,
       "norm_label": "oracleanalyticsadapter",
       "id": "services_data_analytics_pipeline_oracleanalyticsadapter"
     },
@@ -1601,7 +1664,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L319",
-      "community": 16,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_oracleanalyticsadapter_fetchpricing"
     },
@@ -1610,7 +1673,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L348",
-      "community": 63,
+      "community": 62,
       "norm_label": "digitaloceananalyticsadapter",
       "id": "services_data_analytics_pipeline_digitaloceananalyticsadapter"
     },
@@ -1619,7 +1682,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L351",
-      "community": 63,
+      "community": 62,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_digitaloceananalyticsadapter_fetchpricing"
     },
@@ -1628,7 +1691,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L380",
-      "community": 63,
+      "community": 62,
       "norm_label": "dataanalyticspricingpipeline",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
     },
@@ -1637,7 +1700,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L381",
-      "community": 63,
+      "community": 62,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
     },
@@ -1646,7 +1709,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L401",
-      "community": 63,
+      "community": 62,
       "norm_label": ".run()",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run"
     },
@@ -1655,7 +1718,7 @@
       "file_type": "code",
       "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L1",
-      "community": 62,
+      "community": 16,
       "norm_label": "route.ts",
       "id": "pricing_route"
     },
@@ -1664,7 +1727,7 @@
       "file_type": "code",
       "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L7",
-      "community": 62,
+      "community": 16,
       "norm_label": "get()",
       "id": "pricing_route_get"
     },
@@ -1718,7 +1781,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L1",
-      "community": 62,
+      "community": 16,
       "norm_label": "api-utils.ts",
       "id": "lib_api_utils"
     },
@@ -1745,7 +1808,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L98",
-      "community": 62,
+      "community": 16,
       "norm_label": "valid_product_types",
       "id": "lib_api_utils_valid_product_types"
     },
@@ -1754,7 +1817,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L100",
-      "community": 62,
+      "community": 16,
       "norm_label": "parsefilterlist()",
       "id": "lib_api_utils_parsefilterlist"
     },
@@ -1763,7 +1826,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L121",
-      "community": 62,
+      "community": 16,
       "norm_label": "buildpricingfilters()",
       "id": "lib_api_utils_buildpricingfilters"
     },
@@ -1862,7 +1925,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L117",
-      "community": 71,
+      "community": 56,
       "norm_label": ".classifygcp()",
       "id": "services_pricing_pipeline_baseadapter_classifygcp"
     },
@@ -2825,7 +2888,7 @@
       "file_type": "code",
       "source_file": "src/config/native_analytics_instances.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "native_analytics_instances.ts",
       "id": "config_native_analytics_instances"
     },
@@ -2834,7 +2897,7 @@
       "file_type": "code",
       "source_file": "src/config/native_analytics_instances.ts",
       "source_location": "L4",
-      "community": 16,
+      "community": 62,
       "norm_label": "nativeanalyticsconfig",
       "id": "config_native_analytics_instances_nativeanalyticsconfig"
     },
@@ -2843,7 +2906,7 @@
       "file_type": "code",
       "source_file": "src/config/native_analytics_instances.ts",
       "source_location": "L13",
-      "community": 16,
+      "community": 62,
       "norm_label": "native_analytics_instances",
       "id": "config_native_analytics_instances_native_analytics_instances"
     },
@@ -2960,7 +3023,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L162",
-      "community": 74,
+      "community": 48,
       "norm_label": "oracleautonomousadapter",
       "id": "services_database_pipeline_oracleautonomousadapter"
     },
@@ -2969,7 +3032,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L165",
-      "community": 74,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oracleautonomousadapter_fetchpricing"
     },
@@ -2978,7 +3041,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L198",
-      "community": 48,
+      "community": 73,
       "norm_label": "oraclemysqlheatwaveadapter",
       "id": "services_database_pipeline_oraclemysqlheatwaveadapter"
     },
@@ -2987,7 +3050,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L201",
-      "community": 48,
+      "community": 73,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing"
     },
@@ -2996,7 +3059,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L233",
-      "community": 48,
+      "community": 74,
       "norm_label": "oraclepostgresqladapter",
       "id": "services_database_pipeline_oraclepostgresqladapter"
     },
@@ -3005,7 +3068,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L236",
-      "community": 48,
+      "community": 74,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclepostgresqladapter_fetchpricing"
     },
@@ -3095,7 +3158,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L536",
-      "community": 48,
+      "community": 63,
       "norm_label": "alibabadbadapter",
       "id": "services_database_pipeline_alibabadbadapter"
     },
@@ -3104,7 +3167,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L539",
-      "community": 48,
+      "community": 63,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_alibabadbadapter_fetchpricing"
     },
@@ -3176,7 +3239,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L664",
-      "community": 9,
+      "community": 75,
       "norm_label": "oracleredisadapter",
       "id": "services_database_pipeline_oracleredisadapter"
     },
@@ -3185,7 +3248,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L667",
-      "community": 9,
+      "community": 75,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oracleredisadapter_fetchpricing"
     },
@@ -4418,7 +4481,7 @@
       "file_type": "code",
       "source_file": "test_api.mjs",
       "source_location": "L1",
-      "community": 62,
+      "community": 16,
       "norm_label": "test_api.mjs",
       "id": "test_api"
     },
@@ -4427,7 +4490,7 @@
       "file_type": "code",
       "source_file": "test_api.mjs",
       "source_location": "L4",
-      "community": 62,
+      "community": 16,
       "norm_label": "sql",
       "id": "test_api_sql"
     },
@@ -4436,7 +4499,7 @@
       "file_type": "code",
       "source_file": "test_api.mjs",
       "source_location": "L6",
-      "community": 62,
+      "community": 16,
       "norm_label": "run()",
       "id": "test_api_run"
     },
@@ -4472,7 +4535,7 @@
       "file_type": "code",
       "source_file": "test_filters.mjs",
       "source_location": "L1",
-      "community": 62,
+      "community": 16,
       "norm_label": "test_filters.mjs",
       "id": "test_filters"
     },
@@ -4481,7 +4544,7 @@
       "file_type": "code",
       "source_file": "test_filters.mjs",
       "source_location": "L4",
-      "community": 62,
+      "community": 16,
       "norm_label": "sql",
       "id": "test_filters_sql"
     },
@@ -4490,7 +4553,7 @@
       "file_type": "code",
       "source_file": "test_filters.mjs",
       "source_location": "L6",
-      "community": 62,
+      "community": 16,
       "norm_label": "run()",
       "id": "test_filters_run"
     },
@@ -4949,7 +5012,7 @@
       "file_type": "code",
       "source_file": "test_counts.mjs",
       "source_location": "L1",
-      "community": 62,
+      "community": 16,
       "norm_label": "test_counts.mjs",
       "id": "test_counts"
     },
@@ -4958,7 +5021,7 @@
       "file_type": "code",
       "source_file": "test_counts.mjs",
       "source_location": "L4",
-      "community": 62,
+      "community": 16,
       "norm_label": "testcounts()",
       "id": "test_counts_testcounts"
     },
@@ -4967,7 +5030,7 @@
       "file_type": "code",
       "source_file": "src/config/alibaba_data_analytics.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "alibaba_data_analytics.ts",
       "id": "config_alibaba_data_analytics"
     },
@@ -4976,7 +5039,7 @@
       "file_type": "code",
       "source_file": "src/config/alibaba_data_analytics.ts",
       "source_location": "L4",
-      "community": 16,
+      "community": 62,
       "norm_label": "alibabaanalyticsconfig",
       "id": "config_alibaba_data_analytics_alibabaanalyticsconfig"
     },
@@ -4985,7 +5048,7 @@
       "file_type": "code",
       "source_file": "src/config/alibaba_data_analytics.ts",
       "source_location": "L21",
-      "community": 16,
+      "community": 62,
       "norm_label": "alibaba_analytics_instances",
       "id": "config_alibaba_data_analytics_alibaba_analytics_instances"
     },
@@ -4994,7 +5057,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_data_analytics.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "digitalocean_data_analytics.ts",
       "id": "config_digitalocean_data_analytics"
     },
@@ -5003,7 +5066,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_data_analytics.ts",
       "source_location": "L4",
-      "community": 16,
+      "community": 62,
       "norm_label": "digitaloceananalyticsconfig",
       "id": "config_digitalocean_data_analytics_digitaloceananalyticsconfig"
     },
@@ -5012,7 +5075,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_data_analytics.ts",
       "source_location": "L18",
-      "community": 16,
+      "community": 62,
       "norm_label": "digitalocean_analytics_instances",
       "id": "config_digitalocean_data_analytics_digitalocean_analytics_instances"
     },
@@ -5021,7 +5084,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_data_analytics.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "oracle_data_analytics.ts",
       "id": "config_oracle_data_analytics"
     },
@@ -5030,7 +5093,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_data_analytics.ts",
       "source_location": "L4",
-      "community": 16,
+      "community": 62,
       "norm_label": "oracleanalyticsconfig",
       "id": "config_oracle_data_analytics_oracleanalyticsconfig"
     },
@@ -5039,7 +5102,7 @@
       "file_type": "code",
       "source_file": "src/config/oracle_data_analytics.ts",
       "source_location": "L19",
-      "community": 16,
+      "community": 62,
       "norm_label": "oracle_analytics_instances",
       "id": "config_oracle_data_analytics_oracle_analytics_instances"
     },
@@ -5255,7 +5318,7 @@
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L1",
-      "community": 62,
+      "community": 16,
       "norm_label": "route.ts",
       "id": "counts_route"
     },
@@ -5264,7 +5327,7 @@
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L7",
-      "community": 62,
+      "community": 16,
       "norm_label": "get()",
       "id": "counts_route_get"
     },
@@ -5752,55 +5815,148 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
+      "source_location": "L8",
       "weight": 1.0,
       "source": "datacenters_page",
-      "target": "config_datacenter_data",
+      "target": "datacenters_worldmap",
       "confidence_score": 1.0
     },
     {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L4",
       "weight": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_datacenterregion",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_geographies",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "datacenters_page",
+      "source": "datacenters_worldmap",
       "target": "config_datacenter_data_provider_infra",
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_continents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_provider_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_region_coords",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L256",
+      "weight": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_tooltip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_toxy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L264",
+      "weight": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_worldmap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L296",
+      "weight": 1.0,
+      "source": "datacenters_worldmap_worldmap",
+      "target": "datacenters_worldmap_toxy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data"
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/app/datacenters/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "datacenters_page",
-      "target": "config_datacenter_data_providerinfrastructure",
-      "confidence_score": 1.0
+      "target": "config_datacenter_data_datacenterregion"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_geographies"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_provider_infra"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_providerinfrastructure"
     },
     {
       "relation": "contains",
@@ -5808,9 +5964,9 @@
       "source_file": "src/app/datacenters/page.tsx",
       "source_location": "L179",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "datacenters_page",
-      "target": "datacenters_page_datacenterspage",
-      "confidence_score": 1.0
+      "target": "datacenters_page_datacenterspage"
     },
     {
       "relation": "contains",
@@ -5818,9 +5974,9 @@
       "source_file": "src/app/datacenters/page.tsx",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "datacenters_page",
-      "target": "datacenters_page_geochip",
-      "confidence_score": 1.0
+      "target": "datacenters_page_geochip"
     },
     {
       "relation": "contains",
@@ -5828,9 +5984,9 @@
       "source_file": "src/app/datacenters/page.tsx",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "datacenters_page",
-      "target": "datacenters_page_providerrow",
-      "confidence_score": 1.0
+      "target": "datacenters_page_providerrow"
     },
     {
       "relation": "contains",
@@ -5838,9 +5994,9 @@
       "source_file": "src/app/datacenters/page.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "datacenters_page",
-      "target": "datacenters_page_stat",
-      "confidence_score": 1.0
+      "target": "datacenters_page_stat"
     },
     {
       "relation": "contains",
@@ -5848,9 +6004,9 @@
       "source_file": "src/app/datacenters/page.tsx",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "datacenters_page",
-      "target": "datacenters_page_statusdot",
-      "confidence_score": 1.0
+      "target": "datacenters_page_statusdot"
     },
     {
       "relation": "re_exports",
@@ -5952,9 +6108,9 @@
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_datacenter_data",
-      "target": "config_datacenter_data_datacenterregion",
-      "confidence_score": 1.0
+      "target": "config_datacenter_data_datacenterregion"
     },
     {
       "relation": "contains",
@@ -5962,9 +6118,9 @@
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L439",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_datacenter_data",
-      "target": "config_datacenter_data_geographies",
-      "confidence_score": 1.0
+      "target": "config_datacenter_data_geographies"
     },
     {
       "relation": "contains",
@@ -5972,9 +6128,9 @@
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L448",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_datacenter_data",
-      "target": "config_datacenter_data_geography",
-      "confidence_score": 1.0
+      "target": "config_datacenter_data_geography"
     },
     {
       "relation": "contains",
@@ -5982,9 +6138,9 @@
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L41",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_datacenter_data",
-      "target": "config_datacenter_data_provider_infra",
-      "confidence_score": 1.0
+      "target": "config_datacenter_data_provider_infra"
     },
     {
       "relation": "contains",
@@ -5992,9 +6148,9 @@
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_datacenter_data",
-      "target": "config_datacenter_data_providerinfrastructure",
-      "confidence_score": 1.0
+      "target": "config_datacenter_data_providerinfrastructure"
     },
     {
       "relation": "contains",
@@ -6002,9 +6158,9 @@
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_datacenter_data",
-      "target": "config_datacenter_data_regionstatus",
-      "confidence_score": 1.0
+      "target": "config_datacenter_data_regionstatus"
     },
     {
       "relation": "contains",
@@ -15147,5 +15303,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "616be17702f3818ea3515b64296fd21d2215a0fc"
+  "built_at_commit": "801befc662d87dcebb54e816290a30f7ab8244e5"
 }

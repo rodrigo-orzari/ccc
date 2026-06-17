@@ -4,328 +4,499 @@
   "graph": {},
   "nodes": [
     {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L1",
+      "id": "datacenters_page",
+      "community": 67,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "Stat()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L11",
+      "id": "datacenters_page_stat",
+      "community": 67,
+      "norm_label": "stat()"
+    },
+    {
+      "label": "GeoChip()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L23",
+      "id": "datacenters_page_geochip",
+      "community": 67,
+      "norm_label": "geochip()"
+    },
+    {
+      "label": "StatusDot()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L32",
+      "id": "datacenters_page_statusdot",
+      "community": 67,
+      "norm_label": "statusdot()"
+    },
+    {
+      "label": "ProviderRow()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L38",
+      "id": "datacenters_page_providerrow",
+      "community": 67,
+      "norm_label": "providerrow()"
+    },
+    {
+      "label": "DatacentersPage()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L179",
+      "id": "datacenters_page_datacenterspage",
+      "community": 67,
+      "norm_label": "datacenterspage()"
+    },
+    {
+      "label": "ProductTypeSelector.tsx",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L1",
+      "id": "components_producttypeselector",
+      "community": 68,
+      "norm_label": "producttypeselector.tsx"
+    },
+    {
+      "label": "PRODUCT_TYPES",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L6",
+      "id": "components_producttypeselector_product_types",
+      "community": 68,
+      "norm_label": "product_types"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L21",
+      "id": "components_producttypeselector_linkedinicon",
+      "community": 68,
+      "norm_label": "linkedinicon()"
+    },
+    {
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L29",
+      "id": "components_producttypeselector_xicon",
+      "community": 68,
+      "norm_label": "xicon()"
+    },
+    {
+      "label": "ProductTypeSelectorProps",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L39",
+      "id": "components_producttypeselector_producttypeselectorprops",
+      "community": 68,
+      "norm_label": "producttypeselectorprops"
+    },
+    {
+      "label": "ProductTypeSelector()",
+      "file_type": "code",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L44",
+      "id": "components_producttypeselector_producttypeselector",
+      "community": 68,
+      "norm_label": "producttypeselector()"
+    },
+    {
+      "label": "datacenter_data.ts",
+      "file_type": "code",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L1",
+      "id": "config_datacenter_data",
+      "community": 67,
+      "norm_label": "datacenter_data.ts"
+    },
+    {
+      "label": "RegionStatus",
+      "file_type": "code",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L11",
+      "id": "config_datacenter_data_regionstatus",
+      "community": 67,
+      "norm_label": "regionstatus"
+    },
+    {
+      "label": "DatacenterRegion",
+      "file_type": "code",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L13",
+      "id": "config_datacenter_data_datacenterregion",
+      "community": 67,
+      "norm_label": "datacenterregion"
+    },
+    {
+      "label": "ProviderInfrastructure",
+      "file_type": "code",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L22",
+      "id": "config_datacenter_data_providerinfrastructure",
+      "community": 67,
+      "norm_label": "providerinfrastructure"
+    },
+    {
+      "label": "PROVIDER_INFRA",
+      "file_type": "code",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L41",
+      "id": "config_datacenter_data_provider_infra",
+      "community": 67,
+      "norm_label": "provider_infra"
+    },
+    {
+      "label": "GEOGRAPHIES",
+      "file_type": "code",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L439",
+      "id": "config_datacenter_data_geographies",
+      "community": 67,
+      "norm_label": "geographies"
+    },
+    {
+      "label": "Geography",
+      "file_type": "code",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L448",
+      "id": "config_datacenter_data_geography",
+      "community": 67,
+      "norm_label": "geography"
+    },
+    {
       "label": "FilterSidebar.tsx",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L1",
-      "id": "components_filtersidebar",
       "community": 7,
-      "norm_label": "filtersidebar.tsx"
+      "norm_label": "filtersidebar.tsx",
+      "id": "components_filtersidebar"
     },
     {
       "label": "Tooltip()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L11",
-      "id": "components_filtersidebar_tooltip",
       "community": 7,
-      "norm_label": "tooltip()"
+      "norm_label": "tooltip()",
+      "id": "components_filtersidebar_tooltip"
     },
     {
       "label": "FilterSectionProps",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L31",
-      "id": "components_filtersidebar_filtersectionprops",
       "community": 7,
-      "norm_label": "filtersectionprops"
+      "norm_label": "filtersectionprops",
+      "id": "components_filtersidebar_filtersectionprops"
     },
     {
       "label": "FilterSection()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L43",
-      "id": "components_filtersidebar_filtersection",
       "community": 7,
-      "norm_label": "filtersection()"
+      "norm_label": "filtersection()",
+      "id": "components_filtersidebar_filtersection"
     },
     {
       "label": "GroupedFilterSectionProps",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L100",
-      "id": "components_filtersidebar_groupedfiltersectionprops",
       "community": 7,
-      "norm_label": "groupedfiltersectionprops"
+      "norm_label": "groupedfiltersectionprops",
+      "id": "components_filtersidebar_groupedfiltersectionprops"
     },
     {
       "label": "GroupedFilterSection()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L114",
-      "id": "components_filtersidebar_groupedfiltersection",
       "community": 7,
-      "norm_label": "groupedfiltersection()"
+      "norm_label": "groupedfiltersection()",
+      "id": "components_filtersidebar_groupedfiltersection"
     },
     {
       "label": "FilterSidebarProps",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L177",
-      "id": "components_filtersidebar_filtersidebarprops",
       "community": 7,
-      "norm_label": "filtersidebarprops"
+      "norm_label": "filtersidebarprops",
+      "id": "components_filtersidebar_filtersidebarprops"
     },
     {
       "label": "FilterSidebar()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L342",
-      "id": "components_filtersidebar_filtersidebar",
       "community": 7,
-      "norm_label": "filtersidebar()"
+      "norm_label": "filtersidebar()",
+      "id": "components_filtersidebar_filtersidebar"
     },
     {
       "label": "app_hosting.ts",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L1",
-      "id": "config_app_hosting",
       "community": 38,
-      "norm_label": "app_hosting.ts"
+      "norm_label": "app_hosting.ts",
+      "id": "config_app_hosting"
     },
     {
       "label": "Row",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L12",
-      "id": "config_app_hosting_row",
       "community": 38,
-      "norm_label": "row"
+      "norm_label": "row",
+      "id": "config_app_hosting_row"
     },
     {
       "label": "AppHostingRegion",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L21",
-      "id": "config_app_hosting_apphostingregion",
       "community": 38,
-      "norm_label": "apphostingregion"
+      "norm_label": "apphostingregion",
+      "id": "config_app_hosting_apphostingregion"
     },
     {
       "label": "applyMultiplier()",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L27",
-      "id": "config_app_hosting_applymultiplier",
       "community": 38,
-      "norm_label": "applymultiplier()"
+      "norm_label": "applymultiplier()",
+      "id": "config_app_hosting_applymultiplier"
     },
     {
       "label": "AZURE_BASE",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L37",
-      "id": "config_app_hosting_azure_base",
       "community": 38,
-      "norm_label": "azure_base"
+      "norm_label": "azure_base",
+      "id": "config_app_hosting_azure_base"
     },
     {
       "label": "AZURE_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L48",
-      "id": "config_app_hosting_azure_regions",
       "community": 38,
-      "norm_label": "azure_regions"
+      "norm_label": "azure_regions",
+      "id": "config_app_hosting_azure_regions"
     },
     {
       "label": "AZURE_APP_HOSTING_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L56",
-      "id": "config_app_hosting_azure_app_hosting_regions",
       "community": 38,
-      "norm_label": "azure_app_hosting_regions"
+      "norm_label": "azure_app_hosting_regions",
+      "id": "config_app_hosting_azure_app_hosting_regions"
     },
     {
       "label": "AWS_BASE",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L65",
-      "id": "config_app_hosting_aws_base",
       "community": 38,
-      "norm_label": "aws_base"
+      "norm_label": "aws_base",
+      "id": "config_app_hosting_aws_base"
     },
     {
       "label": "AWS_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L75",
-      "id": "config_app_hosting_aws_regions",
       "community": 38,
-      "norm_label": "aws_regions"
+      "norm_label": "aws_regions",
+      "id": "config_app_hosting_aws_regions"
     },
     {
       "label": "AWS_APP_HOSTING_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L83",
-      "id": "config_app_hosting_aws_app_hosting_regions",
       "community": 38,
-      "norm_label": "aws_app_hosting_regions"
+      "norm_label": "aws_app_hosting_regions",
+      "id": "config_app_hosting_aws_app_hosting_regions"
     },
     {
       "label": "GCP_BASE",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L91",
-      "id": "config_app_hosting_gcp_base",
       "community": 38,
-      "norm_label": "gcp_base"
+      "norm_label": "gcp_base",
+      "id": "config_app_hosting_gcp_base"
     },
     {
       "label": "GCP_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L101",
-      "id": "config_app_hosting_gcp_regions",
       "community": 38,
-      "norm_label": "gcp_regions"
+      "norm_label": "gcp_regions",
+      "id": "config_app_hosting_gcp_regions"
     },
     {
       "label": "GCP_APP_HOSTING_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L109",
-      "id": "config_app_hosting_gcp_app_hosting_regions",
       "community": 38,
-      "norm_label": "gcp_app_hosting_regions"
+      "norm_label": "gcp_app_hosting_regions",
+      "id": "config_app_hosting_gcp_app_hosting_regions"
     },
     {
       "label": "DO_BASE",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L118",
-      "id": "config_app_hosting_do_base",
       "community": 38,
-      "norm_label": "do_base"
+      "norm_label": "do_base",
+      "id": "config_app_hosting_do_base"
     },
     {
       "label": "DO_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L127",
-      "id": "config_app_hosting_do_regions",
       "community": 38,
-      "norm_label": "do_regions"
+      "norm_label": "do_regions",
+      "id": "config_app_hosting_do_regions"
     },
     {
       "label": "DO_APP_HOSTING_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L134",
-      "id": "config_app_hosting_do_app_hosting_regions",
       "community": 38,
-      "norm_label": "do_app_hosting_regions"
+      "norm_label": "do_app_hosting_regions",
+      "id": "config_app_hosting_do_app_hosting_regions"
     },
     {
       "label": "ORACLE_BASE",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L143",
-      "id": "config_app_hosting_oracle_base",
       "community": 38,
-      "norm_label": "oracle_base"
+      "norm_label": "oracle_base",
+      "id": "config_app_hosting_oracle_base"
     },
     {
       "label": "ORACLE_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L149",
-      "id": "config_app_hosting_oracle_regions",
       "community": 38,
-      "norm_label": "oracle_regions"
+      "norm_label": "oracle_regions",
+      "id": "config_app_hosting_oracle_regions"
     },
     {
       "label": "ORACLE_APP_HOSTING_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L157",
-      "id": "config_app_hosting_oracle_app_hosting_regions",
       "community": 38,
-      "norm_label": "oracle_app_hosting_regions"
+      "norm_label": "oracle_app_hosting_regions",
+      "id": "config_app_hosting_oracle_app_hosting_regions"
     },
     {
       "label": "ALIBABA_BASE",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L165",
-      "id": "config_app_hosting_alibaba_base",
       "community": 38,
-      "norm_label": "alibaba_base"
+      "norm_label": "alibaba_base",
+      "id": "config_app_hosting_alibaba_base"
     },
     {
       "label": "ALIBABA_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L174",
-      "id": "config_app_hosting_alibaba_regions",
       "community": 38,
-      "norm_label": "alibaba_regions"
+      "norm_label": "alibaba_regions",
+      "id": "config_app_hosting_alibaba_regions"
     },
     {
       "label": "ALIBABA_APP_HOSTING_REGIONS",
       "file_type": "code",
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L182",
-      "id": "config_app_hosting_alibaba_app_hosting_regions",
       "community": 38,
-      "norm_label": "alibaba_app_hosting_regions"
+      "norm_label": "alibaba_app_hosting_regions",
+      "id": "config_app_hosting_alibaba_app_hosting_regions"
     },
     {
       "label": "app_hosting_pipeline.ts",
       "file_type": "code",
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L1",
-      "id": "services_app_hosting_pipeline",
       "community": 38,
-      "norm_label": "app_hosting_pipeline.ts"
+      "norm_label": "app_hosting_pipeline.ts",
+      "id": "services_app_hosting_pipeline"
     },
     {
       "label": "AppHostingConfigEntry",
       "file_type": "code",
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L13",
-      "id": "services_app_hosting_pipeline_apphostingconfigentry",
       "community": 38,
-      "norm_label": "apphostingconfigentry"
+      "norm_label": "apphostingconfigentry",
+      "id": "services_app_hosting_pipeline_apphostingconfigentry"
     },
     {
       "label": "mapRegion()",
       "file_type": "code",
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L22",
-      "id": "services_app_hosting_pipeline_mapregion",
       "community": 38,
-      "norm_label": "mapregion()"
+      "norm_label": "mapregion()",
+      "id": "services_app_hosting_pipeline_mapregion"
     },
     {
       "label": "STATIC_PROVIDERS",
       "file_type": "code",
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L43",
-      "id": "services_app_hosting_pipeline_static_providers",
       "community": 38,
-      "norm_label": "static_providers"
+      "norm_label": "static_providers",
+      "id": "services_app_hosting_pipeline_static_providers"
     },
     {
       "label": "AppHostingPricingPipeline",
       "file_type": "code",
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L52",
-      "id": "services_app_hosting_pipeline_apphostingpricingpipeline",
       "community": 38,
-      "norm_label": "apphostingpricingpipeline"
+      "norm_label": "apphostingpricingpipeline",
+      "id": "services_app_hosting_pipeline_apphostingpricingpipeline"
     },
     {
       "label": ".run()",
       "file_type": "code",
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L53",
-      "id": "services_app_hosting_pipeline_apphostingpricingpipeline_run",
       "community": 38,
-      "norm_label": ".run()"
+      "norm_label": ".run()",
+      "id": "services_app_hosting_pipeline_apphostingpricingpipeline_run"
     },
     {
       "label": "page.tsx",
@@ -737,7 +908,7 @@
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L106",
-      "community": 13,
+      "community": 68,
       "norm_label": "pricingtableprops",
       "id": "components_pricingtable_pricingtableprops"
     },
@@ -764,7 +935,7 @@
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L406",
-      "community": 15,
+      "community": 70,
       "norm_label": "tablerow()",
       "id": "components_pricingtable_tablerow"
     },
@@ -1313,7 +1484,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L54",
-      "community": 16,
+      "community": 72,
       "norm_label": "snowflakestaticadapter",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter"
     },
@@ -1322,7 +1493,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L59",
-      "community": 16,
+      "community": 72,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter_constructor"
     },
@@ -1331,7 +1502,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L68",
-      "community": 16,
+      "community": 72,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing"
     },
@@ -1340,7 +1511,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L97",
-      "community": 16,
+      "community": 73,
       "norm_label": "databricksazureadapter",
       "id": "services_data_analytics_pipeline_databricksazureadapter"
     },
@@ -1349,7 +1520,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L101",
-      "community": 16,
+      "community": 73,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
     },
@@ -1385,7 +1556,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L211",
-      "community": 9,
+      "community": 16,
       "norm_label": "synapseazureadapter",
       "id": "services_data_analytics_pipeline_synapseazureadapter"
     },
@@ -1394,7 +1565,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L215",
-      "community": 9,
+      "community": 16,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing"
     },
@@ -1403,7 +1574,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L284",
-      "community": 9,
+      "community": 48,
       "norm_label": "alibabaanalyticsadapter",
       "id": "services_data_analytics_pipeline_alibabaanalyticsadapter"
     },
@@ -1412,7 +1583,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L287",
-      "community": 9,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_alibabaanalyticsadapter_fetchpricing"
     },
@@ -1502,7 +1673,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
       "source_location": "L1",
-      "community": 13,
+      "community": 69,
       "norm_label": "page.tsx",
       "id": "workloads_page"
     },
@@ -1511,7 +1682,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
       "source_location": "L8",
-      "community": 13,
+      "community": 69,
       "norm_label": "workloadscatalog()",
       "id": "workloads_page_workloadscatalog"
     },
@@ -1601,7 +1772,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L1",
-      "community": 65,
+      "community": 62,
       "norm_label": "pricing_pipeline.ts",
       "id": "services_pricing_pipeline"
     },
@@ -1610,7 +1781,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L10",
-      "community": 9,
+      "community": 48,
       "norm_label": "pricingrecord",
       "id": "services_pricing_pipeline_pricingrecord"
     },
@@ -1619,7 +1790,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L30",
-      "community": 65,
+      "community": 62,
       "norm_label": "pricedriftresult",
       "id": "services_pricing_pipeline_pricedriftresult"
     },
@@ -1817,7 +1988,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L387",
-      "community": 65,
+      "community": 62,
       "norm_label": "oracleadapter",
       "id": "services_pricing_pipeline_oracleadapter"
     },
@@ -1826,7 +1997,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L390",
-      "community": 65,
+      "community": 62,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_oracleadapter_fetchpricing"
     },
@@ -1835,7 +2006,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L416",
-      "community": 67,
+      "community": 62,
       "norm_label": "digitaloceanadapter",
       "id": "services_pricing_pipeline_digitaloceanadapter"
     },
@@ -1853,7 +2024,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L434",
-      "community": 67,
+      "community": 62,
       "norm_label": ".gpucountfromslug()",
       "id": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug"
     },
@@ -1862,7 +2033,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L439",
-      "community": 67,
+      "community": 62,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_digitaloceanadapter_fetchpricing"
     },
@@ -1871,7 +2042,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L455",
-      "community": 67,
+      "community": 62,
       "norm_label": ".fetchfromapi()",
       "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
     },
@@ -1880,7 +2051,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L503",
-      "community": 67,
+      "community": 62,
       "norm_label": ".fetchfromscraper()",
       "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
     },
@@ -1889,7 +2060,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L527",
-      "community": 65,
+      "community": 62,
       "norm_label": "alibabaadapter",
       "id": "services_pricing_pipeline_alibabaadapter"
     },
@@ -1898,7 +2069,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L530",
-      "community": 65,
+      "community": 62,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_alibabaadapter_fetchpricing"
     },
@@ -1907,7 +2078,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L555",
-      "community": 65,
+      "community": 62,
       "norm_label": "pricingpipeline",
       "id": "services_pricing_pipeline_pricingpipeline"
     },
@@ -1916,7 +2087,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L559",
-      "community": 65,
+      "community": 62,
       "norm_label": ".constructor()",
       "id": "services_pricing_pipeline_pricingpipeline_constructor"
     },
@@ -1925,7 +2096,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L577",
-      "community": 65,
+      "community": 62,
       "norm_label": ".run()",
       "id": "services_pricing_pipeline_pricingpipeline_run"
     },
@@ -1934,7 +2105,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L593",
-      "community": 65,
+      "community": 62,
       "norm_label": ".saverecords()",
       "id": "services_pricing_pipeline_pricingpipeline_saverecords"
     },
@@ -1943,7 +2114,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 65,
       "norm_label": "index.ts",
       "id": "types_index"
     },
@@ -1952,7 +2123,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 68,
       "norm_label": "producttype",
       "id": "types_index_producttype"
     },
@@ -1961,7 +2132,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L3",
-      "community": 13,
+      "community": 68,
       "norm_label": "pricingrecord",
       "id": "types_index_pricingrecord"
     },
@@ -1970,7 +2141,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L63",
-      "community": 13,
+      "community": 65,
       "norm_label": "workloadparameter",
       "id": "types_index_workloadparameter"
     },
@@ -1979,7 +2150,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L74",
-      "community": 13,
+      "community": 65,
       "norm_label": "workloadcomponent",
       "id": "types_index_workloadcomponent"
     },
@@ -1988,7 +2159,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L88",
-      "community": 13,
+      "community": 65,
       "norm_label": "workloaddefinition",
       "id": "types_index_workloaddefinition"
     },
@@ -1997,7 +2168,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L1",
-      "community": 13,
+      "community": 65,
       "norm_label": "page.tsx",
       "id": "id_page"
     },
@@ -2006,7 +2177,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L17",
-      "community": 13,
+      "community": 65,
       "norm_label": "catalogproducttype()",
       "id": "id_page_catalogproducttype"
     },
@@ -2015,7 +2186,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L22",
-      "community": 13,
+      "community": 65,
       "norm_label": "region_options",
       "id": "id_page_region_options"
     },
@@ -2024,7 +2195,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L24",
-      "community": 13,
+      "community": 65,
       "norm_label": "providercolor()",
       "id": "id_page_providercolor"
     },
@@ -2033,7 +2204,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L26",
-      "community": 13,
+      "community": 65,
       "norm_label": "providername()",
       "id": "id_page_providername"
     },
@@ -2042,7 +2213,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L27",
-      "community": 13,
+      "community": 65,
       "norm_label": "formatnumber()",
       "id": "id_page_formatnumber"
     },
@@ -2051,7 +2222,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L31",
-      "community": 13,
+      "community": 65,
       "norm_label": "provider_ids",
       "id": "id_page_provider_ids"
     },
@@ -2060,7 +2231,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L33",
-      "community": 13,
+      "community": 65,
       "norm_label": "providerth()",
       "id": "id_page_providerth"
     },
@@ -2069,7 +2240,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L49",
-      "community": 13,
+      "community": 65,
       "norm_label": "architecturestrip()",
       "id": "id_page_architecturestrip"
     },
@@ -2078,7 +2249,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L84",
-      "community": 13,
+      "community": 65,
       "norm_label": "workloaddetails()",
       "id": "id_page_workloaddetails"
     },
@@ -2123,7 +2294,7 @@
       "file_type": "code",
       "source_file": "src/lib/formatInstanceName.ts",
       "source_location": "L1",
-      "community": 15,
+      "community": 70,
       "norm_label": "formatinstancename.ts",
       "id": "lib_formatinstancename"
     },
@@ -2132,7 +2303,7 @@
       "file_type": "code",
       "source_file": "src/lib/formatInstanceName.ts",
       "source_location": "L14",
-      "community": 15,
+      "community": 70,
       "norm_label": "formatinstancename()",
       "id": "lib_formatinstancename_formatinstancename"
     },
@@ -2681,7 +2852,7 @@
       "file_type": "code",
       "source_file": "src/config/workloads.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 69,
       "norm_label": "workloads.ts",
       "id": "config_workloads"
     },
@@ -2690,7 +2861,7 @@
       "file_type": "code",
       "source_file": "src/config/workloads.ts",
       "source_location": "L3",
-      "community": 13,
+      "community": 69,
       "norm_label": "workloads",
       "id": "config_workloads_workloads"
     },
@@ -2771,7 +2942,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L127",
-      "community": 9,
+      "community": 48,
       "norm_label": "gcpcloudsqladapter",
       "id": "services_database_pipeline_gcpcloudsqladapter"
     },
@@ -2780,7 +2951,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L130",
-      "community": 9,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_gcpcloudsqladapter_fetchpricing"
     },
@@ -2789,7 +2960,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L162",
-      "community": 9,
+      "community": 74,
       "norm_label": "oracleautonomousadapter",
       "id": "services_database_pipeline_oracleautonomousadapter"
     },
@@ -2798,7 +2969,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L165",
-      "community": 9,
+      "community": 74,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oracleautonomousadapter_fetchpricing"
     },
@@ -2807,7 +2978,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L198",
-      "community": 9,
+      "community": 48,
       "norm_label": "oraclemysqlheatwaveadapter",
       "id": "services_database_pipeline_oraclemysqlheatwaveadapter"
     },
@@ -2816,7 +2987,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L201",
-      "community": 9,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing"
     },
@@ -2825,7 +2996,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L233",
-      "community": 9,
+      "community": 48,
       "norm_label": "oraclepostgresqladapter",
       "id": "services_database_pipeline_oraclepostgresqladapter"
     },
@@ -2834,7 +3005,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L236",
-      "community": 9,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclepostgresqladapter_fetchpricing"
     },
@@ -2906,7 +3077,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L499",
-      "community": 9,
+      "community": 48,
       "norm_label": "digitaloceandbadapter",
       "id": "services_database_pipeline_digitaloceandbadapter"
     },
@@ -2915,7 +3086,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L502",
-      "community": 9,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_digitaloceandbadapter_fetchpricing"
     },
@@ -2924,7 +3095,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L536",
-      "community": 9,
+      "community": 48,
       "norm_label": "alibabadbadapter",
       "id": "services_database_pipeline_alibabadbadapter"
     },
@@ -2933,7 +3104,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L539",
-      "community": 9,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_alibabadbadapter_fetchpricing"
     },
@@ -2951,7 +3122,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L580",
-      "community": 9,
+      "community": 48,
       "norm_label": "awselasticacheadapter",
       "id": "services_database_pipeline_awselasticacheadapter"
     },
@@ -2960,7 +3131,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L583",
-      "community": 9,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_awselasticacheadapter_fetchpricing"
     },
@@ -2978,7 +3149,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L623",
-      "community": 9,
+      "community": 48,
       "norm_label": "gcpmemorystoreadapter",
       "id": "services_database_pipeline_gcpmemorystoreadapter"
     },
@@ -2987,7 +3158,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L626",
-      "community": 9,
+      "community": 48,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_gcpmemorystoreadapter_fetchpricing"
     },
@@ -3050,7 +3221,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L740",
-      "community": 65,
+      "community": 62,
       "norm_label": "databasepricingpipeline",
       "id": "services_database_pipeline_databasepricingpipeline"
     },
@@ -3059,7 +3230,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L741",
-      "community": 65,
+      "community": 62,
       "norm_label": ".constructor()",
       "id": "services_database_pipeline_databasepricingpipeline_constructor"
     },
@@ -3077,7 +3248,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L1",
-      "community": 65,
+      "community": 62,
       "norm_label": "networking_pipeline.ts",
       "id": "services_networking_pipeline"
     },
@@ -3086,7 +3257,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L4",
-      "community": 65,
+      "community": 62,
       "norm_label": "static_networking_pricing",
       "id": "services_networking_pipeline_static_networking_pricing"
     },
@@ -3127,65 +3298,11 @@
       "id": "services_networking_pipeline_networkingpricingpipeline_setupnetworkingservices"
     },
     {
-      "label": "ProductTypeSelector.tsx",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L1",
-      "community": 13,
-      "norm_label": "producttypeselector.tsx",
-      "id": "components_producttypeselector"
-    },
-    {
-      "label": "PRODUCT_TYPES",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L6",
-      "community": 13,
-      "norm_label": "product_types",
-      "id": "components_producttypeselector_product_types"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L21",
-      "community": 13,
-      "norm_label": "linkedinicon()",
-      "id": "components_producttypeselector_linkedinicon"
-    },
-    {
-      "label": "XIcon()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L29",
-      "community": 13,
-      "norm_label": "xicon()",
-      "id": "components_producttypeselector_xicon"
-    },
-    {
-      "label": "ProductTypeSelectorProps",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L39",
-      "community": 13,
-      "norm_label": "producttypeselectorprops",
-      "id": "components_producttypeselector_producttypeselectorprops"
-    },
-    {
-      "label": "ProductTypeSelector()",
-      "file_type": "code",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L44",
-      "community": 13,
-      "norm_label": "producttypeselector()",
-      "id": "components_producttypeselector_producttypeselector"
-    },
-    {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L1",
-      "community": 48,
+      "community": 13,
       "norm_label": "page.tsx",
       "id": "about_page"
     },
@@ -3194,7 +3311,7 @@
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L6",
-      "community": 48,
+      "community": 13,
       "norm_label": "headingtoid()",
       "id": "about_page_headingtoid"
     },
@@ -3203,7 +3320,7 @@
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L16",
-      "community": 48,
+      "community": 13,
       "norm_label": "aboutpage()",
       "id": "about_page_aboutpage"
     },
@@ -3284,7 +3401,7 @@
       "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L1",
-      "community": 48,
+      "community": 13,
       "norm_label": "page.tsx",
       "id": "terms_page"
     },
@@ -3293,7 +3410,7 @@
       "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L6",
-      "community": 48,
+      "community": 13,
       "norm_label": "headingtoid()",
       "id": "terms_page_headingtoid"
     },
@@ -3302,7 +3419,7 @@
       "file_type": "code",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L16",
-      "community": 48,
+      "community": 13,
       "norm_label": "termsofusepage()",
       "id": "terms_page_termsofusepage"
     },
@@ -3329,7 +3446,7 @@
       "file_type": "code",
       "source_file": "src/components/MarkdownPage.tsx",
       "source_location": "L1",
-      "community": 48,
+      "community": 13,
       "norm_label": "markdownpage.tsx",
       "id": "components_markdownpage"
     },
@@ -3338,7 +3455,7 @@
       "file_type": "code",
       "source_file": "src/components/MarkdownPage.tsx",
       "source_location": "L7",
-      "community": 48,
+      "community": 13,
       "norm_label": "markdownpageprops",
       "id": "components_markdownpage_markdownpageprops"
     },
@@ -3347,7 +3464,7 @@
       "file_type": "code",
       "source_file": "src/components/MarkdownPage.tsx",
       "source_location": "L14",
-      "community": 48,
+      "community": 13,
       "norm_label": "headingtoid()",
       "id": "components_markdownpage_headingtoid"
     },
@@ -3356,7 +3473,7 @@
       "file_type": "code",
       "source_file": "src/components/MarkdownPage.tsx",
       "source_location": "L24",
-      "community": 48,
+      "community": 13,
       "norm_label": "markdownpage()",
       "id": "components_markdownpage_markdownpage"
     },
@@ -3437,7 +3554,7 @@
       "file_type": "code",
       "source_file": "src/app/api/workloads/route.ts",
       "source_location": "L1",
-      "community": 13,
+      "community": 69,
       "norm_label": "route.ts",
       "id": "workloads_route"
     },
@@ -3446,7 +3563,7 @@
       "file_type": "code",
       "source_file": "src/app/api/workloads/route.ts",
       "source_location": "L5",
-      "community": 13,
+      "community": 69,
       "norm_label": "post()",
       "id": "workloads_route_post"
     },
@@ -3455,7 +3572,7 @@
       "file_type": "code",
       "source_file": "ingest_vms.ts",
       "source_location": "L1",
-      "community": 65,
+      "community": 62,
       "norm_label": "ingest_vms.ts",
       "id": "ingest_vms"
     },
@@ -3464,7 +3581,7 @@
       "file_type": "code",
       "source_file": "ingest_vms.ts",
       "source_location": "L7",
-      "community": 65,
+      "community": 62,
       "norm_label": "main()",
       "id": "ingest_vms_main"
     },
@@ -5156,7 +5273,7 @@
       "file_type": "code",
       "source_file": "src/app/methodology/page.tsx",
       "source_location": "L1",
-      "community": 48,
+      "community": 13,
       "norm_label": "page.tsx",
       "id": "methodology_page"
     },
@@ -5165,7 +5282,7 @@
       "file_type": "code",
       "source_file": "src/app/methodology/page.tsx",
       "source_location": "L6",
-      "community": 48,
+      "community": 13,
       "norm_label": "methodologypage()",
       "id": "methodology_page_methodologypage"
     },
@@ -5192,7 +5309,7 @@
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L1",
-      "community": 13,
+      "community": 68,
       "norm_label": "chartsview.tsx",
       "id": "components_chartsview"
     },
@@ -5201,7 +5318,7 @@
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L8",
-      "community": 13,
+      "community": 68,
       "norm_label": "chartsviewprops",
       "id": "components_chartsview_chartsviewprops"
     },
@@ -5210,7 +5327,7 @@
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L13",
-      "community": 13,
+      "community": 68,
       "norm_label": "chartsview()",
       "id": "components_chartsview_chartsview"
     },
@@ -5630,6 +5747,265 @@
     }
   ],
   "links": [
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_datacenterregion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_geographies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_provider_infra",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_providerinfrastructure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L179",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_datacenterspage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_geochip",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_providerrow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_stat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_statusdot",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_producttypeselector"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_linkedinicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_product_types"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_producttypeselector"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_producttypeselectorprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "components_producttypeselector_xicon"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/ProductTypeSelector.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_producttypeselector_producttypeselectorprops",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "config_datacenter_data",
+      "target": "config_datacenter_data_datacenterregion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L439",
+      "weight": 1.0,
+      "source": "config_datacenter_data",
+      "target": "config_datacenter_data_geographies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L448",
+      "weight": 1.0,
+      "source": "config_datacenter_data",
+      "target": "config_datacenter_data_geography",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "config_datacenter_data",
+      "target": "config_datacenter_data_provider_infra",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "config_datacenter_data",
+      "target": "config_datacenter_data_providerinfrastructure",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/config/datacenter_data.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "config_datacenter_data",
+      "target": "config_datacenter_data_regionstatus",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -6267,9 +6643,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L182",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_alibaba_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_alibaba_app_hosting_regions"
     },
     {
       "relation": "contains",
@@ -6277,9 +6653,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L165",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_alibaba_base",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_alibaba_base"
     },
     {
       "relation": "contains",
@@ -6287,9 +6663,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L174",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_alibaba_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_alibaba_regions"
     },
     {
       "relation": "contains",
@@ -6297,9 +6673,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_apphostingregion",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_apphostingregion"
     },
     {
       "relation": "contains",
@@ -6307,9 +6683,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L27",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_applymultiplier",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_applymultiplier"
     },
     {
       "relation": "contains",
@@ -6317,9 +6693,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L83",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_aws_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_aws_app_hosting_regions"
     },
     {
       "relation": "contains",
@@ -6327,9 +6703,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L65",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_aws_base",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_aws_base"
     },
     {
       "relation": "contains",
@@ -6337,9 +6713,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L75",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_aws_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_aws_regions"
     },
     {
       "relation": "contains",
@@ -6347,9 +6723,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L56",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_azure_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_azure_app_hosting_regions"
     },
     {
       "relation": "contains",
@@ -6357,9 +6733,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L37",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_azure_base",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_azure_base"
     },
     {
       "relation": "contains",
@@ -6367,9 +6743,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_azure_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_azure_regions"
     },
     {
       "relation": "contains",
@@ -6377,9 +6753,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L134",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_do_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_do_app_hosting_regions"
     },
     {
       "relation": "contains",
@@ -6387,9 +6763,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L118",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_do_base",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_do_base"
     },
     {
       "relation": "contains",
@@ -6397,9 +6773,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L127",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_do_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_do_regions"
     },
     {
       "relation": "contains",
@@ -6407,9 +6783,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L109",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_gcp_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_gcp_app_hosting_regions"
     },
     {
       "relation": "contains",
@@ -6417,9 +6793,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_gcp_base",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_gcp_base"
     },
     {
       "relation": "contains",
@@ -6427,9 +6803,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_gcp_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_gcp_regions"
     },
     {
       "relation": "contains",
@@ -6437,9 +6813,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L157",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_oracle_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_oracle_app_hosting_regions"
     },
     {
       "relation": "contains",
@@ -6447,9 +6823,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L143",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_oracle_base",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_oracle_base"
     },
     {
       "relation": "contains",
@@ -6457,9 +6833,9 @@
       "source_file": "src/config/app_hosting.ts",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "config_app_hosting",
-      "target": "config_app_hosting_oracle_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_oracle_regions"
     },
     {
       "relation": "contains",
@@ -6489,9 +6865,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "config_app_hosting_apphostingregion",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_apphostingregion"
     },
     {
       "relation": "imports",
@@ -6500,9 +6876,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "config_app_hosting_azure_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_azure_app_hosting_regions"
     },
     {
       "relation": "imports",
@@ -6511,9 +6887,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "config_app_hosting_aws_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_aws_app_hosting_regions"
     },
     {
       "relation": "imports",
@@ -6522,9 +6898,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "config_app_hosting_gcp_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_gcp_app_hosting_regions"
     },
     {
       "relation": "imports",
@@ -6533,9 +6909,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "config_app_hosting_do_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_do_app_hosting_regions"
     },
     {
       "relation": "imports",
@@ -6544,9 +6920,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "config_app_hosting_oracle_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_oracle_app_hosting_regions"
     },
     {
       "relation": "imports",
@@ -6555,9 +6931,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "config_app_hosting_alibaba_app_hosting_regions",
-      "confidence_score": 1.0
+      "target": "config_app_hosting_alibaba_app_hosting_regions"
     },
     {
       "relation": "contains",
@@ -6585,9 +6961,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "services_app_hosting_pipeline_mapregion",
-      "confidence_score": 1.0
+      "target": "services_app_hosting_pipeline_mapregion"
     },
     {
       "relation": "contains",
@@ -6606,9 +6982,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "services_pricing_pipeline_pricingpipeline",
-      "confidence_score": 1.0
+      "target": "services_pricing_pipeline_pricingpipeline"
     },
     {
       "relation": "imports",
@@ -6617,9 +6993,9 @@
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_app_hosting_pipeline",
-      "target": "services_pricing_pipeline_pricingrecord",
-      "confidence_score": 1.0
+      "target": "services_pricing_pipeline_pricingrecord"
     },
     {
       "relation": "imports_from",
@@ -9809,17 +10185,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/config/workloads.ts",
       "source_location": "L1",
       "weight": 1.0,
@@ -9908,28 +10273,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "components_chartsview",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector_producttypeselectorprops",
       "target": "types_index_producttype"
     },
     {
@@ -11983,67 +12326,6 @@
       "confidence_score": 1.0,
       "source": "services_networking_pipeline_networkingpricingpipeline_run",
       "target": "services_networking_pipeline_networkingpricingpipeline_setupnetworkingservices"
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_producttypeselector"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_linkedinicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_product_types"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_producttypeselector"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L35",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_producttypeselectorprops"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/ProductTypeSelector.tsx",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_producttypeselector",
-      "target": "components_producttypeselector_xicon"
     },
     {
       "relation": "contains",
@@ -14865,5 +15147,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "653b6c2d007d75890f55655d43168b68a486d2d3"
+  "built_at_commit": "616be17702f3818ea3515b64296fd21d2215a0fc"
 }
