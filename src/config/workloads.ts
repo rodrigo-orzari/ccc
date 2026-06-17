@@ -365,6 +365,222 @@ export const WORKLOADS: WorkloadDefinition[] = [
     ]
   },
   {
+    id: 'k8s-app-platform',
+    name: 'Kubernetes-Native App Platform',
+    description: 'Cloud-native platform using managed Kubernetes for containerized microservices, persistent block storage for stateful workloads, a managed relational database, and a load balancer for traffic ingress.',
+    icon: '☸️',
+    parameters: [
+      {
+        id: 'workerNodes',
+        label: 'Worker Nodes',
+        type: 'slider',
+        min: 3,
+        max: 30,
+        step: 1,
+        defaultValue: 6,
+        unit: 'nodes'
+      },
+      {
+        id: 'dbMemoryGb',
+        label: 'Database Memory',
+        type: 'slider',
+        min: 8,
+        max: 128,
+        step: 8,
+        defaultValue: 16,
+        unit: 'GB'
+      }
+    ],
+    components: [
+      {
+        id: 'kubernetes',
+        name: 'Managed Kubernetes',
+        description: 'Container orchestration worker nodes',
+        icon: '☸️',
+        getRequirements: (params) => ({
+          productType: 'containers',
+          minVcpus: 4,
+          minMemoryGb: 16,
+          quantity: params.workerNodes
+        })
+      },
+      {
+        id: 'block-storage',
+        name: 'Persistent Block Storage',
+        description: 'Stateful volume per worker node (50 GB each)',
+        icon: '💾',
+        getRequirements: (params) => ({
+          productType: 'storage',
+          category: 'Block',
+          quantity: params.workerNodes * 50
+        })
+      },
+      {
+        id: 'database',
+        name: 'Managed Relational DB',
+        description: 'Primary transactional datastore',
+        icon: '🗃️',
+        getRequirements: (params) => ({
+          productType: 'database',
+          category: 'Relational',
+          minMemoryGb: params.dbMemoryGb,
+          quantity: 1
+        })
+      },
+      {
+        id: 'load-balancer',
+        name: 'Load Balancer',
+        description: 'Traffic ingress for the cluster',
+        icon: '⚖️',
+        getRequirements: () => ({
+          productType: 'networking',
+          category: 'Load Balancer',
+          quantity: 1
+        })
+      }
+    ]
+  },
+  {
+    id: 'hpc-scientific',
+    name: 'HPC / Scientific Computing',
+    description: 'High-performance computing cluster for scientific simulations, genomics, financial modeling, or any massively parallel workload requiring dedicated HPC instances and fast shared file storage.',
+    icon: '🔬',
+    parameters: [
+      {
+        id: 'computeNodes',
+        label: 'Compute Nodes',
+        type: 'slider',
+        min: 4,
+        max: 64,
+        step: 4,
+        defaultValue: 16,
+        unit: 'nodes'
+      },
+      {
+        id: 'storageTB',
+        label: 'Shared Storage',
+        type: 'slider',
+        min: 1,
+        max: 50,
+        step: 1,
+        defaultValue: 5,
+        unit: 'TB'
+      }
+    ],
+    components: [
+      {
+        id: 'hpc-nodes',
+        name: 'HPC Compute Nodes',
+        description: 'High-performance compute instances',
+        icon: '⚡',
+        getRequirements: (params) => ({
+          productType: 'vm',
+          category: 'HPC',
+          minVcpus: 8,
+          quantity: params.computeNodes
+        })
+      },
+      {
+        id: 'head-node',
+        name: 'Head / Master Node',
+        description: 'Job scheduler and cluster controller',
+        icon: '🖥️',
+        getRequirements: () => ({
+          productType: 'vm',
+          category: 'Compute optimized',
+          minVcpus: 8,
+          minMemoryGb: 32,
+          quantity: 1
+        })
+      },
+      {
+        id: 'shared-fs',
+        name: 'Shared File System',
+        description: 'High-throughput shared storage for datasets',
+        icon: '📁',
+        getRequirements: (params) => ({
+          productType: 'storage',
+          category: 'File',
+          quantity: params.storageTB * 1024
+        })
+      },
+      {
+        id: 'results-storage',
+        name: 'Results Object Storage',
+        description: 'Long-term output and archive',
+        icon: '🪣',
+        getRequirements: (params) => ({
+          productType: 'storage',
+          category: 'Object',
+          quantity: params.storageTB * 512
+        })
+      }
+    ]
+  },
+  {
+    id: 'saas-paas-app',
+    name: 'SaaS / PaaS Application',
+    description: 'Fully managed application platform that eliminates infrastructure overhead. Combines PaaS app hosting with a managed relational database and object storage — ideal for SaaS products and internal tools.',
+    icon: '🚀',
+    parameters: [
+      {
+        id: 'appInstances',
+        label: 'App Instances',
+        type: 'slider',
+        min: 1,
+        max: 10,
+        step: 1,
+        defaultValue: 2,
+        unit: 'instances'
+      },
+      {
+        id: 'storageSizeGB',
+        label: 'Asset Storage',
+        type: 'slider',
+        min: 10,
+        max: 500,
+        step: 10,
+        defaultValue: 50,
+        unit: 'GB'
+      }
+    ],
+    components: [
+      {
+        id: 'app-hosting',
+        name: 'App Hosting Platform',
+        description: 'Managed PaaS runtime (App Engine, App Service, App Runner…)',
+        icon: '🌐',
+        getRequirements: (params) => ({
+          productType: 'app-hosting',
+          quantity: params.appInstances
+        })
+      },
+      {
+        id: 'database',
+        name: 'Managed Relational DB',
+        description: 'Primary application datastore',
+        icon: '🗃️',
+        getRequirements: () => ({
+          productType: 'database',
+          category: 'Relational',
+          minMemoryGb: 4,
+          quantity: 1
+        })
+      },
+      {
+        id: 'object-storage',
+        name: 'Object Storage',
+        description: 'User uploads, media assets, and backups',
+        icon: '🪣',
+        getRequirements: (params) => ({
+          productType: 'storage',
+          category: 'Object',
+          quantity: params.storageSizeGB
+        })
+      }
+    ]
+  },
+  {
     id: 'data-warehouse-bi',
     name: 'Data Warehouse & BI Analytics',
     description: 'A centralized data repository coupled with an analytics engine and BI compute nodes for large-scale reporting and insights.',
