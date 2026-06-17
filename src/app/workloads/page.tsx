@@ -97,7 +97,7 @@ export default function WorkloadsCatalog() {
           <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
               <h1 className="text-[16px] font-bold mb-2 text-[#171717] dark:text-[#e5e7eb]">
-                Cloud Starter Kits & Workloads
+                Cloud Workloads
               </h1>
               <p className="text-[#737373] max-w-2xl text-[11px] leading-relaxed">
                 Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements.

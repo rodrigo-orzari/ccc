@@ -190,7 +190,7 @@ export default function WorkloadDetails() {
       const prices: string[] = [];
       PROVIDER_IDS.forEach(provider => {
         const comp = results[provider]?.components.find((x: any) => x.componentId === c.id);
-        if (!comp || comp.monthlyPrice === 0) {
+        if (!comp || comp.instanceType === 'N/A') {
           row.push('Unavailable');
           prices.push('');
         } else {
@@ -204,8 +204,8 @@ export default function WorkloadDetails() {
     PROVIDER_IDS.forEach(provider => {
       const pData = results[provider];
       if (!pData) { totalRow.push(''); return; }
-      const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
-      totalRow.push(isUnavailable || pData.total === 0 ? 'N/A' : (pData.total * mult).toFixed(2));
+      const isUnavailable = pData.components.some((c: any) => c.instanceType === 'N/A');
+      totalRow.push(isUnavailable ? 'N/A' : (pData.total * mult).toFixed(2));
     });
     rows.push(totalRow);
 
@@ -265,7 +265,7 @@ export default function WorkloadDetails() {
             {PROVIDER_IDS.map(provider => {
               const pData = results[provider];
               if (!pData) return null;
-              const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
+              const isUnavailable = pData.components.some((c: any) => c.instanceType === 'N/A');
               const color = providerColor(provider);
 
               return (
@@ -274,7 +274,7 @@ export default function WorkloadDetails() {
                     <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: color, borderColor: color + '50', backgroundColor: color + '18' }}>
                       {providerName(provider)}
                     </span>
-                    {isUnavailable || pData.total === 0 ? (
+                    {isUnavailable ? (
                       <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">N/A</span>
                     ) : (
                       <span className="text-sm font-bold text-black dark:text-white">
@@ -334,7 +334,7 @@ export default function WorkloadDetails() {
                   <BarChart 
                     data={PROVIDER_IDS.map(p => {
                       const pData = results && results[p];
-                      if (!pData || pData.total === 0 || pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available')) return null;
+                      if (!pData || pData.total === 0 || pData.components.some((c: any) => c.instanceType === 'N/A')) return null;
                       return {
                         provider: providerName(p),
                         total: pData.total * multiplier,
@@ -392,7 +392,7 @@ export default function WorkloadDetails() {
                             );
                           }
                           const comp = results[provider].components.find((x: any) => x.componentId === c.id);
-                          if (!comp || comp.monthlyPrice === 0) {
+                          if (!comp || comp.instanceType === 'N/A') {
                             return (
                               <td key={provider} className="py-3 px-4 align-middle text-center">
                                 <span className="text-[10px] uppercase tracking-widest text-[#a3a3a3] dark:text-[#404040]">Unavailable</span>
@@ -442,10 +442,10 @@ export default function WorkloadDetails() {
                           return <td key={provider} className="py-3 px-4 text-center"><span className="text-[10px] text-[#a3a3a3]">—</span></td>;
                         }
                         const pData = results[provider];
-                        const isUnavailable = pData.components.some((c: any) => c.monthlyPrice === 0 && c.instanceType !== 'Not available');
+                        const isUnavailable = pData.components.some((c: any) => c.instanceType === 'N/A');
                         return (
                           <td key={provider} className="py-3 px-4 text-center">
-                            {isUnavailable || pData.total === 0 ? (
+                            {isUnavailable ? (
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">N/A</span>
                             ) : (
                               <div className="flex flex-col items-center gap-1.5 w-full">
