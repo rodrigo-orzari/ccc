@@ -186,10 +186,7 @@ export default function PricingTable({
   const colDefs    = getColDefs(activeProductType);
   const totalWidth = colDefs.reduce((s, c) => s + (colWidths[c.key] ?? c.defaultWidth), 0);
 
-  const maxPrice = data.length > 0 ? Math.max(...data.map(r => parseFloat(r.price_per_unit) || 0)) : 0;
-  const maxInvPrice = activeProductType === 'serverless' && data.length > 0
-    ? Math.max(...data.map(r => Number(r.attributes?.invocation_price_per_1m) || 0))
-    : 0;
+
 
   // For VMs, databases, and AI the name is the provider's real instance/model
   // identifier (e.g. m8a.12xlarge, db.r8i.4xlarge, GPT-5.4) and is searchable in
@@ -386,8 +383,6 @@ export default function PricingTable({
                     index={index}
                     activeProductType={activeProductType}
                     showAggregation={showAggregation}
-                    maxPrice={maxPrice}
-                    maxInvPrice={maxInvPrice}
                   />
                 ))
               ) : (
@@ -409,14 +404,12 @@ export default function PricingTable({
 
 // ─── Table row ───────────────────────────────────────────────────────────────
 function TableRow({
-  record, index, activeProductType, showAggregation, maxPrice, maxInvPrice,
+  record, index, activeProductType, showAggregation,
 }: {
   record: PricingRecord;
   index: number;
   activeProductType: ProductType;
   showAggregation: boolean;
-  maxPrice?: number;
-  maxInvPrice?: number;
 }) {
   const providerColor = PROVIDERS.find(
     p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name,
@@ -471,11 +464,6 @@ function TableRow({
         <td data-col="inv_price"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
           <div className="flex flex-col items-center gap-1">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.invocation_price_per_1m ? `$${Number(record.attributes.invocation_price_per_1m).toFixed(2)}` : '—'}</span>
-            {record.attributes?.invocation_price_per_1m && maxInvPrice !== undefined && maxInvPrice > 0 && (
-              <div className="w-12 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start">
-                <div className="h-full rounded-full" style={{ width: `${(Number(record.attributes.invocation_price_per_1m) / maxInvPrice) * 100}%`, backgroundColor: '#6366f1' }} />
-              </div>
-            )}
           </div>
         </td>
       </>) : activeProductType === 'containers' ? (<>
@@ -544,11 +532,6 @@ function TableRow({
               {activeProductType === 'ai' || activeProductType === 'serverless' ? `$${parseFloat(record.price_per_unit).toFixed(4)}` : (showAggregation ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}` : `$${parseFloat(record.price_per_unit).toFixed(4)}`)}
             </span>
           </div>
-          {maxPrice !== undefined && maxPrice > 0 && (
-            <div className="w-16 h-1 bg-[#dde0f0] dark:bg-[#1e1e38] rounded-full overflow-hidden flex justify-start">
-              <div className="h-full rounded-full" style={{ width: `${(parseFloat(record.price_per_unit) / maxPrice) * 100}%`, backgroundColor: '#6366f1' }} />
-            </div>
-          )}
         </div>
       </td>
 
