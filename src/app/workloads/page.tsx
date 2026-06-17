@@ -32,7 +32,7 @@ export default function WorkloadsCatalog() {
                   Web Applications
                 </h3>
                 <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['serverless-web-app', '3-tier-web', 'ecommerce-microservices'].includes(w.id)).map(w => (
+                  {WORKLOADS.filter(w => ['serverless-web-app', '3-tier-web', 'ecommerce-microservices', 'k8s-app-platform', 'saas-paas-app'].includes(w.id)).map(w => (
                     <li key={w.id}>
                       <Link
                         href={`/workloads/${w.id}`}
@@ -53,7 +53,7 @@ export default function WorkloadsCatalog() {
                   Data & Analytics
                 </h3>
                 <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['streaming-analytics', 'data-warehouse'].includes(w.id)).map(w => (
+                  {WORKLOADS.filter(w => ['streaming-analytics', 'data-warehouse-bi'].includes(w.id)).map(w => (
                     <li key={w.id}>
                       <Link
                         href={`/workloads/${w.id}`}
@@ -75,6 +75,27 @@ export default function WorkloadsCatalog() {
                 </h3>
                 <ul className="space-y-1.5 pl-2">
                   {WORKLOADS.filter(w => ['ml-training-hosting'].includes(w.id)).map(w => (
+                    <li key={w.id}>
+                      <Link
+                        href={`/workloads/${w.id}`}
+                        className="text-[12px] text-[#737373] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
+                        title={w.name}
+                        style={{ textDecoration: 'none' }}
+                      >
+                        {w.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+
+              {/* Infrastructure */}
+              <li>
+                <h3 className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] mb-2.5 uppercase tracking-wide">
+                  Infrastructure
+                </h3>
+                <ul className="space-y-1.5 pl-2">
+                  {WORKLOADS.filter(w => ['hpc-scientific'].includes(w.id)).map(w => (
                     <li key={w.id}>
                       <Link
                         href={`/workloads/${w.id}`}
