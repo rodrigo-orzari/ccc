@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1781720747.883112,
-    "ast_hash": "e806e00f64d311cc7c0f425287d903f4",
+    "mtime": 1781720963.2952144,
+    "ast_hash": "706d9bc8e9e29e7511970c8fe636b5cb",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
