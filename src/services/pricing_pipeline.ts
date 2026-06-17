@@ -665,6 +665,7 @@ export class PricingPipeline {
         if (r.supportedLanguages && r.supportedLanguages.length > 0) {
           attrs.supportedLanguages = r.supportedLanguages;
         }
+        const prevPrice = oldPriceMap.get(r.instanceType);
         return {
           service_id: serviceId,
           region_id: regionMap.get(r.region),
@@ -678,6 +679,7 @@ export class PricingPipeline {
           geography: r.geography,
           category: r.category,
           price_per_unit: r.price,
+          previous_price_per_unit: prevPrice ?? null,
           unit: r.unit,
           attributes: Object.keys(attrs).length > 0 ? this.sql.json(attrs) : null,
           data_source: dataSource

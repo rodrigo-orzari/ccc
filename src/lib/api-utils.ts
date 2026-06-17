@@ -41,6 +41,7 @@ export const initDb = async () => {
       ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS category VARCHAR(50);
       ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS attributes JSONB;
       ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS data_source VARCHAR(20) DEFAULT 'live_api';
+      ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS previous_price_per_unit NUMERIC(15, 6);
     `);
 
     await sql.unsafe(`

@@ -74,7 +74,7 @@ export default function WorkloadsCatalog() {
                   Machine Learning
                 </h3>
                 <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['ml-training'].includes(w.id)).map(w => (
+                  {WORKLOADS.filter(w => ['ml-training-hosting'].includes(w.id)).map(w => (
                     <li key={w.id}>
                       <Link
                         href={`/workloads/${w.id}`}

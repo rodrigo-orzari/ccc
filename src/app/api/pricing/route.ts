@@ -23,6 +23,7 @@ export async function GET(req: NextRequest) {
       pr.gpu_count,
       pr.geography,
       pr.price_per_unit,
+      pr.previous_price_per_unit,
       pr.unit,
       pr.category,
       pr.attributes,

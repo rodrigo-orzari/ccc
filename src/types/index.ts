@@ -14,6 +14,7 @@ export interface PricingRecord {
   geography: string;
   category: string;
   price_per_unit: string;
+  previous_price_per_unit?: string | null;
   unit: string;
   min_price?: string;
   avg_price?: string;
