@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-17)
 
 ## Corpus Check
-- 157 files · ~113,703 words
+- 157 files · ~114,282 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 582 nodes · 841 edges · 70 communities (35 shown, 35 thin omitted)
+- 611 nodes · 871 edges · 71 communities (36 shown, 35 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e757a34d`
+- Built from commit: `aecfdfbe`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -72,19 +72,20 @@
 - [[_COMMUNITY_Community 66|Community 66]]
 - [[_COMMUNITY_Community 67|Community 67]]
 - [[_COMMUNITY_Community 68|Community 68]]
+- [[_COMMUNITY_Community 69|Community 69]]
 - [[_COMMUNITY_Community 71|Community 71]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `BaseAdapter` - 38 edges
 2. `PricingRecord` - 23 edges
-3. `Serverless Language Filter Implementation Summary` - 13 edges
-4. `buildPricingFilters()` - 10 edges
-5. `PricingPipeline` - 10 edges
-6. `Welcome!` - 10 edges
-7. `ServerlessPricingPipeline` - 10 edges
-8. `ProductType` - 8 edges
-9. `DigitalOceanAdapter` - 7 edges
-10. `NetworkingPricingPipeline` - 7 edges
+3. `Compare Cloud Costs` - 15 edges
+4. `Serverless Language Filter Implementation Summary` - 13 edges
+5. `CCC Operations Runbook` - 11 edges
+6. `buildPricingFilters()` - 10 edges
+7. `PricingPipeline` - 10 edges
+8. `ServerlessPricingPipeline` - 10 edges
+9. `ProductType` - 8 edges
+10. `First Deployment (DigitalOcean App Platform)` - 7 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
@@ -101,7 +102,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (70 total, 35 thin omitted)
+## Communities (71 total, 35 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
@@ -124,8 +125,8 @@ Cohesion: 0.06
 Nodes (35): 1. Frontend State Management ✅, 1. In-Table Micro-Visualizations ✅, 2. Analytical Charts View ✅, 2. Query Parameter Building ✅, 3. Backend Query Processing ✅, 3. Networking Filters Data Integration Fix ("Super Debug") ✅, 4. Data Persistence ✅, Configuration & Adapters (+27 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.08
-Nodes (25): 1. What Problem Does This Application Solve?, 2. Architectural Design, 3. File Directory & Code Organization, 4. Documentation Guide, 5. Security & Deployment, 6. Quick Start, 7. In-Depth Subsystem Walks, 8. Resources for Contributors (+17 more)
+Cohesion: 0.10
+Nodes (21): 1. Clone & install, 2. Configure environment, 3. Initialize the database, 4. Populate pricing data, 5. Open the app, Adding a New Cloud Provider, Admin API Endpoints, Compare Cloud Costs (+13 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.06
@@ -136,8 +137,8 @@ Cohesion: 0.06
 Nodes (33): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+25 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.13
-Nodes (11): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig (+3 more)
+Cohesion: 0.12
+Nodes (12): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig (+4 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.50
@@ -156,8 +157,8 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ### Community 38 - "Community 38"
-Cohesion: 0.12
-Nodes (14): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, Row, pipeline (+6 more)
+Cohesion: 0.16
+Nodes (12): ALIBABA_APP_HOSTING, AWS_APP_HOSTING, AZURE_APP_HOSTING, DO_APP_HOSTING, GCP_APP_HOSTING, ORACLE_APP_HOSTING, Row, AppHostingConfigEntry (+4 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.29
@@ -185,18 +186,22 @@ Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
 
 ### Community 55 - "Community 55"
 Cohesion: 0.12
-Nodes (9): AlibabaAnalyticsAdapter, AlibabaDBAdapter, AWSElastiCacheAdapter, DigitalOceanDBAdapter, GCPCloudSQLAdapter, GCPMemorystoreAdapter, OracleMySQLHeatWaveAdapter, OraclePostgreSQLAdapter (+1 more)
+Nodes (8): SynapseAzureAdapter, AlibabaDBAdapter, AlibabaRedisAdapter, AWSElastiCacheAdapter, GCPCloudSQLAdapter, GCPMemorystoreAdapter, OracleMySQLHeatWaveAdapter, PricingRecord
 
 ### Community 56 - "Community 56"
 Cohesion: 0.22
 Nodes (3): AWSAdapter, AzureAdapter, BaseAdapter
 
 ### Community 62 - "Community 62"
-Cohesion: 0.08
-Nodes (18): POST(), buildPricingFilters(), initDb(), parseFilterList(), requireAdminAuth(), VALID_PRODUCT_TYPES, GET(), DatabasePricingPipeline (+10 more)
+Cohesion: 0.06
+Nodes (21): POST(), buildPricingFilters(), initDb(), parseFilterList(), requireAdminAuth(), VALID_PRODUCT_TYPES, GET(), pipeline (+13 more)
+
+### Community 66 - "Community 66"
+Cohesion: 0.06
+Nodes (32): Admin API Reference, Admin endpoints return 401, All prices show ● grey arrows after ingest, Before going to production, CCC Operations Runbook, Common Issues, Database connection hangs, Database Schema Migrations (+24 more)
 
 ## Knowledge Gaps
-- **154 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+149 more)
+- **177 isolated node(s):** `Step 1 — Create the app`, `Step 2 — Environment variables`, `Step 3 — Get the CA certificate (DigitalOcean Managed DB)`, `Step 4 — Initialize the schema`, `Step 5 — Populate pricing data` (+172 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -204,13 +209,13 @@ Nodes (18): POST(), buildPricingFilters(), initDb(), parseFilterList(), requireA
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ServerlessPricingPipeline` connect `Community 26` to `Community 38`, `Community 62`, `Community 47`?**
-  _High betweenness centrality (0.053) - this node is a cross-community bridge._
-- **Why does `BaseAdapter` connect `Community 56` to `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 71`, `Community 9`, `Community 16`, `Community 55`, `Community 62`, `Community 63`?**
-  _High betweenness centrality (0.025) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Community 55` to `Community 64`, `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 9`, `Community 16`, `Community 62`, `Community 63`?**
-  _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **What connects `PROVIDERS`, `ColDef`, `COL_PROVIDER` to the rest of the system?**
-  _154 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.048) - this node is a cross-community bridge._
+- **Why does `BaseAdapter` connect `Community 56` to `Community 64`, `Community 65`, `Community 67`, `Community 68`, `Community 69`, `Community 71`, `Community 9`, `Community 16`, `Community 55`, `Community 62`, `Community 63`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Community 55` to `Community 64`, `Community 65`, `Community 67`, `Community 68`, `Community 69`, `Community 9`, `Community 16`, `Community 62`, `Community 63`?**
+  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+- **What connects `Step 1 — Create the app`, `Step 2 — Environment variables`, `Step 3 — Get the CA certificate (DigitalOcean Managed DB)` to the rest of the system?**
+  _177 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
