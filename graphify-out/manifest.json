@@ -375,8 +375,8 @@
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
-    "mtime": 1781720652.3587787,
-    "ast_hash": "6739bae403f55a30e79c5e9150d6ecf2",
+    "mtime": 1781738838.3237536,
+    "ast_hash": "17e2d5912ea5fb905dec2e6c2c0f7213",
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "src/app/terms/page.tsx": {
-    "mtime": 1781720639.452155,
-    "ast_hash": "15bcd2e6c9d08422c28f995289ec629f",
+    "mtime": 1781738834.5622385,
+    "ast_hash": "c776e72e345783068b313dbd595f0fe4",
     "semantic_hash": ""
   },
   "src/config/alibaba_containers.ts": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "src/components/index.ts": {
-    "mtime": 1781587736.6263053,
-    "ast_hash": "46ce946b1182d828b1321dbb9f8774b8",
+    "mtime": 1781738321.8609736,
+    "ast_hash": "728fdfc89955293934ed4914c51fa23d",
     "semantic_hash": ""
   },
   "src/config/index.ts": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1781720676.0708818,
-    "ast_hash": "5eb1557d0a3995b809ad63e9efe6f8b1",
+    "mtime": 1781737995.545267,
+    "ast_hash": "3e363aff8e95f48632a7e7b7770471b7",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -530,8 +530,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1781720049.6250646,
-    "ast_hash": "65f4f544bc6e45842a6b5898c81b9227",
+    "mtime": 1781739110.7711415,
+    "ast_hash": "58f1d8e4e5943d691afae0c10743827e",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -800,8 +800,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1781736620.0759952,
-    "ast_hash": "bfe7ff56443cec4a7ccd34246308e2fd",
+    "mtime": 1781739048.6709151,
+    "ast_hash": "80f708286e50db31b3b714ebdeb9fbc5",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -810,8 +810,13 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/WorldMap.tsx": {
-    "mtime": 1781736602.7917218,
-    "ast_hash": "f74361bab2cd3819f8e9ac28007e6cb7",
+    "mtime": 1781738226.0538378,
+    "ast_hash": "fd774e12cec719aa59011103a6cf36d3",
+    "semantic_hash": ""
+  },
+  "src/components/DigitalOceanReferralModal.tsx": {
+    "mtime": 1781738310.232996,
+    "ast_hash": "10a3cf9965a7e0ddda29b012c52e6e1f",
     "semantic_hash": ""
   }
 }
