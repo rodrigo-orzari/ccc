@@ -15,8 +15,6 @@ const headingToId = (children: React.ReactNode): string => {
 
 const TermsOfUsePage: React.FC = () => {
   const content = `
-_Last updated: 15 June 2026._
-
 ## Agreement to Terms
 
 By accessing and using comparecloudcosts.com, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
@@ -96,6 +94,21 @@ This abstraction means the data you see is an approximation designed to match "l
 ### Workloads Catalog and Architecture Calculator
 
 The Workloads section provides hypothetical architectures to illustrate relative multi-cloud deployment costs for common scenarios (e.g., Serverless Web Apps, Machine Learning). The provided architectural components and generated cost estimates are conceptual. Real-world implementation costs will vary greatly based on bandwidth consumption, unlisted service dependencies, storage I/O, and architectural variations not represented in the catalog.
+
+### Infrastructure & Datacenter Data
+
+The Datacenters page provides reference information about cloud provider infrastructure — including region counts, Availability Zone counts, edge locations, countries served, and government cloud regions — sourced from each provider's publicly available documentation.
+
+This data is **static, manually curated, and periodically verified**. It is not fetched in real time and may lag behind provider announcements. Specifically:
+
+- **Announced / Planned regions** are regions the provider has publicly committed to but that are not yet generally available. They are presented for informational purposes and do not represent current service availability.
+- **Edge location counts** are approximate. Providers use inconsistent terminology and update these numbers frequently.
+- **Region coordinates** shown on the world map are approximate geographic indicators, not precise geolocation data.
+- **Government cloud regions** may have restricted access that is not reflected in the counts shown.
+
+comparecloudcosts.com makes no representation that the infrastructure data shown is current, complete, or suitable for compliance, architecture, or procurement decisions. Always verify current infrastructure availability directly with the cloud provider before making any architectural, regulatory, or business decisions.
+
+[↑ Go back to the top](#terms-of-use)
 
 ### Voluntary Donations
 
@@ -284,6 +297,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
                   <li style={{ marginBottom: '0.4rem' }}><a href="#visualizations-and-charts" style={{ fontSize: '0.85rem' }}>Visualizations and charts</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#data-normalization" style={{ fontSize: '0.85rem' }}>Data normalization</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#workloads-catalog-and-architecture-calculator" style={{ fontSize: '0.85rem' }}>Workloads catalog</a></li>
+                  <li style={{ marginBottom: '0.4rem' }}><a href="#infrastructure--datacenter-data" style={{ fontSize: '0.85rem' }}>Datacenter data</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#voluntary-donations" style={{ fontSize: '0.85rem' }}>Voluntary donations</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#official-pricing-calculators" style={{ fontSize: '0.85rem' }}>Official calculators</a></li>
                   <li style={{ marginBottom: '0.4rem' }}><a href="#no-warranties-or-liability" style={{ fontSize: '0.85rem' }}>No liability</a></li>
@@ -295,9 +309,10 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
         </aside>
 
         <main className="main-content">
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1.5rem' }}>
+          <h1 style={{ fontSize: '2.25rem', fontWeight: '800', margin: '0 0 0.5rem', letterSpacing: '-0.02em' }}>
             Terms of Use
           </h1>
+          <p style={{ fontSize: '0.8125rem', color: 'var(--muted-text)', marginBottom: '2.5rem' }}>Last updated: 17 June 2026.</p>
           <div className="prose prose-slate dark:prose-invert max-w-none text-black dark:text-white">
             <ReactMarkdown
               components={{

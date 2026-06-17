@@ -1,7 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PROVIDER_INFRA } from '@/config/datacenter_data';
+import { PROVIDER_INFRA, GEOGRAPHIES } from '@/config/datacenter_data';
+
+// Build region-code → geography lookup from static data
+const GEO_BY_CODE: Record<string, string> = {};
+PROVIDER_INFRA.forEach(p => {
+  p.regionList.forEach(r => { GEO_BY_CODE[r.code] = r.geography; });
+});
 
 const W = 960;
 const H = 480;
@@ -10,13 +16,14 @@ function toXY(lat: number, lng: number): [number, number] {
   return [(lng + 180) / 360 * W, (90 - lat) / 180 * H];
 }
 
+// Keep in sync with src/config/index.ts PROVIDERS and page.tsx PROVIDER_COLORS
 const PROVIDER_COLORS: Record<string, string> = {
   aws: '#FF9900',
-  azure: '#0078D4',
+  azure: '#00BCFF',
   gcp: '#34A853',
-  oracle: '#C74634',
-  digitalocean: '#8B5CF6',
-  alibaba: '#F59E0B',
+  oracle: '#F80000',
+  digitalocean: '#0069FF',
+  alibaba: '#FF6A00',
 };
 
 // Simplified continent polygons in equirectangular projection (W=960, H=480)
@@ -264,7 +271,14 @@ interface Tooltip {
 export default function WorldMap() {
   const allProviderIds = PROVIDER_INFRA.map(p => p.id);
   const [selected, setSelected] = useState<Set<string>>(new Set(allProviderIds));
+  const [selectedGeos, setSelectedGeos] = useState<string[]>([]);
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
+
+  const toggleGeo = (geo: string) => {
+    setSelectedGeos(prev =>
+      prev.includes(geo) ? prev.filter(g => g !== geo) : [...prev, geo]
+    );
+  };
 
   function toggle(id: string) {
     setSelected(prev => {
@@ -286,24 +300,28 @@ export default function WorldMap() {
     setSelected(new Set(allProviderIds));
   }
 
-  // Collect all dots to render
+  // Collect all dots to render, filtered by provider and geography
   const dots: Array<{ x: number; y: number; providerId: string; color: string; code: string; name: string }> = [];
   for (const pid of allProviderIds) {
     if (!selected.has(pid)) continue;
     const coords = REGION_COORDS[pid] ?? [];
     const color = PROVIDER_COLORS[pid] ?? '#888';
     for (const [lat, lng, code, name] of coords) {
+      if (selectedGeos.length > 0) {
+        const geo = GEO_BY_CODE[code];
+        if (!geo || !selectedGeos.includes(geo)) continue;
+      }
       const [x, y] = toXY(lat, lng);
       dots.push({ x, y, providerId: pid, color, code, name });
     }
   }
 
   return (
-    <div className="mt-8 border border-[#dde0f0] dark:border-[#1e1e38] rounded-xl overflow-hidden bg-[#f7f8ff] dark:bg-[#0c0c1e]">
+    <div className="mt-8 border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-hidden bg-white dark:bg-[#0a0a18]">
       {/* Header */}
-      <div className="px-5 pt-4 pb-3 border-b border-[#dde0f0] dark:border-[#1e1e38]">
-        <h2 className="text-sm font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Global Region Map</h2>
-        <p className="text-xs text-[#737373] mt-0.5">Select providers to highlight their datacenter regions</p>
+      <div className="px-5 pt-4 pb-3 border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e]">
+        <h2 className="text-[12px] font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Global Region Map</h2>
+        <p className="text-[11px] text-[#737373] mt-0.5">Click to toggle providers · Double-click to isolate one</p>
       </div>
 
       {/* Provider toggles */}
@@ -317,16 +335,16 @@ export default function WorldMap() {
               onClick={() => toggle(p.id)}
               onDoubleClick={() => selectOnly(p.id)}
               title={`Click to toggle · Double-click to show only ${p.name}`}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
                 active
                   ? 'text-white border-transparent shadow-sm'
-                  : 'bg-transparent text-[#737373] dark:text-[#737373] border-[#dde0f0] dark:border-[#2a2a3e] opacity-50 hover:opacity-75'
+                  : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] opacity-60 hover:opacity-90'
               }`}
               style={active ? { backgroundColor: color, borderColor: color } : {}}
             >
               <span
-                className="inline-block w-2 h-2 rounded-full flex-shrink-0"
-                style={{ backgroundColor: active ? 'rgba(255,255,255,0.8)' : color }}
+                className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ backgroundColor: active ? 'rgba(255,255,255,0.85)' : color }}
               />
               {p.nameShort}
             </button>
@@ -334,9 +352,35 @@ export default function WorldMap() {
         })}
         <button
           onClick={selectAll}
-          className="ml-auto text-xs text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff] underline transition-colors"
+          className="ml-auto text-[10px] font-bold text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff] transition-colors"
         >
-          Show all
+          All
+        </button>
+      </div>
+
+      {/* Geography filter */}
+      <div className="px-5 py-3 flex flex-wrap gap-2 items-center border-b border-[#dde0f0] dark:border-[#1e1e38]">
+        <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mr-1">Geography</span>
+        {GEOGRAPHIES.map(geo => (
+          <button
+            key={geo}
+            onClick={() => toggleGeo(geo)}
+            className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+              selectedGeos.includes(geo)
+                ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+            }`}
+          >
+            {geo}
+          </button>
+        ))}
+        <button
+          onClick={() => setSelectedGeos([])}
+          className={`ml-auto text-[10px] font-bold uppercase transition-colors ${
+            selectedGeos.length > 0 ? 'text-[#1a1a2e] dark:text-[#f7f8ff]' : 'text-[#737373]'
+          }`}
+        >
+          {selectedGeos.length > 0 ? 'Clear' : 'All'}
         </button>
       </div>
 
@@ -491,8 +535,8 @@ export default function WorldMap() {
       </div>
 
       {/* Footer note */}
-      <div className="px-5 py-2 text-[10px] text-[#737373] border-t border-[#dde0f0] dark:border-[#1e1e38] flex justify-between">
-        <span>{dots.length} regions shown</span>
+      <div className="px-5 py-2 text-[10px] text-[#737373] border-t border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#06060f] flex justify-between">
+        <span className="font-bold">{dots.length} regions shown</span>
         <span>Equirectangular projection · approximate coordinates</span>
       </div>
     </div>
