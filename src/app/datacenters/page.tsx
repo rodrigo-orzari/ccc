@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Footer, ProductTypeSelector } from '@/components';
 import { PROVIDER_INFRA, GEOGRAPHIES, type ProviderInfrastructure, type DatacenterRegion } from '@/config/datacenter_data';
 import { ChevronDown, ExternalLink } from 'lucide-react';
+import WorldMap from './WorldMap';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -395,6 +396,9 @@ export default function DatacentersPage() {
                 ))}
               </div>
             </div>
+
+            {/* World Map */}
+            <WorldMap />
 
           </main>
         </div>
