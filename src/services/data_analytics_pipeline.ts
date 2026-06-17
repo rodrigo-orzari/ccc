@@ -391,8 +391,6 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
       new NativeAnalyticsStaticAdapter('aws'),
       new NativeAnalyticsStaticAdapter('gcp'),
       new NativeAnalyticsStaticAdapter('azure'),
-      new NativeAnalyticsStaticAdapter('oracle'),
-      new NativeAnalyticsStaticAdapter('alibaba'),
       new SynapseAzureAdapter(),
       new AlibabaAnalyticsAdapter(),
       new OracleAnalyticsAdapter(),
