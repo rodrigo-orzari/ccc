@@ -406,7 +406,8 @@ export default function Dashboard() {
       selectedServerlessProvisionedConcurrency.length === 0 ||
       selectedServerlessEphemeralStorage.length === 0 ||
       selectedServerlessMemory.length === 0 ||
-      selectedServerlessArchitectures.length === 0
+      selectedServerlessArchitectures.length === 0 ||
+      selectedServerlessServiceTypes.length === 0
     )) return false;
 
     if (activeProductType === 'containers' && (
@@ -425,6 +426,18 @@ export default function Dashboard() {
       selectedNetworkingDirections.length === 0
     )) return false;
 
+    if (activeProductType === 'storage' && (
+      selectedStorageCategories.length === 0 ||
+      selectedStorageTiers.length === 0 ||
+      selectedStorageRedundancies.length === 0 ||
+      selectedStorageMedia.length === 0
+    )) return false;
+
+    if (activeProductType === 'app-hosting' && (
+      selectedAppHostingTiers.length === 0 ||
+      selectedAppHostingComputeTypes.length === 0
+    )) return false;
+
     return true;
   }, [
     activeProductType,
@@ -440,6 +453,8 @@ export default function Dashboard() {
     selectedContainersBillingGranularity,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes,
     selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
+    selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
+    selectedAppHostingTiers, selectedAppHostingComputeTypes,
   ]);
 
   // Queries
