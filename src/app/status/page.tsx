@@ -271,6 +271,7 @@ export default function StatusPage() {
           width: 100%;
           border-collapse: collapse;
           font-size: 12.5px;
+          table-layout: fixed;
         }
         .pipeline-table th {
           text-align: center;
@@ -470,10 +471,10 @@ export default function StatusPage() {
                       <table className="pipeline-table">
                         <thead>
                           <tr>
-                            <th>Product Category</th>
-                            <th>Records</th>
-                            <th>Data Source</th>
-                            <th>Last Updated</th>
+                            <th style={{ width: '35%' }}>Product Category</th>
+                            <th style={{ width: '15%' }}>Records</th>
+                            <th style={{ width: '25%' }}>Data Source</th>
+                            <th style={{ width: '25%' }}>Last Updated</th>
                           </tr>
                         </thead>
                         <tbody>
