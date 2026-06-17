@@ -1178,6 +1178,17 @@ export default function FilterSidebar({
         {activeProductType === 'app-hosting' && (
           <>
             <FilterSection
+              title="Geography"
+              tooltip="Geographic region where the app hosting service is deployed."
+              options={config.GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSetAll={onSetGeographies}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
               title="App Hosting Tiers"
               tooltip="Pricing and capability tier of the hosting service"
               options={config.APP_HOSTING_TIERS}

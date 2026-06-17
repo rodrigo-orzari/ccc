@@ -1,21 +1,14 @@
 import { PricingRecord, PricingPipeline } from './pricing_pipeline';
 
-import { 
-  AZURE_APP_HOSTING,
-  DO_APP_HOSTING,
-  AWS_APP_HOSTING,
-  GCP_APP_HOSTING,
-  ALIBABA_APP_HOSTING,
-  ORACLE_APP_HOSTING
+import {
+  AZURE_APP_HOSTING_REGIONS,
+  AWS_APP_HOSTING_REGIONS,
+  GCP_APP_HOSTING_REGIONS,
+  DO_APP_HOSTING_REGIONS,
+  ORACLE_APP_HOSTING_REGIONS,
+  ALIBABA_APP_HOSTING_REGIONS,
+  type AppHostingRegion,
 } from '../config/app_hosting';
-
-// Reusing geography constants from storage
-import { AWS_STORAGE_REGION, AWS_STORAGE_GEOGRAPHY } from '../config/aws_storage';
-import { AZURE_STORAGE_REGION, AZURE_STORAGE_GEOGRAPHY } from '../config/azure_storage';
-import { GCP_STORAGE_REGION, GCP_STORAGE_GEOGRAPHY } from '../config/gcp_storage';
-import { ORACLE_STORAGE_REGION, ORACLE_STORAGE_GEOGRAPHY } from '../config/oracle_storage';
-import { DIGITALOCEAN_STORAGE_REGION, DIGITALOCEAN_STORAGE_GEOGRAPHY } from '../config/digitalocean_storage';
-import { ALIBABA_STORAGE_REGION, ALIBABA_STORAGE_GEOGRAPHY } from '../config/alibaba_storage';
 
 interface AppHostingConfigEntry {
   type: string;
@@ -26,7 +19,7 @@ interface AppHostingConfigEntry {
   attributes: Record<string, any>;
 }
 
-function mapStaticRows(rows: AppHostingConfigEntry[], slug: string, region: string, geography: string): PricingRecord[] {
+function mapRegion(rows: AppHostingConfigEntry[], slug: string, region: string, geography: string): PricingRecord[] {
   return rows.map(inst => ({
     provider: slug,
     service: 'App Hosting',
@@ -47,13 +40,13 @@ function mapStaticRows(rows: AppHostingConfigEntry[], slug: string, region: stri
   }));
 }
 
-const STATIC_PROVIDERS = [
-  { slug: 'aws', rows: AWS_APP_HOSTING, region: AWS_STORAGE_REGION, geography: AWS_STORAGE_GEOGRAPHY },
-  { slug: 'azure', rows: AZURE_APP_HOSTING, region: AZURE_STORAGE_REGION, geography: AZURE_STORAGE_GEOGRAPHY },
-  { slug: 'gcp', rows: GCP_APP_HOSTING, region: GCP_STORAGE_REGION, geography: GCP_STORAGE_GEOGRAPHY },
-  { slug: 'oracle', rows: ORACLE_APP_HOSTING, region: ORACLE_STORAGE_REGION, geography: ORACLE_STORAGE_GEOGRAPHY },
-  { slug: 'digitalocean', rows: DO_APP_HOSTING, region: DIGITALOCEAN_STORAGE_REGION, geography: DIGITALOCEAN_STORAGE_GEOGRAPHY },
-  { slug: 'alibaba', rows: ALIBABA_APP_HOSTING, region: ALIBABA_STORAGE_REGION, geography: ALIBABA_STORAGE_GEOGRAPHY },
+const STATIC_PROVIDERS: { slug: string; regions: AppHostingRegion[] }[] = [
+  { slug: 'aws',          regions: AWS_APP_HOSTING_REGIONS },
+  { slug: 'azure',        regions: AZURE_APP_HOSTING_REGIONS },
+  { slug: 'gcp',          regions: GCP_APP_HOSTING_REGIONS },
+  { slug: 'oracle',       regions: ORACLE_APP_HOSTING_REGIONS },
+  { slug: 'digitalocean', regions: DO_APP_HOSTING_REGIONS },
+  { slug: 'alibaba',      regions: ALIBABA_APP_HOSTING_REGIONS },
 ];
 
 export class AppHostingPricingPipeline extends PricingPipeline {
@@ -61,9 +54,10 @@ export class AppHostingPricingPipeline extends PricingPipeline {
     const results: any[] = [];
 
     for (const p of STATIC_PROVIDERS) {
-      console.log(`⏳ App Hosting: ${p.slug} (${p.rows.length} entries from static config)...`);
+      const totalRows = p.regions.reduce((sum, r) => sum + r.rows.length, 0);
+      console.log(`⏳ App Hosting: ${p.slug} (${totalRows} entries across ${p.regions.length} regions)...`);
       try {
-        const records = mapStaticRows(p.rows, p.slug, p.region, p.geography);
+        const records = p.regions.flatMap(r => mapRegion(r.rows, p.slug, r.region, r.geography));
         const driftAlerts = await this.saveRecords(records, 'app-hosting');
         results.push({
           provider: p.slug,
@@ -72,10 +66,10 @@ export class AppHostingPricingPipeline extends PricingPipeline {
           count: records.length,
           driftAlerts,
           dataSource: 'static_config',
-          note: `${p.slug} App Hosting - static config`,
+          note: `${p.slug} App Hosting - ${p.regions.length} regions`,
         });
       } catch (error: any) {
-        console.warn(`⚠️  App Hosting ${p.slug} static error:`, error.message);
+        console.warn(`⚠️  App Hosting ${p.slug} error:`, error.message);
         results.push({ provider: p.slug, service: 'App Hosting', status: 'error', message: error.message });
       }
     }
