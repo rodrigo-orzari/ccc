@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Footer, ProductTypeSelector, DigitalOceanReferralModal } from '@/components';
 import { PROVIDER_INFRA, GEOGRAPHIES, type ProviderInfrastructure, type DatacenterRegion } from '@/config/datacenter_data';
 import { ChevronDown, ExternalLink, Info } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, Cell } from 'recharts';
 import WorldMap from './WorldMap';
 
 // Provider brand colors — keep in sync with src/config/index.ts PROVIDERS
@@ -64,15 +65,6 @@ function Stat({ label, value, sub }: { label: string; value: string | number; su
       <div className="text-[9px] font-bold text-[#737373] uppercase tracking-widest leading-tight">{label}</div>
       {sub && <div className="text-[9px] text-[#a3a3a3] leading-tight">{sub}</div>}
     </div>
-  );
-}
-
-function GeoChip({ geo, count }: { geo: string; count: number }) {
-  if (!count) return null;
-  return (
-    <span className="inline-flex items-center px-2 py-0.5 rounded text-[9px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#c7ccee] dark:border-[#2a2a4a] text-[#525252] dark:text-[#a3a3a3]">
-      {geo}
-    </span>
   );
 }
 
@@ -155,18 +147,11 @@ function ProviderRow({
             <span className="text-[10px] text-[#a3a3a3]">—</span>
           )}
         </td>
-        <td className="py-4 px-4">
-          <div className="flex flex-wrap gap-1 justify-center">
-            {GEOGRAPHIES.map(geo => (
-              <GeoChip key={geo} geo={geo} count={p.geographyCoverage[geo] ?? 0} />
-            ))}
-          </div>
-        </td>
       </tr>
 
       {isExpanded && (
         <tr className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38]">
-          <td colSpan={7} className="px-4 py-5">
+          <td colSpan={6} className="px-4 py-5">
             <div className="pl-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-1">
               {GEOGRAPHIES.map(geo => {
                 const geoRegions = p.regionList.filter(r => r.geography === geo);
@@ -205,8 +190,89 @@ const NAV_SECTIONS = [
   { id: 'data-sources',     label: 'Data Sources' },
 ];
 
+// Distinct palette for geography segments in the matrix chart
+const GEO_COLORS: Record<string, string> = {
+  'N. America': '#3b82f6',
+  'S. America': '#22c55e',
+  'W. Europe': '#a855f7',
+  'Asia Pacific': '#f59e0b',
+  'Australia': '#ec4899',
+  'Mid East & Africa': '#14b8a6',
+};
+
+function ViewToggle({ view, onChange }: { view: 'table' | 'chart'; onChange: (v: 'table' | 'chart') => void }) {
+  return (
+    <div className="flex bg-[#f5f5f5] dark:bg-[#171717] p-0.5 rounded-lg border border-[#e5e5e5] dark:border-[#262626]">
+      <button
+        onClick={() => onChange('table')}
+        className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${view === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
+      >
+        📊 Table
+      </button>
+      <button
+        onClick={() => onChange('chart')}
+        className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${view === 'chart' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
+      >
+        📈 Chart
+      </button>
+    </div>
+  );
+}
+
+function InfraChart() {
+  const data = PROVIDER_INFRA.map(p => ({
+    name: p.nameShort,
+    Regions: p.regions,
+    'Availability Zones': p.availabilityZones,
+    color: PROVIDER_COLORS[p.id] ?? '#888',
+  }));
+  return (
+    <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded bg-white dark:bg-[#0a0a18] p-4" style={{ height: 360 }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#dde0f033" />
+          <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#737373' }} />
+          <YAxis tick={{ fontSize: 11, fill: '#737373' }} />
+          <RechartsTooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #dde0f0' }} cursor={{ fill: '#73737318' }} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          <Bar dataKey="Regions" radius={[3, 3, 0, 0]}>
+            {data.map((d, i) => <Cell key={i} fill={d.color} />)}
+          </Bar>
+          <Bar dataKey="Availability Zones" radius={[3, 3, 0, 0]} fill="#94a3b8" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+function CoverageChart() {
+  const data = PROVIDER_INFRA.map(p => {
+    const row: Record<string, any> = { name: p.nameShort };
+    GEOGRAPHIES.forEach(geo => { row[geo] = p.geographyCoverage[geo] ?? 0; });
+    return row;
+  });
+  return (
+    <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded bg-white dark:bg-[#0a0a18] p-4" style={{ height: 360 }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#dde0f033" />
+          <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#737373' }} />
+          <YAxis tick={{ fontSize: 11, fill: '#737373' }} />
+          <RechartsTooltip contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #dde0f0' }} cursor={{ fill: '#73737318' }} />
+          <Legend wrapperStyle={{ fontSize: 11 }} />
+          {GEOGRAPHIES.map(geo => (
+            <Bar key={geo} dataKey={geo} stackId="geo" fill={GEO_COLORS[geo] ?? '#888'} radius={[0, 0, 0, 0]} />
+          ))}
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
 export default function DatacentersPage() {
   const [expandedProviders, setExpandedProviders] = useState<Record<string, boolean>>({});
+  const [infraView, setInfraView] = useState<'table' | 'chart'>('table');
+  const [matrixView, setMatrixView] = useState<'table' | 'chart'>('table');
 
   const toggleProvider = (id: string) => {
     setExpandedProviders(prev => ({ ...prev, [id]: !prev[id] }));
@@ -270,8 +336,14 @@ export default function DatacentersPage() {
               </div>
             </div>
 
-            {/* Main table */}
-            <div id="infra-table" className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-x-auto scroll-mt-6">
+            {/* Infrastructure Overview */}
+            <div id="infra-table" className="scroll-mt-6">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="text-xl font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Infrastructure Overview</h2>
+                <ViewToggle view={infraView} onChange={setInfraView} />
+              </div>
+              {infraView === 'chart' ? <InfraChart /> : (
+              <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[900px]">
                 <thead>
                   <tr className="border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e]">
@@ -289,7 +361,6 @@ export default function DatacentersPage() {
                     <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">
                       <Term term="Government Cloud">Gov Cloud</Term>
                     </th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest text-center">Geographic Coverage</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -321,16 +392,21 @@ export default function DatacentersPage() {
                     <td className="py-4 px-4 text-center">
                       <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.govCloud}</span>
                     </td>
-                    <td className="py-4 px-4"></td>
                   </tr>
                 </tfoot>
               </table>
+              </div>
+              )}
             </div>
 
             {/* Regional Coverage Matrix */}
             <div id="coverage-matrix" className="mt-8 scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Regional Coverage Matrix</h2>
+              <div className="flex items-center justify-between mb-1">
+                <h2 className="text-xl font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Regional Coverage Matrix</h2>
+                <ViewToggle view={matrixView} onChange={setMatrixView} />
+              </div>
               <p className="text-sm text-[#737373] mb-4">Number of available regions per provider per geography.</p>
+              {matrixView === 'chart' ? <CoverageChart /> : (
               <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
@@ -373,6 +449,7 @@ export default function DatacentersPage() {
                   </tbody>
                 </table>
               </div>
+              )}
             </div>
 
             {/* Availability Zones per Region — stat cards grid */}
