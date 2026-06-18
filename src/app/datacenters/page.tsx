@@ -86,7 +86,7 @@ function ProviderBadge({ id, name }: { id: string; name: string }) {
   const color = PROVIDER_COLORS[id] ?? '#888';
   return (
     <span
-      className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border"
+      className="w-fit self-start px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border"
       style={{ color, borderColor: color + '50', backgroundColor: color + '18' }}
     >
       {name}
@@ -113,7 +113,7 @@ function ProviderRow({
     <>
       <tr className={`border-b border-[#dde0f0] dark:border-[#1e1e38] hover:bg-[#eef0fc] dark:hover:bg-[#0c0c1e] transition-colors ${rowBg}`}>
         <td className="py-4 px-4 min-w-[180px]">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center justify-center gap-2.5">
             <span className="w-0.5 h-8 rounded-full shrink-0" style={{ backgroundColor: color }} />
             <div>
               <button onClick={onToggle} className="flex items-center gap-1.5 group text-left">
@@ -233,32 +233,19 @@ export default function DatacentersPage() {
 
             {/* On this page */}
             <section className="px-4 pt-5 pb-4 border-b border-[#dde0f0] dark:border-[#1e1e38]">
-              <h2 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-3">Content</h2>
+              <h2 className="text-xs font-bold text-[#737373] uppercase tracking-widest mb-3">Content</h2>
               <nav className="flex flex-col gap-0.5">
                 {NAV_SECTIONS.map(s => (
                   <a
                     key={s.id}
                     href={`#${s.id}`}
-                    className="flex items-center gap-2 px-2 py-1.5 rounded text-[11px] font-medium text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff] hover:bg-[#eef0fc] dark:hover:bg-[#0c0c1e] transition-all"
+                    className="flex items-center gap-2 px-2 py-1.5 rounded text-sm font-medium text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff] hover:bg-[#eef0fc] dark:hover:bg-[#0c0c1e] transition-all"
                     style={{ textDecoration: 'none' }}
                   >
                     {s.label}
                   </a>
                 ))}
               </nav>
-            </section>
-
-            {/* Legend */}
-            <section className="px-4 pt-4 pb-4">
-              <h2 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-3">Legend</h2>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-[10px] text-[#737373]">
-                  <span className="w-2 h-2 rounded-full bg-[#22c55e] shrink-0" /> Available
-                </div>
-                <div className="flex items-center gap-2 text-[10px] text-[#737373]">
-                  <span className="w-2 h-2 rounded-full bg-[#f59e0b] shrink-0" /> Announced / Planned
-                </div>
-              </div>
             </section>
           </aside>
 
@@ -268,10 +255,19 @@ export default function DatacentersPage() {
             {/* Header */}
             <div className="mb-6">
               <h1 className="text-3xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Cloud Infrastructure</h1>
-              <p className="text-sm text-[#737373] max-w-2xl leading-relaxed">
+              <p className="text-sm text-[#737373] max-w-2xl leading-relaxed mb-4">
                 Compare data center presence, <Term term="Availability Zone">availability zones</Term>, and global coverage across providers.
                 Click any row to expand the full <Term term="Region">region</Term> list with Availability Zone counts.
               </p>
+              {/* Legend */}
+              <div className="flex items-center gap-5">
+                <div className="flex items-center gap-2 text-[11px] text-[#737373]">
+                  <span className="w-2 h-2 rounded-full bg-[#22c55e] shrink-0" /> Available
+                </div>
+                <div className="flex items-center gap-2 text-[11px] text-[#737373]">
+                  <span className="w-2 h-2 rounded-full bg-[#f59e0b] shrink-0" /> Announced / Planned
+                </div>
+              </div>
             </div>
 
             {/* Main table */}
@@ -279,7 +275,7 @@ export default function DatacentersPage() {
               <table className="w-full text-left border-collapse min-w-[900px]">
                 <thead>
                   <tr className="border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e]">
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap">Provider</th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">Provider</th>
                     <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">
                       <Term term="Region">Regions</Term>
                     </th>
@@ -293,7 +289,7 @@ export default function DatacentersPage() {
                     <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">
                       <Term term="Government Cloud">Gov Cloud</Term>
                     </th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest">Geographic Coverage</th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest text-center">Geographic Coverage</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -309,7 +305,7 @@ export default function DatacentersPage() {
                 </tbody>
                 <tfoot>
                   <tr className="border-t-2 border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#06060f] hover:bg-[#f7f8ff] dark:hover:bg-[#06060f]">
-                    <td className="py-4 px-4 font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Total</td>
+                    <td className="py-4 px-4 font-bold text-[#1a1a2e] dark:text-[#f7f8ff] text-center">Total</td>
                     <td className="py-4 px-4 text-center">
                       <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.regions}</span>
                     </td>
@@ -333,13 +329,13 @@ export default function DatacentersPage() {
 
             {/* Regional Coverage Matrix */}
             <div id="coverage-matrix" className="mt-8 scroll-mt-6">
-              <h2 className="text-[12px] font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Regional Coverage Matrix</h2>
-              <p className="text-[11px] text-[#737373] mb-4">Number of available regions per provider per geography.</p>
+              <h2 className="text-xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Regional Coverage Matrix</h2>
+              <p className="text-sm text-[#737373] mb-4">Number of available regions per provider per geography.</p>
               <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e]">
-                      <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap">Provider</th>
+                      <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">Provider</th>
                       {GEOGRAPHIES.map(geo => (
                         <th key={geo} className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">{geo}</th>
                       ))}
@@ -381,10 +377,10 @@ export default function DatacentersPage() {
 
             {/* Availability Zones per Region — stat cards grid */}
             <div id="az-detail" className="mt-8 scroll-mt-6">
-              <h2 className="text-[12px] font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">
+              <h2 className="text-xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">
                 <Term term="Availability Zone">Availability Zones</Term> per <Term term="Region">Region</Term>
               </h2>
-              <p className="text-[11px] text-[#737373] mb-4">Total and average Availability Zones per region, per provider. DigitalOcean uses single data center regions without traditional Availability Zones.</p>
+              <p className="text-sm text-[#737373] mb-4">Total and average Availability Zones per region, per provider. DigitalOcean uses single data center regions without traditional Availability Zones.</p>
               <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[#dde0f0] dark:border-[#1e1e38]" style={{ background: 'var(--border-color, #dde0f0)' }}>
                 {PROVIDER_INFRA.map(p => (
                   <div
@@ -417,13 +413,13 @@ export default function DatacentersPage() {
 
             {/* Data sources */}
             <div id="data-sources" className="mt-10 border-t border-[#dde0f0] dark:border-[#1e1e38] pt-6 scroll-mt-6">
-              <h2 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-3">Data Sources</h2>
-              <p className="text-[10px] text-[#a3a3a3] mb-4 max-w-2xl leading-relaxed">
+              <h2 className="text-xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Data Sources</h2>
+              <p className="text-sm text-[#737373] mb-4 max-w-2xl leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
                 {PROVIDER_INFRA.map(p => (
-                  <div key={p.id} className="bg-white dark:bg-[#0a0a18] border border-[#dde0f0] dark:border-[#1e1e38] rounded p-3 flex flex-col gap-2">
+                  <div key={p.id} className="bg-white dark:bg-[#0a0a18] border border-[#dde0f0] dark:border-[#1e1e38] rounded p-2.5 flex flex-col gap-2">
                     <ProviderBadge id={p.id} name={p.nameShort} />
                     <div className="flex flex-col gap-1">
                       {p.sources.map(src => (

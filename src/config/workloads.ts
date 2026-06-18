@@ -649,5 +649,162 @@ export const WORKLOADS: WorkloadDefinition[] = [
         }
       }
     ]
+  },
+  {
+    id: 'disaster-recovery',
+    name: 'Disaster Recovery (Warm Standby)',
+    description: 'A scaled-down replica of your production environment kept running in a secondary region, ready to scale up and take over during a primary-region outage. Includes standby compute, a replicated database, cross-region backups, and failover routing.',
+    icon: '🛟',
+    parameters: [
+      {
+        id: 'standbyNodes',
+        label: 'Warm Standby Nodes',
+        type: 'slider',
+        min: 1,
+        max: 16,
+        step: 1,
+        defaultValue: 3,
+        unit: 'nodes'
+      },
+      {
+        id: 'replicatedDbGB',
+        label: 'Replicated Database Size',
+        type: 'slider',
+        min: 50,
+        max: 5000,
+        step: 50,
+        defaultValue: 500,
+        unit: 'GB'
+      }
+    ],
+    components: [
+      {
+        id: 'standby-compute',
+        name: 'Warm Standby Compute',
+        description: 'Scaled-down replica instances on standby',
+        icon: '🖥️',
+        getRequirements: (params) => ({
+          productType: 'vm',
+          category: 'General purpose',
+          minVcpus: 2,
+          minMemoryGb: 8,
+          quantity: params.standbyNodes
+        })
+      },
+      {
+        id: 'db-replica',
+        name: 'Database Replica',
+        description: 'Cross-region replicated managed database',
+        icon: '🗃️',
+        getRequirements: () => ({
+          productType: 'database',
+          category: 'Relational',
+          minMemoryGb: 8,
+          quantity: 1
+        })
+      },
+      {
+        id: 'backup-storage',
+        name: 'Backup Object Storage',
+        description: 'Cross-region snapshots and backups',
+        icon: '🪣',
+        getRequirements: (params) => ({
+          productType: 'storage',
+          category: 'Object',
+          quantity: params.replicatedDbGB * 2
+        })
+      },
+      {
+        id: 'failover-routing',
+        name: 'Failover Routing',
+        description: 'Cross-region load balancer for failover',
+        icon: '⚖️',
+        getRequirements: () => ({
+          productType: 'networking',
+          category: 'Load Balancer',
+          quantity: 1
+        })
+      }
+    ]
+  },
+  {
+    id: 'content-media-platform',
+    name: 'Content & Media Platform',
+    description: 'A platform for storing, transcoding, and delivering video and image content at scale. Combines a transcoding compute fleet, an object-storage media library, a metadata database for catalog lookups, and a delivery endpoint for distribution.',
+    icon: '🎬',
+    parameters: [
+      {
+        id: 'mediaStorageTB',
+        label: 'Media Library Size',
+        type: 'slider',
+        min: 1,
+        max: 500,
+        step: 1,
+        defaultValue: 20,
+        unit: 'TB'
+      },
+      {
+        id: 'monthlyStreams',
+        label: 'Monthly Streams / Views',
+        type: 'slider',
+        min: 100000,
+        max: 50000000,
+        step: 100000,
+        defaultValue: 2000000,
+        unit: 'views'
+      }
+    ],
+    components: [
+      {
+        id: 'transcoding',
+        name: 'Transcoding Compute',
+        description: 'Encodes media into multiple formats and bitrates',
+        icon: '🎞️',
+        getRequirements: (params) => {
+          const nodes = Math.max(2, Math.ceil(params.monthlyStreams / 5000000));
+          return {
+            productType: 'vm',
+            category: 'Compute optimized',
+            minVcpus: 8,
+            minMemoryGb: 16,
+            quantity: nodes
+          };
+        }
+      },
+      {
+        id: 'media-storage',
+        name: 'Media Object Storage',
+        description: 'Source and transcoded asset library',
+        icon: '🪣',
+        getRequirements: (params) => ({
+          productType: 'storage',
+          category: 'Object',
+          quantity: params.mediaStorageTB * 1024
+        })
+      },
+      {
+        id: 'metadata-db',
+        name: 'Metadata Database',
+        description: 'Catalog, search, and playback metadata',
+        icon: '🗄️',
+        getRequirements: () => ({
+          productType: 'database',
+          category: 'NoSQL',
+          minMemoryGb: 4,
+          quantity: 1
+        })
+      },
+      {
+        id: 'delivery-endpoint',
+        name: 'Content Delivery Endpoint',
+        description: 'Distribution and routing for viewers',
+        icon: '🌐',
+        getRequirements: () => ({
+          productType: 'networking',
+          category: 'Load Balancer',
+          quantity: 1
+        })
+      }
+    ]
   }
 ];
