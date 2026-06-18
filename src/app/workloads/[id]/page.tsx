@@ -251,8 +251,8 @@ export default function WorkloadDetails() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-4 flex items-center gap-3">
           <span className="text-2xl">{workload.icon}</span>
           <div className="min-w-0">
-            <h1 className="text-[14px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{workload.name}</h1>
-            <p className="text-[11px] text-[#737373] truncate">{workload.description}</p>
+            <h1 className="text-xl font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{workload.name}</h1>
+            <p className="text-sm text-[#737373] truncate">{workload.description}</p>
           </div>
         </div>
       </div>
@@ -542,7 +542,7 @@ export default function WorkloadDetails() {
                         step={p.step}
                         value={parameters[p.id] || p.defaultValue}
                         onChange={(e) => setParameters({ ...parameters, [p.id]: Number(e.target.value) })}
-                        className="workload-slider absolute w-full cursor-pointer outline-none"
+                        className="workload-slider absolute w-full top-1/2 -translate-y-1/2 cursor-pointer outline-none"
                       />
                     </div>
                     <div className="flex justify-between text-[10px] text-[#a3a3a3] dark:text-[#525252] mt-1 font-mono">

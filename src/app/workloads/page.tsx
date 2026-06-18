@@ -32,7 +32,7 @@ export default function WorkloadsCatalog() {
                   Web Applications
                 </h3>
                 <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['serverless-web-app', '3-tier-web', 'ecommerce-microservices', 'k8s-app-platform', 'saas-paas-app'].includes(w.id)).map(w => (
+                  {WORKLOADS.filter(w => ['serverless-web-app', '3-tier-web', 'ecommerce-microservices', 'k8s-app-platform', 'saas-paas-app', 'content-media-platform'].includes(w.id)).map(w => (
                     <li key={w.id}>
                       <Link
                         href={`/workloads/${w.id}`}
@@ -95,7 +95,7 @@ export default function WorkloadsCatalog() {
                   Infrastructure
                 </h3>
                 <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['hpc-scientific'].includes(w.id)).map(w => (
+                  {WORKLOADS.filter(w => ['hpc-scientific', 'disaster-recovery'].includes(w.id)).map(w => (
                     <li key={w.id}>
                       <Link
                         href={`/workloads/${w.id}`}
@@ -117,10 +117,10 @@ export default function WorkloadsCatalog() {
         <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1200px] mx-auto">
           <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <h1 className="text-[16px] font-bold mb-2 text-[#171717] dark:text-[#e5e7eb]">
+              <h1 className="text-3xl font-bold mb-2 text-[#171717] dark:text-[#e5e7eb]">
                 Cloud Workloads
               </h1>
-              <p className="text-[#737373] max-w-2xl text-[11px] leading-relaxed">
+              <p className="text-[#737373] max-w-2xl text-sm leading-relaxed">
                 Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements.
               </p>
             </div>
@@ -156,10 +156,10 @@ export default function WorkloadsCatalog() {
                   style={{ textDecoration: 'none' }}
                 >
                   <div className="text-2xl mb-3">{workload.icon}</div>
-                  <h3 className="text-[13px] font-bold mb-2 text-[#171717] dark:text-[#e5e7eb] truncate" title={workload.name}>
+                  <h3 className="text-base font-bold mb-2 text-[#171717] dark:text-[#e5e7eb] truncate" title={workload.name}>
                     {workload.name}
                   </h3>
-                  <p className="text-[#737373] text-[11px] mb-5 flex-1 line-clamp-2 leading-relaxed">
+                  <p className="text-[#737373] text-sm mb-5 flex-1 line-clamp-3 leading-relaxed">
                     {workload.description}
                   </p>
                   <div className="mt-auto pt-3 border-t border-[#e5e5e5] dark:border-[#262626] text-[10px] font-bold uppercase tracking-widest text-[#737373] group-hover:text-black dark:group-hover:text-white transition-colors flex justify-between items-center">

@@ -41,6 +41,7 @@ input[type="range"].workload-slider::-webkit-slider-thumb {
   appearance: none;
   width: 14px;
   height: 14px;
+  margin-top: -5px;
   background: white;
   border-radius: 50%;
   cursor: pointer;

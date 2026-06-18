@@ -271,7 +271,7 @@ interface Tooltip {
 export default function WorldMap() {
   const allProviderIds = PROVIDER_INFRA.map(p => p.id);
   const [selected, setSelected] = useState<Set<string>>(new Set(allProviderIds));
-  const [selectedGeos, setSelectedGeos] = useState<string[]>([]);
+  const [selectedGeos, setSelectedGeos] = useState<string[]>([...GEOGRAPHIES]);
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
   const toggleGeo = (geo: string) => {
@@ -307,81 +307,85 @@ export default function WorldMap() {
     const coords = REGION_COORDS[pid] ?? [];
     const color = PROVIDER_COLORS[pid] ?? '#888';
     for (const [lat, lng, code, name] of coords) {
-      if (selectedGeos.length > 0) {
-        const geo = GEO_BY_CODE[code];
-        if (!geo || !selectedGeos.includes(geo)) continue;
-      }
+      const geo = GEO_BY_CODE[code];
+      if (!geo || !selectedGeos.includes(geo)) continue;
       const [x, y] = toXY(lat, lng);
       dots.push({ x, y, providerId: pid, color, code, name });
     }
   }
 
   return (
-    <div className="mt-8 border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-hidden bg-white dark:bg-[#0a0a18]">
-      {/* Header */}
-      <div className="px-5 pt-4 pb-3 border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e]">
-        <h2 className="text-[12px] font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Global Region Map</h2>
-        <p className="text-[11px] text-[#737373] mt-0.5">Click to toggle providers · Double-click to isolate one</p>
-      </div>
+    <div className="mt-8">
+      {/* Header — outside the box */}
+      <h2 className="text-xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Global Region Map</h2>
+      <p className="text-sm text-[#737373] mb-4">Click to toggle providers · Double-click to isolate one</p>
 
+      <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-hidden bg-white dark:bg-[#0a0a18]">
       {/* Provider toggles */}
-      <div className="px-5 py-3 flex flex-wrap gap-2 items-center border-b border-[#dde0f0] dark:border-[#1e1e38]">
-        {PROVIDER_INFRA.map(p => {
-          const active = selected.has(p.id);
-          const color = PROVIDER_COLORS[p.id] ?? '#888';
-          return (
-            <button
-              key={p.id}
-              onClick={() => toggle(p.id)}
-              onDoubleClick={() => selectOnly(p.id)}
-              title={`Click to toggle · Double-click to show only ${p.name}`}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
-                active
-                  ? 'text-white border-transparent shadow-sm'
-                  : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] opacity-60 hover:opacity-90'
-              }`}
-              style={active ? { backgroundColor: color, borderColor: color } : {}}
-            >
-              <span
-                className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ backgroundColor: active ? 'rgba(255,255,255,0.85)' : color }}
-              />
-              {p.nameShort}
-            </button>
-          );
-        })}
-        <button
-          onClick={selectAll}
-          className="ml-auto text-[10px] font-bold text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff] transition-colors"
-        >
-          All
-        </button>
+      <div className="px-5 py-3 border-b border-[#dde0f0] dark:border-[#1e1e38]">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Provider</span>
+          <button
+            onClick={() => (selected.size === allProviderIds.length ? setSelected(new Set()) : selectAll())}
+            className={`text-[10px] font-bold uppercase transition-colors ${
+              selected.size === allProviderIds.length ? 'text-[#1a1a2e] dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff]'
+            }`}
+          >
+            {selected.size === allProviderIds.length ? 'Clear All' : 'Select All'}
+          </button>
+        </div>
+        <div className="flex flex-wrap gap-2 items-center">
+          {PROVIDER_INFRA.map(p => {
+            const active = selected.has(p.id);
+            const color = PROVIDER_COLORS[p.id] ?? '#888';
+            return (
+              <button
+                key={p.id}
+                onClick={() => toggle(p.id)}
+                onDoubleClick={() => selectOnly(p.id)}
+                title={`Click to toggle · Double-click to show only ${p.name}`}
+                className={`flex items-center px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
+                  active
+                    ? 'text-white border-transparent shadow-sm'
+                    : 'bg-[#dde0f0] dark:bg-[#1e1e38] border-[#dde0f0] dark:border-[#1e1e38] opacity-60 hover:opacity-90'
+                }`}
+                style={active ? { backgroundColor: color, borderColor: color } : { color }}
+              >
+                {p.nameShort}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Geography filter */}
-      <div className="px-5 py-3 flex flex-wrap gap-2 items-center border-b border-[#dde0f0] dark:border-[#1e1e38]">
-        <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mr-1">Geography</span>
-        {GEOGRAPHIES.map(geo => (
+      <div className="px-5 py-3 border-b border-[#dde0f0] dark:border-[#1e1e38]">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Geography</span>
           <button
-            key={geo}
-            onClick={() => toggleGeo(geo)}
-            className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-              selectedGeos.includes(geo)
-                ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+            onClick={() => (selectedGeos.length === GEOGRAPHIES.length ? setSelectedGeos([]) : setSelectedGeos([...GEOGRAPHIES]))}
+            className={`text-[10px] font-bold uppercase transition-colors ${
+              selectedGeos.length === GEOGRAPHIES.length ? 'text-[#1a1a2e] dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff]'
             }`}
           >
-            {geo}
+            {selectedGeos.length === GEOGRAPHIES.length ? 'Clear All' : 'Select All'}
           </button>
-        ))}
-        <button
-          onClick={() => setSelectedGeos([])}
-          className={`ml-auto text-[10px] font-bold uppercase transition-colors ${
-            selectedGeos.length > 0 ? 'text-[#1a1a2e] dark:text-[#f7f8ff]' : 'text-[#737373]'
-          }`}
-        >
-          {selectedGeos.length > 0 ? 'Clear' : 'All'}
-        </button>
+        </div>
+        <div className="flex flex-wrap gap-2 items-center">
+          {GEOGRAPHIES.map(geo => (
+            <button
+              key={geo}
+              onClick={() => toggleGeo(geo)}
+              className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                selectedGeos.includes(geo)
+                  ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                  : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+              }`}
+            >
+              {geo}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Map */}
@@ -538,6 +542,7 @@ export default function WorldMap() {
       <div className="px-5 py-2 text-[10px] text-[#737373] border-t border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#06060f] flex justify-between">
         <span className="font-bold">{dots.length} regions shown</span>
         <span>Equirectangular projection · approximate coordinates</span>
+      </div>
       </div>
     </div>
   );
