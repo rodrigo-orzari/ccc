@@ -267,24 +267,11 @@ export default function DatacentersPage() {
 
             {/* Header */}
             <div className="mb-6">
-              <h1 className="text-[16px] font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Cloud Infrastructure</h1>
-              <p className="text-[11px] text-[#737373] max-w-2xl leading-relaxed">
+              <h1 className="text-3xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Cloud Infrastructure</h1>
+              <p className="text-sm text-[#737373] max-w-2xl leading-relaxed">
                 Compare data center presence, <Term term="Availability Zone">availability zones</Term>, and global coverage across providers.
                 Click any row to expand the full <Term term="Region">region</Term> list with Availability Zone counts.
               </p>
-            </div>
-
-            {/* Summary stats — joined Status-page style */}
-            <div id="summary-stats" className="flex mb-6 max-w-lg rounded overflow-hidden border border-[#dde0f0] dark:border-[#1e1e38] scroll-mt-6" style={{ gap: 1, background: 'var(--border-color, #dde0f0)' }}>
-              <div className="flex-1 bg-white dark:bg-[#0a0a18] p-4">
-                <Stat label="Total Regions" value={totals.regions} />
-              </div>
-              <div className="flex-1 bg-white dark:bg-[#0a0a18] p-4">
-                <Stat label="Availability Zones" value={totals.azs} />
-              </div>
-              <div className="flex-1 bg-white dark:bg-[#0a0a18] p-4">
-                <Stat label="Planned" value={`+${totals.announced}`} />
-              </div>
             </div>
 
             {/* Main table */}
@@ -364,8 +351,10 @@ export default function DatacentersPage() {
                       const rowBg = i % 2 === 0 ? 'bg-white dark:bg-[#06060f]' : 'bg-[#f7f8ff] dark:bg-[#0a0a18]';
                       return (
                         <tr key={p.id} className={`border-b border-[#dde0f0] dark:border-[#1e1e38] ${rowBg}`}>
-                          <td className="py-3 px-4 whitespace-nowrap">
-                            <ProviderBadge id={p.id} name={p.nameShort} />
+                          <td className="py-3 px-4 whitespace-nowrap text-center">
+                            <div className="flex justify-center">
+                              <ProviderBadge id={p.id} name={p.nameShort} />
+                            </div>
                           </td>
                           {GEOGRAPHIES.map(geo => {
                             const count = p.geographyCoverage[geo] ?? 0;
@@ -390,34 +379,32 @@ export default function DatacentersPage() {
               </div>
             </div>
 
-            {/* Availability Zones per Region — stat cards matching product category style */}
+            {/* Availability Zones per Region — stat cards grid */}
             <div id="az-detail" className="mt-8 scroll-mt-6">
               <h2 className="text-[12px] font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">
                 <Term term="Availability Zone">Availability Zones</Term> per <Term term="Region">Region</Term>
               </h2>
               <p className="text-[11px] text-[#737373] mb-4">Total and average Availability Zones per region, per provider. DigitalOcean uses single data center regions without traditional Availability Zones.</p>
-              <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-hidden" style={{ gap: 1, background: 'var(--border-color, #dde0f0)' }}>
-                {PROVIDER_INFRA.map((p, i) => (
-                  <div key={p.id} style={{ gap: 1, background: 'inherit' }}>
-                    {i > 0 && <div className="h-px bg-[#dde0f0] dark:bg-[#1e1e38]" />}
-                    <div className="flex items-center justify-between bg-white dark:bg-[#0a0a18] px-4 py-3">
-                      <ProviderBadge id={p.id} name={p.nameShort} />
-                      <div className="flex items-baseline gap-3">
-                        {p.availabilityZones > 0 ? (
-                          <>
-                            <span className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">{p.availabilityZones}</span>
-                            <span className="text-[9px] font-bold text-[#737373] uppercase tracking-widest">Total Zones</span>
-                            <span className="text-[9px] text-[#a3a3a3]">~{Math.round(p.availabilityZones / p.regions)} per region</span>
-                          </>
-                        ) : (
-                          <>
-                            <span className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">{p.regions}</span>
-                            <span className="text-[9px] font-bold text-[#737373] uppercase tracking-widest">Data Centers</span>
-                            <span className="text-[9px] text-[#a3a3a3]">Single DC / region</span>
-                          </>
-                        )}
+              <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[#dde0f0] dark:border-[#1e1e38]" style={{ background: 'var(--border-color, #dde0f0)' }}>
+                {PROVIDER_INFRA.map(p => (
+                  <div
+                    key={p.id}
+                    className="flex-1 min-w-0 bg-white dark:bg-[#0a0a18] px-4 py-3.5 flex flex-col gap-2"
+                  >
+                    <ProviderBadge id={p.id} name={p.nameShort} />
+                    {p.availabilityZones > 0 ? (
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">{p.availabilityZones}</span>
+                        <span className="text-[9px] font-bold text-[#737373] uppercase tracking-widest">Total Zones</span>
+                        <span className="text-[9px] text-[#a3a3a3]">~{Math.round(p.availabilityZones / p.regions)} per region</span>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">{p.regions}</span>
+                        <span className="text-[9px] font-bold text-[#737373] uppercase tracking-widest">Data Centers</span>
+                        <span className="text-[9px] text-[#a3a3a3]">Single DC / region</span>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -434,7 +421,7 @@ export default function DatacentersPage() {
               <p className="text-[10px] text-[#a3a3a3] mb-4 max-w-2xl leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {PROVIDER_INFRA.map(p => (
                   <div key={p.id} className="bg-white dark:bg-[#0a0a18] border border-[#dde0f0] dark:border-[#1e1e38] rounded p-3 flex flex-col gap-2">
                     <ProviderBadge id={p.id} name={p.nameShort} />
