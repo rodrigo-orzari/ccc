@@ -22,78 +22,6 @@
       "norm_label": "dashboard()"
     },
     {
-      "label": "FilterSidebar.tsx",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L1",
-      "id": "components_filtersidebar",
-      "community": 7,
-      "norm_label": "filtersidebar.tsx"
-    },
-    {
-      "label": "Tooltip()",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L11",
-      "id": "components_filtersidebar_tooltip",
-      "community": 7,
-      "norm_label": "tooltip()"
-    },
-    {
-      "label": "FilterSectionProps",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L31",
-      "id": "components_filtersidebar_filtersectionprops",
-      "community": 7,
-      "norm_label": "filtersectionprops"
-    },
-    {
-      "label": "FilterSection()",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L43",
-      "id": "components_filtersidebar_filtersection",
-      "community": 7,
-      "norm_label": "filtersection()"
-    },
-    {
-      "label": "GroupedFilterSectionProps",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L100",
-      "id": "components_filtersidebar_groupedfiltersectionprops",
-      "community": 7,
-      "norm_label": "groupedfiltersectionprops"
-    },
-    {
-      "label": "GroupedFilterSection()",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L114",
-      "id": "components_filtersidebar_groupedfiltersection",
-      "community": 7,
-      "norm_label": "groupedfiltersection()"
-    },
-    {
-      "label": "FilterSidebarProps",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L177",
-      "id": "components_filtersidebar_filtersidebarprops",
-      "community": 7,
-      "norm_label": "filtersidebarprops"
-    },
-    {
-      "label": "FilterSidebar()",
-      "file_type": "code",
-      "source_file": "src/components/FilterSidebar.tsx",
-      "source_location": "L346",
-      "id": "components_filtersidebar_filtersidebar",
-      "community": 7,
-      "norm_label": "filtersidebar()"
-    },
-    {
       "label": "PricingTable.tsx",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
@@ -430,82 +358,172 @@
       "label": "TableRow()",
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L453",
+      "source_location": "L479",
       "id": "components_pricingtable_tablerow",
-      "community": 63,
+      "community": 65,
       "norm_label": "tablerow()"
+    },
+    {
+      "label": "getMobileFields()",
+      "file_type": "code",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L640",
+      "id": "components_pricingtable_getmobilefields",
+      "community": 15,
+      "norm_label": "getmobilefields()"
+    },
+    {
+      "label": "MobileCard()",
+      "file_type": "code",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L727",
+      "id": "components_pricingtable_mobilecard",
+      "community": 15,
+      "norm_label": "mobilecard()"
+    },
+    {
+      "label": "FilterSidebar.tsx",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L1",
+      "community": 7,
+      "norm_label": "filtersidebar.tsx",
+      "id": "components_filtersidebar"
+    },
+    {
+      "label": "Tooltip()",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L11",
+      "community": 7,
+      "norm_label": "tooltip()",
+      "id": "components_filtersidebar_tooltip"
+    },
+    {
+      "label": "FilterSectionProps",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L31",
+      "community": 7,
+      "norm_label": "filtersectionprops",
+      "id": "components_filtersidebar_filtersectionprops"
+    },
+    {
+      "label": "FilterSection()",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L43",
+      "community": 7,
+      "norm_label": "filtersection()",
+      "id": "components_filtersidebar_filtersection"
+    },
+    {
+      "label": "GroupedFilterSectionProps",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L100",
+      "community": 7,
+      "norm_label": "groupedfiltersectionprops",
+      "id": "components_filtersidebar_groupedfiltersectionprops"
+    },
+    {
+      "label": "GroupedFilterSection()",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L114",
+      "community": 7,
+      "norm_label": "groupedfiltersection()",
+      "id": "components_filtersidebar_groupedfiltersection"
+    },
+    {
+      "label": "FilterSidebarProps",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L177",
+      "community": 7,
+      "norm_label": "filtersidebarprops",
+      "id": "components_filtersidebar_filtersidebarprops"
+    },
+    {
+      "label": "FilterSidebar()",
+      "file_type": "code",
+      "source_file": "src/components/FilterSidebar.tsx",
+      "source_location": "L346",
+      "community": 7,
+      "norm_label": "filtersidebar()",
+      "id": "components_filtersidebar_filtersidebar"
     },
     {
       "label": "ProviderCards.tsx",
       "file_type": "code",
       "source_file": "src/components/ProviderCards.tsx",
       "source_location": "L1",
-      "id": "components_providercards",
       "community": 13,
-      "norm_label": "providercards.tsx"
+      "norm_label": "providercards.tsx",
+      "id": "components_providercards"
     },
     {
       "label": "ProviderCardProps",
       "file_type": "code",
       "source_file": "src/components/ProviderCards.tsx",
       "source_location": "L5",
-      "id": "components_providercards_providercardprops",
       "community": 13,
-      "norm_label": "providercardprops"
+      "norm_label": "providercardprops",
+      "id": "components_providercards_providercardprops"
     },
     {
       "label": "DBStatusProvider",
       "file_type": "code",
       "source_file": "src/components/ProviderCards.tsx",
       "source_location": "L15",
-      "id": "components_providercards_dbstatusprovider",
       "community": 13,
-      "norm_label": "dbstatusprovider"
+      "norm_label": "dbstatusprovider",
+      "id": "components_providercards_dbstatusprovider"
     },
     {
       "label": "ProviderCardsProps",
       "file_type": "code",
       "source_file": "src/components/ProviderCards.tsx",
       "source_location": "L20",
-      "id": "components_providercards_providercardsprops",
       "community": 13,
-      "norm_label": "providercardsprops"
+      "norm_label": "providercardsprops",
+      "id": "components_providercards_providercardsprops"
     },
     {
       "label": "ProviderCards()",
       "file_type": "code",
       "source_file": "src/components/ProviderCards.tsx",
       "source_location": "L29",
-      "id": "components_providercards_providercards",
       "community": 13,
-      "norm_label": "providercards()"
+      "norm_label": "providercards()",
+      "id": "components_providercards_providercards"
     },
     {
       "label": "TableToolbar.tsx",
       "file_type": "code",
       "source_file": "src/components/TableToolbar.tsx",
       "source_location": "L1",
-      "id": "components_tabletoolbar",
       "community": 21,
-      "norm_label": "tabletoolbar.tsx"
+      "norm_label": "tabletoolbar.tsx",
+      "id": "components_tabletoolbar"
     },
     {
       "label": "TableToolbarProps",
       "file_type": "code",
       "source_file": "src/components/TableToolbar.tsx",
       "source_location": "L6",
-      "id": "components_tabletoolbar_tabletoolbarprops",
       "community": 21,
-      "norm_label": "tabletoolbarprops"
+      "norm_label": "tabletoolbarprops",
+      "id": "components_tabletoolbar_tabletoolbarprops"
     },
     {
       "label": "TableToolbar()",
       "file_type": "code",
       "source_file": "src/components/TableToolbar.tsx",
       "source_location": "L19",
-      "id": "components_tabletoolbar_tabletoolbar",
       "community": 21,
-      "norm_label": "tabletoolbar()"
+      "norm_label": "tabletoolbar()",
+      "id": "components_tabletoolbar_tabletoolbar"
     },
     {
       "label": "page.tsx",
@@ -1862,7 +1880,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L97",
-      "community": 72,
+      "community": 71,
       "norm_label": "databricksazureadapter",
       "id": "services_data_analytics_pipeline_databricksazureadapter"
     },
@@ -1871,7 +1889,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L101",
-      "community": 72,
+      "community": 71,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
     },
@@ -1907,7 +1925,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L211",
-      "community": 55,
+      "community": 72,
       "norm_label": "synapseazureadapter",
       "id": "services_data_analytics_pipeline_synapseazureadapter"
     },
@@ -1916,7 +1934,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L215",
-      "community": 55,
+      "community": 72,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing"
     },
@@ -1925,7 +1943,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L284",
-      "community": 72,
+      "community": 55,
       "norm_label": "alibabaanalyticsadapter",
       "id": "services_data_analytics_pipeline_alibabaanalyticsadapter"
     },
@@ -1979,7 +1997,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L380",
-      "community": 62,
+      "community": 8,
       "norm_label": "dataanalyticspricingpipeline",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
     },
@@ -1988,7 +2006,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L381",
-      "community": 62,
+      "community": 8,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
     },
@@ -2006,7 +2024,7 @@
       "file_type": "code",
       "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "route.ts",
       "id": "pricing_route"
     },
@@ -2015,7 +2033,7 @@
       "file_type": "code",
       "source_file": "src/app/api/pricing/route.ts",
       "source_location": "L7",
-      "community": 16,
+      "community": 62,
       "norm_label": "get()",
       "id": "pricing_route_get"
     },
@@ -2024,7 +2042,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
       "source_location": "L1",
-      "community": 65,
+      "community": 16,
       "norm_label": "page.tsx",
       "id": "workloads_page"
     },
@@ -2033,7 +2051,7 @@
       "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
       "source_location": "L8",
-      "community": 65,
+      "community": 16,
       "norm_label": "workloadscatalog()",
       "id": "workloads_page_workloadscatalog"
     },
@@ -2042,7 +2060,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "api-utils.ts",
       "id": "lib_api_utils"
     },
@@ -2069,7 +2087,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L98",
-      "community": 16,
+      "community": 62,
       "norm_label": "valid_product_types",
       "id": "lib_api_utils_valid_product_types"
     },
@@ -2078,7 +2096,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L100",
-      "community": 16,
+      "community": 62,
       "norm_label": "parsefilterlist()",
       "id": "lib_api_utils_parsefilterlist"
     },
@@ -2087,7 +2105,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L121",
-      "community": 16,
+      "community": 62,
       "norm_label": "buildpricingfilters()",
       "id": "lib_api_utils_buildpricingfilters"
     },
@@ -2186,7 +2204,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L117",
-      "community": 71,
+      "community": 56,
       "norm_label": ".classifygcp()",
       "id": "services_pricing_pipeline_baseadapter_classifygcp"
     },
@@ -2267,7 +2285,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L292",
-      "community": 71,
+      "community": 62,
       "norm_label": "gcpadapter",
       "id": "services_pricing_pipeline_gcpadapter"
     },
@@ -2276,7 +2294,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L295",
-      "community": 71,
+      "community": 62,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_gcpadapter_fetchpricing"
     },
@@ -2285,7 +2303,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L304",
-      "community": 71,
+      "community": 62,
       "norm_label": ".fetchfrompricingapi()",
       "id": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi"
     },
@@ -2294,7 +2312,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L359",
-      "community": 71,
+      "community": 62,
       "norm_label": ".fetchfromstaticconfig()",
       "id": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig"
     },
@@ -2303,7 +2321,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L380",
-      "community": 71,
+      "community": 62,
       "norm_label": ".gcpcpuvendor()",
       "id": "services_pricing_pipeline_gcpadapter_gcpcpuvendor"
     },
@@ -2438,7 +2456,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L1",
-      "community": 68,
+      "community": 16,
       "norm_label": "index.ts",
       "id": "types_index"
     },
@@ -2465,7 +2483,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L63",
-      "community": 68,
+      "community": 16,
       "norm_label": "workloadparameter",
       "id": "types_index_workloadparameter"
     },
@@ -2474,7 +2492,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L74",
-      "community": 68,
+      "community": 16,
       "norm_label": "workloadcomponent",
       "id": "types_index_workloadcomponent"
     },
@@ -2483,7 +2501,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L88",
-      "community": 68,
+      "community": 16,
       "norm_label": "workloaddefinition",
       "id": "types_index_workloaddefinition"
     },
@@ -2618,7 +2636,7 @@
       "file_type": "code",
       "source_file": "src/lib/formatInstanceName.ts",
       "source_location": "L1",
-      "community": 63,
+      "community": 65,
       "norm_label": "formatinstancename.ts",
       "id": "lib_formatinstancename"
     },
@@ -2627,7 +2645,7 @@
       "file_type": "code",
       "source_file": "src/lib/formatInstanceName.ts",
       "source_location": "L14",
-      "community": 63,
+      "community": 65,
       "norm_label": "formatinstancename()",
       "id": "lib_formatinstancename_formatinstancename"
     },
@@ -2681,7 +2699,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L2",
-      "community": 65,
+      "community": 7,
       "norm_label": "geographies",
       "id": "config_index_geographies"
     },
@@ -3176,7 +3194,7 @@
       "file_type": "code",
       "source_file": "src/config/workloads.ts",
       "source_location": "L1",
-      "community": 65,
+      "community": 16,
       "norm_label": "workloads.ts",
       "id": "config_workloads"
     },
@@ -3185,7 +3203,7 @@
       "file_type": "code",
       "source_file": "src/config/workloads.ts",
       "source_location": "L3",
-      "community": 65,
+      "community": 16,
       "norm_label": "workloads",
       "id": "config_workloads_workloads"
     },
@@ -3320,7 +3338,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L233",
-      "community": 73,
+      "community": 55,
       "norm_label": "oraclepostgresqladapter",
       "id": "services_database_pipeline_oraclepostgresqladapter"
     },
@@ -3329,7 +3347,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L236",
-      "community": 73,
+      "community": 55,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclepostgresqladapter_fetchpricing"
     },
@@ -3401,7 +3419,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L499",
-      "community": 9,
+      "community": 55,
       "norm_label": "digitaloceandbadapter",
       "id": "services_database_pipeline_digitaloceandbadapter"
     },
@@ -3410,7 +3428,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L502",
-      "community": 9,
+      "community": 55,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_digitaloceandbadapter_fetchpricing"
     },
@@ -3500,7 +3518,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L664",
-      "community": 74,
+      "community": 9,
       "norm_label": "oracleredisadapter",
       "id": "services_database_pipeline_oracleredisadapter"
     },
@@ -3509,7 +3527,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L667",
-      "community": 74,
+      "community": 9,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oracleredisadapter_fetchpricing"
     },
@@ -3527,7 +3545,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L705",
-      "community": 55,
+      "community": 63,
       "norm_label": "alibabaredisadapter",
       "id": "services_database_pipeline_alibabaredisadapter"
     },
@@ -3536,7 +3554,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L708",
-      "community": 55,
+      "community": 63,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_alibabaredisadapter_fetchpricing"
     },
@@ -3563,7 +3581,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L760",
-      "community": 55,
+      "community": 63,
       "norm_label": ".run()",
       "id": "services_database_pipeline_databasepricingpipeline_run"
     },
@@ -3770,7 +3788,7 @@
       "file_type": "code",
       "source_file": "src/app/api/workloads/route.ts",
       "source_location": "L1",
-      "community": 65,
+      "community": 16,
       "norm_label": "route.ts",
       "id": "workloads_route"
     },
@@ -3779,7 +3797,7 @@
       "file_type": "code",
       "source_file": "src/app/api/workloads/route.ts",
       "source_location": "L5",
-      "community": 65,
+      "community": 16,
       "norm_label": "post()",
       "id": "workloads_route_post"
     },
@@ -4589,7 +4607,7 @@
       "file_type": "code",
       "source_file": "test_api.mjs",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "test_api.mjs",
       "id": "test_api"
     },
@@ -4598,7 +4616,7 @@
       "file_type": "code",
       "source_file": "test_api.mjs",
       "source_location": "L4",
-      "community": 16,
+      "community": 62,
       "norm_label": "sql",
       "id": "test_api_sql"
     },
@@ -4607,7 +4625,7 @@
       "file_type": "code",
       "source_file": "test_api.mjs",
       "source_location": "L6",
-      "community": 16,
+      "community": 62,
       "norm_label": "run()",
       "id": "test_api_run"
     },
@@ -4643,7 +4661,7 @@
       "file_type": "code",
       "source_file": "test_filters.mjs",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "test_filters.mjs",
       "id": "test_filters"
     },
@@ -4652,7 +4670,7 @@
       "file_type": "code",
       "source_file": "test_filters.mjs",
       "source_location": "L4",
-      "community": 16,
+      "community": 62,
       "norm_label": "sql",
       "id": "test_filters_sql"
     },
@@ -4661,7 +4679,7 @@
       "file_type": "code",
       "source_file": "test_filters.mjs",
       "source_location": "L6",
-      "community": 16,
+      "community": 62,
       "norm_label": "run()",
       "id": "test_filters_run"
     },
@@ -5120,7 +5138,7 @@
       "file_type": "code",
       "source_file": "test_counts.mjs",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "test_counts.mjs",
       "id": "test_counts"
     },
@@ -5129,7 +5147,7 @@
       "file_type": "code",
       "source_file": "test_counts.mjs",
       "source_location": "L4",
-      "community": 16,
+      "community": 62,
       "norm_label": "testcounts()",
       "id": "test_counts_testcounts"
     },
@@ -5426,7 +5444,7 @@
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L1",
-      "community": 16,
+      "community": 62,
       "norm_label": "route.ts",
       "id": "counts_route"
     },
@@ -5435,7 +5453,7 @@
       "file_type": "code",
       "source_file": "src/app/api/pricing/counts/route.ts",
       "source_location": "L7",
-      "community": 16,
+      "community": 62,
       "norm_label": "get()",
       "id": "counts_route_get"
     },
@@ -5480,7 +5498,7 @@
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L1",
-      "community": 7,
+      "community": 68,
       "norm_label": "chartsview.tsx",
       "id": "components_chartsview"
     },
@@ -5489,7 +5507,7 @@
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L8",
-      "community": 7,
+      "community": 68,
       "norm_label": "chartsviewprops",
       "id": "components_chartsview_chartsviewprops"
     },
@@ -5498,7 +5516,7 @@
       "file_type": "code",
       "source_file": "src/components/ChartsView.tsx",
       "source_location": "L13",
-      "community": 7,
+      "community": 68,
       "norm_label": "chartsview()",
       "id": "components_chartsview_chartsview"
     },
@@ -6468,6 +6486,550 @@
       "target": "hooks_usedynamicfilters_usedynamicfilters"
     },
     {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_pricingtable"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_all_defs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_c"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_arch"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_exec"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_geo"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_gpu"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_gran"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_inv"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_lang"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_mem"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_mid1"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_mid2"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_mid3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_mid4"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_price"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_prov"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_provider"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_sku"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_source"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_stor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_svc_type"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_unit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_col_vcpu"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_coldef"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_default_widths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_getcoldefs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L640",
+      "weight": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_getmobilefields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_hassavedwidths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L75",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_loadwidths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L73",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_lskey"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L727",
+      "weight": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_mobilecard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L126",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_pricingtable"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L100",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_pricingtableprops"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_providers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L113",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_resizehandle"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L83",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_savewidths"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L88",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_sortconfig"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L90",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_sorticon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L375",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "components_pricingtable_tablerow"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "lib_formatinstancename"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "lib_formatinstancename_formatinstancename"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "types_index_pricingrecord"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L180",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable_pricingtable",
+      "target": "components_pricingtable_getcoldefs"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L94",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable_hassavedwidths",
+      "target": "components_pricingtable_lskey"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L77",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable_loadwidths",
+      "target": "components_pricingtable_lskey"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L84",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable_savewidths",
+      "target": "components_pricingtable_lskey"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable_pricingtableprops",
+      "target": "types_index_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "field",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L105",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_pricingtable_pricingtableprops",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L436",
+      "weight": 1.0,
+      "source": "components_pricingtable_tablerow",
+      "target": "lib_formatinstancename_formatinstancename"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/PricingTable.tsx",
+      "source_location": "L739",
+      "weight": 1.0,
+      "source": "components_pricingtable_mobilecard",
+      "target": "components_pricingtable_getmobilefields",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/FilterSidebar.tsx",
@@ -7097,519 +7659,6 @@
       "weight": 1.0,
       "source": "components_filtersidebar_filtersidebar",
       "target": "hooks_usedynamicfilters_usedynamicfilters"
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_pricingtable"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L45",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_all_defs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_c"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L38",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_arch"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_exec"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_geo"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L35",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_gpu"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L39",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_gran"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_inv"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L38",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_lang"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_mem"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_mid1"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_mid2"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_mid3"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L34",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_mid4"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_price"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L41",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_prov"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_provider"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L23",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_sku"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_source"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L42",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_stor"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L38",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_svc_type"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L46",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_unit"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_col_vcpu"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_coldef"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L51",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_default_widths"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L56",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_getcoldefs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L93",
-      "weight": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_hassavedwidths",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L75",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_loadwidths"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L73",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_lskey"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L126",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_pricingtable"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L100",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_pricingtableprops"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_providers"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L113",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_resizehandle"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L83",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_savewidths"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L88",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_sortconfig"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L90",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_sorticon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L375",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "components_pricingtable_tablerow"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "lib_formatinstancename"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "lib_formatinstancename_formatinstancename"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "types_index_pricingrecord"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L180",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable_pricingtable",
-      "target": "components_pricingtable_getcoldefs"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L94",
-      "weight": 1.0,
-      "source": "components_pricingtable_hassavedwidths",
-      "target": "components_pricingtable_lskey",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L77",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable_loadwidths",
-      "target": "components_pricingtable_lskey"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L84",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable_savewidths",
-      "target": "components_pricingtable_lskey"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L103",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable_pricingtableprops",
-      "target": "types_index_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "field",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L105",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_pricingtable_pricingtableprops",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/PricingTable.tsx",
-      "source_location": "L436",
-      "weight": 1.0,
-      "source": "components_pricingtable_tablerow",
-      "target": "lib_formatinstancename_formatinstancename"
     },
     {
       "relation": "re_exports",
@@ -15609,5 +15658,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "21d664c34b810b63ec53e9011a673fd8c2d7007b"
+  "built_at_commit": "afca0e109940b6cee1059f81b2562cf3a5f06a14"
 }

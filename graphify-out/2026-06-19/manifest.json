@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1781761738.5872576,
-    "ast_hash": "acd57cda6695748ffd289975932c16ed",
+    "mtime": 1781921670.4109786,
+    "ast_hash": "533ee3930c0baa707de253a526edd3de",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1781904705.2346494,
-    "ast_hash": "8ce83ca10fa9d4887033ddc84d671cf1",
+    "mtime": 1781921582.9596944,
+    "ast_hash": "39b8e767d457ca153dfddbb3d6067c05",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -435,13 +435,13 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1781904153.1540833,
-    "ast_hash": "e601c64167dbddbe3862f80b07d8696f",
+    "mtime": 1781921577.4671464,
+    "ast_hash": "b5d840b699eb463b264cf851dce4ebbb",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1781735747.6952417,
-    "ast_hash": "054245b97ba24d7bd7e656dafe9a14fd",
+    "mtime": 1781923277.5740664,
+    "ast_hash": "a80d26ea81ac37d7d9208c7c39b8fd56",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
@@ -800,8 +800,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1781761413.6019056,
-    "ast_hash": "19cd097654dada0baa84d763ed40b2ab",
+    "mtime": 1781923309.4057531,
+    "ast_hash": "91a924e9472c2eb50472606c94560ece",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
