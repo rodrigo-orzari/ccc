@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-20)
 
 ## Corpus Check
-- 167 files · ~133,034 words
+- 167 files · ~133,400 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a07c0b85`
+- Built from commit: `72435a14`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -241,7 +241,7 @@ Cohesion: 0.47
 Nodes (4): POST(), initDb(), requireAdminAuth(), DataAnalyticsPricingPipeline
 
 ## Knowledge Gaps
-- **222 isolated node(s):** `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps`, `FilterSidebarProps`, `PIPELINE_DISPLAY` (+217 more)
+- **222 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+217 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -254,7 +254,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.060) - this node is a cross-community bridge._
 - **Why does `ServerlessPricingPipeline` connect `Community 26` to `Community 48`, `Community 47`, `Community 62`, `Community 79`?**
   _High betweenness centrality (0.044) - this node is a cross-community bridge._
-- **What connects `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps` to the rest of the system?**
+- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
   _222 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
