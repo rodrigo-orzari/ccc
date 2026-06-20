@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-20)
 
 ## Corpus Check
-- 167 files · ~133,013 words
+- 167 files · ~133,034 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 719 nodes · 1034 edges · 79 communities (44 shown, 35 thin omitted)
+- 719 nodes · 1035 edges · 80 communities (45 shown, 35 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c90a684e`
+- Built from commit: `a07c0b85`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -81,6 +81,7 @@
 - [[_COMMUNITY_Community 75|Community 75]]
 - [[_COMMUNITY_Community 76|Community 76]]
 - [[_COMMUNITY_Community 78|Community 78]]
+- [[_COMMUNITY_Community 79|Community 79]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `BaseAdapter` - 39 edges
@@ -109,7 +110,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (79 total, 35 thin omitted)
+## Communities (80 total, 35 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
@@ -120,8 +121,8 @@ Cohesion: 0.06
 Nodes (67): Dashboard(), ENGINE_CATEGORIES, FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, groupEngines(), AI_CONTEXT_WINDOWS (+59 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.14
-Nodes (12): DB_FAMILY_MAPPINGS, POST(), buildPricingFilters(), initDb(), parseFilterList(), requireAdminAuth(), VALID_PRODUCT_TYPES, GET() (+4 more)
+Cohesion: 0.17
+Nodes (9): DB_FAMILY_MAPPINGS, buildPricingFilters(), parseFilterList(), VALID_PRODUCT_TYPES, GET(), run(), sql, run() (+1 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.11
@@ -164,16 +165,16 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ### Community 38 - "Community 38"
-Cohesion: 0.09
-Nodes (23): ALIBABA_APP_HOSTING_REGIONS, ALIBABA_BASE, ALIBABA_REGIONS, AppHostingRegion, AWS_APP_HOSTING_REGIONS, AWS_BASE, AWS_REGIONS, AZURE_APP_HOSTING_REGIONS (+15 more)
+Cohesion: 0.10
+Nodes (22): ALIBABA_APP_HOSTING_REGIONS, ALIBABA_BASE, ALIBABA_REGIONS, AppHostingRegion, AWS_APP_HOSTING_REGIONS, AWS_BASE, AWS_REGIONS, AZURE_APP_HOSTING_REGIONS (+14 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.29
 Nodes (8): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry
 
 ### Community 48 - "Community 48"
-Cohesion: 0.36
-Nodes (8): createTransport(), DataQualityAlert, isMailerConfigured(), PriceDriftAlert, sendDataQualityEmail(), sendPriceDriftEmail(), sendStalenessEmail(), StaleDataAlert
+Cohesion: 0.28
+Nodes (9): AppHostingPricingPipeline, createTransport(), DataQualityAlert, isMailerConfigured(), PriceDriftAlert, sendDataQualityEmail(), sendPriceDriftEmail(), sendStalenessEmail() (+1 more)
 
 ### Community 49 - "Community 49"
 Cohesion: 0.40
@@ -208,8 +209,8 @@ Cohesion: 0.18
 Nodes (8): TableRow(), PROVIDER_IDS, providerColor(), providerName(), ProviderTh(), REGION_OPTIONS, formatInstanceName(), WorkloadParameter
 
 ### Community 62 - "Community 62"
-Cohesion: 0.17
-Nodes (7): DataAnalyticsPricingPipeline, DatabasePricingPipeline, STATIC_NETWORKING_PRICING, AlibabaAdapter, PriceDriftResult, PricingPipeline, STATIC_SECURITY_PRICING
+Cohesion: 0.23
+Nodes (5): DatabasePricingPipeline, STATIC_NETWORKING_PRICING, PriceDriftResult, SecurityPricingPipeline, STATIC_SECURITY_PRICING
 
 ### Community 65 - "Community 65"
 Cohesion: 0.31
@@ -235,6 +236,10 @@ Nodes (13): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_AN
 Cohesion: 0.33
 Nodes (3): pipeline, sql, NetworkingPricingPipeline
 
+### Community 79 - "Community 79"
+Cohesion: 0.47
+Nodes (4): POST(), initDb(), requireAdminAuth(), DataAnalyticsPricingPipeline
+
 ## Knowledge Gaps
 - **222 isolated node(s):** `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps`, `FilterSidebarProps`, `PIPELINE_DISPLAY` (+217 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -243,11 +248,11 @@ Nodes (3): pipeline, sql, NetworkingPricingPipeline
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PricingPipeline` connect `Community 62` to `Community 69`, `Community 38`, `Community 9`, `Community 47`, `Community 48`?**
+- **Why does `PricingPipeline` connect `Community 78` to `Community 69`, `Community 38`, `Community 9`, `Community 79`, `Community 47`, `Community 48`, `Community 62`?**
   _High betweenness centrality (0.068) - this node is a cross-community bridge._
 - **Why does `WORKLOADS` connect `Community 61` to `Community 65`, `Community 58`?**
-  _High betweenness centrality (0.058) - this node is a cross-community bridge._
-- **Why does `ServerlessPricingPipeline` connect `Community 26` to `Community 48`, `Community 62`, `Community 47`?**
+  _High betweenness centrality (0.060) - this node is a cross-community bridge._
+- **Why does `ServerlessPricingPipeline` connect `Community 26` to `Community 48`, `Community 47`, `Community 62`, `Community 79`?**
   _High betweenness centrality (0.044) - this node is a cross-community bridge._
 - **What connects `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps` to the rest of the system?**
   _222 weakly-connected nodes found - possible documentation gaps or missing edges._
@@ -255,5 +260,5 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
   _Cohesion score 0.061458718992965566 - nodes in this community are weakly interconnected._
-- **Should `Community 8` be split into smaller, more focused modules?**
-  _Cohesion score 0.14210526315789473 - nodes in this community are weakly interconnected._
+- **Should `Community 9` be split into smaller, more focused modules?**
+  _Cohesion score 0.10507246376811594 - nodes in this community are weakly interconnected._
