@@ -1,4 +1,4 @@
-export type ProductType = 'vm' | 'database' | 'serverless' | 'containers' | 'networking' | 'storage' | 'data-analytics' | 'ai' | 'app-hosting';
+export type ProductType = 'vm' | 'database' | 'serverless' | 'containers' | 'networking' | 'storage' | 'data-analytics' | 'ai' | 'app-hosting' | 'security';
 
 export interface PricingRecord {
   provider: string;

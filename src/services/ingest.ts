@@ -10,6 +10,7 @@ import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline';
 import { NetworkingPricingPipeline } from './networking_pipeline';
 import { StoragePricingPipeline } from './storage_pipeline';
 import { AppHostingPricingPipeline } from './app_hosting_pipeline';
+import { SecurityPricingPipeline } from './security_pipeline';
 
 
 async function main() {
@@ -118,6 +119,18 @@ async function main() {
         console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} App Hosting configurations`);
       } else {
         console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Security & Identity Pricing...');
+    // Run security pricing pipeline
+    const securityPipeline = new SecurityPricingPipeline(sql as any);
+    const securityResults = await securityPipeline.run();
+    securityResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ SECURITY: ${result.recordsProcessed} configurations inserted`);
+      } else {
+        console.log(`  ❌ SECURITY: ${result.message}`);
       }
     });
 

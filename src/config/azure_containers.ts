@@ -21,6 +21,9 @@ const calculateAciPrice = (vcpus: number, memoryGb: number) => {
 };
 
 const baseAzureContainerEntries = [
+  // Managed Kubernetes Control Plane
+  { type: 'AKS Control Plane (Standard)', vcpus: 0, memory: 0, cpuVendor: 'Intel', price: 0.10, orchestrator: 'Kubernetes', compute_type: 'Managed Kubernetes', architecture: 'x86', billing_granularity: 'Hour' },
+
   // ACI (Serverless) - x86
   { type: 'ACI-0.5vCPU-1GB-x86', vcpus: 0.5, memory: 1, cpuVendor: 'Intel', price: calculateAciPrice(0.5, 1), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86', billing_granularity: 'Second' },
   { type: 'ACI-1vCPU-2GB-x86', vcpus: 1, memory: 2, cpuVendor: 'Intel', price: calculateAciPrice(1, 2), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86', billing_granularity: 'Second' },

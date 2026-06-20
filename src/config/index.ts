@@ -10,6 +10,7 @@ export const CPU_PROFILES = [
   { id: 'ampere-arm', label: 'Ampere (ARM)', vendor: 'Ampere', arch: 'ARM' },
 ];
 export const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optimized', 'Storage optimized', 'Burstable', 'HPC'];
+export const PRICING_MODELS = ['On-Demand', 'Spot / Preemptible'];
 
 // Database-specific constants
 export const DB_FAMILIES = ['Relational', 'NoSQL'];
@@ -39,17 +40,17 @@ export const SERVERLESS_SERVICE_TYPES = ['Compute', 'API Gateway', 'Messaging', 
 
 // Containers-specific constants
 export const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
-export const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned'];
+export const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned', 'Managed Kubernetes'];
 export const CONTAINERS_ARCHITECTURES = ['x86', 'ARM'];
 export const CONTAINERS_BILLING_GRANULARITY = ['Second', 'Hour'];
 
 // Networking-specific constants
-export const NETWORKING_SERVICES = ['Data Transfer', 'Content Delivery Network (CDN)', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway'];
+export const NETWORKING_SERVICES = ['Data Transfer', 'Content Delivery Network (CDN)', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway', 'API Gateway'];
 // Display-only grouping for the Service filter chips. Every NETWORKING_SERVICES
 // entry must appear in exactly one group. Filtering logic still uses the flat list.
 export const NETWORKING_SERVICE_GROUPS: { label: string; services: string[] }[] = [
   { label: 'Core & Transfer', services: ['Data Transfer', 'Virtual Private Cloud (VPC)'] },
-  { label: 'Connectivity & Gateways', services: ['VPN Gateway', 'NAT Gateway', 'Dedicated Connection'] },
+  { label: 'Connectivity & Gateways', services: ['VPN Gateway', 'NAT Gateway', 'Dedicated Connection', 'API Gateway'] },
   { label: 'Delivery & Addressing', services: ['Load Balancing', 'Public IPv4', 'Content Delivery Network (CDN)'] },
 ];
 export const NETWORKING_CONNECTION_TYPES = ['Multipoint', 'Point-to-Point'];
@@ -130,3 +131,11 @@ export const APP_HOSTING_TIERS: string[] = ['Free', 'Basic', 'Standard', 'Premiu
 export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
 
 // (Integration folded into Serverless — see SERVERLESS_SERVICE_TYPES above.)
+
+// --- SECURITY & IDENTITY ---
+export const SECURITY_SERVICES = ['Web Application Firewall (WAF)', 'Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'DDoS Protection', 'Threat Detection'];
+export const SECURITY_SERVICE_GROUPS: { label: string; services: string[] }[] = [
+  { label: 'Network Security', services: ['Web Application Firewall (WAF)', 'DDoS Protection'] },
+  { label: 'Identity & Encryption', services: ['Identity & Access Management (IAM)', 'Key Management Service (KMS)'] },
+  { label: 'Threat & Compliance', services: ['Threat Detection'] },
+];

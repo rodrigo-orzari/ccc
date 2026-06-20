@@ -21,6 +21,9 @@ const calculateCloudRunPrice = (vcpus: number, memoryGb: number) => {
 };
 
 const baseGcpContainerEntries = [
+  // Managed Kubernetes Control Plane
+  { type: 'GKE Control Plane (Standard)', vcpus: 0, memory: 0, cpuVendor: 'Intel', price: 0.10, orchestrator: 'Kubernetes', compute_type: 'Managed Kubernetes', architecture: 'x86', billing_granularity: 'Hour' },
+
   // Cloud Run (Serverless) - x86
   { type: 'CloudRun-1vCPU-1GB-x86', vcpus: 1, memory: 1, cpuVendor: 'Intel', price: calculateCloudRunPrice(1, 1), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86', billing_granularity: '100ms' },
   { type: 'CloudRun-1vCPU-2GB-x86', vcpus: 1, memory: 2, cpuVendor: 'Intel', price: calculateCloudRunPrice(1, 2), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86', billing_granularity: '100ms' },
