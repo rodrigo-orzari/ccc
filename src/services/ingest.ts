@@ -11,6 +11,7 @@ import { NetworkingPricingPipeline } from './networking_pipeline';
 import { StoragePricingPipeline } from './storage_pipeline';
 import { AppHostingPricingPipeline } from './app_hosting_pipeline';
 import { SecurityPricingPipeline } from './security_pipeline';
+import { AIPricingPipeline } from './ai_pipeline';
 
 
 async function main() {
@@ -131,6 +132,18 @@ async function main() {
         console.log(`  ✅ SECURITY: ${result.recordsProcessed} configurations inserted`);
       } else {
         console.log(`  ❌ SECURITY: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing AI Models Pricing...');
+    // Run AI pricing pipeline
+    const aiPipeline = new AIPricingPipeline(sql as any);
+    const aiResults = await aiPipeline.run();
+    aiResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ AI: ${result.count || 0} configurations inserted`);
+      } else {
+        console.log(`  ❌ AI: ${result.message}`);
       }
     });
 

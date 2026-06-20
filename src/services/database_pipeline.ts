@@ -249,16 +249,46 @@ export class OraclePostgreSQLAdapter extends BaseAdapter {
       geography: ORACLE_POSTGRESQL_GEOGRAPHY,
       category: 'Relational',
       price: inst.price,
-      unit: 'Hour',
+      unit: 'ECPU-Hour',
       dataSource: 'static_config' as const,
       attributes: {
         engine: 'PostgreSQL',
-        engine_version: '16',
+        engine_version: '14.x',
         deployment_type: 'Provisioned',
         ha_mode: 'Single AZ',
         storage_type: 'SSD',
         tier: deriveTier('oracle', inst.type),
       },
+    }));
+  }
+}
+
+// ─── Vector Databases (static config) ────────────────────────────────────────
+
+import { VECTOR_DATABASES } from '../config/vector_databases';
+
+export class VectorDatabasesAdapter extends BaseAdapter {
+  providerSlug = 'vector';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Vector DB pricing (${VECTOR_DATABASES.length} entries from static config)...`);
+    return VECTOR_DATABASES.map(inst => ({
+      provider: inst.provider,
+      service: 'Vector Database',
+      region: 'global',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory_gb,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: 'Global',
+      category: 'Vector',
+      price: inst.price,
+      unit: inst.unit,
+      dataSource: 'static_config' as const,
+      attributes: inst.attributes,
     }));
   }
 }
@@ -754,6 +784,7 @@ export class DatabasePricingPipeline extends PricingPipeline {
       new DigitalOceanDBAdapter(),
       new AlibabaDBAdapter(),
       new AlibabaRedisAdapter(),
+      new VectorDatabasesAdapter(),
     ];
   }
 

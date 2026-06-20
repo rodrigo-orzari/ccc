@@ -182,11 +182,10 @@ function ProviderRow({
 // ─── page ─────────────────────────────────────────────────────────────────────
 
 const NAV_SECTIONS = [
-  { id: 'summary-stats',    label: 'Summary' },
+  { id: 'world-map',        label: 'Global Region Map' },
   { id: 'infra-table',      label: 'Infrastructure Overview' },
   { id: 'coverage-matrix',  label: 'Regional Coverage Matrix' },
   { id: 'az-detail',        label: 'Availability Zones per Region' },
-  { id: 'world-map',        label: 'Global Region Map' },
   { id: 'data-sources',     label: 'Data Sources' },
 ];
 
@@ -336,6 +335,11 @@ export default function DatacentersPage() {
               </div>
             </div>
 
+            {/* World Map */}
+            <div id="world-map" className="mb-8 scroll-mt-6">
+              <WorldMap />
+            </div>
+
             {/* Infrastructure Overview */}
             <div id="infra-table" className="scroll-mt-6">
               <div className="flex items-center justify-between mb-3">
@@ -481,11 +485,6 @@ export default function DatacentersPage() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* World Map */}
-            <div id="world-map" className="scroll-mt-6">
-              <WorldMap />
             </div>
 
             {/* Data sources */}

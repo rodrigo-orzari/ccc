@@ -137,7 +137,7 @@ export class AzureServerlessAdapter extends BaseAdapter {
     console.log(`Fetching Azure Functions pricing (${AZURE_SERVERLESS.length} entries from static config)...`);
     return AZURE_SERVERLESS.map(inst => ({
       provider: 'azure',
-      service: 'Azure Functions',
+      service: (inst as any).serviceOverride || 'Azure Functions',
       region: AZURE_SERVERLESS_REGION,
       instanceType: inst.type,
       vcpus: inst.vcpus,
