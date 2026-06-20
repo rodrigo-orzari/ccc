@@ -180,6 +180,14 @@ const CloudProductsPage: React.FC = () => {
             .sidebar { display: none; }
             .main-content { margin-left: 0; padding: 2rem 1.5rem 5rem; }
           }
+
+          .products-wrapper > footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+          }
         `}
       </style>
 
