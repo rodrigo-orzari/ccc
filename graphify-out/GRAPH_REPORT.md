@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-19)
 
 ## Corpus Check
-- 166 files · ~131,677 words
+- 166 files · ~131,957 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `361c5e92`
+- Built from commit: `bdd6f45f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -99,10 +99,10 @@
   test_filters.mjs → src/lib/api-utils.ts
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
+- `GET()` --calls--> `buildPricingFilters()`  [EXTRACTED]
+  src/app/api/pricing/route.ts → src/lib/api-utils.ts
 - `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/app/page.tsx → src/hooks/useDynamicFilters.ts
-- `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
-  src/components/ProductTypeSelector.tsx → src/types/index.ts
 
 ## Import Cycles
 - None detected.
@@ -218,7 +218,7 @@ Cohesion: 0.19
 Nodes (8): PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, PricingRecord, ProductType, WorkloadComponent, WorkloadDefinition, WorkloadParameter
 
 ## Knowledge Gaps
-- **222 isolated node(s):** `PROVIDERS`, `SUPPORTED_CATEGORIES`, `PROVIDERS`, `ColDef`, `COL_PROVIDER` (+217 more)
+- **222 isolated node(s):** `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps`, `FilterSidebarProps`, `PRICING_MODELS` (+217 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **37 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -231,7 +231,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.209) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 55` to `Community 65`, `Community 69`, `Community 38`, `Community 9`, `Community 74`, `Community 76`, `Community 16`, `Community 62`?**
   _High betweenness centrality (0.036) - this node is a cross-community bridge._
-- **What connects `PROVIDERS`, `SUPPORTED_CATEGORIES`, `PROVIDERS` to the rest of the system?**
+- **What connects `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps` to the rest of the system?**
   _222 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
