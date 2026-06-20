@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1781634434.6593115,
-    "ast_hash": "d6dff9024401759abfc6fa4aa0a6c412",
+    "mtime": 1781932815.7506535,
+    "ast_hash": "57bb6880e7a8ec3a7d47ad7ab788cf8d",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
@@ -590,8 +590,8 @@
     "semantic_hash": ""
   },
   "src/config/digitalocean_storage.ts": {
-    "mtime": 1781587736.5225377,
-    "ast_hash": "6a48d022ec5b247ea6f25b1ea29b49e1",
+    "mtime": 1781932425.3791292,
+    "ast_hash": "a5c899b242e4863ef93ca2b728bf0687",
     "semantic_hash": ""
   },
   "src/config/gcp_storage.ts": {
@@ -837,6 +837,11 @@
   "src/services/security_pipeline.ts": {
     "mtime": 1781931882.1927207,
     "ast_hash": "c0b9b112e5541cdd2d60a50be6b5a0aa",
+    "semantic_hash": ""
+  },
+  "src/app/cloud-products/page.tsx": {
+    "mtime": 1781932855.054675,
+    "ast_hash": "20c35c35a43fe603ca1533609b8d51be",
     "semantic_hash": ""
   }
 }
