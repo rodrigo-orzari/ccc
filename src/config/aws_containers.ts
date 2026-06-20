@@ -23,6 +23,9 @@ const calculateFargatePrice = (vcpus: number, memoryGb: number, arch: 'x86' | 'A
 };
 
 const baseAwsContainerEntries = [
+  // Managed Kubernetes Control Plane
+  { type: 'EKS Control Plane', vcpus: 0, memory: 0, cpuVendor: 'AWS', price: 0.10, orchestrator: 'Kubernetes', compute_type: 'Managed Kubernetes', architecture: 'x86', billing_granularity: 'Hour' },
+
   // Fargate (Serverless) - x86
   { type: 'Fargate-0.5vCPU-1GB-x86', vcpus: 0.5, memory: 1, cpuVendor: 'Intel', price: calculateFargatePrice(0.5, 1, 'x86'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86', billing_granularity: 'Second' },
   { type: 'Fargate-1vCPU-2GB-x86', vcpus: 1, memory: 2, cpuVendor: 'Intel', price: calculateFargatePrice(1, 2, 'x86'), orchestrator: 'Serverless', compute_type: 'Serverless', architecture: 'x86', billing_granularity: 'Second' },

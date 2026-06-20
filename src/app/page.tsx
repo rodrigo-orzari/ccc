@@ -39,6 +39,7 @@ export default function Dashboard() {
       if (selectedOS.length === staticConfig.OS_TYPES.length) setSelectedOS([...config.OS_TYPES]);
       if (selectedCpu.length === staticConfig.CPU_PROFILES.length) setSelectedCpu([...config.CPU_PROFILES.map(p => p.id)]);
       if (selectedCategory.length === staticConfig.CATEGORIES.length) setSelectedCategory([...config.CATEGORIES]);
+      if (selectedPricingModels.length === staticConfig.PRICING_MODELS.length) setSelectedPricingModels(['On-Demand']);
       if (selectedDbFamilies.length === staticConfig.DB_FAMILIES.length) setSelectedDbFamilies([...config.DB_FAMILIES]);
       if (selectedEngines.length === staticConfig.DB_ENGINES.length) setSelectedEngines([...config.DB_ENGINES]);
       if (selectedDeploymentTypes.length === staticConfig.DEPLOYMENT_TYPES.length) setSelectedDeploymentTypes([...config.DEPLOYMENT_TYPES]);
@@ -66,6 +67,7 @@ export default function Dashboard() {
       if (selectedAiContextWindows.length === staticConfig.AI_CONTEXT_WINDOWS.length) setSelectedAiContextWindows([...config.AI_CONTEXT_WINDOWS]);
       if (selectedAiMultimodalOptions.length === staticConfig.AI_MULTIMODAL_OPTIONS.length) setSelectedAiMultimodalOptions([...config.AI_MULTIMODAL_OPTIONS]);
       if (selectedNetworkingServices.length === staticConfig.NETWORKING_SERVICES.length) setSelectedNetworkingServices([...config.NETWORKING_SERVICES]);
+      if (selectedSecurityServices.length === staticConfig.SECURITY_SERVICES.length) setSelectedSecurityServices([...config.SECURITY_SERVICES]);
       if (selectedNetworkingConnectionTypes.length === staticConfig.NETWORKING_CONNECTION_TYPES.length) setSelectedNetworkingConnectionTypes([...config.NETWORKING_CONNECTION_TYPES]);
       if (selectedNetworkingRoutingTypes.length === staticConfig.NETWORKING_ROUTING_TYPES.length) setSelectedNetworkingRoutingTypes([...config.NETWORKING_ROUTING_TYPES]);
       if (selectedNetworkingHaSupport.length === staticConfig.NETWORKING_HA_SUPPORT.length) setSelectedNetworkingHaSupport([...config.NETWORKING_HA_SUPPORT]);
@@ -99,6 +101,7 @@ export default function Dashboard() {
   const [selectedOS, setSelectedOS] = useState<string[]>([...config.OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(config.CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...config.CATEGORIES]);
+  const [selectedPricingModels, setSelectedPricingModels] = useState<string[]>(['On-Demand']);
   const [selectedGpu, setSelectedGpu] = useState<string[]>(['GPU', 'No GPU']);
 
   const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...config.DB_FAMILIES]);
@@ -157,6 +160,7 @@ export default function Dashboard() {
   const [selectedAiMultimodalOptions, setSelectedAiMultimodalOptions] = useState<string[]>([...config.AI_MULTIMODAL_OPTIONS]);
 
   const [selectedNetworkingServices, setSelectedNetworkingServices] = useState<string[]>([...config.NETWORKING_SERVICES]);
+  const [selectedSecurityServices, setSelectedSecurityServices] = useState<string[]>([...config.SECURITY_SERVICES]);
   const [selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes] = useState<string[]>([...config.NETWORKING_CONNECTION_TYPES]);
   const [selectedNetworkingRoutingTypes, setSelectedNetworkingRoutingTypes] = useState<string[]>([...config.NETWORKING_ROUTING_TYPES]);
   const [selectedNetworkingHaSupport, setSelectedNetworkingHaSupport] = useState<string[]>([...config.NETWORKING_HA_SUPPORT]);
@@ -233,6 +237,7 @@ export default function Dashboard() {
     geography: true,
     os: true,
     cpu: true,
+    gpu: true,
     specs: true,
     dbFamily: true,
     engine: true,
@@ -305,6 +310,7 @@ export default function Dashboard() {
     ));
     subset('cpuVendor', selectedVendors, allVendors);
     subset('category', selectedCategory, config.CATEGORIES);
+    subset('pricing_model', selectedPricingModels, config.PRICING_MODELS);
     subset('gpu', selectedGpu, ['GPU', 'No GPU']);
     subset('dbFamilies', selectedDbFamilies, config.DB_FAMILIES);
     subset('engines', selectedEngines, config.DB_ENGINES);
@@ -335,6 +341,7 @@ export default function Dashboard() {
     subset('aiContextWindows', selectedAiContextWindows, config.AI_CONTEXT_WINDOWS);
     subset('aiMultimodalOptions', selectedAiMultimodalOptions, config.AI_MULTIMODAL_OPTIONS);
     subset('networkingService', selectedNetworkingServices, config.NETWORKING_SERVICES);
+    subset('securityService', selectedSecurityServices, config.SECURITY_SERVICES);
     subset('networkingConnectionTypes', selectedNetworkingConnectionTypes, config.NETWORKING_CONNECTION_TYPES);
     subset('networkingRoutingTypes', selectedNetworkingRoutingTypes, config.NETWORKING_ROUTING_TYPES);
     subset('networkingHaSupport', selectedNetworkingHaSupport, config.NETWORKING_HA_SUPPORT);
@@ -383,7 +390,7 @@ export default function Dashboard() {
     params.append('search', search);
     return params;
   }, [
-    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedGpu, selectedCategory,
+    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedGpu, selectedCategory, selectedPricingModels,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
@@ -393,6 +400,7 @@ export default function Dashboard() {
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
     selectedNetworkingBillingModels, selectedNetworkingUsageTiers, selectedNetworkingPortCapacities, selectedNetworkingTransferScopes,
+    selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
     vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, search
   ]);
@@ -409,7 +417,8 @@ export default function Dashboard() {
       selectedOS.length === 0 ||
       // CPU and GPU are a combined section — block only when both are completely empty
       (selectedCpu.length === 0 && selectedGpu.length === 0) ||
-      selectedCategory.length === 0
+      selectedCategory.length === 0 ||
+      selectedPricingModels.length === 0
     )) return false;
 
     if (activeProductType === 'database' && (
@@ -463,6 +472,10 @@ export default function Dashboard() {
       selectedNetworkingDirections.length === 0
     )) return false;
 
+    if (activeProductType === 'security' && (
+      selectedSecurityServices.length === 0
+    )) return false;
+
     if (activeProductType === 'storage' && (
       selectedStorageCategories.length === 0 ||
       selectedStorageTiers.length === 0 ||
@@ -479,7 +492,7 @@ export default function Dashboard() {
   }, [
     activeProductType,
     selectedProviders, selectedGeographies,
-    selectedOS, selectedCpu, selectedGpu, selectedCategory,
+    selectedOS, selectedCpu, selectedGpu, selectedCategory, selectedPricingModels,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout,
@@ -490,6 +503,7 @@ export default function Dashboard() {
     selectedContainersBillingGranularity,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes,
     selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
+    selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
     selectedAppHostingTiers, selectedAppHostingComputeTypes,
   ]);
@@ -695,6 +709,7 @@ export default function Dashboard() {
           selectedOS={selectedOS}
           selectedCpu={selectedCpu}
           selectedCategory={selectedCategory}
+          selectedPricingModels={selectedPricingModels}
           selectedGpu={selectedGpu}
           selectedDbFamilies={selectedDbFamilies}
           selectedEngines={selectedEngines}
@@ -724,6 +739,7 @@ export default function Dashboard() {
           selectedAiContextWindows={selectedAiContextWindows}
           selectedAiMultimodalOptions={selectedAiMultimodalOptions}
           selectedNetworkingServices={selectedNetworkingServices}
+          selectedSecurityServices={selectedSecurityServices}
           selectedNetworkingConnectionTypes={selectedNetworkingConnectionTypes}
           selectedNetworkingRoutingTypes={selectedNetworkingRoutingTypes}
           selectedNetworkingHaSupport={selectedNetworkingHaSupport}
@@ -750,6 +766,9 @@ export default function Dashboard() {
           onOsToggle={(o) => toggleFilter(selectedOS, setSelectedOS, o)}
           onCpuToggle={(c) => toggleFilter(selectedCpu, setSelectedCpu, c)}
           onCategoryToggle={(c) => toggleFilter(selectedCategory, setSelectedCategory, c)}
+          onSetCategory={setSelectedCategory}
+          onPricingModelToggle={(pm) => toggleFilter(selectedPricingModels, setSelectedPricingModels, pm)}
+          onSetPricingModels={setSelectedPricingModels}
           onGpuToggle={(v) => toggleFilter(selectedGpu, setSelectedGpu, v)}
           onSetGpu={setSelectedGpu}
           onDbFamilyToggle={(f) => toggleFilter(selectedDbFamilies, setSelectedDbFamilies, f)}
@@ -780,6 +799,8 @@ export default function Dashboard() {
           onAiContextWindowToggle={(c) => toggleFilter(selectedAiContextWindows, setSelectedAiContextWindows, c)}
           onAiMultimodalOptionToggle={(o) => toggleFilter(selectedAiMultimodalOptions, setSelectedAiMultimodalOptions, o)}
           onNetworkingServiceToggle={(s) => toggleFilter(selectedNetworkingServices, setSelectedNetworkingServices, s)}
+          onSecurityServiceToggle={(s) => toggleFilter(selectedSecurityServices, setSelectedSecurityServices, s)}
+          onSetSecurityServices={(items) => setSelectedSecurityServices(items)}
           onNetworkingConnectionTypeToggle={(c) => toggleFilter(selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes, c)}
           onNetworkingRoutingTypeToggle={(r) => toggleFilter(selectedNetworkingRoutingTypes, setSelectedNetworkingRoutingTypes, r)}
           onNetworkingHaSupportToggle={(h) => toggleFilter(selectedNetworkingHaSupport, setSelectedNetworkingHaSupport, h)}
@@ -800,7 +821,6 @@ export default function Dashboard() {
           onSetGeographies={setSelectedGeographies}
           onSetOS={setSelectedOS}
           onSetCpu={setSelectedCpu}
-          onSetCategory={setSelectedCategory}
           onSetDbFamilies={setSelectedDbFamilies}
           onSetEngines={setSelectedEngines}
           onSetDeploymentTypes={setSelectedDeploymentTypes}

@@ -190,10 +190,13 @@ export class AzureAdapter extends BaseAdapter {
       const productName: string = (item.productName ?? '').toLowerCase();
       const os = productName.includes('windows') ? 'Windows' : 'Linux';
 
-      // Skip spot/low-priority/dev-test pricing — keep standard on-demand only.
-      if (productName.includes('spot') || productName.includes('low priority') || productName.includes('dev/test')) continue;
+      // Skip dev-test pricing
+      if (productName.includes('dev/test')) continue;
 
-      const key = `${sku}::${os}`;
+      const isSpot = productName.includes('spot') || productName.includes('low priority');
+      const purchaseOption = isSpot ? 'Spot' : 'OnDemand';
+
+      const key = `${sku}::${os}::${purchaseOption}`;
       if (seen.has(key)) continue;
       seen.add(key);
 
@@ -216,6 +219,9 @@ export class AzureAdapter extends BaseAdapter {
         price: item.retailPrice,
         unit: '1 Hour',
         dataSource: 'live_api' as const,
+        attributes: {
+          purchaseOption
+        }
       });
     }
 
@@ -324,12 +330,18 @@ export class GCPAdapter extends BaseAdapter {
       if (!price || price <= 0 || cores <= 0 || memGb <= 0) continue;
 
       // CP-COMPUTEENGINE-VMIMAGE-N2-STANDARD-4 → n2-standard-4
-      const instanceType = key.slice(PREFIX.length).toLowerCase();
+      let instanceType = key.slice(PREFIX.length).toLowerCase();
       if (instanceType.length < 3) continue;
-      // Skip preemptible / spot variants — they have a different pricing entry
-      if (instanceType.endsWith('-preemptible') || instanceType.endsWith('-spot')) continue;
-      if (seen.has(instanceType)) continue;
-      seen.add(instanceType);
+
+      let purchaseOption = 'OnDemand';
+      if (instanceType.endsWith('-preemptible') || instanceType.endsWith('-spot')) {
+        purchaseOption = 'Spot';
+        instanceType = instanceType.replace(/-preemptible$/, '').replace(/-spot$/, '');
+      }
+
+      const dedupeKey = `${instanceType}::${purchaseOption}`;
+      if (seen.has(dedupeKey)) continue;
+      seen.add(dedupeKey);
 
       const cpuVendor = this.gcpCpuVendor(instanceType);
       records.push({
@@ -346,8 +358,9 @@ export class GCPAdapter extends BaseAdapter {
         geography: GCP_GEOGRAPHY,
         category: this.classifyGcp(instanceType, cores, memGb),
         price,
-        unit: 'Hour',
+        unit: '1 Hour',
         dataSource: 'live_api' as const,
+        attributes: { purchaseOption },
       });
     }
 

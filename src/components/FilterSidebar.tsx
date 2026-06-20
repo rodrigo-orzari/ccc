@@ -214,6 +214,7 @@ interface FilterSidebarProps {
   selectedOS: string[];
   selectedCpu: string[];
   selectedCategory: string[];
+  selectedPricingModels: string[];
   selectedGpu: string[];
   selectedDbFamilies: string[];
   selectedEngines: string[];
@@ -248,6 +249,7 @@ interface FilterSidebarProps {
   selectedNetworkingHaSupport: string[];
   selectedNetworkingVpcSupport: string[];
   selectedNetworkingDirections: string[];
+  selectedSecurityServices: string[];
   selectedNetworkingBillingModels: string[];
   selectedNetworkingUsageTiers: string[];
   selectedNetworkingPortCapacities: string[];
@@ -270,6 +272,9 @@ interface FilterSidebarProps {
   onOsToggle: (os: string) => void;
   onCpuToggle: (cpu: string) => void;
   onCategoryToggle: (cat: string) => void;
+  onSetCategory: (items: string[]) => void;
+  onPricingModelToggle: (pm: string) => void;
+  onSetPricingModels: (items: string[]) => void;
   onGpuToggle: (value: string) => void;
   onSetGpu: (items: string[]) => void;
   onDbFamilyToggle: (fam: string) => void;
@@ -295,6 +300,8 @@ interface FilterSidebarProps {
   onAnalyticsEngineToggle: (eng: string) => void;
   onAnalyticsDeploymentTypeToggle: (dt: string) => void;
   onAnalyticsTierToggle: (tier: string) => void;
+  onSecurityServiceToggle: (s: string) => void;
+  onSetSecurityServices: (items: string[]) => void;
   onAiServiceTypeToggle: (val: string) => void;
   onAiModelTierToggle: (val: string) => void;
   onAiContextWindowToggle: (val: string) => void;
@@ -321,7 +328,6 @@ interface FilterSidebarProps {
   onSetGeographies: (items: string[]) => void;
   onSetOS: (items: string[]) => void;
   onSetCpu: (items: string[]) => void;
-  onSetCategory: (items: string[]) => void;
   onSetDbFamilies: (items: string[]) => void;
   onSetEngines: (items: string[]) => void;
   onSetDeploymentTypes: (items: string[]) => void;
@@ -383,6 +389,7 @@ export default function FilterSidebar({
   selectedOS,
   selectedCpu,
   selectedCategory,
+  selectedPricingModels,
   selectedGpu,
   selectedDbFamilies,
   selectedEngines,
@@ -417,6 +424,7 @@ export default function FilterSidebar({
   selectedNetworkingHaSupport,
   selectedNetworkingVpcSupport,
   selectedNetworkingDirections,
+  selectedSecurityServices,
   selectedNetworkingBillingModels,
   selectedNetworkingUsageTiers,
   selectedNetworkingPortCapacities,
@@ -438,6 +446,9 @@ export default function FilterSidebar({
   onOsToggle,
   onCpuToggle,
   onCategoryToggle,
+  onSetCategory,
+  onPricingModelToggle,
+  onSetPricingModels,
   onGpuToggle,
   onSetGpu,
   onDbFamilyToggle,
@@ -463,6 +474,9 @@ export default function FilterSidebar({
   onAnalyticsEngineToggle,
   onAnalyticsDeploymentTypeToggle,
   onAnalyticsTierToggle,
+  onSetAnalyticsTiers,
+  onSecurityServiceToggle,
+  onSetSecurityServices,
   onAiServiceTypeToggle,
   onAiModelTierToggle,
   onAiContextWindowToggle,
@@ -488,7 +502,6 @@ export default function FilterSidebar({
   onSetGeographies,
   onSetOS,
   onSetCpu,
-  onSetCategory,
   onSetDbFamilies,
   onSetEngines,
   onSetDeploymentTypes,
@@ -510,7 +523,6 @@ export default function FilterSidebar({
   onSetContainersBillingGranularity,
   onSetAnalyticsEngines,
   onSetAnalyticsDeploymentTypes,
-  onSetAnalyticsTiers,
   onSetAiServiceTypes,
   onSetAiModelTiers,
   onSetAiContextWindows,
@@ -622,6 +634,18 @@ export default function FilterSidebar({
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
             <FilterSection
+              title="Pricing Model"
+              tooltip="Select between standard on-demand pricing and discounted spare capacity (Spot / Preemptible) instances."
+              options={config.PRICING_MODELS}
+              selected={selectedPricingModels}
+              onToggle={onPricingModelToggle}
+              onSetAll={onSetPricingModels}
+              isExpanded={expanded.pricingModel ?? true}
+              onToggleExpand={() => onToggleSection('pricingModel')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
               title="Operating System"
               tooltip="The operating system running on the VM."
               options={config.OS_TYPES}
@@ -633,72 +657,29 @@ export default function FilterSidebar({
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
-            <section className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h2 className="m-0">
-                  <button
-                    onClick={() => onToggleSection('cpu')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
-                  >
-                    <ChevronDown size={10} className={`transition-transform ${expanded.cpu ? '' : '-rotate-90'}`} />
-                    CPU | GPU <Tooltip text="Processor vendor, architecture, and GPU accelerator."><Info size={10} className="cursor-help" /></Tooltip>
-                  </button>
-                </h2>
-                {/* Select All / Clear All — all CPU profiles + both GPU options = "all" */}
-                {(() => {
-                  const GPU_OPTIONS = ['GPU', 'No GPU'];
-                  const allSelected = selectedCpu.length === config.CPU_PROFILES.length && selectedGpu.length === GPU_OPTIONS.length;
-                  return (
-                    <button
-                      onClick={() => {
-                        if (allSelected) {
-                          onSetCpu([]);
-                          onSetGpu([]);
-                        } else {
-                          onSetCpu(config.CPU_PROFILES.map(p => p.id));
-                          onSetGpu(GPU_OPTIONS);
-                        }
-                      }}
-                      className={`text-[10px] font-bold uppercase transition-colors ${
-                        allSelected ? 'text-black dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
-                      }`}
-                    >
-                      {allSelected ? 'Clear All' : 'Select All'}
-                    </button>
-                  );
-                })()}
-              </div>
-              {expanded.cpu && (
-                <div className="flex flex-wrap gap-2">
-                  {config.CPU_PROFILES.map(profile => (
-                    <button
-                      key={profile.id}
-                      onClick={() => onCpuToggle(profile.id)}
-                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                        selectedCpu.includes(profile.id)
-                          ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                          : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                      }`}
-                    >
-                      {profile.label}
-                    </button>
-                  ))}
-                  {['GPU', 'No GPU'].map(option => (
-                    <button
-                      key={option}
-                      onClick={() => onGpuToggle(option)}
-                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                        selectedGpu.includes(option)
-                          ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                          : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </section>
+            <FilterSection
+              title="CPU"
+              tooltip="Processor vendor and architecture."
+              options={config.CPU_PROFILES.map(p => p.id)}
+              getLabel={(id) => config.CPU_PROFILES.find(p => p.id === id)?.label || id}
+              selected={selectedCpu}
+              onToggle={onCpuToggle}
+              onSetAll={onSetCpu}
+              isExpanded={expanded.cpu ?? true}
+              onToggleExpand={() => onToggleSection('cpu')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
+              title="GPU"
+              tooltip="GPU accelerator options."
+              options={['GPU', 'No GPU']}
+              selected={selectedGpu}
+              onToggle={onGpuToggle}
+              onSetAll={onSetGpu}
+              isExpanded={expanded.gpu ?? true}
+              onToggleExpand={() => onToggleSection('gpu')}
+            />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
@@ -1183,6 +1164,34 @@ export default function FilterSidebar({
               onSetAll={onSetNetworkingDirections}
               isExpanded={expanded.networkingTransferDirection ?? true}
               onToggleExpand={() => onToggleSection('networkingTransferDirection')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+          </>
+        )}
+        {/* Security filters */}
+        {activeProductType === 'security' && (
+          <>
+            <FilterSection
+              title="Geography"
+              tooltip="Geographic region for the service."
+              options={config.GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSetAll={onSetGeographies}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <GroupedFilterSection
+              title="Service"
+              tooltip="Security or identity service type."
+              groups={config.SECURITY_SERVICE_GROUPS}
+              allOptions={config.SECURITY_SERVICES}
+              selected={selectedSecurityServices}
+              onToggle={onSecurityServiceToggle}
+              onSetAll={onSetSecurityServices}
+              isExpanded={expanded.securityService ?? true}
+              onToggleExpand={() => onToggleSection('securityService')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>

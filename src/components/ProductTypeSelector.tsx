@@ -10,6 +10,7 @@ const PRODUCT_TYPES: { id: ProductType; label: string; emoji: string; soon?: boo
   { id: 'data-analytics', label: 'Data & Analytics', emoji: '📊' },
   { id: 'database', label: 'Databases', emoji: '🗄️' },
   { id: 'networking', label: 'Networking', emoji: '🌐' },
+  { id: 'security', label: 'Security & Identity', emoji: '🛡️' },
   { id: 'serverless', label: 'Serverless', emoji: '⚡' },
   { id: 'storage', label: 'Storage', emoji: '💾' },
   { id: 'vm', label: 'Virtual Machines', emoji: '🖥️' },

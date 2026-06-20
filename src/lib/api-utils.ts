@@ -95,7 +95,7 @@ export const initDb = async () => {
 
 const MAX_FILTER_ITEMS = 50;
 const MAX_SEARCH_LENGTH = 200;
-const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting'];
+const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting', 'security'];
 
 function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
   if (!input) return [];
@@ -121,7 +121,7 @@ function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS)
 export function buildPricingFilters(query: any) {
   try {
     const {
-      provider, geography, os, arch, cpuVendor, gpu, category,
+      provider, geography, os, arch, cpuVendor, gpu, category, pricing_model,
       minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
       product,
       dbFamilies, engines, deploymentTypes, haModes,
@@ -219,6 +219,19 @@ export function buildPricingFilters(query: any) {
       if (categoriesFilter.length > 0) {
         conditions.push(`LOWER(pr.category) = ANY($${paramCount++})`);
         values.push(categoriesFilter);
+      }
+
+      const pricingModels = parseFilterList(pricing_model as string).map((s: string) => s.toLowerCase());
+      if (pricingModels.length > 0) {
+        const wantsOnDemand = pricingModels.includes('on-demand');
+        const wantsSpot = pricingModels.includes('spot / preemptible');
+        
+        if (wantsSpot && !wantsOnDemand) {
+          conditions.push(`pr.attributes->>'purchaseOption' = 'Spot'`);
+        } else if (wantsOnDemand && !wantsSpot) {
+          conditions.push(`(pr.attributes->>'purchaseOption' IS NULL OR pr.attributes->>'purchaseOption' != 'Spot')`);
+        }
+        // If both or neither, no filter
       }
     }
 
