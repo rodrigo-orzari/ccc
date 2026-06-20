@@ -96,7 +96,7 @@ export default function Dashboard() {
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Filter state
-  const [selectedProviders, setSelectedProviders] = useState<string[]>(config.PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id));
+  const [selectedProviders, setSelectedProviders] = useState<string[]>(staticConfig.providersForType('ai').filter(p => !p.soon).map(p => p.id));
   const [selectedGeographies, setSelectedGeographies] = useState<string[]>([...config.GEOGRAPHIES]);
   const [selectedOS, setSelectedOS] = useState<string[]>([...config.OS_TYPES]);
   const [selectedCpu, setSelectedCpu] = useState<string[]>(config.CPU_PROFILES.map(p => p.id));
@@ -109,26 +109,21 @@ export default function Dashboard() {
   const [selectedDeploymentTypes, setSelectedDeploymentTypes] = useState<string[]>([...config.DEPLOYMENT_TYPES]);
   const [selectedHaModes, setSelectedHaModes] = useState<string[]>([...config.HA_MODES]);
 
-  // Handle AI provider selection automatically when tab changes
+  // When the category changes, reconcile the selected providers to only those
+  // applicable to the new category. Keeps any still-valid prior selection, drops
+  // providers that don't belong here (e.g. OpenAI when leaving AI), and auto-selects
+  // the niche providers that are exclusive to the new category (e.g. vector DBs on
+  // Databases, OpenAI/Anthropic on AI).
   useEffect(() => {
-    if (activeProductType !== 'ai') {
-      setSelectedProviders(prev => {
-        const nonAIProviders = config.PROVIDERS.filter(p => !p.isAIOnly).map(p => p.id);
-        const next = prev.filter(p => nonAIProviders.includes(p));
-        // If nothing is left (e.g. user was only selecting OpenAI), reset to all non-AI providers
-        if (next.length === 0) {
-          return config.PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id);
-        }
-        return next;
-      });
-    } else {
-      setSelectedProviders(prev => {
-        const aiOnly = config.PROVIDERS.filter(p => p.isAIOnly).map(p => p.id);
-        const missing = aiOnly.filter(id => !prev.includes(id));
-        if (missing.length > 0) return [...prev, ...missing];
-        return prev;
-      });
-    }
+    const applicable = staticConfig.providersForType(activeProductType);
+    const applicableIds = applicable.map(p => p.id);
+    const applicableNonSoon = applicable.filter(p => !p.soon).map(p => p.id);
+    const nicheForType = applicableNonSoon.filter(id => staticConfig.PROVIDER_CATEGORY_SCOPE[id]);
+    setSelectedProviders(prev => {
+      const kept = prev.filter(p => applicableIds.includes(p));
+      const merged = Array.from(new Set([...kept, ...nicheForType]));
+      return merged.length > 0 ? merged : applicableNonSoon;
+    });
   }, [activeProductType]);
 
   const [selectedServerlessLanguages, setSelectedServerlessLanguages] = useState<string[]>([...config.SERVERLESS_LANGUAGES]);
@@ -698,7 +693,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex flex-col min-h-[100dvh] lg:h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans lg:overflow-hidden transition-colors duration-300">
+    <main className="flex flex-col min-h-[100dvh] lg:h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans lg:overflow-hidden transition-colors duration-300">
+      <h1 className="sr-only">Compare Cloud Costs - AWS, Azure, Google Cloud Pricing</h1>
       <ProductTypeSelector activeProductType={activeProductType} onProductTypeChange={setActiveProductType} />
 
       <div className="flex flex-1 lg:overflow-hidden">
@@ -875,13 +871,13 @@ export default function Dashboard() {
 
         <main className="flex-1 min-w-0 lg:overflow-hidden flex flex-col bg-[#f7f8ff] dark:bg-[#06060f]">
           <ProviderCards
-            providers={config.PROVIDERS.filter(p => activeProductType === 'ai' || !p.isAIOnly)}
+            providers={staticConfig.providersForType(activeProductType)}
             selectedProviders={selectedProviders}
             providerCounts={providerCounts}
             dbStatusProviders={dbStatus?.providers}
             isInitialFetch={isInitialFetch}
             onProviderSelect={(providerId) => {
-              const activeProvidersList = config.PROVIDERS.filter(p => !p.soon && (activeProductType === 'ai' || !p.isAIOnly));
+              const activeProvidersList = staticConfig.providersForType(activeProductType).filter(p => !p.soon);
               const activeNonSoon = activeProvidersList.map(p => p.id);
               if (selectedProviders.includes(providerId) && selectedProviders.length === 1) {
                 setSelectedProviders(activeNonSoon);
@@ -1041,6 +1037,6 @@ export default function Dashboard() {
           z-index: 20;
         }
       `}} />
-    </div>
+    </main>
   );
 }

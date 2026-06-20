@@ -125,6 +125,32 @@ export const PROVIDERS: { id: string; name: string; color: string; soon?: boolea
   { id: 'cloudflare', name: 'Cloudflare', color: '#F38020' },
 ];
 
+// Providers that only belong to specific product categories. The six hyperscalers
+// (aws/azure/gcp/oracle/digitalocean/alibaba) are intentionally omitted here,
+// meaning "available in every category". A provider listed below only shows its
+// filter button + summary card on the categories it actually offers. Keep this in
+// sync with the ingest pipelines when a niche provider gains data in a new category.
+export const PROVIDER_CATEGORY_SCOPE: Record<string, string[]> = {
+  openai: ['ai'],
+  anthropic: ['ai'],
+  pinecone: ['database'],
+  milvus: ['database'],
+  qdrant: ['database'],
+  weaviate: ['database'],
+  chroma: ['database'],
+  cloudflare: ['networking'],
+};
+
+// Returns the providers applicable to a given product type. Filter buttons and the
+// summary provider cards should only render these so users never see a provider
+// (e.g. OpenAI on Virtual Machines) that can't appear in the current category.
+export function providersForType(productType: string) {
+  return PROVIDERS.filter(p => {
+    const scope = PROVIDER_CATEGORY_SCOPE[p.id];
+    return !scope || scope.includes(productType);
+  });
+}
+
 // AI-specific constants
 export const AI_SERVICE_TYPES = ['Foundational Models', 'Embeddings'];
 export const AI_MODEL_TIERS = ['Frontier', 'Standard', 'Efficient'];

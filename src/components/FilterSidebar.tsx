@@ -566,7 +566,9 @@ export default function FilterSidebar({
   onClose,
 }: FilterSidebarProps) {
   const config = useDynamicFilters();
-  const activeNonSoon = config.PROVIDERS.filter(p => !p.soon).map(p => p.id);
+  // Only the providers applicable to the active category (e.g. no OpenAI on VMs).
+  const applicableProviders = staticConfig.providersForType(activeProductType);
+  const activeNonSoon = applicableProviders.filter(p => !p.soon).map(p => p.id);
   
   const currentVCpuDefault = 
     activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_VCPU_RANGE : 
@@ -610,7 +612,7 @@ export default function FilterSidebar({
         <FilterSection
           title="Provider"
           tooltip="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter."
-          options={config.PROVIDERS.filter(p => !p.soon).map(p => p.id)}
+          options={applicableProviders.filter(p => !p.soon).map(p => p.id)}
           getLabel={(id) => config.PROVIDERS.find(p => p.id === id)?.name || id}
           selected={selectedProviders}
           onToggle={onProviderToggle}
