@@ -8,6 +8,39 @@ import { RangeSlider } from './RangeSlider';
 // Import all filter constants from config
 import { useDynamicFilters } from '@/hooks/useDynamicFilters';
 
+const ENGINE_CATEGORIES: Record<string, string[]> = {
+  'Relational': ['MySQL', 'PostgreSQL', 'SQL Server', 'Oracle DB', 'MariaDB', 'DB2', 'Db2', 'MySQL (on-premise for Outpost)', 'PostgreSQL (on-premise for Outpost)', 'SQL Server (on-premise for Outpost)', 'Oracle (on-premises for Outposts)'],
+  'Data Warehouse & Analytics': ['BigQuery', 'Snowflake', 'Redshift', 'Databricks', 'Synapse', 'Oracle Autonomous Data Warehouse', 'Oracle Analytics Cloud', 'AnalyticDB for MySQL', 'MaxCompute', 'Hologres', 'E-MapReduce'],
+  'NoSQL & In-Memory': ['MongoDB', 'Cosmos DB', 'Redis', 'Valkey'],
+  'Streaming & Search': ['Kafka', 'Kinesis Data Streams', 'Pub/Sub', 'Event Hubs', 'OpenSearch']
+};
+
+const groupEngines = (engines: string[]) => {
+  const groups: { label: string; services: string[] }[] = [
+    { label: 'Relational', services: [] },
+    { label: 'Data Warehouse & Analytics', services: [] },
+    { label: 'NoSQL & In-Memory', services: [] },
+    { label: 'Streaming & Search', services: [] },
+    { label: 'Other', services: [] }
+  ];
+
+  engines.forEach(eng => {
+    let matched = false;
+    for (const [category, list] of Object.entries(ENGINE_CATEGORIES)) {
+      if (list.includes(eng)) {
+        groups.find(g => g.label === category)?.services.push(eng);
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      groups.find(g => g.label === 'Other')?.services.push(eng);
+    }
+  });
+
+  return groups.filter(g => g.services.length > 0);
+};
+
 const Tooltip = ({ text, children }: { text: string; children: React.ReactNode }) => {
   const [show, setShow] = React.useState(false);
   return (
@@ -509,6 +542,15 @@ export default function FilterSidebar({
 }: FilterSidebarProps) {
   const config = useDynamicFilters();
   const activeNonSoon = config.PROVIDERS.filter(p => !p.soon).map(p => p.id);
+  
+  const currentVCpuDefault = 
+    activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_VCPU_RANGE : 
+    activeProductType === 'containers' ? config.DEFAULT_CONTAINERS_VCPU_RANGE : 
+    config.DEFAULT_VCPU_RANGE;
+  const currentMemoryDefault = 
+    activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_MEMORY_RANGE : 
+    activeProductType === 'containers' ? config.DEFAULT_CONTAINERS_MEMORY_RANGE : 
+    config.DEFAULT_MEMORY_RANGE;
 
   return (
     <>
@@ -686,10 +728,11 @@ export default function FilterSidebar({
               onToggleExpand={() => onToggleSection('dbFamily')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
+            <GroupedFilterSection
               title="Database Engine"
               tooltip="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc."
-              options={config.DB_ENGINES}
+              groups={groupEngines(config.DB_ENGINES)}
+              allOptions={config.DB_ENGINES}
               selected={selectedEngines}
               onToggle={onEngineToggle}
               onSetAll={onSetEngines}
@@ -1310,15 +1353,15 @@ export default function FilterSidebar({
             </h2>
             <button
               onClick={() => {
-                onVCpuRangeChange({ ...config.DEFAULT_VCPU_RANGE });
-                onMemoryRangeChange({ ...config.DEFAULT_MEMORY_RANGE });
+                onVCpuRangeChange({ ...currentVCpuDefault });
+                onMemoryRangeChange({ ...currentMemoryDefault });
                 onPriceRangeChange({ ...config.DEFAULT_PRICE_RANGE });
               }}
               className={`text-[10px] font-bold uppercase transition-colors ${
-                vCpuRange.min !== config.DEFAULT_VCPU_RANGE.min ||
-                vCpuRange.max !== config.DEFAULT_VCPU_RANGE.max ||
-                memoryRange.min !== config.DEFAULT_MEMORY_RANGE.min ||
-                memoryRange.max !== config.DEFAULT_MEMORY_RANGE.max ||
+                vCpuRange.min !== currentVCpuDefault.min ||
+                vCpuRange.max !== currentVCpuDefault.max ||
+                memoryRange.min !== currentMemoryDefault.min ||
+                memoryRange.max !== currentMemoryDefault.max ||
                 priceRange.min !== config.DEFAULT_PRICE_RANGE.min ||
                 priceRange.max !== config.DEFAULT_PRICE_RANGE.max
                   ? 'text-black dark:text-[#f7f8ff]'
@@ -1330,13 +1373,13 @@ export default function FilterSidebar({
           </div>
           {expanded.specs && (
             <div className="space-y-8 px-1">
-              {['vm', 'database', 'containers'].includes(activeProductType) && (
+              {['vm', 'database', 'containers', 'serverless'].includes(activeProductType) && (
                 <>
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
                     <RangeSlider
-                      min={config.DEFAULT_VCPU_RANGE.min}
-                      max={config.DEFAULT_VCPU_RANGE.max}
+                      min={currentVCpuDefault.min}
+                      max={currentVCpuDefault.max}
                       value={vCpuRange}
                       onChange={onVCpuRangeChange}
                     />
@@ -1344,8 +1387,8 @@ export default function FilterSidebar({
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-[#737373]">Memory (GB)</div>
                     <RangeSlider
-                      min={config.DEFAULT_MEMORY_RANGE.min}
-                      max={config.DEFAULT_MEMORY_RANGE.max}
+                      min={currentMemoryDefault.min}
+                      max={currentMemoryDefault.max}
                       value={memoryRange}
                       onChange={onMemoryRangeChange}
                     />

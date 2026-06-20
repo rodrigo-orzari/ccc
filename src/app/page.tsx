@@ -184,6 +184,8 @@ export default function Dashboard() {
   const [memoryRange, setMemoryRange] = useState({ ...config.DEFAULT_MEMORY_RANGE });
   const [serverlessVCpuRange, setServerlessVCpuRange] = useState({ ...config.DEFAULT_SERVERLESS_VCPU_RANGE });
   const [serverlessMemoryRange, setServerlessMemoryRange] = useState({ ...config.DEFAULT_SERVERLESS_MEMORY_RANGE });
+  const [containersVCpuRange, setContainersVCpuRange] = useState({ ...config.DEFAULT_CONTAINERS_VCPU_RANGE });
+  const [containersMemoryRange, setContainersMemoryRange] = useState({ ...config.DEFAULT_CONTAINERS_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...config.DEFAULT_PRICE_RANGE });
   const [search, setSearch] = useState('');
 
@@ -355,10 +357,22 @@ export default function Dashboard() {
 
     // Only send range params when the user has actively constrained them.
     // At the slider floor/ceiling → no filter applied (show all).
-    const currentVCpuDefault = activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_VCPU_RANGE : config.DEFAULT_VCPU_RANGE;
-    const currentMemoryDefault = activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_MEMORY_RANGE : config.DEFAULT_MEMORY_RANGE;
-    const currentVCpuRange = activeProductType === 'serverless' ? serverlessVCpuRange : vCpuRange;
-    const currentMemoryRange = activeProductType === 'serverless' ? serverlessMemoryRange : memoryRange;
+    const currentVCpuDefault = 
+      activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_VCPU_RANGE : 
+      activeProductType === 'containers' ? config.DEFAULT_CONTAINERS_VCPU_RANGE : 
+      config.DEFAULT_VCPU_RANGE;
+    const currentMemoryDefault = 
+      activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_MEMORY_RANGE : 
+      activeProductType === 'containers' ? config.DEFAULT_CONTAINERS_MEMORY_RANGE : 
+      config.DEFAULT_MEMORY_RANGE;
+    const currentVCpuRange = 
+      activeProductType === 'serverless' ? serverlessVCpuRange : 
+      activeProductType === 'containers' ? containersVCpuRange : 
+      vCpuRange;
+    const currentMemoryRange = 
+      activeProductType === 'serverless' ? serverlessMemoryRange : 
+      activeProductType === 'containers' ? containersMemoryRange : 
+      memoryRange;
 
     if (currentVCpuRange.min > currentVCpuDefault.min) params.append('minVcpu', currentVCpuRange.min.toString());
     if (currentVCpuRange.max < currentVCpuDefault.max) params.append('maxVcpu', currentVCpuRange.max.toString());
@@ -380,7 +394,7 @@ export default function Dashboard() {
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
     selectedNetworkingBillingModels, selectedNetworkingUsageTiers, selectedNetworkingPortCapacities, selectedNetworkingTransferScopes,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
-    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, priceRange, search
+    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, search
   ]);
 
   const debouncedParamsString = useDeferredValue(searchParams.toString());
@@ -726,8 +740,8 @@ export default function Dashboard() {
           selectedAppHostingTiers={selectedAppHostingTiers}
           selectedAppHostingComputeTypes={selectedAppHostingComputeTypes}
           selectedServerlessServiceTypes={selectedServerlessServiceTypes}
-          vCpuRange={activeProductType === 'serverless' ? serverlessVCpuRange : vCpuRange}
-          memoryRange={activeProductType === 'serverless' ? serverlessMemoryRange : memoryRange}
+          vCpuRange={activeProductType === 'serverless' ? serverlessVCpuRange : activeProductType === 'containers' ? containersVCpuRange : vCpuRange}
+          memoryRange={activeProductType === 'serverless' ? serverlessMemoryRange : activeProductType === 'containers' ? containersMemoryRange : memoryRange}
           priceRange={priceRange}
           showAggregation={showAggregation}
           expanded={expanded}
@@ -830,8 +844,8 @@ export default function Dashboard() {
           onSetAppHostingTiers={setSelectedAppHostingTiers}
           onSetAppHostingComputeTypes={setSelectedAppHostingComputeTypes}
           onSetServerlessServiceTypes={setSelectedServerlessServiceTypes}
-          onVCpuRangeChange={activeProductType === 'serverless' ? setServerlessVCpuRange : setVCpuRange}
-          onMemoryRangeChange={activeProductType === 'serverless' ? setServerlessMemoryRange : setMemoryRange}
+          onVCpuRangeChange={activeProductType === 'serverless' ? setServerlessVCpuRange : activeProductType === 'containers' ? setContainersVCpuRange : setVCpuRange}
+          onMemoryRangeChange={activeProductType === 'serverless' ? setServerlessMemoryRange : activeProductType === 'containers' ? setContainersMemoryRange : setMemoryRange}
           onPriceRangeChange={setPriceRange}
           onShowAggregationChange={setShowAggregation}
           onToggleSection={toggleSection}

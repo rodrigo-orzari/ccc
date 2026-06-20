@@ -2,7 +2,8 @@ import postgres from 'postgres';
 import dotenv from 'dotenv';
 import cron from 'node-cron';
 import { PricingPipeline, PriceDriftResult } from '../services/pricing_pipeline.ts';
-import { sendPriceDriftEmail, sendStalenessEmail, StaleDataAlert } from '../services/mailer.ts';
+import { sendPriceDriftEmail, sendStalenessEmail, sendDataQualityEmail, StaleDataAlert } from '../services/mailer.ts';
+import { runDataQualityChecks } from '../services/data_quality.ts';
 
 dotenv.config();
 
@@ -98,6 +99,22 @@ cron.schedule('0 0 * * 0', async () => {
     }
   } catch (err) {
     console.error('❌ Staleness check failed:', err);
+  }
+
+  // Data-quality check — alert if any provider has a coverage gap or all-zero
+  // specs that would make workload comparisons show a false "N/A".
+  try {
+    const report = await runDataQualityChecks(sql);
+    if (report.issueCount > 0) {
+      console.warn(`⚠️  Data-quality: ${report.errorCount} error(s), ${report.warnCount} warning(s)`);
+      await sendDataQualityEmail(report.issues).catch(err =>
+        console.error('❌ Failed to send data-quality email:', err)
+      );
+    } else {
+      console.log('✅ Data-quality check passed — no catalog gaps detected.');
+    }
+  } catch (err) {
+    console.error('❌ Data-quality check failed:', err);
   }
 });
 
