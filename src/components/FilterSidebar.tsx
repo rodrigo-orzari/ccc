@@ -7,6 +7,7 @@ import { RangeSlider } from './RangeSlider';
 
 // Import all filter constants from config
 import { useDynamicFilters } from '@/hooks/useDynamicFilters';
+import * as staticConfig from '@/config';
 
 const ENGINE_CATEGORIES: Record<string, string[]> = {
   'Relational': ['MySQL', 'PostgreSQL', 'SQL Server', 'Oracle DB', 'MariaDB', 'DB2', 'Db2', 'MySQL (on-premise for Outpost)', 'PostgreSQL (on-premise for Outpost)', 'SQL Server (on-premise for Outpost)', 'Oracle (on-premises for Outposts)'],
@@ -690,10 +691,10 @@ export default function FilterSidebar({
           const isOnlyVector = selectedDbFamilies.length === 1 && selectedDbFamilies[0].toLowerCase() === 'vector';
           const availableEngines = selectedDbFamilies.length > 0 
             ? selectedDbFamilies.flatMap(f => {
-                const mappedFamily = Object.keys(config.DB_FAMILY_MAPPINGS || {}).find(
+                const mappedFamily = Object.keys(staticConfig.DB_FAMILY_MAPPINGS || {}).find(
                   k => k.toLowerCase() === f.toLowerCase()
                 );
-                return mappedFamily ? config.DB_FAMILY_MAPPINGS[mappedFamily] : [];
+                return mappedFamily ? staticConfig.DB_FAMILY_MAPPINGS[mappedFamily] : [];
               })
             : config.DB_ENGINES;
 
