@@ -726,8 +726,8 @@ export default function Dashboard() {
           selectedAppHostingTiers={selectedAppHostingTiers}
           selectedAppHostingComputeTypes={selectedAppHostingComputeTypes}
           selectedServerlessServiceTypes={selectedServerlessServiceTypes}
-          vCpuRange={vCpuRange}
-          memoryRange={memoryRange}
+          vCpuRange={activeProductType === 'serverless' ? serverlessVCpuRange : vCpuRange}
+          memoryRange={activeProductType === 'serverless' ? serverlessMemoryRange : memoryRange}
           priceRange={priceRange}
           showAggregation={showAggregation}
           expanded={expanded}
@@ -830,8 +830,8 @@ export default function Dashboard() {
           onSetAppHostingTiers={setSelectedAppHostingTiers}
           onSetAppHostingComputeTypes={setSelectedAppHostingComputeTypes}
           onSetServerlessServiceTypes={setSelectedServerlessServiceTypes}
-          onVCpuRangeChange={setVCpuRange}
-          onMemoryRangeChange={setMemoryRange}
+          onVCpuRangeChange={activeProductType === 'serverless' ? setServerlessVCpuRange : setVCpuRange}
+          onMemoryRangeChange={activeProductType === 'serverless' ? setServerlessMemoryRange : setMemoryRange}
           onPriceRangeChange={setPriceRange}
           onShowAggregationChange={setShowAggregation}
           onToggleSection={toggleSection}
