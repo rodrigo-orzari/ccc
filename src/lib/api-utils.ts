@@ -287,6 +287,7 @@ export function buildPricingFilters(query: any) {
           // Map family types to engine lists
           const relationalEngines = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB'];
           const noSqlEngines = ['Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2'];
+          const vectorEngines = ['Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma'];
 
           for (const family of dbFamilyFilters) {
             if (family.toLowerCase() === 'relational') {
@@ -296,6 +297,10 @@ export function buildPricingFilters(query: any) {
             } else if (family.toLowerCase() === 'nosql') {
               familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
               values.push(noSqlEngines.map(e => e.toLowerCase()));
+              paramCount++;
+            } else if (family.toLowerCase() === 'vector') {
+              familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
+              values.push(vectorEngines.map(e => e.toLowerCase()));
               paramCount++;
             }
           }

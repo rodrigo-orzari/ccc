@@ -13,8 +13,8 @@ export const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optim
 export const PRICING_MODELS = ['On-Demand', 'Spot / Preemptible'];
 
 // Database-specific constants
-export const DB_FAMILIES = ['Relational', 'NoSQL'];
-export const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2'];
+export const DB_FAMILIES = ['Relational', 'NoSQL', 'Vector'];
+export const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2', 'Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma'];
 export const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
 export const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
 
