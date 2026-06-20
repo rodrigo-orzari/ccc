@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-20)
 
 ## Corpus Check
-- 167 files · ~133,400 words
+- 167 files · ~133,477 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 719 nodes · 1035 edges · 80 communities (45 shown, 35 thin omitted)
+- 719 nodes · 1036 edges · 80 communities (45 shown, 35 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `72435a14`
+- Built from commit: `a044e6fc`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -102,10 +102,10 @@
   test_filters.mjs → src/lib/api-utils.ts
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
-- `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
-  src/app/page.tsx → src/hooks/useDynamicFilters.ts
-- `GET()` --calls--> `buildPricingFilters()`  [EXTRACTED]
-  src/app/api/pricing/route.ts → src/lib/api-utils.ts
+- `AlibabaAnalyticsAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/data_analytics_pipeline.ts → src/services/pricing_pipeline.ts
+- `DatabricksAzureAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/data_analytics_pipeline.ts → src/services/pricing_pipeline.ts
 
 ## Import Cycles
 - None detected.
@@ -248,12 +248,12 @@ Nodes (4): POST(), initDb(), requireAdminAuth(), DataAnalyticsPricingPipeline
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PricingPipeline` connect `Community 78` to `Community 69`, `Community 38`, `Community 9`, `Community 79`, `Community 47`, `Community 48`, `Community 62`?**
-  _High betweenness centrality (0.068) - this node is a cross-community bridge._
-- **Why does `WORKLOADS` connect `Community 61` to `Community 65`, `Community 58`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
-- **Why does `ServerlessPricingPipeline` connect `Community 26` to `Community 48`, `Community 47`, `Community 62`, `Community 79`?**
-  _High betweenness centrality (0.044) - this node is a cross-community bridge._
+- **Why does `PROVIDERS` connect `Community 7` to `Community 58`, `Community 68`, `Community 62`?**
+  _High betweenness centrality (0.194) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Community 55` to `Community 69`, `Community 38`, `Community 9`, `Community 75`, `Community 76`, `Community 47`, `Community 62`?**
+  _High betweenness centrality (0.061) - this node is a cross-community bridge._
+- **Why does `BaseAdapter` connect `Community 56` to `Community 69`, `Community 9`, `Community 75`, `Community 76`, `Community 78`, `Community 47`, `Community 16`, `Community 55`, `Community 62`?**
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
 - **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
   _222 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
