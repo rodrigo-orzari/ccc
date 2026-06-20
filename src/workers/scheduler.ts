@@ -2,6 +2,14 @@ import postgres from 'postgres';
 import dotenv from 'dotenv';
 import cron from 'node-cron';
 import { PricingPipeline, PriceDriftResult } from '../services/pricing_pipeline.ts';
+import { DatabasePricingPipeline } from '../services/database_pipeline.ts';
+import { ServerlessPricingPipeline } from '../services/serverless_pipeline.ts';
+import { ContainersPricingPipeline } from '../services/containers_pipeline.ts';
+import { DataAnalyticsPricingPipeline } from '../services/data_analytics_pipeline.ts';
+import { NetworkingPricingPipeline } from '../services/networking_pipeline.ts';
+import { StoragePricingPipeline } from '../services/storage_pipeline.ts';
+import { AppHostingPricingPipeline } from '../services/app_hosting_pipeline.ts';
+import { SecurityPricingPipeline } from '../services/security_pipeline.ts';
 import { sendPriceDriftEmail, sendStalenessEmail, sendDataQualityEmail, StaleDataAlert } from '../services/mailer.ts';
 import { runDataQualityChecks } from '../services/data_quality.ts';
 
@@ -59,17 +67,32 @@ cron.schedule('0 0 * * 0', async () => {
   console.log('🕒 Starting scheduled pricing pipeline update...');
   try {
     const allDriftAlerts: PriceDriftResult[] = [];
-    const pipeline = new PricingPipeline(sql as any);
-    const results = await pipeline.run();
-    for (const r of results) {
-      if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+    const pipelines = [
+      new PricingPipeline(sql as any),
+      new DatabasePricingPipeline(sql as any),
+      new ServerlessPricingPipeline(sql as any),
+      new ContainersPricingPipeline(sql as any),
+      new DataAnalyticsPricingPipeline(sql as any),
+      new NetworkingPricingPipeline(sql as any),
+      new StoragePricingPipeline(sql as any),
+      new AppHostingPricingPipeline(sql as any),
+      new SecurityPricingPipeline(sql as any)
+    ];
+
+    for (const pipeline of pipelines) {
+      const results = await pipeline.run();
+      for (const r of results) {
+        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
+      }
+      console.log(`✅ Scheduled pipeline ${pipeline.constructor.name} completed.`);
     }
+
     if (allDriftAlerts.length > 0) {
       await sendPriceDriftEmail(allDriftAlerts).catch(err =>
         console.error('❌ Failed to send price drift email:', err)
       );
     }
-    console.log('✅ Scheduled pipeline completed:', results);
+    console.log('✅ All Scheduled pipelines completed successfully.');
   } catch (err) {
     console.error('❌ Scheduled pipeline failed:', err);
   }

@@ -27,6 +27,19 @@ export interface PricingRecord {
   supportedLanguages?: string[];
 }
 
+async function fetchWithRetry(url: string, config: any = {}, retries = 3, timeout = 60000): Promise<any> {
+  const mergedConfig = { timeout, ...config };
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await axios.get(url, mergedConfig);
+    } catch (err: any) {
+      console.warn(`Fetch failed for ${url.substring(0, 100)}... (attempt ${i + 1}/${retries}): ${err.message}`);
+      if (i === retries - 1) throw err;
+      await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1))); // Exponential backoff
+    }
+  }
+}
+
 export interface PriceDriftResult {
   provider: string;
   service: string;
@@ -170,7 +183,7 @@ export class AzureAdapter extends BaseAdapter {
 
     let pages = 0;
     while (url && pages < 10) {
-      const response = await axios.get(url, { timeout: 30000 });
+      const response = await fetchWithRetry(url);
       allItems.push(...(response.data.Items ?? []));
       url = response.data.NextPageLink ?? null;
       pages++;
@@ -236,7 +249,7 @@ export class AWSAdapter extends BaseAdapter {
   async fetchPricing(): Promise<PricingRecord[]> {
     console.log('Fetching AWS pricing (us-east-1)...');
     const url = 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonEC2/current/us-east-1/index.json';
-    const response = await axios.get(url);
+    const response = await fetchWithRetry(url);
     const products = response.data.products;
     const terms = response.data.terms.OnDemand;
 
@@ -309,9 +322,8 @@ export class GCPAdapter extends BaseAdapter {
 
   private async fetchFromPricingApi(): Promise<PricingRecord[]> {
     console.log('Fetching GCP pricing from Cloud Pricing Calculator...');
-    const response = await axios.get(
-      'https://cloudpricingcalculator.appspot.com/static/data/pricelist.json',
-      { timeout: 30000 }
+    const response = await fetchWithRetry(
+      'https://cloudpricingcalculator.appspot.com/static/data/pricelist.json'
     );
 
     const priceList: Record<string, any> = response.data?.gcp_price_list ?? {};
@@ -468,9 +480,8 @@ export class DigitalOceanAdapter extends BaseAdapter {
   private async fetchFromApi(token: string): Promise<PricingRecord[]> {
     console.log('Fetching DigitalOcean pricing (live /v2/sizes API)...');
     const url = 'https://api.digitalocean.com/v2/sizes?per_page=200';
-    const response = await axios.get(url, {
-      headers: { Authorization: `Bearer ${token}` },
-      timeout: 30000
+    const response = await fetchWithRetry(url, {
+      headers: { Authorization: `Bearer ${token}` }
     });
 
     const sizes: any[] = response.data?.sizes || [];
