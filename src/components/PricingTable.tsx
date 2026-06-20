@@ -72,6 +72,7 @@ function getColDefs(pt: ProductType): ColDef[] {
   if (pt === 'app-hosting')    return [...start, COL_MID1, COL_MID2, COL_MID4, ...tailWithSpecs];
   if (pt === 'data-analytics') return [...start, COL_MID1, COL_MID3, COL_MID2, COL_VCPU, ...tail];
   if (pt === 'ai')             return [...start, COL_MID1, COL_MID3, COL_MID2, COL_MID4, COL_PRICE, COL_INV];
+  if (pt === 'security')       return [...start, COL_MID1, ...tail];
   return [...start, ...tail];
 }
 
@@ -363,6 +364,8 @@ export default function PricingTable({
                   <Th colKey="engine_category"    sortKey="attributes.tier"         label="Tier" />
                   <Th colKey="db_family_cpu_vendor" sortKey="attributes.compute_type" label="Compute Type" />
                   <Th colKey="ha_mode_os"         sortKey="os"                      label="OS" />
+                </>) : activeProductType === 'security' ? (<>
+                  <Th colKey="engine_category"    sortKey="category"   label="Category" />
                 </>) : (<>
                   {/* vm (default) */}
                   <Th colKey="engine_category"    sortKey="category"   label="Category" />
@@ -374,7 +377,7 @@ export default function PricingTable({
 
                 {activeProductType !== 'ai' && <Th colKey="geography" sortKey="geography" label="Geo" />}
 
-                {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && (<>
+                {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && activeProductType !== 'security' && (<>
                   <Th colKey="vcpus"     sortKey="vcpus"     label="vCPU" />
                   <Th colKey="memory_gb" sortKey="memory_gb" label="Memory (GB)" />
                 </>)}
@@ -517,6 +520,8 @@ function TableRow({
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
+      </>) : activeProductType === 'security' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
       </>) : (<>
         {/* vm (default) */}
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>
@@ -534,7 +539,7 @@ function TableRow({
       )}
 
       {/* vCPU + Memory (not shown for networking / data-analytics / ai / storage) */}
-      {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && (<>
+      {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && activeProductType !== 'security' && (<>
         <td data-col="vcpus"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
         <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span></td>
       </>)}
@@ -667,6 +672,10 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
       { label: 'Geo', value: dash(record.geography) },
       { label: 'vCPU', value: dash(record.vcpus) },
       { label: 'Memory (GB)', value: dash(record.memory_gb) },
+    ];
+    case 'security': return [
+      { label: 'Category', value: record.category || '—' },
+      { label: 'Geo', value: dash(record.geography) },
     ];
     default: return [ // vm
       { label: 'Category', value: record.category || 'General purpose' },
