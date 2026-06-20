@@ -182,6 +182,8 @@ export default function Dashboard() {
       
   const [vCpuRange, setVCpuRange] = useState({ ...config.DEFAULT_VCPU_RANGE });
   const [memoryRange, setMemoryRange] = useState({ ...config.DEFAULT_MEMORY_RANGE });
+  const [serverlessVCpuRange, setServerlessVCpuRange] = useState({ ...config.DEFAULT_SERVERLESS_VCPU_RANGE });
+  const [serverlessMemoryRange, setServerlessMemoryRange] = useState({ ...config.DEFAULT_SERVERLESS_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...config.DEFAULT_PRICE_RANGE });
   const [search, setSearch] = useState('');
 
@@ -353,10 +355,15 @@ export default function Dashboard() {
 
     // Only send range params when the user has actively constrained them.
     // At the slider floor/ceiling → no filter applied (show all).
-    if (vCpuRange.min > config.DEFAULT_VCPU_RANGE.min) params.append('minVcpu', vCpuRange.min.toString());
-    if (vCpuRange.max < config.DEFAULT_VCPU_RANGE.max) params.append('maxVcpu', vCpuRange.max.toString());
-    if (memoryRange.min > config.DEFAULT_MEMORY_RANGE.min) params.append('minMemory', memoryRange.min.toString());
-    if (memoryRange.max < config.DEFAULT_MEMORY_RANGE.max) params.append('maxMemory', memoryRange.max.toString());
+    const currentVCpuDefault = activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_VCPU_RANGE : config.DEFAULT_VCPU_RANGE;
+    const currentMemoryDefault = activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_MEMORY_RANGE : config.DEFAULT_MEMORY_RANGE;
+    const currentVCpuRange = activeProductType === 'serverless' ? serverlessVCpuRange : vCpuRange;
+    const currentMemoryRange = activeProductType === 'serverless' ? serverlessMemoryRange : memoryRange;
+
+    if (currentVCpuRange.min > currentVCpuDefault.min) params.append('minVcpu', currentVCpuRange.min.toString());
+    if (currentVCpuRange.max < currentVCpuDefault.max) params.append('maxVcpu', currentVCpuRange.max.toString());
+    if (currentMemoryRange.min > currentMemoryDefault.min) params.append('minMemory', currentMemoryRange.min.toString());
+    if (currentMemoryRange.max < currentMemoryDefault.max) params.append('maxMemory', currentMemoryRange.max.toString());
     if (priceRange.min > config.DEFAULT_PRICE_RANGE.min) params.append('minPrice', priceRange.min.toString());
     if (priceRange.max < config.DEFAULT_PRICE_RANGE.max) params.append('maxPrice', priceRange.max.toString());
     params.append('search', search);
@@ -373,7 +380,7 @@ export default function Dashboard() {
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
     selectedNetworkingBillingModels, selectedNetworkingUsageTiers, selectedNetworkingPortCapacities, selectedNetworkingTransferScopes,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
-    vCpuRange, memoryRange, priceRange, search
+    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, priceRange, search
   ]);
 
   const debouncedParamsString = useDeferredValue(searchParams.toString());
