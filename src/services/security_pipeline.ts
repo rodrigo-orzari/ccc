@@ -9,7 +9,7 @@ const STATIC_SECURITY_PRICING = [
   { provider: 'aws', service: 'Key Management Service (KMS)', category: 'Identity & Encryption', instance_type: 'Per CMK', price_per_unit: 1.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'KMS', scope: 'Regional' } },
   { provider: 'aws', service: 'Key Management Service (KMS)', category: 'Identity & Encryption', instance_type: 'Per 10K Requests', price_per_unit: 0.03, unit: '10K Requests', geography: 'Global', attributes: { security_type: 'KMS', scope: 'Regional' } },
   { provider: 'aws', service: 'DDoS Protection', category: 'Network Security', instance_type: 'Shield Advanced', price_per_unit: 3000.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'DDoS', scope: 'Global' } },
-  { provider: 'aws', service: 'Threat Detection', category: 'Threat & Compliance', instance_type: 'GuardDuty (Per GB CloudTrail)', price_per_unit: 4.00, unit: 'GB', geography: 'US East', attributes: { security_type: 'Threat Detection', scope: 'Regional' } },
+  { provider: 'aws', service: 'Threat Detection', category: 'Threat & Compliance', instance_type: 'GuardDuty (Per GB CloudTrail)', price_per_unit: 4.00, unit: 'GB', geography: 'N. America', attributes: { security_type: 'Threat Detection', scope: 'Regional' } },
 
   // --- GCP ---
   { provider: 'gcp', service: 'Web Application Firewall (WAF)', category: 'Network Security', instance_type: 'Standard Tier (Per Policy)', price_per_unit: 5.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'WAF', scope: 'Global' } },
