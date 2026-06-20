@@ -10,6 +10,7 @@ export async function GET() {
     const query = `
       SELECT
         ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a') as geographies,
+        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a' AND s.category = 'security') as geographies_security,
         ARRAY_AGG(DISTINCT pr.os) FILTER (WHERE pr.os IS NOT NULL AND pr.os != '' AND pr.os != 'N/A' AND pr.os != 'n/a') as os_types,
         ARRAY_AGG(DISTINCT pr.arch) FILTER (WHERE pr.arch IS NOT NULL AND pr.arch != '' AND pr.arch != 'N/A' AND pr.arch != 'n/a') as architectures,
         ARRAY_AGG(DISTINCT pr.cpu_vendor) FILTER (WHERE pr.cpu_vendor IS NOT NULL AND pr.cpu_vendor != '' AND pr.cpu_vendor != 'N/A' AND pr.cpu_vendor != 'n/a') as cpu_vendors,

@@ -430,7 +430,7 @@ export default function StatusPage() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
                     <span style={{ flexShrink: 0 }}><SourceBadge source="static" apiCount={0} staticCount={0} /></span>
-                    <span><strong>Manual fallback pricing</strong> used when a provider has no usable live API or a fetch fails. Not auto-refreshed.</span>
+                    <span><strong>Manual fallback pricing</strong> used when a live fetch fails. Not auto-refreshed.</span>
                   </div>
                 </div>
               </div>

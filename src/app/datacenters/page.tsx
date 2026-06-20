@@ -494,9 +494,9 @@ export default function DatacentersPage() {
               <p className="text-sm text-[#737373] mb-4 max-w-2xl leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2">
                 {PROVIDER_INFRA.map(p => (
-                  <div key={p.id} className="bg-white dark:bg-[#0a0a18] border border-[#dde0f0] dark:border-[#1e1e38] rounded p-2.5 flex flex-col gap-2">
+                  <div key={p.id} className="bg-white dark:bg-[#0a0a18] border border-[#dde0f0] dark:border-[#1e1e38] rounded p-2 flex flex-col gap-1.5">
                     <ProviderBadge id={p.id} name={p.nameShort} />
                     <div className="flex flex-col gap-1">
                       {p.sources.map(src => (
