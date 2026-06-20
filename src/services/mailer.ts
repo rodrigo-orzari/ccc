@@ -95,3 +95,37 @@ export async function sendStalenessEmail(alerts: StaleDataAlert[]): Promise<void
   });
   console.log(`📧 Staleness email sent (${alerts.length} services)`);
 }
+
+export interface DataQualityAlert {
+  severity: 'error' | 'warn';
+  kind: string;
+  detail: string;
+}
+
+export async function sendDataQualityEmail(alerts: DataQualityAlert[]): Promise<void> {
+  if (alerts.length === 0) return;
+
+  const fmt = (sev: string) =>
+    alerts.filter(a => a.severity === sev).map(a => `  • [${a.kind}] ${a.detail}`).join('\n');
+  const errors = alerts.filter(a => a.severity === 'error');
+  const body =
+    `Automated data-quality checks found ${alerts.length} catalog issue(s) that can make ` +
+    `workload comparisons show false "N/A" values:\n\n` +
+    (errors.length ? `ERRORS (${errors.length}):\n${fmt('error')}\n\n` : '') +
+    (alerts.length - errors.length ? `WARNINGS (${alerts.length - errors.length}):\n${fmt('warn')}\n\n` : '') +
+    `Most issues are resolved by re-ingesting the affected pipeline ` +
+    `(POST /api/admin/fetch-pricing?type=<pipeline>) or fixing the provider's config in src/config/.`;
+
+  if (!isMailerConfigured()) {
+    console.warn('⚠️  SMTP not configured — data-quality alert (not sent):\n' + body);
+    return;
+  }
+
+  await createTransport().sendMail({
+    from: ALERT_FROM,
+    to: ALERT_TO,
+    subject: `[CCC] Data-quality issues — ${errors.length} error(s), ${alerts.length - errors.length} warning(s)`,
+    text: body,
+  });
+  console.log(`📧 Data-quality email sent (${alerts.length} issues)`);
+}
