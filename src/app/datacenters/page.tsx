@@ -294,8 +294,8 @@ export default function DatacentersPage() {
       <div className="flex-1 overflow-auto flex flex-col">
         <div className="flex flex-1 w-full">
 
-          {/* Sidebar — page navigation */}
-          <aside className="w-72 border-r border-[#dde0f0] dark:border-[#1e1e38] flex flex-col shrink-0 overflow-y-auto bg-[#f7f8ff] dark:bg-[#06060f] pb-10">
+          {/* Sidebar — page navigation (desktop only) */}
+          <aside className="hidden lg:flex w-72 border-r border-[#dde0f0] dark:border-[#1e1e38] flex-col shrink-0 overflow-y-auto bg-[#f7f8ff] dark:bg-[#06060f] pb-10">
 
             {/* On this page */}
             <section className="px-4 pt-5 pb-4 border-b border-[#dde0f0] dark:border-[#1e1e38]">
@@ -316,7 +316,7 @@ export default function DatacentersPage() {
           </aside>
 
           {/* Main */}
-          <main className="flex-1 overflow-x-auto p-6 lg:p-8 pb-20">
+          <main className="flex-1 min-w-0 overflow-x-auto p-4 lg:p-8 pb-20">
 
             {/* Header */}
             <div className="mb-6">
