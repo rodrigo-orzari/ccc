@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-19)
 
 ## Corpus Check
-- 161 files · ~127,269 words
+- 161 files · ~127,320 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 659 nodes · 934 edges · 73 communities (40 shown, 33 thin omitted)
+- 661 nodes · 936 edges · 73 communities (40 shown, 33 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `afca0e10`
+- Built from commit: `90162985`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -112,7 +112,7 @@ Nodes (13): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, G
 
 ### Community 7 - "Community 7"
 Cohesion: 0.07
-Nodes (58): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+50 more)
+Nodes (60): Dashboard(), FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, AI_CONTEXT_WINDOWS, AI_MODEL_TIERS, AI_MULTIMODAL_OPTIONS (+52 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.13
@@ -219,7 +219,7 @@ Cohesion: 0.13
 Nodes (11): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig (+3 more)
 
 ## Knowledge Gaps
-- **200 isolated node(s):** `PROVIDERS`, `ColDef`, `COL_PROVIDER`, `COL_SKU`, `COL_GEO` (+195 more)
+- **202 isolated node(s):** `SERVERLESS_SERVICE_TYPES`, `DEFAULT_SERVERLESS_VCPU_RANGE`, `DEFAULT_SERVERLESS_MEMORY_RANGE`, `STORAGE_CATEGORIES`, `STORAGE_TIERS` (+197 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **33 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -227,16 +227,16 @@ Nodes (11): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_AN
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `ServerlessPricingPipeline` connect `Community 26` to `Community 38`, `Community 62`, `Community 47`?**
-  _High betweenness centrality (0.037) - this node is a cross-community bridge._
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 55` to `Community 64`, `Community 69`, `Community 38`, `Community 71`, `Community 72`, `Community 8`, `Community 9`, `Community 70`, `Community 62`, `Community 63`?**
   _High betweenness centrality (0.025) - this node is a cross-community bridge._
 - **Why does `BaseAdapter` connect `Community 56` to `Community 64`, `Community 69`, `Community 70`, `Community 71`, `Community 72`, `Community 8`, `Community 9`, `Community 55`, `Community 62`, `Community 63`?**
   _High betweenness centrality (0.020) - this node is a cross-community bridge._
-- **What connects `PROVIDERS`, `ColDef`, `COL_PROVIDER` to the rest of the system?**
-  _200 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `SERVERLESS_SERVICE_TYPES`, `DEFAULT_SERVERLESS_VCPU_RANGE`, `DEFAULT_SERVERLESS_MEMORY_RANGE` to the rest of the system?**
+  _202 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.075 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07146087743102668 - nodes in this community are weakly interconnected._
 - **Should `Community 9` be split into smaller, more focused modules?**
   _Cohesion score 0.13450292397660818 - nodes in this community are weakly interconnected._
