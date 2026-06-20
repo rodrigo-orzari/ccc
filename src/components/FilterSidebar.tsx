@@ -337,6 +337,10 @@ interface FilterSidebarProps {
   onPriceRangeChange: (range: { min: number; max: number }) => void;
   onShowAggregationChange: (value: boolean) => void;
   onToggleSection: (key: string) => void;
+  /** Mobile drawer: whether the sidebar is open (ignored on lg+ where it's always visible). */
+  isOpen?: boolean;
+  /** Mobile drawer: called when the backdrop or close button is tapped. */
+  onClose?: () => void;
 }
 
 export default function FilterSidebar({
@@ -500,12 +504,40 @@ export default function FilterSidebar({
   onPriceRangeChange,
   onShowAggregationChange,
   onToggleSection,
+  isOpen = false,
+  onClose,
 }: FilterSidebarProps) {
   const config = useDynamicFilters();
   const activeNonSoon = config.PROVIDERS.filter(p => !p.soon).map(p => p.id);
 
   return (
-    <aside className="w-72 border-r border-[#dde0f0] dark:border-[#1e1e38] flex flex-col shrink-0 overflow-y-auto bg-[#f7f8ff] dark:bg-[#06060f] custom-scrollbar pb-10">
+    <>
+    {/* Mobile backdrop */}
+    {isOpen && (
+      <div
+        className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+    )}
+    <aside
+      className={`
+        w-72 border-r border-[#dde0f0] dark:border-[#1e1e38] flex flex-col overflow-y-auto bg-[#f7f8ff] dark:bg-[#06060f] custom-scrollbar pb-10
+        fixed inset-y-0 left-0 z-50 max-w-[85vw] transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        lg:static lg:z-auto lg:max-w-none lg:translate-x-0 lg:shrink-0 lg:transition-none
+      `}
+    >
+      {/* Mobile-only header with close button */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[#dde0f0] dark:border-[#1e1e38] lg:hidden sticky top-0 bg-[#f7f8ff] dark:bg-[#06060f] z-10">
+        <span className="text-sm font-bold text-[#1e1e38] dark:text-[#e5e7eb]">Filters</span>
+        <button
+          onClick={onClose}
+          className="text-2xl leading-none px-2 text-[#737373] hover:text-[#1e1e38] dark:hover:text-[#f7f8ff]"
+          aria-label="Close filters"
+        >
+          ×
+        </button>
+      </div>
       <div className="p-4 space-y-8">
         {/* Providers Section */}
         <FilterSection
@@ -1379,5 +1411,6 @@ export default function FilterSidebar({
         )}
       </div>
     </aside>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Search, Download } from 'lucide-react';
+import { Search, Download, SlidersHorizontal } from 'lucide-react';
 
 interface TableToolbarProps {
   totalFilteredCount: number;
@@ -12,6 +12,8 @@ interface TableToolbarProps {
   isExporting?: boolean;
   viewMode?: 'table' | 'charts';
   onViewModeChange?: (mode: 'table' | 'charts') => void;
+  /** Opens the filter drawer on mobile. When provided, a "Filters" button is shown below lg. */
+  onOpenFilters?: () => void;
 }
 
 export default function TableToolbar({
@@ -23,10 +25,19 @@ export default function TableToolbar({
   isExporting = false,
   viewMode = 'table',
   onViewModeChange,
+  onOpenFilters,
 }: TableToolbarProps) {
   return (
     <div className="px-4 py-3 flex items-center bg-[#f7f8ff] dark:bg-[#06060f] border-b border-[#dde0f0] dark:border-[#1e1e38]">
-      <div className="flex items-center gap-6 flex-wrap">
+      <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
+        {onOpenFilters && (
+          <button
+            onClick={onOpenFilters}
+            className="lg:hidden flex items-center gap-2 text-xs font-bold text-[#1e1e38] dark:text-[#f7f8ff] border border-[#dde0f0] dark:border-[#1e1e38] bg-[#dde0f0] dark:bg-[#1e1e38] px-3 py-2 rounded shrink-0"
+          >
+            <SlidersHorizontal size={14} /> Filters
+          </button>
+        )}
         <span className="text-xl font-bold text-black dark:text-[#f7f8ff] shrink-0">
           {totalFilteredCount.toLocaleString()}
           {totalFilteredCount > dataLength && dataLength > 0 && (

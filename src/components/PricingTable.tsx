@@ -90,6 +90,10 @@ function saveWidths(pt: string, w: Record<string, number>) {
   try { localStorage.setItem(lsKey(pt), JSON.stringify(w)); } catch { /* ignore */ }
 }
 
+function hasSavedWidths(pt: string): boolean {
+  try { return localStorage.getItem(lsKey(pt)) != null; } catch { return false; }
+}
+
 // ─── Sort icon ──────────────────────────────────────────────────────────────
 interface SortConfig { key: string; direction: 'asc' | 'desc'; }
 
@@ -144,10 +148,53 @@ export default function PricingTable({
   const widthsRef = useRef(colWidths);
   widthsRef.current = colWidths;
 
-  // Reload widths from localStorage whenever the active product type changes
+  // Scale the default column widths so the table fills the available container
+  // width. Only used as the initial "first adjustment" — once a user manually
+  // resizes a column the widths are persisted and this no longer runs.
+  const fitToContainer = useCallback(() => {
+    const el = tableScrollRef.current;
+    if (!el || hasSavedWidths(activeProductType)) return;
+    const avail = el.clientWidth;
+    if (!avail) return;
+    const defs = getColDefs(activeProductType);
+    const base = defs.reduce((s, c) => s + (DEFAULT_WIDTHS[c.key] ?? c.defaultWidth), 0);
+    if (avail <= base + 1) return; // already wider than container — let it scroll
+    const scale = avail / base;
+    const next: Record<string, number> = { ...DEFAULT_WIDTHS };
+    let used = 0;
+    defs.forEach((c, i) => {
+      const w = DEFAULT_WIDTHS[c.key] ?? c.defaultWidth;
+      if (i === defs.length - 1) {
+        next[c.key] = Math.max(MIN_WIDTH, avail - used); // absorb rounding remainder
+      } else {
+        const scaled = Math.max(MIN_WIDTH, Math.floor(w * scale));
+        next[c.key] = scaled;
+        used += scaled;
+      }
+    });
+    setColWidths(next);
+  }, [activeProductType, tableScrollRef]);
+
+  // Reload widths from localStorage whenever the active product type changes.
+  // If the user has not customized widths yet, auto-fit to the container.
   useEffect(() => {
-    setColWidths(loadWidths(activeProductType));
-  }, [activeProductType]);
+    if (hasSavedWidths(activeProductType)) {
+      setColWidths(loadWidths(activeProductType));
+    } else {
+      setColWidths({ ...DEFAULT_WIDTHS });
+      requestAnimationFrame(fitToContainer);
+    }
+  }, [activeProductType, fitToContainer]);
+
+  // Re-fit when the container resizes (window/sidebar changes), unless the user
+  // has manually set column widths.
+  useEffect(() => {
+    const el = tableScrollRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => fitToContainer());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [fitToContainer, tableScrollRef]);
 
   const startResize = useCallback((e: React.PointerEvent, colKey: string) => {
     e.preventDefault();
