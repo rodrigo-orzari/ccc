@@ -5,6 +5,7 @@ import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } f
 import { ALIBABA_INSTANCES, ALIBABA_REGION, ALIBABA_GEOGRAPHY } from '../config/alibaba_instances.ts';
 import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.ts';
 import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.ts';
+import { PROVIDERS } from '../config/index.ts';
 import { DatabasePricingPipeline } from './database_pipeline';
 
 export interface PricingRecord {
@@ -622,10 +623,20 @@ export class PricingPipeline {
 
     await this.sql.begin(async (sql) => {
       const providerSlug = records[0].provider;
-      const providerRes = await sql`SELECT id FROM providers WHERE slug = ${providerSlug}`;
+      let providerRes = await sql`SELECT id FROM providers WHERE slug = ${providerSlug}`;
 
       if (providerRes.length === 0) {
-        throw new Error(`Provider ${providerSlug} not found in database`);
+        // Auto-create providers that exist in config but were never seeded into the
+        // providers table (e.g. vector DB providers like pinecone/qdrant/weaviate).
+        // Prevents a whole category from failing to ingest just because the DB
+        // predates a config addition.
+        const name = PROVIDERS.find(p => p.id === providerSlug)?.name
+          ?? providerSlug.charAt(0).toUpperCase() + providerSlug.slice(1);
+        providerRes = await sql`
+          INSERT INTO providers (slug, name) VALUES (${providerSlug}, ${name})
+          ON CONFLICT (slug) DO UPDATE SET name = EXCLUDED.name
+          RETURNING id
+        `;
       }
       const providerId = providerRes[0].id;
 
