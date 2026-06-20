@@ -4,220 +4,571 @@
   "graph": {},
   "nodes": [
     {
+      "label": "pricing_pipeline.ts",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L1",
+      "id": "services_pricing_pipeline",
+      "community": 62,
+      "norm_label": "pricing_pipeline.ts"
+    },
+    {
+      "label": "PricingRecord",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L11",
+      "id": "services_pricing_pipeline_pricingrecord",
+      "community": 55,
+      "norm_label": "pricingrecord"
+    },
+    {
+      "label": "fetchWithRetry()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L31",
+      "id": "services_pricing_pipeline_fetchwithretry",
+      "community": 16,
+      "norm_label": "fetchwithretry()"
+    },
+    {
+      "label": "PriceDriftResult",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L44",
+      "id": "services_pricing_pipeline_pricedriftresult",
+      "community": 62,
+      "norm_label": "pricedriftresult"
+    },
+    {
+      "label": "BaseAdapter",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L53",
+      "id": "services_pricing_pipeline_baseadapter",
+      "community": 56,
+      "norm_label": "baseadapter"
+    },
+    {
+      "label": ".getGeography()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L57",
+      "id": "services_pricing_pipeline_baseadapter_getgeography",
+      "community": 56,
+      "norm_label": ".getgeography()"
+    },
+    {
+      "label": ".getCpuVendor()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L68",
+      "id": "services_pricing_pipeline_baseadapter_getcpuvendor",
+      "community": 56,
+      "norm_label": ".getcpuvendor()"
+    },
+    {
+      "label": ".getGpuCount()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L82",
+      "id": "services_pricing_pipeline_baseadapter_getgpucount",
+      "community": 56,
+      "norm_label": ".getgpucount()"
+    },
+    {
+      "label": ".categoryByRatio()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L88",
+      "id": "services_pricing_pipeline_baseadapter_categorybyratio",
+      "community": 56,
+      "norm_label": ".categorybyratio()"
+    },
+    {
+      "label": ".classifyAws()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L96",
+      "id": "services_pricing_pipeline_baseadapter_classifyaws",
+      "community": 56,
+      "norm_label": ".classifyaws()"
+    },
+    {
+      "label": ".classifyAzure()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L117",
+      "id": "services_pricing_pipeline_baseadapter_classifyazure",
+      "community": 56,
+      "norm_label": ".classifyazure()"
+    },
+    {
+      "label": ".classifyGcp()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L131",
+      "id": "services_pricing_pipeline_baseadapter_classifygcp",
+      "community": 56,
+      "norm_label": ".classifygcp()"
+    },
+    {
+      "label": ".getCategory()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L140",
+      "id": "services_pricing_pipeline_baseadapter_getcategory",
+      "community": 56,
+      "norm_label": ".getcategory()"
+    },
+    {
+      "label": ".healthCheck()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L144",
+      "id": "services_pricing_pipeline_baseadapter_healthcheck",
+      "community": 56,
+      "norm_label": ".healthcheck()"
+    },
+    {
+      "label": "AzureAdapter",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L149",
+      "id": "services_pricing_pipeline_azureadapter",
+      "community": 56,
+      "norm_label": "azureadapter"
+    },
+    {
+      "label": ".vcpuFromSku()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L158",
+      "id": "services_pricing_pipeline_azureadapter_vcpufromsku",
+      "community": 56,
+      "norm_label": ".vcpufromsku()"
+    },
+    {
+      "label": ".memoryFromSku()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L167",
+      "id": "services_pricing_pipeline_azureadapter_memoryfromsku",
+      "community": 56,
+      "norm_label": ".memoryfromsku()"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L177",
+      "id": "services_pricing_pipeline_azureadapter_fetchpricing",
+      "community": 56,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "AWSAdapter",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L247",
+      "id": "services_pricing_pipeline_awsadapter",
+      "community": 56,
+      "norm_label": "awsadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L250",
+      "id": "services_pricing_pipeline_awsadapter_fetchpricing",
+      "community": 56,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "GCPAdapter",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L312",
+      "id": "services_pricing_pipeline_gcpadapter",
+      "community": 16,
+      "norm_label": "gcpadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L315",
+      "id": "services_pricing_pipeline_gcpadapter_fetchpricing",
+      "community": 16,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": ".fetchFromPricingApi()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L324",
+      "id": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi",
+      "community": 16,
+      "norm_label": ".fetchfrompricingapi()"
+    },
+    {
+      "label": ".fetchFromStaticConfig()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L385",
+      "id": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig",
+      "community": 16,
+      "norm_label": ".fetchfromstaticconfig()"
+    },
+    {
+      "label": ".gcpCpuVendor()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L406",
+      "id": "services_pricing_pipeline_gcpadapter_gcpcpuvendor",
+      "community": 16,
+      "norm_label": ".gcpcpuvendor()"
+    },
+    {
+      "label": "OracleAdapter",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L413",
+      "id": "services_pricing_pipeline_oracleadapter",
+      "community": 56,
+      "norm_label": "oracleadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L416",
+      "id": "services_pricing_pipeline_oracleadapter_fetchpricing",
+      "community": 56,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "DigitalOceanAdapter",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L442",
+      "id": "services_pricing_pipeline_digitaloceanadapter",
+      "community": 16,
+      "norm_label": "digitaloceanadapter"
+    },
+    {
+      "label": ".classifyDigitalOcean()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L448",
+      "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean",
+      "community": 56,
+      "norm_label": ".classifydigitalocean()"
+    },
+    {
+      "label": ".gpuCountFromSlug()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L460",
+      "id": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug",
+      "community": 16,
+      "norm_label": ".gpucountfromslug()"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L465",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchpricing",
+      "community": 16,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": ".fetchFromApi()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L481",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi",
+      "community": 16,
+      "norm_label": ".fetchfromapi()"
+    },
+    {
+      "label": ".fetchFromScraper()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L528",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper",
+      "community": 16,
+      "norm_label": ".fetchfromscraper()"
+    },
+    {
+      "label": "AlibabaAdapter",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L552",
+      "id": "services_pricing_pipeline_alibabaadapter",
+      "community": 78,
+      "norm_label": "alibabaadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L555",
+      "id": "services_pricing_pipeline_alibabaadapter_fetchpricing",
+      "community": 78,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "PricingPipeline",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L580",
+      "id": "services_pricing_pipeline_pricingpipeline",
+      "community": 78,
+      "norm_label": "pricingpipeline"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L584",
+      "id": "services_pricing_pipeline_pricingpipeline_constructor",
+      "community": 78,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": ".run()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L602",
+      "id": "services_pricing_pipeline_pricingpipeline_run",
+      "community": 78,
+      "norm_label": ".run()"
+    },
+    {
+      "label": ".saveRecords()",
+      "file_type": "code",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L618",
+      "id": "services_pricing_pipeline_pricingpipeline_saverecords",
+      "community": 78,
+      "norm_label": ".saverecords()"
+    },
+    {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
       "source_location": "L1",
-      "id": "app_page",
       "community": 7,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "app_page"
     },
     {
       "label": "Dashboard()",
       "file_type": "code",
       "source_file": "src/app/page.tsx",
       "source_location": "L19",
-      "id": "app_page_dashboard",
       "community": 7,
-      "norm_label": "dashboard()"
+      "norm_label": "dashboard()",
+      "id": "app_page_dashboard"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L1",
-      "id": "status_page",
       "community": 13,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "status_page"
     },
     {
       "label": "PipelineStatus",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L7",
-      "id": "status_page_pipelinestatus",
       "community": 13,
-      "norm_label": "pipelinestatus"
+      "norm_label": "pipelinestatus",
+      "id": "status_page_pipelinestatus"
     },
     {
       "label": "ProviderStatus",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L17",
-      "id": "status_page_providerstatus",
       "community": 13,
-      "norm_label": "providerstatus"
+      "norm_label": "providerstatus",
+      "id": "status_page_providerstatus"
     },
     {
       "label": "StatusData",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L25",
-      "id": "status_page_statusdata",
       "community": 13,
-      "norm_label": "statusdata"
+      "norm_label": "statusdata",
+      "id": "status_page_statusdata"
     },
     {
       "label": "PROVIDER_COLORS",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L34",
-      "id": "status_page_provider_colors",
       "community": 13,
-      "norm_label": "provider_colors"
+      "norm_label": "provider_colors",
+      "id": "status_page_provider_colors"
     },
     {
       "label": "PROVIDER_URLS",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L45",
-      "id": "status_page_provider_urls",
       "community": 13,
-      "norm_label": "provider_urls"
+      "norm_label": "provider_urls",
+      "id": "status_page_provider_urls"
     },
     {
       "label": "LinkedInIcon()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L59",
-      "id": "status_page_linkedinicon",
       "community": 13,
-      "norm_label": "linkedinicon()"
+      "norm_label": "linkedinicon()",
+      "id": "status_page_linkedinicon"
     },
     {
       "label": "XIcon()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L67",
-      "id": "status_page_xicon",
       "community": 13,
-      "norm_label": "xicon()"
+      "norm_label": "xicon()",
+      "id": "status_page_xicon"
     },
     {
       "label": "PIPELINE_ORDER",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L75",
-      "id": "status_page_pipeline_order",
       "community": 13,
-      "norm_label": "pipeline_order"
+      "norm_label": "pipeline_order",
+      "id": "status_page_pipeline_order"
     },
     {
       "label": "SourceBadge()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L79",
-      "id": "status_page_sourcebadge",
       "community": 13,
-      "norm_label": "sourcebadge()"
+      "norm_label": "sourcebadge()",
+      "id": "status_page_sourcebadge"
     },
     {
       "label": "BackToTop()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L118",
-      "id": "status_page_backtotop",
       "community": 13,
-      "norm_label": "backtotop()"
+      "norm_label": "backtotop()",
+      "id": "status_page_backtotop"
     },
     {
       "label": "StatusPage()",
       "file_type": "code",
       "source_file": "src/app/status/page.tsx",
       "source_location": "L131",
-      "id": "status_page_statuspage",
       "community": 13,
-      "norm_label": "statuspage()"
+      "norm_label": "statuspage()",
+      "id": "status_page_statuspage"
     },
     {
       "label": "FilterSidebar.tsx",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L1",
-      "id": "components_filtersidebar",
       "community": 7,
-      "norm_label": "filtersidebar.tsx"
+      "norm_label": "filtersidebar.tsx",
+      "id": "components_filtersidebar"
     },
     {
       "label": "ENGINE_CATEGORIES",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L12",
-      "id": "components_filtersidebar_engine_categories",
       "community": 7,
-      "norm_label": "engine_categories"
+      "norm_label": "engine_categories",
+      "id": "components_filtersidebar_engine_categories"
     },
     {
       "label": "groupEngines()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L20",
-      "id": "components_filtersidebar_groupengines",
       "community": 7,
-      "norm_label": "groupengines()"
+      "norm_label": "groupengines()",
+      "id": "components_filtersidebar_groupengines"
     },
     {
       "label": "Tooltip()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L47",
-      "id": "components_filtersidebar_tooltip",
       "community": 7,
-      "norm_label": "tooltip()"
+      "norm_label": "tooltip()",
+      "id": "components_filtersidebar_tooltip"
     },
     {
       "label": "FilterSectionProps",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L67",
-      "id": "components_filtersidebar_filtersectionprops",
       "community": 7,
-      "norm_label": "filtersectionprops"
+      "norm_label": "filtersectionprops",
+      "id": "components_filtersidebar_filtersectionprops"
     },
     {
       "label": "FilterSection()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L80",
-      "id": "components_filtersidebar_filtersection",
       "community": 7,
-      "norm_label": "filtersection()"
+      "norm_label": "filtersection()",
+      "id": "components_filtersidebar_filtersection"
     },
     {
       "label": "GroupedFilterSectionProps",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L141",
-      "id": "components_filtersidebar_groupedfiltersectionprops",
       "community": 7,
-      "norm_label": "groupedfiltersectionprops"
+      "norm_label": "groupedfiltersectionprops",
+      "id": "components_filtersidebar_groupedfiltersectionprops"
     },
     {
       "label": "GroupedFilterSection()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L156",
-      "id": "components_filtersidebar_groupedfiltersection",
       "community": 7,
-      "norm_label": "groupedfiltersection()"
+      "norm_label": "groupedfiltersection()",
+      "id": "components_filtersidebar_groupedfiltersection"
     },
     {
       "label": "FilterSidebarProps",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L223",
-      "id": "components_filtersidebar_filtersidebarprops",
       "community": 7,
-      "norm_label": "filtersidebarprops"
+      "norm_label": "filtersidebarprops",
+      "id": "components_filtersidebar_filtersidebarprops"
     },
     {
       "label": "FilterSidebar()",
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L398",
-      "id": "components_filtersidebar_filtersidebar",
       "community": 7,
-      "norm_label": "filtersidebar()"
+      "norm_label": "filtersidebar()",
+      "id": "components_filtersidebar_filtersidebar"
     },
     {
       "label": "scheduler.ts",
@@ -1820,357 +2171,6 @@
       "community": 26,
       "norm_label": ".getoracleserverlessstaticrecords()",
       "id": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
-    },
-    {
-      "label": "pricing_pipeline.ts",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L1",
-      "community": 62,
-      "norm_label": "pricing_pipeline.ts",
-      "id": "services_pricing_pipeline"
-    },
-    {
-      "label": "PricingRecord",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L10",
-      "community": 55,
-      "norm_label": "pricingrecord",
-      "id": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "label": "fetchWithRetry()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L30",
-      "community": 16,
-      "norm_label": "fetchwithretry()",
-      "id": "services_pricing_pipeline_fetchwithretry"
-    },
-    {
-      "label": "PriceDriftResult",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L43",
-      "community": 62,
-      "norm_label": "pricedriftresult",
-      "id": "services_pricing_pipeline_pricedriftresult"
-    },
-    {
-      "label": "BaseAdapter",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L52",
-      "community": 56,
-      "norm_label": "baseadapter",
-      "id": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "label": ".getGeography()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L56",
-      "community": 56,
-      "norm_label": ".getgeography()",
-      "id": "services_pricing_pipeline_baseadapter_getgeography"
-    },
-    {
-      "label": ".getCpuVendor()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L67",
-      "community": 56,
-      "norm_label": ".getcpuvendor()",
-      "id": "services_pricing_pipeline_baseadapter_getcpuvendor"
-    },
-    {
-      "label": ".getGpuCount()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L81",
-      "community": 56,
-      "norm_label": ".getgpucount()",
-      "id": "services_pricing_pipeline_baseadapter_getgpucount"
-    },
-    {
-      "label": ".categoryByRatio()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L87",
-      "community": 56,
-      "norm_label": ".categorybyratio()",
-      "id": "services_pricing_pipeline_baseadapter_categorybyratio"
-    },
-    {
-      "label": ".classifyAws()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L95",
-      "community": 56,
-      "norm_label": ".classifyaws()",
-      "id": "services_pricing_pipeline_baseadapter_classifyaws"
-    },
-    {
-      "label": ".classifyAzure()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L116",
-      "community": 56,
-      "norm_label": ".classifyazure()",
-      "id": "services_pricing_pipeline_baseadapter_classifyazure"
-    },
-    {
-      "label": ".classifyGcp()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L130",
-      "community": 56,
-      "norm_label": ".classifygcp()",
-      "id": "services_pricing_pipeline_baseadapter_classifygcp"
-    },
-    {
-      "label": ".getCategory()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L139",
-      "community": 56,
-      "norm_label": ".getcategory()",
-      "id": "services_pricing_pipeline_baseadapter_getcategory"
-    },
-    {
-      "label": ".healthCheck()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L143",
-      "community": 56,
-      "norm_label": ".healthcheck()",
-      "id": "services_pricing_pipeline_baseadapter_healthcheck"
-    },
-    {
-      "label": "AzureAdapter",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L148",
-      "community": 56,
-      "norm_label": "azureadapter",
-      "id": "services_pricing_pipeline_azureadapter"
-    },
-    {
-      "label": ".vcpuFromSku()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L157",
-      "community": 56,
-      "norm_label": ".vcpufromsku()",
-      "id": "services_pricing_pipeline_azureadapter_vcpufromsku"
-    },
-    {
-      "label": ".memoryFromSku()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L166",
-      "community": 56,
-      "norm_label": ".memoryfromsku()",
-      "id": "services_pricing_pipeline_azureadapter_memoryfromsku"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L176",
-      "community": 56,
-      "norm_label": ".fetchpricing()",
-      "id": "services_pricing_pipeline_azureadapter_fetchpricing"
-    },
-    {
-      "label": "AWSAdapter",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L246",
-      "community": 56,
-      "norm_label": "awsadapter",
-      "id": "services_pricing_pipeline_awsadapter"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L249",
-      "community": 56,
-      "norm_label": ".fetchpricing()",
-      "id": "services_pricing_pipeline_awsadapter_fetchpricing"
-    },
-    {
-      "label": "GCPAdapter",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L311",
-      "community": 16,
-      "norm_label": "gcpadapter",
-      "id": "services_pricing_pipeline_gcpadapter"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L314",
-      "community": 16,
-      "norm_label": ".fetchpricing()",
-      "id": "services_pricing_pipeline_gcpadapter_fetchpricing"
-    },
-    {
-      "label": ".fetchFromPricingApi()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L323",
-      "community": 16,
-      "norm_label": ".fetchfrompricingapi()",
-      "id": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi"
-    },
-    {
-      "label": ".fetchFromStaticConfig()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L384",
-      "community": 16,
-      "norm_label": ".fetchfromstaticconfig()",
-      "id": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig"
-    },
-    {
-      "label": ".gcpCpuVendor()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L405",
-      "community": 16,
-      "norm_label": ".gcpcpuvendor()",
-      "id": "services_pricing_pipeline_gcpadapter_gcpcpuvendor"
-    },
-    {
-      "label": "OracleAdapter",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L412",
-      "community": 56,
-      "norm_label": "oracleadapter",
-      "id": "services_pricing_pipeline_oracleadapter"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L415",
-      "community": 56,
-      "norm_label": ".fetchpricing()",
-      "id": "services_pricing_pipeline_oracleadapter_fetchpricing"
-    },
-    {
-      "label": "DigitalOceanAdapter",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L441",
-      "community": 16,
-      "norm_label": "digitaloceanadapter",
-      "id": "services_pricing_pipeline_digitaloceanadapter"
-    },
-    {
-      "label": ".classifyDigitalOcean()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L447",
-      "community": 56,
-      "norm_label": ".classifydigitalocean()",
-      "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean"
-    },
-    {
-      "label": ".gpuCountFromSlug()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L459",
-      "community": 16,
-      "norm_label": ".gpucountfromslug()",
-      "id": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L464",
-      "community": 16,
-      "norm_label": ".fetchpricing()",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchpricing"
-    },
-    {
-      "label": ".fetchFromApi()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L480",
-      "community": 16,
-      "norm_label": ".fetchfromapi()",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
-    },
-    {
-      "label": ".fetchFromScraper()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L527",
-      "community": 16,
-      "norm_label": ".fetchfromscraper()",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
-    },
-    {
-      "label": "AlibabaAdapter",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L551",
-      "community": 78,
-      "norm_label": "alibabaadapter",
-      "id": "services_pricing_pipeline_alibabaadapter"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L554",
-      "community": 78,
-      "norm_label": ".fetchpricing()",
-      "id": "services_pricing_pipeline_alibabaadapter_fetchpricing"
-    },
-    {
-      "label": "PricingPipeline",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L579",
-      "community": 78,
-      "norm_label": "pricingpipeline",
-      "id": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "label": ".constructor()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L583",
-      "community": 78,
-      "norm_label": ".constructor()",
-      "id": "services_pricing_pipeline_pricingpipeline_constructor"
-    },
-    {
-      "label": ".run()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L601",
-      "community": 78,
-      "norm_label": ".run()",
-      "id": "services_pricing_pipeline_pricingpipeline_run"
-    },
-    {
-      "label": ".saveRecords()",
-      "file_type": "code",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L617",
-      "community": 78,
-      "norm_label": ".saverecords()",
-      "id": "services_pricing_pipeline_pricingpipeline_saverecords"
     },
     {
       "label": "Footer.tsx",
@@ -6477,6 +6477,1519 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fetch_pricing_route",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest_vms.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_vms",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/networking_pipeline.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_networking_pipeline",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "config_index_providers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_database_pipeline_databasepricingpipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L524",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_alibabaadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L224",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_awsadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_azureadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L413",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_digitaloceanadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_fetchwithretry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L289",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_gcpadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L384",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_oracleadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_pricedriftresult"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L552",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/security_pipeline.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_security_pipeline",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/workers/scheduler.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workers_scheduler",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/app_hosting_pipeline.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_app_hosting_pipeline",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L287",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_alibabaanalyticsadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L351",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_digitaloceananalyticsadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L182",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L319",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_oracleanalyticsadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L215",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L539",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_alibabadbadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L708",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_alibabaredisadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L583",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_awselasticacheadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L289",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_awsrdsadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L389",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_azuredbadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L502",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_digitaloceandbadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L130",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_gcpcloudsqladapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L626",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_gcpmemorystoreadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L165",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_oracleautonomousadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L201",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L236",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_oraclepostgresqladapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L667",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_oracleredisadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_pipeline.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_pipeline",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L252",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_awsadapter_fetchpricing",
+      "target": "services_pricing_pipeline_fetchwithretry"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L186",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
+      "target": "services_pricing_pipeline_fetchwithretry"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L483",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi",
+      "target": "services_pricing_pipeline_fetchwithretry"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L325",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi",
+      "target": "services_pricing_pipeline_fetchwithretry"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fetch_pricing_route",
+      "target": "services_pricing_pipeline_pricedriftresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/networking_pipeline.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_networking_pipeline",
+      "target": "services_pricing_pipeline_pricedriftresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/security_pipeline.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_security_pipeline",
+      "target": "services_pricing_pipeline_pricedriftresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/workers/scheduler.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workers_scheduler",
+      "target": "services_pricing_pipeline_pricedriftresult"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L284",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_alibabaanalyticsadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L97",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_databricksazureadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_databricksstaticadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L348",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_digitaloceananalyticsadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L170",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_nativeanalyticsstaticadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L316",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_oracleanalyticsadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_snowflakestaticadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L211",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_synapseazureadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L536",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_alibabadbadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L705",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_alibabaredisadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L580",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_awselasticacheadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L286",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_awsrdsadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L381",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_azuredbadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L499",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_digitaloceandbadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L127",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_gcpcloudsqladapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L623",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_gcpmemorystoreadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L162",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_oracleautonomousadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L198",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_oraclemysqlheatwaveadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L233",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_oraclepostgresqladapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L664",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_oracleredisadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L524",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_alibabaadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L224",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_awsadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L135",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L82",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_classifyaws"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L103",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_classifyazure"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L117",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_classifygcp"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L126",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_getcategory"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_getcpuvendor"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_getgeography"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_getgpucount"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L130",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter",
+      "target": "services_pricing_pipeline_baseadapter_healthcheck"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L413",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L289",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L384",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_oracleadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_pipeline.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_pipeline",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L278",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_awsadapter_fetchpricing",
+      "target": "services_pricing_pipeline_baseadapter_getgeography"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L276",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_awsadapter_fetchpricing",
+      "target": "services_pricing_pipeline_baseadapter_getcpuvendor"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L209",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
+      "target": "services_pricing_pipeline_baseadapter_getcpuvendor"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L210",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
+      "target": "services_pricing_pipeline_baseadapter_getgpucount"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L97",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter_classifyaws",
+      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter_classifyazure",
+      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L121",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter_classifygcp",
+      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L127",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_baseadapter_getcategory",
+      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L424",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean",
+      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L279",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_awsadapter_fetchpricing",
+      "target": "services_pricing_pipeline_baseadapter_classifyaws"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L212",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
+      "target": "services_pricing_pipeline_baseadapter_classifyazure"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L344",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi",
+      "target": "services_pricing_pipeline_baseadapter_classifygcp"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L160",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter",
+      "target": "services_pricing_pipeline_azureadapter_fetchpricing"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L150",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter",
+      "target": "services_pricing_pipeline_azureadapter_memoryfromsku"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L144",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter",
+      "target": "services_pricing_pipeline_azureadapter_vcpufromsku"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L197",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
+      "target": "services_pricing_pipeline_azureadapter_vcpufromsku"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L198",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
+      "target": "services_pricing_pipeline_azureadapter_memoryfromsku"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L227",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_awsadapter",
+      "target": "services_pricing_pipeline_awsadapter_fetchpricing"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L301",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter",
+      "target": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L356",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter",
+      "target": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L292",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter",
+      "target": "services_pricing_pipeline_gcpadapter_fetchpricing"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L377",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter",
+      "target": "services_pricing_pipeline_gcpadapter_gcpcpuvendor"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L294",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter_fetchpricing",
+      "target": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L297",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter_fetchpricing",
+      "target": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L331",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi",
+      "target": "services_pricing_pipeline_gcpadapter_gcpcpuvendor"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L387",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_oracleadapter",
+      "target": "services_pricing_pipeline_oracleadapter_fetchpricing"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L419",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter",
+      "target": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L452",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter",
+      "target": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L500",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter",
+      "target": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L436",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter",
+      "target": "services_pricing_pipeline_digitaloceanadapter_fetchpricing"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L431",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter",
+      "target": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L440",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter_fetchpricing",
+      "target": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L449",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter_fetchpricing",
+      "target": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L503",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper",
+      "target": "services_pricing_pipeline_pricingpipeline_run"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L527",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_alibabaadapter",
+      "target": "services_pricing_pipeline_alibabaadapter_fetchpricing"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L578",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_pricingpipeline_run",
+      "target": "services_pricing_pipeline_alibabaadapter_fetchpricing"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "fetch_pricing_route",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest_vms.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "ingest_vms",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/app_hosting_pipeline.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_app_hosting_pipeline",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/data_analytics_pipeline.ts",
+      "source_location": "L380",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/database_pipeline.ts",
+      "source_location": "L740",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_database_pipeline_databasepricingpipeline",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/ingest.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_ingest",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L556",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_pricingpipeline",
+      "target": "services_pricing_pipeline_pricingpipeline_constructor"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L574",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_pricingpipeline",
+      "target": "services_pricing_pipeline_pricingpipeline_run"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L590",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_pricingpipeline",
+      "target": "services_pricing_pipeline_pricingpipeline_saverecords"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_pipeline.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_pipeline",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/workers/scheduler.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workers_scheduler",
+      "target": "services_pricing_pipeline_pricingpipeline"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/pricing_pipeline.ts",
+      "source_location": "L579",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_pricing_pipeline_pricingpipeline_run",
+      "target": "services_pricing_pipeline_pricingpipeline_saverecords"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/page.tsx",
@@ -7939,39 +9452,6 @@
       "confidence_score": 1.0,
       "source": "workers_scheduler",
       "target": "services_networking_pipeline_networkingpricingpipeline"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/workers/scheduler.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workers_scheduler",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/workers/scheduler.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workers_scheduler",
-      "target": "services_pricing_pipeline_pricedriftresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/workers/scheduler.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workers_scheduler",
-      "target": "services_pricing_pipeline_pricingpipeline"
     },
     {
       "relation": "imports",
@@ -9715,50 +11195,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/services/ingest.ts",
       "source_location": "L6",
       "weight": 1.0,
@@ -9821,28 +11257,6 @@
       "target": "services_database_pipeline_gcpcloudsqladapter_fetchpricing"
     },
     {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L127",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_gcpcloudsqladapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L130",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_gcpcloudsqladapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/services/database_pipeline.ts",
@@ -9851,28 +11265,6 @@
       "confidence_score": 1.0,
       "source": "services_database_pipeline_oracleautonomousadapter",
       "target": "services_database_pipeline_oracleautonomousadapter_fetchpricing"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L162",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_oracleautonomousadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L165",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_oracleautonomousadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
     },
     {
       "relation": "method",
@@ -9885,28 +11277,6 @@
       "target": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing"
     },
     {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L198",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_oraclemysqlheatwaveadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L201",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/services/database_pipeline.ts",
@@ -9915,28 +11285,6 @@
       "confidence_score": 1.0,
       "source": "services_database_pipeline_oraclepostgresqladapter",
       "target": "services_database_pipeline_oraclepostgresqladapter_fetchpricing"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L233",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_oraclepostgresqladapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L236",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_oraclepostgresqladapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
     },
     {
       "relation": "method",
@@ -9957,28 +11305,6 @@
       "confidence_score": 1.0,
       "source": "services_database_pipeline_awsrdsadapter",
       "target": "services_database_pipeline_awsrdsadapter_fetchpricing"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L286",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_awsrdsadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L289",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_awsrdsadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
     },
     {
       "relation": "calls",
@@ -10002,28 +11328,6 @@
       "target": "services_database_pipeline_azuredbadapter_fetchpricing"
     },
     {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L381",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_azuredbadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L389",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_azuredbadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/services/database_pipeline.ts",
@@ -10032,28 +11336,6 @@
       "confidence_score": 1.0,
       "source": "services_database_pipeline_digitaloceandbadapter",
       "target": "services_database_pipeline_digitaloceandbadapter_fetchpricing"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L499",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_digitaloceandbadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L502",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_digitaloceandbadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
     },
     {
       "relation": "method",
@@ -10066,28 +11348,6 @@
       "target": "services_database_pipeline_alibabadbadapter_fetchpricing"
     },
     {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L536",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_alibabadbadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L539",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_alibabadbadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/services/database_pipeline.ts",
@@ -10096,28 +11356,6 @@
       "confidence_score": 1.0,
       "source": "services_database_pipeline_awselasticacheadapter",
       "target": "services_database_pipeline_awselasticacheadapter_fetchpricing"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L580",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_awselasticacheadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L583",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_awselasticacheadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
     },
     {
       "relation": "method",
@@ -10130,28 +11368,6 @@
       "target": "services_database_pipeline_gcpmemorystoreadapter_fetchpricing"
     },
     {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L623",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_gcpmemorystoreadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L626",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_gcpmemorystoreadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/services/database_pipeline.ts",
@@ -10162,28 +11378,6 @@
       "target": "services_database_pipeline_oracleredisadapter_fetchpricing"
     },
     {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L664",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_oracleredisadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L667",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_oracleredisadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/services/database_pipeline.ts",
@@ -10192,28 +11386,6 @@
       "confidence_score": 1.0,
       "source": "services_database_pipeline_alibabaredisadapter",
       "target": "services_database_pipeline_alibabaredisadapter_fetchpricing"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L705",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_alibabaredisadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L708",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_alibabaredisadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
     },
     {
       "relation": "calls",
@@ -10258,17 +11430,6 @@
       "target": "services_database_pipeline_databasepricingpipeline_run"
     },
     {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/database_pipeline.ts",
-      "source_location": "L740",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_database_pipeline_databasepricingpipeline",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -10277,17 +11438,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "services_ingest",
-      "target": "services_database_pipeline_databasepricingpipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
       "target": "services_database_pipeline_databasepricingpipeline"
     },
     {
@@ -10365,28 +11515,6 @@
       "confidence_score": 1.0,
       "source": "services_ingest",
       "target": "services_networking_pipeline_networkingpricingpipeline"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/ingest.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_ingest",
-      "target": "services_pricing_pipeline_pricingpipeline"
     },
     {
       "relation": "imports_from",
@@ -10484,28 +11612,6 @@
       "confidence_score": 1.0,
       "source": "services_networking_pipeline",
       "target": "services_networking_pipeline_static_networking_pricing"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/networking_pipeline.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_networking_pipeline",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/networking_pipeline.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_networking_pipeline",
-      "target": "services_pricing_pipeline_pricedriftresult"
     },
     {
       "relation": "imports",
@@ -10756,39 +11862,6 @@
       "confidence_score": 1.0,
       "source": "services_serverless_pipeline",
       "target": "config_oracle_serverless_oracle_serverless"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_pipeline.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_pipeline",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_pipeline.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_pipeline",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_pipeline.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_pipeline",
-      "target": "services_pricing_pipeline_pricingrecord"
     },
     {
       "relation": "contains",
@@ -11152,1068 +12225,6 @@
       "confidence_score": 1.0,
       "source": "services_serverless_pipeline_serverlesspricingpipeline_run",
       "target": "services_serverless_pipeline_serverlesspricingpipeline_getoracleserverlessstaticrecords"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "fetch_pricing_route",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "ingest_vms.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ingest_vms",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L524",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_alibabaadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L224",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_awsadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L135",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_azureadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L39",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L413",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_digitaloceanadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_fetchwithretry"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L289",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_gcpadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L384",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_oracleadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_pricedriftresult"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L552",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/security_pipeline.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_security_pipeline",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/app_hosting_pipeline.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_app_hosting_pipeline",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L287",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_alibabaanalyticsadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L101",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L351",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_digitaloceananalyticsadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L182",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L319",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_oracleanalyticsadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L68",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L215",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L252",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_awsadapter_fetchpricing",
-      "target": "services_pricing_pipeline_fetchwithretry"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L186",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
-      "target": "services_pricing_pipeline_fetchwithretry"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L483",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi",
-      "target": "services_pricing_pipeline_fetchwithretry"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L325",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi",
-      "target": "services_pricing_pipeline_fetchwithretry"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "fetch_pricing_route",
-      "target": "services_pricing_pipeline_pricedriftresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/security_pipeline.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_security_pipeline",
-      "target": "services_pricing_pipeline_pricedriftresult"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L284",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_alibabaanalyticsadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L97",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_databricksazureadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_databricksstaticadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L348",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_digitaloceananalyticsadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L170",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_nativeanalyticsstaticadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L316",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_oracleanalyticsadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_snowflakestaticadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L211",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_synapseazureadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L524",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_alibabaadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L224",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_awsadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L135",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L74",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L82",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_classifyaws"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L103",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_classifyazure"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L117",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_classifygcp"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L126",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_getcategory"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_getcpuvendor"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_getgeography"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L68",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_getgpucount"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L130",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter",
-      "target": "services_pricing_pipeline_baseadapter_healthcheck"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L413",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L289",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L384",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_oracleadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L278",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_awsadapter_fetchpricing",
-      "target": "services_pricing_pipeline_baseadapter_getgeography"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L276",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_awsadapter_fetchpricing",
-      "target": "services_pricing_pipeline_baseadapter_getcpuvendor"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L209",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
-      "target": "services_pricing_pipeline_baseadapter_getcpuvendor"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L210",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
-      "target": "services_pricing_pipeline_baseadapter_getgpucount"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L97",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter_classifyaws",
-      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L112",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter_classifyazure",
-      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L121",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter_classifygcp",
-      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L127",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_baseadapter_getcategory",
-      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L424",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean",
-      "target": "services_pricing_pipeline_baseadapter_categorybyratio"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L279",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_awsadapter_fetchpricing",
-      "target": "services_pricing_pipeline_baseadapter_classifyaws"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L212",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
-      "target": "services_pricing_pipeline_baseadapter_classifyazure"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L344",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi",
-      "target": "services_pricing_pipeline_baseadapter_classifygcp"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L160",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter",
-      "target": "services_pricing_pipeline_azureadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L150",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter",
-      "target": "services_pricing_pipeline_azureadapter_memoryfromsku"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L144",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter",
-      "target": "services_pricing_pipeline_azureadapter_vcpufromsku"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L197",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
-      "target": "services_pricing_pipeline_azureadapter_vcpufromsku"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L198",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_azureadapter_fetchpricing",
-      "target": "services_pricing_pipeline_azureadapter_memoryfromsku"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L227",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_awsadapter",
-      "target": "services_pricing_pipeline_awsadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L301",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter",
-      "target": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L356",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter",
-      "target": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L292",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter",
-      "target": "services_pricing_pipeline_gcpadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L377",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter",
-      "target": "services_pricing_pipeline_gcpadapter_gcpcpuvendor"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L294",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter_fetchpricing",
-      "target": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L297",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter_fetchpricing",
-      "target": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L331",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi",
-      "target": "services_pricing_pipeline_gcpadapter_gcpcpuvendor"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L387",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_oracleadapter",
-      "target": "services_pricing_pipeline_oracleadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L419",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter",
-      "target": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L452",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter",
-      "target": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L500",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter",
-      "target": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L436",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter",
-      "target": "services_pricing_pipeline_digitaloceanadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L431",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter",
-      "target": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L440",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter_fetchpricing",
-      "target": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L449",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter_fetchpricing",
-      "target": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L503",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper",
-      "target": "services_pricing_pipeline_pricingpipeline_run"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L527",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_alibabaadapter",
-      "target": "services_pricing_pipeline_alibabaadapter_fetchpricing"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L578",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_pricingpipeline_run",
-      "target": "services_pricing_pipeline_alibabaadapter_fetchpricing"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/api/admin/fetch-pricing/route.ts",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "fetch_pricing_route",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "ingest_vms.ts",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "ingest_vms",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/app_hosting_pipeline.ts",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_app_hosting_pipeline",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/data_analytics_pipeline.ts",
-      "source_location": "L380",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_data_analytics_pipeline_dataanalyticspricingpipeline",
-      "target": "services_pricing_pipeline_pricingpipeline"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L556",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_pricingpipeline",
-      "target": "services_pricing_pipeline_pricingpipeline_constructor"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L574",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_pricingpipeline",
-      "target": "services_pricing_pipeline_pricingpipeline_run"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L590",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_pricingpipeline",
-      "target": "services_pricing_pipeline_pricingpipeline_saverecords"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L579",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_pricing_pipeline_pricingpipeline_run",
-      "target": "services_pricing_pipeline_pricingpipeline_saverecords"
     },
     {
       "relation": "contains",
@@ -17260,5 +17271,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "72435a1465d9fea2fa8febd474f5d9e398f17da2"
+  "built_at_commit": "a044e6fc8fff700305c80ceeaff01386ca3cd6ee"
 }
