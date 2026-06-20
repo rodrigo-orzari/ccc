@@ -91,6 +91,7 @@ export default function Dashboard() {
   }, [config.isLoading, filtersSynced, config]);
 
   const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Filter state
   const [selectedProviders, setSelectedProviders] = useState<string[]>(config.PROVIDERS.filter(p => !p.soon && !p.isAIOnly).map(p => p.id));
@@ -645,11 +646,13 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans overflow-hidden transition-colors duration-300">
+    <div className="flex flex-col min-h-[100dvh] lg:h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans lg:overflow-hidden transition-colors duration-300">
       <ProductTypeSelector activeProductType={activeProductType} onProductTypeChange={setActiveProductType} />
 
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 lg:overflow-hidden">
         <FilterSidebar
+          isOpen={filtersOpen}
+          onClose={() => setFiltersOpen(false)}
           activeProductType={activeProductType}
           selectedProviders={selectedProviders}
           selectedGeographies={selectedGeographies}
@@ -838,6 +841,7 @@ export default function Dashboard() {
             onExport={handleExport}
             viewMode={viewMode}
             onViewModeChange={setViewMode}
+            onOpenFilters={() => setFiltersOpen(true)}
           />
 
           {viewMode === 'table' ? (
