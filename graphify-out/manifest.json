@@ -30,8 +30,8 @@
     "semantic_hash": ""
   },
   "src/config/aws_containers.ts": {
-    "mtime": 1781587736.4631352,
-    "ast_hash": "01a6c46cf3c29537d38b3097536bb38d",
+    "mtime": 1781931229.7683773,
+    "ast_hash": "9f9318dd4b3b498a6e384ba208017e96",
     "semantic_hash": ""
   },
   "src/config/aws_serverless.ts": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "src/config/azure_containers.ts": {
-    "mtime": 1781587736.4227407,
-    "ast_hash": "8e48d80f0515eacb26e6a0b5a287d595",
+    "mtime": 1781931240.4048266,
+    "ast_hash": "c84c7a80656b8786d9abc89a0257e6cb",
     "semantic_hash": ""
   },
   "src/config/azure_serverless.ts": {
@@ -70,8 +70,8 @@
     "semantic_hash": ""
   },
   "src/config/gcp_containers.ts": {
-    "mtime": 1781587736.5555856,
-    "ast_hash": "56c874f47692f81acff4bca293d78cd1",
+    "mtime": 1781931251.196055,
+    "ast_hash": "94687d030b825bbf03f3e6b5c3639b70",
     "semantic_hash": ""
   },
   "src/config/gcp_instances.ts": {
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "src/services/ingest.ts": {
-    "mtime": 1781587736.7914093,
-    "ast_hash": "8a03e14c191feb8af3b29947c748815e",
+    "mtime": 1781931904.2840424,
+    "ast_hash": "4464ea874054ccafaeb4ecc059fb4e2a",
     "semantic_hash": ""
   },
   "src/services/mailer.ts": {
@@ -130,8 +130,8 @@
     "semantic_hash": ""
   },
   "src/services/networking_pipeline.ts": {
-    "mtime": 1781630434.3048162,
-    "ast_hash": "7ef254afecfe5d345e66e304de4d443a",
+    "mtime": 1781931861.3640876,
+    "ast_hash": "906cc859e5f18498272b1da197b422cc",
     "semantic_hash": ""
   },
   "src/services/populate_containers.ts": {
@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1781713910.392802,
-    "ast_hash": "c6fd6a1e6b2f8ab64d06496b15e33cb6",
+    "mtime": 1781931666.9526925,
+    "ast_hash": "a659ab42ca2610d9b521cb6c9cf3fd0d",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
-    "mtime": 1781713900.869446,
-    "ast_hash": "e1cdeeac7f09e3dfa684c654a63b032e",
+    "mtime": 1781931744.3945706,
+    "ast_hash": "34a03c1ed48ee34e70cb553abc73dc24",
     "semantic_hash": ""
   },
   "src/lib/db.ts": {
@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/app/page.tsx": {
-    "mtime": 1781929907.648381,
-    "ast_hash": "b5463a8f8c9be1c1251b16d01cb75961",
+    "mtime": 1781932064.2756066,
+    "ast_hash": "0ccc9c4e2c0adb3ccfca353b6934771c",
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1781930199.5116692,
-    "ast_hash": "26217d71fc05f4a03c19da9aebd3cc2b",
+    "mtime": 1781932091.5471458,
+    "ast_hash": "565da24b71d44f2746c43a1a7a4a0958",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
@@ -435,13 +435,13 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1781923556.9724755,
-    "ast_hash": "0ea9cc5521fbef7a6e7fe2e8f20bcb6e",
+    "mtime": 1781930732.9481626,
+    "ast_hash": "1dd44565bad1192cf0898ed1c38ce52d",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1781923277.5740664,
-    "ast_hash": "a80d26ea81ac37d7d9208c7c39b8fd56",
+    "mtime": 1781931755.4110472,
+    "ast_hash": "87c8f407df7e8c7b7a3cc5f31eb26b07",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
@@ -465,13 +465,13 @@
     "semantic_hash": ""
   },
   "src/config/index.ts": {
-    "mtime": 1781929880.06846,
-    "ast_hash": "84f19b12f058ece93df9cb264ef6529d",
+    "mtime": 1781931732.1750038,
+    "ast_hash": "a20b44780a70467853a974ed3fcf89bd",
     "semantic_hash": ""
   },
   "src/types/index.ts": {
-    "mtime": 1781714015.380578,
-    "ast_hash": "2f4d3cc7c323da44c08d035e1cd70400",
+    "mtime": 1781931701.7254303,
+    "ast_hash": "b2bcf26989044c00dba166c9a998db6a",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -530,8 +530,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1781739110.7711415,
-    "ast_hash": "58f1d8e4e5943d691afae0c10743827e",
+    "mtime": 1781930668.6049285,
+    "ast_hash": "d5d9cdf90b9d9569fb86ca2d2d7661ff",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -630,8 +630,8 @@
     "semantic_hash": ""
   },
   "src/hooks/useDynamicFilters.ts": {
-    "mtime": 1781930423.5456932,
-    "ast_hash": "fc77668406626d3b6615fb0033edb667",
+    "mtime": 1781932110.8023953,
+    "ast_hash": "226db1e561ee6385aa889cc0fa45b476",
     "semantic_hash": ""
   },
   "check.ts": {
@@ -827,6 +827,16 @@
   "src/services/data_quality.ts": {
     "mtime": 1781929885.0101724,
     "ast_hash": "142e1e582a89d41bfba0978e36a4c05f",
+    "semantic_hash": ""
+  },
+  "cloud_products_comparison.json": {
+    "mtime": 1781932265.8142917,
+    "ast_hash": "8d2277363387bebdf09fd2b5313bae0f",
+    "semantic_hash": ""
+  },
+  "src/services/security_pipeline.ts": {
+    "mtime": 1781931882.1927207,
+    "ast_hash": "c0b9b112e5541cdd2d60a50be6b5a0aa",
     "semantic_hash": ""
   }
 }
