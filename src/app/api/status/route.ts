@@ -14,6 +14,7 @@ const PIPELINE_DISPLAY: Record<string, string> = {
   storage: 'Storage',
   'app-hosting': 'App Hosting',
   integration: 'Integration',
+  security: 'Security',
 };
 
 export async function GET() {

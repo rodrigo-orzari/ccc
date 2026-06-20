@@ -14,6 +14,11 @@ export const PRICING_MODELS = ['On-Demand', 'Spot / Preemptible'];
 
 // Database-specific constants
 export const DB_FAMILIES = ['Relational', 'NoSQL', 'Vector'];
+export const DB_FAMILY_MAPPINGS: Record<string, string[]> = {
+  'Relational': ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB'],
+  'NoSQL': ['Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2'],
+  'Vector': ['Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma']
+};
 export const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2', 'Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma'];
 export const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
 export const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
@@ -112,6 +117,12 @@ export const PROVIDERS: { id: string; name: string; color: string; soon?: boolea
   { id: 'alibaba', name: 'Alibaba', color: '#FF6A00' },
   { id: 'openai', name: 'OpenAI', color: '#10A37F', isAIOnly: true },
   { id: 'anthropic', name: 'Anthropic', color: '#CC9D87', isAIOnly: true },
+  { id: 'pinecone', name: 'Pinecone', color: '#3B1CFF' },
+  { id: 'milvus', name: 'Milvus', color: '#00D2D3' },
+  { id: 'qdrant', name: 'Qdrant', color: '#FF004E' },
+  { id: 'weaviate', name: 'Weaviate', color: '#2DCA73' },
+  { id: 'chroma', name: 'Chroma', color: '#FF4F00' },
+  { id: 'cloudflare', name: 'Cloudflare', color: '#F38020' },
 ];
 
 // AI-specific constants

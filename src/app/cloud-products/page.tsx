@@ -272,8 +272,9 @@ const CloudProductsPage: React.FC = () => {
                 );
               })}
 
-              <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-color)', fontSize: '0.8rem', color: 'var(--muted-text)', textAlign: 'center' }}>
-                <strong>Note on coverage:</strong> comparecloudcosts.com focuses on calculating pricing for core infrastructure. We have highlighted the categories we actively calculate pricing for with a <strong>Compare Pricing ➔</strong> link. Other categories are provided here as a helpful reference to understand product equivalents across the cloud ecosystem.
+              <div className="mt-12 pt-6 border-t border-[var(--border-color)] text-[11px] text-[#737373] leading-relaxed text-left">
+                <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Note on coverage:</strong>{' '}
+                comparecloudcosts.com focuses on calculating pricing for core infrastructure. We have highlighted the categories we actively calculate pricing for with a <strong>Compare Pricing ➔</strong> link. Other categories are provided here as a helpful reference to understand product equivalents across the cloud ecosystem.
               </div>
             </div>
           </main>

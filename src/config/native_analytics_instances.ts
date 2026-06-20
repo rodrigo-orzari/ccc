@@ -39,6 +39,18 @@ export const NATIVE_ANALYTICS_INSTANCES: NativeAnalyticsConfig[] = [
   { provider: 'gcp', engine: 'Pub/Sub', tier: 'Standard', deploymentType: 'Serverless', computeUnitName: 'TiB-Month', pricePerNormalizedUnit: 40.00 }, // $40 per TiB processed/month
   { provider: 'azure', engine: 'Event Hubs', tier: 'Standard', deploymentType: 'Provisioned', computeUnitName: 'Throughput Unit', pricePerNormalizedUnit: 0.03 },
   { provider: 'azure', engine: 'Event Hubs', tier: 'Premium', deploymentType: 'Provisioned', computeUnitName: 'Processing Unit', pricePerNormalizedUnit: 0.94 },
+  
+  // Microsoft Fabric (Azure)
+  // Fabric Capacity is billed per Capacity Unit (CU) per hour.
+  // F2 = 2 CUs, F4 = 4 CUs, F8 = 8 CUs, etc.
+  // East US price is approx $0.18 / CU / hour -> F2 = $0.36, F4 = $0.72.
+  { provider: 'azure', engine: 'Microsoft Fabric', tier: 'Capacity F2', deploymentType: 'Serverless', computeUnitName: 'Hour', pricePerNormalizedUnit: 0.36 },
+  { provider: 'azure', engine: 'Microsoft Fabric', tier: 'Capacity F4', deploymentType: 'Serverless', computeUnitName: 'Hour', pricePerNormalizedUnit: 0.72 },
+  { provider: 'azure', engine: 'Microsoft Fabric', tier: 'Capacity F8', deploymentType: 'Serverless', computeUnitName: 'Hour', pricePerNormalizedUnit: 1.44 },
+  { provider: 'azure', engine: 'Microsoft Fabric', tier: 'Capacity F16', deploymentType: 'Serverless', computeUnitName: 'Hour', pricePerNormalizedUnit: 2.88 },
+  { provider: 'azure', engine: 'Microsoft Fabric', tier: 'Capacity F32', deploymentType: 'Serverless', computeUnitName: 'Hour', pricePerNormalizedUnit: 5.76 },
+  { provider: 'azure', engine: 'Microsoft Fabric', tier: 'Capacity F64', deploymentType: 'Serverless', computeUnitName: 'Hour', pricePerNormalizedUnit: 11.52 },
+
   { provider: 'oracle', engine: 'OCI Streaming', tier: 'Standard', deploymentType: 'Provisioned', computeUnitName: 'Storage GB-Hour', pricePerNormalizedUnit: 0.025 },
   { provider: 'alibaba', engine: 'ApsaraMQ for Kafka', tier: 'Standard', deploymentType: 'Provisioned', computeUnitName: 'Hour', pricePerNormalizedUnit: 0.2 },
 ];

@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import sql from './db.ts';
 import path from 'path';
 import fs from 'fs';
+import { DB_FAMILY_MAPPINGS } from '../config/index';
 
 // ✅ Admin Authentication Logic
 export function requireAdminAuth(req: NextRequest): NextResponse | null {
@@ -284,23 +285,15 @@ export function buildPricingFilters(query: any) {
         if (dbFamilyFilters.length > 0) {
           const familyConditions: string[] = [];
 
-          // Map family types to engine lists
-          const relationalEngines = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB'];
-          const noSqlEngines = ['Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2'];
-          const vectorEngines = ['Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma'];
-
           for (const family of dbFamilyFilters) {
-            if (family.toLowerCase() === 'relational') {
+            // Find engines for this family (case-insensitive match)
+            const mappedFamily = Object.keys(DB_FAMILY_MAPPINGS).find(
+              k => k.toLowerCase() === family.toLowerCase()
+            );
+            
+            if (mappedFamily && DB_FAMILY_MAPPINGS[mappedFamily].length > 0) {
               familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
-              values.push(relationalEngines.map(e => e.toLowerCase()));
-              paramCount++;
-            } else if (family.toLowerCase() === 'nosql') {
-              familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
-              values.push(noSqlEngines.map(e => e.toLowerCase()));
-              paramCount++;
-            } else if (family.toLowerCase() === 'vector') {
-              familyConditions.push(`LOWER(pr.attributes->>'engine') = ANY($${paramCount})`);
-              values.push(vectorEngines.map(e => e.toLowerCase()));
+              values.push(DB_FAMILY_MAPPINGS[mappedFamily].map(e => e.toLowerCase()));
               paramCount++;
             }
           }

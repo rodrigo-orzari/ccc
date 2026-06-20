@@ -98,10 +98,58 @@ const baseAzureEntries = [
     cpuVendor: 'Intel',
     price: 0.000016 * 3600 * 1.75,
     supportedLanguages: AZURE_FUNCTIONS_LANGUAGES,
+    serviceOverride: 'Azure Functions'
+  },
+  
+  // Azure Container Apps (Consumption Plan)
+  // vCPU: $0.1224 / vCPU-hour, Memory: $0.0144 / GB-hour
+  {
+    type: 'Container Apps 0.25vCPU/0.5GB',
+    vcpus: 0.25,
+    memory: 0.5,
+    cpuVendor: 'Intel',
+    price: (0.1224 * 0.25) + (0.0144 * 0.5),
+    supportedLanguages: ['Any (Container)'],
+    serviceOverride: 'Container Apps'
+  },
+  {
+    type: 'Container Apps 0.5vCPU/1GB',
+    vcpus: 0.5,
+    memory: 1,
+    cpuVendor: 'Intel',
+    price: (0.1224 * 0.5) + (0.0144 * 1),
+    supportedLanguages: ['Any (Container)'],
+    serviceOverride: 'Container Apps'
+  },
+  {
+    type: 'Container Apps 1vCPU/2GB',
+    vcpus: 1,
+    memory: 2,
+    cpuVendor: 'Intel',
+    price: (0.1224 * 1) + (0.0144 * 2),
+    supportedLanguages: ['Any (Container)'],
+    serviceOverride: 'Container Apps'
+  },
+  {
+    type: 'Container Apps 2vCPU/4GB',
+    vcpus: 2,
+    memory: 4,
+    cpuVendor: 'Intel',
+    price: (0.1224 * 2) + (0.0144 * 4),
+    supportedLanguages: ['Any (Container)'],
+    serviceOverride: 'Container Apps'
   },
 ];
 
-export const AZURE_SERVERLESS = baseAzureEntries.map(addAzureServerlessAttributes);
+export const AZURE_SERVERLESS = baseAzureEntries.map(entry => {
+  const overrides = addAzureServerlessAttributes(entry);
+  if (entry.serviceOverride === 'Container Apps') {
+    overrides.attributes.service_type = 'Container';
+    overrides.attributes.deployment_type = 'Serverless';
+    overrides.attributes.tier = 'Consumption';
+  }
+  return overrides;
+});
 
 export const AZURE_SERVERLESS_REGION = 'eastus';
 export const AZURE_SERVERLESS_GEOGRAPHY = 'N. America';

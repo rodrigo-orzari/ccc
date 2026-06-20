@@ -72,7 +72,7 @@ function XIcon() {
   );
 }
 
-const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse', 'ai', 'storage'];
+const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse', 'ai', 'storage', 'security'];
 
 
 
@@ -473,7 +473,9 @@ export default function StatusPage() {
                         <tbody>
                           {pipelines.map(pl => (
                             <tr key={pl.category}>
-                              <td style={{ fontWeight: 500 }}>{pl.display_name}</td>
+                              <td style={{ fontWeight: 500 }}>
+                                {pl.display_name === 'security' ? 'Security' : pl.display_name}
+                              </td>
                               <td style={{ fontVariantNumeric: 'tabular-nums' }}>
                                 {pl.record_count > 0 ? pl.record_count.toLocaleString() : (
                                   <span style={{ color: 'var(--muted)' }}>0</span>

@@ -686,11 +686,15 @@ export default function FilterSidebar({
           </>
         )}
 
-        {/* Database filters */}
         {activeProductType === 'database' && (() => {
           const isOnlyVector = selectedDbFamilies.length === 1 && selectedDbFamilies[0].toLowerCase() === 'vector';
-          const availableEngines = isOnlyVector 
-            ? config.DB_ENGINES.filter(e => ['Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma'].includes(e))
+          const availableEngines = selectedDbFamilies.length > 0 
+            ? selectedDbFamilies.flatMap(f => {
+                const mappedFamily = Object.keys(config.DB_FAMILY_MAPPINGS || {}).find(
+                  k => k.toLowerCase() === f.toLowerCase()
+                );
+                return mappedFamily ? config.DB_FAMILY_MAPPINGS[mappedFamily] : [];
+              })
             : config.DB_ENGINES;
 
           return (
