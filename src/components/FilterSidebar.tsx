@@ -73,6 +73,7 @@ interface FilterSectionProps {
   onSetAll: (items: string[]) => void;
   isExpanded: boolean;
   onToggleExpand: () => void;
+  disabledOptions?: string[];
   getLabel?: (option: string) => string;
 }
 
@@ -85,6 +86,7 @@ const FilterSection = ({
   onSetAll,
   isExpanded,
   onToggleExpand,
+  disabledOptions = [],
   getLabel,
 }: FilterSectionProps) => {
   // Batch operations: set all at once to avoid React batching issues
@@ -114,19 +116,22 @@ const FilterSection = ({
     </div>
     {isExpanded && (
       <div className="flex flex-wrap gap-2">
-        {options.map(option => (
+        {options.map(option => {
+          const isDisabled = disabledOptions.includes(option);
+          return (
           <button
             key={option}
-            onClick={() => onToggle(option)}
+            onClick={() => !isDisabled && onToggle(option)}
+            disabled={isDisabled}
             className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
               selected.includes(option)
                 ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
                 : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-            }`}
+            } ${isDisabled ? 'opacity-30 cursor-not-allowed hover:border-[#dde0f0] dark:hover:border-[#1e1e38]' : ''}`}
           >
             {getLabel ? getLabel(option) : option}
           </button>
-        ))}
+        )})}
       </div>
     )}
   </section>
@@ -143,6 +148,7 @@ interface GroupedFilterSectionProps {
   onSetAll: (items: string[]) => void;
   isExpanded: boolean;
   onToggleExpand: () => void;
+  disabledOptions?: string[];
 }
 
 // Like FilterSection, but renders chips organized under labeled sub-groups.
@@ -157,6 +163,7 @@ const GroupedFilterSection = ({
   onSetAll,
   isExpanded,
   onToggleExpand,
+  disabledOptions = [],
 }: GroupedFilterSectionProps) => {
   const allSelected = selected.length === allOptions.length;
   return (
@@ -188,19 +195,22 @@ const GroupedFilterSection = ({
                 {group.label}
               </div>
               <div className="flex flex-wrap gap-2">
-                {group.services.map(option => (
+                {group.services.map(option => {
+                  const isDisabled = disabledOptions.includes(option);
+                  return (
                   <button
                     key={option}
-                    onClick={() => onToggle(option)}
+                    onClick={() => !isDisabled && onToggle(option)}
+                    disabled={isDisabled}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       selected.includes(option)
                         ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
                         : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
+                    } ${isDisabled ? 'opacity-30 cursor-not-allowed hover:border-[#dde0f0] dark:hover:border-[#1e1e38]' : ''}`}
                   >
                     {option}
                   </button>
-                ))}
+                )})}
               </div>
             </div>
           ))}
@@ -689,14 +699,16 @@ export default function FilterSidebar({
 
         {activeProductType === 'database' && (() => {
           const isOnlyVector = selectedDbFamilies.length === 1 && selectedDbFamilies[0].toLowerCase() === 'vector';
-          const availableEngines = selectedDbFamilies.length > 0 
+          const validEngines = selectedDbFamilies.length > 0 
             ? selectedDbFamilies.flatMap(f => {
                 const mappedFamily = Object.keys(staticConfig.DB_FAMILY_MAPPINGS || {}).find(
                   k => k.toLowerCase() === f.toLowerCase()
                 );
                 return mappedFamily ? staticConfig.DB_FAMILY_MAPPINGS[mappedFamily] : [];
               })
-            : config.DB_ENGINES;
+            : staticConfig.DB_ENGINES;
+            
+          const disabledEngines = staticConfig.DB_ENGINES.filter(e => !validEngines.includes(e));
 
           return (
             <>
@@ -725,13 +737,14 @@ export default function FilterSidebar({
               <GroupedFilterSection
                 title="Database Engine"
                 tooltip="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc."
-                groups={groupEngines(availableEngines)}
-                allOptions={availableEngines}
+                groups={groupEngines(staticConfig.DB_ENGINES)}
+                allOptions={staticConfig.DB_ENGINES}
                 selected={selectedEngines}
                 onToggle={onEngineToggle}
                 onSetAll={onSetEngines}
                 isExpanded={expanded.engine ?? true}
                 onToggleExpand={() => onToggleSection('engine')}
+                disabledOptions={disabledEngines}
               />
               {!isOnlyVector && (
                 <>
