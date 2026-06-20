@@ -116,7 +116,7 @@ function SourceBadge({ source, apiCount, staticCount }: { source: string; apiCou
 }
 
 const BackToTop = () => (
-  <p style={{ marginTop: '1.5rem' }}>
+  <p style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
     <a
       href="#top"
       style={{ color: '#2563eb', fontSize: '0.875rem', textDecoration: 'none' }}
@@ -420,9 +420,6 @@ export default function StatusPage() {
                   marginBottom: '2.5rem',
                 }}
               >
-                <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', marginBottom: '0.75rem' }}>
-                  What the data sources mean
-                </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: 12.5, color: 'var(--text)' }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
                     <span style={{ flexShrink: 0 }}><SourceBadge source="api" apiCount={0} staticCount={0} /></span>
