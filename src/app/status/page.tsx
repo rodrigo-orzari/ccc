@@ -280,13 +280,13 @@ export default function StatusPage() {
           text-transform: uppercase;
           letter-spacing: 0.07em;
           color: var(--muted);
-          padding: 0.6rem 1.5rem;
+          padding: 0.8rem 1rem;
           border-bottom: 1px solid var(--border);
           background: var(--surface);
         }
         .pipeline-table th:first-child { text-align: left; }
         .pipeline-table td {
-          padding: 0.65rem 1.5rem;
+          padding: 0.8rem 1rem;
           border-bottom: 1px solid var(--divider);
           vertical-align: middle;
           text-align: center;
@@ -317,13 +317,16 @@ export default function StatusPage() {
           <h4 className="text-[11px] text-[#6b7280] dark:text-[#71717a] uppercase tracking-wider mb-4 font-bold">Content</h4>
           <nav>
             <ul className="space-y-3">
-              {status?.providers.map(p => (
-                <li key={p.slug}>
-                  <a href={`#${p.slug}`} className="text-[13px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
-                    {p.name}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a href="#top" className="text-[13px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
+                  Overview
+                </a>
+              </li>
+              <li>
+                <a href="#status-matrix" className="text-[13px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
+                  Status Matrix
+                </a>
+              </li>
             </ul>
           </nav>
         </aside>
@@ -432,84 +435,184 @@ export default function StatusPage() {
                 </div>
               </div>
 
-              {/* Provider cards */}
-              {status.providers.map(provider => {
-                const color = PROVIDER_COLORS[provider.slug] ?? '#888';
-                // Sort pipelines by canonical order
-                const pipelines = [...provider.pipelines].sort(
-                  (a, b) => PIPELINE_ORDER.indexOf(a.category) - PIPELINE_ORDER.indexOf(b.category)
+              {/* Status Matrix Table */}
+              {(() => {
+                const PROVIDER_ORDER = ['aws', 'azure', 'gcp', 'oracle', 'digitalocean', 'alibaba', 'openai', 'anthropic'];
+                const sortedProviders = [...status.providers].sort(
+                  (a, b) => PROVIDER_ORDER.indexOf(a.slug) - PROVIDER_ORDER.indexOf(b.slug)
                 );
 
-                return (
-                  <React.Fragment key={provider.slug}>
-                  <div id={provider.slug} className="provider-card" style={{ scrollMarginTop: '64px' }}>
-                    <div className="provider-header">
-                      <div className="provider-header-left">
-                        <a
-                          href={PROVIDER_URLS[provider.slug] ?? '#'}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="provider-badge"
-                          style={{ color, borderColor: color + '50', backgroundColor: color + '18', textDecoration: 'none' }}
-                        >
-                          {provider.name}
-                        </a>
-                        <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>
-                          {provider.total_records.toLocaleString()} records
-                        </span>
-                      </div>
-                    </div>
+                // Collect all categories returned from all providers
+                const allReturnedCategories = new Set<string>();
+                status.providers.forEach(p => {
+                  p.pipelines.forEach(pl => {
+                    allReturnedCategories.add(pl.category);
+                  });
+                });
 
-                    {pipelines.length > 0 ? (
-                      <table className="pipeline-table">
-                        <thead>
-                          <tr>
-                            <th style={{ width: '35%' }}>Product Category</th>
-                            <th style={{ width: '15%' }}>Records</th>
-                            <th style={{ width: '25%' }}>Data Source</th>
-                            <th style={{ width: '25%' }}>Last Updated</th>
+                const getCategoryDisplayName = (category: string) => {
+                  const PIPELINE_DISPLAY: Record<string, string> = {
+                    compute: 'Virtual Machines',
+                    database: 'Databases',
+                    serverless: 'Serverless',
+                    containers: 'Containers',
+                    networking: 'Networking',
+                    data_warehouse: 'Data & Analytics',
+                    ai: 'AI & Machine Learning',
+                    storage: 'Storage',
+                    'app-hosting': 'App Hosting',
+                    integration: 'Integration',
+                    security: 'Security',
+                  };
+                  return PIPELINE_DISPLAY[category] ?? (category.charAt(0).toUpperCase() + category.slice(1));
+                };
+
+                // Unique categories sorted alphabetically by display name
+                const categories = Array.from(allReturnedCategories).sort((a, b) => {
+                  const nameA = getCategoryDisplayName(a).toLowerCase();
+                  const nameB = getCategoryDisplayName(b).toLowerCase();
+                  return nameA.localeCompare(nameB);
+                });
+
+                return (
+                  <div id="status-matrix" style={{ overflowX: 'auto', border: '1px solid var(--border)', borderRadius: 8, background: 'var(--surface)', marginBottom: '2.5rem' }}>
+                    <table className="pipeline-table" style={{ minWidth: 800 }}>
+                      <thead>
+                        <tr>
+                          <th style={{ width: '16%', textAlign: 'left' }}>Product Category</th>
+                          {sortedProviders.map(provider => {
+                            const color = PROVIDER_COLORS[provider.slug] ?? '#888';
+                            return (
+                              <th key={provider.slug} style={{ width: '10.5%', textAlign: 'center' }}>
+                                <a
+                                  href={PROVIDER_URLS[provider.slug] ?? '#'}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{
+                                    color,
+                                    fontWeight: 700,
+                                    fontSize: '11px',
+                                    textTransform: 'uppercase',
+                                    textDecoration: 'none'
+                                  }}
+                                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }}
+                                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}
+                                >
+                                  {provider.name}
+                                </a>
+                              </th>
+                            );
+                          })}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {categories.map(category => (
+                          <tr key={category}>
+                            <td style={{ fontWeight: 600, textAlign: 'left' }}>
+                              {getCategoryDisplayName(category)}
+                            </td>
+                            {sortedProviders.map(provider => {
+                              const pl = provider.pipelines.find(p => p.category === category);
+                              if (!pl) {
+                                return (
+                                  <td key={provider.slug} style={{ color: 'var(--muted)' }}>
+                                    —
+                                  </td>
+                                );
+                              }
+                              return (
+                                <td
+                                  key={provider.slug}
+                                  title={pl.last_updated ? `Last updated: ${new Date(pl.last_updated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}` : undefined}
+                                >
+                                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                                    <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 500 }}>
+                                      {pl.record_count > 0 ? pl.record_count.toLocaleString() : '0'}
+                                    </span>
+                                    <SourceBadge
+                                      source={pl.data_source}
+                                      apiCount={pl.api_count}
+                                      staticCount={pl.static_count}
+                                    />
+                                  </div>
+                                </td>
+                              );
+                            })}
                           </tr>
-                        </thead>
-                        <tbody>
-                          {pipelines.map(pl => (
-                            <tr key={pl.category}>
-                              <td style={{ fontWeight: 500 }}>
-                                {pl.display_name === 'security' ? 'Security' : pl.display_name}
-                              </td>
-                              <td style={{ fontVariantNumeric: 'tabular-nums' }}>
-                                {pl.record_count > 0 ? pl.record_count.toLocaleString() : (
-                                  <span style={{ color: 'var(--muted)' }}>0</span>
+                        ))}
+                        
+                        {/* Table Footer / Summary Rows */}
+                        <tr style={{ background: 'var(--border)', height: '1px' }}>
+                          <td colSpan={sortedProviders.length + 1} style={{ padding: 0, height: '1px' }}></td>
+                        </tr>
+                        
+                        {/* Total Records Row */}
+                        <tr style={{ fontWeight: 700, background: 'var(--row-hover)' }}>
+                          <td style={{ textAlign: 'left' }}>Total Records</td>
+                          {sortedProviders.map(provider => (
+                            <td key={provider.slug} style={{ fontVariantNumeric: 'tabular-nums' }}>
+                              {provider.total_records.toLocaleString()}
+                            </td>
+                          ))}
+                        </tr>
+
+                        {/* Live API Percentage Row */}
+                        <tr style={{ fontSize: '11px', color: 'var(--muted)' }}>
+                          <td style={{ textAlign: 'left', fontWeight: 600 }}>Live API Records</td>
+                          {sortedProviders.map(provider => {
+                            let apiCount = 0;
+                            let staticCount = 0;
+                            provider.pipelines.forEach(pl => {
+                              apiCount += pl.api_count || 0;
+                              staticCount += pl.static_count || 0;
+                            });
+                            const total = apiCount + staticCount;
+                            const percent = total > 0 ? Math.round((apiCount / total) * 100) : 0;
+                            return (
+                              <td key={provider.slug} style={{ fontVariantNumeric: 'tabular-nums' }}>
+                                {apiCount > 0 ? (
+                                  <span style={{ color: '#16a34a', fontWeight: 600 }}>
+                                    {percent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({apiCount.toLocaleString()})</span>
+                                  </span>
+                                ) : (
+                                  '—'
                                 )}
                               </td>
-                              <td>
-                                <SourceBadge
-                                  source={pl.data_source}
-                                  apiCount={pl.api_count}
-                                  staticCount={pl.static_count}
-                                />
+                            );
+                          })}
+                        </tr>
+
+                        {/* Static Config Percentage Row */}
+                        <tr style={{ fontSize: '11px', color: 'var(--muted)' }}>
+                          <td style={{ textAlign: 'left', fontWeight: 600 }}>Static Config Records</td>
+                          {sortedProviders.map(provider => {
+                            let apiCount = 0;
+                            let staticCount = 0;
+                            provider.pipelines.forEach(pl => {
+                              apiCount += pl.api_count || 0;
+                              staticCount += pl.static_count || 0;
+                            });
+                            const total = apiCount + staticCount;
+                            const percent = total > 0 ? Math.round((staticCount / total) * 100) : 0;
+                            return (
+                              <td key={provider.slug} style={{ fontVariantNumeric: 'tabular-nums' }}>
+                                {staticCount > 0 ? (
+                                  <span style={{ color: '#d97706', fontWeight: 600 }}>
+                                    {percent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({staticCount.toLocaleString()})</span>
+                                  </span>
+                                ) : (
+                                  '—'
+                                )}
                               </td>
-                              <td style={{ color: 'var(--muted)', fontVariantNumeric: 'tabular-nums' }}>
-                                {pl.last_updated
-                                  ? new Date(pl.last_updated).toLocaleDateString('en-US', {
-                                      year: 'numeric', month: 'short', day: 'numeric',
-                                    })
-                                  : '—'}
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    ) : (
-                      <div style={{ padding: '1rem 1.5rem', color: 'var(--muted)', fontSize: 12 }}>
-                        No pricing data found for this provider.
-                      </div>
-                    )}
+                            );
+                          })}
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  {/* Add Go back to the top after each provider card */}
-                  <BackToTop />
-                </React.Fragment>
-              );
-            })}
+                );
+              })()}
+              <BackToTop />
             </>
           )}
         </div>

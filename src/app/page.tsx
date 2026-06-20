@@ -179,20 +179,7 @@ export default function Dashboard() {
   const [selectedAppHostingTiers, setSelectedAppHostingTiers] = useState<string[]>([...config.APP_HOSTING_TIERS]);
   const [selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes] = useState<string[]>([...config.APP_HOSTING_COMPUTE_TYPES]);
 
-  // Scrub invalid selected engines if Database Families change
-  useEffect(() => {
-    if (activeProductType === 'database' && selectedDbFamilies.length > 0) {
-      const validEngines = new Set(
-        selectedDbFamilies.flatMap(f => {
-          const mappedFamily = Object.keys(staticConfig.DB_FAMILY_MAPPINGS || {}).find(
-            k => k.toLowerCase() === f.toLowerCase()
-          );
-          return mappedFamily ? staticConfig.DB_FAMILY_MAPPINGS[mappedFamily] : [];
-        })
-      );
-      setSelectedEngines(prev => prev.filter(engine => validEngines.has(engine)));
-    }
-  }, [selectedDbFamilies, activeProductType]);
+
   const [selectedServerlessServiceTypes, setSelectedServerlessServiceTypes] = useState<string[]>([...config.SERVERLESS_SERVICE_TYPES]);
 
 
