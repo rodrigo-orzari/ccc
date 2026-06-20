@@ -8,6 +8,7 @@ import { ContainersPricingPipeline } from '../services/containers_pipeline.ts';
 import { DataAnalyticsPricingPipeline } from '../services/data_analytics_pipeline.ts';
 import { NetworkingPricingPipeline } from '../services/networking_pipeline.ts';
 import { StoragePricingPipeline } from '../services/storage_pipeline.ts';
+import { AIPricingPipeline } from '../services/ai_pipeline.ts';
 import { AppHostingPricingPipeline } from '../services/app_hosting_pipeline.ts';
 import { SecurityPricingPipeline } from '../services/security_pipeline.ts';
 import { sendPriceDriftEmail, sendStalenessEmail, sendDataQualityEmail, StaleDataAlert } from '../services/mailer.ts';
@@ -75,6 +76,7 @@ cron.schedule('0 0 * * 0', async () => {
       new DataAnalyticsPricingPipeline(sql as any),
       new NetworkingPricingPipeline(sql as any),
       new StoragePricingPipeline(sql as any),
+      new AIPricingPipeline(sql as any),
       new AppHostingPricingPipeline(sql as any),
       new SecurityPricingPipeline(sql as any)
     ];
