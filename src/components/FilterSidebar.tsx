@@ -12,6 +12,7 @@ const ENGINE_CATEGORIES: Record<string, string[]> = {
   'Relational': ['MySQL', 'PostgreSQL', 'SQL Server', 'Oracle DB', 'MariaDB', 'DB2', 'Db2', 'MySQL (on-premise for Outpost)', 'PostgreSQL (on-premise for Outpost)', 'SQL Server (on-premise for Outpost)', 'Oracle (on-premises for Outposts)'],
   'Data Warehouse & Analytics': ['BigQuery', 'Snowflake', 'Redshift', 'Databricks', 'Synapse', 'Oracle Autonomous Data Warehouse', 'Oracle Analytics Cloud', 'AnalyticDB for MySQL', 'MaxCompute', 'Hologres', 'E-MapReduce'],
   'NoSQL & In-Memory': ['MongoDB', 'Cosmos DB', 'Redis', 'Valkey'],
+  'Vector': ['Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma'],
   'Streaming & Search': ['Kafka', 'Kinesis Data Streams', 'Pub/Sub', 'Event Hubs', 'OpenSearch']
 };
 
@@ -20,6 +21,7 @@ const groupEngines = (engines: string[]) => {
     { label: 'Relational', services: [] },
     { label: 'Data Warehouse & Analytics', services: [] },
     { label: 'NoSQL & In-Memory', services: [] },
+    { label: 'Vector', services: [] },
     { label: 'Streaming & Search', services: [] },
     { label: 'Other', services: [] }
   ];
@@ -685,66 +687,77 @@ export default function FilterSidebar({
         )}
 
         {/* Database filters */}
-        {activeProductType === 'database' && (
-          <>
-            <FilterSection
-              title="Geography"
-              tooltip="Geographic region where the database is deployed."
-              options={config.GEOGRAPHIES}
-              selected={selectedGeographies}
-              onToggle={onGeographyToggle}
-              onSetAll={onSetGeographies}
-              isExpanded={expanded.geography ?? true}
-              onToggleExpand={() => onToggleSection('geography')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
-              title="Database Family"
-              tooltip="The broad category of the database system: Relational (SQL-based) or NoSQL."
-              options={config.DB_FAMILIES}
-              selected={selectedDbFamilies}
-              onToggle={onDbFamilyToggle}
-              onSetAll={onSetDbFamilies}
-              isExpanded={expanded.dbFamily ?? true}
-              onToggleExpand={() => onToggleSection('dbFamily')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <GroupedFilterSection
-              title="Database Engine"
-              tooltip="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc."
-              groups={groupEngines(config.DB_ENGINES)}
-              allOptions={config.DB_ENGINES}
-              selected={selectedEngines}
-              onToggle={onEngineToggle}
-              onSetAll={onSetEngines}
-              isExpanded={expanded.engine ?? true}
-              onToggleExpand={() => onToggleSection('engine')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
-              title="Deployment"
-              tooltip="Provisioned: fixed instance size billed hourly. Serverless: auto-scales, billed per compute unit consumed."
-              options={config.DEPLOYMENT_TYPES}
-              selected={selectedDeploymentTypes}
-              onToggle={onDeploymentTypeToggle}
-              onSetAll={onSetDeploymentTypes}
-              isExpanded={expanded.deploymentType ?? true}
-              onToggleExpand={() => onToggleSection('deploymentType')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
-              title="HIGH-AVAILABILITY"
-              tooltip="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)."
-              options={config.HA_MODES}
-              selected={selectedHaModes}
-              onToggle={onHaModeToggle}
-              onSetAll={onSetHaModes}
-              isExpanded={expanded.haMode ?? true}
-              onToggleExpand={() => onToggleSection('haMode')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-          </>
-        )}
+        {activeProductType === 'database' && (() => {
+          const isOnlyVector = selectedDbFamilies.length === 1 && selectedDbFamilies[0].toLowerCase() === 'vector';
+          const availableEngines = isOnlyVector 
+            ? config.DB_ENGINES.filter(e => ['Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma'].includes(e))
+            : config.DB_ENGINES;
+
+          return (
+            <>
+              <FilterSection
+                title="Geography"
+                tooltip="Geographic region where the database is deployed."
+                options={config.GEOGRAPHIES}
+                selected={selectedGeographies}
+                onToggle={onGeographyToggle}
+                onSetAll={onSetGeographies}
+                isExpanded={expanded.geography ?? true}
+                onToggleExpand={() => onToggleSection('geography')}
+              />
+              <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+              <FilterSection
+                title="Database Family"
+                tooltip="The broad category of the database system: Relational (SQL-based) or NoSQL."
+                options={config.DB_FAMILIES}
+                selected={selectedDbFamilies}
+                onToggle={onDbFamilyToggle}
+                onSetAll={onSetDbFamilies}
+                isExpanded={expanded.dbFamily ?? true}
+                onToggleExpand={() => onToggleSection('dbFamily')}
+              />
+              <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+              <GroupedFilterSection
+                title="Database Engine"
+                tooltip="The database engine: PostgreSQL, MySQL, SQL Server, Oracle DB, etc."
+                groups={groupEngines(availableEngines)}
+                allOptions={availableEngines}
+                selected={selectedEngines}
+                onToggle={onEngineToggle}
+                onSetAll={onSetEngines}
+                isExpanded={expanded.engine ?? true}
+                onToggleExpand={() => onToggleSection('engine')}
+              />
+              {!isOnlyVector && (
+                <>
+                  <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+                  <FilterSection
+                    title="Deployment"
+                    tooltip="Provisioned: fixed instance size billed hourly. Serverless: auto-scales, billed per compute unit consumed."
+                    options={config.DEPLOYMENT_TYPES}
+                    selected={selectedDeploymentTypes}
+                    onToggle={onDeploymentTypeToggle}
+                    onSetAll={onSetDeploymentTypes}
+                    isExpanded={expanded.deploymentType ?? true}
+                    onToggleExpand={() => onToggleSection('deploymentType')}
+                  />
+                  <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+                  <FilterSection
+                    title="HIGH-AVAILABILITY"
+                    tooltip="High-availability configuration: Single AZ (no redundancy), Multi AZ (same-region standby), Zone Redundant, or Multi Region (geo-redundant)."
+                    options={config.HA_MODES}
+                    selected={selectedHaModes}
+                    onToggle={onHaModeToggle}
+                    onSetAll={onSetHaModes}
+                    isExpanded={expanded.haMode ?? true}
+                    onToggleExpand={() => onToggleSection('haMode')}
+                  />
+                </>
+              )}
+              <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            </>
+          );
+        })()}
 
         {/* AI filters */}
         {activeProductType === 'ai' && (
