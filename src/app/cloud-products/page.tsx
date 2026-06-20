@@ -26,6 +26,22 @@ const CloudProductsPage: React.FC = () => {
 
   const categories = Array.from(categoriesMap.keys());
 
+  const CATEGORY_EMOJIS: Record<string, string> = {
+    'Compute': '💻',
+    'Storage': '💾',
+    'Databases': '🗄️',
+    'Containers': '📦',
+    'Networking': '🌐',
+    'Analytics': '📊',
+    'AI & Machine Learning': '🤖',
+    'Identity & Security': '🔒',
+  };
+
+  const getCategoryWithEmoji = (category: string) => {
+    const emoji = CATEGORY_EMOJIS[category];
+    return emoji ? `${emoji} ${category}` : category;
+  };
+
   return (
     <>
       <style>
@@ -115,7 +131,7 @@ const CloudProductsPage: React.FC = () => {
           .products-table th, .products-table td {
             border: 1px solid var(--border-color);
             padding: 0.75rem;
-            text-align: left;
+            text-align: center;
           }
 
           .products-table th {
@@ -178,7 +194,7 @@ const CloudProductsPage: React.FC = () => {
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {categories.map((category) => (
                   <li key={category} style={{ marginBottom: '0.6rem' }}>
-                    <a href={`#${headingToId(category)}`}>{category}</a>
+                    <a href={`#${headingToId(category)}`}>{getCategoryWithEmoji(category)}</a>
                   </li>
                 ))}
               </ul>
@@ -194,9 +210,6 @@ const CloudProductsPage: React.FC = () => {
             </p>
             
             <div className="prose prose-slate dark:prose-invert max-w-none text-black dark:text-white">
-              <blockquote style={{ borderLeft: '4px solid #3b82f6', backgroundColor: 'var(--sidebar-bg)', padding: '1rem 1.25rem', margin: '1.5rem 0', borderRadius: '0 0.375rem 0.375rem 0' }}>
-                <strong style={{ color: 'var(--text-color)' }}>Note on coverage:</strong> comparecloudcosts.com focuses on calculating pricing for core infrastructure. We have highlighted the categories we actively calculate pricing for with a <strong>Compare Pricing ➔</strong> link. Other categories are provided here as a helpful reference to understand product equivalents across the cloud ecosystem.
-              </blockquote>
 
               {categories.map((category) => {
                 const items = categoriesMap.get(category)!;
@@ -205,7 +218,7 @@ const CloudProductsPage: React.FC = () => {
                 return (
                   <div key={category}>
                     <h2 id={headingToId(category)} style={{ display: 'flex', alignItems: 'center' }}>
-                      {category}
+                      {getCategoryWithEmoji(category)}
                       {isSupported && (
                         <Link href="/" className="supported-badge">
                           Compare Pricing ➔
@@ -250,6 +263,10 @@ const CloudProductsPage: React.FC = () => {
                   </div>
                 );
               })}
+
+              <div style={{ marginTop: '3rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-color)', fontSize: '0.8rem', color: 'var(--muted-text)', textAlign: 'center' }}>
+                <strong>Note on coverage:</strong> comparecloudcosts.com focuses on calculating pricing for core infrastructure. We have highlighted the categories we actively calculate pricing for with a <strong>Compare Pricing ➔</strong> link. Other categories are provided here as a helpful reference to understand product equivalents across the cloud ecosystem.
+              </div>
             </div>
           </main>
         </div>
