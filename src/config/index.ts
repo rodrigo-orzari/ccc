@@ -95,6 +95,8 @@ export const ANALYTICS_TIERS = [
 // Range defaults
 export const DEFAULT_VCPU_RANGE = { min: 0, max: 320 };
 export const DEFAULT_MEMORY_RANGE = { min: 0, max: 3200 };
+export const DEFAULT_SERVERLESS_VCPU_RANGE = { min: 0, max: 16 };
+export const DEFAULT_SERVERLESS_MEMORY_RANGE = { min: 0, max: 32 };
 export const DEFAULT_PRICE_RANGE = { min: 0, max: 100 };
 
 // Cloud providers

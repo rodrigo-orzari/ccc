@@ -22,25 +22,21 @@ export async function POST(request: Request) {
       const dbCategory = reqs.productType === 'vm' ? 'compute' : reqs.productType === 'data-analytics' ? 'data_warehouse' : reqs.productType;
       
       for (const provider of providers) {
-        let conditions = [
+        // Base constraints that must always hold: provider, service category, the
+        // product-type category match, and (optionally) region.
+        const base = [
           sql`p.slug = ${provider}`,
-          sql`s.category = ${dbCategory}`
+          sql`s.category = ${dbCategory}`,
         ];
 
-        if (reqs.minVcpus) {
-          conditions.push(sql`pr.vcpus >= ${reqs.minVcpus}`);
-        }
-        if (reqs.minMemoryGb) {
-          conditions.push(sql`pr.memory_gb >= ${reqs.minMemoryGb}`);
-        }
         if (reqs.category === 'GPU instance') {
-          conditions.push(sql`pr.gpu_count > 0`);
+          base.push(sql`pr.gpu_count > 0`);
         } else if (reqs.category === 'Inference') {
-          conditions.push(sql`pr.category ILIKE '%ai%'`);
+          base.push(sql`pr.category ILIKE '%ai%'`);
         } else if (reqs.category) {
-          conditions.push(sql`pr.category ILIKE ${'%' + reqs.category + '%'}`);
+          base.push(sql`pr.category ILIKE ${'%' + reqs.category + '%'}`);
         }
-        
+
         if (region && region !== 'Global') {
           let regionTerms = [region.toLowerCase(), 'global'];
           const lowerRegion = region.toLowerCase();
@@ -53,22 +49,38 @@ export async function POST(request: Request) {
           } else if (lowerRegion.includes('south america') || lowerRegion === 'sa') {
             regionTerms.push('south america', 'sa-east', 'sao paulo');
           }
-          conditions.push(sql`LOWER(pr.geography) = ANY(${regionTerms})`);
+          base.push(sql`LOWER(pr.geography) = ANY(${regionTerms})`);
         }
 
-        const conditionSnippet = conditions.reduce((acc, condition, index) => {
-          if (index === 0) return condition;
-          return sql`${acc} AND ${condition}`;
-        }, sql``);
+        const vcpuCond = reqs.minVcpus ? sql`pr.vcpus >= ${reqs.minVcpus}` : null;
+        const memCond = reqs.minMemoryGb ? sql`pr.memory_gb >= ${reqs.minMemoryGb}` : null;
 
-        const match = await sql`
-          SELECT pr.* FROM pricing_records pr
-          JOIN services s ON pr.service_id = s.id
-          JOIN providers p ON s.provider_id = p.id
-          WHERE ${conditionSnippet}
-          ORDER BY pr.price_per_unit ASC LIMIT 1
-        `;
-        
+        // Progressively relax the spec filters so a single missing/zero attribute
+        // (e.g. an Azure relational row with memory_gb=0) doesn't make a provider
+        // falsely report N/A. The category match is never relaxed. Each attempt is
+        // tried in order; the first that returns a row wins.
+        const specTiers: (typeof base)[] = [];
+        specTiers.push([vcpuCond, memCond].filter(Boolean) as typeof base);   // strict: vCPU + memory
+        if (memCond) specTiers.push([vcpuCond].filter(Boolean) as typeof base); // drop memory
+        if (vcpuCond) specTiers.push([memCond].filter(Boolean) as typeof base); // drop vCPU
+        specTiers.push([]);                                                     // category only (last resort)
+
+        let match: any[] = [];
+        for (const extra of specTiers) {
+          const all = [...base, ...extra];
+          const conditionSnippet = all.reduce((acc, condition, index) => (
+            index === 0 ? condition : sql`${acc} AND ${condition}`
+          ), sql``);
+          match = await sql`
+            SELECT pr.* FROM pricing_records pr
+            JOIN services s ON pr.service_id = s.id
+            JOIN providers p ON s.provider_id = p.id
+            WHERE ${conditionSnippet}
+            ORDER BY pr.price_per_unit ASC LIMIT 1
+          `;
+          if (match && match.length > 0) break;
+        }
+
         if (match && match.length > 0) {
           const instance = match[0];
           const isMonthly = (instance.unit || '').toLowerCase().includes('mo');

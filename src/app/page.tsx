@@ -200,6 +200,21 @@ export default function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Sync core filters to Microsoft Clarity Custom Tags
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof (window as any).clarity === 'function') {
+      try {
+        (window as any).clarity("set", "product_category", activeProductType);
+        (window as any).clarity("set", "providers_compared", selectedProviders.join(','));
+        if (search) {
+          (window as any).clarity("set", "search_term", search);
+        }
+      } catch (err) {
+        console.warn("Clarity set failed", err);
+      }
+    }
+  }, [activeProductType, selectedProviders, search]);
+
   const [showAggregation, setShowAggregation] = useState(false);
   const [sortConfig, setSortConfig] = useState<{ key: keyof PricingRecord | string; direction: 'asc' | 'desc' }>({
     key: 'price_per_unit',
