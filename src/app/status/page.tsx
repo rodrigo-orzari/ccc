@@ -430,11 +430,7 @@ export default function StatusPage() {
                   </div>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
                     <span style={{ flexShrink: 0 }}><SourceBadge source="static" apiCount={0} staticCount={0} /></span>
-                    <span>Pricing from a <strong>curated fallback we maintain by hand</strong>, used when a provider has no usable live API or a live fetch fails. Accurate as of the last update but not auto-refreshed.</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                    <span style={{ flexShrink: 0 }}><SourceBadge source="mixed" apiCount={0} staticCount={0} /></span>
-                    <span>The category contains <strong>both</strong> live-API and static-config records.</span>
+                    <span><strong>Manual fallback pricing</strong> used when a provider has no usable live API or a fetch fails. Not auto-refreshed.</span>
                   </div>
                 </div>
               </div>
@@ -510,12 +506,11 @@ export default function StatusPage() {
                       </div>
                     )}
                   </div>
+                  {/* Add Go back to the top after each provider card */}
+                  <BackToTop />
                 </React.Fragment>
               );
             })}
-
-            <BackToTop />
-
             </>
           )}
         </div>

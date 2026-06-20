@@ -311,7 +311,7 @@ export default function PricingTable({
               <tr className="text-[10px] font-bold uppercase tracking-widest text-[#1e1e38] dark:text-[#dde0f0]">
 
                 <Th colKey="provider"       sortKey="provider"       label="Provider" />
-                <Th colKey="instance_type"  sortKey="instance_type"  label={<span title={skuTooltip} style={{ cursor: 'help' }}>Configuration <span style={{ opacity: 0.45, fontWeight: 400 }}>ⓘ</span></span>} />
+                <Th colKey="instance_type"  sortKey="instance_type"  label={<span title={skuTooltip} style={{ cursor: 'help' }}>Product <span style={{ opacity: 0.45, fontWeight: 400 }}>ⓘ</span></span>} />
 
                 {/* ── Product-type-specific middle columns ── */}
                 {activeProductType === 'database' ? (<>
