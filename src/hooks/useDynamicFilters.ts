@@ -38,6 +38,7 @@ export function useDynamicFilters() {
     isLoading,
     // Dynamically merged
     GEOGRAPHIES: merge(config.GEOGRAPHIES, dynamicData?.geographies),
+    GEOGRAPHIES_SECURITY: merge([], dynamicData?.geographies_security),
     OS_TYPES: merge(config.OS_TYPES, dynamicData?.os_types),
     CATEGORIES: merge(config.CATEGORIES, dynamicData?.categories),
     PRICING_MODELS: config.PRICING_MODELS,

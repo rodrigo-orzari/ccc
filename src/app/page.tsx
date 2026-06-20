@@ -633,26 +633,26 @@ export default function Dashboard() {
       return;
     }
 
-    let headers: string[] = ['Provider', 'Configuration', 'Geography', 'Price (USD)', 'Source'];
+    let headers: string[] = ['Provider', 'Product', 'Geography', 'Price (USD)', 'Source'];
     if (activeProductType === 'database') {
-      headers = ['Provider', 'Configuration', 'Engine', 'Tier', 'Deployment', 'HA Mode', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Product', 'Engine', 'Tier', 'Deployment', 'HA Mode', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'serverless') {
-      headers = ['Provider', 'Configuration', 'Service Type', 'Memory (GB)', 'Architecture', 'Languages', 'Cold Start (ms)', 'Timeout (sec)', 'Memory Config', 'Free Tier', 'Granularity', 'Execution Model', 'Provisioned Concurrency', 'Max Storage (GB)', 'Invocation Price ($/1M)', 'Geography', 'Pricing Unit', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Product', 'Service Type', 'Memory (GB)', 'Architecture', 'Languages', 'Cold Start (ms)', 'Timeout (sec)', 'Memory Config', 'Free Tier', 'Granularity', 'Execution Model', 'Provisioned Concurrency', 'Max Storage (GB)', 'Invocation Price ($/1M)', 'Geography', 'Pricing Unit', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'containers') {
-      headers = ['Provider', 'Configuration', 'Orchestrator', 'Compute Type', 'Architecture', 'Billing Granularity', 'GPU', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Product', 'Orchestrator', 'Compute Type', 'Architecture', 'Billing Granularity', 'GPU', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'networking') {
-      headers = ['Provider', 'Configuration', 'Service', 'Category', 'Transfer Tier', 'Destination', 'Included Transfer', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Product', 'Service', 'Category', 'Transfer Tier', 'Destination', 'Included Transfer', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'data-analytics') {
-      headers = ['Provider', 'Configuration', 'Engine', 'Deployment Type', 'Tier', 'Compute Unit', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Product', 'Engine', 'Deployment Type', 'Tier', 'Compute Unit', 'Geography', 'Price (USD)', 'Source'];
     
     } else if (activeProductType === 'storage') {
-      headers = ['Provider', 'Configuration', 'Category', 'Tier', 'Redundancy', 'Media', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Product', 'Category', 'Tier', 'Redundancy', 'Media', 'Geography', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'app-hosting') {
-      headers = ['Provider', 'Configuration', 'Tier', 'Compute Type', 'OS', 'Geography', 'vCPU', 'Memory (GB)', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Product', 'Tier', 'Compute Type', 'OS', 'Geography', 'vCPU', 'Memory (GB)', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'ai') {
-      headers = ['Provider', 'Configuration', 'Service', 'Model Tier', 'Context Window', 'Multimodal', 'Geography', 'Input Price (/1M)', 'Output Price (/1M)', 'Source'];
+      headers = ['Provider', 'Product', 'Service', 'Model Tier', 'Context Window', 'Multimodal', 'Geography', 'Input Price (/1M)', 'Output Price (/1M)', 'Source'];
     } else {
-      headers = ['Provider', 'Configuration', 'Category', 'CPU Vendor', 'Architecture', 'OS', 'GPU', 'vCPU', 'Memory (GB)', 'Geography', 'Price (USD)', 'Source'];
+      headers = ['Provider', 'Product', 'Category', 'CPU Vendor', 'Architecture', 'OS', 'GPU', 'vCPU', 'Memory (GB)', 'Geography', 'Price (USD)', 'Source'];
     }
 
     const rows = data.map(record => {

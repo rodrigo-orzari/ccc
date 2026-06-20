@@ -1174,7 +1174,7 @@ export default function FilterSidebar({
             <FilterSection
               title="Geography"
               tooltip="Geographic region for the service."
-              options={config.GEOGRAPHIES}
+              options={config.GEOGRAPHIES_SECURITY.length > 0 ? config.GEOGRAPHIES_SECURITY : ['Global', 'N. America']}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
               onSetAll={onSetGeographies}
