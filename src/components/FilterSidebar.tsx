@@ -1182,18 +1182,29 @@ export default function FilterSidebar({
               onToggleExpand={() => onToggleSection('geography')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <GroupedFilterSection
-              title="Service"
-              tooltip="Security or identity service type."
-              groups={config.SECURITY_SERVICE_GROUPS}
-              allOptions={config.SECURITY_SERVICES}
-              selected={selectedSecurityServices}
-              onToggle={onSecurityServiceToggle}
-              onSetAll={onSetSecurityServices}
-              isExpanded={expanded.securityService ?? true}
-              onToggleExpand={() => onToggleSection('securityService')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            {config.SECURITY_SERVICE_GROUPS.map((group, index) => {
+              const groupSelected = selectedSecurityServices.filter(s => group.services.includes(s));
+              const handleSetGroup = (services: string[]) => {
+                const otherSelected = selectedSecurityServices.filter(s => !group.services.includes(s));
+                onSetSecurityServices([...otherSelected, ...services]);
+              };
+              
+              return (
+                <React.Fragment key={group.label}>
+                  <FilterSection
+                    title={group.label}
+                    tooltip={`${group.label} services.`}
+                    options={group.services}
+                    selected={groupSelected}
+                    onToggle={onSecurityServiceToggle}
+                    onSetAll={handleSetGroup}
+                    isExpanded={expanded[`security_${group.label}`] ?? true}
+                    onToggleExpand={() => onToggleSection(`security_${group.label}`)}
+                  />
+                  <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+                </React.Fragment>
+              );
+            })}
           </>
         )}
 
