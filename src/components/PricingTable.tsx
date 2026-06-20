@@ -307,9 +307,35 @@ export default function PricingTable({
         }
       `}</style>
 
+      {/* Mobile: stacked cards (below lg) */}
+      <div className="lg:hidden p-3 space-y-3">
+        {loading ? (
+          Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg bg-white dark:bg-[#0a0a18] p-3 animate-pulse">
+              <div className="h-3 bg-[#dde0f0] dark:bg-[#1e1e38] rounded w-20 mb-2" />
+              <div className="h-3 bg-[#dde0f0] dark:bg-[#1e1e38] rounded w-32" />
+            </div>
+          ))
+        ) : data.length > 0 ? (
+          data.map((record, index) => (
+            <MobileCard
+              key={index}
+              record={record}
+              activeProductType={activeProductType}
+              showAggregation={showAggregation}
+            />
+          ))
+        ) : (
+          <div className="px-6 py-24 text-center text-[#737373] dark:text-[#525252] italic text-sm">
+            No matches for your filters.
+          </div>
+        )}
+      </div>
+
+      {/* Desktop: full table (lg and up) */}
       <div
         ref={tableScrollRef}
-        className={`flex-1 custom-scrollbar ${hasHorizontalOverflow && !scrolledToEnd ? 'scroll-fade-right' : ''}`}
+        className={`hidden lg:block flex-1 custom-scrollbar ${hasHorizontalOverflow && !scrolledToEnd ? 'scroll-fade-right' : ''}`}
         style={{ minHeight: 0, overflowY: 'auto', overflowX: 'scroll' }}
       >
         {/* Inner div fixes the table width so the scroll container can measure it */}
@@ -605,5 +631,168 @@ function TableRow({
         </td>
       )}
     </tr>
+  );
+}
+
+// ─── Mobile card view ────────────────────────────────────────────────────────
+// Mirrors the table columns as label/value pairs so the same data is shown on
+// phones in a stacked, readable card instead of a wide horizontal-scroll table.
+function getMobileFields(record: PricingRecord, pt: ProductType): { label: string; value: string }[] {
+  const a: any = record.attributes || {};
+  const dash = (v: any) => (v === undefined || v === null || v === '' ? '—' : String(v));
+  const arch = record.arch === 'x86 64' ? 'x86' : (record.arch || '—');
+  switch (pt) {
+    case 'database': return [
+      { label: 'Engine', value: dash(a.engine) },
+      { label: 'Tier', value: dash(record.category) },
+      { label: 'Deployment', value: a.deployment_type || 'Provisioned' },
+      { label: 'HA Mode', value: dash(a.ha_mode) },
+      { label: 'Geo', value: dash(record.geography) },
+      { label: 'vCPU', value: dash(record.vcpus) },
+      { label: 'Memory (GB)', value: dash(record.memory_gb) },
+    ];
+    case 'data-analytics': return [
+      { label: 'Engine', value: dash(a.engine) },
+      { label: 'Deployment Type', value: a.deployment_type || 'Provisioned' },
+      { label: 'Tier', value: dash(a.tier) },
+      { label: 'Compute Unit', value: dash(record.vcpus) },
+      { label: 'Geo', value: dash(record.geography) },
+    ];
+    case 'ai': return [
+      { label: 'Service', value: dash(record.service) },
+      { label: 'Model Tier', value: dash(a.modelTier) },
+      { label: 'Context Window', value: a.contextWindowK ? `${a.contextWindowK}K` : '—' },
+      { label: 'Multimodal', value: dash(a.multimodal) },
+      { label: 'Output Price (/1M)', value: a.outputPricePer1M ? `$${Number(a.outputPricePer1M).toFixed(4)}` : '—' },
+    ];
+    case 'serverless': return [
+      { label: 'Service Type', value: a.service_type || 'Compute' },
+      { label: 'Arch', value: arch },
+      { label: 'Languages', value: a.supportedLanguages ? (Array.isArray(a.supportedLanguages) ? a.supportedLanguages.join(', ') : a.supportedLanguages) : '—' },
+      { label: 'Cold Start (ms)', value: dash(a.cold_start_overhead_ms) },
+      { label: 'Timeout', value: a.timeout_seconds ? (Number(a.timeout_seconds) >= 60 ? `${Number(a.timeout_seconds) / 60} min` : `${a.timeout_seconds} sec`) : '—' },
+      { label: 'Memory Config', value: dash(a.memory_configuration) },
+      { label: 'Granularity', value: a.billing_granularity_ms ? `${a.billing_granularity_ms}ms` : '—' },
+      { label: 'Exec. Model', value: dash(a.execution_model) },
+      { label: 'Geo', value: dash(record.geography) },
+      { label: 'Pricing Unit', value: dash(record.unit) },
+      { label: 'Source', value: record.data_source === 'static_config' ? 'Static' : 'API' },
+    ];
+    case 'containers': return [
+      { label: 'Orchestrator', value: dash(a.orchestrator) },
+      { label: 'Compute Type', value: dash(a.compute_type) },
+      { label: 'Architecture', value: dash(a.architecture) },
+      { label: 'Billing', value: dash(a.billing_granularity) },
+      { label: 'GPU', value: record.gpu_count > 0 ? 'GPU' : '—' },
+      { label: 'Geo', value: dash(record.geography) },
+      { label: 'vCPU', value: dash(record.vcpus) },
+      { label: 'Memory (GB)', value: dash(record.memory_gb) },
+    ];
+    case 'networking': return [
+      { label: 'Service', value: dash(record.service) },
+      { label: 'Billing Model', value: dash(a.billing_model) },
+      { label: 'Usage Tier', value: dash(a.usage_tier) },
+      { label: 'Port Capacity', value: dash(a.port_capacity) },
+      { label: 'Transfer Scope', value: dash(a.transfer_scope) },
+      { label: 'Geo', value: dash(record.geography) },
+    ];
+    case 'storage': return [
+      { label: 'Storage Type', value: dash(a.storage_type) },
+      { label: 'Tier', value: dash(a.tier) },
+      { label: 'Redundancy', value: dash(a.redundancy) },
+      { label: 'Media', value: dash(a.media) },
+      { label: 'Geo', value: dash(record.geography) },
+    ];
+    case 'app-hosting': return [
+      { label: 'Tier', value: dash(a.tier) },
+      { label: 'Compute Type', value: dash(a.compute_type) },
+      { label: 'OS', value: dash(record.os) },
+      { label: 'Geo', value: dash(record.geography) },
+      { label: 'vCPU', value: dash(record.vcpus) },
+      { label: 'Memory (GB)', value: dash(record.memory_gb) },
+    ];
+    default: return [ // vm
+      { label: 'Category', value: record.category || 'General purpose' },
+      { label: 'CPU Vendor', value: dash(record.cpu_vendor) },
+      { label: 'Arch', value: arch },
+      { label: 'OS', value: dash(record.os) },
+      { label: 'GPU', value: record.gpu_count > 0 ? 'GPU' : '—' },
+      { label: 'Geo', value: dash(record.geography) },
+      { label: 'vCPU', value: dash(record.vcpus) },
+      { label: 'Memory (GB)', value: dash(record.memory_gb) },
+    ];
+  }
+}
+
+function MobileCard({
+  record, activeProductType, showAggregation,
+}: {
+  record: PricingRecord;
+  activeProductType: ProductType;
+  showAggregation: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const providerColor = PROVIDERS.find(
+    p => (record.provider || '').toLowerCase() === p.id || record.provider === p.name,
+  )?.color ?? '#525252';
+
+  const fields = getMobileFields(record, activeProductType);
+  const visible = open ? fields : fields.slice(0, 4);
+
+  const curr = parseFloat(record.price_per_unit);
+  const prev = record.previous_price_per_unit != null ? parseFloat(record.previous_price_per_unit) : null;
+  const trend = (prev === null || prev === 0)
+    ? null
+    : curr > prev ? <span className="text-[#ef4444] font-bold">▲</span>
+    : curr < prev ? <span className="text-[#22c55e] font-bold">▼</span>
+    : <span className="text-[#a3a3a3] font-bold">●</span>;
+
+  const priceVal = activeProductType === 'ai' || activeProductType === 'serverless'
+    ? `$${curr.toFixed(4)}`
+    : showAggregation ? `$${(curr * 8760).toFixed(2)}` : `$${curr.toFixed(4)}`;
+  const priceUnit = activeProductType === 'ai' ? '/1M tokens'
+    : activeProductType === 'serverless' ? (record.unit || '')
+    : showAggregation ? '/yr' : '/hr';
+
+  return (
+    <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg bg-white dark:bg-[#0a0a18] p-3">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex flex-col gap-1 min-w-0">
+          <span
+            className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border w-fit"
+            style={{ color: providerColor, borderColor: providerColor + '50', backgroundColor: providerColor + '18' }}
+          >
+            {record.provider}
+          </span>
+          <span className="text-sm font-bold text-[#404040] dark:text-[#d4d4d4] break-words" title={record.instance_type}>
+            {formatInstanceName(record.instance_type, record.provider)}
+          </span>
+        </div>
+        <div className="text-right shrink-0">
+          <div className="flex items-center justify-end gap-1 text-base font-bold text-black dark:text-[#f7f8ff]">
+            {trend}{priceVal}
+          </div>
+          <div className="text-[9px] text-[#737373] uppercase tracking-widest">{priceUnit}</div>
+        </div>
+      </div>
+
+      <div className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2">
+        {visible.map(f => (
+          <div key={f.label} className="flex flex-col min-w-0">
+            <span className="text-[8px] font-bold uppercase tracking-widest text-[#a3a3a3]">{f.label}</span>
+            <span className="text-[11px] font-semibold text-[#404040] dark:text-[#d4d4d4] break-words">{f.value}</span>
+          </div>
+        ))}
+      </div>
+
+      {fields.length > 4 && (
+        <button
+          onClick={() => setOpen(o => !o)}
+          className="mt-3 w-full text-[11px] font-bold text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] border-t border-[#dde0f0] dark:border-[#1e1e38] pt-2 transition-colors"
+        >
+          {open ? 'Show less' : `Show ${fields.length - 4} more`}
+        </button>
+      )}
+    </div>
   );
 }

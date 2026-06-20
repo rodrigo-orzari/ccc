@@ -815,7 +815,7 @@ export default function Dashboard() {
           onToggleSection={toggleSection}
         />
 
-        <main className="flex-1 min-w-0 overflow-hidden flex flex-col bg-[#f7f8ff] dark:bg-[#06060f]">
+        <main className="flex-1 min-w-0 lg:overflow-hidden flex flex-col bg-[#f7f8ff] dark:bg-[#06060f]">
           <ProviderCards
             providers={config.PROVIDERS.filter(p => activeProductType === 'ai' || !p.isAIOnly)}
             selectedProviders={selectedProviders}
