@@ -108,9 +108,6 @@ export default function Footer() {
             <XIcon />
           </button>
         </div>
-        <div className="text-[10px] font-medium text-[#a3a3a3] dark:text-[#525252]">
-          © 2026 Co-Sell Plus LLC
-        </div>
       </div>
     </footer>
   );

@@ -476,6 +476,23 @@ export default function StatusPage() {
                   return PIPELINE_DISPLAY[category] ?? (category.charAt(0).toUpperCase() + category.slice(1));
                 };
 
+                const getCategoryEmoji = (category: string) => {
+                  const PIPELINE_EMOJI: Record<string, string> = {
+                    compute: '🖥️',
+                    database: '🗄️',
+                    serverless: '⚡',
+                    containers: '📦',
+                    networking: '🌐',
+                    data_warehouse: '📊',
+                    ai: '🤖',
+                    storage: '💾',
+                    'app-hosting': '🚀',
+                    integration: '🔗',
+                    security: '🔒',
+                  };
+                  return PIPELINE_EMOJI[category] ?? '📁';
+                };
+
                 // Unique categories sorted alphabetically by display name
                 const categories = Array.from(allReturnedCategories).sort((a, b) => {
                   const nameA = getCategoryDisplayName(a).toLowerCase();
@@ -488,7 +505,7 @@ export default function StatusPage() {
                     <table className="pipeline-table" style={{ minWidth: 800 }}>
                       <thead>
                         <tr>
-                          <th style={{ width: '16%', textAlign: 'left' }}>Product Category</th>
+                          <th style={{ width: '16%', textAlign: 'center' }}>Product Category</th>
                           {sortedProviders.map(provider => {
                             const color = PROVIDER_COLORS[provider.slug] ?? '#888';
                             return (
@@ -517,8 +534,11 @@ export default function StatusPage() {
                       <tbody>
                         {categories.map(category => (
                           <tr key={category}>
-                            <td style={{ fontWeight: 600, textAlign: 'left' }}>
-                              {getCategoryDisplayName(category)}
+                            <td style={{ fontWeight: 600, textAlign: 'center' }}>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                                <span aria-hidden="true">{getCategoryEmoji(category)}</span>
+                                {getCategoryDisplayName(category)}
+                              </span>
                             </td>
                             {sortedProviders.map(provider => {
                               const pl = provider.pipelines.find(p => p.category === category);
