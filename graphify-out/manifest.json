@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
-    "mtime": 1781587736.247315,
-    "ast_hash": "ac9e8d14af209bbce1afa2a7cef45aeb",
+    "mtime": 1782015784.6499867,
+    "ast_hash": "ddc9cd8f9166f99b82844576cca19721",
     "semantic_hash": ""
   },
   "src/app/support/page.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "src/app/terms/page.tsx": {
-    "mtime": 1781738834.5622385,
-    "ast_hash": "c776e72e345783068b313dbd595f0fe4",
+    "mtime": 1782015815.8481576,
+    "ast_hash": "5908baa88b0e6925e9f2ec466d9d858b",
     "semantic_hash": ""
   },
   "src/config/alibaba_containers.ts": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1781737995.545267,
-    "ast_hash": "3e363aff8e95f48632a7e7b7770471b7",
+    "mtime": 1782015793.9816074,
+    "ast_hash": "4c80831a86ad1aad934836409704737c",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -530,8 +530,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1782015178.1314976,
-    "ast_hash": "51ac2b7a2f61c5799fabb2180bdb93a3",
+    "mtime": 1782015826.7673385,
+    "ast_hash": "6960997d57bcfb4d023822be167b825c",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -800,8 +800,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1781935069.7520347,
-    "ast_hash": "2105c08f48c0f5592bfbfaa83d73f823",
+    "mtime": 1782015901.086372,
+    "ast_hash": "3cd6cb14dd6195f0ed11175d9fce0912",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
