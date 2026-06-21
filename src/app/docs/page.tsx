@@ -149,7 +149,7 @@ const DocsPage: React.FC = () => {
         <ProductTypeSelector />
       <div className="docs-container" id="top" style={{ flex: 1 }}>
         <aside className="docs-sidebar">
-            <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>
+            <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
               Content
             </h4>
           <nav>
