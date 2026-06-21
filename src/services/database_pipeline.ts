@@ -793,8 +793,23 @@ export class DatabasePricingPipeline extends PricingPipeline {
     for (const adapter of this.adapters) {
       try {
         const records = await adapter.fetchPricing();
-        const driftAlerts = await this.saveRecords(records, 'database');
-        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
+
+        // Special handling for VectorDatabasesAdapter: group by provider and save separately
+        if (adapter instanceof VectorDatabasesAdapter) {
+          const recordsByProvider: Record<string, typeof records> = {};
+          for (const record of records) {
+            if (!recordsByProvider[record.provider]) recordsByProvider[record.provider] = [];
+            recordsByProvider[record.provider].push(record);
+          }
+
+          for (const [providerSlug, providerRecords] of Object.entries(recordsByProvider)) {
+            const driftAlerts = await this.saveRecords(providerRecords, 'database');
+            results.push({ provider: providerSlug, status: 'success', count: providerRecords.length, driftAlerts });
+          }
+        } else {
+          const driftAlerts = await this.saveRecords(records, 'database');
+          results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
+        }
       } catch (error: any) {
         console.error(`Error running DB pipeline for ${adapter.providerSlug}:`, error);
         results.push({ provider: adapter.providerSlug, status: 'error', message: error.message });

@@ -71,7 +71,6 @@ export default function ProviderCards({
                 </span>
                 <div className="flex flex-col gap-0.5">
                   <span className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">{displayCount.toLocaleString()}</span>
-                  <span className="text-[9px] font-bold text-[#737373] uppercase tracking-widest">Instance{displayCount !== 1 ? 's' : ''}</span>
                 </div>
               </div>
             );
