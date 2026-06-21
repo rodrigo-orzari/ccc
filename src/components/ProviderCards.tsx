@@ -37,8 +37,8 @@ export default function ProviderCards({
   const activeNonSoon = providers.filter(p => !p.soon).map(p => p.id);
 
   return (
-    <div className="p-4 lg:p-6 bg-white dark:bg-[#0a0a18]">
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-row gap-px rounded overflow-hidden border border-[#dde0f0] dark:border-[#1e1e38]" style={{ background: 'var(--border-color, #dde0f0)' }}>
+    <div className="px-4 py-2 lg:px-6 lg:py-2.5 bg-white dark:bg-[#0a0a18]">
+      <div className="flex flex-row gap-2 flex-wrap items-center">
         {[...providers]
           .filter(p => !p.soon)
           .sort((a, b) => a.name.localeCompare(b.name))
@@ -59,19 +59,19 @@ export default function ProviderCards({
                     onProviderSelect(p.id);
                   }
                 }}
-                className={`lg:flex-1 min-w-0 bg-white dark:bg-[#0a0a18] px-3 py-3 lg:px-4 lg:py-3.5 flex flex-col gap-2 cursor-pointer group transition-opacity ${
-                  isSelected ? 'opacity-100' : 'opacity-50 hover:opacity-75'
+                className={`px-2.5 py-1.5 rounded border cursor-pointer group transition-opacity flex items-center gap-1.5 ${
+                  isSelected
+                    ? 'bg-white dark:bg-[#0a0a18] border-[#dde0f0] dark:border-[#1e1e38]'
+                    : 'opacity-50 hover:opacity-75 bg-white dark:bg-[#0a0a18] border-[#dde0f0] dark:border-[#1e1e38]'
                 }`}
               >
                 <span
-                  className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border w-fit"
-                  style={{ color: p.color, borderColor: p.color + '40', backgroundColor: p.color + '10' }}
+                  className="text-[11px] font-bold uppercase tracking-widest"
+                  style={{ color: p.color }}
                 >
                   {p.name}
                 </span>
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">{displayCount.toLocaleString()}</span>
-                </div>
+                <span className="text-[13px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{displayCount.toLocaleString()}</span>
               </div>
             );
           })}
