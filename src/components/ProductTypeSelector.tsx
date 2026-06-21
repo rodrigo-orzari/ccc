@@ -85,8 +85,9 @@ export default function ProductTypeSelector({
               } ${product.soon ? 'cursor-not-allowed opacity-60' : ''}`}
               style={{ textDecoration: 'none' }}
             >
-              <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== product.id ? 'font-medium' : ''}`}>
-                {product.emoji} {product.label}
+              <span className={`text-xs font-bold flex flex-col items-center gap-0.5 ${activeProductType !== product.id ? 'font-medium' : ''}`}>
+                <span>{product.emoji}</span>
+                <span className="text-[10px] leading-tight">{product.label}</span>
               </span>
               {product.soon && (
                 <span className="text-[8px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] px-1 rounded uppercase tracking-tighter">
@@ -106,8 +107,9 @@ export default function ProductTypeSelector({
           }`}
           style={{ textDecoration: 'none' }}
         >
-          <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'workloads' as any ? 'font-medium' : ''}`}>
-            📦 Workloads
+          <span className={`text-xs font-bold flex flex-col items-center gap-0.5 ${activeProductType !== 'workloads' as any ? 'font-medium' : ''}`}>
+            <span>📦</span>
+            <span className="text-[10px] leading-tight">Workloads</span>
           </span>
         </Link>
 
@@ -120,8 +122,9 @@ export default function ProductTypeSelector({
           }`}
           style={{ textDecoration: 'none' }}
         >
-          <span className={`text-xs font-bold flex items-center gap-1.5 ${activeProductType !== 'datacenters' as any ? 'font-medium' : ''}`}>
-            🏢 Datacenters
+          <span className={`text-xs font-bold flex flex-col items-center gap-0.5 ${activeProductType !== 'datacenters' as any ? 'font-medium' : ''}`}>
+            <span>🏢</span>
+            <span className="text-[10px] leading-tight">Datacenters</span>
           </span>
         </Link>
       </div>

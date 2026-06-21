@@ -197,12 +197,8 @@ export default function StatusPage() {
         .status-header {
           border-bottom: 1px solid var(--border);
           padding: 2rem 2.5rem 1.5rem;
-          max-width: 1100px;
-          margin: 0 auto;
         }
         .status-body {
-          max-width: 1100px;
-          margin: 0 auto;
           padding: 2rem 2.5rem 5rem;
         }
         .status-wrapper > footer {
