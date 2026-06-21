@@ -137,6 +137,19 @@ export const DO_APP_HOSTING_REGIONS: AppHostingRegion[] = DO_REGIONS.map(r => ({
   rows: applyMultiplier(DO_BASE, r.mult),
 }));
 
+// ─── Cloudflare Pages / Workers ───────────────────────────────────────────────
+// Cloudflare hosts apps on a global anycast edge network — pricing is uniform
+// worldwide (no per-region multiplier) and billed per-plan rather than per vCPU.
+// Source: cloudflare.com/plans/developer-platform/, developers.cloudflare.com/workers/platform/pricing/
+const CLOUDFLARE_BASE: Row[] = [
+  { type: 'Pages (Free)',          vcpus: 0, memory_gb: 0, price: 0,     unit: 'Mo', attributes: { os: 'Linux', tier: 'Free',     compute_type: 'Shared',     runtime: 'Static + Functions' } },
+  { type: 'Workers Paid',          vcpus: 0, memory_gb: 0, price: 5.00,  unit: 'Mo', attributes: { os: 'Linux', tier: 'Standard', compute_type: 'Serverless', runtime: 'Workers + Pages' } },
+  { type: 'Workers for Platforms', vcpus: 0, memory_gb: 0, price: 25.00, unit: 'Mo', attributes: { os: 'Linux', tier: 'Premium',  compute_type: 'Serverless', runtime: 'Multi-tenant' } },
+];
+export const CLOUDFLARE_APP_HOSTING_REGIONS: AppHostingRegion[] = [
+  { region: 'global', geography: 'Global', rows: CLOUDFLARE_BASE },
+];
+
 // ─── Oracle WebLogic ──────────────────────────────────────────────────────────
 // WebLogic is licensed software; pricing is uniform across OCI regions.
 // Source: oracle.com/cloud/price-list/

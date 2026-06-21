@@ -121,11 +121,11 @@ export default function DashboardPreviewPage() {
               <LineChart data={heroTrendData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
                 <XAxis dataKey="month" stroke="#ffffff50" tick={{ fill: '#ffffff50', fontSize: 12 }} tickMargin={10} axisLine={false} />
-                <YAxis stroke="#ffffff50" tick={{ fill: '#ffffff50', fontSize: 12 }} tickFormatter={(val) => \`$\${val}\`} axisLine={false} tickLine={false} />
+                <YAxis stroke="#ffffff50" tick={{ fill: '#ffffff50', fontSize: 12 }} tickFormatter={(val) => `$${val}`} axisLine={false} tickLine={false} />
                 <RechartsTooltip 
                   contentStyle={{ backgroundColor: '#1e1e38', borderColor: '#ffffff20', borderRadius: '8px', color: '#fff' }}
                   itemStyle={{ color: '#fff' }}
-                  formatter={(value: number) => [\`$\${value.toFixed(3)}\`, '']}
+                  formatter={(value: number) => [`$${value.toFixed(3)}`, '']}
                 />
                 <Line type="monotone" dataKey="aws" name="AWS" stroke="#FF9900" strokeWidth={3} dot={false} activeDot={{ r: 6 }} />
                 <Line type="monotone" dataKey="azure" name="Azure" stroke="#0078D4" strokeWidth={3} dot={false} activeDot={{ r: 6 }} />
@@ -204,7 +204,7 @@ export default function DashboardPreviewPage() {
                 <BarChart data={serverlessData} margin={{ top: 0, right: 0, bottom: 0, left: -25 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
                   <XAxis dataKey="provider" stroke="#ffffff50" tick={{ fill: '#ffffff50', fontSize: 12 }} axisLine={false} tickLine={false} />
-                  <YAxis stroke="#ffffff50" tick={{ fill: '#ffffff50', fontSize: 12 }} tickFormatter={(val) => \`$\${val}\`} axisLine={false} tickLine={false} />
+                  <YAxis stroke="#ffffff50" tick={{ fill: '#ffffff50', fontSize: 12 }} tickFormatter={(val) => `$${val}`} axisLine={false} tickLine={false} />
                   <RechartsTooltip cursor={{ fill: '#ffffff10' }} contentStyle={{ backgroundColor: '#1e1e38', borderColor: '#ffffff20', borderRadius: '8px' }} />
                   <Bar dataKey="cost" fill="#10B981" radius={[4, 4, 0, 0]} />
                 </BarChart>
@@ -218,12 +218,12 @@ export default function DashboardPreviewPage() {
       <Footer />
       
       {/* Custom Styles for ticker animation */}
-      <style dangerouslySetInnerHTML={{__html: \`
+      <style dangerouslySetInnerHTML={{__html: `
         @keyframes ticker {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-      \`}} />
+      `}} />
     </main>
   );
 }

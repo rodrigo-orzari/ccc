@@ -28,6 +28,23 @@ export interface PricingRecord {
   supportedLanguages?: string[];
 }
 
+// Returns the DB id for a provider slug, auto-creating the provider row from
+// config if it doesn't exist yet. Lets any pipeline ingest a config provider
+// (e.g. cloudflare, vector DBs) without it being pre-seeded into the providers
+// table — prevents whole services being silently dropped.
+export async function ensureProviderId(sql: any, slug: string): Promise<string> {
+  const existing = await sql`SELECT id FROM providers WHERE slug = ${slug}`;
+  if (existing.length > 0) return existing[0].id;
+  const name = PROVIDERS.find(p => p.id === slug)?.name
+    ?? slug.charAt(0).toUpperCase() + slug.slice(1);
+  const created = await sql`
+    INSERT INTO providers (slug, name) VALUES (${slug}, ${name})
+    ON CONFLICT (slug) DO UPDATE SET name = EXCLUDED.name
+    RETURNING id
+  `;
+  return created[0].id;
+}
+
 async function fetchWithRetry(url: string, config: any = {}, retries = 3, timeout = 60000): Promise<any> {
   const mergedConfig = { timeout, ...config };
   for (let i = 0; i < retries; i++) {

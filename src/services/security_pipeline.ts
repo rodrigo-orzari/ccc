@@ -1,5 +1,5 @@
 import type { Sql } from 'postgres';
-import { PriceDriftResult } from './pricing_pipeline.ts';
+import { PriceDriftResult, ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_SECURITY_PRICING = [
   // --- AWS ---
@@ -38,6 +38,16 @@ const STATIC_SECURITY_PRICING = [
   // --- Alibaba ---
   { provider: 'alibaba', service: 'Web Application Firewall (WAF)', category: 'Network Security', instance_type: 'WAF Base Plan', price_per_unit: 29.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'WAF', scope: 'Regional' } },
   { provider: 'alibaba', service: 'DDoS Protection', category: 'Network Security', instance_type: 'Anti-DDoS Premium', price_per_unit: 3000.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'DDoS', scope: 'Global' } },
+
+  // --- Cloudflare ---
+  // Cloudflare runs a global edge network; security is its flagship offering.
+  // Sources: cloudflare.com/plans, cloudflare.com/application-services/products/waf,
+  // cloudflare.com/zero-trust, cloudflare.com/ddos.
+  { provider: 'cloudflare', service: 'Web Application Firewall (WAF)', category: 'Network Security', instance_type: 'WAF (Pro Plan)', price_per_unit: 20.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'WAF', scope: 'Global' } },
+  { provider: 'cloudflare', service: 'DDoS Protection', category: 'Network Security', instance_type: 'Unmetered DDoS Mitigation', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'DDoS', scope: 'Global' } },
+  { provider: 'cloudflare', service: 'Zero Trust Network Access', category: 'Identity & Encryption', instance_type: 'Access / Zero Trust (Per User)', price_per_unit: 7.00, unit: 'User/Month', geography: 'Global', attributes: { security_type: 'Zero Trust', scope: 'Global' } },
+  { provider: 'cloudflare', service: 'SSL/TLS Encryption', category: 'Identity & Encryption', instance_type: 'Universal SSL (Free)', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'SSL/TLS', scope: 'Global' } },
+  { provider: 'cloudflare', service: 'Bot Management', category: 'Threat & Compliance', instance_type: 'Bot Management (Enterprise)', price_per_unit: 0.00, unit: 'Custom', geography: 'Global', attributes: { security_type: 'Bot Management', scope: 'Global' } },
 ];
 
 export class SecurityPricingPipeline {
@@ -65,16 +75,15 @@ export class SecurityPricingPipeline {
       `;
 
       for (const record of STATIC_SECURITY_PRICING) {
-        // Fetch provider and service IDs
-        const providerRes = await sql`SELECT id FROM providers WHERE slug = ${record.provider}`;
-        if (providerRes.length === 0) continue;
+        // Resolve provider id, auto-creating from config if not yet seeded.
+        const providerId = await ensureProviderId(sql, record.provider);
 
-        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerRes[0].id} AND name = ${record.service} AND category = 'security'`;
+        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerId} AND name = ${record.service} AND category = 'security'`;
         let serviceId: string;
 
         if (serviceRes.length === 0) {
           const insertService = await sql`
-            INSERT INTO services (provider_id, name, category) VALUES (${providerRes[0].id}, ${record.service}, 'security') RETURNING id
+            INSERT INTO services (provider_id, name, category) VALUES (${providerId}, ${record.service}, 'security') RETURNING id
           `;
           serviceId = insertService[0].id;
         } else {

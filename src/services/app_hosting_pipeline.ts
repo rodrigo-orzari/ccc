@@ -7,6 +7,7 @@ import {
   DO_APP_HOSTING_REGIONS,
   ORACLE_APP_HOSTING_REGIONS,
   ALIBABA_APP_HOSTING_REGIONS,
+  CLOUDFLARE_APP_HOSTING_REGIONS,
   type AppHostingRegion,
 } from '../config/app_hosting';
 
@@ -47,6 +48,7 @@ const STATIC_PROVIDERS: { slug: string; regions: AppHostingRegion[] }[] = [
   { slug: 'oracle',       regions: ORACLE_APP_HOSTING_REGIONS },
   { slug: 'digitalocean', regions: DO_APP_HOSTING_REGIONS },
   { slug: 'alibaba',      regions: ALIBABA_APP_HOSTING_REGIONS },
+  { slug: 'cloudflare',   regions: CLOUDFLARE_APP_HOSTING_REGIONS },
 ];
 
 export class AppHostingPricingPipeline extends PricingPipeline {
