@@ -40,6 +40,13 @@ const PROVIDER_COLORS: Record<string, string> = {
   alibaba: '#FF6A00',
   openai: '#10A37F',
   anthropic: '#CC9D87',
+  // Vector DB + edge providers (brand colours mirror src/config/index.ts)
+  pinecone: '#3B1CFF',
+  milvus: '#00D2D3',
+  qdrant: '#FF004E',
+  weaviate: '#2DCA73',
+  chroma: '#FF4F00',
+  cloudflare: '#F38020',
 };
 
 const PROVIDER_URLS: Record<string, string> = {
@@ -51,6 +58,12 @@ const PROVIDER_URLS: Record<string, string> = {
   alibaba: 'https://www.alibabacloud.com',
   openai: 'https://openai.com/api/pricing/',
   anthropic: 'https://www.anthropic.com/pricing',
+  pinecone: 'https://www.pinecone.io',
+  milvus: 'https://zilliz.com',
+  qdrant: 'https://qdrant.tech',
+  weaviate: 'https://weaviate.io',
+  chroma: 'https://www.trychroma.com',
+  cloudflare: 'https://www.cloudflare.com',
 };
 
 const SITE_URL = 'https://comparecloudcosts.com';
@@ -72,7 +85,7 @@ function XIcon() {
   );
 }
 
-const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse', 'ai', 'storage', 'security'];
+const PIPELINE_ORDER = ['compute', 'database', 'serverless', 'containers', 'networking', 'data_warehouse', 'ai', 'storage', 'app-hosting', 'security', 'integration'];
 
 
 
