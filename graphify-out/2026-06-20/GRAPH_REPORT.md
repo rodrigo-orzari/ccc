@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-20)
 
 ## Corpus Check
-- 175 files · ~157,614 words
+- 175 files · ~157,659 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5129ff80`
+- Built from commit: `be76f015`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -242,7 +242,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **237 isolated node(s):** `heroTrendData`, `scatterDataAWS`, `scatterDataAzure`, `scatterDataGCP`, `radarData` (+232 more)
+- **237 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+232 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **41 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -255,7 +255,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.054) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 55` to `Community 65`, `Community 69`, `Community 38`, `Community 9`, `Community 75`, `Community 76`, `Community 47`, `Community 56`, `Community 89`, `Community 90`, `Community 62`?**
   _High betweenness centrality (0.049) - this node is a cross-community bridge._
-- **What connects `heroTrendData`, `scatterDataAWS`, `scatterDataAzure` to the rest of the system?**
+- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
   _237 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
