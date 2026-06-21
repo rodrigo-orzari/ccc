@@ -182,11 +182,11 @@ function ProviderRow({
 // ─── page ─────────────────────────────────────────────────────────────────────
 
 const NAV_SECTIONS = [
-  { id: 'world-map',        label: 'Global Region Map' },
-  { id: 'infra-table',      label: 'Infrastructure Overview' },
-  { id: 'coverage-matrix',  label: 'Regional Coverage Matrix' },
-  { id: 'az-detail',        label: 'Availability Zones per Region' },
-  { id: 'data-sources',     label: 'Data Sources' },
+  { id: 'world-map',        label: 'Global Region Map', emoji: '🗺️' },
+  { id: 'infra-table',      label: 'Infrastructure Overview', emoji: '🏗️' },
+  { id: 'coverage-matrix',  label: 'Regional Coverage Matrix', emoji: '📊' },
+  { id: 'az-detail',        label: 'Availability Zones per Region', emoji: '🏢' },
+  { id: 'data-sources',     label: 'Data Sources', emoji: '📡' },
 ];
 
 // Distinct palette for geography segments in the matrix chart
@@ -298,15 +298,16 @@ export default function DatacentersPage() {
 
             {/* On this page */}
             <section className="px-4 pt-5 pb-4 border-b border-[#dde0f0] dark:border-[#1e1e38]">
-              <h2 className="text-xs font-bold text-[#737373] uppercase tracking-widest mb-3">Content</h2>
+              <h2 className="text-[11px] font-bold text-[#737373] uppercase tracking-[0.08em] mb-4">Content</h2>
               <nav className="flex flex-col gap-0.5">
                 {NAV_SECTIONS.map(s => (
                   <a
                     key={s.id}
                     href={`#${s.id}`}
-                    className="flex items-center gap-2 px-2 py-1.5 rounded text-sm font-medium text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff] hover:bg-[#eef0fc] dark:hover:bg-[#0c0c1e] transition-all"
+                    className="flex items-center justify-center text-center gap-2 px-2 py-1.5 rounded text-sm font-medium text-[#1a1a2e] dark:text-[#f7f8ff] hover:text-[#2563eb] dark:hover:text-[#818cf8] hover:bg-[#eef0fc] dark:hover:bg-[#0c0c1e] transition-all"
                     style={{ textDecoration: 'none' }}
                   >
+                    <span aria-hidden="true">{s.emoji}</span>
                     {s.label}
                   </a>
                 ))}

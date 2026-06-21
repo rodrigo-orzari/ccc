@@ -75,6 +75,7 @@ const DocsPage: React.FC = () => {
           color: var(--text-color);
           text-decoration: none;
           font-size: 0.875rem;
+          font-weight: 500;
           transition: color 0.15s;
           display: block;
         }
@@ -148,7 +149,7 @@ const DocsPage: React.FC = () => {
         <ProductTypeSelector />
       <div className="docs-container" id="top" style={{ flex: 1 }}>
         <aside className="docs-sidebar">
-            <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
+            <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>
               Content
             </h4>
           <nav>

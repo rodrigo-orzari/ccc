@@ -210,8 +210,10 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
           .sidebar a {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 500;
             transition: color 0.2s;
+            display: block;
           }
 
           .sidebar a:hover {
@@ -278,32 +280,32 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
       <div className="terms-container" id="terms-of-use">
         <aside className="sidebar">
 
-          <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
+          <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>
             Content
           </h4>
           <nav>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#agreement-to-terms">Agreement to Terms</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#use-license">Use License</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#disclaimer">Disclaimer</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#limitations">Limitations</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#accuracy-of-materials">Accuracy of Materials</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#modifications">Modifications</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#governing-law">Governing Law</a></li>
-              <li style={{ marginBottom: '0.6rem' }}>
-                <a href="#pricing-disclaimer">Pricing Disclaimer</a>
-                <ul style={{ listStyle: 'none', paddingLeft: '1rem', marginTop: '0.5rem' }}>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#directional-and-sample-data-only" style={{ fontSize: '0.85rem' }}>Directional data only</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#visualizations-and-charts" style={{ fontSize: '0.85rem' }}>Visualizations and charts</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#data-normalization" style={{ fontSize: '0.85rem' }}>Data normalization</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#workloads-catalog-and-architecture-calculator" style={{ fontSize: '0.85rem' }}>Workloads catalog</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#infrastructure--datacenter-data" style={{ fontSize: '0.85rem' }}>Datacenter data</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#voluntary-donations" style={{ fontSize: '0.85rem' }}>Voluntary donations</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#official-pricing-calculators" style={{ fontSize: '0.85rem' }}>Official calculators</a></li>
-                  <li style={{ marginBottom: '0.4rem' }}><a href="#no-warranties-or-liability" style={{ fontSize: '0.85rem' }}>No liability</a></li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <li><a href="#agreement-to-terms" style={{ padding: '3px 0' }}>Agreement to Terms</a></li>
+              <li><a href="#use-license" style={{ padding: '3px 0' }}>Use License</a></li>
+              <li><a href="#disclaimer" style={{ padding: '3px 0' }}>Disclaimer</a></li>
+              <li><a href="#limitations" style={{ padding: '3px 0' }}>Limitations</a></li>
+              <li><a href="#accuracy-of-materials" style={{ padding: '3px 0' }}>Accuracy of Materials</a></li>
+              <li><a href="#modifications" style={{ padding: '3px 0' }}>Modifications</a></li>
+              <li><a href="#governing-law" style={{ padding: '3px 0' }}>Governing Law</a></li>
+              <li>
+                <a href="#pricing-disclaimer" style={{ padding: '3px 0' }}>Pricing Disclaimer</a>
+                <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <li><a href="#directional-and-sample-data-only" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Directional data only</a></li>
+                  <li><a href="#visualizations-and-charts" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Visualizations and charts</a></li>
+                  <li><a href="#data-normalization" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data normalization</a></li>
+                  <li><a href="#workloads-catalog-and-architecture-calculator" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Workloads catalog</a></li>
+                  <li><a href="#infrastructure--datacenter-data" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Datacenter data</a></li>
+                  <li><a href="#voluntary-donations" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Voluntary donations</a></li>
+                  <li><a href="#official-pricing-calculators" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Official calculators</a></li>
+                  <li><a href="#no-warranties-or-liability" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>No liability</a></li>
                 </ul>
               </li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#contact">Contact</a></li>
+              <li><a href="#contact" style={{ padding: '3px 0' }}>Contact</a></li>
             </ul>
           </nav>
         </aside>

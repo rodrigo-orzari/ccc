@@ -323,16 +323,16 @@ export default function StatusPage() {
         
         {/* Fixed Sidebar TOC */}
         <aside className="fixed top-[44px] left-0 w-[280px] h-[calc(100vh-44px)] overflow-y-auto border-r border-[#dde0f0] dark:border-[#1e1e38] p-8 hidden md:block bg-[#f7f8ff] dark:bg-[#06060f] z-40">
-          <h4 className="text-[11px] text-[#6b7280] dark:text-[#71717a] uppercase tracking-wider mb-4 font-bold">Content</h4>
+          <h4 className="text-[11px] text-[#6b7280] dark:text-[#71717a] uppercase tracking-[0.08em] mb-4 font-bold">Content</h4>
           <nav>
             <ul className="space-y-3">
               <li>
-                <a href="#top" className="text-[13px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
+                <a href="#top" className="text-[14px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
                   Overview
                 </a>
               </li>
               <li>
-                <a href="#status-matrix" className="text-[13px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
+                <a href="#status-matrix" className="text-[14px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
                   Status Matrix
                 </a>
               </li>
