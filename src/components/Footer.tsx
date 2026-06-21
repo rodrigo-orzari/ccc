@@ -43,15 +43,15 @@ export default function Footer() {
           <Link href="/docs" className="hover:text-black dark:hover:text-white transition-colors">
             Docs
           </Link>
-          <Link href="/status" className="hover:text-black dark:hover:text-white transition-colors">
-            Status
-          </Link>
           {/* Cloud Products page hidden from nav for now — still reachable at /cloud-products */}
           <Link href="/privacy" className="hover:text-black dark:hover:text-white transition-colors">
-            Privacy Policy
+            Privacy
           </Link>
           <Link href="/terms" className="hover:text-black dark:hover:text-white transition-colors">
-            Terms of Use
+            Terms
+          </Link>
+          <Link href="/status" className="hover:text-black dark:hover:text-white transition-colors">
+            Status
           </Link>
           <a href="mailto:hello@comparecloudcosts.com" className="hover:text-black dark:hover:text-white transition-colors">
             Contact
