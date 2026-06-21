@@ -46,6 +46,18 @@ CREATE TABLE IF NOT EXISTS pricing_records (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Prevents the same instance/region/os/arch variant from being inserted twice.
+-- attributes->>'engine' and ->>'ha_mode' are included (COALESCE'd to '' so NULLs
+-- don't exempt rows from the check) because database_pipeline.ts holds os/arch
+-- constant across DB engines (MySQL, PostgreSQL, SQL Server, etc.) and HA modes —
+-- those rows are only distinguished via the attributes JSONB, not real columns.
+CREATE UNIQUE INDEX IF NOT EXISTS pricing_records_unique_key
+ON pricing_records (
+    service_id, region_id, instance_type, os, arch,
+    (COALESCE(attributes->>'engine', '')),
+    (COALESCE(attributes->>'ha_mode', ''))
+);
+
 -- Initial Data
 INSERT INTO providers (slug, name) VALUES
 ('aws', 'AWS'),
