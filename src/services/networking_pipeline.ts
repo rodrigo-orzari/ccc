@@ -1,5 +1,5 @@
 import type { Sql } from 'postgres';
-import { PriceDriftResult } from './pricing_pipeline.ts';
+import { PriceDriftResult, ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_NETWORKING_PRICING = [
   // --- AWS ---
@@ -111,16 +111,15 @@ export class NetworkingPricingPipeline {
       `;
 
       for (const record of STATIC_NETWORKING_PRICING) {
-        // Fetch provider and service IDs
-        const providerRes = await sql`SELECT id FROM providers WHERE slug = ${record.provider}`;
-        if (providerRes.length === 0) continue;
+        // Resolve provider id, auto-creating from config if not yet seeded.
+        const providerId = await ensureProviderId(sql, record.provider);
 
-        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerRes[0].id} AND name = ${record.service} AND category = 'networking'`;
+        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerId} AND name = ${record.service} AND category = 'networking'`;
         let serviceId: string;
 
         if (serviceRes.length === 0) {
           const insertService = await sql`
-            INSERT INTO services (provider_id, name, category) VALUES (${providerRes[0].id}, ${record.service}, 'networking') RETURNING id
+            INSERT INTO services (provider_id, name, category) VALUES (${providerId}, ${record.service}, 'networking') RETURNING id
           `;
           serviceId = insertService[0].id;
         } else {
