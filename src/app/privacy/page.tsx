@@ -67,6 +67,7 @@ const PrivacyPolicyPage: React.FC = () => {
           color: var(--text-color);
           text-decoration: none;
           font-size: 0.875rem;
+          font-weight: 500;
           transition: color 0.15s;
           display: block;
         }
@@ -134,7 +135,7 @@ const PrivacyPolicyPage: React.FC = () => {
           {/* Sidebar */}
           <aside className="privacy-sidebar">
 
-            <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: 'var(--muted-text)', marginBottom: '0.875rem' }}>
+            <div style={{ fontSize: '0.6875rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted-text)', marginBottom: '1rem' }}>
               Content
             </div>
             <nav>
