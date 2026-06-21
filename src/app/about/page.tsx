@@ -172,8 +172,10 @@ Always verify your final estimates using the official calculators:
           .sidebar a {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 500;
             transition: color 0.2s;
+            display: block;
           }
 
           .sidebar a:hover {
@@ -240,17 +242,17 @@ Always verify your final estimates using the official calculators:
       <div className="about-container" id="about-us">
         <aside className="sidebar">
 
-          <h4 style={{ fontSize: '0.75rem', color: 'var(--muted-text)', textTransform: 'uppercase', marginBottom: '1rem' }}>
+          <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>
             Content
           </h4>
           <nav>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#about-compare-cloud-costs-ccc">About CCC</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#why-we-built-this">Why we built this</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#features">Features</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#who-is-ccc-for">Who is CCC for?</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#about-the-creator">About the Creator</a></li>
-              <li style={{ marginBottom: '0.6rem' }}><a href="#directional-estimates-not-official-quotes">Directional Estimates</a></li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <li><a href="#about-compare-cloud-costs-ccc" style={{ padding: '3px 0' }}>About CCC</a></li>
+              <li><a href="#why-we-built-this" style={{ padding: '3px 0' }}>Why we built this</a></li>
+              <li><a href="#features" style={{ padding: '3px 0' }}>Features</a></li>
+              <li><a href="#who-is-ccc-for" style={{ padding: '3px 0' }}>Who is CCC for?</a></li>
+              <li><a href="#about-the-creator" style={{ padding: '3px 0' }}>About the Creator</a></li>
+              <li><a href="#directional-estimates-not-official-quotes" style={{ padding: '3px 0' }}>Directional Estimates</a></li>
             </ul>
           </nav>
         </aside>
