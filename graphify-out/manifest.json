@@ -375,8 +375,8 @@
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
-    "mtime": 1782016352.017719,
-    "ast_hash": "9d67373f1e62c00f58956b984b14cf1a",
+    "mtime": 1782018116.2315652,
+    "ast_hash": "0c872964b7ad4e0bc80e2f69bd2bfa6c",
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "src/app/privacy/page.tsx": {
-    "mtime": 1782015784.6499867,
-    "ast_hash": "ddc9cd8f9166f99b82844576cca19721",
+    "mtime": 1782018199.6552887,
+    "ast_hash": "5b3e667e8a61e9d721a27c01e6ad7719",
     "semantic_hash": ""
   },
   "src/app/support/page.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "src/app/terms/page.tsx": {
-    "mtime": 1782015815.8481576,
-    "ast_hash": "5908baa88b0e6925e9f2ec466d9d858b",
+    "mtime": 1782018216.3219295,
+    "ast_hash": "91c7a246cab78503812b905a9dbd41a6",
     "semantic_hash": ""
   },
   "src/config/alibaba_containers.ts": {
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1782015793.9816074,
-    "ast_hash": "4c80831a86ad1aad934836409704737c",
+    "mtime": 1782018118.790063,
+    "ast_hash": "14899b3f1f531f5f1b4db34d010b0506",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
