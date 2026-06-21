@@ -682,20 +682,26 @@ export class PricingPipeline {
       const serviceId = serviceRes[0].id;
 
       // 3. Fetch old prices for drift detection BEFORE deleting
+      // Keyed by region+instance_type+os+arch — a single instance_type exists once
+      // per region per OS/arch variant, so instance_type alone collapses distinct
+      // prices into one arbitrary value and produces spurious drift alerts.
       const oldPriceRes = await sql`
-        SELECT instance_type, price_per_unit 
-        FROM pricing_records 
-        WHERE service_id = ${serviceId}
+        SELECT reg.slug AS region_slug, pr.instance_type, pr.os, pr.arch, pr.price_per_unit
+        FROM pricing_records pr
+        JOIN regions reg ON reg.id = pr.region_id
+        WHERE pr.service_id = ${serviceId}
       `;
+      const oldPriceKey = (region: string, instanceType: string, os: string, arch: string) =>
+        `${region}|${instanceType}|${os}|${arch}`;
       const oldPriceMap = new Map<string, number>();
       for (const row of oldPriceRes) {
-        oldPriceMap.set(row.instance_type, parseFloat(row.price_per_unit));
+        oldPriceMap.set(oldPriceKey(row.region_slug, row.instance_type, row.os, row.arch), parseFloat(row.price_per_unit));
       }
 
       // 4. Detect price drift (>20% change)
       if (oldPriceMap.size > 0) {
         for (const r of records) {
-          const oldPrice = oldPriceMap.get(r.instanceType);
+          const oldPrice = oldPriceMap.get(oldPriceKey(r.region, r.instanceType, r.os, r.arch));
           if (oldPrice !== undefined && oldPrice > 0) {
             const pctChange = ((r.price - oldPrice) / oldPrice) * 100;
             if (Math.abs(pctChange) > 20) {
@@ -717,7 +723,7 @@ export class PricingPipeline {
         if (r.supportedLanguages && r.supportedLanguages.length > 0) {
           attrs.supportedLanguages = r.supportedLanguages;
         }
-        const prevPrice = oldPriceMap.get(r.instanceType);
+        const prevPrice = oldPriceMap.get(oldPriceKey(r.region, r.instanceType, r.os, r.arch));
         return {
           service_id: serviceId,
           region_id: regionMap.get(r.region),

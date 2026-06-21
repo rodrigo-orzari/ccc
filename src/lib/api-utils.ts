@@ -43,6 +43,14 @@ export const initDb = async () => {
       ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS attributes JSONB;
       ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS data_source VARCHAR(20) DEFAULT 'live_api';
       ALTER TABLE pricing_records ADD COLUMN IF NOT EXISTS previous_price_per_unit NUMERIC(15, 6);
+
+      -- See schema.sql for why engine/ha_mode (from attributes JSONB) are part of this key.
+      CREATE UNIQUE INDEX IF NOT EXISTS pricing_records_unique_key
+      ON pricing_records (
+          service_id, region_id, instance_type, os, arch,
+          (COALESCE(attributes->>'engine', '')),
+          (COALESCE(attributes->>'ha_mode', ''))
+      );
     `);
 
     await sql.unsafe(`
