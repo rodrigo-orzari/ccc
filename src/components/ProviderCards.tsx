@@ -37,8 +37,8 @@ export default function ProviderCards({
   const activeNonSoon = providers.filter(p => !p.soon).map(p => p.id);
 
   return (
-    <div className="px-4 py-2 lg:px-6 lg:py-2.5 bg-white dark:bg-[#0a0a18]">
-      <div className="flex flex-row gap-2 flex-wrap items-center">
+    <div className="px-4 py-2 lg:px-6 lg:py-2.5 bg-white dark:bg-[#0a0a18] flex justify-center">
+      <div className="flex flex-row gap-2 flex-wrap items-center justify-center">
         {[...providers]
           .filter(p => !p.soon)
           .sort((a, b) => a.name.localeCompare(b.name))
