@@ -885,8 +885,13 @@
     "semantic_hash": ""
   },
   "public/og-image.png": {
-    "mtime": 1781982956.1943367,
-    "ast_hash": "5a47b5d4c9e53de246f8ff9d3301f4e9",
+    "mtime": 1781983532.061169,
+    "ast_hash": "013e0923a96cc83faec6992163a020e3",
+    "semantic_hash": ""
+  },
+  "src/app/dashboard/page.tsx": {
+    "mtime": 1781983906.1462224,
+    "ast_hash": "5bd406a3c4aecb8df859b1fe82b57bf8",
     "semantic_hash": ""
   }
 }
