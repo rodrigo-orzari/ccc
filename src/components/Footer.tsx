@@ -47,9 +47,7 @@ export default function Footer() {
           <Link href="/status" className="hover:text-black dark:hover:text-white transition-colors">
             Status
           </Link>
-          <Link href="/cloud-products" className="hover:text-black dark:hover:text-white transition-colors">
-            Cloud Products
-          </Link>
+          {/* Cloud Products page hidden from nav for now — still reachable at /cloud-products */}
           <Link href="/privacy" className="hover:text-black dark:hover:text-white transition-colors">
             Privacy Policy
           </Link>
