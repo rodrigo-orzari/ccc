@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1782011892.4788177,
-    "ast_hash": "87055ea32ad9a1d0a1503ce8ed8f0ee3",
+    "mtime": 1782012682.316937,
+    "ast_hash": "855f06dfa2288149927caf1489703760",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1781932815.7506535,
-    "ast_hash": "57bb6880e7a8ec3a7d47ad7ab788cf8d",
+    "mtime": 1782012130.7335792,
+    "ast_hash": "e7332338e5607ab4b916d8f9c99681bf",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "src/app/robots.ts": {
-    "mtime": 1782006753.593338,
-    "ast_hash": "563f00f64e7b4ab9f1993c1af0e631fc",
+    "mtime": 1782012138.0476184,
+    "ast_hash": "f989047d5a8241ad570411d0033e35c1",
     "semantic_hash": ""
   },
   "src/app/sitemap.ts": {
