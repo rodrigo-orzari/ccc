@@ -1,12 +1,12 @@
 {
   ".claude/launch.json": {
-    "mtime": 1780553579.436906,
+    "mtime": 1782015207.690578,
     "ast_hash": "de095783b03f7ff790c7bff22628f306",
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1782012682.316937,
-    "ast_hash": "855f06dfa2288149927caf1489703760",
+    "mtime": 1782015185.8925858,
+    "ast_hash": "7e55189ae9bcc6e7d28712e959a7b962",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1782013446.6081874,
-    "ast_hash": "a40d4872657ee71b1c8325b0ed754980",
+    "mtime": 1782015036.2033684,
+    "ast_hash": "875da0ae5233aa478ec36bf4007853b5",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
@@ -530,8 +530,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1782012877.8679621,
-    "ast_hash": "e62ce63320b055710320eed7b3aed428",
+    "mtime": 1782015178.1314976,
+    "ast_hash": "51ac2b7a2f61c5799fabb2180bdb93a3",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
