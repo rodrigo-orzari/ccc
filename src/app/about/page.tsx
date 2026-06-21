@@ -242,7 +242,7 @@ Always verify your final estimates using the official calculators:
       <div className="about-container" id="about-us">
         <aside className="sidebar">
 
-          <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>
+          <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
             Content
           </h4>
           <nav>

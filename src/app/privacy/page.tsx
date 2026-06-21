@@ -135,7 +135,7 @@ const PrivacyPolicyPage: React.FC = () => {
           {/* Sidebar */}
           <aside className="privacy-sidebar">
 
-            <div style={{ fontSize: '0.6875rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted-text)', marginBottom: '1rem' }}>
+            <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
               Content
             </div>
             <nav>
@@ -154,7 +154,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
           {/* Main content */}
           <main className="privacy-main">
-            <h1>Privacy Policy</h1>
+            <h1>Privacy</h1>
             <p className="privacy-meta">Last updated: 15 June 2026.</p>
 
             <h2 id="overview">Overview</h2>
