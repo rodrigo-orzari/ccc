@@ -4,94 +4,427 @@
   "graph": {},
   "nodes": [
     {
-      "label": "layout.tsx",
+      "label": "WorldMap.tsx",
       "file_type": "code",
-      "source_file": "src/app/layout.tsx",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
       "source_location": "L1",
-      "id": "app_layout",
-      "community": 13,
-      "norm_label": "layout.tsx"
+      "id": "datacenters_worldmap",
+      "community": 67,
+      "norm_label": "worldmap.tsx"
     },
     {
-      "label": "metadata",
+      "label": "GEO_BY_CODE",
       "file_type": "code",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L8",
-      "id": "app_layout_metadata",
-      "community": 13,
-      "norm_label": "metadata"
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L7",
+      "id": "datacenters_worldmap_geo_by_code",
+      "community": 67,
+      "norm_label": "geo_by_code"
     },
     {
-      "label": "RootLayout()",
+      "label": "toXY()",
       "file_type": "code",
-      "source_file": "src/app/layout.tsx",
-      "source_location": "L53",
-      "id": "app_layout_rootlayout",
-      "community": 13,
-      "norm_label": "rootlayout()"
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L15",
+      "id": "datacenters_worldmap_toxy",
+      "community": 67,
+      "norm_label": "toxy()"
     },
     {
-      "label": "sitemap.ts",
+      "label": "PROVIDER_COLORS",
       "file_type": "code",
-      "source_file": "src/app/sitemap.ts",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L20",
+      "id": "datacenters_worldmap_provider_colors",
+      "community": 67,
+      "norm_label": "provider_colors"
+    },
+    {
+      "label": "CONTINENTS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L31",
+      "id": "datacenters_worldmap_continents",
+      "community": 67,
+      "norm_label": "continents"
+    },
+    {
+      "label": "REGION_COORDS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L61",
+      "id": "datacenters_worldmap_region_coords",
+      "community": 67,
+      "norm_label": "region_coords"
+    },
+    {
+      "label": "Tooltip",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L263",
+      "id": "datacenters_worldmap_tooltip",
+      "community": 67,
+      "norm_label": "tooltip"
+    },
+    {
+      "label": "WorldMap()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L271",
+      "id": "datacenters_worldmap_worldmap",
+      "community": 67,
+      "norm_label": "worldmap()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
       "source_location": "L1",
-      "id": "app_sitemap",
-      "community": 88,
-      "norm_label": "sitemap.ts"
+      "id": "datacenters_page",
+      "community": 67,
+      "norm_label": "page.tsx"
     },
     {
-      "label": "sitemap()",
+      "label": "PROVIDER_COLORS",
       "file_type": "code",
-      "source_file": "src/app/sitemap.ts",
-      "source_location": "L3",
-      "id": "app_sitemap_sitemap",
-      "community": 88,
-      "norm_label": "sitemap()"
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L12",
+      "id": "datacenters_page_provider_colors",
+      "community": 67,
+      "norm_label": "provider_colors"
     },
     {
-      "label": "Footer.tsx",
+      "label": "GLOSSARY",
       "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L23",
+      "id": "datacenters_page_glossary",
+      "community": 67,
+      "norm_label": "glossary"
+    },
+    {
+      "label": "Term()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L30",
+      "id": "datacenters_page_term",
+      "community": 67,
+      "norm_label": "term()"
+    },
+    {
+      "label": "Stat()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L59",
+      "id": "datacenters_page_stat",
+      "community": 67,
+      "norm_label": "stat()"
+    },
+    {
+      "label": "StatusDot()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L71",
+      "id": "datacenters_page_statusdot",
+      "community": 67,
+      "norm_label": "statusdot()"
+    },
+    {
+      "label": "ProviderBadge()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L77",
+      "id": "datacenters_page_providerbadge",
+      "community": 67,
+      "norm_label": "providerbadge()"
+    },
+    {
+      "label": "ProviderRow()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L89",
+      "id": "datacenters_page_providerrow",
+      "community": 67,
+      "norm_label": "providerrow()"
+    },
+    {
+      "label": "GEO_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L185",
+      "id": "datacenters_page_geo_colors",
+      "community": 67,
+      "norm_label": "geo_colors"
+    },
+    {
+      "label": "ViewToggle()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L194",
+      "id": "datacenters_page_viewtoggle",
+      "community": 67,
+      "norm_label": "viewtoggle()"
+    },
+    {
+      "label": "InfraChart()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L213",
+      "id": "datacenters_page_infrachart",
+      "community": 67,
+      "norm_label": "infrachart()"
+    },
+    {
+      "label": "CoverageChart()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L239",
+      "id": "datacenters_page_coveragechart",
+      "community": 67,
+      "norm_label": "coveragechart()"
+    },
+    {
+      "label": "DatacentersPage()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L263",
+      "id": "datacenters_page_datacenterspage",
+      "community": 67,
+      "norm_label": "datacenterspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
       "source_location": "L1",
-      "id": "components_footer",
+      "id": "status_page",
       "community": 13,
-      "norm_label": "footer.tsx"
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "PipelineStatus",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L7",
+      "id": "status_page_pipelinestatus",
+      "community": 13,
+      "norm_label": "pipelinestatus"
+    },
+    {
+      "label": "ProviderStatus",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L17",
+      "id": "status_page_providerstatus",
+      "community": 13,
+      "norm_label": "providerstatus"
+    },
+    {
+      "label": "StatusData",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L25",
+      "id": "status_page_statusdata",
+      "community": 13,
+      "norm_label": "statusdata"
+    },
+    {
+      "label": "PROVIDER_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L34",
+      "id": "status_page_provider_colors",
+      "community": 13,
+      "norm_label": "provider_colors"
+    },
+    {
+      "label": "PROVIDER_URLS",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L52",
+      "id": "status_page_provider_urls",
+      "community": 13,
+      "norm_label": "provider_urls"
     },
     {
       "label": "LinkedInIcon()",
       "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L9",
-      "id": "components_footer_linkedinicon",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L72",
+      "id": "status_page_linkedinicon",
       "community": 13,
       "norm_label": "linkedinicon()"
     },
     {
       "label": "XIcon()",
       "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L17",
-      "id": "components_footer_xicon",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L80",
+      "id": "status_page_xicon",
       "community": 13,
       "norm_label": "xicon()"
+    },
+    {
+      "label": "PIPELINE_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L88",
+      "id": "status_page_pipeline_order",
+      "community": 13,
+      "norm_label": "pipeline_order"
+    },
+    {
+      "label": "SourceBadge()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L92",
+      "id": "status_page_sourcebadge",
+      "community": 13,
+      "norm_label": "sourcebadge()"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L131",
+      "id": "status_page_backtotop",
+      "community": 13,
+      "norm_label": "backtotop()"
+    },
+    {
+      "label": "StatusPage()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L144",
+      "id": "status_page_statuspage",
+      "community": 13,
+      "norm_label": "statuspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L1",
+      "id": "workloads_page",
+      "community": 65,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "PRODUCT_TYPE_LABELS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L9",
+      "id": "workloads_page_product_type_labels",
+      "community": 65,
+      "norm_label": "product_type_labels"
+    },
+    {
+      "label": "PRODUCT_TYPE_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L22",
+      "id": "workloads_page_product_type_order",
+      "community": 65,
+      "norm_label": "product_type_order"
+    },
+    {
+      "label": "WorkloadsCatalog()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L24",
+      "id": "workloads_page_workloadscatalog",
+      "community": 65,
+      "norm_label": "workloadscatalog()"
+    },
+    {
+      "label": "layout.tsx",
+      "file_type": "code",
+      "source_file": "src/app/layout.tsx",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "layout.tsx",
+      "id": "app_layout"
+    },
+    {
+      "label": "metadata",
+      "file_type": "code",
+      "source_file": "src/app/layout.tsx",
+      "source_location": "L8",
+      "community": 13,
+      "norm_label": "metadata",
+      "id": "app_layout_metadata"
+    },
+    {
+      "label": "RootLayout()",
+      "file_type": "code",
+      "source_file": "src/app/layout.tsx",
+      "source_location": "L53",
+      "community": 13,
+      "norm_label": "rootlayout()",
+      "id": "app_layout_rootlayout"
+    },
+    {
+      "label": "sitemap.ts",
+      "file_type": "code",
+      "source_file": "src/app/sitemap.ts",
+      "source_location": "L1",
+      "community": 88,
+      "norm_label": "sitemap.ts",
+      "id": "app_sitemap"
+    },
+    {
+      "label": "sitemap()",
+      "file_type": "code",
+      "source_file": "src/app/sitemap.ts",
+      "source_location": "L3",
+      "community": 88,
+      "norm_label": "sitemap()",
+      "id": "app_sitemap_sitemap"
+    },
+    {
+      "label": "Footer.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "footer.tsx",
+      "id": "components_footer"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L9",
+      "community": 13,
+      "norm_label": "linkedinicon()",
+      "id": "components_footer_linkedinicon"
+    },
+    {
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L17",
+      "community": 13,
+      "norm_label": "xicon()",
+      "id": "components_footer_xicon"
     },
     {
       "label": "Footer()",
       "file_type": "code",
       "source_file": "src/components/Footer.tsx",
       "source_location": "L25",
-      "id": "components_footer_footer",
       "community": 13,
-      "norm_label": "footer()"
+      "norm_label": "footer()",
+      "id": "components_footer_footer"
     },
     {
       "label": "index.ts",
       "file_type": "code",
       "source_file": "src/components/index.ts",
       "source_location": "L1",
-      "id": "components_index",
       "community": 13,
-      "norm_label": "index.ts"
+      "norm_label": "index.ts",
+      "id": "components_index"
     },
     {
       "label": "api-utils.ts",
@@ -107,7 +440,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L9",
-      "community": 61,
+      "community": 8,
       "norm_label": "requireadminauth()",
       "id": "lib_api_utils_requireadminauth"
     },
@@ -116,7 +449,7 @@
       "file_type": "code",
       "source_file": "src/lib/api-utils.ts",
       "source_location": "L31",
-      "community": 61,
+      "community": 8,
       "norm_label": "initdb()",
       "id": "lib_api_utils_initdb"
     },
@@ -179,7 +512,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L48",
-      "community": 56,
+      "community": 16,
       "norm_label": "fetchwithretry()",
       "id": "services_pricing_pipeline_fetchwithretry"
     },
@@ -341,7 +674,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L329",
-      "community": 80,
+      "community": 16,
       "norm_label": "gcpadapter",
       "id": "services_pricing_pipeline_gcpadapter"
     },
@@ -350,7 +683,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L332",
-      "community": 80,
+      "community": 16,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_gcpadapter_fetchpricing"
     },
@@ -359,7 +692,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L341",
-      "community": 80,
+      "community": 16,
       "norm_label": ".fetchfrompricingapi()",
       "id": "services_pricing_pipeline_gcpadapter_fetchfrompricingapi"
     },
@@ -368,7 +701,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L402",
-      "community": 80,
+      "community": 16,
       "norm_label": ".fetchfromstaticconfig()",
       "id": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig"
     },
@@ -377,7 +710,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L423",
-      "community": 80,
+      "community": 16,
       "norm_label": ".gcpcpuvendor()",
       "id": "services_pricing_pipeline_gcpadapter_gcpcpuvendor"
     },
@@ -413,7 +746,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L465",
-      "community": 16,
+      "community": 56,
       "norm_label": ".classifydigitalocean()",
       "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean"
     },
@@ -458,7 +791,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L569",
-      "community": 78,
+      "community": 62,
       "norm_label": "alibabaadapter",
       "id": "services_pricing_pipeline_alibabaadapter"
     },
@@ -467,7 +800,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L572",
-      "community": 78,
+      "community": 62,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_alibabaadapter_fetchpricing"
     },
@@ -476,7 +809,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L597",
-      "community": 78,
+      "community": 62,
       "norm_label": "pricingpipeline",
       "id": "services_pricing_pipeline_pricingpipeline"
     },
@@ -485,7 +818,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L601",
-      "community": 78,
+      "community": 62,
       "norm_label": ".constructor()",
       "id": "services_pricing_pipeline_pricingpipeline_constructor"
     },
@@ -494,7 +827,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L619",
-      "community": 78,
+      "community": 62,
       "norm_label": ".run()",
       "id": "services_pricing_pipeline_pricingpipeline_run"
     },
@@ -503,117 +836,9 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L635",
-      "community": 78,
+      "community": 62,
       "norm_label": ".saverecords()",
       "id": "services_pricing_pipeline_pricingpipeline_saverecords"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L1",
-      "community": 13,
-      "norm_label": "page.tsx",
-      "id": "status_page"
-    },
-    {
-      "label": "PipelineStatus",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L7",
-      "community": 13,
-      "norm_label": "pipelinestatus",
-      "id": "status_page_pipelinestatus"
-    },
-    {
-      "label": "ProviderStatus",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L17",
-      "community": 13,
-      "norm_label": "providerstatus",
-      "id": "status_page_providerstatus"
-    },
-    {
-      "label": "StatusData",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L25",
-      "community": 13,
-      "norm_label": "statusdata",
-      "id": "status_page_statusdata"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L34",
-      "community": 13,
-      "norm_label": "provider_colors",
-      "id": "status_page_provider_colors"
-    },
-    {
-      "label": "PROVIDER_URLS",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L52",
-      "community": 13,
-      "norm_label": "provider_urls",
-      "id": "status_page_provider_urls"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L72",
-      "community": 13,
-      "norm_label": "linkedinicon()",
-      "id": "status_page_linkedinicon"
-    },
-    {
-      "label": "XIcon()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L80",
-      "community": 13,
-      "norm_label": "xicon()",
-      "id": "status_page_xicon"
-    },
-    {
-      "label": "PIPELINE_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L88",
-      "community": 13,
-      "norm_label": "pipeline_order",
-      "id": "status_page_pipeline_order"
-    },
-    {
-      "label": "SourceBadge()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L92",
-      "community": 13,
-      "norm_label": "sourcebadge()",
-      "id": "status_page_sourcebadge"
-    },
-    {
-      "label": "BackToTop()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L131",
-      "community": 13,
-      "norm_label": "backtotop()",
-      "id": "status_page_backtotop"
-    },
-    {
-      "label": "StatusPage()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L144",
-      "community": 13,
-      "norm_label": "statuspage()",
-      "id": "status_page_statuspage"
     },
     {
       "label": "page.tsx",
@@ -1529,7 +1754,7 @@
       "file_type": "code",
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L54",
-      "community": 78,
+      "community": 62,
       "norm_label": "apphostingpricingpipeline",
       "id": "services_app_hosting_pipeline_apphostingpricingpipeline"
     },
@@ -1538,7 +1763,7 @@
       "file_type": "code",
       "source_file": "src/services/app_hosting_pipeline.ts",
       "source_location": "L55",
-      "community": 78,
+      "community": 62,
       "norm_label": ".run()",
       "id": "services_app_hosting_pipeline_apphostingpricingpipeline_run"
     },
@@ -1565,7 +1790,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L85",
-      "community": 74,
+      "community": 62,
       "norm_label": "networkingpricingpipeline",
       "id": "services_networking_pipeline_networkingpricingpipeline"
     },
@@ -1574,7 +1799,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L88",
-      "community": 74,
+      "community": 62,
       "norm_label": ".constructor()",
       "id": "services_networking_pipeline_networkingpricingpipeline_constructor"
     },
@@ -1583,7 +1808,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L93",
-      "community": 74,
+      "community": 62,
       "norm_label": ".run()",
       "id": "services_networking_pipeline_networkingpricingpipeline_run"
     },
@@ -1592,7 +1817,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L148",
-      "community": 74,
+      "community": 62,
       "norm_label": ".setupnetworkingservices()",
       "id": "services_networking_pipeline_networkingpricingpipeline_setupnetworkingservices"
     },
@@ -1934,7 +2159,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L1",
-      "community": 48,
+      "community": 62,
       "norm_label": "scheduler.ts",
       "id": "workers_scheduler"
     },
@@ -1943,7 +2168,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L26",
-      "community": 23,
+      "community": 62,
       "norm_label": "sql",
       "id": "workers_scheduler_sql"
     },
@@ -1952,7 +2177,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L33",
-      "community": 48,
+      "community": 62,
       "norm_label": "checksparsedata()",
       "id": "workers_scheduler_checksparsedata"
     },
@@ -2009,132 +2234,6 @@
       "community": 4,
       "norm_label": "get()",
       "id": "status_route_get"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L1",
-      "community": 67,
-      "norm_label": "page.tsx",
-      "id": "datacenters_page"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L12",
-      "community": 67,
-      "norm_label": "provider_colors",
-      "id": "datacenters_page_provider_colors"
-    },
-    {
-      "label": "GLOSSARY",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L23",
-      "community": 67,
-      "norm_label": "glossary",
-      "id": "datacenters_page_glossary"
-    },
-    {
-      "label": "Term()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L30",
-      "community": 67,
-      "norm_label": "term()",
-      "id": "datacenters_page_term"
-    },
-    {
-      "label": "Stat()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L59",
-      "community": 67,
-      "norm_label": "stat()",
-      "id": "datacenters_page_stat"
-    },
-    {
-      "label": "StatusDot()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L71",
-      "community": 67,
-      "norm_label": "statusdot()",
-      "id": "datacenters_page_statusdot"
-    },
-    {
-      "label": "ProviderBadge()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L77",
-      "community": 67,
-      "norm_label": "providerbadge()",
-      "id": "datacenters_page_providerbadge"
-    },
-    {
-      "label": "ProviderRow()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L89",
-      "community": 67,
-      "norm_label": "providerrow()",
-      "id": "datacenters_page_providerrow"
-    },
-    {
-      "label": "NAV_SECTIONS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L184",
-      "community": 67,
-      "norm_label": "nav_sections",
-      "id": "datacenters_page_nav_sections"
-    },
-    {
-      "label": "GEO_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L193",
-      "community": 67,
-      "norm_label": "geo_colors",
-      "id": "datacenters_page_geo_colors"
-    },
-    {
-      "label": "ViewToggle()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L202",
-      "community": 67,
-      "norm_label": "viewtoggle()",
-      "id": "datacenters_page_viewtoggle"
-    },
-    {
-      "label": "InfraChart()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L221",
-      "community": 67,
-      "norm_label": "infrachart()",
-      "id": "datacenters_page_infrachart"
-    },
-    {
-      "label": "CoverageChart()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L247",
-      "community": 67,
-      "norm_label": "coveragechart()",
-      "id": "datacenters_page_coveragechart"
-    },
-    {
-      "label": "DatacentersPage()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L271",
-      "community": 67,
-      "norm_label": "datacenterspage()",
-      "id": "datacenters_page_datacenterspage"
     },
     {
       "label": "azure_serverless.ts",
@@ -2303,7 +2402,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L162",
-      "community": 72,
+      "community": 55,
       "norm_label": "oracleautonomousadapter",
       "id": "services_database_pipeline_oracleautonomousadapter"
     },
@@ -2312,7 +2411,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L165",
-      "community": 72,
+      "community": 55,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oracleautonomousadapter_fetchpricing"
     },
@@ -2339,7 +2438,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L233",
-      "community": 73,
+      "community": 55,
       "norm_label": "oraclepostgresqladapter",
       "id": "services_database_pipeline_oraclepostgresqladapter"
     },
@@ -2348,7 +2447,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L236",
-      "community": 73,
+      "community": 55,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclepostgresqladapter_fetchpricing"
     },
@@ -2456,7 +2555,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L566",
-      "community": 89,
+      "community": 55,
       "norm_label": "alibabadbadapter",
       "id": "services_database_pipeline_alibabadbadapter"
     },
@@ -2465,7 +2564,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L569",
-      "community": 89,
+      "community": 55,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_alibabadbadapter_fetchpricing"
     },
@@ -2483,7 +2582,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L610",
-      "community": 90,
+      "community": 55,
       "norm_label": "awselasticacheadapter",
       "id": "services_database_pipeline_awselasticacheadapter"
     },
@@ -2492,7 +2591,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L613",
-      "community": 90,
+      "community": 55,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_awselasticacheadapter_fetchpricing"
     },
@@ -2510,7 +2609,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L653",
-      "community": 9,
+      "community": 55,
       "norm_label": "gcpmemorystoreadapter",
       "id": "services_database_pipeline_gcpmemorystoreadapter"
     },
@@ -2519,7 +2618,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L656",
-      "community": 9,
+      "community": 55,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_gcpmemorystoreadapter_fetchpricing"
     },
@@ -2564,7 +2663,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L735",
-      "community": 68,
+      "community": 9,
       "norm_label": "alibabaredisadapter",
       "id": "services_database_pipeline_alibabaredisadapter"
     },
@@ -2573,7 +2672,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L738",
-      "community": 68,
+      "community": 9,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_alibabaredisadapter_fetchpricing"
     },
@@ -2600,7 +2699,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L791",
-      "community": 68,
+      "community": 9,
       "norm_label": ".run()",
       "id": "services_database_pipeline_databasepricingpipeline_run"
     },
@@ -2690,7 +2789,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L133",
-      "community": 79,
+      "community": 47,
       "norm_label": "azureserverlessadapter",
       "id": "services_serverless_pipeline_azureserverlessadapter"
     },
@@ -2699,7 +2798,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L136",
-      "community": 79,
+      "community": 47,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing"
     },
@@ -2726,7 +2825,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L187",
-      "community": 84,
+      "community": 47,
       "norm_label": "oracleserverlessadapter",
       "id": "services_serverless_pipeline_oracleserverlessadapter"
     },
@@ -2735,7 +2834,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L190",
-      "community": 84,
+      "community": 47,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing"
     },
@@ -3428,7 +3527,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L63",
-      "community": 58,
+      "community": 11,
       "norm_label": "workloadparameter",
       "id": "types_index_workloadparameter"
     },
@@ -3446,7 +3545,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L88",
-      "community": 65,
+      "community": 11,
       "norm_label": "workloaddefinition",
       "id": "types_index_workloaddefinition"
     },
@@ -3455,7 +3554,7 @@
       "file_type": "code",
       "source_file": "src/app/api/admin/data-quality/route.ts",
       "source_location": "L1",
-      "community": 23,
+      "community": 62,
       "norm_label": "route.ts",
       "id": "data_quality_route"
     },
@@ -3464,7 +3563,7 @@
       "file_type": "code",
       "source_file": "src/app/api/admin/data-quality/route.ts",
       "source_location": "L10",
-      "community": 23,
+      "community": 62,
       "norm_label": "get()",
       "id": "data_quality_route_get"
     },
@@ -3473,7 +3572,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L1",
-      "community": 23,
+      "community": 62,
       "norm_label": "data_quality.ts",
       "id": "services_data_quality"
     },
@@ -3482,7 +3581,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L4",
-      "community": 23,
+      "community": 62,
       "norm_label": "providers",
       "id": "services_data_quality_providers"
     },
@@ -3491,7 +3590,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L8",
-      "community": 23,
+      "community": 62,
       "norm_label": "dbcat()",
       "id": "services_data_quality_dbcat"
     },
@@ -3500,7 +3599,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L11",
-      "community": 23,
+      "community": 62,
       "norm_label": "dqissue",
       "id": "services_data_quality_dqissue"
     },
@@ -3509,7 +3608,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L18",
-      "community": 23,
+      "community": 62,
       "norm_label": "dqreport",
       "id": "services_data_quality_dqreport"
     },
@@ -3518,7 +3617,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L39",
-      "community": 23,
+      "community": 62,
       "norm_label": "rundataqualitychecks()",
       "id": "services_data_quality_rundataqualitychecks"
     },
@@ -3527,7 +3626,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L1",
-      "community": 48,
+      "community": 62,
       "norm_label": "mailer.ts",
       "id": "services_mailer"
     },
@@ -3536,7 +3635,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L6",
-      "community": 48,
+      "community": 62,
       "norm_label": "createtransport()",
       "id": "services_mailer_createtransport"
     },
@@ -3545,7 +3644,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L17",
-      "community": 48,
+      "community": 62,
       "norm_label": "ismailerconfigured()",
       "id": "services_mailer_ismailerconfigured"
     },
@@ -3554,7 +3653,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L21",
-      "community": 48,
+      "community": 62,
       "norm_label": "pricedriftalert",
       "id": "services_mailer_pricedriftalert"
     },
@@ -3563,7 +3662,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L30",
-      "community": 48,
+      "community": 62,
       "norm_label": "staledataalert",
       "id": "services_mailer_staledataalert"
     },
@@ -3572,7 +3671,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L38",
-      "community": 48,
+      "community": 62,
       "norm_label": "sendpricedriftemail()",
       "id": "services_mailer_sendpricedriftemail"
     },
@@ -3581,7 +3680,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L69",
-      "community": 48,
+      "community": 62,
       "norm_label": "sendstalenessemail()",
       "id": "services_mailer_sendstalenessemail"
     },
@@ -3590,7 +3689,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L99",
-      "community": 48,
+      "community": 62,
       "norm_label": "dataqualityalert",
       "id": "services_mailer_dataqualityalert"
     },
@@ -3599,7 +3698,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L105",
-      "community": 48,
+      "community": 62,
       "norm_label": "senddataqualityemail()",
       "id": "services_mailer_senddataqualityemail"
     },
@@ -3692,78 +3791,6 @@
       "community": 21,
       "norm_label": "tabletoolbar()",
       "id": "components_tabletoolbar_tabletoolbar"
-    },
-    {
-      "label": "WorldMap.tsx",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L1",
-      "community": 67,
-      "norm_label": "worldmap.tsx",
-      "id": "datacenters_worldmap"
-    },
-    {
-      "label": "GEO_BY_CODE",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L7",
-      "community": 67,
-      "norm_label": "geo_by_code",
-      "id": "datacenters_worldmap_geo_by_code"
-    },
-    {
-      "label": "toXY()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L15",
-      "community": 67,
-      "norm_label": "toxy()",
-      "id": "datacenters_worldmap_toxy"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L20",
-      "community": 67,
-      "norm_label": "provider_colors",
-      "id": "datacenters_worldmap_provider_colors"
-    },
-    {
-      "label": "CONTINENTS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L31",
-      "community": 67,
-      "norm_label": "continents",
-      "id": "datacenters_worldmap_continents"
-    },
-    {
-      "label": "REGION_COORDS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L61",
-      "community": 67,
-      "norm_label": "region_coords",
-      "id": "datacenters_worldmap_region_coords"
-    },
-    {
-      "label": "Tooltip",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L263",
-      "community": 67,
-      "norm_label": "tooltip",
-      "id": "datacenters_worldmap_tooltip"
-    },
-    {
-      "label": "WorldMap()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L271",
-      "community": 67,
-      "norm_label": "worldmap()",
-      "id": "datacenters_worldmap_worldmap"
     },
     {
       "label": "page.tsx",
@@ -4445,7 +4472,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L54",
-      "community": 55,
+      "community": 69,
       "norm_label": "snowflakestaticadapter",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter"
     },
@@ -4454,7 +4481,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L59",
-      "community": 55,
+      "community": 69,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter_constructor"
     },
@@ -4463,7 +4490,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L68",
-      "community": 55,
+      "community": 69,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing"
     },
@@ -4472,7 +4499,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L97",
-      "community": 55,
+      "community": 69,
       "norm_label": "databricksazureadapter",
       "id": "services_data_analytics_pipeline_databricksazureadapter"
     },
@@ -4481,7 +4508,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L101",
-      "community": 55,
+      "community": 69,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
     },
@@ -4490,7 +4517,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L170",
-      "community": 55,
+      "community": 69,
       "norm_label": "nativeanalyticsstaticadapter",
       "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter"
     },
@@ -4499,7 +4526,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L175",
-      "community": 55,
+      "community": 69,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_constructor"
     },
@@ -4508,7 +4535,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L182",
-      "community": 55,
+      "community": 69,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_fetchpricing"
     },
@@ -4517,7 +4544,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L211",
-      "community": 55,
+      "community": 69,
       "norm_label": "synapseazureadapter",
       "id": "services_data_analytics_pipeline_synapseazureadapter"
     },
@@ -4526,7 +4553,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L215",
-      "community": 55,
+      "community": 69,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing"
     },
@@ -4553,7 +4580,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L316",
-      "community": 55,
+      "community": 69,
       "norm_label": "oracleanalyticsadapter",
       "id": "services_data_analytics_pipeline_oracleanalyticsadapter"
     },
@@ -4562,7 +4589,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L319",
-      "community": 55,
+      "community": 69,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_oracleanalyticsadapter_fetchpricing"
     },
@@ -4589,7 +4616,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L380",
-      "community": 61,
+      "community": 62,
       "norm_label": "dataanalyticspricingpipeline",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
     },
@@ -4598,7 +4625,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L381",
-      "community": 61,
+      "community": 62,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
     },
@@ -4628,24 +4655,6 @@
       "community": 8,
       "norm_label": "get()",
       "id": "pricing_route_get"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L1",
-      "community": 65,
-      "norm_label": "page.tsx",
-      "id": "workloads_page"
-    },
-    {
-      "label": "WorkloadsCatalog()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "community": 65,
-      "norm_label": "workloadscatalog()",
-      "id": "workloads_page_workloadscatalog"
     },
     {
       "label": "page.tsx",
@@ -4760,7 +4769,7 @@
       "file_type": "code",
       "source_file": "src/app/api/admin/fetch-pricing/route.ts",
       "source_location": "L1",
-      "community": 61,
+      "community": 8,
       "norm_label": "route.ts",
       "id": "fetch_pricing_route"
     },
@@ -4769,7 +4778,7 @@
       "file_type": "code",
       "source_file": "src/app/api/admin/fetch-pricing/route.ts",
       "source_location": "L14",
-      "community": 61,
+      "community": 8,
       "norm_label": "post()",
       "id": "fetch_pricing_route_post"
     },
@@ -4913,7 +4922,7 @@
       "file_type": "code",
       "source_file": "ingest_vms.ts",
       "source_location": "L1",
-      "community": 78,
+      "community": 62,
       "norm_label": "ingest_vms.ts",
       "id": "ingest_vms"
     },
@@ -4922,7 +4931,7 @@
       "file_type": "code",
       "source_file": "ingest_vms.ts",
       "source_location": "L7",
-      "community": 78,
+      "community": 62,
       "norm_label": "main()",
       "id": "ingest_vms_main"
     },
@@ -5291,7 +5300,7 @@
       "file_type": "code",
       "source_file": "src/services/storage_pipeline.ts",
       "source_location": "L48",
-      "community": 62,
+      "community": 6,
       "norm_label": "storagepricingpipeline",
       "id": "services_storage_pipeline_storagepricingpipeline"
     },
@@ -6200,7 +6209,7 @@
       "file_type": "code",
       "source_file": "run_networking.ts",
       "source_location": "L1",
-      "community": 74,
+      "community": 62,
       "norm_label": "run_networking.ts",
       "id": "run_networking"
     },
@@ -6209,7 +6218,7 @@
       "file_type": "code",
       "source_file": "run_networking.ts",
       "source_location": "L4",
-      "community": 74,
+      "community": 62,
       "norm_label": "sql",
       "id": "run_networking_sql"
     },
@@ -6218,7 +6227,7 @@
       "file_type": "code",
       "source_file": "run_networking.ts",
       "source_location": "L5",
-      "community": 74,
+      "community": 62,
       "norm_label": "pipeline",
       "id": "run_networking_pipeline"
     },
@@ -6344,7 +6353,7 @@
       "file_type": "code",
       "source_file": "src/services/ai_pipeline.ts",
       "source_location": "L36",
-      "community": 61,
+      "community": 27,
       "norm_label": "aipricingpipeline",
       "id": "services_ai_pipeline_aipricingpipeline"
     },
@@ -6353,7 +6362,7 @@
       "file_type": "code",
       "source_file": "src/services/ai_pipeline.ts",
       "source_location": "L37",
-      "community": 61,
+      "community": 27,
       "norm_label": ".constructor()",
       "id": "services_ai_pipeline_aipricingpipeline_constructor"
     },
@@ -6729,6 +6738,512 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_worldmap"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "config_datacenter_data_geographies"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "config_datacenter_data_provider_infra"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_continents"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_geo_by_code"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_provider_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_region_coords"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L256",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_tooltip"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_toxy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L264",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_worldmap"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L296",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap_worldmap",
+      "target": "datacenters_worldmap_toxy"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "components_digitaloceanreferralmodal_digitaloceanreferralmodal"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_datacenterregion"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_geographies"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_provider_infra"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_providerinfrastructure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L248",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_coveragechart"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L179",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_datacenterspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L194",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_geo_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_glossary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L222",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_infrachart"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_provider_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_providerbadge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_providerrow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_stat"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_statusdot"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_term"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L203",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_viewtoggle"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L118",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_backtotop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_linkedinicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_pipeline_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_pipelinestatus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_provider_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_provider_urls"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_providerstatus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_sourcebadge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_statusdata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L125",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_statuspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_xicon"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "workloads_page",
+      "target": "types_index_producttype",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_order",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_workloadscatalog"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/layout.tsx",
@@ -6806,9 +7321,9 @@
       "source_file": "src/components/index.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_index",
-      "target": "components_footer",
-      "confidence_score": 1.0
+      "target": "components_footer"
     },
     {
       "relation": "imports_from",
@@ -6891,17 +7406,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L4",
       "weight": 1.0,
@@ -6924,33 +7428,11 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/terms/page.tsx",
       "source_location": "L4",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "terms_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
       "target": "components_index"
     },
     {
@@ -8800,116 +9282,6 @@
       "confidence_score": 1.0,
       "source": "services_pricing_pipeline_pricingpipeline_run",
       "target": "services_pricing_pipeline_pricingpipeline_saverecords"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L118",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_backtotop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L55",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_linkedinicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L42",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_pipeline_order"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_pipelinestatus"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_provider_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_provider_urls"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_providerstatus"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L86",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_sourcebadge"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_statusdata"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L125",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_statuspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L63",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_xicon"
     },
     {
       "relation": "contains",
@@ -11854,213 +12226,6 @@
       "target": "status_route_pipeline_display"
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "components_digitaloceanreferralmodal_digitaloceanreferralmodal"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_datacenterregion"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_geographies"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_provider_infra"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_providerinfrastructure"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L248",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_coveragechart"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L179",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_datacenterspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L194",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_geo_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_glossary"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L222",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_infrachart"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L199",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_nav_sections"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_provider_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L85",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_providerbadge"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L38",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_providerrow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_stat"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_statusdot"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L29",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_term"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L203",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_viewtoggle"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_worldmap"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/config/azure_serverless.ts",
@@ -14559,109 +14724,6 @@
       "target": "components_tabletoolbar_tabletoolbarprops"
     },
     {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "config_datacenter_data_geographies"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "config_datacenter_data_provider_infra"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_continents"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_geo_by_code"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_provider_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_region_coords"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L256",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_tooltip"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_toxy"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L264",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_worldmap"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L296",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap_worldmap",
-      "target": "datacenters_worldmap_toxy"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/docs/page.tsx",
@@ -15660,38 +15722,6 @@
       "confidence_score": 1.0,
       "source": "pricing_route",
       "target": "pricing_route_get"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_workloadscatalog"
     },
     {
       "relation": "imports_from",
@@ -17797,5 +17827,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "d22a567ef92147313a7a4df0760cd54d16712231"
+  "built_at_commit": "03689de5e66ed8d75ce85524296753267e1c2cbe"
 }

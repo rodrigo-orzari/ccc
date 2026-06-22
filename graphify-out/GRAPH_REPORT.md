@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-06-22)
 
 ## Corpus Check
-- 172 files · ~156,977 words
+- 172 files · ~157,028 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 748 nodes · 1065 edges · 78 communities (44 shown, 34 thin omitted)
+- 748 nodes · 1066 edges · 79 communities (44 shown, 35 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `03689de5`
+- Built from commit: `e3154758`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -33,6 +33,7 @@
 - [[_COMMUNITY_Community 17|Community 17]]
 - [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Community 24|Community 24]]
 - [[_COMMUNITY_Community 25|Community 25]]
 - [[_COMMUNITY_Community 26|Community 26]]
@@ -108,7 +109,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (78 total, 34 thin omitted)
+## Communities (79 total, 35 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
@@ -116,7 +117,7 @@ Nodes (13): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, G
 
 ### Community 7 - "Community 7"
 Cohesion: 0.06
-Nodes (68): Dashboard(), ENGINE_CATEGORIES, FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, groupEngines(), AI_CONTEXT_WINDOWS (+60 more)
+Nodes (67): Dashboard(), ENGINE_CATEGORIES, FilterSectionProps, FilterSidebar(), FilterSidebarProps, GroupedFilterSectionProps, groupEngines(), AI_CONTEXT_WINDOWS (+59 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.15
@@ -131,8 +132,8 @@ Cohesion: 0.06
 Nodes (35): 1. Frontend State Management ✅, 1. In-Table Micro-Visualizations ✅, 2. Analytical Charts View ✅, 2. Query Parameter Building ✅, 3. Backend Query Processing ✅, 3. Networking Filters Data Integration Fix ("Super Debug") ✅, 4. Data Persistence ✅, Configuration & Adapters (+27 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.16
-Nodes (9): ChartsViewProps, PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, PricingRecord, ProductType, WorkloadComponent, WorkloadDefinition (+1 more)
+Cohesion: 0.20
+Nodes (6): ChartsViewProps, PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, PricingRecord, ProductType
 
 ### Community 12 - "Community 12"
 Cohesion: 0.10
@@ -144,7 +145,7 @@ Nodes (12): metadata, DigitalOceanReferralModal(), MarkdownPageProps, DBStatusPr
 
 ### Community 15 - "Community 15"
 Cohesion: 0.06
-Nodes (33): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+25 more)
+Nodes (34): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+26 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.27
@@ -204,7 +205,7 @@ Nodes (4): AWSAdapter, AzureAdapter, BaseAdapter, OracleAdapter
 
 ### Community 58 - "Community 58"
 Cohesion: 0.19
-Nodes (7): TableRow(), PROVIDER_IDS, providerColor(), providerName(), ProviderTh(), REGION_OPTIONS, formatInstanceName()
+Nodes (8): PROVIDER_IDS, providerColor(), providerName(), ProviderTh(), REGION_OPTIONS, WorkloadComponent, WorkloadDefinition, WorkloadParameter
 
 ### Community 62 - "Community 62"
 Cohesion: 0.07
@@ -235,24 +236,24 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **237 isolated node(s):** `GEO_BY_CODE`, `PROVIDER_COLORS`, `CONTINENTS`, `REGION_COORDS`, `Tooltip` (+232 more)
+- **236 isolated node(s):** `PROVIDER_COLORS`, `GLOSSARY`, `GEO_COLORS`, `PROVIDERS`, `ColDef` (+231 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **34 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `PROVIDERS` connect `Community 7` to `Community 58`, `Community 11`, `Community 62`?**
-  _High betweenness centrality (0.074) - this node is a cross-community bridge._
+  _High betweenness centrality (0.056) - this node is a cross-community bridge._
 - **Why does `BaseAdapter` connect `Community 56` to `Community 69`, `Community 9`, `Community 75`, `Community 76`, `Community 47`, `Community 16`, `Community 55`, `Community 62`?**
   _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 55` to `Community 69`, `Community 38`, `Community 9`, `Community 75`, `Community 76`, `Community 47`, `Community 62`?**
   _High betweenness centrality (0.050) - this node is a cross-community bridge._
-- **What connects `GEO_BY_CODE`, `PROVIDER_COLORS`, `CONTINENTS` to the rest of the system?**
-  _237 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `PROVIDER_COLORS`, `GLOSSARY`, `GEO_COLORS` to the rest of the system?**
+  _236 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.05894736842105263 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06018018018018018 - nodes in this community are weakly interconnected._
 - **Should `Community 8` be split into smaller, more focused modules?**
   _Cohesion score 0.14761904761904762 - nodes in this community are weakly interconnected._
