@@ -3,7 +3,7 @@ import Script from 'next/script';
 import './globals.css';
 import Providers from './providers';
 
-import { DonationModal } from '@/components';
+import { Header, Footer, DigitalOceanReferralModal } from '@/components';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://comparecloudcosts.com'),
@@ -71,7 +71,7 @@ export default function RootLayout({
       <body className="bg-gray-900 text-gray-100 min-h-screen">
         <Providers>
           {children}
-          <DonationModal />
+          <DigitalOceanReferralModal />
         </Providers>
       </body>
     </html>
