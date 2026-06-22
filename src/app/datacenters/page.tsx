@@ -482,7 +482,7 @@ export default function DatacentersPage() {
             {/* Data sources */}
             <div id="data-sources" className="mt-10 border-t border-[var(--border)] pt-6 scroll-mt-6">
               <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Data Sources</h2>
-              <p className="text-sm text-[var(--muted)] mb-4 max-w-2xl leading-relaxed">
+              <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2">
