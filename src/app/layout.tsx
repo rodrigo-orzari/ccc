@@ -3,7 +3,7 @@ import Script from 'next/script';
 import './globals.css';
 import Providers from './providers';
 
-import { Header, Footer, DigitalOceanReferralModal } from '@/components';
+import { DigitalOceanReferralModal } from '@/components';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://comparecloudcosts.com'),

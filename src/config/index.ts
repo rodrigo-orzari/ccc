@@ -138,7 +138,7 @@ export const PROVIDER_CATEGORY_SCOPE: Record<string, string[]> = {
   qdrant: ['database'],
   weaviate: ['database'],
   chroma: ['database'],
-  cloudflare: ['networking', 'app-hosting'],
+  cloudflare: ['networking', 'app-hosting', 'security'],
 };
 
 // Returns the providers applicable to a given product type. Filter buttons and the
