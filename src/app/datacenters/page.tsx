@@ -312,20 +312,11 @@ export default function DatacentersPage() {
             {/* Header */}
             <div className="mb-6">
               <h1 className="text-3xl font-bold mb-1 text-[var(--text)]">Cloud Infrastructure</h1>
-              <p className="text-sm text-[var(--muted)] max-w-2xl leading-relaxed mb-4">
-                Compare data center presence, <Term term="Availability Zone">availability zones</Term>, and global coverage across providers.
-                Click any row to expand the full <Term term="Region">region</Term> list with Availability Zone counts.
+              <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">
+                Compare data center presence, <Term term="Availability Zone">availability zones</Term>, and global coverage across providers. Click any row to expand the full <Term term="Region">region</Term> list with Availability Zone counts.
               </p>
-              {/* Legend */}
-              <div className="flex items-center gap-5">
-                <div className="flex items-center gap-2 text-[11px] text-[var(--muted)]">
-                  <span className="w-2 h-2 rounded-full bg-[#22c55e] shrink-0" /> Available
-                </div>
-                <div className="flex items-center gap-2 text-[11px] text-[var(--muted)]">
-                  <span className="w-2 h-2 rounded-full bg-[#f59e0b] shrink-0" /> Announced / Planned
-                </div>
-              </div>
             </div>
+
 
             {/* World Map */}
             <div id="world-map" className="mb-8 scroll-mt-6">
@@ -337,6 +328,15 @@ export default function DatacentersPage() {
               <div className="flex items-center justify-between mb-3">
                 <h2 className="text-xl font-bold text-[var(--text)]">Infrastructure Overview</h2>
                 <ViewToggle view={infraView} onChange={setInfraView} />
+              </div>
+              {/* Legend */}
+              <div className="flex items-center gap-5 mb-4">
+                <div className="flex items-center gap-2 text-[11px] text-[var(--muted)]">
+                  <span className="w-2 h-2 rounded-full bg-[#22c55e] shrink-0" /> Available
+                </div>
+                <div className="flex items-center gap-2 text-[11px] text-[var(--muted)]">
+                  <span className="w-2 h-2 rounded-full bg-[#f59e0b] shrink-0" /> Announced / Planned
+                </div>
               </div>
               {infraView === 'chart' ? <InfraChart /> : (
               <div className="border border-[var(--border)] rounded overflow-x-auto">
