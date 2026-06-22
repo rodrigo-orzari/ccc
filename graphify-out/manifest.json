@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1782151657.2230492,
-    "ast_hash": "44bddb04c256829d7518dac30e5e0f51",
+    "mtime": 1782151783.8409038,
+    "ast_hash": "13b7eaa99591b906a39294c06e5fd134",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -420,8 +420,8 @@
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1781983111.7189038,
-    "ast_hash": "46c962a5731f48b19e6db10c12d4e7d9",
+    "mtime": 1782151748.2922347,
+    "ast_hash": "64747ae2f9b549891b2067001f7b0c37",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
