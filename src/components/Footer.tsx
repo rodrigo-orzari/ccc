@@ -81,15 +81,6 @@ export default function Footer() {
             GitHub
           </a>
 
-          <a
-            href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295200d2aafb687ca"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 hover:text-black dark:hover:text-white transition-colors"
-          >
-            Support this project ❤️
-          </a>
-
           <span className="whitespace-nowrap hidden sm:inline">
             Share with friends and family
           </span>
