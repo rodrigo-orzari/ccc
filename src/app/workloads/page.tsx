@@ -1,9 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Footer, ProductTypeSelector } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
+import type { ProductType } from '@/types';
+
+const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
+  vm: 'Virtual Machines',
+  database: 'Databases',
+  serverless: 'Serverless',
+  containers: 'Containers',
+  networking: 'Networking',
+  'data-analytics': 'Data & Analytics',
+  storage: 'Storage',
+  ai: 'Artificial Intelligence',
+  'app-hosting': 'App Hosting',
+  security: 'Security & Identity',
+};
+
+const PRODUCT_TYPE_ORDER: ProductType[] = ['vm', 'database', 'serverless', 'containers', 'networking', 'data-analytics', 'storage', 'ai', 'app-hosting', 'security'];
 
 export default function WorkloadsCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,108 +29,23 @@ export default function WorkloadsCatalog() {
     w.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const categoryCounts = useMemo(() => {
+    const counts: Partial<Record<ProductType, number>> = {};
+    WORKLOADS.forEach(w => {
+      const categoriesInWorkload = new Set(w.components.map(c => c.getRequirements({}).productType));
+      categoriesInWorkload.forEach(cat => {
+        counts[cat] = (counts[cat] || 0) + 1;
+      });
+    });
+    return counts;
+  }, []);
+
   return (
     <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
       <ProductTypeSelector activeProductType={"workloads" as any} />
 
       <div className="flex-1 overflow-auto flex flex-col">
-        <div className="flex flex-1 w-full">
-        {/* Sidebar — hierarchical structure like docs */}
-        <aside className="w-[280px] border-r border-[#e5e5e5] dark:border-[#262626] p-6 hidden md:block bg-white dark:bg-[#000000] overflow-y-auto">
-          <h2 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest mb-6">
-            Content
-          </h2>
-          <nav>
-            <ul className="space-y-5">
-              {/* Web Applications */}
-              <li>
-                <h3 className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] mb-2.5 uppercase tracking-wide">
-                  Web Applications
-                </h3>
-                <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['serverless-web-app', '3-tier-web', 'ecommerce-microservices', 'k8s-app-platform', 'saas-paas-app', 'content-media-platform'].includes(w.id)).map(w => (
-                    <li key={w.id}>
-                      <Link
-                        href={`/workloads/${w.id}`}
-                        className="text-[12px] text-[#737373] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
-                        title={w.name}
-                        style={{ textDecoration: 'none' }}
-                      >
-                        {w.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-
-              {/* Data & Analytics */}
-              <li>
-                <h3 className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] mb-2.5 uppercase tracking-wide">
-                  Data & Analytics
-                </h3>
-                <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['streaming-analytics', 'data-warehouse-bi'].includes(w.id)).map(w => (
-                    <li key={w.id}>
-                      <Link
-                        href={`/workloads/${w.id}`}
-                        className="text-[12px] text-[#737373] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
-                        title={w.name}
-                        style={{ textDecoration: 'none' }}
-                      >
-                        {w.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-
-              {/* Machine Learning */}
-              <li>
-                <h3 className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] mb-2.5 uppercase tracking-wide">
-                  Machine Learning
-                </h3>
-                <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['ml-training-hosting'].includes(w.id)).map(w => (
-                    <li key={w.id}>
-                      <Link
-                        href={`/workloads/${w.id}`}
-                        className="text-[12px] text-[#737373] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
-                        title={w.name}
-                        style={{ textDecoration: 'none' }}
-                      >
-                        {w.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-
-              {/* Infrastructure */}
-              <li>
-                <h3 className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] mb-2.5 uppercase tracking-wide">
-                  Infrastructure
-                </h3>
-                <ul className="space-y-1.5 pl-2">
-                  {WORKLOADS.filter(w => ['hpc-scientific', 'disaster-recovery'].includes(w.id)).map(w => (
-                    <li key={w.id}>
-                      <Link
-                        href={`/workloads/${w.id}`}
-                        className="text-[12px] text-[#737373] hover:text-[#2563eb] dark:hover:text-[#818cf8] transition-colors line-clamp-1"
-                        title={w.name}
-                        style={{ textDecoration: 'none' }}
-                      >
-                        {w.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </aside>
-
-        {/* Main */}
-        <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1200px] mx-auto">
+        <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
               <h1 className="text-3xl font-bold mb-2 text-[#171717] dark:text-[#e5e7eb]">
@@ -140,6 +71,22 @@ export default function WorkloadsCatalog() {
             </div>
           </div>
 
+          {/* Summary cards — mirrors the Status page's summary-cards pattern */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-px bg-[#e5e5e5] dark:bg-[#262626] border border-[#e5e5e5] dark:border-[#262626] rounded-lg overflow-hidden mb-8">
+            <div className="bg-white dark:bg-[#000000] p-4">
+              <div className="text-[11px] uppercase tracking-wide font-semibold text-[#737373] mb-1">Total Workloads</div>
+              <div className="text-2xl font-extrabold text-[#171717] dark:text-[#e5e7eb] leading-none">{WORKLOADS.length}</div>
+              <div className="text-[11px] text-[#737373] mt-1">conceptual architectures</div>
+            </div>
+            {PRODUCT_TYPE_ORDER.filter(pt => categoryCounts[pt]).map(pt => (
+              <div key={pt} className="bg-white dark:bg-[#000000] p-4">
+                <div className="text-[11px] uppercase tracking-wide font-semibold text-[#737373] mb-1">{PRODUCT_TYPE_LABELS[pt]}</div>
+                <div className="text-2xl font-extrabold text-[#171717] dark:text-[#e5e7eb] leading-none">{categoryCounts[pt]}</div>
+                <div className="text-[11px] text-[#737373] mt-1">workload{categoryCounts[pt] === 1 ? '' : 's'}</div>
+              </div>
+            ))}
+          </div>
+
           {filteredWorkloads.length === 0 ? (
             <div className="text-center py-12 border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded">
               <div className="text-2xl mb-3">🔍</div>
@@ -147,22 +94,22 @@ export default function WorkloadsCatalog() {
               <p className="text-[#737373] mt-1 text-[11px]">Try adjusting your search terms.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
               {filteredWorkloads.map((workload) => (
                 <Link
                   key={workload.id}
                   href={`/workloads/${workload.id}`}
-                  className="bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded p-5 hover:border-black dark:hover:border-white transition-colors flex flex-col group cursor-pointer"
+                  className="bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded p-3 hover:border-black dark:hover:border-white transition-colors flex flex-col group cursor-pointer"
                   style={{ textDecoration: 'none' }}
                 >
-                  <div className="text-2xl mb-3">{workload.icon}</div>
-                  <h3 className="text-base font-bold mb-2 text-[#171717] dark:text-[#e5e7eb] truncate" title={workload.name}>
+                  <div className="text-lg mb-2">{workload.icon}</div>
+                  <h3 className="text-[13px] font-bold mb-1.5 text-[#171717] dark:text-[#e5e7eb] truncate" title={workload.name}>
                     {workload.name}
                   </h3>
-                  <p className="text-[#737373] text-sm mb-5 flex-1 line-clamp-3 leading-relaxed">
+                  <p className="text-[#737373] text-[11px] mb-3 flex-1 line-clamp-2 leading-relaxed">
                     {workload.description}
                   </p>
-                  <div className="mt-auto pt-3 border-t border-[#e5e5e5] dark:border-[#262626] text-[10px] font-bold uppercase tracking-widest text-[#737373] group-hover:text-black dark:group-hover:text-white transition-colors flex justify-between items-center">
+                  <div className="mt-auto pt-2 border-t border-[#e5e5e5] dark:border-[#262626] text-[9px] font-bold uppercase tracking-widest text-[#737373] group-hover:text-black dark:group-hover:text-white transition-colors flex justify-between items-center">
                     Configure &amp; Compare <span className="group-hover:translate-x-0.5 transition-transform">→</span>
                   </div>
                 </Link>
@@ -170,7 +117,6 @@ export default function WorkloadsCatalog() {
             </div>
           )}
         </main>
-        </div>
       </div>
 
       <Footer />

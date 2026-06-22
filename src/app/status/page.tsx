@@ -320,28 +320,9 @@ export default function StatusPage() {
       {/* Fixed Global Nav Removed */}
 
       <div className="status-page" style={{ flex: 1, display: 'flex' }}>
-        
-        {/* Fixed Sidebar TOC */}
-        <aside className="fixed top-[44px] left-0 w-[280px] h-[calc(100vh-44px)] overflow-y-auto border-r border-[#dde0f0] dark:border-[#1e1e38] p-8 hidden md:block bg-[#f7f8ff] dark:bg-[#06060f] z-40">
-          <h4 className="text-[11px] text-[#6b7280] dark:text-[#71717a] uppercase tracking-[0.08em] mb-4 font-bold">Content</h4>
-          <nav>
-            <ul className="space-y-3">
-              <li>
-                <a href="#top" className="text-[14px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
-                  Overview
-                </a>
-              </li>
-              <li>
-                <a href="#status-matrix" className="text-[14px] font-medium transition-colors hover:text-[#2563eb] dark:hover:text-[#818cf8]" style={{ color: 'var(--text)' }}>
-                  Status Matrix
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </aside>
 
         {/* Main body */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }} className="md:ml-[280px]">
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
 
         <div className="status-header border-b border-[#e5e5e5] dark:border-[#262626] pb-6 mb-6" id="top">
           <div className="mb-2">

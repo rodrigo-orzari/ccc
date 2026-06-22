@@ -296,10 +296,6 @@ export default function WorldMap() {
     setSelected(new Set([id]));
   }
 
-  function selectAll() {
-    setSelected(new Set(allProviderIds));
-  }
-
   // Collect all dots to render, filtered by provider and geography
   const dots: Array<{ x: number; y: number; providerId: string; color: string; code: string; name: string }> = [];
   for (const pid of allProviderIds) {
@@ -317,24 +313,14 @@ export default function WorldMap() {
   return (
     <div className="mt-8">
       {/* Header — outside the box */}
-      <h2 className="text-xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Global Region Map</h2>
-      <p className="text-sm text-[#737373] mb-4">Click to toggle providers · Double-click to isolate one</p>
+      <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Global Region Map</h2>
+      <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers · Double-click to isolate one</p>
 
-      <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-hidden bg-white dark:bg-[#0a0a18]">
-      {/* Provider toggles */}
-      <div className="px-5 py-3 border-b border-[#dde0f0] dark:border-[#1e1e38]">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Provider</span>
-          <button
-            onClick={() => (selected.size === allProviderIds.length ? setSelected(new Set()) : selectAll())}
-            className={`text-[10px] font-bold uppercase transition-colors ${
-              selected.size === allProviderIds.length ? 'text-[#1a1a2e] dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff]'
-            }`}
-          >
-            {selected.size === allProviderIds.length ? 'Clear All' : 'Select All'}
-          </button>
-        </div>
-        <div className="flex flex-wrap gap-2 items-center">
+      <div className="border border-[var(--border)] rounded overflow-hidden bg-[var(--surface)]">
+      {/* Provider + Geography filters — single row */}
+      <div className="px-5 py-3 border-b border-[var(--border)] flex flex-col lg:flex-row lg:items-center gap-4">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 shrink-0">Provider</span>
           {PROVIDER_INFRA.map(p => {
             const active = selected.has(p.id);
             const color = PROVIDER_COLORS[p.id] ?? '#888';
@@ -347,7 +333,7 @@ export default function WorldMap() {
                 className={`flex items-center px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
                   active
                     ? 'text-white border-transparent shadow-sm'
-                    : 'bg-[#dde0f0] dark:bg-[#1e1e38] border-[#dde0f0] dark:border-[#1e1e38] opacity-60 hover:opacity-90'
+                    : 'bg-[var(--row-hover)] border-[var(--border)] opacity-60 hover:opacity-90'
                 }`}
                 style={active ? { backgroundColor: color, borderColor: color } : { color }}
               >
@@ -356,30 +342,19 @@ export default function WorldMap() {
             );
           })}
         </div>
-      </div>
 
-      {/* Geography filter */}
-      <div className="px-5 py-3 border-b border-[#dde0f0] dark:border-[#1e1e38]">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Geography</span>
-          <button
-            onClick={() => (selectedGeos.length === GEOGRAPHIES.length ? setSelectedGeos([]) : setSelectedGeos([...GEOGRAPHIES]))}
-            className={`text-[10px] font-bold uppercase transition-colors ${
-              selectedGeos.length === GEOGRAPHIES.length ? 'text-[#1a1a2e] dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff]'
-            }`}
-          >
-            {selectedGeos.length === GEOGRAPHIES.length ? 'Clear All' : 'Select All'}
-          </button>
-        </div>
-        <div className="flex flex-wrap gap-2 items-center">
+        <div className="hidden lg:block w-px h-6 bg-[var(--border)] shrink-0" />
+
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 shrink-0">Geography</span>
           {GEOGRAPHIES.map(geo => (
             <button
               key={geo}
               onClick={() => toggleGeo(geo)}
               className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                 selectedGeos.includes(geo)
-                  ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                  : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                  ? 'bg-[var(--text)] text-[var(--bg)] border-[var(--text)]'
+                  : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--muted)]'
               }`}
             >
               {geo}
@@ -397,7 +372,9 @@ export default function WorldMap() {
         >
           <style>{`
             :root { --map-ocean: #c8d8e8; --map-land: #d4dce8; --map-land-stroke: #b0b8c8; }
-            .dark { --map-ocean: #0e1a2a; --map-land: #1a2840; --map-land-stroke: #2a3850; }
+            @media (prefers-color-scheme: dark) {
+              :root { --map-ocean: #0e1a2a; --map-land: #1a2840; --map-land-stroke: #2a3850; }
+            }
             @keyframes pulse-ring {
               0% { r: 4; opacity: 0.8; }
               70% { r: 9; opacity: 0; }
@@ -521,12 +498,11 @@ export default function WorldMap() {
                 right: flipX ? containerWidth - tooltip.x + 10 : undefined,
                 top: flipY ? undefined : tooltip.y - 8,
                 bottom: flipY ? containerHeight - tooltip.y - 8 : undefined,
-                background: 'var(--tt-bg, #fff)',
-                borderColor: 'var(--tt-border, #dde0f0)',
-                color: 'var(--tt-text, #1a1a2e)',
+                background: 'var(--surface)',
+                borderColor: 'var(--border)',
+                color: 'var(--text)',
               }}
             >
-              <style>{`.dark { --tt-bg: #1a1a2e; --tt-border: #1e1e38; --tt-text: #f7f8ff; }`}</style>
               <div className="flex items-center gap-1.5 font-semibold mb-0.5">
                 <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
                 {provider?.nameShort ?? tooltip.providerId}
@@ -539,7 +515,7 @@ export default function WorldMap() {
       </div>
 
       {/* Footer note */}
-      <div className="px-5 py-2 text-[10px] text-[#737373] border-t border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#06060f] flex justify-between">
+      <div className="px-5 py-2 text-[10px] text-[var(--muted)] border-t border-[var(--border)] bg-[var(--bg)] flex justify-between">
         <span className="font-bold">{dots.length} regions shown</span>
         <span>Equirectangular projection · approximate coordinates</span>
       </div>
