@@ -3,6 +3,7 @@
 import React, { RefObject, useState, useEffect, useRef, useCallback } from 'react';
 import type { ProductType, PricingRecord } from '@/types';
 import { formatInstanceName } from '@/lib/formatInstanceName';
+import { SECURITY_SERVICE_GROUPS } from '@/config';
 
 // ─── Provider colour map ────────────────────────────────────────────────────
 const PROVIDERS: { id: string; name: string; color: string }[] = [
@@ -72,7 +73,7 @@ function getColDefs(pt: ProductType): ColDef[] {
   if (pt === 'app-hosting')    return [...start, COL_MID1, COL_MID2, COL_MID4, ...tailWithSpecs];
   if (pt === 'data-analytics') return [...start, COL_MID1, COL_MID3, COL_MID2, COL_VCPU, ...tail];
   if (pt === 'ai')             return [...start, COL_MID1, COL_MID3, COL_MID2, COL_MID4, COL_PRICE, COL_INV];
-  if (pt === 'security')       return [...start, COL_MID1, ...tail];
+  if (pt === 'security')       return [...start, COL_MID2, COL_MID1, ...tail];
   return [...start, ...tail];
 }
 
@@ -365,7 +366,8 @@ export default function PricingTable({
                   <Th colKey="db_family_cpu_vendor" sortKey="attributes.compute_type" label="Compute Type" />
                   <Th colKey="ha_mode_os"         sortKey="os"                      label="OS" />
                 </>) : activeProductType === 'security' ? (<>
-                  <Th colKey="engine_category"    sortKey="category"   label="Category" />
+                  <Th colKey="db_family_cpu_vendor" label="Domain" />
+                  <Th colKey="engine_category"    sortKey="category"   label="Service" />
                 </>) : (<>
                   {/* vm (default) */}
                   <Th colKey="engine_category"    sortKey="category"   label="Category" />
@@ -521,6 +523,7 @@ function TableRow({
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
       </>) : activeProductType === 'security' ? (<>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{SECURITY_SERVICE_GROUPS.find(g => g.services.includes(record.category || ''))?.label || '—'}</span></td>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
       </>) : (<>
         {/* vm (default) */}
@@ -674,7 +677,8 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
       { label: 'Memory (GB)', value: dash(record.memory_gb) },
     ];
     case 'security': return [
-      { label: 'Category', value: record.category || '—' },
+      { label: 'Domain', value: SECURITY_SERVICE_GROUPS.find(g => g.services.includes(record.category || ''))?.label || '—' },
+      { label: 'Service', value: record.category || '—' },
       { label: 'Geo', value: dash(record.geography) },
     ];
     default: return [ // vm
