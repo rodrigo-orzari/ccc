@@ -39,14 +39,14 @@ function Term({ term, children }: { term: string; children: React.ReactNode }) {
         onMouseLeave={() => setOpen(false)}
         onFocus={() => setOpen(true)}
         onBlur={() => setOpen(false)}
-        className="text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff] transition-colors align-middle"
+        className="text-[var(--muted)] hover:text-[var(--text)] transition-colors align-middle"
         aria-label={`Definition of ${term}`}
       >
         <Info size={11} />
       </button>
       {open && (
-        <span className="absolute bottom-full left-0 mb-2 z-50 w-64 p-2.5 rounded border border-[#dde0f0] dark:border-[#1e1e38] bg-white dark:bg-[#0a0a18] shadow-lg text-[10px] text-[#1a1a2e] dark:text-[#e5e7eb] leading-relaxed font-normal normal-case tracking-normal">
-          <span className="block font-bold text-[#1a1a2e] dark:text-[#f7f8ff] mb-1">{term}</span>
+        <span className="absolute bottom-full left-0 mb-2 z-50 w-64 p-2.5 rounded border border-[var(--border)] bg-[var(--surface)] shadow-lg text-[10px] text-[var(--text)] leading-relaxed font-normal normal-case tracking-normal">
+          <span className="block font-bold text-[var(--text)] mb-1">{term}</span>
           {def}
         </span>
       )}
@@ -59,10 +59,10 @@ function Term({ term, children }: { term: string; children: React.ReactNode }) {
 function Stat({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <div className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">
+      <div className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">
         {typeof value === 'number' ? value.toLocaleString() : value}
       </div>
-      <div className="text-[9px] font-bold text-[#737373] uppercase tracking-widest leading-tight">{label}</div>
+      <div className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest leading-tight">{label}</div>
       {sub && <div className="text-[9px] text-[#a3a3a3] leading-tight">{sub}</div>}
     </div>
   );
@@ -99,44 +99,44 @@ function ProviderRow({
 }) {
   const hasGovCloud = p.governmentRegions > 0;
   const color = PROVIDER_COLORS[p.id] ?? '#888';
-  const rowBg = rowIndex % 2 === 0 ? 'bg-white dark:bg-[#06060f]' : 'bg-[#f7f8ff] dark:bg-[#0a0a18]';
+  const rowBg = rowIndex % 2 === 0 ? 'bg-[var(--bg)]' : 'bg-[var(--row-hover)]';
 
   return (
     <>
-      <tr className={`border-b border-[#dde0f0] dark:border-[#1e1e38] hover:bg-[#eef0fc] dark:hover:bg-[#0c0c1e] transition-colors ${rowBg}`}>
+      <tr className={`border-b border-[var(--border)] hover:bg-[var(--row-hover)] transition-colors ${rowBg}`}>
         <td className="py-4 px-4 min-w-[180px]">
           <div className="flex items-center justify-center gap-2.5">
             <span className="w-0.5 h-8 rounded-full shrink-0" style={{ backgroundColor: color }} />
             <div>
               <button onClick={onToggle} className="flex items-center gap-1.5 group text-left">
-                <ChevronDown size={11} className={`text-[#737373] transition-transform shrink-0 ${isExpanded ? '' : '-rotate-90'}`} />
+                <ChevronDown size={11} className={`text-[var(--muted)] transition-transform shrink-0 ${isExpanded ? '' : '-rotate-90'}`} />
                 <ProviderBadge id={p.id} name={p.nameShort} />
               </button>
-              <div className="text-[10px] text-[#737373] mt-1 pl-4">Since {p.since}</div>
+              <div className="text-[10px] text-[var(--muted)] mt-1 pl-4">Since {p.since}</div>
             </div>
           </div>
         </td>
         <td className="py-4 px-4 text-center">
-          <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{p.regions}</span>
+          <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{p.regions}</span>
           {p.announcedRegions > 0 && (
             <div className="text-[9px] text-[#f59e0b] font-bold mt-0.5">+{p.announcedRegions} planned</div>
           )}
         </td>
         <td className="py-4 px-4 text-center">
           {p.availabilityZones > 0 ? (
-            <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{p.availabilityZones}</span>
+            <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{p.availabilityZones}</span>
           ) : (
             <span className="text-[11px] text-[#a3a3a3]">—</span>
           )}
           {p.availabilityZones > 0 && p.regions > 0 && (
-            <div className="text-[9px] text-[#737373] mt-0.5">~{Math.round(p.availabilityZones / p.regions)} zones / region</div>
+            <div className="text-[9px] text-[var(--muted)] mt-0.5">~{Math.round(p.availabilityZones / p.regions)} zones / region</div>
           )}
         </td>
         <td className="py-4 px-4 text-center">
-          <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{p.edgeLocations.toLocaleString()}+</span>
+          <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{p.edgeLocations.toLocaleString()}+</span>
         </td>
         <td className="py-4 px-4 text-center">
-          <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{p.countriesServed}+</span>
+          <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{p.countriesServed}+</span>
         </td>
         <td className="py-4 px-4 text-center">
           {hasGovCloud ? (
@@ -150,7 +150,7 @@ function ProviderRow({
       </tr>
 
       {isExpanded && (
-        <tr className="bg-[#eef0fc] dark:bg-[#0c0c1e] border-b border-[#dde0f0] dark:border-[#1e1e38]">
+        <tr className="bg-[var(--surface)] border-b border-[var(--border)]">
           <td colSpan={6} className="px-4 py-5">
             <div className="pl-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-1">
               {GEOGRAPHIES.map(geo => {
@@ -158,13 +158,13 @@ function ProviderRow({
                 if (geoRegions.length === 0) return null;
                 return (
                   <div key={geo} className="mb-3">
-                    <div className="text-[9px] font-bold text-[#737373] uppercase tracking-widest mb-1.5">{geo}</div>
+                    <div className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest mb-1.5">{geo}</div>
                     {geoRegions.map(r => (
                       <div key={r.code} className="flex items-center gap-2 py-0.5">
                         <StatusDot status={r.status} />
-                        <span className="text-[11px] text-[#1a1a2e] dark:text-[#e5e7eb]">{r.name}</span>
+                        <span className="text-[11px] text-[var(--text)]">{r.name}</span>
                         <span className="text-[9px] text-[#a3a3a3] font-mono">{r.code}</span>
-                        {r.azCount > 1 && <span className="text-[9px] text-[#737373]">{r.azCount} zones</span>}
+                        {r.azCount > 1 && <span className="text-[9px] text-[var(--muted)]">{r.azCount} zones</span>}
                         {r.status === 'announced' && <span className="text-[9px] font-bold text-[#f59e0b]">Planned</span>}
                       </div>
                     ))}
@@ -181,14 +181,6 @@ function ProviderRow({
 
 // ─── page ─────────────────────────────────────────────────────────────────────
 
-const NAV_SECTIONS = [
-  { id: 'world-map',        label: 'Global Region Map', emoji: '🗺️' },
-  { id: 'infra-table',      label: 'Infrastructure Overview', emoji: '🏗️' },
-  { id: 'coverage-matrix',  label: 'Regional Coverage Matrix', emoji: '📊' },
-  { id: 'az-detail',        label: 'Availability Zones per Region', emoji: '🏢' },
-  { id: 'data-sources',     label: 'Data Sources', emoji: '📡' },
-];
-
 // Distinct palette for geography segments in the matrix chart
 const GEO_COLORS: Record<string, string> = {
   'N. America': '#3b82f6',
@@ -201,16 +193,16 @@ const GEO_COLORS: Record<string, string> = {
 
 function ViewToggle({ view, onChange }: { view: 'table' | 'chart'; onChange: (v: 'table' | 'chart') => void }) {
   return (
-    <div className="flex bg-[#f5f5f5] dark:bg-[#171717] p-0.5 rounded-lg border border-[#e5e5e5] dark:border-[#262626]">
+    <div className="flex bg-[var(--row-hover)] p-0.5 rounded-lg border border-[var(--border)]">
       <button
         onClick={() => onChange('table')}
-        className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${view === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
+        className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${view === 'table' ? 'bg-[var(--surface)] text-[var(--text)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--text)]'}`}
       >
         📊 Table
       </button>
       <button
         onClick={() => onChange('chart')}
-        className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${view === 'chart' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
+        className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${view === 'chart' ? 'bg-[var(--surface)] text-[var(--text)] shadow-sm' : 'text-[var(--muted)] hover:text-[var(--text)]'}`}
       >
         📈 Chart
       </button>
@@ -226,7 +218,7 @@ function InfraChart() {
     color: PROVIDER_COLORS[p.id] ?? '#888',
   }));
   return (
-    <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded bg-white dark:bg-[#0a0a18] p-4" style={{ height: 360 }}>
+    <div className="border border-[var(--border)] rounded bg-[var(--surface)] p-4" style={{ height: 360 }}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#dde0f033" />
@@ -251,7 +243,7 @@ function CoverageChart() {
     return row;
   });
   return (
-    <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded bg-white dark:bg-[#0a0a18] p-4" style={{ height: 360 }}>
+    <div className="border border-[var(--border)] rounded bg-[var(--surface)] p-4" style={{ height: 360 }}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#dde0f033" />
@@ -287,50 +279,49 @@ export default function DatacentersPage() {
   }), []);
 
   return (
-    <div className="flex flex-col h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1a1a2e] dark:text-[#e5e7eb] font-sans overflow-hidden">
+    <div className="dc-page flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+      <style>{`
+        .dc-page {
+          --bg: #ffffff;
+          --surface: #ffffff;
+          --border: #e5e5e5;
+          --text: #171717;
+          --muted: #737373;
+          --divider: #e5e5e5;
+          --row-hover: #fafafa;
+        }
+        @media (prefers-color-scheme: dark) {
+          .dc-page {
+            --bg: #000000;
+            --surface: #000000;
+            --border: #262626;
+            --text: #e5e7eb;
+            --muted: #a3a3a3;
+            --divider: #262626;
+            --row-hover: #0a0a0a;
+          }
+        }
+      `}</style>
       <ProductTypeSelector activeProductType={'datacenters' as any} />
 
       <div className="flex-1 overflow-auto flex flex-col">
-        <div className="flex flex-1 w-full">
-
-          {/* Sidebar — page navigation (desktop only) */}
-          <aside className="hidden lg:flex w-72 border-r border-[#dde0f0] dark:border-[#1e1e38] flex-col shrink-0 overflow-y-auto bg-[#f7f8ff] dark:bg-[#06060f] pb-10">
-
-            {/* On this page */}
-            <section className="px-4 pt-5 pb-4 border-b border-[#dde0f0] dark:border-[#1e1e38]">
-              <h2 className="text-[11px] font-bold text-[#737373] uppercase tracking-[0.08em] mb-4">Content</h2>
-              <nav className="flex flex-col gap-0.5">
-                {NAV_SECTIONS.map(s => (
-                  <a
-                    key={s.id}
-                    href={`#${s.id}`}
-                    className="flex items-center justify-center text-center gap-2 px-2 py-1.5 rounded text-sm font-medium text-[#1a1a2e] dark:text-[#f7f8ff] hover:text-[#2563eb] dark:hover:text-[#818cf8] hover:bg-[#eef0fc] dark:hover:bg-[#0c0c1e] transition-all"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <span aria-hidden="true">{s.emoji}</span>
-                    {s.label}
-                  </a>
-                ))}
-              </nav>
-            </section>
-          </aside>
 
           {/* Main */}
           <main className="flex-1 min-w-0 overflow-x-auto p-4 lg:p-8 pb-20">
 
             {/* Header */}
             <div className="mb-6">
-              <h1 className="text-3xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Cloud Infrastructure</h1>
-              <p className="text-sm text-[#737373] max-w-2xl leading-relaxed mb-4">
+              <h1 className="text-3xl font-bold mb-1 text-[var(--text)]">Cloud Infrastructure</h1>
+              <p className="text-sm text-[var(--muted)] max-w-2xl leading-relaxed mb-4">
                 Compare data center presence, <Term term="Availability Zone">availability zones</Term>, and global coverage across providers.
                 Click any row to expand the full <Term term="Region">region</Term> list with Availability Zone counts.
               </p>
               {/* Legend */}
               <div className="flex items-center gap-5">
-                <div className="flex items-center gap-2 text-[11px] text-[#737373]">
+                <div className="flex items-center gap-2 text-[11px] text-[var(--muted)]">
                   <span className="w-2 h-2 rounded-full bg-[#22c55e] shrink-0" /> Available
                 </div>
-                <div className="flex items-center gap-2 text-[11px] text-[#737373]">
+                <div className="flex items-center gap-2 text-[11px] text-[var(--muted)]">
                   <span className="w-2 h-2 rounded-full bg-[#f59e0b] shrink-0" /> Announced / Planned
                 </div>
               </div>
@@ -344,26 +335,26 @@ export default function DatacentersPage() {
             {/* Infrastructure Overview */}
             <div id="infra-table" className="scroll-mt-6">
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-xl font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Infrastructure Overview</h2>
+                <h2 className="text-xl font-bold text-[var(--text)]">Infrastructure Overview</h2>
                 <ViewToggle view={infraView} onChange={setInfraView} />
               </div>
               {infraView === 'chart' ? <InfraChart /> : (
-              <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-x-auto">
+              <div className="border border-[var(--border)] rounded overflow-x-auto">
               <table className="w-full text-left border-collapse min-w-[900px]">
                 <thead>
-                  <tr className="border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e]">
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">Provider</th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">
+                  <tr className="border-b border-[var(--border)] bg-[var(--surface)]">
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Provider</th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">
                       <Term term="Region">Regions</Term>
                     </th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">
                       <Term term="Availability Zone">Availability Zones</Term>
                     </th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">
                       <Term term="Edge Location">Edge Locations</Term>
                     </th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">Countries</th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Countries</th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">
                       <Term term="Government Cloud">Gov Cloud</Term>
                     </th>
                   </tr>
@@ -380,22 +371,22 @@ export default function DatacentersPage() {
                   ))}
                 </tbody>
                 <tfoot>
-                  <tr className="border-t-2 border-[#dde0f0] dark:border-[#1e1e38] bg-[#f7f8ff] dark:bg-[#06060f] hover:bg-[#f7f8ff] dark:hover:bg-[#06060f]">
-                    <td className="py-4 px-4 font-bold text-[#1a1a2e] dark:text-[#f7f8ff] text-center">Total</td>
+                  <tr className="border-t-2 border-[var(--border)] bg-[var(--bg)] hover:bg-[var(--bg)]">
+                    <td className="py-4 px-4 font-bold text-[var(--text)] text-center">Total</td>
                     <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.regions}</span>
+                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.regions}</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.azs}</span>
+                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.azs}</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.edgeLocations.toLocaleString()}+</span>
+                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.edgeLocations.toLocaleString()}+</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.countries}+</span>
+                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.countries}+</span>
                     </td>
                     <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{totals.govCloud}</span>
+                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.govCloud}</span>
                     </td>
                   </tr>
                 </tfoot>
@@ -407,27 +398,27 @@ export default function DatacentersPage() {
             {/* Regional Coverage Matrix */}
             <div id="coverage-matrix" className="mt-8 scroll-mt-6">
               <div className="flex items-center justify-between mb-1">
-                <h2 className="text-xl font-bold text-[#1a1a2e] dark:text-[#f7f8ff]">Regional Coverage Matrix</h2>
+                <h2 className="text-xl font-bold text-[var(--text)]">Regional Coverage Matrix</h2>
                 <ViewToggle view={matrixView} onChange={setMatrixView} />
               </div>
-              <p className="text-sm text-[#737373] mb-4">Number of available regions per provider per geography.</p>
+              <p className="text-sm text-[var(--muted)] mb-4">Number of available regions per provider per geography.</p>
               {matrixView === 'chart' ? <CoverageChart /> : (
-              <div className="border border-[#dde0f0] dark:border-[#1e1e38] rounded overflow-x-auto">
+              <div className="border border-[var(--border)] rounded overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-[#dde0f0] dark:border-[#1e1e38] bg-[#eef0fc] dark:bg-[#0c0c1e]">
-                      <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">Provider</th>
+                    <tr className="border-b border-[var(--border)] bg-[var(--surface)]">
+                      <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Provider</th>
                       {GEOGRAPHIES.map(geo => (
-                        <th key={geo} className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">{geo}</th>
+                        <th key={geo} className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">{geo}</th>
                       ))}
-                      <th className="py-2.5 px-4 text-[10px] font-bold text-[#737373] uppercase tracking-widest whitespace-nowrap text-center">Total</th>
+                      <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Total</th>
                     </tr>
                   </thead>
                   <tbody>
                     {PROVIDER_INFRA.map((p, i) => {
-                      const rowBg = i % 2 === 0 ? 'bg-white dark:bg-[#06060f]' : 'bg-[#f7f8ff] dark:bg-[#0a0a18]';
+                      const rowBg = i % 2 === 0 ? 'bg-[var(--bg)]' : 'bg-[var(--row-hover)]';
                       return (
-                        <tr key={p.id} className={`border-b border-[#dde0f0] dark:border-[#1e1e38] ${rowBg}`}>
+                        <tr key={p.id} className={`border-b border-[var(--border)] ${rowBg}`}>
                           <td className="py-3 px-4 whitespace-nowrap text-center">
                             <div className="flex justify-center">
                               <ProviderBadge id={p.id} name={p.nameShort} />
@@ -438,7 +429,7 @@ export default function DatacentersPage() {
                             return (
                               <td key={geo} className="py-3 px-4 text-center">
                                 {count > 0 && (
-                                  <span className="text-[13px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">
+                                  <span className="text-[13px] font-black text-[var(--text)] tabular-nums">
                                     {count}
                                   </span>
                                 )}
@@ -446,7 +437,7 @@ export default function DatacentersPage() {
                             );
                           })}
                           <td className="py-3 px-4 text-center">
-                            <span className="text-[13px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{p.regions}</span>
+                            <span className="text-[13px] font-black text-[var(--text)] tabular-nums">{p.regions}</span>
                           </td>
                         </tr>
                       );
@@ -459,27 +450,27 @@ export default function DatacentersPage() {
 
             {/* Availability Zones per Region — stat cards grid */}
             <div id="az-detail" className="mt-8 scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">
+              <h2 className="text-xl font-bold mb-1 text-[var(--text)]">
                 <Term term="Availability Zone">Availability Zones</Term> per <Term term="Region">Region</Term>
               </h2>
-              <p className="text-sm text-[#737373] mb-4">Total and average Availability Zones per region, per provider. DigitalOcean uses single data center regions without traditional Availability Zones.</p>
-              <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[#dde0f0] dark:border-[#1e1e38]" style={{ background: 'var(--border-color, #dde0f0)' }}>
+              <p className="text-sm text-[var(--muted)] mb-4">Total and average Availability Zones per region, per provider. DigitalOcean uses single data center regions without traditional Availability Zones.</p>
+              <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[var(--border)]" style={{ background: 'var(--border)' }}>
                 {PROVIDER_INFRA.map(p => (
                   <div
                     key={p.id}
-                    className="flex-1 min-w-0 bg-white dark:bg-[#0a0a18] px-4 py-3.5 flex flex-col gap-2"
+                    className="flex-1 min-w-0 bg-[var(--surface)] px-4 py-3.5 flex flex-col gap-2"
                   >
                     <ProviderBadge id={p.id} name={p.nameShort} />
                     {p.availabilityZones > 0 ? (
                       <div className="flex flex-col gap-0.5">
-                        <span className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">{p.availabilityZones}</span>
-                        <span className="text-[9px] font-bold text-[#737373] uppercase tracking-widest">Total Zones</span>
+                        <span className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">{p.availabilityZones}</span>
+                        <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest">Total Zones</span>
                         <span className="text-[9px] text-[#a3a3a3]">~{Math.round(p.availabilityZones / p.regions)} per region</span>
                       </div>
                     ) : (
                       <div className="flex flex-col gap-0.5">
-                        <span className="text-[20px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums leading-none">{p.regions}</span>
-                        <span className="text-[9px] font-bold text-[#737373] uppercase tracking-widest">Data Centers</span>
+                        <span className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">{p.regions}</span>
+                        <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest">Data Centers</span>
                         <span className="text-[9px] text-[#a3a3a3]">Single DC / region</span>
                       </div>
                     )}
@@ -489,14 +480,14 @@ export default function DatacentersPage() {
             </div>
 
             {/* Data sources */}
-            <div id="data-sources" className="mt-10 border-t border-[#dde0f0] dark:border-[#1e1e38] pt-6 scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[#1a1a2e] dark:text-[#f7f8ff]">Data Sources</h2>
-              <p className="text-sm text-[#737373] mb-4 max-w-2xl leading-relaxed">
+            <div id="data-sources" className="mt-10 border-t border-[var(--border)] pt-6 scroll-mt-6">
+              <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Data Sources</h2>
+              <p className="text-sm text-[var(--muted)] mb-4 max-w-2xl leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-2">
                 {PROVIDER_INFRA.map(p => (
-                  <div key={p.id} className="bg-white dark:bg-[#0a0a18] border border-[#dde0f0] dark:border-[#1e1e38] rounded p-2 flex flex-col gap-1.5">
+                  <div key={p.id} className="bg-[var(--surface)] border border-[var(--border)] rounded p-2 flex flex-col gap-1.5">
                     <ProviderBadge id={p.id} name={p.nameShort} />
                     <div className="flex flex-col gap-1">
                       {p.sources.map(src => (
@@ -505,7 +496,7 @@ export default function DatacentersPage() {
                           href={src.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-[10px] text-[#737373] hover:text-[#1a1a2e] dark:hover:text-[#f7f8ff] transition-colors group"
+                          className="flex items-center gap-1.5 text-[10px] text-[var(--muted)] hover:text-[var(--text)] transition-colors group"
                         >
                           <ExternalLink size={9} className="shrink-0 group-hover:text-[#2563eb]" />
                           {src.label}
@@ -519,7 +510,6 @@ export default function DatacentersPage() {
             </div>
 
           </main>
-        </div>
       </div>
 
       <Footer />
