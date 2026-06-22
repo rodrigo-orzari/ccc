@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
-    "mtime": 1782109822.7462478,
-    "ast_hash": "31ca562eabdc9d11e40d7b5eecc931ec",
+    "mtime": 1781982736.992674,
+    "ast_hash": "1bd95fb1d7dfb31876d4d17320e57245",
     "semantic_hash": ""
   },
   "src/app/providers.tsx": {
@@ -394,6 +394,11 @@
     "ast_hash": "5b3e667e8a61e9d721a27c01e6ad7719",
     "semantic_hash": ""
   },
+  "src/app/support/page.tsx": {
+    "mtime": 1781587736.2752507,
+    "ast_hash": "28e260ab44a15e8e8403613beb17bf23",
+    "semantic_hash": ""
+  },
   "src/app/terms/page.tsx": {
     "mtime": 1782018216.3219295,
     "ast_hash": "91c7a246cab78503812b905a9dbd41a6",
@@ -425,8 +430,8 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1782109961.590927,
-    "ast_hash": "4363020737326ab23f502700cc087e62",
+    "mtime": 1782020517.8441136,
+    "ast_hash": "6eabd5fcf9ca1f63b726d3627502679d",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
@@ -455,8 +460,8 @@
     "semantic_hash": ""
   },
   "src/components/index.ts": {
-    "mtime": 1782109822.7620628,
-    "ast_hash": "063d60a3c82f46c2c650120b38c8bdb7",
+    "mtime": 1781738321.8609736,
+    "ast_hash": "728fdfc89955293934ed4914c51fa23d",
     "semantic_hash": ""
   },
   "src/config/index.ts": {
@@ -729,6 +734,11 @@
     "ast_hash": "5d8d81361be6b0c6de56926588f46404",
     "semantic_hash": ""
   },
+  "src/components/DonationModal.tsx": {
+    "mtime": 1781587736.566032,
+    "ast_hash": "118c9bec73db93cd7a2d8ea82561a126",
+    "semantic_hash": ""
+  },
   "test_api.mjs": {
     "mtime": 1781556318.0367775,
     "ast_hash": "600359c5397a991696503515958b803a",
@@ -860,8 +870,13 @@
     "semantic_hash": ""
   },
   "src/app/sitemap.ts": {
-    "mtime": 1782109974.654309,
-    "ast_hash": "2517306b28d1e038e97fc26ceeb6586b",
+    "mtime": 1781982753.0627546,
+    "ast_hash": "03c5cb94249ebf00fc3e4fbf80552005",
+    "semantic_hash": ""
+  },
+  "src/app/support/layout.tsx": {
+    "mtime": 1781982785.995758,
+    "ast_hash": "dcab5fc6164d1610f5cf370d9699e63a",
     "semantic_hash": ""
   },
   "src/app/terms/layout.tsx": {
