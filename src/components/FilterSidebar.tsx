@@ -689,6 +689,7 @@ export default function FilterSidebar({
               title="GPU"
               tooltip="GPU accelerator options."
               options={['GPU', 'No GPU']}
+              getLabel={(id) => id === 'GPU' ? 'Yes' : 'No'}
               selected={selectedGpu}
               onToggle={onGpuToggle}
               onSetAll={onSetGpu}
