@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Footer, ProductTypeSelector } from '@/components';
+import { Footer, ProductTypeSelector, DonationModal } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import type { ProductType } from '@/types';
 
@@ -42,6 +42,7 @@ export default function WorkloadsCatalog() {
 
   return (
     <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
+      <DonationModal showOn="workloads" />
       <ProductTypeSelector activeProductType={"workloads" as any} />
 
       <div className="flex-1 overflow-auto flex flex-col">
@@ -71,21 +72,6 @@ export default function WorkloadsCatalog() {
             </div>
           </div>
 
-          {/* Summary cards — mirrors the Status page's summary-cards pattern */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-px bg-[#e5e5e5] dark:bg-[#262626] border border-[#e5e5e5] dark:border-[#262626] rounded-lg overflow-hidden mb-8">
-            <div className="bg-white dark:bg-[#000000] p-4">
-              <div className="text-[11px] uppercase tracking-wide font-semibold text-[#737373] mb-1">Total Workloads</div>
-              <div className="text-2xl font-extrabold text-[#171717] dark:text-[#e5e7eb] leading-none">{WORKLOADS.length}</div>
-              <div className="text-[11px] text-[#737373] mt-1">conceptual architectures</div>
-            </div>
-            {PRODUCT_TYPE_ORDER.filter(pt => categoryCounts[pt]).map(pt => (
-              <div key={pt} className="bg-white dark:bg-[#000000] p-4">
-                <div className="text-[11px] uppercase tracking-wide font-semibold text-[#737373] mb-1">{PRODUCT_TYPE_LABELS[pt]}</div>
-                <div className="text-2xl font-extrabold text-[#171717] dark:text-[#e5e7eb] leading-none">{categoryCounts[pt]}</div>
-                <div className="text-[11px] text-[#737373] mt-1">workload{categoryCounts[pt] === 1 ? '' : 's'}</div>
-              </div>
-            ))}
-          </div>
 
           {filteredWorkloads.length === 0 ? (
             <div className="text-center py-12 border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded">

@@ -427,9 +427,8 @@ export default function StatusPage() {
 
               {/* Status Matrix Table */}
               {(() => {
-                const PROVIDER_ORDER = ['aws', 'azure', 'gcp', 'oracle', 'digitalocean', 'alibaba', 'openai', 'anthropic'];
                 const sortedProviders = [...status.providers].sort(
-                  (a, b) => PROVIDER_ORDER.indexOf(a.slug) - PROVIDER_ORDER.indexOf(b.slug)
+                  (a, b) => b.total_records - a.total_records
                 );
 
                 // Collect all categories returned from all providers

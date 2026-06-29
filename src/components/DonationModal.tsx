@@ -2,20 +2,24 @@
 
 import React, { useState, useEffect } from 'react';
 
-const DO_REFERRAL_URL =
-  'https://www.digitalocean.com/?refcode=23d2b384f3b1&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge';
+const INTUIT_PAYMENT_URL = 'https://connect.intuit.com/pay/comparecloudcosts/scs-v1-824a8961cf5a42edb4a9669eadc326d633c0e43cb25c449994ebf699ef3f754543e8bdeece91480e82e233bb2fd5f5c5-0';
+const STORAGE_KEY = 'hideDonationModal';
 
-const STORAGE_KEY = 'hideDoReferralModal';
+interface DonationModalProps {
+  showOn?: string; // Page identifier to show on (e.g., 'workloads')
+}
 
-export function DigitalOceanReferralModal() {
+export function DonationModal({ showOn = 'workloads' }: DonationModalProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [doNotShowAgain, setDoNotShowAgain] = useState(false);
 
   useEffect(() => {
+    // Check if dismissed permanently or in this session
     if (sessionStorage.getItem(STORAGE_KEY) === 'true') return;
     if (localStorage.getItem(STORAGE_KEY) === 'true') return;
 
-    const timer = setTimeout(() => setIsOpen(true), 2000);
+    // Show after 3 seconds on the target page
+    const timer = setTimeout(() => setIsOpen(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -28,8 +32,8 @@ export function DigitalOceanReferralModal() {
     setIsOpen(false);
   };
 
-  const handleSignUp = () => {
-    window.open(DO_REFERRAL_URL, '_blank', 'noopener,noreferrer');
+  const handleDonate = () => {
+    window.open(INTUIT_PAYMENT_URL, '_blank', 'noopener,noreferrer');
     dismiss(doNotShowAgain);
   };
 
@@ -43,61 +47,55 @@ export function DigitalOceanReferralModal() {
 
         <div className="mb-4">
           <h2 className="text-[15px] font-bold text-[#1a1a2e] dark:text-[#f7f8ff] leading-tight">
-            Here's a way to support CCC — for free
+            Buy me a coffee ☕
           </h2>
-          <p className="text-[10px] text-[#737373] mt-0.5">DigitalOcean referral · no credit card required to explore</p>
+          <p className="text-[10px] text-[#737373] mt-0.5">Support the project · completely voluntary</p>
         </div>
 
-        <p className="text-[13px] text-[#404040] dark:text-[#a3a3a3] mb-3 leading-relaxed">
-          Since you're exploring cloud infrastructure — here's something worth knowing.
-        </p>
-
         <p className="text-[13px] text-[#404040] dark:text-[#a3a3a3] mb-4 leading-relaxed">
-          If you sign up for a DigitalOcean free trial through our link,{' '}
-          <strong className="text-[#1a1a2e] dark:text-[#f7f8ff]">you get $200 in free credits</strong>{' '}
-          to explore their platform. You don't need to spend a cent.
+          comparecloudcosts.com is a free, open-source project. If it's helped you compare cloud costs, consider supporting its development and server costs with a voluntary donation.
         </p>
 
         {/* Highlight box */}
         <div
           className="rounded-lg p-3 mb-5 border"
-          style={{ backgroundColor: '#0069FF12', borderColor: '#0069FF40' }}
+          style={{ backgroundColor: '#F59E0B12', borderColor: '#F59E0B40' }}
         >
-          <p className="text-[12px] leading-relaxed" style={{ color: '#004dbf' }}>
+          <p className="text-[12px] leading-relaxed" style={{ color: '#B45309' }}>
             <span className="dark:hidden">
-              We also receive <strong>$25 in hosting credit</strong> — which keeps comparecloudcosts.com running for at least another day. This project runs on DigitalOcean, and every referral genuinely helps us stay online.
+              Every contribution — no matter the amount — goes directly toward keeping this project running, maintaining accurate pricing data, and adding new cloud providers.
             </span>
-            <span className="hidden dark:inline" style={{ color: '#60a5fa' }}>
-              We also receive <strong>$25 in hosting credit</strong> — which keeps comparecloudcosts.com running for at least another day. This project runs on DigitalOcean, and every referral genuinely helps us stay online.
+            <span className="hidden dark:inline" style={{ color: '#FCD34D' }}>
+              Every contribution — no matter the amount — goes directly toward keeping this project running, maintaining accurate pricing data, and adding new cloud providers.
             </span>
           </p>
         </div>
 
         <div className="flex flex-col gap-3">
           <button
-            onClick={handleSignUp}
+            onClick={handleDonate}
             className="w-full py-2.5 px-4 bg-black dark:bg-white text-white dark:text-black font-semibold rounded-lg hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
           >
-            Get my $200 free credit →
+            Buy me a coffee ☕
           </button>
 
           <button
             onClick={handleDismiss}
             className="w-full py-2.5 px-4 bg-[#f5f5f5] dark:bg-[#262626] text-[#404040] dark:text-[#a3a3a3] font-medium rounded-lg hover:bg-[#e5e5e5] dark:hover:bg-[#404040] transition-colors"
           >
-            Maybe another time
+            Maybe later
           </button>
         </div>
 
         <div className="mt-4 flex items-center gap-2 text-[11px] text-[#737373]">
           <input
             type="checkbox"
-            id="doReferralNoShow"
+            id="donationNoShow"
             checked={doNotShowAgain}
             onChange={e => setDoNotShowAgain(e.target.checked)}
             className="rounded border-[#dde0f0] dark:border-[#1e1e38]"
           />
-          <label htmlFor="doReferralNoShow" className="cursor-pointer select-none">
+          <label htmlFor="donationNoShow" className="cursor-pointer select-none">
             Don't show this again
           </label>
         </div>
