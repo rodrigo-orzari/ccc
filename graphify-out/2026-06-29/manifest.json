@@ -5,8 +5,8 @@
     "semantic_hash": ""
   },
   ".claude/settings.local.json": {
-    "mtime": 1782761440.7095397,
-    "ast_hash": "710b0818eda794f1a41c57ae16aa493b",
+    "mtime": 1782693926.2012198,
+    "ast_hash": "207c1d437ac50eaed5ae84aa398c6999",
     "semantic_hash": ""
   },
   "metadata.json": {
@@ -455,8 +455,8 @@
     "semantic_hash": ""
   },
   "src/components/index.ts": {
-    "mtime": 1782707707.5910733,
-    "ast_hash": "089c95ce41a2a9c01ba34c9325f7f153",
+    "mtime": 1782109822.7620628,
+    "ast_hash": "063d60a3c82f46c2c650120b38c8bdb7",
     "semantic_hash": ""
   },
   "src/config/index.ts": {
@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1782760000.531913,
-    "ast_hash": "10f8afd7339240965f921a8caec43356",
+    "mtime": 1782150742.2237601,
+    "ast_hash": "3351819556d9d4632daa6c5d98271951",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -755,13 +755,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1782761414.8786783,
-    "ast_hash": "f66ebc945923bada1e52c81e025578ff",
+    "mtime": 1781760868.292401,
+    "ast_hash": "841556d38cda395bd049f0e0359da8c1",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1782761393.4786146,
-    "ast_hash": "c049bed8ea14260630fb063b48260822",
+    "mtime": 1782150574.566332,
+    "ast_hash": "b8f5316bacd4b64218d8a84bdbc79a7a",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
@@ -805,8 +805,8 @@
     "semantic_hash": ""
   },
   "src/components/DigitalOceanReferralModal.tsx": {
-    "mtime": 1782759986.4071298,
-    "ast_hash": "846f6ffa706ab15aaf6ff176169b2763",
+    "mtime": 1781739624.0872514,
+    "ast_hash": "2f07230def35959dfce7eb3df018b980",
     "semantic_hash": ""
   },
   "src/app/api/admin/data-quality/route.ts": {
@@ -877,11 +877,6 @@
   "src/app/dashboard/page.tsx": {
     "mtime": 1782006496.0375192,
     "ast_hash": "a1e34123a313bbb3cb5108214fd98e41",
-    "semantic_hash": ""
-  },
-  "src/components/DonationModal.tsx": {
-    "mtime": 1782707687.5594182,
-    "ast_hash": "16f8c0687d6cbe0c4a8b9e716cd409e2",
     "semantic_hash": ""
   }
 }
