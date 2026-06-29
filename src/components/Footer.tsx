@@ -58,6 +58,15 @@ export default function Footer() {
           </a>
 
           <a
+            href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-824a8961cf5a42edb4a9669eadc326d633c0e43cb25c449994ebf699ef3f754543e8bdeece91480e82e233bb2fd5f5c5-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-black dark:hover:text-white transition-colors"
+          >
+            Buy me a coffee ☕
+          </a>
+
+          <a
             href="https://www.digitalocean.com/?refcode=23d2b384f3b1&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"
             target="_blank"
             rel="noopener noreferrer"
