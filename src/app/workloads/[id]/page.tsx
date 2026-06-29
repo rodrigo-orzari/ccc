@@ -86,6 +86,35 @@ export default function WorkloadDetails() {
   const id = params.id as string;
   const workload = WORKLOADS.find((w) => w.id === id);
 
+  const scrollbarStyles = `
+    .always-show-scrollbar {
+      overflow-y: hidden !important;
+      overflow-x: scroll !important;
+      scrollbar-width: auto !important;
+    }
+    .always-show-scrollbar::-webkit-scrollbar {
+      height: 8px;
+    }
+    .always-show-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .always-show-scrollbar::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 4px;
+    }
+    .always-show-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af;
+    }
+    @media (prefers-color-scheme: dark) {
+      .always-show-scrollbar::-webkit-scrollbar-thumb {
+        background: #4b5563;
+      }
+      .always-show-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #6b7280;
+      }
+    }
+  `;
+
   const [parameters, setParameters] = useState<Record<string, number>>({});
   const [results, setResults] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -242,6 +271,7 @@ export default function WorkloadDetails() {
 
   return (
     <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
+      <style>{scrollbarStyles}</style>
       <ProductTypeSelector activeProductType={"workloads" as any} />
 
       <div className="flex-1 overflow-auto flex flex-col">

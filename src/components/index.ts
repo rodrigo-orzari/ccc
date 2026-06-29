@@ -8,3 +8,4 @@ export { RangeSlider } from './RangeSlider';
 export { default as ChartsView } from './ChartsView';
 
 export { DigitalOceanReferralModal } from './DigitalOceanReferralModal';
+export { DonationModal } from './DonationModal';
