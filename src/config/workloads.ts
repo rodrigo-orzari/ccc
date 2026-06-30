@@ -806,5 +806,185 @@ export const WORKLOADS: WorkloadDefinition[] = [
         })
       }
     ]
+  },
+  {
+    id: 'compliance-ready-web-app',
+    name: 'Compliance-Ready Web Application',
+    description: 'A standard 3-tier web app hardened with managed security services — WAF, key management, and threat monitoring — for teams in regulated industries handling sensitive data.',
+    icon: '🛡️',
+    parameters: [
+      {
+        id: 'concurrentUsers',
+        label: 'Peak Concurrent Users',
+        type: 'slider',
+        min: 100,
+        max: 10000,
+        step: 100,
+        defaultValue: 1000,
+        unit: 'users'
+      },
+      {
+        id: 'dbSizeGB',
+        label: 'Database Storage',
+        type: 'slider',
+        min: 50,
+        max: 2000,
+        step: 50,
+        defaultValue: 250,
+        unit: 'GB'
+      }
+    ],
+    components: [
+      {
+        id: 'load-balancer',
+        name: 'Load Balancer',
+        description: 'Distributes incoming traffic',
+        icon: '⚖️',
+        getRequirements: () => ({
+          productType: 'networking',
+          category: 'Load Balancer',
+          quantity: 1
+        })
+      },
+      {
+        id: 'web-tier',
+        name: 'Web / App Tier',
+        description: 'Auto-scaling Virtual Machines',
+        icon: '🖥️',
+        getRequirements: (params) => {
+          const loadFactor = Math.max(2, Math.ceil(params.concurrentUsers / 500));
+          return {
+            productType: 'vm',
+            category: 'General purpose',
+            minVcpus: 2,
+            minMemoryGb: 8,
+            quantity: loadFactor
+          };
+        }
+      },
+      {
+        id: 'database',
+        name: 'Relational Database',
+        description: 'Primary transactional datastore',
+        icon: '🗃️',
+        getRequirements: (params) => {
+          const mem = Math.max(8, Math.ceil(params.concurrentUsers / 250) * 4);
+          return {
+            productType: 'database',
+            category: 'Relational',
+            minMemoryGb: mem,
+            quantity: 1
+          };
+        }
+      },
+      {
+        id: 'waf',
+        name: 'Web Application Firewall',
+        description: 'Filters malicious traffic at the edge',
+        icon: '🧱',
+        getRequirements: () => ({
+          productType: 'security',
+          category: 'Network Security',
+          quantity: 1
+        })
+      },
+      {
+        id: 'kms',
+        name: 'Key Management & Encryption',
+        description: 'Manages encryption keys for data at rest',
+        icon: '🔐',
+        getRequirements: () => ({
+          productType: 'security',
+          category: 'Identity & Encryption',
+          quantity: 1
+        })
+      },
+      {
+        id: 'threat-detection',
+        name: 'Threat Detection & Monitoring',
+        description: 'Continuous monitoring for compliance and anomalies',
+        icon: '🚨',
+        getRequirements: () => ({
+          productType: 'security',
+          category: 'Threat & Compliance',
+          quantity: 1
+        })
+      }
+    ]
+  },
+  {
+    id: 'rag-ai-knowledge-base',
+    name: 'RAG / AI Knowledge Base',
+    description: 'A retrieval-augmented generation pipeline for AI chat and search products — document storage, a metadata store, serverless orchestration, and a managed inference endpoint.',
+    icon: '🧠',
+    parameters: [
+      {
+        id: 'corpusSizeGB',
+        label: 'Document Corpus Size',
+        type: 'slider',
+        min: 1,
+        max: 500,
+        step: 1,
+        defaultValue: 25,
+        unit: 'GB'
+      },
+      {
+        id: 'monthlyQueries',
+        label: 'Monthly Queries',
+        type: 'slider',
+        min: 10000,
+        max: 5000000,
+        step: 10000,
+        defaultValue: 250000,
+        unit: 'queries'
+      }
+    ],
+    components: [
+      {
+        id: 'document-storage',
+        name: 'Document Storage',
+        description: 'Source documents and embeddings archive',
+        icon: '🪣',
+        getRequirements: (params) => ({
+          productType: 'storage',
+          category: 'Object',
+          quantity: params.corpusSizeGB
+        })
+      },
+      {
+        id: 'metadata-store',
+        name: 'Embedding / Metadata Store',
+        description: 'Indexes embeddings and document metadata',
+        icon: '🗄️',
+        getRequirements: () => ({
+          productType: 'database',
+          category: 'NoSQL',
+          minMemoryGb: 4,
+          quantity: 1
+        })
+      },
+      {
+        id: 'orchestration',
+        name: 'Serverless Orchestration',
+        description: 'Coordinates retrieval and prompt assembly',
+        icon: '⚙️',
+        getRequirements: () => ({
+          productType: 'serverless',
+          category: 'Compute',
+          quantity: 1
+        })
+      },
+      {
+        id: 'inference',
+        name: 'Inference Endpoint',
+        description: 'Generates responses from retrieved context',
+        icon: '✨',
+        getRequirements: () => ({
+          productType: 'ai',
+          category: 'Inference',
+          quantity: 1
+        })
+      }
+    ]
   }
 ];
