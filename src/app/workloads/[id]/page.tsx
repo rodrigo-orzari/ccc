@@ -130,6 +130,7 @@ export default function WorkloadDetails() {
   const tableRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [canTableScrollLeft, setCanTableScrollLeft] = useState(false);
   const [canTableScrollRight, setCanTableScrollRight] = useState(true);
 
   const checkScroll = () => {
@@ -143,8 +144,17 @@ export default function WorkloadDetails() {
   const checkTableScroll = () => {
     if (tableRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = tableRef.current;
+      setCanTableScrollLeft(scrollLeft > 0);
       setCanTableScrollRight(scrollLeft + clientWidth < scrollWidth - 2);
     }
+  };
+
+  const tableScrollLeft = () => {
+    tableRef.current?.scrollBy({ left: -280, behavior: 'smooth' });
+  };
+
+  const tableScrollRight = () => {
+    tableRef.current?.scrollBy({ left: 280, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -338,6 +348,24 @@ export default function WorkloadDetails() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Tables */}
           <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
+            {/* Sponsorship Box */}
+            <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col gap-3">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">🤝</span>
+                <div className="flex-1">
+                  <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
+                    Sponsor This Workload
+                  </h3>
+                  <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                    Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
+                  </p>
+                  <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
+                    📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
           {/* Combined Configuration + Cost table */}
           <div className="flex flex-col flex-1 border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
             <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-3">
@@ -404,6 +432,15 @@ export default function WorkloadDetails() {
               </div>
             ) : (
               <div className="relative group flex-1">
+                {canTableScrollLeft && (
+                  <button
+                    onClick={tableScrollLeft}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
+                    aria-label="Scroll left"
+                  >
+                    <ChevronLeft size={20} />
+                  </button>
+                )}
                 <div
                   ref={tableRef}
                   onScroll={checkTableScroll}
@@ -513,37 +550,17 @@ export default function WorkloadDetails() {
                   </tbody>
                 </table>
               </div>
-              {canTableScrollRight && (
-                <button
-                  onClick={() => tableRef.current?.scrollBy({ left: 280, behavior: 'smooth' })}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
-                  aria-label="Scroll right"
-                >
-                  <ChevronRight size={20} />
-                </button>
-              )}
+                {canTableScrollRight && (
+                  <button
+                    onClick={tableScrollRight}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
+                    aria-label="Scroll right"
+                  >
+                    <ChevronRight size={20} />
+                  </button>
+                )}
             </div>
             )}
-          </div>
-        </div>
-
-        {/* Sponsorship Box */}
-        <div className="lg:col-span-8">
-          <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col gap-3">
-            <div className="flex items-start gap-3">
-              <span className="text-2xl">🤝</span>
-              <div className="flex-1">
-                <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
-                  Sponsor This Workload
-                </h3>
-                <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                  Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
-                </p>
-                <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
-                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
 
