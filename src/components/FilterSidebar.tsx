@@ -1049,25 +1049,35 @@ export default function FilterSidebar({
                   </button>
                 </h2>
                 <button
-                  onClick={() => onContainersGpuToggle(!containersGpuIncluded)}
+                  onClick={() => onContainersGpuToggle(false)}
                   className={`text-[10px] font-bold uppercase transition-colors ${
-                    containersGpuIncluded ? 'text-black dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
+                    !containersGpuIncluded ? 'text-black dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
                   }`}
                 >
-                  {containersGpuIncluded ? 'Clear All' : 'Select All'}
+                  {!containersGpuIncluded ? 'Clear All' : 'Select All'}
                 </button>
               </div>
               {(expanded.containersGpu ?? true) && (
                 <div className="flex flex-wrap gap-2">
                   <button
-                    onClick={() => onContainersGpuToggle(!containersGpuIncluded)}
+                    onClick={() => onContainersGpuToggle(true)}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       containersGpuIncluded
                         ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
                         : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                     }`}
                   >
-                    GPU Included
+                    Yes
+                  </button>
+                  <button
+                    onClick={() => onContainersGpuToggle(false)}
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                      !containersGpuIncluded
+                        ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                        : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                    }`}
+                  >
+                    No
                   </button>
                 </div>
               )}
