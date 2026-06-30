@@ -318,6 +318,23 @@ export default function DatacentersPage() {
               </p>
             </div>
 
+            {/* Sponsorship Box */}
+            <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col gap-3">
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">🤝</span>
+                <div className="flex-1">
+                  <h3 className="text-sm font-bold text-[var(--text)] mb-1">
+                    Sponsor This Page
+                  </h3>
+                  <p className="text-[13px] text-[var(--muted)] leading-relaxed">
+                    Have your company featured as a sponsor of our Cloud Infrastructure comparison. Reach thousands of engineers and architects researching global data center coverage.
+                  </p>
+                  <p className="text-[12px] font-bold text-[var(--text)] mt-2">
+                    📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] hover:underline">hello@comparecloudcosts.com</a>
+                  </p>
+                </div>
+              </div>
+            </div>
 
             {/* World Map */}
             <div id="world-map" className="mb-8 scroll-mt-6">
