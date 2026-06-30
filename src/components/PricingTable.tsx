@@ -3,7 +3,6 @@
 import React, { RefObject, useState, useEffect, useRef, useCallback } from 'react';
 import type { ProductType, PricingRecord } from '@/types';
 import { formatInstanceName } from '@/lib/formatInstanceName';
-import { SECURITY_SERVICE_GROUPS } from '@/config';
 
 // ─── Provider colour map ────────────────────────────────────────────────────
 const PROVIDERS: { id: string; name: string; color: string }[] = [
@@ -523,8 +522,8 @@ function TableRow({
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
       </>) : activeProductType === 'security' ? (<>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{SECURITY_SERVICE_GROUPS.find(g => g.services.includes(record.category || ''))?.label || '—'}</span></td>
-        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
       </>) : (<>
         {/* vm (default) */}
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>
@@ -677,8 +676,8 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
       { label: 'Memory (GB)', value: dash(record.memory_gb) },
     ];
     case 'security': return [
-      { label: 'Domain', value: SECURITY_SERVICE_GROUPS.find(g => g.services.includes(record.category || ''))?.label || '—' },
-      { label: 'Service', value: record.category || '—' },
+      { label: 'Domain', value: dash(record.category) },
+      { label: 'Service', value: dash(record.service) },
       { label: 'Geo', value: dash(record.geography) },
     ];
     default: return [ // vm

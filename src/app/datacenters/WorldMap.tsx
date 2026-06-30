@@ -20,15 +20,19 @@ function toXY(lat: number, lng: number): [number, number] {
 // legible on the map. The filter chips above the map are intentionally
 // neutral (black/white) to match the rest of the site; see the button
 // className below instead of this map.
+// Brand colors clash badly at dot size: AWS/Alibaba/Cloudflare are all near-identical
+// orange, and Azure/DigitalOcean/Vultr are all near-identical blue. Alibaba, DigitalOcean,
+// Cloudflare, and Vultr are shifted off their literal brand hex here so all 9 stay
+// distinguishable at a glance; AWS, Azure, GCP, Oracle, and Hetzner keep their brand colors.
 const DOT_COLORS: Record<string, string> = {
   aws: '#FF9900',
-  azure: '#00BCFF',
+  azure: '#0078D4',
   gcp: '#34A853',
   oracle: '#F80000',
-  digitalocean: '#0069FF',
-  alibaba: '#FF6A00',
-  cloudflare: '#F38020',
-  vultr: '#1E90FF',
+  digitalocean: '#00BCD4',
+  alibaba: '#FBBF24',
+  cloudflare: '#7C3AED',
+  vultr: '#EC4899',
   hetzner: '#D4145A',
 };
 
