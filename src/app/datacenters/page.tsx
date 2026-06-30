@@ -8,14 +8,17 @@ import { ChevronDown, ExternalLink, Info } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, Cell } from 'recharts';
 import WorldMap from './WorldMap';
 
-// Provider brand colors — keep in sync with src/config/index.ts PROVIDERS
+// Provider styling — use neutral colors for consistency with category pages
 const PROVIDER_COLORS: Record<string, string> = {
-  aws: '#FF9900',
-  azure: '#00BCFF',
-  gcp: '#34A853',
-  oracle: '#F80000',
-  digitalocean: '#0069FF',
-  alibaba: '#FF6A00',
+  aws: 'inherit',
+  azure: 'inherit',
+  gcp: 'inherit',
+  oracle: 'inherit',
+  digitalocean: 'inherit',
+  alibaba: 'inherit',
+  cloudflare: 'inherit',
+  vultr: 'inherit',
+  hetzner: 'inherit',
 };
 
 // ─── glossary tooltip ────────────────────────────────────────────────────────
@@ -75,11 +78,9 @@ function StatusDot({ status }: { status: DatacenterRegion['status'] }) {
 }
 
 function ProviderBadge({ id, name }: { id: string; name: string }) {
-  const color = PROVIDER_COLORS[id] ?? '#888';
   return (
     <span
-      className="w-fit self-start px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border"
-      style={{ color, borderColor: color + '50', backgroundColor: color + '18' }}
+      className="w-fit self-start px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border bg-black dark:bg-white text-white dark:text-black border-black dark:border-white"
     >
       {name}
     </span>

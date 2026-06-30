@@ -177,18 +177,18 @@ const DocsPage: React.FC = () => {
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
                   <li><a href="#datacenter-data-sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data sources</a></li>
                   <li><a href="#datacenter-accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Accuracy &amp; freshness</a></li>
-                  <li><a href="#datacenter-glossary" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Glossary</a></li>
                 </ul>
               </li>
               <li>
                 <a href="#pricing-data" style={{ padding: '3px 0' }}>Pricing Data</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
-                  <li><a href="#sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Sources</a></li>
+                  <li><a href="#sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data sources</a></li>
                   <li><a href="#normalization" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Normalization</a></li>
                   <li><a href="#price-trends" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Price Trends</a></li>
-                  <li><a href="#accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Accuracy</a></li>
+                  <li><a href="#accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Accuracy &amp; freshness</a></li>
                 </ul>
               </li>
+              <li><a href="#glossary" style={{ padding: '3px 0' }}>Glossary</a></li>
               <li><a href="#filters" style={{ padding: '3px 0' }}>Filters</a></li>
               <li><a href="#sharing" style={{ padding: '3px 0' }}>Sharing</a></li>
               <li><a href="#contributing--feedback" style={{ padding: '3px 0' }}>Contributing &amp; Feedback</a></li>
@@ -340,23 +340,6 @@ const DocsPage: React.FC = () => {
               <strong>Important:</strong> Always verify current infrastructure availability directly with the provider before making architecture or compliance decisions.
             </blockquote>
 
-            <h3 id="datacenter-glossary">Glossary</h3>
-            <p>The following terms are used throughout the Datacenters page. Hovering the <strong>ⓘ</strong> icon next to any term on the page will also surface its definition inline.</p>
-            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>Region</strong> — A geographic cluster of data centers in a specific physical location. Each region is completely independent and isolated from failures in other regions. Providers typically publish regions as named locations (e.g. "US East (N. Virginia)", "West Europe").
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>Availability Zone (AZ)</strong> — One or more discrete data centers within a region, each with redundant power, networking, and connectivity. Deploying resources across multiple Availability Zones in the same region allows applications to survive a single data center outage. DigitalOcean does not use traditional Availability Zones — each of its regions maps to a single data center.
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>Edge Location</strong> — A smaller point-of-presence (PoP) node used for content delivery (CDN) and low-latency services such as DNS, DDoS protection, and WAF. Edge locations are distinct from full compute regions and are not independently deployable as compute environments.
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>Government Cloud</strong> — Dedicated, isolated cloud regions operated specifically to meet government compliance requirements (e.g. FedRAMP High, IL4/IL5 in the US, UK OFFICIAL). Access is typically restricted to vetted public sector customers.
-              </li>
-            </ul>
-
             <BackToTop />
           </div>
 
@@ -364,7 +347,7 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <h2 id="pricing-data">Pricing Data</h2>
 
-            <h3 id="sources">Sources</h3>
+            <h3 id="sources">Data sources</h3>
             <p>
               Pricing data is fetched automatically on a weekly basis from each provider's public
               pricing APIs and pages. When a live fetch fails, the tool falls back to a curated
@@ -387,7 +370,7 @@ const DocsPage: React.FC = () => {
               The application tracks historical price changes across ingestion runs. When viewing the pricing tables, you will see an indicator next to the price: a red up arrow (▲) if the price increased, a green down arrow (▼) if the price decreased, or a grey dot (●) if the price remained unchanged. This allows you to quickly spot pricing shifts and volatility across cloud providers.
             </p>
 
-            <h3 id="accuracy">Accuracy</h3>
+            <h3 id="accuracy">Accuracy &amp; freshness</h3>
             <p>
               Prices are directional and intended for high-level comparison only. Always verify final
               pricing on the official provider calculator before making purchasing decisions.
@@ -401,6 +384,33 @@ const DocsPage: React.FC = () => {
               <Link href="/terms">Terms of Use</Link> for full details.
             </blockquote>
 
+            <BackToTop />
+          </div>
+
+          {/* Glossary */}
+          <div className="docs-section">
+            <h2 id="glossary">Glossary</h2>
+            <p>The following terms are used throughout the platform. Hovering the <strong>ⓘ</strong> icon next to any term on the Datacenters page will also surface its definition inline.</p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Region</strong> — A geographic cluster of data centers in a specific physical location. Each region is completely independent and isolated from failures in other regions. Providers typically publish regions as named locations (e.g. "US East (N. Virginia)", "West Europe").
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Availability Zone (AZ)</strong> — One or more discrete data centers within a region, each with redundant power, networking, and connectivity. Deploying resources across multiple Availability Zones in the same region allows applications to survive a single data center outage. DigitalOcean does not use traditional Availability Zones — each of its regions maps to a single data center.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Edge Location</strong> — A smaller point-of-presence (PoP) node used for content delivery (CDN) and low-latency services such as DNS, DDoS protection, and WAF. Edge locations are distinct from full compute regions and are not independently deployable as compute environments.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Government Cloud</strong> — Dedicated, isolated cloud regions operated specifically to meet government compliance requirements (e.g. FedRAMP High, IL4/IL5 in the US, UK OFFICIAL). Access is typically restricted to vetted public sector customers.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>On-Demand pricing</strong> — Pay-as-you-go pricing with no upfront commitment. All prices on this platform are on-demand unless explicitly stated otherwise. Reserved, spot, savings plan, or committed-use discounts are not included.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>vCPU</strong> — Virtual CPU. A logical compute unit mapped to a physical processor thread. Oracle Cloud uses OCPUs (one OCPU = 2 vCPUs); this platform normalizes all values to vCPUs for consistency.
+              </li>
+            </ul>
             <BackToTop />
           </div>
 
