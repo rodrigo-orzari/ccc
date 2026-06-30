@@ -319,8 +319,8 @@ export default function WorkloadDetails() {
         {/* Prices summary — heading + blurb above the per-provider total pills */}
         <div className="flex flex-col gap-3">
           <div>
-            <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">Prices</h2>
-            <p className="text-[12px] text-[#737373] mt-1">
+            <h2 className="text-xl font-bold mb-1 text-[#171717] dark:text-[#e5e7eb]">Prices</h2>
+            <p className="text-sm text-[#737373]">
               This is the sum of the monthly PAYG/Yearly average prices for this workload.
             </p>
           </div>
@@ -381,41 +381,41 @@ export default function WorkloadDetails() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Tables */}
           <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
+          {/* Monthly/Yearly Comparison — heading + blurb outside the table box */}
+          <div>
+            <h2 className="text-xl font-bold mb-1 text-[#171717] dark:text-[#e5e7eb]">
+              {pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Comparison
+            </h2>
+            <p className="text-sm text-[#737373]">
+              Prices by provider and services that enable users to run this workload.
+            </p>
+          </div>
+
           {/* Combined Configuration + Cost table */}
           <div className="flex flex-col flex-1 border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
-            <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-3">
-              <div>
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-                  {pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Comparison
-                </h2>
-                <p className="text-[11px] text-[#737373] mt-0.5">
-                  Prices by provider and services that enable users to run this workload.
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="flex bg-[#f5f5f5] dark:bg-[#171717] p-0.5 rounded-lg border border-[#e5e5e5] dark:border-[#262626]">
-                  <button
-                    onClick={() => setViewMode('table')}
-                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
-                  >
-                    📊 Table
-                  </button>
-                  <button
-                    onClick={() => setViewMode('charts')}
-                    className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
-                  >
-                    📈 Chart
-                  </button>
-                </div>
+            <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-end gap-3">
+              <div className="flex bg-[#f5f5f5] dark:bg-[#171717] p-0.5 rounded-lg border border-[#e5e5e5] dark:border-[#262626]">
                 <button
-                  onClick={handleExport}
-                  disabled={!results}
-                  title="Export the comparison as CSV"
-                  className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#dde0f0] dark:border-[#1e1e38] px-3 py-1.5 rounded hover:bg-[#dde0f0] dark:hover:bg-[#1e1e38] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  onClick={() => setViewMode('table')}
+                  className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'table' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
                 >
-                  <Download size={12} /> Export
+                  📊 Table
+                </button>
+                <button
+                  onClick={() => setViewMode('charts')}
+                  className={`px-3 py-1 rounded-md text-xs font-bold transition-all ${viewMode === 'charts' ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] text-[#171717] dark:text-[#f7f8ff] shadow-sm' : 'text-[#737373] hover:text-[#171717] dark:hover:text-[#f7f8ff]'}`}
+                >
+                  📈 Chart
                 </button>
               </div>
+              <button
+                onClick={handleExport}
+                disabled={!results}
+                title="Export the comparison as CSV"
+                className="flex items-center gap-2 text-[10px] font-bold text-[#737373] dark:text-[#a3a3a3] border border-[#dde0f0] dark:border-[#1e1e38] px-3 py-1.5 rounded hover:bg-[#dde0f0] dark:hover:bg-[#1e1e38] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Download size={12} /> Export
+              </button>
             </div>
 
             {loading && !results ? (
