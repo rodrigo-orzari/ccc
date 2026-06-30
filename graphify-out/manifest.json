@@ -765,8 +765,8 @@
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
-    "mtime": 1781760651.1157167,
-    "ast_hash": "e885f29fa8e2de1202863e8a18aa2637",
+    "mtime": 1782851346.3040254,
+    "ast_hash": "af510ff6ccd2e1241602113bd122cf47",
     "semantic_hash": ""
   },
   "query_db.ts": {
