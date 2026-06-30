@@ -90,7 +90,8 @@ export default function WorkloadDetails() {
     .always-show-scrollbar {
       overflow-y: hidden !important;
       overflow-x: scroll !important;
-      scrollbar-width: auto !important;
+      scrollbar-width: thin !important;
+      scrollbar-gutter: stable !important;
     }
     .always-show-scrollbar::-webkit-scrollbar {
       height: 8px;
@@ -101,6 +102,7 @@ export default function WorkloadDetails() {
     .always-show-scrollbar::-webkit-scrollbar-thumb {
       background: #d1d5db;
       border-radius: 4px;
+      min-height: 40px;
     }
     .always-show-scrollbar::-webkit-scrollbar-thumb:hover {
       background: #9ca3af;
