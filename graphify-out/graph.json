@@ -4,6 +4,78 @@
   "graph": {},
   "nodes": [
     {
+      "label": "WorldMap.tsx",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L1",
+      "id": "datacenters_worldmap",
+      "community": 67,
+      "norm_label": "worldmap.tsx"
+    },
+    {
+      "label": "GEO_BY_CODE",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L7",
+      "id": "datacenters_worldmap_geo_by_code",
+      "community": 67,
+      "norm_label": "geo_by_code"
+    },
+    {
+      "label": "toXY()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L15",
+      "id": "datacenters_worldmap_toxy",
+      "community": 67,
+      "norm_label": "toxy()"
+    },
+    {
+      "label": "DOT_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L23",
+      "id": "datacenters_worldmap_dot_colors",
+      "community": 67,
+      "norm_label": "dot_colors"
+    },
+    {
+      "label": "CONTINENTS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L37",
+      "id": "datacenters_worldmap_continents",
+      "community": 67,
+      "norm_label": "continents"
+    },
+    {
+      "label": "REGION_COORDS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L67",
+      "id": "datacenters_worldmap_region_coords",
+      "community": 67,
+      "norm_label": "region_coords"
+    },
+    {
+      "label": "Tooltip",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L302",
+      "id": "datacenters_worldmap_tooltip",
+      "community": 67,
+      "norm_label": "tooltip"
+    },
+    {
+      "label": "WorldMap()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L310",
+      "id": "datacenters_worldmap_worldmap",
+      "community": 67,
+      "norm_label": "worldmap()"
+    },
+    {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/datacenters/page.tsx",
@@ -123,749 +195,785 @@
     {
       "label": "page.tsx",
       "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L1",
+      "id": "workloads_page",
+      "community": 65,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "PRODUCT_TYPE_LABELS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L9",
+      "id": "workloads_page_product_type_labels",
+      "community": 65,
+      "norm_label": "product_type_labels"
+    },
+    {
+      "label": "PRODUCT_TYPE_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L22",
+      "id": "workloads_page_product_type_order",
+      "community": 65,
+      "norm_label": "product_type_order"
+    },
+    {
+      "label": "WorkloadsCatalog()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L24",
+      "id": "workloads_page_workloadscatalog",
+      "community": 65,
+      "norm_label": "workloadscatalog()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L1",
-      "id": "docs_page",
       "community": 13,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "docs_page"
     },
     {
       "label": "BackToTop()",
       "file_type": "code",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L6",
-      "id": "docs_page_backtotop",
       "community": 13,
-      "norm_label": "backtotop()"
+      "norm_label": "backtotop()",
+      "id": "docs_page_backtotop"
     },
     {
       "label": "DocsPage()",
       "file_type": "code",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L19",
-      "id": "docs_page_docspage",
       "community": 13,
-      "norm_label": "docspage()"
+      "norm_label": "docspage()",
+      "id": "docs_page_docspage"
     },
     {
       "label": "datacenter_data.ts",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L1",
-      "id": "config_datacenter_data",
       "community": 67,
-      "norm_label": "datacenter_data.ts"
+      "norm_label": "datacenter_data.ts",
+      "id": "config_datacenter_data"
     },
     {
       "label": "RegionStatus",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L11",
-      "id": "config_datacenter_data_regionstatus",
       "community": 67,
-      "norm_label": "regionstatus"
+      "norm_label": "regionstatus",
+      "id": "config_datacenter_data_regionstatus"
     },
     {
       "label": "DatacenterRegion",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L13",
-      "id": "config_datacenter_data_datacenterregion",
       "community": 67,
-      "norm_label": "datacenterregion"
+      "norm_label": "datacenterregion",
+      "id": "config_datacenter_data_datacenterregion"
     },
     {
       "label": "ProviderInfrastructure",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L22",
-      "id": "config_datacenter_data_providerinfrastructure",
       "community": 67,
-      "norm_label": "providerinfrastructure"
+      "norm_label": "providerinfrastructure",
+      "id": "config_datacenter_data_providerinfrastructure"
     },
     {
       "label": "PROVIDER_INFRA",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L41",
-      "id": "config_datacenter_data_provider_infra",
       "community": 67,
-      "norm_label": "provider_infra"
+      "norm_label": "provider_infra",
+      "id": "config_datacenter_data_provider_infra"
     },
     {
       "label": "GEOGRAPHIES",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L547",
-      "id": "config_datacenter_data_geographies",
       "community": 67,
-      "norm_label": "geographies"
+      "norm_label": "geographies",
+      "id": "config_datacenter_data_geographies"
     },
     {
       "label": "Geography",
       "file_type": "code",
       "source_file": "src/config/datacenter_data.ts",
       "source_location": "L556",
-      "id": "config_datacenter_data_geography",
       "community": 67,
-      "norm_label": "geography"
+      "norm_label": "geography",
+      "id": "config_datacenter_data_geography"
     },
     {
       "label": "data_analytics_pipeline.ts",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L1",
-      "id": "services_data_analytics_pipeline",
       "community": 69,
-      "norm_label": "data_analytics_pipeline.ts"
+      "norm_label": "data_analytics_pipeline.ts",
+      "id": "services_data_analytics_pipeline"
     },
     {
       "label": "STREAMING_ENGINES",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L11",
-      "id": "services_data_analytics_pipeline_streaming_engines",
       "community": 69,
-      "norm_label": "streaming_engines"
+      "norm_label": "streaming_engines",
+      "id": "services_data_analytics_pipeline_streaming_engines"
     },
     {
       "label": "analyticsCategory()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L19",
-      "id": "services_data_analytics_pipeline_analyticscategory",
       "community": 69,
-      "norm_label": "analyticscategory()"
+      "norm_label": "analyticscategory()",
+      "id": "services_data_analytics_pipeline_analyticscategory"
     },
     {
       "label": "DatabricksStaticAdapter",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L25",
-      "id": "services_data_analytics_pipeline_databricksstaticadapter",
       "community": 76,
-      "norm_label": "databricksstaticadapter"
+      "norm_label": "databricksstaticadapter",
+      "id": "services_data_analytics_pipeline_databricksstaticadapter"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L30",
-      "id": "services_data_analytics_pipeline_databricksstaticadapter_constructor",
       "community": 76,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "services_data_analytics_pipeline_databricksstaticadapter_constructor"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L37",
-      "id": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing",
       "community": 76,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing"
     },
     {
       "label": "SnowflakeStaticAdapter",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L66",
-      "id": "services_data_analytics_pipeline_snowflakestaticadapter",
       "community": 48,
-      "norm_label": "snowflakestaticadapter"
+      "norm_label": "snowflakestaticadapter",
+      "id": "services_data_analytics_pipeline_snowflakestaticadapter"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L71",
-      "id": "services_data_analytics_pipeline_snowflakestaticadapter_constructor",
       "community": 48,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "services_data_analytics_pipeline_snowflakestaticadapter_constructor"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L80",
-      "id": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing",
       "community": 48,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing"
     },
     {
       "label": "DatabricksAzureAdapter",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L109",
-      "id": "services_data_analytics_pipeline_databricksazureadapter",
       "community": 69,
-      "norm_label": "databricksazureadapter"
+      "norm_label": "databricksazureadapter",
+      "id": "services_data_analytics_pipeline_databricksazureadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L113",
-      "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_data_analytics_pipeline_databricksazureadapter_fetchpricing"
     },
     {
       "label": "NativeAnalyticsStaticAdapter",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L182",
-      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter",
       "community": 69,
-      "norm_label": "nativeanalyticsstaticadapter"
+      "norm_label": "nativeanalyticsstaticadapter",
+      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L187",
-      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_constructor",
       "community": 69,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_constructor"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L194",
-      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_fetchpricing",
       "community": 69,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_data_analytics_pipeline_nativeanalyticsstaticadapter_fetchpricing"
     },
     {
       "label": "SynapseAzureAdapter",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L223",
-      "id": "services_data_analytics_pipeline_synapseazureadapter",
       "community": 69,
-      "norm_label": "synapseazureadapter"
+      "norm_label": "synapseazureadapter",
+      "id": "services_data_analytics_pipeline_synapseazureadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L227",
-      "id": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing",
       "community": 69,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_data_analytics_pipeline_synapseazureadapter_fetchpricing"
     },
     {
       "label": "AlibabaAnalyticsAdapter",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L296",
-      "id": "services_data_analytics_pipeline_alibabaanalyticsadapter",
       "community": 69,
-      "norm_label": "alibabaanalyticsadapter"
+      "norm_label": "alibabaanalyticsadapter",
+      "id": "services_data_analytics_pipeline_alibabaanalyticsadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L299",
-      "id": "services_data_analytics_pipeline_alibabaanalyticsadapter_fetchpricing",
       "community": 69,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_data_analytics_pipeline_alibabaanalyticsadapter_fetchpricing"
     },
     {
       "label": "OracleAnalyticsAdapter",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L328",
-      "id": "services_data_analytics_pipeline_oracleanalyticsadapter",
       "community": 69,
-      "norm_label": "oracleanalyticsadapter"
+      "norm_label": "oracleanalyticsadapter",
+      "id": "services_data_analytics_pipeline_oracleanalyticsadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L331",
-      "id": "services_data_analytics_pipeline_oracleanalyticsadapter_fetchpricing",
       "community": 69,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_data_analytics_pipeline_oracleanalyticsadapter_fetchpricing"
     },
     {
       "label": "DigitalOceanAnalyticsAdapter",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L360",
-      "id": "services_data_analytics_pipeline_digitaloceananalyticsadapter",
       "community": 75,
-      "norm_label": "digitaloceananalyticsadapter"
+      "norm_label": "digitaloceananalyticsadapter",
+      "id": "services_data_analytics_pipeline_digitaloceananalyticsadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L363",
-      "id": "services_data_analytics_pipeline_digitaloceananalyticsadapter_fetchpricing",
       "community": 75,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_data_analytics_pipeline_digitaloceananalyticsadapter_fetchpricing"
     },
     {
       "label": "DataAnalyticsPricingPipeline",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L392",
-      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline",
       "community": 62,
-      "norm_label": "dataanalyticspricingpipeline"
+      "norm_label": "dataanalyticspricingpipeline",
+      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L393",
-      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor",
       "community": 62,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
     },
     {
       "label": ".run()",
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L413",
-      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run",
       "community": 75,
-      "norm_label": ".run()"
+      "norm_label": ".run()",
+      "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_run"
     },
     {
       "label": "database_pipeline.ts",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L1",
-      "id": "services_database_pipeline",
       "community": 9,
-      "norm_label": "database_pipeline.ts"
+      "norm_label": "database_pipeline.ts",
+      "id": "services_database_pipeline"
     },
     {
       "label": "AZURE_REDIS_CACHE_GB",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L35",
-      "id": "services_database_pipeline_azure_redis_cache_gb",
       "community": 9,
-      "norm_label": "azure_redis_cache_gb"
+      "norm_label": "azure_redis_cache_gb",
+      "id": "services_database_pipeline_azure_redis_cache_gb"
     },
     {
       "label": "deriveRedisMemoryGb()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L40",
-      "id": "services_database_pipeline_deriveredismemorygb",
       "community": 9,
-      "norm_label": "deriveredismemorygb()"
+      "norm_label": "deriveredismemorygb()",
+      "id": "services_database_pipeline_deriveredismemorygb"
     },
     {
       "label": "parseAzureDbVcpus()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L61",
-      "id": "services_database_pipeline_parseazuredbvcpus",
       "community": 9,
-      "norm_label": "parseazuredbvcpus()"
+      "norm_label": "parseazuredbvcpus()",
+      "id": "services_database_pipeline_parseazuredbvcpus"
     },
     {
       "label": "deriveAzureDbMemoryGb()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L73",
-      "id": "services_database_pipeline_deriveazuredbmemorygb",
       "community": 9,
-      "norm_label": "deriveazuredbmemorygb()"
+      "norm_label": "deriveazuredbmemorygb()",
+      "id": "services_database_pipeline_deriveazuredbmemorygb"
     },
     {
       "label": "deriveTier()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L81",
-      "id": "services_database_pipeline_derivetier",
       "community": 9,
-      "norm_label": "derivetier()"
+      "norm_label": "derivetier()",
+      "id": "services_database_pipeline_derivetier"
     },
     {
       "label": "GCPCloudSQLAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L127",
-      "id": "services_database_pipeline_gcpcloudsqladapter",
       "community": 55,
-      "norm_label": "gcpcloudsqladapter"
+      "norm_label": "gcpcloudsqladapter",
+      "id": "services_database_pipeline_gcpcloudsqladapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L130",
-      "id": "services_database_pipeline_gcpcloudsqladapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_gcpcloudsqladapter_fetchpricing"
     },
     {
       "label": "OracleAutonomousAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L162",
-      "id": "services_database_pipeline_oracleautonomousadapter",
       "community": 55,
-      "norm_label": "oracleautonomousadapter"
+      "norm_label": "oracleautonomousadapter",
+      "id": "services_database_pipeline_oracleautonomousadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L165",
-      "id": "services_database_pipeline_oracleautonomousadapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_oracleautonomousadapter_fetchpricing"
     },
     {
       "label": "OracleMySQLHeatWaveAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L198",
-      "id": "services_database_pipeline_oraclemysqlheatwaveadapter",
       "community": 55,
-      "norm_label": "oraclemysqlheatwaveadapter"
+      "norm_label": "oraclemysqlheatwaveadapter",
+      "id": "services_database_pipeline_oraclemysqlheatwaveadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L201",
-      "id": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing"
     },
     {
       "label": "OraclePostgreSQLAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L233",
-      "id": "services_database_pipeline_oraclepostgresqladapter",
       "community": 55,
-      "norm_label": "oraclepostgresqladapter"
+      "norm_label": "oraclepostgresqladapter",
+      "id": "services_database_pipeline_oraclepostgresqladapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L236",
-      "id": "services_database_pipeline_oraclepostgresqladapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_oraclepostgresqladapter_fetchpricing"
     },
     {
       "label": "VectorDatabasesAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L270",
-      "id": "services_database_pipeline_vectordatabasesadapter",
       "community": 9,
-      "norm_label": "vectordatabasesadapter"
+      "norm_label": "vectordatabasesadapter",
+      "id": "services_database_pipeline_vectordatabasesadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L273",
-      "id": "services_database_pipeline_vectordatabasesadapter_fetchpricing",
       "community": 9,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_vectordatabasesadapter_fetchpricing"
     },
     {
       "label": "RDS_ENGINE_MAP",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L298",
-      "id": "services_database_pipeline_rds_engine_map",
       "community": 9,
-      "norm_label": "rds_engine_map"
+      "norm_label": "rds_engine_map",
+      "id": "services_database_pipeline_rds_engine_map"
     },
     {
       "label": "AWSRDSAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L316",
-      "id": "services_database_pipeline_awsrdsadapter",
       "community": 9,
-      "norm_label": "awsrdsadapter"
+      "norm_label": "awsrdsadapter",
+      "id": "services_database_pipeline_awsrdsadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L319",
-      "id": "services_database_pipeline_awsrdsadapter_fetchpricing",
       "community": 9,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_awsrdsadapter_fetchpricing"
     },
     {
       "label": "AZURE_DB_SERVICES",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L396",
-      "id": "services_database_pipeline_azure_db_services",
       "community": 9,
-      "norm_label": "azure_db_services"
+      "norm_label": "azure_db_services",
+      "id": "services_database_pipeline_azure_db_services"
     },
     {
       "label": "buildAzureDbFilter()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L406",
-      "id": "services_database_pipeline_buildazuredbfilter",
       "community": 9,
-      "norm_label": "buildazuredbfilter()"
+      "norm_label": "buildazuredbfilter()",
+      "id": "services_database_pipeline_buildazuredbfilter"
     },
     {
       "label": "AzureDBAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L411",
-      "id": "services_database_pipeline_azuredbadapter",
       "community": 9,
-      "norm_label": "azuredbadapter"
+      "norm_label": "azuredbadapter",
+      "id": "services_database_pipeline_azuredbadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L419",
-      "id": "services_database_pipeline_azuredbadapter_fetchpricing",
       "community": 9,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_azuredbadapter_fetchpricing"
     },
     {
       "label": "DigitalOceanDBAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L529",
-      "id": "services_database_pipeline_digitaloceandbadapter",
       "community": 55,
-      "norm_label": "digitaloceandbadapter"
+      "norm_label": "digitaloceandbadapter",
+      "id": "services_database_pipeline_digitaloceandbadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L532",
-      "id": "services_database_pipeline_digitaloceandbadapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_digitaloceandbadapter_fetchpricing"
     },
     {
       "label": "AlibabaDBAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L566",
-      "id": "services_database_pipeline_alibabadbadapter",
       "community": 55,
-      "norm_label": "alibabadbadapter"
+      "norm_label": "alibabadbadapter",
+      "id": "services_database_pipeline_alibabadbadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L569",
-      "id": "services_database_pipeline_alibabadbadapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_alibabadbadapter_fetchpricing"
     },
     {
       "label": "AWS_ELASTICACHE_INSTANCES",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L601",
-      "id": "services_database_pipeline_aws_elasticache_instances",
       "community": 9,
-      "norm_label": "aws_elasticache_instances"
+      "norm_label": "aws_elasticache_instances",
+      "id": "services_database_pipeline_aws_elasticache_instances"
     },
     {
       "label": "AWSElastiCacheAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L610",
-      "id": "services_database_pipeline_awselasticacheadapter",
       "community": 55,
-      "norm_label": "awselasticacheadapter"
+      "norm_label": "awselasticacheadapter",
+      "id": "services_database_pipeline_awselasticacheadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L613",
-      "id": "services_database_pipeline_awselasticacheadapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_awselasticacheadapter_fetchpricing"
     },
     {
       "label": "GCP_MEMORYSTORE_INSTANCES",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L645",
-      "id": "services_database_pipeline_gcp_memorystore_instances",
       "community": 9,
-      "norm_label": "gcp_memorystore_instances"
+      "norm_label": "gcp_memorystore_instances",
+      "id": "services_database_pipeline_gcp_memorystore_instances"
     },
     {
       "label": "GCPMemorystoreAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L653",
-      "id": "services_database_pipeline_gcpmemorystoreadapter",
       "community": 55,
-      "norm_label": "gcpmemorystoreadapter"
+      "norm_label": "gcpmemorystoreadapter",
+      "id": "services_database_pipeline_gcpmemorystoreadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L656",
-      "id": "services_database_pipeline_gcpmemorystoreadapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_gcpmemorystoreadapter_fetchpricing"
     },
     {
       "label": "ORACLE_REDIS_INSTANCES",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L688",
-      "id": "services_database_pipeline_oracle_redis_instances",
       "community": 9,
-      "norm_label": "oracle_redis_instances"
+      "norm_label": "oracle_redis_instances",
+      "id": "services_database_pipeline_oracle_redis_instances"
     },
     {
       "label": "OracleRedisAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L694",
-      "id": "services_database_pipeline_oracleredisadapter",
       "community": 55,
-      "norm_label": "oracleredisadapter"
+      "norm_label": "oracleredisadapter",
+      "id": "services_database_pipeline_oracleredisadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L697",
-      "id": "services_database_pipeline_oracleredisadapter_fetchpricing",
       "community": 55,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_oracleredisadapter_fetchpricing"
     },
     {
       "label": "ALIBABA_REDIS_INSTANCES",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L729",
-      "id": "services_database_pipeline_alibaba_redis_instances",
       "community": 9,
-      "norm_label": "alibaba_redis_instances"
+      "norm_label": "alibaba_redis_instances",
+      "id": "services_database_pipeline_alibaba_redis_instances"
     },
     {
       "label": "AlibabaRedisAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L735",
-      "id": "services_database_pipeline_alibabaredisadapter",
       "community": 23,
-      "norm_label": "alibabaredisadapter"
+      "norm_label": "alibabaredisadapter",
+      "id": "services_database_pipeline_alibabaredisadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L738",
-      "id": "services_database_pipeline_alibabaredisadapter_fetchpricing",
       "community": 23,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_alibabaredisadapter_fetchpricing"
     },
     {
       "label": "AWS_DYNAMODB_INSTANCES",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L770",
-      "id": "services_database_pipeline_aws_dynamodb_instances",
       "community": 9,
-      "norm_label": "aws_dynamodb_instances"
+      "norm_label": "aws_dynamodb_instances",
+      "id": "services_database_pipeline_aws_dynamodb_instances"
     },
     {
       "label": "AWSDynamoDBAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L778",
-      "id": "services_database_pipeline_awsdynamodbadapter",
       "community": 9,
-      "norm_label": "awsdynamodbadapter"
+      "norm_label": "awsdynamodbadapter",
+      "id": "services_database_pipeline_awsdynamodbadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L781",
-      "id": "services_database_pipeline_awsdynamodbadapter_fetchpricing",
       "community": 9,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_awsdynamodbadapter_fetchpricing"
     },
     {
       "label": "AWS_DOCUMENTDB_INSTANCES",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L813",
-      "id": "services_database_pipeline_aws_documentdb_instances",
       "community": 9,
-      "norm_label": "aws_documentdb_instances"
+      "norm_label": "aws_documentdb_instances",
+      "id": "services_database_pipeline_aws_documentdb_instances"
     },
     {
       "label": "AWSDocumentDBAdapter",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L823",
-      "id": "services_database_pipeline_awsdocumentdbadapter",
       "community": 23,
-      "norm_label": "awsdocumentdbadapter"
+      "norm_label": "awsdocumentdbadapter",
+      "id": "services_database_pipeline_awsdocumentdbadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L826",
-      "id": "services_database_pipeline_awsdocumentdbadapter_fetchpricing",
       "community": 23,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_database_pipeline_awsdocumentdbadapter_fetchpricing"
     },
     {
       "label": "DatabasePricingPipeline",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L858",
-      "id": "services_database_pipeline_databasepricingpipeline",
       "community": 62,
-      "norm_label": "databasepricingpipeline"
+      "norm_label": "databasepricingpipeline",
+      "id": "services_database_pipeline_databasepricingpipeline"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L859",
-      "id": "services_database_pipeline_databasepricingpipeline_constructor",
       "community": 62,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "services_database_pipeline_databasepricingpipeline_constructor"
     },
     {
       "label": ".run()",
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L881",
-      "id": "services_database_pipeline_databasepricingpipeline_run",
       "community": 23,
-      "norm_label": ".run()"
+      "norm_label": ".run()",
+      "id": "services_database_pipeline_databasepricingpipeline_run"
     },
     {
       "label": "page.tsx",
@@ -1064,42 +1172,6 @@
       "community": 58,
       "norm_label": "workloaddetails()",
       "id": "id_page_workloaddetails"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L1",
-      "community": 65,
-      "norm_label": "page.tsx",
-      "id": "workloads_page"
-    },
-    {
-      "label": "PRODUCT_TYPE_LABELS",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L9",
-      "community": 65,
-      "norm_label": "product_type_labels",
-      "id": "workloads_page_product_type_labels"
-    },
-    {
-      "label": "PRODUCT_TYPE_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L22",
-      "community": 65,
-      "norm_label": "product_type_order",
-      "id": "workloads_page_product_type_order"
-    },
-    {
-      "label": "WorkloadsCatalog()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L24",
-      "community": 65,
-      "norm_label": "workloadscatalog()",
-      "id": "workloads_page_workloadscatalog"
     },
     {
       "label": "DigitalOceanReferralModal.tsx",
@@ -1505,78 +1577,6 @@
       "community": 15,
       "norm_label": "mobilecard()",
       "id": "components_pricingtable_mobilecard"
-    },
-    {
-      "label": "WorldMap.tsx",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L1",
-      "community": 67,
-      "norm_label": "worldmap.tsx",
-      "id": "datacenters_worldmap"
-    },
-    {
-      "label": "GEO_BY_CODE",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L7",
-      "community": 67,
-      "norm_label": "geo_by_code",
-      "id": "datacenters_worldmap_geo_by_code"
-    },
-    {
-      "label": "toXY()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L15",
-      "community": 67,
-      "norm_label": "toxy()",
-      "id": "datacenters_worldmap_toxy"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L20",
-      "community": 67,
-      "norm_label": "provider_colors",
-      "id": "datacenters_worldmap_provider_colors"
-    },
-    {
-      "label": "CONTINENTS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L31",
-      "community": 67,
-      "norm_label": "continents",
-      "id": "datacenters_worldmap_continents"
-    },
-    {
-      "label": "REGION_COORDS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L61",
-      "community": 67,
-      "norm_label": "region_coords",
-      "id": "datacenters_worldmap_region_coords"
-    },
-    {
-      "label": "Tooltip",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L263",
-      "community": 67,
-      "norm_label": "tooltip",
-      "id": "datacenters_worldmap_tooltip"
-    },
-    {
-      "label": "WorldMap()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L271",
-      "community": 67,
-      "norm_label": "worldmap()",
-      "id": "datacenters_worldmap_worldmap"
     },
     {
       "label": "layout.tsx",
@@ -6837,6 +6837,120 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_worldmap"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "config_datacenter_data_geographies"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "config_datacenter_data_provider_infra"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_continents"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_dot_colors",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_geo_by_code"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_region_coords"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L256",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_tooltip"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_toxy"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L264",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap",
+      "target": "datacenters_worldmap_worldmap"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/WorldMap.tsx",
+      "source_location": "L296",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_worldmap_worldmap",
+      "target": "datacenters_worldmap_toxy"
+    },
+    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -7034,15 +7148,89 @@
       "target": "datacenters_page_viewtoggle"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_donationmodal_donationmodal"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_labels"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
       "source_location": "L8",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_worldmap"
+      "source": "workloads_page",
+      "target": "workloads_page_workloadscatalog"
     },
     {
       "relation": "imports_from",
@@ -7134,28 +7322,6 @@
       "confidence_score": 1.0,
       "source": "config_datacenter_data",
       "target": "config_datacenter_data_regionstatus"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "config_datacenter_data_provider_infra"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "config_datacenter_data_geographies"
     },
     {
       "relation": "imports_from",
@@ -7272,9 +7438,9 @@
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_data_analytics_pipeline",
-      "target": "services_data_analytics_pipeline_analyticscategory",
-      "confidence_score": 1.0
+      "target": "services_data_analytics_pipeline_analyticscategory"
     },
     {
       "relation": "contains",
@@ -7352,9 +7518,9 @@
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_data_analytics_pipeline",
-      "target": "services_data_analytics_pipeline_streaming_engines",
-      "confidence_score": 1.0
+      "target": "services_data_analytics_pipeline_streaming_engines"
     },
     {
       "relation": "contains",
@@ -7851,9 +8017,9 @@
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L813",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_database_pipeline",
-      "target": "services_database_pipeline_aws_documentdb_instances",
-      "confidence_score": 1.0
+      "target": "services_database_pipeline_aws_documentdb_instances"
     },
     {
       "relation": "contains",
@@ -7861,9 +8027,9 @@
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L770",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_database_pipeline",
-      "target": "services_database_pipeline_aws_dynamodb_instances",
-      "confidence_score": 1.0
+      "target": "services_database_pipeline_aws_dynamodb_instances"
     },
     {
       "relation": "contains",
@@ -7881,9 +8047,9 @@
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L823",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_database_pipeline",
-      "target": "services_database_pipeline_awsdocumentdbadapter",
-      "confidence_score": 1.0
+      "target": "services_database_pipeline_awsdocumentdbadapter"
     },
     {
       "relation": "contains",
@@ -7891,9 +8057,9 @@
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L778",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_database_pipeline",
-      "target": "services_database_pipeline_awsdynamodbadapter",
-      "confidence_score": 1.0
+      "target": "services_database_pipeline_awsdynamodbadapter"
     },
     {
       "relation": "contains",
@@ -8636,9 +8802,9 @@
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L781",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_database_pipeline_awsdynamodbadapter",
-      "target": "services_database_pipeline_awsdynamodbadapter_fetchpricing",
-      "confidence_score": 1.0
+      "target": "services_database_pipeline_awsdynamodbadapter_fetchpricing"
     },
     {
       "relation": "method",
@@ -8646,9 +8812,9 @@
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L826",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_database_pipeline_awsdocumentdbadapter",
-      "target": "services_database_pipeline_awsdocumentdbadapter_fetchpricing",
-      "confidence_score": 1.0
+      "target": "services_database_pipeline_awsdocumentdbadapter_fetchpricing"
     },
     {
       "relation": "calls",
@@ -8657,9 +8823,9 @@
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L885",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_database_pipeline_databasepricingpipeline_run",
-      "target": "services_database_pipeline_awsdocumentdbadapter_fetchpricing",
-      "confidence_score": 1.0
+      "target": "services_database_pipeline_awsdocumentdbadapter_fetchpricing"
     },
     {
       "relation": "imports",
@@ -9089,91 +9255,6 @@
       "confidence_score": 1.0,
       "source": "id_page_providerth",
       "target": "id_page_providername"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_donationmodal_donationmodal"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_product_type_labels"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_product_type_order"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_workloadscatalog"
     },
     {
       "relation": "contains",
@@ -9859,87 +9940,6 @@
       "confidence_score": 1.0,
       "source": "components_pricingtable_mobilecard",
       "target": "components_pricingtable_getmobilefields"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_continents"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_geo_by_code"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_provider_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_region_coords"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L256",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_tooltip"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_toxy"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L264",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap",
-      "target": "datacenters_worldmap_worldmap"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/WorldMap.tsx",
-      "source_location": "L296",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_worldmap_worldmap",
-      "target": "datacenters_worldmap_toxy"
     },
     {
       "relation": "contains",
@@ -18081,5 +18081,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "39a0b1fc3300dc0f7545837be6466d129b7ecf73"
+  "built_at_commit": "dbf305374ae9c7862564b896136dae226e0710d3"
 }
