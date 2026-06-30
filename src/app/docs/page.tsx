@@ -158,15 +158,15 @@ const DocsPage: React.FC = () => {
               <li>
                 <a href="#product-categories" style={{ padding: '3px 0' }}>Product Categories</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
-                  <li><a href="#virtual-machines" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Virtual Machines</a></li>
-                  <li><a href="#databases" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Databases</a></li>
-                  <li><a href="#serverless" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Serverless</a></li>
-                  <li><a href="#containers" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Containers</a></li>
-                  <li><a href="#networking" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Networking</a></li>
-                  <li><a href="#data--analytics" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data &amp; Analytics</a></li>
-                  <li><a href="#storage" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Storage</a></li>
-                  <li><a href="#app-hosting" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>App Hosting</a></li>
                   <li><a href="#ai-machine-learning" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>AI &amp; Machine Learning</a></li>
+                  <li><a href="#app-hosting" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>App Hosting</a></li>
+                  <li><a href="#containers" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Containers</a></li>
+                  <li><a href="#databases" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Databases</a></li>
+                  <li><a href="#data--analytics" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data &amp; Analytics</a></li>
+                  <li><a href="#networking" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Networking</a></li>
+                  <li><a href="#serverless" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Serverless</a></li>
+                  <li><a href="#storage" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Storage</a></li>
+                  <li><a href="#virtual-machines" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Virtual Machines</a></li>
                 </ul>
               </li>
               <li>
@@ -213,8 +213,8 @@ const DocsPage: React.FC = () => {
               DigitalOcean, and Alibaba in a single side-by-side view.
             </p>
             <p>
-              Use the <strong>product tabs</strong> at the top to switch between categories: Virtual
-              Machines, Databases, Serverless, Containers, Networking, and Data &amp; Analytics.
+              Use the <strong>product tabs</strong> at the top to switch between categories: AI &amp; Machine Learning,
+              App Hosting, Containers, Databases, Data &amp; Analytics, Networking, Serverless, Storage, and Virtual Machines.
             </p>
             <p>
               Use the <strong>filter sidebar</strong> on the left to narrow results by provider,
@@ -227,25 +227,14 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <h2 id="product-categories">Product Categories</h2>
 
-            <h3 id="virtual-machines">Virtual Machines</h3>
+            <h3 id="ai-machine-learning">AI &amp; Machine Learning</h3>
             <p>
-              Compares compute instances across providers. Filter by operating system, CPU
-              vendor/architecture, GPU support, and instance category (General Purpose, Compute
-              Optimized, Memory Optimized, etc.). All prices are hourly, on-demand, Linux-based
-              unless otherwise noted.
+              Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window size, multimodal capabilities, and compare input/output pricing per 1M tokens.
             </p>
 
-            <h3 id="databases">Databases</h3>
+            <h3 id="app-hosting">App Hosting</h3>
             <p>
-              Covers managed relational, NoSQL, and In-memory database services (RDS, Cloud SQL, Azure Database,
-              ElastiCache, Memorystore, etc.). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
-              Serverless), and HA mode.
-            </p>
-
-            <h3 id="serverless">Serverless</h3>
-            <p>
-              Compares function-as-a-service pricing (AWS Lambda, Azure Functions, Google Cloud
-              Functions, etc.) alongside integration services like API Gateways, Messaging Queues, Event Buses, and Workflows. Key attributes include supported runtimes, cold start behavior, billing granularity, and memory configuration.
+              Covers managed application hosting and Platform-as-a-Service offerings (App Service, App Engine, Heroku, etc.). Compare by compute tier, operating system, and architecture.
             </p>
 
             <h3 id="containers">Containers</h3>
@@ -255,11 +244,11 @@ const DocsPage: React.FC = () => {
               orchestrator, architecture (x86 or ARM), and billing granularity.
             </p>
 
-            <h3 id="networking">Networking</h3>
+            <h3 id="databases">Databases</h3>
             <p>
-              Compares data transfer, VPC, load balancing, VPN, NAT gateway, and dedicated connection
-              pricing. Supports filtering by service type, connection type, routing, and direction
-              (egress/ingress).
+              Covers managed relational, NoSQL, and In-memory database services (RDS, Cloud SQL, Azure Database,
+              ElastiCache, Memorystore, etc.). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
+              Serverless), and HA mode.
             </p>
 
             <h3 id="data--analytics">Data &amp; Analytics</h3>
@@ -269,19 +258,30 @@ const DocsPage: React.FC = () => {
               deployment type, and service tier.
             </p>
 
+            <h3 id="networking">Networking</h3>
+            <p>
+              Compares data transfer, VPC, load balancing, VPN, NAT gateway, and dedicated connection
+              pricing. Supports filtering by service type, connection type, routing, and direction
+              (egress/ingress).
+            </p>
+
+            <h3 id="serverless">Serverless</h3>
+            <p>
+              Compares function-as-a-service pricing (AWS Lambda, Azure Functions, Google Cloud
+              Functions, etc.) alongside integration services like API Gateways, Messaging Queues, Event Buses, and Workflows. Key attributes include supported runtimes, cold start behavior, billing granularity, and memory configuration.
+            </p>
+
             <h3 id="storage">Storage</h3>
             <p>
               Compares object, block, and file storage pricing (S3, Blob Storage, Cloud Storage, EBS). Filter by storage type, performance tier, redundancy (LRS, ZRS, GRS), and media type.
             </p>
 
-            <h3 id="app-hosting">App Hosting</h3>
+            <h3 id="virtual-machines">Virtual Machines</h3>
             <p>
-              Covers managed application hosting and Platform-as-a-Service offerings (App Service, App Engine, Heroku, etc.). Compare by compute tier, operating system, and architecture.
-            </p>
-
-            <h3 id="ai-machine-learning">AI &amp; Machine Learning</h3>
-            <p>
-              Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window size, multimodal capabilities, and compare input/output pricing per 1M tokens.
+              Compares compute instances across providers. Filter by operating system, CPU
+              vendor/architecture, GPU support, and instance category (General Purpose, Compute
+              Optimized, Memory Optimized, etc.). All prices are hourly, on-demand, Linux-based
+              unless otherwise noted.
             </p>
 
             <BackToTop />
