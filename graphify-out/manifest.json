@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1782153913.7437303,
-    "ast_hash": "5adb3b523785793800ebe94ca2df3df2",
+    "mtime": 1782854473.374856,
+    "ast_hash": "c78ed78ef01ae6df4a69e6eb79a115b9",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
@@ -755,8 +755,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1782852947.7832487,
-    "ast_hash": "87eb820ba4136bde69452c41860794c2",
+    "mtime": 1782854650.0868957,
+    "ast_hash": "0792e0ea428d464e1e3f3ecd31d0edf4",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -800,8 +800,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/WorldMap.tsx": {
-    "mtime": 1782853438.8183687,
-    "ast_hash": "3050a698eacb5492168c101e08640174",
+    "mtime": 1782855053.8477008,
+    "ast_hash": "3be3bac18bdae6eac34b2748f3f8102d",
     "semantic_hash": ""
   },
   "src/components/DigitalOceanReferralModal.tsx": {
