@@ -16,14 +16,20 @@ function toXY(lat: number, lng: number): [number, number] {
   return [(lng + 180) / 360 * W, (90 - lat) / 180 * H];
 }
 
-// Keep in sync with src/config/index.ts PROVIDERS and page.tsx PROVIDER_COLORS
-const PROVIDER_COLORS: Record<string, string> = {
+// Dot/tooltip colors only — kept distinct per provider so markers stay
+// legible on the map. The filter chips above the map are intentionally
+// neutral (black/white) to match the rest of the site; see the button
+// className below instead of this map.
+const DOT_COLORS: Record<string, string> = {
   aws: '#FF9900',
   azure: '#00BCFF',
   gcp: '#34A853',
   oracle: '#F80000',
   digitalocean: '#0069FF',
   alibaba: '#FF6A00',
+  cloudflare: '#F38020',
+  vultr: '#1E90FF',
+  hetzner: '#D4145A',
 };
 
 // Simplified continent polygons in equirectangular projection (W=960, H=480)
@@ -258,6 +264,39 @@ const REGION_COORDS: Record<string, Array<[number, number, string, string]>> = {
     [25.2, 55.3, 'me-east-1', 'Dubai'],
     [-26.2, 28.0, 'af-south-1', 'Johannesburg'],
   ],
+  // Cloudflare's regionList groups its 300+ edge PoPs into four continental
+  // entries (na-edge/eu-edge/apac-edge/sa-edge) rather than named regions —
+  // one representative coordinate per code keeps it consistent with that data.
+  cloudflare: [
+    [41.9, -87.6, 'na-edge', 'North America (Distributed)'],
+    [50.1, 8.7, 'eu-edge', 'Europe (Distributed)'],
+    [1.4, 103.8, 'apac-edge', 'Asia Pacific (Distributed)'],
+    [-23.5, -46.6, 'sa-edge', 'South America (Distributed)'],
+  ],
+  vultr: [
+    [40.7, -74.2, 'nj', 'New Jersey'],
+    [38.9, -77.4, 'va', 'Virginia'],
+    [41.9, -87.6, 'il', 'Chicago'],
+    [34.1, -118.2, 'lax', 'Los Angeles'],
+    [43.7, -79.4, 'tor', 'Toronto'],
+    [51.5, -0.1, 'lhr', 'London'],
+    [50.1, 8.7, 'fra', 'Frankfurt'],
+    [52.4, 4.9, 'ams', 'Amsterdam'],
+    [48.9, 2.4, 'par', 'Paris'],
+    [35.7, 139.7, 'nrt', 'Tokyo'],
+    [1.4, 103.8, 'sgp', 'Singapore'],
+    [-33.9, 151.2, 'syd', 'Sydney'],
+    [28.6, 77.2, 'del', 'Delhi'],
+    [-23.5, -46.6, 'sao', 'São Paulo'],
+    [25.2, 55.3, 'uae', 'Dubai'],
+  ],
+  hetzner: [
+    [50.5, 12.0, 'fsn1', 'Falkenstein'],
+    [49.45, 11.08, 'nbg1', 'Nuremberg'],
+    [60.2, 24.9, 'hel1', 'Helsinki'],
+    [39.0, -77.5, 'ash', 'Ashburn'],
+    [19.1, 72.9, 'ind', 'Mumbai'],
+  ],
 };
 
 interface Tooltip {
@@ -301,7 +340,7 @@ export default function WorldMap() {
   for (const pid of allProviderIds) {
     if (!selected.has(pid)) continue;
     const coords = REGION_COORDS[pid] ?? [];
-    const color = PROVIDER_COLORS[pid] ?? '#888';
+    const color = DOT_COLORS[pid] ?? '#888';
     for (const [lat, lng, code, name] of coords) {
       const geo = GEO_BY_CODE[code];
       if (!geo || !selectedGeos.includes(geo)) continue;
@@ -323,7 +362,6 @@ export default function WorldMap() {
           <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 shrink-0">Provider</span>
           {PROVIDER_INFRA.map(p => {
             const active = selected.has(p.id);
-            const color = PROVIDER_COLORS[p.id] ?? '#888';
             return (
               <button
                 key={p.id}
@@ -332,10 +370,9 @@ export default function WorldMap() {
                 title={`Click to toggle · Double-click to show only ${p.name}`}
                 className={`flex items-center px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
                   active
-                    ? 'text-white border-transparent shadow-sm'
-                    : 'bg-[var(--row-hover)] border-[var(--border)] opacity-60 hover:opacity-90'
+                    ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                    : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
                 }`}
-                style={active ? { backgroundColor: color, borderColor: color } : { color }}
               >
                 {p.nameShort}
               </button>
@@ -484,7 +521,7 @@ export default function WorldMap() {
         {/* Tooltip */}
         {tooltip && (() => {
           const provider = PROVIDER_INFRA.find(p => p.id === tooltip.providerId);
-          const color = PROVIDER_COLORS[tooltip.providerId] ?? '#888';
+          const color = DOT_COLORS[tooltip.providerId] ?? '#888';
           const containerEl = document.querySelector('.relative.w-full');
           const containerWidth = containerEl ? (containerEl as HTMLElement).offsetWidth : W;
           const containerHeight = containerEl ? (containerEl as HTMLElement).offsetHeight : H;

@@ -72,6 +72,23 @@ export default function WorkloadsCatalog() {
             </div>
           </div>
 
+          {/* Sponsorship Box — promotes per-workload sponsorship slots, rotated across vendors */}
+          <div className="mb-8 border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col gap-3">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">🤝</span>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
+                  Sponsor a Workload
+                </h3>
+                <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                  Each workload page below has a dedicated sponsorship slot. Get your company featured on the architectures most relevant to your product, in front of engineers actively comparing cloud costs for that exact use case.
+                </p>
+                <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
+                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+                </p>
+              </div>
+            </div>
+          </div>
 
           {filteredWorkloads.length === 0 ? (
             <div className="text-center py-12 border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded">
