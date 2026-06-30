@@ -8,6 +8,18 @@ import { ALIBABA_ANALYTICS_INSTANCES, ALIBABA_ANALYTICS_REGION, ALIBABA_ANALYTIC
 import { ORACLE_ANALYTICS_INSTANCES, ORACLE_ANALYTICS_REGION, ORACLE_ANALYTICS_GEOGRAPHY } from '../config/oracle_data_analytics';
 import { DIGITALOCEAN_ANALYTICS_INSTANCES, DIGITALOCEAN_ANALYTICS_REGION, DIGITALOCEAN_ANALYTICS_GEOGRAPHY } from '../config/digitalocean_data_analytics';
 
+const STREAMING_ENGINES = new Set([
+  'Kinesis Data Streams',
+  'Pub/Sub',
+  'Event Hubs',
+  'ApsaraMQ for Kafka',
+  'Kafka',
+]);
+
+function analyticsCategory(engine: string): string {
+  return STREAMING_ENGINES.has(engine) ? 'Streaming' : 'data_warehouse';
+}
+
 // ─── Databricks Static Adapters ────────────────────────────────────────────────
 
 export class DatabricksStaticAdapter extends BaseAdapter {
@@ -193,7 +205,7 @@ export class NativeAnalyticsStaticAdapter extends BaseAdapter {
       cpuVendor: 'N/A',
       gpuCount: 0,
       geography: this.getGeography(this.region),
-      category: 'data_warehouse',
+      category: analyticsCategory(inst.engine),
       price: inst.pricePerNormalizedUnit,
       unit: inst.computeUnitName,
       attributes: {
@@ -298,7 +310,7 @@ export class AlibabaAnalyticsAdapter extends BaseAdapter {
       cpuVendor: 'N/A',
       gpuCount: 0,
       geography: ALIBABA_ANALYTICS_GEOGRAPHY,
-      category: 'data_warehouse',
+      category: analyticsCategory(inst.engine),
       price: inst.pricePerUnit,
       unit: inst.computeUnitName,
       attributes: {
@@ -362,7 +374,7 @@ export class DigitalOceanAnalyticsAdapter extends BaseAdapter {
       cpuVendor: 'N/A',
       gpuCount: 0,
       geography: DIGITALOCEAN_ANALYTICS_GEOGRAPHY,
-      category: 'data_warehouse',
+      category: analyticsCategory(inst.engine),
       price: inst.pricePerUnit,
       unit: inst.computeUnitName,
       attributes: {

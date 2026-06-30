@@ -765,6 +765,94 @@ export class AlibabaRedisAdapter extends BaseAdapter {
   }
 }
 
+// ─── AWS DynamoDB (Static Provisioned Capacity) ─────────────────────────────────
+
+const AWS_DYNAMODB_INSTANCES = [
+  { type: 'On-Demand Pricing (Pay-Per-Request)', vcpus: 0, memory: 0, price: 0.0000012 }, // $1.25 per million WCUs
+  { type: 'Provisioned - 100 WCU/RCU', vcpus: 0, memory: 0, price: 0.084 }, // per hour
+  { type: 'Provisioned - 500 WCU/RCU', vcpus: 0, memory: 0, price: 0.420 },
+  { type: 'Provisioned - 1000 WCU/RCU', vcpus: 0, memory: 0, price: 0.840 },
+  { type: 'Provisioned - 5000 WCU/RCU', vcpus: 0, memory: 0, price: 4.200 },
+];
+
+export class AWSDynamoDBAdapter extends BaseAdapter {
+  providerSlug = 'aws';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching AWS DynamoDB pricing (${AWS_DYNAMODB_INSTANCES.length} entries from static config)...`);
+    return AWS_DYNAMODB_INSTANCES.map(inst => ({
+      provider: 'aws',
+      service: 'DynamoDB',
+      region: 'us-east-1',
+      instanceType: inst.type,
+      vcpus: 0,
+      memoryGb: 0,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: this.getGeography('us-east-1'),
+      category: 'NoSQL',
+      price: inst.price,
+      unit: 'RCU/WCU-Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'DynamoDB',
+        engine_version: 'v2',
+        deployment_type: inst.type.includes('On-Demand') ? 'Serverless' : 'Provisioned',
+        ha_mode: 'Multi AZ',
+        storage_type: 'Managed',
+        tier: 'General Purpose',
+      },
+    }));
+  }
+}
+
+// ─── AWS DocumentDB (MongoDB-Compatible) ────────────────────────────────────────
+
+const AWS_DOCUMENTDB_INSTANCES = [
+  { type: 'db.t3.medium', vcpus: 2, memory: 1, price: 0.28 },
+  { type: 'db.t3.large', vcpus: 2, memory: 2, price: 0.56 },
+  { type: 'db.t3.xlarge', vcpus: 4, memory: 4, price: 1.12 },
+  { type: 'db.r5.large', vcpus: 2, memory: 16, price: 0.76 },
+  { type: 'db.r5.xlarge', vcpus: 4, memory: 32, price: 1.53 },
+  { type: 'db.r5.2xlarge', vcpus: 8, memory: 64, price: 3.06 },
+  { type: 'db.r5.4xlarge', vcpus: 16, memory: 128, price: 6.12 },
+];
+
+export class AWSDocumentDBAdapter extends BaseAdapter {
+  providerSlug = 'aws';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching AWS DocumentDB pricing (${AWS_DOCUMENTDB_INSTANCES.length} entries from static config)...`);
+    return AWS_DOCUMENTDB_INSTANCES.map(inst => ({
+      provider: 'aws',
+      service: 'DocumentDB',
+      region: 'us-east-1',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: this.getGeography('us-east-1'),
+      category: 'NoSQL',
+      price: inst.price,
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'DocumentDB',
+        engine_version: '5.0',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Multi AZ',
+        storage_type: 'SSD',
+        tier: inst.vcpus <= 2 ? 'Burstable' : inst.vcpus <= 8 ? 'General Purpose' : 'Memory Optimized',
+      },
+    }));
+  }
+}
+
 // ─── DatabasePricingPipeline ───────────────────────────────────────────────────
 
 export class DatabasePricingPipeline extends PricingPipeline {
@@ -779,6 +867,8 @@ export class DatabasePricingPipeline extends PricingPipeline {
       new OracleRedisAdapter(),
       new AWSRDSAdapter(),
       new AWSElastiCacheAdapter(),
+      new AWSDynamoDBAdapter(),
+      new AWSDocumentDBAdapter(),
       new GCPMemorystoreAdapter(),
       new AzureDBAdapter(),
       new DigitalOceanDBAdapter(),
