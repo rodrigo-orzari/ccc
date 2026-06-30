@@ -124,10 +124,13 @@ export default function WorkloadDetails() {
   const [pricingModel, setPricingModel] = useState<'PAYG' | 'Yearly'>('PAYG');
   const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');
   const [diagramExpanded, setDiagramExpanded] = useState(false);
+  const [selectedProviders, setSelectedProviders] = useState<Set<string>>(new Set(PROVIDER_IDS));
 
   const carouselRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [canTableScrollRight, setCanTableScrollRight] = useState(true);
 
   const checkScroll = () => {
     if (carouselRef.current) {
@@ -137,10 +140,22 @@ export default function WorkloadDetails() {
     }
   };
 
+  const checkTableScroll = () => {
+    if (tableRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = tableRef.current;
+      setCanTableScrollRight(scrollLeft + clientWidth < scrollWidth - 2);
+    }
+  };
+
   useEffect(() => {
     checkScroll();
+    checkTableScroll();
     window.addEventListener('resize', checkScroll);
-    return () => window.removeEventListener('resize', checkScroll);
+    window.addEventListener('resize', checkTableScroll);
+    return () => {
+      window.removeEventListener('resize', checkScroll);
+      window.removeEventListener('resize', checkTableScroll);
+    };
   }, []);
 
   const scrollLeft = () => {
@@ -388,14 +403,19 @@ export default function WorkloadDetails() {
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="overflow-x-scroll flex-1 always-show-scrollbar">
-                <table className="w-full min-w-[900px] h-full text-left border-collapse">
+              <div className="relative group flex-1">
+                <div
+                  ref={tableRef}
+                  onScroll={checkTableScroll}
+                  className="overflow-x-scroll flex-1 always-show-scrollbar"
+                >
+                  <table className="w-full min-w-[900px] h-full text-left border-collapse">
                   <thead className="bg-[#f5f5f5] dark:bg-[#171717]">
                     <tr className="border-b border-[#e5e5e5] dark:border-[#262626]">
                       <th className="py-3 px-4 text-center">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">Service</span>
                       </th>
-                      {PROVIDER_IDS.map(p => <ProviderTh key={p} id={p} />)}
+                      {PROVIDER_IDS.filter(p => selectedProviders.has(p)).map(p => <ProviderTh key={p} id={p} />)}
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
@@ -415,7 +435,7 @@ export default function WorkloadDetails() {
                             <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{c.name}</span>
                           </div>
                         </td>
-                        {PROVIDER_IDS.map(provider => {
+                        {PROVIDER_IDS.filter(p => selectedProviders.has(p)).map(provider => {
                           if (!results || !results[provider]) {
                             return (
                               <td key={provider} className="py-3 px-4 align-middle text-center">
@@ -469,7 +489,7 @@ export default function WorkloadDetails() {
                           Total / {pricingModel === 'Yearly' ? 'Year' : 'Month'}
                         </span>
                       </td>
-                      {PROVIDER_IDS.map(provider => {
+                      {PROVIDER_IDS.filter(p => selectedProviders.has(p)).map(provider => {
                         if (!results || !results[provider]) {
                           return <td key={provider} className="py-3 px-4 text-center"><span className="text-[10px] text-[#a3a3a3]">—</span></td>;
                         }
@@ -493,7 +513,37 @@ export default function WorkloadDetails() {
                   </tbody>
                 </table>
               </div>
+              {canTableScrollRight && (
+                <button
+                  onClick={() => tableRef.current?.scrollBy({ left: 280, behavior: 'smooth' })}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
+                  aria-label="Scroll right"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              )}
+            </div>
             )}
+          </div>
+        </div>
+
+        {/* Sponsorship Box */}
+        <div className="lg:col-span-8">
+          <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col gap-3">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">🤝</span>
+              <div className="flex-1">
+                <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
+                  Sponsor This Workload
+                </h3>
+                <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                  Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
+                </p>
+                <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
+                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -521,6 +571,57 @@ export default function WorkloadDetails() {
               <p className="text-[10px] text-[#737373] leading-relaxed">
                 PAYG shows monthly on-demand cost. Yearly are committed-use discounts.
               </p>
+            </section>
+
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mx-1" />
+
+            {/* Providers */}
+            <section className="space-y-3">
+              <div className="flex justify-between items-center">
+                <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Providers</h3>
+                <div className="flex gap-1">
+                  <button
+                    onClick={() => setSelectedProviders(new Set(PROVIDER_IDS))}
+                    className="text-[9px] font-bold text-[#2563eb] dark:text-[#818cf8] hover:underline"
+                  >
+                    All
+                  </button>
+                  <span className="text-[#a3a3a3]">/</span>
+                  <button
+                    onClick={() => setSelectedProviders(new Set())}
+                    className="text-[9px] font-bold text-[#2563eb] dark:text-[#818cf8] hover:underline"
+                  >
+                    None
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {PROVIDER_IDS.map(providerId => {
+                  const provName = providerName(providerId);
+                  const isSelected = selectedProviders.has(providerId);
+                  return (
+                    <button
+                      key={providerId}
+                      onClick={() => {
+                        const newProviders = new Set(selectedProviders);
+                        if (isSelected) {
+                          newProviders.delete(providerId);
+                        } else {
+                          newProviders.add(providerId);
+                        }
+                        setSelectedProviders(newProviders);
+                      }}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                        isSelected
+                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                          : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                      }`}
+                    >
+                      {provName}
+                    </button>
+                  );
+                })}
+              </div>
             </section>
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mx-1" />
