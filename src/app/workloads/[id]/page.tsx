@@ -358,27 +358,25 @@ export default function WorkloadDetails() {
         <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
 
         {/* Sponsorship Box — full-width, between the price summary and the table/filter row */}
-        <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col gap-3">
-          <div className="flex items-start gap-3">
-            <span className="text-2xl">🤝</span>
-            <div className="flex-1">
-              <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
-                Sponsor This Workload
-              </h3>
-              <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
-              </p>
-              <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
-                📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
-              </p>
-            </div>
+        <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col items-center gap-3 text-center">
+          <span className="text-2xl">🤝</span>
+          <div>
+            <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
+              Sponsor This Workload
+            </h3>
+            <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+              Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
+            </p>
+            <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
+              📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+            </p>
           </div>
         </div>
 
         {/* Divider */}
         <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Tables */}
           <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
           {/* Monthly/Yearly Comparison — heading + blurb outside the table box */}
