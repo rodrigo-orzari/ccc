@@ -316,64 +316,83 @@ export default function WorkloadDetails() {
 
       <main className="flex-1 p-6 lg:p-10 max-w-[1400px] mx-auto w-full flex flex-col gap-6">
 
-        {/* Workload Price Summary Box — spans full width, above both the table and the filter panel */}
-        {results && (
-          <div className="flex flex-col sm:flex-row bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded overflow-hidden divide-y sm:divide-y-0 sm:divide-x divide-[#e5e5e5] dark:divide-[#262626]">
-            {PROVIDER_IDS.map(provider => {
-              const pData = results[provider];
-              if (!pData) return null;
-              const isUnavailable = pData.components.some((c: any) => c.instanceType === 'N/A');
-              const color = providerColor(provider);
-
-              return (
-                <div key={provider} className="flex-1 p-4 flex flex-col justify-between gap-3 min-w-[100px] bg-white dark:bg-[#000000]">
-                  <div className="flex justify-between items-center gap-2">
-                    <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: color, borderColor: color + '50', backgroundColor: color + '18' }}>
-                      {providerName(provider)}
-                    </span>
-                    {isUnavailable ? (
-                      <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">N/A</span>
-                    ) : (
-                      <span className="text-sm font-bold text-black dark:text-white">
-                        ${(pData.total * multiplier).toLocaleString('en-US', { maximumFractionDigits: 0 })}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+        {/* Prices summary — heading + blurb above the per-provider total pills */}
+        <div className="flex flex-col gap-3">
+          <div>
+            <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">Prices</h2>
+            <p className="text-[12px] text-[#737373] mt-1">
+              This is the sum of the monthly PAYG/Yearly average prices for this workload.
+            </p>
           </div>
-        )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Sponsorship Box — full-width divider between the workload header and the table/filter row */}
-          <div className="lg:col-span-12 border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col gap-3">
-            <div className="flex items-start gap-3">
-              <span className="text-2xl">🤝</span>
-              <div className="flex-1">
-                <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
-                  Sponsor This Workload
-                </h3>
-                <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                  Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
-                </p>
-                <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
-                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
-                </p>
-              </div>
+          {results && (
+            <div className="flex flex-col sm:flex-row bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded overflow-hidden divide-y sm:divide-y-0 sm:divide-x divide-[#e5e5e5] dark:divide-[#262626]">
+              {PROVIDER_IDS.map(provider => {
+                const pData = results[provider];
+                if (!pData) return null;
+                const isUnavailable = pData.components.some((c: any) => c.instanceType === 'N/A');
+                const color = providerColor(provider);
+
+                return (
+                  <div key={provider} className="flex-1 p-4 flex flex-col justify-between gap-3 min-w-[100px] bg-white dark:bg-[#000000]">
+                    <div className="flex justify-between items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: color, borderColor: color + '50', backgroundColor: color + '18' }}>
+                        {providerName(provider)}
+                      </span>
+                      {isUnavailable ? (
+                        <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">N/A</span>
+                      ) : (
+                        <span className="text-sm font-bold text-black dark:text-white">
+                          ${(pData.total * multiplier).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Divider */}
+        <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
+
+        {/* Sponsorship Box — full-width, between the price summary and the table/filter row */}
+        <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col gap-3">
+          <div className="flex items-start gap-3">
+            <span className="text-2xl">🤝</span>
+            <div className="flex-1">
+              <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
+                Sponsor This Workload
+              </h3>
+              <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
+              </p>
+              <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
+                📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+              </p>
             </div>
           </div>
+        </div>
 
+        {/* Divider */}
+        <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Tables */}
           <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
           {/* Combined Configuration + Cost table */}
           <div className="flex flex-col flex-1 border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000]">
             <div className="px-5 py-3 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-3">
-              <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
-                {pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Comparison
-              </h2>
+              <div>
+                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                  {pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Comparison
+                </h2>
+                <p className="text-[11px] text-[#737373] mt-0.5">
+                  Prices by provider and services that enable users to run this workload.
+                </p>
+              </div>
               <div className="flex items-center gap-3">
-                <span className="text-[10px] text-[#737373] hidden sm:inline">Cheapest match per component</span>
                 <div className="flex bg-[#f5f5f5] dark:bg-[#171717] p-0.5 rounded-lg border border-[#e5e5e5] dark:border-[#262626]">
                   <button
                     onClick={() => setViewMode('table')}
