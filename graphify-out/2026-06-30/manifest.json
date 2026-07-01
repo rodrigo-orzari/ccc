@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1782153913.7437303,
-    "ast_hash": "5adb3b523785793800ebe94ca2df3df2",
+    "mtime": 1782854473.374856,
+    "ast_hash": "c78ed78ef01ae6df4a69e6eb79a115b9",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
@@ -755,13 +755,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1782852947.7832487,
-    "ast_hash": "87eb820ba4136bde69452c41860794c2",
+    "mtime": 1782856858.0391228,
+    "ast_hash": "689402d32dbb29b920c212bd18280499",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1782853489.678818,
-    "ast_hash": "a7bd308151e4d3814a375434440c4e5e",
+    "mtime": 1782856867.0378163,
+    "ast_hash": "111b813821ae6be74489995df5bcc3c6",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
@@ -790,8 +790,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1782853447.1039772,
-    "ast_hash": "22c25fd8bdfb3e92f464aad8171093ca",
+    "mtime": 1782856873.9826014,
+    "ast_hash": "563101d454049fa037cc0a2cfd607f23",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -800,8 +800,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/WorldMap.tsx": {
-    "mtime": 1782853438.8183687,
-    "ast_hash": "3050a698eacb5492168c101e08640174",
+    "mtime": 1782855053.8477008,
+    "ast_hash": "3be3bac18bdae6eac34b2748f3f8102d",
     "semantic_hash": ""
   },
   "src/components/DigitalOceanReferralModal.tsx": {

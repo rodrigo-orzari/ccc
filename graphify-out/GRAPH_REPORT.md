@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-06-30)
 
 ## Corpus Check
-- 173 files · ~159,777 words
+- 173 files · ~159,802 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8aa60068`
+- Built from commit: `53b8f415`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -233,7 +233,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **240 isolated node(s):** `GEO_BY_CODE`, `DOT_COLORS`, `CONTINENTS`, `REGION_COORDS`, `Tooltip` (+235 more)
+- **240 isolated node(s):** `PROVIDER_COLORS`, `GLOSSARY`, `GEO_COLORS`, `GEO_BY_CODE`, `DOT_COLORS` (+235 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **37 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -246,7 +246,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **Why does `PricingRecord` connect `Community 55` to `Community 69`, `Community 38`, `Community 9`, `Community 75`, `Community 76`, `Community 47`, `Community 48`, `Community 23`, `Community 62`?**
   _High betweenness centrality (0.050) - this node is a cross-community bridge._
-- **What connects `GEO_BY_CODE`, `DOT_COLORS`, `CONTINENTS` to the rest of the system?**
+- **What connects `PROVIDER_COLORS`, `GLOSSARY`, `GEO_COLORS` to the rest of the system?**
   _240 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
