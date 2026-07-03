@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-07-02)
 
 ## Corpus Check
-- 173 files · ~160,611 words
+- 174 files · ~161,634 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 760 nodes · 1087 edges · 77 communities (42 shown, 35 thin omitted)
+- 766 nodes · 1099 edges · 82 communities (42 shown, 40 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `34329b19`
+- Built from commit: `8f43332d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -54,6 +54,7 @@
 - [[_COMMUNITY_Community 44|Community 44]]
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
 - [[_COMMUNITY_Community 49|Community 49]]
 - [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
@@ -65,15 +66,19 @@
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 59|Community 59]]
 - [[_COMMUNITY_Community 60|Community 60]]
+- [[_COMMUNITY_Community 61|Community 61]]
 - [[_COMMUNITY_Community 62|Community 62]]
 - [[_COMMUNITY_Community 63|Community 63]]
 - [[_COMMUNITY_Community 64|Community 64]]
 - [[_COMMUNITY_Community 65|Community 65]]
 - [[_COMMUNITY_Community 66|Community 66]]
 - [[_COMMUNITY_Community 67|Community 67]]
+- [[_COMMUNITY_Community 68|Community 68]]
 - [[_COMMUNITY_Community 69|Community 69]]
 - [[_COMMUNITY_Community 70|Community 70]]
 - [[_COMMUNITY_Community 71|Community 71]]
+- [[_COMMUNITY_Community 72|Community 72]]
+- [[_COMMUNITY_Community 73|Community 73]]
 - [[_COMMUNITY_Community 81|Community 81]]
 - [[_COMMUNITY_Community 82|Community 82]]
 - [[_COMMUNITY_Community 83|Community 83]]
@@ -81,16 +86,16 @@
 - [[_COMMUNITY_Community 93|Community 93]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `BaseAdapter` - 39 edges
-2. `PricingRecord` - 25 edges
-3. `PricingPipeline` - 15 edges
+1. `BaseAdapter` - 40 edges
+2. `PricingRecord` - 26 edges
+3. `PricingPipeline` - 16 edges
 4. `Compare Cloud Costs` - 15 edges
 5. `Serverless Language Filter Implementation Summary` - 13 edges
 6. `ServerlessPricingPipeline` - 11 edges
 7. `CCC Operations Runbook` - 11 edges
 8. `ProductType` - 10 edges
 9. `buildPricingFilters()` - 10 edges
-10. `DatabasePricingPipeline` - 8 edges
+10. `NetworkingPricingPipeline` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `run()` --calls--> `buildPricingFilters()`  [EXTRACTED]
@@ -107,7 +112,7 @@
 ## Import Cycles
 - None detected.
 
-## Communities (77 total, 35 thin omitted)
+## Communities (82 total, 40 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
@@ -115,7 +120,7 @@ Nodes (12): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, G
 
 ### Community 7 - "Community 7"
 Cohesion: 0.06
-Nodes (67): Dashboard(), ChartsViewProps, ENGINE_CATEGORIES, FilterSectionProps, FilterSidebar(), GroupedFilterSectionProps, groupEngines(), AI_CONTEXT_WINDOWS (+59 more)
+Nodes (68): Dashboard(), ChartsViewProps, ENGINE_CATEGORIES, FilterSectionProps, FilterSidebar(), groupAnalyticsTiers(), GroupedFilterSectionProps, groupEngines() (+60 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.17
@@ -187,7 +192,7 @@ Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
 
 ### Community 55 - "Community 55"
 Cohesion: 0.09
-Nodes (11): DatabricksAzureAdapter, AlibabaDBAdapter, AWSElastiCacheAdapter, DigitalOceanDBAdapter, GCPCloudSQLAdapter, GCPMemorystoreAdapter, OracleAutonomousAdapter, OracleMySQLHeatWaveAdapter (+3 more)
+Nodes (11): AlibabaAnalyticsAdapter, DatabricksAzureAdapter, DatabricksStaticAdapter, OracleAnalyticsAdapter, SynapseAzureAdapter, DigitalOceanDBAdapter, GCPCloudSQLAdapter, GCPMemorystoreAdapter (+3 more)
 
 ### Community 56 - "Community 56"
 Cohesion: 0.18
@@ -218,32 +223,32 @@ Cohesion: 0.09
 Nodes (16): DatacenterRegion, GEOGRAPHIES, Geography, PROVIDER_INFRA, ProviderInfrastructure, RegionStatus, GEO_COLORS, GLOSSARY (+8 more)
 
 ### Community 69 - "Community 69"
-Cohesion: 0.07
-Nodes (16): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig (+8 more)
+Cohesion: 0.10
+Nodes (14): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+6 more)
 
 ### Community 93 - "Community 93"
 Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **239 isolated node(s):** `PROVIDER_COLORS`, `GLOSSARY`, `GEO_COLORS`, `REGION_OPTIONS`, `PROVIDER_IDS` (+234 more)
+- **240 isolated node(s):** `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps`, `ProviderCardProps`, `DBStatusProvider` (+235 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **35 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **40 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `BaseAdapter` connect `Community 56` to `Community 69`, `Community 9`, `Community 47`, `Community 16`, `Community 55`, `Community 23`, `Community 27`, `Community 62`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Community 55` to `Community 69`, `Community 38`, `Community 9`, `Community 47`, `Community 23`, `Community 62`?**
-  _High betweenness centrality (0.050) - this node is a cross-community bridge._
+- **Why does `BaseAdapter` connect `Community 56` to `Community 68`, `Community 69`, `Community 72`, `Community 9`, `Community 73`, `Community 47`, `Community 48`, `Community 16`, `Community 23`, `Community 55`, `Community 27`, `Community 61`, `Community 62`?**
+  _High betweenness centrality (0.059) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Community 55` to `Community 68`, `Community 69`, `Community 38`, `Community 72`, `Community 9`, `Community 73`, `Community 47`, `Community 48`, `Community 23`, `Community 61`, `Community 62`?**
+  _High betweenness centrality (0.053) - this node is a cross-community bridge._
 - **Why does `PricingPipeline` connect `Community 62` to `Community 9`, `Community 69`, `Community 38`, `Community 47`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **What connects `PROVIDER_COLORS`, `GLOSSARY`, `GEO_COLORS` to the rest of the system?**
-  _239 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.037) - this node is a cross-community bridge._
+- **What connects `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps` to the rest of the system?**
+  _240 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
   _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.05809979494190021 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05727605727605728 - nodes in this community are weakly interconnected._
 - **Should `Community 9` be split into smaller, more focused modules?**
   _Cohesion score 0.1 - nodes in this community are weakly interconnected._
