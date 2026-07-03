@@ -322,6 +322,9 @@ export default function DatacentersPage() {
               </p>
             </div>
 
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
             {/* Sponsorship Box */}
             <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
               <span className="text-2xl">🤝</span>
@@ -337,6 +340,9 @@ export default function DatacentersPage() {
                 </p>
               </div>
             </div>
+
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* World Map */}
             <div id="world-map" className="mb-8 scroll-mt-6">

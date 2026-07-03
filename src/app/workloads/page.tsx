@@ -72,6 +72,9 @@ export default function WorkloadsCatalog() {
             </div>
           </div>
 
+          {/* Divider */}
+          <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
+
           {/* Sponsorship Box — promotes per-workload sponsorship slots, rotated across vendors */}
           <div className="mb-8 border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col items-center gap-3 text-center">
             <span className="text-2xl">🤝</span>
@@ -87,6 +90,9 @@ export default function WorkloadsCatalog() {
               </p>
             </div>
           </div>
+
+          {/* Divider */}
+          <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
 
           {filteredWorkloads.length === 0 ? (
             <div className="text-center py-12 border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded">
