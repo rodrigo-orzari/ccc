@@ -14,6 +14,7 @@ interface TableToolbarProps {
   onViewModeChange?: (mode: 'table' | 'charts') => void;
   /** Opens the filter drawer on mobile. When provided, a "Filters" button is shown below lg. */
   onOpenFilters?: () => void;
+  lastUpdated?: string;
 }
 
 export default function TableToolbar({
@@ -26,6 +27,7 @@ export default function TableToolbar({
   viewMode = 'table',
   onViewModeChange,
   onOpenFilters,
+  lastUpdated,
 }: TableToolbarProps) {
   return (
     <div className="px-4 py-3 flex items-center bg-[#f7f8ff] dark:bg-[#06060f] border-b border-[#dde0f0] dark:border-[#1e1e38]">
@@ -56,9 +58,13 @@ export default function TableToolbar({
           />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           {viewMode === 'table' && (
-            <span className="text-[10px] text-[#a3a3a3] dark:text-[#525252] hidden sm:inline-block">Click a column header to sort</span>
+            <div className="flex items-center gap-3 text-[10px] text-[#a3a3a3] dark:text-[#525252] hidden sm:flex">
+              <span>Click a column header to sort</span>
+              {lastUpdated && <span>•</span>}
+              {lastUpdated && <span>Last updated: {lastUpdated}</span>}
+            </div>
           )}
           
           {onViewModeChange && (

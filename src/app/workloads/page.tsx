@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Footer, ProductTypeSelector, DonationModal } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
+import { WORKLOADS_LISTING_SPONSOR } from '@/config';
 import type { ProductType } from '@/types';
 
 const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
@@ -75,21 +76,39 @@ export default function WorkloadsCatalog() {
           {/* Divider */}
           <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
 
-          {/* Sponsorship Box — promotes per-workload sponsorship slots, rotated across vendors */}
-          <div className="mb-8 border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col items-center gap-3 text-center">
-            <span className="text-2xl">🤝</span>
-            <div>
-              <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
-                Sponsor a Workload
-              </h3>
-              <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                Each workload page below has a dedicated sponsorship slot. Get your company featured on the architectures most relevant to your product, in front of engineers actively comparing cloud costs for that exact use case.
-              </p>
-              <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
-                📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
-              </p>
+          {/* Sponsorship Box — renders WORKLOADS_LISTING_SPONSOR's 1200×200 banner when set,
+              otherwise falls back to the "become a sponsor" pitch. */}
+          {WORKLOADS_LISTING_SPONSOR ? (
+            <a
+              href={WORKLOADS_LISTING_SPONSOR.linkUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="mb-8 block rounded overflow-hidden border border-[#e5e5e5] dark:border-[#262626]"
+            >
+              <img
+                src={WORKLOADS_LISTING_SPONSOR.imageUrl}
+                alt={`Sponsored by ${WORKLOADS_LISTING_SPONSOR.companyName}`}
+                width={1200}
+                height={200}
+                className="w-full h-auto aspect-[6/1] object-cover"
+              />
+            </a>
+          ) : (
+            <div className="mb-8 border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col items-center gap-3 text-center">
+              <span className="text-2xl">🤝</span>
+              <div>
+                <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
+                  Sponsor a Workload
+                </h3>
+                <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                  Each workload page below has a dedicated sponsorship slot. Get your company featured on the architectures most relevant to your product, in front of engineers actively comparing cloud costs for that exact use case.
+                </p>
+                <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
+                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+                </p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Divider */}
           <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />

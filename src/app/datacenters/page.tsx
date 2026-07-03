@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Footer, ProductTypeSelector, DigitalOceanReferralModal } from '@/components';
 import { PROVIDER_INFRA, GEOGRAPHIES, type ProviderInfrastructure, type DatacenterRegion } from '@/config/datacenter_data';
+import { DATACENTERS_SPONSOR } from '@/config';
 import { ChevronDown, ExternalLink, Info } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, Cell } from 'recharts';
 import WorldMap from './WorldMap';
@@ -325,7 +326,24 @@ export default function DatacentersPage() {
             {/* Divider */}
             <div className="h-px bg-[var(--border)] mb-8" />
 
-            {/* Sponsorship Box */}
+            {/* Sponsorship Box — renders DATACENTERS_SPONSOR's 1200×200 banner when set,
+                otherwise falls back to the "become a sponsor" pitch. */}
+            {DATACENTERS_SPONSOR ? (
+              <a
+                href={DATACENTERS_SPONSOR.linkUrl}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="mb-8 block rounded overflow-hidden border border-[var(--border)]"
+              >
+                <img
+                  src={DATACENTERS_SPONSOR.imageUrl}
+                  alt={`Sponsored by ${DATACENTERS_SPONSOR.companyName}`}
+                  width={1200}
+                  height={200}
+                  className="w-full h-auto aspect-[6/1] object-cover"
+                />
+              </a>
+            ) : (
             <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
               <span className="text-2xl">🤝</span>
               <div>
@@ -340,6 +358,7 @@ export default function DatacentersPage() {
                 </p>
               </div>
             </div>
+            )}
 
             {/* Divider */}
             <div className="h-px bg-[var(--border)] mb-8" />

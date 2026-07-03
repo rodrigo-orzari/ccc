@@ -1,3 +1,5 @@
+import type { SponsorSlot } from '@/types';
+
 // Geographic regions
 export const GEOGRAPHIES = ['N. America', 'S. America', 'W. Europe', 'N. Europe', 'Mid East & Africa', 'Asia Pacific', 'Australia'];
 
@@ -176,3 +178,11 @@ export const SECURITY_SERVICE_GROUPS: { label: string; services: string[] }[] = 
   { label: 'Identity & Encryption', services: ['Identity & Access Management (IAM)', 'Key Management Service (KMS)'] },
   { label: 'Threat & Compliance', services: ['Threat Detection'] },
 ];
+
+// --- SPONSORSHIP ---
+// Site-wide sponsor slots (Datacenters page, Workloads listing page). Per-workload
+// slots live on each entry in WORKLOADS (src/config/workloads.ts) via `sponsor`.
+// Set to a SponsorSlot to go live; leave null and the page shows the "become a
+// sponsor" pitch box instead. Image spec: 1200×200 (6:1) — see /docs "Advertising with us".
+export const DATACENTERS_SPONSOR: SponsorSlot | null = null;
+export const WORKLOADS_LISTING_SPONSOR: SponsorSlot | null = null;

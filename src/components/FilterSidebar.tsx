@@ -1358,8 +1358,8 @@ export default function FilterSidebar({
           <>
             <FilterSection
               title="Geography"
-              tooltip="Geographic region."
-              options={config.GEOGRAPHIES}
+              tooltip="Geographic region. Analytics services are offered from a representative region per provider, normalized to the geography shown."
+              options={config.GEOGRAPHIES_ANALYTICS.length > 0 ? config.GEOGRAPHIES_ANALYTICS : ['N. America', 'Asia Pacific']}
               selected={selectedGeographies}
               onToggle={onGeographyToggle}
               onSetAll={onSetGeographies}
@@ -1412,7 +1412,7 @@ export default function FilterSidebar({
                 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
               >
                 <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
-                Specs & Price <Tooltip text="Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD."><Info size={10} className="cursor-help" /></Tooltip>
+                {['ai', 'serverless', 'data-analytics'].includes(activeProductType) ? 'Price' : 'Specs & Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by hourly price ($). Prices are on-demand (PAYG) USD." : ['serverless', 'data-analytics'].includes(activeProductType) ? "Filter by price (PAYG or Yearly). Prices are on-demand USD." : "Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD."}><Info size={10} className="cursor-help" /></Tooltip>
               </button>
             </h2>
             <button
@@ -1437,7 +1437,7 @@ export default function FilterSidebar({
           </div>
           {expanded.specs && (
             <div className="space-y-8 px-1">
-              {['vm', 'database', 'containers', 'serverless'].includes(activeProductType) && (
+              {['vm', 'database', 'containers'].includes(activeProductType) && (
                 <>
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
@@ -1460,7 +1460,35 @@ export default function FilterSidebar({
                 </>
               )}
               <div className="space-y-2">
-                <div className="text-[10px] font-bold text-[#737373]">{activeProductType === 'ai' ? 'Input Price ($/1M Tokens)' : 'Hourly price ($)'}</div>
+                <div className="flex items-center justify-between">
+                  <div className="text-[10px] font-bold text-[#737373]">
+                    {activeProductType === 'ai' ? 'Input Price ($/1M Tokens)' : ['serverless', 'data-analytics'].includes(activeProductType) ? 'PAYG Price' : 'Hourly price ($)'}
+                  </div>
+                  {['serverless', 'containers', 'data-analytics'].includes(activeProductType) && (
+                    <div className="flex gap-1">
+                      <button
+                        onClick={() => onShowAggregationChange(false)}
+                        className={`px-2 py-0.5 rounded text-[8px] font-bold transition-all border ${
+                          !showAggregation
+                            ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                            : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]'
+                        }`}
+                      >
+                        PAYG
+                      </button>
+                      <button
+                        onClick={() => onShowAggregationChange(true)}
+                        className={`px-2 py-0.5 rounded text-[8px] font-bold transition-all border ${
+                          showAggregation
+                            ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                            : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]'
+                        }`}
+                      >
+                        Yearly
+                      </button>
+                    </div>
+                  )}
+                </div>
                 <RangeSlider
                   min={config.DEFAULT_PRICE_RANGE.min}
                   max={config.DEFAULT_PRICE_RANGE.max}
@@ -1477,7 +1505,7 @@ export default function FilterSidebar({
         <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
         {/* Pricing Mode */}
-        {activeProductType !== 'ai' && (
+        {!['ai', 'serverless', 'containers', 'data-analytics'].includes(activeProductType) && (
           <section className="space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="m-0">

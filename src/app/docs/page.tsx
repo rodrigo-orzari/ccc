@@ -191,6 +191,7 @@ const DocsPage: React.FC = () => {
               <li><a href="#glossary" style={{ padding: '3px 0' }}>Glossary</a></li>
               <li><a href="#filters" style={{ padding: '3px 0' }}>Filters</a></li>
               <li><a href="#sharing" style={{ padding: '3px 0' }}>Sharing</a></li>
+              <li><a href="#advertising" style={{ padding: '3px 0' }}>Advertising with Us</a></li>
               <li><a href="#contributing--feedback" style={{ padding: '3px 0' }}>Contributing &amp; Feedback</a></li>
             </ul>
           </nav>
@@ -450,6 +451,42 @@ const DocsPage: React.FC = () => {
             <p>
               Use the <strong>Share</strong> buttons in the top bar to share a link to the tool on X
               (Twitter) or LinkedIn.
+            </p>
+            <BackToTop />
+          </div>
+
+          {/* Advertising */}
+          <div className="docs-section">
+            <h2 id="advertising">Advertising with Us</h2>
+            <p>
+              comparecloudcosts.com puts your brand in front of engineers, architects, and technical
+              decision-makers actively comparing cloud pricing and evaluating infrastructure choices — a
+              highly qualified audience at the exact moment they're making buying decisions.
+            </p>
+            <p>
+              Sponsorship slots are available on the <Link href="/datacenters">Datacenters</Link> page,
+              the <Link href="/workloads">Workloads</Link> catalog, and individual workload pages — so you
+              can target a broad audience or a specific architecture pattern relevant to your product (for
+              example, a security vendor sponsoring the Compliance-Ready Web Application workload).
+            </p>
+            <h3 id="advertising-specs">Image Specs</h3>
+            <p>
+              All sponsor placements use a single shared banner spec, so one asset works across every slot:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Dimensions:</strong> 1200 × 200px (6:1 aspect ratio)</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Retina asset:</strong> 2400 × 400px recommended</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Format:</strong> PNG, JPG, or WebP</li>
+              <li style={{ marginBottom: '0.4rem' }}>Images render responsively (scaled to the container width, aspect ratio preserved), so avoid placing critical text near the edges.</li>
+            </ul>
+            <p>
+              For reference, this is close to LinkedIn's Company Page cover image ratio (1128 × 191px,
+              ~5.9:1) — if you already have a LinkedIn banner asset, it will likely need only minor
+              cropping to fit.
+            </p>
+            <p>
+              Interested in sponsoring? Reach out at{' '}
+              <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.
             </p>
             <BackToTop />
           </div>

@@ -20,6 +20,7 @@ export interface PricingRecord {
   avg_price?: string;
   max_price?: string;
   data_source?: string;
+  updated_at?: string;
   attributes?: {
     supportedLanguages?: string | string[];
     engine?: string;
@@ -85,6 +86,15 @@ export interface WorkloadComponent {
   };
 }
 
+// Sponsor banner slot. Image should be a 1200×200 (6:1) asset — see /docs
+// "Advertising with us" for specs. Slots render as the "become a sponsor"
+// pitch box when unset.
+export interface SponsorSlot {
+  imageUrl: string;
+  companyName: string;
+  linkUrl: string;
+}
+
 export interface WorkloadDefinition {
   id: string;
   name: string;
@@ -92,4 +102,5 @@ export interface WorkloadDefinition {
   icon: string;
   parameters: WorkloadParameter[];
   components: WorkloadComponent[];
+  sponsor?: SponsorSlot;
 }

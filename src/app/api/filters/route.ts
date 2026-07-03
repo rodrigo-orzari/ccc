@@ -11,6 +11,7 @@ export async function GET() {
       SELECT
         ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a') as geographies,
         ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a' AND s.category = 'security') as geographies_security,
+        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a' AND s.category = 'data_warehouse') as geographies_analytics,
         ARRAY_AGG(DISTINCT pr.os) FILTER (WHERE pr.os IS NOT NULL AND pr.os != '' AND pr.os != 'N/A' AND pr.os != 'n/a') as os_types,
         ARRAY_AGG(DISTINCT pr.arch) FILTER (WHERE pr.arch IS NOT NULL AND pr.arch != '' AND pr.arch != 'N/A' AND pr.arch != 'n/a') as architectures,
         ARRAY_AGG(DISTINCT pr.cpu_vendor) FILTER (WHERE pr.cpu_vendor IS NOT NULL AND pr.cpu_vendor != '' AND pr.cpu_vendor != 'N/A' AND pr.cpu_vendor != 'n/a') as cpu_vendors,
@@ -27,7 +28,7 @@ export async function GET() {
         ARRAY_AGG(DISTINCT pr.attributes->>'engine') FILTER (WHERE pr.attributes->>'engine' IS NOT NULL) as engines,
         ARRAY_AGG(DISTINCT pr.attributes->>'deployment_type') FILTER (WHERE pr.attributes->>'deployment_type' IS NOT NULL) as deployment_types,
         ARRAY_AGG(DISTINCT pr.attributes->>'ha_mode') FILTER (WHERE pr.attributes->>'ha_mode' IS NOT NULL) as ha_modes,
-        ARRAY_AGG(DISTINCT pr.attributes->>'tier') FILTER (WHERE pr.attributes->>'tier' IS NOT NULL) as tiers,
+        ARRAY_AGG(DISTINCT pr.attributes->>'tier') FILTER (WHERE pr.attributes->>'tier' IS NOT NULL AND s.category = 'data_warehouse') as tiers,
         ARRAY_AGG(DISTINCT pr.attributes->>'modelTier') FILTER (WHERE pr.attributes->>'modelTier' IS NOT NULL) as ai_model_tiers,
         ARRAY_AGG(DISTINCT pr.attributes->>'multimodal') FILTER (WHERE pr.attributes->>'multimodal' IS NOT NULL) as ai_multimodal,
         ARRAY_AGG(DISTINCT pr.attributes->>'orchestrator') FILTER (WHERE pr.attributes->>'orchestrator' IS NOT NULL) as orchestrators,

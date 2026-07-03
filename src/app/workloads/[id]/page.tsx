@@ -357,21 +357,40 @@ export default function WorkloadDetails() {
         {/* Divider */}
         <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
 
-        {/* Sponsorship Box — full-width, between the price summary and the table/filter row */}
-        <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col items-center gap-3 text-center">
-          <span className="text-2xl">🤝</span>
-          <div>
-            <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
-              Sponsor This Workload
-            </h3>
-            <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-              Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
-            </p>
-            <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
-              📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
-            </p>
+        {/* Sponsorship Box — full-width, between the price summary and the table/filter row.
+            Renders the sponsor's 1200×200 banner when workload.sponsor is set; otherwise
+            falls back to the "become a sponsor" pitch. */}
+        {workload.sponsor ? (
+          <a
+            href={workload.sponsor.linkUrl}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="block rounded overflow-hidden border border-[#e5e5e5] dark:border-[#262626]"
+          >
+            <img
+              src={workload.sponsor.imageUrl}
+              alt={`Sponsored by ${workload.sponsor.companyName}`}
+              width={1200}
+              height={200}
+              className="w-full h-auto aspect-[6/1] object-cover"
+            />
+          </a>
+        ) : (
+          <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col items-center gap-3 text-center">
+            <span className="text-2xl">🤝</span>
+            <div>
+              <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
+                Sponsor This Workload
+              </h3>
+              <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
+              </p>
+              <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
+                📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+              </p>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Divider */}
         <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />

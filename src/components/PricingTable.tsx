@@ -114,6 +114,7 @@ interface PricingTableProps {
   scrolledToEnd: boolean;
   sortConfig: SortConfig;
   onHeaderClick: (key: string) => void;
+  lastUpdated?: string;
 }
 
 // ─── Resize handle ──────────────────────────────────────────────────────────
@@ -140,6 +141,7 @@ export default function PricingTable({
   scrolledToEnd,
   sortConfig,
   onHeaderClick,
+  lastUpdated,
 }: PricingTableProps) {
   const [colWidths, setColWidths] = useState<Record<string, number>>(DEFAULT_WIDTHS);
   const widthsRef = useRef(colWidths);

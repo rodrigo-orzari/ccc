@@ -615,6 +615,17 @@ export default function Dashboard() {
     };
   }, [data.length, activeProductType]);
 
+  const lastUpdated = useMemo(() => {
+    if (!rawData || rawData.length === 0) return undefined;
+    const maxUpdated = rawData.reduce((max, record) => {
+      if (!record.updated_at) return max;
+      const recordDate = new Date(record.updated_at);
+      return recordDate > max ? recordDate : max;
+    }, new Date(0));
+    if (maxUpdated.getTime() === 0) return undefined;
+    return maxUpdated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }, [rawData]);
+
   const handleHeaderClick = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
@@ -896,6 +907,7 @@ export default function Dashboard() {
             viewMode={viewMode}
             onViewModeChange={setViewMode}
             onOpenFilters={() => setFiltersOpen(true)}
+            lastUpdated={lastUpdated}
           />
 
           {viewMode === 'table' ? (
@@ -909,6 +921,7 @@ export default function Dashboard() {
               scrolledToEnd={scrolledToEnd}
               sortConfig={sortConfig}
               onHeaderClick={handleHeaderClick}
+              lastUpdated={lastUpdated}
             />
           ) : (
             <ChartsView
