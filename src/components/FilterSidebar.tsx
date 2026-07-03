@@ -1412,7 +1412,7 @@ export default function FilterSidebar({
                 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
               >
                 <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
-                {['ai', 'serverless', 'data-analytics'].includes(activeProductType) ? 'Price' : 'Specs & Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by hourly price ($). Prices are on-demand (PAYG) USD." : ['serverless', 'data-analytics'].includes(activeProductType) ? "Filter by price (PAYG or Yearly). Prices are on-demand USD." : "Filter by vCPU count, memory size (GB), and hourly price ($). Prices are on-demand (PAYG) USD."}><Info size={10} className="cursor-help" /></Tooltip>
+                {['vm', 'database', 'containers'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
               </button>
             </h2>
             <button
@@ -1462,9 +1462,9 @@ export default function FilterSidebar({
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="text-[10px] font-bold text-[#737373]">
-                    {activeProductType === 'ai' ? 'Input Price ($/1M Tokens)' : ['serverless', 'data-analytics'].includes(activeProductType) ? 'PAYG Price' : 'Hourly price ($)'}
+                    {activeProductType === 'ai' ? 'Input Price ($/1M Tokens)' : 'Price ($)'}
                   </div>
-                  {['serverless', 'containers', 'data-analytics'].includes(activeProductType) && (
+                  {activeProductType !== 'ai' && (
                     <div className="flex gap-1">
                       <button
                         onClick={() => onShowAggregationChange(false)}
@@ -1502,48 +1502,6 @@ export default function FilterSidebar({
           )}
         </section>
 
-        <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-
-        {/* Pricing Mode */}
-        {!['ai', 'serverless', 'containers', 'data-analytics'].includes(activeProductType) && (
-          <section className="space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="m-0">
-                <button
-                  onClick={() => onToggleSection('pricing')}
-                  className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
-                >
-                  <ChevronDown size={10} className={`transition-transform ${expanded.pricing ? '' : '-rotate-90'}`} />
-                  PAYG OR YEARLY PRICE <Tooltip text="PAYG shows the on-demand hourly price. Yearly multiplies the hourly price by 8,760 hours for a rough annual estimate (no committed-use discounts applied)."><Info size={10} className="cursor-help" /></Tooltip>
-                </button>
-              </h2>
-            </div>
-            {expanded.pricing && (
-              <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => onShowAggregationChange(false)}
-                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                    !showAggregation
-                      ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                      : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                  }`}
-                >
-                  PAYG
-                </button>
-                <button
-                  onClick={() => onShowAggregationChange(true)}
-                  className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                    showAggregation
-                      ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                      : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                  }`}
-                >
-                  Yearly
-                </button>
-              </div>
-            )}
-          </section>
-        )}
       </div>
     </aside>
     </>
