@@ -7,6 +7,7 @@ import { NATIVE_ANALYTICS_INSTANCES, NATIVE_ANALYTICS_AWS_REGION, NATIVE_ANALYTI
 import { ALIBABA_ANALYTICS_INSTANCES, ALIBABA_ANALYTICS_REGION, ALIBABA_ANALYTICS_GEOGRAPHY } from '../config/alibaba_data_analytics';
 import { ORACLE_ANALYTICS_INSTANCES, ORACLE_ANALYTICS_REGION, ORACLE_ANALYTICS_GEOGRAPHY } from '../config/oracle_data_analytics';
 import { DIGITALOCEAN_ANALYTICS_INSTANCES, DIGITALOCEAN_ANALYTICS_REGION, DIGITALOCEAN_ANALYTICS_GEOGRAPHY } from '../config/digitalocean_data_analytics';
+import { ANALYTICS_REGIONS } from '../config/analytics_regions';
 
 const STREAMING_ENGINES = new Set([
   'Kinesis Data Streams',
@@ -18,6 +19,22 @@ const STREAMING_ENGINES = new Set([
 
 function analyticsCategory(engine: string): string {
   return STREAMING_ENGINES.has(engine) ? 'Streaming' : 'data_warehouse';
+}
+
+// Replicate each single-region analytics record across the provider's regions,
+// scaling price by the per-region multiplier. Providers without a region table
+// (or engines priced globally) fall through unchanged. See config/analytics_regions.ts.
+function expandRecordsByRegion(records: PricingRecord[]): PricingRecord[] {
+  return records.flatMap(rec => {
+    const regions = ANALYTICS_REGIONS[rec.provider];
+    if (!regions || regions.length === 0) return [rec];
+    return regions.map(r => ({
+      ...rec,
+      region: r.region,
+      geography: r.geography,
+      price: Number((rec.price * r.mult).toFixed(6)),
+    }));
+  });
 }
 
 // ─── Databricks Static Adapters ────────────────────────────────────────────────
@@ -426,7 +443,9 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
 
     for (const adapter of this.adapters) {
       try {
-        const records = await adapter.fetchPricing();
+        // Expand each adapter's single-region records across the provider's regions
+        // so the category has real geographic coverage (W. Europe, Asia Pacific, etc.).
+        const records = expandRecordsByRegion(await adapter.fetchPricing());
 
         const byService = new Map<string, PricingRecord[]>();
         for (const rec of records) {

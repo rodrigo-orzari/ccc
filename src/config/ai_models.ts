@@ -135,6 +135,15 @@ export const AI_MODELS: AIModelConfig[] = [
     modelTier: 'Efficient',
     multimodal: 'Yes',
   },
+  {
+    providerSlug: 'gcp',
+    serviceName: 'Embeddings',
+    geography: 'Global',
+    modelName: 'text-embedding-005',
+    inputPricePer1M: 0.025,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
 
   // ── AWS Bedrock ───────────────────────────────────────────────────────
   {
@@ -158,6 +167,24 @@ export const AI_MODELS: AIModelConfig[] = [
     contextWindowK: 1000,
     modelTier: 'Efficient',
     multimodal: 'Yes',
+  },
+  {
+    providerSlug: 'aws',
+    serviceName: 'Embeddings',
+    geography: 'Global',
+    modelName: 'Titan Text Embeddings V2 (Bedrock)',
+    inputPricePer1M: 0.02,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
+  {
+    providerSlug: 'aws',
+    serviceName: 'Embeddings',
+    geography: 'Global',
+    modelName: 'Cohere Embed English v3 (Bedrock)',
+    inputPricePer1M: 0.10,
+    modelTier: 'Standard',
+    multimodal: 'No',
   },
 
   // ── Azure (Microsoft Foundry) ─────────────────────────────────────────
@@ -194,7 +221,25 @@ export const AI_MODELS: AIModelConfig[] = [
     modelTier: 'Efficient',
     multimodal: 'Yes',
   },
-  
+  {
+    providerSlug: 'azure',
+    serviceName: 'Embeddings',
+    geography: 'Global',
+    modelName: 'text-embedding-3-large (Azure)',
+    inputPricePer1M: 0.13,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
+  {
+    providerSlug: 'azure',
+    serviceName: 'Embeddings',
+    geography: 'Global',
+    modelName: 'text-embedding-3-small (Azure)',
+    inputPricePer1M: 0.02,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
+
   // ── Oracle (OCI Generative AI) ──────────────────────────────────────────
   {
     providerSlug: 'oracle',

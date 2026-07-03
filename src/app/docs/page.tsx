@@ -16,6 +16,38 @@ const BackToTop = () => (
   </p>
 );
 
+// Section heading with a click-to-copy deep link to that section.
+const CopyHeading: React.FC<{ id: string; children: React.ReactNode }> = ({ id, children }) => {
+  const [copied, setCopied] = React.useState(false);
+  const copyLink = () => {
+    const url = `${window.location.origin}${window.location.pathname}#${id}`;
+    const done = () => {
+      setCopied(true);
+      window.history.replaceState(null, '', `#${id}`);
+      setTimeout(() => setCopied(false), 1500);
+    };
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(url).then(done).catch(done);
+    } else {
+      done();
+    }
+  };
+  return (
+    <h2 id={id} className="docs-h2">
+      {children}
+      <button
+        type="button"
+        onClick={copyLink}
+        className={`docs-h2-anchor${copied ? ' copied' : ''}`}
+        aria-label={`Copy link to the ${typeof children === 'string' ? children : 'section'} section`}
+        title="Copy link to this section"
+      >
+        {copied ? '✓ Copied' : '🔗 Copy link'}
+      </button>
+    </h2>
+  );
+};
+
 const DocsPage: React.FC = () => {
   return (
     <>
@@ -104,6 +136,28 @@ const DocsPage: React.FC = () => {
           letter-spacing: -0.01em;
           scroll-margin-top: 2rem;
         }
+        .docs-main h2.docs-h2 {
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+        }
+        .docs-h2-anchor {
+          opacity: 0.3;
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: var(--muted-text);
+          font-size: 0.7rem;
+          font-weight: 600;
+          line-height: 1;
+          padding: 3px 6px;
+          border-radius: 4px;
+          transition: opacity 0.15s, background 0.15s, color 0.15s;
+          white-space: nowrap;
+        }
+        .docs-h2:hover .docs-h2-anchor { opacity: 0.75; }
+        .docs-h2-anchor:hover { opacity: 1 !important; background: var(--border-color); color: var(--text-color); }
+        .docs-h2-anchor.copied { opacity: 1 !important; color: #16a34a; }
         .docs-main h3 {
           font-size: 1rem;
           font-weight: 700;
@@ -207,7 +261,7 @@ const DocsPage: React.FC = () => {
 
           {/* Getting Started */}
           <div className="docs-section">
-            <h2 id="getting-started">Getting Started</h2>
+            <CopyHeading id="getting-started">Getting Started</CopyHeading>
             <p>
               comparecloudcosts.com is a free, open-source tool that aggregates and normalizes on-demand
               (pay-as-you-go) pricing across AWS, Microsoft Azure, Google Cloud, Oracle Cloud,
@@ -226,7 +280,7 @@ const DocsPage: React.FC = () => {
 
           {/* Product Categories */}
           <div className="docs-section">
-            <h2 id="product-categories">Product Categories</h2>
+            <CopyHeading id="product-categories">Product Categories</CopyHeading>
 
             <h3 id="ai-machine-learning">AI &amp; Machine Learning</h3>
             <p>
@@ -290,7 +344,7 @@ const DocsPage: React.FC = () => {
 
           {/* Workloads */}
           <div className="docs-section">
-            <h2 id="workloads">Workloads</h2>
+            <CopyHeading id="workloads">Workloads</CopyHeading>
             <p>
               The Workloads feature allows you to price end-to-end cloud architectures instead of just individual components. We've defined common application patterns (like a 3-Tier Web App or a Data Processing Pipeline) and their component requirements.
             </p>
@@ -303,7 +357,7 @@ const DocsPage: React.FC = () => {
 
           {/* Datacenters */}
           <div className="docs-section">
-            <h2 id="datacenters">Datacenters</h2>
+            <CopyHeading id="datacenters">Datacenters</CopyHeading>
             <p>
               The <strong>Datacenters</strong> page is a dedicated infrastructure reference that lets you compare the global physical footprint of each cloud provider side by side — independently of pricing. It is designed to help teams evaluate geographic reach, redundancy posture, and regulatory coverage before committing to a cloud strategy.
             </p>
@@ -320,8 +374,11 @@ const DocsPage: React.FC = () => {
               <li style={{ marginBottom: '0.4rem' }}><strong>Azure</strong> — <a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/" target="_blank" rel="noopener noreferrer">Azure Global Infrastructure</a>, <a href="https://azure.microsoft.com/en-us/explore/global-infrastructure/geographies/" target="_blank" rel="noopener noreferrer">Azure Geographies</a></li>
               <li style={{ marginBottom: '0.4rem' }}><strong>Google Cloud</strong> — <a href="https://cloud.google.com/about/locations" target="_blank" rel="noopener noreferrer">Google Cloud Locations</a>, <a href="https://cloud.google.com/infrastructure" target="_blank" rel="noopener noreferrer">Google Network Infrastructure</a></li>
               <li style={{ marginBottom: '0.4rem' }}><strong>Oracle Cloud</strong> — <a href="https://www.oracle.com/cloud/architecture-and-regions/" target="_blank" rel="noopener noreferrer">OCI Cloud Regions</a>, <a href="https://www.oracle.com/cloud/public-cloud-regions/infrastructure/" target="_blank" rel="noopener noreferrer">OCI Infrastructure</a></li>
-              <li style={{ marginBottom: '0.4rem' }}><strong>DigitalOcean</strong> — <a href="https://www.digitalocean.com/docs/platform/availability-matrix/" target="_blank" rel="noopener noreferrer">Regional Availability</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>DigitalOcean</strong> — <a href="https://docs.digitalocean.com/products/platform/availability-matrix/" target="_blank" rel="noopener noreferrer">Regional Availability</a></li>
               <li style={{ marginBottom: '0.4rem' }}><strong>Alibaba Cloud</strong> — <a href="https://www.alibabacloud.com/global-locations" target="_blank" rel="noopener noreferrer">Alibaba Cloud Global Infrastructure</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Cloudflare</strong> — <a href="https://www.cloudflare.com/network/" target="_blank" rel="noopener noreferrer">Cloudflare Global Network</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Vultr</strong> — <a href="https://www.vultr.com/locations/" target="_blank" rel="noopener noreferrer">Vultr Global Infrastructure</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Hetzner</strong> — <a href="https://www.hetzner.cloud/locations" target="_blank" rel="noopener noreferrer">Hetzner Cloud Locations</a></li>
             </ul>
             <p>
               Source links are also reproduced at the bottom of the Datacenters page itself, grouped by provider.
@@ -346,7 +403,7 @@ const DocsPage: React.FC = () => {
 
           {/* Pricing Data */}
           <div className="docs-section">
-            <h2 id="pricing-data">Pricing Data</h2>
+            <CopyHeading id="pricing-data">Pricing Data</CopyHeading>
 
             <h3 id="sources">Data sources</h3>
             <p>
@@ -390,7 +447,7 @@ const DocsPage: React.FC = () => {
 
           {/* Glossary */}
           <div className="docs-section">
-            <h2 id="glossary">Glossary</h2>
+            <CopyHeading id="glossary">Glossary</CopyHeading>
             <p>The following terms are used throughout the platform. Hovering the <strong>ⓘ</strong> icon next to any term on the Datacenters page will also surface its definition inline.</p>
             <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
               <li style={{ marginBottom: '0.75rem' }}>
@@ -417,7 +474,7 @@ const DocsPage: React.FC = () => {
 
           {/* Filters */}
           <div className="docs-section">
-            <h2 id="filters">Filters</h2>
+            <CopyHeading id="filters">Filters</CopyHeading>
 
             <h3 id="geography">Geography</h3>
             <p>
@@ -447,7 +504,7 @@ const DocsPage: React.FC = () => {
 
           {/* Sharing */}
           <div className="docs-section">
-            <h2 id="sharing">Sharing</h2>
+            <CopyHeading id="sharing">Sharing</CopyHeading>
             <p>
               Use the <strong>Share</strong> buttons in the top bar to share a link to the tool on X
               (Twitter) or LinkedIn.
@@ -457,7 +514,7 @@ const DocsPage: React.FC = () => {
 
           {/* Advertising */}
           <div className="docs-section">
-            <h2 id="advertising">Advertising with Us</h2>
+            <CopyHeading id="advertising">Advertising with Us</CopyHeading>
             <p>
               comparecloudcosts.com puts your brand in front of engineers, architects, and technical
               decision-makers actively comparing cloud pricing and evaluating infrastructure choices — a
@@ -493,7 +550,7 @@ const DocsPage: React.FC = () => {
 
           {/* Contributing */}
           <div className="docs-section">
-            <h2 id="contributing--feedback">Contributing &amp; Feedback</h2>
+            <CopyHeading id="contributing--feedback">Contributing &amp; Feedback</CopyHeading>
             <p>
               The project is open source. Found a bug, missing provider, or incorrect price? Open an
               issue or pull request on{' '}

@@ -37,12 +37,17 @@ export default function ProviderCards({
   const activeNonSoon = providers.filter(p => !p.soon).map(p => p.id);
 
   return (
-    <div className="px-4 py-2 lg:px-6 lg:py-2.5 bg-white dark:bg-[#0a0a18] flex justify-center">
-      <div className="flex flex-row gap-2 flex-wrap items-center justify-center">
+    <div className="px-4 py-3 lg:px-6 lg:py-4 bg-white dark:bg-[#0a0a18]">
+      {/* Provider summary — connected-card grid mirroring the Status page summary cards.
+          Each card is click-to-filter; deselected providers are dimmed. */}
+      <div
+        className="grid gap-px bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg overflow-hidden"
+        style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}
+      >
         {[...providers]
           .filter(p => !p.soon)
           .sort((a, b) => a.name.localeCompare(b.name))
-          .map((p, idx) => {
+          .map((p) => {
             const isSelected = selectedProviders.length === activeNonSoon.length || selectedProviders.includes(p.id);
             const filteredCount = providerCounts[p.id];
             const dbProvider = dbStatusProviders?.find(dp => dp.slug === p.id || dp.slug === p.name.toLowerCase());
@@ -50,29 +55,24 @@ export default function ProviderCards({
             const displayCount = isSelected ? (isInitialFetch ? dbCount : filteredCount || 0) : 0;
 
             return (
-              <div
+              <button
                 key={p.id}
-                onClick={() => {
-                  if (selectedProviders.includes(p.id) && selectedProviders.length === 1) {
-                    onProviderSelect(p.id);
-                  } else {
-                    onProviderSelect(p.id);
-                  }
-                }}
-                className={`px-2.5 py-1.5 rounded border cursor-pointer group transition-opacity flex items-center gap-1.5 ${
-                  isSelected
-                    ? 'bg-white dark:bg-[#0a0a18] border-[#dde0f0] dark:border-[#1e1e38]'
-                    : 'opacity-50 hover:opacity-75 bg-white dark:bg-[#0a0a18] border-[#dde0f0] dark:border-[#1e1e38]'
-                }`}
+                onClick={() => onProviderSelect(p.id)}
+                title={isSelected ? `Click to show only ${p.name}` : `Click to include ${p.name}`}
+                className="text-left px-4 py-3 bg-white dark:bg-[#0a0a18] cursor-pointer transition-colors hover:bg-[#f7f8ff] dark:hover:bg-[#10102a]"
               >
-                <span
-                  className="text-[11px] font-bold uppercase tracking-widest"
-                  style={{ color: p.color }}
-                >
-                  {p.name}
-                </span>
-                <span className="text-[13px] font-black text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">{displayCount.toLocaleString()}</span>
-              </div>
+                <div className={isSelected ? '' : 'opacity-40'}>
+                  <div
+                    className="text-[11px] font-bold uppercase tracking-widest mb-1 truncate"
+                    style={{ color: p.color }}
+                  >
+                    {p.name}
+                  </div>
+                  <div className="text-2xl font-black leading-none text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">
+                    {displayCount.toLocaleString()}
+                  </div>
+                </div>
+              </button>
             );
           })}
       </div>

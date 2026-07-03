@@ -49,20 +49,27 @@ export class AIPricingPipeline extends PricingPipeline {
       const staticAdapter = new AIStaticAdapter();
       const records = await staticAdapter.fetchPricing();
       
-      // Group records by provider since AIStaticAdapter returns a mix of providers
-      const recordsByProvider: Record<string, typeof records> = {};
+      // Group records by provider AND service. saveRecords() labels an entire batch
+      // with records[0].service, so a batch must contain only one service — otherwise
+      // mixed services (e.g. 'Foundational Models' + 'Embeddings' for the same provider)
+      // all collapse under the first record's service name and the others become
+      // unreachable via the Service Type filter (which matches on services.name).
+      const recordsByGroup: Record<string, typeof records> = {};
       for (const record of records) {
-        if (!recordsByProvider[record.provider]) recordsByProvider[record.provider] = [];
-        recordsByProvider[record.provider].push(record);
+        const key = `${record.provider}||${record.service}`;
+        if (!recordsByGroup[key]) recordsByGroup[key] = [];
+        recordsByGroup[key].push(record);
       }
 
-      for (const [providerSlug, providerRecords] of Object.entries(recordsByProvider)) {
-        const driftAlerts = await this.saveRecords(providerRecords, 'ai');
+      for (const groupRecords of Object.values(recordsByGroup)) {
+        const providerSlug = groupRecords[0].provider;
+        const serviceName = groupRecords[0].service;
+        const driftAlerts = await this.saveRecords(groupRecords, 'ai');
         results.push({
           provider: providerSlug,
-          service: 'Artificial Intelligence',
+          service: serviceName,
           status: 'success',
-          count: providerRecords.length,
+          count: groupRecords.length,
           driftAlerts,
           dataSource: 'static_config',
         });

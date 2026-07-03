@@ -229,7 +229,6 @@ export default function Dashboard() {
   // UI state
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     provider: true,
-    pricing: true,
     category: true,
     geography: true,
     os: true,

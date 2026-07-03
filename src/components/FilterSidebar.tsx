@@ -44,6 +44,35 @@ const groupEngines = (engines: string[]) => {
   return groups.filter(g => g.services.length > 0);
 };
 
+// Groups the flat Data & Analytics tier list into logical sub-groups. Tier strings
+// are shared across engines (Snowflake and Databricks both use "Standard"/"Enterprise"),
+// so grouping is by tier *concept* rather than by engine: editions (capability tiers),
+// Synapse capacity units (Capacity F*), Redshift compute nodes (DC2/RA3 Node), and
+// billing models. Unknown/new dynamic values fall into "Other".
+const groupAnalyticsTiers = (tiers: string[]) => {
+  const groups: { label: string; services: string[] }[] = [
+    { label: 'Editions', services: [] },
+    { label: 'Capacity Units', services: [] },
+    { label: 'Compute Nodes', services: [] },
+    { label: 'Billing Model', services: [] },
+    { label: 'Other', services: [] },
+  ];
+  const push = (label: string, t: string) => groups.find(g => g.label === label)!.services.push(t);
+
+  tiers.forEach(t => {
+    if (/^capacity\s+f\d+/i.test(t)) push('Capacity Units', t);
+    else if (/\bnode\b/i.test(t)) push('Compute Nodes', t);
+    else if (/^(on-demand|provisioned|serverless)$/i.test(t)) push('Billing Model', t);
+    else if (/(standard|premium|enterprise|business critical|edition|plus)/i.test(t)) push('Editions', t);
+    else push('Other', t);
+  });
+
+  // Order capacity units numerically (F2 < F4 < … < F64) rather than alphabetically.
+  groups[1].services.sort((a, b) => (parseInt(a.replace(/\D/g, ''), 10) || 0) - (parseInt(b.replace(/\D/g, ''), 10) || 0));
+
+  return groups.filter(g => g.services.length > 0);
+};
+
 const Tooltip = ({ text, children }: { text: string; children: React.ReactNode }) => {
   const [show, setShow] = React.useState(false);
   return (
@@ -1029,7 +1058,13 @@ export default function FilterSidebar({
             <FilterSection
               title="Billing Granularity"
               tooltip="How billing is calculated."
-              options={config.CONTAINERS_BILLING_GRANULARITY}
+              options={[...config.CONTAINERS_BILLING_GRANULARITY].sort((a, b) => {
+                // Order by unit of time, smallest → largest, rather than alphabetically.
+                const order = ['100ms', 'Second', 'Hour'];
+                const ia = order.indexOf(a); const ib = order.indexOf(b);
+                return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+              })}
+              getLabel={(opt) => opt === '100ms' ? 'Millisecond' : opt}
               selected={selectedContainersBillingGranularity}
               onToggle={onContainersBillingGranularityToggle}
               onSetAll={onSetContainersBillingGranularity}
@@ -1389,10 +1424,11 @@ export default function FilterSidebar({
               onToggleExpand={() => onToggleSection('deploymentType')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
+            <GroupedFilterSection
               title="Tier"
-              tooltip="Performance Tier."
-              options={config.ANALYTICS_TIERS}
+              tooltip="Performance / capacity tier, grouped by type: editions, Synapse capacity units, Redshift compute nodes, and billing models."
+              groups={groupAnalyticsTiers(config.ANALYTICS_TIERS)}
+              allOptions={config.ANALYTICS_TIERS}
               selected={selectedAnalyticsTiers}
               onToggle={onAnalyticsTierToggle}
               onSetAll={onSetAnalyticsTiers}
@@ -1460,34 +1496,8 @@ export default function FilterSidebar({
                 </>
               )}
               <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-[10px] font-bold text-[#737373]">
-                    {activeProductType === 'ai' ? 'Input Price ($/1M Tokens)' : 'Price ($)'}
-                  </div>
-                  {activeProductType !== 'ai' && (
-                    <div className="flex gap-1">
-                      <button
-                        onClick={() => onShowAggregationChange(false)}
-                        className={`px-2 py-0.5 rounded text-[8px] font-bold transition-all border ${
-                          !showAggregation
-                            ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                            : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]'
-                        }`}
-                      >
-                        PAYG
-                      </button>
-                      <button
-                        onClick={() => onShowAggregationChange(true)}
-                        className={`px-2 py-0.5 rounded text-[8px] font-bold transition-all border ${
-                          showAggregation
-                            ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                            : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38]'
-                        }`}
-                      >
-                        Yearly
-                      </button>
-                    </div>
-                  )}
+                <div className="text-[10px] font-bold text-[#737373]">
+                  {activeProductType === 'ai' ? 'Input Price ($/1M Tokens)' : 'Price ($)'}
                 </div>
                 <RangeSlider
                   min={config.DEFAULT_PRICE_RANGE.min}
@@ -1498,6 +1508,33 @@ export default function FilterSidebar({
                   onChange={onPriceRangeChange}
                 />
               </div>
+              {activeProductType !== 'ai' && (
+                <div className="space-y-2">
+                  <div className="text-[10px] font-bold text-[#737373]">PAYG or Yearly</div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => onShowAggregationChange(false)}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                        !showAggregation
+                          ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                          : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                      }`}
+                    >
+                      PAYG
+                    </button>
+                    <button
+                      onClick={() => onShowAggregationChange(true)}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                        showAggregation
+                          ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                          : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                      }`}
+                    >
+                      Yearly
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </section>
