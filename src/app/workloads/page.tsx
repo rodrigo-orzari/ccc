@@ -54,7 +54,10 @@ export default function WorkloadsCatalog() {
                 Cloud Workloads
               </h1>
               <p className="text-[#737373] max-w-2xl text-sm leading-relaxed">
-                Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements.
+                Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements. If you'd like us to create a workload template for a specific architecture or use case, we'd love to hear from you. Tell us what you need to compare.{' '}
+                <a href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Request" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">
+                  📧 hello@comparecloudcosts.com
+                </a>
               </p>
             </div>
             <div className="relative w-full md:w-80 shrink-0">
@@ -109,25 +112,6 @@ export default function WorkloadsCatalog() {
               </div>
             </div>
           )}
-
-          {/* Divider */}
-          <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
-
-          {/* Feature Request CTA */}
-          <div className="mb-8 border border-[#e5e5e5] dark:border-[#262626] rounded bg-gradient-to-br from-[#f0f9ff] dark:from-[#0c1929] to-[#e0f2fe] dark:to-[#0f172a] p-6 flex flex-col items-center gap-3 text-center">
-            <span className="text-2xl">💡</span>
-            <div>
-              <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1">
-                Want a New Workload?
-              </h3>
-              <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                If you'd like us to create a workload template for a specific architecture or use case, we'd love to hear from you. Tell us what you need to compare.
-              </p>
-              <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
-                📧 <a href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Request" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
-              </p>
-            </div>
-          </div>
 
           {/* Divider */}
           <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
