@@ -15,7 +15,7 @@ const headingToId = (children: React.ReactNode): string => {
 
 const AboutPage: React.FC = () => {
   const content = `
-comparecloudcosts.com (CCC) is a comprehensive platform designed to demystify cloud pricing across the industry's leading providers. By normalizing complex billing metrics into side-by-side comparisons, CCC empowers users to make data-driven infrastructure decisions, optimize their cloud spend, and confidently navigate a multi-cloud strategy before committing to a specific architecture.
+comparecloudcosts.com (CCC) is a comprehensive cloud pricing intelligence platform that makes comparing infrastructure costs across multiple cloud providers effortless. By normalizing and aggregating pricing data from AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean, Alibaba Cloud, and emerging alternatives, CCC enables teams to make confident, data-driven architectural decisions and optimize cloud spend before deployment.
 
 ## Why we built this
 
@@ -31,25 +31,33 @@ Furthermore, the modern landscape is increasingly multi-cloud. Companies run wor
 
 [↑ Go back to the top](#about-us)
 
-## Features
+## Key Capabilities
 
-comparecloudcosts.com (CCC) was built to bridge the gap between complex provider rate cards and actionable business intelligence.
+comparecloudcosts.com (CCC) was built to bridge the gap between fragmented provider pricing data and actionable architectural intelligence.
 
-### Side-by-Side Multi-Cloud Analysis
+### Comprehensive Product Coverage
 
-Compare identical configurations across the world's leading cloud providers (AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean, and more) in a single view.
+Access pricing for 10+ product categories spanning compute (VMs, containers, serverless, Kubernetes), databases (relational, NoSQL, data warehouses), networking, storage, security, app hosting, and AI/ML services. Compare how workload composition and architecture choices impact total cost across providers.
 
-### Real-Time Data
+### Multi-Cloud Analysis at Scale
 
-Our engines refresh pricing data frequently to ensure you are seeing the most accurate market rates before you commit to a provider.
+Compare identical configurations across AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, and 4+ additional providers in a single normalized view. Adjust specs, region, and commitment options to see how costs shift across the entire provider ecosystem.
 
-### Granular Breakdown
+### Global Infrastructure Intelligence
 
-We break down compute, storage, networking, and support costs so you see exactly how a workload's cost structure changes across different providers.
+Explore the Datacenters page to understand each provider's physical footprint — region availability, edge presence, redundancy posture, and government cloud offerings — independent of pricing. Make architectural decisions based on both cost *and* geographic reach.
 
-### Proactive Optimization
+### Frequently Updated Pricing
 
-We provide insights into right-sizing and regional price differences before deployment, complementing your existing reactive FinOps tools.
+Our automated pricing pipelines (spanning live APIs, static configs, and manual verification) refresh data on a weekly basis. Each record is timestamped so you know exactly when it was last ingested. The Status page shows current coverage, data freshness, and pipeline health.
+
+### Granular Cost Breakdown
+
+Drill into compute, storage, networking, and licensing costs independently. See exactly how vCPU count, memory, region, commitment level, and workload type impact price — so architectural trade-offs are financially transparent.
+
+### Proactive Workload Planning
+
+Model complete workloads before deployment. Pre-built workload templates (e.g., "High-Traffic Web App", "RAG / AI Knowledge Base", "Compliance-Ready Database") show you the total cost of all components together across providers. Complement reactive FinOps tools with pre-purchase architectural cost modeling.
 
 [↑ Go back to the top](#about-us)
 
@@ -249,7 +257,7 @@ Always verify your final estimates using the official calculators:
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
               <li><a href="#about-compare-cloud-costs-ccc" style={{ padding: '3px 0' }}>About CCC</a></li>
               <li><a href="#why-we-built-this" style={{ padding: '3px 0' }}>Why we built this</a></li>
-              <li><a href="#features" style={{ padding: '3px 0' }}>Features</a></li>
+              <li><a href="#key-capabilities" style={{ padding: '3px 0' }}>Key Capabilities</a></li>
               <li><a href="#who-is-ccc-for" style={{ padding: '3px 0' }}>Who is CCC for?</a></li>
               <li><a href="#about-the-creator" style={{ padding: '3px 0' }}>About the Creator</a></li>
               <li><a href="#directional-estimates-not-official-quotes" style={{ padding: '3px 0' }}>Directional Estimates</a></li>

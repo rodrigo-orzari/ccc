@@ -883,18 +883,6 @@ export default function FilterSidebar({
               isExpanded={expanded.serverlessServiceType ?? true}
               onToggleExpand={() => onToggleSection('serverlessServiceType')}
             />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
-              title="Memory Size"
-              tooltip="Allocated memory per function/instance. This is the main driver of serverless price."
-              options={config.SERVERLESS_MEMORY_TIERS}
-              selected={selectedServerlessMemory}
-              onToggle={onServerlessMemoryToggle}
-              onSetAll={onSetServerlessMemory}
-              isExpanded={expanded.serverlessMemory ?? true}
-              onToggleExpand={() => onToggleSection('serverlessMemory')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Architecture"
               tooltip="CPU architecture: x86 (Intel/AMD) or ARM (e.g. AWS Graviton). ARM is typically cheaper."
@@ -910,6 +898,7 @@ export default function FilterSidebar({
               title="Languages"
               tooltip="Supported programming languages."
               options={config.SERVERLESS_LANGUAGES}
+              getLabel={() => 'Any'}
               selected={selectedServerlessLanguages}
               onToggle={onServerlessLanguageToggle}
               onSetAll={onSetServerlessLanguages}
@@ -1448,7 +1437,7 @@ export default function FilterSidebar({
                 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
               >
                 <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
-                {['vm', 'database', 'containers'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
+                {['vm', 'database', 'containers', 'serverless'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'serverless' ? "Filter by memory size, price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
               </button>
             </h2>
             <button
@@ -1456,6 +1445,9 @@ export default function FilterSidebar({
                 onVCpuRangeChange({ ...currentVCpuDefault });
                 onMemoryRangeChange({ ...currentMemoryDefault });
                 onPriceRangeChange({ ...config.DEFAULT_PRICE_RANGE });
+                if (activeProductType === 'serverless') {
+                  onSetServerlessMemory(config.SERVERLESS_MEMORY_TIERS);
+                }
               }}
               className={`text-[10px] font-bold uppercase transition-colors ${
                 vCpuRange.min !== currentVCpuDefault.min ||
@@ -1463,7 +1455,8 @@ export default function FilterSidebar({
                 memoryRange.min !== currentMemoryDefault.min ||
                 memoryRange.max !== currentMemoryDefault.max ||
                 priceRange.min !== config.DEFAULT_PRICE_RANGE.min ||
-                priceRange.max !== config.DEFAULT_PRICE_RANGE.max
+                priceRange.max !== config.DEFAULT_PRICE_RANGE.max ||
+                (activeProductType === 'serverless' && selectedServerlessMemory.length !== config.SERVERLESS_MEMORY_TIERS.length)
                   ? 'text-black dark:text-[#f7f8ff]'
                   : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
               }`}
@@ -1494,6 +1487,26 @@ export default function FilterSidebar({
                     />
                   </div>
                 </>
+              )}
+              {activeProductType === 'serverless' && (
+                <div className="space-y-2">
+                  <div className="text-[10px] font-bold text-[#737373]">Memory Size</div>
+                  <div className="overflow-x-auto flex gap-1.5 pb-2 -mr-1 pr-1">
+                    {config.SERVERLESS_MEMORY_TIERS.map(tier => (
+                      <button
+                        key={tier}
+                        onClick={() => onServerlessMemoryToggle(tier)}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border whitespace-nowrap shrink-0 ${
+                          selectedServerlessMemory.includes(tier)
+                            ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
+                            : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
+                        }`}
+                      >
+                        {tier}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               )}
               <div className="space-y-2">
                 <div className="text-[10px] font-bold text-[#737373]">

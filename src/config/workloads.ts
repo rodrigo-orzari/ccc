@@ -986,5 +986,119 @@ export const WORKLOADS: WorkloadDefinition[] = [
         })
       }
     ]
+  },
+  {
+    id: 'smart-manufacturing',
+    name: 'Smart Manufacturing / Industrial IoT',
+    description: 'A real-time sensor analytics platform for factory floor monitoring — edge data collection, continuous stream ingestion, live metrics storage, historical analytics, and predictive maintenance using ML.',
+    icon: '🏭',
+    parameters: [
+      {
+        id: 'sensorCount',
+        label: 'Number of IoT Sensors',
+        type: 'slider',
+        min: 10,
+        max: 1000,
+        step: 10,
+        defaultValue: 100,
+        unit: 'sensors'
+      },
+      {
+        id: 'monthlyDataGB',
+        label: 'Monthly Data Volume',
+        type: 'slider',
+        min: 10,
+        max: 10000,
+        step: 100,
+        defaultValue: 500,
+        unit: 'GB'
+      },
+      {
+        id: 'retentionDays',
+        label: 'Hot Storage Retention',
+        type: 'slider',
+        min: 7,
+        max: 365,
+        step: 7,
+        defaultValue: 30,
+        unit: 'days'
+      }
+    ],
+    components: [
+      {
+        id: 'edge-compute',
+        name: 'Edge Gateway / Local Compute',
+        description: 'Processes sensor data at factory floor before cloud transmission',
+        icon: '🖥️',
+        getRequirements: (params) => {
+          const gateways = Math.max(1, Math.ceil(params.sensorCount / 100));
+          return {
+            productType: 'vm',
+            minVcpus: 2,
+            minMemoryGb: 4,
+            quantity: gateways
+          };
+        }
+      },
+      {
+        id: 'stream-ingestion',
+        name: 'Stream Processing / Message Queue',
+        description: 'Real-time ingestion and normalization of sensor streams',
+        icon: '⚡',
+        getRequirements: () => ({
+          productType: 'serverless',
+          category: 'Compute',
+          quantity: 1
+        })
+      },
+      {
+        id: 'metrics-store',
+        name: 'Hot Metrics Store',
+        description: 'Recent sensor readings for dashboards and alerts',
+        icon: '📊',
+        getRequirements: (params) => {
+          const hotStorageGB = Math.max(10, Math.ceil((params.monthlyDataGB / 30) * params.retentionDays));
+          return {
+            productType: 'database',
+            category: 'NoSQL',
+            minMemoryGb: Math.ceil(hotStorageGB / 50) * 4, // Rough estimation: 50GB per 4GB instance
+            quantity: 1
+          };
+        }
+      },
+      {
+        id: 'data-warehouse',
+        name: 'Analytics Data Warehouse',
+        description: 'Historical data for trends, patterns, and compliance reporting',
+        icon: '🏢',
+        getRequirements: (params) => ({
+          productType: 'data-analytics',
+          category: 'Warehouse',
+          quantity: 1
+        })
+      },
+      {
+        id: 'cold-archive',
+        name: 'Cold Storage Archive',
+        description: 'Long-term compliance and historical data',
+        icon: '🪣',
+        getRequirements: (params) => ({
+          productType: 'storage',
+          category: 'Object',
+          quantity: params.monthlyDataGB * 12 // Approximate annual cold storage
+        })
+      },
+      {
+        id: 'predictive-maintenance',
+        name: 'Predictive Maintenance AI',
+        description: 'ML model for equipment anomaly detection and failure prediction',
+        icon: '🤖',
+        getRequirements: () => ({
+          productType: 'ai',
+          category: 'Inference',
+          quantity: 1
+        })
+      }
+    ]
   }
 ];
