@@ -25,7 +25,8 @@ if (!process.env.DATABASE_URL) {
 
 const sql = postgres(process.env.DATABASE_URL, {
   ssl: process.env.DATABASE_CA_CERT ? {
-    rejectUnauthorized: false,
+    // Verify the server cert against the provided CA (prevents MITM on the DB link).
+    rejectUnauthorized: true,
     ca: Buffer.from(process.env.DATABASE_CA_CERT, 'base64')
   } : process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });

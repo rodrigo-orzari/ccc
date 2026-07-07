@@ -34,62 +34,71 @@ export default function Dashboard() {
 
   const [filtersSynced, setFiltersSynced] = useState(false);
   useEffect(() => {
-    if (!config.isLoading && !filtersSynced) {
-      if (selectedGeographies.length === staticConfig.GEOGRAPHIES.length) setSelectedGeographies([...config.GEOGRAPHIES]);
-      if (selectedOS.length === staticConfig.OS_TYPES.length) setSelectedOS([...config.OS_TYPES]);
-      if (selectedCpu.length === staticConfig.CPU_PROFILES.length) setSelectedCpu([...config.CPU_PROFILES.map(p => p.id)]);
-      if (selectedCategory.length === staticConfig.CATEGORIES.length) setSelectedCategory([...config.CATEGORIES]);
-      if (selectedPricingModels.length === staticConfig.PRICING_MODELS.length) setSelectedPricingModels(['On-Demand']);
-      if (selectedDbFamilies.length === staticConfig.DB_FAMILIES.length) setSelectedDbFamilies([...config.DB_FAMILIES]);
-      if (selectedEngines.length === staticConfig.DB_ENGINES.length) setSelectedEngines([...config.DB_ENGINES]);
-      if (selectedDeploymentTypes.length === staticConfig.DEPLOYMENT_TYPES.length) setSelectedDeploymentTypes([...config.DEPLOYMENT_TYPES]);
-      if (selectedHaModes.length === staticConfig.HA_MODES.length) setSelectedHaModes([...config.HA_MODES]);
-      if (selectedServerlessLanguages.length === staticConfig.SERVERLESS_LANGUAGES.length) setSelectedServerlessLanguages([...config.SERVERLESS_LANGUAGES]);
-      if (selectedServerlessColdStart.length === staticConfig.SERVERLESS_COLD_START_OPTIONS.length) setSelectedServerlessColdStart([...config.SERVERLESS_COLD_START_OPTIONS]);
-      if (selectedServerlessTimeout.length === staticConfig.SERVERLESS_TIMEOUT_OPTIONS.length) setSelectedServerlessTimeout([...config.SERVERLESS_TIMEOUT_OPTIONS]);
-      if (selectedServerlessMemoryConfig.length === staticConfig.SERVERLESS_MEMORY_CONFIG_OPTIONS.length) setSelectedServerlessMemoryConfig([...config.SERVERLESS_MEMORY_CONFIG_OPTIONS]);
-      if (selectedServerlessFreeTier.length === staticConfig.SERVERLESS_FREE_TIER_OPTIONS.length) setSelectedServerlessFreeTier([...config.SERVERLESS_FREE_TIER_OPTIONS]);
-      if (selectedServerlessGranularity.length === staticConfig.SERVERLESS_GRANULARITY_OPTIONS.length) setSelectedServerlessGranularity([...config.SERVERLESS_GRANULARITY_OPTIONS]);
-      if (selectedServerlessExecutionModel.length === staticConfig.SERVERLESS_EXECUTION_MODEL_OPTIONS.length) setSelectedServerlessExecutionModel([...config.SERVERLESS_EXECUTION_MODEL_OPTIONS]);
-      if (selectedServerlessProvisionedConcurrency.length === staticConfig.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length) setSelectedServerlessProvisionedConcurrency([...config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]);
-      if (selectedServerlessEphemeralStorage.length === staticConfig.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length) setSelectedServerlessEphemeralStorage([...config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]);
-      if (selectedServerlessMemory.length === staticConfig.SERVERLESS_MEMORY_TIERS.length) setSelectedServerlessMemory([...config.SERVERLESS_MEMORY_TIERS]);
-      if (selectedServerlessArchitectures.length === staticConfig.SERVERLESS_ARCHITECTURES.length) setSelectedServerlessArchitectures([...config.SERVERLESS_ARCHITECTURES]);
-      if (selectedContainersOrchestrators.length === staticConfig.CONTAINERS_ORCHESTRATORS.length) setSelectedContainersOrchestrators([...config.CONTAINERS_ORCHESTRATORS]);
-      if (selectedContainersComputeTypes.length === staticConfig.CONTAINERS_COMPUTE_TYPES.length) setSelectedContainersComputeTypes([...config.CONTAINERS_COMPUTE_TYPES]);
-      if (selectedContainersArchitectures.length === staticConfig.CONTAINERS_ARCHITECTURES.length) setSelectedContainersArchitectures([...config.CONTAINERS_ARCHITECTURES]);
-      if (selectedContainersBillingGranularity.length === staticConfig.CONTAINERS_BILLING_GRANULARITY.length) setSelectedContainersBillingGranularity([...config.CONTAINERS_BILLING_GRANULARITY]);
-      if (selectedAnalyticsEngines.length === staticConfig.ANALYTICS_ENGINES.length) setSelectedAnalyticsEngines([...config.ANALYTICS_ENGINES]);
-      if (selectedAnalyticsDeploymentTypes.length === staticConfig.ANALYTICS_DEPLOYMENT_TYPES.length) setSelectedAnalyticsDeploymentTypes([...config.ANALYTICS_DEPLOYMENT_TYPES]);
-      if (selectedAnalyticsTiers.length === staticConfig.ANALYTICS_TIERS.length) setSelectedAnalyticsTiers([...config.ANALYTICS_TIERS]);
-      if (selectedAiServiceTypes.length === staticConfig.AI_SERVICE_TYPES.length) setSelectedAiServiceTypes([...config.AI_SERVICE_TYPES]);
-      if (selectedAiModelTiers.length === staticConfig.AI_MODEL_TIERS.length) setSelectedAiModelTiers([...config.AI_MODEL_TIERS]);
-      if (selectedAiContextWindows.length === staticConfig.AI_CONTEXT_WINDOWS.length) setSelectedAiContextWindows([...config.AI_CONTEXT_WINDOWS]);
-      if (selectedAiMultimodalOptions.length === staticConfig.AI_MULTIMODAL_OPTIONS.length) setSelectedAiMultimodalOptions([...config.AI_MULTIMODAL_OPTIONS]);
-      if (selectedNetworkingServices.length === staticConfig.NETWORKING_SERVICES.length) setSelectedNetworkingServices([...config.NETWORKING_SERVICES]);
-      if (selectedSecurityServices.length === staticConfig.SECURITY_SERVICES.length) setSelectedSecurityServices([...config.SECURITY_SERVICES]);
-      if (selectedNetworkingConnectionTypes.length === staticConfig.NETWORKING_CONNECTION_TYPES.length) setSelectedNetworkingConnectionTypes([...config.NETWORKING_CONNECTION_TYPES]);
-      if (selectedNetworkingRoutingTypes.length === staticConfig.NETWORKING_ROUTING_TYPES.length) setSelectedNetworkingRoutingTypes([...config.NETWORKING_ROUTING_TYPES]);
-      if (selectedNetworkingHaSupport.length === staticConfig.NETWORKING_HA_SUPPORT.length) setSelectedNetworkingHaSupport([...config.NETWORKING_HA_SUPPORT]);
-      if (selectedNetworkingVpcSupport.length === staticConfig.NETWORKING_VPC_SUPPORT.length) setSelectedNetworkingVpcSupport([...config.NETWORKING_VPC_SUPPORT]);
-      if (selectedNetworkingDirections.length === staticConfig.NETWORKING_DIRECTIONS.length) setSelectedNetworkingDirections([...config.NETWORKING_DIRECTIONS]);
-      if (selectedNetworkingBillingModels.length === staticConfig.NETWORKING_BILLING_MODELS.length) setSelectedNetworkingBillingModels([...config.NETWORKING_BILLING_MODELS]);
-      if (selectedNetworkingUsageTiers.length === staticConfig.NETWORKING_USAGE_TIERS.length) setSelectedNetworkingUsageTiers([...config.NETWORKING_USAGE_TIERS]);
-      if (selectedNetworkingPortCapacities.length === staticConfig.NETWORKING_PORT_CAPACITIES.length) setSelectedNetworkingPortCapacities([...config.NETWORKING_PORT_CAPACITIES]);
-      if (selectedNetworkingTransferScopes.length === staticConfig.NETWORKING_TRANSFER_SCOPES.length) setSelectedNetworkingTransferScopes([...config.NETWORKING_TRANSFER_SCOPES]);
+    if (config.isLoading || filtersSynced) return;
 
+    // When the dynamic (DB-derived) filter config finishes loading, replace any
+    // filter group that is STILL at its full static default with the dynamic list.
+    // A group counts as "untouched by the user" when its length equals the static
+    // default's length. Each entry is [ currentSelection, setter, staticDefaultLen,
+    // () => dynamicValue ]; the value is a thunk so it's only built when applied
+    // (identical lazy behavior to the old per-line `if`s).
+    const syncGroups: Array<[string[], (v: string[]) => void, number, () => string[]]> = [
+      [selectedGeographies, setSelectedGeographies, staticConfig.GEOGRAPHIES.length, () => [...config.GEOGRAPHIES]],
+      [selectedOS, setSelectedOS, staticConfig.OS_TYPES.length, () => [...config.OS_TYPES]],
+      [selectedCpu, setSelectedCpu, staticConfig.CPU_PROFILES.length, () => [...config.CPU_PROFILES.map(p => p.id)]],
+      [selectedCategory, setSelectedCategory, staticConfig.CATEGORIES.length, () => [...config.CATEGORIES]],
+      [selectedPricingModels, setSelectedPricingModels, staticConfig.PRICING_MODELS.length, () => ['On-Demand']],
+      [selectedDbFamilies, setSelectedDbFamilies, staticConfig.DB_FAMILIES.length, () => [...config.DB_FAMILIES]],
+      [selectedEngines, setSelectedEngines, staticConfig.DB_ENGINES.length, () => [...config.DB_ENGINES]],
+      [selectedDeploymentTypes, setSelectedDeploymentTypes, staticConfig.DEPLOYMENT_TYPES.length, () => [...config.DEPLOYMENT_TYPES]],
+      [selectedHaModes, setSelectedHaModes, staticConfig.HA_MODES.length, () => [...config.HA_MODES]],
+      [selectedServerlessLanguages, setSelectedServerlessLanguages, staticConfig.SERVERLESS_LANGUAGES.length, () => [...config.SERVERLESS_LANGUAGES]],
+      [selectedServerlessColdStart, setSelectedServerlessColdStart, staticConfig.SERVERLESS_COLD_START_OPTIONS.length, () => [...config.SERVERLESS_COLD_START_OPTIONS]],
+      [selectedServerlessTimeout, setSelectedServerlessTimeout, staticConfig.SERVERLESS_TIMEOUT_OPTIONS.length, () => [...config.SERVERLESS_TIMEOUT_OPTIONS]],
+      [selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig, staticConfig.SERVERLESS_MEMORY_CONFIG_OPTIONS.length, () => [...config.SERVERLESS_MEMORY_CONFIG_OPTIONS]],
+      [selectedServerlessFreeTier, setSelectedServerlessFreeTier, staticConfig.SERVERLESS_FREE_TIER_OPTIONS.length, () => [...config.SERVERLESS_FREE_TIER_OPTIONS]],
+      [selectedServerlessGranularity, setSelectedServerlessGranularity, staticConfig.SERVERLESS_GRANULARITY_OPTIONS.length, () => [...config.SERVERLESS_GRANULARITY_OPTIONS]],
+      [selectedServerlessExecutionModel, setSelectedServerlessExecutionModel, staticConfig.SERVERLESS_EXECUTION_MODEL_OPTIONS.length, () => [...config.SERVERLESS_EXECUTION_MODEL_OPTIONS]],
+      [selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency, staticConfig.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length, () => [...config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]],
+      [selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage, staticConfig.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length, () => [...config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]],
+      [selectedServerlessMemory, setSelectedServerlessMemory, staticConfig.SERVERLESS_MEMORY_TIERS.length, () => [...config.SERVERLESS_MEMORY_TIERS]],
+      [selectedServerlessArchitectures, setSelectedServerlessArchitectures, staticConfig.SERVERLESS_ARCHITECTURES.length, () => [...config.SERVERLESS_ARCHITECTURES]],
+      [selectedContainersOrchestrators, setSelectedContainersOrchestrators, staticConfig.CONTAINERS_ORCHESTRATORS.length, () => [...config.CONTAINERS_ORCHESTRATORS]],
+      [selectedContainersComputeTypes, setSelectedContainersComputeTypes, staticConfig.CONTAINERS_COMPUTE_TYPES.length, () => [...config.CONTAINERS_COMPUTE_TYPES]],
+      [selectedContainersArchitectures, setSelectedContainersArchitectures, staticConfig.CONTAINERS_ARCHITECTURES.length, () => [...config.CONTAINERS_ARCHITECTURES]],
+      [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity, staticConfig.CONTAINERS_BILLING_GRANULARITY.length, () => [...config.CONTAINERS_BILLING_GRANULARITY]],
+      [selectedAnalyticsEngines, setSelectedAnalyticsEngines, staticConfig.ANALYTICS_ENGINES.length, () => [...config.ANALYTICS_ENGINES]],
+      [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes, staticConfig.ANALYTICS_DEPLOYMENT_TYPES.length, () => [...config.ANALYTICS_DEPLOYMENT_TYPES]],
+      [selectedAnalyticsTiers, setSelectedAnalyticsTiers, staticConfig.ANALYTICS_TIERS.length, () => [...config.ANALYTICS_TIERS]],
+      [selectedAiServiceTypes, setSelectedAiServiceTypes, staticConfig.AI_SERVICE_TYPES.length, () => [...config.AI_SERVICE_TYPES]],
+      [selectedAiModelTiers, setSelectedAiModelTiers, staticConfig.AI_MODEL_TIERS.length, () => [...config.AI_MODEL_TIERS]],
+      [selectedAiContextWindows, setSelectedAiContextWindows, staticConfig.AI_CONTEXT_WINDOWS.length, () => [...config.AI_CONTEXT_WINDOWS]],
+      [selectedAiMultimodalOptions, setSelectedAiMultimodalOptions, staticConfig.AI_MULTIMODAL_OPTIONS.length, () => [...config.AI_MULTIMODAL_OPTIONS]],
+      [selectedNetworkingServices, setSelectedNetworkingServices, staticConfig.NETWORKING_SERVICES.length, () => [...config.NETWORKING_SERVICES]],
+      [selectedSecurityServices, setSelectedSecurityServices, staticConfig.SECURITY_SERVICES.length, () => [...config.SECURITY_SERVICES]],
+      [selectedNetworkingConnectionTypes, setSelectedNetworkingConnectionTypes, staticConfig.NETWORKING_CONNECTION_TYPES.length, () => [...config.NETWORKING_CONNECTION_TYPES]],
+      [selectedNetworkingRoutingTypes, setSelectedNetworkingRoutingTypes, staticConfig.NETWORKING_ROUTING_TYPES.length, () => [...config.NETWORKING_ROUTING_TYPES]],
+      [selectedNetworkingHaSupport, setSelectedNetworkingHaSupport, staticConfig.NETWORKING_HA_SUPPORT.length, () => [...config.NETWORKING_HA_SUPPORT]],
+      [selectedNetworkingVpcSupport, setSelectedNetworkingVpcSupport, staticConfig.NETWORKING_VPC_SUPPORT.length, () => [...config.NETWORKING_VPC_SUPPORT]],
+      [selectedNetworkingDirections, setSelectedNetworkingDirections, staticConfig.NETWORKING_DIRECTIONS.length, () => [...config.NETWORKING_DIRECTIONS]],
+      [selectedNetworkingBillingModels, setSelectedNetworkingBillingModels, staticConfig.NETWORKING_BILLING_MODELS.length, () => [...config.NETWORKING_BILLING_MODELS]],
+      [selectedNetworkingUsageTiers, setSelectedNetworkingUsageTiers, staticConfig.NETWORKING_USAGE_TIERS.length, () => [...config.NETWORKING_USAGE_TIERS]],
+      [selectedNetworkingPortCapacities, setSelectedNetworkingPortCapacities, staticConfig.NETWORKING_PORT_CAPACITIES.length, () => [...config.NETWORKING_PORT_CAPACITIES]],
+      [selectedNetworkingTransferScopes, setSelectedNetworkingTransferScopes, staticConfig.NETWORKING_TRANSFER_SCOPES.length, () => [...config.NETWORKING_TRANSFER_SCOPES]],
+      [selectedStorageCategories, setSelectedStorageCategories, staticConfig.STORAGE_CATEGORIES.length, () => [...config.STORAGE_CATEGORIES]],
+      [selectedStorageRedundancies, setSelectedStorageRedundancies, staticConfig.STORAGE_REDUNDANCIES.length, () => [...config.STORAGE_REDUNDANCIES]],
+      [selectedStorageMedia, setSelectedStorageMedia, staticConfig.STORAGE_MEDIA.length, () => [...config.STORAGE_MEDIA]],
+      [selectedStorageTiers, setSelectedStorageTiers, staticConfig.STORAGE_TIERS.length, () => [...config.STORAGE_TIERS]],
+      [selectedAppHostingTiers, setSelectedAppHostingTiers, staticConfig.APP_HOSTING_TIERS.length, () => [...config.APP_HOSTING_TIERS]],
+      [selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes, staticConfig.APP_HOSTING_COMPUTE_TYPES.length, () => [...config.APP_HOSTING_COMPUTE_TYPES]],
+      [selectedServerlessServiceTypes, setSelectedServerlessServiceTypes, staticConfig.SERVERLESS_SERVICE_TYPES.length, () => [...config.SERVERLESS_SERVICE_TYPES]],
+    ];
 
-      if (selectedStorageCategories.length === staticConfig.STORAGE_CATEGORIES.length) setSelectedStorageCategories([...config.STORAGE_CATEGORIES]);
-      if (selectedStorageRedundancies.length === staticConfig.STORAGE_REDUNDANCIES.length) setSelectedStorageRedundancies([...config.STORAGE_REDUNDANCIES]);
-      if (selectedStorageMedia.length === staticConfig.STORAGE_MEDIA.length) setSelectedStorageMedia([...config.STORAGE_MEDIA]);
-      if (selectedStorageTiers.length === staticConfig.STORAGE_TIERS.length) setSelectedStorageTiers([...config.STORAGE_TIERS]);
-
-      if (selectedAppHostingTiers.length === staticConfig.APP_HOSTING_TIERS.length) setSelectedAppHostingTiers([...config.APP_HOSTING_TIERS]);
-      if (selectedAppHostingComputeTypes.length === staticConfig.APP_HOSTING_COMPUTE_TYPES.length) setSelectedAppHostingComputeTypes([...config.APP_HOSTING_COMPUTE_TYPES]);
-      if (selectedServerlessServiceTypes.length === staticConfig.SERVERLESS_SERVICE_TYPES.length) setSelectedServerlessServiceTypes([...config.SERVERLESS_SERVICE_TYPES]);
-
-      setFiltersSynced(true);
+    for (const [current, setter, staticLen, next] of syncGroups) {
+      if (current.length === staticLen) setter(next());
     }
+
+    setFiltersSynced(true);
   }, [config.isLoading, filtersSynced, config]);
 
   const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');

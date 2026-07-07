@@ -151,6 +151,26 @@ export function buildPricingFilters(query: any) {
     const values: any[] = [];
     let paramCount = 1;
 
+    // Helper for the very common "LOWER(<expr>) = ANY($n)" filter shape: parse a
+    // comma-separated list (via the same validation as everything else), optionally
+    // lowercase it, and register exactly one positional param. `extra` appends fixed
+    // values that should always match (e.g. 'n/a','none' for un-normalized rows).
+    // Absent/empty input adds nothing and consumes no param — identical to the old
+    // hand-written blocks, so param numbering is preserved.
+    const addInFilter = (
+      raw: string | undefined,
+      expr: string,
+      opts: { lower?: boolean; extra?: string[] } = {}
+    ) => {
+      const { lower = true, extra = [] } = opts;
+      const parsed = parseFilterList(raw as string);
+      const items = lower ? parsed.map((s: string) => s.toLowerCase()) : parsed;
+      if (items.length > 0) {
+        conditions.push(`${expr} = ANY($${paramCount++})`);
+        values.push([...items, ...extra]);
+      }
+    };
+
     const resolvedProductType =
       product && VALID_PRODUCT_TYPES.includes(product as string)
         ? (product as string)
@@ -189,12 +209,9 @@ export function buildPricingFilters(query: any) {
     }
 
     if (resolvedProductType === 'compute') {
-      const osFilters = parseFilterList(os as string).map((s: string) => s.toLowerCase());
-      if (osFilters.length > 0) {
-        conditions.push(`LOWER(pr.os) = ANY($${paramCount++})`);
-        values.push(osFilters);
-      }
+      addInFilter(os, 'LOWER(pr.os)');
 
+      // arch has a special x86 -> 'x86 64' normalization, so it stays hand-written.
       const archFilters = parseFilterList(arch as string).map((a: string) =>
         (a === 'x86' ? 'x86 64' : a).toLowerCase()
       );
@@ -203,11 +220,7 @@ export function buildPricingFilters(query: any) {
         values.push(archFilters);
       }
 
-      const cpuVendorFilters = parseFilterList(cpuVendor as string).map((s: string) => s.toLowerCase());
-      if (cpuVendorFilters.length > 0) {
-        conditions.push(`LOWER(pr.cpu_vendor) = ANY($${paramCount++})`);
-        values.push(cpuVendorFilters);
-      }
+      addInFilter(cpuVendor, 'LOWER(pr.cpu_vendor)');
 
       // gpu is a comma-separated list: 'GPU', 'No GPU', or both.
       // 'GPU' only    → gpu_count > 0 (GPU instances only)
@@ -224,11 +237,7 @@ export function buildPricingFilters(query: any) {
     }
 
     if (resolvedProductType === 'compute') {
-      const categoriesFilter = parseFilterList(category as string).map((s: string) => s.toLowerCase());
-      if (categoriesFilter.length > 0) {
-        conditions.push(`LOWER(pr.category) = ANY($${paramCount++})`);
-        values.push(categoriesFilter);
-      }
+      addInFilter(category, 'LOWER(pr.category)');
 
       const pricingModels = parseFilterList(pricing_model as string).map((s: string) => s.toLowerCase());
       if (pricingModels.length > 0) {
@@ -281,11 +290,7 @@ export function buildPricingFilters(query: any) {
       // previously broke analytics engines), making the analytics deployment
       // filter a no-op.
       const rawDeploymentParam = resolvedProductType === 'data-analytics' ? analyticsDeploymentTypes : deploymentTypes;
-      const deploymentTypeFilters = parseFilterList(rawDeploymentParam as string).map((s: string) => s.toLowerCase());
-      if (deploymentTypeFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'deployment_type') = ANY($${paramCount++})`);
-        values.push(deploymentTypeFilters);
-      }
+      addInFilter(rawDeploymentParam, `LOWER(pr.attributes->>'deployment_type')`);
 
       // Database family filtering (Relational vs NoSQL) - only for 'database' type
       if (resolvedProductType === 'database') {
@@ -311,42 +316,20 @@ export function buildPricingFilters(query: any) {
           }
         }
 
-        const haModeFilters = parseFilterList(haModes as string).map((s: string) => s.toLowerCase());
-        if (haModeFilters.length > 0) {
-          conditions.push(`LOWER(pr.attributes->>'ha_mode') = ANY($${paramCount++})`);
-          values.push(haModeFilters);
-        }
+        addInFilter(haModes, `LOWER(pr.attributes->>'ha_mode')`);
       }
 
       // Analytics tier filtering - only for 'data-analytics' type
       if (resolvedProductType === 'data-analytics') {
-        const tierFilters = parseFilterList(analyticsTiers as string).map((s: string) => s.toLowerCase());
-        if (tierFilters.length > 0) {
-          conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
-          values.push(tierFilters);
-        }
+        addInFilter(analyticsTiers, `LOWER(pr.attributes->>'tier')`);
       }
     }
 
     // AI product type filters
     if (resolvedProductType === 'ai') {
-      const serviceTypeFilters = parseFilterList(aiServiceTypes as string).map((s: string) => s.toLowerCase());
-      if (serviceTypeFilters.length > 0) {
-        conditions.push(`LOWER(s.name) = ANY($${paramCount++})`);
-        values.push(serviceTypeFilters);
-      }
-
-      const modelTierFilters = parseFilterList(aiModelTiers as string).map((s: string) => s.toLowerCase());
-      if (modelTierFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'modelTier') = ANY($${paramCount++})`);
-        values.push(modelTierFilters);
-      }
-
-      const multimodalFilters = parseFilterList(aiMultimodalOptions as string).map((s: string) => s.toLowerCase());
-      if (multimodalFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'multimodal') = ANY($${paramCount++})`);
-        values.push(multimodalFilters);
-      }
+      addInFilter(aiServiceTypes, 'LOWER(s.name)');
+      addInFilter(aiModelTiers, `LOWER(pr.attributes->>'modelTier')`);
+      addInFilter(aiMultimodalOptions, `LOWER(pr.attributes->>'multimodal')`);
 
       if (aiContextWindows) {
         const windowOptions = parseFilterList(aiContextWindows as string);
@@ -372,11 +355,7 @@ export function buildPricingFilters(query: any) {
 
     // Serverless product type filters
     if (resolvedProductType === 'serverless') {
-      const serviceTypeFilters = parseFilterList(serverlessServiceTypes as string).map((s: string) => s.toLowerCase());
-      if (serviceTypeFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'service_type') = ANY($${paramCount++})`);
-        values.push(serviceTypeFilters);
-      }
+      addInFilter(serverlessServiceTypes, `LOWER(pr.attributes->>'service_type')`);
 
       const languages = parseFilterList(serverlessLanguages as string);
       if (languages.length > 0) {
@@ -565,70 +544,21 @@ export function buildPricingFilters(query: any) {
 
     // Networking product type filters
     if (resolvedProductType === 'networking') {
-      const networkingServices = parseFilterList(networkingService as string);
-      if (networkingServices.length > 0) {
-        conditions.push(`s.name = ANY($${paramCount++})`);
-        values.push(networkingServices);
-      }
+      // networkingService matches the real service name (case-sensitive), so no LOWER.
+      addInFilter(networkingService, 's.name', { lower: false });
 
-      const networkingConnectionTypesFilters = parseFilterList(networkingConnectionTypes as string).map((s: string) => s.toLowerCase());
-      if (networkingConnectionTypesFilters.length > 0) {
-        networkingConnectionTypesFilters.push('n/a', 'none');
-        conditions.push(`LOWER(pr.attributes->>'connection_type') = ANY($${paramCount++})`);
-        values.push(networkingConnectionTypesFilters);
-      }
+      // These attribute filters also match rows with un-normalized 'n/a'/'none' values.
+      const NA = { extra: ['n/a', 'none'] };
+      addInFilter(networkingConnectionTypes, `LOWER(pr.attributes->>'connection_type')`, NA);
+      addInFilter(networkingRoutingTypes, `LOWER(pr.attributes->>'routing_type')`, NA);
+      addInFilter(networkingHaSupport, `LOWER(pr.attributes->>'ha_support')`, NA);
+      addInFilter(networkingVpcSupport, `LOWER(pr.attributes->>'vpc_support')`, NA);
+      addInFilter(networkingTransferDirections, `LOWER(pr.attributes->>'transfer_direction')`, NA);
 
-      const networkingRoutingTypesFilters = parseFilterList(networkingRoutingTypes as string).map((s: string) => s.toLowerCase());
-      if (networkingRoutingTypesFilters.length > 0) {
-        networkingRoutingTypesFilters.push('n/a', 'none');
-        conditions.push(`LOWER(pr.attributes->>'routing_type') = ANY($${paramCount++})`);
-        values.push(networkingRoutingTypesFilters);
-      }
-
-      const networkingHaSupportFilters = parseFilterList(networkingHaSupport as string).map((s: string) => s.toLowerCase());
-      if (networkingHaSupportFilters.length > 0) {
-        networkingHaSupportFilters.push('n/a', 'none');
-        conditions.push(`LOWER(pr.attributes->>'ha_support') = ANY($${paramCount++})`);
-        values.push(networkingHaSupportFilters);
-      }
-
-      const networkingVpcSupportFilters = parseFilterList(networkingVpcSupport as string).map((s: string) => s.toLowerCase());
-      if (networkingVpcSupportFilters.length > 0) {
-        networkingVpcSupportFilters.push('n/a', 'none');
-        conditions.push(`LOWER(pr.attributes->>'vpc_support') = ANY($${paramCount++})`);
-        values.push(networkingVpcSupportFilters);
-      }
-
-      const networkingTransferDirectionsFilters = parseFilterList(networkingTransferDirections as string).map((s: string) => s.toLowerCase());
-      if (networkingTransferDirectionsFilters.length > 0) {
-        networkingTransferDirectionsFilters.push('n/a', 'none');
-        conditions.push(`LOWER(pr.attributes->>'transfer_direction') = ANY($${paramCount++})`);
-        values.push(networkingTransferDirectionsFilters);
-      }
-
-      const billingModelsFilters = parseFilterList(networkingBillingModels as string).map((s: string) => s.toLowerCase());
-      if (billingModelsFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'billing_model') = ANY($${paramCount++})`);
-        values.push(billingModelsFilters);
-      }
-
-      const usageTiersFilters = parseFilterList(networkingUsageTiers as string).map((s: string) => s.toLowerCase());
-      if (usageTiersFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'usage_tier') = ANY($${paramCount++})`);
-        values.push(usageTiersFilters);
-      }
-
-      const portCapacitiesFilters = parseFilterList(networkingPortCapacities as string).map((s: string) => s.toLowerCase());
-      if (portCapacitiesFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'port_capacity') = ANY($${paramCount++})`);
-        values.push(portCapacitiesFilters);
-      }
-
-      const transferScopesFilters = parseFilterList(networkingTransferScopes as string).map((s: string) => s.toLowerCase());
-      if (transferScopesFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'transfer_scope') = ANY($${paramCount++})`);
-        values.push(transferScopesFilters);
-      }
+      addInFilter(networkingBillingModels, `LOWER(pr.attributes->>'billing_model')`);
+      addInFilter(networkingUsageTiers, `LOWER(pr.attributes->>'usage_tier')`);
+      addInFilter(networkingPortCapacities, `LOWER(pr.attributes->>'port_capacity')`);
+      addInFilter(networkingTransferScopes, `LOWER(pr.attributes->>'transfer_scope')`);
     }
 
     // Containers product type filters
@@ -661,34 +591,14 @@ export function buildPricingFilters(query: any) {
     // Storage product type filters (Object/Block/File/Archive). All driven by
     // attributes JSONB; capacity price is normalized to $/GB-month.
     if (resolvedProductType === 'storage') {
-      const typeFilters = parseFilterList(storageTypes as string).map((s: string) => s.toLowerCase());
-      if (typeFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'storage_type') = ANY($${paramCount++})`);
-        values.push(typeFilters);
-      }
-      const tierFilters = parseFilterList(storageTiers as string).map((s: string) => s.toLowerCase());
-      if (tierFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
-        values.push(tierFilters);
-      }
-      const redundancyFilters = parseFilterList(storageRedundancy as string).map((s: string) => s.toLowerCase());
-      if (redundancyFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'redundancy') = ANY($${paramCount++})`);
-        values.push(redundancyFilters);
-      }
+      addInFilter(storageTypes, `LOWER(pr.attributes->>'storage_type')`);
+      addInFilter(storageTiers, `LOWER(pr.attributes->>'tier')`);
+      addInFilter(storageRedundancy, `LOWER(pr.attributes->>'redundancy')`);
     }
 
     if (resolvedProductType === 'app-hosting') {
-      const tierFilters = parseFilterList(appHostingTiers as string).map((s: string) => s.toLowerCase());
-      if (tierFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'tier') = ANY($${paramCount++})`);
-        values.push(tierFilters);
-      }
-      const computeTypeFilters = parseFilterList(appHostingComputeTypes as string).map((s: string) => s.toLowerCase());
-      if (computeTypeFilters.length > 0) {
-        conditions.push(`LOWER(pr.attributes->>'compute_type') = ANY($${paramCount++})`);
-        values.push(computeTypeFilters);
-      }
+      addInFilter(appHostingTiers, `LOWER(pr.attributes->>'tier')`);
+      addInFilter(appHostingComputeTypes, `LOWER(pr.attributes->>'compute_type')`);
     }
 
     const noComputeSliders = ['networking', 'serverless', 'ai', 'storage', 'app-hosting'];

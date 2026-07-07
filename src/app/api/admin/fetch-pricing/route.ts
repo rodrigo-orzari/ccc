@@ -10,6 +10,22 @@ import { AIPricingPipeline } from '@/services/ai_pipeline';
 import { StoragePricingPipeline } from '@/services/storage_pipeline';
 import { DataAnalyticsPricingPipeline } from '@/services/data_analytics_pipeline';
 import { sendPriceDriftEmail } from '@/services/mailer';
+import { clearCache } from '@/lib/cache';
+
+// Pipeline registry: `type` is both the query-param selector (?type=compute) and
+// the label attached to each result row. Add a new product line here in one place
+// instead of copy-pasting a run block.
+type PipelineCtor = new (sql: any) => { run: () => Promise<any[]> };
+const PIPELINE_REGISTRY: { type: string; Pipeline: PipelineCtor }[] = [
+  { type: 'compute', Pipeline: PricingPipeline },
+  { type: 'database', Pipeline: DatabasePricingPipeline },
+  { type: 'serverless', Pipeline: ServerlessPricingPipeline },
+  { type: 'networking', Pipeline: NetworkingPricingPipeline },
+  { type: 'containers', Pipeline: ContainersPricingPipeline },
+  { type: 'ai', Pipeline: AIPricingPipeline },
+  { type: 'storage', Pipeline: StoragePricingPipeline },
+  { type: 'data-analytics', Pipeline: DataAnalyticsPricingPipeline },
+];
 
 export async function POST(req: NextRequest) {
   const authResponse = requireAdminAuth(req);
@@ -21,80 +37,22 @@ export async function POST(req: NextRequest) {
     const results: any[] = [];
     const allDriftAlerts: PriceDriftResult[] = [];
 
-    if (type === 'all' || type === 'compute') {
-      const pipeline = new PricingPipeline(sql as any);
-      const computeResults = await pipeline.run();
-      for (const r of computeResults) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-        results.push({ ...r, pipeline: 'compute' });
-      }
-    }
+    for (const { type: pipelineType, Pipeline } of PIPELINE_REGISTRY) {
+      if (type !== 'all' && type !== pipelineType) continue;
 
-    if (type === 'all' || type === 'database') {
-      const dbPipeline = new DatabasePricingPipeline(sql as any);
-      const dbResults = await dbPipeline.run();
-      for (const r of dbResults) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-        results.push({ ...r, pipeline: 'database' });
-      }
-    }
-
-    if (type === 'all' || type === 'serverless') {
-      const serverlessPipeline = new ServerlessPricingPipeline(sql as any);
-      const serverlessResults = await serverlessPipeline.run();
-      for (const r of serverlessResults) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-        results.push({ ...r, pipeline: 'serverless' });
-      }
-    }
-
-    if (type === 'all' || type === 'networking') {
-      const networkingPipeline = new NetworkingPricingPipeline(sql as any);
-      const networkingResults = await networkingPipeline.run();
-      for (const r of networkingResults) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-        results.push({ ...r, pipeline: 'networking' });
-      }
-    }
-
-    if (type === 'all' || type === 'containers') {
-      const containersPipeline = new ContainersPricingPipeline(sql as any);
-      const containersResults = await containersPipeline.run();
-      for (const r of containersResults) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-        results.push({ ...r, pipeline: 'containers' });
-      }
-    }
-
-    if (type === 'all' || type === 'ai') {
-      const aiPipeline = new AIPricingPipeline(sql as any);
-      const aiResults = await aiPipeline.run();
-      for (const r of aiResults) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-        results.push({ ...r, pipeline: 'ai' });
-      }
-    }
-
-    if (type === 'all' || type === 'storage') {
-      const storagePipeline = new StoragePricingPipeline(sql as any);
-      const storageResults = await storagePipeline.run();
-      for (const r of storageResults) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-        results.push({ ...r, pipeline: 'storage' });
-      }
-    }
-
-    if (type === 'all' || type === 'data-analytics') {
-      const dataAnalyticsPipeline = new DataAnalyticsPricingPipeline(sql as any);
-      const dataAnalyticsResults = await dataAnalyticsPipeline.run();
-      for (const r of dataAnalyticsResults) {
+      const pipeline = new Pipeline(sql as any);
+      const pipelineResults = await pipeline.run();
+      for (const r of pipelineResults) {
         if ((r as any).driftAlerts) allDriftAlerts.push(...(r as any).driftAlerts);
-        results.push({ ...r, pipeline: 'data-analytics' });
+        results.push({ ...r, pipeline: pipelineType });
       }
     }
 
     // Refresh schema migrations / column backfills after any fetch
     await initDb();
+
+    // Prices just changed — drop cached API responses so users see fresh data now.
+    clearCache();
 
     // Send drift email if any significant price changes were detected
     if (allDriftAlerts.length > 0) {

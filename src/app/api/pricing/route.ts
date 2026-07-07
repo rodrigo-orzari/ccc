@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import sql from '@/lib/db';
 import { buildPricingFilters } from '@/lib/api-utils';
+import { getCached, setCached } from '@/lib/cache';
 
 export const dynamic = 'force-dynamic';
 
@@ -9,6 +10,12 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const query = Object.fromEntries(searchParams.entries());
     const isAggregated = query.aggregate === 'true';
+
+    // Serve identical filter requests from the in-process cache. Prices change at
+    // most weekly, so a short TTL is safe and spares the DB from repeated identical reads.
+    const cacheKey = 'pricing:' + searchParams.toString();
+    const cached = getCached(cacheKey);
+    if (cached) return NextResponse.json(cached);
 
     let selectClause = `
       p.name as provider,
@@ -84,9 +91,8 @@ export async function GET(req: NextRequest) {
       dbQuery += ` ORDER BY pr.price_per_unit ASC LIMIT ${limit}`;
     }
 
-    console.log('SQL Query:', dbQuery);
-    console.log('SQL Params:', values);
     const result = await sql.unsafe(dbQuery, values);
+    setCached(cacheKey, result);
     return NextResponse.json(result);
   } catch (err: any) {
     console.error('API Error:', err);

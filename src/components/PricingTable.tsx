@@ -130,6 +130,53 @@ function ResizeHandle({ onStart, onReset }: { onStart: (e: React.PointerEvent) =
   );
 }
 
+// ─── Row virtualization ──────────────────────────────────────────────────────
+// Dependency-free windowing for large result sets: only the rows near the viewport
+// are rendered, with spacer <tr>s standing in for the rest. This keeps the native
+// table layout fully intact (colgroup widths, sticky header, column resize,
+// horizontal scroll) — unlike absolute-positioning virtualizers. For small lists
+// it is disabled entirely, so the common case renders exactly as it did before.
+const VIRTUALIZE_THRESHOLD = 80; // at/below this many rows, render everything
+const ROW_ESTIMATE_PX = 53;      // approximate rendered height of one table row
+const ROW_OVERSCAN = 12;         // extra rows above/below the viewport (avoids flicker)
+
+function useVirtualRows(
+  scrollRef: RefObject<HTMLDivElement>,
+  rowCount: number,
+  enabled: boolean,
+) {
+  const [range, setRange] = useState<{ start: number; end: number }>({ start: 0, end: rowCount });
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!enabled || !el) {
+      setRange({ start: 0, end: rowCount });
+      return;
+    }
+    const compute = () => {
+      const viewport = el.clientHeight || 0;
+      const visibleCount = Math.ceil(viewport / ROW_ESTIMATE_PX) + ROW_OVERSCAN * 2;
+      const maxStart = Math.max(0, rowCount - visibleCount);
+      const start = Math.min(Math.max(0, Math.floor(el.scrollTop / ROW_ESTIMATE_PX) - ROW_OVERSCAN), maxStart);
+      const end = Math.min(rowCount, start + visibleCount);
+      setRange(prev => (prev.start === start && prev.end === end ? prev : { start, end }));
+    };
+    compute();
+    el.addEventListener('scroll', compute, { passive: true });
+    const ro = new ResizeObserver(compute);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener('scroll', compute);
+      ro.disconnect();
+    };
+  }, [scrollRef, rowCount, enabled]);
+
+  if (!enabled) return { start: 0, end: rowCount, padTop: 0, padBottom: 0 };
+  const start = Math.max(0, Math.min(range.start, rowCount));
+  const end = Math.min(range.end, rowCount);
+  return { start, end, padTop: start * ROW_ESTIMATE_PX, padBottom: Math.max(0, (rowCount - end) * ROW_ESTIMATE_PX) };
+}
+
 // ─── Main component ─────────────────────────────────────────────────────────
 export default function PricingTable({
   data,
@@ -191,6 +238,12 @@ export default function PricingTable({
 
   const colDefs    = getColDefs(activeProductType);
   const totalWidth = colDefs.reduce((s, c) => s + (colWidths[c.key] ?? c.defaultWidth), 0);
+
+  // Virtualize the desktop table only when the result set is large. Below the
+  // threshold, rowStart/rowEnd span the whole list and the pads are 0 — identical
+  // to the previous "render every row" behavior.
+  const virtualize = !loading && data.length > VIRTUALIZE_THRESHOLD;
+  const { start: rowStart, end: rowEnd, padTop, padBottom } = useVirtualRows(tableScrollRef, data.length, virtualize);
 
 
 
@@ -412,15 +465,30 @@ export default function PricingTable({
                   </tr>
                 ))
               ) : data.length > 0 ? (
-                data.map((record, index) => (
-                  <TableRow
-                    key={index}
-                    record={record}
-                    index={index}
-                    activeProductType={activeProductType}
-                    showAggregation={showAggregation}
-                  />
-                ))
+                <>
+                  {padTop > 0 && (
+                    <tr aria-hidden="true">
+                      <td colSpan={colDefs.length} style={{ height: padTop, padding: 0, border: 0 }} />
+                    </tr>
+                  )}
+                  {data.slice(rowStart, rowEnd).map((record, i) => {
+                    const index = rowStart + i;
+                    return (
+                      <TableRow
+                        key={index}
+                        record={record}
+                        index={index}
+                        activeProductType={activeProductType}
+                        showAggregation={showAggregation}
+                      />
+                    );
+                  })}
+                  {padBottom > 0 && (
+                    <tr aria-hidden="true">
+                      <td colSpan={colDefs.length} style={{ height: padBottom, padding: 0, border: 0 }} />
+                    </tr>
+                  )}
+                </>
               ) : (
                 <tr>
                   <td colSpan={colDefs.length} className="px-6 py-32 text-center text-[#737373] dark:text-[#525252] italic text-sm">

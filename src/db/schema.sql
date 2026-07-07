@@ -58,6 +58,35 @@ ON pricing_records (
     (COALESCE(attributes->>'ha_mode', ''))
 );
 
+-- Performance indexes for the /api/pricing and /api/pricing/counts hot path.
+-- Every request filters on s.category and joins pricing_records -> services -> providers,
+-- then filters pricing_records by geography/os/arch/cpu_vendor/category (all wrapped in
+-- LOWER()) plus JSONB attributes. Without these, Postgres sequential-scans pricing_records
+-- on every request. All are IF NOT EXISTS so this block is safe to re-run.
+
+-- Join / foreign-key columns (Postgres does NOT auto-index FKs).
+CREATE INDEX IF NOT EXISTS idx_pricing_service_id ON pricing_records (service_id);
+CREATE INDEX IF NOT EXISTS idx_pricing_region_id ON pricing_records (region_id);
+CREATE INDEX IF NOT EXISTS idx_services_category ON services (category);
+
+-- ORDER BY price_per_unit ASC on every query.
+CREATE INDEX IF NOT EXISTS idx_pricing_price ON pricing_records (price_per_unit);
+
+-- Functional indexes matching the LOWER(col) = ANY(...) filter predicates.
+CREATE INDEX IF NOT EXISTS idx_pricing_geography_lower ON pricing_records (LOWER(geography));
+CREATE INDEX IF NOT EXISTS idx_pricing_category_lower ON pricing_records (LOWER(category));
+CREATE INDEX IF NOT EXISTS idx_pricing_os_lower ON pricing_records (LOWER(os));
+CREATE INDEX IF NOT EXISTS idx_pricing_arch_lower ON pricing_records (LOWER(arch));
+CREATE INDEX IF NOT EXISTS idx_pricing_cpu_vendor_lower ON pricing_records (LOWER(cpu_vendor));
+
+-- GPU filtering (gpu_count > 0 / = 0).
+CREATE INDEX IF NOT EXISTS idx_pricing_gpu_count ON pricing_records (gpu_count);
+
+-- JSONB attributes: GIN supports the `?|` containment filters (e.g. serverless languages);
+-- the expression index accelerates the very common engine = ANY(...) database/analytics filter.
+CREATE INDEX IF NOT EXISTS idx_pricing_attributes_gin ON pricing_records USING GIN (attributes);
+CREATE INDEX IF NOT EXISTS idx_pricing_attr_engine_lower ON pricing_records (LOWER(attributes->>'engine'));
+
 -- Initial Data
 INSERT INTO providers (slug, name) VALUES
 ('aws', 'AWS'),
