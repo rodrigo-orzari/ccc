@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS pricing_records (
 -- don't exempt rows from the check) because database_pipeline.ts holds os/arch
 -- constant across DB engines (MySQL, PostgreSQL, SQL Server, etc.) and HA modes —
 -- those rows are only distinguished via the attributes JSONB, not real columns.
+DROP INDEX IF EXISTS pricing_records_unique_key;
 CREATE UNIQUE INDEX IF NOT EXISTS pricing_records_unique_key
 ON pricing_records (
     service_id, region_id, instance_type, os, arch,
