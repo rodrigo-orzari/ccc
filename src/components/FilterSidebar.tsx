@@ -44,6 +44,17 @@ const groupEngines = (engines: string[]) => {
   return groups.filter(g => g.services.length > 0);
 };
 
+// Formats tier labels by stripping redundant prefixes. Used for display only;
+// the original tier string is retained for filtering logic.
+const formatAnalyticsTierLabel = (tier: string): string => {
+  // Strip "Capacity " prefix from Synapse capacity units: "Capacity F2" → "F2"
+  if (/^capacity\s+/i.test(tier)) return tier.replace(/^capacity\s+/i, '');
+  // Strip " Node" suffix from Redshift compute nodes: "DC2 Node" → "DC2", "RA3 Node" → "RA3"
+  if (/\s+node$/i.test(tier)) return tier.replace(/\s+node$/i, '');
+  // Return as-is for other tiers (Standard, Enterprise, On-Demand, etc.)
+  return tier;
+};
+
 // Groups the flat Data & Analytics tier list into logical sub-groups. Tier strings
 // are shared across engines (Snowflake and Databricks both use "Standard"/"Enterprise"),
 // so grouping is by tier *concept* rather than by engine: editions (capability tiers),
@@ -178,6 +189,7 @@ interface GroupedFilterSectionProps {
   isExpanded: boolean;
   onToggleExpand: () => void;
   disabledOptions?: string[];
+  getLabel?: (option: string) => string;
 }
 
 // Like FilterSection, but renders chips organized under labeled sub-groups.
@@ -193,6 +205,7 @@ const GroupedFilterSection = ({
   isExpanded,
   onToggleExpand,
   disabledOptions = [],
+  getLabel,
 }: GroupedFilterSectionProps) => {
   const allSelected = selected.length === allOptions.length;
   return (
@@ -237,7 +250,7 @@ const GroupedFilterSection = ({
                         : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                     } ${isDisabled ? 'opacity-30 cursor-not-allowed hover:border-[#dde0f0] dark:hover:border-[#1e1e38]' : ''}`}
                   >
-                    {option}
+                    {getLabel ? getLabel(option) : option}
                   </button>
                 )})}
               </div>
@@ -1423,6 +1436,7 @@ export default function FilterSidebar({
               onSetAll={onSetAnalyticsTiers}
               isExpanded={expanded.tier ?? true}
               onToggleExpand={() => onToggleSection('tier')}
+              getLabel={formatAnalyticsTierLabel}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
