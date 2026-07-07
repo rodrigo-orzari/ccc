@@ -48,19 +48,20 @@ export default function WorkloadsCatalog() {
 
       <div className="flex-1 overflow-auto flex flex-col">
         <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
-          <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <h1 className="text-3xl font-bold mb-2 text-[#171717] dark:text-[#e5e7eb]">
-                Cloud Workloads
-              </h1>
-              <p className="text-[#737373] max-w-2xl text-sm leading-relaxed">
-                Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements. If you'd like us to create a workload template for a specific architecture or use case, we'd love to hear from you. Tell us what you need to compare.{' '}
-                <a href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Request" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">
-                  📧 hello@comparecloudcosts.com
-                </a>
-              </p>
-            </div>
-            <div className="relative w-full md:w-80 shrink-0">
+          <div className="mb-6">
+            <h1 className="text-3xl font-bold mb-2 text-[#171717] dark:text-[#e5e7eb]">
+              Cloud Workloads
+            </h1>
+            <p className="text-[#737373] max-w-4xl text-sm leading-relaxed">
+              Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements. If you'd like us to create a workload template for a specific architecture or use case, we'd love to hear from you. Tell us what you need to compare.{' '}
+              <a href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Request" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">
+                📧 hello@comparecloudcosts.com
+              </a>
+            </p>
+          </div>
+
+          <div className="mb-6 w-full max-w-sm">
+            <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <svg className="h-3 w-3 text-[#737373]" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
