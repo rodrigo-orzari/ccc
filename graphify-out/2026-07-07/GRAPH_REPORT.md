@@ -1,16 +1,16 @@
-# Graph Report - _ccc  (2026-07-07)
+# Graph Report - _ccc  (2026-07-06)
 
 ## Corpus Check
-- 174 files · ~164,128 words
+- 174 files · ~163,428 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 775 nodes · 1108 edges · 88 communities (46 shown, 42 thin omitted)
+- 774 nodes · 1107 edges · 86 communities (49 shown, 37 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c621030f`
+- Built from commit: `68f3387c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -83,8 +83,6 @@
 - [[_COMMUNITY_Community 75|Community 75]]
 - [[_COMMUNITY_Community 76|Community 76]]
 - [[_COMMUNITY_Community 78|Community 78]]
-- [[_COMMUNITY_Community 79|Community 79]]
-- [[_COMMUNITY_Community 80|Community 80]]
 - [[_COMMUNITY_Community 81|Community 81]]
 - [[_COMMUNITY_Community 82|Community 82]]
 - [[_COMMUNITY_Community 83|Community 83]]
@@ -110,27 +108,27 @@
   test_filters.mjs → src/lib/api-utils.ts
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
-- `FilterSidebarProps` --references--> `ProductType`  [EXTRACTED]
-  src/components/FilterSidebar.tsx → src/types/index.ts
 - `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
   src/app/page.tsx → src/hooks/useDynamicFilters.ts
+- `FilterSidebarProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/FilterSidebar.tsx → src/types/index.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (88 total, 42 thin omitted)
+## Communities (86 total, 37 thin omitted)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.10
-Nodes (12): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, AwsStorageScraper, AzureStorageScraper (+4 more)
+Nodes (13): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, AwsStorageScraper, AzureStorageScraper (+5 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.06
-Nodes (67): Dashboard(), ENGINE_CATEGORIES, FilterSectionProps, FilterSidebar(), groupAnalyticsTiers(), GroupedFilterSectionProps, groupEngines(), AI_CONTEXT_WINDOWS (+59 more)
+Nodes (67): Dashboard(), ChartsViewProps, ENGINE_CATEGORIES, FilterSectionProps, FilterSidebar(), groupAnalyticsTiers(), GroupedFilterSectionProps, groupEngines() (+59 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.10
-Nodes (19): DB_FAMILY_MAPPINGS, GET(), POST(), buildPricingFilters(), initDb(), parseFilterList(), requireAdminAuth(), VALID_PRODUCT_TYPES (+11 more)
+Cohesion: 0.17
+Nodes (9): DB_FAMILY_MAPPINGS, buildPricingFilters(), parseFilterList(), VALID_PRODUCT_TYPES, GET(), run(), sql, run() (+1 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.10
@@ -141,8 +139,8 @@ Cohesion: 0.06
 Nodes (35): 1. Frontend State Management ✅, 1. In-Table Micro-Visualizations ✅, 2. Analytical Charts View ✅, 2. Query Parameter Building ✅, 3. Backend Query Processing ✅, 3. Networking Filters Data Integration Fix ("Super Debug") ✅, 4. Data Persistence ✅, Configuration & Adapters (+27 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.16
-Nodes (9): ChartsViewProps, FilterSidebarProps, PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, PricingRecord, ProductType, SponsorSlot (+1 more)
+Cohesion: 0.22
+Nodes (6): FilterSidebarProps, PricingTableProps, PRODUCT_TYPES, ProductTypeSelectorProps, PricingRecord, ProductType
 
 ### Community 12 - "Community 12"
 Cohesion: 0.07
@@ -155,6 +153,10 @@ Nodes (14): metadata, DigitalOceanReferralModal(), DonationModal(), DonationModa
 ### Community 15 - "Community 15"
 Cohesion: 0.06
 Nodes (34): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+26 more)
+
+### Community 16 - "Community 16"
+Cohesion: 0.24
+Nodes (3): DigitalOceanAdapter, fetchWithRetry(), GCPAdapter
 
 ### Community 25 - "Community 25"
 Cohesion: 0.50
@@ -201,16 +203,16 @@ Cohesion: 0.40
 Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
 
 ### Community 55 - "Community 55"
-Cohesion: 0.08
-Nodes (12): AlibabaAnalyticsAdapter, DatabricksAzureAdapter, DatabricksStaticAdapter, DigitalOceanAnalyticsAdapter, NativeAnalyticsStaticAdapter, OracleAnalyticsAdapter, SynapseAzureAdapter, DigitalOceanDBAdapter (+4 more)
+Cohesion: 0.10
+Nodes (11): AlibabaAnalyticsAdapter, DatabricksAzureAdapter, AlibabaDBAdapter, AWSElastiCacheAdapter, DigitalOceanDBAdapter, GCPMemorystoreAdapter, OracleAutonomousAdapter, OracleMySQLHeatWaveAdapter (+3 more)
 
 ### Community 56 - "Community 56"
-Cohesion: 0.18
+Cohesion: 0.19
 Nodes (4): AWSAdapter, AzureAdapter, BaseAdapter, OracleAdapter
 
 ### Community 58 - "Community 58"
 Cohesion: 0.18
-Nodes (8): TableRow(), PROVIDER_IDS, providerColor(), providerName(), ProviderTh(), REGION_OPTIONS, formatInstanceName(), WorkloadParameter
+Nodes (8): TableRow(), GEOGRAPHIES, PROVIDER_IDS, providerColor(), providerName(), ProviderTh(), REGION_OPTIONS, formatInstanceName()
 
 ### Community 61 - "Community 61"
 Cohesion: 0.36
@@ -218,15 +220,15 @@ Nodes (8): createTransport(), DataQualityAlert, isMailerConfigured(), PriceDrift
 
 ### Community 62 - "Community 62"
 Cohesion: 0.23
-Nodes (7): DatabasePricingPipeline, STATIC_NETWORKING_PRICING, ensureProviderId(), PriceDriftResult, SecurityPricingPipeline, STATIC_SECURITY_PRICING, StoragePricingPipeline
+Nodes (6): DatabasePricingPipeline, STATIC_NETWORKING_PRICING, ensureProviderId(), PriceDriftResult, SecurityPricingPipeline, STATIC_SECURITY_PRICING
 
 ### Community 63 - "Community 63"
 Cohesion: 0.25
 Nodes (4): CATEGORY_EMOJIS, CATEGORY_TO_PRODUCT, PROVIDER_COLORS, PROVIDERS
 
 ### Community 65 - "Community 65"
-Cohesion: 0.28
-Nodes (4): WORKLOADS, WorkloadDefinition, PRODUCT_TYPE_LABELS, PRODUCT_TYPE_ORDER
+Cohesion: 0.21
+Nodes (7): WORKLOADS, SponsorSlot, WorkloadComponent, WorkloadDefinition, WorkloadParameter, PRODUCT_TYPE_LABELS, PRODUCT_TYPE_ORDER
 
 ### Community 66 - "Community 66"
 Cohesion: 0.06
@@ -241,36 +243,44 @@ Cohesion: 0.22
 Nodes (3): AppHostingPricingPipeline, AlibabaAdapter, PricingPipeline
 
 ### Community 69 - "Community 69"
-Cohesion: 0.14
-Nodes (11): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+3 more)
+Cohesion: 0.10
+Nodes (14): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+6 more)
+
+### Community 72 - "Community 72"
+Cohesion: 0.31
+Nodes (7): GET(), dbCat(), DQIssue, DQReport, PROVIDERS, runDataQualityChecks(), sql
 
 ### Community 73 - "Community 73"
 Cohesion: 0.33
 Nodes (3): pipeline, sql, NetworkingPricingPipeline
+
+### Community 74 - "Community 74"
+Cohesion: 0.47
+Nodes (4): POST(), initDb(), requireAdminAuth(), DataAnalyticsPricingPipeline
 
 ### Community 93 - "Community 93"
 Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **246 isolated node(s):** `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps`, `What It Does`, `Workload Templates` (+241 more)
+- **246 isolated node(s):** `What It Does`, `Workload Templates`, `Regional Pricing for Data & Analytics`, `Filter Architecture`, `Stack` (+241 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **42 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **37 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `BaseAdapter` connect `Community 56` to `Community 68`, `Community 69`, `Community 72`, `Community 9`, `Community 75`, `Community 76`, `Community 78`, `Community 79`, `Community 48`, `Community 80`, `Community 16`, `Community 47`, `Community 23`, `Community 55`, `Community 27`, `Community 62`?**
+- **Why does `BaseAdapter` connect `Community 56` to `Community 68`, `Community 69`, `Community 9`, `Community 75`, `Community 76`, `Community 78`, `Community 47`, `Community 48`, `Community 16`, `Community 23`, `Community 55`, `Community 27`, `Community 62`?**
   _High betweenness centrality (0.058) - this node is a cross-community bridge._
-- **Why does `PricingRecord` connect `Community 55` to `Community 69`, `Community 38`, `Community 9`, `Community 75`, `Community 76`, `Community 78`, `Community 79`, `Community 48`, `Community 80`, `Community 47`, `Community 23`, `Community 27`, `Community 62`?**
+- **Why does `PricingRecord` connect `Community 55` to `Community 69`, `Community 38`, `Community 9`, `Community 75`, `Community 76`, `Community 78`, `Community 47`, `Community 48`, `Community 23`, `Community 27`, `Community 62`?**
   _High betweenness centrality (0.052) - this node is a cross-community bridge._
 - **Why does `PricingPipeline` connect `Community 68` to `Community 69`, `Community 38`, `Community 9`, `Community 74`, `Community 47`, `Community 27`, `Community 61`, `Community 62`?**
   _High betweenness centrality (0.036) - this node is a cross-community bridge._
-- **What connects `ENGINE_CATEGORIES`, `FilterSectionProps`, `GroupedFilterSectionProps` to the rest of the system?**
+- **What connects `What It Does`, `Workload Templates`, `Regional Pricing for Data & Analytics` to the rest of the system?**
   _246 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 6` be split into smaller, more focused modules?**
-  _Cohesion score 0.09523809523809523 - nodes in this community are weakly interconnected._
-- **Should `Community 7` be split into smaller, more focused modules?**
-  _Cohesion score 0.059298245614035086 - nodes in this community are weakly interconnected._
-- **Should `Community 8` be split into smaller, more focused modules?**
   _Cohesion score 0.0960591133004926 - nodes in this community are weakly interconnected._
+- **Should `Community 7` be split into smaller, more focused modules?**
+  _Cohesion score 0.05775803144224197 - nodes in this community are weakly interconnected._
+- **Should `Community 9` be split into smaller, more focused modules?**
+  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
