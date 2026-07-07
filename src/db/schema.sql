@@ -52,6 +52,24 @@ CREATE TABLE IF NOT EXISTS pricing_records (
 -- constant across DB engines (MySQL, PostgreSQL, SQL Server, etc.) and HA modes —
 -- those rows are only distinguished via the attributes JSONB, not real columns.
 DROP INDEX IF EXISTS pricing_records_unique_key;
+
+-- Remove duplicate rows before creating the unique index.
+-- Keeps the first row (lowest id) of each duplicate group, deletes the rest.
+-- This is a no-op if no duplicates exist.
+WITH duplicates AS (
+  SELECT
+    id,
+    ROW_NUMBER() OVER (
+      PARTITION BY service_id, region_id, instance_type, os, arch,
+                   COALESCE(attributes->>'engine', ''),
+                   COALESCE(attributes->>'ha_mode', '')
+      ORDER BY id
+    ) as rn
+  FROM pricing_records
+)
+DELETE FROM pricing_records
+WHERE id IN (SELECT id FROM duplicates WHERE rn > 1);
+
 CREATE UNIQUE INDEX IF NOT EXISTS pricing_records_unique_key
 ON pricing_records (
     service_id, region_id, instance_type, os, arch,
