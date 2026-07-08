@@ -293,21 +293,28 @@ async function fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]>
 // contains `descriptionSubstr`, scoped to the Cloud Run reference region.
 // Tries multiple pattern variations to handle API changes.
 function findRatePerUnit(skus: any[], descriptionSubstr: string): number | null {
+  const isCpu = descriptionSubstr.toLowerCase().includes('cpu');
+
   // Try multiple pattern variations for robustness against API changes
   const patterns = [
     descriptionSubstr,
     descriptionSubstr.toLowerCase(),
     descriptionSubstr.replace(' Allocation', ''),
     descriptionSubstr.replace(/Allocation Time/, 'Time'),
+    // New patterns for current Google API (vCPU/Memory naming)
+    isCpu ? 'vcpu' : 'memory',
+    isCpu ? 'vCPU' : 'Memory',
+    isCpu ? 'vcpu-seconds' : 'memory-seconds',
   ];
 
   for (const pattern of patterns) {
     const sku = skus.find(s => {
       const desc = (s.description ?? '').toLowerCase();
       const matchesPattern = desc.includes(pattern.toLowerCase());
-      const isNotFree = !desc.includes('free');
+      const isNotFree = !desc.includes('free') && !desc.includes('discount') && !desc.includes('commitment');
+      const isNotTransfer = !desc.includes('transfer') && !desc.includes('data out');
       const isInRegion = (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global');
-      return matchesPattern && isNotFree && isInRegion;
+      return matchesPattern && isNotFree && isNotTransfer && isInRegion;
     });
 
     if (sku) {
@@ -322,13 +329,14 @@ function findRatePerUnit(skus: any[], descriptionSubstr: string): number | null 
     }
   }
 
-  // Last-resort: look for ANY SKU with 'cloud run' + 'cpu' or 'memory'
-  const isCpu = descriptionSubstr.toLowerCase().includes('cpu');
-  const fallbackKeyword = isCpu ? 'cpu' : 'memory';
+  // Last-resort: look for ANY SKU with 'cloud run' execution pricing (not transfer/commitment)
   const fallbackSku = skus.find(s => {
     const desc = (s.description ?? '').toLowerCase();
-    return desc.includes('cloud run') && desc.includes(fallbackKeyword) && !desc.includes('free') &&
-           (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global');
+    const hasCloudRun = desc.includes('cloud run');
+    const isExecution = (isCpu ? desc.includes('cpu') || desc.includes('vcpu') : desc.includes('memory')) &&
+                        !desc.includes('transfer') && !desc.includes('discount') && !desc.includes('commitment') && !desc.includes('free');
+    const isInRegion = (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global');
+    return hasCloudRun && isExecution && isInRegion;
   });
 
   if (fallbackSku) {

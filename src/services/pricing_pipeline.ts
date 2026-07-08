@@ -749,7 +749,8 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
       // Alibaba returns 400 on any request error. Log response to diagnose.
       if (response.status !== 200 || response.data?.Code) {
         const errorCode = response.data?.Code ?? 'UNKNOWN';
-        const errorMsg = response.data?.Message ?? 'Unknown error';
+        const errorMsg = response.data?.Message ?? response.data?.message ?? JSON.stringify(response.data);
+        console.log(`[DEBUG] Alibaba error for ${inst.type}: ${errorCode} - ${errorMsg}`);
         throw new Error(`Alibaba API error ${errorCode}: ${errorMsg}`);
       }
 
