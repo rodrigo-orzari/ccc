@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1783364527.300563,
-    "ast_hash": "7847668530d9dcb1ff31acddb3d6cb09",
+    "mtime": 1783543448.6656878,
+    "ast_hash": "5123ea2c0a6caf9df583ae71bf5493d9",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -325,8 +325,8 @@
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
-    "mtime": 1782152352.438199,
-    "ast_hash": "f4766640fd3f41d41377e6eeb3c169be",
+    "mtime": 1783543249.6164575,
+    "ast_hash": "de92365d467c555eafa88cadfd3331a6",
     "semantic_hash": ""
   },
   "src/app/providers.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1782587012.256728,
-    "ast_hash": "4f37012658957049cdbccd34edba1e22",
+    "mtime": 1783543221.0558162,
+    "ast_hash": "5566a62164ad3aef976b0666721a37cb",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
@@ -644,19 +644,9 @@
     "ast_hash": "142e1e582a89d41bfba0978e36a4c05f",
     "semantic_hash": ""
   },
-  "cloud_products_comparison.json": {
-    "mtime": 1781932265.8142917,
-    "ast_hash": "8d2277363387bebdf09fd2b5313bae0f",
-    "semantic_hash": ""
-  },
   "src/services/security_pipeline.ts": {
     "mtime": 1782006141.6526368,
     "ast_hash": "02e71a2b9317d3a5b9ce6de4cb54ec87",
-    "semantic_hash": ""
-  },
-  "src/app/cloud-products/page.tsx": {
-    "mtime": 1781980849.3499599,
-    "ast_hash": "d83e35833096ef01f0979c44f5f28dba",
     "semantic_hash": ""
   },
   "src/config/vector_databases.ts": {
@@ -665,33 +655,33 @@
     "semantic_hash": ""
   },
   "src/app/about/layout.tsx": {
-    "mtime": 1781982784.035011,
-    "ast_hash": "2d0d23e233e6978f144818487de3b8f0",
+    "mtime": 1783543274.4087622,
+    "ast_hash": "b9d40836584737bc06a930ac23448f6f",
     "semantic_hash": ""
   },
   "src/app/methodology/layout.tsx": {
-    "mtime": 1781982785.95705,
-    "ast_hash": "56c79683e67ffd32539b5f925cd01cbe",
+    "mtime": 1783543278.2930863,
+    "ast_hash": "cd4f553cba8c4062b98dcd0d2e0a11e0",
     "semantic_hash": ""
   },
   "src/app/privacy/layout.tsx": {
-    "mtime": 1781982785.923229,
-    "ast_hash": "61484a82f5cbfe02cb3edd037cc62a14",
+    "mtime": 1783543285.4462533,
+    "ast_hash": "83709a0ebe25c0613386951367837488",
     "semantic_hash": ""
   },
   "src/app/robots.ts": {
-    "mtime": 1782012138.0476184,
-    "ast_hash": "f989047d5a8241ad570411d0033e35c1",
+    "mtime": 1783543225.9448073,
+    "ast_hash": "b01af6012726142ef94ff475bee703fe",
     "semantic_hash": ""
   },
   "src/app/sitemap.ts": {
-    "mtime": 1782109974.654309,
-    "ast_hash": "2517306b28d1e038e97fc26ceeb6586b",
+    "mtime": 1783543235.8279185,
+    "ast_hash": "5e4f365f479fc82a6648bf9c0fb9e879",
     "semantic_hash": ""
   },
   "src/app/terms/layout.tsx": {
-    "mtime": 1781982784.8905823,
-    "ast_hash": "b09dc88d1fae5a3c27f6038f613815aa",
+    "mtime": 1783543281.927963,
+    "ast_hash": "93306a90b78878fb3f57e5ba2348292c",
     "semantic_hash": ""
   },
   "public/og-image.png": {
@@ -727,6 +717,36 @@
   "src/services/alibaba_signer.ts": {
     "mtime": 1783470736.8405745,
     "ast_hash": "8682e17c92c044d97c44954154306879",
+    "semantic_hash": ""
+  },
+  "src/app/dashboard/layout.tsx": {
+    "mtime": 1783543299.5834184,
+    "ast_hash": "898a214b1bec43153185a9fa6eff6c44",
+    "semantic_hash": ""
+  },
+  "src/app/datacenters/layout.tsx": {
+    "mtime": 1783543308.5529377,
+    "ast_hash": "d2f061ad2e16515a7020c807367d715f",
+    "semantic_hash": ""
+  },
+  "src/app/docs/layout.tsx": {
+    "mtime": 1783543312.8003244,
+    "ast_hash": "06ad5b2b76d9a5a47c1ee6509c4041f9",
+    "semantic_hash": ""
+  },
+  "src/app/status/layout.tsx": {
+    "mtime": 1783543316.4647067,
+    "ast_hash": "6ddaa796e7e151ee3ed1169dbcdd170b",
+    "semantic_hash": ""
+  },
+  "src/app/workloads/[id]/layout.tsx": {
+    "mtime": 1783543329.9928675,
+    "ast_hash": "80d9e4ad8297507ec3f219465cb78e2c",
+    "semantic_hash": ""
+  },
+  "src/app/workloads/layout.tsx": {
+    "mtime": 1783543304.344993,
+    "ast_hash": "8b0a263c31fd2bcc81d926cf133f8cc7",
     "semantic_hash": ""
   }
 }

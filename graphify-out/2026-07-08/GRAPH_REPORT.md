@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-07-08)
 
 ## Corpus Check
-- 142 files · ~166,295 words
+- 142 files · ~166,524 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e93aa525`
+- Built from commit: `77356c7f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -79,14 +79,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
-- `GCPCloudSQLAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
-- `OracleAutonomousAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
-- `OracleMySQLHeatWaveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
-- `OraclePostgreSQLAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
+- `AWSContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `AzureContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `DigitalOceanContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `GCPContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
 
 ## Import Cycles
 - None detected.
@@ -234,7 +234,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **280 isolated node(s):** `STREAMING_ENGINES`, `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES`, `RDS_ENGINE_MAP`, `AZURE_DB_SERVICES` (+275 more)
+- **280 isolated node(s):** `STREAMING_ENGINES`, `ORACLE_FLEX_FAMILIES`, `ORACLE_GPU_MODELS`, `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES` (+275 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -247,7 +247,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.060) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 7` to `Community 58`, `Community 44`?**
   _High betweenness centrality (0.035) - this node is a cross-community bridge._
-- **What connects `STREAMING_ENGINES`, `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES` to the rest of the system?**
+- **What connects `STREAMING_ENGINES`, `ORACLE_FLEX_FAMILIES`, `ORACLE_GPU_MODELS` to the rest of the system?**
   _280 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
