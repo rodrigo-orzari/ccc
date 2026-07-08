@@ -969,9 +969,15 @@ export class PricingPipeline {
         };
       });
 
-      // postgres.js bulk insert!
+      // postgres.js bulk insert in batches — postgres.js has a 65,534-parameter
+      // limit per query. With ~15 columns per row, that's ~4,300 rows max per
+      // query. Batch in chunks of 1,000 to stay safely under the limit.
       if (rowsToInsert.length > 0) {
-        await sql`INSERT INTO pricing_records ${sql(rowsToInsert)}`;
+        const batchSize = 1000;
+        for (let i = 0; i < rowsToInsert.length; i += batchSize) {
+          const batch = rowsToInsert.slice(i, i + batchSize);
+          await sql`INSERT INTO pricing_records ${sql(batch)}`;
+        }
       }
 
       console.log(`✅ Saved ${records.length} records for ${providerSlug} (${serviceCategory}, source: ${dataSource})`);
