@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/dashboard', '/cloud-products'],
+      disallow: ['/api/'],
     },
     sitemap: 'https://comparecloudcosts.com/sitemap.xml',
   };

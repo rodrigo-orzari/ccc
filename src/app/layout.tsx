@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   },
   description: 'Compare compute, database, and serverless pricing across AWS, Azure, Google Cloud, Oracle, and DigitalOcean.',
   keywords: ['Cloud Computing', 'AWS Pricing', 'Azure Pricing', 'Google Cloud Pricing', 'Cloud Cost Comparison', 'FinOps', 'Cloud Databases', 'Serverless Pricing'],
+  alternates: {
+    canonical: '/',
+  },
   authors: [{ name: 'Compare Cloud Costs' }],
   creator: 'Compare Cloud Costs',
   openGraph: {
@@ -55,9 +58,38 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': 'https://comparecloudcosts.com/#organization',
+        name: 'Compare Cloud Costs',
+        url: 'https://comparecloudcosts.com',
+        logo: 'https://comparecloudcosts.com/logo.png',
+        description:
+          'Compare compute, database, and serverless pricing across AWS, Azure, Google Cloud, Oracle, DigitalOcean, and Alibaba Cloud.',
+        email: 'hello@comparecloudcosts.com',
+      },
+      {
+        '@type': 'WebSite',
+        '@id': 'https://comparecloudcosts.com/#website',
+        url: 'https://comparecloudcosts.com',
+        name: 'Compare Cloud Costs',
+        publisher: { '@id': 'https://comparecloudcosts.com/#organization' },
+        description:
+          'Instantly compare compute, database, and serverless pricing across major cloud providers.',
+      },
+    ],
+  };
+
   return (
     <html lang="en" className="dark">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Script id="clarity-script" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){

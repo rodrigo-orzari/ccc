@@ -181,12 +181,21 @@ ccc/
 │   │   ├── layout.tsx                # Root layout (fonts, providers, metadata)
 │   │   ├── globals.css               # Global styles + custom scrollbar/slider CSS
 │   │   ├── providers.tsx             # React Query provider wrapper
+│   │   ├── sitemap.ts                # SEO: sitemap.xml (all routes + 14 workload pages from WORKLOADS)
+│   │   ├── robots.ts                 # SEO: robots.txt (allows all except /api/)
+│   │   ├── dashboard/page.tsx        # Marketing landing page (indexed)
+│   │   ├── datacenters/page.tsx      # Datacenter/region world map
 │   │   ├── about/page.tsx            # About page (solution overview, key capabilities, use cases)
 │   │   ├── docs/page.tsx             # Documentation hub (Datacenters, pricing methodology, FAQ)
 │   │   ├── status/page.tsx           # Status page (pipeline health, data freshness, coverage)
 │   │   ├── workloads/
 │   │   │   ├── page.tsx              # Workloads catalog (cards grid)
-│   │   │   └── [id]/page.tsx         # Workload detail (comparison table + config panel)
+│   │   │   ├── layout.tsx            # SEO metadata for the catalog
+│   │   │   └── [id]/
+│   │   │       ├── page.tsx          # Workload detail (comparison table + config panel)
+│   │   │       └── layout.tsx        # Per-workload SEO metadata + BreadcrumbList JSON-LD
+│   │   │   # Note: about/docs/status/methodology/privacy/terms/dashboard/datacenters
+│   │   │   #       each have a sibling layout.tsx exporting per-page metadata + canonical
 │   │   ├── api/
 │   │   │   ├── pricing/
 │   │   │   │   ├── route.ts          # GET /api/pricing — filtered pricing records

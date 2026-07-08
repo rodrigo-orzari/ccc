@@ -43,7 +43,6 @@ export default function Footer() {
           <Link href="/docs" className="hover:text-black dark:hover:text-white transition-colors">
             Docs
           </Link>
-          {/* Cloud Products page hidden from nav for now — still reachable at /cloud-products */}
           <Link href="/privacy" className="hover:text-black dark:hover:text-white transition-colors">
             Privacy
           </Link>
