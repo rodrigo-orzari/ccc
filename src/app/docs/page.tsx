@@ -184,7 +184,15 @@ const DocsPage: React.FC = () => {
           color: var(--muted-text);
           margin-bottom: 2.5rem;
         }
-        .docs-section { margin-bottom: 0; }
+        .docs-section {
+          margin-bottom: 0;
+          padding-top: 2.5rem;
+          border-top: 1px solid var(--divider-color);
+        }
+        .docs-section:first-of-type {
+          border-top: none;
+          padding-top: 0;
+        }
         .docs-wrapper > footer {
           position: fixed;
           bottom: 0;
@@ -225,6 +233,14 @@ const DocsPage: React.FC = () => {
               </li>
               <li>
                 <a href="#workloads" style={{ padding: '3px 0' }}>Workloads</a>
+              </li>
+              <li>
+                <a href="#use-cases" style={{ padding: '3px 0' }}>Use Cases</a>
+                <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <li><a href="#use-case-1" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Database + Compute Scaling</a></li>
+                  <li><a href="#use-case-2" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Multi-Region DR</a></li>
+                  <li><a href="#use-case-3" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Kubernetes Clusters</a></li>
+                </ul>
               </li>
               <li>
                 <a href="#datacenters" style={{ padding: '3px 0' }}>Datacenters</a>
@@ -346,10 +362,165 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="workloads">Workloads</CopyHeading>
             <p>
-              The Workloads feature allows you to price end-to-end cloud architectures instead of just individual components. We've defined common application patterns (like a 3-Tier Web App or a Data Processing Pipeline) and their component requirements.
+              The Workloads feature allows you to price end-to-end cloud architectures instead of just individual components. We've defined common application patterns and their component requirements. By adjusting scale parameters, the tool automatically calculates necessary resource specs and queries the cheapest matching instances across all providers.
             </p>
+            <p><strong>Available workloads:</strong></p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1.5rem' }}>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link href="/workloads/serverless-web-app" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
+                  Serverless Web Application
+                </Link> — Event-driven backends for web and mobile apps. Ideal for variable workloads and reduced operational overhead.
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link href="/workloads/3-tier-web" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
+                  Classic 3-Tier Web Architecture
+                </Link> — The foundational blueprint for traditional web applications using VMs and relational databases. Scales from hundreds to thousands of concurrent users.
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link href="/workloads/streaming-analytics" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
+                  Real-time Streaming Analytics
+                </Link> — High-throughput data pipelines for IoT telemetry, clickstreams, and financial data processing.
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <Link href="/workloads/ecommerce-microservices" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
+                  E-Commerce Microservices Stack
+                </Link> — A decoupled, highly available architecture for product catalogs and transactions. Built for fast lookups and fault tolerance.
+              </li>
+            </ul>
+
+            <BackToTop />
+          </div>
+
+          {/* Use Cases */}
+          <div className="docs-section">
+            <CopyHeading id="use-cases">Use Cases & Step-by-Step Comparisons</CopyHeading>
             <p>
-              By adjusting scale parameters like traffic or data volume, the tool automatically calculates the necessary resource specs (e.g. vCPUs, Memory) and queries the cheapest matching general-purpose instances across AWS, Azure, GCP, DigitalOcean, Oracle, and Alibaba.
+              The following real-world scenarios demonstrate how to use comparecloudcosts.com to compare pricing across multiple product categories, apply filters, and export results for decision-making.
+            </p>
+
+            <h3 id="use-case-1">Use Case 1: Evaluating Database + Compute for a Scaling Startup</h3>
+            <p>
+              <strong>Scenario:</strong> You're running a SaaS product with a PostgreSQL database and API servers. You want to compare cost-effective options for both components as your user base grows from 1,000 to 5,000 concurrent users.
+            </p>
+            <p><strong>Steps:</strong></p>
+            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Start on the Databases tab.</strong> Click <strong>Databases</strong> at the top of the page.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Filter for managed relational databases.</strong> In the left sidebar:
+                <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 0.5rem' }}>
+                  <li>Select <strong>Engine: PostgreSQL</strong> to narrow to your database type.</li>
+                  <li>Select <strong>HA Mode: Multi-AZ</strong> to ensure high availability.</li>
+                  <li>Set <strong>Memory: 8–32 GB</strong> to match a medium-sized production database.</li>
+                  <li>Keep <strong>Geography: All</strong> to see global options.</li>
+                </ul>
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Note the top 3 providers</strong> by hourly price (typically AWS RDS, Azure Database, or Google Cloud SQL).
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Switch to Virtual Machines tab.</strong> Now compare compute instances for your application servers.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Filter for balanced compute.</strong> In the sidebar:
+                <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 0.5rem' }}>
+                  <li>Select <strong>Category: General purpose</strong>.</li>
+                  <li>Set <strong>vCPU: 2–4</strong> and <strong>Memory: 8–16 GB</strong>.</li>
+                  <li>Select <strong>Geography: US East</strong> to match your database region.</li>
+                </ul>
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Export or screenshot results.</strong> You now have a side-by-side cost table for all major providers. Use this to calculate total monthly cost: (Database hourly price + Compute hourly price per instance × 2–3 instances) × 730 hours/month.
+              </li>
+            </ol>
+            <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--muted-text)' }}>
+              <strong>💡 Tip:</strong> Repeat this comparison at 5,000 and 10,000 concurrent users by increasing vCPU/memory filters. You'll see how scaling costs differ across providers — some remain linear, while others show volume discounts or better pricing at larger sizes.
+            </p>
+
+            <h3 id="use-case-2">Use Case 2: Multi-Region Disaster Recovery Architecture</h3>
+            <p>
+              <strong>Scenario:</strong> You need to set up a disaster recovery (DR) backup in a different geographic region. You want to compare both primary and backup region costs across Storage (for backups) and Networking (for data replication).
+            </p>
+            <p><strong>Steps:</strong></p>
+            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Start on the Storage tab.</strong> Click <strong>Storage</strong> at the top.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Filter for object storage.</strong> In the left sidebar:
+                <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 0.5rem' }}>
+                  <li>Select <strong>Type: Object Storage</strong> (S3-equivalent).</li>
+                  <li>Select <strong>Geography: US East</strong> for your primary region.</li>
+                </ul>
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Record storage pricing per GB/month.</strong> Note the cost for your expected backup volume (e.g., 500 GB).
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Switch filters to Geography: EU West</strong> (your DR region) and repeat. Compare how storage costs differ.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Switch to Networking tab.</strong> Now estimate data transfer costs for replication.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Filter for inter-region data transfer.</strong> In the sidebar:
+                <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 0.5rem' }}>
+                  <li>Look for rows mentioning <strong>Data Transfer Out (Intercontinental)</strong> or <strong>Data Transfer Between Regions</strong>.</li>
+                  <li>These typically cost $0.02–0.05 per GB, depending on direction and provider.</li>
+                </ul>
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Calculate monthly DR cost:</strong> (Primary storage + DR storage + daily replication volume × 30 days × data transfer rate).
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Export or create a spreadsheet</strong> with your calculations and share with your team for decision-making.
+              </li>
+            </ol>
+            <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--muted-text)' }}>
+              <strong>💡 Tip:</strong> Use the <strong>Aggregate View</strong> toggle (in the toolbar) to collapse results by instance type and see min/max/avg pricing. This makes it easier to spot which provider offers the best value across regions.
+            </p>
+
+            <h3 id="use-case-3">Use Case 3: Containerized Workload Scaling on Kubernetes</h3>
+            <p>
+              <strong>Scenario:</strong> You're migrating a Docker-based application to Kubernetes and need to compare the per-node cost of different providers' managed Kubernetes services (EKS, GKE, AKS, DOKS, OKE).
+            </p>
+            <p><strong>Steps:</strong></p>
+            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Start on the Containers tab.</strong> Click <strong>Containers</strong> at the top.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Filter for Kubernetes node pools.</strong> In the left sidebar:
+                <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 0.5rem' }}>
+                  <li>Select <strong>Type: Kubernetes</strong> (or look for EKS, GKE, AKS, OKE, DOKS).</li>
+                  <li>Set <strong>vCPU: 4</strong> and <strong>Memory: 16 GB</strong> (a typical mid-size node).</li>
+                  <li>Select <strong>Geography: US East</strong>.</li>
+                </ul>
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Note the per-node hourly cost</strong> for each provider. This is what you'll pay for each Kubernetes worker node.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Check for hidden costs.</strong> Managed Kubernetes services often add control-plane charges:
+                <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 0.5rem' }}>
+                  <li><strong>AWS EKS:</strong> +$0.10/cluster/hour (control plane).</li>
+                  <li><strong>Azure AKS:</strong> Free control plane (included).</li>
+                  <li><strong>Google GKE:</strong> Free control plane for one cluster, then charges apply.</li>
+                </ul>
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Calculate cluster cost:</strong> (Control plane fee + per-node cost × number of nodes) × 730 hours/month.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Compare across node sizes.</strong> Re-apply filters for 2-vCPU (dev clusters) and 8-vCPU (production) to see how pricing scales.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Create a comparison sheet</strong> with dev, staging, and production cluster costs for each provider.
+              </li>
+            </ol>
+            <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--muted-text)' }}>
+              <strong>💡 Tip:</strong> Also check the <strong>Serverless</strong> tab for <strong>Cloud Run / Fargate / App Engine</strong> if you're considering a serverless container approach. Many teams find these cheaper than managing Kubernetes clusters for variable workloads.
             </p>
 
             <BackToTop />
