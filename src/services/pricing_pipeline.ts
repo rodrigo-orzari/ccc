@@ -837,7 +837,7 @@ export class PricingPipeline {
           previous_price_per_unit: prevPrice ?? null,
           unit: r.unit,
           attributes: Object.keys(attrs).length > 0 ? this.sql.json(attrs) : null,
-          data_source: dataSource
+          data_source: r.dataSource ?? dataSource
         };
       });
 

@@ -336,11 +336,34 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       });
     }
 
-    // Azure Functions: To be implemented in Phase 3
+    // Azure Functions: Try live Retail Prices API first, fall back to static config.
+    // Container Apps rows (same static config array, no live adapter) are always
+    // appended so a successful live fetch doesn't drop them from the table.
     try {
-      console.log('⏳ Azure Functions (Phase 3 - not yet implemented)...');
-      const records = await this.getAzureServerlessStaticRecords();
-      if (records.length > 0) {
+      console.log('🔄 Attempting Azure Functions live API fetch...');
+      const azureAdapter = new AzureFunctionsLiveAdapter();
+      let records = await azureAdapter.fetchPricing();
+
+      if (records.length === 0) {
+        console.warn('⚠️  Azure Functions live API returned empty, using static config fallback');
+        records = await this.getAzureServerlessStaticRecords();
+      } else {
+        records = [...records, ...(await this.getAzureContainerAppsStaticRecords())];
+      }
+
+      const driftAlerts = await this.saveRecords(records, 'serverless');
+      results.push({
+        provider: 'azure',
+        service: 'Azure Functions',
+        status: 'success',
+        count: records.length,
+        driftAlerts,
+        dataSource: records[0]?.dataSource || 'static_config'
+      });
+    } catch (error: any) {
+      console.warn(`⚠️  Azure Functions live API failed (${error.message}), falling back to static config...`);
+      try {
+        const records = await this.getAzureServerlessStaticRecords();
         const driftAlerts = await this.saveRecords(records, 'serverless');
         results.push({
           provider: 'azure',
@@ -349,17 +372,17 @@ export class ServerlessPricingPipeline extends PricingPipeline {
           count: records.length,
           driftAlerts,
           dataSource: 'static_config',
-          note: 'Phase 3 pending - static config only'
+          note: 'Using static config fallback due to API failure'
+        });
+      } catch (fallbackError: any) {
+        console.error(`❌ Azure Functions static config also failed:`, fallbackError);
+        results.push({
+          provider: 'azure',
+          service: 'Azure Functions',
+          status: 'error',
+          message: `Live API failed: ${error.message}, Static fallback failed: ${(fallbackError as Error).message}`
         });
       }
-    } catch (error: any) {
-      console.warn(`⚠️  Azure Functions error:`, error.message);
-      results.push({
-        provider: 'azure',
-        service: 'Azure Functions',
-        status: 'skipped',
-        message: 'Phase 3 not yet implemented'
-      });
     }
 
     // DigitalOcean App Platform Functions
@@ -509,11 +532,24 @@ export class ServerlessPricingPipeline extends PricingPipeline {
   }
 
   /**
-   * Static config for Azure Functions (Phase 3 placeholder)
+   * Static config for Azure Functions (used when the live Retail Prices fetch fails)
    */
   private async getAzureServerlessStaticRecords(): Promise<PricingRecord[]> {
     const adapter = new AzureServerlessAdapter();
     return adapter.fetchPricing();
+  }
+
+  /**
+   * Azure Container Apps rows live in the same AZURE_SERVERLESS static array as
+   * Functions but have no live adapter of their own — AzureFunctionsLiveAdapter
+   * only covers Functions, so we always append these statically regardless of
+   * whether the Functions fetch above went live or fell back, otherwise a
+   * successful live Functions fetch would silently drop Container Apps from
+   * the comparison table.
+   */
+  private async getAzureContainerAppsStaticRecords(): Promise<PricingRecord[]> {
+    const allStatic = await this.getAzureServerlessStaticRecords();
+    return allStatic.filter(r => r.service === 'Container Apps');
   }
 
   /**

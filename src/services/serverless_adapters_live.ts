@@ -257,14 +257,95 @@ export class GCPCloudRunLiveAdapter extends BaseAdapter {
 }
 
 /**
- * Azure Functions Live Adapter (Placeholder)
- * To be implemented in Phase 3
+ * Azure Functions Live Adapter
+ * Fetches Consumption-plan pricing from the Azure Retail Prices API — a
+ * genuinely public, keyless REST API (no auth, no subscription needed):
+ * https://prices.azure.com/api/retail/prices
+ *
+ * The Consumption plan bills two meters (execution time in GB-seconds,
+ * invocation count) rather than a distinct SKU per memory size, so — like
+ * the static config it replaces — we generate a handful of representative
+ * memory tiers (128MB up to the 1.75GB Consumption-plan ceiling) and derive
+ * each tier's GB-hour price from the live per-GB-second rate.
  */
 export class AzureFunctionsLiveAdapter extends BaseAdapter {
   providerSlug = 'azure';
+  private static readonly REGION = 'eastus';
+  private readonly AZURE_FUNCTIONS_LANGUAGES = ['C#', 'JavaScript', 'Python', 'Java', 'PowerShell', 'Go', 'Rust'];
+
+  // Same memory tiers and instance-type names as the static config
+  // (azure_serverless.ts) so a live fetch produces identical comparison rows,
+  // just with live prices. Names are explicit (not derived from memoryGb *
+  // 1024) since 0.128 GB rounds to 131MB, not the conventional "128MB".
+  private readonly MEMORY_TIERS: { type: string; memoryGb: number }[] = [
+    { type: 'Functions-128MB-Consumption', memoryGb: 0.128 },
+    { type: 'Functions-256MB-Consumption', memoryGb: 0.256 },
+    { type: 'Functions-512MB-Consumption', memoryGb: 0.512 },
+    { type: 'Functions-1GB-Consumption', memoryGb: 1 },
+    { type: 'Functions-1536MB-Consumption', memoryGb: 1.5 },
+    { type: 'Functions-1792MB-Consumption', memoryGb: 1.75 },
+  ];
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log('⏳ Azure Functions adapter not yet implemented (Phase 3)');
-    return [];
+    console.log('📥 Fetching Azure Functions pricing from live Retail Prices API...');
+    const filter = encodeURIComponent(
+      `serviceName eq 'Functions' and priceType eq 'Consumption' and armRegionName eq '${AzureFunctionsLiveAdapter.REGION}'`
+    );
+    const url = `https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview&$filter=${filter}`;
+    const response = await axios.get(url, { timeout: 30000 });
+    const items: any[] = response.data?.Items ?? [];
+
+    // "Standard" is the classic Consumption-plan SKU (as opposed to "Flex
+    // Consumption"/"Premium"). Each meter has a $0 free-tier row and a
+    // non-zero paid-tier row for the same meterName — take the paid one.
+    const executionItem = items.find(i => i.skuName === 'Standard' && i.meterName === 'Standard Execution Time' && i.retailPrice > 0);
+    const invocationItem = items.find(i => i.skuName === 'Standard' && i.meterName === 'Standard Total Executions' && i.retailPrice > 0);
+
+    if (!executionItem) throw new Error('Azure Retail Prices API: no non-zero Standard Execution Time meter found for Functions');
+
+    const gbSecondPrice = executionItem.retailPrice; // $ per GB-second
+    // unitOfMeasure for "Total Executions" meters is "10" (i.e. price is per 10 executions).
+    const invocationPricePerMillion = invocationItem
+      ? (invocationItem.retailPrice / 10) * 1_000_000
+      : 0.20; // fall back to the well-known $0.20/1M rate if the meter is missing
+
+    const records: PricingRecord[] = this.MEMORY_TIERS.map(({ type, memoryGb }) => ({
+      provider: 'azure',
+      service: 'Azure Functions',
+      region: AzureFunctionsLiveAdapter.REGION,
+      instanceType: type,
+      vcpus: 1,
+      memoryGb,
+      arch: 'x86 64',
+      os: 'Linux',
+      cpuVendor: 'Intel',
+      gpuCount: 0,
+      geography: this.getGeography(AzureFunctionsLiveAdapter.REGION),
+      category: 'Serverless Compute',
+      price: gbSecondPrice * 3600 * memoryGb,
+      unit: 'GB-Hour',
+      dataSource: 'live_api' as const,
+      supportedLanguages: this.AZURE_FUNCTIONS_LANGUAGES,
+      attributes: {
+        service_type: 'Compute',
+        deployment_type: 'Serverless',
+        tier: 'Serverless',
+        cold_start_overhead_ms: 350,
+        timeout_seconds: 300,
+        memory_configuration: 'fixed-tiers',
+        invocation_price: invocationPricePerMillion / 1_000_000,
+        invocation_price_per_1m: invocationPricePerMillion,
+        free_invocations_per_month: 1000000,
+        free_gb_seconds_per_month: 400000,
+        max_memory_gb: 1.75,
+        billing_granularity_ms: 1,
+        execution_model: 'Both',
+        provisioned_concurrency_support: 'Yes',
+        max_ephemeral_storage_gb: 1.5,
+      },
+    }));
+
+    console.log(`✅ Fetched ${records.length} Azure Functions pricing records (execution rate: $${gbSecondPrice}/GB-s)`);
+    return records;
   }
 }
