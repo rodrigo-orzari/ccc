@@ -115,8 +115,8 @@
     "semantic_hash": ""
   },
   "src/services/database_pipeline.ts": {
-    "mtime": 1783476452.782055,
-    "ast_hash": "9a5231e369adb0999ed086e6ce481308",
+    "mtime": 1783532298.8664243,
+    "ast_hash": "6e3a916a25ce7dbfdc575e4598dc6e5c",
     "semantic_hash": ""
   },
   "src/services/ingest.ts": {
@@ -140,13 +140,13 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1783488877.45382,
-    "ast_hash": "40ec2fa6aa37e2b3b372da8d781db8f1",
+    "mtime": 1783532368.0031075,
+    "ast_hash": "e1c9dad0caef7ac39ebd075a77df962f",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
-    "mtime": 1783488869.7004943,
-    "ast_hash": "b9b8a93be703361e9143aad6ab379ec5",
+    "mtime": 1783531757.346243,
+    "ast_hash": "dea9b9ddfc9d18e85f0637a042875217",
     "semantic_hash": ""
   },
   "src/services/serverless_pipeline.ts": {
@@ -240,8 +240,8 @@
     "semantic_hash": ""
   },
   "src/services/data_analytics_pipeline.ts": {
-    "mtime": 1783476465.3052747,
-    "ast_hash": "d771c6deb3d81718fedfee356a5a580f",
+    "mtime": 1783532327.9251084,
+    "ast_hash": "765c1c4573d78d98979846d04dda1f84",
     "semantic_hash": ""
   },
   "src/config/native_analytics_instances.ts": {
@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
-    "mtime": 1783109017.6998143,
-    "ast_hash": "b488e2506a7493c58d63bd7ec7ae68db",
+    "mtime": 1783531596.061601,
+    "ast_hash": "82deaf59bf6bd2d099423fdecb9d3d8d",
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1783491170.860898,
-    "ast_hash": "251b8e505ccfdd53db508d32c007f367",
+    "mtime": 1783532451.9088862,
+    "ast_hash": "db3f463788123de8ac1eab498103b100",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {

@@ -1,16 +1,16 @@
-# Graph Report - _ccc  (2026-07-07)
+# Graph Report - _ccc  (2026-07-08)
 
 ## Corpus Check
-- 142 files · ~163,824 words
+- 142 files · ~166,295 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 818 nodes · 1303 edges · 63 communities (45 shown, 18 thin omitted)
+- 820 nodes · 1316 edges · 55 communities (42 shown, 13 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4ca3cbbe`
+- Built from commit: `e93aa525`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,8 +29,6 @@
 - [[_COMMUNITY_Community 13|Community 13]]
 - [[_COMMUNITY_Community 14|Community 14]]
 - [[_COMMUNITY_Community 15|Community 15]]
-- [[_COMMUNITY_Community 16|Community 16]]
-- [[_COMMUNITY_Community 17|Community 17]]
 - [[_COMMUNITY_Community 18|Community 18]]
 - [[_COMMUNITY_Community 19|Community 19]]
 - [[_COMMUNITY_Community 20|Community 20]]
@@ -38,14 +36,9 @@
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Community 24|Community 24]]
 - [[_COMMUNITY_Community 25|Community 25]]
-- [[_COMMUNITY_Community 26|Community 26]]
 - [[_COMMUNITY_Community 27|Community 27]]
 - [[_COMMUNITY_Community 28|Community 28]]
-- [[_COMMUNITY_Community 29|Community 29]]
 - [[_COMMUNITY_Community 30|Community 30]]
-- [[_COMMUNITY_Community 32|Community 32]]
-- [[_COMMUNITY_Community 33|Community 33]]
-- [[_COMMUNITY_Community 34|Community 34]]
 - [[_COMMUNITY_Community 35|Community 35]]
 - [[_COMMUNITY_Community 36|Community 36]]
 - [[_COMMUNITY_Community 37|Community 37]]
@@ -57,7 +50,6 @@
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 47|Community 47]]
-- [[_COMMUNITY_Community 56|Community 56]]
 - [[_COMMUNITY_Community 58|Community 58]]
 - [[_COMMUNITY_Community 63|Community 63]]
 - [[_COMMUNITY_Community 64|Community 64]]
@@ -77,29 +69,29 @@
 2. `PricingRecord` - 56 edges
 3. `PricingPipeline` - 18 edges
 4. `Compare Cloud Costs` - 17 edges
-5. `ServerlessPricingPipeline` - 13 edges
-6. `Serverless Language Filter Implementation Summary` - 13 edges
-7. `fetchWithRetry()` - 12 edges
-8. `Compare Cloud Costs (CCC) — Claude Context` - 12 edges
-9. `CCC Operations Runbook` - 11 edges
-10. `ProductType` - 10 edges
+5. `sleep()` - 13 edges
+6. `ServerlessPricingPipeline` - 13 edges
+7. `Serverless Language Filter Implementation Summary` - 13 edges
+8. `fetchWithRetry()` - 12 edges
+9. `Compare Cloud Costs (CCC) — Claude Context` - 12 edges
+10. `CCC Operations Runbook` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
-- `AWSContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
-- `AzureContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
-- `DigitalOceanContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
-- `GCPContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `GCPCloudSQLAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
+- `OracleAutonomousAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
+- `OracleMySQLHeatWaveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
+- `OraclePostgreSQLAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (63 total, 18 thin omitted)
+## Communities (55 total, 13 thin omitted)
 
 ### Community 0 - "Serverless Provider Configs"
 Cohesion: 0.05
@@ -142,7 +134,7 @@ Cohesion: 0.07
 Nodes (29): 1. Clone & install, 2. Configure environment, 3. Initialize the database, 4. Populate pricing data, 5. Open the app, About Page & User-Facing Messaging, Adding a New Cloud Provider, Admin API Endpoints (+21 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.05
+Cohesion: 0.04
 Nodes (14): metadata, DigitalOceanReferralModal(), DonationModal(), DonationModalProps, MarkdownPageProps, DBStatusProvider, ProviderCardProps, ProviderCardsProps (+6 more)
 
 ### Community 14 - "Community 14"
@@ -152,10 +144,6 @@ Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 ### Community 15 - "Community 15"
 Cohesion: 0.06
 Nodes (32): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+24 more)
-
-### Community 16 - "Community 16"
-Cohesion: 0.33
-Nodes (3): NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig, NativeAnalyticsStaticAdapter
 
 ### Community 18 - "Community 18"
 Cohesion: 0.14
@@ -189,10 +177,6 @@ Nodes (4): AI_MODELS, AIModelConfig, AIPricingPipeline, AIStaticAdapter
 Cohesion: 0.40
 Nodes (3): baseGcpEntries, GCP_CLOUD_RUN_LANGUAGES, GCP_SERVERLESS
 
-### Community 29 - "Community 29"
-Cohesion: 0.44
-Nodes (3): AzureAdapter, fetchWithRetry(), sleep()
-
 ### Community 30 - "Community 30"
 Cohesion: 0.40
 Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
@@ -221,10 +205,6 @@ Nodes (6): AlibabaCredentials, buildSignedUrl(), percentEncode(), randomNonce(),
 Cohesion: 0.23
 Nodes (10): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry (+2 more)
 
-### Community 56 - "Community 56"
-Cohesion: 0.21
-Nodes (4): AlibabaAnalyticsAdapter, OracleAnalyticsAdapter, AWSAdapter, BaseAdapter
-
 ### Community 58 - "Community 58"
 Cohesion: 0.19
 Nodes (7): TableRow(), PROVIDER_IDS, providerColor(), providerName(), ProviderTh(), REGION_OPTIONS, formatInstanceName()
@@ -246,28 +226,28 @@ Cohesion: 0.09
 Nodes (16): DatacenterRegion, GEOGRAPHIES, Geography, PROVIDER_INFRA, ProviderInfrastructure, RegionStatus, GEO_COLORS, GLOSSARY (+8 more)
 
 ### Community 69 - "Community 69"
-Cohesion: 0.13
-Nodes (11): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, ORACLE_ANALYTICS_INSTANCES, OracleAnalyticsConfig (+3 more)
+Cohesion: 0.05
+Nodes (27): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+19 more)
 
 ### Community 93 - "Community 93"
 Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **280 isolated node(s):** `ORACLE_FLEX_FAMILIES`, `ORACLE_GPU_MODELS`, `STREAMING_ENGINES`, `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES` (+275 more)
+- **280 isolated node(s):** `STREAMING_ENGINES`, `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES`, `RDS_ENGINE_MAP`, `AZURE_DB_SERVICES` (+275 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PricingRecord` connect `Community 9` to `Community 33`, `Database Instance Configs`, `Community 34`, `Community 35`, `Community 69`, `Community 38`, `Community 36`, `Community 37`, `Community 39`, `Community 40`, `Community 6`, `Community 44`, `Community 47`, `Community 16`, `Community 56`, `Community 26`, `Community 27`?**
-  _High betweenness centrality (0.085) - this node is a cross-community bridge._
-- **Why does `BaseAdapter` connect `Community 56` to `Database Instance Configs`, `Community 9`, `Community 16`, `Community 17`, `Community 26`, `Community 27`, `Community 29`, `Community 32`, `Community 33`, `Community 34`, `Community 35`, `Community 36`, `Community 37`, `Community 39`, `Community 40`, `Community 44`, `Community 46`, `Community 47`, `Community 69`?**
+- **Why does `PricingRecord` connect `Community 9` to `Database Instance Configs`, `Community 35`, `Community 36`, `Community 69`, `Community 38`, `Community 37`, `Community 39`, `Community 40`, `Community 6`, `Community 44`, `Community 47`, `Community 27`?**
+  _High betweenness centrality (0.083) - this node is a cross-community bridge._
+- **Why does `BaseAdapter` connect `Community 69` to `Database Instance Configs`, `Community 35`, `Community 36`, `Community 37`, `Community 39`, `Community 40`, `Community 9`, `Community 44`, `Community 46`, `Community 47`, `Community 27`?**
   _High betweenness centrality (0.060) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 7` to `Community 58`, `Community 44`?**
-  _High betweenness centrality (0.034) - this node is a cross-community bridge._
-- **What connects `ORACLE_FLEX_FAMILIES`, `ORACLE_GPU_MODELS`, `STREAMING_ENGINES` to the rest of the system?**
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+- **What connects `STREAMING_ENGINES`, `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES` to the rest of the system?**
   _280 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
