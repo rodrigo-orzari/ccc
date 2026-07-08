@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { Sql } from 'postgres';
 import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/oracle_instances';
 import { fetchOracleCatalog, findPrice, nameIncludes, OracleProduct } from './oracle_price_list';
+import { buildSignedUrl } from './alibaba_signer';
 import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.ts';
 import { ALIBABA_INSTANCES, ALIBABA_REGION, ALIBABA_GEOGRAPHY } from '../config/alibaba_instances.ts';
 import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.ts';
@@ -663,12 +664,106 @@ export class DigitalOceanAdapter extends BaseAdapter {
   }
 }
 
+// Alibaba's BSS OpenAPI (business.aliyuncs.com) exposes ECS pay-as-you-go
+// pricing via GetPayAsYouGoPrice, signed with an AccessKey ID/Secret (see
+// alibaba_signer.ts) — no paid subscription needed, just a RAM
+// user/AccessKey with bssapi:GetPayAsYouGoPrice permission.
+//
+// NOT YET VERIFIED against a live Alibaba account (no ALIBABA_ACCESS_KEY_ID/
+// SECRET available in this environment). The request shape below follows
+// Alibaba's documented GetPayAsYouGoPrice contract for ECS, but the exact
+// ModuleList Config string Alibaba expects can vary by product; if it's
+// wrong, requests fail cleanly (caught below) and this falls back to the
+// existing static config for every instance type rather than partially
+// succeeding with guessed values.
+async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
+  const accessKeyId = process.env.ALIBABA_ACCESS_KEY_ID;
+  const accessKeySecret = process.env.ALIBABA_ACCESS_KEY_SECRET;
+  if (!accessKeyId || !accessKeySecret) {
+    console.warn('⚠️  ALIBABA_ACCESS_KEY_ID/SECRET not set — Alibaba ECS live pricing unavailable, using static config.');
+    return null;
+  }
+
+  const creds = { accessKeyId, accessKeySecret };
+  const records: PricingRecord[] = [];
+
+  for (const inst of ALIBABA_INSTANCES) {
+    try {
+      const configStr = [
+        `InstanceType:${inst.type}`,
+        'IoOptimized:IoOptimized',
+        'ImageOs:linux',
+        'NetworkType:vpc',
+        `RegionId:${ALIBABA_REGION}`,
+      ].join(',');
+
+      const url = buildSignedUrl(
+        'business.aliyuncs.com',
+        'GetPayAsYouGoPrice',
+        '2017-12-14',
+        {
+          ProductCode: 'ecs',
+          SubscriptionType: 'PayAsYouGo',
+          'ModuleList.1.ModuleCode': 'InstanceType',
+          'ModuleList.1.Config': configStr,
+          'ModuleList.1.PriceType': 'Hour',
+        },
+        creds
+      );
+
+      const response = await axios.get(url, { timeout: 15000 });
+      const tradePrice = response.data?.Data?.TradePrice ?? response.data?.Data?.ModuleDetails?.ModuleDetail?.[0]?.TradePrice;
+      const price = typeof tradePrice === 'number' ? tradePrice : parseFloat(tradePrice);
+      if (!price || isNaN(price) || price <= 0) continue;
+
+      const gpuCount = inst.gpuCount ?? 0;
+      records.push({
+        provider: 'alibaba',
+        service: 'Elastic Compute Service',
+        region: ALIBABA_REGION,
+        instanceType: inst.type,
+        vcpus: inst.vcpus,
+        memoryGb: inst.memory,
+        arch: inst.cpuVendor === 'Ampere' ? 'ARM' : 'x86 64',
+        os: 'Linux',
+        cpuVendor: inst.cpuVendor,
+        gpuCount,
+        geography: ALIBABA_GEOGRAPHY,
+        category: 'General purpose',
+        price,
+        unit: 'Hour',
+        dataSource: 'live_api' as const,
+      });
+    } catch (err: any) {
+      console.warn(`⚠️  Alibaba live price fetch failed for ${inst.type} (${err.message})`);
+    }
+  }
+
+  return records.length > 0 ? records : null;
+}
+
 export class AlibabaAdapter extends BaseAdapter {
   providerSlug = 'alibaba';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching Alibaba pricing (from static config, ${ALIBABA_INSTANCES.length} entries)...`);
+    let liveRecords: PricingRecord[] | null = null;
+    try {
+      liveRecords = await fetchAlibabaEcsLiveRecords();
+    } catch (err: any) {
+      console.warn(`⚠️  Alibaba ECS live pricing fetch failed (${err.message}), falling back to static config.`);
+    }
+
+    // Live pricing is fetched per-instance-type above, so a partial failure
+    // (some types succeed, others don't) already only includes the
+    // successes — anything missing from liveRecords falls back to static
+    // per-type here, same per-record honesty pattern as the Oracle adapter.
+    const liveByType = new Map((liveRecords ?? []).map(r => [r.instanceType, r]));
+
+    console.log(`Fetching Alibaba pricing (${liveByType.size}/${ALIBABA_INSTANCES.length} from live BSS OpenAPI, rest from static config)...`);
     return ALIBABA_INSTANCES.map(inst => {
+      const live = liveByType.get(inst.type);
+      if (live) return live;
+
       const gpuCount = inst.gpuCount ?? 0;
       return {
         provider: 'alibaba',
