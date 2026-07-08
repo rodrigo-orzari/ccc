@@ -221,6 +221,7 @@ export default function StatusPage() {
         .summary-card {
           background: var(--surface);
           padding: 1.25rem 1.5rem;
+          text-align: center;
         }
         .summary-card-label {
           font-size: 11px;
