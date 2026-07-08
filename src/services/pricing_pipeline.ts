@@ -51,6 +51,20 @@ export function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Azure Retail Prices (prices.azure.com) is hit by 4 separate adapters in a
+// single ingest run (VM compute, database, Databricks, Synapse), each paging
+// through up to 10-20 requests per region x 2 regions — up to ~100 sequential
+// calls to the same host with no delay between them. fetchWithRetry() already
+// reacts to a 429 after the fact (honoring Retry-After), but a small proactive
+// delay between pages/regions keeps the request rate under Azure's per-minute
+// threshold in the first place, rather than relying on hitting the limit and
+// backing off. Every other provider (AWS, GCP, Oracle, DigitalOcean, Alibaba)
+// makes far fewer sequential calls per run and shows no evidence of
+// rate-limiting, so this delay is scoped to Azure Retail Prices only rather
+// than applied as a blanket policy across all adapters.
+export const AZURE_RETAIL_API_PAGE_DELAY_MS = 350;
+export const AZURE_RETAIL_API_REGION_DELAY_MS = 1500;
+
 export async function fetchWithRetry(url: string, config: any = {}, retries = 3, timeout = 60000): Promise<any> {
   const mergedConfig = { timeout, ...config };
   for (let i = 0; i < retries; i++) {
@@ -211,7 +225,7 @@ export class AzureAdapter extends BaseAdapter {
   async fetchPricing(): Promise<PricingRecord[]> {
     const records: PricingRecord[] = [];
 
-    for (const region of AzureAdapter.REGIONS) {
+    for (const [i, region] of AzureAdapter.REGIONS.entries()) {
       try {
         records.push(...(await this.fetchForRegion(region)));
       } catch (err: any) {
@@ -221,6 +235,7 @@ export class AzureAdapter extends BaseAdapter {
         // must not discard whatever regions already succeeded.
         console.warn(`⚠️  Azure VM pricing fetch failed for ${region} (${err.message}) — keeping results from other regions.`);
       }
+      if (i < AzureAdapter.REGIONS.length - 1) await sleep(AZURE_RETAIL_API_REGION_DELAY_MS);
     }
 
     console.log(`✅ Fetched ${records.length} Azure VM records across ${AzureAdapter.REGIONS.length} regions (some regions may have failed — see warnings above)`);
@@ -241,6 +256,7 @@ export class AzureAdapter extends BaseAdapter {
       allItems.push(...(response.data.Items ?? []));
       url = response.data.NextPageLink ?? null;
       pages++;
+      if (url) await sleep(AZURE_RETAIL_API_PAGE_DELAY_MS);
     }
 
     const records: PricingRecord[] = [];
@@ -720,7 +736,12 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
   const creds = { accessKeyId, accessKeySecret };
   const records: PricingRecord[] = [];
 
-  for (const inst of ALIBABA_INSTANCES) {
+  for (const [i, inst] of ALIBABA_INSTANCES.entries()) {
+    // A small stagger between the 12 sequential GetPayAsYouGoPrice calls —
+    // cheap insurance against per-second throttling on a fresh/free-tier
+    // RAM account, which can have a much lower default QPS than a
+    // provisioned one.
+    if (i > 0) await sleep(300);
     try {
       const configStr = [
         `InstanceType:${inst.type}`,
@@ -746,11 +767,11 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
 
       const response = await axios.get(url, { timeout: 15000 });
 
-      // Alibaba returns 400 on any request error. Log response to diagnose.
-      if (response.status !== 200 || response.data?.Code) {
-        const errorCode = response.data?.Code ?? 'UNKNOWN';
-        const errorMsg = response.data?.Message ?? response.data?.message ?? JSON.stringify(response.data);
-        console.log(`[DEBUG] Alibaba error for ${inst.type}: ${errorCode} - ${errorMsg}`);
+      // Alibaba can return HTTP 200 with an error Code in the body (as opposed
+      // to a non-2xx status, which axios would already have thrown on).
+      if (response.data?.Code) {
+        const errorCode = response.data.Code;
+        const errorMsg = response.data?.Message ?? JSON.stringify(response.data);
         throw new Error(`Alibaba API error ${errorCode}: ${errorMsg}`);
       }
 
@@ -777,7 +798,15 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
         dataSource: 'live_api' as const,
       });
     } catch (err: any) {
-      console.warn(`⚠️  Alibaba live price fetch failed for ${inst.type} (${err.message})`);
+      // Axios throws on non-2xx before our own status check runs, so the
+      // actual Alibaba error code/message (in the response body) would
+      // otherwise be swallowed behind a generic "Request failed with status
+      // code 400". Surface err.response.data explicitly for diagnosis.
+      const apiError = err.response?.data;
+      const code = apiError?.Code ?? '';
+      const detail = apiError ? `${code || 'UNKNOWN'}: ${apiError.Message ?? JSON.stringify(apiError)}` : err.message;
+      const throttled = /throttl/i.test(code) ? ' [THROTTLED — consider increasing the delay between requests]' : '';
+      console.warn(`⚠️  Alibaba live price fetch failed for ${inst.type} (${detail})${throttled}`);
     }
   }
 
@@ -952,7 +981,23 @@ export class PricingPipeline {
       await sql`DELETE FROM pricing_records WHERE service_id = ${serviceId}`;
 
       // 6. Batch Insert Pricing Records
-      const rowsToInsert = records.map(r => {
+      // Dedupe against the DB's unique constraint key (service_id, region_id,
+      // instance_type, os, arch, engine, ha_mode) before inserting. Some
+      // provider feeds (e.g. Azure Retail Prices, which mixes tiers/SKUs that
+      // normalize to the same instance_type+engine+ha_mode within one region)
+      // occasionally emit two rows that collide on this key — without this,
+      // a single colliding pair aborts the ENTIRE insert (and the whole
+      // category for that provider/region) via a 23505 constraint violation.
+      const seenKeys = new Set<string>();
+      let duplicateCount = 0;
+      const rowsToInsert = records.filter(r => {
+        const attrsForKey = r.attributes ?? {};
+        const key = [serviceId, regionMap.get(r.region), r.instanceType, r.os, r.arch,
+          (attrsForKey as any).engine ?? '', (attrsForKey as any).ha_mode ?? ''].join('|');
+        if (seenKeys.has(key)) { duplicateCount++; return false; }
+        seenKeys.add(key);
+        return true;
+      }).map(r => {
         const attrs = { ...r.attributes };
         if (r.supportedLanguages && r.supportedLanguages.length > 0) {
           attrs.supportedLanguages = r.supportedLanguages;
@@ -977,6 +1022,9 @@ export class PricingPipeline {
           data_source: r.dataSource ?? dataSource
         };
       });
+      if (duplicateCount > 0) {
+        console.warn(`⚠️  Dropped ${duplicateCount} duplicate-key row(s) for ${providerSlug} (${serviceCategory}) before insert.`);
+      }
 
       // postgres.js bulk insert in batches — postgres.js has a 65,534-parameter
       // limit per query. With ~15 columns per row, that's ~4,300 rows max per
@@ -989,7 +1037,7 @@ export class PricingPipeline {
         }
       }
 
-      console.log(`✅ Saved ${records.length} records for ${providerSlug} (${serviceCategory}, source: ${dataSource})`);
+      console.log(`✅ Saved ${rowsToInsert.length} records for ${providerSlug} (${serviceCategory}, source: ${dataSource})`);
     });
 
     return driftAlerts;

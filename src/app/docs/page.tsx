@@ -258,11 +258,11 @@ const DocsPage: React.FC = () => {
                   <li><a href="#accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Accuracy &amp; freshness</a></li>
                 </ul>
               </li>
-              <li><a href="#glossary" style={{ padding: '3px 0' }}>Glossary</a></li>
               <li><a href="#filters" style={{ padding: '3px 0' }}>Filters</a></li>
               <li><a href="#sharing" style={{ padding: '3px 0' }}>Sharing</a></li>
               <li><a href="#advertising" style={{ padding: '3px 0' }}>Advertising with Us</a></li>
               <li><a href="#contributing--feedback" style={{ padding: '3px 0' }}>Contributing &amp; Feedback</a></li>
+              <li><a href="#glossary" style={{ padding: '3px 0' }}>Glossary</a></li>
             </ul>
           </nav>
         </aside>
@@ -298,56 +298,56 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="product-categories">Product Categories</CopyHeading>
 
-            <h3 id="ai-machine-learning">AI &amp; Machine Learning</h3>
+            <h3 id="ai-machine-learning">🧠 <Link href="/?product=ai">AI &amp; Machine Learning</Link></h3>
             <p>
               Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window size, multimodal capabilities, and compare input/output pricing per 1M tokens.
             </p>
 
-            <h3 id="app-hosting">App Hosting</h3>
+            <h3 id="app-hosting">🚀 <Link href="/?product=app-hosting">App Hosting</Link></h3>
             <p>
               Covers managed application hosting and Platform-as-a-Service offerings (App Service, App Engine, Heroku, etc.). Compare by compute tier, operating system, and architecture.
             </p>
 
-            <h3 id="containers">Containers</h3>
+            <h3 id="containers">📦 <Link href="/?product=containers">Containers</Link></h3>
             <p>
               Covers managed container runtimes including Kubernetes node pools (EKS, GKE, AKS, OKE,
               DOKS) and serverless container platforms (Fargate, Cloud Run, ACI). Filter by
               orchestrator, architecture (x86 or ARM), and billing granularity.
             </p>
 
-            <h3 id="databases">Databases</h3>
+            <h3 id="databases">🗄️ <Link href="/?product=database">Databases</Link></h3>
             <p>
               Covers managed relational, NoSQL, and In-memory database services (RDS, Cloud SQL, Azure Database,
               ElastiCache, Memorystore, etc.). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
               Serverless), and HA mode.
             </p>
 
-            <h3 id="data--analytics">Data &amp; Analytics</h3>
+            <h3 id="data--analytics">📊 <Link href="/?product=data-analytics">Data &amp; Analytics</Link></h3>
             <p>
               Covers managed data warehouse and analytics services (Redshift, BigQuery, Synapse,
               Snowflake, Databricks, and native cloud-provider offerings). Filter by engine,
               deployment type, and service tier.
             </p>
 
-            <h3 id="networking">Networking</h3>
+            <h3 id="networking">🌐 <Link href="/?product=networking">Networking</Link></h3>
             <p>
               Compares data transfer, VPC, load balancing, VPN, NAT gateway, and dedicated connection
               pricing. Supports filtering by service type, connection type, routing, and direction
               (egress/ingress).
             </p>
 
-            <h3 id="serverless">Serverless</h3>
+            <h3 id="serverless">⚡ <Link href="/?product=serverless">Serverless</Link></h3>
             <p>
               Compares function-as-a-service pricing (AWS Lambda, Azure Functions, Google Cloud
               Functions, etc.) alongside integration services like API Gateways, Messaging Queues, Event Buses, and Workflows. Key attributes include supported runtimes, cold start behavior, billing granularity, and memory configuration.
             </p>
 
-            <h3 id="storage">Storage</h3>
+            <h3 id="storage">💾 <Link href="/?product=storage">Storage</Link></h3>
             <p>
               Compares object, block, and file storage pricing (S3, Blob Storage, Cloud Storage, EBS). Filter by storage type, performance tier, redundancy (LRS, ZRS, GRS), and media type.
             </p>
 
-            <h3 id="virtual-machines">Virtual Machines</h3>
+            <h3 id="virtual-machines">🖥️ <Link href="/?product=compute">Virtual Machines</Link></h3>
             <p>
               Compares compute instances across providers. Filter by operating system, CPU
               vendor/architecture, GPU support, and instance category (General Purpose, Compute
@@ -362,31 +362,34 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="workloads">Workloads</CopyHeading>
             <p>
-              The Workloads feature allows you to price end-to-end cloud architectures instead of just individual components. We've defined common application patterns and their component requirements. By adjusting scale parameters, the tool automatically calculates necessary resource specs and queries the cheapest matching instances across all providers.
+              The <Link href="/workloads">📦 Workloads</Link> page lets you price end-to-end cloud architectures instead of just individual components. We've defined common application patterns and their component requirements. By adjusting scale parameters, the tool automatically calculates necessary resource specs and queries the cheapest matching instances across all providers.
             </p>
             <p><strong>Available workloads:</strong></p>
             <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1.5rem' }}>
               <li style={{ marginBottom: '0.5rem' }}>
-                <Link href="/workloads/serverless-web-app" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
+                ⚡ <Link href="/workloads/serverless-web-app" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
                   Serverless Web Application
                 </Link> — Event-driven backends for web and mobile apps. Ideal for variable workloads and reduced operational overhead.
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                <Link href="/workloads/3-tier-web" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
+                🏢 <Link href="/workloads/3-tier-web" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
                   Classic 3-Tier Web Architecture
                 </Link> — The foundational blueprint for traditional web applications using VMs and relational databases. Scales from hundreds to thousands of concurrent users.
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                <Link href="/workloads/streaming-analytics" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
+                🌊 <Link href="/workloads/streaming-analytics" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
                   Real-time Streaming Analytics
                 </Link> — High-throughput data pipelines for IoT telemetry, clickstreams, and financial data processing.
               </li>
               <li style={{ marginBottom: '0.5rem' }}>
-                <Link href="/workloads/ecommerce-microservices" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
+                🛒 <Link href="/workloads/ecommerce-microservices" style={{ color: 'var(--link-color)', textDecoration: 'none' }} onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }} onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}>
                   E-Commerce Microservices Stack
                 </Link> — A decoupled, highly available architecture for product catalogs and transactions. Built for fast lookups and fault tolerance.
               </li>
             </ul>
+            <p style={{ fontSize: '0.875rem', color: 'var(--muted-text)' }}>
+              See the full list and build your own configuration on the <Link href="/workloads">Workloads page</Link>.
+            </p>
 
             <BackToTop />
           </div>
@@ -403,7 +406,7 @@ const DocsPage: React.FC = () => {
               <strong>Scenario:</strong> You're running a SaaS product with a PostgreSQL database and API servers. You want to compare cost-effective options for both components as your user base grows from 1,000 to 5,000 concurrent users.
             </p>
             <p><strong>Steps:</strong></p>
-            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem', listStyleType: 'decimal', listStylePosition: 'outside' }}>
               <li style={{ marginBottom: '0.75rem' }}>
                 <strong>Start on the Databases tab.</strong> Click <strong>Databases</strong> at the top of the page.
               </li>
@@ -434,16 +437,16 @@ const DocsPage: React.FC = () => {
                 <strong>Export or screenshot results.</strong> You now have a side-by-side cost table for all major providers. Use this to calculate total monthly cost: (Database hourly price + Compute hourly price per instance × 2–3 instances) × 730 hours/month.
               </li>
             </ol>
-            <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--muted-text)' }}>
+            <blockquote>
               <strong>💡 Tip:</strong> Repeat this comparison at 5,000 and 10,000 concurrent users by increasing vCPU/memory filters. You'll see how scaling costs differ across providers — some remain linear, while others show volume discounts or better pricing at larger sizes.
-            </p>
+            </blockquote>
 
             <h3 id="use-case-2">Use Case 2: Multi-Region Disaster Recovery Architecture</h3>
             <p>
               <strong>Scenario:</strong> You need to set up a disaster recovery (DR) backup in a different geographic region. You want to compare both primary and backup region costs across Storage (for backups) and Networking (for data replication).
             </p>
             <p><strong>Steps:</strong></p>
-            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem', listStyleType: 'decimal', listStylePosition: 'outside' }}>
               <li style={{ marginBottom: '0.75rem' }}>
                 <strong>Start on the Storage tab.</strong> Click <strong>Storage</strong> at the top.
               </li>
@@ -477,16 +480,16 @@ const DocsPage: React.FC = () => {
                 <strong>Export or create a spreadsheet</strong> with your calculations and share with your team for decision-making.
               </li>
             </ol>
-            <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--muted-text)' }}>
+            <blockquote>
               <strong>💡 Tip:</strong> Use the <strong>Aggregate View</strong> toggle (in the toolbar) to collapse results by instance type and see min/max/avg pricing. This makes it easier to spot which provider offers the best value across regions.
-            </p>
+            </blockquote>
 
             <h3 id="use-case-3">Use Case 3: Containerized Workload Scaling on Kubernetes</h3>
             <p>
               <strong>Scenario:</strong> You're migrating a Docker-based application to Kubernetes and need to compare the per-node cost of different providers' managed Kubernetes services (EKS, GKE, AKS, DOKS, OKE).
             </p>
             <p><strong>Steps:</strong></p>
-            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+            <ol style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem', listStyleType: 'decimal', listStylePosition: 'outside' }}>
               <li style={{ marginBottom: '0.75rem' }}>
                 <strong>Start on the Containers tab.</strong> Click <strong>Containers</strong> at the top.
               </li>
@@ -519,9 +522,9 @@ const DocsPage: React.FC = () => {
                 <strong>Create a comparison sheet</strong> with dev, staging, and production cluster costs for each provider.
               </li>
             </ol>
-            <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--muted-text)' }}>
+            <blockquote>
               <strong>💡 Tip:</strong> Also check the <strong>Serverless</strong> tab for <strong>Cloud Run / Fargate / App Engine</strong> if you're considering a serverless container approach. Many teams find these cheaper than managing Kubernetes clusters for variable workloads.
-            </p>
+            </blockquote>
 
             <BackToTop />
           </div>
@@ -607,6 +610,31 @@ const DocsPage: React.FC = () => {
             <p>
               <strong>Comprehensive Coverage & Missing Services:</strong> This application is not meant to be a comprehensive catalog of all offerings across all cloud providers. We consolidate data in good faith based on publicly available pricing pages and APIs, but we may inadvertently omit certain services, instance types, or product categories that cloud providers currently offer. If you represent a cloud provider or are a user who detects that a specific service or offering is missing or misrepresented, we welcome your feedback. Please reach out to us so we can continuously improve the accuracy and completeness of our platform.
             </p>
+            <p>
+              The data on this platform serves as a <strong>directional indicator</strong> — a sample of popular
+              instances designed to highlight architectural cost differences across clouds — not a substitute for
+              an official quote. Always verify your final estimates using the official calculators or pricing pages:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://calculator.aws/" target="_blank" rel="noopener noreferrer">AWS Pricing Calculator</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://azure.microsoft.com/en-us/pricing/calculator/" target="_blank" rel="noopener noreferrer">Azure Pricing Calculator</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://cloud.google.com/products/calculator" target="_blank" rel="noopener noreferrer">Google Cloud Pricing Calculator</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://www.oracle.com/cloud/costestimator.html" target="_blank" rel="noopener noreferrer">Oracle Cloud Cost Estimator</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://www.digitalocean.com/pricing" target="_blank" rel="noopener noreferrer">DigitalOcean Pricing</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://www.alibabacloud.com/pricing-calculator" target="_blank" rel="noopener noreferrer">Alibaba Cloud Pricing Calculator</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://developers.cloudflare.com/workers/platform/pricing/" target="_blank" rel="noopener noreferrer">Cloudflare Workers Pricing</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer">OpenAI API Pricing</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener noreferrer">Anthropic Pricing</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://www.pinecone.io/pricing/" target="_blank" rel="noopener noreferrer">Pinecone Pricing</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://qdrant.tech/pricing/" target="_blank" rel="noopener noreferrer">Qdrant Pricing</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://zilliz.com/pricing" target="_blank" rel="noopener noreferrer">Zilliz Cloud (Milvus) Pricing</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://weaviate.io/pricing" target="_blank" rel="noopener noreferrer">Weaviate Pricing</a></li>
+              <li style={{ marginBottom: '0.4rem' }}><a href="https://www.trychroma.com/pricing" target="_blank" rel="noopener noreferrer">Chroma Pricing</a></li>
+            </ul>
+            <p style={{ fontSize: '0.875rem', color: 'var(--muted-text)' }}>
+              Not every vendor above publishes an interactive calculator — for those (Cloudflare, and the
+              vector database providers), the link goes to their official pricing page instead.
+            </p>
             <blockquote>
               <strong>Disclaimer:</strong> Price data may be delayed, incomplete, or imprecise.
               comparecloudcosts.com makes no warranties regarding accuracy. See our{' '}
@@ -616,36 +644,24 @@ const DocsPage: React.FC = () => {
             <BackToTop />
           </div>
 
-          {/* Glossary */}
-          <div className="docs-section">
-            <CopyHeading id="glossary">Glossary</CopyHeading>
-            <p>The following terms are used throughout the platform. Hovering the <strong>ⓘ</strong> icon next to any term on the Datacenters page will also surface its definition inline.</p>
-            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>Region</strong> — A geographic cluster of data centers in a specific physical location. Each region is completely independent and isolated from failures in other regions. Providers typically publish regions as named locations (e.g. "US East (N. Virginia)", "West Europe").
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>Availability Zone (AZ)</strong> — One or more discrete data centers within a region, each with redundant power, networking, and connectivity. Deploying resources across multiple Availability Zones in the same region allows applications to survive a single data center outage. DigitalOcean does not use traditional Availability Zones — each of its regions maps to a single data center.
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>Edge Location</strong> — A smaller point-of-presence (PoP) node used for content delivery (CDN) and low-latency services such as DNS, DDoS protection, and WAF. Edge locations are distinct from full compute regions and are not independently deployable as compute environments.
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>Government Cloud</strong> — Dedicated, isolated cloud regions operated specifically to meet government compliance requirements (e.g. FedRAMP High, IL4/IL5 in the US, UK OFFICIAL). Access is typically restricted to vetted public sector customers.
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>On-Demand pricing</strong> — Pay-as-you-go pricing with no upfront commitment. All prices on this platform are on-demand unless explicitly stated otherwise. Reserved, spot, savings plan, or committed-use discounts are not included.
-              </li>
-              <li style={{ marginBottom: '0.75rem' }}>
-                <strong>vCPU</strong> — Virtual CPU. A logical compute unit mapped to a physical processor thread. Oracle Cloud uses OCPUs (one OCPU = 2 vCPUs); this platform normalizes all values to vCPUs for consistency.
-              </li>
-            </ul>
-            <BackToTop />
-          </div>
-
           {/* Filters */}
           <div className="docs-section">
             <CopyHeading id="filters">Filters</CopyHeading>
+            <p>
+              Users have the ability to filter every product category on the platform — narrow results
+              by provider, region, specs, price, and category-specific attributes to zero in on exactly
+              the comparison you need. To see these filters applied in a real, multi-category workflow,
+              check out the <Link href="/docs#use-cases">Use Cases &amp; Step-by-Step Comparisons</Link>{' '}
+              section above.
+            </p>
+
+            <h3 id="provider">Provider</h3>
+            <p>
+              Checkbox list to include or exclude specific cloud providers (AWS, Azure, GCP, Oracle,
+              DigitalOcean, Alibaba Cloud, and category-specific vendors like OpenAI, Anthropic,
+              Cloudflare, or the vector database providers). Multi-select — narrow to one provider or
+              compare a custom subset.
+            </p>
 
             <h3 id="geography">Geography</h3>
             <p>
@@ -668,6 +684,18 @@ const DocsPage: React.FC = () => {
             <p>
               Toggle <strong>Aggregate View</strong> in the toolbar to collapse results by instance
               type across providers, showing min/max/avg pricing instead of individual region rows.
+            </p>
+
+            <h3 id="category-specific-filters">Category-Specific Filters</h3>
+            <p>
+              Beyond the universal filters above, each product category exposes its own additional
+              attribute filters in the sidebar — for example, GPU and CPU vendor for Virtual Machines;
+              Database Engine, Deployment type, and High-Availability mode for Databases; Context Window
+              and Multimodal support for AI &amp; Machine Learning; Cold Start, Timeout, and Execution
+              Model for Serverless; Orchestrator and Architecture for Containers; Connection Type,
+              Routing Type, and Direction for Networking; and Redundancy and Media type for Storage. See
+              the <Link href="/docs#product-categories">Product Categories</Link> section above for what
+              each category covers.
             </p>
 
             <BackToTop />
@@ -712,6 +740,12 @@ const DocsPage: React.FC = () => {
               ~5.9:1) — if you already have a LinkedIn banner asset, it will likely need only minor
               cropping to fit.
             </p>
+            <blockquote>
+              <strong>💡 Tip:</strong> Your banner can include a call to action tailored to your goal —
+              whether that's driving traffic to a landing page or to your company's main site. You can
+              also swap your banner for a new one at least once a month; just send us the replacement
+              asset and we'll have it live within 3 business days.
+            </blockquote>
             <p>
               Interested in sponsoring? Reach out at{' '}
               <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.
@@ -731,6 +765,33 @@ const DocsPage: React.FC = () => {
               , or reach out at{' '}
               <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.
             </p>
+            <BackToTop />
+          </div>
+
+          {/* Glossary */}
+          <div className="docs-section">
+            <CopyHeading id="glossary">Glossary</CopyHeading>
+            <p>The following terms are used throughout the platform. Hovering the <strong>ⓘ</strong> icon next to any term on the Datacenters page will also surface its definition inline.</p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Region</strong> — A geographic cluster of data centers in a specific physical location. Each region is completely independent and isolated from failures in other regions. Providers typically publish regions as named locations (e.g. "US East (N. Virginia)", "West Europe").
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Availability Zone (AZ)</strong> — One or more discrete data centers within a region, each with redundant power, networking, and connectivity. Deploying resources across multiple Availability Zones in the same region allows applications to survive a single data center outage. DigitalOcean does not use traditional Availability Zones — each of its regions maps to a single data center.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Edge Location</strong> — A smaller point-of-presence (PoP) node used for content delivery (CDN) and low-latency services such as DNS, DDoS protection, and WAF. Edge locations are distinct from full compute regions and are not independently deployable as compute environments.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>Government Cloud</strong> — Dedicated, isolated cloud regions operated specifically to meet government compliance requirements (e.g. FedRAMP High, IL4/IL5 in the US, UK OFFICIAL). Access is typically restricted to vetted public sector customers.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>On-Demand pricing</strong> — Pay-as-you-go pricing with no upfront commitment. All prices on this platform are on-demand unless explicitly stated otherwise. Reserved, spot, savings plan, or committed-use discounts are not included.
+              </li>
+              <li style={{ marginBottom: '0.75rem' }}>
+                <strong>vCPU</strong> — Virtual CPU. A logical compute unit mapped to a physical processor thread. Oracle Cloud uses OCPUs (one OCPU = 2 vCPUs); this platform normalizes all values to vCPUs for consistency.
+              </li>
+            </ul>
             <BackToTop />
           </div>
 

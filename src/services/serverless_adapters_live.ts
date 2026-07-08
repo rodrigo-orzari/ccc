@@ -360,12 +360,16 @@ export async function fetchGcpCloudRunRates(apiKey: string): Promise<{ cpuRate: 
   const serviceName = await findCloudRunServiceName(apiKey);
   const skus = await fetchAllSkus(serviceName, apiKey);
 
-  // Debug: log sample SKU descriptions for diagnostics
+  // Debug: log candidate SKU descriptions (excluding free/discount/commitment/transfer
+  // noise) so real CPU/Memory execution-rate SKU names can be identified from logs
+  // when the patterns in findRatePerUnit() don't match Google's current naming.
   const cloudRunSkus = skus.filter(s => (s.description ?? '').includes('Cloud Run'));
-  if (cloudRunSkus.length > 0) {
-    console.log(`🔍 Found ${cloudRunSkus.length} Cloud Run SKUs. Sample descriptions:`);
-    cloudRunSkus.slice(0, 5).forEach(s => console.log(`   - ${s.description}`));
-  }
+  const usefulSkus = cloudRunSkus.filter(s => {
+    const d = (s.description ?? '').toLowerCase();
+    return !d.includes('free') && !d.includes('discount') && !d.includes('commitment') && !d.includes('transfer');
+  });
+  console.log(`🔍 Found ${cloudRunSkus.length} Cloud Run SKUs total, ${usefulSkus.length} candidates after excluding free/discount/commitment/transfer:`);
+  usefulSkus.slice(0, 30).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
 
   const cpuRate = findRatePerUnit(skus, 'CPU Allocation Time');
   const memRate = findRatePerUnit(skus, 'Memory Allocation Time');

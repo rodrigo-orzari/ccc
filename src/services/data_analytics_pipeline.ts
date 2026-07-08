@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
-import { BaseAdapter, PricingRecord, PricingPipeline, fetchWithRetry } from './pricing_pipeline';
+import { BaseAdapter, PricingRecord, PricingPipeline, fetchWithRetry, sleep, AZURE_RETAIL_API_PAGE_DELAY_MS, AZURE_RETAIL_API_REGION_DELAY_MS } from './pricing_pipeline';
 import { DATABRICKS_INSTANCES, DATABRICKS_AWS_REGION, DATABRICKS_GCP_REGION } from '../config/databricks_instances';
 import { SNOWFLAKE_INSTANCES, SNOWFLAKE_AWS_REGION, SNOWFLAKE_AZURE_REGION, SNOWFLAKE_GCP_REGION } from '../config/snowflake_instances';
 import { NATIVE_ANALYTICS_INSTANCES, NATIVE_ANALYTICS_AWS_REGION, NATIVE_ANALYTICS_GCP_REGION } from '../config/native_analytics_instances';
@@ -132,12 +132,13 @@ export class DatabricksAzureAdapter extends BaseAdapter {
 
   async fetchPricing(): Promise<PricingRecord[]> {
     const records: PricingRecord[] = [];
-    for (const region of DatabricksAzureAdapter.REGIONS) {
+    for (const [i, region] of DatabricksAzureAdapter.REGIONS.entries()) {
       try {
         records.push(...(await this.fetchForRegion(region)));
       } catch (err: any) {
         console.warn(`⚠️  Azure Databricks pricing fetch failed for ${region} (${err.message}) — keeping results from other regions.`);
       }
+      if (i < DatabricksAzureAdapter.REGIONS.length - 1) await sleep(AZURE_RETAIL_API_REGION_DELAY_MS);
     }
     console.log(`✅ Fetched ${records.length} Azure Databricks records across ${DatabricksAzureAdapter.REGIONS.length} regions (some regions may have failed — see warnings above)`);
     return records;
@@ -157,6 +158,7 @@ export class DatabricksAzureAdapter extends BaseAdapter {
       allItems.push(...(response.data.Items ?? []));
       url = response.data.NextPageLink ?? null;
       pages++;
+      if (url) await sleep(AZURE_RETAIL_API_PAGE_DELAY_MS);
     }
 
     const records: PricingRecord[] = [];
@@ -260,12 +262,13 @@ export class SynapseAzureAdapter extends BaseAdapter {
 
   async fetchPricing(): Promise<PricingRecord[]> {
     const records: PricingRecord[] = [];
-    for (const region of SynapseAzureAdapter.REGIONS) {
+    for (const [i, region] of SynapseAzureAdapter.REGIONS.entries()) {
       try {
         records.push(...(await this.fetchForRegion(region)));
       } catch (err: any) {
         console.warn(`⚠️  Azure Synapse pricing fetch failed for ${region} (${err.message}) — keeping results from other regions.`);
       }
+      if (i < SynapseAzureAdapter.REGIONS.length - 1) await sleep(AZURE_RETAIL_API_REGION_DELAY_MS);
     }
     console.log(`✅ Fetched ${records.length} Azure Synapse records across ${SynapseAzureAdapter.REGIONS.length} regions (some regions may have failed — see warnings above)`);
     return records;
@@ -285,6 +288,7 @@ export class SynapseAzureAdapter extends BaseAdapter {
       allItems.push(...(response.data.Items ?? []));
       url = response.data.NextPageLink ?? null;
       pages++;
+      if (url) await sleep(AZURE_RETAIL_API_PAGE_DELAY_MS);
     }
 
     const records: PricingRecord[] = [];
