@@ -47,15 +47,24 @@ export async function ensureProviderId(sql: any, slug: string): Promise<string> 
   return created[0].id;
 }
 
-async function fetchWithRetry(url: string, config: any = {}, retries = 3, timeout = 60000): Promise<any> {
+export function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export async function fetchWithRetry(url: string, config: any = {}, retries = 3, timeout = 60000): Promise<any> {
   const mergedConfig = { timeout, ...config };
   for (let i = 0; i < retries; i++) {
     try {
       return await axios.get(url, mergedConfig);
     } catch (err: any) {
+      // Honor the server's Retry-After header (Azure's Retail Prices API sends
+      // this on 429s) instead of our own fixed backoff — it tells us exactly
+      // how long to wait, which is usually much longer than 2-6s.
+      const retryAfterHeader = err.response?.headers?.['retry-after'];
+      const retryAfterMs = retryAfterHeader ? parseInt(retryAfterHeader, 10) * 1000 : null;
       console.warn(`Fetch failed for ${url.substring(0, 100)}... (attempt ${i + 1}/${retries}): ${err.message}`);
       if (i === retries - 1) throw err;
-      await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1))); // Exponential backoff
+      await sleep(retryAfterMs && !isNaN(retryAfterMs) ? retryAfterMs : 2000 * (i + 1)); // Exponential backoff, or server-specified delay
     }
   }
 }
@@ -203,71 +212,86 @@ export class AzureAdapter extends BaseAdapter {
     const records: PricingRecord[] = [];
 
     for (const region of AzureAdapter.REGIONS) {
-      console.log(`Fetching Azure VM pricing (${region})...`);
-      const filter = encodeURIComponent(
-        `serviceName eq 'Virtual Machines' and priceType eq 'Consumption' and armRegionName eq '${region}'`
-      );
-      let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
-      const allItems: any[] = [];
-
-      let pages = 0;
-      while (url && pages < 10) {
-        const response = await fetchWithRetry(url);
-        allItems.push(...(response.data.Items ?? []));
-        url = response.data.NextPageLink ?? null;
-        pages++;
-      }
-
-      // Deduplicate by SKU + OS — the API occasionally returns the same SKU
-      // under multiple meter names (spot, dev/test, etc.) within one region.
-      const seen = new Set<string>();
-
-      for (const item of allItems) {
-        if (!item.retailPrice || item.retailPrice <= 0) continue;
-
-        const sku: string = (item.armSkuName ?? '').trim();
-        if (!sku) continue;
-
-        const productName: string = (item.productName ?? '').toLowerCase();
-        const os = productName.includes('windows') ? 'Windows' : 'Linux';
-
-        // Skip dev-test pricing
-        if (productName.includes('dev/test')) continue;
-
-        const isSpot = productName.includes('spot') || productName.includes('low priority');
-        const purchaseOption = isSpot ? 'Spot' : 'OnDemand';
-
-        const key = `${sku}::${os}::${purchaseOption}`;
-        if (seen.has(key)) continue;
-        seen.add(key);
-
-        const vcpus = this.vcpuFromSku(sku);
-        const memoryGb = this.memoryFromSku(sku, vcpus);
-
-        records.push({
-          provider: 'azure',
-          service: 'Virtual Machines',
-          region,
-          instanceType: sku,
-          vcpus,
-          memoryGb,
-          arch: sku.toLowerCase().includes('arm64') ? 'ARM' : 'x86 64',
-          os,
-          cpuVendor: this.getCpuVendor(sku),
-          gpuCount: this.getGpuCount(sku),
-          geography: 'N. America',
-          category: this.classifyAzure(sku, vcpus, memoryGb),
-          price: item.retailPrice,
-          unit: '1 Hour',
-          dataSource: 'live_api' as const,
-          attributes: {
-            purchaseOption
-          }
-        });
+      try {
+        records.push(...(await this.fetchForRegion(region)));
+      } catch (err: any) {
+        // A single region failing (e.g. Azure Retail Prices API rate limit —
+        // it allows very few requests per minute, and fetching N regions
+        // across 4 different Azure adapters in one pipeline run can trip it)
+        // must not discard whatever regions already succeeded.
+        console.warn(`⚠️  Azure VM pricing fetch failed for ${region} (${err.message}) — keeping results from other regions.`);
       }
     }
 
-    console.log(`✅ Fetched ${records.length} Azure VM records across ${AzureAdapter.REGIONS.length} regions`);
+    console.log(`✅ Fetched ${records.length} Azure VM records across ${AzureAdapter.REGIONS.length} regions (some regions may have failed — see warnings above)`);
+    return records;
+  }
+
+  private async fetchForRegion(region: string): Promise<PricingRecord[]> {
+    console.log(`Fetching Azure VM pricing (${region})...`);
+    const filter = encodeURIComponent(
+      `serviceName eq 'Virtual Machines' and priceType eq 'Consumption' and armRegionName eq '${region}'`
+    );
+    let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
+    const allItems: any[] = [];
+
+    let pages = 0;
+    while (url && pages < 10) {
+      const response = await fetchWithRetry(url);
+      allItems.push(...(response.data.Items ?? []));
+      url = response.data.NextPageLink ?? null;
+      pages++;
+    }
+
+    const records: PricingRecord[] = [];
+    // Deduplicate by SKU + OS — the API occasionally returns the same SKU
+    // under multiple meter names (spot, dev/test, etc.) within one region.
+    const seen = new Set<string>();
+
+    for (const item of allItems) {
+      if (!item.retailPrice || item.retailPrice <= 0) continue;
+
+      const sku: string = (item.armSkuName ?? '').trim();
+      if (!sku) continue;
+
+      const productName: string = (item.productName ?? '').toLowerCase();
+      const os = productName.includes('windows') ? 'Windows' : 'Linux';
+
+      // Skip dev-test pricing
+      if (productName.includes('dev/test')) continue;
+
+      const isSpot = productName.includes('spot') || productName.includes('low priority');
+      const purchaseOption = isSpot ? 'Spot' : 'OnDemand';
+
+      const key = `${sku}::${os}::${purchaseOption}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+
+      const vcpus = this.vcpuFromSku(sku);
+      const memoryGb = this.memoryFromSku(sku, vcpus);
+
+      records.push({
+        provider: 'azure',
+        service: 'Virtual Machines',
+        region,
+        instanceType: sku,
+        vcpus,
+        memoryGb,
+        arch: sku.toLowerCase().includes('arm64') ? 'ARM' : 'x86 64',
+        os,
+        cpuVendor: this.getCpuVendor(sku),
+        gpuCount: this.getGpuCount(sku),
+        geography: 'N. America',
+        category: this.classifyAzure(sku, vcpus, memoryGb),
+        price: item.retailPrice,
+        unit: '1 Hour',
+        dataSource: 'live_api' as const,
+        attributes: {
+          purchaseOption
+        }
+      });
+    }
+
     return records;
   }
 }

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
-import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline';
+import { BaseAdapter, PricingRecord, PricingPipeline, fetchWithRetry } from './pricing_pipeline';
 import { fetchOracleCatalog, findPrice } from './oracle_price_list';
 import {
   GCP_CLOUD_SQL_INSTANCES,
@@ -461,10 +461,16 @@ export class AzureDBAdapter extends BaseAdapter {
     const records: PricingRecord[] = [];
 
     for (const region of AzureDBAdapter.REGIONS) {
-      records.push(...(await this.fetchForRegion(region)));
+      try {
+        records.push(...(await this.fetchForRegion(region)));
+      } catch (err: any) {
+        // Azure Retail Prices API rate-limits aggressively (few requests/min) —
+        // one region failing must not discard results from other regions.
+        console.warn(`⚠️  Azure database pricing fetch failed for ${region} (${err.message}) — keeping results from other regions.`);
+      }
     }
 
-    console.log(`✅ Fetched ${records.length} Azure database records across ${AzureDBAdapter.REGIONS.length} regions`);
+    console.log(`✅ Fetched ${records.length} Azure database records across ${AzureDBAdapter.REGIONS.length} regions (some regions may have failed — see warnings above)`);
     return records;
   }
 
@@ -478,7 +484,7 @@ export class AzureDBAdapter extends BaseAdapter {
 
     let pages = 0;
     while (url && pages < 20) {
-      const response = await axios.get(url, { timeout: 30000 });
+      const response = await fetchWithRetry(url);
       allItems.push(...(response.data.Items ?? []));
       url = response.data.NextPageLink ?? null;
       pages++;

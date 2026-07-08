@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
-import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline';
+import { BaseAdapter, PricingRecord, PricingPipeline, fetchWithRetry } from './pricing_pipeline';
 import { DATABRICKS_INSTANCES, DATABRICKS_AWS_REGION, DATABRICKS_GCP_REGION } from '../config/databricks_instances';
 import { SNOWFLAKE_INSTANCES, SNOWFLAKE_AWS_REGION, SNOWFLAKE_AZURE_REGION, SNOWFLAKE_GCP_REGION } from '../config/snowflake_instances';
 import { NATIVE_ANALYTICS_INSTANCES, NATIVE_ANALYTICS_AWS_REGION, NATIVE_ANALYTICS_GCP_REGION } from '../config/native_analytics_instances';
@@ -133,9 +133,13 @@ export class DatabricksAzureAdapter extends BaseAdapter {
   async fetchPricing(): Promise<PricingRecord[]> {
     const records: PricingRecord[] = [];
     for (const region of DatabricksAzureAdapter.REGIONS) {
-      records.push(...(await this.fetchForRegion(region)));
+      try {
+        records.push(...(await this.fetchForRegion(region)));
+      } catch (err: any) {
+        console.warn(`⚠️  Azure Databricks pricing fetch failed for ${region} (${err.message}) — keeping results from other regions.`);
+      }
     }
-    console.log(`✅ Fetched ${records.length} Azure Databricks records across ${DatabricksAzureAdapter.REGIONS.length} regions`);
+    console.log(`✅ Fetched ${records.length} Azure Databricks records across ${DatabricksAzureAdapter.REGIONS.length} regions (some regions may have failed — see warnings above)`);
     return records;
   }
 
@@ -149,7 +153,7 @@ export class DatabricksAzureAdapter extends BaseAdapter {
 
     let pages = 0;
     while (url && pages < 10) {
-      const response = await axios.get(url, { timeout: 30000 });
+      const response = await fetchWithRetry(url, { timeout: 30000 });
       allItems.push(...(response.data.Items ?? []));
       url = response.data.NextPageLink ?? null;
       pages++;
@@ -257,9 +261,13 @@ export class SynapseAzureAdapter extends BaseAdapter {
   async fetchPricing(): Promise<PricingRecord[]> {
     const records: PricingRecord[] = [];
     for (const region of SynapseAzureAdapter.REGIONS) {
-      records.push(...(await this.fetchForRegion(region)));
+      try {
+        records.push(...(await this.fetchForRegion(region)));
+      } catch (err: any) {
+        console.warn(`⚠️  Azure Synapse pricing fetch failed for ${region} (${err.message}) — keeping results from other regions.`);
+      }
     }
-    console.log(`✅ Fetched ${records.length} Azure Synapse records across ${SynapseAzureAdapter.REGIONS.length} regions`);
+    console.log(`✅ Fetched ${records.length} Azure Synapse records across ${SynapseAzureAdapter.REGIONS.length} regions (some regions may have failed — see warnings above)`);
     return records;
   }
 
@@ -273,7 +281,7 @@ export class SynapseAzureAdapter extends BaseAdapter {
 
     let pages = 0;
     while (url && pages < 10) {
-      const response = await axios.get(url, { timeout: 30000 });
+      const response = await fetchWithRetry(url, { timeout: 30000 });
       allItems.push(...(response.data.Items ?? []));
       url = response.data.NextPageLink ?? null;
       pages++;
