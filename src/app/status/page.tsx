@@ -332,9 +332,6 @@ export default function StatusPage() {
           </div>
           <p className="text-sm text-[#737373] m-0">
             Learn when we last gathered pricing information per cloud provider and product category.
-            {status?.last_ingested && (
-              <> Last ingestion: {new Date(status.last_ingested).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}.</>
-            )}
           </p>
         </div>
 
@@ -386,9 +383,6 @@ export default function StatusPage() {
                   <div className="summary-card-label">Providers</div>
                   <div className="summary-card-value">
                     {status.providers.filter(p => p.total_records > 0).length}
-                    <span style={{ fontSize: '1rem', color: 'var(--muted)', fontWeight: 400 }}>
-                      /{status.providers.length}
-                    </span>
                   </div>
                   <div className="summary-card-sub">with data</div>
                 </div>
