@@ -376,7 +376,7 @@
       "label": "AlibabaAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L786",
+      "source_location": "L787",
       "id": "services_pricing_pipeline_alibabaadapter",
       "community": 46,
       "norm_label": "alibabaadapter"
@@ -385,7 +385,7 @@
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L789",
+      "source_location": "L790",
       "id": "services_pricing_pipeline_alibabaadapter_fetchpricing",
       "community": 46,
       "norm_label": ".fetchpricing()"
@@ -394,7 +394,7 @@
       "label": "PricingPipeline",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L830",
+      "source_location": "L831",
       "id": "services_pricing_pipeline_pricingpipeline",
       "community": 43,
       "norm_label": "pricingpipeline"
@@ -403,7 +403,7 @@
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L834",
+      "source_location": "L835",
       "id": "services_pricing_pipeline_pricingpipeline_constructor",
       "community": 43,
       "norm_label": ".constructor()"
@@ -412,7 +412,7 @@
       "label": ".run()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L852",
+      "source_location": "L853",
       "id": "services_pricing_pipeline_pricingpipeline_run",
       "community": 43,
       "norm_label": ".run()"
@@ -421,7 +421,7 @@
       "label": ".saveRecords()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
-      "source_location": "L868",
+      "source_location": "L869",
       "id": "services_pricing_pipeline_pricingpipeline_saverecords",
       "community": 43,
       "norm_label": ".saverecords()"
@@ -493,7 +493,7 @@
       "label": "fetchGcpCloudRunRates()",
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L351",
+      "source_location": "L359",
       "id": "services_serverless_adapters_live_fetchgcpcloudrunrates",
       "community": 2,
       "norm_label": "fetchgcpcloudrunrates()"
@@ -502,7 +502,7 @@
       "label": "GCPCloudRunLiveAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L370",
+      "source_location": "L378",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter",
       "community": 2,
       "norm_label": "gcpcloudrunliveadapter"
@@ -511,7 +511,7 @@
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L388",
+      "source_location": "L396",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing",
       "community": 2,
       "norm_label": ".fetchpricing()"
@@ -520,7 +520,7 @@
       "label": "AzureFunctionsLiveAdapter",
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L455",
+      "source_location": "L463",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter",
       "community": 2,
       "norm_label": "azurefunctionsliveadapter"
@@ -529,7 +529,7 @@
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L473",
+      "source_location": "L481",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing",
       "community": 2,
       "norm_label": ".fetchpricing()"
@@ -20985,5 +20985,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a23f4291395c92f5e56c4b28b341a0a8f838b69e"
+  "built_at_commit": "4ca3cbbeecfc742a24aa90d65794b3ca591aa50c"
 }
