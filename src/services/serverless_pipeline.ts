@@ -310,11 +310,31 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       }
     }
 
-    // GCP Cloud Run: To be implemented in Phase 2
+    // GCP Cloud Run: Try live Billing Catalog API first (needs GCP_BILLING_API_KEY),
+    // fall back to static config.
     try {
-      console.log('⏳ GCP Cloud Run (Phase 2 - not yet implemented)...');
-      const records = await this.getGCPServerlessStaticRecords();
-      if (records.length > 0) {
+      console.log('🔄 Attempting GCP Cloud Run live API fetch...');
+      const gcpAdapter = new GCPCloudRunLiveAdapter();
+      let records = await gcpAdapter.fetchPricing();
+
+      if (records.length === 0) {
+        console.warn('⚠️  GCP Cloud Run live API returned empty, using static config fallback');
+        records = await this.getGCPServerlessStaticRecords();
+      }
+
+      const driftAlerts = await this.saveRecords(records, 'serverless');
+      results.push({
+        provider: 'gcp',
+        service: 'Cloud Run',
+        status: 'success',
+        count: records.length,
+        driftAlerts,
+        dataSource: records[0]?.dataSource || 'static_config'
+      });
+    } catch (error: any) {
+      console.warn(`⚠️  GCP Cloud Run live API failed (${error.message}), falling back to static config...`);
+      try {
+        const records = await this.getGCPServerlessStaticRecords();
         const driftAlerts = await this.saveRecords(records, 'serverless');
         results.push({
           provider: 'gcp',
@@ -323,17 +343,17 @@ export class ServerlessPricingPipeline extends PricingPipeline {
           count: records.length,
           driftAlerts,
           dataSource: 'static_config',
-          note: 'Phase 2 pending - static config only'
+          note: 'Using static config fallback due to API failure'
+        });
+      } catch (fallbackError: any) {
+        console.error(`❌ GCP Cloud Run static config also failed:`, fallbackError);
+        results.push({
+          provider: 'gcp',
+          service: 'Cloud Run',
+          status: 'error',
+          message: `Live API failed: ${error.message}, Static fallback failed: ${(fallbackError as Error).message}`
         });
       }
-    } catch (error: any) {
-      console.warn(`⚠️  GCP Cloud Run error:`, error.message);
-      results.push({
-        provider: 'gcp',
-        service: 'Cloud Run',
-        status: 'skipped',
-        message: 'Phase 2 not yet implemented'
-      });
     }
 
     // Azure Functions: Try live Retail Prices API first, fall back to static config.

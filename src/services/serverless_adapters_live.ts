@@ -244,15 +244,147 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
 }
 
 /**
- * GCP Cloud Run Live Adapter (Placeholder)
- * To be implemented in Phase 2
+ * GCP Cloud Run Live Adapter
+ * Fetches Cloud Run pricing from the GCP Cloud Billing Catalog API
+ * (cloudbilling.googleapis.com). Unlike Azure's Retail Prices API this one
+ * requires a simple API key (no OAuth/service-account token) but the calling
+ * project must have the Cloud Billing API enabled first — see
+ * GCP_BILLING_API_KEY below. Gracefully returns [] (triggering the pipeline's
+ * static-config fallback) if the key isn't set, matching the DigitalOcean
+ * live adapter's pattern for an optional/missing credential.
+ *
+ * NOTE: this integration has not been exercised against a real GCP project —
+ * we don't have a GCP_BILLING_API_KEY in this environment to verify against.
+ * The request/response shapes below follow Google's documented Billing
+ * Catalog API contract (services.list / services.skus.list); if Google has
+ * changed field names since, the try/catch + empty-result path will surface
+ * as "falls back to static config" rather than a hard failure.
  */
 export class GCPCloudRunLiveAdapter extends BaseAdapter {
   providerSlug = 'gcp';
+  private static readonly REGION = 'us-central1';
+  private readonly GCP_CLOUD_RUN_LANGUAGES = ['Python', 'Node', 'Go', 'Java', 'C#', 'PHP', 'Ruby', 'Any'];
+
+  // Same (vCPU, memoryGB) combinations as the static config (gcp_serverless.ts).
+  private readonly CONFIGS: { vcpus: number; memoryGb: number }[] = [
+    { vcpus: 1, memoryGb: 0.512 },
+    { vcpus: 1, memoryGb: 1 },
+    { vcpus: 1, memoryGb: 2 },
+    { vcpus: 2, memoryGb: 1 },
+    { vcpus: 2, memoryGb: 2 },
+    { vcpus: 2, memoryGb: 4 },
+    { vcpus: 4, memoryGb: 2 },
+    { vcpus: 4, memoryGb: 4 },
+    { vcpus: 4, memoryGb: 8 },
+  ];
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log('⏳ GCP Cloud Run adapter not yet implemented (Phase 2)');
-    return [];
+    const apiKey = process.env.GCP_BILLING_API_KEY;
+    if (!apiKey) {
+      console.warn('⚠️  GCP_BILLING_API_KEY not set — Cloud Run live pricing unavailable, using static config.');
+      return [];
+    }
+
+    try {
+      const serviceName = await this.findCloudRunServiceName(apiKey);
+      const skus = await this.fetchAllSkus(serviceName, apiKey);
+
+      const cpuRate = this.findRatePerUnit(skus, 'CPU Allocation Time');
+      const memRate = this.findRatePerUnit(skus, 'Memory Allocation Time');
+      if (cpuRate == null || memRate == null) {
+        throw new Error(`Could not find both CPU and Memory Allocation Time SKUs (cpuRate=${cpuRate}, memRate=${memRate})`);
+      }
+
+      const records: PricingRecord[] = this.CONFIGS.map(({ vcpus, memoryGb }) => ({
+        provider: 'gcp',
+        service: 'Cloud Run',
+        region: GCPCloudRunLiveAdapter.REGION,
+        instanceType: `CloudRun-${vcpus}vCPU-${memoryGb < 1 ? `${memoryGb * 1024}MB` : `${memoryGb}GB`}`,
+        vcpus,
+        memoryGb,
+        arch: 'x86 64',
+        os: 'Linux',
+        cpuVendor: 'Intel',
+        gpuCount: 0,
+        geography: this.getGeography(GCPCloudRunLiveAdapter.REGION),
+        category: 'Serverless Compute',
+        price: (cpuRate * vcpus * 3600) + (memRate * memoryGb * 3600),
+        unit: 'GB-Hour',
+        dataSource: 'live_api' as const,
+        supportedLanguages: this.GCP_CLOUD_RUN_LANGUAGES,
+        attributes: {
+          service_type: 'Compute',
+          deployment_type: 'Serverless',
+          tier: 'Serverless',
+          cold_start_overhead_ms: 150,
+          timeout_seconds: 3600,
+          memory_configuration: 'user-configurable',
+          invocation_price: 0.0000004,
+          invocation_price_per_1m: 0.40,
+          free_vcpu_seconds_per_month: 180000,
+          free_memory_gb_seconds_per_month: 360000,
+          max_memory_gb: 8,
+          billing_granularity_ms: 100,
+          execution_model: 'Container Image',
+          provisioned_concurrency_support: 'Yes',
+          max_ephemeral_storage_gb: 32,
+        },
+      }));
+
+      console.log(`✅ Fetched ${records.length} GCP Cloud Run pricing records (CPU: $${cpuRate}/vCPU-s, Mem: $${memRate}/GiB-s)`);
+      return records;
+    } catch (err: any) {
+      console.warn(`⚠️  GCP Cloud Run live pricing fetch failed (${err.message}), falling back to static config.`);
+      return [];
+    }
+  }
+
+  private async findCloudRunServiceName(apiKey: string): Promise<string> {
+    let pageToken: string | undefined;
+    for (let page = 0; page < 20; page++) {
+      const url = `https://cloudbilling.googleapis.com/v1/services?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
+      const response = await axios.get(url, { timeout: 30000 });
+      const services: any[] = response.data?.services ?? [];
+      const match = services.find(s => s.displayName === 'Cloud Run');
+      if (match) return match.name; // e.g. "services/6F81-5844-456A"
+      pageToken = response.data?.nextPageToken;
+      if (!pageToken) break;
+    }
+    throw new Error('Cloud Run service not found in Billing Catalog services.list');
+  }
+
+  private async fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]> {
+    const skus: any[] = [];
+    let pageToken: string | undefined;
+    for (let page = 0; page < 20; page++) {
+      const url = `https://cloudbilling.googleapis.com/v1/${serviceName}/skus?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
+      const response = await axios.get(url, { timeout: 30000 });
+      skus.push(...(response.data?.skus ?? []));
+      pageToken = response.data?.nextPageToken;
+      if (!pageToken) break;
+    }
+    return skus;
+  }
+
+  // Finds the on-demand (non-free-tier) unit price for a SKU whose
+  // description contains `descriptionSubstr`, scoped to our reference region.
+  private findRatePerUnit(skus: any[], descriptionSubstr: string): number | null {
+    const sku = skus.find(s =>
+      (s.description ?? '').includes(descriptionSubstr) &&
+      !(s.description ?? '').toLowerCase().includes('free') &&
+      (s.serviceRegions ?? []).some((r: string) => r === GCPCloudRunLiveAdapter.REGION || r === 'global')
+    );
+    if (!sku) return null;
+
+    const tiers = sku.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
+    // Take the highest-usage (last) tier — the first tier is often the free allotment at $0.
+    const rate = tiers[tiers.length - 1]?.unitPrice;
+    if (!rate) return null;
+
+    const units = parseInt(rate.units ?? '0', 10);
+    const nanos = rate.nanos ?? 0;
+    const price = units + nanos / 1e9;
+    return price > 0 ? price : null;
   }
 }
 
