@@ -475,9 +475,21 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
 
     for (const adapter of this.adapters) {
       try {
-        // Expand each adapter's single-region records across the provider's regions
-        // so the category has real geographic coverage (W. Europe, Asia Pacific, etc.).
-        const records = expandRecordsByRegion(await adapter.fetchPricing());
+        const rawRecords = await adapter.fetchPricing();
+
+        // Expand single-region records across the provider's regions so the
+        // category has real geographic coverage (W. Europe, Asia Pacific,
+        // etc.) — but ONLY for adapters that fetched a single region to begin
+        // with (the static config adapters). DatabricksAzureAdapter and
+        // SynapseAzureAdapter already live-fetch real eastus + westus2 prices;
+        // running their output through this synthetic expansion overwrote
+        // that real per-region data with the same synthetic region list
+        // regardless of source, making a SKU priced in both eastus and
+        // westus2 collapse into two identical-key rows per synthetic region —
+        // exactly the "23505 duplicate key" collisions this category was
+        // hitting (and silently dropping half of, post-dedup).
+        const distinctRegions = new Set(rawRecords.map(r => r.region));
+        const records = distinctRegions.size > 1 ? rawRecords : expandRecordsByRegion(rawRecords);
 
         const byService = new Map<string, PricingRecord[]>();
         for (const rec of records) {

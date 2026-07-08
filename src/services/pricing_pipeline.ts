@@ -713,18 +713,25 @@ export class DigitalOceanAdapter extends BaseAdapter {
   }
 }
 
-// Alibaba's BSS OpenAPI (business.aliyuncs.com) exposes ECS pay-as-you-go
-// pricing via GetPayAsYouGoPrice, signed with an AccessKey ID/Secret (see
+// Alibaba's BSS OpenAPI exposes ECS pay-as-you-go pricing via
+// GetPayAsYouGoPrice, signed with an AccessKey ID/Secret (see
 // alibaba_signer.ts) — no paid subscription needed, just a RAM
 // user/AccessKey with bssapi:GetPayAsYouGoPrice permission.
 //
-// NOT YET VERIFIED against a live Alibaba account (no ALIBABA_ACCESS_KEY_ID/
-// SECRET available in this environment). The request shape below follows
-// Alibaba's documented GetPayAsYouGoPrice contract for ECS, but the exact
-// ModuleList Config string Alibaba expects can vary by product; if it's
-// wrong, requests fail cleanly (caught below) and this falls back to the
-// existing static config for every instance type rather than partially
-// succeeding with guessed values.
+// Endpoint: Alibaba Cloud has two separate sites — the China site
+// (aliyun.com) and the International site (alibabacloud.com) — and
+// credentials from one generally can't call the other site's endpoints.
+// The original `business.aliyuncs.com` (no region prefix) is the China-site
+// domain; a live run against this account's key returned "NotApplicable:
+// You are not authorized to call the API operation. Please check whether
+// the caller site matches the API domain regionId" — the documented symptom
+// of an International-site account (the norm for a non-China signup)
+// hitting the China-site domain. Switched to the region-scoped domain,
+// which International accounts should use instead. NOT YET reverified
+// against a live run — if this specific error persists, the account may
+// also be missing the BSS module's own authorization (a RAM policy like
+// AliyunBSSReadOnlyAccess) separate from ECS permissions.
+const ALIBABA_BSS_ENDPOINT = `business.${ALIBABA_REGION}.aliyuncs.com`;
 async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
   const accessKeyId = process.env.ALIBABA_ACCESS_KEY_ID;
   const accessKeySecret = process.env.ALIBABA_ACCESS_KEY_SECRET;
@@ -752,7 +759,7 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
       ].join(',');
 
       const url = buildSignedUrl(
-        'business.aliyuncs.com',
+        ALIBABA_BSS_ENDPOINT,
         'GetPayAsYouGoPrice',
         '2017-12-14',
         {

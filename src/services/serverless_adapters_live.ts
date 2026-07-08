@@ -360,16 +360,19 @@ export async function fetchGcpCloudRunRates(apiKey: string): Promise<{ cpuRate: 
   const serviceName = await findCloudRunServiceName(apiKey);
   const skus = await fetchAllSkus(serviceName, apiKey);
 
-  // Debug: log candidate SKU descriptions (excluding free/discount/commitment/transfer
-  // noise) so real CPU/Memory execution-rate SKU names can be identified from logs
-  // when the patterns in findRatePerUnit() don't match Google's current naming.
+  // Debug: the previous run showed 0 candidates surviving the
+  // free/discount/commitment/transfer exclusion out of 208 "Cloud Run" SKUs —
+  // meaning literally every one matched an exclusion keyword, which strongly
+  // suggests the exclusion filter itself is wrong (or the real execution-rate
+  // SKUs don't say "Cloud Run" at all). Dumping the full raw list, unfiltered,
+  // to get ground truth instead of guessing at another pattern.
   const cloudRunSkus = skus.filter(s => (s.description ?? '').includes('Cloud Run'));
-  const usefulSkus = cloudRunSkus.filter(s => {
-    const d = (s.description ?? '').toLowerCase();
-    return !d.includes('free') && !d.includes('discount') && !d.includes('commitment') && !d.includes('transfer');
-  });
-  console.log(`🔍 Found ${cloudRunSkus.length} Cloud Run SKUs total, ${usefulSkus.length} candidates after excluding free/discount/commitment/transfer:`);
-  usefulSkus.slice(0, 30).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
+  console.log(`🔍 Found ${skus.length} total SKUs for this service, ${cloudRunSkus.length} contain "Cloud Run". Raw descriptions:`);
+  cloudRunSkus.slice(0, 100).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
+  if (cloudRunSkus.length === 0) {
+    console.log(`🔍 No "Cloud Run" SKUs at all — sampling 20 SKU descriptions from the full service catalog instead:`);
+    skus.slice(0, 20).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
+  }
 
   const cpuRate = findRatePerUnit(skus, 'CPU Allocation Time');
   const memRate = findRatePerUnit(skus, 'Memory Allocation Time');
