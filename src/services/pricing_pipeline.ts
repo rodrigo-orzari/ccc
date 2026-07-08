@@ -168,9 +168,15 @@ export abstract class BaseAdapter {
 export class AzureAdapter extends BaseAdapter {
   providerSlug = 'azure';
 
-  // Single canonical region — consistent with all other providers using one
-  // reference region (AWS→us-east-1, GCP→us-central1, DO→nyc1).
-  private static readonly REGION = 'eastus';
+  // eastus is Azure's cheapest/baseline US region and is kept as the primary
+  // reference region (consistent with AWS→us-east-1, GCP→us-central1,
+  // DO→nyc1). westus2 is added alongside it — unlike AWS/GCP's "twin"
+  // regions (which price within ~1-3% of their East counterpart), Azure's
+  // *older* westus region runs 15-25% higher, and a single eastus reference
+  // was silently standing in for all of "N. America" in the comparison
+  // table. westus2 is priced close to eastus but still catches real
+  // West-region variance without the cost of a full multi-region fetch.
+  private static readonly REGIONS = ['eastus', 'westus2'];
 
   // Extract vCPU count from Azure VM SKU name.
   // Standard_D4s_v3→4, Standard_B2ms→2, Standard_NC6→6, Standard_M64s→64
@@ -194,71 +200,74 @@ export class AzureAdapter extends BaseAdapter {
   }
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching Azure VM pricing (${AzureAdapter.REGION} only)...`);
-    const filter = encodeURIComponent(
-      `serviceName eq 'Virtual Machines' and priceType eq 'Consumption' and armRegionName eq '${AzureAdapter.REGION}'`
-    );
-    let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
-    const allItems: any[] = [];
-
-    let pages = 0;
-    while (url && pages < 10) {
-      const response = await fetchWithRetry(url);
-      allItems.push(...(response.data.Items ?? []));
-      url = response.data.NextPageLink ?? null;
-      pages++;
-    }
-
     const records: PricingRecord[] = [];
-    // Deduplicate by SKU + OS — the API occasionally returns the same SKU
-    // under multiple meter names (spot, dev/test, etc.) within one region.
-    const seen = new Set<string>();
 
-    for (const item of allItems) {
-      if (!item.retailPrice || item.retailPrice <= 0) continue;
+    for (const region of AzureAdapter.REGIONS) {
+      console.log(`Fetching Azure VM pricing (${region})...`);
+      const filter = encodeURIComponent(
+        `serviceName eq 'Virtual Machines' and priceType eq 'Consumption' and armRegionName eq '${region}'`
+      );
+      let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
+      const allItems: any[] = [];
 
-      const sku: string = (item.armSkuName ?? '').trim();
-      if (!sku) continue;
+      let pages = 0;
+      while (url && pages < 10) {
+        const response = await fetchWithRetry(url);
+        allItems.push(...(response.data.Items ?? []));
+        url = response.data.NextPageLink ?? null;
+        pages++;
+      }
 
-      const productName: string = (item.productName ?? '').toLowerCase();
-      const os = productName.includes('windows') ? 'Windows' : 'Linux';
+      // Deduplicate by SKU + OS — the API occasionally returns the same SKU
+      // under multiple meter names (spot, dev/test, etc.) within one region.
+      const seen = new Set<string>();
 
-      // Skip dev-test pricing
-      if (productName.includes('dev/test')) continue;
+      for (const item of allItems) {
+        if (!item.retailPrice || item.retailPrice <= 0) continue;
 
-      const isSpot = productName.includes('spot') || productName.includes('low priority');
-      const purchaseOption = isSpot ? 'Spot' : 'OnDemand';
+        const sku: string = (item.armSkuName ?? '').trim();
+        if (!sku) continue;
 
-      const key = `${sku}::${os}::${purchaseOption}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
+        const productName: string = (item.productName ?? '').toLowerCase();
+        const os = productName.includes('windows') ? 'Windows' : 'Linux';
 
-      const vcpus = this.vcpuFromSku(sku);
-      const memoryGb = this.memoryFromSku(sku, vcpus);
+        // Skip dev-test pricing
+        if (productName.includes('dev/test')) continue;
 
-      records.push({
-        provider: 'azure',
-        service: 'Virtual Machines',
-        region: AzureAdapter.REGION,
-        instanceType: sku,
-        vcpus,
-        memoryGb,
-        arch: sku.toLowerCase().includes('arm64') ? 'ARM' : 'x86 64',
-        os,
-        cpuVendor: this.getCpuVendor(sku),
-        gpuCount: this.getGpuCount(sku),
-        geography: 'N. America',
-        category: this.classifyAzure(sku, vcpus, memoryGb),
-        price: item.retailPrice,
-        unit: '1 Hour',
-        dataSource: 'live_api' as const,
-        attributes: {
-          purchaseOption
-        }
-      });
+        const isSpot = productName.includes('spot') || productName.includes('low priority');
+        const purchaseOption = isSpot ? 'Spot' : 'OnDemand';
+
+        const key = `${sku}::${os}::${purchaseOption}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+
+        const vcpus = this.vcpuFromSku(sku);
+        const memoryGb = this.memoryFromSku(sku, vcpus);
+
+        records.push({
+          provider: 'azure',
+          service: 'Virtual Machines',
+          region,
+          instanceType: sku,
+          vcpus,
+          memoryGb,
+          arch: sku.toLowerCase().includes('arm64') ? 'ARM' : 'x86 64',
+          os,
+          cpuVendor: this.getCpuVendor(sku),
+          gpuCount: this.getGpuCount(sku),
+          geography: 'N. America',
+          category: this.classifyAzure(sku, vcpus, memoryGb),
+          price: item.retailPrice,
+          unit: '1 Hour',
+          dataSource: 'live_api' as const,
+          attributes: {
+            purchaseOption
+          }
+        });
+      }
     }
 
-    console.log(`✅ Fetched ${records.length} Azure VM records`);
+    console.log(`✅ Fetched ${records.length} Azure VM records across ${AzureAdapter.REGIONS.length} regions`);
     return records;
   }
 }

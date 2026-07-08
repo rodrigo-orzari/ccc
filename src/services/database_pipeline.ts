@@ -448,15 +448,30 @@ function buildAzureDbFilter(): string {
 export class AzureDBAdapter extends BaseAdapter {
   providerSlug = 'azure';
 
-  // Fetch Azure DB pricing scoped to a single representative region so we
-  // don't inflate the count by duplicating every SKU across all ~60 Azure
-  // regions. eastus is the canonical reference region for Azure pricing.
-  private static readonly REGION = 'eastus';
+  // Fetch Azure DB pricing scoped to a small set of representative regions
+  // rather than duplicating every SKU across all ~60 Azure regions. eastus
+  // stays the primary reference region; westus2 is added because Azure's
+  // older westus region prices 15-25% above eastus and a single eastus
+  // reference was silently standing in for all of "N. America" (westus2 is
+  // the modern, closely-priced West region — see the comment on
+  // AzureAdapter.REGIONS in pricing_pipeline.ts for the full reasoning).
+  private static readonly REGIONS = ['eastus', 'westus2'];
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching Azure database pricing (${AzureDBAdapter.REGION} only)...`);
+    const records: PricingRecord[] = [];
+
+    for (const region of AzureDBAdapter.REGIONS) {
+      records.push(...(await this.fetchForRegion(region)));
+    }
+
+    console.log(`✅ Fetched ${records.length} Azure database records across ${AzureDBAdapter.REGIONS.length} regions`);
+    return records;
+  }
+
+  private async fetchForRegion(region: string): Promise<PricingRecord[]> {
+    console.log(`Fetching Azure database pricing (${region})...`);
     const filter = encodeURIComponent(
-      `(${buildAzureDbFilter()}) and priceType eq 'Consumption' and armRegionName eq '${AzureDBAdapter.REGION}'`
+      `(${buildAzureDbFilter()}) and priceType eq 'Consumption' and armRegionName eq '${region}'`
     );
     let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
     const allItems: any[] = [];
@@ -470,7 +485,7 @@ export class AzureDBAdapter extends BaseAdapter {
     }
 
     const records: PricingRecord[] = [];
-    // Deduplicate by SKU within the single-region response (some services
+    // Deduplicate by SKU within this region's response (some services
     // return multiple meter rows for the same SKU, e.g. different billing
     // granularities). We keep the first (cheapest) occurrence.
     const seen = new Set<string>();
@@ -532,7 +547,7 @@ export class AzureDBAdapter extends BaseAdapter {
       records.push({
         provider: 'azure',
         service: 'Azure Databases',
-        region: AzureDBAdapter.REGION,
+        region,
         instanceType: sku,
         vcpus,
         memoryGb: engine === 'Redis' ? deriveRedisMemoryGb(sku) : deriveAzureDbMemoryGb(tier, vcpus),
@@ -556,7 +571,6 @@ export class AzureDBAdapter extends BaseAdapter {
       });
     }
 
-    console.log(`✅ Fetched ${records.length} Azure database records`);
     return records;
   }
 }

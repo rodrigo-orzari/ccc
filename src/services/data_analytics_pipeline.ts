@@ -125,12 +125,24 @@ export class SnowflakeStaticAdapter extends BaseAdapter {
 
 export class DatabricksAzureAdapter extends BaseAdapter {
   providerSlug = 'azure';
-  private static readonly REGION = 'eastus';
+  // See AzureAdapter.REGIONS in pricing_pipeline.ts for why westus2 is added
+  // alongside eastus (older westus prices 15-25% above eastus; westus2 is
+  // the modern, closely-priced West region).
+  private static readonly REGIONS = ['eastus', 'westus2'];
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching Azure Databricks pricing (${DatabricksAzureAdapter.REGION} only)...`);
+    const records: PricingRecord[] = [];
+    for (const region of DatabricksAzureAdapter.REGIONS) {
+      records.push(...(await this.fetchForRegion(region)));
+    }
+    console.log(`✅ Fetched ${records.length} Azure Databricks records across ${DatabricksAzureAdapter.REGIONS.length} regions`);
+    return records;
+  }
+
+  private async fetchForRegion(region: string): Promise<PricingRecord[]> {
+    console.log(`Fetching Azure Databricks pricing (${region})...`);
     const filter = encodeURIComponent(
-      `serviceName eq 'Azure Databricks' and priceType eq 'Consumption' and armRegionName eq '${DatabricksAzureAdapter.REGION}'`
+      `serviceName eq 'Azure Databricks' and priceType eq 'Consumption' and armRegionName eq '${region}'`
     );
     let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
     const allItems: any[] = [];
@@ -148,7 +160,7 @@ export class DatabricksAzureAdapter extends BaseAdapter {
 
     for (const item of allItems) {
       if (!item.retailPrice || item.retailPrice <= 0) continue;
-      
+
       // SKU Name often looks like "Standard Jobs Light Compute" or "Premium All-purpose Compute"
       const skuName: string = (item.skuName ?? '').trim();
       if (!skuName) continue;
@@ -168,7 +180,7 @@ export class DatabricksAzureAdapter extends BaseAdapter {
       records.push({
         provider: 'azure',
         service: 'Azure Databricks',
-        region: DatabricksAzureAdapter.REGION,
+        region,
         instanceType: skuName,
         vcpus: 1, // Represents 1 DBU
         memoryGb: 0,
@@ -176,7 +188,7 @@ export class DatabricksAzureAdapter extends BaseAdapter {
         os: 'Linux',
         cpuVendor: 'N/A',
         gpuCount: 0,
-        geography: this.getGeography(DatabricksAzureAdapter.REGION),
+        geography: this.getGeography(region),
         category: 'data_warehouse',
         price: item.retailPrice,
         unit: 'DBU',
@@ -189,7 +201,6 @@ export class DatabricksAzureAdapter extends BaseAdapter {
       });
     }
 
-    console.log(`✅ Fetched ${records.length} Azure Databricks records`);
     return records;
   }
 }
@@ -239,12 +250,23 @@ export class NativeAnalyticsStaticAdapter extends BaseAdapter {
 
 export class SynapseAzureAdapter extends BaseAdapter {
   providerSlug = 'azure';
-  private static readonly REGION = 'eastus';
+  // See AzureAdapter.REGIONS in pricing_pipeline.ts for why westus2 is added
+  // alongside eastus.
+  private static readonly REGIONS = ['eastus', 'westus2'];
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching Azure Synapse pricing (${SynapseAzureAdapter.REGION} only)...`);
+    const records: PricingRecord[] = [];
+    for (const region of SynapseAzureAdapter.REGIONS) {
+      records.push(...(await this.fetchForRegion(region)));
+    }
+    console.log(`✅ Fetched ${records.length} Azure Synapse records across ${SynapseAzureAdapter.REGIONS.length} regions`);
+    return records;
+  }
+
+  private async fetchForRegion(region: string): Promise<PricingRecord[]> {
+    console.log(`Fetching Azure Synapse pricing (${region})...`);
     const filter = encodeURIComponent(
-      `serviceName eq 'Azure Synapse Analytics' and priceType eq 'Consumption' and armRegionName eq '${SynapseAzureAdapter.REGION}'`
+      `serviceName eq 'Azure Synapse Analytics' and priceType eq 'Consumption' and armRegionName eq '${region}'`
     );
     let url: string | null = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
     const allItems: any[] = [];
@@ -262,7 +284,7 @@ export class SynapseAzureAdapter extends BaseAdapter {
 
     for (const item of allItems) {
       if (!item.retailPrice || item.retailPrice <= 0) continue;
-      
+
       const skuName: string = (item.skuName ?? '').trim();
       const productName: string = (item.productName ?? '').trim();
       if (!skuName || !productName) continue;
@@ -270,7 +292,6 @@ export class SynapseAzureAdapter extends BaseAdapter {
       // Filter for Dedicated SQL Pool (DWUs) and map to normalized units (1 Unit = 100 DWU)
       // Often skuName contains "DW100c", "DW500c"
       let tier = 'Standard';
-      let computeUnitName = '100 DWU';
       let price = item.retailPrice;
 
       if (!skuName.toLowerCase().includes('dw') && !productName.toLowerCase().includes('dw')) continue;
@@ -282,7 +303,7 @@ export class SynapseAzureAdapter extends BaseAdapter {
       records.push({
         provider: 'azure',
         service: 'Azure Synapse',
-        region: SynapseAzureAdapter.REGION,
+        region,
         instanceType: skuName,
         vcpus: 1, // Normalized to 1 Unit (equivalent to the DWU instance itself for simplicity in this demo, or we could parse DW100c to scale `vcpus`)
         memoryGb: 0,
@@ -290,9 +311,9 @@ export class SynapseAzureAdapter extends BaseAdapter {
         os: 'Linux',
         cpuVendor: 'N/A',
         gpuCount: 0,
-        geography: this.getGeography(SynapseAzureAdapter.REGION),
+        geography: this.getGeography(region),
         category: 'data_warehouse',
-        price: price,
+        price,
         unit: 'DWU Instance',
         attributes: {
           engine: 'Synapse',
@@ -303,7 +324,6 @@ export class SynapseAzureAdapter extends BaseAdapter {
       });
     }
 
-    console.log(`✅ Fetched ${records.length} Azure Synapse records`);
     return records;
   }
 }
