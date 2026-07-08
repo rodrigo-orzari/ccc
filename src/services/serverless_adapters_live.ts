@@ -260,9 +260,75 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
  * changed field names since, the try/catch + empty-result path will surface
  * as "falls back to static config" rather than a hard failure.
  */
+export const GCP_CLOUD_RUN_REGION = 'us-central1';
+
+async function findCloudRunServiceName(apiKey: string): Promise<string> {
+  let pageToken: string | undefined;
+  for (let page = 0; page < 20; page++) {
+    const url = `https://cloudbilling.googleapis.com/v1/services?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
+    const response = await axios.get(url, { timeout: 30000 });
+    const services: any[] = response.data?.services ?? [];
+    const match = services.find(s => s.displayName === 'Cloud Run');
+    if (match) return match.name; // e.g. "services/6F81-5844-456A"
+    pageToken = response.data?.nextPageToken;
+    if (!pageToken) break;
+  }
+  throw new Error('Cloud Run service not found in Billing Catalog services.list');
+}
+
+async function fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]> {
+  const skus: any[] = [];
+  let pageToken: string | undefined;
+  for (let page = 0; page < 20; page++) {
+    const url = `https://cloudbilling.googleapis.com/v1/${serviceName}/skus?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
+    const response = await axios.get(url, { timeout: 30000 });
+    skus.push(...(response.data?.skus ?? []));
+    pageToken = response.data?.nextPageToken;
+    if (!pageToken) break;
+  }
+  return skus;
+}
+
+// Finds the on-demand (non-free-tier) unit price for a SKU whose description
+// contains `descriptionSubstr`, scoped to the Cloud Run reference region.
+function findRatePerUnit(skus: any[], descriptionSubstr: string): number | null {
+  const sku = skus.find(s =>
+    (s.description ?? '').includes(descriptionSubstr) &&
+    !(s.description ?? '').toLowerCase().includes('free') &&
+    (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global')
+  );
+  if (!sku) return null;
+
+  const tiers = sku.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
+  // Take the highest-usage (last) tier — the first tier is often the free allotment at $0.
+  const rate = tiers[tiers.length - 1]?.unitPrice;
+  if (!rate) return null;
+
+  const units = parseInt(rate.units ?? '0', 10);
+  const nanos = rate.nanos ?? 0;
+  const price = units + nanos / 1e9;
+  return price > 0 ? price : null;
+}
+
+// Shared by GCPCloudRunLiveAdapter (serverless category) and
+// GCPContainersLiveAdapter (containers category) — both need the same
+// per-vCPU-second / per-GiB-second Cloud Run rates, just applied to a
+// different set of (vCPU, memory) configurations.
+export async function fetchGcpCloudRunRates(apiKey: string): Promise<{ cpuRate: number; memRate: number }> {
+  const serviceName = await findCloudRunServiceName(apiKey);
+  const skus = await fetchAllSkus(serviceName, apiKey);
+
+  const cpuRate = findRatePerUnit(skus, 'CPU Allocation Time');
+  const memRate = findRatePerUnit(skus, 'Memory Allocation Time');
+  if (cpuRate == null || memRate == null) {
+    throw new Error(`Could not find both CPU and Memory Allocation Time SKUs (cpuRate=${cpuRate}, memRate=${memRate})`);
+  }
+  return { cpuRate, memRate };
+}
+
 export class GCPCloudRunLiveAdapter extends BaseAdapter {
   providerSlug = 'gcp';
-  private static readonly REGION = 'us-central1';
+  private static readonly REGION = GCP_CLOUD_RUN_REGION;
   private readonly GCP_CLOUD_RUN_LANGUAGES = ['Python', 'Node', 'Go', 'Java', 'C#', 'PHP', 'Ruby', 'Any'];
 
   // Same (vCPU, memoryGB) combinations as the static config (gcp_serverless.ts).
@@ -286,14 +352,7 @@ export class GCPCloudRunLiveAdapter extends BaseAdapter {
     }
 
     try {
-      const serviceName = await this.findCloudRunServiceName(apiKey);
-      const skus = await this.fetchAllSkus(serviceName, apiKey);
-
-      const cpuRate = this.findRatePerUnit(skus, 'CPU Allocation Time');
-      const memRate = this.findRatePerUnit(skus, 'Memory Allocation Time');
-      if (cpuRate == null || memRate == null) {
-        throw new Error(`Could not find both CPU and Memory Allocation Time SKUs (cpuRate=${cpuRate}, memRate=${memRate})`);
-      }
+      const { cpuRate, memRate } = await fetchGcpCloudRunRates(apiKey);
 
       const records: PricingRecord[] = this.CONFIGS.map(({ vcpus, memoryGb }) => ({
         provider: 'gcp',
@@ -337,54 +396,6 @@ export class GCPCloudRunLiveAdapter extends BaseAdapter {
       console.warn(`⚠️  GCP Cloud Run live pricing fetch failed (${err.message}), falling back to static config.`);
       return [];
     }
-  }
-
-  private async findCloudRunServiceName(apiKey: string): Promise<string> {
-    let pageToken: string | undefined;
-    for (let page = 0; page < 20; page++) {
-      const url = `https://cloudbilling.googleapis.com/v1/services?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
-      const response = await axios.get(url, { timeout: 30000 });
-      const services: any[] = response.data?.services ?? [];
-      const match = services.find(s => s.displayName === 'Cloud Run');
-      if (match) return match.name; // e.g. "services/6F81-5844-456A"
-      pageToken = response.data?.nextPageToken;
-      if (!pageToken) break;
-    }
-    throw new Error('Cloud Run service not found in Billing Catalog services.list');
-  }
-
-  private async fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]> {
-    const skus: any[] = [];
-    let pageToken: string | undefined;
-    for (let page = 0; page < 20; page++) {
-      const url = `https://cloudbilling.googleapis.com/v1/${serviceName}/skus?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
-      const response = await axios.get(url, { timeout: 30000 });
-      skus.push(...(response.data?.skus ?? []));
-      pageToken = response.data?.nextPageToken;
-      if (!pageToken) break;
-    }
-    return skus;
-  }
-
-  // Finds the on-demand (non-free-tier) unit price for a SKU whose
-  // description contains `descriptionSubstr`, scoped to our reference region.
-  private findRatePerUnit(skus: any[], descriptionSubstr: string): number | null {
-    const sku = skus.find(s =>
-      (s.description ?? '').includes(descriptionSubstr) &&
-      !(s.description ?? '').toLowerCase().includes('free') &&
-      (s.serviceRegions ?? []).some((r: string) => r === GCPCloudRunLiveAdapter.REGION || r === 'global')
-    );
-    if (!sku) return null;
-
-    const tiers = sku.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
-    // Take the highest-usage (last) tier — the first tier is often the free allotment at $0.
-    const rate = tiers[tiers.length - 1]?.unitPrice;
-    if (!rate) return null;
-
-    const units = parseInt(rate.units ?? '0', 10);
-    const nanos = rate.nanos ?? 0;
-    const price = units + nanos / 1e9;
-    return price > 0 ? price : null;
   }
 }
 

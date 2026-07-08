@@ -453,7 +453,7 @@ const ORACLE_GPU_MODELS: { prefix: string; model: string; exclude?: string[] }[]
   { prefix: 'BM.GPU.H200.', model: 'h200' },
 ];
 
-function findOracleFlexRates(catalog: OracleProduct[], familyToken: string): { ocpuRate: number; memRate: number } | null {
+export function findOracleFlexRates(catalog: OracleProduct[], familyToken: string): { ocpuRate: number; memRate: number } | null {
   const ocpuRate = findPrice(catalog, item => nameIncludes(item, 'compute', 'standard', familyToken, 'ocpu'));
   const memRate = findPrice(catalog, item => nameIncludes(item, 'compute', 'standard', familyToken, 'memory'));
   if (ocpuRate == null || memRate == null) return null;
