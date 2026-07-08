@@ -184,6 +184,13 @@ export class DigitalOceanServerlessAdapter extends BaseAdapter {
   }
 }
 
+// Not wired to the live OCI price list (oracle_price_list.ts): the feed's
+// "Oracle Functions - Execution Time" and "- Invocations" line items both
+// report a PAY_AS_YOU_GO value of $0, which looks like a free-tier/promo
+// artifact rather than the real metered rate — writing that would silently
+// make Oracle Functions look free in the comparison table, which is worse
+// than the (accurate, documented) static rate. Revisit if Oracle's feed
+// starts returning a non-zero value for these SKUs.
 export class OracleServerlessAdapter extends BaseAdapter {
   providerSlug = 'oracle';
 

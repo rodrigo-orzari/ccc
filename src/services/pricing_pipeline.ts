@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
 import { ORACLE_INSTANCES, ORACLE_REGION, ORACLE_GEOGRAPHY } from '../config/oracle_instances';
+import { fetchOracleCatalog, findPrice, nameIncludes, OracleProduct } from './oracle_price_list';
 import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } from '../config/digitalocean_instances.ts';
 import { ALIBABA_INSTANCES, ALIBABA_REGION, ALIBABA_GEOGRAPHY } from '../config/alibaba_instances.ts';
 import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.ts';
@@ -427,14 +428,107 @@ export class GCPAdapter extends BaseAdapter {
   }
 }
 
+// Oracle bills Flex VM shapes as separate OCPU-hour + GB-hour metered rates
+// rather than one flat instance price (see oracle_price_list.ts). We keep the
+// same representative shape sizes as the static config (that list is what
+// drives which (OCPU, GB) combinations show up in the comparison table) but
+// recompute each one's price from live per-unit rates when we can identify
+// them unambiguously in the OCI price feed. Families whose live naming is too
+// ambiguous to match safely (Standard3, Optimized3, Bare Metal, HPC) keep
+// their static price — this is a per-record fallback, not per-provider, so a
+// live-catalog hiccup for one family doesn't take down the rest.
+const ORACLE_FLEX_FAMILIES: { prefix: string; familyToken: string }[] = [
+  { prefix: 'VM.Standard.E4.Flex', familyToken: 'e4' },
+  { prefix: 'VM.Standard.E5.Flex', familyToken: 'e5' },
+  { prefix: 'VM.Standard.A2.Flex', familyToken: 'a2' },
+];
+
+const ORACLE_GPU_MODELS: { prefix: string; model: string; exclude?: string[] }[] = [
+  { prefix: 'VM.GPU.A10.', model: 'a10', exclude: ['a100'] },
+  { prefix: 'BM.GPU.A10.', model: 'a10', exclude: ['a100'] },
+  { prefix: 'BM.GPU.L40S.', model: 'l40s' },
+  { prefix: 'BM.GPU.A100-v2.', model: 'a100 - v2' },
+  { prefix: 'BM.GPU.H100.', model: 'h100' },
+  { prefix: 'BM.GPU.H200.', model: 'h200' },
+];
+
+function findOracleFlexRates(catalog: OracleProduct[], familyToken: string): { ocpuRate: number; memRate: number } | null {
+  const ocpuRate = findPrice(catalog, item => nameIncludes(item, 'compute', 'standard', familyToken, 'ocpu'));
+  const memRate = findPrice(catalog, item => nameIncludes(item, 'compute', 'standard', familyToken, 'memory'));
+  if (ocpuRate == null || memRate == null) return null;
+  return { ocpuRate, memRate };
+}
+
+function findOracleGpuRate(catalog: OracleProduct[], model: string, exclude: string[] = []): number | null {
+  // Match `model` as a whole token (not a substring of a longer model name
+  // like "a10" inside "a100", or "h100" inside "h100t") by requiring
+  // non-alphanumeric boundaries on both sides.
+  const modelRe = new RegExp(`(^|[^a-z0-9])${model.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}([^a-z0-9]|$)`);
+  return findPrice(catalog, item => {
+    const dn = item.displayName.toLowerCase();
+    if (!dn.includes('gpu')) return false;
+    if (dn.includes('nvidia ai enterprise')) return false;
+    if (dn.includes('bare metal gpu standard') || dn.includes('vm gpu standard')) return false;
+    if (dn.includes('vmware') || dn.includes('commit')) return false;
+    if (!modelRe.test(dn)) return false;
+    return !exclude.some(e => dn.includes(e));
+  });
+}
+
 export class OracleAdapter extends BaseAdapter {
   providerSlug = 'oracle';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching Oracle pricing (from src/config/oracle_instances.ts, ${ORACLE_INSTANCES.length} entries)...`);
-    return ORACLE_INSTANCES.map(inst => {
+    let catalog: OracleProduct[] | null = null;
+    try {
+      catalog = await fetchOracleCatalog();
+      console.log(`Fetched OCI live price list (${catalog.length} SKUs) — recomputing Flex/GPU shape prices where possible.`);
+    } catch (err: any) {
+      console.warn(`⚠️  OCI live price list fetch failed (${err.message}), all Oracle compute prices will use static config.`);
+    }
+
+    // Pre-resolve per-unit rates once per pipeline run instead of per-instance.
+    const flexRates = new Map<string, { ocpuRate: number; memRate: number }>();
+    const gpuRates = new Map<string, number>();
+    if (catalog) {
+      for (const f of ORACLE_FLEX_FAMILIES) {
+        const rates = findOracleFlexRates(catalog, f.familyToken);
+        if (rates) flexRates.set(f.prefix, rates);
+      }
+      for (const g of ORACLE_GPU_MODELS) {
+        const rate = findOracleGpuRate(catalog, g.model, g.exclude);
+        if (rate != null) gpuRates.set(g.prefix, rate);
+      }
+    }
+
+    let liveCount = 0;
+    const records = ORACLE_INSTANCES.map(inst => {
       const gpuCount = inst.gpuCount ?? 0;
       const isHpc = inst.type.toLowerCase().includes('hpc');
+
+      let price = inst.price;
+      let dataSource: 'live_api' | 'static_config' = 'static_config';
+
+      const flexFamily = ORACLE_FLEX_FAMILIES.find(f => inst.type.startsWith(f.prefix));
+      const ocpuMatch = inst.type.match(/\((\d+)\s*OCPU/i);
+      if (flexFamily && ocpuMatch) {
+        const rates = flexRates.get(flexFamily.prefix);
+        if (rates) {
+          price = rates.ocpuRate * parseInt(ocpuMatch[1], 10) + rates.memRate * inst.memory;
+          dataSource = 'live_api';
+        }
+      } else if (gpuCount > 0) {
+        const gpuFamily = ORACLE_GPU_MODELS.find(g => inst.type.startsWith(g.prefix));
+        if (gpuFamily) {
+          const rate = gpuRates.get(gpuFamily.prefix);
+          if (rate != null) {
+            price = rate * gpuCount;
+            dataSource = 'live_api';
+          }
+        }
+      }
+      if (dataSource === 'live_api') liveCount++;
+
       return {
         provider: 'oracle',
         service: 'OCI Compute',
@@ -448,11 +542,14 @@ export class OracleAdapter extends BaseAdapter {
         gpuCount,
         geography: ORACLE_GEOGRAPHY,
         category: isHpc ? 'HPC' : this.categoryByRatio(inst.vcpus, inst.memory),
-        price: inst.price,
+        price,
         unit: 'Hour',
-        dataSource: 'static_config' as const,
+        dataSource,
       };
     });
+
+    console.log(`✅ Oracle compute: ${liveCount}/${records.length} records priced from live OCI rates, ${records.length - liveCount} from static config.`);
+    return records;
   }
 }
 

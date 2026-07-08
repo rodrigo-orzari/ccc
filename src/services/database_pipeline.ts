@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { Sql } from 'postgres';
 import { BaseAdapter, PricingRecord, PricingPipeline } from './pricing_pipeline';
+import { fetchOracleCatalog, findPrice } from './oracle_price_list';
 import {
   GCP_CLOUD_SQL_INSTANCES,
   GCP_CLOUD_SQL_REGION,
@@ -157,44 +158,74 @@ export class GCPCloudSQLAdapter extends BaseAdapter {
   }
 }
 
-// ─── Oracle Autonomous Database (static config) ────────────────────────────────
+// ─── Oracle Autonomous Database (live OCI price list, static fallback) ─────────
+
+// The OCI price list (oracle_price_list.ts) has an exact, unambiguous match
+// for both workloads under Oracle's current "Autonomous AI" naming — verified
+// to equal the existing static $0.336/ECPU-hr exactly, so this is a like-for-like
+// swap to a self-updating source, not a guess.
+const ORACLE_AUTONOMOUS_LIVE_NAMES: Record<string, string> = {
+  ATP: 'oracle autonomous ai transaction processing - ecpu',
+  ADW: 'oracle autonomous ai lakehouse - ecpu',
+};
 
 export class OracleAutonomousAdapter extends BaseAdapter {
   providerSlug = 'oracle';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`Fetching Oracle Autonomous DB pricing (${ORACLE_AUTONOMOUS_INSTANCES.length} entries from static config)...`);
-    return ORACLE_AUTONOMOUS_INSTANCES.map(inst => ({
-      provider: 'oracle',
-      service: 'Autonomous Database',
-      region: ORACLE_AUTONOMOUS_REGION,
-      instanceType: inst.type,
-      vcpus: 0,
-      memoryGb: 0,
-      arch: 'x86 64',
-      os: '',
-      cpuVendor: 'Intel',
-      gpuCount: 0,
-      geography: ORACLE_AUTONOMOUS_GEOGRAPHY,
-      category: 'Relational',
-      price: inst.price,
-      unit: 'ECPU-Hour',
-      dataSource: 'static_config' as const,
-      attributes: {
-        engine: 'Oracle DB',
-        engine_version: '19c',
-        deployment_type: 'Serverless',
-        ha_mode: 'Multi AZ',
-        storage_type: 'SSD',
-        workload: inst.workload,
-        tier: deriveTier('oracle', inst.type),
-      },
-    }));
+    let liveRates = new Map<string, number>();
+    try {
+      const catalog = await fetchOracleCatalog();
+      for (const [workload, exactName] of Object.entries(ORACLE_AUTONOMOUS_LIVE_NAMES)) {
+        const rate = findPrice(catalog, item => item.displayName.toLowerCase() === exactName);
+        if (rate != null) liveRates.set(workload, rate);
+      }
+    } catch (err: any) {
+      console.warn(`⚠️  OCI live price list fetch failed for Autonomous DB (${err.message}), using static config.`);
+    }
+
+    console.log(`Fetching Oracle Autonomous DB pricing (${liveRates.size}/${ORACLE_AUTONOMOUS_INSTANCES.length} from live OCI rates)...`);
+    return ORACLE_AUTONOMOUS_INSTANCES.map(inst => {
+      const liveRate = liveRates.get(inst.workload);
+      return {
+        provider: 'oracle',
+        service: 'Autonomous Database',
+        region: ORACLE_AUTONOMOUS_REGION,
+        instanceType: inst.type,
+        vcpus: 0,
+        memoryGb: 0,
+        arch: 'x86 64',
+        os: '',
+        cpuVendor: 'Intel',
+        gpuCount: 0,
+        geography: ORACLE_AUTONOMOUS_GEOGRAPHY,
+        category: 'Relational',
+        price: liveRate ?? inst.price,
+        unit: 'ECPU-Hour',
+        dataSource: (liveRate != null ? 'live_api' : 'static_config') as 'live_api' | 'static_config',
+        attributes: {
+          engine: 'Oracle DB',
+          engine_version: '19c',
+          deployment_type: 'Serverless',
+          ha_mode: 'Multi AZ',
+          storage_type: 'SSD',
+          workload: inst.workload,
+          tier: deriveTier('oracle', inst.type),
+        },
+      };
+    });
   }
 }
 
 // ─── Oracle MySQL HeatWave (static config) ────────────────────────────────────
 
+// Not wired to the live OCI price list: the feed's plain "MySQL Database -
+// ECPU" SKU ($0.0366/ECPU-hr) prices roughly 5x below our static HeatWave
+// estimate, and a separate "Database - MySQL HeatWave on AWS" category also
+// exists — it's unclear whether "MySQL Database - ECPU" is base MySQL
+// (without the HeatWave analytics engine) or HeatWave itself, and mapping the
+// wrong one would silently under-price this row. Needs the exact HeatWave SKU
+// confirmed against oracle.com before wiring live.
 export class OracleMySQLHeatWaveAdapter extends BaseAdapter {
   providerSlug = 'oracle';
 
@@ -230,6 +261,12 @@ export class OracleMySQLHeatWaveAdapter extends BaseAdapter {
 
 // ─── Oracle PostgreSQL (static config) ───────────────────────────────────────
 
+// Not wired to the live OCI price list: our static price already bundles an
+// estimated managed-service fee on top of raw compute (see comment on
+// ORACLE_POSTGRESQL_INSTANCES), while the feed's "Database with PostgreSQL -
+// X86" SKU ($0.098/OCPU-hr) may be base compute only. Swapping in the raw
+// live rate could silently *remove* that markup and under-price this row.
+// Needs the fee structure confirmed against oracle.com before wiring live.
 export class OraclePostgreSQLAdapter extends BaseAdapter {
   providerSlug = 'oracle';
 
