@@ -745,6 +745,14 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
       );
 
       const response = await axios.get(url, { timeout: 15000 });
+
+      // Alibaba returns 400 on any request error. Log response to diagnose.
+      if (response.status !== 200 || response.data?.Code) {
+        const errorCode = response.data?.Code ?? 'UNKNOWN';
+        const errorMsg = response.data?.Message ?? 'Unknown error';
+        throw new Error(`Alibaba API error ${errorCode}: ${errorMsg}`);
+      }
+
       const tradePrice = response.data?.Data?.TradePrice ?? response.data?.Data?.ModuleDetails?.ModuleDetail?.[0]?.TradePrice;
       const price = typeof tradePrice === 'number' ? tradePrice : parseFloat(tradePrice);
       if (!price || isNaN(price) || price <= 0) continue;

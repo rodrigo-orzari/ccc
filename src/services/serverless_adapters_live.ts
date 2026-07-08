@@ -291,23 +291,57 @@ async function fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]>
 
 // Finds the on-demand (non-free-tier) unit price for a SKU whose description
 // contains `descriptionSubstr`, scoped to the Cloud Run reference region.
+// Tries multiple pattern variations to handle API changes.
 function findRatePerUnit(skus: any[], descriptionSubstr: string): number | null {
-  const sku = skus.find(s =>
-    (s.description ?? '').includes(descriptionSubstr) &&
-    !(s.description ?? '').toLowerCase().includes('free') &&
-    (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global')
-  );
-  if (!sku) return null;
+  // Try multiple pattern variations for robustness against API changes
+  const patterns = [
+    descriptionSubstr,
+    descriptionSubstr.toLowerCase(),
+    descriptionSubstr.replace(' Allocation', ''),
+    descriptionSubstr.replace(/Allocation Time/, 'Time'),
+  ];
 
-  const tiers = sku.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
-  // Take the highest-usage (last) tier — the first tier is often the free allotment at $0.
-  const rate = tiers[tiers.length - 1]?.unitPrice;
-  if (!rate) return null;
+  for (const pattern of patterns) {
+    const sku = skus.find(s => {
+      const desc = (s.description ?? '').toLowerCase();
+      const matchesPattern = desc.includes(pattern.toLowerCase());
+      const isNotFree = !desc.includes('free');
+      const isInRegion = (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global');
+      return matchesPattern && isNotFree && isInRegion;
+    });
 
-  const units = parseInt(rate.units ?? '0', 10);
-  const nanos = rate.nanos ?? 0;
-  const price = units + nanos / 1e9;
-  return price > 0 ? price : null;
+    if (sku) {
+      const tiers = sku.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
+      const rate = tiers[tiers.length - 1]?.unitPrice;
+      if (!rate) continue;
+
+      const units = parseInt(rate.units ?? '0', 10);
+      const nanos = rate.nanos ?? 0;
+      const price = units + nanos / 1e9;
+      if (price > 0) return price;
+    }
+  }
+
+  // Last-resort: look for ANY SKU with 'cloud run' + 'cpu' or 'memory'
+  const isCpu = descriptionSubstr.toLowerCase().includes('cpu');
+  const fallbackKeyword = isCpu ? 'cpu' : 'memory';
+  const fallbackSku = skus.find(s => {
+    const desc = (s.description ?? '').toLowerCase();
+    return desc.includes('cloud run') && desc.includes(fallbackKeyword) && !desc.includes('free') &&
+           (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global');
+  });
+
+  if (fallbackSku) {
+    const tiers = fallbackSku.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
+    const rate = tiers[tiers.length - 1]?.unitPrice;
+    if (!rate) return null;
+    const units = parseInt(rate.units ?? '0', 10);
+    const nanos = rate.nanos ?? 0;
+    const price = units + nanos / 1e9;
+    return price > 0 ? price : null;
+  }
+
+  return null;
 }
 
 // Shared by GCPCloudRunLiveAdapter (serverless category) and
@@ -317,6 +351,13 @@ function findRatePerUnit(skus: any[], descriptionSubstr: string): number | null 
 export async function fetchGcpCloudRunRates(apiKey: string): Promise<{ cpuRate: number; memRate: number }> {
   const serviceName = await findCloudRunServiceName(apiKey);
   const skus = await fetchAllSkus(serviceName, apiKey);
+
+  // Debug: log sample SKU descriptions for diagnostics
+  const cloudRunSkus = skus.filter(s => (s.description ?? '').includes('Cloud Run'));
+  if (cloudRunSkus.length > 0) {
+    console.log(`🔍 Found ${cloudRunSkus.length} Cloud Run SKUs. Sample descriptions:`);
+    cloudRunSkus.slice(0, 5).forEach(s => console.log(`   - ${s.description}`));
+  }
 
   const cpuRate = findRatePerUnit(skus, 'CPU Allocation Time');
   const memRate = findRatePerUnit(skus, 'Memory Allocation Time');
