@@ -162,6 +162,8 @@ const FilterSection = ({
           <button
             key={option}
             onClick={() => !isDisabled && onToggle(option)}
+            onDoubleClick={() => !isDisabled && onSetAll([option])}
+            title="Click to toggle · Double-click to isolate"
             disabled={isDisabled}
             className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
               selected.includes(option)
@@ -243,6 +245,8 @@ const GroupedFilterSection = ({
                   <button
                     key={option}
                     onClick={() => !isDisabled && onToggle(option)}
+                    onDoubleClick={() => !isDisabled && onSetAll([option])}
+                    title="Click to toggle · Double-click to isolate"
                     disabled={isDisabled}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       selected.includes(option)
@@ -667,7 +671,7 @@ export default function FilterSidebar({
       <div className="p-4 space-y-8">
         {/* Category intro — explains what this product category page compares */}
         <p className="text-[11px] leading-relaxed text-[#737373] dark:text-[#a3a3a3]">
-          {PRODUCT_TYPE_DESCRIPTIONS[activeProductType]}
+          {PRODUCT_TYPE_DESCRIPTIONS[activeProductType]} Double-click to isolate one.
         </p>
 
         {/* Providers Section */}

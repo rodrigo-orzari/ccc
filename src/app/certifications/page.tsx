@@ -30,40 +30,75 @@ const PROVIDERS_FOR_CERT: Record<string, Set<string>> = Object.fromEntries(
   ]),
 );
 
-function toggle(set: Set<string>, value: string): Set<string> {
-  const next = new Set(set);
-  if (next.has(value)) next.delete(value);
-  else next.add(value);
-  return next;
-}
+
 
 export default function CertificationsPage() {
-  const [selProviders, setSelProviders] = useState<Set<string>>(new Set());
-  const [selGeos, setSelGeos] = useState<Set<string>>(new Set());
-  const [selCategories, setSelCategories] = useState<Set<string>>(new Set());
+  const [selProviders, setSelProviders] = useState<Set<string>>(new Set(COMPLIANCE_PROVIDERS.map(p => p.id)));
+  const [selGeos, setSelGeos] = useState<Set<string>>(new Set(['Global', ...GEOGRAPHIES]));
+  const [selCategories, setSelCategories] = useState<Set<string>>(new Set(CATEGORY_ORDER));
   const [searchQuery, setSearchQuery] = useState('');
+
+  const toggleProvider = (id: string) => {
+    setSelProviders((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const isolateProvider = (id: string) => {
+    setSelProviders(new Set([id]));
+  };
+
+  const toggleGeo = (geo: string) => {
+    setSelGeos((prev) => {
+      const next = new Set(prev);
+      if (next.has(geo)) next.delete(geo);
+      else next.add(geo);
+      return next;
+    });
+  };
+
+  const isolateGeo = (geo: string) => {
+    setSelGeos(new Set([geo]));
+  };
+
+  const toggleCategory = (cat: string) => {
+    setSelCategories((prev) => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
+      return next;
+    });
+  };
+
+  const isolateCategory = (cat: string) => {
+    setSelCategories(new Set([cat]));
+  };
 
   const visibleCerts = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     return CERTIFICATIONS.filter((c) => {
-      if (selCategories.size > 0 && !selCategories.has(c.category)) return false;
-      if (selGeos.size > 0 && c.scope !== 'Global' && !selGeos.has(c.scope)) return false;
-      if (selProviders.size > 0) {
-        const held = PROVIDERS_FOR_CERT[c.id];
-        if (![...selProviders].some((p) => held.has(p))) return false;
-      }
+      if (!selCategories.has(c.category)) return false;
+      if (!selGeos.has(c.scope)) return false;
+      const held = PROVIDERS_FOR_CERT[c.id];
+      if (![...selProviders].some((p) => held.has(p))) return false;
       if (q && !c.name.toLowerCase().includes(q) && !c.description.toLowerCase().includes(q)) return false;
       return true;
     }).sort((a, b) => CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category));
   }, [selProviders, selGeos, selCategories, searchQuery]);
 
   const anyFilterActive =
-    selProviders.size > 0 || selGeos.size > 0 || selCategories.size > 0 || searchQuery.trim().length > 0;
+    selProviders.size < COMPLIANCE_PROVIDERS.length ||
+    selGeos.size < (GEOGRAPHIES.length + 1) ||
+    selCategories.size < CATEGORY_ORDER.length ||
+    searchQuery.trim().length > 0;
 
   const clearAll = () => {
-    setSelProviders(new Set());
-    setSelGeos(new Set());
-    setSelCategories(new Set());
+    setSelProviders(new Set(COMPLIANCE_PROVIDERS.map(p => p.id)));
+    setSelGeos(new Set(['Global', ...GEOGRAPHIES]));
+    setSelCategories(new Set(CATEGORY_ORDER));
     setSearchQuery('');
   };
 
@@ -156,8 +191,9 @@ export default function CertificationsPage() {
                 return (
                   <button
                     key={p.id}
-                    onClick={() => setSelProviders((s) => toggle(s, p.id))}
-                    title={`Toggle ${p.name}`}
+                    onClick={() => toggleProvider(p.id)}
+                    onDoubleClick={() => isolateProvider(p.id)}
+                    title={`Click to toggle · Double-click to show only ${p.name}`}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
                       active
                         ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
@@ -178,7 +214,9 @@ export default function CertificationsPage() {
                 return (
                   <button
                     key={geo}
-                    onClick={() => setSelGeos((s) => toggle(s, geo))}
+                    onClick={() => toggleGeo(geo)}
+                    onDoubleClick={() => isolateGeo(geo)}
+                    title={`Click to toggle · Double-click to show only ${geo}`}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       active
                         ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
@@ -199,7 +237,9 @@ export default function CertificationsPage() {
                 return (
                   <button
                     key={cat}
-                    onClick={() => setSelCategories((s) => toggle(s, cat))}
+                    onClick={() => toggleCategory(cat)}
+                    onDoubleClick={() => isolateCategory(cat)}
+                    title={`Click to toggle · Double-click to show only ${cat}`}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
                       active
                         ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'

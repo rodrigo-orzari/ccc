@@ -285,7 +285,7 @@ export default function DatacentersPage() {
             <div className="mb-6">
               <h1 className="text-3xl font-bold mb-1 text-[var(--text)]">Cloud Infrastructure</h1>
               <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4">
-                Compare data center presence, availability zones, and global coverage across providers. Click any row to expand the full region list with Availability Zone counts.
+                Compare data center presence, availability zones, and global coverage across providers.
               </p>
             </div>
 
@@ -336,10 +336,13 @@ export default function DatacentersPage() {
 
             {/* Infrastructure Overview */}
             <div id="infra-table" className="scroll-mt-6">
-              <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center justify-between mb-1">
                 <h2 className="text-xl font-bold text-[var(--text)]">Infrastructure Overview</h2>
                 <ViewToggle view={infraView} onChange={setInfraView} />
               </div>
+              <p className="text-sm text-[var(--muted)] mb-3">
+                Click any row to expand the full region list with Availability Zone counts.
+              </p>
               {/* Legend */}
               <div className="flex items-center gap-5 mb-4">
                 <div className="flex items-center gap-2 text-[11px] text-[var(--muted)]">
