@@ -16,7 +16,7 @@ Hosted on DigitalOcean App Platform. If you're creating a new account, our refer
 
 ---
 
-## What It Does
+## 🎯 What It Does
 
 Cloud providers structure, name, and publish pricing data in completely different formats. Finding the cheapest region, instance type, or architecture for a specific workload requires browsing multiple price calculators or maintaining custom spreadsheets.
 
@@ -31,22 +31,24 @@ CCC solves this by:
 
 ---
 
-## Product Categories
+## 🗂️ Product Categories
 
 | Category | Description | Live API | Static Fallback | Regional Coverage |
 |---|---|---|---|---|
-| Virtual Machines | General compute instances | AWS, Azure, GCP, Oracle, DO | All 9 providers | By provider (native regions) |
-| Databases | Managed relational, NoSQL, in-memory, caching | AWS, Azure | All 9 providers | By provider (native regions) |
-| Serverless | Functions, API Gateways, event brokers | AWS Lambda | All 9 providers | By provider (native regions) |
-| Containers | Managed Kubernetes, container instances | — | All 9 providers | By provider (native regions) |
-| Networking | Load balancers, VPN, CDN, data transfer | — | All 9 providers | By provider (native regions) |
-| Data & Analytics | Data warehouses, streaming, Spark/Databricks | — | All 9 providers | Regional multipliers (1.00–1.32) |
-| AI | Foundation models, inference endpoints | — | All 9 providers | By provider (native regions) |
-| Storage | Object, block, file, archive | — | All 9 providers | By provider (native regions) |
-| App Hosting | PaaS platforms (App Engine, App Runner, etc.) | — | All 9 providers | By provider (native regions) |
-| Workloads | Pre-built templates for multi-service architectures | — | Derived | Multi-cloud cost simulation |
+| 🖥️ Virtual Machines | General compute instances | AWS, Azure, GCP, Oracle, DO | All 9 providers | By provider (native regions) |
+| 🗄️ Databases | Managed relational, NoSQL, in-memory, caching | AWS, Azure | All 9 providers | By provider (native regions) |
+| ⚡ Serverless | Functions, API Gateways, event brokers | AWS Lambda | All 9 providers | By provider (native regions) |
+| 📦 Containers | Managed Kubernetes, container instances | — | All 9 providers | By provider (native regions) |
+| 🌐 Networking | Load balancers, VPN, CDN, data transfer | — | All 9 providers | By provider (native regions) |
+| 📊 Data & Analytics | Data warehouses, streaming, Spark/Databricks | — | All 9 providers | Regional multipliers (1.00–1.32) |
+| 🧠 AI | Foundation models, inference endpoints | — | All 9 providers | By provider (native regions) |
+| 💾 Storage | Object, block, file, archive | — | All 9 providers | By provider (native regions) |
+| 🚀 App Hosting | PaaS platforms (App Engine, App Runner, etc.) | — | All 9 providers | By provider (native regions) |
+| 📦 Workloads | Pre-built templates for multi-service architectures | — | Derived | Multi-cloud cost simulation |
+| 📜 Certifications | Provider compliance & regulation matrix (not priced) | — | Curated | By standard jurisdiction |
+| 🏢 Datacenters | Global region & infrastructure footprint (not priced) | — | Curated | Worldwide |
 
-### Workload Templates
+### 📦 Workload Templates
 
 Pre-built cost estimation templates that model complete multi-service architectures across all providers. Each template lets you adjust key parameters (concurrency, data volume, retention, etc.) and see total cost impact across compute, storage, networking, and data services.
 
@@ -56,7 +58,7 @@ Available templates:
 - **Compliance-Ready Database** — Managed relational DB with HA, automated backups, compliance tiers
 - **Smart Manufacturing / Industrial IoT** — Edge gateways, stream processing, hot metrics storage, analytics warehouse, cold archive, predictive maintenance AI
 
-### Regional Pricing for Data & Analytics
+### 📊 Regional Pricing for Data & Analytics
 
 The **Data & Analytics** category includes regional price multipliers to reflect geographic cost variations across providers. A single SKU (e.g., Redshift RA3 in US) is replicated across regions with scaling factors:
 
@@ -68,7 +70,7 @@ The **Data & Analytics** category includes regional price multipliers to reflect
 
 Multipliers are approximate public regional pricing deltas. Oracle and DigitalOcean publish uniform global pricing (mult 1.00 everywhere). See `src/config/analytics_regions.ts` for per-provider region mappings.
 
-### Filter Architecture
+### 🎛️ Filter Architecture
 
 Filters dynamically adapt per product category to reduce clutter and highlight relevant options:
 
@@ -81,7 +83,7 @@ Filters dynamically adapt per product category to reduce clutter and highlight r
 
 ---
 
-## Stack
+## 🧱 Stack
 
 | Layer | Technology |
 |---|---|
@@ -97,7 +99,7 @@ Filters dynamically adapt per product category to reduce clutter and highlight r
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js 18+
@@ -157,7 +159,7 @@ Navigate to [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## npm Scripts
+## ⚙️ npm Scripts
 
 | Command | Description |
 |---|---|
@@ -172,7 +174,7 @@ Navigate to [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## Repository Structure
+## 📁 Repository Structure
 
 ```
 ccc/
@@ -318,7 +320,7 @@ ccc/
 
 ---
 
-## Database Schema
+## 🗄️ Database Schema
 
 ```sql
 providers       -- slug ('aws','azure','gcp','oracle','digitalocean','alibaba','cloudflare','vultr','hetzner'), name
@@ -342,7 +344,7 @@ Schema migrations run automatically on every `POST /api/admin/init-db` call via 
 
 ---
 
-## Admin API Endpoints
+## 🔐 Admin API Endpoints
 
 All `/api/admin/*` endpoints require `X-Admin-Token: <ADMIN_API_KEY>` header.
 
@@ -366,7 +368,7 @@ All `/api/admin/*` endpoints require `X-Admin-Token: <ADMIN_API_KEY>` header.
 
 ---
 
-## Key Design Decisions
+## 🧠 Key Design Decisions
 
 **Why no ORM?** The pipelines use raw `postgres.js` queries for bulk inserts and `sql.unsafe()` for dynamic filter building. Query params are always passed separately (no interpolation) to prevent SQL injection.
 
@@ -388,9 +390,9 @@ All `/api/admin/*` endpoints require `X-Admin-Token: <ADMIN_API_KEY>` header.
 
 ---
 
-## Status & Monitoring
+## 📈 Status & Monitoring
 
-### Status Page (`/status`)
+### 🩺 Status Page (`/status`)
 Real-time visibility into pipeline health and data freshness. Shows:
 - Last ingestion timestamp for each product category
 - Record counts per provider and category
@@ -399,7 +401,7 @@ Real-time visibility into pipeline health and data freshness. Shows:
 
 Access at `/status` or via the main navigation footer.
 
-### Health Check (`/api/health`)
+### 💓 Health Check (`/api/health`)
 Lightweight endpoint that returns JSON:
 ```json
 {
@@ -414,7 +416,7 @@ Lightweight endpoint that returns JSON:
 ```
 Use this to monitor data freshness in external dashboards or alerting systems.
 
-### Datacenters Page (`/docs`)
+### 🏢 Datacenters Page (`/datacenters`)
 Infrastructure intelligence independent of pricing. Shows:
 - Cloud provider geographic footprint (regions, edges, data centers)
 - Government cloud offerings and compliance posture
@@ -423,14 +425,14 @@ Infrastructure intelligence independent of pricing. Shows:
 
 No pricing on this page — pure infrastructure comparison. Use it to validate that your target geography is supported before running cost estimates.
 
-### Certifications & Regulations Page (`/certifications`)
+### 📜 Certifications & Regulations Page (`/certifications`)
 Compliance posture independent of pricing. Shows which security, privacy, industry, and government certifications each provider holds (ISO 27001/27017/27018, SOC 1/2/3, PCI DSS, HIPAA, FedRAMP High/Moderate, CSA STAR, FIPS 140-2, HITRUST, GDPR, IRAP, C5, ENS, MTCS). Provider-centric tiles with three filters — provider, region (same `GEOGRAPHIES` buckets as the pricing pages), and certification. Selecting a certification disables providers that lack it ("who qualifies for FedRAMP High?"). Certification names link to a definition of the standard; each provider's official compliance page is linked at the bottom as the source of truth.
 
 Static curated data — **no live pipeline**. Compliance changes rarely and a wrong claim carries real risk, so the matrix lives in `src/config/certifications.ts` and is refreshed roughly every 6 months via a human-reviewed Claude Code prompt. See [CERTIFICATIONS_REFRESH.md](./CERTIFICATIONS_REFRESH.md) for the ready-to-paste refresh prompt and review process.
 
 ---
 
-## Deploying to DigitalOcean App Platform
+## 🌊 Deploying to DigitalOcean App Platform
 
 1. Fork this repository
 2. Create a new App on [cloud.digitalocean.com/apps](https://cloud.digitalocean.com/apps)
@@ -450,7 +452,7 @@ See [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for a complete production c
 
 ---
 
-## About Page & User-Facing Messaging
+## 💬 About Page & User-Facing Messaging
 
 The About page (`/about`) is the authoritative reference for users on what CCC does and who it's for. It emphasizes:
 
@@ -466,7 +468,7 @@ The About page (`/about`) is the authoritative reference for users on what CCC d
 
 ---
 
-## Adding a New Cloud Provider
+## ➕ Adding a New Cloud Provider
 
 1. Create static config files in `src/config/<provider>_*.ts` (one per product category)
 2. Add provider slug + name to `src/db/schema.sql` INSERT block
@@ -478,7 +480,7 @@ See [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) § 4.3 for a step-by-step walkt
 
 ---
 
-## Documentation Map
+## 🗺️ Documentation Map
 
 | Goal | Location |
 |---|---|
@@ -498,7 +500,7 @@ See [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) § 4.3 for a step-by-step walkt
 
 ---
 
-## License & Contributions
+## 📄 License & Contributions
 
 Licensed under **AGPL-3.0**. If you modify this code and host it publicly, you must publish your changes under the same license.
 
@@ -506,7 +508,7 @@ Pull Requests are welcome. Please open an Issue first for significant changes.
 
 ---
 
-## Support & Feedback
+## 🙋 Support & Feedback
 
 - **Bug?** → [Open a GitHub Issue](../../issues)
 - **Feature idea?** → [Open a GitHub Discussion](../../discussions)

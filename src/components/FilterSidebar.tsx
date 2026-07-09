@@ -437,6 +437,21 @@ interface FilterSidebarProps {
   onClose?: () => void;
 }
 
+// One-line intro shown at the top of the sidebar for each product category,
+// explaining what the page compares (~250–280 chars). Keyed by ProductType.
+const PRODUCT_TYPE_DESCRIPTIONS: Record<ProductType, string> = {
+  vm: 'Compare virtual machine pricing across clouds — general-purpose, compute-, memory-, and storage-optimized instances. Filter by vCPU, RAM, CPU vendor, architecture, GPU, and OS to find the cheapest equivalent instance for your workload in each region.',
+  database: 'Compare managed database pricing across clouds — relational, NoSQL, in-memory, and vector engines. Filter by engine, deployment type, high-availability mode, vCPU, and RAM to line up equivalent offerings and find the lowest cost per configuration.',
+  serverless: 'Compare serverless function pricing across clouds — per-request and per-GB-second billing for event-driven workloads. Filter by runtime, memory, timeout, architecture, cold-start behavior, and free tier to estimate real function costs across providers.',
+  containers: 'Compare managed container and Kubernetes pricing across clouds — control planes, node pools, and serverless container runtimes. Filter by orchestrator, compute type, architecture, GPU, and billing granularity to compare equivalent platforms side by side.',
+  networking: 'Compare cloud networking pricing across providers — load balancers, VPN, CDN, and data transfer. Filter by service, connection and routing type, HA and VPC support, direction, and billing model to understand often-overlooked networking and egress costs.',
+  storage: 'Compare cloud storage pricing across providers — object, block, file, and archive tiers. Filter by storage type, tier, redundancy, and media to compare capacity pricing and find the cheapest option for hot, warm, or cold data in each region.',
+  'data-analytics': 'Compare data and analytics pricing across clouds — data warehouses, streaming, and Spark/Databricks platforms. Filter by engine, deployment type, and tier to compare services, with regional multipliers reflecting how costs shift by geography.',
+  ai: 'Compare AI and machine-learning pricing across providers — foundation models and inference endpoints. Filter by service type, model tier, context window, and multimodal support to compare input and output token pricing across model families side by side.',
+  'app-hosting': 'Compare application hosting (PaaS) pricing across clouds — App Engine, App Runner, and similar platforms. Filter by tier, compute type, OS, vCPU, and RAM to compare fully managed app-hosting plans and find the cheapest fit for your service.',
+  security: 'Compare security and identity pricing across providers — managed services for identity, secrets, threat detection, and more. Filter by service and provider to line up equivalent offerings and understand what each cloud charges for comparable capabilities.',
+};
+
 export default function FilterSidebar({
   activeProductType,
   selectedProviders,
@@ -650,6 +665,11 @@ export default function FilterSidebar({
         </button>
       </div>
       <div className="p-4 space-y-8">
+        {/* Category intro — explains what this product category page compares */}
+        <p className="text-[11px] leading-relaxed text-[#737373] dark:text-[#a3a3a3]">
+          {PRODUCT_TYPE_DESCRIPTIONS[activeProductType]}
+        </p>
+
         {/* Providers Section */}
         <FilterSection
           title="Provider"

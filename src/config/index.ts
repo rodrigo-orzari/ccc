@@ -186,3 +186,4 @@ export const SECURITY_SERVICE_GROUPS: { label: string; services: string[] }[] = 
 // sponsor" pitch box instead. Image spec: 1200×200 (6:1) — see /docs "Advertising with us".
 export const DATACENTERS_SPONSOR: SponsorSlot | null = null;
 export const WORKLOADS_LISTING_SPONSOR: SponsorSlot | null = null;
+export const CERTIFICATIONS_SPONSOR: SponsorSlot | null = null;

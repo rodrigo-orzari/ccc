@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Footer, ProductTypeSelector, DigitalOceanReferralModal } from '@/components';
-import { GEOGRAPHIES } from '@/config';
+import { GEOGRAPHIES, CERTIFICATIONS_SPONSOR } from '@/config';
 import {
   CERTIFICATIONS,
   COMPLIANCE_PROVIDERS,
@@ -101,7 +101,44 @@ export default function CertificationsPage() {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-[var(--border)] mb-6" />
+          <div className="h-px bg-[var(--border)] mb-8" />
+
+          {/* Sponsorship Box — renders CERTIFICATIONS_SPONSOR's 1200×200 banner when set,
+              otherwise falls back to the "become a sponsor" pitch. */}
+          {CERTIFICATIONS_SPONSOR ? (
+            <a
+              href={CERTIFICATIONS_SPONSOR.linkUrl}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="mb-8 block rounded overflow-hidden border border-[var(--border)]"
+            >
+              <img
+                src={CERTIFICATIONS_SPONSOR.imageUrl}
+                alt={`Sponsored by ${CERTIFICATIONS_SPONSOR.companyName}`}
+                width={1200}
+                height={200}
+                className="w-full h-auto aspect-[6/1] object-cover"
+              />
+            </a>
+          ) : (
+            <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
+              <span className="text-2xl">🤝</span>
+              <div>
+                <h3 className="text-sm font-bold text-[var(--text)] mb-1">
+                  Sponsor This Page
+                </h3>
+                <p className="text-[13px] text-[var(--muted)] leading-relaxed">
+                  Have your company featured as a sponsor of our Certifications &amp; Regulations comparison. Reach engineers, architects, and security teams evaluating cloud compliance posture.
+                </p>
+                <p className="text-[12px] font-bold text-[var(--text)] mt-2">
+                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] hover:underline">hello@comparecloudcosts.com</a>
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Divider */}
+          <div className="h-px bg-[var(--border)] mb-8" />
 
           {/* Filters — datacenter-map-style button rows in a bordered box */}
           <div className="border border-[var(--border)] rounded bg-[var(--surface)] mb-8 divide-y divide-[var(--border)]">
@@ -115,14 +152,12 @@ export default function CertificationsPage() {
                     key={p.id}
                     onClick={() => setSelProviders((s) => toggle(s, p.id))}
                     title={`Toggle ${p.name}`}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
                       active
-                        ? 'text-white border-transparent shadow-sm'
-                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-70 hover:opacity-100'
+                        ? 'bg-[var(--text)] text-[var(--bg)] border-[var(--text)]'
+                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--muted)]'
                     }`}
-                    style={active ? { backgroundColor: p.color } : undefined}
                   >
-                    <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: active ? '#ffffff' : p.color }} />
                     {p.name}
                   </button>
                 );
@@ -155,22 +190,43 @@ export default function CertificationsPage() {
               <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Category</span>
               {CATEGORY_ORDER.map((cat) => {
                 const active = selCategories.has(cat);
-                const color = CATEGORY_COLOR[cat];
                 return (
                   <button
                     key={cat}
                     onClick={() => setSelCategories((s) => toggle(s, cat))}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
-                      active ? 'text-white border-transparent shadow-sm' : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--muted)]'
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
+                      active
+                        ? 'bg-[var(--text)] text-[var(--bg)] border-[var(--text)]'
+                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--muted)]'
                     }`}
-                    style={active ? { backgroundColor: color } : undefined}
                   >
-                    <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: active ? '#ffffff' : color }} />
                     {cat}
                   </button>
                 );
               })}
             </div>
+          </div>
+
+          {/* Summary — certifications held per provider (respects active filters),
+              connected-card grid mirroring the provider summary on other pages. */}
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] block mb-2">
+            Certifications by provider
+          </span>
+          <div
+            className="grid gap-px rounded-lg overflow-hidden border border-[var(--border)] bg-[var(--border)] mb-6"
+            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))' }}
+          >
+            {COMPLIANCE_PROVIDERS.map((p) => {
+              const count = visibleCerts.filter((c) => PROVIDERS_FOR_CERT[c.id].has(p.id)).length;
+              return (
+                <div key={p.id} className="px-4 py-3 bg-[var(--surface)]">
+                  <div className="text-[11px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
+                    {p.name}
+                  </div>
+                  <div className="text-2xl font-black leading-none text-[var(--text)] tabular-nums">{count}</div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Count + clear */}
@@ -267,10 +323,12 @@ export default function CertificationsPage() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
               {COMPLIANCE_PROVIDERS.map((p) => (
                 <div key={p.id} className="bg-[var(--surface)] border border-[var(--border)] rounded p-2 flex flex-col gap-1.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: p.color }} />
-                    <span className="text-[11px] font-bold text-[var(--text)]">{p.name}</span>
-                  </div>
+                  <span
+                    className="w-fit self-start px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border"
+                    style={{ color: p.color, borderColor: p.color + '50', backgroundColor: p.color + '18' }}
+                  >
+                    {p.name}
+                  </span>
                   <a
                     href={p.sourceUrl}
                     target="_blank"
