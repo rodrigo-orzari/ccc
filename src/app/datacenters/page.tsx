@@ -24,41 +24,7 @@ const PROVIDER_COLORS: Record<string, string> = {
   hetzner: '#D4145A',
 };
 
-// ─── glossary tooltip ────────────────────────────────────────────────────────
 
-const GLOSSARY: Record<string, string> = {
-  Region: 'A geographic cluster of data centers in a specific physical location. Each region is completely independent — isolated from failures in other regions.',
-  'Availability Zone': 'One or more discrete data centers within a region, each with redundant power, networking, and connectivity. Multiple Availability Zones in a region let you build highly available applications that survive a single data center outage.',
-  'Edge Location': 'A smaller point-of-presence node used for content delivery (CDN) and low-latency services, distinct from full compute regions.',
-  'Government Cloud': 'Dedicated, isolated cloud regions operated to meet government compliance requirements (e.g. FedRAMP, IL4/IL5 in the US).',
-};
-
-function Term({ term, children }: { term: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
-  const def = GLOSSARY[term];
-  if (!def) return <>{children}</>;
-  return (
-    <span className="relative inline-flex items-center gap-0.5">
-      {children}
-      <button
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-        onFocus={() => setOpen(true)}
-        onBlur={() => setOpen(false)}
-        className="text-[var(--muted)] hover:text-[var(--text)] transition-colors align-middle"
-        aria-label={`Definition of ${term}`}
-      >
-        <Info size={11} />
-      </button>
-      {open && (
-        <span className="absolute bottom-full left-0 mb-2 z-50 w-64 p-2.5 rounded border border-[var(--border)] bg-[var(--surface)] shadow-lg text-[10px] text-[var(--text)] leading-relaxed font-normal normal-case tracking-normal">
-          <span className="block font-bold text-[var(--text)] mb-1">{term}</span>
-          {def}
-        </span>
-      )}
-    </span>
-  );
-}
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -319,7 +285,7 @@ export default function DatacentersPage() {
             <div className="mb-6">
               <h1 className="text-3xl font-bold mb-1 text-[var(--text)]">Cloud Infrastructure</h1>
               <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4">
-                Compare data center presence, <Term term="Availability Zone">availability zones</Term>, and global coverage across providers. Click any row to expand the full <Term term="Region">region</Term> list with Availability Zone counts.
+                Compare data center presence, availability zones, and global coverage across providers. Click any row to expand the full region list with Availability Zone counts.
               </p>
             </div>
 
@@ -389,19 +355,11 @@ export default function DatacentersPage() {
                 <thead>
                   <tr className="border-b border-[var(--border)] bg-[var(--surface)]">
                     <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Provider</th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">
-                      <Term term="Region">Regions</Term>
-                    </th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">
-                      <Term term="Availability Zone">Availability Zones</Term>
-                    </th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">
-                      <Term term="Edge Location">Edge Locations</Term>
-                    </th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Regions</th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Availability Zones</th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Edge Locations</th>
                     <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Countries</th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">
-                      <Term term="Government Cloud">Gov Cloud</Term>
-                    </th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Gov Cloud</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -496,9 +454,9 @@ export default function DatacentersPage() {
             {/* Availability Zones per Region — stat cards grid */}
             <div id="az-detail" className="mt-8 scroll-mt-6">
               <h2 className="text-xl font-bold mb-1 text-[var(--text)]">
-                <Term term="Availability Zone">Availability Zones</Term> per <Term term="Region">Region</Term>
+                Availability Zones per Region
               </h2>
-              <p className="text-sm text-[var(--muted)] mb-4">Total and average Availability Zones per region, per provider. DigitalOcean uses single data center regions without traditional Availability Zones.</p>
+              <p className="text-sm text-[var(--muted)] mb-4">Total and average Availability Zones per region, per provider.</p>
               <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[var(--border)]" style={{ background: 'var(--border)' }}>
                 {PROVIDER_INFRA.map(p => (
                   <div

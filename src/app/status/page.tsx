@@ -316,109 +316,110 @@ export default function StatusPage() {
         }
       `}</style>
 
-      <div className="status-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: 'var(--bg)', color: 'var(--text)' }}>
+      <div className="status-wrapper flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
         <ProductTypeSelector activeProductType={"status" as any} />
-      {/* Fixed Global Nav Removed */}
 
-      <div className="status-page" style={{ flex: 1, display: 'flex' }}>
-
-        {/* Main body */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-
-        <div className="status-header border-b border-[#e5e5e5] dark:border-[#262626] pb-6 mb-6" id="top">
-          <div className="mb-2">
-            <h1 className="text-3xl font-bold text-[#171717] dark:text-[#e5e7eb]">
-              Last Price Update
-            </h1>
-          </div>
-          <p className="text-sm text-[#737373] m-0">
-            Learn when we last gathered pricing information per cloud provider and product category.
-          </p>
-        </div>
-
-        <div className="status-body">
-          {loading && (
-            <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--muted)', fontSize: 13 }}>
-              Loading status…
+        <div className="flex-1 overflow-auto flex flex-col">
+          <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
+            {/* Constrained layout for header */}
+            <div className="max-w-[1100px] mx-auto mb-6" id="top">
+              <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">
+                Status
+              </h1>
+              <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                Learn the number of prices we gathered, how we fetch that information (API or Static), and the latest update.
+              </p>
             </div>
-          )}
 
-          {error && (
-            <div style={{ padding: '1.5rem', border: '1px solid #ef4444', borderRadius: 8, color: '#ef4444', fontSize: 13 }}>
-              Failed to load status: {error}
-            </div>
-          )}
+            {/* Divider */}
+            <div className="max-w-[1100px] mx-auto h-px bg-[var(--border)] mb-8" />
 
-          {status && !loading && (
-            <>
-              {/* Summary cards */}
-              <div className="summary-cards">
-                <div className="summary-card">
-                  <div className="summary-card-label">Total Records</div>
-                  <div className="summary-card-value">{status.total_records.toLocaleString()}</div>
-                  <div className="summary-card-sub">across all providers &amp; categories</div>
-                </div>
-                <div className="summary-card">
-                  <div className="summary-card-label">Live API Records</div>
-                  <div className="summary-card-value" style={{ color: '#16a34a' }}>
-                    {status.total_api_records.toLocaleString()}
-                  </div>
-                  <div className="summary-card-sub">
-                    {status.total_records > 0
-                      ? `${Math.round((status.total_api_records / status.total_records) * 100)}% of total`
-                      : '—'}
-                  </div>
-                </div>
-                <div className="summary-card">
-                  <div className="summary-card-label">Static Config Records</div>
-                  <div className="summary-card-value" style={{ color: '#d97706' }}>
-                    {status.total_static_records.toLocaleString()}
-                  </div>
-                  <div className="summary-card-sub">
-                    {status.total_records > 0
-                      ? `${Math.round((status.total_static_records / status.total_records) * 100)}% of total`
-                      : '—'}
-                  </div>
-                </div>
-                <div className="summary-card">
-                  <div className="summary-card-label">Providers</div>
-                  <div className="summary-card-value">
-                    {status.providers.filter(p => p.total_records > 0).length}
-                  </div>
-                  <div className="summary-card-sub">with data</div>
-                </div>
-                <div className="summary-card">
-                  <div className="summary-card-label">Last Ingested</div>
-                  <div className="summary-card-value" style={{ fontSize: '1.1rem' }}>
-                    {status.last_ingested
-                      ? new Date(status.last_ingested).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-                      : '—'}
-                  </div>
-                  <div className="summary-card-sub">most recent run</div>
-                </div>
+            {loading && (
+              <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--muted)', fontSize: 13 }}>
+                Loading status…
               </div>
+            )}
 
-              {/* Data source legend */}
-              <div
-                style={{
-                  border: '1px solid var(--border)',
-                  borderRadius: 8,
-                  background: 'var(--surface)',
-                  padding: '1rem 1.25rem',
-                  marginBottom: '2.5rem',
-                }}
-              >
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: 12.5, color: 'var(--text)' }}>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                    <span style={{ flexShrink: 0 }}><SourceBadge source="api" apiCount={0} staticCount={0} /></span>
-                    <span>Pricing fetched <strong>live from the provider's pricing API</strong> during the most recent ingestion run. Most current and authoritative.</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                    <span style={{ flexShrink: 0 }}><SourceBadge source="static" apiCount={0} staticCount={0} /></span>
-                    <span><strong>Manual fallback pricing</strong> used when a live fetch fails. Not auto-refreshed.</span>
+            {error && (
+              <div className="max-w-[1100px] mx-auto" style={{ padding: '1.5rem', border: '1px solid #ef4444', borderRadius: 8, color: '#ef4444', fontSize: 13 }}>
+                Failed to load status: {error}
+              </div>
+            )}
+
+            {status && !loading && (
+              <>
+                {/* Summary cards */}
+                <div className="max-w-[1100px] mx-auto">
+                  <div className="summary-cards">
+                    <div className="summary-card">
+                      <div className="summary-card-label">Total Records</div>
+                      <div className="summary-card-value">{status.total_records.toLocaleString()}</div>
+                      <div className="summary-card-sub">across all providers &amp; categories</div>
+                    </div>
+                    <div className="summary-card">
+                      <div className="summary-card-label">Live API Records</div>
+                      <div className="summary-card-value" style={{ color: '#16a34a' }}>
+                        {status.total_api_records.toLocaleString()}
+                      </div>
+                      <div className="summary-card-sub">
+                        {status.total_records > 0
+                          ? `${Math.round((status.total_api_records / status.total_records) * 100)}% of total`
+                          : '—'}
+                      </div>
+                    </div>
+                    <div className="summary-card">
+                      <div className="summary-card-label">Static Config Records</div>
+                      <div className="summary-card-value" style={{ color: '#d97706' }}>
+                        {status.total_static_records.toLocaleString()}
+                      </div>
+                      <div className="summary-card-sub">
+                        {status.total_records > 0
+                          ? `${Math.round((status.total_static_records / status.total_records) * 100)}% of total`
+                          : '—'}
+                      </div>
+                    </div>
+                    <div className="summary-card">
+                      <div className="summary-card-label">Providers</div>
+                      <div className="summary-card-value">
+                        {status.providers.filter(p => p.total_records > 0).length}
+                      </div>
+                      <div className="summary-card-sub">with data</div>
+                    </div>
+                    <div className="summary-card">
+                      <div className="summary-card-label">Last Ingested</div>
+                      <div className="summary-card-value" style={{ fontSize: '1.1rem' }}>
+                        {status.last_ingested
+                          ? new Date(status.last_ingested).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                          : '—'}
+                      </div>
+                      <div className="summary-card-sub">most recent run</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+
+                {/* Data source legend */}
+                <div className="max-w-[1100px] mx-auto">
+                  <div
+                    style={{
+                      border: '1px solid var(--border)',
+                      borderRadius: 8,
+                      background: 'var(--surface)',
+                      padding: '1rem 1.25rem',
+                      marginBottom: '2.5rem',
+                    }}
+                  >
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: 12.5, color: 'var(--text)' }}>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                        <span style={{ flexShrink: 0 }}><SourceBadge source="api" apiCount={0} staticCount={0} /></span>
+                        <span>Pricing fetched <strong>live from the provider's pricing API</strong> during the most recent ingestion run. Most current and authoritative.</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                        <span style={{ flexShrink: 0 }}><SourceBadge source="static" apiCount={0} staticCount={0} /></span>
+                        <span><strong>Manual fallback pricing</strong> used when a live fetch fails. Not auto-refreshed.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
               {/* Status Matrix Table */}
               {(() => {
@@ -616,14 +617,19 @@ export default function StatusPage() {
                   </div>
                 );
               })()}
-              <BackToTop />
+              <div className="max-w-[1100px] mx-auto mt-6">
+                <BackToTop />
+                <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[13px] text-[#737373] dark:text-[#a3a3a3] italic">
+                  <strong>Disclaimer:</strong> Price data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
+                  <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+                </blockquote>
+              </div>
             </>
           )}
+          </main>
         </div>
+        <Footer />
       </div>
-      </div>
-      <Footer />
-    </div>
     </>
   );
 }

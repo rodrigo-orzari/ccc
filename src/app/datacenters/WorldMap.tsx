@@ -361,8 +361,8 @@ export default function WorldMap() {
 
       <div className="border border-[var(--border)] rounded overflow-hidden bg-[var(--surface)]">
       {/* Provider + Geography filters — single row */}
-      <div className="px-5 py-3 border-b border-[var(--border)] flex flex-col lg:flex-row lg:items-center gap-4">
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="px-5 py-3 border-b border-[var(--border)] flex flex-col items-center lg:flex-row lg:justify-center lg:items-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 shrink-0">Provider</span>
           {PROVIDER_INFRA.map(p => {
             const active = selected.has(p.id);
@@ -386,7 +386,7 @@ export default function WorldMap() {
 
         <div className="hidden lg:block w-px h-6 bg-[var(--border)] shrink-0" />
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 shrink-0">Geography</span>
           {GEOGRAPHIES.map(geo => (
             <button
