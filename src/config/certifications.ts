@@ -180,6 +180,54 @@ export const CERTIFICATIONS: Certification[] = [
     description: 'Singapore’s Multi-Tier Cloud Security standard (SS 584).',
     definitionUrl: 'https://www.imda.gov.sg/regulations-and-licensing-listing/ict-standards-and-quality-of-service/it-standards-and-frameworks',
   },
+  {
+    id: 'iso-27701',
+    name: 'ISO/IEC 27701',
+    category: 'Privacy',
+    scope: 'Global',
+    description: 'Privacy information management system (PIMS) extension to ISO 27001.',
+    definitionUrl: 'https://en.wikipedia.org/wiki/ISO/IEC_27701',
+  },
+  {
+    id: 'iso-22301',
+    name: 'ISO 22301',
+    category: 'Security',
+    scope: 'Global',
+    description: 'International standard for business continuity management systems.',
+    definitionUrl: 'https://en.wikipedia.org/wiki/ISO_22301',
+  },
+  {
+    id: 'iso-20000-1',
+    name: 'ISO/IEC 20000-1',
+    category: 'Security',
+    scope: 'Global',
+    description: 'International standard for IT service management (ITSM).',
+    definitionUrl: 'https://en.wikipedia.org/wiki/ISO/IEC_20000',
+  },
+  {
+    id: 'iso-42001',
+    name: 'ISO/IEC 42001',
+    category: 'Security',
+    scope: 'Global',
+    description: 'First international standard for AI management systems (AIMS).',
+    definitionUrl: 'https://en.wikipedia.org/wiki/ISO/IEC_42001',
+  },
+  {
+    id: 'nist-800-171',
+    name: 'NIST SP 800-171',
+    category: 'Government / Regional',
+    scope: 'N. America',
+    description: 'US standard for protecting controlled unclassified information (CUI).',
+    definitionUrl: 'https://csrc.nist.gov/pubs/sp/800/171/r3/final',
+  },
+  {
+    id: 'ismap',
+    name: 'ISMAP',
+    category: 'Government / Regional',
+    scope: 'Asia Pacific',
+    description: 'Japan’s government Information system Security Management and Assessment Program.',
+    definitionUrl: 'https://www.ismap.go.jp/',
+  },
 ];
 
 export const CERT_BY_ID: Record<string, Certification> = Object.fromEntries(
@@ -199,7 +247,7 @@ export interface ComplianceSource {
 
 export const COMPLIANCE_PROVIDERS: ComplianceSource[] = [
   { id: 'aws', name: 'AWS', color: '#FF9900', sourceUrl: 'https://aws.amazon.com/compliance/programs/', sourceLabel: 'AWS Compliance Programs', lastVerified: '2026-07-09' },
-  { id: 'azure', name: 'Azure', color: '#00BCFF', sourceUrl: 'https://learn.microsoft.com/en-us/azure/compliance/', sourceLabel: 'Azure Compliance Offerings', lastVerified: '2026-07-09' },
+  { id: 'azure', name: 'Azure', color: '#00BCFF', sourceUrl: 'https://learn.microsoft.com/en-us/azure/compliance/offerings/', sourceLabel: 'Azure Compliance Offerings', lastVerified: '2026-07-09' },
   { id: 'gcp', name: 'Google Cloud', color: '#34A853', sourceUrl: 'https://cloud.google.com/security/compliance/offerings', sourceLabel: 'Google Cloud Compliance', lastVerified: '2026-07-09' },
   { id: 'oracle', name: 'Oracle', color: '#F80000', sourceUrl: 'https://www.oracle.com/corporate/cloud-compliance/', sourceLabel: 'Oracle Cloud Compliance', lastVerified: '2026-07-09' },
   { id: 'alibaba', name: 'Alibaba Cloud', color: '#FF6A00', sourceUrl: 'https://www.alibabacloud.com/en/trust-center', sourceLabel: 'Alibaba Cloud Trust Center', lastVerified: '2026-07-09' },
@@ -213,25 +261,31 @@ export const PROVIDER_CERTIFICATIONS: Record<string, string[]> = {
   aws: [
     'iso-27001', 'iso-27017', 'iso-27018', 'soc-1', 'soc-2', 'soc-3', 'pci-dss', 'hipaa',
     'fedramp-high', 'fedramp-moderate', 'csa-star', 'fips-140-2', 'hitrust', 'gdpr', 'irap', 'c5', 'ens', 'mtcs',
+    'iso-27701', 'iso-22301', 'iso-20000-1', 'iso-42001', 'nist-800-171', 'ismap',
   ],
   azure: [
     'iso-27001', 'iso-27017', 'iso-27018', 'soc-1', 'soc-2', 'soc-3', 'pci-dss', 'hipaa',
     'fedramp-high', 'fedramp-moderate', 'csa-star', 'fips-140-2', 'hitrust', 'gdpr', 'irap', 'c5', 'ens', 'mtcs',
+    'iso-27701', 'iso-22301', 'iso-20000-1', 'iso-42001', 'nist-800-171', 'ismap',
   ],
   gcp: [
     'iso-27001', 'iso-27017', 'iso-27018', 'soc-1', 'soc-2', 'soc-3', 'pci-dss', 'hipaa',
     'fedramp-high', 'fedramp-moderate', 'csa-star', 'fips-140-2', 'hitrust', 'gdpr', 'irap', 'c5', 'ens', 'mtcs',
+    'iso-27701', 'iso-22301', 'iso-42001', 'nist-800-171', 'ismap',
   ],
   oracle: [
     'iso-27001', 'iso-27017', 'iso-27018', 'soc-1', 'soc-2', 'soc-3', 'pci-dss', 'hipaa',
     'fedramp-high', 'fedramp-moderate', 'csa-star', 'fips-140-2', 'gdpr', 'irap', 'c5',
+    'iso-27701', 'iso-20000-1', 'iso-42001', 'nist-800-171', 'ismap',
   ],
   alibaba: [
     'iso-27001', 'iso-27017', 'iso-27018', 'soc-1', 'soc-2', 'soc-3', 'pci-dss', 'hipaa',
     'csa-star', 'gdpr', 'c5', 'mtcs',
+    'iso-27701', 'iso-22301', 'iso-20000-1',
   ],
   cloudflare: [
     'iso-27001', 'iso-27018', 'soc-2', 'pci-dss', 'hipaa', 'gdpr',
+    'iso-27701',
   ],
   digitalocean: [
     'iso-27001', 'soc-2', 'soc-3', 'pci-dss', 'csa-star', 'gdpr',

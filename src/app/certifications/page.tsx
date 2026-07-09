@@ -41,8 +41,10 @@ export default function CertificationsPage() {
   const [selProviders, setSelProviders] = useState<Set<string>>(new Set());
   const [selGeos, setSelGeos] = useState<Set<string>>(new Set());
   const [selCategories, setSelCategories] = useState<Set<string>>(new Set());
+  const [searchQuery, setSearchQuery] = useState('');
 
   const visibleCerts = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
     return CERTIFICATIONS.filter((c) => {
       if (selCategories.size > 0 && !selCategories.has(c.category)) return false;
       if (selGeos.size > 0 && c.scope !== 'Global' && !selGeos.has(c.scope)) return false;
@@ -50,13 +52,20 @@ export default function CertificationsPage() {
         const held = PROVIDERS_FOR_CERT[c.id];
         if (![...selProviders].some((p) => held.has(p))) return false;
       }
+      if (q && !c.name.toLowerCase().includes(q) && !c.description.toLowerCase().includes(q)) return false;
       return true;
     }).sort((a, b) => CATEGORY_ORDER.indexOf(a.category) - CATEGORY_ORDER.indexOf(b.category));
-  }, [selProviders, selGeos, selCategories]);
+  }, [selProviders, selGeos, selCategories, searchQuery]);
 
-  const anyFilterActive = selProviders.size > 0 || selGeos.size > 0 || selCategories.size > 0;
+  const anyFilterActive =
+    selProviders.size > 0 || selGeos.size > 0 || selCategories.size > 0 || searchQuery.trim().length > 0;
 
-  const clearAll = () => { setSelProviders(new Set()); setSelGeos(new Set()); setSelCategories(new Set()); };
+  const clearAll = () => {
+    setSelProviders(new Set());
+    setSelGeos(new Set());
+    setSelCategories(new Set());
+    setSearchQuery('');
+  };
 
   return (
     <div className="cc-page flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
@@ -88,15 +97,18 @@ export default function CertificationsPage() {
           {/* Header — workloads-style intro paragraph */}
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">Certifications &amp; Regulations</h1>
-            <p className="text-[var(--muted)] max-w-4xl text-sm leading-relaxed">
+            <p className="text-[#737373] dark:text-[#a3a3a3] max-w-4xl text-sm leading-relaxed">
               Compliance is a comparison axis of its own — the cheapest provider is no use if it can&apos;t
               meet your regulatory bar. Each tile below is a security, privacy, industry, or government
               standard, with a short definition, the providers that currently hold it, and a link to learn
               more. Filter by <strong>provider</strong> to see the standards a cloud carries, by{' '}
               <strong>region</strong> to focus on a jurisdiction, or by <strong>category</strong> to narrow
-              the type of standard. Certification status is compiled from each provider&apos;s official
-              documentation — see the sources at the bottom. This is for general comparison only, not legal
-              advice.
+              the type of standard. We track a <strong>curated set of {CERTIFICATIONS.length} widely-recognized
+              standards</strong> so clouds compare cleanly side by side — this is <strong>not</strong> an
+              exhaustive list, and the largest providers hold many more (AWS advertises 140+, Azure 100+). For
+              a provider&apos;s complete, authoritative list, open its <strong>trust center</strong> linked at
+              the bottom. Status is compiled from each provider&apos;s official documentation; this is for
+              general comparison only, not legal advice. Last update, July 2026.
             </p>
           </div>
 
@@ -154,8 +166,8 @@ export default function CertificationsPage() {
                     title={`Toggle ${p.name}`}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
                       active
-                        ? 'bg-[var(--text)] text-[var(--bg)] border-[var(--text)]'
-                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--muted)]'
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
                     }`}
                   >
                     {p.name}
@@ -175,8 +187,8 @@ export default function CertificationsPage() {
                     onClick={() => setSelGeos((s) => toggle(s, geo))}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       active
-                        ? 'bg-[var(--text)] text-[var(--bg)] border-[var(--text)]'
-                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--muted)]'
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
                     }`}
                   >
                     {geo}
@@ -196,8 +208,8 @@ export default function CertificationsPage() {
                     onClick={() => setSelCategories((s) => toggle(s, cat))}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
                       active
-                        ? 'bg-[var(--text)] text-[var(--bg)] border-[var(--text)]'
-                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--muted)]'
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
                     }`}
                   >
                     {cat}
@@ -209,9 +221,15 @@ export default function CertificationsPage() {
 
           {/* Summary — certifications held per provider (respects active filters),
               connected-card grid mirroring the provider summary on other pages. */}
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] block mb-2">
-            Certifications by provider
-          </span>
+          <div className="mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] block">
+              Tracked certifications by provider
+            </span>
+            <span className="text-[10px] text-[var(--muted)]">
+              Counts reflect the {CERTIFICATIONS.length} standards tracked here — not each provider&apos;s full
+              catalog (AWS 140+, Azure 100+). See the trust centers below for the complete list.
+            </span>
+          </div>
           <div
             className="grid gap-px rounded-lg overflow-hidden border border-[var(--border)] bg-[var(--border)] mb-6"
             style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))' }}
@@ -229,10 +247,24 @@ export default function CertificationsPage() {
             })}
           </div>
 
-          {/* Count + clear */}
-          <div className="flex items-center gap-3 mb-4">
+          {/* Search + count + clear */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+            <div className="relative w-full sm:max-w-xs">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg className="h-3 w-3 text-[var(--muted)]" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Search certifications..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[var(--row-hover)] border border-[var(--border)] text-[var(--text)] text-[11px] rounded pl-8 pr-3 py-1.5 focus:border-[var(--text)] placeholder-[var(--muted)] outline-none transition-colors"
+              />
+            </div>
             <span className="text-[11px] text-[var(--muted)]">
-              Showing {visibleCerts.length} of {CERTIFICATIONS.length} certifications
+              Showing {visibleCerts.length} of {CERTIFICATIONS.length} tracked standards
             </span>
             {anyFilterActive && (
               <button onClick={clearAll} className="text-[11px] font-medium text-[#2563eb] hover:underline">
@@ -313,12 +345,13 @@ export default function CertificationsPage() {
 
           {/* Data sources */}
           <div id="data-sources" className="mt-12 border-t border-[var(--border)] pt-6 scroll-mt-6">
-            <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Data Sources</h2>
+            <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources &amp; Trust Centers</h2>
             <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed max-w-3xl">
-              Certification status is compiled from each provider&apos;s official compliance documentation
-              (linked below). Standard names link to a definition of the standard. This information may not
-              reflect real-time changes and is not legal or compliance advice — verify directly with the
-              provider before relying on it.
+              The links below are each provider&apos;s official compliance hub / trust center — the complete,
+              authoritative list of certifications, which for the largest clouds runs to 100+ (AWS alone
+              advertises 140+). We track a curated, comparable subset above; standard names link to a
+              definition of each. This information may not reflect real-time changes and is not legal or
+              compliance advice — verify directly with the provider before relying on it.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
               {COMPLIANCE_PROVIDERS.map((p) => (
@@ -342,7 +375,7 @@ export default function CertificationsPage() {
               ))}
             </div>
             <p className="text-[9px] text-[#a3a3a3] mt-4">
-              Last verified: July 2026 · Re-verified against provider documentation roughly every 6 months.
+              Last update, July 2026.
             </p>
           </div>
 

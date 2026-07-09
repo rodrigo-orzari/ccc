@@ -586,10 +586,13 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="certifications">Certifications &amp; Regulations</CopyHeading>
             <p>
-              The <Link href="/certifications">📜 Certifications &amp; Regulations</Link> page compares the compliance posture of each cloud provider side by side — which security, privacy, industry, and government certifications they hold — independently of pricing. It covers standards such as ISO&nbsp;27001/27017/27018, SOC&nbsp;1/2/3, PCI&nbsp;DSS, HIPAA, FedRAMP High/Moderate, CSA&nbsp;STAR, FIPS&nbsp;140-2, HITRUST, GDPR, IRAP, C5, ENS, and MTCS.
+              The <Link href="/certifications">📜 Certifications &amp; Regulations</Link> page compares the compliance posture of each cloud provider side by side — which security, privacy, industry, and government certifications they hold — independently of pricing. It covers standards such as ISO&nbsp;27001/27017/27018/27701/22301/20000-1/42001, SOC&nbsp;1/2/3, PCI&nbsp;DSS, HIPAA, FedRAMP High/Moderate, CSA&nbsp;STAR, FIPS&nbsp;140-2, HITRUST, NIST&nbsp;800-171, GDPR, IRAP, C5, ENS, MTCS, and ISMAP.
             </p>
             <p>
               Like the Datacenters page, this data is curated manually from each provider's official compliance documentation rather than a live database — a missing certification means "not found in that provider's published docs at verification time," not necessarily that it is unavailable.
+            </p>
+            <p>
+              Importantly, the page tracks a <strong>curated set of widely-recognized standards</strong> chosen so providers can be compared side by side — it is <strong>not</strong> an exhaustive list. The largest clouds hold far more (AWS advertises 140+ certifications and attestations, Azure 100+). For a provider's complete, authoritative catalog, use its <strong>trust center</strong> — every provider's is linked at the bottom of the Certifications page.
             </p>
 
             <h3 id="certifications-filters">Filters</h3>
