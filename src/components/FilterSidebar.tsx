@@ -430,6 +430,12 @@ interface FilterSidebarProps {
   onSetAppHostingTiers: (items: string[]) => void;
   onSetAppHostingComputeTypes: (items: string[]) => void;
   onSetServerlessServiceTypes: (items: string[]) => void;
+  selectedIntegrationServices: string[];
+  selectedIntegrationTiers: string[];
+  onIntegrationServiceToggle: (item: string) => void;
+  onIntegrationTierToggle: (item: string) => void;
+  onSetIntegrationServices: (items: string[]) => void;
+  onSetIntegrationTiers: (items: string[]) => void;
   onVCpuRangeChange: (range: { min: number; max: number }) => void;
   onMemoryRangeChange: (range: { min: number; max: number }) => void;
   onPriceRangeChange: (range: { min: number; max: number }) => void;
@@ -454,6 +460,7 @@ const PRODUCT_TYPE_DESCRIPTIONS: Record<ProductType, string> = {
   ai: 'Compare AI and machine-learning pricing across providers — foundation models and inference endpoints. Filter by service type, model tier, context window, and multimodal support to compare input and output token pricing across model families side by side.',
   'app-hosting': 'Compare application hosting (PaaS) pricing across clouds — App Engine, App Runner, and similar platforms. Filter by tier, compute type, OS, vCPU, and RAM to compare fully managed app-hosting plans and find the cheapest fit for your service.',
   security: 'Compare security and identity pricing across providers — managed services for identity, secrets, threat detection, and more. Filter by service and provider to line up equivalent offerings and understand what each cloud charges for comparable capabilities.',
+  integration: 'Compare integration and messaging pricing across clouds — message queues, event buses, API gateways, and workflows. Filter by service type and tier to find the cheapest way to connect your systems.',
 };
 
 export default function FilterSidebar({
@@ -510,6 +517,8 @@ export default function FilterSidebar({
   selectedAppHostingTiers,
   selectedAppHostingComputeTypes,
   selectedServerlessServiceTypes,
+  selectedIntegrationServices,
+  selectedIntegrationTiers,
   vCpuRange,
   memoryRange,
   priceRange,
@@ -572,6 +581,8 @@ export default function FilterSidebar({
   onAppHostingTierToggle,
   onAppHostingComputeTypeToggle,
   onServerlessServiceTypeToggle,
+  onIntegrationServiceToggle,
+  onIntegrationTierToggle,
   onSetProviders,
   onSetGeographies,
   onSetOS,
@@ -618,6 +629,8 @@ export default function FilterSidebar({
   onSetAppHostingTiers,
   onSetAppHostingComputeTypes,
   onSetServerlessServiceTypes,
+  onSetIntegrationServices,
+  onSetIntegrationTiers,
   onVCpuRangeChange,
   onMemoryRangeChange,
   onPriceRangeChange,
@@ -1414,6 +1427,44 @@ export default function FilterSidebar({
         )}
 
         {/* Integration Specific Filters */}
+        {activeProductType === 'integration' && (
+          <>
+            <FilterSection
+              title="Geography"
+              tooltip="Geographic region where the integration service is deployed."
+              options={config.GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSetAll={onSetGeographies}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Service Type"
+              tooltip="The category of integration/messaging service."
+              options={staticConfig.INTEGRATION_SERVICES}
+              selected={selectedIntegrationServices}
+              onToggle={onIntegrationServiceToggle}
+              onSetAll={onSetIntegrationServices}
+              isExpanded={expanded.integrationServices ?? true}
+              onToggleExpand={() => onToggleSection('integrationServices')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Tier"
+              tooltip="The deployment/pricing tier."
+              options={staticConfig.INTEGRATION_TIERS}
+              selected={selectedIntegrationTiers}
+              onToggle={onIntegrationTierToggle}
+              onSetAll={onSetIntegrationTiers}
+              isExpanded={expanded.integrationTiers ?? true}
+              onToggleExpand={() => onToggleSection('integrationTiers')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+          </>
+        )}
+
         {/* Data Analytics filters */}
         {activeProductType === 'data-analytics' && (
           <>

@@ -92,6 +92,8 @@ export default function Dashboard() {
       [selectedAppHostingTiers, setSelectedAppHostingTiers, staticConfig.APP_HOSTING_TIERS.length, () => [...config.APP_HOSTING_TIERS]],
       [selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes, staticConfig.APP_HOSTING_COMPUTE_TYPES.length, () => [...config.APP_HOSTING_COMPUTE_TYPES]],
       [selectedServerlessServiceTypes, setSelectedServerlessServiceTypes, staticConfig.SERVERLESS_SERVICE_TYPES.length, () => [...config.SERVERLESS_SERVICE_TYPES]],
+      [selectedIntegrationServices, setSelectedIntegrationServices, staticConfig.INTEGRATION_SERVICES.length, () => [...staticConfig.INTEGRATION_SERVICES]],
+      [selectedIntegrationTiers, setSelectedIntegrationTiers, staticConfig.INTEGRATION_TIERS.length, () => [...staticConfig.INTEGRATION_TIERS]],
     ];
 
     for (const [current, setter, staticLen, next] of syncGroups) {
@@ -185,6 +187,8 @@ export default function Dashboard() {
 
 
   const [selectedServerlessServiceTypes, setSelectedServerlessServiceTypes] = useState<string[]>([...config.SERVERLESS_SERVICE_TYPES]);
+  const [selectedIntegrationServices, setSelectedIntegrationServices] = useState<string[]>([...staticConfig.INTEGRATION_SERVICES]);
+  const [selectedIntegrationTiers, setSelectedIntegrationTiers] = useState<string[]>([...staticConfig.INTEGRATION_TIERS]);
 
 
 
@@ -365,6 +369,8 @@ export default function Dashboard() {
     subset('appHostingTiers', selectedAppHostingTiers, config.APP_HOSTING_TIERS);
     subset('appHostingComputeTypes', selectedAppHostingComputeTypes, config.APP_HOSTING_COMPUTE_TYPES);
     subset('serverlessServiceTypes', selectedServerlessServiceTypes, config.SERVERLESS_SERVICE_TYPES);
+    subset('integrationServices', selectedIntegrationServices, staticConfig.INTEGRATION_SERVICES);
+    subset('integrationTiers', selectedIntegrationTiers, staticConfig.INTEGRATION_TIERS);
 
 
     // Only send range params when the user has actively constrained them.
@@ -407,6 +413,7 @@ export default function Dashboard() {
     selectedNetworkingBillingModels, selectedNetworkingUsageTiers, selectedNetworkingPortCapacities, selectedNetworkingTransferScopes,
     selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
+    selectedIntegrationServices, selectedIntegrationTiers,
     vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, search
   ]);
 
@@ -493,6 +500,11 @@ export default function Dashboard() {
       selectedAppHostingComputeTypes.length === 0
     )) return false;
 
+    if (activeProductType === 'integration' && (
+      selectedIntegrationServices.length === 0 ||
+      selectedIntegrationTiers.length === 0
+    )) return false;
+
     return true;
   }, [
     activeProductType,
@@ -511,6 +523,7 @@ export default function Dashboard() {
     selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
     selectedAppHostingTiers, selectedAppHostingComputeTypes,
+    selectedIntegrationServices, selectedIntegrationTiers,
   ]);
 
   // Queries
@@ -773,6 +786,8 @@ export default function Dashboard() {
           selectedAppHostingTiers={selectedAppHostingTiers}
           selectedAppHostingComputeTypes={selectedAppHostingComputeTypes}
           selectedServerlessServiceTypes={selectedServerlessServiceTypes}
+          selectedIntegrationServices={selectedIntegrationServices}
+          selectedIntegrationTiers={selectedIntegrationTiers}
           vCpuRange={activeProductType === 'serverless' ? serverlessVCpuRange : activeProductType === 'containers' ? containersVCpuRange : vCpuRange}
           memoryRange={activeProductType === 'serverless' ? serverlessMemoryRange : activeProductType === 'containers' ? containersMemoryRange : memoryRange}
           priceRange={priceRange}
@@ -834,6 +849,8 @@ export default function Dashboard() {
           onAppHostingTierToggle={(t) => toggleFilter(selectedAppHostingTiers, setSelectedAppHostingTiers, t)}
           onAppHostingComputeTypeToggle={(c) => toggleFilter(selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes, c)}
           onServerlessServiceTypeToggle={(s) => toggleFilter(selectedServerlessServiceTypes, setSelectedServerlessServiceTypes, s)}
+          onIntegrationServiceToggle={(s) => toggleFilter(selectedIntegrationServices, setSelectedIntegrationServices, s)}
+          onIntegrationTierToggle={(t) => toggleFilter(selectedIntegrationTiers, setSelectedIntegrationTiers, t)}
           onSetProviders={setSelectedProviders}
           onSetGeographies={setSelectedGeographies}
           onSetOS={setSelectedOS}
@@ -881,6 +898,8 @@ export default function Dashboard() {
           onSetAppHostingTiers={setSelectedAppHostingTiers}
           onSetAppHostingComputeTypes={setSelectedAppHostingComputeTypes}
           onSetServerlessServiceTypes={setSelectedServerlessServiceTypes}
+          onSetIntegrationServices={setSelectedIntegrationServices}
+          onSetIntegrationTiers={setSelectedIntegrationTiers}
           onVCpuRangeChange={activeProductType === 'serverless' ? setServerlessVCpuRange : activeProductType === 'containers' ? setContainersVCpuRange : setVCpuRange}
           onMemoryRangeChange={activeProductType === 'serverless' ? setServerlessMemoryRange : activeProductType === 'containers' ? setContainersMemoryRange : setMemoryRange}
           onPriceRangeChange={setPriceRange}

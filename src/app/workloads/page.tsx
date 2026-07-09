@@ -18,9 +18,10 @@ const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
   ai: 'Artificial Intelligence',
   'app-hosting': 'App Hosting',
   security: 'Security & Identity',
+  integration: 'Integration',
 };
 
-const PRODUCT_TYPE_ORDER: ProductType[] = ['vm', 'database', 'serverless', 'containers', 'networking', 'data-analytics', 'storage', 'ai', 'app-hosting', 'security'];
+const PRODUCT_TYPE_ORDER: ProductType[] = ['vm', 'database', 'serverless', 'containers', 'networking', 'data-analytics', 'storage', 'ai', 'app-hosting', 'security', 'integration'];
 
 export default function WorkloadsCatalog() {
   const [searchQuery, setSearchQuery] = useState('');

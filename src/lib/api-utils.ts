@@ -104,7 +104,7 @@ export const initDb = async () => {
 
 const MAX_FILTER_ITEMS = 50;
 const MAX_SEARCH_LENGTH = 200;
-const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting', 'security'];
+const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting', 'security', 'integration'];
 
 function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
   if (!input) return [];
@@ -145,6 +145,7 @@ export function buildPricingFilters(query: any) {
       storageTypes, storageTiers, storageRedundancy,
       appHostingTiers, appHostingComputeTypes,
       serverlessServiceTypes,
+      integrationServices, integrationTiers,
     } = query;
 
     const conditions: string[] = [];
@@ -601,7 +602,12 @@ export function buildPricingFilters(query: any) {
       addInFilter(appHostingComputeTypes, `LOWER(pr.attributes->>'compute_type')`);
     }
 
-    const noComputeSliders = ['networking', 'serverless', 'ai', 'storage', 'app-hosting'];
+    if (resolvedProductType === 'integration') {
+      addInFilter(integrationServices, `LOWER(pr.attributes->>'service_type')`);
+      addInFilter(integrationTiers, `LOWER(pr.attributes->>'tier')`);
+    }
+
+    const noComputeSliders = ['networking', 'serverless', 'ai', 'storage', 'app-hosting', 'integration'];
 
     if (minVcpu && !noComputeSliders.includes(resolvedProductType)) {
       conditions.push(`pr.vcpus >= $${paramCount++}`);

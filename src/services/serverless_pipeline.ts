@@ -31,14 +31,6 @@ import {
   ALIBABA_SERVERLESS_REGION,
   ALIBABA_SERVERLESS_GEOGRAPHY,
 } from '../config/alibaba_serverless.ts';
-import {
-  AWS_INTEGRATION,
-  AZURE_INTEGRATION,
-  GCP_INTEGRATION,
-  ORACLE_INTEGRATION,
-  ALIBABA_INTEGRATION,
-  DIGITALOCEAN_INTEGRATION,
-} from '../config/integration';
 import { AwsLambdaScraper } from '../scrapers/aws_lambda';
 
 export class AWSServerlessLiveAdapter extends BaseAdapter {
@@ -482,54 +474,6 @@ export class ServerlessPricingPipeline extends PricingPipeline {
         status: 'skipped',
         message: error.message
       });
-    }
-
-    // Integration services (folded into Serverless via service_type attribute).
-    // Messaging / Eventing / API Gateway / Workflow rows land under category='serverless'
-    // so they appear alongside Compute in the Serverless tab, filterable by Service Type.
-    const integrationProviders: { slug: string; rows: any[]; region: string; geography: string; service: string }[] = [
-      { slug: 'aws',          rows: AWS_INTEGRATION,          region: AWS_SERVERLESS_REGION,          geography: AWS_SERVERLESS_GEOGRAPHY,          service: 'Integration' },
-      { slug: 'azure',        rows: AZURE_INTEGRATION,        region: AZURE_SERVERLESS_REGION,        geography: AZURE_SERVERLESS_GEOGRAPHY,        service: 'Integration' },
-      { slug: 'gcp',          rows: GCP_INTEGRATION,          region: GCP_SERVERLESS_REGION,          geography: GCP_SERVERLESS_GEOGRAPHY,          service: 'Integration' },
-      { slug: 'oracle',       rows: ORACLE_INTEGRATION,       region: ORACLE_SERVERLESS_REGION,       geography: ORACLE_SERVERLESS_GEOGRAPHY,       service: 'Integration' },
-      { slug: 'alibaba',      rows: ALIBABA_INTEGRATION,      region: ALIBABA_SERVERLESS_REGION,      geography: ALIBABA_SERVERLESS_GEOGRAPHY,      service: 'Integration' },
-      { slug: 'digitalocean', rows: DIGITALOCEAN_INTEGRATION, region: DIGITALOCEAN_SERVERLESS_REGION, geography: DIGITALOCEAN_SERVERLESS_GEOGRAPHY, service: 'Integration' },
-    ];
-    for (const p of integrationProviders) {
-      try {
-        console.log(`⏳ ${p.slug} Integration (${p.rows.length} entries)...`);
-        const records: PricingRecord[] = p.rows.map(inst => ({
-          provider: p.slug,
-          service: p.service,
-          region: p.region,
-          instanceType: inst.type,
-          vcpus: 0,
-          memoryGb: 0,
-          arch: '',
-          os: '',
-          cpuVendor: '',
-          gpuCount: 0,
-          geography: p.geography,
-          category: inst.attributes?.service_type || 'Integration',
-          price: inst.price,
-          unit: inst.unit,
-          dataSource: 'static_config' as const,
-          attributes: inst.attributes || {},
-        }));
-        const driftAlerts = await this.saveRecords(records, 'serverless');
-        results.push({
-          provider: p.slug,
-          service: p.service,
-          status: 'success',
-          count: records.length,
-          driftAlerts,
-          dataSource: 'static_config',
-          note: `${p.slug} Integration - static config`,
-        });
-      } catch (error: any) {
-        console.warn(`⚠️  ${p.slug} Integration error:`, error.message);
-        results.push({ provider: p.slug, service: 'Integration', status: 'error', message: error.message });
-      }
     }
 
     return results;

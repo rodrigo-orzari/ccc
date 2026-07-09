@@ -169,7 +169,9 @@ export const STORAGE_MEDIA: string[] = ['SSD', 'HDD'];
 export const APP_HOSTING_TIERS: string[] = ['Free', 'Basic', 'Standard', 'Premium', 'Professional'];
 export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
 
-// (Integration folded into Serverless — see SERVERLESS_SERVICE_TYPES above.)
+// --- INTEGRATION ---
+export const INTEGRATION_SERVICES = ['Messaging', 'Eventing', 'API Gateway', 'Workflow'];
+export const INTEGRATION_TIERS = ['Standard', 'Premium', 'Consumption', 'FIFO'];
 
 // --- SECURITY & IDENTITY ---
 export const SECURITY_SERVICES = ['Web Application Firewall (WAF)', 'Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'DDoS Protection', 'Threat Detection'];

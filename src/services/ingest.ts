@@ -10,6 +10,7 @@ import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline';
 import { NetworkingPricingPipeline } from './networking_pipeline';
 import { StoragePricingPipeline } from './storage_pipeline';
 import { AppHostingPricingPipeline } from './app_hosting_pipeline';
+import { IntegrationPricingPipeline } from './integration_pipeline';
 import { SecurityPricingPipeline } from './security_pipeline';
 import { AIPricingPipeline } from './ai_pipeline';
 
@@ -118,6 +119,18 @@ async function main() {
     appHostingResults.forEach((result: any) => {
       if (result.status === 'success') {
         console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} App Hosting configurations`);
+      } else {
+        console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Integration Pricing...');
+    // Run integration pricing pipeline
+    const integrationPipeline = new IntegrationPricingPipeline(sql as any);
+    const integrationResults = await integrationPipeline.run();
+    integrationResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} Integration configurations`);
       } else {
         console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
       }

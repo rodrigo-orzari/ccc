@@ -73,6 +73,7 @@ function getColDefs(pt: ProductType): ColDef[] {
   if (pt === 'data-analytics') return [...start, COL_MID1, COL_MID3, COL_MID2, COL_VCPU, ...tail];
   if (pt === 'ai')             return [...start, COL_MID1, COL_MID3, COL_MID2, COL_MID4, COL_PRICE, COL_INV];
   if (pt === 'security')       return [...start, COL_MID2, COL_MID1, ...tail];
+  if (pt === 'integration')    return [...start, COL_MID1, COL_MID2, ...tail];
   return [...start, ...tail];
 }
 
@@ -422,6 +423,9 @@ export default function PricingTable({
                 </>) : activeProductType === 'security' ? (<>
                   <Th colKey="db_family_cpu_vendor" label="Domain" />
                   <Th colKey="engine_category"    sortKey="category"   label="Service" />
+                </>) : activeProductType === 'integration' ? (<>
+                  <Th colKey="engine_category"    sortKey="attributes.service_type" label="Service Type" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"         label="Tier" />
                 </>) : (<>
                   {/* vm (default) */}
                   <Th colKey="engine_category"    sortKey="category"   label="Category" />
@@ -433,7 +437,7 @@ export default function PricingTable({
 
                 {activeProductType !== 'ai' && <Th colKey="geography" sortKey="geography" label="Geo" />}
 
-                {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && activeProductType !== 'security' && (<>
+                {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && activeProductType !== 'security' && activeProductType !== 'integration' && (<>
                   <Th colKey="vcpus"     sortKey="vcpus"     label="vCPU" />
                   <Th colKey="memory_gb" sortKey="memory_gb" label="Memory (GB)" />
                 </>)}
@@ -443,7 +447,7 @@ export default function PricingTable({
                 <Th
                   colKey="price_per_unit"
                   sortKey="price_per_unit"
-                  label={activeProductType === 'ai' ? 'Input Price (/1M)' : activeProductType === 'serverless' ? 'Price ($)' : (showAggregation ? 'Yearly price ($)' : 'Hourly price ($)')}
+                  label={activeProductType === 'ai' ? 'Input Price (/1M)' : (activeProductType === 'serverless' || activeProductType === 'integration') ? 'Price ($)' : (showAggregation ? 'Yearly price ($)' : 'Hourly price ($)')}
                   className="text-black dark:text-[#f7f8ff] hover:opacity-80"
                 />
                 
@@ -594,6 +598,9 @@ function TableRow({
       </>) : activeProductType === 'security' ? (<>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || '—'}</span></td>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
+      </>) : activeProductType === 'integration' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.service_type || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
       </>) : (<>
         {/* vm (default) */}
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>
@@ -610,8 +617,8 @@ function TableRow({
         </td>
       )}
 
-      {/* vCPU + Memory (not shown for networking / data-analytics / ai / storage) */}
-      {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && activeProductType !== 'security' && (<>
+      {/* vCPU + Memory (not shown for networking / data-analytics / ai / storage / security / integration) */}
+      {activeProductType !== 'networking' && activeProductType !== 'data-analytics' && activeProductType !== 'ai' && activeProductType !== 'storage' && activeProductType !== 'security' && activeProductType !== 'integration' && (<>
         <td data-col="vcpus"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.vcpus || '—'}</span></td>
         <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span></td>
       </>)}
@@ -636,7 +643,7 @@ function TableRow({
               return <span className="text-[10px] text-[#a3a3a3] font-bold leading-none" title="Unchanged since last ingest">●</span>;
             })()}
             <span className="text-xs font-bold text-black dark:text-[#f7f8ff]">
-              {activeProductType === 'ai' || activeProductType === 'serverless' ? `$${parseFloat(record.price_per_unit).toFixed(4)}` : (showAggregation ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}` : `$${parseFloat(record.price_per_unit).toFixed(4)}`)}
+              {activeProductType === 'ai' || activeProductType === 'serverless' || activeProductType === 'integration' ? `$${parseFloat(record.price_per_unit).toFixed(4)}` : (showAggregation ? `$${(parseFloat(record.price_per_unit) * 8760).toFixed(2)}` : `$${parseFloat(record.price_per_unit).toFixed(4)}`)}
             </span>
           </div>
         </div>
@@ -748,6 +755,11 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
     case 'security': return [
       { label: 'Domain', value: dash(record.category) },
       { label: 'Service', value: dash(record.service) },
+      { label: 'Geo', value: dash(record.geography) },
+    ];
+    case 'integration': return [
+      { label: 'Service Type', value: dash(a.service_type) },
+      { label: 'Tier', value: dash(a.tier) },
       { label: 'Geo', value: dash(record.geography) },
     ];
     default: return [ // vm
