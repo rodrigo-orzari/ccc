@@ -432,10 +432,16 @@ interface FilterSidebarProps {
   onSetServerlessServiceTypes: (items: string[]) => void;
   selectedIntegrationServices: string[];
   selectedIntegrationTiers: string[];
+  selectedIntegrationSizes: string[];
+  selectedIntegrationProtocols: string[];
   onIntegrationServiceToggle: (item: string) => void;
   onIntegrationTierToggle: (item: string) => void;
+  onIntegrationSizeToggle: (item: string) => void;
+  onIntegrationProtocolToggle: (item: string) => void;
   onSetIntegrationServices: (items: string[]) => void;
   onSetIntegrationTiers: (items: string[]) => void;
+  onSetIntegrationSizes: (items: string[]) => void;
+  onSetIntegrationProtocols: (items: string[]) => void;
   onVCpuRangeChange: (range: { min: number; max: number }) => void;
   onMemoryRangeChange: (range: { min: number; max: number }) => void;
   onPriceRangeChange: (range: { min: number; max: number }) => void;
@@ -519,6 +525,8 @@ export default function FilterSidebar({
   selectedServerlessServiceTypes,
   selectedIntegrationServices,
   selectedIntegrationTiers,
+  selectedIntegrationSizes,
+  selectedIntegrationProtocols,
   vCpuRange,
   memoryRange,
   priceRange,
@@ -583,6 +591,8 @@ export default function FilterSidebar({
   onServerlessServiceTypeToggle,
   onIntegrationServiceToggle,
   onIntegrationTierToggle,
+  onIntegrationSizeToggle,
+  onIntegrationProtocolToggle,
   onSetProviders,
   onSetGeographies,
   onSetOS,
@@ -631,6 +641,8 @@ export default function FilterSidebar({
   onSetServerlessServiceTypes,
   onSetIntegrationServices,
   onSetIntegrationTiers,
+  onSetIntegrationSizes,
+  onSetIntegrationProtocols,
   onVCpuRangeChange,
   onMemoryRangeChange,
   onPriceRangeChange,
@@ -1462,6 +1474,43 @@ export default function FilterSidebar({
               onToggleExpand={() => onToggleSection('integrationTiers')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            
+            {(selectedIntegrationServices.length === 0 || 
+              selectedIntegrationServices.includes('Messaging') || 
+              selectedIntegrationServices.includes('Eventing') || 
+              selectedIntegrationServices.length === staticConfig.INTEGRATION_SERVICES.length) && (
+              <>
+                <FilterSection
+                  title="Max Message Size"
+                  tooltip="Filter by maximum supported message/payload size."
+                  options={staticConfig.INTEGRATION_SIZES}
+                  selected={selectedIntegrationSizes}
+                  onToggle={onIntegrationSizeToggle}
+                  onSetAll={onSetIntegrationSizes}
+                  isExpanded={expanded.integrationSizes ?? true}
+                  onToggleExpand={() => onToggleSection('integrationSizes')}
+                />
+                <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+              </>
+            )}
+
+            {(selectedIntegrationServices.length === 0 || 
+              selectedIntegrationServices.includes('API Gateway') || 
+              selectedIntegrationServices.length === staticConfig.INTEGRATION_SERVICES.length) && (
+              <>
+                <FilterSection
+                  title="Protocols"
+                  tooltip="Filter by supported API protocols."
+                  options={staticConfig.INTEGRATION_PROTOCOLS}
+                  selected={selectedIntegrationProtocols}
+                  onToggle={onIntegrationProtocolToggle}
+                  onSetAll={onSetIntegrationProtocols}
+                  isExpanded={expanded.integrationProtocols ?? true}
+                  onToggleExpand={() => onToggleSection('integrationProtocols')}
+                />
+                <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+              </>
+            )}
           </>
         )}
 

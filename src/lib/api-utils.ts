@@ -146,6 +146,7 @@ export function buildPricingFilters(query: any) {
       appHostingTiers, appHostingComputeTypes,
       serverlessServiceTypes,
       integrationServices, integrationTiers,
+      integrationSizes, integrationProtocols,
     } = query;
 
     const conditions: string[] = [];
@@ -605,6 +606,39 @@ export function buildPricingFilters(query: any) {
     if (resolvedProductType === 'integration') {
       addInFilter(integrationServices, `LOWER(pr.attributes->>'service_type')`);
       addInFilter(integrationTiers, `LOWER(pr.attributes->>'tier')`);
+
+      if (integrationSizes) {
+        const sizeOptions = parseFilterList(integrationSizes as string);
+        const sizeConditions: string[] = [];
+        for (const opt of sizeOptions) {
+          if (opt === '256 KB') {
+            sizeConditions.push(`(pr.attributes->>'max_message_size_kb')::int <= 256`);
+          } else if (opt === '1 MB') {
+            sizeConditions.push(`(pr.attributes->>'max_message_size_kb')::int BETWEEN 257 AND 1024`);
+          } else if (opt === '4 MB') {
+            sizeConditions.push(`(pr.attributes->>'max_message_size_kb')::int BETWEEN 1025 AND 4096`);
+          } else if (opt === '10 MB') {
+            sizeConditions.push(`(pr.attributes->>'max_message_size_kb')::int BETWEEN 4097 AND 10240`);
+          } else if (opt === '100 MB') {
+            sizeConditions.push(`(pr.attributes->>'max_message_size_kb')::int > 10240`);
+          }
+        }
+        if (sizeConditions.length > 0) {
+          conditions.push(`(${sizeConditions.join(' OR ')})`);
+        }
+      }
+
+      if (integrationProtocols) {
+        const protocolOptions = parseFilterList(integrationProtocols as string).map(p => p.toLowerCase());
+        const protocolConditions: string[] = [];
+        for (const opt of protocolOptions) {
+          protocolConditions.push(`LOWER(pr.attributes->>'protocols') LIKE $${paramCount++}`);
+          values.push(`%${opt}%`);
+        }
+        if (protocolConditions.length > 0) {
+          conditions.push(`(${protocolConditions.join(' OR ')})`);
+        }
+      }
     }
 
     const noComputeSliders = ['networking', 'serverless', 'ai', 'storage', 'app-hosting', 'integration'];

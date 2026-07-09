@@ -172,6 +172,8 @@ export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
 // --- INTEGRATION ---
 export const INTEGRATION_SERVICES = ['Messaging', 'Eventing', 'API Gateway', 'Workflow'];
 export const INTEGRATION_TIERS = ['Standard', 'Premium', 'Consumption', 'FIFO'];
+export const INTEGRATION_SIZES = ['256 KB', '1 MB', '4 MB', '10 MB', '100 MB'];
+export const INTEGRATION_PROTOCOLS = ['REST', 'HTTP', 'SOAP', 'GraphQL'];
 
 // --- SECURITY & IDENTITY ---
 export const SECURITY_SERVICES = ['Web Application Firewall (WAF)', 'Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'DDoS Protection', 'Threat Detection'];

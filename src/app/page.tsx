@@ -94,6 +94,8 @@ export default function Dashboard() {
       [selectedServerlessServiceTypes, setSelectedServerlessServiceTypes, staticConfig.SERVERLESS_SERVICE_TYPES.length, () => [...config.SERVERLESS_SERVICE_TYPES]],
       [selectedIntegrationServices, setSelectedIntegrationServices, staticConfig.INTEGRATION_SERVICES.length, () => [...staticConfig.INTEGRATION_SERVICES]],
       [selectedIntegrationTiers, setSelectedIntegrationTiers, staticConfig.INTEGRATION_TIERS.length, () => [...staticConfig.INTEGRATION_TIERS]],
+      [selectedIntegrationSizes, setSelectedIntegrationSizes, staticConfig.INTEGRATION_SIZES.length, () => [...staticConfig.INTEGRATION_SIZES]],
+      [selectedIntegrationProtocols, setSelectedIntegrationProtocols, staticConfig.INTEGRATION_PROTOCOLS.length, () => [...staticConfig.INTEGRATION_PROTOCOLS]],
     ];
 
     for (const [current, setter, staticLen, next] of syncGroups) {
@@ -189,6 +191,8 @@ export default function Dashboard() {
   const [selectedServerlessServiceTypes, setSelectedServerlessServiceTypes] = useState<string[]>([...config.SERVERLESS_SERVICE_TYPES]);
   const [selectedIntegrationServices, setSelectedIntegrationServices] = useState<string[]>([...staticConfig.INTEGRATION_SERVICES]);
   const [selectedIntegrationTiers, setSelectedIntegrationTiers] = useState<string[]>([...staticConfig.INTEGRATION_TIERS]);
+  const [selectedIntegrationSizes, setSelectedIntegrationSizes] = useState<string[]>([...staticConfig.INTEGRATION_SIZES]);
+  const [selectedIntegrationProtocols, setSelectedIntegrationProtocols] = useState<string[]>([...staticConfig.INTEGRATION_PROTOCOLS]);
 
 
 
@@ -371,6 +375,8 @@ export default function Dashboard() {
     subset('serverlessServiceTypes', selectedServerlessServiceTypes, config.SERVERLESS_SERVICE_TYPES);
     subset('integrationServices', selectedIntegrationServices, staticConfig.INTEGRATION_SERVICES);
     subset('integrationTiers', selectedIntegrationTiers, staticConfig.INTEGRATION_TIERS);
+    subset('integrationSizes', selectedIntegrationSizes, staticConfig.INTEGRATION_SIZES);
+    subset('integrationProtocols', selectedIntegrationProtocols, staticConfig.INTEGRATION_PROTOCOLS);
 
 
     // Only send range params when the user has actively constrained them.
@@ -414,6 +420,7 @@ export default function Dashboard() {
     selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
     selectedIntegrationServices, selectedIntegrationTiers,
+    selectedIntegrationSizes, selectedIntegrationProtocols,
     vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, search
   ]);
 
@@ -500,10 +507,13 @@ export default function Dashboard() {
       selectedAppHostingComputeTypes.length === 0
     )) return false;
 
-    if (activeProductType === 'integration' && (
-      selectedIntegrationServices.length === 0 ||
-      selectedIntegrationTiers.length === 0
-    )) return false;
+    if (activeProductType === 'integration') {
+      if (selectedIntegrationServices.length === 0 || selectedIntegrationTiers.length === 0) return false;
+      const hasMessagingOrEventing = selectedIntegrationServices.includes('Messaging') || selectedIntegrationServices.includes('Eventing') || selectedIntegrationServices.length === staticConfig.INTEGRATION_SERVICES.length;
+      const hasApiGateway = selectedIntegrationServices.includes('API Gateway') || selectedIntegrationServices.length === staticConfig.INTEGRATION_SERVICES.length;
+      if (hasMessagingOrEventing && selectedIntegrationSizes.length === 0) return false;
+      if (hasApiGateway && selectedIntegrationProtocols.length === 0) return false;
+    }
 
     return true;
   }, [
@@ -523,7 +533,7 @@ export default function Dashboard() {
     selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
     selectedAppHostingTiers, selectedAppHostingComputeTypes,
-    selectedIntegrationServices, selectedIntegrationTiers,
+    selectedIntegrationServices, selectedIntegrationTiers, selectedIntegrationSizes, selectedIntegrationProtocols,
   ]);
 
   // Queries
@@ -788,6 +798,8 @@ export default function Dashboard() {
           selectedServerlessServiceTypes={selectedServerlessServiceTypes}
           selectedIntegrationServices={selectedIntegrationServices}
           selectedIntegrationTiers={selectedIntegrationTiers}
+          selectedIntegrationSizes={selectedIntegrationSizes}
+          selectedIntegrationProtocols={selectedIntegrationProtocols}
           vCpuRange={activeProductType === 'serverless' ? serverlessVCpuRange : activeProductType === 'containers' ? containersVCpuRange : vCpuRange}
           memoryRange={activeProductType === 'serverless' ? serverlessMemoryRange : activeProductType === 'containers' ? containersMemoryRange : memoryRange}
           priceRange={priceRange}
@@ -851,6 +863,8 @@ export default function Dashboard() {
           onServerlessServiceTypeToggle={(s) => toggleFilter(selectedServerlessServiceTypes, setSelectedServerlessServiceTypes, s)}
           onIntegrationServiceToggle={(s) => toggleFilter(selectedIntegrationServices, setSelectedIntegrationServices, s)}
           onIntegrationTierToggle={(t) => toggleFilter(selectedIntegrationTiers, setSelectedIntegrationTiers, t)}
+          onIntegrationSizeToggle={(s) => toggleFilter(selectedIntegrationSizes, setSelectedIntegrationSizes, s)}
+          onIntegrationProtocolToggle={(p) => toggleFilter(selectedIntegrationProtocols, setSelectedIntegrationProtocols, p)}
           onSetProviders={setSelectedProviders}
           onSetGeographies={setSelectedGeographies}
           onSetOS={setSelectedOS}
@@ -900,6 +914,8 @@ export default function Dashboard() {
           onSetServerlessServiceTypes={setSelectedServerlessServiceTypes}
           onSetIntegrationServices={setSelectedIntegrationServices}
           onSetIntegrationTiers={setSelectedIntegrationTiers}
+          onSetIntegrationSizes={setSelectedIntegrationSizes}
+          onSetIntegrationProtocols={setSelectedIntegrationProtocols}
           onVCpuRangeChange={activeProductType === 'serverless' ? setServerlessVCpuRange : activeProductType === 'containers' ? setContainersVCpuRange : setVCpuRange}
           onMemoryRangeChange={activeProductType === 'serverless' ? setServerlessMemoryRange : activeProductType === 'containers' ? setContainersMemoryRange : setMemoryRange}
           onPriceRangeChange={setPriceRange}

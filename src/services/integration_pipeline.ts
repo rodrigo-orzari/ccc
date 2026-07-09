@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { PricingRecord, PricingPipeline } from './pricing_pipeline';
 import {
   AWS_INTEGRATION,
@@ -25,30 +26,103 @@ const STATIC_PROVIDERS: { slug: string; rows: any[]; region: string; geography: 
 ];
 
 export class IntegrationPricingPipeline extends PricingPipeline {
+  private async fetchAzureServiceBusLive(region: string): Promise<{ standardOpPrice: number, premiumHourPrice: number } | null> {
+    try {
+      const filter = encodeURIComponent(
+        `serviceName eq 'Service Bus' and armRegionName eq '${region}'`
+      );
+      const url = `https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview&$filter=${filter}`;
+      const res = await axios.get(url, { timeout: 15000 });
+      const items = res.data?.Items ?? [];
+      
+      const stdOpItem = items.find((i: any) => i.skuName === 'Standard' && i.meterName === 'Standard Messaging Operations' && i.retailPrice > 0);
+      const premItem = items.find((i: any) => i.skuName === 'Premium' && i.meterName === 'Premium Messaging Unit');
+      
+      if (!stdOpItem && !premItem) return null;
+      return {
+        standardOpPrice: stdOpItem ? stdOpItem.retailPrice : 0.80,
+        premiumHourPrice: premItem ? premItem.retailPrice : 0.9275,
+      };
+    } catch (err: any) {
+      console.warn('⚠️ Azure Service Bus live pricing fetch failed:', err.message);
+      return null;
+    }
+  }
+
+  private async fetchAzureEventGridLive(region: string): Promise<number | null> {
+    try {
+      const filter = encodeURIComponent(
+        `serviceName eq 'Event Grid' and armRegionName eq '${region}'`
+      );
+      const url = `https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview&$filter=${filter}`;
+      const res = await axios.get(url, { timeout: 15000 });
+      const items = res.data?.Items ?? [];
+      
+      const opItem = items.find((i: any) => i.skuName === 'Standard' && i.meterName === 'Standard Event Operations' && i.retailPrice > 0);
+      return opItem ? opItem.retailPrice : 0.60;
+    } catch (err: any) {
+      console.warn('⚠️ Azure Event Grid live pricing fetch failed:', err.message);
+      return null;
+    }
+  }
+
   async run() {
     const results: any[] = [];
+
+    // Attempt live fetches for Azure to replace static values where possible
+    let liveSb: { standardOpPrice: number, premiumHourPrice: number } | null = null;
+    let liveEg: number | null = null;
+
+    try {
+      liveSb = await this.fetchAzureServiceBusLive(AZURE_SERVERLESS_REGION);
+      liveEg = await this.fetchAzureEventGridLive(AZURE_SERVERLESS_REGION);
+    } catch (e) {
+      // ignore, fall back to static
+    }
 
     for (const p of STATIC_PROVIDERS) {
       console.log(`⏳ Integration: ${p.slug} (${p.rows.length} entries)...`);
       try {
-        const records: PricingRecord[] = p.rows.map(inst => ({
-          provider: p.slug,
-          service: 'Integration',
-          region: p.region,
-          instanceType: inst.type,
-          vcpus: 0,
-          memoryGb: 0,
-          arch: '',
-          os: '',
-          cpuVendor: '',
-          gpuCount: 0,
-          geography: p.geography,
-          category: 'integration',
-          price: inst.price,
-          unit: inst.unit,
-          dataSource: 'static_config' as const,
-          attributes: inst.attributes || {},
-        }));
+        let isLiveFetched = false;
+        const records: PricingRecord[] = p.rows.map(inst => {
+          let price = inst.price;
+          let dataSource: 'live_api' | 'static_config' = 'static_config';
+
+          if (p.slug === 'azure') {
+            if (inst.type === 'Service Bus Standard' && liveSb) {
+              price = liveSb.standardOpPrice;
+              dataSource = 'live_api';
+              isLiveFetched = true;
+            } else if (inst.type === 'Service Bus Premium' && liveSb) {
+              price = Math.round(liveSb.premiumHourPrice * 24 * 30);
+              dataSource = 'live_api';
+              isLiveFetched = true;
+            } else if (inst.type === 'Event Grid' && liveEg !== null) {
+              price = liveEg;
+              dataSource = 'live_api';
+              isLiveFetched = true;
+            }
+          }
+
+          return {
+            provider: p.slug,
+            service: 'Integration',
+            region: p.region,
+            instanceType: inst.type,
+            vcpus: 0,
+            memoryGb: 0,
+            arch: '',
+            os: '',
+            cpuVendor: '',
+            gpuCount: 0,
+            geography: p.geography,
+            category: 'integration',
+            price,
+            unit: inst.unit,
+            dataSource,
+            attributes: inst.attributes || {},
+          };
+        });
 
         const driftAlerts = await this.saveRecords(records, 'integration');
         results.push({
@@ -57,8 +131,8 @@ export class IntegrationPricingPipeline extends PricingPipeline {
           status: 'success',
           count: records.length,
           driftAlerts,
-          dataSource: 'static_config',
-          note: `${p.slug} Integration - static config`,
+          dataSource: isLiveFetched ? 'live_api' : 'static_config',
+          note: `${p.slug} Integration - ${isLiveFetched ? 'live API fetch' : 'static config'}`,
         });
       } catch (error: any) {
         console.warn(`⚠️  Integration ${p.slug} error:`, error.message);

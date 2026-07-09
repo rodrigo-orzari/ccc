@@ -58,6 +58,8 @@ export interface PricingRecord {
     usage_tier?: string;
     port_capacity?: string;
     transfer_scope?: string;
+    max_message_size_kb?: string | number;
+    protocols?: string;
   };
 }
 
