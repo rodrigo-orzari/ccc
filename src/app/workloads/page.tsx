@@ -60,23 +60,6 @@ export default function WorkloadsCatalog() {
             </p>
           </div>
 
-          <div className="mb-6 w-full max-w-sm">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-3 w-3 text-[#737373]" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <input
-                type="text"
-                placeholder="Search workloads..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] text-[#171717] dark:text-[#e5e7eb] text-[11px] rounded pl-8 pr-3 py-1.5 focus:border-black dark:focus:border-white placeholder-[#737373] outline-none transition-colors"
-              />
-            </div>
-          </div>
-
           {/* Divider */}
           <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
 
@@ -116,6 +99,42 @@ export default function WorkloadsCatalog() {
 
           {/* Divider */}
           <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
+
+          {/* Search + count */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
+            <div className="relative w-full sm:max-w-xs">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg className="h-3 w-3 text-[#737373]" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <input
+                type="text"
+                placeholder="Search workloads..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] text-[#171717] dark:text-[#e5e7eb] text-[11px] rounded pl-8 pr-3 py-1.5 focus:border-black dark:focus:border-white placeholder-[#737373] outline-none transition-colors"
+              />
+            </div>
+            <span className="text-[11px] text-[#737373] dark:text-[#a3a3a3]">
+              Showing {filteredWorkloads.length} workloads. Contact{' '}
+              <a
+                href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Proposal"
+                className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold"
+              >
+                hello@comparecloudcosts.com
+              </a>{' '}
+              to propose other workload designs.
+            </span>
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="text-[11px] font-medium text-[#2563eb] dark:text-[#818cf8] hover:underline"
+              >
+                Clear
+              </button>
+            )}
+          </div>
 
           {filteredWorkloads.length === 0 ? (
             <div className="text-center py-12 border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded">

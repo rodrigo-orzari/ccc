@@ -98,7 +98,7 @@ export default function CertificationsPage() {
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">Certifications &amp; Regulations</h1>
             <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed">
-              Compare <strong>{CERTIFICATIONS.length} widely-recognized security, privacy, and compliance standards</strong> across major cloud providers. 
+              Compare <strong>security, privacy, and compliance standards</strong> across major cloud providers. 
               This curated list provides a quick overview of each provider's regulatory posture. For a complete and authoritative list, always consult the provider's official trust center. This information is for general comparison and does not constitute legal advice.
             </p>
           </div>

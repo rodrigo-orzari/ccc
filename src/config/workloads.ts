@@ -2,6 +2,101 @@ import { WorkloadDefinition } from '@/types';
 
 export const WORKLOADS: WorkloadDefinition[] = [
   {
+    id: 'rag-ai-app',
+    name: 'RAG AI Application',
+    description: 'A generative AI application using a Foundational Model connected to a Vector Database to search proprietary documents and return grounded answers.',
+    icon: '🧠',
+    parameters: [
+      {
+        id: 'monthlyQueries',
+        label: 'Monthly User Queries',
+        type: 'slider',
+        min: 10000,
+        max: 1000000,
+        step: 10000,
+        defaultValue: 100000,
+        unit: 'queries'
+      },
+      {
+        id: 'tokensPerQuery',
+        label: 'Tokens per Query',
+        type: 'slider',
+        min: 500,
+        max: 10000,
+        step: 500,
+        defaultValue: 2000,
+        unit: 'tokens'
+      },
+      {
+        id: 'dbMemoryGb',
+        label: 'Vector DB Memory',
+        type: 'slider',
+        min: 4,
+        max: 128,
+        step: 4,
+        defaultValue: 16,
+        unit: 'GB'
+      }
+    ],
+    components: [
+      {
+        id: 'api-gateway',
+        name: 'API & Orchestration',
+        description: 'Serverless compute to route queries and orchestrate LLM logic',
+        icon: '⚙️',
+        getRequirements: () => {
+          return {
+            productType: 'serverless',
+            category: 'Compute',
+            quantity: 1
+          };
+        }
+      },
+      {
+        id: 'embeddings',
+        name: 'Embeddings Model',
+        description: 'Converts the incoming query into vector embeddings',
+        icon: '🔢',
+        getRequirements: (params) => {
+          const embeddingTokens = (params.monthlyQueries * (params.tokensPerQuery * 0.2)) / 1000000;
+          return {
+            productType: 'ai',
+            category: 'Embeddings',
+            quantity: embeddingTokens / 730
+          };
+        }
+      },
+      {
+        id: 'vector-db',
+        name: 'Vector Database (pgvector)',
+        description: 'Stores and searches document embeddings (Managed PostgreSQL)',
+        icon: '🗄️',
+        getRequirements: (params) => {
+          return {
+            productType: 'database',
+            category: 'Relational',
+            minMemoryGb: params.dbMemoryGb,
+            quantity: 1
+          };
+        }
+      },
+      {
+        id: 'llm',
+        name: 'Foundational Model',
+        description: 'Generates the final response based on query and retrieved context',
+        icon: '💬',
+        getRequirements: (params) => {
+          const llmTokens = (params.monthlyQueries * (params.tokensPerQuery * 0.8)) / 1000000;
+          return {
+            productType: 'ai',
+            category: 'Foundational Models',
+            quantity: llmTokens / 730
+          };
+        }
+      }
+    ]
+  },
+  {
     id: 'serverless-web-app',
     name: 'Serverless Web Application',
     description: 'A scalable, low-maintenance backend without provisioning servers. Perfect for event-driven web and mobile backends.',
