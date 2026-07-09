@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1783628643.9351456,
-    "ast_hash": "110ad7a02c35e414b5d26db7e049edf9",
+    "mtime": 1783630371.9120212,
+    "ast_hash": "b00dac889d6e8d2f64ab69038eb80f88",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -345,8 +345,8 @@
     "semantic_hash": ""
   },
   "next-env.d.ts": {
-    "mtime": 1782587088.5835652,
-    "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
+    "mtime": 1783632855.0281532,
+    "ast_hash": "2a74d3909800ca5467fa83b0ab4a4890",
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
@@ -400,8 +400,8 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1783543221.0558162,
-    "ast_hash": "5566a62164ad3aef976b0666721a37cb",
+    "mtime": 1783632519.9666772,
+    "ast_hash": "46abd7420e13df19be761f1ff246c739",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1783626269.3801618,
-    "ast_hash": "3c431ff262e914a8957c4da0139f9137",
+    "mtime": 1783630361.4406874,
+    "ast_hash": "d731b9aa0d0536898690c9307bf9f3f9",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -600,13 +600,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783446740.9053268,
-    "ast_hash": "e30761480423f98a40d7945d93c1f2c9",
+    "mtime": 1783632850.7187247,
+    "ast_hash": "72561fe14cbdfd4cf396dfd149807a9d",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
-    "mtime": 1783364182.8506668,
-    "ast_hash": "b691c99148e6658611a2b083643b2c93",
+    "mtime": 1783632865.070242,
+    "ast_hash": "ba98bcf3f821dfd84000205439eb9e41",
     "semantic_hash": ""
   },
   "src/lib/formatInstanceName.ts": {
@@ -615,8 +615,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1783628883.5397177,
-    "ast_hash": "416ec5f1991b457c6c0e12575eda3698",
+    "mtime": 1783632297.2256932,
+    "ast_hash": "1ec5b944fb3c0f7308ae2be46d796e0f",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -625,8 +625,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/WorldMap.tsx": {
-    "mtime": 1782855053.8477008,
-    "ast_hash": "3be3bac18bdae6eac34b2748f3f8102d",
+    "mtime": 1783632271.1443298,
+    "ast_hash": "fda9cd7d494a85c51618595d6e12f88d",
     "semantic_hash": ""
   },
   "src/components/DigitalOceanReferralModal.tsx": {
@@ -755,18 +755,33 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783628968.1934507,
-    "ast_hash": "159c57ee3f821603049b6ad55ae213e0",
+    "mtime": 1783632932.1648283,
+    "ast_hash": "615093cafbacf79fe97382fdf6ace041",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {
-    "mtime": 1783626013.976929,
-    "ast_hash": "442856e60d7e24885ca537e1626b69ca",
+    "mtime": 1783630263.8896358,
+    "ast_hash": "193a3cb7226b5facd85a520053d3bc65",
     "semantic_hash": ""
   },
   "CERTIFICATIONS_REFRESH.md": {
     "mtime": 1783626002.5569298,
     "ast_hash": "595e6e3622a0df1ca35b97b005278ca2",
+    "semantic_hash": ""
+  },
+  "public/ccc-mark.png": {
+    "mtime": 1783629517.889689,
+    "ast_hash": "74ca415562a896452ffe41a0da012851",
+    "semantic_hash": ""
+  },
+  "src/app/apple-icon.png": {
+    "mtime": 1783629471.404231,
+    "ast_hash": "80cfc34ae8a27170deb338ea76c374f8",
+    "semantic_hash": ""
+  },
+  "src/app/icon.png": {
+    "mtime": 1783629471.3926592,
+    "ast_hash": "74ca415562a896452ffe41a0da012851",
     "semantic_hash": ""
   }
 }
