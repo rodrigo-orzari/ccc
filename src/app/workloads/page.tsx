@@ -52,7 +52,7 @@ export default function WorkloadsCatalog() {
             <h1 className="text-3xl font-bold mb-2 text-[#171717] dark:text-[#e5e7eb]">
               Cloud Workloads
             </h1>
-            <p className="text-[#737373] dark:text-[#a3a3a3] max-w-4xl text-sm leading-relaxed">
+            <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed">
               Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements. If you'd like us to create a workload template for a specific architecture or use case, we'd love to hear from you. Tell us what you need to compare.{' '}
               <a href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Request" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">
                 📧 hello@comparecloudcosts.com

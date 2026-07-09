@@ -318,7 +318,7 @@ export default function DatacentersPage() {
             {/* Header */}
             <div className="mb-6">
               <h1 className="text-3xl font-bold mb-1 text-[var(--text)]">Cloud Infrastructure</h1>
-              <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4 max-w-4xl">
+              <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4">
                 Compare data center presence, <Term term="Availability Zone">availability zones</Term>, and global coverage across providers. Click any row to expand the full <Term term="Region">region</Term> list with Availability Zone counts.
               </p>
             </div>

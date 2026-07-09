@@ -97,18 +97,9 @@ export default function CertificationsPage() {
           {/* Header — workloads-style intro paragraph */}
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">Certifications &amp; Regulations</h1>
-            <p className="text-[#737373] dark:text-[#a3a3a3] max-w-4xl text-sm leading-relaxed">
-              Compliance is a comparison axis of its own — the cheapest provider is no use if it can&apos;t
-              meet your regulatory bar. Each tile below is a security, privacy, industry, or government
-              standard, with a short definition, the providers that currently hold it, and a link to learn
-              more. Filter by <strong>provider</strong> to see the standards a cloud carries, by{' '}
-              <strong>region</strong> to focus on a jurisdiction, or by <strong>category</strong> to narrow
-              the type of standard. We track a <strong>curated set of {CERTIFICATIONS.length} widely-recognized
-              standards</strong> so clouds compare cleanly side by side — this is <strong>not</strong> an
-              exhaustive list, and the largest providers hold many more (AWS advertises 140+, Azure 100+). For
-              a provider&apos;s complete, authoritative list, open its <strong>trust center</strong> linked at
-              the bottom. Status is compiled from each provider&apos;s official documentation; this is for
-              general comparison only, not legal advice. Last update, July 2026.
+            <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed">
+              Compare <strong>{CERTIFICATIONS.length} widely-recognized security, privacy, and compliance standards</strong> across major cloud providers. 
+              This curated list provides a quick overview of each provider's regulatory posture. For a complete and authoritative list, always consult the provider's official trust center. This information is for general comparison and does not constitute legal advice.
             </p>
           </div>
 
@@ -153,6 +144,9 @@ export default function CertificationsPage() {
           <div className="h-px bg-[var(--border)] mb-8" />
 
           {/* Filters — datacenter-map-style button rows in a bordered box */}
+          <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Certifications by provider</h2>
+          <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers, region, or certification categories. Double-click to isolate one.</p>
+          
           <div className="border border-[var(--border)] rounded bg-[var(--surface)] mb-8 divide-y divide-[var(--border)]">
             {/* Provider */}
             <div className="px-5 py-3 flex flex-wrap items-center gap-2">
@@ -179,7 +173,7 @@ export default function CertificationsPage() {
             {/* Region */}
             <div className="px-5 py-3 flex flex-wrap items-center gap-2">
               <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Region</span>
-              {GEOGRAPHIES.map((geo) => {
+              {['Global', ...GEOGRAPHIES].map((geo) => {
                 const active = selGeos.has(geo);
                 return (
                   <button

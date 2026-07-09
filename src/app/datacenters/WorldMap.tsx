@@ -357,7 +357,7 @@ export default function WorldMap() {
     <div className="mt-8">
       {/* Header — outside the box */}
       <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Global Region Map</h2>
-      <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers. Double-click to isolate one.</p>
+      <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers and region. Double-click to isolate one.</p>
 
       <div className="border border-[var(--border)] rounded overflow-hidden bg-[var(--surface)]">
       {/* Provider + Geography filters — single row */}
