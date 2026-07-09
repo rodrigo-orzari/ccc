@@ -8,7 +8,9 @@
 // standard-body links are used only to DEFINE each standard, never as the source
 // of truth for who holds it.
 //
-// Refresh cadence: re-verify against PROVIDER_COMPLIANCE_SOURCES every ~6 months.
+// Refresh cadence: re-verify against each provider's sourceUrl every ~6 months.
+// HOW TO REFRESH: see CERTIFICATIONS_REFRESH.md at the repo root — it contains the
+// ready-to-paste Claude Code prompt and review steps.
 // A "not held" (absence from a provider's list) means "not found in that
 // provider's published documentation as of the verification date" — see the
 // disclaimer rendered on /certifications. This is not legal advice.

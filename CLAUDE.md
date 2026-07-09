@@ -80,6 +80,7 @@ npm run worker     # Background cron worker (tsx src/workers/scheduler.ts)
 | Deploy to production | OPERATIONS_RUNBOOK.md |
 | Security vulnerabilities | SECURITY_AUDIT.md |
 | Security fixes applied | SECURITY_FIXES.md |
+| Refresh /certifications data | CERTIFICATIONS_REFRESH.md |
 
 ## Adding a New Cloud Provider
 See PROJECT_ANALYSIS.md § 4.3 for the step-by-step guide.

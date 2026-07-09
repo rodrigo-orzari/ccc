@@ -250,6 +250,13 @@ const DocsPage: React.FC = () => {
                 </ul>
               </li>
               <li>
+                <a href="#certifications" style={{ padding: '3px 0' }}>Certifications</a>
+                <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <li><a href="#certifications-filters" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Filters</a></li>
+                  <li><a href="#certifications-accuracy" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Accuracy &amp; freshness</a></li>
+                </ul>
+              </li>
+              <li>
                 <a href="#pricing-data" style={{ padding: '3px 0' }}>Pricing Data</a>
                 <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
                   <li><a href="#sources" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data sources</a></li>
@@ -570,6 +577,41 @@ const DocsPage: React.FC = () => {
             </ul>
             <blockquote>
               <strong>Important:</strong> Always verify current infrastructure availability directly with the provider before making architecture or compliance decisions.
+            </blockquote>
+
+            <BackToTop />
+          </div>
+
+          {/* Certifications */}
+          <div className="docs-section">
+            <CopyHeading id="certifications">Certifications &amp; Regulations</CopyHeading>
+            <p>
+              The <Link href="/certifications">📜 Certifications &amp; Regulations</Link> page compares the compliance posture of each cloud provider side by side — which security, privacy, industry, and government certifications they hold — independently of pricing. It covers standards such as ISO&nbsp;27001/27017/27018, SOC&nbsp;1/2/3, PCI&nbsp;DSS, HIPAA, FedRAMP High/Moderate, CSA&nbsp;STAR, FIPS&nbsp;140-2, HITRUST, GDPR, IRAP, C5, ENS, and MTCS.
+            </p>
+            <p>
+              Like the Datacenters page, this data is curated manually from each provider's official compliance documentation rather than a live database — a missing certification means "not found in that provider's published docs at verification time," not necessarily that it is unavailable.
+            </p>
+
+            <h3 id="certifications-filters">Filters</h3>
+            <p>
+              Tiles are provider-centric — each provider shows the certifications it holds, with every certification name linking to a definition of the standard. Three filters narrow the view:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Provider</strong> — limit the tiles to specific providers.</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Region</strong> — uses the same geography buckets as the pricing pages; regional standards (e.g. IRAP, C5, ENS, MTCS) appear only when their jurisdiction is selected, while globally recognized standards always show.</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>Certification</strong> — a cross-filter: selecting one or more certifications <em>disables</em> any provider that lacks them, answering questions like "which providers qualify for FedRAMP High?"</li>
+            </ul>
+
+            <h3 id="certifications-accuracy">Accuracy &amp; freshness</h3>
+            <p>
+              Compliance status changes rarely (roughly annually), so the matrix is re-verified against each provider's official compliance page about every six months. The "Last verified" date and the per-provider source links are shown at the bottom of the page. Key caveats:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.4rem' }}>Certification names link to a <strong>definition</strong> of the standard (Wikipedia or the standard body); the provider's own compliance page — linked at the bottom of the page — is the source of truth for who holds what.</li>
+              <li style={{ marginBottom: '0.4rem' }}>Some entries are intentionally <strong>conservative</strong> — where a provider's page did not clearly confirm a certification, it is left off rather than assumed.</li>
+            </ul>
+            <blockquote>
+              <strong>Important:</strong> This page is for general comparison only and is not legal or compliance advice. Always confirm a provider's current certifications directly with the provider before relying on them.
             </blockquote>
 
             <BackToTop />

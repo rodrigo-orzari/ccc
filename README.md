@@ -27,6 +27,7 @@ CCC solves this by:
 3. **Comparing** configurations side-by-side with filters, sorting, and in-table visualizations
 4. **Simulating** full workload costs — e.g. "what does a 3-tier web app cost on each cloud for 1,000 concurrent users?" — via the Workloads catalog
 5. **Tracking** price changes between ingestion runs with per-row trend indicators (▲ / ▼ / ●)
+6. **Comparing** compliance posture — which certifications (ISO 27001, SOC 2, PCI DSS, HIPAA, FedRAMP, GDPR, IRAP, C5, …) each provider holds — via the Certifications & Regulations page
 
 ---
 
@@ -185,6 +186,7 @@ ccc/
 │   │   ├── robots.ts                 # SEO: robots.txt (allows all except /api/)
 │   │   ├── dashboard/page.tsx        # Marketing landing page (indexed)
 │   │   ├── datacenters/page.tsx      # Datacenter/region world map
+│   │   ├── certifications/page.tsx   # Certifications & Regulations (provider compliance matrix + filters)
 │   │   ├── about/page.tsx            # About page (solution overview, key capabilities, use cases)
 │   │   ├── docs/page.tsx             # Documentation hub (Datacenters, pricing methodology, FAQ)
 │   │   ├── status/page.tsx           # Status page (pipeline health, data freshness, coverage)
@@ -260,6 +262,7 @@ ccc/
 │   │
 │   ├── config/                       # Static fallback pricing configs (used when APIs unavailable)
 │   │   ├── workloads.ts              # Workload definitions (components, parameters, requirements)
+│   │   ├── certifications.ts         # Compliance certifications matrix (static, curated) — see CERTIFICATIONS_REFRESH.md
 │   │   ├── analytics_regions.ts      # Regional multipliers for Data & Analytics (1.00–1.32 scaling per geography)
 │   │   ├── app_hosting.ts            # App Hosting static configs (all 9 providers)
 │   │   ├── ai_models.ts              # AI model configs (all providers)
@@ -420,6 +423,11 @@ Infrastructure intelligence independent of pricing. Shows:
 
 No pricing on this page — pure infrastructure comparison. Use it to validate that your target geography is supported before running cost estimates.
 
+### Certifications & Regulations Page (`/certifications`)
+Compliance posture independent of pricing. Shows which security, privacy, industry, and government certifications each provider holds (ISO 27001/27017/27018, SOC 1/2/3, PCI DSS, HIPAA, FedRAMP High/Moderate, CSA STAR, FIPS 140-2, HITRUST, GDPR, IRAP, C5, ENS, MTCS). Provider-centric tiles with three filters — provider, region (same `GEOGRAPHIES` buckets as the pricing pages), and certification. Selecting a certification disables providers that lack it ("who qualifies for FedRAMP High?"). Certification names link to a definition of the standard; each provider's official compliance page is linked at the bottom as the source of truth.
+
+Static curated data — **no live pipeline**. Compliance changes rarely and a wrong claim carries real risk, so the matrix lives in `src/config/certifications.ts` and is refreshed roughly every 6 months via a human-reviewed Claude Code prompt. See [CERTIFICATIONS_REFRESH.md](./CERTIFICATIONS_REFRESH.md) for the ready-to-paste refresh prompt and review process.
+
 ---
 
 ## Deploying to DigitalOcean App Platform
@@ -449,6 +457,7 @@ The About page (`/about`) is the authoritative reference for users on what CCC d
 - **Comprehensive Product Coverage** — 10+ categories across 9+ cloud providers
 - **Multi-Cloud Analysis at Scale** — normalized, side-by-side comparisons
 - **Global Infrastructure Intelligence** — Datacenters page for geographic reach independent of pricing
+- **Compliance & Certification Comparison** — Certifications & Regulations page showing which standards each provider holds, independent of pricing
 - **Frequently Updated Pricing** — weekly refresh with timestamps (not real-time, but predictably fresh)
 - **Granular Cost Breakdown** — drill into compute, storage, networking, licensing independently
 - **Proactive Workload Planning** — workload templates for pre-deployment cost simulation
@@ -476,6 +485,8 @@ See [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) § 4.3 for a step-by-step walkt
 | User-facing overview | [/about](https://comparecloudcosts.com/about) page (in-app) |
 | Pipeline health & data freshness | [/status](https://comparecloudcosts.com/status) page (in-app) |
 | Infrastructure intelligence | [/docs](https://comparecloudcosts.com/docs) Datacenters section (in-app) |
+| Compliance & certifications | [/certifications](https://comparecloudcosts.com/certifications) page (in-app) |
+| Refresh certification data | [CERTIFICATIONS_REFRESH.md](./CERTIFICATIONS_REFRESH.md) |
 | Deploy to production | [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) |
 | Understand the full architecture | [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) |
 | View system diagrams | [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) |
