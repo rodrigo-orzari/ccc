@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1783628643.9351456,
-    "ast_hash": "110ad7a02c35e414b5d26db7e049edf9",
+    "mtime": 1783630371.9120212,
+    "ast_hash": "b00dac889d6e8d2f64ab69038eb80f88",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1783626269.3801618,
-    "ast_hash": "3c431ff262e914a8957c4da0139f9137",
+    "mtime": 1783630361.4406874,
+    "ast_hash": "d731b9aa0d0536898690c9307bf9f3f9",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -600,8 +600,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783446740.9053268,
-    "ast_hash": "e30761480423f98a40d7945d93c1f2c9",
+    "mtime": 1783630293.6665256,
+    "ast_hash": "b1e28a9e22bf2847fd42c457644861d9",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
@@ -615,8 +615,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1783628883.5397177,
-    "ast_hash": "416ec5f1991b457c6c0e12575eda3698",
+    "mtime": 1783630311.7877784,
+    "ast_hash": "1519f1dee04b0b4b8f6ea2fe553c34b6",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -755,18 +755,33 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783628968.1934507,
-    "ast_hash": "159c57ee3f821603049b6ad55ae213e0",
+    "mtime": 1783630285.929388,
+    "ast_hash": "473e3900c0aa8127a24f83617bd5ef4e",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {
-    "mtime": 1783626013.976929,
-    "ast_hash": "442856e60d7e24885ca537e1626b69ca",
+    "mtime": 1783630263.8896358,
+    "ast_hash": "193a3cb7226b5facd85a520053d3bc65",
     "semantic_hash": ""
   },
   "CERTIFICATIONS_REFRESH.md": {
     "mtime": 1783626002.5569298,
     "ast_hash": "595e6e3622a0df1ca35b97b005278ca2",
+    "semantic_hash": ""
+  },
+  "public/ccc-mark.png": {
+    "mtime": 1783629517.889689,
+    "ast_hash": "74ca415562a896452ffe41a0da012851",
+    "semantic_hash": ""
+  },
+  "src/app/apple-icon.png": {
+    "mtime": 1783629471.404231,
+    "ast_hash": "80cfc34ae8a27170deb338ea76c374f8",
+    "semantic_hash": ""
+  },
+  "src/app/icon.png": {
+    "mtime": 1783629471.3926592,
+    "ast_hash": "74ca415562a896452ffe41a0da012851",
     "semantic_hash": ""
   }
 }
