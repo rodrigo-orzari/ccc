@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1783543448.6656878,
-    "ast_hash": "5123ea2c0a6caf9df583ae71bf5493d9",
+    "mtime": 1783626238.7942045,
+    "ast_hash": "beb2d4e28639f321d26f8424cdcac59c",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -220,8 +220,8 @@
     "semantic_hash": "bbd006811e0d6f366d712590b31c89d2"
   },
   "CLAUDE.md": {
-    "mtime": 1783457947.281426,
-    "ast_hash": "d32c7def98f56836566b71443dd9951d",
+    "mtime": 1783626034.309482,
+    "ast_hash": "d267060ed317f8d4d10f63390da94bf1",
     "semantic_hash": ""
   },
   "public/logo.png": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1783532451.9088862,
-    "ast_hash": "db3f463788123de8ac1eab498103b100",
+    "mtime": 1783626269.3801618,
+    "ast_hash": "3c431ff262e914a8957c4da0139f9137",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -755,13 +755,18 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783625261.7268329,
-    "ast_hash": "b748586e51a5b846cb53e091def8dd01",
+    "mtime": 1783628157.4082875,
+    "ast_hash": "e3bc0e3c3825233ce3b7e702d1db8f2f",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {
-    "mtime": 1783625207.1270528,
-    "ast_hash": "2a3d7ff61ddf4a288eb2cdd5ea3cb0e8",
+    "mtime": 1783626013.976929,
+    "ast_hash": "442856e60d7e24885ca537e1626b69ca",
+    "semantic_hash": ""
+  },
+  "CERTIFICATIONS_REFRESH.md": {
+    "mtime": 1783626002.5569298,
+    "ast_hash": "595e6e3622a0df1ca35b97b005278ca2",
     "semantic_hash": ""
   }
 }

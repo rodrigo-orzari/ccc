@@ -410,8 +410,8 @@
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
-    "mtime": 1782013327.842059,
-    "ast_hash": "a956e00b32c6a109f5d66feb42e96e5f",
+    "mtime": 1783625286.5208852,
+    "ast_hash": "3b90c2fdc910dd22f461be9712432a3c",
     "semantic_hash": ""
   },
   "src/components/ProviderCards.tsx": {
@@ -675,8 +675,8 @@
     "semantic_hash": ""
   },
   "src/app/sitemap.ts": {
-    "mtime": 1783543235.8279185,
-    "ast_hash": "5e4f365f479fc82a6648bf9c0fb9e879",
+    "mtime": 1783625292.0723267,
+    "ast_hash": "2af4bd4eebbda498073e2087363c9192",
     "semantic_hash": ""
   },
   "src/app/terms/layout.tsx": {
@@ -747,6 +747,21 @@
   "src/app/workloads/layout.tsx": {
     "mtime": 1783543304.344993,
     "ast_hash": "8b0a263c31fd2bcc81d926cf133f8cc7",
+    "semantic_hash": ""
+  },
+  "src/app/certifications/layout.tsx": {
+    "mtime": 1783625266.7876449,
+    "ast_hash": "3d6c1e308088cbceb141998c4813f84a",
+    "semantic_hash": ""
+  },
+  "src/app/certifications/page.tsx": {
+    "mtime": 1783625261.7268329,
+    "ast_hash": "b748586e51a5b846cb53e091def8dd01",
+    "semantic_hash": ""
+  },
+  "src/config/certifications.ts": {
+    "mtime": 1783625207.1270528,
+    "ast_hash": "2a3d7ff61ddf4a288eb2cdd5ea3cb0e8",
     "semantic_hash": ""
   }
 }
