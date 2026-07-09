@@ -600,8 +600,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783630293.6665256,
-    "ast_hash": "b1e28a9e22bf2847fd42c457644861d9",
+    "mtime": 1783632297.306647,
+    "ast_hash": "5e6eb0c6841b901ca502dede3eabcad7",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
@@ -615,8 +615,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1783630311.7877784,
-    "ast_hash": "1519f1dee04b0b4b8f6ea2fe553c34b6",
+    "mtime": 1783632297.2256932,
+    "ast_hash": "1ec5b944fb3c0f7308ae2be46d796e0f",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -625,8 +625,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/WorldMap.tsx": {
-    "mtime": 1782855053.8477008,
-    "ast_hash": "3be3bac18bdae6eac34b2748f3f8102d",
+    "mtime": 1783632271.1443298,
+    "ast_hash": "fda9cd7d494a85c51618595d6e12f88d",
     "semantic_hash": ""
   },
   "src/components/DigitalOceanReferralModal.tsx": {
@@ -755,8 +755,8 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783630285.929388,
-    "ast_hash": "473e3900c0aa8127a24f83617bd5ef4e",
+    "mtime": 1783632266.2064378,
+    "ast_hash": "6c0a985a75fdba822d688bebe8dfd7d6",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {
