@@ -114,6 +114,21 @@ export default function ProductTypeSelector({
         </Link>
 
         <Link
+          href="/certifications"
+          className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
+            activeProductType === 'certifications' as any
+              ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm border-[#dde0f0] dark:border-[#1e1e38] cursor-default'
+              : 'border-transparent text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-60 hover:opacity-100'
+          }`}
+          style={{ textDecoration: 'none' }}
+        >
+          <span className={`text-xs font-bold flex flex-col items-center gap-0.5 ${activeProductType !== 'certifications' as any ? 'font-medium' : ''}`}>
+            <span>📜</span>
+            <span className="text-[10px] leading-tight">Compliance</span>
+          </span>
+        </Link>
+
+        <Link
           href="/datacenters"
           className={`flex items-center gap-2 px-3 py-1 rounded border transition-all ${
             activeProductType === 'datacenters' as any
