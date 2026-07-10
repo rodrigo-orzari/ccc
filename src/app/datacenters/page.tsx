@@ -318,10 +318,7 @@ export default function DatacentersPage() {
                   <span className="text-2xl">🤝</span> Sponsor This Page
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                  Have your company featured as a sponsor of our Cloud Infrastructure comparison. Reach thousands of engineers and architects researching global data center coverage.
-                </p>
-                <p className="text-[12px] font-bold text-[var(--text)] mt-2">
-                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] hover:underline">hello@comparecloudcosts.com</a>
+                  For $9,99 per month or $99 for 12 months, have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">hello@comparecloudcosts.com</a> for more information.
                 </p>
               </div>
             </div>

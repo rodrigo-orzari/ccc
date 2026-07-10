@@ -304,8 +304,8 @@ export default function WorkloadDetails() {
       <div className="flex-1 overflow-auto flex flex-col">
       {/* Workload identity strip — content aligns with the main grid's max-width
           so the title sits flush with the architecture/comparison boxes below. */}
-      <div className="border-b border-[#e5e5e5] dark:border-[#262626]">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-4 flex items-center gap-3">
+      <div>
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-4 flex items-center gap-3 border-b border-[#e5e5e5] dark:border-[#262626]">
           <span className="text-2xl">{workload.icon}</span>
           <div className="min-w-0">
             <h1 className="text-xl font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{workload.name}</h1>
@@ -382,10 +382,7 @@ export default function WorkloadDetails() {
                 <span className="text-2xl">🤝</span> Sponsor This Workload
               </h3>
               <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                Have your company featured as a sponsor of this workload comparison. Reach thousands of cloud decision-makers exploring pricing strategies.
-              </p>
-              <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
-                📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+                For $9,99 per month or $99 for 12 months, have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">hello@comparecloudcosts.com</a> for more information.
               </p>
             </div>
           </div>
@@ -745,8 +742,8 @@ export default function WorkloadDetails() {
       </main>
 
       {/* Workload Carousel - Moved completely outside main to guarantee it renders below all content */}
-      <div className="w-full border-t border-[#e5e5e5] dark:border-[#262626] bg-white dark:bg-[#000000]">
-        <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 py-8">
+      <div className="w-full bg-white dark:bg-[#000000]">
+        <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 py-8 border-t border-[#e5e5e5] dark:border-[#262626]">
           <div className="flex items-center justify-between mb-4 px-2">
             <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
               Explore Other Workloads

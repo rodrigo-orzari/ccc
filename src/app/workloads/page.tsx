@@ -88,10 +88,7 @@ export default function WorkloadsCatalog() {
                   <span className="text-2xl">🤝</span> Sponsor a Workload
                 </h3>
                 <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                  Each workload page below has a dedicated sponsorship slot. Get your company featured on the architectures most relevant to your product, in front of engineers actively comparing cloud costs for that exact use case.
-                </p>
-                <p className="text-[12px] font-bold text-[#171717] dark:text-[#e5e7eb] mt-2">
-                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline">hello@comparecloudcosts.com</a>
+                  For $9,99 per month or $99 for 12 months, have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">hello@comparecloudcosts.com</a> for more information.
                 </p>
               </div>
             </div>

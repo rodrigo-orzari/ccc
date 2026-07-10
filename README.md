@@ -4,15 +4,9 @@
 
 # Compare Cloud Costs
 
-A full-stack cloud pricing comparison app that aggregates, normalizes, and compares pricing across **AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, Cloudflare, Vultr, and Hetzner** in a single side-by-side dashboard.
+A full-stack cloud pricing comparison app that aggregates, normalizes, and compares pricing across **AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, Cloudflare, Vultr, and Hetzner** in a single side-by-side dashboard. **Live at [comparecloudcosts.com](https://comparecloudcosts.com)**
 
-**Live at [comparecloudcosts.com](https://comparecloudcosts.com)**
-
-Hosted on DigitalOcean App Platform. If you're creating a new account, our referral link gives the project free hosting credits:
-
-<a href="https://www.digitalocean.com/?refcode=23d2b384f3b1&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge"><img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%203.svg" alt="DigitalOcean Referral Badge" /></a>
-
-**[❤️ Support this project](https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295210d2aafb687ca)** — donations cover infrastructure and AI tooling costs.
+**[☕ Buy me a coffee](https://connect.intuit.com/pay/comparecloudcosts/scs-v1-824a8961cf5a42edb4a9669eadc326d633c0e43cb25c449994ebf699ef3f754543e8bdeece91480e82e233bb2fd5f5c5-0)** — donations cover infrastructure and AI tooling costs.
 
 ---
 
@@ -95,7 +89,6 @@ Filters dynamically adapt per product category to reduce clutter and highlight r
 | Pipelines | `tsx` (TypeScript runner) · `playwright` (web scrapers) |
 | Scheduling | `node-cron` (background worker process) |
 | Email | `nodemailer` (price drift + staleness alerts) |
-| Hosting | DigitalOcean App Platform |
 
 ---
 
@@ -103,7 +96,7 @@ Filters dynamically adapt per product category to reduce clutter and highlight r
 
 ### Prerequisites
 - Node.js 18+
-- PostgreSQL 14+ (local or managed, e.g. DigitalOcean Managed Databases)
+- PostgreSQL 14+ (local or managed)
 
 ### 1. Clone & install
 
@@ -126,7 +119,7 @@ DATABASE_URL="postgres://user:password@host:5432/dbname"
 ADMIN_API_KEY="$(openssl rand -hex 32)"   # protects /api/admin/* endpoints
 ```
 
-For DigitalOcean Managed Postgres, also set:
+For managed PostgreSQL requiring SSL certificates, also set:
 ```bash
 DATABASE_CA_CERT="$(cat /path/to/ca-certificate.crt | base64)"
 ```
@@ -432,24 +425,6 @@ Static curated data — **no live pipeline**. Compliance changes rarely and a wr
 
 ---
 
-## 🌊 Deploying to DigitalOcean App Platform
-
-1. Fork this repository
-2. Create a new App on [cloud.digitalocean.com/apps](https://cloud.digitalocean.com/apps)
-3. Connect your fork — set build command `npm run build`, run command `npm run start`
-4. Add a **Managed PostgreSQL** database component (or attach an existing cluster)
-5. Set environment variables (see `.env.example`):
-   - `DATABASE_URL` — provided automatically if you attach a DO Managed DB
-   - `DATABASE_CA_CERT` — download from your DB cluster's Connection Details page, then `cat ca-cert.crt | base64`
-   - `ADMIN_API_KEY` — generate with `openssl rand -hex 32`
-   - `NODE_ENV=production`
-6. Deploy. After first deploy:
-   - Trigger `POST /api/admin/init-db` to set up the schema
-   - Trigger `POST /api/admin/fetch-pricing?type=all` to populate all product categories
-   - (Optional) Trigger `npm run ingest` locally if you want to capture the latest pricing before opening to users
-
-See [OPERATIONS_RUNBOOK.md](./OPERATIONS_RUNBOOK.md) for a complete production checklist.
-
 ---
 
 ## 💬 About Page & User-Facing Messaging
@@ -514,6 +489,6 @@ Pull Requests are welcome. Please open an Issue first for significant changes.
 - **Feature idea?** → [Open a GitHub Discussion](../../discussions)
 - **General questions?** → hello@comparecloudcosts.com
 
-<p align="center"><strong><a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-d4824657f6fd4f78a6856dc5e82dd2429767f2a940be417e91832e441461fa61acbb2640b33e45d295210d2aafb687ca">❤️ Support this project</a></strong></p>
+<p align="center"><strong><a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-824a8961cf5a42edb4a9669eadc326d633c0e43cb25c449994ebf699ef3f754543e8bdeece91480e82e233bb2fd5f5c5-0">☕ Buy me a coffee</a></strong></p>
 
 <p align="center">© 2026 <a href="https://www.linkedin.com/in/rodrigoorzari/">Rodrigo Orzari</a>. All rights reserved.</p>

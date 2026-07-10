@@ -19,7 +19,7 @@
 import { GEOGRAPHIES } from './index';
 
 export type CertScope = (typeof GEOGRAPHIES)[number] | 'Global';
-export type CertCategory = 'Security' | 'Privacy' | 'Industry' | 'Government / Regional';
+export type CertCategory = 'Security' | 'Privacy' | 'Industry' | 'Government';
 
 export interface Certification {
   id: string;
@@ -103,7 +103,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     id: 'fedramp-high',
     name: 'FedRAMP High',
-    category: 'Government / Regional',
+    category: 'Government',
     scope: 'N. America',
     description: 'US government authorization for high-impact cloud workloads.',
     definitionUrl: 'https://en.wikipedia.org/wiki/FedRAMP',
@@ -111,7 +111,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     id: 'fedramp-moderate',
     name: 'FedRAMP Moderate',
-    category: 'Government / Regional',
+    category: 'Government',
     scope: 'N. America',
     description: 'US government authorization for moderate-impact cloud workloads.',
     definitionUrl: 'https://en.wikipedia.org/wiki/FedRAMP',
@@ -151,7 +151,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     id: 'irap',
     name: 'IRAP',
-    category: 'Government / Regional',
+    category: 'Government',
     scope: 'Australia',
     description: 'Australian Government Information Security Registered Assessors Program.',
     definitionUrl: 'https://www.cyber.gov.au/irap',
@@ -159,7 +159,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     id: 'c5',
     name: 'BSI C5',
-    category: 'Government / Regional',
+    category: 'Government',
     scope: 'W. Europe',
     description: 'Germany’s Cloud Computing Compliance Criteria Catalogue (BSI).',
     definitionUrl: 'https://www.bsi.bund.de/EN/Topics/CloudComputing/Compliance_Criteria_Catalogue/Compliance_Criteria_Catalogue_node.html',
@@ -167,7 +167,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     id: 'ens',
     name: 'ENS',
-    category: 'Government / Regional',
+    category: 'Government',
     scope: 'W. Europe',
     description: 'Spain’s Esquema Nacional de Seguridad (National Security Framework).',
     definitionUrl: 'https://ens.ccn.cni.es/en/',
@@ -175,7 +175,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     id: 'mtcs',
     name: 'MTCS',
-    category: 'Government / Regional',
+    category: 'Government',
     scope: 'Asia Pacific',
     description: 'Singapore’s Multi-Tier Cloud Security standard (SS 584).',
     definitionUrl: 'https://www.imda.gov.sg/regulations-and-licensing-listing/ict-standards-and-quality-of-service/it-standards-and-frameworks',
@@ -215,7 +215,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     id: 'nist-800-171',
     name: 'NIST SP 800-171',
-    category: 'Government / Regional',
+    category: 'Government',
     scope: 'N. America',
     description: 'US standard for protecting controlled unclassified information (CUI).',
     definitionUrl: 'https://csrc.nist.gov/pubs/sp/800/171/r3/final',
@@ -223,7 +223,7 @@ export const CERTIFICATIONS: Certification[] = [
   {
     id: 'ismap',
     name: 'ISMAP',
-    category: 'Government / Regional',
+    category: 'Government',
     scope: 'Asia Pacific',
     description: 'Japan’s government Information system Security Management and Assessment Program.',
     definitionUrl: 'https://www.ismap.go.jp/',

@@ -12,7 +12,7 @@ import {
 } from '@/config/certifications';
 import { ExternalLink } from 'lucide-react';
 
-const CATEGORY_ORDER: CertCategory[] = ['Security', 'Privacy', 'Industry', 'Government / Regional'];
+const CATEGORY_ORDER: CertCategory[] = ['Security', 'Privacy', 'Industry', 'Government'];
 
 // Accent color per certification category — used on the tile badge and the
 // category filter buttons so the two read as the same grouping.
@@ -20,7 +20,7 @@ const CATEGORY_COLOR: Record<CertCategory, string> = {
   Security: '#2563eb',
   Privacy: '#7c3aed',
   Industry: '#059669',
-  'Government / Regional': '#dc2626',
+  'Government': '#dc2626',
 };
 
 // Which providers hold a given certification (precomputed once).
@@ -135,8 +135,8 @@ export default function CertificationsPage() {
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">Certifications &amp; Regulations</h1>
             <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed">
-              Compare <strong>security, privacy, and compliance standards</strong> across major cloud providers. 
-              This curated list provides a quick overview of each provider's regulatory posture. For a complete and authoritative list, always consult the provider's official trust center. This information is for general comparison and does not constitute legal advice. Curious where these providers actually run? Explore{' '}
+              Compare <strong>security, privacy, and compliance standards</strong> across cloud providers, databases, and AI vendors. 
+              Use the filters to align configurations, verify regulatory certifications, and access official trust centers. Curious where these providers actually run? Explore{' '}
               <Link href="/datacenters" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Datacenters</Link>{' '}
               for each cloud's global region and infrastructure footprint.
             </p>
@@ -169,10 +169,7 @@ export default function CertificationsPage() {
                   <span className="text-2xl">🤝</span> Sponsor This Page
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                  Have your company featured as a sponsor of our Certifications &amp; Regulations comparison. Reach engineers, architects, and security teams evaluating cloud compliance posture.
-                </p>
-                <p className="text-[12px] font-bold text-[var(--text)] mt-2">
-                  📧 <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] hover:underline">hello@comparecloudcosts.com</a>
+                  For $9,99 per month or $99 for 12 months, have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">hello@comparecloudcosts.com</a> for more information.
                 </p>
               </div>
             </div>
@@ -264,7 +261,7 @@ export default function CertificationsPage() {
             </span>
             <span className="text-[10px] text-[var(--muted)]">
               Counts reflect the {CERTIFICATIONS.length} standards tracked here — not each provider&apos;s full
-              catalog (AWS 140+, Azure 100+). See the trust centers below for the complete list.
+              catalog. See the trust centers below for the complete list.
             </span>
           </div>
           <div
@@ -274,8 +271,8 @@ export default function CertificationsPage() {
             {COMPLIANCE_PROVIDERS.map((p) => {
               const count = visibleCerts.filter((c) => PROVIDERS_FOR_CERT[c.id].has(p.id)).length;
               return (
-                <div key={p.id} className="px-4 py-3 bg-[var(--surface)]">
-                  <div className="text-[11px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
+                <div key={p.id} className="px-2.5 py-2.5 bg-[var(--surface)]">
+                  <div className="text-[9px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
                     {p.name}
                   </div>
                   <div className="text-2xl font-black leading-none text-[var(--text)] tabular-nums">{count}</div>
@@ -417,6 +414,12 @@ export default function CertificationsPage() {
           </div>
 
         </main>
+
+        {/* Disclaimer — plain text, no box, so it reads as fine-print not a feature panel. */}
+        <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8 text-[11px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+          <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
+          This compliance standards matrix is curated for comparison purposes. Mappings reflect each provider&apos;s publicly documented status at the last verification date. It does not constitute legal or compliance advice. Always consult the provider&apos;s official trust center and legal agreements for authoritative compliance audits and reports. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness.
+        </div>
       </div>
 
       <Footer />
