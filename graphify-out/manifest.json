@@ -140,13 +140,13 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1783706961.097257,
-    "ast_hash": "ea921d4f6a02fad08914959f4d3ea4d9",
+    "mtime": 1783707656.0447347,
+    "ast_hash": "ccbf3695f9f3bcae8e4bc5b311e4a4fe",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
-    "mtime": 1783706986.784868,
-    "ast_hash": "d00ec11763078c2fc352518e12265f78",
+    "mtime": 1783707722.7270603,
+    "ast_hash": "95d4c3fd41bc2b18c8c42ee729b09976",
     "semantic_hash": ""
   },
   "src/services/serverless_pipeline.ts": {
@@ -595,13 +595,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1783045898.1955578,
-    "ast_hash": "1c176b85d3ed060de0e2a4598b62e5b3",
+    "mtime": 1783707781.2542105,
+    "ast_hash": "a2e826a60fc523cf494779abae47b4fb",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783706027.877494,
-    "ast_hash": "ac257cb8022129e9ec3784600812ee13",
+    "mtime": 1783707782.7819545,
+    "ast_hash": "7611652159972c7a8e7db8685827f356",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
@@ -615,8 +615,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1783704922.6848757,
-    "ast_hash": "e56f2a68b72b70073dffb9f35077190f",
+    "mtime": 1783707779.2836998,
+    "ast_hash": "d5df3b0908fde3c4e9bf1c3a631f2d39",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -755,13 +755,13 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783704916.7295594,
-    "ast_hash": "36fc4fe372339ab9f9eb71372792c90a",
+    "mtime": 1783707764.0359583,
+    "ast_hash": "62fb917782565bfe2b33e0e620a0b55c",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {
-    "mtime": 1783630263.8896358,
-    "ast_hash": "193a3cb7226b5facd85a520053d3bc65",
+    "mtime": 1783707475.0414662,
+    "ast_hash": "9950c26f265ed4ec568485bf6521b9b7",
     "semantic_hash": ""
   },
   "CERTIFICATIONS_REFRESH.md": {
