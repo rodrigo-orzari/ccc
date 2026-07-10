@@ -397,6 +397,9 @@ export default function StatusPage() {
                   </div>
                 </div>
 
+                {/* Divider */}
+                <div className="max-w-[1100px] mx-auto h-px bg-[var(--border)] mb-8" />
+
                 {/* Data source legend */}
                 <div className="max-w-[1100px] mx-auto">
                   <div
@@ -420,6 +423,9 @@ export default function StatusPage() {
                     </div>
                   </div>
                 </div>
+
+                {/* Divider */}
+                <div className="max-w-[1100px] mx-auto h-px bg-[var(--border)] mb-8" />
 
               {/* Status Matrix Table */}
               {(() => {
@@ -617,6 +623,10 @@ export default function StatusPage() {
                   </div>
                 );
               })()}
+
+              {/* Divider */}
+              <div className="max-w-[1100px] mx-auto h-px bg-[var(--border)] mb-8" />
+
               <div className="max-w-[1100px] mx-auto mt-6">
                 <BackToTop />
                 <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[13px] text-[#737373] dark:text-[#a3a3a3] italic">

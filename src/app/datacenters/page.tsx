@@ -284,7 +284,7 @@ export default function DatacentersPage() {
             {/* Header */}
             <div className="mb-6">
               <h1 className="text-3xl font-bold mb-1 text-[var(--text)]">Cloud Infrastructure</h1>
-              <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4 max-w-4xl">
+              <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4">
                 Compare data center presence, availability zones, and global coverage across providers. Comparing regulatory posture instead? Visit{' '}
                 <Link href="/certifications" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Compliance</Link>{' '}
                 to see which certifications and standards each provider holds.
@@ -334,6 +334,9 @@ export default function DatacentersPage() {
             <div id="world-map" className="mb-8 scroll-mt-6">
               <WorldMap />
             </div>
+
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* Infrastructure Overview */}
             <div id="infra-table" className="scroll-mt-6">
@@ -450,6 +453,28 @@ export default function DatacentersPage() {
                       );
                     })}
                   </tbody>
+                  <tfoot>
+                    <tr className="border-t-2 border-[var(--border)] bg-[var(--surface)] font-bold">
+                      <td className="py-3 px-4 text-center text-[10px] uppercase tracking-widest text-[var(--muted)] font-bold">
+                        Total
+                      </td>
+                      {GEOGRAPHIES.map(geo => {
+                        const totalGeo = PROVIDER_INFRA.reduce((sum, p) => sum + (p.geographyCoverage[geo] ?? 0), 0);
+                        return (
+                          <td key={geo} className="py-3 px-4 text-center">
+                            <span className="text-[13px] font-black text-[var(--text)] tabular-nums">
+                              {totalGeo}
+                            </span>
+                          </td>
+                        );
+                      })}
+                      <td className="py-3 px-4 text-center">
+                        <span className="text-[13px] font-black text-[var(--text)] tabular-nums">
+                          {PROVIDER_INFRA.reduce((sum, p) => sum + p.regions, 0)}
+                        </span>
+                      </td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
               )}
@@ -486,9 +511,12 @@ export default function DatacentersPage() {
               </div>
             </div>
 
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
             {/* Data sources */}
-            <div id="data-sources" className="mt-10 border-t border-[var(--border)] pt-6 scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Data Sources</h2>
+            <div id="data-sources" className="mt-10 scroll-mt-6">
+              <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources</h2>
               <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
               </p>

@@ -256,6 +256,9 @@ export default function CertificationsPage() {
             </div>
           </div>
 
+          {/* Divider */}
+          <div className="h-px bg-[var(--border)] mb-8" />
+
           {/* Summary — certifications held per provider (respects active filters),
               connected-card grid mirroring the provider summary on other pages. */}
           <div className="mb-2">
@@ -283,6 +286,9 @@ export default function CertificationsPage() {
               );
             })}
           </div>
+
+          {/* Divider */}
+          <div className="h-px bg-[var(--border)] mb-8" />
 
           {/* Search + count + clear */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
@@ -375,9 +381,12 @@ export default function CertificationsPage() {
             </div>
           )}
 
+          {/* Divider */}
+          <div className="h-px bg-[var(--border)] mb-8" />
+
           {/* Data sources */}
-          <div id="data-sources" className="mt-12 border-t border-[var(--border)] pt-6 scroll-mt-6">
-            <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources &amp; Trust Centers</h2>
+          <div id="data-sources" className="mt-12 scroll-mt-6">
+            <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources</h2>
             <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
               The links below are each provider&apos;s official compliance hub / trust center — the complete,
               authoritative list of certifications, which for the largest clouds runs to 100+ (AWS alone
