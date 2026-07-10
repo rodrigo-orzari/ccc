@@ -253,6 +253,13 @@ export const COMPLIANCE_PROVIDERS: ComplianceSource[] = [
   { id: 'alibaba', name: 'Alibaba Cloud', color: '#FF6A00', sourceUrl: 'https://www.alibabacloud.com/en/trust-center', sourceLabel: 'Alibaba Cloud Trust Center', lastVerified: '2026-07-09' },
   { id: 'cloudflare', name: 'Cloudflare', color: '#F38020', sourceUrl: 'https://www.cloudflare.com/trust-hub/compliance-resources/', sourceLabel: 'Cloudflare Trust Hub', lastVerified: '2026-07-09' },
   { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF', sourceUrl: 'https://www.digitalocean.com/trust/certification-reports', sourceLabel: 'DigitalOcean Trust Platform', lastVerified: '2026-07-09' },
+  { id: 'openai', name: 'OpenAI', color: '#10A37F', sourceUrl: 'https://openai.com/security/', sourceLabel: 'OpenAI Security & Trust', lastVerified: '2026-07-10' },
+  { id: 'anthropic', name: 'Anthropic', color: '#CC9D87', sourceUrl: 'https://www.anthropic.com/trust', sourceLabel: 'Anthropic Trust Center', lastVerified: '2026-07-10' },
+  { id: 'pinecone', name: 'Pinecone', color: '#3B1CFF', sourceUrl: 'https://www.pinecone.io/security/', sourceLabel: 'Pinecone Trust & Security', lastVerified: '2026-07-10' },
+  { id: 'milvus', name: 'Milvus / Zilliz', color: '#00D2D3', sourceUrl: 'https://zilliz.com/trust-center', sourceLabel: 'Zilliz Trust Center', lastVerified: '2026-07-10' },
+  { id: 'qdrant', name: 'Qdrant', color: '#FF004E', sourceUrl: 'https://qdrant.tech/legal/trust-center/', sourceLabel: 'Qdrant Trust Center', lastVerified: '2026-07-10' },
+  { id: 'weaviate', name: 'Weaviate', color: '#2DCA73', sourceUrl: 'https://trust.weaviate.io/', sourceLabel: 'Weaviate Trust Portal', lastVerified: '2026-07-10' },
+  { id: 'chroma', name: 'Chroma', color: '#FF4F00', sourceUrl: 'https://www.trychroma.com/security', sourceLabel: 'Chroma Cloud Security', lastVerified: '2026-07-10' },
 ];
 
 // provider id → certification ids held, per that provider's published docs.
@@ -289,6 +296,28 @@ export const PROVIDER_CERTIFICATIONS: Record<string, string[]> = {
   ],
   digitalocean: [
     'iso-27001', 'soc-2', 'soc-3', 'pci-dss', 'csa-star', 'gdpr',
+  ],
+  openai: [
+    'iso-27001', 'iso-27017', 'iso-27018', 'soc-2', 'pci-dss', 'hipaa', 'gdpr', 'csa-star',
+    'iso-27701', 'iso-42001',
+  ],
+  anthropic: [
+    'iso-27001', 'soc-2', 'hipaa', 'gdpr', 'iso-42001',
+  ],
+  pinecone: [
+    'iso-27001', 'soc-2', 'hipaa', 'gdpr',
+  ],
+  milvus: [
+    'iso-27001', 'soc-2', 'hipaa', 'gdpr',
+  ],
+  qdrant: [
+    'soc-2', 'hipaa', 'gdpr',
+  ],
+  weaviate: [
+    'iso-27001', 'soc-2', 'hipaa', 'gdpr',
+  ],
+  chroma: [
+    'soc-2', 'hipaa', 'gdpr',
   ],
 };
 

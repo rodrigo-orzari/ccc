@@ -777,16 +777,29 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
 
       const response = await axios.get(url, { timeout: 15000 });
 
-      // Alibaba can return HTTP 200 with an error Code in the body (as opposed
-      // to a non-2xx status, which axios would already have thrown on).
-      if (response.data?.Code) {
-        const errorCode = response.data.Code;
+      // Alibaba returns HTTP 200 with a body `Code` field: "Success" on success,
+      // an error code otherwise. Only treat NON-"Success" codes as errors —
+      // previously any Code (including "Success") was thrown as an error.
+      const code = response.data?.Code;
+      if (code && code !== 'Success') {
         const errorMsg = response.data?.Message ?? JSON.stringify(response.data);
-        throw new Error(`Alibaba API error ${errorCode}: ${errorMsg}`);
+        throw new Error(`Alibaba API error ${code}: ${errorMsg}`);
       }
 
-      const tradePrice = response.data?.Data?.TradePrice ?? response.data?.Data?.ModuleDetails?.ModuleDetail?.[0]?.TradePrice;
-      const price = typeof tradePrice === 'number' ? tradePrice : parseFloat(tradePrice);
+      // GetPayAsYouGoPrice returns the hourly cost inside the module detail.
+      // Prefer the on-demand list price (OriginalCost) over the promo-adjusted
+      // CostAfterDiscount for a stable comparison figure. One-time raw dump on
+      // the first instance so the exact field is visible if extraction misses.
+      const md = response.data?.Data?.ModuleDetails?.ModuleDetail?.[0];
+      if (i === 0) {
+        console.log(`🔍 Alibaba ${inst.type} raw Data: ${JSON.stringify(response.data?.Data)}`);
+      }
+      const rawPrice =
+        response.data?.Data?.TradePrice ??
+        md?.OriginalCost ??
+        md?.CostAfterDiscount ??
+        md?.UnitPrice;
+      const price = typeof rawPrice === 'number' ? rawPrice : parseFloat(rawPrice);
       if (!price || isNaN(price) || price <= 0) continue;
 
       const gpuCount = inst.gpuCount ?? 0;

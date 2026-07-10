@@ -313,10 +313,9 @@ export default function DatacentersPage() {
               </a>
             ) : (
             <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
-              <span className="text-2xl">🤝</span>
               <div>
-                <h3 className="text-sm font-bold text-[var(--text)] mb-1">
-                  Sponsor This Page
+                <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
+                  <span className="text-2xl">🤝</span> Sponsor This Page
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
                   Have your company featured as a sponsor of our Cloud Infrastructure comparison. Reach thousands of engineers and architects researching global data center coverage.

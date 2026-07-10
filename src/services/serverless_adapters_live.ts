@@ -289,67 +289,39 @@ async function fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]>
   return skus;
 }
 
-// Finds the on-demand (non-free-tier) unit price for a SKU whose description
-// contains `descriptionSubstr`, scoped to the Cloud Run reference region.
-// Tries multiple pattern variations to handle API changes.
-function findRatePerUnit(skus: any[], descriptionSubstr: string): number | null {
-  const isCpu = descriptionSubstr.toLowerCase().includes('cpu');
+// Extracts the on-demand per-second execution rate for Cloud Run *Services*
+// from the Billing Catalog. Google's current SKU names are e.g.
+// "Services CPU (Instance-based billing) in us-central1" and
+// "Services Memory (Instance-based billing) in us-central1" (the old
+// "CPU/Memory Allocation Time" names are gone). We prefer the instance-based
+// rate — it matches the always-allocated cost model the static config assumes —
+// then fall back to request-based, excluding Cloud Run Jobs / Worker Pools /
+// min-instance ("Instances") SKUs and commitment/discount/transfer noise.
+function findCloudRunServiceRate(skus: any[], kind: 'cpu' | 'memory'): number | null {
+  const inRegion = (s: any) =>
+    (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global');
 
-  // Try multiple pattern variations for robustness against API changes
-  const patterns = [
-    descriptionSubstr,
-    descriptionSubstr.toLowerCase(),
-    descriptionSubstr.replace(' Allocation', ''),
-    descriptionSubstr.replace(/Allocation Time/, 'Time'),
-    // New patterns for current Google API (vCPU/Memory naming)
-    isCpu ? 'vcpu' : 'memory',
-    isCpu ? 'vCPU' : 'Memory',
-    isCpu ? 'vcpu-seconds' : 'memory-seconds',
-  ];
-
-  for (const pattern of patterns) {
-    const sku = skus.find(s => {
-      const desc = (s.description ?? '').toLowerCase();
-      const matchesPattern = desc.includes(pattern.toLowerCase());
-      const isNotFree = !desc.includes('free') && !desc.includes('discount') && !desc.includes('commitment');
-      const isNotTransfer = !desc.includes('transfer') && !desc.includes('data out');
-      const isInRegion = (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global');
-      return matchesPattern && isNotFree && isNotTransfer && isInRegion;
-    });
-
-    if (sku) {
-      const tiers = sku.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
-      const rate = tiers[tiers.length - 1]?.unitPrice;
-      if (!rate) continue;
-
-      const units = parseInt(rate.units ?? '0', 10);
-      const nanos = rate.nanos ?? 0;
-      const price = units + nanos / 1e9;
-      if (price > 0) return price;
-    }
-  }
-
-  // Last-resort: look for ANY SKU with 'cloud run' execution pricing (not transfer/commitment)
-  const fallbackSku = skus.find(s => {
-    const desc = (s.description ?? '').toLowerCase();
-    const hasCloudRun = desc.includes('cloud run');
-    const isExecution = (isCpu ? desc.includes('cpu') || desc.includes('vcpu') : desc.includes('memory')) &&
-                        !desc.includes('transfer') && !desc.includes('discount') && !desc.includes('commitment') && !desc.includes('free');
-    const isInRegion = (s.serviceRegions ?? []).some((r: string) => r === GCP_CLOUD_RUN_REGION || r === 'global');
-    return hasCloudRun && isExecution && isInRegion;
-  });
-
-  if (fallbackSku) {
-    const tiers = fallbackSku.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
+  const priceOf = (s: any): number | null => {
+    const tiers = s.pricingInfo?.[0]?.pricingExpression?.tieredRates ?? [];
     const rate = tiers[tiers.length - 1]?.unitPrice;
     if (!rate) return null;
-    const units = parseInt(rate.units ?? '0', 10);
-    const nanos = rate.nanos ?? 0;
-    const price = units + nanos / 1e9;
+    const price = parseInt(rate.units ?? '0', 10) + (rate.nanos ?? 0) / 1e9;
     return price > 0 ? price : null;
-  }
+  };
 
-  return null;
+  const kindRe = kind === 'cpu' ? /\bcpu\b/i : /\bmemory\b/i;
+  const candidates = skus.filter(s => {
+    const d = s.description ?? '';
+    return /\bservices\b/i.test(d) && kindRe.test(d) && inRegion(s) &&
+      !/jobs|worker pools|committed|commitment|discount|transfer|network|carrier|data out/i.test(d);
+  });
+
+  const pick =
+    candidates.find(s => /instance-based/i.test(s.description ?? '')) ??
+    candidates.find(s => /request-based/i.test(s.description ?? '') && !/tier 2/i.test(s.description ?? '')) ??
+    candidates[0];
+
+  return pick ? priceOf(pick) : null;
 }
 
 // Shared by GCPCloudRunLiveAdapter (serverless category) and
@@ -360,26 +332,19 @@ export async function fetchGcpCloudRunRates(apiKey: string): Promise<{ cpuRate: 
   const serviceName = await findCloudRunServiceName(apiKey);
   const skus = await fetchAllSkus(serviceName, apiKey);
 
-  // Diagnostic: the prior dump was 100 SKUs of pure noise (committed-use discounts
-  // and data-transfer), while the real per-second execution-rate SKUs never showed.
-  // memRate resolves ($0.0000025/GiB-s) but cpuRate is null, so the CPU execution
-  // SKU is named asymmetrically to memory. Dump ONLY the execution-rate candidates
-  // (drop commitment/discount/transfer/network noise) so the next run reveals the
-  // exact CPU SKU description — then findRatePerUnit can be fixed precisely, not blind.
-  const NOISE = /commitment|discount|transfer|network|carrier|data out|google-api/i;
-  const EXEC = /\b(v?cpu|memory|allocation|instance time|request)\b/i;
-  const execCandidates = skus.filter(s => {
-    const d = s.description ?? '';
-    return !NOISE.test(d) && EXEC.test(d);
-  });
-  console.log(`🔍 ${skus.length} total SKUs; ${execCandidates.length} execution-rate candidates (commitments/transfer excluded):`);
-  execCandidates.slice(0, 60).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
+  const cpuRate = findCloudRunServiceRate(skus, 'cpu');
+  const memRate = findCloudRunServiceRate(skus, 'memory');
+  console.log(`🔍 Cloud Run rates: cpuRate=${cpuRate}, memRate=${memRate} (region ${GCP_CLOUD_RUN_REGION})`);
 
-  const cpuRate = findRatePerUnit(skus, 'CPU Allocation Time');
-  const memRate = findRatePerUnit(skus, 'Memory Allocation Time');
-  console.log(`🔍 Matcher result: cpuRate=${cpuRate}, memRate=${memRate} (region ${GCP_CLOUD_RUN_REGION})`);
   if (cpuRate == null || memRate == null) {
-    throw new Error(`Could not find both CPU and Memory Allocation Time SKUs (cpuRate=${cpuRate}, memRate=${memRate})`);
+    // On failure only, dump the execution-rate candidates so the SKU naming can
+    // be re-checked (drops commitment/discount/transfer noise).
+    const NOISE = /commitment|discount|transfer|network|carrier|data out|google-api/i;
+    const EXEC = /\b(v?cpu|memory)\b/i;
+    const cand = skus.filter(s => { const d = s.description ?? ''; return !NOISE.test(d) && EXEC.test(d); });
+    console.log(`🔍 ${skus.length} total SKUs; ${cand.length} execution-rate candidates:`);
+    cand.slice(0, 60).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
+    throw new Error(`Could not find both Cloud Run Services CPU + Memory rates (cpuRate=${cpuRate}, memRate=${memRate})`);
   }
   return { cpuRate, memRate };
 }

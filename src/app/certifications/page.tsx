@@ -133,7 +133,7 @@ export default function CertificationsPage() {
           {/* Header — workloads-style intro paragraph */}
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">Certifications &amp; Regulations</h1>
-            <p className="text-[#737373] dark:text-[#a3a3a3] max-w-4xl text-sm leading-relaxed">
+            <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed">
               Compare <strong>security, privacy, and compliance standards</strong> across major cloud providers. 
               This curated list provides a quick overview of each provider's regulatory posture. For a complete and authoritative list, always consult the provider's official trust center. This information is for general comparison and does not constitute legal advice. Curious where these providers actually run? Explore{' '}
               <Link href="/datacenters" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Datacenters</Link>{' '}
@@ -163,10 +163,9 @@ export default function CertificationsPage() {
             </a>
           ) : (
             <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
-              <span className="text-2xl">🤝</span>
               <div>
-                <h3 className="text-sm font-bold text-[var(--text)] mb-1">
-                  Sponsor This Page
+                <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
+                  <span className="text-2xl">🤝</span> Sponsor This Page
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
                   Have your company featured as a sponsor of our Certifications &amp; Regulations comparison. Reach engineers, architects, and security teams evaluating cloud compliance posture.
