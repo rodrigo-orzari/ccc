@@ -60,6 +60,9 @@ export interface PricingRecord {
     transfer_scope?: string;
     max_message_size_kb?: string | number;
     protocols?: string;
+    // Integration comparability (see src/config/integration.ts):
+    pricing_model?: 'usage' | 'data' | 'flat';
+    normalized_price_per_1m?: number | null;
   };
 }
 

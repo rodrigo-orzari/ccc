@@ -394,9 +394,9 @@ export default function WorkloadDetails() {
         {/* Divider */}
         <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Tables */}
-          <div className="lg:col-span-8 flex flex-col gap-6 min-w-0">
+        <div className="flex flex-col gap-6">
+          {/* Tables — full width; the configuration bar is rendered above via order utilities */}
+          <div className="flex flex-col gap-6 min-w-0 order-2">
           {/* Monthly/Yearly Comparison — heading + blurb outside the table box */}
           <div>
             <h2 className="text-xl font-bold mb-1 text-[#171717] dark:text-[#e5e7eb]">
@@ -540,7 +540,7 @@ export default function WorkloadDetails() {
                                 className="flex flex-col gap-0.5 items-center hover:opacity-80 transition-opacity"
                                 style={{ textDecoration: 'none' }}
                               >
-                                <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate max-w-[160px] hover:underline">
+                                <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate max-w-[220px] hover:underline">
                                   {comp.quantity > 1 ? <span className="text-[#737373] font-bold">{comp.quantity}× </span> : ''}{formatInstanceName(comp.instanceType, provider)}
                                 </span>
                                 <div className="flex flex-col items-center gap-1 w-full mt-1">
@@ -599,9 +599,13 @@ export default function WorkloadDetails() {
           </div>
         </div>
 
-        {/* Configuration panel — mirrors FilterSidebar's chip patterns and section dividers */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-          <div className="border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000] p-5 flex flex-col gap-6">
+        {/* Configuration bar — filters on top (order-1), full width, laid out
+            horizontally like the Datacenters/Compliance pages instead of a
+            right-hand sidebar. */}
+        <div className="flex flex-col gap-6 order-1">
+          <div className="border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000] p-5 flex flex-col gap-5">
+            {/* Top row: Pricing Model · Providers · Region, side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Pricing Model */}
             <section className="space-y-3">
               <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Pricing Model</h3>
@@ -624,8 +628,6 @@ export default function WorkloadDetails() {
                 PAYG shows monthly on-demand cost. Yearly are committed-use discounts.
               </p>
             </section>
-
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mx-1" />
 
             {/* Providers */}
             <section className="space-y-3">
@@ -676,8 +678,6 @@ export default function WorkloadDetails() {
               </div>
             </section>
 
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mx-1" />
-
             {/* Region */}
             <section className="space-y-3">
               <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Region</h3>
@@ -697,13 +697,14 @@ export default function WorkloadDetails() {
                 ))}
               </div>
             </section>
+            </div>
 
-            <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mx-1" />
+            <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
 
             {/* Workload Scale */}
             <section className="space-y-4">
               <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Workload Scale</h3>
-              <div className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-5">
                 {workload.parameters.map((p) => (
                   <div key={p.id}>
                     <div className="flex justify-between items-center mb-2">

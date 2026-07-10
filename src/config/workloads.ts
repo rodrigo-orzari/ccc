@@ -131,7 +131,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         icon: '🚪',
         getRequirements: (params) => {
           return {
-            productType: 'serverless',
+            productType: 'integration',
             category: 'API Gateway',
             quantity: 1
           };
@@ -149,6 +149,17 @@ export const WORKLOADS: WorkloadDefinition[] = [
             quantity: 1
           };
         }
+      },
+      {
+        id: 'message-queue',
+        name: 'Message Queue',
+        description: 'Decouples the API from compute — buffers requests for async processing',
+        icon: '📨',
+        getRequirements: () => ({
+          productType: 'integration',
+          category: 'Messaging',
+          quantity: 1
+        })
       },
       {
         id: 'database',
@@ -383,6 +394,28 @@ export const WORKLOADS: WorkloadDefinition[] = [
             quantity: 1
           };
         }
+      },
+      {
+        id: 'message-queue',
+        name: 'Message Queue',
+        description: 'Async order & payment processing between services',
+        icon: '📨',
+        getRequirements: () => ({
+          productType: 'integration',
+          category: 'Messaging',
+          quantity: 1
+        })
+      },
+      {
+        id: 'event-bus',
+        name: 'Event Bus',
+        description: 'Fans "order-placed" events out to inventory, shipping, and analytics',
+        icon: '📡',
+        getRequirements: () => ({
+          productType: 'integration',
+          category: 'Eventing',
+          quantity: 1
+        })
       }
     ]
   },
@@ -414,6 +447,17 @@ export const WORKLOADS: WorkloadDefinition[] = [
       }
     ],
     components: [
+      {
+        id: 'pipeline-orchestration',
+        name: 'Pipeline Orchestration',
+        description: 'Coordinates the multi-stage train → evaluate → deploy pipeline (Step Functions / Logic Apps)',
+        icon: '🔀',
+        getRequirements: () => ({
+          productType: 'integration',
+          category: 'Workflow',
+          quantity: 1
+        })
+      },
       {
         id: 'training',
         name: 'Training Environment',
@@ -851,6 +895,17 @@ export const WORKLOADS: WorkloadDefinition[] = [
     ],
     components: [
       {
+        id: 'transcode-queue',
+        name: 'Transcode Queue',
+        description: 'Buffers uploads — the transcoding fleet scales on queue depth',
+        icon: '📨',
+        getRequirements: () => ({
+          productType: 'integration',
+          category: 'Messaging',
+          quantity: 1
+        })
+      },
+      {
         id: 'transcoding',
         name: 'Transcoding Compute',
         description: 'Encodes media into multiple formats and bitrates',
@@ -1060,12 +1115,12 @@ export const WORKLOADS: WorkloadDefinition[] = [
       },
       {
         id: 'orchestration',
-        name: 'Serverless Orchestration',
-        description: 'Coordinates retrieval and prompt assembly',
-        icon: '⚙️',
+        name: 'Workflow Orchestration',
+        description: 'Coordinates retrieval and prompt assembly across steps',
+        icon: '🔀',
         getRequirements: () => ({
-          productType: 'serverless',
-          category: 'Compute',
+          productType: 'integration',
+          category: 'Workflow',
           quantity: 1
         })
       },
@@ -1160,6 +1215,17 @@ export const WORKLOADS: WorkloadDefinition[] = [
             quantity: 1
           };
         }
+      },
+      {
+        id: 'alert-event-bus',
+        name: 'Alert Event Bus',
+        description: 'Fans threshold-breach events out to alerting and maintenance workflows',
+        icon: '📡',
+        getRequirements: () => ({
+          productType: 'integration',
+          category: 'Eventing',
+          quantity: 1
+        })
       },
       {
         id: 'data-warehouse',

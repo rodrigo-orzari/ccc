@@ -33,6 +33,13 @@ export async function POST(request: Request) {
           base.push(sql`pr.gpu_count > 0`);
         } else if (reqs.category === 'Inference') {
           base.push(sql`pr.category ILIKE '%ai%'`);
+        } else if (reqs.productType === 'integration' && reqs.category) {
+          // Integration records all share pr.category = 'integration'; the
+          // specific service (Message Queue / Event Bus / API Gateway /
+          // Workflow) is distinguished by attributes.service_type
+          // (Messaging / Eventing / API Gateway / Workflow — see
+          // config/integration.ts). So match on service_type, not pr.category.
+          base.push(sql`pr.attributes->>'service_type' = ${reqs.category}`);
         } else if (reqs.category) {
           base.push(sql`pr.category ILIKE ${'%' + reqs.category + '%'}`);
         }
@@ -83,10 +90,41 @@ export async function POST(request: Request) {
 
         if (match && match.length > 0) {
           const instance = match[0];
-          const isMonthly = (instance.unit || '').toLowerCase().includes('mo');
-          const monthlyPrice = isMonthly 
-            ? parseFloat(instance.price_per_unit) * reqs.quantity
-            : parseFloat(instance.price_per_unit) * 730 * reqs.quantity;
+          const unit = (instance.unit || '').toLowerCase();
+          const price = parseFloat(instance.price_per_unit);
+          let monthlyPrice: number;
+
+          if (reqs.productType === 'integration') {
+            // Integration units are consumption-based and heterogeneous
+            // ("per 1M Requests", "per 1M Events", "per 1k Actions", "per TB",
+            // flat "Mo", etc.) — the generic "× 730 hours" fallback used for
+            // hourly VM pricing produces nonsense here (e.g. GCP Pub/Sub at
+            // $40/TB would become ~$29k/mo). Instead, estimate a monthly cost
+            // from a representative usage volume per unit shape. These volumes
+            // are deliberate, tunable assumptions for a directional
+            // comparison — NOT a metered bill. Adjust to taste.
+            const ASSUMED_MILLIONS_OF_OPS_PER_MONTH = 10;   // 10M requests/events/operations
+            const ASSUMED_THOUSANDS_OF_STEPS_PER_MONTH = 100; // 100k workflow actions/steps/transitions
+            const ASSUMED_TB_PER_MONTH = 1;                 // 1 TB throughput
+            if (unit.includes('mo')) {
+              monthlyPrice = price * reqs.quantity;                                   // already monthly (flat SKU)
+            } else if (unit.includes('1m')) {
+              monthlyPrice = price * ASSUMED_MILLIONS_OF_OPS_PER_MONTH * reqs.quantity;
+            } else if (unit.includes('1k')) {
+              monthlyPrice = price * ASSUMED_THOUSANDS_OF_STEPS_PER_MONTH * reqs.quantity;
+            } else if (unit.includes('tb')) {
+              monthlyPrice = price * ASSUMED_TB_PER_MONTH * reqs.quantity;
+            } else {
+              // Unknown consumption unit (e.g. "per 10GB/Hr") — fall back to the
+              // raw per-unit price rather than inflating it ×730.
+              monthlyPrice = price * reqs.quantity;
+            }
+          } else {
+            const isMonthly = unit.includes('mo');
+            monthlyPrice = isMonthly
+              ? price * reqs.quantity
+              : price * 730 * reqs.quantity;
+          }
 
           results[provider].components.push({
             componentId: component.id,

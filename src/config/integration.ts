@@ -28,6 +28,27 @@ const CATEGORY_TO_SERVICE_TYPE: Record<RawIntegrationEntry['category'], string> 
   'Workflow': 'Workflow',
 };
 
+// Integration services are priced on three incompatible models, so a raw price
+// comparison is apples-to-oranges. We classify each row and, for the usage-based
+// ones, compute a common "$ per 1M operations" figure so they can be compared
+// (and sorted, and picked by the workload engine) on one honest axis:
+//   • usage — per 1M / 1k operations/requests/events/actions/steps → normalized.
+//   • data  — per TB / GB / Hr (throughput-billed, e.g. Pub/Sub)   → not per-op.
+//   • flat  — per month (provisioned tier, e.g. Service Bus Premium) → not per-op.
+// data/flat rows have normalized_price_per_1m = null and are shown with a model
+// badge rather than mis-sorted against per-operation prices.
+function normalizeIntegrationPrice(
+  price: number,
+  unit: string,
+): { pricing_model: 'usage' | 'data' | 'flat'; normalized_price_per_1m: number | null } {
+  const u = unit.toLowerCase();
+  if (u === 'mo' || u.includes('month')) return { pricing_model: 'flat', normalized_price_per_1m: null };
+  if (u.includes('tb') || u.includes('gb') || u.includes('/hr')) return { pricing_model: 'data', normalized_price_per_1m: null };
+  if (u.includes('1m')) return { pricing_model: 'usage', normalized_price_per_1m: price };          // already per 1M
+  if (u.includes('1k')) return { pricing_model: 'usage', normalized_price_per_1m: price * 1000 };   // per 1k → per 1M
+  return { pricing_model: 'usage', normalized_price_per_1m: price };
+}
+
 const tag = (entries: RawIntegrationEntry[]) =>
   entries.map(e => ({
     type: e.type,
@@ -37,6 +58,7 @@ const tag = (entries: RawIntegrationEntry[]) =>
       ...e.attributes,
       service_type: CATEGORY_TO_SERVICE_TYPE[e.category],
       deployment_type: 'Serverless',
+      ...normalizeIntegrationPrice(e.price, e.unit),
     },
   }));
 

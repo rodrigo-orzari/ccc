@@ -45,11 +45,12 @@ const COL_PROV       = C('prov_concurrency',      140);
 const COL_STOR       = C('max_storage',           110);
 const COL_INV        = C('inv_price',             140);
 const COL_UNIT       = C('unit',                  140);
+const COL_NORM       = C('norm_price',            170);
 
 const ALL_DEFS: ColDef[] = [
   COL_PROVIDER, COL_SKU, COL_GEO, COL_VCPU, COL_MEM, COL_PRICE, COL_SOURCE,
   COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU,
-  COL_SVC_TYPE, COL_ARCH, COL_LANG, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, COL_UNIT,
+  COL_SVC_TYPE, COL_ARCH, COL_LANG, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, COL_UNIT, COL_NORM,
 ];
 
 const DEFAULT_WIDTHS: Record<string, number> =
@@ -73,7 +74,7 @@ function getColDefs(pt: ProductType): ColDef[] {
   if (pt === 'data-analytics') return [...start, COL_MID1, COL_MID3, COL_MID2, COL_VCPU, ...tail];
   if (pt === 'ai')             return [...start, COL_MID1, COL_MID3, COL_MID2, COL_MID4, COL_PRICE, COL_INV];
   if (pt === 'security')       return [...start, COL_MID2, COL_MID1, ...tail];
-  if (pt === 'integration')    return [...start, COL_MID1, COL_MID2, ...tail];
+  if (pt === 'integration')    return [...start, COL_MID1, COL_MID2, COL_GEO, COL_UNIT, COL_PRICE, COL_NORM, COL_SOURCE];
   return [...start, ...tail];
 }
 
@@ -442,15 +443,17 @@ export default function PricingTable({
                   <Th colKey="memory_gb" sortKey="memory_gb" label="Memory (GB)" />
                 </>)}
 
-                {activeProductType === 'serverless' && <Th colKey="unit" sortKey="unit" label="Pricing Unit" />}
+                {(activeProductType === 'serverless' || activeProductType === 'integration') && <Th colKey="unit" sortKey="unit" label="Pricing Unit" />}
 
                 <Th
                   colKey="price_per_unit"
                   sortKey="price_per_unit"
-                  label={activeProductType === 'ai' ? 'Input Price (/1M)' : (activeProductType === 'serverless' || activeProductType === 'integration') ? 'Price ($)' : (showAggregation ? 'Yearly price ($)' : 'Hourly price ($)')}
+                  label={activeProductType === 'ai' ? 'Input Price (/1M)' : activeProductType === 'integration' ? 'Native Price ($)' : activeProductType === 'serverless' ? 'Price ($)' : (showAggregation ? 'Yearly price ($)' : 'Hourly price ($)')}
                   className="text-black dark:text-[#f7f8ff] hover:opacity-80"
                 />
-                
+
+                {activeProductType === 'integration' && <Th colKey="norm_price" sortKey="attributes.normalized_price_per_1m" label="Comparable ($/1M ops)" />}
+
                 {activeProductType === 'serverless' && <Th colKey="source" sortKey="data_source" label="Source" />}
                 {activeProductType === 'ai' && <Th colKey="inv_price" sortKey="attributes.outputPricePer1M" label="Output Price (/1M)" />}
                 {activeProductType !== 'serverless' && activeProductType !== 'ai' && <Th colKey="source" sortKey="data_source" label="Source" />}
@@ -623,8 +626,8 @@ function TableRow({
         <td data-col="memory_gb" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.memory_gb || '—'}</span></td>
       </>)}
 
-      {/* Pricing Unit (serverless only, since units vary widely: GB-Hour vs per 1M Requests vs Mo) */}
-      {activeProductType === 'serverless' && (
+      {/* Pricing Unit (serverless + integration, since units vary widely: GB-Hour vs per 1M Requests vs Mo) */}
+      {(activeProductType === 'serverless' || activeProductType === 'integration') && (
         <td data-col="unit" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
           <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.unit || '—'}</span>
         </td>
@@ -648,6 +651,28 @@ function TableRow({
           </div>
         </div>
       </td>
+
+      {/* Comparable $/1M ops (integration only) — usage-based rows normalized to a
+          common unit; flat/data-volume rows show their model badge since they
+          can't be compared per-operation. */}
+      {activeProductType === 'integration' && (
+        <td data-col="norm_price" className="px-6 py-4 text-center align-middle whitespace-nowrap overflow-hidden">
+          {(() => {
+            const n = record.attributes?.normalized_price_per_1m;
+            if (n != null) return <span className="text-xs font-bold text-black dark:text-[#f7f8ff]">${Number(n).toFixed(4)}</span>;
+            const model = record.attributes?.pricing_model;
+            const label = model === 'flat' ? 'Flat / mo' : model === 'data' ? 'Per volume' : '—';
+            return (
+              <span
+                title="Different pricing model — not comparable on a per-operation basis"
+                className="px-2 py-0.5 rounded-full text-[8px] font-bold border uppercase tracking-widest bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] dark:text-[#a3a3a3] border-[#dde0f0] dark:border-[#1e1e38]"
+              >
+                {label}
+              </span>
+            );
+          })()}
+        </td>
+      )}
 
       {/* Source / Output Price */}
       {activeProductType === 'serverless' && (
