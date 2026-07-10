@@ -747,7 +747,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
   },
   {
     id: 'disaster-recovery',
-    name: 'Disaster Recovery (Warm Standby)',
+    name: 'DR, Warm Standby',
     description: 'A scaled-down replica of your production environment kept running in a secondary region, ready to scale up and take over during a primary-region outage. Includes standby compute, a replicated database, cross-region backups, and failover routing.',
     icon: '🛟',
     parameters: [
@@ -1009,7 +1009,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
   },
   {
     id: 'rag-ai-knowledge-base',
-    name: 'RAG / AI Knowledge Base',
+    name: 'RAG AI Knowledge Base',
     description: 'A retrieval-augmented generation pipeline for AI chat and search products — document storage, a metadata store, serverless orchestration, and a managed inference endpoint.',
     icon: '🧠',
     parameters: [
@@ -1084,8 +1084,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
   },
   {
     id: 'smart-manufacturing',
-    name: 'Smart Manufacturing / Industrial IoT',
-    description: 'A real-time sensor analytics platform for factory floor monitoring — edge data collection, continuous stream ingestion, live metrics storage, historical analytics, and predictive maintenance using ML.',
+    name: 'Smart Manufacturing',
+    description: 'An Industrial IoT platform for real-time sensor analytics and factory-floor monitoring — edge data collection, continuous stream ingestion, live metrics storage, historical analytics, and predictive maintenance using ML.',
     icon: '🏭',
     parameters: [
       {

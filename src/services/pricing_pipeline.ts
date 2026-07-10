@@ -750,12 +750,14 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
     // provisioned one.
     if (i > 0) await sleep(300);
     try {
+      // Config keys must match Alibaba's documented ECS pricing module exactly:
+      // "InstanceType:...,IoOptimized:IoOptimized,ImageOs:linux". The region is a
+      // TOP-LEVEL `Region` request param, NOT a `RegionId` config key — passing it
+      // in the Config string caused "InvalidConfigCode ... config: RegionId:...".
       const configStr = [
         `InstanceType:${inst.type}`,
         'IoOptimized:IoOptimized',
         'ImageOs:linux',
-        'NetworkType:vpc',
-        `RegionId:${ALIBABA_REGION}`,
       ].join(',');
 
       const url = buildSignedUrl(
@@ -765,6 +767,7 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
         {
           ProductCode: 'ecs',
           SubscriptionType: 'PayAsYouGo',
+          Region: ALIBABA_REGION,
           'ModuleList.1.ModuleCode': 'InstanceType',
           'ModuleList.1.Config': configStr,
           'ModuleList.1.PriceType': 'Hour',

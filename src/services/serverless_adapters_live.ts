@@ -360,22 +360,24 @@ export async function fetchGcpCloudRunRates(apiKey: string): Promise<{ cpuRate: 
   const serviceName = await findCloudRunServiceName(apiKey);
   const skus = await fetchAllSkus(serviceName, apiKey);
 
-  // Debug: the previous run showed 0 candidates surviving the
-  // free/discount/commitment/transfer exclusion out of 208 "Cloud Run" SKUs —
-  // meaning literally every one matched an exclusion keyword, which strongly
-  // suggests the exclusion filter itself is wrong (or the real execution-rate
-  // SKUs don't say "Cloud Run" at all). Dumping the full raw list, unfiltered,
-  // to get ground truth instead of guessing at another pattern.
-  const cloudRunSkus = skus.filter(s => (s.description ?? '').includes('Cloud Run'));
-  console.log(`🔍 Found ${skus.length} total SKUs for this service, ${cloudRunSkus.length} contain "Cloud Run". Raw descriptions:`);
-  cloudRunSkus.slice(0, 100).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
-  if (cloudRunSkus.length === 0) {
-    console.log(`🔍 No "Cloud Run" SKUs at all — sampling 20 SKU descriptions from the full service catalog instead:`);
-    skus.slice(0, 20).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
-  }
+  // Diagnostic: the prior dump was 100 SKUs of pure noise (committed-use discounts
+  // and data-transfer), while the real per-second execution-rate SKUs never showed.
+  // memRate resolves ($0.0000025/GiB-s) but cpuRate is null, so the CPU execution
+  // SKU is named asymmetrically to memory. Dump ONLY the execution-rate candidates
+  // (drop commitment/discount/transfer/network noise) so the next run reveals the
+  // exact CPU SKU description — then findRatePerUnit can be fixed precisely, not blind.
+  const NOISE = /commitment|discount|transfer|network|carrier|data out|google-api/i;
+  const EXEC = /\b(v?cpu|memory|allocation|instance time|request)\b/i;
+  const execCandidates = skus.filter(s => {
+    const d = s.description ?? '';
+    return !NOISE.test(d) && EXEC.test(d);
+  });
+  console.log(`🔍 ${skus.length} total SKUs; ${execCandidates.length} execution-rate candidates (commitments/transfer excluded):`);
+  execCandidates.slice(0, 60).forEach(s => console.log(`   - [${(s.serviceRegions ?? []).join(',')}] ${s.description}`));
 
   const cpuRate = findRatePerUnit(skus, 'CPU Allocation Time');
   const memRate = findRatePerUnit(skus, 'Memory Allocation Time');
+  console.log(`🔍 Matcher result: cpuRate=${cpuRate}, memRate=${memRate} (region ${GCP_CLOUD_RUN_REGION})`);
   if (cpuRate == null || memRate == null) {
     throw new Error(`Could not find both CPU and Memory Allocation Time SKUs (cpuRate=${cpuRate}, memRate=${memRate})`);
   }

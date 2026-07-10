@@ -152,10 +152,12 @@ export default function WorkloadsCatalog() {
                   className="bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded p-3 hover:border-black dark:hover:border-white transition-colors flex flex-col group cursor-pointer"
                   style={{ textDecoration: 'none' }}
                 >
-                  <div className="text-lg mb-2">{workload.icon}</div>
-                  <h3 className="text-[13px] font-bold mb-1.5 text-[#171717] dark:text-[#e5e7eb] truncate" title={workload.name}>
-                    {workload.name}
-                  </h3>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-lg shrink-0 leading-none">{workload.icon}</span>
+                    <h3 className="text-[13px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate" title={workload.name}>
+                      {workload.name}
+                    </h3>
+                  </div>
                   <p className="text-[#737373] text-[11px] mb-3 flex-1 line-clamp-2 leading-relaxed">
                     {workload.description}
                   </p>
