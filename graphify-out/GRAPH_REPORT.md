@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-07-10)
 
 ## Corpus Check
-- 151 files · ~179,085 words
+- 151 files · ~179,119 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `19c7c2a7`
+- Built from commit: `5fcc5d23`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -74,24 +74,24 @@
 2. `PricingRecord` - 57 edges
 3. `PricingPipeline` - 19 edges
 4. `Compare Cloud Costs` - 17 edges
-5. `ServerlessPricingPipeline` - 13 edges
-6. `sleep()` - 13 edges
+5. `sleep()` - 13 edges
+6. `ServerlessPricingPipeline` - 13 edges
 7. `Serverless Language Filter Implementation Summary` - 13 edges
-8. `Compare Cloud Costs (CCC) — Claude Context` - 12 edges
-9. `fetchWithRetry()` - 12 edges
+8. `fetchWithRetry()` - 12 edges
+9. `Compare Cloud Costs (CCC) — Claude Context` - 12 edges
 10. `CCC Operations Runbook` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
-- `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
-  src/app/page.tsx → src/hooks/useDynamicFilters.ts
-- `FilterSidebarProps` --references--> `ProductType`  [EXTRACTED]
-  src/components/FilterSidebar.tsx → src/types/index.ts
-- `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
-  src/components/ProductTypeSelector.tsx → src/types/index.ts
-- `ServerlessPricingPipeline` --inherits--> `PricingPipeline`  [EXTRACTED]
-  src/services/serverless_pipeline.ts → src/services/pricing_pipeline.ts
+- `GCPContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `OracleContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `DatabricksAzureAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/data_analytics_pipeline.ts → src/services/pricing_pipeline.ts
+- `DatabricksStaticAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/data_analytics_pipeline.ts → src/services/pricing_pipeline.ts
 
 ## Import Cycles
 - None detected.
@@ -223,7 +223,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **300 isolated node(s):** `PipelineCtor`, `PIPELINE_REGISTRY`, `CATEGORY_ORDER`, `CATEGORY_COLOR`, `PROVIDERS_FOR_CERT` (+295 more)
+- **300 isolated node(s):** `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `ORACLE_FLEX_FAMILIES`, `ORACLE_GPU_MODELS`, `PipelineCtor` (+295 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -236,7 +236,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.056) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 7` to `Community 8`, `Community 32`?**
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **What connects `PipelineCtor`, `PIPELINE_REGISTRY`, `CATEGORY_ORDER` to the rest of the system?**
+- **What connects `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `ORACLE_FLEX_FAMILIES` to the rest of the system?**
   _300 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
