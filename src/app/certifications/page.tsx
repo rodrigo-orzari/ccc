@@ -35,7 +35,7 @@ const PROVIDERS_FOR_CERT: Record<string, Set<string>> = Object.fromEntries(
 
 export default function CertificationsPage() {
   const [selProviders, setSelProviders] = useState<Set<string>>(new Set(COMPLIANCE_PROVIDERS.map(p => p.id)));
-  const [selGeos, setSelGeos] = useState<Set<string>>(new Set(['Global', ...GEOGRAPHIES]));
+  const [selGeos, setSelGeos] = useState<Set<string>>(new Set(GEOGRAPHIES));
   const [selCategories, setSelCategories] = useState<Set<string>>(new Set(CATEGORY_ORDER));
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -82,7 +82,8 @@ export default function CertificationsPage() {
     const q = searchQuery.trim().toLowerCase();
     return CERTIFICATIONS.filter((c) => {
       if (!selCategories.has(c.category)) return false;
-      if (!selGeos.has(c.scope)) return false;
+      const geoMatches = c.scope === 'Global' || selGeos.has(c.scope);
+      if (!geoMatches) return false;
       const held = PROVIDERS_FOR_CERT[c.id];
       if (![...selProviders].some((p) => held.has(p))) return false;
       if (q && !c.name.toLowerCase().includes(q) && !c.description.toLowerCase().includes(q)) return false;
@@ -92,13 +93,13 @@ export default function CertificationsPage() {
 
   const anyFilterActive =
     selProviders.size < COMPLIANCE_PROVIDERS.length ||
-    selGeos.size < (GEOGRAPHIES.length + 1) ||
+    selGeos.size < GEOGRAPHIES.length ||
     selCategories.size < CATEGORY_ORDER.length ||
     searchQuery.trim().length > 0;
 
   const clearAll = () => {
     setSelProviders(new Set(COMPLIANCE_PROVIDERS.map(p => p.id)));
-    setSelGeos(new Set(['Global', ...GEOGRAPHIES]));
+    setSelGeos(new Set(GEOGRAPHIES));
     setSelCategories(new Set(CATEGORY_ORDER));
     setSearchQuery('');
   };
@@ -211,7 +212,7 @@ export default function CertificationsPage() {
             {/* Region */}
             <div className="px-5 py-3 flex flex-wrap items-center gap-2">
               <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Region</span>
-              {['Global', ...GEOGRAPHIES].map((geo) => {
+              {GEOGRAPHIES.map((geo) => {
                 const active = selGeos.has(geo);
                 return (
                   <button
@@ -267,8 +268,8 @@ export default function CertificationsPage() {
             </span>
           </div>
           <div
-            className="grid gap-px rounded-lg overflow-hidden border border-[var(--border)] bg-[var(--border)] mb-6"
-            style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))' }}
+            className="grid gap-px rounded-lg overflow-x-auto border border-[var(--border)] bg-[var(--border)] mb-6 scrollbar-thin"
+            style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(90px, 1fr)' }}
           >
             {COMPLIANCE_PROVIDERS.map((p) => {
               const count = visibleCerts.filter((c) => PROVIDERS_FOR_CERT[c.id].has(p.id)).length;
@@ -382,7 +383,7 @@ export default function CertificationsPage() {
           {/* Data sources */}
           <div id="data-sources" className="mt-12 border-t border-[var(--border)] pt-6 scroll-mt-6">
             <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources &amp; Trust Centers</h2>
-            <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed max-w-3xl">
+            <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
               The links below are each provider&apos;s official compliance hub / trust center — the complete,
               authoritative list of certifications, which for the largest clouds runs to 100+ (AWS alone
               advertises 140+). We track a curated, comparable subset above; standard names link to a
