@@ -140,13 +140,13 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1783706961.097257,
-    "ast_hash": "ea921d4f6a02fad08914959f4d3ea4d9",
+    "mtime": 1783707656.0447347,
+    "ast_hash": "ccbf3695f9f3bcae8e4bc5b311e4a4fe",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
-    "mtime": 1783706986.784868,
-    "ast_hash": "d00ec11763078c2fc352518e12265f78",
+    "mtime": 1783707722.7270603,
+    "ast_hash": "95d4c3fd41bc2b18c8c42ee729b09976",
     "semantic_hash": ""
   },
   "src/services/serverless_pipeline.ts": {
@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1783630371.9120212,
-    "ast_hash": "b00dac889d6e8d2f64ab69038eb80f88",
+    "mtime": 1783709584.2617688,
+    "ast_hash": "a4657c85afb5d43f64b7b7afcfb50188",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1783633383.0074627,
-    "ast_hash": "a456f3a28769b28a9fa454f01e7d84ed",
+    "mtime": 1783710155.0322196,
+    "ast_hash": "04a35211c7451d6163dc3f7aac9acacb",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -595,13 +595,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1783045898.1955578,
-    "ast_hash": "1c176b85d3ed060de0e2a4598b62e5b3",
+    "mtime": 1783709838.5481148,
+    "ast_hash": "a94f3ab9e704ea2e1c0be6308d818c8e",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783706027.877494,
-    "ast_hash": "ac257cb8022129e9ec3784600812ee13",
+    "mtime": 1783709841.2101307,
+    "ast_hash": "b4138e121023bbde03e0f691ea2754bf",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
@@ -615,8 +615,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1783704922.6848757,
-    "ast_hash": "e56f2a68b72b70073dffb9f35077190f",
+    "mtime": 1783710181.6433873,
+    "ast_hash": "e7cfdd873c20cfe2e8c8f8f2e16fdc26",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -755,13 +755,13 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783704916.7295594,
-    "ast_hash": "36fc4fe372339ab9f9eb71372792c90a",
+    "mtime": 1783710135.6733043,
+    "ast_hash": "7af84a3508dc999f5956f6b3e8984886",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {
-    "mtime": 1783630263.8896358,
-    "ast_hash": "193a3cb7226b5facd85a520053d3bc65",
+    "mtime": 1783708910.6682816,
+    "ast_hash": "9e3f4d9d5d38125112496de634e9f280",
     "semantic_hash": ""
   },
   "CERTIFICATIONS_REFRESH.md": {

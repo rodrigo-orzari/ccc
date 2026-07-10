@@ -140,13 +140,13 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1783707656.0447347,
-    "ast_hash": "ccbf3695f9f3bcae8e4bc5b311e4a4fe",
+    "mtime": 1783724561.9776828,
+    "ast_hash": "8217a5e0118cf5694e4b47beb536c5fb",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
-    "mtime": 1783707722.7270603,
-    "ast_hash": "95d4c3fd41bc2b18c8c42ee729b09976",
+    "mtime": 1783724461.3170946,
+    "ast_hash": "861875f619b43abf7971f0cd2805a3a2",
     "semantic_hash": ""
   },
   "src/services/serverless_pipeline.ts": {
@@ -325,13 +325,13 @@
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
-    "mtime": 1783543249.6164575,
-    "ast_hash": "de92365d467c555eafa88cadfd3331a6",
+    "mtime": 1783710320.4815784,
+    "ast_hash": "c9248f0ec8040707055ba0af7d41040e",
     "semantic_hash": ""
   },
   "src/app/providers.tsx": {
-    "mtime": 1781587736.351992,
-    "ast_hash": "22e6cd317f6ac2ec33c0f5dc39228834",
+    "mtime": 1783710324.0342355,
+    "ast_hash": "0ac5eb93b1df244fe66d7c74dd976e29",
     "semantic_hash": ""
   },
   "src/lib/api-utils.ts": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1783710155.0322196,
-    "ast_hash": "04a35211c7451d6163dc3f7aac9acacb",
+    "mtime": 1783710327.9112499,
+    "ast_hash": "85312798f494cbe71063247ffb35e38d",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -787,6 +787,11 @@
   "src/services/integration_pipeline.ts": {
     "mtime": 1783705620.7267978,
     "ast_hash": "9fe24f6522cffa97b354ab69b61246d8",
+    "semantic_hash": ""
+  },
+  "src/services/gcp_compute_rates.ts": {
+    "mtime": 1783724492.3041813,
+    "ast_hash": "ec93f5e57b6c152d4b2f93db9213e5b0",
     "semantic_hash": ""
   }
 }

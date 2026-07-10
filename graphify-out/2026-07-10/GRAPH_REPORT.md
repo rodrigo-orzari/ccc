@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-07-10)
 
 ## Corpus Check
-- 151 files · ~179,119 words
+- 151 files · ~179,225 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5fcc5d23`
+- Built from commit: `49ea7c4e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -108,7 +108,7 @@ Nodes (12): Adding a New Cloud Provider, API Routes, Architecture, Compare Cloud
 
 ### Community 2 - "Database Instance Configs"
 Cohesion: 0.20
-Nodes (8): GCPContainersLiveAdapter, AWSLambdaLiveAdapter, AzureFunctionsLiveAdapter, fetchAllSkus(), fetchGcpCloudRunRates(), findCloudRunServiceName(), findRatePerUnit(), GCPCloudRunLiveAdapter
+Nodes (8): GCPContainersLiveAdapter, AWSLambdaLiveAdapter, AzureFunctionsLiveAdapter, fetchAllSkus(), fetchGcpCloudRunRates(), findCloudRunServiceName(), findCloudRunServiceRate(), GCPCloudRunLiveAdapter
 
 ### Community 6 - "Community 6"
 Cohesion: 0.12
@@ -223,7 +223,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **300 isolated node(s):** `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `ORACLE_FLEX_FAMILIES`, `ORACLE_GPU_MODELS`, `PipelineCtor` (+295 more)
+- **300 isolated node(s):** `CATEGORY_ORDER`, `CATEGORY_COLOR`, `PROVIDERS_FOR_CERT`, `PROVIDER_COLORS`, `GEO_COLORS` (+295 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **22 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -236,7 +236,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.056) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 7` to `Community 8`, `Community 32`?**
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **What connects `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `ORACLE_FLEX_FAMILIES` to the rest of the system?**
+- **What connects `CATEGORY_ORDER`, `CATEGORY_COLOR`, `PROVIDERS_FOR_CERT` to the rest of the system?**
   _300 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
