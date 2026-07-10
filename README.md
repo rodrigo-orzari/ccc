@@ -477,16 +477,13 @@ See [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) § 4.3 for a step-by-step walkt
 
 ## 📄 License & Contributions
 
-Licensed under **AGPL-3.0**. If you modify this code and host it publicly, you must publish your changes under the same license.
-
-Pull Requests are welcome. Please open an Issue first for significant changes.
+Licensed under **AGPL-3.0**. If you modify this code and host it publicly, you must publish your changes under the same license. Pull Requests are welcome. Please open an Issue first for significant changes.
 
 ---
 
 ## 🙋 Support & Feedback
 
-- **Bug?** → [Open a GitHub Issue](../../issues)
-- **Feature idea?** → [Open a GitHub Discussion](../../discussions)
+- **Bug or Feature Idea?** → [Submit an Issue](../../issues)
 - **General questions?** → hello@comparecloudcosts.com
 
 <p align="center"><strong><a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-824a8961cf5a42edb4a9669eadc326d633c0e43cb25c449994ebf699ef3f754543e8bdeece91480e82e233bb2fd5f5c5-0">☕ Buy me a coffee</a></strong></p>
