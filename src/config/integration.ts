@@ -1,14 +1,16 @@
 /**
- * Integration & Messaging services, folded into the Serverless category.
+ * Integration & Messaging services — their OWN product category.
  *
- * service_type maps the legacy category strings to the new SERVERLESS_SERVICE_TYPES enum:
+ * These rows are processed by IntegrationPricingPipeline (integration_pipeline.ts),
+ * which saves them under service.category = 'integration' (NOT serverless). The
+ * pipeline runs from both `npm run ingest` and POST /api/admin/fetch-pricing.
+ *
+ * `service_type` normalizes each entry's raw `category` to the value the
+ * Integration "Service Type" filter uses (INTEGRATION_SERVICES in config/index.ts):
  *   Message Queue → Messaging
  *   Event Bus     → Eventing
  *   API Gateway   → API Gateway
  *   Workflow      → Workflow
- *
- * These flow through ServerlessPricingPipeline so rows land under
- * service.category = 'serverless' alongside Lambda/Functions/Run.
  */
 
 type RawIntegrationEntry = {

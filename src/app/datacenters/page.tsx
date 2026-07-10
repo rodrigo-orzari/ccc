@@ -284,8 +284,10 @@ export default function DatacentersPage() {
             {/* Header */}
             <div className="mb-6">
               <h1 className="text-3xl font-bold mb-1 text-[var(--text)]">Cloud Infrastructure</h1>
-              <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4">
-                Compare data center presence, availability zones, and global coverage across providers.
+              <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4 max-w-4xl">
+                Compare data center presence, availability zones, and global coverage across providers. Comparing regulatory posture instead? Visit{' '}
+                <Link href="/certifications" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Compliance</Link>{' '}
+                to see which certifications and standards each provider holds.
               </p>
             </div>
 

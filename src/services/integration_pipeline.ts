@@ -26,7 +26,11 @@ const STATIC_PROVIDERS: { slug: string; rows: any[]; region: string; geography: 
 ];
 
 export class IntegrationPricingPipeline extends PricingPipeline {
-  private async fetchAzureServiceBusLive(region: string): Promise<{ standardOpPrice: number, premiumHourPrice: number } | null> {
+  // Returns the live retail price for each meter, or null for a meter we could
+  // NOT find in the API response. Never substitutes a hardcoded default — a null
+  // here means the caller keeps the static config value (and labels it static),
+  // so we never present a fallback number as if it were a live fetch.
+  private async fetchAzureServiceBusLive(region: string): Promise<{ standardOpPrice: number | null, premiumHourPrice: number | null } | null> {
     try {
       const filter = encodeURIComponent(
         `serviceName eq 'Service Bus' and armRegionName eq '${region}'`
@@ -34,14 +38,14 @@ export class IntegrationPricingPipeline extends PricingPipeline {
       const url = `https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview&$filter=${filter}`;
       const res = await axios.get(url, { timeout: 15000 });
       const items = res.data?.Items ?? [];
-      
+
       const stdOpItem = items.find((i: any) => i.skuName === 'Standard' && i.meterName === 'Standard Messaging Operations' && i.retailPrice > 0);
       const premItem = items.find((i: any) => i.skuName === 'Premium' && i.meterName === 'Premium Messaging Unit');
-      
+
       if (!stdOpItem && !premItem) return null;
       return {
-        standardOpPrice: stdOpItem ? stdOpItem.retailPrice : 0.80,
-        premiumHourPrice: premItem ? premItem.retailPrice : 0.9275,
+        standardOpPrice: stdOpItem ? stdOpItem.retailPrice : null,
+        premiumHourPrice: premItem ? premItem.retailPrice : null,
       };
     } catch (err: any) {
       console.warn('⚠️ Azure Service Bus live pricing fetch failed:', err.message);
@@ -49,6 +53,8 @@ export class IntegrationPricingPipeline extends PricingPipeline {
     }
   }
 
+  // Returns the live Event Grid operations price, or null if not found — same
+  // no-fake-defaults contract as fetchAzureServiceBusLive above.
   private async fetchAzureEventGridLive(region: string): Promise<number | null> {
     try {
       const filter = encodeURIComponent(
@@ -57,9 +63,9 @@ export class IntegrationPricingPipeline extends PricingPipeline {
       const url = `https://prices.azure.com/api/retail/prices?api-version=2023-01-01-preview&$filter=${filter}`;
       const res = await axios.get(url, { timeout: 15000 });
       const items = res.data?.Items ?? [];
-      
+
       const opItem = items.find((i: any) => i.skuName === 'Standard' && i.meterName === 'Standard Event Operations' && i.retailPrice > 0);
-      return opItem ? opItem.retailPrice : 0.60;
+      return opItem ? opItem.retailPrice : null;
     } catch (err: any) {
       console.warn('⚠️ Azure Event Grid live pricing fetch failed:', err.message);
       return null;
@@ -89,11 +95,11 @@ export class IntegrationPricingPipeline extends PricingPipeline {
           let dataSource: 'live_api' | 'static_config' = 'static_config';
 
           if (p.slug === 'azure') {
-            if (inst.type === 'Service Bus Standard' && liveSb) {
+            if (inst.type === 'Service Bus Standard' && liveSb?.standardOpPrice != null) {
               price = liveSb.standardOpPrice;
               dataSource = 'live_api';
               isLiveFetched = true;
-            } else if (inst.type === 'Service Bus Premium' && liveSb) {
+            } else if (inst.type === 'Service Bus Premium' && liveSb?.premiumHourPrice != null) {
               price = Math.round(liveSb.premiumHourPrice * 24 * 30);
               dataSource = 'live_api';
               isLiveFetched = true;

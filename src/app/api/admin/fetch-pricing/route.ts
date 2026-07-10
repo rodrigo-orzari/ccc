@@ -9,6 +9,9 @@ import { NetworkingPricingPipeline } from '@/services/networking_pipeline';
 import { AIPricingPipeline } from '@/services/ai_pipeline';
 import { StoragePricingPipeline } from '@/services/storage_pipeline';
 import { DataAnalyticsPricingPipeline } from '@/services/data_analytics_pipeline';
+import { AppHostingPricingPipeline } from '@/services/app_hosting_pipeline';
+import { SecurityPricingPipeline } from '@/services/security_pipeline';
+import { IntegrationPricingPipeline } from '@/services/integration_pipeline';
 import { sendPriceDriftEmail } from '@/services/mailer';
 import { clearCache } from '@/lib/cache';
 
@@ -25,6 +28,9 @@ const PIPELINE_REGISTRY: { type: string; Pipeline: PipelineCtor }[] = [
   { type: 'ai', Pipeline: AIPricingPipeline },
   { type: 'storage', Pipeline: StoragePricingPipeline },
   { type: 'data-analytics', Pipeline: DataAnalyticsPricingPipeline },
+  { type: 'app-hosting', Pipeline: AppHostingPricingPipeline },
+  { type: 'security', Pipeline: SecurityPricingPipeline },
+  { type: 'integration', Pipeline: IntegrationPricingPipeline },
 ];
 
 export async function POST(req: NextRequest) {
