@@ -90,6 +90,9 @@ export default function WorkloadsCatalog() {
                 <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
                   For $9,99 per month or $99 for 12 months, have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">hello@comparecloudcosts.com</a> for more information.
                 </p>
+                <p className="text-[11px] text-[#737373] dark:text-[#a3a3a3] mt-1.5 opacity-80">
+                  Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-black dark:hover:text-white">Docs</Link> for detailed instructions.
+                </p>
               </div>
             </div>
           )}

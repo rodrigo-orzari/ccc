@@ -171,6 +171,9 @@ export default function CertificationsPage() {
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
                   For $9,99 per month or $99 for 12 months, have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">hello@comparecloudcosts.com</a> for more information.
                 </p>
+                <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
+                  Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
+                </p>
               </div>
             </div>
           )}
@@ -340,26 +343,21 @@ export default function CertificationsPage() {
                     <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">{c.name}</h3>
                     <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">{c.description}</p>
 
-                    {/* provider dots — held solid, not held faded */}
-                    <div className="flex items-center gap-1.5 mb-3">
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] mr-0.5">
-                        {held.size}/{COMPLIANCE_PROVIDERS.length}
-                      </span>
-                      {COMPLIANCE_PROVIDERS.map((p) => {
-                        const has = held.has(p.id);
-                        return (
-                          <span
-                            key={p.id}
-                            title={`${p.name}${has ? '' : ' — not listed'}`}
-                            className="w-2.5 h-2.5 rounded-full shrink-0"
-                            style={{
-                              backgroundColor: has ? p.color : 'transparent',
-                              border: has ? 'none' : `1px solid var(--border)`,
-                              opacity: has ? 1 : 0.5,
-                            }}
-                          />
-                        );
-                      })}
+                    {/* provider badges showing who has it */}
+                    <div className="flex flex-wrap gap-1 mb-3">
+                      {COMPLIANCE_PROVIDERS.filter((p) => held.has(p.id)).map((p) => (
+                        <span
+                          key={p.id}
+                          className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0"
+                          style={{
+                            color: p.color,
+                            borderColor: `${p.color}40`,
+                            backgroundColor: `${p.color}12`,
+                          }}
+                        >
+                          {p.name}
+                        </span>
+                      ))}
                     </div>
 
                     {/* definition link */}
