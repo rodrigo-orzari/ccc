@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-07-10)
 
 ## Corpus Check
-- 152 files · ~180,135 words
+- 152 files · ~180,986 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 877 nodes · 1402 edges · 66 communities (48 shown, 18 thin omitted)
+- 879 nodes · 1404 edges · 65 communities (45 shown, 20 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `74f8c8a6`
+- Built from commit: `f1fb4f3a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -48,7 +48,6 @@
 - [[_COMMUNITY_Community 34|Community 34]]
 - [[_COMMUNITY_Community 35|Community 35]]
 - [[_COMMUNITY_Community 36|Community 36]]
-- [[_COMMUNITY_Community 37|Community 37]]
 - [[_COMMUNITY_Community 38|Community 38]]
 - [[_COMMUNITY_Community 40|Community 40]]
 - [[_COMMUNITY_Community 41|Community 41]]
@@ -58,6 +57,7 @@
 - [[_COMMUNITY_Community 45|Community 45]]
 - [[_COMMUNITY_Community 46|Community 46]]
 - [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
 - [[_COMMUNITY_Community 53|Community 53]]
 - [[_COMMUNITY_Community 56|Community 56]]
@@ -88,19 +88,19 @@
 ## Surprising Connections (you probably didn't know these)
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
+- `FilterSidebarProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/FilterSidebar.tsx → src/types/index.ts
+- `ProductTypeSelectorProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/ProductTypeSelector.tsx → src/types/index.ts
 - `AWSContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
   src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
 - `AzureContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
-- `DigitalOceanContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
-- `GCPContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
   src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
 
 ## Import Cycles
 - 3-file cycle: `src/services/gcp_compute_rates.ts -> src/services/serverless_adapters_live.ts -> src/services/pricing_pipeline.ts -> src/services/gcp_compute_rates.ts`
 
-## Communities (66 total, 18 thin omitted)
+## Communities (65 total, 20 thin omitted)
 
 ### Community 0 - "Serverless Provider Configs"
 Cohesion: 0.05
@@ -115,8 +115,8 @@ Cohesion: 0.27
 Nodes (5): DatabricksAzureAdapter, SynapseAzureAdapter, AzureAdapter, fetchWithRetry(), sleep()
 
 ### Community 6 - "Community 6"
-Cohesion: 0.06
-Nodes (30): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, AwsStorageScraper, AzureStorageScraper (+22 more)
+Cohesion: 0.10
+Nodes (13): ALIBABA_STORAGE, AWS_STORAGE, AZURE_STORAGE, DIGITALOCEAN_STORAGE, GCP_STORAGE, ORACLE_STORAGE, AwsStorageScraper, AzureStorageScraper (+5 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.05
@@ -127,8 +127,8 @@ Cohesion: 0.19
 Nodes (7): TableRow(), PROVIDER_IDS, providerColor(), providerName(), ProviderTh(), REGION_OPTIONS, formatInstanceName()
 
 ### Community 9 - "Community 9"
-Cohesion: 0.07
-Nodes (20): VECTOR_DATABASES, ALIBABA_REDIS_INSTANCES, AlibabaDBAdapter, AWS_DOCUMENTDB_INSTANCES, AWS_DYNAMODB_INSTANCES, AWS_ELASTICACHE_INSTANCES, AWSDynamoDBAdapter, AWSElastiCacheAdapter (+12 more)
+Cohesion: 0.06
+Nodes (21): VECTOR_DATABASES, ALIBABA_REDIS_INSTANCES, AlibabaDBAdapter, AWS_DOCUMENTDB_INSTANCES, AWS_DYNAMODB_INSTANCES, AWS_ELASTICACHE_INSTANCES, AWSDynamoDBAdapter, AWSElastiCacheAdapter (+13 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.06
@@ -152,27 +152,23 @@ Nodes (12): CATEGORY_COLOR, CATEGORY_ORDER, PROVIDERS_FOR_CERT, CERT_BY_ID, Cert
 
 ### Community 15 - "Community 15"
 Cohesion: 0.06
-Nodes (35): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+27 more)
+Nodes (36): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+28 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.26
-Nodes (11): DB_FAMILY_MAPPINGS, GET(), buildPricingFilters(), parseFilterList(), VALID_PRODUCT_TYPES, Entry, getCached(), setCached() (+3 more)
-
-### Community 19 - "Community 19"
-Cohesion: 0.27
-Nodes (7): PIPELINE_REGISTRY, PipelineCtor, POST(), initDb(), requireAdminAuth(), clearCache(), SecurityPricingPipeline
+Cohesion: 0.24
+Nodes (4): AI_MODELS, AIModelConfig, AIPricingPipeline, AIStaticAdapter
 
 ### Community 24 - "Community 24"
-Cohesion: 0.10
-Nodes (19): AI_MODELS, AIModelConfig, GET(), AIPricingPipeline, AIStaticAdapter, dbCat(), DQIssue, DQReport (+11 more)
+Cohesion: 0.07
+Nodes (38): DB_FAMILY_MAPPINGS, GET(), GET(), PIPELINE_REGISTRY, PipelineCtor, POST(), buildPricingFilters(), initDb() (+30 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.50
 Nodes (4): config, getRateLimitStatus(), middleware(), rateLimitStore
 
 ### Community 28 - "Community 28"
-Cohesion: 0.11
-Nodes (10): DigitalOceanDBAdapter, OracleMySQLHeatWaveAdapter, AWSAdapter, BaseAdapter, AlibabaServerlessAdapter, AWSServerlessAdapter, AWSServerlessLiveAdapter, AzureServerlessAdapter (+2 more)
+Cohesion: 0.09
+Nodes (11): DigitalOceanContainersLiveAdapter, AWSAdapter, BaseAdapter, AWSLambdaLiveAdapter, AzureFunctionsLiveAdapter, AlibabaServerlessAdapter, AWSServerlessAdapter, AWSServerlessLiveAdapter (+3 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.25
@@ -184,7 +180,7 @@ Nodes (3): DigitalOceanReferralModal(), DonationModal(), DonationModalProps
 
 ### Community 33 - "Community 33"
 Cohesion: 0.27
-Nodes (4): AppHostingPricingPipeline, DataAnalyticsPricingPipeline, DatabasePricingPipeline, PricingPipeline
+Nodes (3): AppHostingPricingPipeline, DatabasePricingPipeline, PricingPipeline
 
 ### Community 34 - "Community 34"
 Cohesion: 0.33
@@ -195,12 +191,8 @@ Cohesion: 0.36
 Nodes (6): AWSRDSAdapter, AzureDBAdapter, buildAzureDbFilter(), deriveAzureDbMemoryGb(), deriveRedisMemoryGb(), deriveTier()
 
 ### Community 36 - "Community 36"
-Cohesion: 0.35
-Nodes (3): PricingRecord, DigitalOceanServerlessAdapter, ServerlessPricingPipeline
-
-### Community 37 - "Community 37"
-Cohesion: 0.24
-Nodes (5): NetworkingPricingPipeline, STATIC_NETWORKING_PRICING, ensureProviderId(), PriceDriftResult, STATIC_SECURITY_PRICING
+Cohesion: 0.28
+Nodes (4): AzureContainersLiveAdapter, PricingRecord, DigitalOceanServerlessAdapter, ServerlessPricingPipeline
 
 ### Community 38 - "Community 38"
 Cohesion: 0.09
@@ -231,16 +223,16 @@ Cohesion: 0.40
 Nodes (3): baseOracleEntries, ORACLE_LAMBDA_LANGUAGES, ORACLE_SERVERLESS
 
 ### Community 47 - "Community 47"
-Cohesion: 0.31
+Cohesion: 0.27
 Nodes (9): ALIBABA_INTEGRATION, AWS_INTEGRATION, AZURE_INTEGRATION, CATEGORY_TO_SERVICE_TYPE, DIGITALOCEAN_INTEGRATION, GCP_INTEGRATION, ORACLE_INTEGRATION, RawIntegrationEntry (+1 more)
 
 ### Community 53 - "Community 53"
 Cohesion: 0.05
-Nodes (25): baseGcpContainerEntries, GCP_CONTAINERS, AwsFargateScraper, AzureContainerInstancesScraper, AWSContainersLiveAdapter, AzureContainersLiveAdapter, DigitalOceanContainersLiveAdapter, GCPContainersLiveAdapter (+17 more)
+Nodes (38): baseGcpContainerEntries, GCP_CONTAINERS, AwsFargateScraper, AzureContainerInstancesScraper, AlibabaCredentials, buildSignedUrl(), percentEncode(), randomNonce() (+30 more)
 
 ### Community 65 - "Community 65"
-Cohesion: 0.17
-Nodes (7): WORKLOADS, SponsorSlot, WorkloadComponent, WorkloadDefinition, WorkloadParameter, PRODUCT_TYPE_LABELS, PRODUCT_TYPE_ORDER
+Cohesion: 0.24
+Nodes (6): SponsorSlot, WorkloadComponent, WorkloadDefinition, WorkloadParameter, PRODUCT_TYPE_LABELS, PRODUCT_TYPE_ORDER
 
 ### Community 66 - "Community 66"
 Cohesion: 0.06
@@ -252,31 +244,31 @@ Nodes (15): DatacenterRegion, GEOGRAPHIES, Geography, PROVIDER_INFRA, ProviderIn
 
 ### Community 69 - "Community 69"
 Cohesion: 0.07
-Nodes (18): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+10 more)
+Nodes (19): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+11 more)
 
 ### Community 93 - "Community 93"
 Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **302 isolated node(s):** `metadata`, `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS` (+297 more)
+- **303 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `PROVIDERS`, `ColDef`, `COL_PROVIDER` (+298 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PricingRecord` connect `Community 36` to `Database Instance Configs`, `Community 35`, `Community 69`, `Community 38`, `Community 6`, `Community 9`, `Community 47`, `Community 53`, `Community 24`, `Community 56`, `Community 28`?**
+- **Why does `PricingRecord` connect `Community 36` to `Database Instance Configs`, `Community 35`, `Community 69`, `Community 38`, `Community 6`, `Community 9`, `Community 47`, `Community 18`, `Community 53`, `Community 56`, `Community 28`?**
   _High betweenness centrality (0.078) - this node is a cross-community bridge._
-- **Why does `BaseAdapter` connect `Community 28` to `Database Instance Configs`, `Community 35`, `Community 36`, `Community 69`, `Community 6`, `Community 9`, `Community 47`, `Community 53`, `Community 24`, `Community 56`?**
+- **Why does `BaseAdapter` connect `Community 28` to `Database Instance Configs`, `Community 35`, `Community 36`, `Community 69`, `Community 9`, `Community 47`, `Community 18`, `Community 19`, `Community 53`, `Community 56`?**
   _High betweenness centrality (0.055) - this node is a cross-community bridge._
-- **Why does `PROVIDERS` connect `Community 7` to `Community 8`, `Community 11`, `Community 6`?**
+- **Why does `PROVIDERS` connect `Community 7` to `Community 8`, `Community 11`, `Community 53`?**
   _High betweenness centrality (0.034) - this node is a cross-community bridge._
-- **What connects `metadata`, `PipelineStatus`, `ProviderStatus` to the rest of the system?**
-  _302 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `PROVIDERS` to the rest of the system?**
+  _303 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
 - **Should `Community 6` be split into smaller, more focused modules?**
-  _Cohesion score 0.05764411027568922 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10256410256410256 - nodes in this community are weakly interconnected._
 - **Should `Community 7` be split into smaller, more focused modules?**
   _Cohesion score 0.053703703703703705 - nodes in this community are weakly interconnected._
