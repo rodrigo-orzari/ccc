@@ -7,6 +7,7 @@ import { DIGITALOCEAN_INSTANCES, DIGITALOCEAN_REGION, DIGITALOCEAN_GEOGRAPHY } f
 import { ALIBABA_INSTANCES, ALIBABA_REGION, ALIBABA_GEOGRAPHY } from '../config/alibaba_instances.ts';
 import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.ts';
 import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.ts';
+import { fetchGcpComputeRates, gcpFamilyOf, gcpGpuModelOf } from './gcp_compute_rates';
 import { PROVIDERS } from '../config/index.ts';
 import { DatabasePricingPipeline } from './database_pipeline';
 
@@ -380,73 +381,69 @@ export class AWSAdapter extends BaseAdapter {
 export class GCPAdapter extends BaseAdapter {
   providerSlug = 'gcp';
 
+  // Live pricing via Google's own Billing Catalog (cloudbilling.googleapis.com).
+  // We keep GCP_INSTANCES as the shape catalog and recompute each shape's price
+  // from live per-family core/ram rates (+ GPU device rate for a2/g2), exactly
+  // like the Oracle Flex recompute. Per-record fallback to static config when a
+  // family's rate isn't found — matched shapes are live_api, the rest static.
   async fetchPricing(): Promise<PricingRecord[]> {
-    try {
-      return await this.fetchFromPricingApi();
-    } catch (err: any) {
-      console.warn(`⚠️  GCP live pricing fetch failed (${err.message}), falling back to static config.`);
+    const apiKey = process.env.GCP_BILLING_API_KEY;
+    if (!apiKey) {
+      console.warn('⚠️  GCP_BILLING_API_KEY not set — Compute Engine live pricing unavailable, using static config.');
       return this.fetchFromStaticConfig();
     }
-  }
 
-  private async fetchFromPricingApi(): Promise<PricingRecord[]> {
-    console.log('Fetching GCP pricing from Cloud Pricing Calculator...');
-    const response = await fetchWithRetry(
-      'https://cloudpricingcalculator.appspot.com/static/data/pricelist.json'
-    );
+    let rates;
+    try {
+      rates = await fetchGcpComputeRates(apiKey);
+    } catch (err: any) {
+      console.warn(`⚠️  GCP Compute live rates fetch failed (${err.message}), using static config.`);
+      return this.fetchFromStaticConfig();
+    }
 
-    const priceList: Record<string, any> = response.data?.gcp_price_list ?? {};
-    const records: PricingRecord[] = [];
-    const seen = new Set<string>();
-    const PREFIX = 'CP-COMPUTEENGINE-VMIMAGE-';
+    let liveCount = 0;
+    const records: PricingRecord[] = GCP_INSTANCES.map(inst => {
+      const family = gcpFamilyOf(inst.type);
+      const fam = rates.families.get(family);
+      let price = inst.price;
+      let dataSource: 'live_api' | 'static_config' = 'static_config';
 
-    for (const [key, val] of Object.entries(priceList)) {
-      if (!key.startsWith(PREFIX)) continue;
-
-      // Prefer region-specific price over the generic 'us' bucket
-      const price: number = Number(val['us-central1'] ?? val['us'] ?? 0);
-      const cores: number = parseInt(String(val['cores'] ?? '0'), 10);
-      const memGb: number = parseFloat(String(val['memory'] ?? '0'));
-
-      if (!price || price <= 0 || cores <= 0 || memGb <= 0) continue;
-
-      // CP-COMPUTEENGINE-VMIMAGE-N2-STANDARD-4 → n2-standard-4
-      let instanceType = key.slice(PREFIX.length).toLowerCase();
-      if (instanceType.length < 3) continue;
-
-      let purchaseOption = 'OnDemand';
-      if (instanceType.endsWith('-preemptible') || instanceType.endsWith('-spot')) {
-        purchaseOption = 'Spot';
-        instanceType = instanceType.replace(/-preemptible$/, '').replace(/-spot$/, '');
+      if (fam) {
+        let computed = fam.core * inst.vcpus + fam.ram * inst.memory;
+        const gpuCount = inst.gpuCount ?? 0;
+        if (gpuCount > 0) {
+          const model = gcpGpuModelOf(family);
+          const gpuRate = model ? rates.gpus.get(model) : undefined;
+          // Can't fully price a GPU shape without its accelerator rate → stay static.
+          computed = gpuRate != null ? computed + gpuRate * gpuCount : 0;
+        }
+        if (computed > 0) {
+          price = computed;
+          dataSource = 'live_api';
+          liveCount++;
+        }
       }
 
-      const dedupeKey = `${instanceType}::${purchaseOption}`;
-      if (seen.has(dedupeKey)) continue;
-      seen.add(dedupeKey);
-
-      const cpuVendor = this.gcpCpuVendor(instanceType);
-      records.push({
+      return {
         provider: 'gcp',
         service: 'Compute Engine',
         region: GCP_REGION,
-        instanceType,
-        vcpus: cores,
-        memoryGb: memGb,
-        arch: cpuVendor === 'Ampere' ? 'ARM' : 'x86 64',
+        instanceType: inst.type,
+        vcpus: inst.vcpus,
+        memoryGb: inst.memory,
+        arch: inst.cpuVendor === 'Ampere' ? 'ARM' : 'x86 64',
         os: 'Linux',
-        cpuVendor,
-        gpuCount: (instanceType.startsWith('a2-') || instanceType.startsWith('a3-') || instanceType.startsWith('g2-')) ? 1 : 0,
+        cpuVendor: inst.cpuVendor,
+        gpuCount: inst.gpuCount ?? 0,
         geography: GCP_GEOGRAPHY,
-        category: this.classifyGcp(instanceType, cores, memGb),
+        category: this.classifyGcp(inst.type, inst.vcpus, inst.memory),
         price,
-        unit: '1 Hour',
-        dataSource: 'live_api' as const,
-        attributes: { purchaseOption },
-      });
-    }
+        unit: 'Hour',
+        dataSource,
+      };
+    });
 
-    if (records.length === 0) throw new Error('No GCP VM records parsed from pricing API response');
-    console.log(`✅ Fetched ${records.length} GCP Compute Engine records from Cloud Pricing Calculator`);
+    console.log(`✅ GCP compute: ${liveCount}/${records.length} priced live from Billing Catalog, ${records.length - liveCount} from static config.`);
     return records;
   }
 
@@ -471,11 +468,6 @@ export class GCPAdapter extends BaseAdapter {
     }));
   }
 
-  private gcpCpuVendor(instanceType: string): string {
-    if (instanceType.startsWith('t2a')) return 'Ampere';
-    if (instanceType.startsWith('n2d') || instanceType.startsWith('c2d') || instanceType.startsWith('t2d')) return 'AMD';
-    return 'Intel';
-  }
 }
 
 // Oracle bills Flex VM shapes as separate OCPU-hour + GB-hour metered rates

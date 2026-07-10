@@ -262,21 +262,24 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
  */
 export const GCP_CLOUD_RUN_REGION = 'us-central1';
 
-async function findCloudRunServiceName(apiKey: string): Promise<string> {
+// Resolve a Billing Catalog service resource name (e.g. "services/6F81-...")
+// from its displayName ("Cloud Run", "Compute Engine"). Exported so the compute
+// pipeline can reuse the same catalog client as Cloud Run.
+export async function findGcpServiceName(displayName: string, apiKey: string): Promise<string> {
   let pageToken: string | undefined;
   for (let page = 0; page < 20; page++) {
     const url = `https://cloudbilling.googleapis.com/v1/services?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
     const response = await axios.get(url, { timeout: 30000 });
     const services: any[] = response.data?.services ?? [];
-    const match = services.find(s => s.displayName === 'Cloud Run');
-    if (match) return match.name; // e.g. "services/6F81-5844-456A"
+    const match = services.find(s => s.displayName === displayName);
+    if (match) return match.name;
     pageToken = response.data?.nextPageToken;
     if (!pageToken) break;
   }
-  throw new Error('Cloud Run service not found in Billing Catalog services.list');
+  throw new Error(`GCP service "${displayName}" not found in Billing Catalog services.list`);
 }
 
-async function fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]> {
+export async function fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]> {
   const skus: any[] = [];
   let pageToken: string | undefined;
   for (let page = 0; page < 20; page++) {
@@ -329,7 +332,7 @@ function findCloudRunServiceRate(skus: any[], kind: 'cpu' | 'memory'): number | 
 // per-vCPU-second / per-GiB-second Cloud Run rates, just applied to a
 // different set of (vCPU, memory) configurations.
 export async function fetchGcpCloudRunRates(apiKey: string): Promise<{ cpuRate: number; memRate: number }> {
-  const serviceName = await findCloudRunServiceName(apiKey);
+  const serviceName = await findGcpServiceName('Cloud Run', apiKey);
   const skus = await fetchAllSkus(serviceName, apiKey);
 
   const cpuRate = findCloudRunServiceRate(skus, 'cpu');

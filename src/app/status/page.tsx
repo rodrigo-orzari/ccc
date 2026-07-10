@@ -177,17 +177,15 @@ export default function StatusPage() {
           --divider: #e5e5e5;
           --row-hover: #fafafa;
         }
-        @media (prefers-color-scheme: dark) {
-          :root {
-            --bg: #000000;
-            --surface: #000000;
-            --border: #262626;
-            --text: #e5e7eb;
-            --muted: #a3a3a3;
-            --link: #818cf8;
-            --divider: #262626;
-            --row-hover: #0a0a0a;
-          }
+        .dark {
+          --bg: #000000;
+          --surface: #000000;
+          --border: #262626;
+          --text: #e5e7eb;
+          --muted: #a3a3a3;
+          --link: #818cf8;
+          --divider: #262626;
+          --row-hover: #0a0a0a;
         }
         .status-page {
           min-height: 100vh;

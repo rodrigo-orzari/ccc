@@ -84,8 +84,21 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -100,7 +113,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="bg-gray-900 text-gray-100 min-h-screen">
+      <body className="bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] min-h-screen">
         <Providers>
           {children}
           <DigitalOceanReferralModal />
