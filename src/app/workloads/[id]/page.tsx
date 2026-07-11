@@ -467,10 +467,78 @@ export default function WorkloadDetails() {
               </div>
             ) : (
               <div className="relative group flex-1">
+                {/* MOBILE (below lg): the wide provider×component table is
+                    unreadable on phones, so mirror PricingTable's Phase-2
+                    stacked-card pattern — one card per provider, components
+                    listed vertically with the provider total in the header. */}
+                <div className="lg:hidden flex flex-col gap-3">
+                  {PROVIDER_IDS.filter(p => selectedProviders.has(p)).map(provider => {
+                    const pData = results?.[provider];
+                    const color = providerColor(provider);
+                    const unavailable = !pData || pData.components.some((x: any) => x.instanceType === 'N/A');
+                    return (
+                      <div key={provider} className="border border-[#e5e5e5] dark:border-[#262626] rounded-lg bg-white dark:bg-[#000000] overflow-hidden">
+                        <div className="flex items-center justify-between px-4 py-3 bg-[#f5f5f5] dark:bg-[#171717] border-b border-[#e5e5e5] dark:border-[#262626]">
+                          <span
+                            className="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border"
+                            style={{ color, borderColor: color + '50', backgroundColor: color + '18' }}
+                          >
+                            {providerName(provider)}
+                          </span>
+                          <span className="text-[13px] font-bold text-black dark:text-white">
+                            {unavailable ? (
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">N/A</span>
+                            ) : (
+                              <>
+                                ${(pData!.total * multiplier).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                <span className="text-[9px] font-bold uppercase tracking-widest text-[#737373] ml-1">/ {pricingModel === 'Yearly' ? 'yr' : 'mo'}</span>
+                              </>
+                            )}
+                          </span>
+                        </div>
+                        <div className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
+                          {workload.components.map(c => {
+                            const comp = pData?.components.find((x: any) => x.componentId === c.id);
+                            const has = comp && comp.instanceType !== 'N/A';
+                            const reqs = has ? c.getRequirements(parameters || {}) : null;
+                            const catalogParams = has && reqs
+                              ? new URLSearchParams({ product: catalogProductType(reqs.productType), provider, search: comp.instanceType })
+                              : null;
+                            return (
+                              <div key={c.id} className="flex items-center justify-between gap-3 px-4 py-2.5">
+                                <div className="flex items-center gap-2 min-w-0">
+                                  <span className="shrink-0">{c.icon}</span>
+                                  <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{c.name}</span>
+                                </div>
+                                {has ? (
+                                  <Link
+                                    href={`/?${catalogParams!.toString()}`}
+                                    title={`Open ${comp!.instanceType} in the main catalog`}
+                                    className="flex flex-col items-end gap-0.5 min-w-0 hover:opacity-80 transition-opacity"
+                                    style={{ textDecoration: 'none' }}
+                                  >
+                                    <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate max-w-[160px] text-right hover:underline">
+                                      {comp!.quantity > 1 ? <span className="text-[#737373]">{comp!.quantity}× </span> : ''}{formatInstanceName(comp!.instanceType, provider)}
+                                    </span>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">
+                                      ${(comp!.monthlyPrice * multiplier).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                    </span>
+                                  </Link>
+                                ) : (
+                                  <span className="text-[10px] uppercase tracking-widest text-[#a3a3a3] dark:text-[#404040]">{pData ? 'Unavailable' : '—'}</span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
                 {canTableScrollLeft && (
                   <button
                     onClick={tableScrollLeft}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
+                    className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 -ml-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
                     aria-label="Scroll left"
                   >
                     <ChevronLeft size={20} />
@@ -479,7 +547,7 @@ export default function WorkloadDetails() {
                 <div
                   ref={tableRef}
                   onScroll={checkTableScroll}
-                  className="overflow-x-scroll flex-1 always-show-scrollbar"
+                  className="hidden lg:block overflow-x-scroll flex-1 always-show-scrollbar"
                 >
                   <table className="w-full min-w-[900px] h-full text-left border-collapse">
                   <thead className="bg-[#f5f5f5] dark:bg-[#171717]">
@@ -588,7 +656,7 @@ export default function WorkloadDetails() {
                 {canTableScrollRight && (
                   <button
                     onClick={tableScrollRight}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
+                    className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 -mr-4 z-10 p-2 bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-full shadow-md text-black dark:text-white hover:bg-[#f5f5f5] dark:hover:bg-[#262626] transition-all"
                     aria-label="Scroll right"
                   >
                     <ChevronRight size={20} />
