@@ -381,22 +381,22 @@ export default function DatacentersPage() {
                   ))}
                 </tbody>
                 <tfoot>
-                  <tr className="border-t-2 border-[var(--border)] bg-[var(--bg)] hover:bg-[var(--bg)]">
-                    <td className="py-4 px-4 font-bold text-[var(--text)] text-center">Total</td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.regions}</span>
+                  <tr className="border-t-2 border-[var(--border)] bg-[var(--row-hover)] font-bold">
+                    <td className="py-3 px-4 text-center text-[10px] uppercase tracking-widest text-[var(--muted)] font-bold">Total</td>
+                    <td className="py-3 px-4 text-center">
+                      <span className="text-[14px] font-black text-[var(--text)] tabular-nums">{totals.regions}</span>
                     </td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.azs}</span>
+                    <td className="py-3 px-4 text-center">
+                      <span className="text-[14px] font-black text-[var(--text)] tabular-nums">{totals.azs}</span>
                     </td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.edgeLocations.toLocaleString()}+</span>
+                    <td className="py-3 px-4 text-center">
+                      <span className="text-[14px] font-black text-[var(--text)] tabular-nums">{totals.edgeLocations.toLocaleString()}+</span>
                     </td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.countries}+</span>
+                    <td className="py-3 px-4 text-center">
+                      <span className="text-[14px] font-black text-[var(--text)] tabular-nums">{totals.countries}+</span>
                     </td>
-                    <td className="py-4 px-4 text-center">
-                      <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{totals.govCloud}</span>
+                    <td className="py-3 px-4 text-center">
+                      <span className="text-[14px] font-black text-[var(--text)] tabular-nums">{totals.govCloud}</span>
                     </td>
                   </tr>
                 </tfoot>
@@ -454,7 +454,7 @@ export default function DatacentersPage() {
                     })}
                   </tbody>
                   <tfoot>
-                    <tr className="border-t-2 border-[var(--border)] bg-[var(--surface)] font-bold">
+                    <tr className="border-t-2 border-[var(--border)] bg-[var(--row-hover)] font-bold">
                       <td className="py-3 px-4 text-center text-[10px] uppercase tracking-widest text-[var(--muted)] font-bold">
                         Total
                       </td>
@@ -462,14 +462,14 @@ export default function DatacentersPage() {
                         const totalGeo = PROVIDER_INFRA.reduce((sum, p) => sum + (p.geographyCoverage[geo] ?? 0), 0);
                         return (
                           <td key={geo} className="py-3 px-4 text-center">
-                            <span className="text-[13px] font-black text-[var(--text)] tabular-nums">
+                            <span className="text-[14px] font-black text-[var(--text)] tabular-nums">
                               {totalGeo}
                             </span>
                           </td>
                         );
                       })}
                       <td className="py-3 px-4 text-center">
-                        <span className="text-[13px] font-black text-[var(--text)] tabular-nums">
+                        <span className="text-[14px] font-black text-[var(--text)] tabular-nums">
                           {PROVIDER_INFRA.reduce((sum, p) => sum + p.regions, 0)}
                         </span>
                       </td>
