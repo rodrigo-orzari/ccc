@@ -24,6 +24,20 @@ const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
 
 const PRODUCT_TYPE_ORDER: ProductType[] = ['vm', 'database', 'serverless', 'containers', 'networking', 'data-analytics', 'storage', 'ai', 'app-hosting', 'security', 'integration'];
 
+const PRODUCT_TYPE_EMOJIS: Record<ProductType, string> = {
+  vm: '🖥️',
+  database: '🗄️',
+  serverless: '⚡',
+  containers: '📦',
+  networking: '🌐',
+  'data-analytics': '📊',
+  storage: '💾',
+  ai: '🤖',
+  'app-hosting': '🚀',
+  security: '🔒',
+  integration: '🔗',
+};
+
 export default function WorkloadsCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -49,17 +63,37 @@ export default function WorkloadsCatalog() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
+    <div className="wl-page flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+      <style>{`
+        .wl-page {
+          --bg: #ffffff;
+          --surface: #ffffff;
+          --border: #e5e5e5;
+          --text: #171717;
+          --muted: #737373;
+          --row-hover: #fafafa;
+        }
+        @media (prefers-color-scheme: dark) {
+          .wl-page {
+            --bg: #000000;
+            --surface: #000000;
+            --border: #262626;
+            --text: #e5e7eb;
+            --muted: #a3a3a3;
+            --row-hover: #0a0a0a;
+          }
+        }
+      `}</style>
       <DonationModal showOn="workloads" />
       <ProductTypeSelector activeProductType={"workloads" as any} />
 
       <div className="flex-1 overflow-auto flex flex-col">
         <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           <div className="mb-6">
-            <h1 className="text-3xl font-bold mb-2 text-[#171717] dark:text-[#e5e7eb]">
+            <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">
               Cloud Workloads
             </h1>
-            <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed">
+            <p className="text-[var(--muted)] text-sm leading-relaxed">
               Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements. If you'd like us to create a workload template for a specific architecture or use case, we'd love to hear from you. Tell us what you need to compare.{' '}
               <a href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Request" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">
                 📧 hello@comparecloudcosts.com
@@ -68,7 +102,7 @@ export default function WorkloadsCatalog() {
           </div>
 
           {/* Divider */}
-          <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
+          <div className="h-px bg-[var(--border)] mb-8" />
 
           {/* Sponsorship Box — renders WORKLOADS_LISTING_SPONSOR's 1200×200 banner when set,
               otherwise falls back to the "become a sponsor" pitch. */}
@@ -77,7 +111,7 @@ export default function WorkloadsCatalog() {
               href={WORKLOADS_LISTING_SPONSOR.linkUrl}
               target="_blank"
               rel="noopener noreferrer sponsored"
-              className="mb-8 block rounded overflow-hidden border border-[#e5e5e5] dark:border-[#262626]"
+              className="mb-8 block rounded overflow-hidden border border-[var(--border)]"
             >
               <img
                 src={WORKLOADS_LISTING_SPONSOR.imageUrl}
@@ -104,13 +138,55 @@ export default function WorkloadsCatalog() {
           )}
 
           {/* Divider */}
-          <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mb-8" />
+          <div className="h-px bg-[var(--border)] mb-8" />
+
+          {/* Component Distribution Summary Table */}
+          <div className="mb-8 max-w-xl">
+            <h2 className="text-xl font-bold text-[var(--text)] mb-1">
+              Component Distribution
+            </h2>
+            <p className="text-sm text-[var(--muted)] mb-4">
+              The distribution of core cloud components utilized across the different workload templates.
+            </p>
+            <div className="border border-[var(--border)] rounded overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-[var(--border)] bg-[var(--surface)]">
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-left">Product Category</th>
+                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Workloads Featured In</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {PRODUCT_TYPE_ORDER.map((cat, i) => {
+                    const count = categoryCounts[cat] ?? 0;
+                    const rowBg = i % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]';
+                    return (
+                      <tr key={cat} className={`border-b border-[var(--border)] last:border-0 hover:bg-[#eef2ff] dark:hover:bg-[#111827] transition-colors ${rowBg}`}>
+                        <td className="py-2.5 px-4 whitespace-nowrap">
+                          <span className="inline-flex items-center gap-2 text-[13px] font-semibold text-[var(--text)]">
+                            <span aria-hidden="true">{PRODUCT_TYPE_EMOJIS[cat]}</span>
+                            {PRODUCT_TYPE_LABELS[cat]}
+                          </span>
+                        </td>
+                        <td className="py-2.5 px-4 text-center">
+                          <span className="text-[13px] font-black text-[var(--text)] tabular-nums">{count}</span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-[var(--border)] mb-8" />
 
           {/* Search + count */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
             <div className="relative w-full sm:max-w-xs">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-3 w-3 text-[#737373]" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-3 w-3 text-[var(--muted)]" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                 </svg>
               </div>
@@ -119,10 +195,10 @@ export default function WorkloadsCatalog() {
                 placeholder="Search workloads..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] text-[#171717] dark:text-[#e5e7eb] text-[11px] rounded pl-8 pr-3 py-1.5 focus:border-black dark:focus:border-white placeholder-[#737373] outline-none transition-colors"
+                className="w-full bg-[var(--row-hover)] border border-[var(--border)] text-[var(--text)] text-[11px] rounded pl-8 pr-3 py-1.5 focus:border-[var(--text)] placeholder-[var(--muted)] outline-none transition-colors"
               />
             </div>
-            <span className="text-[11px] text-[#737373] dark:text-[#a3a3a3]">
+            <span className="text-[11px] text-[var(--muted)]">
               Showing {filteredWorkloads.length} workloads. Contact{' '}
               <a
                 href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Proposal"
@@ -143,10 +219,10 @@ export default function WorkloadsCatalog() {
           </div>
 
           {filteredWorkloads.length === 0 ? (
-            <div className="text-center py-12 border border-dashed border-[#e5e5e5] dark:border-[#262626] rounded">
+            <div className="text-center py-12 border border-dashed border-[var(--border)] rounded">
               <div className="text-2xl mb-3">🔍</div>
-              <h3 className="text-[11px] font-bold uppercase tracking-widest text-[#737373]">No workloads found</h3>
-              <p className="text-[#737373] mt-1 text-[11px]">Try adjusting your search terms.</p>
+              <h3 className="text-[11px] font-bold uppercase tracking-widest text-[var(--muted)]">No workloads found</h3>
+              <p className="text-[var(--muted)] mt-1 text-[11px]">Try adjusting your search terms.</p>
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
@@ -154,19 +230,19 @@ export default function WorkloadsCatalog() {
                 <Link
                   key={workload.id}
                   href={`/workloads/${workload.id}`}
-                  className="bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded p-3 hover:border-black dark:hover:border-white transition-colors flex flex-col group cursor-pointer"
+                  className="bg-[var(--row-hover)] border border-[var(--border)] rounded p-3 hover:border-[var(--text)] transition-colors flex flex-col group cursor-pointer"
                   style={{ textDecoration: 'none' }}
                 >
                   <div className="flex items-center gap-2 mb-1.5">
                     <span className="text-lg shrink-0 leading-none">{workload.icon}</span>
-                    <h3 className="text-[13px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate" title={workload.name}>
+                    <h3 className="text-[13px] font-bold text-[var(--text)] truncate" title={workload.name}>
                       {workload.name}
                     </h3>
                   </div>
-                  <p className="text-[#737373] text-[11px] mb-3 flex-1 line-clamp-2 leading-relaxed">
+                  <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 line-clamp-2 leading-relaxed">
                     {workload.description}
                   </p>
-                  <div className="mt-auto pt-2 border-t border-[#e5e5e5] dark:border-[#262626] text-[9px] font-bold uppercase tracking-widest text-[#737373] group-hover:text-black dark:group-hover:text-white transition-colors flex justify-between items-center">
+                  <div className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] group-hover:text-[var(--text)] transition-colors flex justify-between items-center">
                     Configure &amp; Compare <span className="group-hover:translate-x-0.5 transition-transform">→</span>
                   </div>
                 </Link>

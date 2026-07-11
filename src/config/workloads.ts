@@ -488,7 +488,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
   {
     id: 'smart-manufacturing',
     name: 'Smart Manufacturing (IIoT)',
-    description: 'An Industrial IoT platform for real-time sensor analytics — edge collection, stream ingestion, live metrics storage, historical analytics, and predictive maintenance.',
+    description: 'An Industrial IoT (IIoT) platform for real-time sensor analytics — edge collection, stream ingestion, live metrics storage, historical analytics, and predictive maintenance.',
     icon: '🏭',
     capacityLabel: 'Sensor Fleet',
     components: [
