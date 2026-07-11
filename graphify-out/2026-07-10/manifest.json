@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1783744224.6343374,
-    "ast_hash": "eb91a7fd4c7b52fab6200356dec3752a",
+    "mtime": 1783748203.271088,
+    "ast_hash": "9011937243030f80775cce197c226052",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
@@ -275,8 +275,8 @@
     "semantic_hash": ""
   },
   "src/scrapers/aws_fargate.ts": {
-    "mtime": 1781587736.6813016,
-    "ast_hash": "f1f991625991cb31b7cf59fc09b4a3c1",
+    "mtime": 1783748243.1153119,
+    "ast_hash": "fd3bba012bf31a51f67b9b9ec180d5bd",
     "semantic_hash": ""
   },
   "src/scrapers/aws_lambda.ts": {
@@ -285,8 +285,8 @@
     "semantic_hash": ""
   },
   "src/scrapers/azure_container_instances.ts": {
-    "mtime": 1781587736.6924913,
-    "ast_hash": "d1598a90da5c8f2bf58d600fbfabf0f1",
+    "mtime": 1783748246.0343184,
+    "ast_hash": "04a2bfc6909db86f4089564431b0032b",
     "semantic_hash": ""
   },
   "src/scrapers/azure_functions.ts": {
@@ -790,8 +790,8 @@
     "semantic_hash": ""
   },
   "src/services/gcp_compute_rates.ts": {
-    "mtime": 1783744368.473129,
-    "ast_hash": "6882fe25860b92cea18b38c5d59d4111",
+    "mtime": 1783748181.726957,
+    "ast_hash": "592f31761a06d31db0cf20efd60adb59",
     "semantic_hash": ""
   },
   "src/services/gcp_billing_catalog.ts": {
