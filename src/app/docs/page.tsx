@@ -288,7 +288,7 @@ const DocsPage: React.FC = () => {
             <p>
               comparecloudcosts.com is a free, open-source tool that aggregates and normalizes on-demand
               (pay-as-you-go) pricing across AWS, Microsoft Azure, Google Cloud, Oracle Cloud,
-              DigitalOcean, and Alibaba in a single side-by-side view.
+              DigitalOcean, and Alibaba in a single side-by-side view. Our goal is to make **cloud cost comparison** simple and transparent.
             </p>
             <p>
               Use the <strong>product tabs</strong> at the top to switch between categories: AI &amp; Machine Learning,
@@ -296,7 +296,7 @@ const DocsPage: React.FC = () => {
             </p>
             <p>
               Use the <strong>filter sidebar</strong> on the left to narrow results by provider,
-              geography, instance specs, and product-specific attributes.
+              geography, instance specs, and product-specific attributes. This allows you to generate a tailored **cloud server pricing comparison** in seconds.
             </p>
             <BackToTop />
           </div>
@@ -307,7 +307,7 @@ const DocsPage: React.FC = () => {
 
             <h3 id="ai-machine-learning">🧠 <Link href="/?product=ai">AI &amp; Machine Learning</Link></h3>
             <p>
-              Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window size, multimodal capabilities, and compare input/output pricing per 1M tokens.
+              Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window size, multimodal capabilities, and compare input/output pricing per 1M tokens to optimize your **AI API costs**.
             </p>
 
             <h3 id="app-hosting">🚀 <Link href="/?product=app-hosting">App Hosting</Link></h3>
@@ -317,15 +317,13 @@ const DocsPage: React.FC = () => {
 
             <h3 id="containers">📦 <Link href="/?product=containers">Containers</Link></h3>
             <p>
-              Covers managed container runtimes including Kubernetes node pools (EKS, GKE, AKS, OKE,
-              DOKS) and serverless container platforms (Fargate, Cloud Run, ACI). Filter by
+              Covers managed container runtimes including Kubernetes node pools (**AWS EKS vs Azure AKS vs GCP GKE** node cost comparisons) and serverless container platforms (Fargate, Cloud Run, ACI). Filter by
               orchestrator, architecture (x86 or ARM), and billing granularity.
             </p>
 
             <h3 id="databases">🗄️ <Link href="/?product=database">Databases</Link></h3>
             <p>
-              Covers managed relational, NoSQL, and In-memory database services (RDS, Cloud SQL, Azure Database,
-              ElastiCache, Memorystore, etc.). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
+              Covers managed relational, NoSQL, and In-memory database services (**AWS RDS vs Azure SQL vs Google Cloud SQL** PostgreSQL/MySQL pricing). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
               Serverless), and HA mode.
             </p>
 
@@ -351,12 +349,12 @@ const DocsPage: React.FC = () => {
 
             <h3 id="storage">💾 <Link href="/?product=storage">Storage</Link></h3>
             <p>
-              Compares object, block, and file storage pricing (S3, Blob Storage, Cloud Storage, EBS). Filter by storage type, performance tier, redundancy (LRS, ZRS, GRS), and media type.
+              Compares object, block, and file storage pricing (**AWS S3 vs Azure Blob vs GCP Cloud Storage price per GB**). Filter by storage type, performance tier, redundancy (LRS, ZRS, GRS), and media type.
             </p>
 
             <h3 id="virtual-machines">🖥️ <Link href="/?product=compute">Virtual Machines</Link></h3>
             <p>
-              Compares compute instances across providers. Filter by operating system, CPU
+              Compares compute instances across providers (**AWS EC2 vs Azure VM vs GCP Compute Engine**). Filter by operating system, CPU
               vendor/architecture, GPU support, and instance category (General Purpose, Compute
               Optimized, Memory Optimized, etc.). All prices are hourly, on-demand, Linux-based
               unless otherwise noted.

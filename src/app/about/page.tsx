@@ -266,7 +266,7 @@ const AboutPage: React.FC = () => {
                   comparecloudcosts.com (CCC) is a comprehensive cloud pricing intelligence platform that makes
                   comparing infrastructure costs across multiple cloud providers effortless. By normalizing and
                   aggregating pricing data from AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean,
-                  Alibaba Cloud, and emerging alternatives, CCC enables teams to make confident, data-driven
+                  Alibaba Cloud, and emerging alternatives, CCC enables teams to perform side-by-side **AWS vs Azure vs Google Cloud pricing calculator** comparisons, helping you make confident, data-driven
                   architectural decisions and optimize cloud spend before deployment.
                 </p>
                 <BackToTop />
@@ -279,7 +279,7 @@ const AboutPage: React.FC = () => {
                   Cloud computing has revolutionized how we build and scale technology, but it has also introduced
                   a new challenge: pricing complexity. While cloud providers offer individual calculators and
                   purchase agreements, calculating the True Cost of Ownership (TCO) for a modern infrastructure
-                  remains a monumental task.
+                  remains a monumental task. If you've ever tried building a **cloud provider price comparison** spreadsheet, you know how quickly details like regional variances and compute tier differences become overwhelming.
                 </p>
 
                 <h3 id="the-cloud-pricing-maze">The Cloud Pricing Maze</h3>
@@ -287,7 +287,7 @@ const AboutPage: React.FC = () => {
                   Users can find exact pricing for one provider in isolation, but comparing those costs
                   side-by-side requires navigating disparate calculators and performing exhaustive individual
                   studies. Data is scattered across different rate cards and service models, making an
-                  "apples-to-apples" comparison nearly impossible without manual normalization.
+                  "apples-to-apples" comparison nearly impossible without manual normalization. CCC solves this by providing a unified **cloud cost comparison table** covering VMs, database instances, and storage fees in one view.
                 </p>
                 <p>
                   Many organizations rely on traditional FinOps solutions that provide an "after-the-fact" view of
@@ -298,7 +298,7 @@ const AboutPage: React.FC = () => {
                   Furthermore, the modern landscape is increasingly multi-cloud. Companies run workloads across
                   different cloud providers simultaneously to achieve specific performance, redundancy, or
                   strategic goals. Many organizations find themselves overpaying because they lacked a unified,
-                  cross-provider view during the planning phase.
+                  cross-provider view during the planning phase. CCC provides **multi-cloud cost optimization** visibility directly at the design phase.
                 </p>
                 <BackToTop />
               </div>
