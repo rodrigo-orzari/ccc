@@ -398,7 +398,7 @@ export default function WorkloadDetails() {
 
         <div className="flex flex-col gap-6">
           {/* Tables — full width; the configuration bar is rendered above via order utilities */}
-          <div className="flex flex-col gap-6 min-w-0 order-2">
+          <div className="flex flex-col gap-6 min-w-0 order-1">
           {/* Monthly/Yearly Comparison — heading + blurb outside the table box */}
           <div>
             <h2 className="text-xl font-bold mb-1 text-[#171717] dark:text-[#e5e7eb]">
@@ -672,7 +672,7 @@ export default function WorkloadDetails() {
         {/* Configuration bar — filters on top (order-1), full width, laid out
             horizontally like the Datacenters/Compliance pages instead of a
             right-hand sidebar. */}
-        <div className="flex flex-col gap-6 order-1">
+        <div className="flex flex-col gap-6 order-2">
           <div className="border border-[#e5e5e5] dark:border-[#262626] rounded bg-white dark:bg-[#000000] p-5 flex flex-col gap-5">
             {/* Top row: Pricing Model · Providers · Region, side by side */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

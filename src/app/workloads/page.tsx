@@ -83,6 +83,43 @@ export default function WorkloadsCatalog() {
             --row-hover: #0a0a0a;
           }
         }
+        .summary-cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+          gap: 1px;
+          background: var(--border);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          overflow: hidden;
+          margin-bottom: 2rem;
+        }
+        .summary-card {
+          background: var(--surface);
+          padding: 1rem 1.25rem;
+          text-align: center;
+        }
+        .summary-card-label {
+          font-size: 9px;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-weight: 600;
+          color: var(--muted);
+          margin-bottom: 0.3rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .summary-card-value {
+          font-size: 1.4rem;
+          font-weight: 800;
+          color: var(--text);
+          line-height: 1;
+        }
+        .summary-card-sub {
+          font-size: 9px;
+          color: var(--muted);
+          margin-top: 0.2rem;
+        }
       `}</style>
       <DonationModal showOn="workloads" />
       <ProductTypeSelector activeProductType={"workloads" as any} />
@@ -140,42 +177,31 @@ export default function WorkloadsCatalog() {
           {/* Divider */}
           <div className="h-px bg-[var(--border)] mb-8" />
 
-          {/* Component Distribution Summary Table */}
-          <div className="mb-8 max-w-xl">
+          {/* Component Distribution Summary Block */}
+          <div className="mb-8 w-full">
             <h2 className="text-xl font-bold text-[var(--text)] mb-1">
               Component Distribution
             </h2>
             <p className="text-sm text-[var(--muted)] mb-4">
-              The distribution of core cloud components utilized across the different workload templates.
+              The number of workload templates that feature each product category in their architecture.
             </p>
-            <div className="border border-[var(--border)] rounded overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-[var(--border)] bg-[var(--surface)]">
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-left">Product Category</th>
-                    <th className="py-2.5 px-4 text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest whitespace-nowrap text-center">Workloads Featured In</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {PRODUCT_TYPE_ORDER.map((cat, i) => {
-                    const count = categoryCounts[cat] ?? 0;
-                    const rowBg = i % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]';
-                    return (
-                      <tr key={cat} className={`border-b border-[var(--border)] last:border-0 hover:bg-[#eef2ff] dark:hover:bg-[#111827] transition-colors ${rowBg}`}>
-                        <td className="py-2.5 px-4 whitespace-nowrap">
-                          <span className="inline-flex items-center gap-2 text-[13px] font-semibold text-[var(--text)]">
-                            <span aria-hidden="true">{PRODUCT_TYPE_EMOJIS[cat]}</span>
-                            {PRODUCT_TYPE_LABELS[cat]}
-                          </span>
-                        </td>
-                        <td className="py-2.5 px-4 text-center">
-                          <span className="text-[13px] font-black text-[var(--text)] tabular-nums">{count}</span>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+            <div className="summary-cards">
+              {PRODUCT_TYPE_ORDER.map((cat) => {
+                const count = categoryCounts[cat] ?? 0;
+                return (
+                  <div key={cat} className="summary-card">
+                    <div className="summary-card-label" title={PRODUCT_TYPE_LABELS[cat]}>
+                      {PRODUCT_TYPE_LABELS[cat]}
+                    </div>
+                    <div className="summary-card-value">
+                      {count}
+                    </div>
+                    <div className="summary-card-sub">
+                      workloads
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
