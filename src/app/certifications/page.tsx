@@ -185,76 +185,81 @@ export default function CertificationsPage() {
           <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Certifications by provider</h2>
           <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers, region, or certification categories. Double-click to isolate one.</p>
           
-          <div className="border border-[var(--border)] rounded bg-[var(--surface)] mb-8 divide-y divide-[var(--border)]">
-            {/* Provider */}
-            <div className="px-5 py-3 flex flex-wrap items-center gap-2">
-              <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Provider</span>
-              {COMPLIANCE_PROVIDERS.map((p) => {
-                const active = selProviders.has(p.id);
-                return (
-                  <button
-                    key={p.id}
-                    onClick={() => toggleProvider(p.id)}
-                    onDoubleClick={() => isolateProvider(p.id)}
-                    title={`Click to toggle · Double-click to show only ${p.name}`}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
-                      active
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
-                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
-                    }`}
-                  >
-                    {p.name}
-                  </button>
-                );
-              })}
-            </div>
+          <div className="border border-[var(--border)] rounded bg-[var(--surface)] mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-[var(--border)]">
+              {/* Provider */}
+              <div className="px-5 py-4 flex items-start gap-2">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Provider</span>
+                <div className="flex flex-wrap gap-2 flex-1">
+                  {COMPLIANCE_PROVIDERS.map((p) => {
+                    const active = selProviders.has(p.id);
+                    return (
+                      <button
+                        key={p.id}
+                        onClick={() => toggleProvider(p.id)}
+                        onDoubleClick={() => isolateProvider(p.id)}
+                        title={`Click to toggle · Double-click to show only ${p.name}`}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
+                          active
+                            ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                            : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
+                        }`}
+                      >
+                        {p.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
-            {/* Region & Category in the same row on desktop */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-[var(--border)]">
               {/* Region */}
-              <div className="px-5 py-3 flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Region</span>
-                {GEOGRAPHIES.map((geo) => {
-                  const active = selGeos.has(geo);
-                  return (
-                    <button
-                      key={geo}
-                      onClick={() => toggleGeo(geo)}
-                      onDoubleClick={() => isolateGeo(geo)}
-                      title={`Click to toggle · Double-click to show only ${geo}`}
-                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                        active
-                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
-                          : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
-                      }`}
-                    >
-                      {geo}
-                    </button>
-                  );
-                })}
+              <div className="px-5 py-4 flex items-start gap-2">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Region</span>
+                <div className="flex flex-wrap gap-2 flex-1">
+                  {GEOGRAPHIES.map((geo) => {
+                    const active = selGeos.has(geo);
+                    return (
+                      <button
+                        key={geo}
+                        onClick={() => toggleGeo(geo)}
+                        onDoubleClick={() => isolateGeo(geo)}
+                        title={`Click to toggle · Double-click to show only ${geo}`}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                          active
+                            ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                            : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
+                        }`}
+                      >
+                        {geo}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* Category */}
-              <div className="px-5 py-3 flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Category</span>
-                {CATEGORY_ORDER.map((cat) => {
-                  const active = selCategories.has(cat);
-                  return (
-                    <button
-                      key={cat}
-                      onClick={() => toggleCategory(cat)}
-                      onDoubleClick={() => isolateCategory(cat)}
-                      title={`Click to toggle · Double-click to show only ${cat}`}
-                      className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
-                        active
-                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
-                          : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
-                      }`}
-                    >
-                      {cat}
-                    </button>
-                  );
-                })}
+              <div className="px-5 py-4 flex items-start gap-2">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Category</span>
+                <div className="flex flex-wrap gap-2 flex-1">
+                  {CATEGORY_ORDER.map((cat) => {
+                    const active = selCategories.has(cat);
+                    return (
+                      <button
+                        key={cat}
+                        onClick={() => toggleCategory(cat)}
+                        onDoubleClick={() => isolateCategory(cat)}
+                        title={`Click to toggle · Double-click to show only ${cat}`}
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
+                          active
+                            ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                            : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>

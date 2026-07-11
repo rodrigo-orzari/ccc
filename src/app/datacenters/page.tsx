@@ -112,11 +112,12 @@ function ProviderRow({
         </td>
         <td className="py-4 px-4 text-center">
           {hasGovCloud ? (
-            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#22c55e] bg-[#f0fdf4] dark:bg-[#052e16] border border-[#bbf7d0] dark:border-[#166534] px-2 py-0.5 rounded-full">
-              ✓ {p.governmentRegions} regions
-            </span>
+            <>
+              <span className="text-[15px] font-black text-[var(--text)] tabular-nums">{p.governmentRegions}</span>
+              <div className="text-[9px] text-[var(--muted)] mt-0.5">regions</div>
+            </>
           ) : (
-            <span className="text-[10px] text-[#a3a3a3]">—</span>
+            <span className="text-[11px] text-[#a3a3a3]">—</span>
           )}
         </td>
       </tr>
@@ -496,13 +497,11 @@ export default function DatacentersPage() {
                     {p.availabilityZones > 0 ? (
                       <div className="flex flex-col gap-0.5">
                         <span className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">{p.availabilityZones}</span>
-                        <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest">Total Zones</span>
                         <span className="text-[9px] text-[#a3a3a3]">~{Math.round(p.availabilityZones / p.regions)} per region</span>
                       </div>
                     ) : (
                       <div className="flex flex-col gap-0.5">
                         <span className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">{p.regions}</span>
-                        <span className="text-[9px] font-bold text-[var(--muted)] uppercase tracking-widest">Data Centers</span>
                         <span className="text-[9px] text-[#a3a3a3]">Single DC / region</span>
                       </div>
                     )}

@@ -97,12 +97,12 @@ function SourceBadge({ source, apiCount, staticCount }: { source: string; apiCou
     display: 'inline-flex',
     alignItems: 'center',
     gap: 4,
-    padding: '2px 7px',
-    borderRadius: 4,
-    fontSize: 10,
+    padding: '1px 6.5px',
+    borderRadius: '9999px',
+    fontSize: 8,
     fontWeight: 700,
     textTransform: 'uppercase',
-    letterSpacing: '0.05em',
+    letterSpacing: '0.06em',
     border: '1px solid',
   };
 
@@ -304,9 +304,7 @@ export default function StatusPage() {
         .pipeline-table tr:last-child td {
           border-bottom: none;
         }
-        .pipeline-table tr:hover td {
-          background: var(--row-hover);
-        }
+        /* Alternating row backgrounds and hovers are handled dynamically via Tailwind classnames on tr */
         @media (max-width: 640px) {
           .status-header, .status-body { padding: 1.25rem 1rem; }
           .pipeline-table th, .pipeline-table td { padding: 0.55rem 1rem; }
@@ -450,11 +448,11 @@ export default function StatusPage() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: 12.5, color: 'var(--text)' }}>
                       <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
                         <span style={{ flexShrink: 0 }}><SourceBadge source="api" apiCount={0} staticCount={0} /></span>
-                        <span>Pricing fetched <strong>live from the provider's pricing API</strong> during the most recent ingestion run. Most current and authoritative.</span>
+                        <span>Pricing fetched live from the provider's pricing API during the most recent ingestion run. Most current and authoritative.</span>
                       </div>
                       <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
                         <span style={{ flexShrink: 0 }}><SourceBadge source="static" apiCount={0} staticCount={0} /></span>
-                        <span><strong>Manual fallback pricing</strong> used when a live fetch fails. Not auto-refreshed.</span>
+                        <span>Manual fallback pricing used when a live fetch fails. Not auto-refreshed.</span>
                       </div>
                     </div>
                   </div>
@@ -557,8 +555,15 @@ export default function StatusPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {categories.map(category => (
-                          <tr key={category}>
+                        {categories.map((category, index) => (
+                          <tr
+                            key={category}
+                            className={`transition-colors ${
+                              index % 2 === 0
+                                ? 'bg-[#f7f8ff] dark:bg-[#06060f]'
+                                : 'bg-[#e8eaf8] dark:bg-[#10102a]'
+                            } hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}
+                          >
                             <td style={{ fontWeight: 600, textAlign: 'center' }}>
                               <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
                                 <span aria-hidden="true">{getCategoryEmoji(category)}</span>
@@ -667,11 +672,14 @@ export default function StatusPage() {
                 );
               })()}
 
-              {/* Divider */}
-              <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
-
               <div className="max-w-[1600px] mx-auto mt-6">
                 <BackToTop />
+              </div>
+
+              {/* Divider */}
+              <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] my-8" />
+
+              <div className="max-w-[1600px] mx-auto">
                 <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[13px] text-[#737373] dark:text-[#a3a3a3] italic">
                   <strong>Disclaimer:</strong> Price data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
                   <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
