@@ -2,6 +2,24 @@ import { NextResponse } from 'next/server';
 import sql from '@/lib/db';
 import { WORKLOADS } from '@/config/workloads';
 
+// Integration SKUs are consumption-priced in heterogeneous units ("per 1M
+// Requests", "per 1M Events", "per 1k Actions", "per TB", flat "Mo", …). To
+// compare and price them we convert each to an estimated monthly cost at a
+// representative usage volume. These volumes are deliberate, tunable
+// assumptions for a directional comparison — NOT a metered bill.
+const ASSUMED_MILLIONS_OF_OPS_PER_MONTH = 10;     // 10M requests/events/operations
+const ASSUMED_THOUSANDS_OF_STEPS_PER_MONTH = 100; // 100k workflow actions/steps
+const ASSUMED_TB_PER_MONTH = 1;                   // 1 TB throughput
+
+function integrationMonthlyCost(unit: string, price: number, quantity: number): number {
+  const u = (unit || '').toLowerCase();
+  if (u.includes('mo')) return price * quantity;                                   // already monthly (flat SKU)
+  if (u.includes('1m')) return price * ASSUMED_MILLIONS_OF_OPS_PER_MONTH * quantity;
+  if (u.includes('1k')) return price * ASSUMED_THOUSANDS_OF_STEPS_PER_MONTH * quantity;
+  if (u.includes('tb')) return price * ASSUMED_TB_PER_MONTH * quantity;
+  return price * quantity; // unknown consumption unit — raw per-unit, not ×730
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -62,76 +80,77 @@ export async function POST(request: Request) {
         const vcpuCond = reqs.minVcpus ? sql`pr.vcpus >= ${reqs.minVcpus}` : null;
         const memCond = reqs.minMemoryGb ? sql`pr.memory_gb >= ${reqs.minMemoryGb}` : null;
 
-        // Progressively relax the spec filters so a single missing/zero attribute
-        // (e.g. an Azure relational row with memory_gb=0) doesn't make a provider
-        // falsely report N/A. The category match is never relaxed. Each attempt is
-        // tried in order; the first that returns a row wins.
-        const specTiers: (typeof base)[] = [];
-        specTiers.push([vcpuCond, memCond].filter(Boolean) as typeof base);   // strict: vCPU + memory
-        if (memCond) specTiers.push([vcpuCond].filter(Boolean) as typeof base); // drop memory
-        if (vcpuCond) specTiers.push([memCond].filter(Boolean) as typeof base); // drop vCPU
-        specTiers.push([]);                                                     // category only (last resort)
+        let chosen: any = null;
+        let monthlyPrice = 0;
 
-        let match: any[] = [];
-        for (const extra of specTiers) {
-          const all = [...base, ...extra];
-          const conditionSnippet = all.reduce((acc, condition, index) => (
+        if (reqs.productType === 'integration') {
+          // Integration SKUs within one service_type have HETEROGENEOUS units
+          // (per 1M ops, per 1k steps, per TB, flat per Mo), so picking the row
+          // with the lowest RAW price_per_unit — as the ORDER BY below does for
+          // everything else — is meaningless here (a $0.40/1M-ops row would
+          // "beat" a $10/Mo flat row that's actually cheaper at real volume).
+          // Instead fetch every candidate, convert each to an estimated monthly
+          // cost at a representative volume, and keep the cheapest by that.
+          const conditionSnippet = base.reduce((acc, condition, index) => (
             index === 0 ? condition : sql`${acc} AND ${condition}`
           ), sql``);
-          match = await sql`
+          const candidates = await sql`
             SELECT pr.* FROM pricing_records pr
             JOIN services s ON pr.service_id = s.id
             JOIN providers p ON s.provider_id = p.id
             WHERE ${conditionSnippet}
-            ORDER BY pr.price_per_unit ASC LIMIT 1
           `;
-          if (match && match.length > 0) break;
-        }
-
-        if (match && match.length > 0) {
-          const instance = match[0];
-          const unit = (instance.unit || '').toLowerCase();
-          const price = parseFloat(instance.price_per_unit);
-          let monthlyPrice: number;
-
-          if (reqs.productType === 'integration') {
-            // Integration units are consumption-based and heterogeneous
-            // ("per 1M Requests", "per 1M Events", "per 1k Actions", "per TB",
-            // flat "Mo", etc.) — the generic "× 730 hours" fallback used for
-            // hourly VM pricing produces nonsense here (e.g. GCP Pub/Sub at
-            // $40/TB would become ~$29k/mo). Instead, estimate a monthly cost
-            // from a representative usage volume per unit shape. These volumes
-            // are deliberate, tunable assumptions for a directional
-            // comparison — NOT a metered bill. Adjust to taste.
-            const ASSUMED_MILLIONS_OF_OPS_PER_MONTH = 10;   // 10M requests/events/operations
-            const ASSUMED_THOUSANDS_OF_STEPS_PER_MONTH = 100; // 100k workflow actions/steps/transitions
-            const ASSUMED_TB_PER_MONTH = 1;                 // 1 TB throughput
-            if (unit.includes('mo')) {
-              monthlyPrice = price * reqs.quantity;                                   // already monthly (flat SKU)
-            } else if (unit.includes('1m')) {
-              monthlyPrice = price * ASSUMED_MILLIONS_OF_OPS_PER_MONTH * reqs.quantity;
-            } else if (unit.includes('1k')) {
-              monthlyPrice = price * ASSUMED_THOUSANDS_OF_STEPS_PER_MONTH * reqs.quantity;
-            } else if (unit.includes('tb')) {
-              monthlyPrice = price * ASSUMED_TB_PER_MONTH * reqs.quantity;
-            } else {
-              // Unknown consumption unit (e.g. "per 10GB/Hr") — fall back to the
-              // raw per-unit price rather than inflating it ×730.
-              monthlyPrice = price * reqs.quantity;
+          for (const cand of candidates) {
+            const m = integrationMonthlyCost(cand.unit, parseFloat(cand.price_per_unit), reqs.quantity);
+            if (chosen === null || m < monthlyPrice) {
+              chosen = cand;
+              monthlyPrice = m;
             }
-          } else {
-            const isMonthly = unit.includes('mo');
-            monthlyPrice = isMonthly
-              ? price * reqs.quantity
-              : price * 730 * reqs.quantity;
+          }
+        } else {
+          // Progressively relax the spec filters so a single missing/zero attribute
+          // (e.g. an Azure relational row with memory_gb=0) doesn't make a provider
+          // falsely report N/A. The category match is never relaxed. Each attempt is
+          // tried in order; the first that returns a row wins.
+          const specTiers: (typeof base)[] = [];
+          specTiers.push([vcpuCond, memCond].filter(Boolean) as typeof base);   // strict: vCPU + memory
+          if (memCond) specTiers.push([vcpuCond].filter(Boolean) as typeof base); // drop memory
+          if (vcpuCond) specTiers.push([memCond].filter(Boolean) as typeof base); // drop vCPU
+          specTiers.push([]);                                                     // category only (last resort)
+
+          let match: any[] = [];
+          for (const extra of specTiers) {
+            const all = [...base, ...extra];
+            const conditionSnippet = all.reduce((acc, condition, index) => (
+              index === 0 ? condition : sql`${acc} AND ${condition}`
+            ), sql``);
+            match = await sql`
+              SELECT pr.* FROM pricing_records pr
+              JOIN services s ON pr.service_id = s.id
+              JOIN providers p ON s.provider_id = p.id
+              WHERE ${conditionSnippet}
+              ORDER BY pr.price_per_unit ASC LIMIT 1
+            `;
+            if (match && match.length > 0) break;
           }
 
+          if (match && match.length > 0) {
+            chosen = match[0];
+            const unit = (chosen.unit || '').toLowerCase();
+            const price = parseFloat(chosen.price_per_unit);
+            monthlyPrice = unit.includes('mo')
+              ? price * reqs.quantity          // storage (GB-Month) and other monthly SKUs
+              : price * 730 * reqs.quantity;   // hourly SKUs (VM, DB, containers) → month
+          }
+        }
+
+        if (chosen) {
           results[provider].components.push({
             componentId: component.id,
             name: component.name,
-            instanceType: instance.instance_type,
-            vcpus: instance.vcpus,
-            memoryGb: instance.memory_gb,
+            instanceType: chosen.instance_type,
+            vcpus: chosen.vcpus,
+            memoryGb: chosen.memory_gb,
             monthlyPrice: monthlyPrice,
             quantity: reqs.quantity,
           });

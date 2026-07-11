@@ -12,7 +12,7 @@
 // on any missing family/GPU it dumps the candidate "Instance Core/Ram" and GPU
 // SKU descriptions to the ingest log, so the matcher can be corrected precisely.
 
-import { findGcpServiceName, fetchAllSkus } from './serverless_adapters_live';
+import { findGcpServiceName, fetchAllSkus } from './gcp_billing_catalog';
 
 const REGION = 'us-central1';
 

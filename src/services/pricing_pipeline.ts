@@ -9,7 +9,6 @@ import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.t
 import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.ts';
 import { fetchGcpComputeRates, gcpFamilyOf, gcpGpuModelOf } from './gcp_compute_rates';
 import { PROVIDERS } from '../config/index.ts';
-import { DatabasePricingPipeline } from './database_pipeline';
 
 export interface PricingRecord {
   provider: string;

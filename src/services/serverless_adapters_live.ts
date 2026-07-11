@@ -262,35 +262,14 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
  */
 export const GCP_CLOUD_RUN_REGION = 'us-central1';
 
-// Resolve a Billing Catalog service resource name (e.g. "services/6F81-...")
-// from its displayName ("Cloud Run", "Compute Engine"). Exported so the compute
-// pipeline can reuse the same catalog client as Cloud Run.
-export async function findGcpServiceName(displayName: string, apiKey: string): Promise<string> {
-  let pageToken: string | undefined;
-  for (let page = 0; page < 20; page++) {
-    const url = `https://cloudbilling.googleapis.com/v1/services?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
-    const response = await axios.get(url, { timeout: 30000 });
-    const services: any[] = response.data?.services ?? [];
-    const match = services.find(s => s.displayName === displayName);
-    if (match) return match.name;
-    pageToken = response.data?.nextPageToken;
-    if (!pageToken) break;
-  }
-  throw new Error(`GCP service "${displayName}" not found in Billing Catalog services.list`);
-}
-
-export async function fetchAllSkus(serviceName: string, apiKey: string): Promise<any[]> {
-  const skus: any[] = [];
-  let pageToken: string | undefined;
-  for (let page = 0; page < 20; page++) {
-    const url = `https://cloudbilling.googleapis.com/v1/${serviceName}/skus?key=${apiKey}${pageToken ? `&pageToken=${pageToken}` : ''}`;
-    const response = await axios.get(url, { timeout: 30000 });
-    skus.push(...(response.data?.skus ?? []));
-    pageToken = response.data?.nextPageToken;
-    if (!pageToken) break;
-  }
-  return skus;
-}
+// findGcpServiceName / fetchAllSkus now live in the dependency-free
+// gcp_billing_catalog leaf module (re-exported here to preserve this module's
+// public API). They were moved out to break a circular import: gcp_compute_rates
+// imports them, and importing them from here dragged BaseAdapter into a cycle
+// (pricing_pipeline → gcp_compute_rates → serverless_adapters_live →
+// pricing_pipeline) that crashed build-time module init.
+import { findGcpServiceName, fetchAllSkus } from './gcp_billing_catalog';
+export { findGcpServiceName, fetchAllSkus };
 
 // Extracts the on-demand per-second execution rate for Cloud Run *Services*
 // from the Billing Catalog. Google's current SKU names are e.g.
