@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import sql from '@/lib/db';
 import { WORKLOADS } from '@/config/workloads';
+import { DEFAULT_PRIORITIES } from '@/config/workload_priorities';
 
 // Integration SKUs are consumption-priced in heterogeneous units ("per 1M
 // Requests", "per 1M Events", "per 1k Actions", "per TB", flat "Mo", …). To
@@ -23,7 +24,8 @@ function integrationMonthlyCost(unit: string, price: number, quantity: number): 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { workloadId, parameters, region } = body;
+    const { workloadId, priorities, region } = body;
+    const activePriorities = priorities ?? DEFAULT_PRIORITIES;
 
     const workload = WORKLOADS.find((w) => w.id === workloadId);
     if (!workload) {
@@ -32,13 +34,16 @@ export async function POST(request: Request) {
 
     const providers = ['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'];
     const results: Record<string, { total: number; components: any[] }> = {};
-    
+
     providers.forEach(p => results[p] = { total: 0, components: [] });
 
     for (const component of workload.components) {
-      const reqs = component.getRequirements(parameters || {});
+      const reqs = component.getRequirements(activePriorities);
+      // Components can opt out of the architecture at the current priority levels
+      // (e.g. security add-ons below Security=medium) by returning null — skip them.
+      if (!reqs) continue;
       const dbCategory = reqs.productType === 'vm' ? 'compute' : reqs.productType === 'data-analytics' ? 'data_warehouse' : reqs.productType;
-      
+
       for (const provider of providers) {
         // Base constraints that must always hold: provider, service category, the
         // product-type category match, and (optionally) region.
@@ -136,11 +141,15 @@ export async function POST(request: Request) {
 
           if (match && match.length > 0) {
             chosen = match[0];
-            const unit = (chosen.unit || '').toLowerCase();
+            const unit = (chosen.unit || '').toLowerCase().trim();
             const price = parseFloat(chosen.price_per_unit);
-            monthlyPrice = unit.includes('mo')
-              ? price * reqs.quantity          // storage (GB-Month) and other monthly SKUs
-              : price * 730 * reqs.quantity;   // hourly SKUs (VM, DB, containers) → month
+            if (unit.includes('mo') || unit.includes('month')) {
+              monthlyPrice = price * reqs.quantity;        // storage (GB-Month) / per-month SKUs; quantity = GB or units
+            } else if (unit === 'gb' || unit === 'gib') {
+              monthlyPrice = price * reqs.quantity;        // per-GB data (networking egress/CDN); quantity = monthly GB
+            } else {
+              monthlyPrice = price * 730 * reqs.quantity;  // hourly SKUs (VM, DB, containers, load balancer) → month
+            }
           }
         }
 

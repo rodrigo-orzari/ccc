@@ -63,10 +63,10 @@ export function DonationModal({ showOn = 'workloads' }: DonationModalProps) {
         >
           <p className="text-[12px] leading-relaxed" style={{ color: '#B45309' }}>
             <span className="dark:hidden">
-              Every contribution — no matter the amount — goes directly toward keeping this project running, maintaining accurate pricing data, and adding new cloud providers.
+              A $3.99 contribution goes directly toward keeping this project running, maintaining accurate pricing data, and adding new cloud providers.
             </span>
             <span className="hidden dark:inline" style={{ color: '#FCD34D' }}>
-              Every contribution — no matter the amount — goes directly toward keeping this project running, maintaining accurate pricing data, and adding new cloud providers.
+              A $3.99 contribution goes directly toward keeping this project running, maintaining accurate pricing data, and adding new cloud providers.
             </span>
           </p>
         </div>

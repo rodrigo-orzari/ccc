@@ -66,15 +66,17 @@ export interface PricingRecord {
   };
 }
 
-export interface WorkloadParameter {
-  id: string;
-  label: string;
-  type: 'slider' | 'number';
-  min: number;
-  max: number;
-  step: number;
-  defaultValue: number;
-  unit: string;
+// Workloads are configured by intent, not bespoke numeric params: four
+// universal sliders anchored on the AWS Well-Architected pillars. Cost is the
+// OUTPUT — there is no cost slider. Each workload interprets these into concrete
+// component requirements via the shared helpers in config/workload_priorities.ts.
+export type PriorityLevel = 'low' | 'medium' | 'high';
+
+export interface WorkloadPriorities {
+  capacity: PriorityLevel;     // magnitude — how big (users / throughput / data volume)
+  performance: PriorityLevel;  // speed — instance class, storage media, caching
+  reliability: PriorityLevel;  // redundancy — HA mode, replicas, backups, load balancing
+  security: PriorityLevel;     // hardening — WAF, key management, threat detection
 }
 
 export interface WorkloadComponent {
@@ -82,13 +84,17 @@ export interface WorkloadComponent {
   name: string;
   description: string;
   icon: string;
-  getRequirements: (params: Record<string, number>) => {
+  // Returns null when the component is NOT part of the architecture at the
+  // current priority levels (e.g. security add-ons only appear once security is
+  // medium+, a cache only at high performance). The engine and the
+  // "what this builds" panel skip null components.
+  getRequirements: (p: WorkloadPriorities) => {
     productType: ProductType;
     minVcpus?: number;
     minMemoryGb?: number;
     category?: string;
     quantity: number;
-  };
+  } | null;
 }
 
 // Sponsor banner slot. Image should be a 1200×200 (6:1) asset — see /docs
@@ -105,7 +111,10 @@ export interface WorkloadDefinition {
   name: string;
   description: string;
   icon: string;
-  parameters: WorkloadParameter[];
   components: WorkloadComponent[];
+  // What the "Capacity" slider means in this workload's context, e.g.
+  // "Concurrent Users", "Ingestion Throughput", "Document Corpus". Cosmetic —
+  // shown as the Capacity slider's sublabel. Defaults to a generic term.
+  capacityLabel?: string;
   sponsor?: SponsorSlot;
 }

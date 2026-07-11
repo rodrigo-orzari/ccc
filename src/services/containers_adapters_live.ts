@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { BaseAdapter, PricingRecord, findOracleFlexRates } from './pricing_pipeline';
-import { AwsFargateScraper } from '../scrapers/aws_fargate';
-import { AzureContainerInstancesScraper } from '../scrapers/azure_container_instances';
-import { AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY } from '../config/aws_containers';
-import { AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY } from '../config/azure_containers';
+import { AWS_CONTAINERS, AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY } from '../config/aws_containers';
+import { AZURE_CONTAINERS, AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY } from '../config/azure_containers';
 import { GCP_CONTAINERS, GCP_CONTAINERS_REGION, GCP_CONTAINERS_GEOGRAPHY } from '../config/gcp_containers';
 import { DIGITALOCEAN_CONTAINERS, DIGITALOCEAN_CONTAINERS_REGION, DIGITALOCEAN_CONTAINERS_GEOGRAPHY } from '../config/digitalocean_containers';
 import { ORACLE_CONTAINERS, ORACLE_CONTAINERS_REGION, ORACLE_CONTAINERS_GEOGRAPHY } from '../config/oracle_containers';
@@ -38,70 +36,147 @@ function mapContainerRow(
   };
 }
 
+// Arch-correct row mapper for AWS/Azure containers: the static configs carry an
+// explicit `architecture` field ('x86' | 'ARM'), so we trust that rather than
+// guessing arch from cpuVendor like mapContainerRow does (which would mislabel
+// Azure's Ampere/ARM AKS rows as x86).
+function mapConfigContainerRow(
+  inst: any,
+  slug: string,
+  region: string,
+  geography: string,
+  price: number,
+  dataSource: 'live_api' | 'static_config'
+): PricingRecord {
+  return {
+    provider: slug,
+    service: 'Containers',
+    region,
+    instanceType: inst.type,
+    vcpus: inst.vcpus,
+    memoryGb: inst.memory,
+    arch: inst.architecture === 'ARM' ? 'ARM' : 'x86 64',
+    os: 'Linux',
+    cpuVendor: inst.cpuVendor,
+    gpuCount: 0,
+    geography,
+    category: 'containers',
+    price,
+    unit: 'Hourly',
+    dataSource,
+    attributes: inst.attributes,
+  };
+}
+
+// AWS Fargate is priced per vCPU-hour + per GB-hour, split by architecture
+// (x86 vs Graviton/ARM), and published in the SAME public, keyless AWS Price
+// List API used for Lambda/RDS — no headless-browser scraping (which failed on
+// DO with a missing libnspr4.so) and no credentials. Returns rates for both
+// architectures; EKS node rows are just EC2 VM prices (covered live under
+// compute) and stay static, mirroring GKE handling in GCPContainersLiveAdapter.
+interface FargateRates { x86: { cpu: number; mem: number }; arm: { cpu: number; mem: number }; }
+
+async function fetchFargateRates(region: string): Promise<FargateRates> {
+  const url = `https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonECS/current/${region}/index.json`;
+  const { data } = await axios.get(url, { timeout: 60000 });
+  const products: Record<string, any> = data.products ?? {};
+  const onDemand: Record<string, any> = data.terms?.OnDemand ?? {};
+
+  const priceOf = (sku: string): number | null => {
+    for (const term of Object.values<any>(onDemand[sku] ?? {})) {
+      for (const dim of Object.values<any>(term.priceDimensions ?? {})) {
+        const usd = dim.pricePerUnit?.USD;
+        if (usd != null) { const p = parseFloat(usd); if (p > 0) return p; }
+      }
+    }
+    return null;
+  };
+  const rate = (pred: (usagetype: string) => boolean): number | null => {
+    for (const [sku, p] of Object.entries(products)) {
+      if (pred(p.attributes?.usagetype ?? '')) { const price = priceOf(sku); if (price != null) return price; }
+    }
+    return null;
+  };
+
+  const x86cpu = rate(u => /Fargate-vCPU-Hours/.test(u) && !/ARM|Windows/.test(u));
+  const x86mem = rate(u => /Fargate-GB-Hours/.test(u) && !/ARM|Windows|Ephemeral/.test(u));
+  const armcpu = rate(u => /Fargate-ARM-vCPU-Hours/.test(u));
+  const armmem = rate(u => /Fargate-ARM-GB-Hours/.test(u));
+  if (x86cpu == null || x86mem == null || armcpu == null || armmem == null) {
+    throw new Error(`Fargate rates incomplete (x86cpu=${x86cpu} x86mem=${x86mem} armcpu=${armcpu} armmem=${armmem})`);
+  }
+  return { x86: { cpu: x86cpu, mem: x86mem }, arm: { cpu: armcpu, mem: armmem } };
+}
+
 export class AWSContainersLiveAdapter extends BaseAdapter {
   providerSlug = 'aws';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`🔄 Attempting AWS Containers live API fetch (via AwsFargateScraper)...`);
+    let rates: FargateRates;
     try {
-      const scraper = new AwsFargateScraper();
-      const instances = await scraper.run();
-      
-      return instances.map(inst => ({
-        provider: 'aws',
-        service: 'Fargate',
-        region: AWS_CONTAINERS_REGION,
-        instanceType: inst.type,
-        vcpus: inst.vcpus,
-        memoryGb: inst.memory,
-        arch: inst.cpuVendor === 'AWS' ? 'ARM' : 'x86 64',
-        os: 'Linux',
-        cpuVendor: inst.cpuVendor,
-        gpuCount: 0,
-        geography: AWS_CONTAINERS_GEOGRAPHY,
-        category: 'Containers',
-        price: inst.price,
-        unit: 'Hour',
-        dataSource: 'live_api' as any,
-        attributes: inst.attributes,
-      }));
-    } catch (e) {
-      console.warn('⚠️  AWS Containers live fetch failed. Falling back to empty to trigger static config...');
+      rates = await fetchFargateRates(AWS_CONTAINERS_REGION);
+    } catch (err: any) {
+      console.warn(`⚠️  AWS Fargate live pricing fetch failed (${err.message}), using static config.`);
       return [];
     }
+
+    let liveCount = 0;
+    const records = AWS_CONTAINERS.map((inst: any) => {
+      if (inst.type.startsWith('Fargate-')) {
+        liveCount++;
+        const r = inst.architecture === 'ARM' ? rates.arm : rates.x86;
+        const price = inst.vcpus * r.cpu + inst.memory * r.mem;
+        return mapConfigContainerRow(inst, 'aws', AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY, price, 'live_api');
+      }
+      return mapConfigContainerRow(inst, 'aws', AWS_CONTAINERS_REGION, AWS_CONTAINERS_GEOGRAPHY, inst.price, 'static_config');
+    });
+    console.log(`✅ AWS Containers: ${liveCount}/${records.length} rows (Fargate) priced live, rest (EKS nodes) from static config.`);
+    return records;
   }
+}
+
+// Azure Container Instances is priced per vCPU-hour + per GB-hour on the public,
+// keyless Azure Retail Prices API (same source as Functions/VMs/DB) — replacing
+// the headless-browser scraper that failed on DO. AKS node rows are VM prices
+// and stay static.
+async function fetchAciRates(region: string): Promise<{ cpu: number; mem: number }> {
+  const filter = encodeURIComponent(`serviceName eq 'Container Instances' and armRegionName eq '${region}'`);
+  const url = `https://prices.azure.com/api/retail/prices?$filter=${filter}`;
+  const { data } = await axios.get(url, { timeout: 30000 });
+  const items: any[] = data.Items ?? [];
+  // Standard (non-GPU, non-Spot, non-Confidential) Linux vCPU + Memory duration.
+  const find = (meter: string, unitFrag: string) => items.find(i =>
+    i.productName === 'Container Instances' && i.skuName === 'Standard' &&
+    i.meterName === meter && (i.unitOfMeasure || '').includes(unitFrag) && i.retailPrice > 0);
+  const cpu = find('Standard vCPU Duration', 'Hour')?.retailPrice ?? null;
+  const mem = find('Standard Memory Duration', 'GB Hour')?.retailPrice ?? null;
+  if (cpu == null || mem == null) throw new Error(`ACI rates incomplete (cpu=${cpu} mem=${mem})`);
+  return { cpu, mem };
 }
 
 export class AzureContainersLiveAdapter extends BaseAdapter {
   providerSlug = 'azure';
 
   async fetchPricing(): Promise<PricingRecord[]> {
-    console.log(`🔄 Attempting AZURE Containers live API fetch (via AzureContainerInstancesScraper)...`);
+    let rates: { cpu: number; mem: number };
     try {
-      const scraper = new AzureContainerInstancesScraper();
-      const instances = await scraper.run();
-      
-      return instances.map(inst => ({
-        provider: 'azure',
-        service: 'Container Instances',
-        region: AZURE_CONTAINERS_REGION,
-        instanceType: inst.type,
-        vcpus: inst.vcpus,
-        memoryGb: inst.memory,
-        arch: 'x86 64',
-        os: 'Linux',
-        cpuVendor: inst.cpuVendor,
-        gpuCount: 0,
-        geography: AZURE_CONTAINERS_GEOGRAPHY,
-        category: 'Containers',
-        price: inst.price,
-        unit: 'Hour',
-        dataSource: 'live_api' as any,
-      }));
-    } catch (e) {
-      console.warn('⚠️  AZURE Containers live fetch failed. Falling back to empty to trigger static config...');
+      rates = await fetchAciRates(AZURE_CONTAINERS_REGION);
+    } catch (err: any) {
+      console.warn(`⚠️  Azure ACI live pricing fetch failed (${err.message}), using static config.`);
       return [];
     }
+
+    let liveCount = 0;
+    const records = AZURE_CONTAINERS.map((inst: any) => {
+      if (inst.type.startsWith('ACI-')) {
+        liveCount++;
+        const price = inst.vcpus * rates.cpu + inst.memory * rates.mem;
+        return mapConfigContainerRow(inst, 'azure', AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY, price, 'live_api');
+      }
+      return mapConfigContainerRow(inst, 'azure', AZURE_CONTAINERS_REGION, AZURE_CONTAINERS_GEOGRAPHY, inst.price, 'static_config');
+    });
+    console.log(`✅ Azure Containers: ${liveCount}/${records.length} rows (ACI) priced live, rest (AKS nodes) from static config.`);
+    return records;
   }
 }
 

@@ -240,11 +240,12 @@ export class AlibabaServerlessAdapter extends BaseAdapter {
 export class ServerlessPricingPipeline extends PricingPipeline {
   constructor(sql: Sql) {
     super(sql);
-    // Use live API adapters with fallback to static configs
-    // Phase 1: AWS Lambda (live API)
-    // Phase 2: GCP Cloud Run (live API - placeholder)
-    // Phase 3: Azure Functions (live API - placeholder)
-    // DigitalOcean: Static config
+    // Live API adapters, each with per-record fallback to static config:
+    //   AWS Lambda        — live (AWS Price List API)
+    //   GCP Cloud Run     — live (Billing Catalog API, needs GCP_BILLING_API_KEY)
+    //   Azure Functions   — live (Retail Prices API)
+    //   DigitalOcean      — static config
+    //   Alibaba           — static config
     this.adapters = [
       new AWSLambdaLiveAdapter(),
       new GCPCloudRunLiveAdapter(),
@@ -488,7 +489,8 @@ export class ServerlessPricingPipeline extends PricingPipeline {
   }
 
   /**
-   * Static config for GCP Cloud Run (Phase 2 placeholder)
+   * Static-config fallback for GCP Cloud Run (used when the live Billing
+   * Catalog fetch is unavailable — see GCPCloudRunLiveAdapter).
    */
   private async getGCPServerlessStaticRecords(): Promise<PricingRecord[]> {
     const adapter = new GCPServerlessAdapter();

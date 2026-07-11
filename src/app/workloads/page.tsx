@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Footer, ProductTypeSelector, DonationModal } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
+import { DEFAULT_PRIORITIES } from '@/config/workload_priorities';
 import { WORKLOADS_LISTING_SPONSOR } from '@/config';
 import type { ProductType } from '@/types';
 
@@ -34,7 +35,12 @@ export default function WorkloadsCatalog() {
   const categoryCounts = useMemo(() => {
     const counts: Partial<Record<ProductType, number>> = {};
     WORKLOADS.forEach(w => {
-      const categoriesInWorkload = new Set(w.components.map(c => c.getRequirements({}).productType));
+      const categoriesInWorkload = new Set(
+        w.components
+          .map(c => c.getRequirements(DEFAULT_PRIORITIES))
+          .filter(Boolean)
+          .map(r => r!.productType)
+      );
       categoriesInWorkload.forEach(cat => {
         counts[cat] = (counts[cat] || 0) + 1;
       });

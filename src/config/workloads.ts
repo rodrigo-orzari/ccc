@@ -1,4 +1,37 @@
-import { WorkloadDefinition } from '@/types';
+import { WorkloadDefinition, WorkloadPriorities } from '@/types';
+import {
+  capacityScale, capacityNodes, capacitySize,
+  perfComputeCategory, perfWantsCache,
+  reliabilityReplicas, reliabilityWantsLoadBalancer, reliabilityWantsBackup,
+  securityIncludes,
+  computeReqs, dbReqs, storageReqs,
+} from './workload_priorities';
+
+// ─── Workloads, configured by Well-Architected intent ──────────────────────────
+//
+// Every component's getRequirements(p) reads the four universal priority sliders
+// (capacity/performance/reliability/security) and composes the shared modifiers
+// in workload_priorities.ts into a concrete requirement. Returning `null` drops
+// the component from the architecture at the current levels (e.g. security
+// add-ons appear only when Security is medium+). Cost is the OUTPUT.
+
+// Normalised AI token consumption (per 1M tokens / month) driven by capacity.
+const aiTokensQty = (p: WorkloadPriorities, share: number): number =>
+  (100000 * capacityScale(p.capacity) * 2000 * share) / 1_000_000 / 730;
+
+// Monthly data-egress volume (GB) driven by capacity — quantity for per-GB
+// networking components (see the engine's per-GB branch).
+const egressGb = (p: WorkloadPriorities, baseGb: number): number =>
+  Math.round(baseGb * capacityScale(p.capacity));
+
+// Managed-Kubernetes / container node fleet sizing (mirrors computeReqs but
+// productType 'containers').
+const containerNodes = (p: WorkloadPriorities, baseVcpus: number) => ({
+  productType: 'containers' as const,
+  minVcpus: Math.max(2, Math.round(baseVcpus * capacitySize(p.capacity))),
+  minMemoryGb: Math.max(4, Math.round(baseVcpus * capacitySize(p.capacity) * 4)),
+  quantity: Math.max(2, Math.round(capacityNodes(p.capacity) * reliabilityReplicas(p.reliability))),
+});
 
 export const WORKLOADS: WorkloadDefinition[] = [
   {
@@ -6,1328 +39,494 @@ export const WORKLOADS: WorkloadDefinition[] = [
     name: 'RAG AI Application',
     description: 'A generative AI application using a Foundational Model connected to a Vector Database to search proprietary documents and return grounded answers.',
     icon: '🧠',
-    parameters: [
-      {
-        id: 'monthlyQueries',
-        label: 'Monthly User Queries',
-        type: 'slider',
-        min: 10000,
-        max: 1000000,
-        step: 10000,
-        defaultValue: 100000,
-        unit: 'queries'
-      },
-      {
-        id: 'tokensPerQuery',
-        label: 'Tokens per Query',
-        type: 'slider',
-        min: 500,
-        max: 10000,
-        step: 500,
-        defaultValue: 2000,
-        unit: 'tokens'
-      },
-      {
-        id: 'dbMemoryGb',
-        label: 'Vector DB Memory',
-        type: 'slider',
-        min: 4,
-        max: 128,
-        step: 4,
-        defaultValue: 16,
-        unit: 'GB'
-      },
-      {
-        id: 'corpusSizeGB',
-        label: 'Document Corpus Size',
-        type: 'slider',
-        min: 1,
-        max: 500,
-        step: 1,
-        defaultValue: 25,
-        unit: 'GB'
-      }
-    ],
+    capacityLabel: 'Query & Corpus Volume',
     components: [
       {
-        id: 'document-storage',
-        name: 'Document Storage',
+        id: 'document-storage', name: 'Document Storage', icon: '🪣',
         description: 'Source documents the corpus is built and embedded from',
-        icon: '🪣',
-        getRequirements: (params) => {
-          return {
-            productType: 'storage',
-            category: 'Object',
-            quantity: params.corpusSizeGB
-          };
-        }
+        getRequirements: (p) => storageReqs(p, 25, { category: 'Object' }),
       },
       {
-        id: 'api-gateway',
-        name: 'API & Orchestration',
+        id: 'api-orchestration', name: 'API & Orchestration', icon: '⚙️',
         description: 'Serverless compute to route queries and orchestrate LLM logic',
-        icon: '⚙️',
-        getRequirements: () => {
-          return {
-            productType: 'serverless',
-            category: 'Compute',
-            quantity: 1
-          };
-        }
+        getRequirements: () => ({ productType: 'serverless', category: 'Compute', quantity: 1 }),
       },
       {
-        id: 'embeddings',
-        name: 'Embeddings Model',
+        id: 'embeddings', name: 'Embeddings Model', icon: '🔢',
         description: 'Converts the incoming query into vector embeddings',
-        icon: '🔢',
-        getRequirements: (params) => {
-          const embeddingTokens = (params.monthlyQueries * (params.tokensPerQuery * 0.2)) / 1000000;
-          return {
-            productType: 'ai',
-            category: 'Embeddings',
-            quantity: embeddingTokens / 730
-          };
-        }
+        getRequirements: (p) => ({ productType: 'ai', category: 'Embeddings', quantity: aiTokensQty(p, 0.2) }),
       },
       {
-        id: 'vector-db',
-        name: 'Vector Database (pgvector)',
+        id: 'vector-db', name: 'Vector Database (pgvector)', icon: '🗄️',
         description: 'Stores and searches document embeddings (Managed PostgreSQL)',
-        icon: '🗄️',
-        getRequirements: (params) => {
-          return {
-            productType: 'database',
-            category: 'Relational',
-            minMemoryGb: params.dbMemoryGb,
-            quantity: 1
-          };
-        }
+        getRequirements: (p) => dbReqs(p, 16, 'Relational'),
       },
       {
-        id: 'llm',
-        name: 'Foundational Model',
-        description: 'Generates the final response based on query and retrieved context',
-        icon: '💬',
-        getRequirements: (params) => {
-          const llmTokens = (params.monthlyQueries * (params.tokensPerQuery * 0.8)) / 1000000;
-          return {
-            productType: 'ai',
-            category: 'Foundational Models',
-            quantity: llmTokens / 730
-          };
-        }
-      }
-    ]
+        id: 'llm', name: 'Foundational Model', icon: '💬',
+        description: 'Generates the final response from query and retrieved context',
+        getRequirements: (p) => ({ productType: 'ai', category: 'Foundational Models', quantity: aiTokensQty(p, 0.8) }),
+      },
+    ],
   },
   {
     id: 'serverless-web-app',
     name: 'Serverless Web Application',
     description: 'A scalable, low-maintenance backend without provisioning servers. Perfect for event-driven web and mobile backends.',
     icon: '⚡',
-    parameters: [
-      {
-        id: 'monthlyRequests',
-        label: 'Monthly API Requests',
-        type: 'slider',
-        min: 100000,
-        max: 10000000,
-        step: 100000,
-        defaultValue: 1000000,
-        unit: 'reqs'
-      },
-      {
-        id: 'dbSizeGB',
-        label: 'Database Storage',
-        type: 'slider',
-        min: 10,
-        max: 500,
-        step: 10,
-        defaultValue: 50,
-        unit: 'GB'
-      }
-    ],
+    capacityLabel: 'Request Volume',
     components: [
       {
-        id: 'api-gateway',
-        name: 'API Gateway / Routing',
+        id: 'api-gateway', name: 'API Gateway / Routing', icon: '🚪',
         description: 'Entry point for requests',
-        icon: '🚪',
-        getRequirements: (params) => {
-          return {
-            productType: 'integration',
-            category: 'API Gateway',
-            quantity: 1
-          };
-        }
+        getRequirements: () => ({ productType: 'integration', category: 'API Gateway', quantity: 1 }),
       },
       {
-        id: 'compute',
-        name: 'Serverless Compute',
+        id: 'compute', name: 'Serverless Compute', icon: '⚙️',
         description: 'Event-driven code execution',
-        icon: '⚙️',
-        getRequirements: (params) => {
-          return {
-            productType: 'serverless',
-            category: 'Compute',
-            quantity: 1
-          };
-        }
+        getRequirements: () => ({ productType: 'serverless', category: 'Compute', quantity: 1 }),
       },
       {
-        id: 'message-queue',
-        name: 'Message Queue',
+        id: 'message-queue', name: 'Message Queue', icon: '📨',
         description: 'Decouples the API from compute — buffers requests for async processing',
-        icon: '📨',
-        getRequirements: () => ({
-          productType: 'integration',
-          category: 'Messaging',
-          quantity: 1
-        })
+        getRequirements: () => ({ productType: 'integration', category: 'Messaging', quantity: 1 }),
       },
       {
-        id: 'database',
-        name: 'Managed NoSQL',
+        id: 'database', name: 'Managed NoSQL', icon: '🗄️',
         description: 'High-throughput document store',
-        icon: '🗄️',
-        getRequirements: (params) => {
-          return {
-            productType: 'database',
-            category: 'NoSQL',
-            minMemoryGb: 4, // Approximating tier based on memory
-            quantity: 1
-          };
-        }
+        getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
       },
       {
-        id: 'asset-storage',
-        name: 'Object Storage',
+        id: 'asset-storage', name: 'Object Storage', icon: '🪣',
         description: 'User uploads, static assets, and files served by the backend',
-        icon: '🪣',
-        getRequirements: (params) => {
-          // Asset/upload footprint scales roughly with the app's data size;
-          // reuse dbSizeGB as the proxy rather than adding another slider.
-          return {
-            productType: 'storage',
-            category: 'Object',
-            quantity: params.dbSizeGB
-          };
-        }
-      }
-    ]
+        getRequirements: (p) => storageReqs(p, 50, { category: 'Object' }),
+      },
+    ],
   },
   {
     id: '3-tier-web',
     name: 'Classic 3-Tier Web Architecture',
-    description: 'The foundational blueprint for monolithic or traditionally scaled web applications using VMs and relational databases.',
+    description: 'The foundational blueprint for monolithic or traditionally scaled web applications using VMs and relational databases. The deliberate minimal baseline.',
     icon: '🏢',
-    parameters: [
-      {
-        id: 'concurrentUsers',
-        label: 'Peak Concurrent Users',
-        type: 'slider',
-        min: 100,
-        max: 10000,
-        step: 100,
-        defaultValue: 1000,
-        unit: 'users'
-      },
-      {
-        id: 'dbSizeGB',
-        label: 'Database Storage',
-        type: 'slider',
-        min: 50,
-        max: 2000,
-        step: 50,
-        defaultValue: 250,
-        unit: 'GB'
-      }
-    ],
+    capacityLabel: 'Concurrent Users',
     components: [
       {
-        id: 'load-balancer',
-        name: 'Load Balancer',
+        id: 'load-balancer', name: 'Load Balancer', icon: '⚖️',
         description: 'Distributes incoming traffic',
-        icon: '⚖️',
-        getRequirements: (params) => {
-          return {
-            productType: 'networking',
-            category: 'Load Balancer',
-            quantity: 1
-          };
-        }
+        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
       },
       {
-        id: 'web-tier',
-        name: 'Web / App Tier',
+        id: 'web-tier', name: 'Web / App Tier', icon: '🖥️',
         description: 'Auto-scaling Virtual Machines',
-        icon: '🖥️',
-        getRequirements: (params) => {
-          const loadFactor = Math.max(2, Math.ceil(params.concurrentUsers / 500));
-          return {
-            productType: 'vm',
-            category: 'General purpose',
-            minVcpus: 2,
-            minMemoryGb: 8,
-            quantity: loadFactor
-          };
-        }
+        getRequirements: (p) => computeReqs(p, 2, { redundant: true }),
       },
       {
-        id: 'database',
-        name: 'Relational Database',
+        id: 'database', name: 'Relational Database', icon: '🗃️',
         description: 'Primary transactional datastore',
-        icon: '🗃️',
-        getRequirements: (params) => {
-          const mem = Math.max(8, Math.ceil(params.concurrentUsers / 250) * 4);
-          return {
-            productType: 'database',
-            category: 'Relational',
-            minMemoryGb: mem,
-            quantity: 1
-          };
-        }
-      }
-    ]
+        getRequirements: (p) => dbReqs(p, 8, 'Relational'),
+      },
+    ],
   },
   {
     id: 'streaming-analytics',
     name: 'Real-time Streaming Analytics',
     description: 'A highly demanded architecture for processing IoT telemetry, clickstreams, or financial data in real time.',
     icon: '🌊',
-    parameters: [
-      {
-        id: 'throughputMB',
-        label: 'Ingestion Throughput',
-        type: 'slider',
-        min: 1,
-        max: 100,
-        step: 1,
-        defaultValue: 10,
-        unit: 'MB/s'
-      },
-      {
-        id: 'storageTB',
-        label: 'Data Lake Size',
-        type: 'slider',
-        min: 1,
-        max: 100,
-        step: 1,
-        defaultValue: 10,
-        unit: 'TB'
-      }
-    ],
+    capacityLabel: 'Ingestion Throughput',
     components: [
       {
-        id: 'streaming',
-        name: 'Event Streaming',
+        id: 'streaming', name: 'Event Streaming', icon: '📨',
         description: 'Message broker / streaming platform',
-        icon: '📨',
-        getRequirements: (params) => {
-          return {
-            productType: 'data-analytics',
-            category: 'Streaming',
-            quantity: 1
-          };
-        }
+        getRequirements: (p) => ({ productType: 'data-analytics', category: 'Streaming', quantity: Math.max(1, Math.round(capacityScale(p.capacity))) }),
       },
       {
-        id: 'compute',
-        name: 'Stream Processing',
+        id: 'compute', name: 'Stream Processing', icon: '🧠',
         description: 'Real-time compute nodes',
-        icon: '🧠',
-        getRequirements: (params) => {
-          const vcpus = Math.max(4, Math.ceil(params.throughputMB / 5) * 2);
-          return {
-            productType: 'vm',
-            category: 'Compute optimized',
-            minVcpus: vcpus,
-            minMemoryGb: vcpus * 2,
-            quantity: 3 // Typically a cluster
-          };
-        }
+        getRequirements: (p) => computeReqs(p, 4, { redundant: true, category: 'Compute optimized' }),
       },
       {
-        id: 'storage',
-        name: 'Object Storage',
+        id: 'serving-db', name: 'Serving Store', icon: '🗄️',
+        description: 'Low-latency store where processed results land for querying',
+        getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
+      },
+      {
+        id: 'storage', name: 'Object Storage', icon: '🪣',
         description: 'Long-term data lake',
-        icon: '🪣',
-        getRequirements: (params) => {
-          return {
-            productType: 'storage',
-            category: 'Object',
-            quantity: params.storageTB * 1024 // Assuming price is per GB
-          };
-        }
-      }
-    ]
+        getRequirements: (p) => storageReqs(p, 1024, { category: 'Object' }),
+      },
+    ],
   },
   {
     id: 'ecommerce-microservices',
     name: 'E-Commerce Microservices Stack',
     description: 'A resilient, decoupled architecture designed for high availability, fast product lookups, and fault tolerance.',
     icon: '🛒',
-    parameters: [
-      {
-        id: 'dailyTraffic',
-        label: 'Daily Unique Visitors',
-        type: 'slider',
-        min: 5000,
-        max: 500000,
-        step: 5000,
-        defaultValue: 50000,
-        unit: 'visitors'
-      },
-      {
-        id: 'catalogSize',
-        label: 'Product Catalog Size',
-        type: 'slider',
-        min: 1000,
-        max: 1000000,
-        step: 10000,
-        defaultValue: 50000,
-        unit: 'items'
-      }
-    ],
+    capacityLabel: 'Daily Visitors',
     components: [
       {
-        id: 'kubernetes',
-        name: 'Managed Kubernetes',
+        id: 'load-balancer', name: 'Ingress / Load Balancer', icon: '⚖️',
+        description: 'Fronts the microservices with a single entry point and traffic distribution',
+        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+      },
+      {
+        id: 'kubernetes', name: 'Managed Kubernetes', icon: '☸️',
         description: 'Container orchestration cluster',
-        icon: '☸️',
-        getRequirements: (params) => {
-          const nodes = Math.max(3, Math.ceil(params.dailyTraffic / 20000));
-          return {
-            productType: 'containers',
-            minVcpus: 4,
-            minMemoryGb: 16,
-            quantity: nodes
-          };
-        }
+        getRequirements: (p) => containerNodes(p, 4),
       },
       {
-        id: 'cache',
-        name: 'Distributed Cache',
-        description: 'In-memory datastore for sessions',
-        icon: '⚡',
-        getRequirements: (params) => {
-          return {
-            productType: 'database',
-            category: 'In-memory',
-            minMemoryGb: 4,
-            quantity: 1
-          };
-        }
+        id: 'cache', name: 'Distributed Cache', icon: '⚡',
+        description: 'In-memory datastore for sessions and hot product lookups',
+        getRequirements: (p) => dbReqs(p, 4, 'In-memory'),
       },
       {
-        id: 'database',
-        name: 'Transactional DB',
+        id: 'database', name: 'Transactional DB', icon: '🗃️',
         description: 'Primary persistent store',
-        icon: '🗃️',
-        getRequirements: (params) => {
-          const mem = params.catalogSize > 100000 ? 16 : 8;
-          return {
-            productType: 'database',
-            category: 'Relational',
-            minMemoryGb: mem,
-            quantity: 1
-          };
-        }
+        getRequirements: (p) => dbReqs(p, 8, 'Relational'),
       },
       {
-        id: 'product-media',
-        name: 'Product Image Storage',
+        id: 'product-media', name: 'Product Image Storage', icon: '🪣',
         description: 'Object storage for product images and media across the catalog',
-        icon: '🪣',
-        getRequirements: (params) => {
-          // ~2 MB of images per catalog item (multiple photos + thumbnails),
-          // converted to GB. Derives directly from the catalog-size param.
-          return {
-            productType: 'storage',
-            category: 'Object',
-            quantity: Math.max(1, Math.ceil((params.catalogSize * 2) / 1024))
-          };
-        }
+        getRequirements: (p) => storageReqs(p, 98, { category: 'Object' }),
       },
       {
-        id: 'message-queue',
-        name: 'Message Queue',
+        id: 'message-queue', name: 'Message Queue', icon: '📨',
         description: 'Async order & payment processing between services',
-        icon: '📨',
-        getRequirements: () => ({
-          productType: 'integration',
-          category: 'Messaging',
-          quantity: 1
-        })
+        getRequirements: () => ({ productType: 'integration', category: 'Messaging', quantity: 1 }),
       },
       {
-        id: 'event-bus',
-        name: 'Event Bus',
+        id: 'event-bus', name: 'Event Bus', icon: '📡',
         description: 'Fans "order-placed" events out to inventory, shipping, and analytics',
-        icon: '📡',
-        getRequirements: () => ({
-          productType: 'integration',
-          category: 'Eventing',
-          quantity: 1
-        })
-      }
-    ]
+        getRequirements: () => ({ productType: 'integration', category: 'Eventing', quantity: 1 }),
+      },
+    ],
   },
   {
     id: 'ml-training-hosting',
-    name: 'ML Model Training & Hosting',
-    description: 'A heavy-compute pipeline designed for MLOps, training custom models, and serving them via APIs.',
+    name: 'ML Training & Hosting',
+    description: 'A pipeline for training machine-learning models on GPU clusters and serving them through a managed inference endpoint.',
     icon: '🤖',
-    parameters: [
-      {
-        id: 'trainingHours',
-        label: 'Training Hours per Month',
-        type: 'slider',
-        min: 10,
-        max: 730,
-        step: 10,
-        defaultValue: 100,
-        unit: 'hours'
-      },
-      {
-        id: 'datasetSizeGB',
-        label: 'Training Dataset Size',
-        type: 'slider',
-        min: 50,
-        max: 5000,
-        step: 50,
-        defaultValue: 500,
-        unit: 'GB'
-      }
-    ],
+    capacityLabel: 'Training Scale',
     components: [
       {
-        id: 'pipeline-orchestration',
-        name: 'Pipeline Orchestration',
-        description: 'Coordinates the multi-stage train → evaluate → deploy pipeline (Step Functions / Logic Apps)',
-        icon: '🔀',
-        getRequirements: () => ({
-          productType: 'integration',
-          category: 'Workflow',
-          quantity: 1
-        })
+        id: 'workflow', name: 'Pipeline Orchestration', icon: '🔀',
+        description: 'Coordinates the multi-stage training pipeline',
+        getRequirements: () => ({ productType: 'integration', category: 'Workflow', quantity: 1 }),
       },
       {
-        id: 'training',
-        name: 'Training Environment',
-        description: 'GPU-accelerated VMs',
-        icon: '🔥',
-        getRequirements: (params) => {
-          // Calculate average utilization across the month
-          const fractionalMonth = params.trainingHours / 730;
-          return {
-            productType: 'vm',
-            category: 'GPU instance',
-            minVcpus: 8,
-            minMemoryGb: 32,
-            quantity: fractionalMonth > 0 ? fractionalMonth : 1
-          };
-        }
+        id: 'gpu-training', name: 'GPU Training Cluster', icon: '🔥',
+        description: 'Accelerated compute for model training',
+        getRequirements: (p) => ({ productType: 'vm', category: 'GPU instance', quantity: Math.max(1, Math.round(capacityNodes(p.capacity))) }),
       },
       {
-        id: 'storage',
-        name: 'High-Performance Storage',
-        description: 'Fast file storage for datasets',
-        icon: '📁',
-        getRequirements: (params) => {
-          return {
-            productType: 'storage',
-            category: 'File',
-            quantity: params.datasetSizeGB // GB
-          };
-        }
+        id: 'storage', name: 'Dataset Storage', icon: '📁',
+        description: 'High-throughput storage for training datasets and checkpoints',
+        getRequirements: (p) => storageReqs(p, 500, { category: 'File' }),
       },
       {
-        id: 'inference',
-        name: 'Inference Endpoint',
-        description: 'Model hosting API',
-        icon: '🧠',
-        getRequirements: (params) => {
-          return {
-            productType: 'ai',
-            category: 'Inference',
-            quantity: 1
-          };
-        }
-      }
-    ]
+        id: 'inference', name: 'Inference Endpoint', icon: '🧠',
+        description: 'Serves the trained model',
+        getRequirements: () => ({ productType: 'ai', category: 'Inference', quantity: 1 }),
+      },
+    ],
   },
   {
     id: 'k8s-app-platform',
-    name: 'Kubernetes-Native App Platform',
-    description: 'Cloud-native platform using managed Kubernetes for containerized microservices, persistent block storage for stateful workloads, a managed relational database, and a load balancer for traffic ingress.',
+    name: 'Kubernetes App Platform',
+    description: 'A general-purpose container platform for running microservices and stateful applications on managed Kubernetes.',
     icon: '☸️',
-    parameters: [
-      {
-        id: 'workerNodes',
-        label: 'Worker Nodes',
-        type: 'slider',
-        min: 3,
-        max: 30,
-        step: 1,
-        defaultValue: 6,
-        unit: 'nodes'
-      },
-      {
-        id: 'dbMemoryGb',
-        label: 'Database Memory',
-        type: 'slider',
-        min: 8,
-        max: 128,
-        step: 8,
-        defaultValue: 16,
-        unit: 'GB'
-      }
-    ],
+    capacityLabel: 'Cluster Scale',
     components: [
       {
-        id: 'kubernetes',
-        name: 'Managed Kubernetes',
-        description: 'Container orchestration worker nodes',
-        icon: '☸️',
-        getRequirements: (params) => ({
-          productType: 'containers',
-          minVcpus: 4,
-          minMemoryGb: 16,
-          quantity: params.workerNodes
-        })
+        id: 'kubernetes', name: 'Managed Kubernetes', icon: '☸️',
+        description: 'Container orchestration node pool',
+        getRequirements: (p) => containerNodes(p, 4),
       },
       {
-        id: 'block-storage',
-        name: 'Persistent Block Storage',
-        description: 'Stateful volume per worker node (50 GB each)',
-        icon: '💾',
-        getRequirements: (params) => ({
-          productType: 'storage',
-          category: 'Block',
-          quantity: params.workerNodes * 50
-        })
+        id: 'block-storage', name: 'Persistent Volumes', icon: '💾',
+        description: 'Block storage for stateful workloads',
+        getRequirements: (p) => storageReqs(p, 100, { category: 'Block' }),
       },
       {
-        id: 'database',
-        name: 'Managed Relational DB',
-        description: 'Primary transactional datastore',
-        icon: '🗃️',
-        getRequirements: (params) => ({
-          productType: 'database',
-          category: 'Relational',
-          minMemoryGb: params.dbMemoryGb,
-          quantity: 1
-        })
+        id: 'database', name: 'Relational Database', icon: '🗃️',
+        description: 'Managed backing database',
+        getRequirements: (p) => dbReqs(p, 8, 'Relational'),
       },
       {
-        id: 'load-balancer',
-        name: 'Load Balancer',
-        description: 'Traffic ingress for the cluster',
-        icon: '⚖️',
-        getRequirements: () => ({
-          productType: 'networking',
-          category: 'Load Balancer',
-          quantity: 1
-        })
-      }
-    ]
+        id: 'load-balancer', name: 'Load Balancer', icon: '⚖️',
+        description: 'Ingress traffic distribution',
+        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+      },
+    ],
   },
   {
     id: 'hpc-scientific',
     name: 'HPC / Scientific Computing',
-    description: 'High-performance computing cluster for scientific simulations, genomics, financial modeling, or any massively parallel workload requiring dedicated HPC instances and fast shared file storage.',
+    description: 'A high-performance computing cluster for simulations, modeling, and batch scientific workloads.',
     icon: '🔬',
-    parameters: [
-      {
-        id: 'computeNodes',
-        label: 'Compute Nodes',
-        type: 'slider',
-        min: 4,
-        max: 64,
-        step: 4,
-        defaultValue: 16,
-        unit: 'nodes'
-      },
-      {
-        id: 'storageTB',
-        label: 'Shared Storage',
-        type: 'slider',
-        min: 1,
-        max: 50,
-        step: 1,
-        defaultValue: 5,
-        unit: 'TB'
-      }
-    ],
+    capacityLabel: 'Cluster Size',
     components: [
       {
-        id: 'hpc-nodes',
-        name: 'HPC Compute Nodes',
-        description: 'High-performance compute instances',
-        icon: '⚡',
-        getRequirements: (params) => ({
-          productType: 'vm',
-          category: 'HPC',
-          minVcpus: 8,
-          quantity: params.computeNodes
-        })
-      },
-      {
-        id: 'head-node',
-        name: 'Head / Master Node',
+        id: 'head-node', name: 'Head / Scheduler Node', icon: '🖥️',
         description: 'Job scheduler and cluster controller',
-        icon: '🖥️',
-        getRequirements: () => ({
-          productType: 'vm',
-          category: 'Compute optimized',
-          minVcpus: 8,
-          minMemoryGb: 32,
-          quantity: 1
-        })
+        getRequirements: (p) => ({ ...computeReqs(p, 4), quantity: 1 }),
       },
       {
-        id: 'shared-fs',
-        name: 'Shared File System',
-        description: 'High-throughput shared storage for datasets',
-        icon: '📁',
-        getRequirements: (params) => ({
-          productType: 'storage',
-          category: 'File',
-          quantity: params.storageTB * 1024
-        })
+        id: 'compute-nodes', name: 'Compute Nodes', icon: '⚡',
+        description: 'Parallel compute-optimized worker fleet',
+        getRequirements: (p) => ({ productType: 'vm', category: 'Compute optimized', minVcpus: Math.max(8, Math.round(8 * capacitySize(p.capacity))), quantity: Math.max(2, Math.round(capacityScale(p.capacity) * 2)) }),
       },
       {
-        id: 'results-storage',
-        name: 'Results Object Storage',
-        description: 'Long-term output and archive',
-        icon: '🪣',
-        getRequirements: (params) => ({
-          productType: 'storage',
-          category: 'Object',
-          quantity: params.storageTB * 512
-        })
-      }
-    ]
+        id: 'scratch-storage', name: 'Scratch Storage', icon: '📁',
+        description: 'High-throughput parallel file system for active jobs',
+        getRequirements: (p) => storageReqs(p, 500, { category: 'File' }),
+      },
+      {
+        id: 'archive-storage', name: 'Results Archive', icon: '🪣',
+        description: 'Long-term object storage for results',
+        getRequirements: (p) => storageReqs(p, 1024, { category: 'Object' }),
+      },
+    ],
   },
   {
     id: 'saas-paas-app',
-    name: 'SaaS / PaaS Application',
-    description: 'Fully managed application platform that eliminates infrastructure overhead. Combines PaaS app hosting with a managed relational database and object storage — ideal for SaaS products and internal tools.',
+    name: 'SaaS on Managed Platform',
+    description: 'A multi-tenant SaaS product running on a managed application platform (PaaS) with a relational backend.',
     icon: '🚀',
-    parameters: [
-      {
-        id: 'appInstances',
-        label: 'App Instances',
-        type: 'slider',
-        min: 1,
-        max: 10,
-        step: 1,
-        defaultValue: 2,
-        unit: 'instances'
-      },
-      {
-        id: 'storageSizeGB',
-        label: 'Asset Storage',
-        type: 'slider',
-        min: 10,
-        max: 500,
-        step: 10,
-        defaultValue: 50,
-        unit: 'GB'
-      }
-    ],
+    capacityLabel: 'Tenant Scale',
     components: [
       {
-        id: 'app-hosting',
-        name: 'App Hosting Platform',
-        description: 'Managed PaaS runtime (App Engine, App Service, App Runner…)',
-        icon: '🌐',
-        getRequirements: (params) => ({
-          productType: 'app-hosting',
-          quantity: params.appInstances
-        })
+        id: 'app-hosting', name: 'Managed App Hosting', icon: '🚀',
+        description: 'Platform-as-a-Service application tier',
+        getRequirements: (p) => ({ productType: 'app-hosting', quantity: Math.max(1, Math.round(capacityNodes(p.capacity) * reliabilityReplicas(p.reliability))) }),
       },
       {
-        id: 'database',
-        name: 'Managed Relational DB',
-        description: 'Primary application datastore',
-        icon: '🗃️',
-        getRequirements: () => ({
-          productType: 'database',
-          category: 'Relational',
-          minMemoryGb: 4,
-          quantity: 1
-        })
+        id: 'database', name: 'Relational Database', icon: '🗃️',
+        description: 'Primary tenant datastore',
+        getRequirements: (p) => dbReqs(p, 8, 'Relational'),
       },
       {
-        id: 'object-storage',
-        name: 'Object Storage',
-        description: 'User uploads, media assets, and backups',
-        icon: '🪣',
-        getRequirements: (params) => ({
-          productType: 'storage',
-          category: 'Object',
-          quantity: params.storageSizeGB
-        })
-      }
-    ]
+        id: 'storage', name: 'Object Storage', icon: '🪣',
+        description: 'Tenant assets and uploads',
+        getRequirements: (p) => storageReqs(p, 50, { category: 'Object' }),
+      },
+    ],
   },
   {
     id: 'data-warehouse-bi',
-    name: 'Data Warehouse & BI Analytics',
-    description: 'A centralized data repository coupled with an analytics engine and BI compute nodes for large-scale reporting and insights.',
+    name: 'Data Warehouse & BI',
+    description: 'A cloud data warehouse feeding business-intelligence dashboards, fed by an ETL pipeline.',
     icon: '📊',
-    parameters: [
-      {
-        id: 'datasetSizeGB',
-        label: 'Data Lake Storage',
-        type: 'slider',
-        min: 100,
-        max: 50000,
-        step: 100,
-        defaultValue: 1000,
-        unit: 'GB'
-      },
-      {
-        id: 'biComputeCores',
-        label: 'BI Compute Cores',
-        type: 'slider',
-        min: 2,
-        max: 32,
-        step: 2,
-        defaultValue: 4,
-        unit: 'vCPU'
-      }
-    ],
+    capacityLabel: 'Data Volume',
     components: [
       {
-        id: 'data-warehouse',
-        name: 'Data Warehouse',
-        description: 'Columnar analytics engine',
-        icon: '🗄️',
-        getRequirements: (params) => {
-          return {
-            productType: 'data-analytics',
-            category: 'Warehouse',
-            quantity: 1
-          };
-        }
+        id: 'etl-orchestration', name: 'ETL Orchestration', icon: '🔀',
+        description: 'Coordinates extract-transform-load jobs into the warehouse',
+        getRequirements: () => ({ productType: 'integration', category: 'Workflow', quantity: 1 }),
       },
       {
-        id: 'data-lake',
-        name: 'Object Storage',
-        description: 'Raw data staging',
-        icon: '🪣',
-        getRequirements: (params) => {
-          return {
-            productType: 'storage',
-            category: 'Object',
-            quantity: 1
-          };
-        }
+        id: 'warehouse', name: 'Data Warehouse', icon: '🗄️',
+        description: 'Columnar analytics warehouse',
+        getRequirements: (p) => ({ productType: 'data-analytics', category: 'Warehouse', quantity: Math.max(1, Math.round(capacityScale(p.capacity))) }),
       },
       {
-        id: 'bi-compute',
-        name: 'BI Visualization Node',
-        description: 'Compute instance for dashboards',
-        icon: '📈',
-        getRequirements: (params) => {
-          return {
-            productType: 'vm',
-            minVcpus: params.biComputeCores,
-            minMemoryGb: params.biComputeCores * 2,
-            quantity: 1
-          };
-        }
-      }
-    ]
+        id: 'storage', name: 'Staging Storage', icon: '🪣',
+        description: 'Object storage staging area / data lake',
+        getRequirements: (p) => storageReqs(p, 1024, { category: 'Object' }),
+      },
+      {
+        id: 'bi-compute', name: 'BI / Query Tier', icon: '📈',
+        description: 'Compute for BI dashboards and ad-hoc queries',
+        getRequirements: (p) => computeReqs(p, 4),
+      },
+    ],
   },
   {
     id: 'disaster-recovery',
-    name: 'DR, Warm Standby',
-    description: 'A scaled-down replica of your production environment kept running in a secondary region, ready to scale up and take over during a primary-region outage. Includes standby compute, a replicated database, cross-region backups, and failover routing.',
+    name: 'Disaster Recovery (Warm Standby)',
+    description: 'A cross-region warm-standby environment that can take over if the primary region fails.',
     icon: '🛟',
-    parameters: [
-      {
-        id: 'standbyNodes',
-        label: 'Warm Standby Nodes',
-        type: 'slider',
-        min: 1,
-        max: 16,
-        step: 1,
-        defaultValue: 3,
-        unit: 'nodes'
-      },
-      {
-        id: 'replicatedDbGB',
-        label: 'Replicated Database Size',
-        type: 'slider',
-        min: 50,
-        max: 5000,
-        step: 50,
-        defaultValue: 500,
-        unit: 'GB'
-      }
-    ],
+    capacityLabel: 'Protected Footprint',
     components: [
       {
-        id: 'standby-compute',
-        name: 'Warm Standby Compute',
-        description: 'Scaled-down replica instances on standby',
-        icon: '🖥️',
-        getRequirements: (params) => ({
-          productType: 'vm',
-          category: 'General purpose',
-          minVcpus: 2,
-          minMemoryGb: 8,
-          quantity: params.standbyNodes
-        })
+        id: 'standby-compute', name: 'Standby Compute', icon: '🖥️',
+        description: 'Scaled-down replica of the production compute tier',
+        getRequirements: (p) => computeReqs(p, 2, { redundant: true }),
       },
       {
-        id: 'db-replica',
-        name: 'Database Replica',
-        description: 'Cross-region replicated managed database',
-        icon: '🗃️',
-        getRequirements: () => ({
-          productType: 'database',
-          category: 'Relational',
-          minMemoryGb: 8,
-          quantity: 1
-        })
+        id: 'database', name: 'Replicated Database', icon: '🗃️',
+        description: 'Cross-region database replica',
+        getRequirements: (p) => dbReqs(p, 8, 'Relational'),
       },
       {
-        id: 'backup-storage',
-        name: 'Backup Object Storage',
-        description: 'Cross-region snapshots and backups',
-        icon: '🪣',
-        getRequirements: (params) => ({
-          productType: 'storage',
-          category: 'Object',
-          quantity: params.replicatedDbGB * 2
-        })
+        id: 'backup-storage', name: 'Backup Storage', icon: '🪣',
+        description: 'Object storage for snapshots and backups',
+        getRequirements: (p) => storageReqs(p, 500, { category: 'Object' }),
       },
       {
-        id: 'failover-routing',
-        name: 'Failover Routing',
-        description: 'Cross-region load balancer for failover',
-        icon: '⚖️',
-        getRequirements: () => ({
-          productType: 'networking',
-          category: 'Load Balancer',
-          quantity: 1
-        })
-      }
-    ]
+        id: 'dns-failover', name: 'DNS / Load Balancer Failover', icon: '⚖️',
+        description: 'Traffic failover to the standby region',
+        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+      },
+    ],
   },
   {
     id: 'content-media-platform',
     name: 'Content & Media Platform',
-    description: 'A platform for storing, transcoding, and delivering video and image content at scale. Combines a transcoding compute fleet, an object-storage media library, a metadata database for catalog lookups, and a delivery endpoint for distribution.',
+    description: 'A video/media platform that transcodes uploads and delivers content globally through a CDN.',
     icon: '🎬',
-    parameters: [
-      {
-        id: 'mediaStorageTB',
-        label: 'Media Library Size',
-        type: 'slider',
-        min: 1,
-        max: 500,
-        step: 1,
-        defaultValue: 20,
-        unit: 'TB'
-      },
-      {
-        id: 'monthlyStreams',
-        label: 'Monthly Streams / Views',
-        type: 'slider',
-        min: 100000,
-        max: 50000000,
-        step: 100000,
-        defaultValue: 2000000,
-        unit: 'views'
-      }
-    ],
+    capacityLabel: 'Monthly Viewers',
     components: [
       {
-        id: 'transcode-queue',
-        name: 'Transcode Queue',
-        description: 'Buffers uploads — the transcoding fleet scales on queue depth',
-        icon: '📨',
-        getRequirements: () => ({
-          productType: 'integration',
-          category: 'Messaging',
-          quantity: 1
-        })
+        id: 'cdn', name: 'Content Delivery (CDN)', icon: '🌐',
+        description: 'Global edge delivery of media — priced on monthly egress volume',
+        getRequirements: (p) => ({ productType: 'networking', category: 'Internet Egress', quantity: egressGb(p, 10240) }),
       },
       {
-        id: 'transcoding',
-        name: 'Transcoding Compute',
-        description: 'Encodes media into multiple formats and bitrates',
-        icon: '🎞️',
-        getRequirements: (params) => {
-          const nodes = Math.max(2, Math.ceil(params.monthlyStreams / 5000000));
-          return {
-            productType: 'vm',
-            category: 'Compute optimized',
-            minVcpus: 8,
-            minMemoryGb: 16,
-            quantity: nodes
-          };
-        }
+        id: 'transcode', name: 'Transcoding Compute', icon: '🎞️',
+        description: 'Compute-optimized fleet for media transcoding',
+        getRequirements: (p) => computeReqs(p, 4, { redundant: true, category: 'Compute optimized' }),
       },
       {
-        id: 'media-storage',
-        name: 'Media Object Storage',
-        description: 'Source and transcoded asset library',
-        icon: '🪣',
-        getRequirements: (params) => ({
-          productType: 'storage',
-          category: 'Object',
-          quantity: params.mediaStorageTB * 1024
-        })
+        id: 'storage', name: 'Media Storage', icon: '🪣',
+        description: 'Object storage for source and transcoded media',
+        getRequirements: (p) => storageReqs(p, 1024, { category: 'Object' }),
       },
       {
-        id: 'metadata-db',
-        name: 'Metadata Database',
-        description: 'Catalog, search, and playback metadata',
-        icon: '🗄️',
-        getRequirements: () => ({
-          productType: 'database',
-          category: 'NoSQL',
-          minMemoryGb: 4,
-          quantity: 1
-        })
+        id: 'metadata-db', name: 'Metadata DB', icon: '🗄️',
+        description: 'Catalog and playback metadata',
+        getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
       },
       {
-        id: 'delivery-endpoint',
-        name: 'Content Delivery Endpoint',
-        description: 'Distribution and routing for viewers',
-        icon: '🌐',
-        getRequirements: () => ({
-          productType: 'networking',
-          category: 'Load Balancer',
-          quantity: 1
-        })
-      }
-    ]
+        id: 'load-balancer', name: 'Load Balancer', icon: '⚖️',
+        description: 'Distributes API/control-plane traffic',
+        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+      },
+    ],
   },
   {
     id: 'compliance-ready-web-app',
     name: 'Compliance-Ready Web Application',
-    description: 'A standard 3-tier web app hardened with managed security services — WAF, key management, and threat monitoring — for teams in regulated industries handling sensitive data.',
+    description: 'A 3-tier web app hardened with managed security services for teams in regulated industries handling sensitive data. Security add-ons scale with the Security slider.',
     icon: '🛡️',
-    parameters: [
-      {
-        id: 'concurrentUsers',
-        label: 'Peak Concurrent Users',
-        type: 'slider',
-        min: 100,
-        max: 10000,
-        step: 100,
-        defaultValue: 1000,
-        unit: 'users'
-      },
-      {
-        id: 'dbSizeGB',
-        label: 'Database Storage',
-        type: 'slider',
-        min: 50,
-        max: 2000,
-        step: 50,
-        defaultValue: 250,
-        unit: 'GB'
-      }
-    ],
+    capacityLabel: 'Concurrent Users',
     components: [
       {
-        id: 'load-balancer',
-        name: 'Load Balancer',
+        id: 'load-balancer', name: 'Load Balancer', icon: '⚖️',
         description: 'Distributes incoming traffic',
-        icon: '⚖️',
-        getRequirements: () => ({
-          productType: 'networking',
-          category: 'Load Balancer',
-          quantity: 1
-        })
+        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
       },
       {
-        id: 'web-tier',
-        name: 'Web / App Tier',
+        id: 'web-tier', name: 'Web / App Tier', icon: '🖥️',
         description: 'Auto-scaling Virtual Machines',
-        icon: '🖥️',
-        getRequirements: (params) => {
-          const loadFactor = Math.max(2, Math.ceil(params.concurrentUsers / 500));
-          return {
-            productType: 'vm',
-            category: 'General purpose',
-            minVcpus: 2,
-            minMemoryGb: 8,
-            quantity: loadFactor
-          };
-        }
+        getRequirements: (p) => computeReqs(p, 2, { redundant: true }),
       },
       {
-        id: 'database',
-        name: 'Relational Database',
+        id: 'database', name: 'Relational Database', icon: '🗃️',
         description: 'Primary transactional datastore',
-        icon: '🗃️',
-        getRequirements: (params) => {
-          const mem = Math.max(8, Math.ceil(params.concurrentUsers / 250) * 4);
-          return {
-            productType: 'database',
-            category: 'Relational',
-            minMemoryGb: mem,
-            quantity: 1
-          };
-        }
+        getRequirements: (p) => dbReqs(p, 8, 'Relational'),
       },
       {
-        id: 'waf',
-        name: 'Web Application Firewall',
-        description: 'Filters malicious traffic at the edge',
-        icon: '🧱',
-        getRequirements: () => ({
-          productType: 'security',
-          category: 'Network Security',
-          quantity: 1
-        })
+        id: 'waf', name: 'Web Application Firewall', icon: '🧱',
+        description: 'Filters malicious traffic at the edge (Security ≥ medium)',
+        getRequirements: (p) => securityIncludes(p.security, 'waf') ? ({ productType: 'security', category: 'Network Security', quantity: 1 }) : null,
       },
       {
-        id: 'kms',
-        name: 'Key Management & Encryption',
-        description: 'Manages encryption keys for data at rest',
-        icon: '🔐',
-        getRequirements: () => ({
-          productType: 'security',
-          category: 'Identity & Encryption',
-          quantity: 1
-        })
+        id: 'kms', name: 'Key Management & Encryption', icon: '🔐',
+        description: 'Manages encryption keys for data at rest (Security ≥ medium)',
+        getRequirements: (p) => securityIncludes(p.security, 'kms') ? ({ productType: 'security', category: 'Identity & Encryption', quantity: 1 }) : null,
       },
       {
-        id: 'threat-detection',
-        name: 'Threat Detection & Monitoring',
-        description: 'Continuous monitoring for compliance and anomalies',
-        icon: '🚨',
-        getRequirements: () => ({
-          productType: 'security',
-          category: 'Threat & Compliance',
-          quantity: 1
-        })
+        id: 'threat-detection', name: 'Threat Detection & Monitoring', icon: '🚨',
+        description: 'Continuous monitoring for compliance and anomalies (Security = high)',
+        getRequirements: (p) => securityIncludes(p.security, 'threat') ? ({ productType: 'security', category: 'Threat & Compliance', quantity: 1 }) : null,
       },
       {
-        id: 'audit-archive',
-        name: 'Audit Log Archive',
-        description: 'Immutable (WORM) object storage for retained audit and compliance logs',
-        icon: '🪣',
-        getRequirements: (params) => {
-          // Archived audit-log volume scales with the governed data footprint;
-          // derive from dbSizeGB rather than adding a retention slider.
-          return {
-            productType: 'storage',
-            category: 'Object',
-            quantity: params.dbSizeGB
-          };
-        }
-      }
-    ]
+        id: 'audit-archive', name: 'Audit Log Archive', icon: '🪣',
+        description: 'Immutable (WORM) object storage for retained audit logs',
+        getRequirements: (p) => storageReqs(p, 250, { category: 'Object' }),
+      },
+    ],
   },
   {
     id: 'rag-ai-knowledge-base',
     name: 'RAG AI Knowledge Base',
-    description: 'A retrieval-augmented generation pipeline for AI chat and search products — document storage, a metadata store, serverless orchestration, and a managed inference endpoint.',
+    description: 'A retrieval-augmented generation pipeline for AI chat and search — document storage, a metadata store, an API layer, embeddings, orchestration, and a managed inference endpoint.',
     icon: '🧠',
-    parameters: [
-      {
-        id: 'corpusSizeGB',
-        label: 'Document Corpus Size',
-        type: 'slider',
-        min: 1,
-        max: 500,
-        step: 1,
-        defaultValue: 25,
-        unit: 'GB'
-      },
-      {
-        id: 'monthlyQueries',
-        label: 'Monthly Queries',
-        type: 'slider',
-        min: 10000,
-        max: 5000000,
-        step: 10000,
-        defaultValue: 250000,
-        unit: 'queries'
-      }
-    ],
+    capacityLabel: 'Corpus & Query Volume',
     components: [
       {
-        id: 'document-storage',
-        name: 'Document Storage',
+        id: 'document-storage', name: 'Document Storage', icon: '🪣',
         description: 'Source documents and embeddings archive',
-        icon: '🪣',
-        getRequirements: (params) => ({
-          productType: 'storage',
-          category: 'Object',
-          quantity: params.corpusSizeGB
-        })
+        getRequirements: (p) => storageReqs(p, 25, { category: 'Object' }),
       },
       {
-        id: 'metadata-store',
-        name: 'Embedding / Metadata Store',
+        id: 'api-compute', name: 'API & Orchestration Compute', icon: '⚙️',
+        description: 'Serverless compute serving the retrieval/generation API',
+        getRequirements: () => ({ productType: 'serverless', category: 'Compute', quantity: 1 }),
+      },
+      {
+        id: 'embeddings', name: 'Embeddings Model', icon: '🔢',
+        description: 'Embeds incoming queries and ingested documents',
+        getRequirements: (p) => ({ productType: 'ai', category: 'Embeddings', quantity: aiTokensQty(p, 0.3) }),
+      },
+      {
+        id: 'metadata-store', name: 'Embedding / Metadata Store', icon: '🗄️',
         description: 'Indexes embeddings and document metadata',
-        icon: '🗄️',
-        getRequirements: () => ({
-          productType: 'database',
-          category: 'NoSQL',
-          minMemoryGb: 4,
-          quantity: 1
-        })
+        getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
       },
       {
-        id: 'orchestration',
-        name: 'Workflow Orchestration',
+        id: 'orchestration', name: 'Workflow Orchestration', icon: '🔀',
         description: 'Coordinates retrieval and prompt assembly across steps',
-        icon: '🔀',
-        getRequirements: () => ({
-          productType: 'integration',
-          category: 'Workflow',
-          quantity: 1
-        })
+        getRequirements: () => ({ productType: 'integration', category: 'Workflow', quantity: 1 }),
       },
       {
-        id: 'inference',
-        name: 'Inference Endpoint',
+        id: 'inference', name: 'Inference Endpoint', icon: '✨',
         description: 'Generates responses from retrieved context',
-        icon: '✨',
-        getRequirements: () => ({
-          productType: 'ai',
-          category: 'Inference',
-          quantity: 1
-        })
-      }
-    ]
+        getRequirements: () => ({ productType: 'ai', category: 'Inference', quantity: 1 }),
+      },
+    ],
   },
   {
     id: 'smart-manufacturing',
-    name: 'Smart Manufacturing',
-    description: 'An Industrial IoT platform for real-time sensor analytics and factory-floor monitoring — edge data collection, continuous stream ingestion, live metrics storage, historical analytics, and predictive maintenance using ML.',
+    name: 'Smart Manufacturing (IIoT)',
+    description: 'An Industrial IoT platform for real-time sensor analytics — edge collection, stream ingestion, live metrics storage, historical analytics, and predictive maintenance.',
     icon: '🏭',
-    parameters: [
-      {
-        id: 'sensorCount',
-        label: 'Number of IoT Sensors',
-        type: 'slider',
-        min: 10,
-        max: 1000,
-        step: 10,
-        defaultValue: 100,
-        unit: 'sensors'
-      },
-      {
-        id: 'monthlyDataGB',
-        label: 'Monthly Data Volume',
-        type: 'slider',
-        min: 10,
-        max: 10000,
-        step: 100,
-        defaultValue: 500,
-        unit: 'GB'
-      },
-      {
-        id: 'retentionDays',
-        label: 'Hot Storage Retention',
-        type: 'slider',
-        min: 7,
-        max: 365,
-        step: 7,
-        defaultValue: 30,
-        unit: 'days'
-      }
-    ],
+    capacityLabel: 'Sensor Fleet',
     components: [
       {
-        id: 'edge-compute',
-        name: 'Edge Gateway / Local Compute',
-        description: 'Processes sensor data at factory floor before cloud transmission',
-        icon: '🖥️',
-        getRequirements: (params) => {
-          const gateways = Math.max(1, Math.ceil(params.sensorCount / 100));
-          return {
-            productType: 'vm',
-            minVcpus: 2,
-            minMemoryGb: 4,
-            quantity: gateways
-          };
-        }
+        id: 'edge-compute', name: 'Edge Gateway / Local Compute', icon: '🖥️',
+        description: 'On-prem/edge collection and buffering',
+        getRequirements: (p) => computeReqs(p, 2),
       },
       {
-        id: 'stream-ingestion',
-        name: 'Stream Processing / Message Queue',
-        description: 'Real-time ingestion and normalization of sensor streams',
-        icon: '⚡',
-        getRequirements: () => ({
-          productType: 'serverless',
-          category: 'Compute',
-          quantity: 1
-        })
+        id: 'ingest-compute', name: 'Stream Ingestion', icon: '⚡',
+        description: 'Serverless ingestion of sensor telemetry',
+        getRequirements: () => ({ productType: 'serverless', category: 'Compute', quantity: 1 }),
       },
       {
-        id: 'metrics-store',
-        name: 'Hot Metrics Store',
-        description: 'Recent sensor readings for dashboards and alerts',
-        icon: '📊',
-        getRequirements: (params) => {
-          const hotStorageGB = Math.max(10, Math.ceil((params.monthlyDataGB / 30) * params.retentionDays));
-          return {
-            productType: 'database',
-            category: 'NoSQL',
-            minMemoryGb: Math.ceil(hotStorageGB / 50) * 4, // Rough estimation: 50GB per 4GB instance
-            quantity: 1
-          };
-        }
+        id: 'event-bus', name: 'Event Bus', icon: '📡',
+        description: 'Fans telemetry to storage, analytics, and alerting',
+        getRequirements: () => ({ productType: 'integration', category: 'Eventing', quantity: 1 }),
       },
       {
-        id: 'alert-event-bus',
-        name: 'Alert Event Bus',
-        description: 'Fans threshold-breach events out to alerting and maintenance workflows',
-        icon: '📡',
-        getRequirements: () => ({
-          productType: 'integration',
-          category: 'Eventing',
-          quantity: 1
-        })
+        id: 'timeseries-db', name: 'Time-Series Store', icon: '🗄️',
+        description: 'Live metrics and sensor state',
+        getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
       },
       {
-        id: 'data-warehouse',
-        name: 'Analytics Data Warehouse',
-        description: 'Historical data for trends, patterns, and compliance reporting',
-        icon: '🏢',
-        getRequirements: (params) => ({
-          productType: 'data-analytics',
-          category: 'Warehouse',
-          quantity: 1
-        })
+        id: 'analytics', name: 'Historical Analytics', icon: '📊',
+        description: 'Warehouse for historical sensor analytics',
+        getRequirements: (p) => ({ productType: 'data-analytics', category: 'Warehouse', quantity: Math.max(1, Math.round(capacityScale(p.capacity))) }),
       },
       {
-        id: 'cold-archive',
-        name: 'Cold Storage Archive',
-        description: 'Long-term compliance and historical data',
-        icon: '🪣',
-        getRequirements: (params) => ({
-          productType: 'storage',
-          category: 'Object',
-          quantity: params.monthlyDataGB * 12 // Approximate annual cold storage
-        })
+        id: 'storage', name: 'Raw Data Lake', icon: '🪣',
+        description: 'Object storage for raw telemetry',
+        getRequirements: (p) => storageReqs(p, 500, { category: 'Object' }),
       },
       {
-        id: 'predictive-maintenance',
-        name: 'Predictive Maintenance AI',
-        description: 'ML model for equipment anomaly detection and failure prediction',
-        icon: '🤖',
-        getRequirements: () => ({
-          productType: 'ai',
-          category: 'Inference',
-          quantity: 1
-        })
-      }
-    ]
-  }
+        id: 'predictive-ai', name: 'Predictive Maintenance', icon: '✨',
+        description: 'ML inference for anomaly / failure prediction',
+        getRequirements: () => ({ productType: 'ai', category: 'Inference', quantity: 1 }),
+      },
+    ],
+  },
 ];

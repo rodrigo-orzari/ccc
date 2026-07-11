@@ -7,7 +7,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip,
 import { Download, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Footer, ProductTypeSelector } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
-import { WorkloadDefinition } from '@/types';
+import { WorkloadDefinition, WorkloadPriorities, PriorityLevel } from '@/types';
+import { DEFAULT_PRIORITIES, PRIORITY_PILLARS, PRIORITY_LEVELS } from '@/config/workload_priorities';
 import { PROVIDERS, GEOGRAPHIES } from '@/config';
 import { formatInstanceName } from '@/lib/formatInstanceName';
 
@@ -117,7 +118,7 @@ export default function WorkloadDetails() {
     }
   `;
 
-  const [parameters, setParameters] = useState<Record<string, number>>({});
+  const [priorities, setPriorities] = useState<WorkloadPriorities>(DEFAULT_PRIORITIES);
   const [results, setResults] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [region, setRegion] = useState('Global');
@@ -176,17 +177,18 @@ export default function WorkloadDetails() {
     carouselRef.current?.scrollBy({ left: 280, behavior: 'smooth' });
   };
 
-  // Seed state from URL params on mount so shared links restore the exact configuration.
+  // Seed the four Well-Architected priorities from URL params on mount so shared
+  // links restore the exact configuration.
   useEffect(() => {
     if (!workload) return;
     const sp = new URLSearchParams(window.location.search);
-    const initial: Record<string, number> = {};
-    workload.parameters.forEach(p => {
-      const fromUrl = sp.get(p.id);
-      const parsed = fromUrl !== null ? Number(fromUrl) : NaN;
-      initial[p.id] = Number.isFinite(parsed) ? parsed : p.defaultValue;
+    const valid = (v: string | null): v is PriorityLevel => v === 'low' || v === 'medium' || v === 'high';
+    const next: WorkloadPriorities = { ...DEFAULT_PRIORITIES };
+    (Object.keys(next) as (keyof WorkloadPriorities)[]).forEach(k => {
+      const v = sp.get(k);
+      if (valid(v)) next[k] = v;
     });
-    setParameters(initial);
+    setPriorities(next);
     const r = sp.get('region');
     if (r) setRegion(r);
     const pm = sp.get('pricing');
@@ -196,12 +198,10 @@ export default function WorkloadDetails() {
   // Push state back to URL (replace, no history entry per stroke) so the bar always
   // reflects the current configuration and is shareable verbatim.
   useEffect(() => {
-    if (!workload || Object.keys(parameters).length === 0) return;
+    if (!workload) return;
     const sp = new URLSearchParams();
-    workload.parameters.forEach(p => {
-      if (parameters[p.id] !== undefined && parameters[p.id] !== p.defaultValue) {
-        sp.set(p.id, String(parameters[p.id]));
-      }
+    (Object.keys(priorities) as (keyof WorkloadPriorities)[]).forEach(k => {
+      if (priorities[k] !== DEFAULT_PRIORITIES[k]) sp.set(k, priorities[k]);
     });
     if (region !== 'Global') sp.set('region', region);
     if (pricingModel !== 'PAYG') sp.set('pricing', pricingModel);
@@ -210,17 +210,17 @@ export default function WorkloadDetails() {
     if (next !== window.location.pathname + window.location.search) {
       window.history.replaceState(null, '', next);
     }
-  }, [workload, parameters, region, pricingModel]);
+  }, [workload, priorities, region, pricingModel]);
 
   useEffect(() => {
-    if (!workload || Object.keys(parameters).length === 0) return;
+    if (!workload) return;
     const fetchPricing = async () => {
       setLoading(true);
       try {
         const res = await fetch('/api/workloads', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ workloadId: workload.id, parameters, region }),
+          body: JSON.stringify({ workloadId: workload.id, priorities, region }),
         });
         const data = await res.json();
         setResults(data.results);
@@ -232,7 +232,7 @@ export default function WorkloadDetails() {
     };
     const debounce = setTimeout(fetchPricing, 300);
     return () => clearTimeout(debounce);
-  }, [parameters, region, workload]);
+  }, [priorities, region, workload]);
 
   // CSV export of the current comparison: one row per component × provider plus a
   // per-provider total row. Honors the active pricing model (PAYG vs Yearly).
@@ -241,7 +241,9 @@ export default function WorkloadDetails() {
     const mult = pricingModel === 'Yearly' ? 12 : 1;
     const headers = ['Service', ...PROVIDER_IDS.map(p => providerName(p)), ...PROVIDER_IDS.map(p => `${providerName(p)} (${pricingModel === 'Yearly' ? 'USD/yr' : 'USD/mo'})`)];
     const rows: string[][] = [];
-    workload.components.forEach(c => {
+    // Only export components that are part of the architecture at the current
+    // priority levels (security add-ons vanish when Security is low).
+    workload.components.filter(c => c.getRequirements(priorities)).forEach(c => {
       const row: string[] = [c.name];
       const prices: string[] = [];
       PROVIDER_IDS.forEach(provider => {
@@ -497,10 +499,10 @@ export default function WorkloadDetails() {
                           </span>
                         </div>
                         <div className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
-                          {workload.components.map(c => {
+                          {workload.components.filter(c => c.getRequirements(priorities)).map(c => {
                             const comp = pData?.components.find((x: any) => x.componentId === c.id);
                             const has = comp && comp.instanceType !== 'N/A';
-                            const reqs = has ? c.getRequirements(parameters || {}) : null;
+                            const reqs = has ? c.getRequirements(priorities) : null;
                             const catalogParams = has && reqs
                               ? new URLSearchParams({ product: catalogProductType(reqs.productType), provider, search: comp.instanceType })
                               : null;
@@ -559,7 +561,7 @@ export default function WorkloadDetails() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
-                    {workload.components.map(c => {
+                    {workload.components.filter(c => c.getRequirements(priorities)).map(c => {
                       const compPrices = PROVIDER_IDS.map(provider => {
                         if (!results || !results[provider]) return 0;
                         const comp = results[provider].components.find((x: any) => x.componentId === c.id);
@@ -594,9 +596,9 @@ export default function WorkloadDetails() {
                           // Reqs from the component drive both the workload match and the deep-link
                           // back into the main catalog so users can pivot from "AWS picked this" to
                           // "show me all AWS options that satisfy this requirement".
-                          const reqs = c.getRequirements(parameters || {});
+                          const reqs = c.getRequirements(priorities);
                           const catalogParams = new URLSearchParams({
-                            product: catalogProductType(reqs.productType),
+                            product: catalogProductType(reqs?.productType ?? 'vm'),
                             provider,
                             search: comp.instanceType,
                           });
@@ -773,42 +775,54 @@ export default function WorkloadDetails() {
 
             <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
 
-            {/* Workload Scale */}
+            {/* Well-Architected priorities — four universal intent sliders.
+                Cost is the output; the table recomputes as these change. */}
             <section className="space-y-4">
-              <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Workload Scale</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-5">
-                {workload.parameters.map((p) => (
-                  <div key={p.id}>
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{p.label}</label>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#171717] dark:text-[#e5e7eb] bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] px-2 py-0.5 rounded shadow-sm">
-                        {formatNumber(parameters[p.id])} {p.unit}
+              <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Well-Architected Priorities</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+                {PRIORITY_PILLARS.map((pillar) => (
+                  <div key={pillar.key}>
+                    <div className="flex justify-between items-baseline mb-2 gap-2">
+                      <label className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{pillar.label}</label>
+                      <span className="text-[9px] text-[#a3a3a3] dark:text-[#525252] truncate text-right">
+                        {pillar.key === 'capacity' && workload.capacityLabel ? workload.capacityLabel : pillar.hint}
                       </span>
                     </div>
-                    <div className="relative h-6 flex items-center">
-                      <div className="absolute w-full h-1 bg-[#e5e5e5] dark:bg-[#262626] rounded-full" />
-                      <div
-                        className="absolute h-1 bg-black dark:bg-white rounded-full pointer-events-none"
-                        style={{
-                          width: `${(((parameters[p.id] || p.defaultValue) - p.min) / (p.max - p.min)) * 100}%`
-                        }}
-                      />
-                      <input
-                        type="range"
-                        min={p.min}
-                        max={p.max}
-                        step={p.step}
-                        value={parameters[p.id] || p.defaultValue}
-                        onChange={(e) => setParameters({ ...parameters, [p.id]: Number(e.target.value) })}
-                        className="workload-slider absolute w-full top-1/2 -translate-y-1/2 cursor-pointer outline-none"
-                      />
-                    </div>
-                    <div className="flex justify-between text-[10px] text-[#a3a3a3] dark:text-[#525252] mt-1 font-mono">
-                      <span>{formatNumber(p.min)}</span>
-                      <span>{formatNumber(p.max)}</span>
+                    <div className="flex gap-1 bg-[#f5f5f5] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded-lg p-1">
+                      {PRIORITY_LEVELS.map((lvl) => (
+                        <button
+                          key={lvl}
+                          onClick={() => setPriorities({ ...priorities, [pillar.key]: lvl })}
+                          className={`flex-1 px-2 py-1.5 rounded text-[10px] font-bold uppercase tracking-widest transition-all ${
+                            priorities[pillar.key] === lvl
+                              ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm'
+                              : 'text-[#737373] hover:text-black dark:hover:text-white'
+                          }`}
+                        >
+                          {lvl}
+                        </button>
+                      ))}
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* What this builds — live view of the resulting architecture so the
+                  recomputed price is trusted. Security-gated components appear/vanish. */}
+              <div className="rounded-lg border border-[#e5e5e5] dark:border-[#262626] bg-[#fafafa] dark:bg-[#0a0a0a] p-3">
+                <div className="text-[9px] font-bold text-[#737373] uppercase tracking-widest mb-2">What this builds</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {workload.components.map((c) => {
+                    const r = c.getRequirements(priorities);
+                    if (!r) return null;
+                    return (
+                      <span key={c.id} className="inline-flex items-center gap-1 text-[10px] font-medium text-[#171717] dark:text-[#e5e7eb] bg-white dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#262626] rounded px-2 py-1">
+                        <span>{c.icon}</span>{c.name}
+                        {r.quantity > 1 && <span className="text-[#737373]">×{r.quantity}</span>}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </section>
           </div>
