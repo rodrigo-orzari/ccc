@@ -527,20 +527,27 @@ export default function StatusPage() {
                           {sortedProviders.map(provider => {
                             const color = PROVIDER_COLORS[provider.slug] ?? '#888';
                             return (
-                              <th key={provider.slug} style={{ width: '10.5%', textAlign: 'center' }}>
+                              <th key={provider.slug} style={{ width: '10.5%', textAlign: 'center', padding: '0.75rem 0.5rem' }}>
                                 <a
                                   href={PROVIDER_URLS[provider.slug] ?? '#'}
                                   target="_blank"
                                   rel="noopener noreferrer"
+                                  className="inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border transition-all duration-200"
                                   style={{
                                     color,
-                                    fontWeight: 700,
-                                    fontSize: '11px',
-                                    textTransform: 'uppercase',
-                                    textDecoration: 'none'
+                                    borderColor: `${color}40`,
+                                    backgroundColor: `${color}12`,
+                                    textDecoration: 'none',
+                                    whiteSpace: 'nowrap'
                                   }}
-                                  onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'underline'; }}
-                                  onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.textDecoration = 'none'; }}
+                                  onMouseEnter={e => {
+                                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = `${color}25`;
+                                    (e.currentTarget as HTMLAnchorElement).style.borderColor = color;
+                                  }}
+                                  onMouseLeave={e => {
+                                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = `${color}12`;
+                                    (e.currentTarget as HTMLAnchorElement).style.borderColor = `${color}40`;
+                                  }}
                                 >
                                   {provider.name}
                                 </a>
