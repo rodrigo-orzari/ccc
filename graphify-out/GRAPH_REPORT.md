@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-07-10)
 
 ## Corpus Check
-- 154 files · ~182,953 words
+- 154 files · ~183,190 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cd7bd24a`
+- Built from commit: `cd1041c8`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -87,14 +87,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
+- `AWSLambdaLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/serverless_adapters_live.ts → src/services/pricing_pipeline.ts
+- `GCPCloudRunLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/serverless_adapters_live.ts → src/services/pricing_pipeline.ts
+- `AzureFunctionsLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/serverless_adapters_live.ts → src/services/pricing_pipeline.ts
 - `fetchGcpComputeRates()` --calls--> `fetchAllSkus()`  [EXTRACTED]
   src/services/gcp_compute_rates.ts → src/services/gcp_billing_catalog.ts
-- `fetchGcpComputeRates()` --calls--> `findGcpServiceName()`  [EXTRACTED]
-  src/services/gcp_compute_rates.ts → src/services/gcp_billing_catalog.ts
-- `AWSContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
-- `AzureContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
 
 ## Import Cycles
 - 3-file cycle: `src/services/gcp_compute_rates.ts -> src/services/serverless_adapters_live.ts -> src/services/pricing_pipeline.ts -> src/services/gcp_compute_rates.ts`
@@ -234,7 +234,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **303 isolated node(s):** `StorageConfigEntry`, `STATIC_PROVIDERS`, `FAMILIES`, `GcpComputeRates`, `ORACLE_FLEX_FAMILIES` (+298 more)
+- **303 isolated node(s):** `CATEGORY_ORDER`, `CATEGORY_COLOR`, `PROVIDERS_FOR_CERT`, `StorageConfigEntry`, `STATIC_PROVIDERS` (+298 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -247,7 +247,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 7` to `Community 8`, `Community 53`?**
   _High betweenness centrality (0.034) - this node is a cross-community bridge._
-- **What connects `StorageConfigEntry`, `STATIC_PROVIDERS`, `FAMILIES` to the rest of the system?**
+- **What connects `CATEGORY_ORDER`, `CATEGORY_COLOR`, `PROVIDERS_FOR_CERT` to the rest of the system?**
   _303 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._

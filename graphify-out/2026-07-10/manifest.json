@@ -350,8 +350,8 @@
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
-    "mtime": 1783531596.061601,
-    "ast_hash": "82deaf59bf6bd2d099423fdecb9d3d8d",
+    "mtime": 1783749445.9796226,
+    "ast_hash": "5a70761dfd0256b328157b904bd48315",
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
@@ -470,8 +470,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1783630361.4406874,
-    "ast_hash": "d731b9aa0d0536898690c9307bf9f3f9",
+    "mtime": 1783749451.3779013,
+    "ast_hash": "bed12a4efb3fa18d994572c6c95ecec9",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -595,8 +595,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1783747684.123932,
-    "ast_hash": "ce0f10c9866ce00c4bcfd747b32fbddb",
+    "mtime": 1783750127.4463809,
+    "ast_hash": "873c7b6372fdb1c9c712b949b75128fc",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -797,6 +797,11 @@
   "src/services/gcp_billing_catalog.ts": {
     "mtime": 1783744333.8708575,
     "ast_hash": "41d13fa3c708d4fcc96a2f9dcc053dff",
+    "semantic_hash": ""
+  },
+  "src/app/manifest.ts": {
+    "mtime": 1783749280.1305192,
+    "ast_hash": "d3296739e9d7af93723714e329512551",
     "semantic_hash": ""
   }
 }
