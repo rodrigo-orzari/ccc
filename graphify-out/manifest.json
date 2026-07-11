@@ -590,13 +590,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783795465.8739536,
-    "ast_hash": "f38f5670090c18fb97c0c7cde0824f60",
+    "mtime": 1783800923.76985,
+    "ast_hash": "4e4b19c01631ef4765909fc7ad1f4635",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
-    "mtime": 1783795389.9766953,
-    "ast_hash": "47ddf36ee9495615c98e71879b37de7c",
+    "mtime": 1783800755.7245255,
+    "ast_hash": "81ceb6c971c804ff7286ffbe86a3ce9e",
     "semantic_hash": ""
   },
   "src/lib/formatInstanceName.ts": {
