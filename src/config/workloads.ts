@@ -36,9 +36,32 @@ export const WORKLOADS: WorkloadDefinition[] = [
         step: 4,
         defaultValue: 16,
         unit: 'GB'
+      },
+      {
+        id: 'corpusSizeGB',
+        label: 'Document Corpus Size',
+        type: 'slider',
+        min: 1,
+        max: 500,
+        step: 1,
+        defaultValue: 25,
+        unit: 'GB'
       }
     ],
     components: [
+      {
+        id: 'document-storage',
+        name: 'Document Storage',
+        description: 'Source documents the corpus is built and embedded from',
+        icon: '🪣',
+        getRequirements: (params) => {
+          return {
+            productType: 'storage',
+            category: 'Object',
+            quantity: params.corpusSizeGB
+          };
+        }
+      },
       {
         id: 'api-gateway',
         name: 'API & Orchestration',
@@ -172,6 +195,21 @@ export const WORKLOADS: WorkloadDefinition[] = [
             category: 'NoSQL',
             minMemoryGb: 4, // Approximating tier based on memory
             quantity: 1
+          };
+        }
+      },
+      {
+        id: 'asset-storage',
+        name: 'Object Storage',
+        description: 'User uploads, static assets, and files served by the backend',
+        icon: '🪣',
+        getRequirements: (params) => {
+          // Asset/upload footprint scales roughly with the app's data size;
+          // reuse dbSizeGB as the proxy rather than adding another slider.
+          return {
+            productType: 'storage',
+            category: 'Object',
+            quantity: params.dbSizeGB
           };
         }
       }
@@ -392,6 +430,21 @@ export const WORKLOADS: WorkloadDefinition[] = [
             category: 'Relational',
             minMemoryGb: mem,
             quantity: 1
+          };
+        }
+      },
+      {
+        id: 'product-media',
+        name: 'Product Image Storage',
+        description: 'Object storage for product images and media across the catalog',
+        icon: '🪣',
+        getRequirements: (params) => {
+          // ~2 MB of images per catalog item (multiple photos + thumbnails),
+          // converted to GB. Derives directly from the catalog-size param.
+          return {
+            productType: 'storage',
+            category: 'Object',
+            quantity: Math.max(1, Math.ceil((params.catalogSize * 2) / 1024))
           };
         }
       },
@@ -1059,6 +1112,21 @@ export const WORKLOADS: WorkloadDefinition[] = [
           category: 'Threat & Compliance',
           quantity: 1
         })
+      },
+      {
+        id: 'audit-archive',
+        name: 'Audit Log Archive',
+        description: 'Immutable (WORM) object storage for retained audit and compliance logs',
+        icon: '🪣',
+        getRequirements: (params) => {
+          // Archived audit-log volume scales with the governed data footprint;
+          // derive from dbSizeGB rather than adding a retention slider.
+          return {
+            productType: 'storage',
+            category: 'Object',
+            quantity: params.dbSizeGB
+          };
+        }
       }
     ]
   },
