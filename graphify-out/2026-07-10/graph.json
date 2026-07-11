@@ -6,101 +6,236 @@
     {
       "label": "page.tsx",
       "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L1",
+      "id": "certifications_page",
+      "community": 14,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "CATEGORY_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L15",
+      "id": "certifications_page_category_order",
+      "community": 14,
+      "norm_label": "category_order"
+    },
+    {
+      "label": "CATEGORY_COLOR",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L19",
+      "id": "certifications_page_category_color",
+      "community": 14,
+      "norm_label": "category_color"
+    },
+    {
+      "label": "PROVIDERS_FOR_CERT",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L27",
+      "id": "certifications_page_providers_for_cert",
+      "community": 14,
+      "norm_label": "providers_for_cert"
+    },
+    {
+      "label": "CertificationsPage()",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L36",
+      "id": "certifications_page_certificationspage",
+      "community": 14,
+      "norm_label": "certificationspage()"
+    },
+    {
+      "label": "serverless_adapters_live.ts",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L1",
+      "id": "services_serverless_adapters_live",
+      "community": 39,
+      "norm_label": "serverless_adapters_live.ts"
+    },
+    {
+      "label": "AWSLambdaLiveAdapter",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L16",
+      "id": "services_serverless_adapters_live_awslambdaliveadapter",
+      "community": 37,
+      "norm_label": "awslambdaliveadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L54",
+      "id": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing",
+      "community": 37,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": ".mapAWSLocationToRegion()",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L224",
+      "id": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion",
+      "community": 37,
+      "norm_label": ".mapawslocationtoregion()"
+    },
+    {
+      "label": "findCloudRunServiceRate()",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L309",
+      "id": "services_serverless_adapters_live_findcloudrunservicerate",
+      "community": 39,
+      "norm_label": "findcloudrunservicerate()"
+    },
+    {
+      "label": "fetchGcpCloudRunRates()",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L340",
+      "id": "services_serverless_adapters_live_fetchgcpcloudrunrates",
+      "community": 39,
+      "norm_label": "fetchgcpcloudrunrates()"
+    },
+    {
+      "label": "GCPCloudRunLiveAdapter",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L361",
+      "id": "services_serverless_adapters_live_gcpcloudrunliveadapter",
+      "community": 39,
+      "norm_label": "gcpcloudrunliveadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L379",
+      "id": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing",
+      "community": 39,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "AzureFunctionsLiveAdapter",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L446",
+      "id": "services_serverless_adapters_live_azurefunctionsliveadapter",
+      "community": 47,
+      "norm_label": "azurefunctionsliveadapter"
+    },
+    {
+      "label": ".fetchPricing()",
+      "file_type": "code",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L464",
+      "id": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing",
+      "community": 47,
+      "norm_label": ".fetchpricing()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L1",
-      "id": "about_page",
       "community": 19,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "about_page"
     },
     {
       "label": "LinkedInIcon()",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L6",
-      "id": "about_page_linkedinicon",
       "community": 19,
-      "norm_label": "linkedinicon()"
+      "norm_label": "linkedinicon()",
+      "id": "about_page_linkedinicon"
     },
     {
       "label": "BackToTop()",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L14",
-      "id": "about_page_backtotop",
       "community": 19,
-      "norm_label": "backtotop()"
+      "norm_label": "backtotop()",
+      "id": "about_page_backtotop"
     },
     {
       "label": "CopyHeading()",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L28",
-      "id": "about_page_copyheading",
       "community": 19,
-      "norm_label": "copyheading()"
+      "norm_label": "copyheading()",
+      "id": "about_page_copyheading"
     },
     {
       "label": "AboutPage()",
       "file_type": "code",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L59",
-      "id": "about_page_aboutpage",
       "community": 19,
-      "norm_label": "aboutpage()"
+      "norm_label": "aboutpage()",
+      "id": "about_page_aboutpage"
     },
     {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L1",
-      "id": "docs_page",
       "community": 34,
-      "norm_label": "page.tsx"
+      "norm_label": "page.tsx",
+      "id": "docs_page"
     },
     {
       "label": "BackToTop()",
       "file_type": "code",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L6",
-      "id": "docs_page_backtotop",
       "community": 34,
-      "norm_label": "backtotop()"
+      "norm_label": "backtotop()",
+      "id": "docs_page_backtotop"
     },
     {
       "label": "CopyHeading()",
       "file_type": "code",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L20",
-      "id": "docs_page_copyheading",
       "community": 34,
-      "norm_label": "copyheading()"
+      "norm_label": "copyheading()",
+      "id": "docs_page_copyheading"
     },
     {
       "label": "DocsPage()",
       "file_type": "code",
       "source_file": "src/app/docs/page.tsx",
       "source_location": "L51",
-      "id": "docs_page_docspage",
       "community": 34,
-      "norm_label": "docspage()"
+      "norm_label": "docspage()",
+      "id": "docs_page_docspage"
     },
     {
       "label": "manifest.ts",
       "file_type": "code",
       "source_file": "src/app/manifest.ts",
       "source_location": "L1",
-      "id": "app_manifest",
       "community": 49,
-      "norm_label": "manifest.ts"
+      "norm_label": "manifest.ts",
+      "id": "app_manifest"
     },
     {
       "label": "manifest()",
       "file_type": "code",
       "source_file": "src/app/manifest.ts",
       "source_location": "L3",
-      "id": "app_manifest_manifest",
       "community": 49,
-      "norm_label": "manifest()"
+      "norm_label": "manifest()",
+      "id": "app_manifest_manifest"
     },
     {
       "label": "aws_storage.ts",
@@ -884,96 +1019,6 @@
       "community": 39,
       "norm_label": "fetchallskus()",
       "id": "services_gcp_billing_catalog_fetchallskus"
-    },
-    {
-      "label": "serverless_adapters_live.ts",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L1",
-      "community": 39,
-      "norm_label": "serverless_adapters_live.ts",
-      "id": "services_serverless_adapters_live"
-    },
-    {
-      "label": "AWSLambdaLiveAdapter",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L16",
-      "community": 37,
-      "norm_label": "awslambdaliveadapter",
-      "id": "services_serverless_adapters_live_awslambdaliveadapter"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L54",
-      "community": 37,
-      "norm_label": ".fetchpricing()",
-      "id": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing"
-    },
-    {
-      "label": ".mapAWSLocationToRegion()",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L197",
-      "community": 37,
-      "norm_label": ".mapawslocationtoregion()",
-      "id": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
-    },
-    {
-      "label": "findCloudRunServiceRate()",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L282",
-      "community": 39,
-      "norm_label": "findcloudrunservicerate()",
-      "id": "services_serverless_adapters_live_findcloudrunservicerate"
-    },
-    {
-      "label": "fetchGcpCloudRunRates()",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L313",
-      "community": 39,
-      "norm_label": "fetchgcpcloudrunrates()",
-      "id": "services_serverless_adapters_live_fetchgcpcloudrunrates"
-    },
-    {
-      "label": "GCPCloudRunLiveAdapter",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L334",
-      "community": 39,
-      "norm_label": "gcpcloudrunliveadapter",
-      "id": "services_serverless_adapters_live_gcpcloudrunliveadapter"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L352",
-      "community": 39,
-      "norm_label": ".fetchpricing()",
-      "id": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing"
-    },
-    {
-      "label": "AzureFunctionsLiveAdapter",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L419",
-      "community": 47,
-      "norm_label": "azurefunctionsliveadapter",
-      "id": "services_serverless_adapters_live_azurefunctionsliveadapter"
-    },
-    {
-      "label": ".fetchPricing()",
-      "file_type": "code",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L437",
-      "community": 47,
-      "norm_label": ".fetchpricing()",
-      "id": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing"
     },
     {
       "label": "page.tsx",
@@ -1766,51 +1811,6 @@
       "community": 13,
       "norm_label": "statuspage()",
       "id": "status_page_statuspage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L1",
-      "community": 14,
-      "norm_label": "page.tsx",
-      "id": "certifications_page"
-    },
-    {
-      "label": "CATEGORY_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L15",
-      "community": 14,
-      "norm_label": "category_order",
-      "id": "certifications_page_category_order"
-    },
-    {
-      "label": "CATEGORY_COLOR",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L19",
-      "community": 14,
-      "norm_label": "category_color",
-      "id": "certifications_page_category_color"
-    },
-    {
-      "label": "PROVIDERS_FOR_CERT",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L27",
-      "community": 14,
-      "norm_label": "providers_for_cert",
-      "id": "certifications_page_providers_for_cert"
-    },
-    {
-      "label": "CertificationsPage()",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L36",
-      "community": 14,
-      "norm_label": "certificationspage()",
-      "id": "certifications_page_certificationspage"
     },
     {
       "label": "page.tsx",
@@ -8009,6 +8009,510 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "certifications_page_category_color"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "certifications_page_category_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "certifications_page_certificationspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "certifications_page_providers_for_cert"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_cert_by_id"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_certcategory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_certifications"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_compliance_providers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_provider_certifications"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_providerhascert"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_index_geographies"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/containers_adapters_live.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_containers_adapters_live",
+      "target": "services_serverless_adapters_live"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/gcp_compute_rates.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_gcp_compute_rates",
+      "target": "services_serverless_adapters_live"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L272",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_gcp_billing_catalog"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_gcp_billing_catalog_fetchallskus"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_gcp_billing_catalog_findgcpservicename"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_pricing_pipeline"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_serverless_adapters_live_awslambdaliveadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_serverless_adapters_live_azurefunctionsliveadapter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L317",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_serverless_adapters_live_fetchgcpcloudrunrates"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L300",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_serverless_adapters_live_findcloudrunservicerate"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L250",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live",
+      "target": "services_serverless_adapters_live_gcpcloudrunliveadapter"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_pipeline",
+      "target": "services_serverless_adapters_live"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_awslambdaliveadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_awslambdaliveadapter",
+      "target": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L197",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_awslambdaliveadapter",
+      "target": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_pipeline",
+      "target": "services_serverless_adapters_live_awslambdaliveadapter"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L100",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing",
+      "target": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L335",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_fetchgcpcloudrunrates",
+      "target": "services_serverless_adapters_live_findcloudrunservicerate"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/containers_adapters_live.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_containers_adapters_live",
+      "target": "services_serverless_adapters_live_fetchgcpcloudrunrates"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/services/containers_adapters_live.ts",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "services_containers_adapters_live_gcpcontainersliveadapter_fetchpricing",
+      "target": "services_serverless_adapters_live_fetchgcpcloudrunrates"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L315",
+      "weight": 1.0,
+      "source": "services_serverless_adapters_live_fetchgcpcloudrunrates",
+      "target": "services_gcp_billing_catalog_fetchallskus"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L314",
+      "weight": 1.0,
+      "source": "services_serverless_adapters_live_fetchgcpcloudrunrates",
+      "target": "services_gcp_billing_catalog_findgcpservicename"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L355",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing",
+      "target": "services_serverless_adapters_live_fetchgcpcloudrunrates"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L250",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_gcpcloudrunliveadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L253",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_gcpcloudrunliveadapter",
+      "target": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_pipeline",
+      "target": "services_serverless_adapters_live_gcpcloudrunliveadapter"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L253",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "inherits",
+      "context": "type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_azurefunctionsliveadapter",
+      "target": "services_pricing_pipeline_baseadapter"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L289",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_azurefunctionsliveadapter",
+      "target": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_pipeline.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_pipeline",
+      "target": "services_serverless_adapters_live_azurefunctionsliveadapter"
+    },
+    {
+      "relation": "references",
+      "context": "generic_arg",
+      "confidence": "EXTRACTED",
+      "source_file": "src/services/serverless_adapters_live.ts",
+      "source_location": "L289",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing",
+      "target": "services_pricing_pipeline_pricingrecord"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/app/about/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
@@ -8115,9 +8619,9 @@
       "source_file": "src/app/manifest.ts",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "app_manifest",
-      "target": "app_manifest_manifest",
-      "confidence_score": 1.0
+      "target": "app_manifest_manifest"
     },
     {
       "relation": "contains",
@@ -8929,17 +9433,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/services/gcp_compute_rates.ts",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_gcp_compute_rates",
-      "target": "services_serverless_adapters_live"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L10",
       "weight": 1.0,
@@ -9439,17 +9932,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_pricing_pipeline"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L2",
       "weight": 1.0,
@@ -9873,50 +10355,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "services_integration_pipeline",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L289",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing",
-      "target": "services_pricing_pipeline_pricingrecord"
-    },
-    {
-      "relation": "references",
-      "context": "generic_arg",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L253",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing",
       "target": "services_pricing_pipeline_pricingrecord"
     },
     {
@@ -10882,50 +11320,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L2",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_awslambdaliveadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L271",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_azurefunctionsliveadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "inherits",
-      "context": "type",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L250",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_gcpcloudrunliveadapter",
-      "target": "services_pricing_pipeline_baseadapter"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L2",
       "weight": 1.0,
@@ -11780,261 +12174,6 @@
       "confidence_score": 1.0,
       "source": "services_gcp_billing_catalog",
       "target": "services_gcp_billing_catalog_findgcpservicename"
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L272",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_gcp_billing_catalog"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L271",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_gcp_billing_catalog_findgcpservicename"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L314",
-      "weight": 1.0,
-      "source": "services_serverless_adapters_live_fetchgcpcloudrunrates",
-      "target": "services_gcp_billing_catalog_findgcpservicename"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L271",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_gcp_billing_catalog_fetchallskus"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L315",
-      "weight": 1.0,
-      "source": "services_serverless_adapters_live_fetchgcpcloudrunrates",
-      "target": "services_gcp_billing_catalog_fetchallskus"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/containers_adapters_live.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_containers_adapters_live",
-      "target": "services_serverless_adapters_live"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_serverless_adapters_live_awslambdaliveadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L271",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_serverless_adapters_live_azurefunctionsliveadapter"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L317",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_serverless_adapters_live_fetchgcpcloudrunrates"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L300",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_serverless_adapters_live_findcloudrunservicerate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L250",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live",
-      "target": "services_serverless_adapters_live_gcpcloudrunliveadapter"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_pipeline",
-      "target": "services_serverless_adapters_live"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_awslambdaliveadapter",
-      "target": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L197",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_awslambdaliveadapter",
-      "target": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_pipeline",
-      "target": "services_serverless_adapters_live_awslambdaliveadapter"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L100",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing",
-      "target": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L335",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_fetchgcpcloudrunrates",
-      "target": "services_serverless_adapters_live_findcloudrunservicerate"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/containers_adapters_live.ts",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_containers_adapters_live",
-      "target": "services_serverless_adapters_live_fetchgcpcloudrunrates"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/services/containers_adapters_live.ts",
-      "source_location": "L131",
-      "weight": 1.0,
-      "source": "services_containers_adapters_live_gcpcontainersliveadapter_fetchpricing",
-      "target": "services_serverless_adapters_live_fetchgcpcloudrunrates"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L355",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing",
-      "target": "services_serverless_adapters_live_fetchgcpcloudrunrates"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L253",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_gcpcloudrunliveadapter",
-      "target": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_pipeline",
-      "target": "services_serverless_adapters_live_gcpcloudrunliveadapter"
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_adapters_live.ts",
-      "source_location": "L289",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_adapters_live_azurefunctionsliveadapter",
-      "target": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/services/serverless_pipeline.ts",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "services_serverless_pipeline",
-      "target": "services_serverless_adapters_live_azurefunctionsliveadapter"
     },
     {
       "relation": "imports_from",
@@ -13572,145 +13711,6 @@
       "confidence_score": 1.0,
       "source": "status_page",
       "target": "status_page_xicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "certifications_page_category_color"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "certifications_page_category_order"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "certifications_page_certificationspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "certifications_page_providers_for_cert"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_cert_by_id"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_certcategory"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_certifications"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_compliance_providers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_provider_certifications"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_providerhascert"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_index_geographies"
     },
     {
       "relation": "imports",
@@ -22886,5 +22886,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "cd7bd24aeaca6069b2940e2b4db6cf9d6bd0279f"
+  "built_at_commit": "cd1041c8de9d7eb56a0996a5245d5bf7628356f5"
 }

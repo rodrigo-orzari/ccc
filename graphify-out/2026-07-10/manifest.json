@@ -145,8 +145,8 @@
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
-    "mtime": 1783744363.234422,
-    "ast_hash": "557a581931a46dc068567fd252d477ae",
+    "mtime": 1783750726.1978424,
+    "ast_hash": "162290e49825745646108061c23c656b",
     "semantic_hash": ""
   },
   "src/services/serverless_pipeline.ts": {
@@ -755,8 +755,8 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783710135.6733043,
-    "ast_hash": "7af84a3508dc999f5956f6b3e8984886",
+    "mtime": 1783750295.6566892,
+    "ast_hash": "51b43aecb0e84861ff33a08192c68573",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {
