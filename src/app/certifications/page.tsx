@@ -274,8 +274,7 @@ export default function CertificationsPage() {
               Tracked certifications by provider
             </span>
             <span className="text-[10px] text-[var(--muted)]">
-              Counts reflect the {CERTIFICATIONS.length} standards tracked here — not each provider&apos;s full
-              catalog. See the trust centers below for the complete list.
+              {`Counts reflect the ${CERTIFICATIONS.length} standards tracked here — not each provider's full catalog. See the trust centers below for the complete list.`}
             </span>
           </div>
           <div
@@ -315,7 +314,7 @@ export default function CertificationsPage() {
               />
             </div>
             <span className="text-[11px] text-[var(--muted)]">
-              Showing {visibleCerts.length} of {CERTIFICATIONS.length} tracked standards
+              {`Showing ${visibleCerts.length} of ${CERTIFICATIONS.length} tracked standards`}
             </span>
             {anyFilterActive && (
               <button onClick={clearAll} className="text-[11px] font-medium text-[#2563eb] hover:underline">
@@ -429,6 +428,11 @@ export default function CertificationsPage() {
           </div>
 
         </main>
+
+        {/* Divider */}
+        <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 mb-8">
+          <div className="h-px bg-[var(--border)]" />
+        </div>
 
         {/* Disclaimer — plain text, no box, so it reads as fine-print not a feature panel. */}
         <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8 text-[11px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">

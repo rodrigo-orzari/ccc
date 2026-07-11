@@ -82,16 +82,16 @@ export default function WorkloadsCatalog() {
               />
             </a>
           ) : (
-            <div className="mb-8 border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col items-center gap-3 text-center">
+            <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
               <div>
-                <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1 flex items-center justify-center gap-2">
+                <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
                   <span className="text-2xl">🤝</span> Sponsor a Workload
                 </h3>
-                <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                <p className="text-[13px] text-[var(--muted)] leading-relaxed">
                   For $9,99 per month or $99 for 12 months, have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">hello@comparecloudcosts.com</a> for more information.
                 </p>
-                <p className="text-[11px] text-[#737373] dark:text-[#a3a3a3] mt-1.5 opacity-80">
-                  Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-black dark:hover:text-white">Docs</Link> for detailed instructions.
+                <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
+                  Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
                 </p>
               </div>
             </div>

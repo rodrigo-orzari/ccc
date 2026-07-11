@@ -679,11 +679,10 @@ export default function StatusPage() {
               {/* Divider */}
               <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] my-8" />
 
-              <div className="max-w-[1600px] mx-auto">
-                <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[13px] text-[#737373] dark:text-[#a3a3a3] italic">
-                  <strong>Disclaimer:</strong> Price data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
-                  <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
-                </blockquote>
+              <div className="max-w-[1600px] mx-auto pb-8 text-[11px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
+                <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
+                Price data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
+                <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
               </div>
             </>
           )}
