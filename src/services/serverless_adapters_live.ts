@@ -70,7 +70,7 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
 
       // Filter for Lambda products only
       const lambdaProducts = Object.entries(products)
-        .filter(([_, product]: any) => product.productFamily === 'AWSLambda')
+        .filter(([_, product]: any) => product.productFamily === 'Serverless')
         .map(([sku, product]: any) => ({ sku, ...product }));
 
       console.log(`Found ${lambdaProducts.length} Lambda SKUs, processing...`);
@@ -85,16 +85,12 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
           // Skip if not on-demand pricing
           if (attrs.purchaseType && attrs.purchaseType !== 'On Demand') continue;
 
-          // Skip non-vCPU-second pricing dimensions (like invocations)
-          if (!attrs.memory) continue;
+          // We only look for execution duration rates
+          const isX86 = attrs.group === 'AWS-Lambda-Tenant-Isolated-Environment-Memory-GB';
+          const isARM = attrs.group === 'AWS-Lambda-Tenant-Isolated-Environment-Memory-GB-ARM';
+          if (!isX86 && !isARM) continue;
 
-          // Extract pricing information
-          const memory = parseInt(attrs.memory); // MB
           const region = attrs.location; // e.g., "US East (N. Virginia)"
-          const architecture = attrs.architecture || 'x86'; // ARM64 or x86
-
-          // Skip unsupported architectures
-          if (!['ARM64', 'x86', 'ARM', 'x86_64'].includes(architecture)) continue;
 
           // Map AWS location to region slug
           const regionSlug = this.mapAWSLocationToRegion(region);
@@ -104,75 +100,106 @@ export class AWSLambdaLiveAdapter extends BaseAdapter {
           const onDemandTerms = terms.OnDemand[product.sku];
           if (!onDemandTerms) continue;
 
-          // Extract GB-second price from the first term
+          // Extract price per unit
           const termCode = Object.keys(onDemandTerms)[0];
           const pricingTerm = onDemandTerms[termCode];
           if (!pricingTerm) continue;
 
-          // Find the GB-second pricing dimension
+          // Find the GB pricing dimension
           let gbSecondPrice = 0;
           for (const priceDimension of Object.values(pricingTerm.priceDimensions)) {
             const dim = priceDimension as any;
-            // Look for vCPU-seconds dimension
-            if (dim.description?.includes('vCPU-seconds') || dim.description?.includes('GB-seconds')) {
-              const usdPrice = dim.pricePerUnit?.USD;
-              if (usdPrice) {
-                gbSecondPrice = parseFloat(usdPrice);
-                break;
-              }
+            const usdPrice = dim.pricePerUnit?.USD;
+            if (usdPrice) {
+              // Note: unit is typically "GB" which actually means 10 GB-seconds in AWS billing catalog
+              gbSecondPrice = parseFloat(usdPrice) / 10;
+              break;
             }
           }
 
-          // Skip if no price found
           if (gbSecondPrice === 0) continue;
 
           // Normalize architecture
-          const normalizedArch = architecture === 'ARM64' ? 'ARM' : 'x86 64';
-          const cpuVendor = architecture === 'ARM64' ? 'AWS' : 'Intel';
+          const normalizedArch = isARM ? 'ARM' : 'x86 64';
+          const cpuVendor = isARM ? 'AWS' : 'Intel';
 
-          // Create instance type key
-          const instanceType = `Lambda-${memory}MB-${architecture}`;
+          // List of standard memory configurations to generate matching the catalog fallback
+          const memoryTiers = [
+            { mb: 128, gb: 0.125, label: '128MB' },
+            { mb: 256, gb: 0.256, label: '256MB' },
+            { mb: 512, gb: 0.512, label: '512MB' },
+            { mb: 1024, gb: 1, label: '1GB' },
+            { mb: 1536, gb: 1.5, label: '1536MB' },
+            { mb: 2048, gb: 2, label: '2GB' },
+            { mb: 2560, gb: 2.5, label: '2560MB' },
+            { mb: 3072, gb: 3, label: '3GB' },
+            { mb: 3584, gb: 3.5, label: '3584MB' },
+            { mb: 4096, gb: 4, label: '4GB' },
+            { mb: 4608, gb: 4.5, label: '4608MB' },
+            { mb: 5120, gb: 5, label: '5GB' },
+            { mb: 5632, gb: 5.5, label: '5632MB' },
+            { mb: 6144, gb: 6, label: '6GB' },
+            { mb: 6656, gb: 6.5, label: '6656MB' },
+            { mb: 7168, gb: 7, label: '7GB' },
+            { mb: 7680, gb: 7.5, label: '7680MB' },
+            { mb: 8192, gb: 8, label: '8GB' },
+            { mb: 8704, gb: 8.5, label: '8704MB' },
+            { mb: 9216, gb: 9, label: '9GB' },
+            { mb: 9728, gb: 9.5, label: '9728MB' },
+            { mb: 10240, gb: 10, label: '10GB' }
+          ];
 
-          // Skip duplicate instance types (keep lowest price)
-          if (seenInstanceTypes.has(instanceType)) continue;
-          seenInstanceTypes.add(instanceType);
+          for (const tier of memoryTiers) {
+            const instanceType = `Lambda-${tier.label}-${isARM ? 'ARM' : 'x86'}`;
 
-          // Convert GB-second to GB-hour (multiply by 3600 seconds)
-          const gbHourPrice = gbSecondPrice * 3600;
+            // Check if we've already added this instanceType for this region to prevent duplicates
+            const uniqueKey = `${regionSlug}-${instanceType}`;
+            if (seenInstanceTypes.has(uniqueKey)) continue;
+            seenInstanceTypes.add(uniqueKey);
 
-          // Create pricing record
-          const record: PricingRecord = {
-            provider: 'aws',
-            service: 'Lambda',
-            region: regionSlug,
-            instanceType: instanceType,
-            vcpus: 1, // Normalized vCPU (Lambda scales automatically)
-            memoryGb: memory / 1024, // Convert MB to GB
-            arch: normalizedArch,
-            os: 'Linux',
-            cpuVendor: cpuVendor,
-            gpuCount: 0,
-            geography: geography,
-            category: 'Serverless Compute',
-            price: gbHourPrice,
-            unit: 'GB-Hour',
-            dataSource: 'live_api' as const,
-            supportedLanguages: this.AWS_LAMBDA_LANGUAGES,
-            attributes: {
-              deployment_type: 'Serverless',
-              memory_mb: memory,
-              cpu_architecture: architecture,
-              execution_unit: 'GB-Second',
-              execution_price: gbSecondPrice,
-              invocation_price: 0.0000002, // $0.20 per 1M invocations
-              free_invocations_per_month: 1000000,
-              timeout_seconds: 900, // Max 15 minutes
-              ephemeral_storage_gb: 10, // Max 10GB
-              cold_start_overhead_ms: 100, // Approximate
-            },
-          };
+            // Convert GB-second price to GB-hour rate for this tier's memory size:
+            // price = (gbSecondPrice * memoryGb) * 3600
+            const price = gbSecondPrice * tier.gb * 3600;
 
-          records.push(record);
+            const record: PricingRecord = {
+              provider: 'aws',
+              service: 'Lambda',
+              region: regionSlug,
+              instanceType: instanceType,
+              vcpus: 1, // Normalized vCPU (Lambda scales automatically)
+              memoryGb: tier.gb,
+              arch: normalizedArch,
+              os: 'Linux',
+              cpuVendor: cpuVendor,
+              gpuCount: 0,
+              geography: geography,
+              category: 'Serverless Compute',
+              price: price,
+              unit: 'GB-Hour',
+              dataSource: 'live_api' as const,
+              supportedLanguages: this.AWS_LAMBDA_LANGUAGES,
+              attributes: {
+                service_type: 'Compute',
+                deployment_type: 'Serverless',
+                tier: 'Serverless',
+                cold_start_overhead_ms: 100,
+                timeout_seconds: 900,
+                memory_configuration: 'user-configurable',
+                invocation_price: 0.0000002, // $0.20 per 1M invocations
+                free_invocations_per_month: 1000000,
+                billing_granularity_ms: 1,
+                invocation_price_per_1m: 0.20,
+                execution_model: 'Both',
+                provisioned_concurrency_support: 'Yes',
+                max_ephemeral_storage_gb: 10,
+                memory_mb: tier.mb,
+                cpu_architecture: isARM ? 'ARM' : 'x86',
+                execution_unit: 'GB-Second',
+                execution_price: gbSecondPrice,
+              },
+            };
+            records.push(record);
+          }
         } catch (error) {
           // Log errors but continue processing
           console.warn(`⚠️  Error processing Lambda SKU ${product.sku}:`, (error as Error).message);

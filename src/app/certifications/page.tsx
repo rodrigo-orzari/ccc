@@ -209,50 +209,53 @@ export default function CertificationsPage() {
               })}
             </div>
 
-            {/* Region */}
-            <div className="px-5 py-3 flex flex-wrap items-center gap-2">
-              <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Region</span>
-              {GEOGRAPHIES.map((geo) => {
-                const active = selGeos.has(geo);
-                return (
-                  <button
-                    key={geo}
-                    onClick={() => toggleGeo(geo)}
-                    onDoubleClick={() => isolateGeo(geo)}
-                    title={`Click to toggle · Double-click to show only ${geo}`}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      active
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
-                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
-                    }`}
-                  >
-                    {geo}
-                  </button>
-                );
-              })}
-            </div>
+            {/* Region & Category in the same row on desktop */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-[var(--border)]">
+              {/* Region */}
+              <div className="px-5 py-3 flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Region</span>
+                {GEOGRAPHIES.map((geo) => {
+                  const active = selGeos.has(geo);
+                  return (
+                    <button
+                      key={geo}
+                      onClick={() => toggleGeo(geo)}
+                      onDoubleClick={() => isolateGeo(geo)}
+                      title={`Click to toggle · Double-click to show only ${geo}`}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                        active
+                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                          : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
+                      }`}
+                    >
+                      {geo}
+                    </button>
+                  );
+                })}
+              </div>
 
-            {/* Category */}
-            <div className="px-5 py-3 flex flex-wrap items-center gap-2">
-              <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Category</span>
-              {CATEGORY_ORDER.map((cat) => {
-                const active = selCategories.has(cat);
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => toggleCategory(cat)}
-                    onDoubleClick={() => isolateCategory(cat)}
-                    title={`Click to toggle · Double-click to show only ${cat}`}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
-                      active
-                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
-                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
+              {/* Category */}
+              <div className="px-5 py-3 flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0">Category</span>
+                {CATEGORY_ORDER.map((cat) => {
+                  const active = selCategories.has(cat);
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => toggleCategory(cat)}
+                      onDoubleClick={() => isolateCategory(cat)}
+                      title={`Click to toggle · Double-click to show only ${cat}`}
+                      className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
+                        active
+                          ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                          : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
