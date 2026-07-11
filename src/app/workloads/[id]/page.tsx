@@ -701,19 +701,19 @@ export default function WorkloadDetails() {
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Providers</h3>
-                <div className="flex gap-1">
-                  <button
-                    onClick={() => setSelectedProviders(new Set(PROVIDER_IDS))}
-                    className="text-[9px] font-bold text-[#2563eb] dark:text-[#818cf8] hover:underline"
-                  >
-                    All
-                  </button>
-                  <span className="text-[#a3a3a3]">/</span>
+                <div className="flex items-center gap-1">
                   <button
                     onClick={() => setSelectedProviders(new Set())}
-                    className="text-[9px] font-bold text-[#2563eb] dark:text-[#818cf8] hover:underline"
+                    className="text-[9px] font-bold text-[#2563eb] dark:text-[#818cf8] hover:underline uppercase"
                   >
-                    None
+                    CLEAR
+                  </button>
+                  <span className="text-[#a3a3a3] dark:text-[#525252] mx-0.5">-</span>
+                  <button
+                    onClick={() => setSelectedProviders(new Set(PROVIDER_IDS))}
+                    className="text-[9px] font-bold text-[#2563eb] dark:text-[#818cf8] hover:underline uppercase"
+                  >
+                    SELECT ALL
                   </button>
                 </div>
               </div>
@@ -733,6 +733,10 @@ export default function WorkloadDetails() {
                         }
                         setSelectedProviders(newProviders);
                       }}
+                      onDoubleClick={() => {
+                        setSelectedProviders(new Set([providerId]));
+                      }}
+                      title="Click to toggle · Double-click to isolate"
                       className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                         isSelected
                           ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
