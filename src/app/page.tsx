@@ -315,11 +315,9 @@ export default function Dashboard() {
     subset('geography', selectedGeographies, config.GEOGRAPHIES);
     subset('os', selectedOS, config.OS_TYPES);
     // Translate CPU profile IDs → vendor names the API understands
-    const allVendors = Array.from(new Set(config.CPU_PROFILES.map(p => p.vendor)));
+    const allVendors = Array.from(new Set(config.CPU_PROFILES.flatMap(p => p.vendors)));
     const selectedVendors = Array.from(new Set(
-      selectedCpu
-        .map(id => config.CPU_PROFILES.find(p => p.id === id)?.vendor)
-        .filter((v): v is string => Boolean(v))
+      selectedCpu.flatMap(id => config.CPU_PROFILES.find(p => p.id === id)?.vendors ?? [])
     ));
     subset('cpuVendor', selectedVendors, allVendors);
     subset('category', selectedCategory, config.CATEGORIES);

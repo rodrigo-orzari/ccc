@@ -5,11 +5,14 @@ export const GEOGRAPHIES = ['N. America', 'S. America', 'W. Europe', 'N. Europe'
 
 // VM-specific constants
 export const OS_TYPES = ['Linux', 'Windows'];
+// Three CPU filter options. Each maps to one or more underlying cpu_vendor
+// values stored on the records. ARM covers both AWS Graviton and Ampere Altra,
+// so selecting it surfaces both in the results (the table still shows the
+// specific chip — Graviton / Ampere — see PricingTable's vendor display).
 export const CPU_PROFILES = [
-  { id: 'intel-x86', label: 'Intel (x86)', vendor: 'Intel', arch: 'x86 64' },
-  { id: 'amd-x86', label: 'AMD (x86)', vendor: 'AMD', arch: 'x86 64' },
-  { id: 'aws-arm', label: 'AWS Graviton (ARM)', vendor: 'AWS', arch: 'ARM' },
-  { id: 'ampere-arm', label: 'Ampere (ARM)', vendor: 'Ampere', arch: 'ARM' },
+  { id: 'intel', label: 'Intel', vendors: ['Intel'], arch: 'x86 64' },
+  { id: 'amd', label: 'AMD', vendors: ['AMD'], arch: 'x86 64' },
+  { id: 'arm', label: 'ARM (Graviton / Ampere)', vendors: ['AWS', 'Ampere'], arch: 'ARM' },
 ];
 export const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optimized', 'Storage optimized', 'Burstable', 'HPC'];
 export const PRICING_MODELS = ['On-Demand', 'Spot / Preemptible'];
@@ -27,7 +30,7 @@ export const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Regio
 
 // Serverless-specific constants
 export const SERVERLESS_LANGUAGES = ['Python', 'Node', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'TypeScript', 'Any'];
-export const SERVERLESS_COLD_START_OPTIONS = ['Fast (<100)', 'Medium (100-200)', 'Slow (>200)'];
+export const SERVERLESS_COLD_START_OPTIONS = ['<100 ms', '100-200 ms', '>200 ms'];
 export const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5)', 'Medium (10)', 'Long (15+)'];
 export const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['Configurable', 'Tiers', 'Automatic'];
 export const SERVERLESS_FREE_TIER_OPTIONS = ['Yes', 'No'];

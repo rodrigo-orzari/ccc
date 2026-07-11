@@ -370,11 +370,11 @@ export function buildPricingFilters(query: any) {
         const coldStartConditions: string[] = [];
 
         for (const opt of coldStartOptions) {
-          if (opt.includes('Fast')) {
+          if (opt.includes('<100')) {
             coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int < 100`);
-          } else if (opt.includes('Medium')) {
+          } else if (opt.includes('100-200')) {
             coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int BETWEEN 100 AND 200`);
-          } else if (opt.includes('Slow')) {
+          } else if (opt.includes('>200')) {
             coldStartConditions.push(`(pr.attributes->>'cold_start_overhead_ms')::int > 200`);
           }
         }

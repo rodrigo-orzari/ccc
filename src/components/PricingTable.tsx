@@ -19,6 +19,10 @@ interface ColDef { key: string; defaultWidth: number; }
 
 const C = (key: string, defaultWidth: number): ColDef => ({ key, defaultWidth });
 
+// Display label for a stored cpu_vendor. Records store 'AWS' for Graviton
+// chips; show the chip name so ARM results are identifiable (Graviton vs Ampere).
+const cpuVendorLabel = (v?: string): string => (v === 'AWS' ? 'Graviton' : (v || '—'));
+
 // Shared columns
 const COL_PROVIDER   = C('provider',             100);
 const COL_SKU        = C('instance_type',         180);

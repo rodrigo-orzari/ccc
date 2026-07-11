@@ -23,12 +23,14 @@ export function useDynamicFilters() {
   };
 
   const CPU_PROFILES = (() => {
-    const existingVendors = new Set(config.CPU_PROFILES.map(p => p.vendor));
+    // Flatten every vendor already covered by a config profile (ARM covers both
+    // AWS/Graviton and Ampere) so they aren't re-added as stray single profiles.
+    const existingVendors = new Set(config.CPU_PROFILES.flatMap(p => p.vendors));
     const newVendors = (dynamicData?.cpu_vendors || []).filter((v: string) => !existingVendors.has(v));
     const newProfiles = newVendors.map((v: string) => ({
       id: v.toLowerCase(),
       label: v,
-      vendor: v,
+      vendors: [v],
       arch: dynamicData?.architectures?.[0] || 'x86 64' // Best guess fallback
     }));
     return [...config.CPU_PROFILES, ...newProfiles];
