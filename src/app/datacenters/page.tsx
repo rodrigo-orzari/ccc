@@ -406,8 +406,11 @@ export default function DatacentersPage() {
               )}
             </div>
 
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
             {/* Regional Coverage Matrix */}
-            <div id="coverage-matrix" className="mt-8 scroll-mt-6">
+            <div id="coverage-matrix" className="scroll-mt-6">
               <div className="flex items-center justify-between mb-1">
                 <h2 className="text-xl font-bold text-[var(--text)]">Regional Coverage Matrix</h2>
                 <ViewToggle view={matrixView} onChange={setMatrixView} />
@@ -481,8 +484,11 @@ export default function DatacentersPage() {
               )}
             </div>
 
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
             {/* Availability Zones per Region — stat cards grid */}
-            <div id="az-detail" className="mt-8 scroll-mt-6">
+            <div id="az-detail" className="scroll-mt-6">
               <h2 className="text-xl font-bold mb-1 text-[var(--text)]">
                 Availability Zones per Region
               </h2>
