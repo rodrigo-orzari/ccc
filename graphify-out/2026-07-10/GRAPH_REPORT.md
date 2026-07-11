@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-07-10)
 
 ## Corpus Check
-- 154 files · ~183,190 words
+- 154 files · ~183,357 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 889 nodes · 1423 edges · 65 communities (42 shown, 23 thin omitted)
+- 889 nodes · 1424 edges · 65 communities (42 shown, 23 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cd1041c8`
+- Built from commit: `e96e29d2`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -234,7 +234,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **303 isolated node(s):** `CATEGORY_ORDER`, `CATEGORY_COLOR`, `PROVIDERS_FOR_CERT`, `StorageConfigEntry`, `STATIC_PROVIDERS` (+298 more)
+- **303 isolated node(s):** `PipelineStatus`, `ProviderStatus`, `StatusData`, `PROVIDER_COLORS`, `PROVIDER_URLS` (+298 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **23 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -246,8 +246,8 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `BaseAdapter` connect `Community 28` to `Database Instance Configs`, `Community 35`, `Community 36`, `Community 69`, `Community 37`, `Community 39`, `Community 9`, `Community 43`, `Community 46`, `Community 47`, `Community 18`, `Community 53`, `Community 56`?**
   _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 7` to `Community 8`, `Community 53`?**
-  _High betweenness centrality (0.034) - this node is a cross-community bridge._
-- **What connects `CATEGORY_ORDER`, `CATEGORY_COLOR`, `PROVIDERS_FOR_CERT` to the rest of the system?**
+  _High betweenness centrality (0.028) - this node is a cross-community bridge._
+- **What connects `PipelineStatus`, `ProviderStatus`, `StatusData` to the rest of the system?**
   _303 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
