@@ -289,7 +289,7 @@ export default function CertificationsPage() {
                   <div className="text-[9px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
                     {p.name}
                   </div>
-                  <div className="text-2xl font-black leading-none text-[var(--text)] tabular-nums">{count}</div>
+                  <div className="text-xl font-black leading-none text-[var(--text)] tabular-nums">{count}</div>
                 </div>
               );
             })}

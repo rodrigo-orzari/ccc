@@ -71,11 +71,11 @@ function ProviderRow({
 }) {
   const hasGovCloud = p.governmentRegions > 0;
   const color = PROVIDER_COLORS[p.id] ?? '#888';
-  const rowBg = rowIndex % 2 === 0 ? 'bg-[var(--bg)]' : 'bg-[var(--row-hover)]';
+  const rowBg = rowIndex % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]';
 
   return (
     <>
-      <tr className={`border-b border-[var(--border)] hover:bg-[var(--row-hover)] transition-colors ${rowBg}`}>
+      <tr className={`border-b border-[var(--border)] hover:bg-[#eef2ff] dark:hover:bg-[#111827] transition-colors ${rowBg}`}>
         <td className="py-4 px-4 min-w-[180px]">
           <div className="flex items-center justify-center gap-2.5">
             <span className="w-0.5 h-8 rounded-full shrink-0" style={{ backgroundColor: color }} />
@@ -286,7 +286,7 @@ export default function DatacentersPage() {
             <div className="mb-6">
               <h1 className="text-3xl font-bold mb-1 text-[var(--text)]">Cloud Infrastructure</h1>
               <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed mb-4">
-                Compare data center presence, availability zones, and global coverage across providers. Comparing regulatory posture instead? Visit{' '}
+                Compare global datacenter presence, availability zones, and physical footprint across cloud providers. Comparing regulatory posture instead? Visit{' '}
                 <Link href="/certifications" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Compliance</Link>{' '}
                 to see which certifications and standards each provider holds.
               </p>
@@ -427,9 +427,9 @@ export default function DatacentersPage() {
                   </thead>
                   <tbody>
                     {PROVIDER_INFRA.map((p, i) => {
-                      const rowBg = i % 2 === 0 ? 'bg-[var(--bg)]' : 'bg-[var(--row-hover)]';
+                      const rowBg = i % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]';
                       return (
-                        <tr key={p.id} className={`border-b border-[var(--border)] ${rowBg}`}>
+                        <tr key={p.id} className={`border-b border-[var(--border)] hover:bg-[#eef2ff] dark:hover:bg-[#111827] transition-colors ${rowBg}`}>
                           <td className="py-3 px-4 whitespace-nowrap text-center">
                             <div className="flex justify-center">
                               <ProviderBadge id={p.id} name={p.nameShort} />
@@ -541,6 +541,14 @@ export default function DatacentersPage() {
                 ))}
               </div>
               <p className="text-[9px] text-[#a3a3a3] mt-4">Last verified: June 2026 · Data may not reflect real-time changes.</p>
+            </div>
+
+            {/* Disclaimer */}
+            <div className="max-w-[1600px] mx-auto mt-6">
+              <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[13px] text-[#737373] dark:text-[#a3a3a3] italic">
+                <strong>Disclaimer:</strong> Infrastructure data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
+                <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+              </blockquote>
             </div>
 
           </main>

@@ -312,7 +312,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
 
         <main className="main-content">
           <h1 style={{ fontSize: '2.25rem', fontWeight: '800', margin: '0 0 0.5rem', letterSpacing: '-0.02em' }}>
-            Terms
+            Terms of Use
           </h1>
           <p style={{ fontSize: '0.8125rem', color: 'var(--muted-text)', marginBottom: '2.5rem' }}>Last updated: 17 June 2026.</p>
           <div className="prose prose-slate dark:prose-invert max-w-none text-black dark:text-white">

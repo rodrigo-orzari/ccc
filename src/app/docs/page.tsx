@@ -675,7 +675,7 @@ const DocsPage: React.FC = () => {
               <li style={{ marginBottom: '0.4rem' }}><a href="https://www.trychroma.com/pricing" target="_blank" rel="noopener noreferrer">Chroma Pricing</a></li>
             </ul>
             <p style={{ fontSize: '0.875rem', color: 'var(--muted-text)' }}>
-              Not every vendor above publishes an interactive calculator — for those (Cloudflare, and the
+              Not every provider above publishes an interactive calculator — for those (Cloudflare, and the
               vector database providers), the link goes to their official pricing page instead.
             </p>
             <blockquote>
@@ -701,7 +701,7 @@ const DocsPage: React.FC = () => {
             <h3 id="provider">Provider</h3>
             <p>
               Checkbox list to include or exclude specific cloud providers (AWS, Azure, GCP, Oracle,
-              DigitalOcean, Alibaba Cloud, and category-specific vendors like OpenAI, Anthropic,
+              DigitalOcean, Alibaba Cloud, and category-specific providers like OpenAI, Anthropic,
               Cloudflare, or the vector database providers). Multi-select — narrow to one provider or
               compare a custom subset.
             </p>
@@ -766,7 +766,7 @@ const DocsPage: React.FC = () => {
               Sponsorship slots are available on the <Link href="/datacenters">Datacenters</Link> page,
               the <Link href="/workloads">Workloads</Link> catalog, and individual workload pages — so you
               can target a broad audience or a specific architecture pattern relevant to your product (for
-              example, a security vendor sponsoring the Compliance-Ready Web Application workload).
+              example, a security provider sponsoring the Compliance-Ready Web Application workload).
             </p>
             <h3 id="advertising-specs">Image Specs</h3>
             <p>
