@@ -2,6 +2,12 @@ import axios from 'axios';
 import { BaseScraper } from './base_scraper.ts';
 
 export class AwsStorageScraper extends BaseScraper<any> {
+  // Override run to bypass Playwright headless browser initialization entirely,
+  // since this scraper only uses standard HTTP API requests via axios.
+  async run(): Promise<any[]> {
+    return this.scrape();
+  }
+
   async scrape(): Promise<any[]> {
     console.log('[AwsStorageScraper] Fetching AWS S3 and EFS pricing API...');
     const s3Url = 'https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonS3/current/index.json';
