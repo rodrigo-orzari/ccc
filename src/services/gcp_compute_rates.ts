@@ -43,10 +43,19 @@ function skuPrice(sku: any): number | null {
 // Matches e.g. "N2 Instance Core running in Americas" and, for N1,
 // "N1 Predefined Instance Core running in Americas".
 function findFamilyRate(skus: any[], family: string, kind: 'core' | 'ram'): number | null {
-  const famRe = new RegExp(`\\b${family}\\b`, 'i'); // \b keeps N2 from matching N2D
+  const isC2 = family === 'c2';
+  const isM1 = family === 'm1';
+  const famRe = isC2
+    ? /\bc2\b|compute-?optimized/i
+    : isM1
+    ? /\bm1\b|memory-?optimized/i
+    : new RegExp(`\\b${family}\\b`, 'i');
+
   const kindRe = kind === 'core' ? /\b(core|cpu)\b/i : /\bram\b/i;
   const pick = skus.find((s) => {
     const d = s.description ?? '';
+    if (isC2 && /\bc2d\b/i.test(d)) return false;
+    if (isM1 && /\b(m2|m3|m4)\b/i.test(d)) return false;
     return famRe.test(d) && /instance/i.test(d) && kindRe.test(d) && isOnDemand(d) && inRegion(s);
   });
   return pick ? skuPrice(pick) : null;

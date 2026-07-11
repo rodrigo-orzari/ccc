@@ -1051,7 +1051,10 @@ export class PricingPipeline {
         }
       }
 
-      console.log(`✅ Saved ${rowsToInsert.length} records for ${providerSlug} (${serviceCategory}, source: ${dataSource})`);
+      const hasLive = records.some(r => (r.dataSource ?? dataSource) === 'live_api');
+      const hasStatic = records.some(r => (r.dataSource ?? dataSource) === 'static_config');
+      const logSource = (hasLive && hasStatic) ? 'mixed' : (hasLive ? 'live_api' : 'static_config');
+      console.log(`✅ Saved ${rowsToInsert.length} records for ${providerSlug} (${serviceCategory}, source: ${logSource})`);
     });
 
     return driftAlerts;
