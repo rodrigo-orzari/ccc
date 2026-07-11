@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Footer, ProductTypeSelector } from '@/components';
+import { STATUS_SPONSOR } from '@/config';
 
 interface PipelineStatus {
   category: string;
@@ -320,7 +321,7 @@ export default function StatusPage() {
         <div className="flex-1 overflow-auto flex flex-col">
           <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
             {/* Constrained layout for header */}
-            <div className="max-w-[1100px] mx-auto mb-6" id="top">
+            <div className="max-w-[1600px] mx-auto mb-6" id="top">
               <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">
                 Status
               </h1>
@@ -330,7 +331,44 @@ export default function StatusPage() {
             </div>
 
             {/* Divider */}
-            <div className="max-w-[1100px] mx-auto h-px bg-[var(--border)] mb-8" />
+            <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
+
+            {/* Sponsorship Box */}
+            <div className="max-w-[1600px] mx-auto">
+              {STATUS_SPONSOR ? (
+                <a
+                  href={STATUS_SPONSOR.linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="mb-8 block rounded overflow-hidden border border-[var(--border)]"
+                >
+                  <img
+                    src={STATUS_SPONSOR.imageUrl}
+                    alt={`Sponsored by ${STATUS_SPONSOR.companyName}`}
+                    width={1200}
+                    height={200}
+                    className="w-full h-auto aspect-[6/1] object-cover"
+                  />
+                </a>
+              ) : (
+                <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
+                  <div>
+                    <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
+                      <span className="text-2xl">🤝</span> Sponsor This Page
+                    </h3>
+                    <p className="text-[13px] text-[var(--muted)] leading-relaxed">
+                      For $9,99 per month or $99 for 12 months, have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">hello@comparecloudcosts.com</a> for more information.
+                    </p>
+                    <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
+                      Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Divider */}
+            <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
 
             {loading && (
               <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--muted)', fontSize: 13 }}>
@@ -339,7 +377,7 @@ export default function StatusPage() {
             )}
 
             {error && (
-              <div className="max-w-[1100px] mx-auto" style={{ padding: '1.5rem', border: '1px solid #ef4444', borderRadius: 8, color: '#ef4444', fontSize: 13 }}>
+              <div className="max-w-[1600px] mx-auto" style={{ padding: '1.5rem', border: '1px solid #ef4444', borderRadius: 8, color: '#ef4444', fontSize: 13 }}>
                 Failed to load status: {error}
               </div>
             )}
@@ -347,7 +385,7 @@ export default function StatusPage() {
             {status && !loading && (
               <>
                 {/* Summary cards */}
-                <div className="max-w-[1100px] mx-auto">
+                <div className="max-w-[1600px] mx-auto">
                   <div className="summary-cards">
                     <div className="summary-card">
                       <div className="summary-card-label">Total Records</div>
@@ -396,10 +434,10 @@ export default function StatusPage() {
                 </div>
 
                 {/* Divider */}
-                <div className="max-w-[1100px] mx-auto h-px bg-[var(--border)] mb-8" />
+                <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
 
                 {/* Data source legend */}
-                <div className="max-w-[1100px] mx-auto">
+                <div className="max-w-[1600px] mx-auto">
                   <div
                     style={{
                       border: '1px solid var(--border)',
@@ -423,7 +461,7 @@ export default function StatusPage() {
                 </div>
 
                 {/* Divider */}
-                <div className="max-w-[1100px] mx-auto h-px bg-[var(--border)] mb-8" />
+                <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
 
               {/* Status Matrix Table */}
               {(() => {
@@ -481,7 +519,7 @@ export default function StatusPage() {
                 });
 
                 return (
-                  <div id="status-matrix" style={{ overflowX: 'auto', border: '1px solid var(--border)', borderRadius: 8, background: 'var(--surface)', marginBottom: '2.5rem' }}>
+                  <div id="status-matrix" className="max-w-[1600px] mx-auto" style={{ overflowX: 'auto', border: '1px solid var(--border)', borderRadius: 8, background: 'var(--surface)', marginBottom: '2.5rem' }}>
                     <table className="pipeline-table" style={{ minWidth: 800 }}>
                       <thead>
                         <tr>
@@ -623,9 +661,9 @@ export default function StatusPage() {
               })()}
 
               {/* Divider */}
-              <div className="max-w-[1100px] mx-auto h-px bg-[var(--border)] mb-8" />
+              <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
 
-              <div className="max-w-[1100px] mx-auto mt-6">
+              <div className="max-w-[1600px] mx-auto mt-6">
                 <BackToTop />
                 <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[13px] text-[#737373] dark:text-[#a3a3a3] italic">
                   <strong>Disclaimer:</strong> Price data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}

@@ -191,3 +191,4 @@ export const SECURITY_SERVICE_GROUPS: { label: string; services: string[] }[] = 
 export const DATACENTERS_SPONSOR: SponsorSlot | null = null;
 export const WORKLOADS_LISTING_SPONSOR: SponsorSlot | null = null;
 export const CERTIFICATIONS_SPONSOR: SponsorSlot | null = null;
+export const STATUS_SPONSOR: SponsorSlot | null = null;
