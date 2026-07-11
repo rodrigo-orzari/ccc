@@ -405,8 +405,8 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1783634342.3116908,
-    "ast_hash": "dc1d587c64475f39f7ae2d9d9c720581",
+    "mtime": 1783725157.8710034,
+    "ast_hash": "ce80ed64acb42510c380c44e038aa169",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
@@ -440,8 +440,8 @@
     "semantic_hash": ""
   },
   "src/types/index.ts": {
-    "mtime": 1783637279.0624452,
-    "ast_hash": "666a8a23bb3d4694a9014564fa6cf3e8",
+    "mtime": 1783725183.8095267,
+    "ast_hash": "780c0cd17ad2de4b1634811e252b8b11",
     "semantic_hash": ""
   },
   "postcss.config.mjs": {
@@ -580,8 +580,8 @@
     "semantic_hash": ""
   },
   "src/config/integration.ts": {
-    "mtime": 1783705646.6175833,
-    "ast_hash": "ed7d96f5ac08acfbd15a5ec9d56b8ec5",
+    "mtime": 1783725041.2633157,
+    "ast_hash": "c207c358ea954086e49013db2d95eac8",
     "semantic_hash": ""
   },
   "src/services/app_hosting_pipeline.ts": {
@@ -590,13 +590,13 @@
     "semantic_hash": ""
   },
   "src/app/api/workloads/route.ts": {
-    "mtime": 1781929563.8539357,
-    "ast_hash": "41fd75a3433724d65be642891fcec44b",
+    "mtime": 1783725296.4579296,
+    "ast_hash": "9e4bde25194f882dbefd909dd69a19a5",
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1783709838.5481148,
-    "ast_hash": "a94f3ab9e704ea2e1c0be6308d818c8e",
+    "mtime": 1783725131.4993145,
+    "ast_hash": "fd55ebc3d3ca4e9c318c07029f8df03e",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -605,8 +605,8 @@
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
-    "mtime": 1783706065.7533174,
-    "ast_hash": "3aff3b6c168a65e10aa765fcf6b92acf",
+    "mtime": 1783743636.636085,
+    "ast_hash": "ba5086ac7942e57b92a102b3538aaf1e",
     "semantic_hash": ""
   },
   "src/lib/formatInstanceName.ts": {
