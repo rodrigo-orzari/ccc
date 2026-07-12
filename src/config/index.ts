@@ -175,6 +175,15 @@ export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
 // --- INTEGRATION ---
 export const INTEGRATION_SERVICES = ['Messaging', 'Eventing', 'API Gateway', 'Workflow'];
 export const INTEGRATION_TIERS = ['Standard', 'Premium', 'Consumption', 'FIFO'];
+// Billing model of an integration SKU (stored per record as attributes.pricing_model).
+// usage = per-operation (per 1k/1M requests/events/ops/steps); data = per-GB/TB;
+// flat = fixed monthly instance ('/mo'). Filter values are the stored lowercase keys.
+export const INTEGRATION_PRICING_MODELS = ['usage', 'data', 'flat'];
+export const INTEGRATION_PRICING_MODEL_LABELS: Record<string, string> = {
+  usage: 'Usage-based',
+  data: 'Data-based',
+  flat: 'Flat (monthly)',
+};
 export const INTEGRATION_SIZES = ['256 KB', '1 MB', '4 MB', '10 MB', '100 MB'];
 export const INTEGRATION_PROTOCOLS = ['REST', 'HTTP', 'SOAP', 'GraphQL'];
 

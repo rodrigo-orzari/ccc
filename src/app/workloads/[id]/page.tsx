@@ -749,7 +749,7 @@ export default function WorkloadDetails() {
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Providers</h3>
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="flex flex-wrap gap-2">
                 {PROVIDER_IDS.map(providerId => {
                   const provName = providerName(providerId);
                   const isSelected = selectedProviders.has(providerId);
@@ -785,12 +785,12 @@ export default function WorkloadDetails() {
             {/* Region */}
             <section className="space-y-3">
               <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Region</h3>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="flex flex-wrap gap-2">
                 {REGION_OPTIONS.map(opt => (
                   <button
                     key={opt}
                     onClick={() => setRegion(opt)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border whitespace-nowrap ${
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
                       region === opt
                         ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
                         : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'

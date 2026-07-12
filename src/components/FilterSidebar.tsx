@@ -431,14 +431,17 @@ interface FilterSidebarProps {
   onSetAppHostingComputeTypes: (items: string[]) => void;
   onSetServerlessServiceTypes: (items: string[]) => void;
   selectedIntegrationServices: string[];
+  selectedIntegrationPricingModels: string[];
   selectedIntegrationTiers: string[];
   selectedIntegrationSizes: string[];
   selectedIntegrationProtocols: string[];
   onIntegrationServiceToggle: (item: string) => void;
+  onIntegrationPricingModelToggle: (item: string) => void;
   onIntegrationTierToggle: (item: string) => void;
   onIntegrationSizeToggle: (item: string) => void;
   onIntegrationProtocolToggle: (item: string) => void;
   onSetIntegrationServices: (items: string[]) => void;
+  onSetIntegrationPricingModels: (items: string[]) => void;
   onSetIntegrationTiers: (items: string[]) => void;
   onSetIntegrationSizes: (items: string[]) => void;
   onSetIntegrationProtocols: (items: string[]) => void;
@@ -524,6 +527,7 @@ export default function FilterSidebar({
   selectedAppHostingComputeTypes,
   selectedServerlessServiceTypes,
   selectedIntegrationServices,
+  selectedIntegrationPricingModels,
   selectedIntegrationTiers,
   selectedIntegrationSizes,
   selectedIntegrationProtocols,
@@ -590,6 +594,7 @@ export default function FilterSidebar({
   onAppHostingComputeTypeToggle,
   onServerlessServiceTypeToggle,
   onIntegrationServiceToggle,
+  onIntegrationPricingModelToggle,
   onIntegrationTierToggle,
   onIntegrationSizeToggle,
   onIntegrationProtocolToggle,
@@ -640,6 +645,7 @@ export default function FilterSidebar({
   onSetAppHostingComputeTypes,
   onSetServerlessServiceTypes,
   onSetIntegrationServices,
+  onSetIntegrationPricingModels,
   onSetIntegrationTiers,
   onSetIntegrationSizes,
   onSetIntegrationProtocols,
@@ -1463,6 +1469,18 @@ export default function FilterSidebar({
               onSetAll={onSetIntegrationServices}
               isExpanded={expanded.integrationServices ?? true}
               onToggleExpand={() => onToggleSection('integrationServices')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Pricing Model"
+              tooltip="How the service is billed: usage-based (per operation), data-based (per GB/TB), or a flat monthly fee."
+              options={staticConfig.INTEGRATION_PRICING_MODELS}
+              getLabel={(id) => staticConfig.INTEGRATION_PRICING_MODEL_LABELS[id] ?? id}
+              selected={selectedIntegrationPricingModels}
+              onToggle={onIntegrationPricingModelToggle}
+              onSetAll={onSetIntegrationPricingModels}
+              isExpanded={expanded.integrationPricingModels ?? true}
+              onToggleExpand={() => onToggleSection('integrationPricingModels')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection

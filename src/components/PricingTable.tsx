@@ -23,6 +23,10 @@ const C = (key: string, defaultWidth: number): ColDef => ({ key, defaultWidth })
 // chips; show the chip name so ARM results are identifiable (Graviton vs Ampere).
 const cpuVendorLabel = (v?: string): string => (v === 'AWS' ? 'Graviton' : (v || '—'));
 
+// Pretty-print a pricing unit for display: the stored flat-monthly unit 'Mo'
+// reads better as '/mo'. Everything else passes through unchanged.
+const prettyUnit = (u?: string): string => (u === 'Mo' ? '/mo' : (u || ''));
+
 // Shared columns
 const COL_PROVIDER   = C('provider',             100);
 const COL_SKU        = C('instance_type',         180);
@@ -633,7 +637,7 @@ function TableRow({
       {/* Pricing Unit (serverless + integration, since units vary widely: GB-Hour vs per 1M Requests vs Mo) */}
       {(activeProductType === 'serverless' || activeProductType === 'integration') && (
         <td data-col="unit" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.unit || '—'}</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{prettyUnit(record.unit) || '—'}</span>
         </td>
       )}
 
@@ -745,7 +749,7 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
       { label: 'Granularity', value: a.billing_granularity_ms ? `${a.billing_granularity_ms}ms` : '—' },
       { label: 'Exec. Model', value: dash(a.execution_model) },
       { label: 'Geo', value: dash(record.geography) },
-      { label: 'Pricing Unit', value: dash(record.unit) },
+      { label: 'Pricing Unit', value: dash(prettyUnit(record.unit)) },
       { label: 'Source', value: record.data_source === 'static_config' ? 'Static' : 'API' },
     ];
     case 'containers': return [

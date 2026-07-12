@@ -96,6 +96,7 @@ export default function Dashboard() {
       [selectedIntegrationTiers, setSelectedIntegrationTiers, staticConfig.INTEGRATION_TIERS.length, () => [...staticConfig.INTEGRATION_TIERS]],
       [selectedIntegrationSizes, setSelectedIntegrationSizes, staticConfig.INTEGRATION_SIZES.length, () => [...staticConfig.INTEGRATION_SIZES]],
       [selectedIntegrationProtocols, setSelectedIntegrationProtocols, staticConfig.INTEGRATION_PROTOCOLS.length, () => [...staticConfig.INTEGRATION_PROTOCOLS]],
+      [selectedIntegrationPricingModels, setSelectedIntegrationPricingModels, staticConfig.INTEGRATION_PRICING_MODELS.length, () => [...staticConfig.INTEGRATION_PRICING_MODELS]],
     ];
 
     for (const [current, setter, staticLen, next] of syncGroups) {
@@ -193,6 +194,7 @@ export default function Dashboard() {
   const [selectedIntegrationTiers, setSelectedIntegrationTiers] = useState<string[]>([...staticConfig.INTEGRATION_TIERS]);
   const [selectedIntegrationSizes, setSelectedIntegrationSizes] = useState<string[]>([...staticConfig.INTEGRATION_SIZES]);
   const [selectedIntegrationProtocols, setSelectedIntegrationProtocols] = useState<string[]>([...staticConfig.INTEGRATION_PROTOCOLS]);
+  const [selectedIntegrationPricingModels, setSelectedIntegrationPricingModels] = useState<string[]>([...staticConfig.INTEGRATION_PRICING_MODELS]);
 
 
 
@@ -372,6 +374,7 @@ export default function Dashboard() {
     subset('appHostingComputeTypes', selectedAppHostingComputeTypes, config.APP_HOSTING_COMPUTE_TYPES);
     subset('serverlessServiceTypes', selectedServerlessServiceTypes, config.SERVERLESS_SERVICE_TYPES);
     subset('integrationServices', selectedIntegrationServices, staticConfig.INTEGRATION_SERVICES);
+    subset('integrationPricingModels', selectedIntegrationPricingModels, staticConfig.INTEGRATION_PRICING_MODELS);
     subset('integrationTiers', selectedIntegrationTiers, staticConfig.INTEGRATION_TIERS);
     subset('integrationSizes', selectedIntegrationSizes, staticConfig.INTEGRATION_SIZES);
     subset('integrationProtocols', selectedIntegrationProtocols, staticConfig.INTEGRATION_PROTOCOLS);
@@ -417,7 +420,7 @@ export default function Dashboard() {
     selectedNetworkingBillingModels, selectedNetworkingUsageTiers, selectedNetworkingPortCapacities, selectedNetworkingTransferScopes,
     selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
-    selectedIntegrationServices, selectedIntegrationTiers,
+    selectedIntegrationServices, selectedIntegrationTiers, selectedIntegrationPricingModels,
     selectedIntegrationSizes, selectedIntegrationProtocols,
     vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, search
   ]);
@@ -531,7 +534,7 @@ export default function Dashboard() {
     selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
     selectedAppHostingTiers, selectedAppHostingComputeTypes,
-    selectedIntegrationServices, selectedIntegrationTiers, selectedIntegrationSizes, selectedIntegrationProtocols,
+    selectedIntegrationServices, selectedIntegrationTiers, selectedIntegrationSizes, selectedIntegrationProtocols, selectedIntegrationPricingModels,
   ]);
 
   // Queries
@@ -795,6 +798,7 @@ export default function Dashboard() {
           selectedAppHostingComputeTypes={selectedAppHostingComputeTypes}
           selectedServerlessServiceTypes={selectedServerlessServiceTypes}
           selectedIntegrationServices={selectedIntegrationServices}
+          selectedIntegrationPricingModels={selectedIntegrationPricingModels}
           selectedIntegrationTiers={selectedIntegrationTiers}
           selectedIntegrationSizes={selectedIntegrationSizes}
           selectedIntegrationProtocols={selectedIntegrationProtocols}
@@ -860,6 +864,7 @@ export default function Dashboard() {
           onAppHostingComputeTypeToggle={(c) => toggleFilter(selectedAppHostingComputeTypes, setSelectedAppHostingComputeTypes, c)}
           onServerlessServiceTypeToggle={(s) => toggleFilter(selectedServerlessServiceTypes, setSelectedServerlessServiceTypes, s)}
           onIntegrationServiceToggle={(s) => toggleFilter(selectedIntegrationServices, setSelectedIntegrationServices, s)}
+          onIntegrationPricingModelToggle={(s) => toggleFilter(selectedIntegrationPricingModels, setSelectedIntegrationPricingModels, s)}
           onIntegrationTierToggle={(t) => toggleFilter(selectedIntegrationTiers, setSelectedIntegrationTiers, t)}
           onIntegrationSizeToggle={(s) => toggleFilter(selectedIntegrationSizes, setSelectedIntegrationSizes, s)}
           onIntegrationProtocolToggle={(p) => toggleFilter(selectedIntegrationProtocols, setSelectedIntegrationProtocols, p)}
@@ -911,6 +916,7 @@ export default function Dashboard() {
           onSetAppHostingComputeTypes={setSelectedAppHostingComputeTypes}
           onSetServerlessServiceTypes={setSelectedServerlessServiceTypes}
           onSetIntegrationServices={setSelectedIntegrationServices}
+          onSetIntegrationPricingModels={setSelectedIntegrationPricingModels}
           onSetIntegrationTiers={setSelectedIntegrationTiers}
           onSetIntegrationSizes={setSelectedIntegrationSizes}
           onSetIntegrationProtocols={setSelectedIntegrationProtocols}

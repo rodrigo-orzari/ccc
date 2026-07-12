@@ -146,7 +146,7 @@ export function buildPricingFilters(query: any) {
       appHostingTiers, appHostingComputeTypes,
       serverlessServiceTypes,
       integrationServices, integrationTiers,
-      integrationSizes, integrationProtocols,
+      integrationSizes, integrationProtocols, integrationPricingModels,
     } = query;
 
     const conditions: string[] = [];
@@ -606,6 +606,7 @@ export function buildPricingFilters(query: any) {
     if (resolvedProductType === 'integration') {
       addInFilter(integrationServices, `LOWER(pr.attributes->>'service_type')`);
       addInFilter(integrationTiers, `LOWER(pr.attributes->>'tier')`);
+      addInFilter(integrationPricingModels, `LOWER(pr.attributes->>'pricing_model')`);
 
       if (integrationSizes) {
         const sizeOptions = parseFilterList(integrationSizes as string);
