@@ -585,18 +585,18 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1783795705.231248,
-    "ast_hash": "f0003e2e4664bfd1ba0b96edb1cebb26",
+    "mtime": 1783801348.1300514,
+    "ast_hash": "6ce3488e08f6bd0af2ad5aad4363cbf9",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783795465.8739536,
-    "ast_hash": "f38f5670090c18fb97c0c7cde0824f60",
+    "mtime": 1783801296.3412569,
+    "ast_hash": "3cfebcbdc3d1dfc6783fb43e1a027b1c",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
-    "mtime": 1783795389.9766953,
-    "ast_hash": "47ddf36ee9495615c98e71879b37de7c",
+    "mtime": 1783800755.7245255,
+    "ast_hash": "81ceb6c971c804ff7286ffbe86a3ce9e",
     "semantic_hash": ""
   },
   "src/lib/formatInstanceName.ts": {
