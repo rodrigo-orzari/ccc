@@ -611,7 +611,7 @@ function TableRow({
       </>) : (<>
         {/* vm (default) */}
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>
-        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{record.cpu_vendor || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{cpuVendorLabel(record.cpu_vendor)}</span></td>
         <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
         <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
@@ -793,7 +793,7 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
     ];
     default: return [ // vm
       { label: 'Category', value: record.category || 'General purpose' },
-      { label: 'CPU Vendor', value: dash(record.cpu_vendor) },
+      { label: 'CPU Vendor', value: cpuVendorLabel(record.cpu_vendor) },
       { label: 'Arch', value: arch },
       { label: 'OS', value: dash(record.os) },
       { label: 'GPU', value: record.gpu_count > 0 ? 'GPU' : '—' },

@@ -960,7 +960,6 @@ export default function FilterSidebar({
               title="Languages"
               tooltip="Supported programming languages."
               options={config.SERVERLESS_LANGUAGES}
-              getLabel={() => 'Any'}
               selected={selectedServerlessLanguages}
               onToggle={onServerlessLanguageToggle}
               onSetAll={onSetServerlessLanguages}
@@ -1325,6 +1324,9 @@ export default function FilterSidebar({
                     title={group.label}
                     tooltip={`${group.label} services.`}
                     options={group.services}
+                    // Drop the (IAM)/(KMS) acronym from the button label only —
+                    // the underlying value stays full so table results keep it.
+                    getLabel={(id) => id.replace(/\s*\((IAM|KMS)\)$/, '')}
                     selected={groupSelected}
                     onToggle={onSecurityServiceToggle}
                     onSetAll={handleSetGroup}

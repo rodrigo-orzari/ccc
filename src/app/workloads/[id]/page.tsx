@@ -116,6 +116,50 @@ export default function WorkloadDetails() {
         background: #6b7280;
       }
     }
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1px;
+      background: var(--border, #e5e5e5);
+      border: 1px solid var(--border, #e5e5e5);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      .summary-cards {
+        background: var(--border, #262626);
+        border: 1px solid var(--border, #262626);
+      }
+    }
+    .summary-card {
+      background: var(--surface, #ffffff);
+      padding: 1rem 1.25rem;
+      text-align: left;
+    }
+    @media (prefers-color-scheme: dark) {
+      .summary-card {
+        background: var(--surface, #000000);
+      }
+    }
+    .summary-card-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .summary-card-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text, #171717);
+      line-height: 1;
+    }
+    @media (prefers-color-scheme: dark) {
+      .summary-card-value {
+        color: var(--text, #e5e7eb);
+      }
+    }
   `;
 
   const [priorities, setPriorities] = useState<WorkloadPriorities>(DEFAULT_PRIORITIES);
@@ -328,7 +372,7 @@ export default function WorkloadDetails() {
           </div>
 
           {results && (
-            <div className="flex flex-col sm:flex-row bg-white dark:bg-[#000000] border border-[#e5e5e5] dark:border-[#262626] rounded overflow-hidden divide-y sm:divide-y-0 sm:divide-x divide-[#e5e5e5] dark:divide-[#262626]">
+            <div className="summary-cards">
               {PROVIDER_IDS.map(provider => {
                 const pData = results[provider];
                 if (!pData) return null;
@@ -336,17 +380,15 @@ export default function WorkloadDetails() {
                 const color = providerColor(provider);
 
                 return (
-                  <div key={provider} className="flex-1 p-4 flex flex-col justify-between gap-3 min-w-[100px] bg-white dark:bg-[#000000]">
-                    <div className="flex justify-between items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-widest border" style={{ color: color, borderColor: color + '50', backgroundColor: color + '18' }}>
-                        {providerName(provider)}
-                      </span>
+                  <div key={provider} className="summary-card flex flex-col justify-center min-w-[100px]">
+                    <div className="summary-card-label" style={{ color }}>
+                      {providerName(provider)}
+                    </div>
+                    <div className="summary-card-value">
                       {isUnavailable ? (
-                        <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">N/A</span>
+                        'N/A'
                       ) : (
-                        <span className="text-sm font-bold text-black dark:text-white">
-                          ${(pData.total * multiplier).toLocaleString('en-US', { maximumFractionDigits: 0 })}
-                        </span>
+                        `$${(pData.total * multiplier).toLocaleString('en-US', { maximumFractionDigits: 0 })}`
                       )}
                     </div>
                   </div>
@@ -406,6 +448,9 @@ export default function WorkloadDetails() {
             </h2>
             <p className="text-sm text-[#737373]">
               Prices by provider and services that enable users to run this workload.
+            </p>
+            <p className="text-sm text-[#737373] mt-1.5">
+              Shape the architecture with the four <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Well-Architected</span> controls below — <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Capacity</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Performance</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Reliability</span>, and <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Security</span>. Components and prices recompute as you adjust each priority (e.g. higher Security adds a WAF, KMS, and threat monitoring), and you can switch region or pricing model to compare like-for-like.
             </p>
           </div>
 
@@ -695,7 +740,7 @@ export default function WorkloadDetails() {
                 ))}
               </div>
               <p className="text-[10px] text-[#737373] leading-relaxed">
-                PAYG shows monthly on-demand cost. Yearly are committed-use discounts.
+                PAYG shows monthly on-demand cost.<br />Yearly are committed-use discounts.
               </p>
             </section>
 
@@ -703,23 +748,8 @@ export default function WorkloadDetails() {
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Providers</h3>
-                <div className="flex items-center gap-1">
-                  <button
-                    onClick={() => setSelectedProviders(new Set())}
-                    className="text-[9px] font-bold text-[#2563eb] dark:text-[#818cf8] hover:underline uppercase"
-                  >
-                    CLEAR
-                  </button>
-                  <span className="text-[#a3a3a3] dark:text-[#525252] mx-0.5">-</span>
-                  <button
-                    onClick={() => setSelectedProviders(new Set(PROVIDER_IDS))}
-                    className="text-[9px] font-bold text-[#2563eb] dark:text-[#818cf8] hover:underline uppercase"
-                  >
-                    SELECT ALL
-                  </button>
-                </div>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-3 gap-2">
                 {PROVIDER_IDS.map(providerId => {
                   const provName = providerName(providerId);
                   const isSelected = selectedProviders.has(providerId);
@@ -755,12 +785,12 @@ export default function WorkloadDetails() {
             {/* Region */}
             <section className="space-y-3">
               <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Region</h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 {REGION_OPTIONS.map(opt => (
                   <button
                     key={opt}
                     onClick={() => setRegion(opt)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border whitespace-nowrap ${
                       region === opt
                         ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
                         : 'bg-[#f5f5f5] dark:bg-[#171717] text-[#737373] border-[#e5e5e5] dark:border-[#262626] hover:border-[#a3a3a3] dark:hover:border-[#404040]'

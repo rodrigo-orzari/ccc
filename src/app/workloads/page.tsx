@@ -95,19 +95,25 @@ export default function WorkloadsCatalog() {
         }
         .summary-card {
           background: var(--surface);
-          padding: 1rem 1.25rem;
+          padding: 1rem 0.85rem;
           text-align: center;
         }
         .summary-card-label {
-          font-size: 9px;
+          font-size: 8.5px;
           text-transform: uppercase;
-          letter-spacing: 0.08em;
+          letter-spacing: 0.04em;
           font-weight: 600;
           color: var(--muted);
           margin-bottom: 0.3rem;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          /* Wrap long category names onto multiple lines instead of truncating.
+             min-height reserves ~2 lines so the numbers align across all cards. */
+          white-space: normal;
+          overflow-wrap: anywhere;
+          line-height: 1.25;
+          min-height: 2.1em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .summary-card-value {
           font-size: 1.4rem;
