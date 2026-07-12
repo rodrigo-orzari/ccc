@@ -280,7 +280,7 @@ export default function DatacentersPage() {
       <div className="flex-1 overflow-auto flex flex-col">
 
           {/* Main */}
-          <main className="flex-1 min-w-0 overflow-x-auto p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
+          <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
 
             {/* Header */}
             <div className="mb-6">

@@ -181,10 +181,40 @@ export default function CertificationsPage() {
           {/* Divider */}
           <div className="h-px bg-[var(--border)] mb-8" />
 
-          {/* Filters — datacenter-map-style button rows in a bordered box */}
+          {/* Summary — certifications held per provider (respects active filters),
+              connected-card grid mirroring the provider summary on other pages. */}
           <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Certifications by provider</h2>
+          <div className="mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] block">
+              Tracked certifications by provider
+            </span>
+            <span className="text-[10px] text-[var(--muted)]">
+              {`Counts reflect the ${CERTIFICATIONS.length} standards tracked here — not each provider's full catalog. See the trust centers below for the complete list.`}
+            </span>
+          </div>
+          <div
+            className="grid gap-px rounded-lg overflow-x-auto border border-[var(--border)] bg-[var(--border)] mb-8 scrollbar-thin"
+            style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(90px, 1fr)' }}
+          >
+            {COMPLIANCE_PROVIDERS.map((p) => {
+              const count = visibleCerts.filter((c) => PROVIDERS_FOR_CERT[c.id].has(p.id)).length;
+              return (
+                <div key={p.id} className="px-2.5 py-2.5 bg-[var(--surface)]">
+                  <div className="text-[9px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
+                    {p.name}
+                  </div>
+                  <div className="text-xl font-black leading-none text-[var(--text)] tabular-nums">{count}</div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-[var(--border)] mb-8" />
+
+          {/* Filters — datacenter-map-style button rows in a bordered box */}
           <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers, region, or certification categories. Double-click to isolate one.</p>
-          
+
           <div className="border border-[var(--border)] rounded bg-[var(--surface)] mb-8">
             <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-[var(--border)]">
               {/* Provider */}
@@ -262,36 +292,6 @@ export default function CertificationsPage() {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Divider */}
-          <div className="h-px bg-[var(--border)] mb-8" />
-
-          {/* Summary — certifications held per provider (respects active filters),
-              connected-card grid mirroring the provider summary on other pages. */}
-          <div className="mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] block">
-              Tracked certifications by provider
-            </span>
-            <span className="text-[10px] text-[var(--muted)]">
-              {`Counts reflect the ${CERTIFICATIONS.length} standards tracked here — not each provider's full catalog. See the trust centers below for the complete list.`}
-            </span>
-          </div>
-          <div
-            className="grid gap-px rounded-lg overflow-x-auto border border-[var(--border)] bg-[var(--border)] mb-6 scrollbar-thin"
-            style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(90px, 1fr)' }}
-          >
-            {COMPLIANCE_PROVIDERS.map((p) => {
-              const count = visibleCerts.filter((c) => PROVIDERS_FOR_CERT[c.id].has(p.id)).length;
-              return (
-                <div key={p.id} className="px-2.5 py-2.5 bg-[var(--surface)]">
-                  <div className="text-[9px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
-                    {p.name}
-                  </div>
-                  <div className="text-xl font-black leading-none text-[var(--text)] tabular-nums">{count}</div>
-                </div>
-              );
-            })}
           </div>
 
           {/* Divider */}

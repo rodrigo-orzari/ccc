@@ -421,7 +421,7 @@ export default function StatusPage() {
                     </div>
                     <div className="summary-card">
                       <div className="summary-card-label">Last Ingested</div>
-                      <div className="summary-card-value" style={{ fontSize: '1.1rem' }}>
+                      <div className="summary-card-value">
                         {status.last_ingested
                           ? new Date(status.last_ingested).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
                           : '—'}
@@ -500,11 +500,11 @@ export default function StatusPage() {
                     containers: '📦',
                     networking: '🌐',
                     data_warehouse: '📊',
-                    ai: '🤖',
+                    ai: '🧠',
                     storage: '💾',
                     'app-hosting': '🚀',
                     integration: '🔗',
-                    security: '🔒',
+                    security: '🛡️',
                   };
                   return PIPELINE_EMOJI[category] ?? '📁';
                 };
