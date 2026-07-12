@@ -385,8 +385,8 @@
     "semantic_hash": ""
   },
   "src/components/FilterSidebar.tsx": {
-    "mtime": 1783637321.3065324,
-    "ast_hash": "9517436d2573478897fd92eec5881ad1",
+    "mtime": 1783828286.9697864,
+    "ast_hash": "2dd9628b47b39cd749295e0a875cb59e",
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
-    "mtime": 1783800266.8036494,
-    "ast_hash": "4e7d356f578400a725d8b0f60af2da5c",
+    "mtime": 1783828213.9306982,
+    "ast_hash": "2b2f8ad1c225f798175360cdec1fa945",
     "semantic_hash": ""
   },
   "src/components/ProductTypeSelector.tsx": {
@@ -475,8 +475,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1783753469.3724766,
-    "ast_hash": "3ecf96be6989d43111bf15b6fdd7241a",
+    "mtime": 1783829039.2076056,
+    "ast_hash": "331d812931d5e5896c78c010d7a7ff63",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -585,13 +585,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1783801348.1300514,
-    "ast_hash": "6ce3488e08f6bd0af2ad5aad4363cbf9",
+    "mtime": 1783828554.319624,
+    "ast_hash": "ef0de4ab308ec090089c8fdc006b00e2",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783801296.3412569,
-    "ast_hash": "3cfebcbdc3d1dfc6783fb43e1a027b1c",
+    "mtime": 1783828397.8294733,
+    "ast_hash": "9e71aac5909c81cd0c978ea130fa2895",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
@@ -605,8 +605,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1783753789.1813903,
-    "ast_hash": "dfd5a886c0238dbc89ddcb81a8b4a24e",
+    "mtime": 1783829184.3132381,
+    "ast_hash": "c75a0bb9ec53d12986137a64cfd78e7f",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -745,8 +745,8 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783753415.8411067,
-    "ast_hash": "c2f4b648fbdbe0e5c796b8572f61f53a",
+    "mtime": 1783829114.417781,
+    "ast_hash": "10b10a51ced864de9c652d2d755c2309",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {

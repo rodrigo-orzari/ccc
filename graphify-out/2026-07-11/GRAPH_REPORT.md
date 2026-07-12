@@ -1,22 +1,23 @@
 # Graph Report - _ccc  (2026-07-11)
 
 ## Corpus Check
-- 153 files · ~183,931 words
+- 153 files · ~184,063 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 913 nodes · 1495 edges · 61 communities (44 shown, 17 thin omitted)
+- 913 nodes · 1497 edges · 62 communities (45 shown, 17 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `c0ae54a4`
+- Built from commit: `62d57374`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Serverless Provider Configs|Serverless Provider Configs]]
 - [[_COMMUNITY_Container Provider Configs|Container Provider Configs]]
+- [[_COMMUNITY_Community 2|Community 2]]
 - [[_COMMUNITY_Community 4|Community 4]]
 - [[_COMMUNITY_Community 6|Community 6]]
 - [[_COMMUNITY_Community 7|Community 7]]
@@ -83,19 +84,19 @@
 ## Surprising Connections (you probably didn't know these)
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
+- `FilterSidebarProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/FilterSidebar.tsx → src/types/index.ts
+- `PricingTableProps` --references--> `ProductType`  [EXTRACTED]
+  src/components/PricingTable.tsx → src/types/index.ts
 - `aiTokensQty()` --calls--> `capacityScale()`  [EXTRACTED]
   src/config/workloads.ts → src/config/workload_priorities.ts
 - `egressGb()` --calls--> `capacityScale()`  [EXTRACTED]
   src/config/workloads.ts → src/config/workload_priorities.ts
-- `Dashboard()` --calls--> `useDynamicFilters()`  [EXTRACTED]
-  src/app/page.tsx → src/hooks/useDynamicFilters.ts
-- `PricingTableProps` --references--> `ProductType`  [EXTRACTED]
-  src/components/PricingTable.tsx → src/types/index.ts
 
 ## Import Cycles
 - 3-file cycle: `src/services/gcp_compute_rates.ts -> src/services/serverless_adapters_live.ts -> src/services/pricing_pipeline.ts -> src/services/gcp_compute_rates.ts`
 
-## Communities (61 total, 17 thin omitted)
+## Communities (62 total, 17 thin omitted)
 
 ### Community 0 - "Serverless Provider Configs"
 Cohesion: 0.05
@@ -104,6 +105,10 @@ Nodes (38): dependencies, @aws-sdk/client-pricing, axios, dotenv, @google/genai,
 ### Community 1 - "Container Provider Configs"
 Cohesion: 0.15
 Nodes (12): Adding a New Cloud Provider, API Routes, Architecture, Compare Cloud Costs (CCC) — Claude Context, Conventions, Database Schema, Documentation Map, Key Files — Start Here (+4 more)
+
+### Community 2 - "Community 2"
+Cohesion: 0.36
+Nodes (6): AWSRDSAdapter, AzureDBAdapter, buildAzureDbFilter(), deriveAzureDbMemoryGb(), deriveRedisMemoryGb(), deriveTier()
 
 ### Community 6 - "Community 6"
 Cohesion: 0.06
@@ -118,8 +123,8 @@ Cohesion: 0.06
 Nodes (43): FilterSidebarProps, PRODUCT_TYPES, ProductTypeSelectorProps, capacityNodes(), capacityScale(), capacitySize(), computeReqs(), dbReqs() (+35 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.09
-Nodes (21): VECTOR_DATABASES, ALIBABA_REDIS_INSTANCES, AWS_DOCUMENTDB_INSTANCES, AWS_DYNAMODB_INSTANCES, AWS_ELASTICACHE_INSTANCES, AWSRDSAdapter, AZURE_DB_SERVICES, AZURE_REDIS_CACHE_GB (+13 more)
+Cohesion: 0.07
+Nodes (20): VECTOR_DATABASES, ALIBABA_REDIS_INSTANCES, AlibabaDBAdapter, AWS_DOCUMENTDB_INSTANCES, AWS_DYNAMODB_INSTANCES, AWS_ELASTICACHE_INSTANCES, AWSDynamoDBAdapter, AZURE_DB_SERVICES (+12 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.06
@@ -143,7 +148,7 @@ Nodes (12): CATEGORY_COLOR, CATEGORY_ORDER, PROVIDERS_FOR_CERT, CERT_BY_ID, Cert
 
 ### Community 15 - "Community 15"
 Cohesion: 0.05
-Nodes (40): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+32 more)
+Nodes (41): ALL_DEFS, COL_ARCH, COL_EXEC, COL_GEO, COL_GPU, COL_GRAN, COL_INV, COL_LANG (+33 more)
 
 ### Community 18 - "Community 18"
 Cohesion: 0.24
@@ -154,8 +159,8 @@ Cohesion: 0.50
 Nodes (4): config, getRateLimitStatus(), middleware(), rateLimitStore
 
 ### Community 28 - "Community 28"
-Cohesion: 0.08
-Nodes (12): AWSDynamoDBAdapter, AWSElastiCacheAdapter, OracleMySQLHeatWaveAdapter, OracleRedisAdapter, VectorDatabasesAdapter, AWSAdapter, BaseAdapter, AlibabaServerlessAdapter (+4 more)
+Cohesion: 0.11
+Nodes (10): AWSElastiCacheAdapter, OracleRedisAdapter, AWSAdapter, BaseAdapter, AlibabaServerlessAdapter, AWSServerlessAdapter, AWSServerlessLiveAdapter, AzureServerlessAdapter (+2 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.25
@@ -174,12 +179,12 @@ Cohesion: 0.07
 Nodes (14): AWS_CONTAINERS, baseAwsContainerEntries, AZURE_CONTAINERS, baseAzureContainerEntries, baseGcpContainerEntries, GCP_CONTAINERS, AWSContainersLiveAdapter, AzureContainersLiveAdapter (+6 more)
 
 ### Community 36 - "Community 36"
-Cohesion: 0.20
-Nodes (6): AlibabaDBAdapter, GCPCloudSQLAdapter, PricingRecord, GCPServerlessAdapter, OracleServerlessAdapter, ServerlessPricingPipeline
+Cohesion: 0.35
+Nodes (3): PricingRecord, GCPServerlessAdapter, ServerlessPricingPipeline
 
 ### Community 37 - "Community 37"
-Cohesion: 0.27
-Nodes (3): AppHostingPricingPipeline, DatabasePricingPipeline, PricingPipeline
+Cohesion: 0.23
+Nodes (4): AppHostingPricingPipeline, DataAnalyticsPricingPipeline, DatabasePricingPipeline, PricingPipeline
 
 ### Community 38 - "Community 38"
 Cohesion: 0.09
@@ -231,27 +236,27 @@ Nodes (15): DatacenterRegion, GEOGRAPHIES, Geography, PROVIDER_INFRA, ProviderIn
 
 ### Community 69 - "Community 69"
 Cohesion: 0.07
-Nodes (19): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+11 more)
+Nodes (18): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+10 more)
 
 ### Community 93 - "Community 93"
 Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **304 isolated node(s):** `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `PRODUCT_TYPE_EMOJIS`, `PROVIDERS`, `ColDef` (+299 more)
+- **304 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `PRODUCT_TYPE_EMOJIS` (+299 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **17 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PricingRecord` connect `Community 36` to `Community 33`, `Community 35`, `Community 69`, `Community 38`, `Community 6`, `Community 9`, `Community 44`, `Community 47`, `Community 18`, `Community 56`, `Community 28`?**
+- **Why does `PricingRecord` connect `Community 36` to `Community 33`, `Community 2`, `Community 35`, `Community 69`, `Community 38`, `Community 6`, `Community 9`, `Community 44`, `Community 47`, `Community 18`, `Community 56`, `Community 28`?**
   _High betweenness centrality (0.079) - this node is a cross-community bridge._
-- **Why does `BaseAdapter` connect `Community 28` to `Community 33`, `Community 35`, `Community 36`, `Community 69`, `Community 6`, `Community 9`, `Community 43`, `Community 44`, `Community 47`, `Community 18`, `Community 56`?**
+- **Why does `BaseAdapter` connect `Community 28` to `Community 33`, `Community 2`, `Community 35`, `Community 36`, `Community 69`, `Community 6`, `Community 9`, `Community 43`, `Community 44`, `Community 47`, `Community 18`, `Community 56`?**
   _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 7` to `Community 8`, `Community 6`?**
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **What connects `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `PRODUCT_TYPE_EMOJIS` to the rest of the system?**
+- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `PRODUCT_TYPE_LABELS` to the rest of the system?**
   _304 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
