@@ -258,11 +258,13 @@ export default function WorkloadsCatalog() {
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-              {filteredWorkloads.map((workload) => (
+              {filteredWorkloads.map((workload, index) => (
                 <Link
                   key={workload.id}
                   href={`/workloads/${workload.id}`}
-                  className="bg-[var(--row-hover)] border border-[var(--border)] rounded p-3 hover:border-[var(--text)] transition-colors flex flex-col group cursor-pointer"
+                  className={`border border-[var(--border)] rounded p-3 hover:border-[var(--text)] transition-colors flex flex-col group cursor-pointer ${
+                    index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'
+                  }`}
                   style={{ textDecoration: 'none' }}
                 >
                   <div className="flex items-center gap-2 mb-1.5">
