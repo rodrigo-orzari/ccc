@@ -1,16 +1,34 @@
-import { PricingPipeline } from './src/services/pricing_pipeline';
+import { OracleAdapter, DigitalOceanAdapter } from './src/services/pricing_pipeline';
 import { IntegrationPricingPipeline } from './src/services/integration_pipeline';
-
-// Mock saveRecords to prevent DB connection errors
-PricingPipeline.prototype.saveRecords = async function(records) {
-  return records;
-};
 
 async function run() {
   console.log("=== Validating Compute Pipeline ===");
-  const computePipeline = new PricingPipeline();
-  // We can't just get records from run() because run() might return nothing or undefined if saveRecords returns void.
-  // Wait, let's see what PricingPipeline.run() returns. If it returns void, we can extract from saveRecords.
+  const oracleAdapter = new OracleAdapter();
+  const oracleRecords = await oracleAdapter.fetchPricing();
+  
+  const oracleGPUs = oracleRecords.filter(r => r.category === 'GPU instance');
+  console.log(`Found ${oracleGPUs.length} Oracle GPU instances`);
+  if (oracleGPUs.length > 0) {
+    console.log(oracleGPUs.slice(0, 3));
+  }
+
+  const doAdapter = new DigitalOceanAdapter();
+  const doRecords = await doAdapter.fetchPricing();
+  const doGPUs = doRecords.filter(r => r.category === 'GPU instance');
+  console.log(`Found ${doGPUs.length} DigitalOcean GPU instances`);
+  if (doGPUs.length > 0) {
+    console.log(doGPUs);
+  }
+
+  console.log("\n=== Validating Integration Pipeline ===");
+  // We can just import ALIBABA_INTEGRATION since integration_pipeline just reads static config
+  const { ALIBABA_INTEGRATION } = require('./src/config/integration');
+
+  const alibabaWorkflow = ALIBABA_INTEGRATION.filter((r: any) => r.attributes?.service_type === 'Workflow');
+  console.log(`Found ${alibabaWorkflow.length} Alibaba Workflow components`);
+  if (alibabaWorkflow.length > 0) {
+    console.log(alibabaWorkflow);
+  }
 }
 
 run().catch(console.error);
