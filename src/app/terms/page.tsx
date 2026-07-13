@@ -224,7 +224,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             margin-left: 280px;
             flex: 1;
             padding: 3rem 4rem 5rem;
-            max-width: 850px;
+            max-width: 1200px;
           }
 
           .prose h2, .prose h3 {

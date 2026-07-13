@@ -76,7 +76,7 @@ const PrivacyPolicyPage: React.FC = () => {
           margin-left: 280px;
           flex: 1;
           padding: 3rem 4rem 5rem;
-          max-width: 820px;
+          max-width: 1200px;
           line-height: 1.7;
           font-size: 0.9375rem;
         }
