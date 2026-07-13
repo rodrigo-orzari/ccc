@@ -1,16 +1,16 @@
 # Graph Report - _ccc  (2026-07-12)
 
 ## Corpus Check
-- 159 files · ~186,010 words
+- 159 files · ~186,100 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 942 nodes · 1538 edges · 73 communities (48 shown, 25 thin omitted)
+- 942 nodes · 1540 edges · 73 communities (48 shown, 25 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `decb061c`
+- Built from commit: `621a7b04`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -97,14 +97,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `runDataQualityChecks()` --calls--> `sql`  [INFERRED]
   src/services/data_quality.ts → src/workers/scheduler.ts
-- `GCPCloudSQLAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
-- `OracleAutonomousAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
-- `AWSRDSAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
-- `AzureDBAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
+- `AWSContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `AzureContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `DigitalOceanContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
+- `GCPContainersLiveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/containers_adapters_live.ts → src/services/pricing_pipeline.ts
 
 ## Import Cycles
 - 3-file cycle: `src/services/gcp_compute_rates.ts -> src/services/serverless_adapters_live.ts -> src/services/pricing_pipeline.ts -> src/services/gcp_compute_rates.ts`
@@ -276,7 +276,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **311 isolated node(s):** `🎯 What It Does`, `📦 Workload Templates`, `📊 Regional Pricing for Data & Analytics`, `🎛️ Filter Architecture`, `🧱 Stack` (+306 more)
+- **311 isolated node(s):** `ORACLE_FLEX_FAMILIES`, `ORACLE_GPU_MODELS`, `🎯 What It Does`, `📦 Workload Templates`, `📊 Regional Pricing for Data & Analytics` (+306 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **25 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -286,10 +286,10 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `PricingRecord` connect `Community 36` to `Community 33`, `Community 35`, `Community 69`, `Community 38`, `Community 6`, `Community 9`, `Community 44`, `Community 47`, `Community 18`, `Community 19`, `Community 24`, `Community 56`, `Community 59`, `Community 28`, `Community 63`?**
   _High betweenness centrality (0.080) - this node is a cross-community bridge._
 - **Why does `BaseAdapter` connect `Community 28` to `Community 33`, `Community 35`, `Community 36`, `Community 69`, `Community 6`, `Community 39`, `Community 9`, `Community 43`, `Community 44`, `Community 18`, `Community 19`, `Community 24`, `Community 56`, `Community 59`, `Community 62`, `Community 63`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+  _High betweenness centrality (0.056) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 45` to `Community 8`, `Community 33`, `Community 2`, `Community 7`?**
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **What connects `🎯 What It Does`, `📦 Workload Templates`, `📊 Regional Pricing for Data & Analytics` to the rest of the system?**
+- **What connects `ORACLE_FLEX_FAMILIES`, `ORACLE_GPU_MODELS`, `🎯 What It Does` to the rest of the system?**
   _311 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
