@@ -118,46 +118,62 @@ export default function WorkloadDetails() {
     }
     .summary-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1px;
-      background: var(--border, #e5e5e5);
-      border: 1px solid var(--border, #e5e5e5);
+      background: #dde0f0;
+      border: 1px solid #dde0f0;
       border-radius: 8px;
       overflow: hidden;
       margin-bottom: 2rem;
     }
     @media (prefers-color-scheme: dark) {
       .summary-cards {
-        background: var(--border, #262626);
-        border: 1px solid var(--border, #262626);
+        background: #1e1e38;
+        border-color: #1e1e38;
       }
     }
     .summary-card {
-      background: var(--surface, #ffffff);
-      padding: 1rem 1.25rem;
+      background: #ffffff;
+      padding: 0.75rem 1rem;
       text-align: left;
     }
     @media (prefers-color-scheme: dark) {
       .summary-card {
-        background: var(--surface, #000000);
+        background: #0a0a18;
       }
     }
     .summary-card-label {
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+      font-size: 11px;
       font-weight: 700;
-      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .summary-card-value {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text, #171717);
+      font-size: 1.5rem; /* ~24px for text-2xl */
+      font-weight: 900; /* font-black */
+      color: #1a1a2e;
       line-height: 1;
+      font-variant-numeric: tabular-nums;
     }
     @media (prefers-color-scheme: dark) {
       .summary-card-value {
-        color: var(--text, #e5e7eb);
+        color: #f7f8ff;
+      }
+    }
+    .summary-card-sub {
+      font-size: 9px;
+      color: #737373;
+      margin-top: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    @media (prefers-color-scheme: dark) {
+      .summary-card-sub {
+        color: #a3a3a3;
       }
     }
   `;
@@ -306,7 +322,7 @@ export default function WorkloadDetails() {
     PROVIDER_IDS.forEach(provider => {
       const pData = results[provider];
       if (!pData) { totalRow.push(''); return; }
-      const isUnavailable = pData.components.some((c: any) => c.instanceType === 'N/A');
+      const isUnavailable = pData.components.filter((c: any) => c.instanceType !== 'N/A').length === 0;
       totalRow.push(isUnavailable ? 'N/A' : (pData.total * mult).toFixed(2));
     });
     rows.push(totalRow);
@@ -376,7 +392,10 @@ export default function WorkloadDetails() {
               {PROVIDER_IDS.map(provider => {
                 const pData = results[provider];
                 if (!pData) return null;
-                const isUnavailable = pData.components.some((c: any) => c.instanceType === 'N/A');
+                const totalElements = workload.components.filter(c => c.getRequirements(priorities)).length;
+                const trackedElements = pData.components.filter((c: any) => c.instanceType !== 'N/A').length;
+                const isUnavailable = trackedElements === 0;
+                const isPartial = trackedElements > 0 && trackedElements < totalElements;
                 const color = providerColor(provider);
 
                 return (
@@ -388,7 +407,14 @@ export default function WorkloadDetails() {
                       {isUnavailable ? (
                         'N/A'
                       ) : (
-                        `$${(pData.total * multiplier).toLocaleString('en-US', { maximumFractionDigits: 0 })}`
+                        <div className="flex flex-col">
+                          <span>${(pData.total * multiplier).toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+                          {isPartial && (
+                            <span className="summary-card-sub">
+                              {trackedElements} of {totalElements} tracked
+                            </span>
+                          )}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -488,7 +514,7 @@ export default function WorkloadDetails() {
                   <BarChart 
                     data={PROVIDER_IDS.map(p => {
                       const pData = results && results[p];
-                      if (!pData || pData.total === 0 || pData.components.some((c: any) => c.instanceType === 'N/A')) return null;
+                      if (!pData || pData.total === 0 || pData.components.filter((c: any) => c.instanceType !== 'N/A').length === 0) return null;
                       return {
                         provider: providerName(p),
                         total: pData.total * multiplier,
@@ -519,7 +545,10 @@ export default function WorkloadDetails() {
                   {PROVIDER_IDS.filter(p => selectedProviders.has(p)).map(provider => {
                     const pData = results?.[provider];
                     const color = providerColor(provider);
-                    const unavailable = !pData || pData.components.some((x: any) => x.instanceType === 'N/A');
+                    const totalElements = workload.components.filter(c => c.getRequirements(priorities)).length;
+                    const trackedElements = pData ? pData.components.filter((x: any) => x.instanceType !== 'N/A').length : 0;
+                    const unavailable = !pData || trackedElements === 0;
+                    const isPartial = trackedElements > 0 && trackedElements < totalElements;
                     return (
                       <div key={provider} className="border border-[#e5e5e5] dark:border-[#262626] rounded-lg bg-white dark:bg-[#000000] overflow-hidden">
                         <div className="flex items-center justify-between px-4 py-3 bg-[#f5f5f5] dark:bg-[#171717] border-b border-[#e5e5e5] dark:border-[#262626]">
@@ -529,13 +558,20 @@ export default function WorkloadDetails() {
                           >
                             {providerName(provider)}
                           </span>
-                          <span className="text-[13px] font-bold text-black dark:text-white">
+                          <span className="flex flex-col items-end text-[13px] font-bold text-black dark:text-white">
                             {unavailable ? (
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">N/A</span>
                             ) : (
                               <>
-                                ${(pData!.total * multiplier).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                                <span className="text-[9px] font-bold uppercase tracking-widest text-[#737373] ml-1">/ {pricingModel === 'Yearly' ? 'yr' : 'mo'}</span>
+                                <div>
+                                  ${(pData!.total * multiplier).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#737373] ml-1">/ {pricingModel === 'Yearly' ? 'yr' : 'mo'}</span>
+                                </div>
+                                {isPartial && (
+                                  <span className="text-[9px] font-normal uppercase tracking-widest text-[#737373] mt-0.5">
+                                    {trackedElements} of {totalElements} tracked
+                                  </span>
+                                )}
                               </>
                             )}
                           </span>
@@ -603,7 +639,7 @@ export default function WorkloadDetails() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#f5f5f5] dark:divide-[#181818]">
-                    {workload.components.filter(c => c.getRequirements(priorities)).map(c => {
+                    {workload.components.filter(c => c.getRequirements(priorities)).map((c, index) => {
                       const compPrices = PROVIDER_IDS.map(provider => {
                         if (!results || !results[provider]) return 0;
                         const comp = results[provider].components.find((x: any) => x.componentId === c.id);
@@ -612,7 +648,7 @@ export default function WorkloadDetails() {
                       const maxCompPrice = compPrices.length > 0 ? Math.max(...compPrices) : 0;
                       
                       return (
-                      <tr key={c.id} className="hover:bg-[#fafafa] dark:hover:bg-[#0a0a0a] transition-colors">
+                      <tr key={c.id} className={`transition-colors group ${index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
                         <td className="py-3 px-4 align-middle whitespace-nowrap text-center">
                           <div className="flex items-center gap-2 justify-center">
                             <span>{c.icon}</span>
@@ -678,16 +714,24 @@ export default function WorkloadDetails() {
                           return <td key={provider} className="py-3 px-4 text-center"><span className="text-[10px] text-[#a3a3a3]">—</span></td>;
                         }
                         const pData = results[provider];
-                        const isUnavailable = pData.components.some((c: any) => c.instanceType === 'N/A');
+                        const totalElements = workload.components.filter(c => c.getRequirements(priorities)).length;
+                        const trackedElements = pData ? pData.components.filter((x: any) => x.instanceType !== 'N/A').length : 0;
+                        const isUnavailable = !pData || trackedElements === 0;
+                        const isPartial = trackedElements > 0 && trackedElements < totalElements;
                         return (
                           <td key={provider} className="py-3 px-4 text-center">
                             {isUnavailable ? (
                               <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">N/A</span>
                             ) : (
-                              <div className="flex flex-col items-center gap-1.5 w-full">
+                              <div className="flex flex-col items-center gap-1 w-full">
                                 <span className="text-[13px] font-bold text-black dark:text-white">
                                   ${(pData.total * multiplier).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                 </span>
+                                {isPartial && (
+                                  <span className="text-[9px] font-normal uppercase tracking-widest text-[#737373]">
+                                    {trackedElements} of {totalElements} tracked
+                                  </span>
+                                )}
                               </div>
                             )}
                           </td>
@@ -747,12 +791,15 @@ export default function WorkloadDetails() {
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Providers</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {PROVIDER_IDS.map(providerId => {
+                {/* Button order (not the table's): Oracle before DigitalOcean, plus a
+                    forced line break so DigitalOcean + Alibaba sit on the second row. */}
+                {(['aws', 'azure', 'gcp', 'oracle', 'digitalocean', 'alibaba'] as const).map(providerId => {
                   const provName = providerName(providerId);
                   const isSelected = selectedProviders.has(providerId);
                   return (
+                    <React.Fragment key={providerId}>
+                      {providerId === 'digitalocean' && <div className="basis-full h-0" aria-hidden="true" />}
                     <button
-                      key={providerId}
                       onClick={() => {
                         const newProviders = new Set(selectedProviders);
                         if (isSelected) {
@@ -774,6 +821,7 @@ export default function WorkloadDetails() {
                     >
                       {provName}
                     </button>
+                    </React.Fragment>
                   );
                 })}
               </div>
