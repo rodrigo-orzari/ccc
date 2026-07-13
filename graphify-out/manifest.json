@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1783917219.540128,
-    "ast_hash": "d067f81758b8449cf61cd1116eb4661a",
+    "mtime": 1783917225.7551112,
+    "ast_hash": "611fcbcf67babf2217db9708c8d74716",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
