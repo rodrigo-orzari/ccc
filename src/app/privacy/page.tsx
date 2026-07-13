@@ -219,6 +219,12 @@ const PrivacyPolicyPage: React.FC = () => {
             <p>
               We partner with Microsoft Clarity and Microsoft Advertising to capture how you use and interact with our website through behavioral metrics, heatmaps, and session replay to improve and market our products/services. Website usage data is captured using first and third-party cookies and other tracking technologies to determine the popularity of products/services and online activity. Additionally, we use this information for site optimization, fraud/security purposes, and advertising. For more information about how Microsoft collects and uses your data, visit the <a href="https://www.microsoft.com/privacy/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft Privacy Statement</a>.
             </p>
+            <p>
+              We also encourage and allow companies to sponsor our website to help maintain and pay for our infrastructure costs.
+              Please be aware that these sponsors may provide their own links which contain tracking capabilities (such as Bitly or custom UTM parameters)
+              to measure their click-through rates. We do not track these metrics on their behalf, and we have no relation to or responsibility for
+              the tracking mechanisms used by third-party sponsors when you click on their advertisements.
+            </p>
 
             <h2 id="changes">Changes to This Policy</h2>
             <p>

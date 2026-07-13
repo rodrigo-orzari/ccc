@@ -827,7 +827,13 @@ const DocsPage: React.FC = () => {
               also swap your banner for a new one at least once a month; just send us the replacement
               asset and we'll have it live within 3 business days.
             </blockquote>
+            <h3 id="advertising-tracking">Link Tracking</h3>
             <p>
+              Please note that we do not offer native click-through rate (CTR) tracking or analytics on our end.
+              Sponsors are responsible for providing their own trackable destination links (e.g., using UTM parameters,
+              Bitly, or other custom redirect services) to measure the performance of their campaigns.
+            </p>
+            <p style={{ marginTop: '1.5rem' }}>
               Interested in sponsoring? Reach out at{' '}
               <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.
             </p>
