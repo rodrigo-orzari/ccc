@@ -1148,11 +1148,6 @@ const DocsPage: React.FC = () => {
             </table>
 
             <BackToTop />
-          </div> queue allocations, API gateway requests, and protocol support.</td>
-                </tr>
-              </tbody>
-            </table>
-            <BackToTop />
           </div>
 
           {/* Glossary */}

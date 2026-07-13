@@ -4,409 +4,490 @@
   "graph": {},
   "nodes": [
     {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L1",
+      "id": "about_page",
+      "community": 23,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L7",
+      "id": "about_page_linkedinicon",
+      "community": 23,
+      "norm_label": "linkedinicon()"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L15",
+      "id": "about_page_backtotop",
+      "community": 23,
+      "norm_label": "backtotop()"
+    },
+    {
+      "label": "CopyHeading()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L29",
+      "id": "about_page_copyheading",
+      "community": 23,
+      "norm_label": "copyheading()"
+    },
+    {
+      "label": "AboutPage()",
+      "file_type": "code",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L60",
+      "id": "about_page_aboutpage",
+      "community": 23,
+      "norm_label": "aboutpage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L1",
+      "id": "docs_page",
+      "community": 32,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "id": "docs_page_backtotop",
+      "community": 32,
+      "norm_label": "backtotop()"
+    },
+    {
+      "label": "CopyHeading()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L20",
+      "id": "docs_page_copyheading",
+      "community": 32,
+      "norm_label": "copyheading()"
+    },
+    {
+      "label": "DocsPage()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L51",
+      "id": "docs_page_docspage",
+      "community": 32,
+      "norm_label": "docspage()"
+    },
+    {
       "label": "pricing_pipeline.ts",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L1",
-      "id": "services_pricing_pipeline",
       "community": 33,
-      "norm_label": "pricing_pipeline.ts"
+      "norm_label": "pricing_pipeline.ts",
+      "id": "services_pricing_pipeline"
     },
     {
       "label": "PricingRecord",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L13",
-      "id": "services_pricing_pipeline_pricingrecord",
       "community": 36,
-      "norm_label": "pricingrecord"
+      "norm_label": "pricingrecord",
+      "id": "services_pricing_pipeline_pricingrecord"
     },
     {
       "label": "ensureProviderId()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L37",
-      "id": "services_pricing_pipeline_ensureproviderid",
       "community": 11,
-      "norm_label": "ensureproviderid()"
+      "norm_label": "ensureproviderid()",
+      "id": "services_pricing_pipeline_ensureproviderid"
     },
     {
       "label": "sleep()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L50",
-      "id": "services_pricing_pipeline_sleep",
       "community": 44,
-      "norm_label": "sleep()"
+      "norm_label": "sleep()",
+      "id": "services_pricing_pipeline_sleep"
     },
     {
       "label": "fetchWithRetry()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L68",
-      "id": "services_pricing_pipeline_fetchwithretry",
       "community": 44,
-      "norm_label": "fetchwithretry()"
+      "norm_label": "fetchwithretry()",
+      "id": "services_pricing_pipeline_fetchwithretry"
     },
     {
       "label": "PriceDriftResult",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L86",
-      "id": "services_pricing_pipeline_pricedriftresult",
       "community": 11,
-      "norm_label": "pricedriftresult"
+      "norm_label": "pricedriftresult",
+      "id": "services_pricing_pipeline_pricedriftresult"
     },
     {
       "label": "BaseAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L95",
-      "id": "services_pricing_pipeline_baseadapter",
       "community": 28,
-      "norm_label": "baseadapter"
+      "norm_label": "baseadapter",
+      "id": "services_pricing_pipeline_baseadapter"
     },
     {
       "label": ".getGeography()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L99",
-      "id": "services_pricing_pipeline_baseadapter_getgeography",
       "community": 28,
-      "norm_label": ".getgeography()"
+      "norm_label": ".getgeography()",
+      "id": "services_pricing_pipeline_baseadapter_getgeography"
     },
     {
       "label": ".getCpuVendor()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L110",
-      "id": "services_pricing_pipeline_baseadapter_getcpuvendor",
       "community": 44,
-      "norm_label": ".getcpuvendor()"
+      "norm_label": ".getcpuvendor()",
+      "id": "services_pricing_pipeline_baseadapter_getcpuvendor"
     },
     {
       "label": ".getGpuCount()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L124",
-      "id": "services_pricing_pipeline_baseadapter_getgpucount",
       "community": 44,
-      "norm_label": ".getgpucount()"
+      "norm_label": ".getgpucount()",
+      "id": "services_pricing_pipeline_baseadapter_getgpucount"
     },
     {
       "label": ".categoryByRatio()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L130",
-      "id": "services_pricing_pipeline_baseadapter_categorybyratio",
       "community": 28,
-      "norm_label": ".categorybyratio()"
+      "norm_label": ".categorybyratio()",
+      "id": "services_pricing_pipeline_baseadapter_categorybyratio"
     },
     {
       "label": ".classifyAws()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L138",
-      "id": "services_pricing_pipeline_baseadapter_classifyaws",
       "community": 28,
-      "norm_label": ".classifyaws()"
+      "norm_label": ".classifyaws()",
+      "id": "services_pricing_pipeline_baseadapter_classifyaws"
     },
     {
       "label": ".classifyAzure()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L159",
-      "id": "services_pricing_pipeline_baseadapter_classifyazure",
       "community": 28,
-      "norm_label": ".classifyazure()"
+      "norm_label": ".classifyazure()",
+      "id": "services_pricing_pipeline_baseadapter_classifyazure"
     },
     {
       "label": ".classifyGcp()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L173",
-      "id": "services_pricing_pipeline_baseadapter_classifygcp",
       "community": 28,
-      "norm_label": ".classifygcp()"
+      "norm_label": ".classifygcp()",
+      "id": "services_pricing_pipeline_baseadapter_classifygcp"
     },
     {
       "label": ".getCategory()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L182",
-      "id": "services_pricing_pipeline_baseadapter_getcategory",
       "community": 28,
-      "norm_label": ".getcategory()"
+      "norm_label": ".getcategory()",
+      "id": "services_pricing_pipeline_baseadapter_getcategory"
     },
     {
       "label": ".healthCheck()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L186",
-      "id": "services_pricing_pipeline_baseadapter_healthcheck",
       "community": 28,
-      "norm_label": ".healthcheck()"
+      "norm_label": ".healthcheck()",
+      "id": "services_pricing_pipeline_baseadapter_healthcheck"
     },
     {
       "label": "AzureAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L191",
-      "id": "services_pricing_pipeline_azureadapter",
       "community": 44,
-      "norm_label": "azureadapter"
+      "norm_label": "azureadapter",
+      "id": "services_pricing_pipeline_azureadapter"
     },
     {
       "label": ".vcpuFromSku()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L206",
-      "id": "services_pricing_pipeline_azureadapter_vcpufromsku",
       "community": 44,
-      "norm_label": ".vcpufromsku()"
+      "norm_label": ".vcpufromsku()",
+      "id": "services_pricing_pipeline_azureadapter_vcpufromsku"
     },
     {
       "label": ".memoryFromSku()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L215",
-      "id": "services_pricing_pipeline_azureadapter_memoryfromsku",
       "community": 44,
-      "norm_label": ".memoryfromsku()"
+      "norm_label": ".memoryfromsku()",
+      "id": "services_pricing_pipeline_azureadapter_memoryfromsku"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L225",
-      "id": "services_pricing_pipeline_azureadapter_fetchpricing",
       "community": 44,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_azureadapter_fetchpricing"
     },
     {
       "label": ".fetchForRegion()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L245",
-      "id": "services_pricing_pipeline_azureadapter_fetchforregion",
       "community": 44,
-      "norm_label": ".fetchforregion()"
+      "norm_label": ".fetchforregion()",
+      "id": "services_pricing_pipeline_azureadapter_fetchforregion"
     },
     {
       "label": "AWSAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L315",
-      "id": "services_pricing_pipeline_awsadapter",
       "community": 28,
-      "norm_label": "awsadapter"
+      "norm_label": "awsadapter",
+      "id": "services_pricing_pipeline_awsadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L318",
-      "id": "services_pricing_pipeline_awsadapter_fetchpricing",
       "community": 28,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_awsadapter_fetchpricing"
     },
     {
       "label": "GCPAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L380",
-      "id": "services_pricing_pipeline_gcpadapter",
       "community": 62,
-      "norm_label": "gcpadapter"
+      "norm_label": "gcpadapter",
+      "id": "services_pricing_pipeline_gcpadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L388",
-      "id": "services_pricing_pipeline_gcpadapter_fetchpricing",
       "community": 62,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_gcpadapter_fetchpricing"
     },
     {
       "label": ".fetchFromStaticConfig()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L449",
-      "id": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig",
       "community": 62,
-      "norm_label": ".fetchfromstaticconfig()"
+      "norm_label": ".fetchfromstaticconfig()",
+      "id": "services_pricing_pipeline_gcpadapter_fetchfromstaticconfig"
     },
     {
       "label": "ORACLE_FLEX_FAMILIES",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L481",
-      "id": "services_pricing_pipeline_oracle_flex_families",
       "community": 33,
-      "norm_label": "oracle_flex_families"
+      "norm_label": "oracle_flex_families",
+      "id": "services_pricing_pipeline_oracle_flex_families"
     },
     {
       "label": "ORACLE_GPU_MODELS",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L487",
-      "id": "services_pricing_pipeline_oracle_gpu_models",
       "community": 33,
-      "norm_label": "oracle_gpu_models"
+      "norm_label": "oracle_gpu_models",
+      "id": "services_pricing_pipeline_oracle_gpu_models"
     },
     {
       "label": "findOracleFlexRates()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L496",
-      "id": "services_pricing_pipeline_findoracleflexrates",
       "community": 18,
-      "norm_label": "findoracleflexrates()"
+      "norm_label": "findoracleflexrates()",
+      "id": "services_pricing_pipeline_findoracleflexrates"
     },
     {
       "label": "findOracleGpuRate()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L503",
-      "id": "services_pricing_pipeline_findoraclegpurate",
       "community": 18,
-      "norm_label": "findoraclegpurate()"
+      "norm_label": "findoraclegpurate()",
+      "id": "services_pricing_pipeline_findoraclegpurate"
     },
     {
       "label": "OracleAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L519",
-      "id": "services_pricing_pipeline_oracleadapter",
       "community": 18,
-      "norm_label": "oracleadapter"
+      "norm_label": "oracleadapter",
+      "id": "services_pricing_pipeline_oracleadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L522",
-      "id": "services_pricing_pipeline_oracleadapter_fetchpricing",
       "community": 18,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_oracleadapter_fetchpricing"
     },
     {
       "label": "DigitalOceanAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L597",
-      "id": "services_pricing_pipeline_digitaloceanadapter",
       "community": 43,
-      "norm_label": "digitaloceanadapter"
+      "norm_label": "digitaloceanadapter",
+      "id": "services_pricing_pipeline_digitaloceanadapter"
     },
     {
       "label": ".classifyDigitalOcean()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L603",
-      "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean",
       "community": 43,
-      "norm_label": ".classifydigitalocean()"
+      "norm_label": ".classifydigitalocean()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean"
     },
     {
       "label": ".gpuCountFromSlug()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L615",
-      "id": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug",
       "community": 43,
-      "norm_label": ".gpucountfromslug()"
+      "norm_label": ".gpucountfromslug()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L620",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchpricing",
       "community": 43,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchpricing"
     },
     {
       "label": ".fetchFromApi()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L636",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi",
       "community": 43,
-      "norm_label": ".fetchfromapi()"
+      "norm_label": ".fetchfromapi()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
     },
     {
       "label": ".fetchFromScraper()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L683",
-      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper",
       "community": 43,
-      "norm_label": ".fetchfromscraper()"
+      "norm_label": ".fetchfromscraper()",
+      "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
     },
     {
       "label": "fetchAlibabaEcsLiveRecords()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L736",
-      "id": "services_pricing_pipeline_fetchalibabaecsliverecords",
       "community": 39,
-      "norm_label": "fetchalibabaecsliverecords()"
+      "norm_label": "fetchalibabaecsliverecords()",
+      "id": "services_pricing_pipeline_fetchalibabaecsliverecords"
     },
     {
       "label": "AlibabaAdapter",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L840",
-      "id": "services_pricing_pipeline_alibabaadapter",
       "community": 39,
-      "norm_label": "alibabaadapter"
+      "norm_label": "alibabaadapter",
+      "id": "services_pricing_pipeline_alibabaadapter"
     },
     {
       "label": ".fetchPricing()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L843",
-      "id": "services_pricing_pipeline_alibabaadapter_fetchpricing",
       "community": 39,
-      "norm_label": ".fetchpricing()"
+      "norm_label": ".fetchpricing()",
+      "id": "services_pricing_pipeline_alibabaadapter_fetchpricing"
     },
     {
       "label": "PricingPipeline",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L884",
-      "id": "services_pricing_pipeline_pricingpipeline",
       "community": 6,
-      "norm_label": "pricingpipeline"
+      "norm_label": "pricingpipeline",
+      "id": "services_pricing_pipeline_pricingpipeline"
     },
     {
       "label": ".constructor()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L888",
-      "id": "services_pricing_pipeline_pricingpipeline_constructor",
       "community": 6,
-      "norm_label": ".constructor()"
+      "norm_label": ".constructor()",
+      "id": "services_pricing_pipeline_pricingpipeline_constructor"
     },
     {
       "label": ".run()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L906",
-      "id": "services_pricing_pipeline_pricingpipeline_run",
       "community": 6,
-      "norm_label": ".run()"
+      "norm_label": ".run()",
+      "id": "services_pricing_pipeline_pricingpipeline_run"
     },
     {
       "label": ".saveRecords()",
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L922",
-      "id": "services_pricing_pipeline_pricingpipeline_saverecords",
       "community": 6,
-      "norm_label": ".saverecords()"
+      "norm_label": ".saverecords()",
+      "id": "services_pricing_pipeline_pricingpipeline_saverecords"
     },
     {
       "label": "validate_components.ts",
@@ -839,42 +920,6 @@
       "community": 14,
       "norm_label": "certificationspage()",
       "id": "certifications_page_certificationspage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L1",
-      "community": 32,
-      "norm_label": "page.tsx",
-      "id": "docs_page"
-    },
-    {
-      "label": "BackToTop()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "community": 32,
-      "norm_label": "backtotop()",
-      "id": "docs_page_backtotop"
-    },
-    {
-      "label": "CopyHeading()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L20",
-      "community": 32,
-      "norm_label": "copyheading()",
-      "id": "docs_page_copyheading"
-    },
-    {
-      "label": "DocsPage()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L51",
-      "community": 32,
-      "norm_label": "docspage()",
-      "id": "docs_page_docspage"
     },
     {
       "label": "page.tsx",
@@ -3935,51 +3980,6 @@
       "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L1",
-      "community": 23,
-      "norm_label": "page.tsx",
-      "id": "about_page"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L6",
-      "community": 23,
-      "norm_label": "linkedinicon()",
-      "id": "about_page_linkedinicon"
-    },
-    {
-      "label": "BackToTop()",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L14",
-      "community": 23,
-      "norm_label": "backtotop()",
-      "id": "about_page_backtotop"
-    },
-    {
-      "label": "CopyHeading()",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L28",
-      "community": 23,
-      "norm_label": "copyheading()",
-      "id": "about_page_copyheading"
-    },
-    {
-      "label": "AboutPage()",
-      "file_type": "code",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L59",
-      "community": 23,
-      "norm_label": "aboutpage()",
-      "id": "about_page_aboutpage"
     },
     {
       "label": "manifest.ts",
@@ -8484,6 +8484,109 @@
   ],
   "links": [
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "about_page_aboutpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "about_page_backtotop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "about_page_copyheading"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "about_page_linkedinicon"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/about/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "about_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_backtotop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_copyheading"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_docspage"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -11915,47 +12018,6 @@
       "confidence_score": 1.0,
       "source": "certifications_page",
       "target": "config_index_geographies"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_backtotop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_copyheading"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_docspage"
     },
     {
       "relation": "imports_from",
@@ -18781,68 +18843,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "about_page_aboutpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "about_page_backtotop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "about_page_copyheading"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "about_page_linkedinicon"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/about/page.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "about_page",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/app/manifest.ts",
       "source_location": "L3",
       "weight": 1.0,
@@ -24603,5 +24603,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "621a7b04d20b084a869802646575052113bc62a3"
+  "built_at_commit": "544224cc261b4e33bcea86437b345d6d2047df72"
 }
