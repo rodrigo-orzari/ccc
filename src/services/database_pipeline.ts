@@ -912,6 +912,131 @@ export class AWSDocumentDBAdapter extends BaseAdapter {
   }
 }
 
+// ─── GCP Firestore / Datastore ────────────────────────────────────────────────
+
+const GCP_FIRESTORE_INSTANCES = [
+  { type: 'Pay-as-you-go (Reads/Writes)', vcpus: 0, memory: 0, price: 0.00000108 },
+  { type: 'Provisioned - 100 Ops/s', vcpus: 0, memory: 0, price: 0.05 },
+  { type: 'Provisioned - 500 Ops/s', vcpus: 0, memory: 0, price: 0.25 },
+  { type: 'Provisioned - 1000 Ops/s', vcpus: 0, memory: 0, price: 0.50 },
+];
+
+export class GCPFirestoreAdapter extends BaseAdapter {
+  providerSlug = 'gcp';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching GCP Firestore pricing (${GCP_FIRESTORE_INSTANCES.length} entries from static config)...`);
+    return GCP_FIRESTORE_INSTANCES.map(inst => ({
+      provider: 'gcp',
+      service: 'Firestore',
+      region: 'us-central1',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: this.getGeography('us-central1'),
+      category: 'NoSQL',
+      price: inst.price,
+      unit: 'Operations-Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'Firestore',
+        engine_version: 'v1',
+        deployment_type: inst.type.includes('Pay-as-you-go') ? 'Serverless' : 'Provisioned',
+        ha_mode: 'Multi AZ',
+        storage_type: 'Managed',
+        tier: 'General Purpose',
+      },
+    }));
+  }
+}
+
+// ─── GCP Cloud Bigtable ───────────────────────────────────────────────────────
+
+const GCP_BIGTABLE_INSTANCES = [
+  { type: 'Standard Node (1 node)', vcpus: 4, memory: 16, price: 0.65 },
+  { type: 'Standard Node (3 nodes)', vcpus: 12, memory: 48, price: 1.95 },
+  { type: 'Standard Node (5 nodes)', vcpus: 20, memory: 80, price: 3.25 },
+];
+
+export class GCPBigtableAdapter extends BaseAdapter {
+  providerSlug = 'gcp';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching GCP Bigtable pricing (${GCP_BIGTABLE_INSTANCES.length} entries from static config)...`);
+    return GCP_BIGTABLE_INSTANCES.map(inst => ({
+      provider: 'gcp',
+      service: 'Cloud Bigtable',
+      region: 'us-central1',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: this.getGeography('us-central1'),
+      category: 'NoSQL',
+      price: inst.price,
+      unit: 'Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'Bigtable',
+        engine_version: 'v1',
+        deployment_type: 'Provisioned',
+        ha_mode: 'Multi AZ',
+        storage_type: 'SSD',
+        tier: 'General Purpose',
+      },
+    }));
+  }
+}
+
+// ─── Oracle NoSQL Database Cloud Service ──────────────────────────────────────
+
+const ORACLE_NOSQL_INSTANCES = [
+  { type: 'On-Demand Pricing (Pay-Per-Request)', vcpus: 0, memory: 0, price: 0.0000010 },
+  { type: 'Provisioned - 100 WCU/RCU', vcpus: 0, memory: 0, price: 0.075 },
+  { type: 'Provisioned - 500 WCU/RCU', vcpus: 0, memory: 0, price: 0.375 },
+  { type: 'Provisioned - 1000 WCU/RCU', vcpus: 0, memory: 0, price: 0.750 },
+];
+
+export class OracleNoSQLAdapter extends BaseAdapter {
+  providerSlug = 'oracle';
+
+  async fetchPricing(): Promise<PricingRecord[]> {
+    console.log(`Fetching Oracle NoSQL pricing (${ORACLE_NOSQL_INSTANCES.length} entries from static config)...`);
+    return ORACLE_NOSQL_INSTANCES.map(inst => ({
+      provider: 'oracle',
+      service: 'Oracle NoSQL',
+      region: 'us-ashburn-1',
+      instanceType: inst.type,
+      vcpus: inst.vcpus,
+      memoryGb: inst.memory,
+      arch: 'x86 64',
+      os: '',
+      cpuVendor: 'N/A',
+      gpuCount: 0,
+      geography: this.getGeography('us-ashburn-1'),
+      category: 'NoSQL',
+      price: inst.price,
+      unit: 'RCU/WCU-Hour',
+      dataSource: 'static_config' as const,
+      attributes: {
+        engine: 'Oracle NoSQL',
+        engine_version: 'v1',
+        deployment_type: inst.type.includes('On-Demand') ? 'Serverless' : 'Provisioned',
+        ha_mode: 'Multi AZ',
+        storage_type: 'Managed',
+        tier: 'General Purpose',
+      },
+    }));
+  }
+}
+
 // ─── DatabasePricingPipeline ───────────────────────────────────────────────────
 
 export class DatabasePricingPipeline extends PricingPipeline {
@@ -933,6 +1058,9 @@ export class DatabasePricingPipeline extends PricingPipeline {
       new DigitalOceanDBAdapter(),
       new AlibabaDBAdapter(),
       new AlibabaRedisAdapter(),
+      new GCPFirestoreAdapter(),
+      new GCPBigtableAdapter(),
+      new OracleNoSQLAdapter(),
       new VectorDatabasesAdapter(),
     ];
   }

@@ -119,9 +119,46 @@ const DocsPage: React.FC = () => {
           margin-left: 260px;
           flex: 1;
           padding: 3rem 4rem 6rem;
-          max-width: 820px;
+          max-width: 1200px;
           line-height: 1.7;
           font-size: 0.9375rem;
+        }
+        .docs-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 1.5rem 0;
+          font-size: 0.8125rem;
+          border: 1px solid var(--border-color);
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        .docs-table th {
+          background-color: var(--sidebar-bg);
+          color: var(--text-color);
+          font-weight: 700;
+          text-align: left;
+          padding: 0.75rem 1rem;
+          border-bottom: 2px solid var(--border-color);
+          text-transform: uppercase;
+          font-size: 0.75rem;
+          letter-spacing: 0.05em;
+        }
+        .docs-table td {
+          padding: 0.75rem 1rem;
+          border-bottom: 1px solid var(--border-color);
+          color: var(--text-color);
+          line-height: 1.5;
+        }
+        .docs-table tr:last-child td {
+          border-bottom: none;
+        }
+        .docs-table tr:nth-child(even) {
+          background-color: rgba(238, 240, 252, 0.3);
+        }
+        @media (prefers-color-scheme: dark) {
+          .docs-table tr:nth-child(even) {
+            background-color: rgba(12, 12, 30, 0.3);
+          }
         }
         .docs-main h1 {
           font-size: 2.25rem;
@@ -269,6 +306,7 @@ const DocsPage: React.FC = () => {
               <li><a href="#sharing" style={{ padding: '3px 0' }}>Sharing</a></li>
               <li><a href="#advertising" style={{ padding: '3px 0' }}>Advertising with Us</a></li>
               <li><a href="#contributing--feedback" style={{ padding: '3px 0' }}>Contributing &amp; Feedback</a></li>
+              <li><a href="#data-dictionary" style={{ padding: '3px 0' }}>Data Dictionary</a></li>
               <li><a href="#glossary" style={{ padding: '3px 0' }}>Glossary</a></li>
             </ul>
           </nav>
@@ -808,6 +846,92 @@ const DocsPage: React.FC = () => {
               , or reach out at{' '}
               <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.
             </p>
+          </div>
+          {/* Data Dictionary */}
+          <div className="docs-section">
+            <CopyHeading id="data-dictionary">Data Dictionary</CopyHeading>
+            <p>
+              This Data Dictionary explains the core components, domains, and metrics compared across each product category on comparecloudcosts.com. Normalizing these parameters allows for precise, side-by-side cost and technical comparisons.
+            </p>
+
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '22%' }}>Product Category</th>
+                  <th style={{ width: '25%' }}>Primary Domain</th>
+                  <th style={{ width: '18%' }}>Unit of Measure</th>
+                  <th style={{ width: '35%' }}>Key Parameters &amp; Information</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Virtual Machines (VM)</strong></td>
+                  <td>General-purpose and optimized raw compute instances</td>
+                  <td>USD / vCPU-Hour (Normalised to monthly total)</td>
+                  <td>Instance Type, vCPU count, Memory (RAM GB), Operating System (Linux vs Windows), and regional pricing.</td>
+                </tr>
+                <tr>
+                  <td><strong>Databases</strong></td>
+                  <td>Managed relational, NoSQL, in-memory, and vector database engines</td>
+                  <td>USD / Hour, Storage ($/GB/Month)</td>
+                  <td>Database Engine (PostgreSQL, MySQL, Redis, MongoDB, SQL Server, etc.), High Availability (Single/Multi-AZ), vCPU, RAM, and Storage tiers.</td>
+                </tr>
+                <tr>
+                  <td><strong>Serverless</strong></td>
+                  <td>Event-driven serverless computing functions (FaaS)</td>
+                  <td>USD / 1M Requests &amp; USD / GB-Second</td>
+                  <td>Runtime Language, configured memory allocations, execution model (ZIP/Container), timeout limits, and CPU architecture (x86 vs ARM).</td>
+                </tr>
+                <tr>
+                  <td><strong>Containers</strong></td>
+                  <td>Fully managed container runners and Kubernetes platforms (CaaS)</td>
+                  <td>USD / Node-Hour or Container-Hour</td>
+                  <td>Deployment model (Managed Nodes vs Serverless Fargate), CPU/RAM configurations, orchestrator (Kubernetes vs PaaS runner).</td>
+                </tr>
+                <tr>
+                  <td><strong>Networking</strong></td>
+                  <td>Cloud traffic routing, connectivity, and load distribution</td>
+                  <td>USD / Hour (base), USD / GB (data processed / egress)</td>
+                  <td>Load Balancer Tier, VPN connection configurations, CDN caching rules, and data transfer (inbound vs outbound internet egress).</td>
+                </tr>
+                <tr>
+                  <td><strong>Data &amp; Analytics</strong></td>
+                  <td>Big Data warehousing, analytics streams, and lakehouses</td>
+                  <td>USD / compute-hour, storage $/TB/Month</td>
+                  <td>Warehouse nodes or query execution units, serverless queries volume, telemetry ingestion rates, and storage capacity.</td>
+                </tr>
+                <tr>
+                  <td><strong>Storage</strong></td>
+                  <td>Object, block, file system, and archival data storage</td>
+                  <td>USD / GB / Month, read/write API requests</td>
+                  <td>Storage Type (Object, Block, File, Archive), redundancy profile (Local vs Geo-Redundant), and performance media (HDD vs standard/premium SSD).</td>
+                </tr>
+                <tr>
+                  <td><strong>Artificial Intelligence (AI)</strong></td>
+                  <td>Generative AI models, vector search, and custom training runtimes</td>
+                  <td>USD / 1M Tokens (text/image inference)</td>
+                  <td>Model Family, token inputs/outputs sizes, training GPU/Accelerator type, and dedicated host duration.</td>
+                </tr>
+                <tr>
+                  <td><strong>App Hosting</strong></td>
+                  <td>Managed PaaS platforms for standard application hosting</td>
+                  <td>USD / instance-hour or plan tier</td>
+                  <td>Hosting tiers (Hobby, Production, Enterprise), vCPU/RAM configurations, operating systems, and deployment options.</td>
+                </tr>
+                <tr>
+                  <td><strong>Security &amp; Identity</strong></td>
+                  <td>Access controls, key management, firewalls, and active monitoring</td>
+                  <td>USD / monthly active user, $/key, $/GB scanned</td>
+                  <td>Security Type (WAF, IAM, Key management KMS, DDoS protection, Threat Detection/Monitoring), and regional scale.</td>
+                </tr>
+                <tr>
+                  <td><strong>Integration</strong></td>
+                  <td>Managed publish-subscribe event buses and application connectors</td>
+                  <td>USD / Million Messages or connection duration</td>
+                  <td>Event Bus throughput, queue allocations, API gateway requests, and protocol support.</td>
+                </tr>
+              </tbody>
+            </table>
             <BackToTop />
           </div>
 

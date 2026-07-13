@@ -332,13 +332,15 @@ export default function CertificationsPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-              {visibleCerts.map((c) => {
+              {visibleCerts.map((c, index) => {
                 const held = PROVIDERS_FOR_CERT[c.id];
                 const color = CATEGORY_COLOR[c.category];
                 return (
                   <div
                     key={c.id}
-                    className="bg-[var(--surface)] border border-[var(--border)] rounded p-4 flex flex-col hover:border-[var(--text)] transition-colors"
+                    className={`border border-[var(--border)] rounded p-4 flex flex-col hover:border-[var(--text)] transition-colors ${
+                      index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'
+                    }`}
                   >
                     {/* badges */}
                     <div className="flex items-center gap-1.5 mb-2 flex-wrap">

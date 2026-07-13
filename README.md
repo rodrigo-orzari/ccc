@@ -6,8 +6,6 @@
 
 A full-stack cloud pricing comparison app that aggregates, normalizes, and compares pricing across **AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, Cloudflare, Vultr, and Hetzner** in a single side-by-side dashboard. **Live at [comparecloudcosts.com](https://comparecloudcosts.com)**
 
-**[☕ Buy me a coffee](https://connect.intuit.com/pay/comparecloudcosts/scs-v1-824a8961cf5a42edb4a9669eadc326d633c0e43cb25c449994ebf699ef3f754543e8bdeece91480e82e233bb2fd5f5c5-0)** — donations cover infrastructure and AI tooling costs.
-
 ---
 
 ## 🎯 What It Does
@@ -179,7 +177,7 @@ ccc/
 │   │   ├── providers.tsx             # React Query provider wrapper
 │   │   ├── sitemap.ts                # SEO: sitemap.xml (all routes + 14 workload pages from WORKLOADS)
 │   │   ├── robots.ts                 # SEO: robots.txt (allows all except /api/)
-│   │   ├── dashboard/page.tsx        # Marketing landing page (indexed)
+│   │   ├── dashboard/page.tsx        # New graphical landing page preview
 │   │   ├── datacenters/page.tsx      # Datacenter/region world map
 │   │   ├── certifications/page.tsx   # Certifications & Regulations (provider compliance matrix + filters)
 │   │   ├── about/page.tsx            # About page (solution overview, key capabilities, use cases)
@@ -210,7 +208,6 @@ ccc/
 │   │   ├── methodology/page.tsx
 │   │   ├── privacy/page.tsx
 │   │   ├── status/page.tsx
-│   │   ├── support/page.tsx
 │   │   └── terms/page.tsx
 │   │
 │   ├── components/
@@ -222,8 +219,8 @@ ccc/
 │   │   ├── ProviderCards.tsx         # Provider count summary cards
 │   │   ├── RangeSlider.tsx           # Dual-handle range slider (vCPU, memory, price filters)
 │   │   ├── Footer.tsx                # Footer with social share buttons
-│   │   ├── DonationModal.tsx         # Donation prompt modal
 │   │   ├── MarkdownPage.tsx          # Generic markdown renderer for static pages
+│   │   ├── DigitalOceanReferralModal.tsx # DO affiliate promo
 │   │   └── index.ts                  # Barrel export
 │   │
 │   ├── services/                     # Pricing ingestion pipelines
@@ -485,7 +482,5 @@ Licensed under **AGPL-3.0**. If you modify this code and host it publicly, you m
 
 - **Bug or Feature Idea?** → [Submit an Issue](../../issues)
 - **General questions?** → hello@comparecloudcosts.com
-
-<p align="center"><strong><a href="https://connect.intuit.com/pay/comparecloudcosts/scs-v1-824a8961cf5a42edb4a9669eadc326d633c0e43cb25c449994ebf699ef3f754543e8bdeece91480e82e233bb2fd5f5c5-0">☕ Buy me a coffee</a></strong></p>
 
 <p align="center">© 2026 <a href="https://www.linkedin.com/in/rodrigoorzari/">Rodrigo Orzari</a>. All rights reserved.</p>

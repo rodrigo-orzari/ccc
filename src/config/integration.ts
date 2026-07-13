@@ -91,6 +91,7 @@ export const ALIBABA_INTEGRATION = tag([
   { type: 'RocketMQ Premium',  category: 'Message Queue', price: 150.00, unit: 'Mo',             attributes: { tier: 'Premium',  max_message_size_kb: 4096 } },
   { type: 'API Gateway',       category: 'API Gateway',   price: 2.50,  unit: 'per 1M Requests', attributes: { tier: 'Standard', protocols: 'REST' } },
   { type: 'EventBridge',       category: 'Event Bus',     price: 1.00,  unit: 'per 1M Events',   attributes: { tier: 'Standard' } },
+  { type: 'CloudFlow (Serverless Workflow)', category: 'Workflow', price: 0.025, unit: 'per 1k Steps', attributes: { tier: 'Standard' } },
 ]);
 
 export const ORACLE_INTEGRATION = tag([

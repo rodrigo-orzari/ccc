@@ -134,7 +134,7 @@ export default function WorkloadDetails() {
     }
     .summary-card {
       background: #ffffff;
-      padding: 0.75rem 1rem;
+      padding: 1rem 1.25rem;
       text-align: left;
     }
     @media (prefers-color-scheme: dark) {
@@ -147,7 +147,7 @@ export default function WorkloadDetails() {
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.45rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -167,7 +167,7 @@ export default function WorkloadDetails() {
     .summary-card-sub {
       font-size: 9px;
       color: #737373;
-      margin-top: 0.2rem;
+      margin-top: 0.45rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
