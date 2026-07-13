@@ -684,7 +684,17 @@ export class DigitalOceanAdapter extends BaseAdapter {
     console.log(`Fetching DigitalOcean pricing (from Playwright Scraper)...`);
     const scraper = new DigitalOceanDropletsScraper();
     const scrapedInstances = await scraper.run();
-    return scrapedInstances.map(s => ({
+    
+    // Merge scraped instances with static config instances (so we keep static GPU instances)
+    const combinedMap = new Map<string, any>();
+    for (const s of DIGITALOCEAN_INSTANCES) {
+      combinedMap.set(s.slug, s);
+    }
+    for (const s of scrapedInstances) {
+      combinedMap.set(s.slug, s);
+    }
+
+    return Array.from(combinedMap.values()).map(s => ({
       provider: 'digitalocean',
       service: 'Droplets',
       region: DIGITALOCEAN_REGION,
