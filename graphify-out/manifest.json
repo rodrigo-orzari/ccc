@@ -585,8 +585,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1783829454.9328408,
-    "ast_hash": "a45c7b56488ab79aa5aaa9a298982117",
+    "mtime": 1783907138.677134,
+    "ast_hash": "09ed94feae185efc66cb707a27f0c727",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -605,8 +605,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1783829184.3132381,
-    "ast_hash": "c75a0bb9ec53d12986137a64cfd78e7f",
+    "mtime": 1783907198.982635,
+    "ast_hash": "8ffe8624975b26431e29eae4b075880c",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
