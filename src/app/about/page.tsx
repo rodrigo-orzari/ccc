@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Footer, ProductTypeSelector } from "@/components";
 
 function LinkedInIcon() {
@@ -408,6 +409,9 @@ const AboutPage: React.FC = () => {
               {/* About the Creator */}
               <div className="about-section">
                 <CopyHeading id="about-the-creator">About the Creator</CopyHeading>
+                <div style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+                  <Image src="/rodrigo-orzari.png" alt="Rodrigo Orzari" width={120} height={120} />
+                </div>
                 <p>
                   Hi, I'm <strong>Rodrigo Orzari</strong>{' '}
                   <a

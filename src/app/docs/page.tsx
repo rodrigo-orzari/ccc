@@ -846,89 +846,309 @@ const DocsPage: React.FC = () => {
               , or reach out at{' '}
               <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.
             </p>
+            <BackToTop />
           </div>
+
           {/* Data Dictionary */}
           <div className="docs-section">
             <CopyHeading id="data-dictionary">Data Dictionary</CopyHeading>
             <p>
-              This Data Dictionary explains the core components, domains, and metrics compared across each product category on comparecloudcosts.com. Normalizing these parameters allows for precise, side-by-side cost and technical comparisons.
+              This Data Dictionary provides a comprehensive breakdown of every product category, the specific columns displayed in their comparison tables, and the core definitions of their filters and parameters.
             </p>
 
+            <h3 style={{ marginTop: '2rem' }}>1. Virtual Machines (VM)</h3>
+            <p>General-purpose, compute-optimized, memory-optimized, or accelerator-backed virtual server instances.</p>
             <table className="docs-table">
               <thead>
                 <tr>
-                  <th style={{ width: '22%' }}>Product Category</th>
-                  <th style={{ width: '25%' }}>Primary Domain</th>
-                  <th style={{ width: '18%' }}>Unit of Measure</th>
-                  <th style={{ width: '35%' }}>Key Parameters &amp; Information</th>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Virtual Machines (VM)</strong></td>
-                  <td>General-purpose and optimized raw compute instances</td>
-                  <td>USD / vCPU-Hour (Normalised to monthly total)</td>
-                  <td>Instance Type, vCPU count, Memory (RAM GB), Operating System (Linux vs Windows), and regional pricing.</td>
+                  <td><strong>Instance Type</strong></td>
+                  <td>The unique provider-specific SKU identifier (e.g. <code>m5.large</code> on AWS, <code>Standard_D2s_v5</code> on Azure, <code>c2-standard-4</code> on GCP). Normalizes name profiles to facilitate direct comparisons.</td>
                 </tr>
                 <tr>
-                  <td><strong>Databases</strong></td>
-                  <td>Managed relational, NoSQL, in-memory, and vector database engines</td>
-                  <td>USD / Hour, Storage ($/GB/Month)</td>
-                  <td>Database Engine (PostgreSQL, MySQL, Redis, MongoDB, SQL Server, etc.), High Availability (Single/Multi-AZ), vCPU, RAM, and Storage tiers.</td>
+                  <td><strong>Category</strong></td>
+                  <td>
+                    Resource allocation classification profile:<br />
+                    • <strong>Compute Optimized:</strong> Higher ratio of CPU cores relative to RAM, suited for web servers and batch processing.<br />
+                    • <strong>General Purpose:</strong> Balanced CPU-to-RAM ratio, suited for standard application servers.<br />
+                    • <strong>Memory Optimized:</strong> Higher ratio of RAM relative to CPU cores, suited for caching, analytics, and in-memory databases.<br />
+                    • <strong>GPU Instance:</strong> Equipped with dedicated hardware accelerators (e.g. NVIDIA A100/H100) for machine learning training, rendering, and scientific simulation.<br />
+                    • <strong>HPC:</strong> High-Performance Computing nodes configured for low-latency cluster interconnects.
+                  </td>
                 </tr>
                 <tr>
-                  <td><strong>Serverless</strong></td>
-                  <td>Event-driven serverless computing functions (FaaS)</td>
-                  <td>USD / 1M Requests &amp; USD / GB-Second</td>
-                  <td>Runtime Language, configured memory allocations, execution model (ZIP/Container), timeout limits, and CPU architecture (x86 vs ARM).</td>
+                  <td><strong>vCPUs &amp; Memory</strong></td>
+                  <td>The virtual processing cores and RAM capacity (in GB). Oracle Cloud’s OCPUs (which represent physical cores) are normalized to vCPUs (1 OCPU = 2 vCPUs) to ensure comparable capacity calculation.</td>
                 </tr>
                 <tr>
-                  <td><strong>Containers</strong></td>
-                  <td>Fully managed container runners and Kubernetes platforms (CaaS)</td>
-                  <td>USD / Node-Hour or Container-Hour</td>
-                  <td>Deployment model (Managed Nodes vs Serverless Fargate), CPU/RAM configurations, orchestrator (Kubernetes vs PaaS runner).</td>
+                  <td><strong>Operating System</strong></td>
+                  <td>The OS configuration: <strong>Linux</strong> (standard license-free base pricing) vs. <strong>Windows</strong> (includes the developer OS licensing surcharge).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>2. Databases</h3>
+            <p>Managed relational servers, NoSQL document stores, cache layers, and vector indexes.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Database Engine</strong></td>
+                  <td>The underlying database platform: <strong>Relational</strong> (PostgreSQL, MySQL, MariaDB, SQL Server, Oracle DB) vs. <strong>NoSQL</strong> (MongoDB, Cosmos DB, Cassandra) vs. <strong>In-Memory Cache</strong> (Redis, Valkey) vs. <strong>Vector Index</strong> (Pinecone, Milvus, Qdrant, Weaviate, Chroma).</td>
                 </tr>
                 <tr>
-                  <td><strong>Networking</strong></td>
-                  <td>Cloud traffic routing, connectivity, and load distribution</td>
-                  <td>USD / Hour (base), USD / GB (data processed / egress)</td>
-                  <td>Load Balancer Tier, VPN connection configurations, CDN caching rules, and data transfer (inbound vs outbound internet egress).</td>
+                  <td><strong>Deployment Type</strong></td>
+                  <td>
+                    Resource provisioning model:<br />
+                    • <strong>Provisioned:</strong> Replicating a traditional VM host with fixed CPU/RAM ceilings.<br />
+                    • <strong>Serverless:</strong> Dynamic compute units that automatically scale up/down or pause based on query traffic.
+                  </td>
                 </tr>
                 <tr>
-                  <td><strong>Data &amp; Analytics</strong></td>
-                  <td>Big Data warehousing, analytics streams, and lakehouses</td>
-                  <td>USD / compute-hour, storage $/TB/Month</td>
-                  <td>Warehouse nodes or query execution units, serverless queries volume, telemetry ingestion rates, and storage capacity.</td>
+                  <td><strong>HA Mode</strong></td>
+                  <td>
+                    High-Availability cluster configuration:<br />
+                    • <strong>Single AZ:</strong> A single active database node in one Availability Zone.<br />
+                    • <strong>Multi-AZ:</strong> An active primary database with a hot standby node synchronously replicated in a second zone.<br />
+                    • <strong>Zone Redundant:</strong> Active multi-master nodes distributed across zones.<br />
+                    • <strong>Geo-Redundant / Multi-Region:</strong> Read/write replicas asynchronously synced to a separate geographic region.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>3. Serverless</h3>
+            <p>Event-driven Serverless Functions (FaaS) executed on demand.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Memory Config</strong></td>
+                  <td>
+                    How memory allocations are managed:<br />
+                    • <strong>Configurable:</strong> Users explicitly configure the function memory limits (e.g. 128 MB up to 10 GB), which automatically scales virtual CPU allocation proportionally.<br />
+                    • <strong>Automatic:</strong> The provider dynamically adjusts memory allocation per execution based on requirements, without manual settings.<br />
+                    • <strong>Tiers:</strong> Predefined memory resource templates to select from.
+                  </td>
                 </tr>
                 <tr>
-                  <td><strong>Storage</strong></td>
-                  <td>Object, block, file system, and archival data storage</td>
-                  <td>USD / GB / Month, read/write API requests</td>
-                  <td>Storage Type (Object, Block, File, Archive), redundancy profile (Local vs Geo-Redundant), and performance media (HDD vs standard/premium SSD).</td>
+                  <td><strong>Granularity</strong></td>
+                  <td>The rounding increments of execution billing: <strong>1 ms</strong> billing (precise computation time, e.g. AWS Lambda) vs. <strong>100 ms</strong> billing (execution duration rounded up to the nearest 100ms increment).</td>
                 </tr>
                 <tr>
-                  <td><strong>Artificial Intelligence (AI)</strong></td>
-                  <td>Generative AI models, vector search, and custom training runtimes</td>
-                  <td>USD / 1M Tokens (text/image inference)</td>
-                  <td>Model Family, token inputs/outputs sizes, training GPU/Accelerator type, and dedicated host duration.</td>
+                  <td><strong>Timeout</strong></td>
+                  <td>The maximum execution duration limit (e.g. 5 min, 10 min, 15+ min) before the platform terminates the executing thread.</td>
                 </tr>
                 <tr>
-                  <td><strong>App Hosting</strong></td>
-                  <td>Managed PaaS platforms for standard application hosting</td>
-                  <td>USD / instance-hour or plan tier</td>
-                  <td>Hosting tiers (Hobby, Production, Enterprise), vCPU/RAM configurations, operating systems, and deployment options.</td>
+                  <td><strong>Provisioned Concurrency</strong></td>
+                  <td>Pre-allocated warm environments maintained by the provider to eliminate function activation latency (cold starts).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>4. Containers</h3>
+            <p>Managed container control planes (Kubernetes) and serverless container runners.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Pricing Model</strong></td>
+                  <td>
+                    Compute allocation model:<br />
+                    • <strong>Managed Nodes:</strong> Billed by the provisioned nodes/VMs that form the Kubernetes cluster.<br />
+                    • <strong>Serverless Containers:</strong> Billed purely per vCPU-second and RAM-second consumed by active container replicas (e.g., AWS Fargate, GCP Cloud Run, Azure Container Apps).
+                  </td>
                 </tr>
                 <tr>
-                  <td><strong>Security &amp; Identity</strong></td>
-                  <td>Access controls, key management, firewalls, and active monitoring</td>
-                  <td>USD / monthly active user, $/key, $/GB scanned</td>
-                  <td>Security Type (WAF, IAM, Key management KMS, DDoS protection, Threat Detection/Monitoring), and regional scale.</td>
+                  <td><strong>Orchestrator</strong></td>
+                  <td>The control plane mechanism: <strong>Kubernetes</strong> (standard K8s clusters) vs. <strong>PaaS Container Runner</strong> (simplified orchestrators, hosting isolated containers without cluster nodes management).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>5. Networking</h3>
+            <p>Network routing, load balancing, tunnels, and data transfer egress.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Service Type</strong></td>
+                  <td>Network infrastructure components: <strong>Load Balancers</strong> (L4 network / L7 application routing), <strong>NAT Gateway</strong> (outbound translation for private subnets), <strong>VPN</strong> (secure IPSec tunnels), <strong>CDN</strong> (edge static caching), or <strong>Data Transfer</strong> (egress).</td>
                 </tr>
                 <tr>
-                  <td><strong>Integration</strong></td>
-                  <td>Managed publish-subscribe event buses and application connectors</td>
-                  <td>USD / Million Messages or connection duration</td>
-                  <td>Event Bus throughput, queue allocations, API gateway requests, and protocol support.</td>
+                  <td><strong>Direction</strong></td>
+                  <td>The path direction of traffic: <strong>Inbound</strong> (ingress from internet - universally free) vs. <strong>Outbound</strong> (egress to internet or across cloud regions - billed at variable per-GB rates).</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Model</strong></td>
+                  <td>Pricing metrics structure: <strong>Hourly Base</strong> (base fee to run the load balancer/gateway endpoint) vs. <strong>Data Volume</strong> (cost per GB of data processed).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>6. Data &amp; Analytics</h3>
+            <p>Cloud data warehouses, streaming analytics, ETL utilities, and lakehouse storage.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Service Type</strong></td>
+                  <td>Analytical engine types: <strong>Data Warehouse</strong> (OLAP databases, e.g. Snowflake, Redshift, BigQuery), <strong>ETL / Ingestion</strong> (pipelines, e.g. AWS Glue, Kinesis), or <strong>Lakehouse</strong> (querying files directly).</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Metric</strong></td>
+                  <td>How usage is billed: <strong>Compute Hours</strong> (billed per running node/instance) vs. <strong>Serverless Scan</strong> (billed per TB of data processed by queries).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>7. Storage</h3>
+            <p>Object buckets, VM block storage volumes, shared file systems, and archive tiers.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Storage Type</strong></td>
+                  <td>Storage architecture: <strong>Object</strong> (API-driven bucket folders), <strong>Block</strong> (virtual SSD/HDD drives mounted to VMs), <strong>File</strong> (shared directories accessed by multiple VMs), or <strong>Archive</strong> (offline data storage).</td>
+                </tr>
+                <tr>
+                  <td><strong>Access Tier</strong></td>
+                  <td>
+                    Storage temperature tiers:<br />
+                    • <strong>Hot:</strong> Optimized for active, frequent read/writes. Highest storage cost, lowest access fees.<br />
+                    • <strong>Cool / Warm:</strong> Optimized for data read less than once a month. Reduced storage cost, slight read/write access fee.<br />
+                    • <strong>Cold / Archive:</strong> Long-term offline backups. Lowest storage cost, high access fee, retrieval times span minutes to hours.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Redundancy</strong></td>
+                  <td>
+                    Replication level:<br />
+                    • <strong>LRS (Locally Redundant):</strong> Syncs 3 copies within a single data center. Protects against hardware failure.<br />
+                    • <strong>ZRS (Zone Redundant):</strong> Syncs copies across 3 distinct zones/facilities in a region. Protects against zonal outages.<br />
+                    • <strong>GRS (Geo-Redundant):</strong> Async replication to a secondary geographic region. Protects against region-wide disasters.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>8. Artificial Intelligence (AI)</h3>
+            <p>GenAI LLM endpoints, custom model training nodes, and vector search operations.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Service Type</strong></td>
+                  <td>AI runtime function: <strong>Inference API</strong> (querying pre-trained LLMs, e.g. Claude, Llama, GPT) vs. <strong>Model Training</strong> (provisioning custom accelerator nodes).</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Unit</strong></td>
+                  <td>Billing metrics: <strong>Per 1M Tokens</strong> (volume-based billing for input/output prompts) vs. <strong>Accelerator Hour</strong> (compute-based billing for active GPU/TPU hours).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>9. App Hosting</h3>
+            <p>Fully managed Platform-as-a-Service (PaaS) app runners and app engines.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Hosting Tier</strong></td>
+                  <td>The environment isolation: <strong>Hobby/Free</strong> (basic sandboxes, auto-sleeps), <strong>Shared</strong> (shared CPU resource, no sleeps), <strong>Dedicated</strong> (guaranteed dedicated vCPU/RAM), or <strong>Enterprise</strong> (fully isolated virtual network nodes).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>10. Security &amp; Identity</h3>
+            <p>Firewalls, IAM policies, secret managers, and runtime threat detection.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Security Type</strong></td>
+                  <td>The protection layer: <strong>WAF</strong> (Web Application Firewall rules), <strong>IAM</strong> (Identity &amp; Access Management users), <strong>KMS</strong> (Key Management secrets/certificates), <strong>DDoS Protection</strong> (mitigation shielding), or <strong>Threat Detection</strong> (active system monitoring).</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Metric</strong></td>
+                  <td>The billing dimensions: <strong>Per Rule/Policy</strong> (WAF rules), <strong>Per Key/Month</strong> (KMS active keys), <strong>Per GB Scanned</strong> (Threat Detection checking CloudTrail/System logs), or <strong>Per Host/Month</strong> (continuous server threat protection).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>11. Integration</h3>
+            <p>Managed message queues, publish-subscribe brokers, gateways, and workflows.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Integration Type</strong></td>
+                  <td>Middleware broker type: <strong>Pub-Sub</strong> (topics for fan-out), <strong>Message Queue</strong> (point-to-point queues), <strong>Event Bus</strong> (routing buses), or <strong>API Gateway</strong> (access endpoint mapping).</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Unit</strong></td>
+                  <td>Performance metrics: <strong>Per Million Messages</strong> (event traffic volume) vs. <strong>Connection Hour</strong> (persistent web sockets billing).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <BackToTop />
+          </div> queue allocations, API gateway requests, and protocol support.</td>
                 </tr>
               </tbody>
             </table>
