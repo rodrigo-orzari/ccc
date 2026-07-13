@@ -409,6 +409,38 @@ export default function DatacentersPage() {
             {/* Divider */}
             <div className="h-px bg-[var(--border)] mb-8" />
 
+            {/* Availability Zones per Region — stat cards grid */}
+            <div id="az-detail" className="scroll-mt-6">
+              <h2 className="text-xl font-bold mb-1 text-[var(--text)]">
+                Availability Zones per Region
+              </h2>
+              <p className="text-sm text-[var(--muted)] mb-4">Total and average Availability Zones per region, per provider.</p>
+              <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[var(--border)]" style={{ background: 'var(--border)' }}>
+                {PROVIDER_INFRA.map(p => (
+                  <div
+                    key={p.id}
+                    className="flex-1 min-w-0 bg-[var(--surface)] px-4 py-3.5 flex flex-col gap-2"
+                  >
+                    <ProviderBadge id={p.id} name={p.nameShort} />
+                    {p.availabilityZones > 0 ? (
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">{p.availabilityZones}</span>
+                        <span className="text-[9px] text-[#a3a3a3]">~{Math.round(p.availabilityZones / p.regions)} per region</span>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">{p.regions}</span>
+                        <span className="text-[9px] text-[#a3a3a3]">Single DC / region</span>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
             {/* Regional Coverage Matrix */}
             <div id="coverage-matrix" className="scroll-mt-6">
               <div className="flex items-center justify-between mb-1">
@@ -482,38 +514,6 @@ export default function DatacentersPage() {
                 </table>
               </div>
               )}
-            </div>
-
-            {/* Divider */}
-            <div className="h-px bg-[var(--border)] mb-8" />
-
-            {/* Availability Zones per Region — stat cards grid */}
-            <div id="az-detail" className="scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[var(--text)]">
-                Availability Zones per Region
-              </h2>
-              <p className="text-sm text-[var(--muted)] mb-4">Total and average Availability Zones per region, per provider.</p>
-              <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[var(--border)]" style={{ background: 'var(--border)' }}>
-                {PROVIDER_INFRA.map(p => (
-                  <div
-                    key={p.id}
-                    className="flex-1 min-w-0 bg-[var(--surface)] px-4 py-3.5 flex flex-col gap-2"
-                  >
-                    <ProviderBadge id={p.id} name={p.nameShort} />
-                    {p.availabilityZones > 0 ? (
-                      <div className="flex flex-col gap-0.5">
-                        <span className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">{p.availabilityZones}</span>
-                        <span className="text-[9px] text-[#a3a3a3]">~{Math.round(p.availabilityZones / p.regions)} per region</span>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col gap-0.5">
-                        <span className="text-[20px] font-black text-[var(--text)] tabular-nums leading-none">{p.regions}</span>
-                        <span className="text-[9px] text-[#a3a3a3]">Single DC / region</span>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Divider */}

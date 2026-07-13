@@ -441,16 +441,13 @@ export default function WorkloadDetails() {
         <div className="flex flex-col gap-6">
           {/* Tables — full width; the configuration bar is rendered above via order utilities */}
           <div className="flex flex-col gap-6 min-w-0 order-1">
-          {/* Monthly/Yearly Comparison — heading + blurb outside the table box */}
+          {/* Workload Costs Comparison — heading + blurb outside the table box */}
           <div>
             <h2 className="text-xl font-bold mb-1 text-[#171717] dark:text-[#e5e7eb]">
-              {pricingModel === 'Yearly' ? 'Yearly' : 'Monthly'} Comparison
+              Workload Costs Comparison
             </h2>
             <p className="text-sm text-[#737373]">
-              Prices by provider and services that enable users to run this workload.
-            </p>
-            <p className="text-sm text-[#737373] mt-1.5">
-              Shape the architecture with the four <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Well-Architected</span> controls below — <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Capacity</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Performance</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Reliability</span>, and <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Security</span>. Components and prices recompute as you adjust each priority (e.g. higher Security adds a WAF, KMS, and threat monitoring), and you can switch region or pricing model to compare like-for-like.
+              Prices by provider and services that enable users to run this workload. Shape the architecture with the four <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Well-Architected</span> controls below — <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Capacity</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Performance</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Reliability</span>, and <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Security</span>. Components and prices recompute as you adjust each priority (e.g. higher Security adds a WAF, KMS, and threat monitoring), and you can switch region or pricing model to compare like-for-like.
             </p>
           </div>
 
