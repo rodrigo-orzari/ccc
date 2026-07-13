@@ -55,7 +55,9 @@ export async function POST(request: Request) {
         if (reqs.category === 'GPU instance') {
           base.push(sql`pr.gpu_count > 0`);
         } else if (reqs.category === 'Inference') {
-          base.push(sql`pr.category ILIKE '%ai%'`);
+          base.push(sql`pr.category ILIKE '%ai%' AND s.name NOT ILIKE '%embeddings%'`);
+        } else if (reqs.category === 'Embeddings') {
+          base.push(sql`s.name ILIKE '%embeddings%'`);
         } else if (reqs.productType === 'integration' && reqs.category) {
           // Integration records all share pr.category = 'integration'; the
           // specific service (Message Queue / Event Bus / API Gateway /
