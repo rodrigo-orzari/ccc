@@ -258,7 +258,7 @@ const AboutPage: React.FC = () => {
 
           <main className="main-content">
             <h1>What is CompareCloudCosts.com?</h1>
-            <div className="prose">
+            <div className="prose max-w-none">
 
               {/* About CCC */}
               <div className="about-section">
