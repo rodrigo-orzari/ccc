@@ -1649,12 +1649,12 @@ export default function FilterSidebar({
               {activeProductType === 'serverless' && (
                 <div className="space-y-2">
                   <div className="text-[10px] font-bold text-[#737373]">Memory Size</div>
-                  <div className="overflow-x-auto flex gap-1.5 pb-2 -mr-1 pr-1">
+                  <div className="flex flex-wrap gap-2">
                     {config.SERVERLESS_MEMORY_TIERS.map(tier => (
                       <button
                         key={tier}
                         onClick={() => onServerlessMemoryToggle(tier)}
-                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border whitespace-nowrap shrink-0 ${
+                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border whitespace-nowrap ${
                           selectedServerlessMemory.includes(tier)
                             ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
                             : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
