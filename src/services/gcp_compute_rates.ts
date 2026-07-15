@@ -45,10 +45,14 @@ function skuPrice(sku: any): number | null {
 function findFamilyRate(skus: any[], family: string, kind: 'core' | 'ram'): number | null {
   const isC2 = family === 'c2';
   const isM1 = family === 'm1';
+  // 2026-07-15 ingest dump: Google's C2 SKUs are literally named
+  // "Compute optimized Instance Core running in <region>" — with a SPACE, so
+  // `compute-?optimized` (hyphen-only) never matched and c2 stayed static.
+  // Allow space or hyphen in both the c2 and m1 aliases.
   const famRe = isC2
-    ? /\bc2\b|compute-?optimized/i
+    ? /\bc2\b|compute[-\s]?optimized/i
     : isM1
-    ? /\bm1\b|memory-?optimized/i
+    ? /\bm1\b|memory[-\s]?optimized/i
     : new RegExp(`\\b${family}\\b`, 'i');
 
   const kindRe = kind === 'core' ? /\b(core|cpu)\b/i : /\bram\b/i;
