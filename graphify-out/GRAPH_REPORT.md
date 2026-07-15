@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-07-15)
 
 ## Corpus Check
-- 160 files · ~216,937 words
+- 160 files · ~216,981 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `5f592eaa`
+- Built from commit: `a6f35531`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -245,7 +245,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **313 isolated node(s):** `REGION_OPTIONS`, `PROVIDER_IDS`, `AIModelConfig`, `RawIntegrationEntry`, `CATEGORY_TO_SERVICE_TYPE` (+308 more)
+- **313 isolated node(s):** `FAMILIES`, `GcpComputeRates`, `REGION_OPTIONS`, `PROVIDER_IDS`, `AIModelConfig` (+308 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **24 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -258,7 +258,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.056) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 45` to `Community 8`, `Community 2`, `Community 18`, `Community 7`?**
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **What connects `REGION_OPTIONS`, `PROVIDER_IDS`, `AIModelConfig` to the rest of the system?**
+- **What connects `FAMILIES`, `GcpComputeRates`, `REGION_OPTIONS` to the rest of the system?**
   _313 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._

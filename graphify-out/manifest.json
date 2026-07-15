@@ -780,8 +780,8 @@
     "semantic_hash": ""
   },
   "src/services/gcp_compute_rates.ts": {
-    "mtime": 1783748181.726957,
-    "ast_hash": "592f31761a06d31db0cf20efd60adb59",
+    "mtime": 1784135133.3803551,
+    "ast_hash": "edd7b708ac3409b30f2315e72d8f8661",
     "semantic_hash": ""
   },
   "src/services/gcp_billing_catalog.ts": {
