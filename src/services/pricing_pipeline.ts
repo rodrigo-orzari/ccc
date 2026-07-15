@@ -291,7 +291,9 @@ export class AzureAdapter extends BaseAdapter {
       // and making Azure look far cheaper than every other provider.
       const isSpot = meterName.includes('spot') || meterName.includes('low priority')
         || productName.includes('spot') || productName.includes('low priority');
-      const purchaseOption = isSpot ? 'Spot' : 'OnDemand';
+      if (isSpot) continue;
+      
+      const purchaseOption = 'OnDemand';
 
       const key = `${sku}::${os}::${purchaseOption}`;
       if (seen.has(key)) continue;

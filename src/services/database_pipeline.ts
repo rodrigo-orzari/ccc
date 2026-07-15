@@ -373,6 +373,7 @@ export class AWSRDSAdapter extends BaseAdapter {
       const attr = product.attributes;
       // Skip Windows SQL Server / Oracle licensing noise — keep Linux baseline
       if (attr.operatingSystem && attr.operatingSystem !== 'Linux') continue;
+      if (attr.licenseModel && attr.licenseModel.toLowerCase().includes('bring your own license')) continue;
 
       const term = terms[sku];
       if (!term) continue;
