@@ -274,6 +274,19 @@ export const AI_MODELS: AIModelConfig[] = [
     modelTier: 'Efficient',
     multimodal: 'No',
   },
+  {
+    // OCI GenAI prices embeddings at $0.001 per 10k transactions (1 char = 1
+    // transaction); at ~4 chars/token that's ≈ $0.40 per 1M tokens. Added
+    // because Oracle showed N/A on Embeddings components despite offering
+    // Cohere Embed on OCI Generative AI.
+    providerSlug: 'oracle',
+    serviceName: 'Embeddings',
+    geography: 'Global',
+    modelName: 'Cohere Embed 3 (OCI GenAI)',
+    inputPricePer1M: 0.40,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
 
   // ── DigitalOcean (GenAI Platform) ───────────────────────────────────────
   {
@@ -373,6 +386,19 @@ export const AI_MODELS: AIModelConfig[] = [
     outputPricePer1M: 0.30,
     contextWindowK: 128,
     modelTier: 'Efficient',
+    multimodal: 'No',
+  },
+  {
+    // Model Studio text-embedding-v3 ≈ $0.096/1M tokens (third-party price
+    // monitor; Alibaba's own intl pricing page is console-only). Added because
+    // Alibaba showed N/A on Embeddings components despite offering Qwen
+    // embedding models. Verify on next data refresh.
+    providerSlug: 'alibaba',
+    serviceName: 'Embeddings',
+    geography: 'Global',
+    modelName: 'text-embedding-v3',
+    inputPricePer1M: 0.096,
+    modelTier: 'Standard',
     multimodal: 'No',
   },
 ];

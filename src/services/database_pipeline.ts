@@ -629,7 +629,10 @@ export class AlibabaDBAdapter extends BaseAdapter {
     console.log(`Fetching Alibaba DB pricing (${ALIBABA_DB_INSTANCES.length} entries from static config)...`);
     return ALIBABA_DB_INSTANCES.map(inst => ({
       provider: 'alibaba',
-      service: 'ApsaraDB RDS',
+      // MongoDB entries are ApsaraDB for MongoDB (NoSQL), the rest ApsaraDB RDS
+      // (Relational) — the hardcoded 'Relational' previously made Alibaba show
+      // N/A for every NoSQL workload component.
+      service: inst.engine === 'MongoDB' ? 'ApsaraDB for MongoDB' : 'ApsaraDB RDS',
       region: ALIBABA_DB_REGION,
       instanceType: inst.type,
       vcpus: inst.vcpus,
@@ -639,7 +642,7 @@ export class AlibabaDBAdapter extends BaseAdapter {
       cpuVendor: 'Intel',
       gpuCount: 0,
       geography: ALIBABA_DB_GEOGRAPHY,
-      category: 'Relational',
+      category: inst.engine === 'MongoDB' ? 'NoSQL' : 'Relational',
       price: inst.price,
       unit: 'Hour',
       dataSource: 'static_config' as const,

@@ -38,6 +38,11 @@ const STATIC_SECURITY_PRICING = [
   // --- Alibaba ---
   { provider: 'alibaba', service: 'Web Application Firewall (WAF)', category: 'Network Security', instance_type: 'WAF Base Plan', price_per_unit: 29.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'WAF', scope: 'Regional' } },
   { provider: 'alibaba', service: 'DDoS Protection', category: 'Network Security', instance_type: 'Anti-DDoS Premium', price_per_unit: 3000.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'DDoS', scope: 'Global' } },
+  // Added 2026-07-15: Alibaba genuinely offers KMS and Security Center — their
+  // absence made Alibaba show N/A on Identity & Encryption / Threat & Compliance
+  // workload components. Prices from Alibaba's published international billing docs.
+  { provider: 'alibaba', service: 'Key Management Service (KMS)', category: 'Identity & Encryption', instance_type: 'Per CMK (HSM-backed)', price_per_unit: 2.50, unit: 'Month', geography: 'Global', attributes: { security_type: 'KMS', scope: 'Regional' } },
+  { provider: 'alibaba', service: 'Threat Detection', category: 'Threat & Compliance', instance_type: 'Security Center Advanced (per server)', price_per_unit: 23.50, unit: 'Month', geography: 'Global', attributes: { security_type: 'Threat Detection', scope: 'Global' } },
 
   // --- Cloudflare ---
   // Cloudflare runs a global edge network; security is its flagship offering.

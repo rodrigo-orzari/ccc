@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import sql from '@/lib/db';
 import { WORKLOADS } from '@/config/workloads';
 import { DEFAULT_PRIORITIES } from '@/config/workload_priorities';
+import { isNotOffered } from '@/config/not_offered';
 
 // Integration SKUs are consumption-priced in heterogeneous units ("per 1M
 // Requests", "per 1M Events", "per 1k Actions", "per TB", flat "Mo", …). To
@@ -58,6 +59,11 @@ export async function POST(request: Request) {
           base.push(sql`pr.category ILIKE '%ai%' AND s.name NOT ILIKE '%embeddings%'`);
         } else if (reqs.category === 'Embeddings') {
           base.push(sql`s.name ILIKE '%embeddings%'`);
+        } else if (reqs.category === 'Foundational Models') {
+          // Same trap as Embeddings: AI rows carry pr.category = 'ai', so the
+          // generic pr.category ILIKE '%Foundational Models%' below can never
+          // match — the sub-type lives in the SERVICE name (see ai_pipeline.ts).
+          base.push(sql`s.name ILIKE '%foundational%'`);
         } else if (reqs.productType === 'integration' && reqs.category) {
           // Integration records all share pr.category = 'integration'; the
           // specific service (Message Queue / Event Bus / API Gateway /
@@ -170,7 +176,12 @@ export async function POST(request: Request) {
           results[provider].components.push({
             componentId: component.id,
             name: component.name,
+            // 'N/A' stays the sentinel every consumer keys on; notOffered
+            // distinguishes "provider has no such product" (honest gap, from
+            // config/not_offered.ts) from "we have no matching data" so the UI
+            // can label them differently.
             instanceType: 'N/A',
+            notOffered: isNotOffered(provider, reqs.productType, reqs.category),
             monthlyPrice: 0,
             quantity: reqs.quantity,
           });

@@ -102,4 +102,8 @@ export const ORACLE_INTEGRATION = tag([
 
 export const DIGITALOCEAN_INTEGRATION = tag([
   { type: 'API Gateway (Functions)', category: 'API Gateway', price: 0.00, unit: 'per 1M Requests', attributes: { tier: 'Standard', protocols: 'HTTP', note: 'Included with Functions usage' } },
+  // Managed Kafka: $147/mo entry 3-node cluster (shared vCPU, 6 GB) per DO's
+  // published pricing — its absence made DigitalOcean show N/A on Messaging
+  // components despite genuinely offering a managed message broker.
+  { type: 'Managed Kafka (3-node Basic)', category: 'Message Queue', price: 147.00, unit: 'Mo', attributes: { tier: 'Basic', max_message_size_kb: 1024 } },
 ]);

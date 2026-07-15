@@ -309,7 +309,7 @@ export default function WorkloadDetails() {
       PROVIDER_IDS.forEach(provider => {
         const comp = results[provider]?.components.find((x: any) => x.componentId === c.id);
         if (!comp || comp.instanceType === 'N/A') {
-          row.push('Unavailable');
+          row.push(comp?.notOffered ? 'Not offered' : 'No data');
           prices.push('');
         } else {
           row.push(comp.quantity > 1 ? `${comp.quantity}× ${comp.instanceType}` : comp.instanceType);
@@ -605,7 +605,14 @@ export default function WorkloadDetails() {
                                     </span>
                                   </Link>
                                 ) : (
-                                  <span className="text-[10px] uppercase tracking-widest text-[#a3a3a3] dark:text-[#404040]">{pData ? 'Unavailable' : '—'}</span>
+                                  <span
+                                    title={comp?.notOffered
+                                      ? 'This provider does not offer a comparable product in this category.'
+                                      : 'No matching pricing data ingested yet — this does not mean the provider lacks the product.'}
+                                    className="text-[10px] uppercase tracking-widest text-[#a3a3a3] dark:text-[#404040]"
+                                  >
+                                    {pData ? (comp?.notOffered ? 'Not offered' : 'No data') : '—'}
+                                  </span>
                                 )}
                               </div>
                             );
@@ -665,9 +672,20 @@ export default function WorkloadDetails() {
                           }
                           const comp = results[provider].components.find((x: any) => x.componentId === c.id);
                           if (!comp || comp.instanceType === 'N/A') {
+                            // "Not offered" = the provider genuinely has no such product
+                            // (config/not_offered.ts); plain "No data" = we haven't ingested
+                            // a matching row — our gap, not the provider's.
+                            const notOffered = comp?.notOffered === true;
                             return (
                               <td key={provider} className="py-3 px-4 align-middle text-center">
-                                <span className="text-[10px] uppercase tracking-widest text-[#a3a3a3] dark:text-[#404040]">Unavailable</span>
+                                <span
+                                  title={notOffered
+                                    ? 'This provider does not offer a comparable product in this category.'
+                                    : 'No matching pricing data ingested yet — this does not mean the provider lacks the product.'}
+                                  className="text-[10px] uppercase tracking-widest text-[#a3a3a3] dark:text-[#404040]"
+                                >
+                                  {notOffered ? 'Not offered' : 'No data'}
+                                </span>
                               </td>
                             );
                           }

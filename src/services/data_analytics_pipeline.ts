@@ -15,6 +15,10 @@ const STREAMING_ENGINES = new Set([
   'Event Hubs',
   'ApsaraMQ for Kafka',
   'Kafka',
+  // Oracle's streaming row was missing from this set, so it was filed as
+  // 'data_warehouse' — making Oracle show N/A for streaming components even
+  // though the row exists.
+  'OCI Streaming',
 ]);
 
 function analyticsCategory(engine: string): string {

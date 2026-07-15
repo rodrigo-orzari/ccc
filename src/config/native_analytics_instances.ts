@@ -53,4 +53,7 @@ export const NATIVE_ANALYTICS_INSTANCES: NativeAnalyticsConfig[] = [
 
   { provider: 'oracle', engine: 'OCI Streaming', tier: 'Standard', deploymentType: 'Provisioned', computeUnitName: 'Storage GB-Hour', pricePerNormalizedUnit: 0.025 },
   { provider: 'alibaba', engine: 'ApsaraMQ for Kafka', tier: 'Standard', deploymentType: 'Provisioned', computeUnitName: 'Hour', pricePerNormalizedUnit: 0.2 },
+  // NOTE: DigitalOcean's Managed Kafka streaming row lives in
+  // digitalocean_data_analytics.ts (its own adapter) — not here; this file's
+  // adapter only runs for aws/gcp/azure.
 ];

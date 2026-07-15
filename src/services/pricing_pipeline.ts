@@ -271,12 +271,26 @@ export class AzureAdapter extends BaseAdapter {
       if (!sku) continue;
 
       const productName: string = (item.productName ?? '').toLowerCase();
+      const meterName: string = (item.meterName ?? '').toLowerCase();
       const os = productName.includes('windows') ? 'Windows' : 'Linux';
 
       // Skip dev-test pricing
       if (productName.includes('dev/test')) continue;
 
-      const isSpot = productName.includes('spot') || productName.includes('low priority');
+      // Skip classic Cloud Services meters. They share the VM's meterName (e.g.
+      // "B2ats v2") but are a different, pricier product ("Basv2 Series Cloud
+      // Services") that is not a VM SKU — and would otherwise compete with the
+      // real VM row for the same dedupe key.
+      if (productName.includes('cloud services')) continue;
+
+      // Azure puts "Spot"/"Low Priority" in the METER name, not the product name:
+      //   meterName "B2ats v2 Low Priority"  productName "Virtual Machines Basv2 Series"
+      // Checking only productName therefore never matched, so Low-Priority/Spot
+      // rates were ingested and labelled as On-Demand — understating Azure VM
+      // prices by up to ~5x (B2ats_v2 showed $0.00188/hr vs the real $0.0094/hr)
+      // and making Azure look far cheaper than every other provider.
+      const isSpot = meterName.includes('spot') || meterName.includes('low priority')
+        || productName.includes('spot') || productName.includes('low priority');
       const purchaseOption = isSpot ? 'Spot' : 'OnDemand';
 
       const key = `${sku}::${os}::${purchaseOption}`;
@@ -285,6 +299,11 @@ export class AzureAdapter extends BaseAdapter {
 
       const vcpus = this.vcpuFromSku(sku);
       const memoryGb = this.memoryFromSku(sku, vcpus);
+      // Azure's ARM (Ampere Altra) sizes mark ARM with a 'p' immediately after
+      // the vCPU count — Standard_D16ps_v6, Standard_B4ps_v2, Standard_D2pls_v5.
+      // They contain no "arm64" marker, so the previous check labelled every
+      // Azure ARM SKU as x86/Intel.
+      const isArm = /\dp/.test(sku.toLowerCase());
 
       records.push({
         provider: 'azure',
@@ -293,9 +312,9 @@ export class AzureAdapter extends BaseAdapter {
         instanceType: sku,
         vcpus,
         memoryGb,
-        arch: sku.toLowerCase().includes('arm64') ? 'ARM' : 'x86 64',
+        arch: isArm ? 'ARM' : 'x86 64',
         os,
-        cpuVendor: this.getCpuVendor(sku),
+        cpuVendor: isArm ? 'Ampere' : this.getCpuVendor(sku),
         gpuCount: this.getGpuCount(sku),
         geography: 'N. America',
         category: this.classifyAzure(sku, vcpus, memoryGb),
@@ -355,6 +374,15 @@ export class AWSAdapter extends BaseAdapter {
       const vcpus = parseInt(attr.vcpu) || 2;
       let memoryGb = attr.memory ? parseFloat(attr.memory.replace(/,/g, '').split(' ')[0]) : 4;
       if (isNaN(memoryGb)) memoryGb = 4;
+      // The AWS Price List exposes no 'architecture' attribute — it has
+      // physicalProcessor ("AWS Graviton3 Processor") and processorArchitecture
+      // ("64-bit"). So `attr.architecture === 'arm64'` never matched and every
+      // Graviton instance (t4g, m6g, c7g…) was labelled 'x86 64', even though
+      // cpuVendor correctly read 'AWS' off physicalProcessor.
+      const isArm = /graviton/i.test(attr.physicalProcessor || '')
+        || /arm64|aarch64/i.test(attr.processorArchitecture || '')
+        || attr.architecture === 'arm64';
+
       records.push({
         provider: 'aws',
         service: 'EC2',
@@ -362,7 +390,7 @@ export class AWSAdapter extends BaseAdapter {
         instanceType: attr.instanceType,
         vcpus,
         memoryGb,
-        arch: attr.architecture === 'arm64' ? 'ARM' : 'x86 64',
+        arch: isArm ? 'ARM' : 'x86 64',
         os,
         cpuVendor: this.getCpuVendor(attr.physicalProcessor || ''),
         gpuCount: attr.gpu ? parseInt(attr.gpu) : 0,
@@ -816,7 +844,16 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
         cpuVendor: inst.cpuVendor,
         gpuCount,
         geography: ALIBABA_GEOGRAPHY,
-        category: 'General purpose',
+        // Classify by memory:vCPU ratio (same thresholds as BaseAdapter.
+        // categoryByRatio) — hardcoding 'General purpose' here mislabeled the
+        // c7 (compute-optimized) and r7 (memory-optimized) families, making
+        // Alibaba show N/A for any 'Compute optimized' workload requirement.
+        category: (() => {
+          const ratio = inst.vcpus > 0 ? inst.memory / inst.vcpus : 4;
+          if (ratio <= 2.1) return 'Compute optimized';
+          if (ratio >= 7.5) return 'Memory optimized';
+          return 'General purpose';
+        })(),
         price,
         unit: 'Hour',
         dataSource: 'live_api' as const,
