@@ -115,8 +115,8 @@
     "semantic_hash": ""
   },
   "src/services/database_pipeline.ts": {
-    "mtime": 1784133787.8820205,
-    "ast_hash": "cff8f9a8dfcae1a2c13496f960b41495",
+    "mtime": 1783916225.5307548,
+    "ast_hash": "084dfea0a2f572481b8ed8fb9450ba70",
     "semantic_hash": ""
   },
   "src/services/ingest.ts": {
@@ -140,8 +140,8 @@
     "semantic_hash": ""
   },
   "src/services/pricing_pipeline.ts": {
-    "mtime": 1784133619.2775686,
-    "ast_hash": "e83d1c957085c43dd31e72d3cd89c3b1",
+    "mtime": 1783916773.308305,
+    "ast_hash": "9bb41897a7bcc1457f86ee26ca509555",
     "semantic_hash": ""
   },
   "src/services/serverless_adapters_live.ts": {
@@ -240,13 +240,13 @@
     "semantic_hash": ""
   },
   "src/services/data_analytics_pipeline.ts": {
-    "mtime": 1784133351.2647328,
-    "ast_hash": "662a1d3ec5fa581ed6c9e8764b5a2344",
+    "mtime": 1783533848.2370577,
+    "ast_hash": "4b0026b86685c53ca301c0e809f85d79",
     "semantic_hash": ""
   },
   "src/config/native_analytics_instances.ts": {
-    "mtime": 1784134079.698813,
-    "ast_hash": "d51e549ed13ba2a5cdcb79bf172ca3b1",
+    "mtime": 1781935543.3657951,
+    "ast_hash": "04a3ab83b296b62fce251048aecde49d",
     "semantic_hash": ""
   },
   "src/workers/scheduler.ts": {
@@ -370,8 +370,8 @@
     "semantic_hash": ""
   },
   "src/config/alibaba_database_instances.ts": {
-    "mtime": 1784133759.6659443,
-    "ast_hash": "fc8eb5b7ecebe8f6fc1504ccf455432d",
+    "mtime": 1781587736.4948428,
+    "ast_hash": "d6348b579f98caed212dbf761a72cd3d",
     "semantic_hash": ""
   },
   "src/config/alibaba_instances.ts": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
-    "mtime": 1784133880.4874983,
-    "ast_hash": "5b075e685c73c82682fb3e8f99963f78",
+    "mtime": 1783052604.6979668,
+    "ast_hash": "8a32851104a37778524b0a7e501ccde9",
     "semantic_hash": ""
   },
   "src/services/ai_pipeline.ts": {
@@ -570,8 +570,8 @@
     "semantic_hash": ""
   },
   "src/config/integration.ts": {
-    "mtime": 1784133837.568891,
-    "ast_hash": "58ad798a520c88c0cc2d085e3dc9a8d0",
+    "mtime": 1783916674.0051668,
+    "ast_hash": "08e30b001d0083845677c5ce993aa20a",
     "semantic_hash": ""
   },
   "src/services/app_hosting_pipeline.ts": {
@@ -580,13 +580,13 @@
     "semantic_hash": ""
   },
   "src/app/api/workloads/route.ts": {
-    "mtime": 1784133950.7255912,
-    "ast_hash": "a6b7972fc17fd586b265c63240c536cd",
+    "mtime": 1783917341.698064,
+    "ast_hash": "9c4fa0a72b9e9e193e5d100ae084f906",
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1784134001.6929197,
-    "ast_hash": "ed0c1db479529434f9c21ff2ef7f9ce8",
+    "mtime": 1783915902.2031605,
+    "ast_hash": "db40f59f7d91c1cf430b0884f2969946",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -635,8 +635,8 @@
     "semantic_hash": ""
   },
   "src/services/security_pipeline.ts": {
-    "mtime": 1784133805.1569352,
-    "ast_hash": "1d3549c1e0a8879ee1209b7f69824fb7",
+    "mtime": 1782006141.6526368,
+    "ast_hash": "02e71a2b9317d3a5b9ce6de4cb54ec87",
     "semantic_hash": ""
   },
   "src/config/vector_databases.ts": {
@@ -832,11 +832,6 @@
   "public/rodrigo-orzari.png": {
     "mtime": 1783917032.6497684,
     "ast_hash": "a2d85f057e6b38b52733300079a152aa",
-    "semantic_hash": ""
-  },
-  "src/config/not_offered.ts": {
-    "mtime": 1784133929.0016477,
-    "ast_hash": "acb695608ee43dfa68264eb429d31e99",
     "semantic_hash": ""
   }
 }
