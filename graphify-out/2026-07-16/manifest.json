@@ -15,8 +15,8 @@
     "semantic_hash": "0e084414b83e9bbb7c430d09df573f59"
   },
   "package.json": {
-    "mtime": 1783457956.6774528,
-    "ast_hash": "d49edd825f7429a73b573c6bf3833a7f",
+    "mtime": 1784243450.1359057,
+    "ast_hash": "cf483ef85978fead8e79a0288dd800af",
     "semantic_hash": ""
   },
   "playwright.config.ts": {
@@ -390,8 +390,8 @@
     "semantic_hash": ""
   },
   "src/components/Footer.tsx": {
-    "mtime": 1784232537.6934555,
-    "ast_hash": "f7d9dbcd612484a4cfa7029a89c4aabf",
+    "mtime": 1784243503.0002382,
+    "ast_hash": "fc3de9f8d2161f354702f503ddcd76c8",
     "semantic_hash": ""
   },
   "src/components/PricingTable.tsx": {
@@ -857,6 +857,31 @@
   "src/app/sponsors/page.tsx": {
     "mtime": 1784236179.170086,
     "ast_hash": "9ee4878feac52776bc99d3bb47d07967",
+    "semantic_hash": ""
+  },
+  "src/app/blog/[slug]/page.tsx": {
+    "mtime": 1784243537.5692265,
+    "ast_hash": "4a0f9048a547cfb86925199970fdc64f",
+    "semantic_hash": ""
+  },
+  "src/app/blog/page.tsx": {
+    "mtime": 1784243484.2178795,
+    "ast_hash": "33a1994b57ee727f8a00bf000dbb7359",
+    "semantic_hash": ""
+  },
+  "src/lib/blog.ts": {
+    "mtime": 1784243474.4822502,
+    "ast_hash": "553c6d8adacff8855959f1774b032892",
+    "semantic_hash": ""
+  },
+  "src/content/blog/the-hidden-costs-of-managed-services.md": {
+    "mtime": 1784243572.691003,
+    "ast_hash": "68b90d2e6c65839e0839bf7cc156dbcf",
+    "semantic_hash": ""
+  },
+  "src/content/blog/welcome.md": {
+    "mtime": 1784243468.09174,
+    "ast_hash": "a34842cd9d3969f43bd19a9aafb770d9",
     "semantic_hash": ""
   }
 }
