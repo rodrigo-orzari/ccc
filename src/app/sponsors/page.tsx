@@ -161,7 +161,7 @@ export default function SponsorsPage() {
                   Monthly Traffic
                 </div>
                 <div className="summary-card-value">
-                  --
+                  200+
                 </div>
                 <div className="summary-card-sub">
                   unique visitors
@@ -180,7 +180,7 @@ export default function SponsorsPage() {
                   Top Geographies
                 </div>
                 <div className="summary-card-value text-xl flex items-center justify-center h-full pt-1">
-                  US, EU, IN
+                  US, Global
                 </div>
               </div>
               <div className="summary-card">
@@ -188,7 +188,7 @@ export default function SponsorsPage() {
                   Desktop vs Mobile
                 </div>
                 <div className="summary-card-value text-xl flex items-center justify-center h-full pt-1">
-                  --% Desktop
+                  85% Desktop
                 </div>
               </div>
             </div>

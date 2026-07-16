@@ -229,6 +229,17 @@ export default function WorkloadDetails() {
     };
   }, []);
 
+  // Sync workload_id to Microsoft Clarity Custom Tags
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof (window as any).clarity === 'function' && workload) {
+      try {
+        (window as any).clarity("set", "workload_id", workload.id);
+      } catch (err) {
+        console.warn("Clarity set failed", err);
+      }
+    }
+  }, [workload]);
+
   const scrollLeft = () => {
     carouselRef.current?.scrollBy({ left: -280, behavior: 'smooth' });
   };
