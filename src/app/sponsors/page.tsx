@@ -92,10 +92,7 @@ export default function SponsorsPage() {
             <div className="text-[var(--muted)] text-sm leading-relaxed">
               <p className="mb-4">
                 CompareCloudCosts.com remains free and unbiased thanks to the support of our sponsors. 
-                These companies help cover our infrastructure costs so we can continue providing transparent cloud pricing data to IT Managers, Product Owners, and other tech professionals seeking ways to streamline their cloud investments.
-              </p>
-              <p className="mb-4">
-                Please take a moment to explore our sponsors' offerings, and if you reach out to them, let them know you discovered them through CompareCloudCosts.com!
+                These companies help cover our infrastructure costs so we can continue providing transparent cloud pricing data to IT Managers, Product Owners, and other tech professionals seeking ways to streamline their cloud investments. Please take a moment to explore our sponsors' offerings, and if you reach out to them, let them know you discovered them through CompareCloudCosts.com.
               </p>
             </div>
           </div>
@@ -159,7 +156,7 @@ export default function SponsorsPage() {
               Audience & Reach
             </h2>
             <p className="text-sm text-[var(--muted)] mb-4">
-              A snapshot of our global reach and the highly-qualified technical audience you can connect with by sponsoring.
+              A snapshot of our global reach and the highly-qualified technical audience you can connect with by sponsoring. Last update July 16, 2026.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
@@ -336,7 +333,7 @@ export default function SponsorsPage() {
           {/* Become a sponsor CTA */}
           <div className="text-center pb-8">
             <p className="text-[var(--muted)] text-sm">
-              Interested in becoming a sponsor? See our <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising Docs</Link> or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
+              Interested in becoming a sponsor? See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising with Us</Link> in the Documentation or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
             </p>
           </div>
 
