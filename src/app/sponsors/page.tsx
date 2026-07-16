@@ -324,6 +324,30 @@ export default function SponsorsPage() {
                 </a>
               </div>
 
+              {/* Traffic Sources Card */}
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+                <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#f59e0b1a', color: '#f59e0b' }}>
+                    SOURCES
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--muted)]">
+                    REFERRERS
+                  </span>
+                </div>
+                <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">Organic & LinkedIn</h3>
+                <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
+                  Strong presence in organic search and professional networks, showing your audience actively discovers us through trusted channels.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#f59e0b40] bg-[#f59e0b12] text-[#f59e0b]">GOOGLE</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#3b82f640] bg-[#3b82f612] text-[#3b82f6]">LINKEDIN</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#06b6d440] bg-[#06b6d412] text-[#06b6d4]">DIRECT</span>
+                </div>
+                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
+                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+
             </div>
           </div>
 
