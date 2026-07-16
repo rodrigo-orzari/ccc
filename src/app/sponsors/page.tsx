@@ -87,11 +87,18 @@ export default function SponsorsPage() {
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">
               Our Sponsors
             </h1>
-            <p className="text-[var(--muted)] text-sm leading-relaxed">
-              CompareCloudCosts remains free and unbiased thanks to the generous support of our sponsors. 
-              These companies help cover our infrastructure costs so we can continue providing transparent cloud pricing data to the community.
-              Interested in becoming a sponsor? See our <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising Docs</Link> or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
-            </p>
+            <div className="text-[var(--muted)] text-sm leading-relaxed">
+              <p className="mb-4">
+                CompareCloudCosts.com remains free and unbiased thanks to the support of our sponsors. 
+                These companies help cover our infrastructure costs so we can continue providing transparent cloud pricing data to IT Managers, Product Owners, and other tech professionals seeking ways to streamline their cloud investments.
+              </p>
+              <p className="mb-4">
+                Please take a moment to explore our sponsors' offerings, and if you reach out to them, let them know you discovered them through CompareCloudCosts.com!
+              </p>
+              <p>
+                Interested in becoming a sponsor? See our <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising Docs</Link> or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
+              </p>
+            </div>
           </div>
 
           {/* Divider */}
@@ -155,42 +162,103 @@ export default function SponsorsPage() {
             <p className="text-sm text-[var(--muted)] mb-4">
               A snapshot of our global reach and the highly-qualified technical audience you can connect with by sponsoring.
             </p>
-            <div className="summary-cards">
-              <div className="summary-card">
-                <div className="summary-card-label" title="Average Monthly Traffic">
-                  Monthly Traffic
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              
+              {/* Traffic Card */}
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+                <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#2563eb1a', color: '#2563eb' }}>
+                    TRAFFIC
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--muted)]">
+                    MONTHLY
+                  </span>
                 </div>
-                <div className="summary-card-value">
-                  200+
+                <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">200+ Unique Visitors</h3>
+                <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
+                  Consistent monthly traffic of technical professionals comparing cloud infrastructure costs.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#2563eb40] bg-[#2563eb12] text-[#2563eb]">ORGANIC</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#16a34a40] bg-[#16a34a12] text-[#16a34a]">LINKEDIN</span>
                 </div>
-                <div className="summary-card-sub">
-                  unique visitors
-                </div>
+                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
+                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
               </div>
-              <div className="summary-card">
-                <div className="summary-card-label" title="Top Audience Roles">
-                  Primary Roles
+
+              {/* Roles Card */}
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+                <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#9333ea1a', color: '#9333ea' }}>
+                    AUDIENCE
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--muted)]">
+                    ROLES
+                  </span>
                 </div>
-                <div className="summary-card-value text-xl flex items-center justify-center h-full pt-1">
-                  Engineers & Architects
+                <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">Engineers & Architects</h3>
+                <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
+                  Our users are the technical decision-makers actively evaluating cloud architectures and tools.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#eab30840] bg-[#eab30812] text-[#eab308]">DEVOPS</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#ef444440] bg-[#ef444412] text-[#ef4444]">CTO</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#06b6d440] bg-[#06b6d412] text-[#06b6d4]">SRE</span>
                 </div>
+                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
+                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
               </div>
-              <div className="summary-card">
-                <div className="summary-card-label" title="Top Geographies">
-                  Top Geographies
+
+              {/* Geo Card */}
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+                <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#16a34a1a', color: '#16a34a' }}>
+                    DEMOGRAPHICS
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--muted)]">
+                    GLOBAL
+                  </span>
                 </div>
-                <div className="summary-card-value text-xl flex items-center justify-center h-full pt-1">
-                  US, Global
+                <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">US & Global Reach</h3>
+                <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
+                  While heavily concentrated in the United States, our traffic spans cloud hubs globally.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#3b82f640] bg-[#3b82f612] text-[#3b82f6]">US</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#f9731640] bg-[#f9731612] text-[#f97316]">EU</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#8b5cf640] bg-[#8b5cf612] text-[#8b5cf6]">IN</span>
                 </div>
+                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
+                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
               </div>
-              <div className="summary-card">
-                <div className="summary-card-label" title="Device Breakdown">
-                  Desktop vs Mobile
+
+              {/* Device Card */}
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+                <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#f59e0b1a', color: '#f59e0b' }}>
+                    PLATFORM
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--muted)]">
+                    DESKTOP
+                  </span>
                 </div>
-                <div className="summary-card-value text-xl flex items-center justify-center h-full pt-1">
-                  85% Desktop
+                <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">85% Desktop</h3>
+                <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
+                  Users visit CCC while actively working on their PCs, indicating high-intent research behavior.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#14b8a640] bg-[#14b8a612] text-[#14b8a6]">WINDOWS</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#64748b40] bg-[#64748b12] text-[#64748b]">MAC</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#ec489940] bg-[#ec489912] text-[#ec4899]">LINUX</span>
                 </div>
+                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
+                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
               </div>
+
             </div>
           </div>
 
