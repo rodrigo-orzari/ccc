@@ -127,10 +127,16 @@ Please refer directly to the official tools for exact quotes:
 - **Alibaba Cloud:** [Alibaba Cloud Pricing Calculator](https://www.alibabacloud.com/pricing-calculator)
 - **OpenAI:** [OpenAI API Pricing](https://openai.com/api/pricing/)
 - **Anthropic:** [Anthropic Pricing](https://www.anthropic.com/pricing)
+- **Pinecone:** [Pinecone Pricing](https://www.pinecone.io/pricing/)
+- **Milvus (Zilliz):** [Zilliz Cloud Pricing](https://zilliz.com/pricing)
+- **Qdrant:** [Qdrant Pricing](https://qdrant.tech/pricing/)
+- **Weaviate:** [Weaviate Pricing](https://weaviate.io/pricing)
+- **Chroma:** [Chroma Pricing](https://www.trychroma.com/pricing)
+- **Cloudflare:** [Cloudflare Pricing](https://www.cloudflare.com/plans/)
 
 ### No warranties or liability
 
-The pricing data on this platform is provided as-is for informational and comparative purposes only. We make no warranties regarding accuracy, completeness, or fitness for any particular purpose. Users should independently verify all pricing before making purchasing decisions.
+The pricing data on this platform is provided "as-is" for informational and comparative purposes only. comparecloudcosts.com, along with any of our featured sponsors or advertisers, makes no warranties or guarantees regarding the accuracy, completeness, or fitness for any particular purpose of the data presented. Neither comparecloudcosts.com nor any of its sponsors shall be held responsible or liable for any discrepancies, pricing changes, or financial consequences resulting from the use of this information. Users should independently verify all pricing directly with the official cloud providers before making any purchasing decisions.
 
 [↑ Go back to the top](#terms-of-use)
 

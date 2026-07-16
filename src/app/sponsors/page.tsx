@@ -92,7 +92,7 @@ export default function SponsorsPage() {
             <div className="text-[var(--muted)] text-sm leading-relaxed">
               <p className="mb-4">
                 CompareCloudCosts.com remains free and unbiased thanks to the support of our sponsors. 
-                These companies help cover our infrastructure costs so we can continue providing transparent cloud pricing data to IT Managers, Product Owners, and other tech professionals seeking ways to streamline their cloud investments. Please take a moment to explore our sponsors' offerings, and if you reach out to them, let them know you discovered them through CompareCloudCosts.com.
+                These companies help cover our infrastructure costs so we can continue providing transparent cloud pricing data to IT Managers, Product Owners, and other tech professionals seeking ways to streamline their cloud investments. Please take a moment to explore our sponsors' offerings, and if you reach out to them, let them know you discovered them through CompareCloudCosts.com. Interested in becoming a sponsor? Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising with Us</Link> in the Documentation or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
               </p>
             </div>
           </div>
@@ -106,7 +106,7 @@ export default function SponsorsPage() {
               Active Sponsors
             </h2>
             <p className="text-sm text-[var(--muted)] mb-6">
-              Discover the partners that make this project possible.
+              Discover the sponsors that make this project possible.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -349,16 +349,6 @@ export default function SponsorsPage() {
               </div>
 
             </div>
-          </div>
-
-          {/* Divider */}
-          <div className="h-px bg-[var(--border)] my-12" />
-
-          {/* Become a sponsor CTA */}
-          <div className="text-center pb-8">
-            <p className="text-[var(--muted)] text-sm">
-              Interested in becoming a sponsor? See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising with Us</Link> in the Documentation or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
-            </p>
           </div>
 
         </main>

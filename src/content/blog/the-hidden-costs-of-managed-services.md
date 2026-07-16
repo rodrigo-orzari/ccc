@@ -5,7 +5,7 @@ excerpt: "Your managed database costs are double what you expected. Your serverl
 author: 'Rodrigo Orzari'
 ---
 
-## Introduction
+## 👋 Introduction
 
 You've chosen your cloud provider. You've planned your architecture. You've estimated your monthly bill. And then reality hits.
 
@@ -19,7 +19,7 @@ Let's talk about the hidden costs that blindside most teams, and why normalizati
 
 ---
 
-## The High Availability Surcharge: Your First Shock
+## 🚨 The High Availability Surcharge: Your First Shock
 
 When you move a database to the cloud, redundancy feels automatic. It's not.
 
@@ -33,7 +33,7 @@ The lesson here isn't that HA is bad—it's essential for production. The lesson
 
 ---
 
-## Managed Database Premiums: The Simplicity Tax
+## 💸 Managed Database Premiums: The Simplicity Tax
 
 Now let's compare apples to apples.
 
@@ -51,7 +51,7 @@ The question isn't "which is cheapest?" It's "which is right for your workload a
 
 ---
 
-## Serverless Database Billing: The Unpredictability Problem
+## 🎢 Serverless Database Billing: The Unpredictability Problem
 
 Serverless databases promise auto-scaling and pay-as-you-go pricing. They deliver—but the bill might surprise you.
 
@@ -65,7 +65,7 @@ The hidden cost of serverless isn't the per-unit pricing—it's the operational 
 
 ---
 
-## Proprietary vs. Open Source: Locking In at 3x Cost
+## 🔒 Proprietary vs. Open Source: Locking In at 3x Cost
 
 Here's where things get strategic.
 
@@ -83,7 +83,7 @@ This isn't an argument against proprietary databases. It's an argument for makin
 
 ---
 
-## The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help)
+## 🧩 The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help)
 
 Here's the core problem: **No two providers use the same naming conventions, capacity units, or pricing models.**
 
@@ -101,7 +101,7 @@ Finding the cheapest cloud VM shouldn't require a data science degree. But witho
 
 ---
 
-## Storage Redundancy Multipliers: The Invisible Cost Driver
+## 💾 Storage Redundancy Multipliers: The Invisible Cost Driver
 
 Let's talk about storage, because it adds another dimension to the puzzle.
 
@@ -123,7 +123,7 @@ For large-scale storage workloads (petabytes, not terabytes), these multipliers 
 
 ---
 
-## Putting It Together: The Real Cost of Managed Services
+## 🏗️ Putting It Together: The Real Cost of Managed Services
 
 You chose managed services for good reasons: reduced operational overhead, built-in reliability, simplified scaling. Those benefits are real. But they come with hidden costs—surcharges for HA, premiums for simplicity, unpredictability in serverless, lock-in with proprietary databases, and multipliers across storage tiers.
 
@@ -137,7 +137,7 @@ Because cloud cost optimization isn't about picking the cheapest provider. It's 
 
 ---
 
-## Call to Action
+## 🚀 Call to Action
 
 **See for yourself.**
 
