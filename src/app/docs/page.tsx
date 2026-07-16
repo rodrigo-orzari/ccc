@@ -802,9 +802,9 @@ const DocsPage: React.FC = () => {
             </p>
             <p>
               Sponsorship slots are available on the <Link href="/datacenters">Datacenters</Link> page,
-              the <Link href="/workloads">Workloads</Link> catalog, and individual workload pages — so you
-              can target a broad audience or a specific architecture pattern relevant to your product (for
-              example, a security provider sponsoring the Compliance-Ready Web Application workload).
+              the <Link href="/workloads">Workloads</Link> catalog, and individual workload pages.
+              Additionally, as a fourth place of brand visibility, all active sponsors are featured on our dedicated <Link href="/sponsors">Sponsors</Link> page. 
+              This inclusion gives you a dedicated card featuring your company logo, a brief description (up to 500 characters), and a direct link to your sponsored page or product.
             </p>
             <h3 id="advertising-specs">Image Specs</h3>
             <p>
