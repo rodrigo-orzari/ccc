@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { Footer, ProductTypeSelector, DonationModal } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { DEFAULT_PRIORITIES } from '@/config/workload_priorities';
-import { WORKLOADS_LISTING_SPONSOR } from '@/config';
+import { WORKLOADS_LISTING_SPONSOR, PROVIDERS } from '@/config';
+import { isNotOffered } from '@/config/not_offered';
 import type { ProductType } from '@/types';
 
 const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
@@ -23,6 +24,8 @@ const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
 };
 
 const PRODUCT_TYPE_ORDER: ProductType[] = ['vm', 'database', 'serverless', 'containers', 'networking', 'data-analytics', 'storage', 'ai', 'app-hosting', 'security', 'integration'];
+
+const HYPERSCALERS = PROVIDERS.slice(0, 6);
 
 const PRODUCT_TYPE_EMOJIS: Record<ProductType, string> = {
   vm: '🖥️',
@@ -257,26 +260,56 @@ export default function WorkloadsCatalog() {
               <p className="text-[var(--muted)] mt-1 text-[11px]">Try adjusting your search terms.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {filteredWorkloads.map((workload, index) => (
                 <Link
                   key={workload.id}
                   href={`/workloads/${workload.id}`}
-                  className={`border border-[var(--border)] rounded p-3 hover:border-[var(--text)] transition-colors flex flex-col group cursor-pointer ${
+                  className={`border border-[var(--border)] rounded p-4 hover:border-[var(--text)] transition-colors flex flex-col group cursor-pointer ${
                     index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'
                   }`}
                   style={{ textDecoration: 'none' }}
                 >
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="text-lg shrink-0 leading-none">{workload.icon}</span>
-                    <h3 className="text-[13px] font-bold text-[var(--text)] truncate" title={workload.name}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl shrink-0 leading-none">{workload.icon}</span>
+                    <h3 className="text-[15px] font-bold text-[var(--text)] truncate" title={workload.name}>
                       {workload.name}
                     </h3>
                   </div>
-                  <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 line-clamp-2 leading-relaxed">
+                  <p className="text-[var(--muted)] text-[12px] mb-4 flex-1 line-clamp-3 leading-relaxed">
                     {workload.description}
                   </p>
-                  <div className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] group-hover:text-[var(--text)] transition-colors flex justify-between items-center">
+
+                  {/* Provider bubbles showing who supports this workload */}
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {HYPERSCALERS.filter((p) => {
+                      // AI constraint: DO doesn't support GenAI
+                      const hasAI = workload.components.some(c => c.getRequirements(DEFAULT_PRIORITIES)?.productType === 'ai');
+                      if (hasAI && p.id === 'digitalocean') return false;
+
+                      // Configured NotOffered constraints
+                      const excluded = workload.components.some(c => {
+                        const reqs = c.getRequirements(DEFAULT_PRIORITIES);
+                        if (!reqs) return false;
+                        return isNotOffered(p.id, reqs.productType, reqs.category);
+                      });
+                      return !excluded;
+                    }).map((p) => (
+                      <span
+                        key={p.id}
+                        className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0"
+                        style={{
+                          color: p.color,
+                          borderColor: `${p.color}40`,
+                          backgroundColor: `${p.color}12`,
+                        }}
+                      >
+                        {p.name}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto pt-3 border-t border-[var(--border)] text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] group-hover:text-[var(--text)] transition-colors flex justify-between items-center">
                     Configure &amp; Compare <span className="group-hover:translate-x-0.5 transition-transform">→</span>
                   </div>
                 </Link>
