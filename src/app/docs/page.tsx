@@ -801,9 +801,8 @@ const DocsPage: React.FC = () => {
               highly qualified audience at the exact moment they're making buying decisions.
             </p>
             <p>
-              Sponsorship slots are available on the <Link href="/datacenters">Datacenters</Link> page,
-              the <Link href="/workloads">Workloads</Link> catalog, and individual workload pages.
-              Additionally, as a fourth place of brand visibility, all active sponsors are featured on our dedicated <Link href="/sponsors">Sponsors</Link> page. 
+              Sponsorship slots are available on individual workload pages. Additionally, your brand is displayed across the
+              <Link href="/datacenters"> Datacenters</Link> page, the <Link href="/workloads">Workloads</Link> catalog, and inside the CSV file when a user downloads the workload comparison from a page your company sponsors. As a fifth place of brand visibility, all active sponsors are featured on our dedicated <Link href="/sponsors">Sponsors</Link> page.
               This inclusion gives you a dedicated card featuring your company logo, a brief description (up to 500 characters), and a direct link to your sponsored page or product.
             </p>
             <h3 id="advertising-specs">Image Specs</h3>
