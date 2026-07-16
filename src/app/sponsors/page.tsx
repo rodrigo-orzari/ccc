@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Footer } from '@/components';
+import { Footer, ProductTypeSelector } from '@/components';
 
 // Define the dummy sponsor data
 const SPONSORS = [
@@ -80,6 +80,8 @@ export default function SponsorsPage() {
           margin-top: 0.2rem;
         }
       `}</style>
+      
+      <ProductTypeSelector activeProductType={'' as any} />
 
       <div className="flex-1 overflow-auto flex flex-col">
         <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
@@ -157,7 +159,7 @@ export default function SponsorsPage() {
           {/* Audience Stats Placeholder Section */}
           <div className="mb-8 w-full">
             <h2 className="text-xl font-bold text-[var(--text)] mb-1">
-              Our Audience & Reach
+              Audience & Reach
             </h2>
             <p className="text-sm text-[var(--muted)] mb-4">
               A snapshot of our global reach and the highly-qualified technical audience you can connect with by sponsoring.
