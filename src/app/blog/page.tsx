@@ -54,7 +54,7 @@ export default function BlogIndexPage() {
           <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
             <div>
               <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
-                <span className="text-2xl">🤝</span> Sponsor the Blog
+                <span className="text-2xl">🤝</span> Sponsor this page
               </h3>
               <p className="text-[13px] text-[var(--muted)] leading-relaxed">
                 Have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link> or contact hello@comparecloudcosts.com.
@@ -64,6 +64,9 @@ export default function BlogIndexPage() {
               </p>
             </div>
           </div>
+
+          {/* Divider */}
+          <div className="h-px bg-[var(--border)] mb-8" />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {posts.map((post) => (
