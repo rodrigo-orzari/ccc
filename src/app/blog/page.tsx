@@ -37,8 +37,7 @@ export default function BlogIndexPage() {
       
       <ProductTypeSelector activeProductType={'' as any} />
 
-      <div className="flex-1 overflow-auto flex flex-col">
-        <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
+      <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">
               Blog
@@ -96,7 +95,6 @@ export default function BlogIndexPage() {
             )}
           </div>
         </main>
-      </div>
 
       <Footer />
     </div>

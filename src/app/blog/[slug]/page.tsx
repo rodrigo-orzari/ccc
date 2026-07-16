@@ -69,8 +69,7 @@ export default async function BlogPostPage(props: Props) {
       
       <ProductTypeSelector activeProductType={'' as any} />
 
-      <div className="flex-1 overflow-auto flex flex-col">
-        <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[900px] mx-auto">
+      <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[900px] mx-auto">
           
           <div className="mb-8 pb-8 border-b border-[var(--border)]">
             <Link href="/blog" className="inline-flex items-center text-sm font-semibold text-[#2563eb] dark:text-[#818cf8] hover:underline mb-6">
@@ -90,7 +89,7 @@ export default async function BlogPostPage(props: Props) {
             </div>
           </div>
 
-          <article className="prose prose-slate dark:prose-invert prose-lg max-w-none prose-a:text-[#2563eb] dark:prose-a:text-[#818cf8] prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl">
+          <article className="prose prose-slate dark:prose-invert text-[0.9375rem] leading-[1.7] max-w-none prose-a:text-[#2563eb] dark:prose-a:text-[#818cf8] prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl">
             <ReactMarkdown>{post.content}</ReactMarkdown>
           </article>
           
@@ -105,7 +104,6 @@ export default async function BlogPostPage(props: Props) {
           </div>
           
         </main>
-      </div>
 
       <Footer />
     </div>

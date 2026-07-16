@@ -143,4 +143,4 @@ Because cloud cost optimization isn't about picking the cheapest provider. It's 
 
 [Start your free cloud cost benchmark →](https://comparecloudcosts.com) No signup required. Compare your workload across AWS, Azure, Google Cloud, Oracle, and more in minutes. Download the results as CSV. Share with your team.
 
-**For tech consulting firms and ISVs:** If you're helping your customers navigate cloud partnerships—or building your own co-sell strategy with AWS, GCP, or Azure—this benchmark becomes a tool you can offer them. [Learn how Co-Sell Plus helps tech firms scale their cloud GTM →](https://cosellplus.com) and contact us at hello@cosellplus.com. 
+**For tech consulting firms and ISVs:** If you're helping your customers navigate cloud partnerships—or building your own co-sell strategy with AWS, GCP, or Azure—this benchmark becomes a tool you can offer them. [Learn how Co-Sell Plus helps tech firms scale their cloud GTM →](https://cosellplus.com) and contact us at [hello@cosellplus.com](mailto:hello@cosellplus.com). 
