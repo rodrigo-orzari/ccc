@@ -307,9 +307,41 @@ export default function WorkloadDetails() {
 
   // CSV export of the current comparison: one row per component × provider plus a
   // per-provider total row. Honors the active pricing model (PAYG vs Yearly).
+  // Includes workload name and sponsorship header at the top.
   const handleExport = () => {
     if (!workload || !results) return;
     const mult = pricingModel === 'Yearly' ? 12 : 1;
+
+    // Build header rows with workload, sponsorship, and disclaimer info
+    const headerRows: string[] = [];
+    headerRows.push(`# Workload Comparison Report: ${workload.name}`);
+    headerRows.push(`# Generated: ${new Date().toLocaleString()}`);
+    headerRows.push(`# Pricing Model: ${pricingModel}`);
+    headerRows.push('');
+
+    if (workload.sponsor) {
+      headerRows.push('# 🤝 SPONSORED BY');
+      headerRows.push(`# Company: ${workload.sponsor.companyName}`);
+      headerRows.push(`# Learn more: ${workload.sponsor.linkUrl}`);
+      headerRows.push('');
+      headerRows.push('# This report is brought to you by the sponsor above.');
+      headerRows.push('# Consider reaching out to them for solutions that help optimize your cloud costs.');
+    } else {
+      headerRows.push('# 📢 MAKE THIS PAGE YOURS');
+      headerRows.push('# Interested in sponsoring this workload comparison?');
+      headerRows.push('# Reach thousands of cloud decision-makers and engineers.');
+      headerRows.push('# Contact: hello@comparecloudcosts.com');
+      headerRows.push('# Learn more: https://comparecloudcosts.com/sponsors');
+    }
+    headerRows.push('');
+    headerRows.push('# ⚠️  PRICING DISCLAIMER');
+    headerRows.push('# Prices shown are directional estimates based on public provider APIs and pricing pages.');
+    headerRows.push('# These figures are provided "as-is" for comparison purposes only and are not guaranteed to be accurate.');
+    headerRows.push('# Always verify final pricing with official provider calculators before making purchasing decisions.');
+    headerRows.push('# For full terms and conditions, see: https://comparecloudcosts.com/terms');
+    headerRows.push('');
+    headerRows.push('');
+
     const headers = ['Service', ...PROVIDER_IDS.map(p => providerName(p)), ...PROVIDER_IDS.map(p => `${providerName(p)} (${pricingModel === 'Yearly' ? 'USD/yr' : 'USD/mo'})`)];
     const rows: string[][] = [];
     // Only export components that are part of the architecture at the current
@@ -338,10 +370,18 @@ export default function WorkloadDetails() {
     });
     rows.push(totalRow);
 
-    const csv = [headers, ...rows]
-      .map(r => r.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+    const csvContent = [
+      ...headerRows,
+      headers,
+      ...rows
+    ]
+      .map(r => {
+        if (typeof r === 'string') return r;
+        return r.map(cell => `"${String(cell).replace(/"/g, '""')}"`).join(',');
+      })
       .join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;

@@ -835,7 +835,7 @@ const DocsPage: React.FC = () => {
             </p>
             <h3 id="advertising-exclusivity">Sponsorship Exclusivity</h3>
             <p>
-              We want to ensure that our sponsors get high-quality visibility without competing offerings cluttering their space. 
+              We want to ensure that our sponsors get high-quality visibility without competing offerings cluttering their space.
               To achieve this, we apply different levels of exclusivity depending on the page you choose to sponsor:
             </p>
             <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
@@ -846,6 +846,28 @@ const DocsPage: React.FC = () => {
                 <strong>Global Pages (Shared / Carousel):</strong> On high-traffic aggregator pages such as the main <strong>Workloads</strong> page, the <strong>Compliance</strong> page, and the <strong>Datacenters</strong> page, sponsor banners are displayed in a rotating carousel. These spaces are non-exclusive and may feature multiple sponsors.
               </li>
             </ul>
+
+            <h3 id="advertising-csv-downloads">Sponsorship in CSV Downloads</h3>
+            <p>
+              When users download a pricing comparison CSV from a workload page, the file includes a header section with the workload name, generation timestamp, and pricing model used. If the workload has an active sponsor, the CSV header displays the sponsor company name and a link to learn more. If the workload is unsponsored, the header includes information about sponsorship opportunities and how to get involved.
+            </p>
+            <p>
+              This ensures that sponsors receive brand exposure at download time — reaching users who are actively exporting and analyzing cloud cost data — while unsponsored workloads serve as a soft call-to-action for potential sponsors.
+            </p>
+
+            <h3 id="advertising-tracking">Site Analytics & Tracking</h3>
+            <p>
+              We use <a href="https://clarity.microsoft.com/" target="_blank" rel="noopener noreferrer">Microsoft Clarity</a> to track
+              how users interact with the site — including page views, engagement metrics, click patterns, and device/browser data.
+              This helps us understand audience behavior and measure the effectiveness of sponsor placements.
+              All analytics are anonymized and aggregated; individual user data is never shared with sponsors.
+            </p>
+            <p>
+              When evaluating a sponsorship opportunity, you can review our <Link href="/sponsors">Sponsors</Link> page,
+              which features high-level audience metrics including traffic volume, user roles, geographic distribution,
+              engagement depth, and platform breakdown — allowing you to make an informed decision about sponsorship ROI.
+            </p>
+
             <p style={{ marginTop: '1.5rem' }}>
               Interested in sponsoring? Reach out at{' '}
               <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.

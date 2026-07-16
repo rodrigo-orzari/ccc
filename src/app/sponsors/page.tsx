@@ -87,7 +87,7 @@ export default function SponsorsPage() {
         <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">
-              Our Sponsors
+              Sponsors
             </h1>
             <div className="text-[var(--muted)] text-sm leading-relaxed">
               <p className="mb-4">
@@ -96,9 +96,6 @@ export default function SponsorsPage() {
               </p>
               <p className="mb-4">
                 Please take a moment to explore our sponsors' offerings, and if you reach out to them, let them know you discovered them through CompareCloudCosts.com!
-              </p>
-              <p>
-                Interested in becoming a sponsor? See our <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising Docs</Link> or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
               </p>
             </div>
           </div>
@@ -165,7 +162,7 @@ export default function SponsorsPage() {
               A snapshot of our global reach and the highly-qualified technical audience you can connect with by sponsoring.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              
+
               {/* Traffic Card */}
               <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
@@ -207,6 +204,29 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#eab30840] bg-[#eab30812] text-[#eab308]">DEVOPS</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#ef444440] bg-[#ef444412] text-[#ef4444]">CTO</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#06b6d440] bg-[#06b6d412] text-[#06b6d4]">SRE</span>
+                </div>
+                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
+                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+
+              {/* Engagement Depth Card */}
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+                <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#06b6d41a', color: '#06b6d4' }}>
+                    ENGAGEMENT
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--muted)]">
+                    DEPTH
+                  </span>
+                </div>
+                <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">92% Scroll Depth</h3>
+                <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
+                  Users thoroughly explore pricing data, averaging 4.6 pages per session with high scroll engagement.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#06b6d440] bg-[#06b6d412] text-[#06b6d4]">ACTIVE READING</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#3b82f640] bg-[#3b82f612] text-[#3b82f6]">HIGH-INTENT</span>
                 </div>
                 <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
                   Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
@@ -261,7 +281,63 @@ export default function SponsorsPage() {
                 </a>
               </div>
 
+              {/* Traffic Quality Card */}
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+                <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#8b5cf61a', color: '#8b5cf6' }}>
+                    QUALITY
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--muted)]">
+                    RETENTION
+                  </span>
+                </div>
+                <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">34% Return Rate</h3>
+                <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
+                  Returning visitors demonstrate sustained interest in your cloud cost optimization tools and services.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#8b5cf640] bg-[#8b5cf612] text-[#8b5cf6]">QUALIFIED</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#ec489940] bg-[#ec489912] text-[#ec4899]">REPEAT</span>
+                </div>
+                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
+                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+
+              {/* Performance Card */}
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+                <div className="flex items-center gap-1.5 mb-2 flex-wrap">
+                  <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#10b9811a', color: '#10b981' }}>
+                    PERFORMANCE
+                  </span>
+                  <span className="text-[9px] font-medium uppercase tracking-wider px-1.5 py-0.5 rounded border border-[var(--border)] text-[var(--muted)]">
+                    QUALITY
+                  </span>
+                </div>
+                <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">67/100 Score</h3>
+                <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
+                  Optimized Core Web Vitals (LCP, INP, CLS) ensure your ads load fast and don't impact user experience.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#10b98140] bg-[#10b98112] text-[#10b981]">FAST LOAD</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#3b82f640] bg-[#3b82f612] text-[#3b82f6]">SMOOTH</span>
+                </div>
+                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
+                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+
             </div>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-[var(--border)] my-12" />
+
+          {/* Become a sponsor CTA */}
+          <div className="text-center pb-8">
+            <p className="text-[var(--muted)] text-sm">
+              Interested in becoming a sponsor? See our <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising Docs</Link> or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
+            </p>
           </div>
 
         </main>
