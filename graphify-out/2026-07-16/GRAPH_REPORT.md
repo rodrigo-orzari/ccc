@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-07-16)
 
 ## Corpus Check
-- 169 files · ~222,010 words
+- 169 files · ~222,253 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2c2d0f38`
+- Built from commit: `daec5dfa`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -255,7 +255,7 @@ Nodes (5): AlibabaRedisAdapter, AWSDocumentDBAdapter, GCPBigtableAdapter, GCPFir
 
 ### Community 61 - "Community 61"
 Cohesion: 0.20
-Nodes (9): Call to Action, Introduction, Managed Database Premiums: The Simplicity Tax, Proprietary vs. Open Source: Locking In at 3x Cost, Putting It Together: The Real Cost of Managed Services, Serverless Database Billing: The Unpredictability Problem, Storage Redundancy Multipliers: The Invisible Cost Driver, The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help) (+1 more)
+Nodes (9): 🚀 Call to Action, 👋 Introduction, 💸 Managed Database Premiums: The Simplicity Tax, 🔒 Proprietary vs. Open Source: Locking In at 3x Cost, 🏗️ Putting It Together: The Real Cost of Managed Services, 🎢 Serverless Database Billing: The Unpredictability Problem, 💾 Storage Redundancy Multipliers: The Invisible Cost Driver, 🧩 The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help) (+1 more)
 
 ### Community 63 - "Community 63"
 Cohesion: 0.31
@@ -282,7 +282,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **330 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+325 more)
+- **330 isolated node(s):** `Props`, `metadata`, `CATEGORY_ORDER`, `CATEGORY_COLOR`, `PROVIDERS_FOR_CERT` (+325 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **31 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -295,7 +295,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 45` to `Community 8`, `Community 2`, `Community 19`, `Community 7`?**
   _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **What connects `name`, `private`, `version` to the rest of the system?**
+- **What connects `Props`, `metadata`, `CATEGORY_ORDER` to the rest of the system?**
   _330 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._

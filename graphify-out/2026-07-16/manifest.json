@@ -360,8 +360,8 @@
     "semantic_hash": ""
   },
   "src/app/terms/page.tsx": {
-    "mtime": 1783976849.179302,
-    "ast_hash": "a2b35f472c60261b3b1fd7d41bff498c",
+    "mtime": 1784244658.704937,
+    "ast_hash": "86257369d9a2169e3ce326dc476f803a",
     "semantic_hash": ""
   },
   "src/config/alibaba_containers.ts": {
@@ -475,8 +475,8 @@
     "semantic_hash": ""
   },
   "src/app/status/page.tsx": {
-    "mtime": 1783829039.2076056,
-    "ast_hash": "331d812931d5e5896c78c010d7a7ff63",
+    "mtime": 1784244385.8391907,
+    "ast_hash": "9509ef6ae0d6b0c862ab4d7c4414a73c",
     "semantic_hash": ""
   },
   "src/config/ai_models.ts": {
@@ -585,13 +585,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1784234618.973349,
-    "ast_hash": "4085268ace7577a04243177578ae60de",
+    "mtime": 1784244385.8559835,
+    "ast_hash": "710618ef85b375fa04c79d44bc32bea7",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1783915582.2512214,
-    "ast_hash": "5515ff00e9701caed754a9196140bf03",
+    "mtime": 1784244385.8843966,
+    "ast_hash": "d51325f476a7160a0561178eb4bef5bc",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
@@ -605,8 +605,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1783907198.982635,
-    "ast_hash": "8ffe8624975b26431e29eae4b075880c",
+    "mtime": 1784244384.375684,
+    "ast_hash": "1c790b4274aa4f02da517ada97330f36",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -745,8 +745,8 @@
     "semantic_hash": ""
   },
   "src/app/certifications/page.tsx": {
-    "mtime": 1783916005.337994,
-    "ast_hash": "f5edd9d1df48f4755994c24062fe44aa",
+    "mtime": 1784244383.0331907,
+    "ast_hash": "84f2f5223045341ad41afc99a4a29120",
     "semantic_hash": ""
   },
   "src/config/certifications.ts": {
@@ -855,18 +855,18 @@
     "semantic_hash": ""
   },
   "src/app/sponsors/page.tsx": {
-    "mtime": 1784236179.170086,
-    "ast_hash": "9ee4878feac52776bc99d3bb47d07967",
+    "mtime": 1784244478.4416287,
+    "ast_hash": "3534b4a60ede9a1fa06228504f20b569",
     "semantic_hash": ""
   },
   "src/app/blog/[slug]/page.tsx": {
-    "mtime": 1784243537.5692265,
-    "ast_hash": "4a0f9048a547cfb86925199970fdc64f",
+    "mtime": 1784245027.4676118,
+    "ast_hash": "86380b7a4079b2229fa8f84d9ed51706",
     "semantic_hash": ""
   },
   "src/app/blog/page.tsx": {
-    "mtime": 1784243484.2178795,
-    "ast_hash": "33a1994b57ee727f8a00bf000dbb7359",
+    "mtime": 1784245137.2033167,
+    "ast_hash": "0974ce0a16efa73f9f739422ef7232e9",
     "semantic_hash": ""
   },
   "src/lib/blog.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "src/content/blog/the-hidden-costs-of-managed-services.md": {
-    "mtime": 1784243572.691003,
-    "ast_hash": "68b90d2e6c65839e0839bf7cc156dbcf",
+    "mtime": 1784244756.7862206,
+    "ast_hash": "f225907d39eefee1ace8bfd092cf8bc2",
     "semantic_hash": ""
   },
   "src/content/blog/welcome.md": {

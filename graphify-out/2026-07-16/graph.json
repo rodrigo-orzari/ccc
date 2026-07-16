@@ -4,366 +4,6 @@
   "graph": {},
   "nodes": [
     {
-      "label": "package.json",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L1",
-      "id": "package",
-      "community": 0,
-      "norm_label": "package.json"
-    },
-    {
-      "label": "name",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L2",
-      "id": "package_name",
-      "community": 0,
-      "norm_label": "name"
-    },
-    {
-      "label": "private",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L3",
-      "id": "package_private",
-      "community": 0,
-      "norm_label": "private"
-    },
-    {
-      "label": "version",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L4",
-      "id": "package_version",
-      "community": 0,
-      "norm_label": "version"
-    },
-    {
-      "label": "type",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L5",
-      "id": "package_type",
-      "community": 0,
-      "norm_label": "type"
-    },
-    {
-      "label": "scripts",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L6",
-      "id": "package_scripts",
-      "community": 0,
-      "norm_label": "scripts"
-    },
-    {
-      "label": "dev",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L7",
-      "id": "package_scripts_dev",
-      "community": 0,
-      "norm_label": "dev"
-    },
-    {
-      "label": "build",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L8",
-      "id": "package_scripts_build",
-      "community": 0,
-      "norm_label": "build"
-    },
-    {
-      "label": "start",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L9",
-      "id": "package_scripts_start",
-      "community": 0,
-      "norm_label": "start"
-    },
-    {
-      "label": "ingest",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L10",
-      "id": "package_scripts_ingest",
-      "community": 0,
-      "norm_label": "ingest"
-    },
-    {
-      "label": "worker",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L11",
-      "id": "package_scripts_worker",
-      "community": 0,
-      "norm_label": "worker"
-    },
-    {
-      "label": "lint",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L12",
-      "id": "package_scripts_lint",
-      "community": 0,
-      "norm_label": "lint"
-    },
-    {
-      "label": "dependencies",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L14",
-      "id": "package_dependencies",
-      "community": 0,
-      "norm_label": "dependencies"
-    },
-    {
-      "label": "@aws-sdk/client-pricing",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L15",
-      "id": "package_dependencies_aws_sdk_client_pricing",
-      "community": 0,
-      "norm_label": "@aws-sdk/client-pricing"
-    },
-    {
-      "label": "@google/genai",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L16",
-      "id": "package_dependencies_google_genai",
-      "community": 0,
-      "norm_label": "@google/genai"
-    },
-    {
-      "label": "@tailwindcss/postcss",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L17",
-      "id": "package_dependencies_tailwindcss_postcss",
-      "community": 0,
-      "norm_label": "@tailwindcss/postcss"
-    },
-    {
-      "label": "@tailwindcss/typography",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L18",
-      "id": "package_dependencies_tailwindcss_typography",
-      "community": 0,
-      "norm_label": "@tailwindcss/typography"
-    },
-    {
-      "label": "@tanstack/react-query",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L19",
-      "id": "package_dependencies_tanstack_react_query",
-      "community": 0,
-      "norm_label": "@tanstack/react-query"
-    },
-    {
-      "label": "axios",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L20",
-      "id": "package_dependencies_axios",
-      "community": 0,
-      "norm_label": "axios"
-    },
-    {
-      "label": "dotenv",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L21",
-      "id": "package_dependencies_dotenv",
-      "community": 0,
-      "norm_label": "dotenv"
-    },
-    {
-      "label": "gray-matter",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L22",
-      "id": "package_dependencies_gray_matter",
-      "community": 0,
-      "norm_label": "gray-matter"
-    },
-    {
-      "label": "lucide-react",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L23",
-      "id": "package_dependencies_lucide_react",
-      "community": 0,
-      "norm_label": "lucide-react"
-    },
-    {
-      "label": "motion",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L24",
-      "id": "package_dependencies_motion",
-      "community": 0,
-      "norm_label": "motion"
-    },
-    {
-      "label": "next",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L25",
-      "id": "package_dependencies_next",
-      "community": 0,
-      "norm_label": "next"
-    },
-    {
-      "label": "node-cron",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L26",
-      "id": "package_dependencies_node_cron",
-      "community": 0,
-      "norm_label": "node-cron"
-    },
-    {
-      "label": "nodemailer",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L27",
-      "id": "package_dependencies_nodemailer",
-      "community": 0,
-      "norm_label": "nodemailer"
-    },
-    {
-      "label": "postcss",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L28",
-      "id": "package_dependencies_postcss",
-      "community": 0,
-      "norm_label": "postcss"
-    },
-    {
-      "label": "postgres",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L29",
-      "id": "package_dependencies_postgres",
-      "community": 0,
-      "norm_label": "postgres"
-    },
-    {
-      "label": "react",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L30",
-      "id": "package_dependencies_react",
-      "community": 0,
-      "norm_label": "react"
-    },
-    {
-      "label": "react-dom",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L31",
-      "id": "package_dependencies_react_dom",
-      "community": 0,
-      "norm_label": "react-dom"
-    },
-    {
-      "label": "react-markdown",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L32",
-      "id": "package_dependencies_react_markdown",
-      "community": 0,
-      "norm_label": "react-markdown"
-    },
-    {
-      "label": "recharts",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L33",
-      "id": "package_dependencies_recharts",
-      "community": 0,
-      "norm_label": "recharts"
-    },
-    {
-      "label": "tsx",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L34",
-      "id": "package_dependencies_tsx",
-      "community": 0,
-      "norm_label": "tsx"
-    },
-    {
-      "label": "devDependencies",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L36",
-      "id": "package_devdependencies",
-      "community": 0,
-      "norm_label": "devdependencies"
-    },
-    {
-      "label": "@playwright/test",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L37",
-      "id": "package_devdependencies_playwright_test",
-      "community": 0,
-      "norm_label": "@playwright/test"
-    },
-    {
-      "label": "@types/node",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L38",
-      "id": "package_devdependencies_types_node",
-      "community": 0,
-      "norm_label": "@types/node"
-    },
-    {
-      "label": "@types/nodemailer",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L39",
-      "id": "package_devdependencies_types_nodemailer",
-      "community": 0,
-      "norm_label": "@types/nodemailer"
-    },
-    {
-      "label": "autoprefixer",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L40",
-      "id": "package_devdependencies_autoprefixer",
-      "community": 0,
-      "norm_label": "autoprefixer"
-    },
-    {
-      "label": "tailwindcss",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L41",
-      "id": "package_devdependencies_tailwindcss",
-      "community": 0,
-      "norm_label": "tailwindcss"
-    },
-    {
-      "label": "typescript",
-      "file_type": "code",
-      "source_file": "package.json",
-      "source_location": "L42",
-      "id": "package_devdependencies_typescript",
-      "community": 0,
-      "norm_label": "typescript"
-    },
-    {
       "label": "page.tsx",
       "file_type": "code",
       "source_file": "src/app/blog/[slug]/page.tsx",
@@ -436,40 +76,445 @@
       "norm_label": "blogindexpage()"
     },
     {
-      "label": "Footer.tsx",
+      "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
+      "source_file": "src/app/certifications/page.tsx",
       "source_location": "L1",
-      "id": "components_footer",
-      "community": 48,
-      "norm_label": "footer.tsx"
+      "id": "certifications_page",
+      "community": 14,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "CATEGORY_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L15",
+      "id": "certifications_page_category_order",
+      "community": 14,
+      "norm_label": "category_order"
+    },
+    {
+      "label": "CATEGORY_COLOR",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L19",
+      "id": "certifications_page_category_color",
+      "community": 14,
+      "norm_label": "category_color"
+    },
+    {
+      "label": "PROVIDERS_FOR_CERT",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L27",
+      "id": "certifications_page_providers_for_cert",
+      "community": 14,
+      "norm_label": "providers_for_cert"
+    },
+    {
+      "label": "CertificationsPage()",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L36",
+      "id": "certifications_page_certificationspage",
+      "community": 14,
+      "norm_label": "certificationspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L1",
+      "id": "datacenters_page",
+      "community": 67,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "PROVIDER_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L15",
+      "id": "datacenters_page_provider_colors",
+      "community": 67,
+      "norm_label": "provider_colors"
+    },
+    {
+      "label": "Stat()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L31",
+      "id": "datacenters_page_stat",
+      "community": 67,
+      "norm_label": "stat()"
+    },
+    {
+      "label": "StatusDot()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L43",
+      "id": "datacenters_page_statusdot",
+      "community": 67,
+      "norm_label": "statusdot()"
+    },
+    {
+      "label": "ProviderBadge()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L49",
+      "id": "datacenters_page_providerbadge",
+      "community": 67,
+      "norm_label": "providerbadge()"
+    },
+    {
+      "label": "ProviderRow()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L61",
+      "id": "datacenters_page_providerrow",
+      "community": 67,
+      "norm_label": "providerrow()"
+    },
+    {
+      "label": "GEO_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L158",
+      "id": "datacenters_page_geo_colors",
+      "community": 67,
+      "norm_label": "geo_colors"
+    },
+    {
+      "label": "ViewToggle()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L167",
+      "id": "datacenters_page_viewtoggle",
+      "community": 67,
+      "norm_label": "viewtoggle()"
+    },
+    {
+      "label": "InfraChart()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L186",
+      "id": "datacenters_page_infrachart",
+      "community": 67,
+      "norm_label": "infrachart()"
+    },
+    {
+      "label": "CoverageChart()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L212",
+      "id": "datacenters_page_coveragechart",
+      "community": 67,
+      "norm_label": "coveragechart()"
+    },
+    {
+      "label": "DatacentersPage()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L236",
+      "id": "datacenters_page_datacenterspage",
+      "community": 67,
+      "norm_label": "datacenterspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/sponsors/page.tsx",
+      "source_location": "L1",
+      "id": "sponsors_page",
+      "community": 59,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "SPONSORS",
+      "file_type": "code",
+      "source_file": "src/app/sponsors/page.tsx",
+      "source_location": "L8",
+      "id": "sponsors_page_sponsors",
+      "community": 59,
+      "norm_label": "sponsors"
+    },
+    {
+      "label": "SponsorsPage()",
+      "file_type": "code",
+      "source_file": "src/app/sponsors/page.tsx",
+      "source_location": "L19",
+      "id": "sponsors_page_sponsorspage",
+      "community": 59,
+      "norm_label": "sponsorspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L1",
+      "id": "status_page",
+      "community": 13,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "PipelineStatus",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L8",
+      "id": "status_page_pipelinestatus",
+      "community": 13,
+      "norm_label": "pipelinestatus"
+    },
+    {
+      "label": "ProviderStatus",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L18",
+      "id": "status_page_providerstatus",
+      "community": 13,
+      "norm_label": "providerstatus"
+    },
+    {
+      "label": "StatusData",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L26",
+      "id": "status_page_statusdata",
+      "community": 13,
+      "norm_label": "statusdata"
+    },
+    {
+      "label": "PROVIDER_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L35",
+      "id": "status_page_provider_colors",
+      "community": 13,
+      "norm_label": "provider_colors"
+    },
+    {
+      "label": "PROVIDER_URLS",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L53",
+      "id": "status_page_provider_urls",
+      "community": 13,
+      "norm_label": "provider_urls"
     },
     {
       "label": "LinkedInIcon()",
       "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L9",
-      "id": "components_footer_linkedinicon",
-      "community": 48,
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L73",
+      "id": "status_page_linkedinicon",
+      "community": 13,
       "norm_label": "linkedinicon()"
     },
     {
       "label": "XIcon()",
       "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L17",
-      "id": "components_footer_xicon",
-      "community": 48,
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L81",
+      "id": "status_page_xicon",
+      "community": 13,
       "norm_label": "xicon()"
     },
     {
-      "label": "Footer()",
+      "label": "PIPELINE_ORDER",
       "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L89",
+      "id": "status_page_pipeline_order",
+      "community": 13,
+      "norm_label": "pipeline_order"
+    },
+    {
+      "label": "SourceBadge()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L93",
+      "id": "status_page_sourcebadge",
+      "community": 13,
+      "norm_label": "sourcebadge()"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L132",
+      "id": "status_page_backtotop",
+      "community": 13,
+      "norm_label": "backtotop()"
+    },
+    {
+      "label": "StatusPage()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L145",
+      "id": "status_page_statuspage",
+      "community": 13,
+      "norm_label": "statuspage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L1",
+      "id": "terms_page",
+      "community": 23,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "headingToId()",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "id": "terms_page_headingtoid",
+      "community": 23,
+      "norm_label": "headingtoid()"
+    },
+    {
+      "label": "TermsOfUsePage()",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L16",
+      "id": "terms_page_termsofusepage",
+      "community": 23,
+      "norm_label": "termsofusepage()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L1",
+      "id": "id_page",
+      "community": 8,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "catalogProductType()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L18",
+      "id": "id_page_catalogproducttype",
+      "community": 8,
+      "norm_label": "catalogproducttype()"
+    },
+    {
+      "label": "REGION_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L23",
+      "id": "id_page_region_options",
+      "community": 8,
+      "norm_label": "region_options"
+    },
+    {
+      "label": "providerColor()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
       "source_location": "L25",
-      "id": "components_footer_footer",
-      "community": 48,
-      "norm_label": "footer()"
+      "id": "id_page_providercolor",
+      "community": 8,
+      "norm_label": "providercolor()"
+    },
+    {
+      "label": "providerName()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L27",
+      "id": "id_page_providername",
+      "community": 8,
+      "norm_label": "providername()"
+    },
+    {
+      "label": "formatNumber()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L28",
+      "id": "id_page_formatnumber",
+      "community": 8,
+      "norm_label": "formatnumber()"
+    },
+    {
+      "label": "PROVIDER_IDS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L32",
+      "id": "id_page_provider_ids",
+      "community": 8,
+      "norm_label": "provider_ids"
+    },
+    {
+      "label": "ProviderTh()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L34",
+      "id": "id_page_providerth",
+      "community": 8,
+      "norm_label": "providerth()"
+    },
+    {
+      "label": "ArchitectureStrip()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L50",
+      "id": "id_page_architecturestrip",
+      "community": 8,
+      "norm_label": "architecturestrip()"
+    },
+    {
+      "label": "WorkloadDetails()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L85",
+      "id": "id_page_workloaddetails",
+      "community": 8,
+      "norm_label": "workloaddetails()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L1",
+      "id": "workloads_page",
+      "community": 8,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "PRODUCT_TYPE_LABELS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L11",
+      "id": "workloads_page_product_type_labels",
+      "community": 8,
+      "norm_label": "product_type_labels"
+    },
+    {
+      "label": "PRODUCT_TYPE_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L25",
+      "id": "workloads_page_product_type_order",
+      "community": 8,
+      "norm_label": "product_type_order"
+    },
+    {
+      "label": "PRODUCT_TYPE_EMOJIS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L27",
+      "id": "workloads_page_product_type_emojis",
+      "community": 8,
+      "norm_label": "product_type_emojis"
+    },
+    {
+      "label": "WorkloadsCatalog()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L41",
+      "id": "workloads_page_workloadscatalog",
+      "community": 8,
+      "norm_label": "workloadscatalog()"
     },
     {
       "label": "the-hidden-costs-of-managed-services.md",
@@ -481,157 +526,553 @@
       "norm_label": "the-hidden-costs-of-managed-services.md"
     },
     {
-      "label": "Introduction",
+      "label": "\ud83d\udc4b Introduction",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L8",
       "id": "blog_the_hidden_costs_of_managed_services_introduction",
       "community": 61,
-      "norm_label": "introduction"
+      "norm_label": "\ud83d\udc4b introduction"
     },
     {
-      "label": "The High Availability Surcharge: Your First Shock",
+      "label": "\ud83d\udea8 The High Availability Surcharge: Your First Shock",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L22",
       "id": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock",
       "community": 61,
-      "norm_label": "the high availability surcharge: your first shock"
+      "norm_label": "\ud83d\udea8 the high availability surcharge: your first shock"
     },
     {
-      "label": "Managed Database Premiums: The Simplicity Tax",
+      "label": "\ud83d\udcb8 Managed Database Premiums: The Simplicity Tax",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L36",
       "id": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax",
       "community": 61,
-      "norm_label": "managed database premiums: the simplicity tax"
+      "norm_label": "\ud83d\udcb8 managed database premiums: the simplicity tax"
     },
     {
-      "label": "Serverless Database Billing: The Unpredictability Problem",
+      "label": "\ud83c\udfa2 Serverless Database Billing: The Unpredictability Problem",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L54",
       "id": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem",
       "community": 61,
-      "norm_label": "serverless database billing: the unpredictability problem"
+      "norm_label": "\ud83c\udfa2 serverless database billing: the unpredictability problem"
     },
     {
-      "label": "Proprietary vs. Open Source: Locking In at 3x Cost",
+      "label": "\ud83d\udd12 Proprietary vs. Open Source: Locking In at 3x Cost",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L68",
       "id": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost",
       "community": 61,
-      "norm_label": "proprietary vs. open source: locking in at 3x cost"
+      "norm_label": "\ud83d\udd12 proprietary vs. open source: locking in at 3x cost"
     },
     {
-      "label": "The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help)",
+      "label": "\ud83e\udde9 The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help)",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L86",
       "id": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help",
       "community": 61,
-      "norm_label": "the data normalization challenge: why comparisons are impossible (without help)"
+      "norm_label": "\ud83e\udde9 the data normalization challenge: why comparisons are impossible (without help)"
     },
     {
-      "label": "Storage Redundancy Multipliers: The Invisible Cost Driver",
+      "label": "\ud83d\udcbe Storage Redundancy Multipliers: The Invisible Cost Driver",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L104",
       "id": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver",
       "community": 61,
-      "norm_label": "storage redundancy multipliers: the invisible cost driver"
+      "norm_label": "\ud83d\udcbe storage redundancy multipliers: the invisible cost driver"
     },
     {
-      "label": "Putting It Together: The Real Cost of Managed Services",
+      "label": "\ud83c\udfd7\ufe0f Putting It Together: The Real Cost of Managed Services",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L126",
       "id": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services",
       "community": 61,
-      "norm_label": "putting it together: the real cost of managed services"
+      "norm_label": "\ud83c\udfd7\ufe0f putting it together: the real cost of managed services"
     },
     {
-      "label": "Call to Action",
+      "label": "\ud83d\ude80 Call to Action",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L140",
       "id": "blog_the_hidden_costs_of_managed_services_call_to_action",
       "community": 61,
-      "norm_label": "call to action"
+      "norm_label": "\ud83d\ude80 call to action"
+    },
+    {
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L1",
+      "community": 0,
+      "norm_label": "package.json",
+      "id": "package"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L2",
+      "community": 0,
+      "norm_label": "name",
+      "id": "package_name"
+    },
+    {
+      "label": "private",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L3",
+      "community": 0,
+      "norm_label": "private",
+      "id": "package_private"
+    },
+    {
+      "label": "version",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L4",
+      "community": 0,
+      "norm_label": "version",
+      "id": "package_version"
+    },
+    {
+      "label": "type",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L5",
+      "community": 0,
+      "norm_label": "type",
+      "id": "package_type"
+    },
+    {
+      "label": "scripts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L6",
+      "community": 0,
+      "norm_label": "scripts",
+      "id": "package_scripts"
+    },
+    {
+      "label": "dev",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L7",
+      "community": 0,
+      "norm_label": "dev",
+      "id": "package_scripts_dev"
+    },
+    {
+      "label": "build",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L8",
+      "community": 0,
+      "norm_label": "build",
+      "id": "package_scripts_build"
+    },
+    {
+      "label": "start",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L9",
+      "community": 0,
+      "norm_label": "start",
+      "id": "package_scripts_start"
+    },
+    {
+      "label": "ingest",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L10",
+      "community": 0,
+      "norm_label": "ingest",
+      "id": "package_scripts_ingest"
+    },
+    {
+      "label": "worker",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L11",
+      "community": 0,
+      "norm_label": "worker",
+      "id": "package_scripts_worker"
+    },
+    {
+      "label": "lint",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L12",
+      "community": 0,
+      "norm_label": "lint",
+      "id": "package_scripts_lint"
+    },
+    {
+      "label": "dependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L14",
+      "community": 0,
+      "norm_label": "dependencies",
+      "id": "package_dependencies"
+    },
+    {
+      "label": "@aws-sdk/client-pricing",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L15",
+      "community": 0,
+      "norm_label": "@aws-sdk/client-pricing",
+      "id": "package_dependencies_aws_sdk_client_pricing"
+    },
+    {
+      "label": "@google/genai",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L16",
+      "community": 0,
+      "norm_label": "@google/genai",
+      "id": "package_dependencies_google_genai"
+    },
+    {
+      "label": "@tailwindcss/postcss",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L17",
+      "community": 0,
+      "norm_label": "@tailwindcss/postcss",
+      "id": "package_dependencies_tailwindcss_postcss"
+    },
+    {
+      "label": "@tailwindcss/typography",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L18",
+      "community": 0,
+      "norm_label": "@tailwindcss/typography",
+      "id": "package_dependencies_tailwindcss_typography"
+    },
+    {
+      "label": "@tanstack/react-query",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L19",
+      "community": 0,
+      "norm_label": "@tanstack/react-query",
+      "id": "package_dependencies_tanstack_react_query"
+    },
+    {
+      "label": "axios",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L20",
+      "community": 0,
+      "norm_label": "axios",
+      "id": "package_dependencies_axios"
+    },
+    {
+      "label": "dotenv",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "community": 0,
+      "norm_label": "dotenv",
+      "id": "package_dependencies_dotenv"
+    },
+    {
+      "label": "gray-matter",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L22",
+      "community": 0,
+      "norm_label": "gray-matter",
+      "id": "package_dependencies_gray_matter"
+    },
+    {
+      "label": "lucide-react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L23",
+      "community": 0,
+      "norm_label": "lucide-react",
+      "id": "package_dependencies_lucide_react"
+    },
+    {
+      "label": "motion",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L24",
+      "community": 0,
+      "norm_label": "motion",
+      "id": "package_dependencies_motion"
+    },
+    {
+      "label": "next",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L25",
+      "community": 0,
+      "norm_label": "next",
+      "id": "package_dependencies_next"
+    },
+    {
+      "label": "node-cron",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L26",
+      "community": 0,
+      "norm_label": "node-cron",
+      "id": "package_dependencies_node_cron"
+    },
+    {
+      "label": "nodemailer",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L27",
+      "community": 0,
+      "norm_label": "nodemailer",
+      "id": "package_dependencies_nodemailer"
+    },
+    {
+      "label": "postcss",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L28",
+      "community": 0,
+      "norm_label": "postcss",
+      "id": "package_dependencies_postcss"
+    },
+    {
+      "label": "postgres",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L29",
+      "community": 0,
+      "norm_label": "postgres",
+      "id": "package_dependencies_postgres"
+    },
+    {
+      "label": "react",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L30",
+      "community": 0,
+      "norm_label": "react",
+      "id": "package_dependencies_react"
+    },
+    {
+      "label": "react-dom",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L31",
+      "community": 0,
+      "norm_label": "react-dom",
+      "id": "package_dependencies_react_dom"
+    },
+    {
+      "label": "react-markdown",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L32",
+      "community": 0,
+      "norm_label": "react-markdown",
+      "id": "package_dependencies_react_markdown"
+    },
+    {
+      "label": "recharts",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L33",
+      "community": 0,
+      "norm_label": "recharts",
+      "id": "package_dependencies_recharts"
+    },
+    {
+      "label": "tsx",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L34",
+      "community": 0,
+      "norm_label": "tsx",
+      "id": "package_dependencies_tsx"
+    },
+    {
+      "label": "devDependencies",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L36",
+      "community": 0,
+      "norm_label": "devdependencies",
+      "id": "package_devdependencies"
+    },
+    {
+      "label": "@playwright/test",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L37",
+      "community": 0,
+      "norm_label": "@playwright/test",
+      "id": "package_devdependencies_playwright_test"
+    },
+    {
+      "label": "@types/node",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L38",
+      "community": 0,
+      "norm_label": "@types/node",
+      "id": "package_devdependencies_types_node"
+    },
+    {
+      "label": "@types/nodemailer",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L39",
+      "community": 0,
+      "norm_label": "@types/nodemailer",
+      "id": "package_devdependencies_types_nodemailer"
+    },
+    {
+      "label": "autoprefixer",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L40",
+      "community": 0,
+      "norm_label": "autoprefixer",
+      "id": "package_devdependencies_autoprefixer"
+    },
+    {
+      "label": "tailwindcss",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L41",
+      "community": 0,
+      "norm_label": "tailwindcss",
+      "id": "package_devdependencies_tailwindcss"
+    },
+    {
+      "label": "typescript",
+      "file_type": "code",
+      "source_file": "package.json",
+      "source_location": "L42",
+      "community": 0,
+      "norm_label": "typescript",
+      "id": "package_devdependencies_typescript"
+    },
+    {
+      "label": "Footer.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L1",
+      "community": 48,
+      "norm_label": "footer.tsx",
+      "id": "components_footer"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L9",
+      "community": 48,
+      "norm_label": "linkedinicon()",
+      "id": "components_footer_linkedinicon"
+    },
+    {
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L17",
+      "community": 48,
+      "norm_label": "xicon()",
+      "id": "components_footer_xicon"
+    },
+    {
+      "label": "Footer()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L25",
+      "community": 48,
+      "norm_label": "footer()",
+      "id": "components_footer_footer"
     },
     {
       "label": "welcome.md",
       "file_type": "document",
       "source_file": "src/content/blog/welcome.md",
       "source_location": "L1",
-      "id": "blog_welcome",
       "community": 74,
-      "norm_label": "welcome.md"
+      "norm_label": "welcome.md",
+      "id": "blog_welcome"
     },
     {
       "label": "What to expect",
       "file_type": "document",
       "source_file": "src/content/blog/welcome.md",
       "source_location": "L12",
-      "id": "blog_welcome_what_to_expect",
       "community": 74,
-      "norm_label": "what to expect"
+      "norm_label": "what to expect",
+      "id": "blog_welcome_what_to_expect"
     },
     {
       "label": "blog.ts",
       "file_type": "code",
       "source_file": "src/lib/blog.ts",
       "source_location": "L1",
-      "id": "lib_blog",
       "community": 43,
-      "norm_label": "blog.ts"
+      "norm_label": "blog.ts",
+      "id": "lib_blog"
     },
     {
       "label": "contentDirectory",
       "file_type": "code",
       "source_file": "src/lib/blog.ts",
       "source_location": "L5",
-      "id": "lib_blog_contentdirectory",
       "community": 43,
-      "norm_label": "contentdirectory"
+      "norm_label": "contentdirectory",
+      "id": "lib_blog_contentdirectory"
     },
     {
       "label": "BlogPost",
       "file_type": "code",
       "source_file": "src/lib/blog.ts",
       "source_location": "L7",
-      "id": "lib_blog_blogpost",
       "community": 43,
-      "norm_label": "blogpost"
+      "norm_label": "blogpost",
+      "id": "lib_blog_blogpost"
     },
     {
       "label": "getPostSlugs()",
       "file_type": "code",
       "source_file": "src/lib/blog.ts",
       "source_location": "L17",
-      "id": "lib_blog_getpostslugs",
       "community": 43,
-      "norm_label": "getpostslugs()"
+      "norm_label": "getpostslugs()",
+      "id": "lib_blog_getpostslugs"
     },
     {
       "label": "getPostBySlug()",
       "file_type": "code",
       "source_file": "src/lib/blog.ts",
       "source_location": "L24",
-      "id": "lib_blog_getpostbyslug",
       "community": 43,
-      "norm_label": "getpostbyslug()"
+      "norm_label": "getpostbyslug()",
+      "id": "lib_blog_getpostbyslug"
     },
     {
       "label": "getAllPosts()",
       "file_type": "code",
       "source_file": "src/lib/blog.ts",
       "source_location": "L46",
-      "id": "lib_blog_getallposts",
       "community": 43,
-      "norm_label": "getallposts()"
+      "norm_label": "getallposts()",
+      "id": "lib_blog_getallposts"
     },
     {
       "label": "page.tsx",
@@ -695,33 +1136,6 @@
       "community": 39,
       "norm_label": "sponsorslayout()",
       "id": "sponsors_layout_sponsorslayout"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L1",
-      "community": 59,
-      "norm_label": "page.tsx",
-      "id": "sponsors_page"
-    },
-    {
-      "label": "SPONSORS",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L8",
-      "community": 59,
-      "norm_label": "sponsors",
-      "id": "sponsors_page_sponsors"
-    },
-    {
-      "label": "SponsorsPage()",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L19",
-      "community": 59,
-      "norm_label": "sponsorspage()",
-      "id": "sponsors_page_sponsorspage"
     },
     {
       "label": "query.js",
@@ -1831,96 +2245,6 @@
       "id": "workloads_route_post"
     },
     {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L1",
-      "community": 8,
-      "norm_label": "page.tsx",
-      "id": "id_page"
-    },
-    {
-      "label": "catalogProductType()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L18",
-      "community": 8,
-      "norm_label": "catalogproducttype()",
-      "id": "id_page_catalogproducttype"
-    },
-    {
-      "label": "REGION_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L23",
-      "community": 8,
-      "norm_label": "region_options",
-      "id": "id_page_region_options"
-    },
-    {
-      "label": "providerColor()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L25",
-      "community": 8,
-      "norm_label": "providercolor()",
-      "id": "id_page_providercolor"
-    },
-    {
-      "label": "providerName()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L27",
-      "community": 8,
-      "norm_label": "providername()",
-      "id": "id_page_providername"
-    },
-    {
-      "label": "formatNumber()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L28",
-      "community": 8,
-      "norm_label": "formatnumber()",
-      "id": "id_page_formatnumber"
-    },
-    {
-      "label": "PROVIDER_IDS",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L32",
-      "community": 8,
-      "norm_label": "provider_ids",
-      "id": "id_page_provider_ids"
-    },
-    {
-      "label": "ProviderTh()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L34",
-      "community": 8,
-      "norm_label": "providerth()",
-      "id": "id_page_providerth"
-    },
-    {
-      "label": "ArchitectureStrip()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L50",
-      "community": 8,
-      "norm_label": "architecturestrip()",
-      "id": "id_page_architecturestrip"
-    },
-    {
-      "label": "WorkloadDetails()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L85",
-      "community": 8,
-      "norm_label": "workloaddetails()",
-      "id": "id_page_workloaddetails"
-    },
-    {
       "label": "ai_models.ts",
       "file_type": "code",
       "source_file": "src/config/ai_models.ts",
@@ -2855,51 +3179,6 @@
       "community": 58,
       "norm_label": "main()",
       "id": "scratch_main"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L1",
-      "community": 14,
-      "norm_label": "page.tsx",
-      "id": "certifications_page"
-    },
-    {
-      "label": "CATEGORY_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L15",
-      "community": 14,
-      "norm_label": "category_order",
-      "id": "certifications_page_category_order"
-    },
-    {
-      "label": "CATEGORY_COLOR",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L19",
-      "community": 14,
-      "norm_label": "category_color",
-      "id": "certifications_page_category_color"
-    },
-    {
-      "label": "PROVIDERS_FOR_CERT",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L27",
-      "community": 14,
-      "norm_label": "providers_for_cert",
-      "id": "certifications_page_providers_for_cert"
-    },
-    {
-      "label": "CertificationsPage()",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L36",
-      "community": 14,
-      "norm_label": "certificationspage()",
-      "id": "certifications_page_certificationspage"
     },
     {
       "label": "digitalocean_instances.ts",
@@ -4144,51 +4423,6 @@
       "id": "lib_api_utils_buildpricingfilters"
     },
     {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L1",
-      "community": 8,
-      "norm_label": "page.tsx",
-      "id": "workloads_page"
-    },
-    {
-      "label": "PRODUCT_TYPE_LABELS",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L11",
-      "community": 8,
-      "norm_label": "product_type_labels",
-      "id": "workloads_page_product_type_labels"
-    },
-    {
-      "label": "PRODUCT_TYPE_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L25",
-      "community": 8,
-      "norm_label": "product_type_order",
-      "id": "workloads_page_product_type_order"
-    },
-    {
-      "label": "PRODUCT_TYPE_EMOJIS",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L27",
-      "community": 8,
-      "norm_label": "product_type_emojis",
-      "id": "workloads_page_product_type_emojis"
-    },
-    {
-      "label": "WorkloadsCatalog()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L41",
-      "community": 8,
-      "norm_label": "workloadscatalog()",
-      "id": "workloads_page_workloadscatalog"
-    },
-    {
       "label": "workloads.ts",
       "file_type": "code",
       "source_file": "src/config/workloads.ts",
@@ -4916,213 +5150,6 @@
       "community": 8,
       "norm_label": "workloaddefinition",
       "id": "types_index_workloaddefinition"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L1",
-      "community": 67,
-      "norm_label": "page.tsx",
-      "id": "datacenters_page"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L15",
-      "community": 67,
-      "norm_label": "provider_colors",
-      "id": "datacenters_page_provider_colors"
-    },
-    {
-      "label": "Stat()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L31",
-      "community": 67,
-      "norm_label": "stat()",
-      "id": "datacenters_page_stat"
-    },
-    {
-      "label": "StatusDot()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L43",
-      "community": 67,
-      "norm_label": "statusdot()",
-      "id": "datacenters_page_statusdot"
-    },
-    {
-      "label": "ProviderBadge()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L49",
-      "community": 67,
-      "norm_label": "providerbadge()",
-      "id": "datacenters_page_providerbadge"
-    },
-    {
-      "label": "ProviderRow()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L61",
-      "community": 67,
-      "norm_label": "providerrow()",
-      "id": "datacenters_page_providerrow"
-    },
-    {
-      "label": "GEO_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L158",
-      "community": 67,
-      "norm_label": "geo_colors",
-      "id": "datacenters_page_geo_colors"
-    },
-    {
-      "label": "ViewToggle()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L167",
-      "community": 67,
-      "norm_label": "viewtoggle()",
-      "id": "datacenters_page_viewtoggle"
-    },
-    {
-      "label": "InfraChart()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L186",
-      "community": 67,
-      "norm_label": "infrachart()",
-      "id": "datacenters_page_infrachart"
-    },
-    {
-      "label": "CoverageChart()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L212",
-      "community": 67,
-      "norm_label": "coveragechart()",
-      "id": "datacenters_page_coveragechart"
-    },
-    {
-      "label": "DatacentersPage()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L236",
-      "community": 67,
-      "norm_label": "datacenterspage()",
-      "id": "datacenters_page_datacenterspage"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L1",
-      "community": 13,
-      "norm_label": "page.tsx",
-      "id": "status_page"
-    },
-    {
-      "label": "PipelineStatus",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L8",
-      "community": 13,
-      "norm_label": "pipelinestatus",
-      "id": "status_page_pipelinestatus"
-    },
-    {
-      "label": "ProviderStatus",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L18",
-      "community": 13,
-      "norm_label": "providerstatus",
-      "id": "status_page_providerstatus"
-    },
-    {
-      "label": "StatusData",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L26",
-      "community": 13,
-      "norm_label": "statusdata",
-      "id": "status_page_statusdata"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L35",
-      "community": 13,
-      "norm_label": "provider_colors",
-      "id": "status_page_provider_colors"
-    },
-    {
-      "label": "PROVIDER_URLS",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L53",
-      "community": 13,
-      "norm_label": "provider_urls",
-      "id": "status_page_provider_urls"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L73",
-      "community": 13,
-      "norm_label": "linkedinicon()",
-      "id": "status_page_linkedinicon"
-    },
-    {
-      "label": "XIcon()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L81",
-      "community": 13,
-      "norm_label": "xicon()",
-      "id": "status_page_xicon"
-    },
-    {
-      "label": "PIPELINE_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L89",
-      "community": 13,
-      "norm_label": "pipeline_order",
-      "id": "status_page_pipeline_order"
-    },
-    {
-      "label": "SourceBadge()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L93",
-      "community": 13,
-      "norm_label": "sourcebadge()",
-      "id": "status_page_sourcebadge"
-    },
-    {
-      "label": "BackToTop()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L132",
-      "community": 13,
-      "norm_label": "backtotop()",
-      "id": "status_page_backtotop"
-    },
-    {
-      "label": "StatusPage()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L145",
-      "community": 13,
-      "norm_label": "statuspage()",
-      "id": "status_page_statuspage"
     },
     {
       "label": "serverless_adapters_live.ts",
@@ -7573,33 +7600,6 @@
       "id": "services_mailer_senddataqualityemail"
     },
     {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L1",
-      "community": 23,
-      "norm_label": "page.tsx",
-      "id": "terms_page"
-    },
-    {
-      "label": "headingToId()",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "community": 23,
-      "norm_label": "headingtoid()",
-      "id": "terms_page_headingtoid"
-    },
-    {
-      "label": "TermsOfUsePage()",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L16",
-      "community": 23,
-      "norm_label": "termsofusepage()",
-      "id": "terms_page_termsofusepage"
-    },
-    {
       "label": "OPERATIONS_RUNBOOK.md",
       "file_type": "document",
       "source_file": "OPERATIONS_RUNBOOK.md",
@@ -8880,6 +8880,1214 @@
   ],
   "links": [
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "lib_blog"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "lib_blog_getpostbyslug"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "lib_blog_getpostslugs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_blogpostpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_generatemetadata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_generatestaticparams"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_props"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "slug_page_generatestaticparams",
+      "target": "lib_blog_getpostslugs"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "slug_page_generatemetadata",
+      "target": "lib_blog_getpostbyslug"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "slug_page_blogpostpage",
+      "target": "lib_blog_getpostbyslug"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/page.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_page",
+      "target": "blog_page_blogindexpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_page",
+      "target": "blog_page_metadata"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_page",
+      "target": "lib_blog"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_page",
+      "target": "lib_blog_getallposts"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/blog/page.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "blog_page_blogindexpage",
+      "target": "lib_blog_getallposts"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "certifications_page_category_color"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "certifications_page_category_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "certifications_page_certificationspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "certifications_page_providers_for_cert"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_cert_by_id"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_certcategory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_certifications"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_compliance_providers"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_provider_certifications"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_certifications_providerhascert"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "certifications_page",
+      "target": "config_index_geographies"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "components_digitaloceanreferralmodal_digitaloceanreferralmodal"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_datacenterregion"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_geographies"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_provider_infra"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_datacenter_data_providerinfrastructure"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "config_index"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L248",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_coveragechart"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L179",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_datacenterspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L194",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_geo_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L222",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_infrachart"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_provider_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_providerbadge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_providerrow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_stat"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_statusdot"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L203",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_page_viewtoggle"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "datacenters_page",
+      "target": "datacenters_worldmap"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/sponsors/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sponsors_page",
+      "target": "sponsors_page_sponsors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/sponsors/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "sponsors_page",
+      "target": "sponsors_page_sponsorspage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "config_index"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L118",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_backtotop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_linkedinicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_pipeline_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_pipelinestatus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_provider_colors"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L43",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_provider_urls"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_providerstatus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_sourcebadge"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_statusdata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L125",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_statuspage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L63",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "status_page",
+      "target": "status_page_xicon"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "components_markdownpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "terms_page_headingtoid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "terms_page",
+      "target": "terms_page_termsofusepage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_index_geographies"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_index_providers"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_workload_priorities"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_workload_priorities_default_priorities"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_workload_priorities_priority_levels"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_workload_priorities_priority_pillars"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_architecturestrip"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_catalogproducttype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_formatnumber"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_provider_ids"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_providercolor"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_providername"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_providerth"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L19",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_region_options"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "id_page_workloaddetails"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "lib_formatinstancename"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "lib_formatinstancename_formatinstancename"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "types_index_prioritylevel"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "types_index_workloaddefinition"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page",
+      "target": "types_index_workloadpriorities"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page_providerth",
+      "target": "id_page_providercolor"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "id_page_providerth",
+      "target": "id_page_providername"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_donationmodal_donationmodal"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workload_priorities"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workload_priorities_default_priorities"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_emojis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_labels"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_workloadscatalog"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L140",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_call_to_action"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_introduction"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L126",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "package.json",
@@ -9055,9 +10263,9 @@
       "source_file": "package.json",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_dependencies",
-      "target": "package_dependencies_gray_matter",
-      "confidence_score": 1.0
+      "target": "package_dependencies_gray_matter"
     },
     {
       "relation": "contains",
@@ -9270,165 +10478,6 @@
       "target": "package_devdependencies_typescript"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "slug_page",
-      "target": "lib_blog",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "slug_page",
-      "target": "lib_blog_getpostbyslug",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "slug_page",
-      "target": "lib_blog_getpostslugs",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L39",
-      "weight": 1.0,
-      "source": "slug_page",
-      "target": "slug_page_blogpostpage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L23",
-      "weight": 1.0,
-      "source": "slug_page",
-      "target": "slug_page_generatemetadata",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "slug_page",
-      "target": "slug_page_generatestaticparams",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "source": "slug_page",
-      "target": "slug_page_props",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "source": "slug_page_generatestaticparams",
-      "target": "lib_blog_getpostslugs"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L25",
-      "weight": 1.0,
-      "source": "slug_page_generatemetadata",
-      "target": "lib_blog_getpostbyslug"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L41",
-      "weight": 1.0,
-      "source": "slug_page_blogpostpage",
-      "target": "lib_blog_getpostbyslug"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/page.tsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "source": "blog_page",
-      "target": "blog_page_blogindexpage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "source": "blog_page",
-      "target": "blog_page_metadata",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "blog_page",
-      "target": "lib_blog",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "blog_page",
-      "target": "lib_blog_getallposts",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/blog/page.tsx",
-      "source_location": "L13",
-      "weight": 1.0,
-      "source": "blog_page_blogindexpage",
-      "target": "lib_blog_getallposts"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/Footer.tsx",
@@ -9472,102 +10521,12 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L140",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_call_to_action",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_introduction",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L36",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L68",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L126",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L54",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L104",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L86",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/content/blog/welcome.md",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "blog_welcome",
-      "target": "blog_welcome_what_to_expect",
-      "confidence_score": 1.0
+      "target": "blog_welcome_what_to_expect"
     },
     {
       "relation": "contains",
@@ -9575,9 +10534,9 @@
       "source_file": "src/lib/blog.ts",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_blog",
-      "target": "lib_blog_blogpost",
-      "confidence_score": 1.0
+      "target": "lib_blog_blogpost"
     },
     {
       "relation": "contains",
@@ -9585,9 +10544,9 @@
       "source_file": "src/lib/blog.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_blog",
-      "target": "lib_blog_contentdirectory",
-      "confidence_score": 1.0
+      "target": "lib_blog_contentdirectory"
     },
     {
       "relation": "contains",
@@ -9595,9 +10554,9 @@
       "source_file": "src/lib/blog.ts",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_blog",
-      "target": "lib_blog_getallposts",
-      "confidence_score": 1.0
+      "target": "lib_blog_getallposts"
     },
     {
       "relation": "contains",
@@ -9605,9 +10564,9 @@
       "source_file": "src/lib/blog.ts",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_blog",
-      "target": "lib_blog_getpostbyslug",
-      "confidence_score": 1.0
+      "target": "lib_blog_getpostbyslug"
     },
     {
       "relation": "contains",
@@ -9615,9 +10574,9 @@
       "source_file": "src/lib/blog.ts",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_blog",
-      "target": "lib_blog_getpostslugs",
-      "confidence_score": 1.0
+      "target": "lib_blog_getpostslugs"
     },
     {
       "relation": "calls",
@@ -9626,9 +10585,9 @@
       "source_file": "src/lib/blog.ts",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_blog_getallposts",
-      "target": "lib_blog_getpostslugs",
-      "confidence_score": 1.0
+      "target": "lib_blog_getpostslugs"
     },
     {
       "relation": "imports_from",
@@ -9690,26 +10649,6 @@
       "confidence_score": 1.0,
       "source": "sponsors_layout",
       "target": "sponsors_layout_sponsorslayout"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "sponsors_page",
-      "target": "sponsors_page_sponsors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "sponsors_page",
-      "target": "sponsors_page_sponsorspage"
     },
     {
       "relation": "contains",
@@ -13907,294 +14846,6 @@
       "target": "config_not_offered_isnotoffered"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_index_geographies"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_index_providers"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_workload_priorities"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_workload_priorities_default_priorities"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_workload_priorities_priority_levels"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_workload_priorities_priority_pillars"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_architecturestrip"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_catalogproducttype"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_formatnumber"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_provider_ids"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_providercolor"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_providername"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_providerth"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_region_options"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L45",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "id_page_workloaddetails"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "lib_formatinstancename"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "lib_formatinstancename_formatinstancename"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "types_index_prioritylevel"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "types_index_workloaddefinition"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page",
-      "target": "types_index_workloadpriorities"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page_providerth",
-      "target": "id_page_providercolor"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "id_page_providerth",
-      "target": "id_page_providername"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/config/ai_models.ts",
@@ -15597,145 +16248,6 @@
       "confidence_score": 1.0,
       "source": "scratch_main",
       "target": "scratch_sql"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "certifications_page_category_color"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "certifications_page_category_order"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "certifications_page_certificationspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L26",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "certifications_page_providers_for_cert"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_cert_by_id"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_certcategory"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_certifications"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_compliance_providers"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_provider_certifications"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_certifications_providerhascert"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "certifications_page",
-      "target": "config_index_geographies"
     },
     {
       "relation": "contains",
@@ -18376,17 +18888,6 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/hooks/useDynamicFilters.ts",
       "source_location": "L2",
       "weight": 1.0,
@@ -18403,28 +18904,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "lib_api_utils",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
       "target": "config_index"
     },
     {
@@ -18663,134 +19142,6 @@
       "weight": 1.0,
       "source": "pricing_route_get",
       "target": "lib_api_utils_buildpricingfilters"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_donationmodal_donationmodal"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workload_priorities"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workload_priorities_default_priorities"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_product_type_emojis"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_product_type_labels"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_product_type_order"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_workloadscatalog"
     },
     {
       "relation": "imports_from",
@@ -20543,315 +20894,6 @@
       "confidence_score": 1.0,
       "source": "components_chartsview",
       "target": "types_index_pricingrecord"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "components_digitaloceanreferralmodal_digitaloceanreferralmodal"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_datacenterregion"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_geographies"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_provider_infra"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "config_datacenter_data_providerinfrastructure"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L248",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_coveragechart"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L179",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_datacenterspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L194",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_geo_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L222",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_infrachart"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_provider_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L85",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_providerbadge"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L38",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_providerrow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_stat"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_statusdot"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L203",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_page_viewtoggle"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "datacenters_page",
-      "target": "datacenters_worldmap"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L118",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_backtotop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L55",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_linkedinicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L42",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_pipeline_order"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_pipelinestatus"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L33",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_provider_colors"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L43",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_provider_urls"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_providerstatus"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L86",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_sourcebadge"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_statusdata"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L125",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_statuspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L63",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "status_page",
-      "target": "status_page_xicon"
     },
     {
       "relation": "re_exports",
@@ -23435,17 +23477,6 @@
       "target": "components_digitaloceanreferralmodal_digitaloceanreferralmodal"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "components_index"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/app/dashboard/page.tsx",
@@ -24333,37 +24364,6 @@
       "confidence_score": 1.0,
       "source": "services_mailer_sendstalenessemail",
       "target": "services_mailer_ismailerconfigured"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "components_markdownpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "terms_page_headingtoid"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "terms_page",
-      "target": "terms_page_termsofusepage"
     },
     {
       "relation": "contains",
@@ -25549,5 +25549,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "2c2d0f38d9a8ccaa9f9a3ed22a5825fc6cc6a5bf"
+  "built_at_commit": "daec5dfa9d50b61d6050c8ee810a3908c0c5a174"
 }
