@@ -843,5 +843,10 @@
     "mtime": 1784138240.714523,
     "ast_hash": "0247954a70daed49bcf45d8fd3f44928",
     "semantic_hash": ""
+  },
+  "query.js": {
+    "mtime": 1784138562.711241,
+    "ast_hash": "7b8aaf0cd64d6fe3e12774b7d7dee251",
+    "semantic_hash": ""
   }
 }

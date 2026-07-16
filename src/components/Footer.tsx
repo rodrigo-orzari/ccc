@@ -52,6 +52,9 @@ export default function Footer() {
           <Link href="/status" className="hover:text-black dark:hover:text-white transition-colors">
             Status
           </Link>
+          <Link href="/sponsors" className="hover:text-black dark:hover:text-white transition-colors">
+            Sponsors
+          </Link>
           <a href="mailto:hello@comparecloudcosts.com" className="hover:text-black dark:hover:text-white transition-colors">
             Contact
           </a>

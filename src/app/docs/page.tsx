@@ -833,6 +833,19 @@ const DocsPage: React.FC = () => {
               Sponsors are responsible for providing their own trackable destination links (e.g., using UTM parameters,
               Bitly, or other custom redirect services) to measure the performance of their campaigns.
             </p>
+            <h3 id="advertising-exclusivity">Sponsorship Exclusivity</h3>
+            <p>
+              We want to ensure that our sponsors get high-quality visibility without competing offerings cluttering their space. 
+              To achieve this, we apply different levels of exclusivity depending on the page you choose to sponsor:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.4rem' }}>
+                <strong>Individual Workload Pages (Exclusive):</strong> If you sponsor a specific workload (e.g., a three-tier web application), that space is <strong>exclusive</strong> to you. We will not allow a direct competitor (e.g., another consulting company offering the same services) to advertise on that same page.
+              </li>
+              <li style={{ marginBottom: '0.4rem' }}>
+                <strong>Global Pages (Shared / Carousel):</strong> On high-traffic aggregator pages such as the main <strong>Workloads</strong> page, the <strong>Compliance</strong> page, and the <strong>Datacenters</strong> page, sponsor banners are displayed in a rotating carousel. These spaces are non-exclusive and may feature multiple sponsors.
+              </li>
+            </ul>
             <p style={{ marginTop: '1.5rem' }}>
               Interested in sponsoring? Reach out at{' '}
               <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.
