@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1784232713.3411577,
-    "ast_hash": "3c1d677067896a73bdc829ecccb280aa",
+    "mtime": 1784234606.7128365,
+    "ast_hash": "4c920d4ae6a364e680c7a54b5ef727c4",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -585,8 +585,8 @@
     "semantic_hash": ""
   },
   "src/app/workloads/[id]/page.tsx": {
-    "mtime": 1784233192.564674,
-    "ast_hash": "0aeb528a594d42c43f21f5f06cb1dbd3",
+    "mtime": 1784234618.973349,
+    "ast_hash": "4085268ace7577a04243177578ae60de",
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
@@ -855,8 +855,8 @@
     "semantic_hash": ""
   },
   "src/app/sponsors/page.tsx": {
-    "mtime": 1784233699.4505217,
-    "ast_hash": "62f8b88bf97e29f912e0c31a48d2f358",
+    "mtime": 1784234396.2914884,
+    "ast_hash": "34d37d0b0cf9cf47cf8b680388319bd4",
     "semantic_hash": ""
   }
 }
