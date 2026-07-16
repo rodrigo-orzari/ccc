@@ -4,157 +4,31 @@
   "graph": {},
   "nodes": [
     {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L1",
-      "id": "docs_page",
-      "community": 50,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "BackToTop()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "id": "docs_page_backtotop",
-      "community": 50,
-      "norm_label": "backtotop()"
-    },
-    {
-      "label": "CopyHeading()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L20",
-      "id": "docs_page_copyheading",
-      "community": 50,
-      "norm_label": "copyheading()"
-    },
-    {
-      "label": "DocsPage()",
-      "file_type": "code",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L51",
-      "id": "docs_page_docspage",
-      "community": 50,
-      "norm_label": "docspage()"
-    },
-    {
-      "label": "layout.tsx",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/layout.tsx",
-      "source_location": "L1",
-      "id": "sponsors_layout",
-      "community": 39,
-      "norm_label": "layout.tsx"
-    },
-    {
-      "label": "metadata",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/layout.tsx",
-      "source_location": "L3",
-      "id": "sponsors_layout_metadata",
-      "community": 39,
-      "norm_label": "metadata"
-    },
-    {
-      "label": "SponsorsLayout()",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/layout.tsx",
-      "source_location": "L10",
-      "id": "sponsors_layout_sponsorslayout",
-      "community": 39,
-      "norm_label": "sponsorslayout()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L1",
-      "id": "sponsors_page",
-      "community": 59,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "SPONSORS",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L8",
-      "id": "sponsors_page_sponsors",
-      "community": 59,
-      "norm_label": "sponsors"
-    },
-    {
-      "label": "SponsorsPage()",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L19",
-      "id": "sponsors_page_sponsorspage",
-      "community": 59,
-      "norm_label": "sponsorspage()"
-    },
-    {
-      "label": "Footer.tsx",
-      "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L1",
-      "id": "components_footer",
-      "community": 48,
-      "norm_label": "footer.tsx"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L9",
-      "id": "components_footer_linkedinicon",
-      "community": 48,
-      "norm_label": "linkedinicon()"
-    },
-    {
-      "label": "XIcon()",
-      "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L17",
-      "id": "components_footer_xicon",
-      "community": 48,
-      "norm_label": "xicon()"
-    },
-    {
-      "label": "Footer()",
-      "file_type": "code",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L25",
-      "id": "components_footer_footer",
-      "community": 48,
-      "norm_label": "footer()"
-    },
-    {
       "label": "query.js",
       "file_type": "code",
       "source_file": "query.js",
       "source_location": "L1",
+      "id": "query",
       "community": 65,
-      "norm_label": "query.js",
-      "id": "query"
+      "norm_label": "query.js"
     },
     {
       "label": "sql",
       "file_type": "code",
       "source_file": "query.js",
       "source_location": "L5",
+      "id": "query_sql",
       "community": 65,
-      "norm_label": "sql",
-      "id": "query_sql"
+      "norm_label": "sql"
     },
     {
       "label": "main()",
       "file_type": "code",
       "source_file": "query.js",
       "source_location": "L9",
+      "id": "query_main",
       "community": 65,
-      "norm_label": "main()",
-      "id": "query_main"
+      "norm_label": "main()"
     },
     {
       "label": "database_pipeline.ts",
@@ -242,7 +116,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L172",
-      "community": 9,
+      "community": 28,
       "norm_label": "oracleautonomousadapter",
       "id": "services_database_pipeline_oracleautonomousadapter"
     },
@@ -260,7 +134,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L229",
-      "community": 36,
+      "community": 9,
       "norm_label": "oraclemysqlheatwaveadapter",
       "id": "services_database_pipeline_oraclemysqlheatwaveadapter"
     },
@@ -269,7 +143,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L232",
-      "community": 36,
+      "community": 9,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing"
     },
@@ -278,7 +152,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L270",
-      "community": 9,
+      "community": 28,
       "norm_label": "oraclepostgresqladapter",
       "id": "services_database_pipeline_oraclepostgresqladapter"
     },
@@ -287,7 +161,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L273",
-      "community": 9,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclepostgresqladapter_fetchpricing"
     },
@@ -296,7 +170,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L307",
-      "community": 9,
+      "community": 59,
       "norm_label": "vectordatabasesadapter",
       "id": "services_database_pipeline_vectordatabasesadapter"
     },
@@ -305,7 +179,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L310",
-      "community": 9,
+      "community": 59,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_vectordatabasesadapter_fetchpricing"
     },
@@ -386,7 +260,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L589",
-      "community": 9,
+      "community": 28,
       "norm_label": "digitaloceandbadapter",
       "id": "services_database_pipeline_digitaloceandbadapter"
     },
@@ -395,7 +269,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L592",
-      "community": 9,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_digitaloceandbadapter_fetchpricing"
     },
@@ -404,7 +278,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L626",
-      "community": 9,
+      "community": 28,
       "norm_label": "alibabadbadapter",
       "id": "services_database_pipeline_alibabadbadapter"
     },
@@ -413,7 +287,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L629",
-      "community": 9,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_alibabadbadapter_fetchpricing"
     },
@@ -431,7 +305,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L673",
-      "community": 28,
+      "community": 9,
       "norm_label": "awselasticacheadapter",
       "id": "services_database_pipeline_awselasticacheadapter"
     },
@@ -440,7 +314,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L676",
-      "community": 28,
+      "community": 9,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_awselasticacheadapter_fetchpricing"
     },
@@ -980,7 +854,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L627",
-      "community": 28,
+      "community": 39,
       "norm_label": "digitaloceanadapter",
       "id": "services_pricing_pipeline_digitaloceanadapter"
     },
@@ -989,7 +863,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L633",
-      "community": 28,
+      "community": 39,
       "norm_label": ".classifydigitalocean()",
       "id": "services_pricing_pipeline_digitaloceanadapter_classifydigitalocean"
     },
@@ -998,7 +872,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L645",
-      "community": 28,
+      "community": 39,
       "norm_label": ".gpucountfromslug()",
       "id": "services_pricing_pipeline_digitaloceanadapter_gpucountfromslug"
     },
@@ -1007,7 +881,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L650",
-      "community": 28,
+      "community": 39,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_digitaloceanadapter_fetchpricing"
     },
@@ -1016,7 +890,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L666",
-      "community": 28,
+      "community": 39,
       "norm_label": ".fetchfromapi()",
       "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromapi"
     },
@@ -1025,7 +899,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L713",
-      "community": 28,
+      "community": 39,
       "norm_label": ".fetchfromscraper()",
       "id": "services_pricing_pipeline_digitaloceanadapter_fetchfromscraper"
     },
@@ -1763,7 +1637,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L445",
-      "community": 69,
+      "community": 24,
       "norm_label": "dataanalyticspricingpipeline",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline"
     },
@@ -1772,7 +1646,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L446",
-      "community": 69,
+      "community": 24,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_dataanalyticspricingpipeline_constructor"
     },
@@ -1874,6 +1748,42 @@
       "community": 46,
       "norm_label": "aboutpage()",
       "id": "about_page_aboutpage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L1",
+      "community": 50,
+      "norm_label": "page.tsx",
+      "id": "docs_page"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "community": 50,
+      "norm_label": "backtotop()",
+      "id": "docs_page_backtotop"
+    },
+    {
+      "label": "CopyHeading()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L20",
+      "community": 50,
+      "norm_label": "copyheading()",
+      "id": "docs_page_copyheading"
+    },
+    {
+      "label": "DocsPage()",
+      "file_type": "code",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L51",
+      "community": 50,
+      "norm_label": "docspage()",
+      "id": "docs_page_docspage"
     },
     {
       "label": "validate_components.ts",
@@ -4067,7 +3977,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L71",
-      "community": 36,
+      "community": 28,
       "norm_label": "awsserverlessadapter",
       "id": "services_serverless_pipeline_awsserverlessadapter"
     },
@@ -4076,7 +3986,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L74",
-      "community": 36,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_awsserverlessadapter_fetchpricing"
     },
@@ -4103,7 +4013,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L125",
-      "community": 28,
+      "community": 36,
       "norm_label": "azureserverlessadapter",
       "id": "services_serverless_pipeline_azureserverlessadapter"
     },
@@ -4112,7 +4022,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L128",
-      "community": 28,
+      "community": 36,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing"
     },
@@ -5645,6 +5555,42 @@
       "community": 27,
       "norm_label": "workloadslayout()",
       "id": "workloads_layout_workloadslayout"
+    },
+    {
+      "label": "Footer.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L1",
+      "community": 48,
+      "norm_label": "footer.tsx",
+      "id": "components_footer"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L9",
+      "community": 48,
+      "norm_label": "linkedinicon()",
+      "id": "components_footer_linkedinicon"
+    },
+    {
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L17",
+      "community": 48,
+      "norm_label": "xicon()",
+      "id": "components_footer_xicon"
+    },
+    {
+      "label": "Footer()",
+      "file_type": "code",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L25",
+      "community": 48,
+      "norm_label": "footer()",
+      "id": "components_footer_footer"
     },
     {
       "label": "alibaba_signer.ts",
@@ -8637,136 +8583,14 @@
   ],
   "links": [
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_backtotop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_copyheading"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/docs/page.tsx",
-      "source_location": "L37",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "docs_page",
-      "target": "docs_page_docspage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/sponsors/layout.tsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "source": "sponsors_layout",
-      "target": "sponsors_layout_metadata",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/sponsors/layout.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "sponsors_layout",
-      "target": "sponsors_layout_sponsorslayout",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "sponsors_page",
-      "target": "sponsors_page_sponsors",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L19",
-      "weight": 1.0,
-      "source": "sponsors_page",
-      "target": "sponsors_page_sponsorspage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_footer",
-      "target": "components_footer_footer"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_footer",
-      "target": "components_footer_linkedinicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/Footer.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_footer",
-      "target": "components_footer_xicon"
-    },
-    {
-      "relation": "re_exports",
-      "context": "export",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/index.ts",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "components_index",
-      "target": "components_footer"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "query.js",
       "source_location": "L9",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "query",
-      "target": "query_main"
+      "target": "query_main",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -8774,9 +8598,9 @@
       "source_file": "query.js",
       "source_location": "L5",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "query",
-      "target": "query_sql"
+      "target": "query_sql",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -8785,9 +8609,9 @@
       "source_file": "query.js",
       "source_location": "L10",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "query_main",
-      "target": "query_sql"
+      "target": "query_sql",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -14221,6 +14045,47 @@
       "confidence_score": 1.0,
       "source": "about_page",
       "target": "components_markdownpage"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_backtotop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_copyheading"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/docs/page.tsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_page",
+      "target": "docs_page_docspage"
     },
     {
       "relation": "imports",
@@ -21589,6 +21454,47 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_footer",
+      "target": "components_footer_footer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_footer",
+      "target": "components_footer_linkedinicon"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Footer.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_footer",
+      "target": "components_footer_xicon"
+    },
+    {
+      "relation": "re_exports",
+      "context": "export",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_index",
+      "target": "components_footer"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/services/alibaba_signer.ts",
       "source_location": "L31",
       "weight": 1.0,
@@ -24976,5 +24882,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "570f8bf38647883b5f368c6a7170256943faedaf"
+  "built_at_commit": "2db8645709c30e27f0963747bd4b4ea207581632"
 }

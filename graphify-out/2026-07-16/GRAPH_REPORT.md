@@ -1,16 +1,16 @@
-# Graph Report - _ccc  (2026-07-16)
+# Graph Report - _ccc  (2026-07-15)
 
 ## Corpus Check
-- 164 files · ~217,838 words
+- 162 files · ~217,060 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 959 nodes · 1561 edges · 77 communities (49 shown, 28 thin omitted)
+- 953 nodes · 1557 edges · 77 communities (49 shown, 28 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 1 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `570f8bf3`
+- Built from commit: `2db86457`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -101,11 +101,11 @@
   src/services/data_quality.ts → src/workers/scheduler.ts
 - `GCPCloudSQLAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
   src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
-- `OracleAutonomousAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
-  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
 - `OracleMySQLHeatWaveAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
   src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
-- `OraclePostgreSQLAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+- `VectorDatabasesAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
+  src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
+- `AWSRDSAdapter` --inherits--> `BaseAdapter`  [EXTRACTED]
   src/services/database_pipeline.ts → src/services/pricing_pipeline.ts
 
 ## Import Cycles
@@ -138,8 +138,8 @@ Cohesion: 0.05
 Nodes (46): FilterSidebarProps, PRODUCT_TYPES, ProductTypeSelectorProps, isNotOffered(), NOT_OFFERED, NotOfferedEntry, capacityNodes(), capacityScale() (+38 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.06
-Nodes (24): ALIBABA_DB_INSTANCES, VECTOR_DATABASES, ALIBABA_REDIS_INSTANCES, AlibabaDBAdapter, AWS_DOCUMENTDB_INSTANCES, AWS_DYNAMODB_INSTANCES, AWS_ELASTICACHE_INSTANCES, AWSDynamoDBAdapter (+16 more)
+Cohesion: 0.07
+Nodes (21): ALIBABA_DB_INSTANCES, VECTOR_DATABASES, ALIBABA_REDIS_INSTANCES, AWS_DOCUMENTDB_INSTANCES, AWS_DYNAMODB_INSTANCES, AWS_ELASTICACHE_INSTANCES, AWSDynamoDBAdapter, AWSElastiCacheAdapter (+13 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.06
@@ -174,16 +174,16 @@ Cohesion: 0.33
 Nodes (3): ALIBABA_FC_LANGUAGES, ALIBABA_SERVERLESS, baseAlibabaEntries
 
 ### Community 24 - "Community 24"
-Cohesion: 0.27
-Nodes (3): AppHostingPricingPipeline, DatabasePricingPipeline, PricingPipeline
+Cohesion: 0.23
+Nodes (4): AppHostingPricingPipeline, DataAnalyticsPricingPipeline, DatabasePricingPipeline, PricingPipeline
 
 ### Community 25 - "Community 25"
 Cohesion: 0.50
 Nodes (4): config, getRateLimitStatus(), middleware(), rateLimitStore
 
 ### Community 28 - "Community 28"
-Cohesion: 0.11
-Nodes (9): AWSElastiCacheAdapter, AWSAdapter, BaseAdapter, DigitalOceanAdapter, AlibabaServerlessAdapter, AWSServerlessLiveAdapter, AzureServerlessAdapter, DigitalOceanServerlessAdapter (+1 more)
+Cohesion: 0.10
+Nodes (11): AlibabaDBAdapter, DigitalOceanDBAdapter, OracleAutonomousAdapter, OraclePostgreSQLAdapter, AWSAdapter, BaseAdapter, AlibabaServerlessAdapter, AWSServerlessAdapter (+3 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.25
@@ -206,8 +206,8 @@ Cohesion: 0.16
 Nodes (7): AWSContainersLiveAdapter, AzureContainersLiveAdapter, FargateRates, fetchAciRates(), fetchFargateRates(), GCPContainersLiveAdapter, OracleContainersLiveAdapter
 
 ### Community 36 - "Community 36"
-Cohesion: 0.24
-Nodes (5): OracleMySQLHeatWaveAdapter, PricingRecord, AWSServerlessAdapter, OracleServerlessAdapter, ServerlessPricingPipeline
+Cohesion: 0.28
+Nodes (4): PricingRecord, AzureServerlessAdapter, OracleServerlessAdapter, ServerlessPricingPipeline
 
 ### Community 37 - "Community 37"
 Cohesion: 0.27
@@ -267,28 +267,28 @@ Nodes (15): DatacenterRegion, GEOGRAPHIES, Geography, PROVIDER_INFRA, ProviderIn
 
 ### Community 69 - "Community 69"
 Cohesion: 0.07
-Nodes (19): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+11 more)
+Nodes (18): ALIBABA_ANALYTICS_INSTANCES, AlibabaAnalyticsConfig, ANALYTICS_REGIONS, AnalyticsRegion, DIGITALOCEAN_ANALYTICS_INSTANCES, DigitalOceanAnalyticsConfig, NATIVE_ANALYTICS_INSTANCES, NativeAnalyticsConfig (+10 more)
 
 ### Community 93 - "Community 93"
 Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **315 isolated node(s):** `metadata`, `SPONSORS`, `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES`, `RDS_ENGINE_MAP` (+310 more)
+- **313 isolated node(s):** `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES`, `RDS_ENGINE_MAP`, `AZURE_DB_SERVICES`, `AWS_ELASTICACHE_INSTANCES` (+308 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PricingRecord` connect `Community 36` to `Community 35`, `Community 68`, `Community 69`, `Community 38`, `Community 37`, `Community 6`, `Community 9`, `Community 70`, `Community 11`, `Community 44`, `Community 47`, `Community 18`, `Community 56`, `Community 28`?**
-  _High betweenness centrality (0.078) - this node is a cross-community bridge._
-- **Why does `BaseAdapter` connect `Community 28` to `Community 33`, `Community 35`, `Community 68`, `Community 37`, `Community 69`, `Community 36`, `Community 6`, `Community 9`, `Community 70`, `Community 11`, `Community 44`, `Community 47`, `Community 18`, `Community 56`?**
-  _High betweenness centrality (0.054) - this node is a cross-community bridge._
+- **Why does `PricingRecord` connect `Community 36` to `Community 35`, `Community 68`, `Community 69`, `Community 38`, `Community 37`, `Community 6`, `Community 9`, `Community 70`, `Community 11`, `Community 44`, `Community 47`, `Community 18`, `Community 56`, `Community 59`, `Community 28`?**
+  _High betweenness centrality (0.079) - this node is a cross-community bridge._
+- **Why does `BaseAdapter` connect `Community 28` to `Community 33`, `Community 35`, `Community 68`, `Community 37`, `Community 69`, `Community 6`, `Community 39`, `Community 9`, `Community 70`, `Community 11`, `Community 44`, `Community 36`, `Community 47`, `Community 18`, `Community 56`, `Community 59`?**
+  _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 45` to `Community 8`, `Community 2`, `Community 6`, `Community 7`?**
   _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **What connects `metadata`, `SPONSORS`, `AZURE_REDIS_CACHE_GB` to the rest of the system?**
-  _315 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `AZURE_REDIS_CACHE_GB`, `ORACLE_AUTONOMOUS_LIVE_NAMES`, `RDS_ENGINE_MAP` to the rest of the system?**
+  _313 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
