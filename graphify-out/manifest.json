@@ -875,13 +875,43 @@
     "semantic_hash": ""
   },
   "src/content/blog/the-hidden-costs-of-managed-services.md": {
-    "mtime": 1784246978.0750728,
-    "ast_hash": "a94d800cb41c714badd4561fc8c49b3b",
+    "mtime": 1784248321.2632794,
+    "ast_hash": "8692944c36440986434b5c0148463c86",
     "semantic_hash": ""
   },
   "src/content/blog/welcome.md": {
     "mtime": 1784243468.09174,
     "ast_hash": "a34842cd9d3969f43bd19a9aafb770d9",
+    "semantic_hash": ""
+  },
+  "public/blog/database-engine-pricing.svg": {
+    "mtime": 1784248243.6485305,
+    "ast_hash": "37394592f1c09cd58b2d04b415207922",
+    "semantic_hash": ""
+  },
+  "public/blog/database-pricing-comparison.svg": {
+    "mtime": 1784248207.0443833,
+    "ast_hash": "909e0d08832451a2ecc1f3f61c9bbf12",
+    "semantic_hash": ""
+  },
+  "public/blog/high-availability-cost-multipliers.svg": {
+    "mtime": 1784248193.06598,
+    "ast_hash": "2d5fb2b44045c0e438b145290beaac20",
+    "semantic_hash": ""
+  },
+  "public/blog/predictable-vs-variable-costs.svg": {
+    "mtime": 1784248227.652756,
+    "ast_hash": "6dfded22c84cec47016bf4980469c2f1",
+    "semantic_hash": ""
+  },
+  "public/blog/same-workload-different-names.svg": {
+    "mtime": 1784248260.5437682,
+    "ast_hash": "30fb479c1bca638519566b9ab0afbb6b",
+    "semantic_hash": ""
+  },
+  "public/blog/storage-redundancy-multipliers.svg": {
+    "mtime": 1784248276.7539914,
+    "ast_hash": "8e7fbf98efeb6454162c820668e069e1",
     "semantic_hash": ""
   }
 }
