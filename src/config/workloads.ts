@@ -529,4 +529,38 @@ export const WORKLOADS: WorkloadDefinition[] = [
       },
     ],
   },
+  {
+    id: 'event-driven-image-processing',
+    name: 'Event-Driven Image Processing',
+    description: 'An event-driven architecture that processes uploaded images (e.g., ID verification, insurance claims) by triggering serverless functions to run AI vision models and store the extracted metadata.',
+    icon: '🖼️',
+    capacityLabel: 'Processed Images / Documents',
+    components: [
+      {
+        id: 'raw-storage', name: 'Raw Storage', icon: '🪣',
+        description: 'Landing bucket for raw user uploads from mobile/web',
+        getRequirements: (p) => storageReqs(p, 50, { category: 'Object' }),
+      },
+      {
+        id: 'event-trigger', name: 'Event Trigger', icon: '📡',
+        description: 'Captures the upload event and routes it asynchronously',
+        getRequirements: () => ({ productType: 'integration', category: 'Eventing', quantity: 1 }),
+      },
+      {
+        id: 'compute', name: 'Serverless Compute', icon: '⚙️',
+        description: 'Executes the business logic and orchestrates the AI call',
+        getRequirements: () => ({ productType: 'serverless', category: 'Compute', quantity: 1 }),
+      },
+      {
+        id: 'vision-ai', name: 'Vision AI', icon: '👁️',
+        description: 'Multimodal AI model that performs OCR, analyzes the image, and extracts required information',
+        getRequirements: (p) => ({ productType: 'ai', category: 'Foundational Models', quantity: aiTokensQty(p, 0.5) }),
+      },
+      {
+        id: 'metadata-db', name: 'Metadata DB', icon: '🗄️',
+        description: 'Stores the extracted metadata and processing results',
+        getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
+      },
+    ],
+  },
 ];
