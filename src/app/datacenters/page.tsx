@@ -20,8 +20,6 @@ const PROVIDER_COLORS: Record<string, string> = {
   digitalocean: '#0069FF',
   alibaba: '#FF6A00',
   cloudflare: '#F38020',
-  vultr: '#1E90FF',
-  hetzner: '#D4145A',
 };
 
 

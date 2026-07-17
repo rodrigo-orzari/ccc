@@ -343,7 +343,7 @@ ccc/
 ## 🗄️ Database Schema
 
 ```sql
-providers       -- slug ('aws','azure','gcp','oracle','digitalocean','alibaba','cloudflare','vultr','hetzner'), name
+providers       -- slug ('aws','azure','gcp','oracle','digitalocean','alibaba','cloudflare'), name
 regions         -- provider_id, slug (e.g. 'us-east-1'), display_name
 services        -- provider_id, name (e.g. 'EC2'), category (e.g. 'compute')
 pricing_records -- instance specs + pricing:

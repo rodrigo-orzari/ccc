@@ -20,10 +20,6 @@ function toXY(lat: number, lng: number): [number, number] {
 // legible on the map. The filter chips above the map are intentionally
 // neutral (black/white) to match the rest of the site; see the button
 // className below instead of this map.
-// Brand colors clash badly at dot size: AWS/Alibaba/Cloudflare are all near-identical
-// orange, and Azure/DigitalOcean/Vultr are all near-identical blue. Alibaba, DigitalOcean,
-// Cloudflare, and Vultr are shifted off their literal brand hex here so all 9 stay
-// distinguishable at a glance; AWS, Azure, GCP, Oracle, and Hetzner keep their brand colors.
 const DOT_COLORS: Record<string, string> = {
   aws: '#FF9900',
   azure: '#0078D4',
@@ -32,8 +28,6 @@ const DOT_COLORS: Record<string, string> = {
   digitalocean: '#00BCD4',
   alibaba: '#FBBF24',
   cloudflare: '#7C3AED',
-  vultr: '#EC4899',
-  hetzner: '#D4145A',
 };
 
 // Simplified continent polygons in equirectangular projection (W=960, H=480)
@@ -276,30 +270,6 @@ const REGION_COORDS: Record<string, Array<[number, number, string, string]>> = {
     [50.1, 8.7, 'eu-edge', 'Europe (Distributed)'],
     [1.4, 103.8, 'apac-edge', 'Asia Pacific (Distributed)'],
     [-23.5, -46.6, 'sa-edge', 'South America (Distributed)'],
-  ],
-  vultr: [
-    [40.7, -74.2, 'nj', 'New Jersey'],
-    [38.9, -77.4, 'va', 'Virginia'],
-    [41.9, -87.6, 'il', 'Chicago'],
-    [34.1, -118.2, 'lax', 'Los Angeles'],
-    [43.7, -79.4, 'tor', 'Toronto'],
-    [51.5, -0.1, 'lhr', 'London'],
-    [50.1, 8.7, 'fra', 'Frankfurt'],
-    [52.4, 4.9, 'ams', 'Amsterdam'],
-    [48.9, 2.4, 'par', 'Paris'],
-    [35.7, 139.7, 'nrt', 'Tokyo'],
-    [1.4, 103.8, 'sgp', 'Singapore'],
-    [-33.9, 151.2, 'syd', 'Sydney'],
-    [28.6, 77.2, 'del', 'Delhi'],
-    [-23.5, -46.6, 'sao', 'São Paulo'],
-    [25.2, 55.3, 'uae', 'Dubai'],
-  ],
-  hetzner: [
-    [50.5, 12.0, 'fsn1', 'Falkenstein'],
-    [49.45, 11.08, 'nbg1', 'Nuremberg'],
-    [60.2, 24.9, 'hel1', 'Helsinki'],
-    [39.0, -77.5, 'ash', 'Ashburn'],
-    [19.1, 72.9, 'ind', 'Mumbai'],
   ],
 };
 

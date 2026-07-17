@@ -604,8 +604,6 @@ const DocsPage: React.FC = () => {
               <li style={{ marginBottom: '0.4rem' }}><strong>DigitalOcean</strong> — <a href="https://docs.digitalocean.com/products/platform/availability-matrix/" target="_blank" rel="noopener noreferrer">Regional Availability</a></li>
               <li style={{ marginBottom: '0.4rem' }}><strong>Alibaba Cloud</strong> — <a href="https://www.alibabacloud.com/global-locations" target="_blank" rel="noopener noreferrer">Alibaba Cloud Global Infrastructure</a></li>
               <li style={{ marginBottom: '0.4rem' }}><strong>Cloudflare</strong> — <a href="https://www.cloudflare.com/network/" target="_blank" rel="noopener noreferrer">Cloudflare Global Network</a></li>
-              <li style={{ marginBottom: '0.4rem' }}><strong>Vultr</strong> — <a href="https://www.vultr.com/locations/" target="_blank" rel="noopener noreferrer">Vultr Global Infrastructure</a></li>
-              <li style={{ marginBottom: '0.4rem' }}><strong>Hetzner</strong> — <a href="https://www.hetzner.cloud/locations" target="_blank" rel="noopener noreferrer">Hetzner Cloud Locations</a></li>
             </ul>
             <p>
               Source links are also reproduced at the bottom of the Datacenters page itself, grouped by provider.
