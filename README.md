@@ -44,11 +44,13 @@ CCC solves this by:
 
 Pre-built cost estimation templates that model complete multi-service architectures across all providers. Each template lets you adjust key parameters (concurrency, data volume, retention, etc.) and see total cost impact across compute, storage, networking, and data services.
 
-Available templates:
+Available templates (16 total):
 - **High-Traffic Web App** — API servers, databases, load balancing, CDN
 - **RAG / AI Knowledge Base** — Embedding generation, vector storage, inference, retrieval pipelines
 - **Compliance-Ready Database** — Managed relational DB with HA, automated backups, compliance tiers
 - **Smart Manufacturing / Industrial IoT** — Edge gateways, stream processing, hot metrics storage, analytics warehouse, cold archive, predictive maintenance AI
+- **Event-Driven Image Processing** — Serverless KYC / ID verification pipelines with Vision AI
+- *And 11 more covering HPC, streaming analytics, disaster recovery, etc.*
 
 ### 📊 Regional Pricing for Data & Analytics
 
@@ -183,6 +185,9 @@ ccc/
 │   │   ├── about/page.tsx            # About page (solution overview, key capabilities, use cases)
 │   │   ├── docs/page.tsx             # Documentation hub (Datacenters, pricing methodology, FAQ)
 │   │   ├── status/page.tsx           # Status page (pipeline health, data freshness, coverage)
+│   │   ├── blog/
+│   │   │   ├── page.tsx              # Blog index page
+│   │   │   └── [slug]/page.tsx       # Individual blog post renderer
 │   │   ├── workloads/
 │   │   │   ├── page.tsx              # Workloads catalog (cards grid)
 │   │   │   ├── layout.tsx            # SEO metadata for the catalog
@@ -277,7 +282,11 @@ ccc/
 │   ├── lib/
 │   │   ├── api-utils.ts              # SQL query builder, filter parsing, initDb() migration runner
 │   │   ├── db.ts                     # postgres.js connection singleton
-│   │   └── formatInstanceName.ts     # Display-name cleaner (Azure armSkuName → readable labels)
+│   │   ├── formatInstanceName.ts     # Display-name cleaner (Azure armSkuName → readable labels)
+│   │   └── blog.ts                   # Markdown parser for blog content
+│   │
+│   ├── content/
+│   │   └── blog/                     # Markdown files for blog posts (*.md)
 │   │
 │   ├── db/
 │   │   └── schema.sql                # PostgreSQL schema (providers, regions, services, pricing_records)
@@ -419,8 +428,6 @@ No pricing on this page — pure infrastructure comparison. Use it to validate t
 Compliance posture independent of pricing. Shows which security, privacy, industry, and government certifications each provider holds (ISO 27001/27017/27018/27701/22301/20000-1/42001, SOC 1/2/3, PCI DSS, HIPAA, FedRAMP High/Moderate, CSA STAR, FIPS 140-2, HITRUST, NIST 800-171, GDPR, IRAP, C5, ENS, MTCS, ISMAP). Provider-centric tiles with three filters — provider, region (same `GEOGRAPHIES` buckets as the pricing pages), and certification. Selecting a certification disables providers that lack it ("who qualifies for FedRAMP High?"). Certification names link to a definition of the standard; each provider's official compliance page is linked at the bottom as the source of truth.
 
 Static curated data — **no live pipeline**. Compliance changes rarely and a wrong claim carries real risk, so the matrix lives in `src/config/certifications.ts` and is refreshed roughly every 6 months via a human-reviewed Claude Code prompt. See [CERTIFICATIONS_REFRESH.md](./CERTIFICATIONS_REFRESH.md) for the ready-to-paste refresh prompt and review process.
-
----
 
 ---
 
