@@ -4,6 +4,51 @@
   "graph": {},
   "nodes": [
     {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L1",
+      "id": "slug_page",
+      "community": 43,
+      "norm_label": "page.tsx"
+    },
+    {
+      "label": "generateStaticParams()",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L10",
+      "id": "slug_page_generatestaticparams",
+      "community": 43,
+      "norm_label": "generatestaticparams()"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L17",
+      "id": "slug_page_props",
+      "community": 43,
+      "norm_label": "props"
+    },
+    {
+      "label": "generateMetadata()",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L23",
+      "id": "slug_page_generatemetadata",
+      "community": 43,
+      "norm_label": "generatemetadata()"
+    },
+    {
+      "label": "BlogPostPage()",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L39",
+      "id": "slug_page_blogpostpage",
+      "community": 43,
+      "norm_label": "blogpostpage()"
+    },
+    {
       "label": "the-hidden-costs-of-managed-services.md",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
@@ -85,13 +130,13 @@
       "norm_label": "\ud83c\udfd7\ufe0f putting it together: the real cost of managed services"
     },
     {
-      "label": "\ud83d\ude80 Call to Action",
+      "label": "\ud83d\ude80 See for yourself",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L131",
-      "id": "blog_the_hidden_costs_of_managed_services_call_to_action",
+      "id": "blog_the_hidden_costs_of_managed_services_see_for_yourself",
       "community": 61,
-      "norm_label": "\ud83d\ude80 call to action"
+      "norm_label": "\ud83d\ude80 see for yourself"
     },
     {
       "label": "README.md",
@@ -362,51 +407,6 @@
       "community": 12,
       "norm_label": "\ud83d\ude4b support & feedback",
       "id": "readme_support_feedback"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L1",
-      "community": 43,
-      "norm_label": "page.tsx",
-      "id": "slug_page"
-    },
-    {
-      "label": "generateStaticParams()",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L10",
-      "community": 43,
-      "norm_label": "generatestaticparams()",
-      "id": "slug_page_generatestaticparams"
-    },
-    {
-      "label": "Props",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L17",
-      "community": 43,
-      "norm_label": "props",
-      "id": "slug_page_props"
-    },
-    {
-      "label": "generateMetadata()",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L23",
-      "community": 43,
-      "norm_label": "generatemetadata()",
-      "id": "slug_page_generatemetadata"
-    },
-    {
-      "label": "BlogPostPage()",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L39",
-      "community": 43,
-      "norm_label": "blogpostpage()",
-      "id": "slug_page_blogpostpage"
     },
     {
       "label": "page.tsx",
@@ -8889,14 +8889,110 @@
   ],
   "links": [
     {
-      "relation": "contains",
+      "relation": "imports_from",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L140",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_call_to_action"
+      "source": "slug_page",
+      "target": "lib_blog"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "lib_blog_getpostbyslug"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "lib_blog_getpostslugs"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L39",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_blogpostpage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_generatemetadata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_generatestaticparams"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page",
+      "target": "slug_page_props"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "slug_page_generatestaticparams",
+      "target": "lib_blog_getpostslugs"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "slug_page_generatemetadata",
+      "target": "lib_blog_getpostbyslug"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "slug_page_blogpostpage",
+      "target": "lib_blog_getpostbyslug"
     },
     {
       "relation": "contains",
@@ -8937,6 +9033,16 @@
       "confidence_score": 1.0,
       "source": "blog_the_hidden_costs_of_managed_services",
       "target": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_see_for_yourself",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -9287,112 +9393,6 @@
       "confidence_score": 1.0,
       "source": "readme_status_monitoring",
       "target": "readme_status_page_status"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "slug_page",
-      "target": "lib_blog"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "slug_page",
-      "target": "lib_blog_getpostbyslug"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "slug_page",
-      "target": "lib_blog_getpostslugs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L39",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "slug_page",
-      "target": "slug_page_blogpostpage"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L23",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "slug_page",
-      "target": "slug_page_generatemetadata"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "slug_page",
-      "target": "slug_page_generatestaticparams"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "slug_page",
-      "target": "slug_page_props"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L11",
-      "weight": 1.0,
-      "source": "slug_page_generatestaticparams",
-      "target": "lib_blog_getpostslugs"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L25",
-      "weight": 1.0,
-      "source": "slug_page_generatemetadata",
-      "target": "lib_blog_getpostbyslug"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L41",
-      "weight": 1.0,
-      "source": "slug_page_blogpostpage",
-      "target": "lib_blog_getpostbyslug"
     },
     {
       "relation": "imports",
@@ -25590,5 +25590,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3da993106cfba51c806578b2bb99167b3cdecf22"
+  "built_at_commit": "982f11e296427b7f917caa048f6be7997a65e573"
 }

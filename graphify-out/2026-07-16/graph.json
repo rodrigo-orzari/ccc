@@ -4,274 +4,364 @@
   "graph": {},
   "nodes": [
     {
+      "label": "the-hidden-costs-of-managed-services.md",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L1",
+      "id": "blog_the_hidden_costs_of_managed_services",
+      "community": 61,
+      "norm_label": "the-hidden-costs-of-managed-services.md"
+    },
+    {
+      "label": "\ud83d\udc4b Introduction",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L9",
+      "id": "blog_the_hidden_costs_of_managed_services_introduction",
+      "community": 61,
+      "norm_label": "\ud83d\udc4b introduction"
+    },
+    {
+      "label": "\ud83d\udea8 The High Availability Surcharge: Your First Shock",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L23",
+      "id": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock",
+      "community": 61,
+      "norm_label": "\ud83d\udea8 the high availability surcharge: your first shock"
+    },
+    {
+      "label": "\ud83d\udcb8 Managed Database Premiums: The Simplicity Tax",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L39",
+      "id": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax",
+      "community": 61,
+      "norm_label": "\ud83d\udcb8 managed database premiums: the simplicity tax"
+    },
+    {
+      "label": "\ud83c\udfa2 Serverless Database Billing: The Unpredictability Problem",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L53",
+      "id": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem",
+      "community": 61,
+      "norm_label": "\ud83c\udfa2 serverless database billing: the unpredictability problem"
+    },
+    {
+      "label": "\ud83d\udd12 Proprietary vs. Open Source: Locking In at 3x Cost",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L67",
+      "id": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost",
+      "community": 61,
+      "norm_label": "\ud83d\udd12 proprietary vs. open source: locking in at 3x cost"
+    },
+    {
+      "label": "\ud83e\udde9 The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help)",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L81",
+      "id": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help",
+      "community": 61,
+      "norm_label": "\ud83e\udde9 the data normalization challenge: why comparisons are impossible (without help)"
+    },
+    {
+      "label": "\ud83d\udcbe Storage Redundancy Multipliers: The Invisible Cost Driver",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L99",
+      "id": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver",
+      "community": 61,
+      "norm_label": "\ud83d\udcbe storage redundancy multipliers: the invisible cost driver"
+    },
+    {
+      "label": "\ud83c\udfd7\ufe0f Putting It Together: The Real Cost of Managed Services",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L117",
+      "id": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services",
+      "community": 61,
+      "norm_label": "\ud83c\udfd7\ufe0f putting it together: the real cost of managed services"
+    },
+    {
+      "label": "\ud83d\ude80 Call to Action",
+      "file_type": "document",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L131",
+      "id": "blog_the_hidden_costs_of_managed_services_call_to_action",
+      "community": 61,
+      "norm_label": "\ud83d\ude80 call to action"
+    },
+    {
       "label": "README.md",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L1",
-      "id": "readme",
       "community": 12,
-      "norm_label": "readme.md"
+      "norm_label": "readme.md",
+      "id": "readme"
     },
     {
       "label": "Compare Cloud Costs",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L5",
-      "id": "readme_compare_cloud_costs",
       "community": 12,
-      "norm_label": "compare cloud costs"
+      "norm_label": "compare cloud costs",
+      "id": "readme_compare_cloud_costs"
     },
     {
       "label": "\ud83c\udfaf What It Does",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L11",
-      "id": "readme_what_it_does",
       "community": 12,
-      "norm_label": "\ud83c\udfaf what it does"
+      "norm_label": "\ud83c\udfaf what it does",
+      "id": "readme_what_it_does"
     },
     {
       "label": "\ud83d\uddc2\ufe0f Product Categories",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L26",
-      "id": "readme_product_categories",
       "community": 12,
-      "norm_label": "\ud83d\uddc2\ufe0f product categories"
+      "norm_label": "\ud83d\uddc2\ufe0f product categories",
+      "id": "readme_product_categories"
     },
     {
       "label": "\ud83d\udce6 Workload Templates",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L43",
-      "id": "readme_workload_templates",
       "community": 12,
-      "norm_label": "\ud83d\udce6 workload templates"
+      "norm_label": "\ud83d\udce6 workload templates",
+      "id": "readme_workload_templates"
     },
     {
       "label": "\ud83d\udcca Regional Pricing for Data & Analytics",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L55",
-      "id": "readme_regional_pricing_for_data_analytics",
       "community": 12,
-      "norm_label": "\ud83d\udcca regional pricing for data & analytics"
+      "norm_label": "\ud83d\udcca regional pricing for data & analytics",
+      "id": "readme_regional_pricing_for_data_analytics"
     },
     {
       "label": "\ud83c\udf9b\ufe0f Filter Architecture",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L67",
-      "id": "readme_filter_architecture",
       "community": 12,
-      "norm_label": "\ud83c\udf9b\ufe0f filter architecture"
+      "norm_label": "\ud83c\udf9b\ufe0f filter architecture",
+      "id": "readme_filter_architecture"
     },
     {
       "label": "\ud83e\uddf1 Stack",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L80",
-      "id": "readme_stack",
       "community": 12,
-      "norm_label": "\ud83e\uddf1 stack"
+      "norm_label": "\ud83e\uddf1 stack",
+      "id": "readme_stack"
     },
     {
       "label": "\ud83d\ude80 Quick Start",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L95",
-      "id": "readme_quick_start",
       "community": 12,
-      "norm_label": "\ud83d\ude80 quick start"
+      "norm_label": "\ud83d\ude80 quick start",
+      "id": "readme_quick_start"
     },
     {
       "label": "Prerequisites",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L97",
-      "id": "readme_prerequisites",
       "community": 12,
-      "norm_label": "prerequisites"
+      "norm_label": "prerequisites",
+      "id": "readme_prerequisites"
     },
     {
       "label": "1. Clone & install",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L101",
-      "id": "readme_1_clone_install",
       "community": 12,
-      "norm_label": "1. clone & install"
+      "norm_label": "1. clone & install",
+      "id": "readme_1_clone_install"
     },
     {
       "label": "2. Configure environment",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L109",
-      "id": "readme_2_configure_environment",
       "community": 12,
-      "norm_label": "2. configure environment"
+      "norm_label": "2. configure environment",
+      "id": "readme_2_configure_environment"
     },
     {
       "label": "3. Initialize the database",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L127",
-      "id": "readme_3_initialize_the_database",
       "community": 12,
-      "norm_label": "3. initialize the database"
+      "norm_label": "3. initialize the database",
+      "id": "readme_3_initialize_the_database"
     },
     {
       "label": "4. Populate pricing data",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L138",
-      "id": "readme_4_populate_pricing_data",
       "community": 12,
-      "norm_label": "4. populate pricing data"
+      "norm_label": "4. populate pricing data",
+      "id": "readme_4_populate_pricing_data"
     },
     {
       "label": "5. Open the app",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L149",
-      "id": "readme_5_open_the_app",
       "community": 12,
-      "norm_label": "5. open the app"
+      "norm_label": "5. open the app",
+      "id": "readme_5_open_the_app"
     },
     {
       "label": "\u2699\ufe0f npm Scripts",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L155",
-      "id": "readme_npm_scripts",
       "community": 12,
-      "norm_label": "\u2699\ufe0f npm scripts"
+      "norm_label": "\u2699\ufe0f npm scripts",
+      "id": "readme_npm_scripts"
     },
     {
       "label": "\ud83d\udcc1 Repository Structure",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L170",
-      "id": "readme_repository_structure",
       "community": 12,
-      "norm_label": "\ud83d\udcc1 repository structure"
+      "norm_label": "\ud83d\udcc1 repository structure",
+      "id": "readme_repository_structure"
     },
     {
       "label": "\ud83d\uddc4\ufe0f Database Schema",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L322",
-      "id": "readme_database_schema",
       "community": 12,
-      "norm_label": "\ud83d\uddc4\ufe0f database schema"
+      "norm_label": "\ud83d\uddc4\ufe0f database schema",
+      "id": "readme_database_schema"
     },
     {
       "label": "\ud83d\udd10 Admin API Endpoints",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L346",
-      "id": "readme_admin_api_endpoints",
       "community": 12,
-      "norm_label": "\ud83d\udd10 admin api endpoints"
+      "norm_label": "\ud83d\udd10 admin api endpoints",
+      "id": "readme_admin_api_endpoints"
     },
     {
       "label": "\ud83e\udde0 Key Design Decisions",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L370",
-      "id": "readme_key_design_decisions",
       "community": 12,
-      "norm_label": "\ud83e\udde0 key design decisions"
+      "norm_label": "\ud83e\udde0 key design decisions",
+      "id": "readme_key_design_decisions"
     },
     {
       "label": "\ud83d\udcc8 Status & Monitoring",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L392",
-      "id": "readme_status_monitoring",
       "community": 12,
-      "norm_label": "\ud83d\udcc8 status & monitoring"
+      "norm_label": "\ud83d\udcc8 status & monitoring",
+      "id": "readme_status_monitoring"
     },
     {
       "label": "\ud83e\ude7a Status Page (`/status`)",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L394",
-      "id": "readme_status_page_status",
       "community": 12,
-      "norm_label": "\ud83e\ude7a status page (`/status`)"
+      "norm_label": "\ud83e\ude7a status page (`/status`)",
+      "id": "readme_status_page_status"
     },
     {
       "label": "\ud83d\udc93 Health Check (`/api/health`)",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L403",
-      "id": "readme_health_check_api_health",
       "community": 12,
-      "norm_label": "\ud83d\udc93 health check (`/api/health`)"
+      "norm_label": "\ud83d\udc93 health check (`/api/health`)",
+      "id": "readme_health_check_api_health"
     },
     {
       "label": "\ud83c\udfe2 Datacenters Page (`/datacenters`)",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L418",
-      "id": "readme_datacenters_page_datacenters",
       "community": 12,
-      "norm_label": "\ud83c\udfe2 datacenters page (`/datacenters`)"
+      "norm_label": "\ud83c\udfe2 datacenters page (`/datacenters`)",
+      "id": "readme_datacenters_page_datacenters"
     },
     {
       "label": "\ud83d\udcdc Certifications & Regulations Page (`/certifications`)",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L427",
-      "id": "readme_certifications_regulations_page_certifications",
       "community": 12,
-      "norm_label": "\ud83d\udcdc certifications & regulations page (`/certifications`)"
+      "norm_label": "\ud83d\udcdc certifications & regulations page (`/certifications`)",
+      "id": "readme_certifications_regulations_page_certifications"
     },
     {
       "label": "\ud83d\udcac About Page & User-Facing Messaging",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L434",
-      "id": "readme_about_page_user_facing_messaging",
       "community": 12,
-      "norm_label": "\ud83d\udcac about page & user-facing messaging"
+      "norm_label": "\ud83d\udcac about page & user-facing messaging",
+      "id": "readme_about_page_user_facing_messaging"
     },
     {
       "label": "\u2795 Adding a New Cloud Provider",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L450",
-      "id": "readme_adding_a_new_cloud_provider",
       "community": 12,
-      "norm_label": "\u2795 adding a new cloud provider"
+      "norm_label": "\u2795 adding a new cloud provider",
+      "id": "readme_adding_a_new_cloud_provider"
     },
     {
       "label": "\ud83d\uddfa\ufe0f Documentation Map",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L462",
-      "id": "readme_documentation_map",
       "community": 12,
-      "norm_label": "\ud83d\uddfa\ufe0f documentation map"
+      "norm_label": "\ud83d\uddfa\ufe0f documentation map",
+      "id": "readme_documentation_map"
     },
     {
       "label": "\ud83d\udcc4 License & Contributions",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L482",
-      "id": "readme_license_contributions",
       "community": 12,
-      "norm_label": "\ud83d\udcc4 license & contributions"
+      "norm_label": "\ud83d\udcc4 license & contributions",
+      "id": "readme_license_contributions"
     },
     {
       "label": "\ud83d\ude4b Support & Feedback",
       "file_type": "document",
       "source_file": "README.md",
       "source_location": "L488",
-      "id": "readme_support_feedback",
       "community": 12,
-      "norm_label": "\ud83d\ude4b support & feedback"
+      "norm_label": "\ud83d\ude4b support & feedback",
+      "id": "readme_support_feedback"
     },
     {
       "label": "page.tsx",
@@ -371,96 +461,6 @@
       "community": 8,
       "norm_label": "workloadscatalog()",
       "id": "workloads_page_workloadscatalog"
-    },
-    {
-      "label": "the-hidden-costs-of-managed-services.md",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L1",
-      "community": 61,
-      "norm_label": "the-hidden-costs-of-managed-services.md",
-      "id": "blog_the_hidden_costs_of_managed_services"
-    },
-    {
-      "label": "\ud83d\udc4b Introduction",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L8",
-      "community": 61,
-      "norm_label": "\ud83d\udc4b introduction",
-      "id": "blog_the_hidden_costs_of_managed_services_introduction"
-    },
-    {
-      "label": "\ud83d\udea8 The High Availability Surcharge: Your First Shock",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L22",
-      "community": 61,
-      "norm_label": "\ud83d\udea8 the high availability surcharge: your first shock",
-      "id": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock"
-    },
-    {
-      "label": "\ud83d\udcb8 Managed Database Premiums: The Simplicity Tax",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L36",
-      "community": 61,
-      "norm_label": "\ud83d\udcb8 managed database premiums: the simplicity tax",
-      "id": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax"
-    },
-    {
-      "label": "\ud83c\udfa2 Serverless Database Billing: The Unpredictability Problem",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L54",
-      "community": 61,
-      "norm_label": "\ud83c\udfa2 serverless database billing: the unpredictability problem",
-      "id": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem"
-    },
-    {
-      "label": "\ud83d\udd12 Proprietary vs. Open Source: Locking In at 3x Cost",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L68",
-      "community": 61,
-      "norm_label": "\ud83d\udd12 proprietary vs. open source: locking in at 3x cost",
-      "id": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost"
-    },
-    {
-      "label": "\ud83e\udde9 The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help)",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L86",
-      "community": 61,
-      "norm_label": "\ud83e\udde9 the data normalization challenge: why comparisons are impossible (without help)",
-      "id": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help"
-    },
-    {
-      "label": "\ud83d\udcbe Storage Redundancy Multipliers: The Invisible Cost Driver",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L104",
-      "community": 61,
-      "norm_label": "\ud83d\udcbe storage redundancy multipliers: the invisible cost driver",
-      "id": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver"
-    },
-    {
-      "label": "\ud83c\udfd7\ufe0f Putting It Together: The Real Cost of Managed Services",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L126",
-      "community": 61,
-      "norm_label": "\ud83c\udfd7\ufe0f putting it together: the real cost of managed services",
-      "id": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services"
-    },
-    {
-      "label": "\ud83d\ude80 Call to Action",
-      "file_type": "document",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L140",
-      "community": 61,
-      "norm_label": "\ud83d\ude80 call to action",
-      "id": "blog_the_hidden_costs_of_managed_services_call_to_action"
     },
     {
       "label": "blog.ts",
@@ -8891,6 +8891,96 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L140",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_call_to_action"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_introduction"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L126",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L104",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "blog_the_hidden_costs_of_managed_services",
+      "target": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "README.md",
       "source_location": "L5",
       "weight": 1.0,
@@ -9474,96 +9564,6 @@
       "confidence_score": 1.0,
       "source": "workloads_page",
       "target": "workloads_page_workloadscatalog"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L140",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_call_to_action"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_introduction"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L36",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L68",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L126",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L54",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L104",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L86",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "blog_the_hidden_costs_of_managed_services",
-      "target": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock"
     },
     {
       "relation": "imports_from",
@@ -25590,5 +25590,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "e42ce67d9ff3186ecd0d9c830eab39ade02cece4"
+  "built_at_commit": "3da993106cfba51c806578b2bb99167b3cdecf22"
 }
