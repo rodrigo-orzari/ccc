@@ -6,474 +6,6 @@
     {
       "label": "page.tsx",
       "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L1",
-      "id": "slug_page",
-      "community": 43,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "generateStaticParams()",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L10",
-      "id": "slug_page_generatestaticparams",
-      "community": 43,
-      "norm_label": "generatestaticparams()"
-    },
-    {
-      "label": "Props",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L17",
-      "id": "slug_page_props",
-      "community": 43,
-      "norm_label": "props"
-    },
-    {
-      "label": "generateMetadata()",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L23",
-      "id": "slug_page_generatemetadata",
-      "community": 43,
-      "norm_label": "generatemetadata()"
-    },
-    {
-      "label": "BlogPostPage()",
-      "file_type": "code",
-      "source_file": "src/app/blog/[slug]/page.tsx",
-      "source_location": "L39",
-      "id": "slug_page_blogpostpage",
-      "community": 43,
-      "norm_label": "blogpostpage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/blog/page.tsx",
-      "source_location": "L1",
-      "id": "blog_page",
-      "community": 43,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "metadata",
-      "file_type": "code",
-      "source_file": "src/app/blog/page.tsx",
-      "source_location": "L7",
-      "id": "blog_page_metadata",
-      "community": 43,
-      "norm_label": "metadata"
-    },
-    {
-      "label": "BlogIndexPage()",
-      "file_type": "code",
-      "source_file": "src/app/blog/page.tsx",
-      "source_location": "L12",
-      "id": "blog_page_blogindexpage",
-      "community": 43,
-      "norm_label": "blogindexpage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L1",
-      "id": "certifications_page",
-      "community": 14,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "CATEGORY_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L15",
-      "id": "certifications_page_category_order",
-      "community": 14,
-      "norm_label": "category_order"
-    },
-    {
-      "label": "CATEGORY_COLOR",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L19",
-      "id": "certifications_page_category_color",
-      "community": 14,
-      "norm_label": "category_color"
-    },
-    {
-      "label": "PROVIDERS_FOR_CERT",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L27",
-      "id": "certifications_page_providers_for_cert",
-      "community": 14,
-      "norm_label": "providers_for_cert"
-    },
-    {
-      "label": "CertificationsPage()",
-      "file_type": "code",
-      "source_file": "src/app/certifications/page.tsx",
-      "source_location": "L36",
-      "id": "certifications_page_certificationspage",
-      "community": 14,
-      "norm_label": "certificationspage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L1",
-      "id": "datacenters_page",
-      "community": 67,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L15",
-      "id": "datacenters_page_provider_colors",
-      "community": 67,
-      "norm_label": "provider_colors"
-    },
-    {
-      "label": "Stat()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L31",
-      "id": "datacenters_page_stat",
-      "community": 67,
-      "norm_label": "stat()"
-    },
-    {
-      "label": "StatusDot()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L43",
-      "id": "datacenters_page_statusdot",
-      "community": 67,
-      "norm_label": "statusdot()"
-    },
-    {
-      "label": "ProviderBadge()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L49",
-      "id": "datacenters_page_providerbadge",
-      "community": 67,
-      "norm_label": "providerbadge()"
-    },
-    {
-      "label": "ProviderRow()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L61",
-      "id": "datacenters_page_providerrow",
-      "community": 67,
-      "norm_label": "providerrow()"
-    },
-    {
-      "label": "GEO_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L158",
-      "id": "datacenters_page_geo_colors",
-      "community": 67,
-      "norm_label": "geo_colors"
-    },
-    {
-      "label": "ViewToggle()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L167",
-      "id": "datacenters_page_viewtoggle",
-      "community": 67,
-      "norm_label": "viewtoggle()"
-    },
-    {
-      "label": "InfraChart()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L186",
-      "id": "datacenters_page_infrachart",
-      "community": 67,
-      "norm_label": "infrachart()"
-    },
-    {
-      "label": "CoverageChart()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L212",
-      "id": "datacenters_page_coveragechart",
-      "community": 67,
-      "norm_label": "coveragechart()"
-    },
-    {
-      "label": "DatacentersPage()",
-      "file_type": "code",
-      "source_file": "src/app/datacenters/page.tsx",
-      "source_location": "L236",
-      "id": "datacenters_page_datacenterspage",
-      "community": 67,
-      "norm_label": "datacenterspage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L1",
-      "id": "sponsors_page",
-      "community": 59,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "SPONSORS",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L8",
-      "id": "sponsors_page_sponsors",
-      "community": 59,
-      "norm_label": "sponsors"
-    },
-    {
-      "label": "SponsorsPage()",
-      "file_type": "code",
-      "source_file": "src/app/sponsors/page.tsx",
-      "source_location": "L19",
-      "id": "sponsors_page_sponsorspage",
-      "community": 59,
-      "norm_label": "sponsorspage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L1",
-      "id": "status_page",
-      "community": 13,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "PipelineStatus",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L8",
-      "id": "status_page_pipelinestatus",
-      "community": 13,
-      "norm_label": "pipelinestatus"
-    },
-    {
-      "label": "ProviderStatus",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L18",
-      "id": "status_page_providerstatus",
-      "community": 13,
-      "norm_label": "providerstatus"
-    },
-    {
-      "label": "StatusData",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L26",
-      "id": "status_page_statusdata",
-      "community": 13,
-      "norm_label": "statusdata"
-    },
-    {
-      "label": "PROVIDER_COLORS",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L35",
-      "id": "status_page_provider_colors",
-      "community": 13,
-      "norm_label": "provider_colors"
-    },
-    {
-      "label": "PROVIDER_URLS",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L53",
-      "id": "status_page_provider_urls",
-      "community": 13,
-      "norm_label": "provider_urls"
-    },
-    {
-      "label": "LinkedInIcon()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L73",
-      "id": "status_page_linkedinicon",
-      "community": 13,
-      "norm_label": "linkedinicon()"
-    },
-    {
-      "label": "XIcon()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L81",
-      "id": "status_page_xicon",
-      "community": 13,
-      "norm_label": "xicon()"
-    },
-    {
-      "label": "PIPELINE_ORDER",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L89",
-      "id": "status_page_pipeline_order",
-      "community": 13,
-      "norm_label": "pipeline_order"
-    },
-    {
-      "label": "SourceBadge()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L93",
-      "id": "status_page_sourcebadge",
-      "community": 13,
-      "norm_label": "sourcebadge()"
-    },
-    {
-      "label": "BackToTop()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L132",
-      "id": "status_page_backtotop",
-      "community": 13,
-      "norm_label": "backtotop()"
-    },
-    {
-      "label": "StatusPage()",
-      "file_type": "code",
-      "source_file": "src/app/status/page.tsx",
-      "source_location": "L145",
-      "id": "status_page_statuspage",
-      "community": 13,
-      "norm_label": "statuspage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L1",
-      "id": "terms_page",
-      "community": 23,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "headingToId()",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L6",
-      "id": "terms_page_headingtoid",
-      "community": 23,
-      "norm_label": "headingtoid()"
-    },
-    {
-      "label": "TermsOfUsePage()",
-      "file_type": "code",
-      "source_file": "src/app/terms/page.tsx",
-      "source_location": "L16",
-      "id": "terms_page_termsofusepage",
-      "community": 23,
-      "norm_label": "termsofusepage()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L1",
-      "id": "id_page",
-      "community": 8,
-      "norm_label": "page.tsx"
-    },
-    {
-      "label": "catalogProductType()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L18",
-      "id": "id_page_catalogproducttype",
-      "community": 8,
-      "norm_label": "catalogproducttype()"
-    },
-    {
-      "label": "REGION_OPTIONS",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L23",
-      "id": "id_page_region_options",
-      "community": 8,
-      "norm_label": "region_options"
-    },
-    {
-      "label": "providerColor()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L25",
-      "id": "id_page_providercolor",
-      "community": 8,
-      "norm_label": "providercolor()"
-    },
-    {
-      "label": "providerName()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L27",
-      "id": "id_page_providername",
-      "community": 8,
-      "norm_label": "providername()"
-    },
-    {
-      "label": "formatNumber()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L28",
-      "id": "id_page_formatnumber",
-      "community": 8,
-      "norm_label": "formatnumber()"
-    },
-    {
-      "label": "PROVIDER_IDS",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L32",
-      "id": "id_page_provider_ids",
-      "community": 8,
-      "norm_label": "provider_ids"
-    },
-    {
-      "label": "ProviderTh()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L34",
-      "id": "id_page_providerth",
-      "community": 8,
-      "norm_label": "providerth()"
-    },
-    {
-      "label": "ArchitectureStrip()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L50",
-      "id": "id_page_architecturestrip",
-      "community": 8,
-      "norm_label": "architecturestrip()"
-    },
-    {
-      "label": "WorkloadDetails()",
-      "file_type": "code",
-      "source_file": "src/app/workloads/[id]/page.tsx",
-      "source_location": "L85",
-      "id": "id_page_workloaddetails",
-      "community": 8,
-      "norm_label": "workloaddetails()"
-    },
-    {
-      "label": "page.tsx",
-      "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
       "source_location": "L1",
       "id": "workloads_page",
@@ -484,7 +16,7 @@
       "label": "PRODUCT_TYPE_LABELS",
       "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L11",
+      "source_location": "L12",
       "id": "workloads_page_product_type_labels",
       "community": 8,
       "norm_label": "product_type_labels"
@@ -493,16 +25,25 @@
       "label": "PRODUCT_TYPE_ORDER",
       "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L25",
+      "source_location": "L26",
       "id": "workloads_page_product_type_order",
       "community": 8,
       "norm_label": "product_type_order"
     },
     {
+      "label": "HYPERSCALERS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L28",
+      "id": "workloads_page_hyperscalers",
+      "community": 8,
+      "norm_label": "hyperscalers"
+    },
+    {
       "label": "PRODUCT_TYPE_EMOJIS",
       "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L27",
+      "source_location": "L30",
       "id": "workloads_page_product_type_emojis",
       "community": 8,
       "norm_label": "product_type_emojis"
@@ -511,100 +52,568 @@
       "label": "WorkloadsCatalog()",
       "file_type": "code",
       "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L41",
+      "source_location": "L44",
       "id": "workloads_page_workloadscatalog",
       "community": 8,
       "norm_label": "workloadscatalog()"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L1",
+      "community": 43,
+      "norm_label": "page.tsx",
+      "id": "slug_page"
+    },
+    {
+      "label": "generateStaticParams()",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L10",
+      "community": 43,
+      "norm_label": "generatestaticparams()",
+      "id": "slug_page_generatestaticparams"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L17",
+      "community": 43,
+      "norm_label": "props",
+      "id": "slug_page_props"
+    },
+    {
+      "label": "generateMetadata()",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L23",
+      "community": 43,
+      "norm_label": "generatemetadata()",
+      "id": "slug_page_generatemetadata"
+    },
+    {
+      "label": "BlogPostPage()",
+      "file_type": "code",
+      "source_file": "src/app/blog/[slug]/page.tsx",
+      "source_location": "L39",
+      "community": 43,
+      "norm_label": "blogpostpage()",
+      "id": "slug_page_blogpostpage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/blog/page.tsx",
+      "source_location": "L1",
+      "community": 43,
+      "norm_label": "page.tsx",
+      "id": "blog_page"
+    },
+    {
+      "label": "metadata",
+      "file_type": "code",
+      "source_file": "src/app/blog/page.tsx",
+      "source_location": "L7",
+      "community": 43,
+      "norm_label": "metadata",
+      "id": "blog_page_metadata"
+    },
+    {
+      "label": "BlogIndexPage()",
+      "file_type": "code",
+      "source_file": "src/app/blog/page.tsx",
+      "source_location": "L12",
+      "community": 43,
+      "norm_label": "blogindexpage()",
+      "id": "blog_page_blogindexpage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L1",
+      "community": 14,
+      "norm_label": "page.tsx",
+      "id": "certifications_page"
+    },
+    {
+      "label": "CATEGORY_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L15",
+      "community": 14,
+      "norm_label": "category_order",
+      "id": "certifications_page_category_order"
+    },
+    {
+      "label": "CATEGORY_COLOR",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L19",
+      "community": 14,
+      "norm_label": "category_color",
+      "id": "certifications_page_category_color"
+    },
+    {
+      "label": "PROVIDERS_FOR_CERT",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L27",
+      "community": 14,
+      "norm_label": "providers_for_cert",
+      "id": "certifications_page_providers_for_cert"
+    },
+    {
+      "label": "CertificationsPage()",
+      "file_type": "code",
+      "source_file": "src/app/certifications/page.tsx",
+      "source_location": "L36",
+      "community": 14,
+      "norm_label": "certificationspage()",
+      "id": "certifications_page_certificationspage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L1",
+      "community": 67,
+      "norm_label": "page.tsx",
+      "id": "datacenters_page"
+    },
+    {
+      "label": "PROVIDER_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L15",
+      "community": 67,
+      "norm_label": "provider_colors",
+      "id": "datacenters_page_provider_colors"
+    },
+    {
+      "label": "Stat()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L31",
+      "community": 67,
+      "norm_label": "stat()",
+      "id": "datacenters_page_stat"
+    },
+    {
+      "label": "StatusDot()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L43",
+      "community": 67,
+      "norm_label": "statusdot()",
+      "id": "datacenters_page_statusdot"
+    },
+    {
+      "label": "ProviderBadge()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L49",
+      "community": 67,
+      "norm_label": "providerbadge()",
+      "id": "datacenters_page_providerbadge"
+    },
+    {
+      "label": "ProviderRow()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L61",
+      "community": 67,
+      "norm_label": "providerrow()",
+      "id": "datacenters_page_providerrow"
+    },
+    {
+      "label": "GEO_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L158",
+      "community": 67,
+      "norm_label": "geo_colors",
+      "id": "datacenters_page_geo_colors"
+    },
+    {
+      "label": "ViewToggle()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L167",
+      "community": 67,
+      "norm_label": "viewtoggle()",
+      "id": "datacenters_page_viewtoggle"
+    },
+    {
+      "label": "InfraChart()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L186",
+      "community": 67,
+      "norm_label": "infrachart()",
+      "id": "datacenters_page_infrachart"
+    },
+    {
+      "label": "CoverageChart()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L212",
+      "community": 67,
+      "norm_label": "coveragechart()",
+      "id": "datacenters_page_coveragechart"
+    },
+    {
+      "label": "DatacentersPage()",
+      "file_type": "code",
+      "source_file": "src/app/datacenters/page.tsx",
+      "source_location": "L236",
+      "community": 67,
+      "norm_label": "datacenterspage()",
+      "id": "datacenters_page_datacenterspage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/sponsors/page.tsx",
+      "source_location": "L1",
+      "community": 59,
+      "norm_label": "page.tsx",
+      "id": "sponsors_page"
+    },
+    {
+      "label": "SPONSORS",
+      "file_type": "code",
+      "source_file": "src/app/sponsors/page.tsx",
+      "source_location": "L8",
+      "community": 59,
+      "norm_label": "sponsors",
+      "id": "sponsors_page_sponsors"
+    },
+    {
+      "label": "SponsorsPage()",
+      "file_type": "code",
+      "source_file": "src/app/sponsors/page.tsx",
+      "source_location": "L19",
+      "community": 59,
+      "norm_label": "sponsorspage()",
+      "id": "sponsors_page_sponsorspage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L1",
+      "community": 13,
+      "norm_label": "page.tsx",
+      "id": "status_page"
+    },
+    {
+      "label": "PipelineStatus",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L8",
+      "community": 13,
+      "norm_label": "pipelinestatus",
+      "id": "status_page_pipelinestatus"
+    },
+    {
+      "label": "ProviderStatus",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L18",
+      "community": 13,
+      "norm_label": "providerstatus",
+      "id": "status_page_providerstatus"
+    },
+    {
+      "label": "StatusData",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L26",
+      "community": 13,
+      "norm_label": "statusdata",
+      "id": "status_page_statusdata"
+    },
+    {
+      "label": "PROVIDER_COLORS",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L35",
+      "community": 13,
+      "norm_label": "provider_colors",
+      "id": "status_page_provider_colors"
+    },
+    {
+      "label": "PROVIDER_URLS",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L53",
+      "community": 13,
+      "norm_label": "provider_urls",
+      "id": "status_page_provider_urls"
+    },
+    {
+      "label": "LinkedInIcon()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L73",
+      "community": 13,
+      "norm_label": "linkedinicon()",
+      "id": "status_page_linkedinicon"
+    },
+    {
+      "label": "XIcon()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L81",
+      "community": 13,
+      "norm_label": "xicon()",
+      "id": "status_page_xicon"
+    },
+    {
+      "label": "PIPELINE_ORDER",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L89",
+      "community": 13,
+      "norm_label": "pipeline_order",
+      "id": "status_page_pipeline_order"
+    },
+    {
+      "label": "SourceBadge()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L93",
+      "community": 13,
+      "norm_label": "sourcebadge()",
+      "id": "status_page_sourcebadge"
+    },
+    {
+      "label": "BackToTop()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L132",
+      "community": 13,
+      "norm_label": "backtotop()",
+      "id": "status_page_backtotop"
+    },
+    {
+      "label": "StatusPage()",
+      "file_type": "code",
+      "source_file": "src/app/status/page.tsx",
+      "source_location": "L145",
+      "community": 13,
+      "norm_label": "statuspage()",
+      "id": "status_page_statuspage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L1",
+      "community": 23,
+      "norm_label": "page.tsx",
+      "id": "terms_page"
+    },
+    {
+      "label": "headingToId()",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L6",
+      "community": 23,
+      "norm_label": "headingtoid()",
+      "id": "terms_page_headingtoid"
+    },
+    {
+      "label": "TermsOfUsePage()",
+      "file_type": "code",
+      "source_file": "src/app/terms/page.tsx",
+      "source_location": "L16",
+      "community": 23,
+      "norm_label": "termsofusepage()",
+      "id": "terms_page_termsofusepage"
+    },
+    {
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L1",
+      "community": 8,
+      "norm_label": "page.tsx",
+      "id": "id_page"
+    },
+    {
+      "label": "catalogProductType()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L18",
+      "community": 8,
+      "norm_label": "catalogproducttype()",
+      "id": "id_page_catalogproducttype"
+    },
+    {
+      "label": "REGION_OPTIONS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L23",
+      "community": 8,
+      "norm_label": "region_options",
+      "id": "id_page_region_options"
+    },
+    {
+      "label": "providerColor()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L25",
+      "community": 8,
+      "norm_label": "providercolor()",
+      "id": "id_page_providercolor"
+    },
+    {
+      "label": "providerName()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L27",
+      "community": 8,
+      "norm_label": "providername()",
+      "id": "id_page_providername"
+    },
+    {
+      "label": "formatNumber()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L28",
+      "community": 8,
+      "norm_label": "formatnumber()",
+      "id": "id_page_formatnumber"
+    },
+    {
+      "label": "PROVIDER_IDS",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L32",
+      "community": 8,
+      "norm_label": "provider_ids",
+      "id": "id_page_provider_ids"
+    },
+    {
+      "label": "ProviderTh()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L34",
+      "community": 8,
+      "norm_label": "providerth()",
+      "id": "id_page_providerth"
+    },
+    {
+      "label": "ArchitectureStrip()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L50",
+      "community": 8,
+      "norm_label": "architecturestrip()",
+      "id": "id_page_architecturestrip"
+    },
+    {
+      "label": "WorkloadDetails()",
+      "file_type": "code",
+      "source_file": "src/app/workloads/[id]/page.tsx",
+      "source_location": "L85",
+      "community": 8,
+      "norm_label": "workloaddetails()",
+      "id": "id_page_workloaddetails"
     },
     {
       "label": "the-hidden-costs-of-managed-services.md",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L1",
-      "id": "blog_the_hidden_costs_of_managed_services",
       "community": 61,
-      "norm_label": "the-hidden-costs-of-managed-services.md"
+      "norm_label": "the-hidden-costs-of-managed-services.md",
+      "id": "blog_the_hidden_costs_of_managed_services"
     },
     {
       "label": "\ud83d\udc4b Introduction",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L8",
-      "id": "blog_the_hidden_costs_of_managed_services_introduction",
       "community": 61,
-      "norm_label": "\ud83d\udc4b introduction"
+      "norm_label": "\ud83d\udc4b introduction",
+      "id": "blog_the_hidden_costs_of_managed_services_introduction"
     },
     {
       "label": "\ud83d\udea8 The High Availability Surcharge: Your First Shock",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L22",
-      "id": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock",
       "community": 61,
-      "norm_label": "\ud83d\udea8 the high availability surcharge: your first shock"
+      "norm_label": "\ud83d\udea8 the high availability surcharge: your first shock",
+      "id": "blog_the_hidden_costs_of_managed_services_the_high_availability_surcharge_your_first_shock"
     },
     {
       "label": "\ud83d\udcb8 Managed Database Premiums: The Simplicity Tax",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L36",
-      "id": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax",
       "community": 61,
-      "norm_label": "\ud83d\udcb8 managed database premiums: the simplicity tax"
+      "norm_label": "\ud83d\udcb8 managed database premiums: the simplicity tax",
+      "id": "blog_the_hidden_costs_of_managed_services_managed_database_premiums_the_simplicity_tax"
     },
     {
       "label": "\ud83c\udfa2 Serverless Database Billing: The Unpredictability Problem",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L54",
-      "id": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem",
       "community": 61,
-      "norm_label": "\ud83c\udfa2 serverless database billing: the unpredictability problem"
+      "norm_label": "\ud83c\udfa2 serverless database billing: the unpredictability problem",
+      "id": "blog_the_hidden_costs_of_managed_services_serverless_database_billing_the_unpredictability_problem"
     },
     {
       "label": "\ud83d\udd12 Proprietary vs. Open Source: Locking In at 3x Cost",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L68",
-      "id": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost",
       "community": 61,
-      "norm_label": "\ud83d\udd12 proprietary vs. open source: locking in at 3x cost"
+      "norm_label": "\ud83d\udd12 proprietary vs. open source: locking in at 3x cost",
+      "id": "blog_the_hidden_costs_of_managed_services_proprietary_vs_open_source_locking_in_at_3x_cost"
     },
     {
       "label": "\ud83e\udde9 The Data Normalization Challenge: Why Comparisons Are Impossible (Without Help)",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L86",
-      "id": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help",
       "community": 61,
-      "norm_label": "\ud83e\udde9 the data normalization challenge: why comparisons are impossible (without help)"
+      "norm_label": "\ud83e\udde9 the data normalization challenge: why comparisons are impossible (without help)",
+      "id": "blog_the_hidden_costs_of_managed_services_the_data_normalization_challenge_why_comparisons_are_impossible_without_help"
     },
     {
       "label": "\ud83d\udcbe Storage Redundancy Multipliers: The Invisible Cost Driver",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L104",
-      "id": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver",
       "community": 61,
-      "norm_label": "\ud83d\udcbe storage redundancy multipliers: the invisible cost driver"
+      "norm_label": "\ud83d\udcbe storage redundancy multipliers: the invisible cost driver",
+      "id": "blog_the_hidden_costs_of_managed_services_storage_redundancy_multipliers_the_invisible_cost_driver"
     },
     {
       "label": "\ud83c\udfd7\ufe0f Putting It Together: The Real Cost of Managed Services",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L126",
-      "id": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services",
       "community": 61,
-      "norm_label": "\ud83c\udfd7\ufe0f putting it together: the real cost of managed services"
+      "norm_label": "\ud83c\udfd7\ufe0f putting it together: the real cost of managed services",
+      "id": "blog_the_hidden_costs_of_managed_services_putting_it_together_the_real_cost_of_managed_services"
     },
     {
       "label": "\ud83d\ude80 Call to Action",
       "file_type": "document",
       "source_file": "src/content/blog/the-hidden-costs-of-managed-services.md",
       "source_location": "L140",
-      "id": "blog_the_hidden_costs_of_managed_services_call_to_action",
       "community": 61,
-      "norm_label": "\ud83d\ude80 call to action"
+      "norm_label": "\ud83d\ude80 call to action",
+      "id": "blog_the_hidden_costs_of_managed_services_call_to_action"
     },
     {
       "label": "package.json",
@@ -1187,7 +1196,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L41",
-      "community": 44,
+      "community": 37,
       "norm_label": "deriveredismemorygb()",
       "id": "services_database_pipeline_deriveredismemorygb"
     },
@@ -1205,7 +1214,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L74",
-      "community": 44,
+      "community": 37,
       "norm_label": "deriveazuredbmemorygb()",
       "id": "services_database_pipeline_deriveazuredbmemorygb"
     },
@@ -1214,7 +1223,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L82",
-      "community": 44,
+      "community": 37,
       "norm_label": "derivetier()",
       "id": "services_database_pipeline_derivetier"
     },
@@ -1268,7 +1277,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L229",
-      "community": 28,
+      "community": 9,
       "norm_label": "oraclemysqlheatwaveadapter",
       "id": "services_database_pipeline_oraclemysqlheatwaveadapter"
     },
@@ -1277,7 +1286,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L232",
-      "community": 28,
+      "community": 9,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oraclemysqlheatwaveadapter_fetchpricing"
     },
@@ -1304,7 +1313,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L307",
-      "community": 28,
+      "community": 53,
       "norm_label": "vectordatabasesadapter",
       "id": "services_database_pipeline_vectordatabasesadapter"
     },
@@ -1313,7 +1322,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L310",
-      "community": 28,
+      "community": 53,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_vectordatabasesadapter_fetchpricing"
     },
@@ -1358,7 +1367,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L444",
-      "community": 44,
+      "community": 37,
       "norm_label": "buildazuredbfilter()",
       "id": "services_database_pipeline_buildazuredbfilter"
     },
@@ -1367,7 +1376,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L449",
-      "community": 44,
+      "community": 37,
       "norm_label": "azuredbadapter",
       "id": "services_database_pipeline_azuredbadapter"
     },
@@ -1376,7 +1385,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L461",
-      "community": 44,
+      "community": 37,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_azuredbadapter_fetchpricing"
     },
@@ -1385,7 +1394,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L479",
-      "community": 44,
+      "community": 37,
       "norm_label": ".fetchforregion()",
       "id": "services_database_pipeline_azuredbadapter_fetchforregion"
     },
@@ -1466,7 +1475,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L716",
-      "community": 36,
+      "community": 9,
       "norm_label": "gcpmemorystoreadapter",
       "id": "services_database_pipeline_gcpmemorystoreadapter"
     },
@@ -1475,7 +1484,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L719",
-      "community": 36,
+      "community": 9,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_gcpmemorystoreadapter_fetchpricing"
     },
@@ -1493,7 +1502,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L757",
-      "community": 28,
+      "community": 9,
       "norm_label": "oracleredisadapter",
       "id": "services_database_pipeline_oracleredisadapter"
     },
@@ -1502,7 +1511,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L760",
-      "community": 28,
+      "community": 9,
       "norm_label": ".fetchpricing()",
       "id": "services_database_pipeline_oracleredisadapter_fetchpricing"
     },
@@ -1673,7 +1682,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L1046",
-      "community": 24,
+      "community": 52,
       "norm_label": "databasepricingpipeline",
       "id": "services_database_pipeline_databasepricingpipeline"
     },
@@ -1682,7 +1691,7 @@
       "file_type": "code",
       "source_file": "src/services/database_pipeline.ts",
       "source_location": "L1047",
-      "community": 24,
+      "community": 52,
       "norm_label": ".constructor()",
       "id": "services_database_pipeline_databasepricingpipeline_constructor"
     },
@@ -1700,7 +1709,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L1",
-      "community": 19,
+      "community": 52,
       "norm_label": "pricing_pipeline.ts",
       "id": "services_pricing_pipeline"
     },
@@ -1772,7 +1781,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L110",
-      "community": 37,
+      "community": 44,
       "norm_label": ".getcpuvendor()",
       "id": "services_pricing_pipeline_baseadapter_getcpuvendor"
     },
@@ -1781,7 +1790,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L124",
-      "community": 37,
+      "community": 44,
       "norm_label": ".getgpucount()",
       "id": "services_pricing_pipeline_baseadapter_getgpucount"
     },
@@ -1808,7 +1817,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L159",
-      "community": 28,
+      "community": 44,
       "norm_label": ".classifyazure()",
       "id": "services_pricing_pipeline_baseadapter_classifyazure"
     },
@@ -1844,7 +1853,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L191",
-      "community": 37,
+      "community": 44,
       "norm_label": "azureadapter",
       "id": "services_pricing_pipeline_azureadapter"
     },
@@ -1853,7 +1862,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L206",
-      "community": 37,
+      "community": 44,
       "norm_label": ".vcpufromsku()",
       "id": "services_pricing_pipeline_azureadapter_vcpufromsku"
     },
@@ -1862,7 +1871,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L215",
-      "community": 37,
+      "community": 44,
       "norm_label": ".memoryfromsku()",
       "id": "services_pricing_pipeline_azureadapter_memoryfromsku"
     },
@@ -1871,7 +1880,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L225",
-      "community": 37,
+      "community": 44,
       "norm_label": ".fetchpricing()",
       "id": "services_pricing_pipeline_azureadapter_fetchpricing"
     },
@@ -1880,7 +1889,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L245",
-      "community": 37,
+      "community": 44,
       "norm_label": ".fetchforregion()",
       "id": "services_pricing_pipeline_azureadapter_fetchforregion"
     },
@@ -1934,7 +1943,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L511",
-      "community": 19,
+      "community": 52,
       "norm_label": "oracle_flex_families",
       "id": "services_pricing_pipeline_oracle_flex_families"
     },
@@ -1943,7 +1952,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L517",
-      "community": 19,
+      "community": 52,
       "norm_label": "oracle_gpu_models",
       "id": "services_pricing_pipeline_oracle_gpu_models"
     },
@@ -1970,7 +1979,7 @@
       "file_type": "code",
       "source_file": "src/services/pricing_pipeline.ts",
       "source_location": "L549",
-      "community": 19,
+      "community": 71,
       "norm_label": "oracleadapter",
       "id": "services_pricing_pipeline_oracleadapter"
     },
@@ -2492,7 +2501,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L46",
-      "community": 73,
+      "community": 28,
       "norm_label": "databricksstaticadapter",
       "id": "services_data_analytics_pipeline_databricksstaticadapter"
     },
@@ -2501,7 +2510,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L51",
-      "community": 73,
+      "community": 28,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_databricksstaticadapter_constructor"
     },
@@ -2510,7 +2519,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L58",
-      "community": 73,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_databricksstaticadapter_fetchpricing"
     },
@@ -2519,7 +2528,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L87",
-      "community": 69,
+      "community": 51,
       "norm_label": "snowflakestaticadapter",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter"
     },
@@ -2528,7 +2537,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L92",
-      "community": 69,
+      "community": 51,
       "norm_label": ".constructor()",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter_constructor"
     },
@@ -2537,7 +2546,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L101",
-      "community": 69,
+      "community": 51,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_snowflakestaticadapter_fetchpricing"
     },
@@ -2627,7 +2636,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L349",
-      "community": 69,
+      "community": 36,
       "norm_label": "alibabaanalyticsadapter",
       "id": "services_data_analytics_pipeline_alibabaanalyticsadapter"
     },
@@ -2636,7 +2645,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L352",
-      "community": 69,
+      "community": 36,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_alibabaanalyticsadapter_fetchpricing"
     },
@@ -2645,7 +2654,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L381",
-      "community": 69,
+      "community": 36,
       "norm_label": "oracleanalyticsadapter",
       "id": "services_data_analytics_pipeline_oracleanalyticsadapter"
     },
@@ -2654,7 +2663,7 @@
       "file_type": "code",
       "source_file": "src/services/data_analytics_pipeline.ts",
       "source_location": "L384",
-      "community": 69,
+      "community": 36,
       "norm_label": ".fetchpricing()",
       "id": "services_data_analytics_pipeline_oracleanalyticsadapter_fetchpricing"
     },
@@ -2798,7 +2807,7 @@
       "file_type": "code",
       "source_file": "validate_components.ts",
       "source_location": "L1",
-      "community": 24,
+      "community": 71,
       "norm_label": "validate_components.ts",
       "id": "validate_components"
     },
@@ -2807,7 +2816,7 @@
       "file_type": "code",
       "source_file": "validate_components.ts",
       "source_location": "L4",
-      "community": 24,
+      "community": 71,
       "norm_label": "run()",
       "id": "validate_components_run"
     },
@@ -3185,7 +3194,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L1",
-      "community": 19,
+      "community": 52,
       "norm_label": "digitalocean_instances.ts",
       "id": "config_digitalocean_instances"
     },
@@ -3194,7 +3203,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L9",
-      "community": 19,
+      "community": 52,
       "norm_label": "digitaloceaninstanceconfig",
       "id": "config_digitalocean_instances_digitaloceaninstanceconfig"
     },
@@ -3203,7 +3212,7 @@
       "file_type": "code",
       "source_file": "src/config/digitalocean_instances.ts",
       "source_location": "L21",
-      "community": 19,
+      "community": 52,
       "norm_label": "digitalocean_instances",
       "id": "config_digitalocean_instances_digitalocean_instances"
     },
@@ -3338,7 +3347,7 @@
       "file_type": "code",
       "source_file": "src/components/FilterSidebar.tsx",
       "source_location": "L269",
-      "community": 8,
+      "community": 45,
       "norm_label": "filtersidebarprops",
       "id": "components_filtersidebar_filtersidebarprops"
     },
@@ -3689,7 +3698,7 @@
       "file_type": "code",
       "source_file": "src/components/PricingTable.tsx",
       "source_location": "L117",
-      "community": 15,
+      "community": 45,
       "norm_label": "pricingtableprops",
       "id": "components_pricingtable_pricingtableprops"
     },
@@ -3761,7 +3770,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L4",
-      "community": 14,
+      "community": 7,
       "norm_label": "geographies",
       "id": "config_index_geographies"
     },
@@ -3770,7 +3779,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L7",
-      "community": 7,
+      "community": 2,
       "norm_label": "os_types",
       "id": "config_index_os_types"
     },
@@ -3869,7 +3878,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L34",
-      "community": 2,
+      "community": 7,
       "norm_label": "serverless_timeout_options",
       "id": "config_index_serverless_timeout_options"
     },
@@ -3896,7 +3905,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L37",
-      "community": 7,
+      "community": 2,
       "norm_label": "serverless_granularity_options",
       "id": "config_index_serverless_granularity_options"
     },
@@ -3905,7 +3914,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L38",
-      "community": 7,
+      "community": 2,
       "norm_label": "serverless_execution_model_options",
       "id": "config_index_serverless_execution_model_options"
     },
@@ -3995,7 +4004,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L58",
-      "community": 7,
+      "community": 2,
       "norm_label": "networking_services",
       "id": "config_index_networking_services"
     },
@@ -4031,7 +4040,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L68",
-      "community": 2,
+      "community": 7,
       "norm_label": "networking_ha_support",
       "id": "config_index_networking_ha_support"
     },
@@ -4076,7 +4085,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L73",
-      "community": 2,
+      "community": 7,
       "norm_label": "networking_port_capacities",
       "id": "config_index_networking_port_capacities"
     },
@@ -4085,7 +4094,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L74",
-      "community": 7,
+      "community": 2,
       "norm_label": "networking_transfer_scopes",
       "id": "config_index_networking_transfer_scopes"
     },
@@ -4103,7 +4112,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L92",
-      "community": 2,
+      "community": 7,
       "norm_label": "analytics_deployment_types",
       "id": "config_index_analytics_deployment_types"
     },
@@ -4175,7 +4184,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L113",
-      "community": 2,
+      "community": 7,
       "norm_label": "default_price_range",
       "id": "config_index_default_price_range"
     },
@@ -4211,7 +4220,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L160",
-      "community": 2,
+      "community": 7,
       "norm_label": "ai_service_types",
       "id": "config_index_ai_service_types"
     },
@@ -4238,7 +4247,7 @@
       "file_type": "code",
       "source_file": "src/config/index.ts",
       "source_location": "L163",
-      "community": 7,
+      "community": 2,
       "norm_label": "ai_multimodal_options",
       "id": "config_index_ai_multimodal_options"
     },
@@ -4805,7 +4814,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L193",
-      "community": 35,
+      "community": 36,
       "norm_label": "gcpcontainersliveadapter",
       "id": "services_containers_adapters_live_gcpcontainersliveadapter"
     },
@@ -4814,7 +4823,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L196",
-      "community": 35,
+      "community": 36,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_gcpcontainersliveadapter_fetchpricing"
     },
@@ -4823,7 +4832,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L235",
-      "community": 68,
+      "community": 28,
       "norm_label": "digitaloceancontainersliveadapter",
       "id": "services_containers_adapters_live_digitaloceancontainersliveadapter"
     },
@@ -4832,7 +4841,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L239",
-      "community": 68,
+      "community": 28,
       "norm_label": ".droptletslugfor()",
       "id": "services_containers_adapters_live_digitaloceancontainersliveadapter_droptletslugfor"
     },
@@ -4841,7 +4850,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L243",
-      "community": 68,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_digitaloceancontainersliveadapter_fetchpricing"
     },
@@ -4850,7 +4859,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L289",
-      "community": 35,
+      "community": 28,
       "norm_label": "oraclecontainersliveadapter",
       "id": "services_containers_adapters_live_oraclecontainersliveadapter"
     },
@@ -4859,7 +4868,7 @@
       "file_type": "code",
       "source_file": "src/services/containers_adapters_live.ts",
       "source_location": "L292",
-      "community": 35,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_containers_adapters_live_oraclecontainersliveadapter_fetchpricing"
     },
@@ -4895,7 +4904,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L71",
-      "community": 47,
+      "community": 28,
       "norm_label": "awsserverlessadapter",
       "id": "services_serverless_pipeline_awsserverlessadapter"
     },
@@ -4904,7 +4913,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L74",
-      "community": 47,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_awsserverlessadapter_fetchpricing"
     },
@@ -4931,7 +4940,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L125",
-      "community": 47,
+      "community": 28,
       "norm_label": "azureserverlessadapter",
       "id": "services_serverless_pipeline_azureserverlessadapter"
     },
@@ -4940,7 +4949,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L128",
-      "community": 47,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_azureserverlessadapter_fetchpricing"
     },
@@ -4949,7 +4958,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L152",
-      "community": 47,
+      "community": 36,
       "norm_label": "digitaloceanserverlessadapter",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter"
     },
@@ -4958,7 +4967,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L155",
-      "community": 47,
+      "community": 36,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_digitaloceanserverlessadapter_fetchpricing"
     },
@@ -4967,7 +4976,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L186",
-      "community": 47,
+      "community": 28,
       "norm_label": "oracleserverlessadapter",
       "id": "services_serverless_pipeline_oracleserverlessadapter"
     },
@@ -4976,7 +4985,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_pipeline.ts",
       "source_location": "L189",
-      "community": 47,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_pipeline_oracleserverlessadapter_fetchpricing"
     },
@@ -5093,7 +5102,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L1",
-      "community": 8,
+      "community": 45,
       "norm_label": "producttype",
       "id": "types_index_producttype"
     },
@@ -5102,7 +5111,7 @@
       "file_type": "code",
       "source_file": "src/types/index.ts",
       "source_location": "L3",
-      "community": 15,
+      "community": 45,
       "norm_label": "pricingrecord",
       "id": "types_index_pricingrecord"
     },
@@ -5156,7 +5165,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L1",
-      "community": 18,
+      "community": 33,
       "norm_label": "serverless_adapters_live.ts",
       "id": "services_serverless_adapters_live"
     },
@@ -5165,7 +5174,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L16",
-      "community": 70,
+      "community": 33,
       "norm_label": "awslambdaliveadapter",
       "id": "services_serverless_adapters_live_awslambdaliveadapter"
     },
@@ -5174,7 +5183,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L54",
-      "community": 70,
+      "community": 33,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_awslambdaliveadapter_fetchpricing"
     },
@@ -5183,7 +5192,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L224",
-      "community": 70,
+      "community": 33,
       "norm_label": ".mapawslocationtoregion()",
       "id": "services_serverless_adapters_live_awslambdaliveadapter_mapawslocationtoregion"
     },
@@ -5192,7 +5201,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L309",
-      "community": 18,
+      "community": 33,
       "norm_label": "findcloudrunservicerate()",
       "id": "services_serverless_adapters_live_findcloudrunservicerate"
     },
@@ -5201,7 +5210,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L340",
-      "community": 18,
+      "community": 33,
       "norm_label": "fetchgcpcloudrunrates()",
       "id": "services_serverless_adapters_live_fetchgcpcloudrunrates"
     },
@@ -5210,7 +5219,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L361",
-      "community": 18,
+      "community": 33,
       "norm_label": "gcpcloudrunliveadapter",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter"
     },
@@ -5219,7 +5228,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L379",
-      "community": 18,
+      "community": 33,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_gcpcloudrunliveadapter_fetchpricing"
     },
@@ -5228,7 +5237,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L446",
-      "community": 18,
+      "community": 28,
       "norm_label": "azurefunctionsliveadapter",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter"
     },
@@ -5237,7 +5246,7 @@
       "file_type": "code",
       "source_file": "src/services/serverless_adapters_live.ts",
       "source_location": "L464",
-      "community": 18,
+      "community": 28,
       "norm_label": ".fetchpricing()",
       "id": "services_serverless_adapters_live_azurefunctionsliveadapter_fetchpricing"
     },
@@ -5264,7 +5273,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/aws_storage.ts",
       "source_location": "L1",
-      "community": 6,
+      "community": 18,
       "norm_label": "aws_storage.ts",
       "id": "scrapers_aws_storage"
     },
@@ -5273,7 +5282,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/aws_storage.ts",
       "source_location": "L4",
-      "community": 6,
+      "community": 18,
       "norm_label": "awsstoragescraper",
       "id": "scrapers_aws_storage_awsstoragescraper"
     },
@@ -5282,7 +5291,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/aws_storage.ts",
       "source_location": "L7",
-      "community": 6,
+      "community": 18,
       "norm_label": ".run()",
       "id": "scrapers_aws_storage_awsstoragescraper_run"
     },
@@ -5291,7 +5300,7 @@
       "file_type": "code",
       "source_file": "src/scrapers/aws_storage.ts",
       "source_location": "L11",
-      "community": 6,
+      "community": 18,
       "norm_label": ".scrape()",
       "id": "scrapers_aws_storage_awsstoragescraper_scrape"
     },
@@ -5363,7 +5372,7 @@
       "file_type": "code",
       "source_file": "src/services/storage_pipeline.ts",
       "source_location": "L47",
-      "community": 6,
+      "community": 19,
       "norm_label": "getoraclestoragerows()",
       "id": "services_storage_pipeline_getoraclestoragerows"
     },
@@ -5417,7 +5426,7 @@
       "file_type": "code",
       "source_file": "src/services/gcp_billing_catalog.ts",
       "source_location": "L1",
-      "community": 18,
+      "community": 33,
       "norm_label": "gcp_billing_catalog.ts",
       "id": "services_gcp_billing_catalog"
     },
@@ -5426,7 +5435,7 @@
       "file_type": "code",
       "source_file": "src/services/gcp_billing_catalog.ts",
       "source_location": "L14",
-      "community": 18,
+      "community": 33,
       "norm_label": "findgcpservicename()",
       "id": "services_gcp_billing_catalog_findgcpservicename"
     },
@@ -5435,7 +5444,7 @@
       "file_type": "code",
       "source_file": "src/services/gcp_billing_catalog.ts",
       "source_location": "L28",
-      "community": 18,
+      "community": 33,
       "norm_label": "fetchallskus()",
       "id": "services_gcp_billing_catalog_fetchallskus"
     },
@@ -5669,7 +5678,7 @@
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L1",
-      "community": 8,
+      "community": 45,
       "norm_label": "producttypeselector.tsx",
       "id": "components_producttypeselector"
     },
@@ -5678,7 +5687,7 @@
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L6",
-      "community": 8,
+      "community": 45,
       "norm_label": "product_types",
       "id": "components_producttypeselector_product_types"
     },
@@ -5687,7 +5696,7 @@
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L23",
-      "community": 8,
+      "community": 45,
       "norm_label": "linkedinicon()",
       "id": "components_producttypeselector_linkedinicon"
     },
@@ -5696,7 +5705,7 @@
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L31",
-      "community": 8,
+      "community": 45,
       "norm_label": "xicon()",
       "id": "components_producttypeselector_xicon"
     },
@@ -5705,7 +5714,7 @@
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L41",
-      "community": 8,
+      "community": 45,
       "norm_label": "producttypeselectorprops",
       "id": "components_producttypeselector_producttypeselectorprops"
     },
@@ -5714,7 +5723,7 @@
       "file_type": "code",
       "source_file": "src/components/ProductTypeSelector.tsx",
       "source_location": "L46",
-      "community": 8,
+      "community": 45,
       "norm_label": "producttypeselector()",
       "id": "components_producttypeselector_producttypeselector"
     },
@@ -5723,7 +5732,7 @@
       "file_type": "code",
       "source_file": "src/services/ingest.ts",
       "source_location": "L1",
-      "community": 24,
+      "community": 52,
       "norm_label": "ingest.ts",
       "id": "services_ingest"
     },
@@ -5732,7 +5741,7 @@
       "file_type": "code",
       "source_file": "src/services/ingest.ts",
       "source_location": "L18",
-      "community": 24,
+      "community": 52,
       "norm_label": "main()",
       "id": "services_ingest_main"
     },
@@ -6470,7 +6479,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L1",
-      "community": 54,
+      "community": 11,
       "norm_label": "scheduler.ts",
       "id": "workers_scheduler"
     },
@@ -6479,7 +6488,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L26",
-      "community": 63,
+      "community": 11,
       "norm_label": "sql",
       "id": "workers_scheduler_sql"
     },
@@ -6488,7 +6497,7 @@
       "file_type": "code",
       "source_file": "src/workers/scheduler.ts",
       "source_location": "L34",
-      "community": 54,
+      "community": 11,
       "norm_label": "checksparsedata()",
       "id": "workers_scheduler_checksparsedata"
     },
@@ -6641,7 +6650,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L85",
-      "community": 52,
+      "community": 11,
       "norm_label": "networkingpricingpipeline",
       "id": "services_networking_pipeline_networkingpricingpipeline"
     },
@@ -6650,7 +6659,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L88",
-      "community": 52,
+      "community": 11,
       "norm_label": ".constructor()",
       "id": "services_networking_pipeline_networkingpricingpipeline_constructor"
     },
@@ -6659,7 +6668,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L93",
-      "community": 52,
+      "community": 11,
       "norm_label": ".run()",
       "id": "services_networking_pipeline_networkingpricingpipeline_run"
     },
@@ -6668,7 +6677,7 @@
       "file_type": "code",
       "source_file": "src/services/networking_pipeline.ts",
       "source_location": "L148",
-      "community": 52,
+      "community": 11,
       "norm_label": ".setupnetworkingservices()",
       "id": "services_networking_pipeline_networkingpricingpipeline_setupnetworkingservices"
     },
@@ -7316,7 +7325,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L1",
-      "community": 51,
+      "community": 35,
       "norm_label": "aws_containers.ts",
       "id": "config_aws_containers"
     },
@@ -7325,7 +7334,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L7",
-      "community": 51,
+      "community": 35,
       "norm_label": "addcontainerattributes()",
       "id": "config_aws_containers_addcontainerattributes"
     },
@@ -7334,7 +7343,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L20",
-      "community": 51,
+      "community": 35,
       "norm_label": "calculatefargateprice()",
       "id": "config_aws_containers_calculatefargateprice"
     },
@@ -7343,7 +7352,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L25",
-      "community": 51,
+      "community": 35,
       "norm_label": "baseawscontainerentries",
       "id": "config_aws_containers_baseawscontainerentries"
     },
@@ -7352,7 +7361,7 @@
       "file_type": "code",
       "source_file": "src/config/aws_containers.ts",
       "source_location": "L72",
-      "community": 51,
+      "community": 35,
       "norm_label": "aws_containers",
       "id": "config_aws_containers_aws_containers"
     },
@@ -7361,7 +7370,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L1",
-      "community": 53,
+      "community": 35,
       "norm_label": "azure_containers.ts",
       "id": "config_azure_containers"
     },
@@ -7370,7 +7379,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L7",
-      "community": 53,
+      "community": 35,
       "norm_label": "addcontainerattributes()",
       "id": "config_azure_containers_addcontainerattributes"
     },
@@ -7379,7 +7388,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L19",
-      "community": 53,
+      "community": 35,
       "norm_label": "calculateaciprice()",
       "id": "config_azure_containers_calculateaciprice"
     },
@@ -7388,7 +7397,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L23",
-      "community": 53,
+      "community": 35,
       "norm_label": "baseazurecontainerentries",
       "id": "config_azure_containers_baseazurecontainerentries"
     },
@@ -7397,7 +7406,7 @@
       "file_type": "code",
       "source_file": "src/config/azure_containers.ts",
       "source_location": "L53",
-      "community": 53,
+      "community": 35,
       "norm_label": "azure_containers",
       "id": "config_azure_containers_azure_containers"
     },
@@ -7406,7 +7415,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L1",
-      "community": 62,
+      "community": 35,
       "norm_label": "gcp_containers.ts",
       "id": "config_gcp_containers"
     },
@@ -7415,7 +7424,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L7",
-      "community": 62,
+      "community": 35,
       "norm_label": "addcontainerattributes()",
       "id": "config_gcp_containers_addcontainerattributes"
     },
@@ -7424,7 +7433,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L19",
-      "community": 62,
+      "community": 35,
       "norm_label": "calculatecloudrunprice()",
       "id": "config_gcp_containers_calculatecloudrunprice"
     },
@@ -7433,7 +7442,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L23",
-      "community": 62,
+      "community": 35,
       "norm_label": "basegcpcontainerentries",
       "id": "config_gcp_containers_basegcpcontainerentries"
     },
@@ -7442,7 +7451,7 @@
       "file_type": "code",
       "source_file": "src/config/gcp_containers.ts",
       "source_location": "L52",
-      "community": 62,
+      "community": 35,
       "norm_label": "gcp_containers",
       "id": "config_gcp_containers_gcp_containers"
     },
@@ -7451,7 +7460,7 @@
       "file_type": "code",
       "source_file": "src/app/api/admin/data-quality/route.ts",
       "source_location": "L1",
-      "community": 63,
+      "community": 11,
       "norm_label": "route.ts",
       "id": "data_quality_route"
     },
@@ -7460,7 +7469,7 @@
       "file_type": "code",
       "source_file": "src/app/api/admin/data-quality/route.ts",
       "source_location": "L10",
-      "community": 63,
+      "community": 11,
       "norm_label": "get()",
       "id": "data_quality_route_get"
     },
@@ -7469,7 +7478,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L1",
-      "community": 63,
+      "community": 11,
       "norm_label": "data_quality.ts",
       "id": "services_data_quality"
     },
@@ -7478,7 +7487,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L4",
-      "community": 63,
+      "community": 11,
       "norm_label": "providers",
       "id": "services_data_quality_providers"
     },
@@ -7487,7 +7496,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L8",
-      "community": 63,
+      "community": 11,
       "norm_label": "dbcat()",
       "id": "services_data_quality_dbcat"
     },
@@ -7496,7 +7505,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L11",
-      "community": 63,
+      "community": 11,
       "norm_label": "dqissue",
       "id": "services_data_quality_dqissue"
     },
@@ -7505,7 +7514,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L18",
-      "community": 63,
+      "community": 11,
       "norm_label": "dqreport",
       "id": "services_data_quality_dqreport"
     },
@@ -7514,7 +7523,7 @@
       "file_type": "code",
       "source_file": "src/services/data_quality.ts",
       "source_location": "L39",
-      "community": 63,
+      "community": 11,
       "norm_label": "rundataqualitychecks()",
       "id": "services_data_quality_rundataqualitychecks"
     },
@@ -7523,7 +7532,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L1",
-      "community": 54,
+      "community": 11,
       "norm_label": "mailer.ts",
       "id": "services_mailer"
     },
@@ -7532,7 +7541,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L6",
-      "community": 54,
+      "community": 11,
       "norm_label": "createtransport()",
       "id": "services_mailer_createtransport"
     },
@@ -7541,7 +7550,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L17",
-      "community": 54,
+      "community": 11,
       "norm_label": "ismailerconfigured()",
       "id": "services_mailer_ismailerconfigured"
     },
@@ -7550,7 +7559,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L21",
-      "community": 54,
+      "community": 11,
       "norm_label": "pricedriftalert",
       "id": "services_mailer_pricedriftalert"
     },
@@ -7559,7 +7568,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L30",
-      "community": 54,
+      "community": 11,
       "norm_label": "staledataalert",
       "id": "services_mailer_staledataalert"
     },
@@ -7568,7 +7577,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L38",
-      "community": 54,
+      "community": 11,
       "norm_label": "sendpricedriftemail()",
       "id": "services_mailer_sendpricedriftemail"
     },
@@ -7577,7 +7586,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L69",
-      "community": 54,
+      "community": 11,
       "norm_label": "sendstalenessemail()",
       "id": "services_mailer_sendstalenessemail"
     },
@@ -7586,7 +7595,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L99",
-      "community": 54,
+      "community": 11,
       "norm_label": "dataqualityalert",
       "id": "services_mailer_dataqualityalert"
     },
@@ -7595,7 +7604,7 @@
       "file_type": "code",
       "source_file": "src/services/mailer.ts",
       "source_location": "L105",
-      "community": 54,
+      "community": 11,
       "norm_label": "senddataqualityemail()",
       "id": "services_mailer_senddataqualityemail"
     },
@@ -8880,6 +8889,177 @@
   ],
   "links": [
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_donationmodal_donationmodal"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "components_index"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "workloads_page",
+      "target": "config_index_providers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "workloads_page",
+      "target": "config_not_offered_isnotoffered",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workload_priorities"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workload_priorities_default_priorities"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "config_workloads_workloads"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "types_index"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "types_index_producttype"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_hyperscalers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_emojis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_labels"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_product_type_order"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/app/workloads/page.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "workloads_page",
+      "target": "workloads_page_workloadscatalog"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -9857,145 +10037,6 @@
       "confidence_score": 1.0,
       "source": "id_page_providerth",
       "target": "id_page_providername"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_donationmodal_donationmodal"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "components_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_index"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workload_priorities"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workload_priorities_default_priorities"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "config_workloads_workloads"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "types_index"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "types_index_producttype"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L27",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_product_type_emojis"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_product_type_labels"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_product_type_order"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/app/workloads/page.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "workloads_page",
-      "target": "workloads_page_workloadscatalog"
     },
     {
       "relation": "contains",
@@ -25549,5 +25590,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "daec5dfa9d50b61d6050c8ee810a3908c0c5a174"
+  "built_at_commit": "998ce0aeafc374a4a820bb65f0eed629140703cf"
 }

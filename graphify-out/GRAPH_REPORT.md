@@ -1,7 +1,7 @@
 # Graph Report - _ccc  (2026-07-16)
 
 ## Corpus Check
-- 169 files · ~222,354 words
+- 169 files · ~222,371 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `998ce0ae`
+- Built from commit: `67b49466`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -264,7 +264,7 @@ Cohesion: 0.25
 Nodes (6): heroTrendData, radarData, scatterDataAWS, scatterDataAzure, scatterDataGCP, serverlessData
 
 ## Knowledge Gaps
-- **331 isolated node(s):** `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `HYPERSCALERS`, `PRODUCT_TYPE_EMOJIS`, `Props` (+326 more)
+- **331 isolated node(s):** `Props`, `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `HYPERSCALERS`, `PRODUCT_TYPE_EMOJIS` (+326 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **28 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -277,7 +277,7 @@ _Questions this graph is uniquely positioned to answer:_
   _High betweenness centrality (0.051) - this node is a cross-community bridge._
 - **Why does `PROVIDERS` connect `Community 45` to `Community 8`, `Community 2`, `Community 52`, `Community 7`?**
   _High betweenness centrality (0.041) - this node is a cross-community bridge._
-- **What connects `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER`, `HYPERSCALERS` to the rest of the system?**
+- **What connects `Props`, `PRODUCT_TYPE_LABELS`, `PRODUCT_TYPE_ORDER` to the rest of the system?**
   _331 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Serverless Provider Configs` be split into smaller, more focused modules?**
   _Cohesion score 0.05 - nodes in this community are weakly interconnected._
