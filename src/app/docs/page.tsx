@@ -304,7 +304,17 @@ const DocsPage: React.FC = () => {
               </li>
               <li><a href="#filters" style={{ padding: '3px 0' }}>Filters</a></li>
               <li><a href="#sharing" style={{ padding: '3px 0' }}>Sharing</a></li>
-              <li><a href="#advertising" style={{ padding: '3px 0' }}>Advertising with Us</a></li>
+              <li>
+                <a href="#advertising" style={{ padding: '3px 0' }}>Advertising with Us</a>
+                <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <li><a href="#advertising-specs" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Image Specs</a></li>
+                  <li><a href="#advertising-tracking" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Link Tracking</a></li>
+                  <li><a href="#advertising-exclusivity" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Sponsorship Exclusivity</a></li>
+                  <li><a href="#advertising-csv-downloads" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>CSV Downloads</a></li>
+                  <li><a href="#advertising-analytics" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Site Analytics &amp; Tracking</a></li>
+                  <li><a href="#advertising-prices" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Prices</a></li>
+                </ul>
+              </li>
               <li><a href="#contributing--feedback" style={{ padding: '3px 0' }}>Contributing &amp; Feedback</a></li>
               <li><a href="#data-dictionary" style={{ padding: '3px 0' }}>Data Dictionary</a></li>
               <li><a href="#glossary" style={{ padding: '3px 0' }}>Glossary</a></li>
@@ -854,7 +864,7 @@ const DocsPage: React.FC = () => {
               This ensures that sponsors receive brand exposure at download time — reaching users who are actively exporting and analyzing cloud cost data — while unsponsored workloads serve as a soft call-to-action for potential sponsors.
             </p>
 
-            <h3 id="advertising-tracking">Site Analytics & Tracking</h3>
+            <h3 id="advertising-analytics">Site Analytics & Tracking</h3>
             <p>
               We use <a href="https://clarity.microsoft.com/" target="_blank" rel="noopener noreferrer">Microsoft Clarity</a> to track
               how users interact with the site — including page views, engagement metrics, click patterns, and device/browser data.
@@ -866,6 +876,17 @@ const DocsPage: React.FC = () => {
               which features high-level audience metrics including traffic volume, user roles, geographic distribution,
               engagement depth, and platform breakdown — allowing you to make an informed decision about sponsorship ROI.
             </p>
+
+            <h3 id="advertising-prices">Prices</h3>
+            <p>
+              We offer flexible pricing options designed to fit different goals and budgets. Choose the tier that best suits your needs:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
+              <li style={{ marginBottom: '0.4rem' }}><strong>$9.99/month or $99/year</strong> to have your brand in a workload page + sponsors page</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>$12.99/month or $119/year</strong> to have your brand in a workload page + sponsors page + a carousel in the main workload page</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>$15.99/month or $149/year</strong> to have your brand in a workload page + sponsors page + a carousel in the main workload, compliance, and datacenter page</li>
+              <li style={{ marginBottom: '0.4rem' }}><strong>$19.99/month or $189/year</strong> to have your brand in a workload page + premium placement in the sponsors page + a carousel in the main workload, compliance, datacenter, and main blog post pages + a yearly sponsored blog post in <a href="https://comparecloudcosts.com/blog" target="_blank" rel="noopener noreferrer">https://comparecloudcosts.com/blog</a></li>
+            </ul>
 
             <p style={{ marginTop: '1.5rem' }}>
               Interested in sponsoring? Reach out at{' '}

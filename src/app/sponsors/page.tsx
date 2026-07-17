@@ -8,7 +8,7 @@ import { Footer, ProductTypeSelector } from '@/components';
 const SPONSORS = [
   {
     id: 'acme-cloud',
-    name: 'Acme Cloud Consulting',
+    name: 'Acme Cloud Consulting (Example)',
     description: 'Expert cloud migration and FinOps services to optimize your architecture and reduce spend across all major providers. (Note: This is a fictitious dummy sponsor for demonstration purposes.)',
     logoUrl: 'https://placehold.co/400x400/2563eb/ffffff?text=ACME',
     linkUrl: '/workloads/three-tier-web-app',
