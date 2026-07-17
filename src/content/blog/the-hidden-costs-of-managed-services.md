@@ -32,6 +32,8 @@ This catches founders and finance teams off guard. You've budgeted for a managed
 
 The lesson here isn't that HA is bad—it's essential for production. The lesson is that HA pricing isn't standardized. You need to factor redundancy into your TCO from day one, not discover it mid-project.
 
+![High Availability Cost Multipliers](/blog/high-availability-cost-multipliers.svg)
+
 ---
 
 ## 💸 Managed Database Premiums: The Simplicity Tax
@@ -42,11 +44,7 @@ An 8 vCPU / 30 GB PostgreSQL instance on Google Cloud SQL costs approximately $0
 
 Why the difference? Some of it is engineering and support. Some of it is market positioning. But for teams running tight FinOps budgets, that gap can mean thousands of dollars monthly.
 
-*[GRAPHIC: Comparison table showing pricing across three providers:*
-- *Google Cloud SQL (8 vCPU / 30 GB): $0.39/hr*
-- *AWS RDS (8 vCPU / 32 GB): [insert actual pricing]*
-- *DigitalOcean Managed Database (8 vCPU / 32 GB): $0.72/hr*
-- *Include monthly cost projection ($2,800 vs $5,200) to make the impact visceral.]*
+![Database Pricing Comparison](/blog/database-pricing-comparison.svg)
 
 The question isn't "which is cheapest?" It's "which is right for your workload and budget?" A simpler provider might justify the premium if it reduces your operational overhead. But you need to make that trade-off consciously, not discover it after migration.
 
@@ -60,7 +58,7 @@ Oracle's Autonomous Database charges $0.336 per ECPU-hour for serverless workloa
 
 Compare this to a provisioned PostgreSQL instance: your costs are fixed and predictable. You know exactly what you'll pay each month. Serverless offers flexibility; provisioned offerings offer certainty. Which you need depends on your business model and risk tolerance.
 
-*[GRAPHIC: Line chart showing cost variance over time: one line showing flat, predictable cost of provisioned instance; another showing spiky, variable cost of serverless with auto-scaling.]*
+![Predictable vs. Variable Costs Over Time](/blog/predictable-vs-variable-costs.svg)
 
 The hidden cost of serverless isn't the per-unit pricing—it's the operational complexity of managing variable costs and the potential for bill shock when demand spikes.
 
@@ -74,11 +72,7 @@ Every cloud provider offers proprietary database engines alongside open-source o
 
 Proprietary databases offer managed features and deep integration with their ecosystem. They also lock you in—switching costs are high, and pricing reflects that. When you compare a NoSQL workload on Cosmos DB to the same workload on an open-source alternative at scale, you can see a 3x cost difference. Sometimes more.
 
-*[GRAPHIC: Comparison matrix showing:*
-- *Relational (PostgreSQL, MySQL)*
-- *NoSQL (DynamoDB, Cosmos DB, Firestore)*
-- *Vector Databases (Pinecone, Qdrant, Weaviate)*
-- *Show 3-5 example workloads across each, with cost ranges. Highlight where proprietary options command premiums.]*
+![Database Engine Pricing by Type](/blog/database-engine-pricing.svg)
 
 This isn't an argument against proprietary databases. It's an argument for making an informed choice. If you're betting your architecture on a proprietary service, you're also betting that the cost-benefit remains favorable as you scale. Many teams find it doesn't.
 
@@ -96,7 +90,7 @@ This is why systematic normalization exists.
 
 At CompareCloudCosts.com, we normalize over 100,000 pricing data points across AWS, Azure, Google Cloud, Oracle, DigitalOcean, and Alibaba Cloud. We translate every provider's naming convention into a standard unit: actual compute capacity, actual memory, actual throughput. We then price the same workload against each provider and show you the real comparison.
 
-*[GRAPHIC: Side-by-side table showing how the same workload is named and priced across six providers. Highlight the naming confusion and how normalization resolves it.]*
+![Same Workload, Different Names](/blog/same-workload-different-names.svg)
 
 Finding the cheapest cloud VM shouldn't require a data science degree. But without normalization, it does.
 
@@ -116,11 +110,7 @@ The cost multipliers vary by provider. On Azure, switching from Single-Zone to Z
 
 For large-scale storage workloads (petabytes, not terabytes), these multipliers compound. A workload that costs $5,000/month on Single-Zone storage might cost $10,000-15,000/month with geo-redundancy. That's not a bug; it's the price of reliability. But you need to budget for it.
 
-*[GRAPHIC: Stacked bar chart showing cost breakdown across redundancy tiers:*
-- *AWS S3 (Standard → IA → Glacier)*
-- *Azure Blob Storage (Standard → Geo-Redundant)*
-- *Google Cloud Storage (Standard → Nearline)*
-- *Show the multipliers visually so the impact is clear.]*
+![Storage Cost Multipliers by Redundancy Tier](/blog/storage-redundancy-multipliers.svg)
 
 ---
 
