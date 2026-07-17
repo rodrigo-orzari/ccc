@@ -128,9 +128,7 @@ Because cloud cost optimization isn't about picking the cheapest provider. It's 
 
 ---
 
-## 🚀 Call to Action
-
-**See for yourself.**
+## 🚀 See for yourself
 
 [Start your free cloud cost benchmark →](https://comparecloudcosts.com) No signup required. Compare your workload across AWS, Azure, Google Cloud, Oracle, and more in minutes. Download the results as CSV. Share with your team.
 
