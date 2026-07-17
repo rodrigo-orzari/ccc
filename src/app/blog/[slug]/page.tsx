@@ -69,7 +69,7 @@ export default async function BlogPostPage(props: Props) {
       
       <ProductTypeSelector activeProductType={'' as any} />
 
-      <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[900px] mx-auto">
+      <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           
           <div className="mb-8 pb-8 border-b border-[var(--border)]">
             <Link href="/blog" className="inline-flex items-center text-sm font-semibold text-[#2563eb] dark:text-[#818cf8] hover:underline mb-6">
