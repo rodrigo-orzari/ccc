@@ -8,11 +8,11 @@ import { DigitalOceanReferralModal } from '@/components';
 export const metadata: Metadata = {
   metadataBase: new URL('https://comparecloudcosts.com'),
   title: {
-    default: 'Compare Cloud Costs - AWS, Azure, Google Cloud Pricing',
+    default: 'Compare Cloud Costs - AWS, Azure, GCP, Oracle, DigitalOcean & Alibaba',
     template: '%s | Compare Cloud Costs',
   },
-  description: 'Compare compute, database, and serverless pricing across AWS, Azure, Google Cloud, Oracle, and DigitalOcean.',
-  keywords: ['Cloud Computing', 'AWS Pricing', 'Azure Pricing', 'Google Cloud Pricing', 'Cloud Cost Comparison', 'FinOps', 'Cloud Databases', 'Serverless Pricing'],
+  description: 'Compare pricing across AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, and Cloudflare. AI models, vector databases, compute, storage, and networking—all normalized side-by-side.',
+  keywords: ['Cloud Computing', 'AWS Pricing', 'Azure Pricing', 'Google Cloud Pricing', 'Oracle Cloud', 'DigitalOcean', 'Cloud Cost Comparison', 'FinOps', 'Cloud Databases', 'Serverless Pricing', 'Multi-Cloud', 'Cloud TCO'],
   alternates: {
     canonical: '/',
   },
@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://comparecloudcosts.com',
-    title: 'Compare Cloud Costs - AWS, Azure, Google Cloud Pricing',
-    description: 'Instantly compare compute, database, and serverless pricing across major cloud providers.',
+    title: 'Compare Cloud Costs - 10+ Categories Across 6 Major Cloud Providers',
+    description: 'Side-by-side cloud pricing comparison: AWS vs Azure vs GCP vs Oracle vs DigitalOcean vs Alibaba. Compute, databases, serverless, storage, networking, AI, and more.',
     siteName: 'Compare Cloud Costs',
     images: [
       {
@@ -36,8 +36,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Compare Cloud Costs',
-    description: 'Instantly compare compute, database, and serverless pricing across major cloud providers.',
+    title: 'Compare Cloud Costs Across 6+ Providers',
+    description: 'AWS vs Azure vs Google Cloud vs Oracle vs DigitalOcean—instantly compare pricing for compute, databases, serverless, storage, and more.',
     images: ['/og-image.png'],
   },
   robots: {

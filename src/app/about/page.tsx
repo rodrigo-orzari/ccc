@@ -267,7 +267,7 @@ const AboutPage: React.FC = () => {
                   comparecloudcosts.com (CCC) is a comprehensive cloud pricing intelligence platform that makes
                   comparing infrastructure costs across multiple cloud providers effortless. By normalizing and
                   aggregating pricing data from AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean,
-                  Alibaba Cloud, and emerging alternatives, CCC enables teams to perform side-by-side **AWS vs Azure vs Google Cloud pricing calculator** comparisons, helping you make confident, data-driven
+                  Alibaba Cloud, Cloudflare, and specialized providers (AI models, vector databases), CCC enables teams to perform side-by-side **AWS vs Azure vs Google Cloud pricing calculator** comparisons, helping you make confident, data-driven
                   architectural decisions and optimize cloud spend before deployment.
                 </p>
                 <BackToTop />
@@ -323,7 +323,7 @@ const AboutPage: React.FC = () => {
                 <h3 id="multi-cloud-analysis-at-scale">Multi-Cloud Analysis at Scale</h3>
                 <p>
                   Compare identical configurations across AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba
-                  Cloud, and 4+ additional providers in a single normalized view. Adjust specs, region, and
+                  Cloud, Cloudflare, and specialized providers (AI models, vector databases) in a single normalized view. Adjust specs, region, and
                   commitment options to see how costs shift across the entire provider ecosystem.
                 </p>
 

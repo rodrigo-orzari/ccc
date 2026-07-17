@@ -4,7 +4,7 @@
 
 # Compare Cloud Costs
 
-A full-stack cloud pricing comparison app that aggregates, normalizes, and compares pricing across **AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, Cloudflare, Vultr, and Hetzner** in a single side-by-side dashboard. **Live at [comparecloudcosts.com](https://comparecloudcosts.com)**
+A full-stack cloud pricing comparison app that aggregates, normalizes, and compares pricing across **AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, and Cloudflare** in a single side-by-side dashboard. View infrastructure coverage for **Vultr** and **Hetzner** on the [Datacenters](https://comparecloudcosts.com/datacenters) page (no pricing data). Explore specialized pricing for AI models (OpenAI, Anthropic) and vector databases (Pinecone, Milvus, Qdrant, Weaviate, Chroma). **Live at [comparecloudcosts.com](https://comparecloudcosts.com)**
 
 ---
 
@@ -39,6 +39,27 @@ CCC solves this by:
 | 📦 Workloads | Pre-built templates for multi-service architectures | — | Derived | Multi-cloud cost simulation |
 | 📜 Certifications | Provider compliance & regulation matrix (not priced) | — | Curated | By standard jurisdiction |
 | 🏢 Datacenters | Global region & infrastructure footprint (not priced) | — | Curated | Worldwide |
+
+### 🗺️ Provider Coverage by Category
+
+The six hyperscale providers (AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba) are available across all pricing categories. Specialized providers support specific categories only:
+
+| Category | Providers | Notes |
+|---|---|---|
+| Virtual Machines | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
+| Databases | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Pinecone, Milvus, Qdrant, Weaviate, Chroma | Main providers + vector databases |
+| Serverless | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
+| Containers | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
+| Networking | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Cloudflare | Main providers + Cloudflare |
+| Data & Analytics | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
+| AI | OpenAI, Anthropic | Specialized foundation models only |
+| Storage | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
+| App Hosting | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Cloudflare | Main providers + Cloudflare |
+| Workloads | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** AI providers | Multi-component templates |
+| Certifications | All providers | Compliance matrix (no pricing) |
+| Datacenters | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba, Cloudflare, Vultr, Hetzner | Infrastructure reference only |
+
+**Note:** Vultr and Hetzner are available for infrastructure and region planning on the Datacenters page, but pricing data is not available.
 
 ### 📦 Workload Templates
 

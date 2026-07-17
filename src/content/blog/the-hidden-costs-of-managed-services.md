@@ -30,7 +30,7 @@ This catches founders and finance teams off guard. You've budgeted for a managed
 
 ![High Availability Cost Multipliers](/blog/high-availability-cost-multipliers.svg)
 
-<span style="font-size: 0.85rem; color: #999;">HA adds significant cost multipliers across providers. AWS RDS 1.3x, Google Cloud SQL 2x, Oracle MySQL 3x.</span>
+<p style="font-size: 0.85rem; color: #999; text-align: center; font-style: italic; margin-top: 0.5rem;">Image: HA adds significant cost multipliers across providers. AWS RDS 1.3x, Google Cloud SQL 2x, Oracle MySQL 3x.</p>
 
 The lesson here isn't that HA is bad—it's essential for production. The lesson is that HA pricing isn't standardized. You need to factor redundancy into your TCO from day one, not discover it mid-project.
 
@@ -46,7 +46,7 @@ Why the difference? Some of it is engineering and support. Some of it is market 
 
 ![Database Pricing Comparison](/blog/database-pricing-comparison.svg)
 
-<span style="font-size: 0.85rem; color: #999;">Same specs across providers: Google Cloud SQL at $0.39/hr vs. DigitalOcean at $0.72/hr—an 84% annual cost difference.</span>
+<p style="font-size: 0.85rem; color: #999; text-align: center; font-style: italic; margin-top: 0.5rem;">Image: Same specs across providers: Google Cloud SQL at $0.39/hr vs. DigitalOcean at $0.72/hr—an 84% annual cost difference.</p>
 
 The question isn't "which is cheapest?" It's "which is right for your workload and budget?" A simpler provider might justify the premium if it reduces your operational overhead. But you need to make that trade-off consciously, not discover it after migration.
 
@@ -62,7 +62,7 @@ Compare this to a provisioned PostgreSQL instance: your costs are fixed and pred
 
 ![Predictable vs. Variable Costs Over Time](/blog/predictable-vs-variable-costs.svg)
 
-<span style="font-size: 0.85rem; color: #999;">Provisioned instances maintain flat monthly costs. Serverless auto-scaling can cause costs to spike 2-3x during demand peaks.</span>
+<p style="font-size: 0.85rem; color: #999; text-align: center; font-style: italic; margin-top: 0.5rem;">Image: Provisioned instances maintain flat monthly costs. Serverless auto-scaling can cause costs to spike 2-3x during demand peaks.</p>
 
 The hidden cost of serverless isn't the per-unit pricing—it's the operational complexity of managing variable costs and the potential for bill shock when demand spikes.
 
@@ -78,7 +78,7 @@ Proprietary databases offer managed features and deep integration with their eco
 
 ![Database Engine Pricing by Type](/blog/database-engine-pricing.svg)
 
-<span style="font-size: 0.85rem; color: #999;">Open-source databases range from $300-600/mo while proprietary options (Oracle, Cosmos DB) run $800-9,000/mo—the lock-in premium.</span>
+<p style="font-size: 0.85rem; color: #999; text-align: center; font-style: italic; margin-top: 0.5rem;">Image: Open-source databases range from $300-600/mo while proprietary options (Oracle, Cosmos DB) run $800-9,000/mo—the lock-in premium.</p>
 
 This isn't an argument against proprietary databases. It's an argument for making an informed choice. If you're betting your architecture on a proprietary service, you're also betting that the cost-benefit remains favorable as you scale. Many teams find it doesn't.
 
@@ -98,7 +98,7 @@ At <a href="https://comparecloudcosts.com" target="_blank">CompareCloudCosts.com
 
 ![Same Workload, Different Names](/blog/same-workload-different-names.svg)
 
-<span style="font-size: 0.85rem; color: #999;">The same 4 vCPU workload has five different names across five providers—and five different monthly prices ranging from $30 to $128.</span>
+<p style="font-size: 0.85rem; color: #999; text-align: center; font-style: italic; margin-top: 0.5rem;">Image: The same 4 vCPU workload has five different names across five providers—and five different monthly prices ranging from $30 to $128.</p>
 
 Finding the <a href="https://comparecloudcosts.com" target="_blank">cheapest cloud VM</a> shouldn't require a data science degree. But without normalization, it does.
 
@@ -120,7 +120,7 @@ For large-scale storage workloads (petabytes, not terabytes), these multipliers 
 
 ![Storage Cost Multipliers by Redundancy Tier](/blog/storage-redundancy-multipliers.svg)
 
-<span style="font-size: 0.85rem; color: #999;">Geographic redundancy adds 50-100% to storage costs. Budget for it upfront, especially at scale.</span>
+<p style="font-size: 0.85rem; color: #999; text-align: center; font-style: italic; margin-top: 0.5rem;">Image: Geographic redundancy adds 50-100% to storage costs. Budget for it upfront, especially at scale.</p>
 
 ---
 

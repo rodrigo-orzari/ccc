@@ -290,6 +290,11 @@ export default function DatacentersPage() {
                 <Link href="/certifications" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Compliance</Link>{' '}
                 to see which certifications and standards each provider holds.
               </p>
+
+              {/* Notice: Infrastructure-Reference-Only Providers */}
+              <div className="mt-4 p-3 bg-[#fef3c7] dark:bg-[#1c1a0f] border border-[#fbbf24] dark:border-[#92400e] rounded text-sm text-[#92400e] dark:text-[#fcd34d]">
+                <strong>📍 Infrastructure Reference Only:</strong> Vultr and Hetzner are included for region and infrastructure planning purposes, but pricing data is not currently available. Compare pricing for other providers on the <Link href="/" className="font-semibold hover:underline">main dashboard</Link>.
+              </div>
             </div>
 
             {/* Divider */}
