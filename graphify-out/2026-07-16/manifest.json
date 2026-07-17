@@ -590,13 +590,13 @@
     "semantic_hash": ""
   },
   "src/app/workloads/page.tsx": {
-    "mtime": 1784246304.8459458,
-    "ast_hash": "25a66cb69462b362fdee3f86d2f76940",
+    "mtime": 1784247020.5427823,
+    "ast_hash": "e7d0a29efff16f36ce553b091d83fcb7",
     "semantic_hash": ""
   },
   "src/config/workloads.ts": {
-    "mtime": 1783800755.7245255,
-    "ast_hash": "81ceb6c971c804ff7286ffbe86a3ce9e",
+    "mtime": 1784247274.5406632,
+    "ast_hash": "1676703c8824c9e38ce287ade57d1de4",
     "semantic_hash": ""
   },
   "src/lib/formatInstanceName.ts": {
@@ -860,8 +860,8 @@
     "semantic_hash": ""
   },
   "src/app/blog/[slug]/page.tsx": {
-    "mtime": 1784245027.4676118,
-    "ast_hash": "86380b7a4079b2229fa8f84d9ed51706",
+    "mtime": 1784246973.2325969,
+    "ast_hash": "79e6c0666caeb58eab5bafa783b092db",
     "semantic_hash": ""
   },
   "src/app/blog/page.tsx": {
@@ -870,13 +870,13 @@
     "semantic_hash": ""
   },
   "src/lib/blog.ts": {
-    "mtime": 1784243474.4822502,
-    "ast_hash": "553c6d8adacff8855959f1774b032892",
+    "mtime": 1784246967.7037804,
+    "ast_hash": "2d377ea64f431713298514349b901850",
     "semantic_hash": ""
   },
   "src/content/blog/the-hidden-costs-of-managed-services.md": {
-    "mtime": 1784244756.7862206,
-    "ast_hash": "f225907d39eefee1ace8bfd092cf8bc2",
+    "mtime": 1784246978.0750728,
+    "ast_hash": "a94d800cb41c714badd4561fc8c49b3b",
     "semantic_hash": ""
   },
   "src/content/blog/welcome.md": {
