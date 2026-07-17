@@ -860,8 +860,8 @@
     "semantic_hash": ""
   },
   "src/app/blog/[slug]/page.tsx": {
-    "mtime": 1784249117.63809,
-    "ast_hash": "52fe7214717ecb6cccccca90338e71c1",
+    "mtime": 1784253073.6208687,
+    "ast_hash": "e4feb6d2d1c29fd5305ee088d761b0a3",
     "semantic_hash": ""
   },
   "src/app/blog/page.tsx": {
