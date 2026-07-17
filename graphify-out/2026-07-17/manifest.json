@@ -100,8 +100,8 @@
     "semantic_hash": ""
   },
   "src/db/schema.sql": {
-    "mtime": 1783468377.4291997,
-    "ast_hash": "e2e207b46ddd96ec13602a3057e45ea1",
+    "mtime": 1784320875.5416253,
+    "ast_hash": "5082da04eec68505104569cceeecd2fc",
     "semantic_hash": ""
   },
   "src/services/containers_adapters_live.ts": {
@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1784247981.7474005,
-    "ast_hash": "90c45583e0b0df26243f3b77e7b7e5b9",
+    "mtime": 1784320742.7327762,
+    "ast_hash": "d6670f1b84755ff551f17b559bb2661d",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -315,8 +315,8 @@
     "semantic_hash": ""
   },
   "src/app/layout.tsx": {
-    "mtime": 1783710320.4815784,
-    "ast_hash": "c9248f0ec8040707055ba0af7d41040e",
+    "mtime": 1784320787.0980482,
+    "ast_hash": "bc52fb8911118f37585d16f224925962",
     "semantic_hash": ""
   },
   "src/app/providers.tsx": {
@@ -340,8 +340,8 @@
     "semantic_hash": ""
   },
   "src/app/about/page.tsx": {
-    "mtime": 1783977679.953953,
-    "ast_hash": "e28c0043cf8effc038f9f66a52b4b976",
+    "mtime": 1784320755.3292248,
+    "ast_hash": "d8cf6385cc40e68b8f401509be639edc",
     "semantic_hash": ""
   },
   "src/app/methodology/page.tsx": {
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "src/config/index.ts": {
-    "mtime": 1783829570.4692912,
-    "ast_hash": "a48c3783153d87de34c13dbdca55fb6d",
+    "mtime": 1784320868.8248491,
+    "ast_hash": "e3b2ce7f36f4540798b43ddc30322fbd",
     "semantic_hash": ""
   },
   "src/types/index.ts": {
@@ -605,8 +605,8 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1784244384.375684,
-    "ast_hash": "1c790b4274aa4f02da517ada97330f36",
+    "mtime": 1784320772.54337,
+    "ast_hash": "ef1e581287120f7310eb29aab3769938",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "src/content/blog/the-hidden-costs-of-managed-services.md": {
-    "mtime": 1784320121.2915003,
-    "ast_hash": "ba052446881dd167af81fa08ef26402e",
+    "mtime": 1784320704.662072,
+    "ast_hash": "49a1b9ad1a127a30006910d03970010d",
     "semantic_hash": ""
   },
   "src/content/blog/welcome.md": {
