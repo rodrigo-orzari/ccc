@@ -7,6 +7,7 @@ const contentDirectory = path.join(process.cwd(), 'src/content/blog');
 export type BlogPost = {
   slug: string;
   title: string;
+  subtitle?: string;
   date: string;
   excerpt?: string;
   author?: string;
@@ -35,6 +36,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
   return {
     slug: realSlug,
     title: data.title,
+    subtitle: data.subtitle,
     date: data.date,
     excerpt: data.excerpt,
     author: data.author,

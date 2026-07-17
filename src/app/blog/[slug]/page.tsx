@@ -79,6 +79,11 @@ export default async function BlogPostPage(props: Props) {
             <h1 className="text-3xl md:text-5xl font-bold mb-4 text-[var(--text)] leading-tight">
               {post.title}
             </h1>
+            {post.subtitle && (
+              <h2 className="text-xl md:text-2xl text-[var(--muted)] mb-6 font-medium">
+                {post.subtitle}
+              </h2>
+            )}
             
             <div className="flex items-center gap-4 text-sm text-[var(--muted)]">
               <span className="font-semibold">{post.author || 'CCC Team'}</span>

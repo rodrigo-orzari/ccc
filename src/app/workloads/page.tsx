@@ -23,7 +23,7 @@ const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
   integration: 'Integration',
 };
 
-const PRODUCT_TYPE_ORDER: ProductType[] = ['vm', 'database', 'serverless', 'containers', 'networking', 'data-analytics', 'storage', 'ai', 'app-hosting', 'security', 'integration'];
+const PRODUCT_TYPE_ORDER: ProductType[] = ['ai', 'app-hosting', 'containers', 'data-analytics', 'database', 'integration', 'networking', 'security', 'serverless', 'storage', 'vm'];
 
 const HYPERSCALERS = PROVIDERS.slice(0, 6);
 

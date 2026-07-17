@@ -1,5 +1,6 @@
 ---
-title: "The Hidden Costs of Managed Services: Why Your Database and Compute Aren't What They Seem"
+title: "The Hidden Costs of Managed Services"
+subtitle: "Why Your Database and Compute Aren't What They Seem"
 date: '2026-07-16'
 excerpt: "Your managed database costs are double what you expected. Your serverless workloads are unpredictably expensive. Let's talk about the hidden costs that blindside most teams, and why normalization matters more than you think."
 author: 'Rodrigo Orzari'
