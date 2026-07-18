@@ -268,7 +268,7 @@ export default function CertificationsPage() {
 
               {/* Category */}
               <div className="px-5 py-4 flex items-start gap-2">
-                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Category</span>
+                <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-28 shrink-0 mt-1.5 leading-snug">Certifications &amp; Regulations<br/>Category</span>
                 <div className="flex flex-wrap gap-2 flex-1">
                   {CATEGORY_ORDER.map((cat) => {
                     const active = selCategories.has(cat);

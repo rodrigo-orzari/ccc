@@ -1008,26 +1008,35 @@ export class PricingPipeline {
       const serviceId = serviceRes[0].id;
 
       // 3. Fetch old prices for drift detection BEFORE deleting
-      // Keyed by region+instance_type+os+arch — a single instance_type exists once
-      // per region per OS/arch variant, so instance_type alone collapses distinct
-      // prices into one arbitrary value and produces spurious drift alerts.
+      // Keyed by region+instance_type+os+arch+engine+ha_mode — matching the same
+      // dimensions as the insert dedupe key below. instance_type alone is NOT
+      // unique: RDS instance types (e.g. db.r5.large) are shared across up to 6
+      // engines and 2 HA modes with very different prices, so omitting
+      // engine/ha_mode collapses distinct products into one arbitrary "old
+      // price" and produces massive false-positive drift (confirmed 2026-07-17:
+      // ~60% of AWS RDS rows falsely flagged as >20% drift because they were
+      // being compared against a different engine/HA variant's price, not
+      // their own previous price).
       const oldPriceRes = await sql`
-        SELECT reg.slug AS region_slug, pr.instance_type, pr.os, pr.arch, pr.price_per_unit
+        SELECT reg.slug AS region_slug, pr.instance_type, pr.os, pr.arch,
+               pr.attributes->>'engine' AS engine, pr.attributes->>'ha_mode' AS ha_mode,
+               pr.price_per_unit
         FROM pricing_records pr
         JOIN regions reg ON reg.id = pr.region_id
         WHERE pr.service_id = ${serviceId}
       `;
-      const oldPriceKey = (region: string, instanceType: string, os: string, arch: string) =>
-        `${region}|${instanceType}|${os}|${arch}`;
+      const oldPriceKey = (region: string, instanceType: string, os: string, arch: string, engine?: string, haMode?: string) =>
+        `${region}|${instanceType}|${os}|${arch}|${engine ?? ''}|${haMode ?? ''}`;
       const oldPriceMap = new Map<string, number>();
       for (const row of oldPriceRes) {
-        oldPriceMap.set(oldPriceKey(row.region_slug, row.instance_type, row.os, row.arch), parseFloat(row.price_per_unit));
+        oldPriceMap.set(oldPriceKey(row.region_slug, row.instance_type, row.os, row.arch, row.engine, row.ha_mode), parseFloat(row.price_per_unit));
       }
 
       // 4. Detect price drift (>20% change)
       if (oldPriceMap.size > 0) {
         for (const r of records) {
-          const oldPrice = oldPriceMap.get(oldPriceKey(r.region, r.instanceType, r.os, r.arch));
+          const rAttrs = (r.attributes ?? {}) as any;
+          const oldPrice = oldPriceMap.get(oldPriceKey(r.region, r.instanceType, r.os, r.arch, rAttrs.engine, rAttrs.ha_mode));
           if (oldPrice !== undefined && oldPrice > 0) {
             const pctChange = ((r.price - oldPrice) / oldPrice) * 100;
             if (Math.abs(pctChange) > 20) {
@@ -1065,7 +1074,7 @@ export class PricingPipeline {
         if (r.supportedLanguages && r.supportedLanguages.length > 0) {
           attrs.supportedLanguages = r.supportedLanguages;
         }
-        const prevPrice = oldPriceMap.get(oldPriceKey(r.region, r.instanceType, r.os, r.arch));
+        const prevPrice = oldPriceMap.get(oldPriceKey(r.region, r.instanceType, r.os, r.arch, attrs.engine, attrs.ha_mode));
         return {
           service_id: serviceId,
           region_id: regionMap.get(r.region),
