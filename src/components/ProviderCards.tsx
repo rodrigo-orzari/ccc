@@ -38,8 +38,8 @@ export default function ProviderCards({
 
   const renderGrid = (group: typeof providers) => (
     <div
-      className="grid gap-px bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg overflow-hidden"
-      style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))' }}
+      className="grid gap-px bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] rounded-lg overflow-x-auto scrollbar-thin"
+      style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(80px, 1fr)' }}
     >
       {[...group]
         .sort((a, b) => a.name.localeCompare(b.name))
@@ -55,16 +55,16 @@ export default function ProviderCards({
               key={p.id}
               onClick={() => onProviderSelect(p.id)}
               title={isSelected ? `Click to show only ${p.name}` : `Click to include ${p.name}`}
-              className="text-left px-4 py-3 bg-white dark:bg-[#0a0a18] cursor-pointer transition-colors hover:bg-[#f7f8ff] dark:hover:bg-[#10102a]"
+              className="text-left px-2.5 py-2.5 bg-white dark:bg-[#0a0a18] cursor-pointer transition-colors hover:bg-[#f7f8ff] dark:hover:bg-[#10102a]"
             >
               <div className={isSelected ? '' : 'opacity-40'}>
                 <div
-                  className="text-[11px] font-bold uppercase tracking-widest mb-1 truncate"
+                  className="text-[9px] font-bold uppercase tracking-widest mb-1 truncate"
                   style={{ color: p.color }}
                 >
                   {p.name}
                 </div>
-                <div className="text-2xl font-black leading-none text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">
+                <div className="text-xl font-black leading-none text-[#1a1a2e] dark:text-[#f7f8ff] tabular-nums">
                   {displayCount.toLocaleString()}
                 </div>
               </div>
@@ -75,33 +75,10 @@ export default function ProviderCards({
   );
 
   const nonSoon = providers.filter(p => !p.soon);
-  const hyperscalers = nonSoon.filter(p => p.providerType !== 'specialized');
-  const specialized = nonSoon.filter(p => p.providerType === 'specialized');
 
   return (
-    <div className="px-4 py-3 lg:px-6 lg:py-4 bg-white dark:bg-[#0a0a18] space-y-3">
-      {/* Provider summary — connected-card grid mirroring the Status page summary cards.
-          Each card is click-to-filter; deselected providers are dimmed. Split into
-          Cloud Platforms (hyperscalers) and Specialized Providers so e.g. OpenAI
-          doesn't read as a peer of AWS. */}
-      {hyperscalers.length > 0 && (
-        <div className="space-y-1.5">
-          {specialized.length > 0 && (
-            <div className="text-[9px] font-bold text-[#a3a3a3] dark:text-[#525252] uppercase tracking-widest pl-0.5">
-              Cloud Platforms
-            </div>
-          )}
-          {renderGrid(hyperscalers)}
-        </div>
-      )}
-      {specialized.length > 0 && (
-        <div className="space-y-1.5">
-          <div className="text-[9px] font-bold text-[#a3a3a3] dark:text-[#525252] uppercase tracking-widest pl-0.5">
-            Specialized Providers
-          </div>
-          {renderGrid(specialized)}
-        </div>
-      )}
+    <div className="px-4 py-3 lg:px-6 lg:py-4 bg-white dark:bg-[#0a0a18]">
+      {nonSoon.length > 0 && renderGrid(nonSoon)}
     </div>
   );
 }
