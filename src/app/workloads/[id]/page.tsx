@@ -11,7 +11,7 @@ import { WorkloadDefinition, WorkloadPriorities, PriorityLevel } from '@/types';
 import { DEFAULT_PRIORITIES, PRIORITY_PILLARS, PRIORITY_LEVELS } from '@/config/workload_priorities';
 import { PROVIDERS, GEOGRAPHIES } from '@/config';
 import { formatInstanceName } from '@/lib/formatInstanceName';
-import { HYPERSCALER_IDS, providerIdsForWorkload } from '@/config/workload_providers';
+import { HYPERSCALER_IDS } from '@/config/workload_providers';
 
 // Map a workload component's productType to the URL ?product= value the main
 // catalog page expects. Most match 1:1; vm is a special case (catalog uses 'vm'
@@ -83,16 +83,6 @@ export default function WorkloadDetails() {
   const params = useParams();
   const id = params.id as string;
   const workload = WORKLOADS.find((w) => w.id === id);
-
-  // Provider column list for this workload: the six hyperscalers, plus any
-  // specialized providers (OpenAI, Anthropic, Cloudflare, vector DBs, …)
-  // scoped into at least one component this workload actually uses. These
-  // extra columns are honestly partial — priced where in scope, "Not
-  // offered" elsewhere — same "N of M tracked" treatment already used for
-  // hyperscaler data gaps, so no separate UI pattern is needed.
-  const PROVIDER_IDS = workload
-    ? (providerIdsForWorkload(workload) as unknown as readonly string[])
-    : (HYPERSCALER_IDS as unknown as readonly string[]);
 
   const scrollbarStyles = `
     .always-show-scrollbar {
@@ -192,16 +182,28 @@ export default function WorkloadDetails() {
   const [pricingModel, setPricingModel] = useState<'PAYG' | 'Yearly'>('PAYG');
   const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');
   const [diagramExpanded, setDiagramExpanded] = useState(false);
+
+  // Provider column list: the six hyperscalers, plus any specialized
+  // providers (OpenAI, Anthropic, Cloudflare, vector DBs, …) that the API
+  // actually returned real pricing for on at least one component. Driven by
+  // `results` (not just the static scope config) so a provider that's
+  // structurally in-scope for a productType but has zero ingested rows for
+  // this specific component mix (e.g. a vector DB with no matching pricing
+  // record) never appears as an all-"Not offered"/all-N/A dead column.
+  const PROVIDER_IDS: readonly string[] = results
+    ? [...HYPERSCALER_IDS, ...Object.keys(results).filter(p => !(HYPERSCALER_IDS as unknown as string[]).includes(p))]
+    : (HYPERSCALER_IDS as unknown as readonly string[]);
+
   const [selectedProviders, setSelectedProviders] = useState<Set<string>>(new Set(PROVIDER_IDS));
 
-  // Re-seed selected providers when navigating between workloads (e.g. via the
-  // carousel) — Next.js reuses this component across route params, so without
-  // this a workload with specialized columns (RAG → OpenAI/Anthropic) loaded
-  // after one without them would start with those columns hidden.
+  // Re-seed selected providers whenever the provider column list changes —
+  // either navigating between workloads or once pricing results come back
+  // and add/remove specialized columns — so newly appearing columns default
+  // to visible and stale ones from a prior workload don't linger.
   useEffect(() => {
     setSelectedProviders(new Set(PROVIDER_IDS));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [workload?.id]);
+  }, [workload?.id, PROVIDER_IDS.join(',')]);
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLDivElement>(null);

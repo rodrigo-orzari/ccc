@@ -230,7 +230,20 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ workloadId, results, specializedProviderIds });
+    // Drop specialized-provider columns that turned out to have zero real
+    // matches (every component "Not offered"/no data) — a column that's
+    // 100% N/A tells the user nothing and just clutters the table. This is a
+    // POST-pricing check (unlike the deterministic scope skip above) because
+    // a provider can be in-scope for the productType yet still have no
+    // ingested row for this specific component mix.
+    const finalSpecializedProviderIds = specializedProviderIds.filter(
+      (p) => results[p].components.some((c) => c.instanceType !== 'N/A')
+    );
+    specializedProviderIds
+      .filter((p) => !finalSpecializedProviderIds.includes(p))
+      .forEach((p) => delete results[p]);
+
+    return NextResponse.json({ workloadId, results, specializedProviderIds: finalSpecializedProviderIds });
   } catch (error) {
     console.error('Workloads API Error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
