@@ -113,9 +113,6 @@ export const DEFAULT_CONTAINERS_MEMORY_RANGE = { min: 0, max: 256 };
 export const DEFAULT_PRICE_RANGE = { min: 0, max: 100 };
 
 // Cloud providers with pricing data pipelines.
-// NOTE: Vultr and Hetzner are available for infrastructure reference on the Datacenters
-// page (via datacenter_data.ts), but are NOT included here. They have no pricing pipelines
-// and should never appear in pricing comparisons or the main dashboard.
 // To add a new pricing provider, add it here, create a config file (src/config/<provider>_*.ts),
 // and register a pipeline adapter in the appropriate src/services/*_pipeline.ts file.
 // providerType distinguishes the six general-purpose hyperscalers (offer

@@ -183,11 +183,10 @@ export default function CertificationsPage() {
 
           {/* Summary — certifications held per provider (respects active filters),
               connected-card grid mirroring the provider summary on other pages. */}
-          <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Certifications by provider</h2>
           <div className="mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--muted)] block">
+            <h2 className="text-xl font-bold mb-1 text-[var(--text)]">
               Tracked certifications by provider
-            </span>
+            </h2>
             <span className="text-[10px] text-[var(--muted)]">
               {`Counts reflect the ${CERTIFICATIONS.length} standards tracked here — not each provider's full catalog. See the trust centers below for the complete list.`}
             </span>
@@ -390,11 +389,10 @@ export default function CertificationsPage() {
             </div>
           )}
 
-          {/* Divider */}
-          <div className="h-px bg-[var(--border)] mb-8" />
-
           {/* Data sources */}
           <div id="data-sources" className="mt-12 scroll-mt-6">
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
             <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources</h2>
             <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
               The links below are each provider&apos;s official compliance hub / trust center — the complete,

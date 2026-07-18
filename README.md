@@ -4,7 +4,7 @@
 
 # Compare Cloud Costs
 
-A full-stack cloud pricing comparison app that aggregates, normalizes, and compares pricing across **AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, and Cloudflare** in a single side-by-side dashboard. View infrastructure coverage for **Vultr** and **Hetzner** on the [Datacenters](https://comparecloudcosts.com/datacenters) page (no pricing data). Explore specialized pricing for AI models (OpenAI, Anthropic) and vector databases (Pinecone, Milvus, Qdrant, Weaviate, Chroma). **Live at [comparecloudcosts.com](https://comparecloudcosts.com)**
+A full-stack cloud pricing comparison app that aggregates, normalizes, and compares pricing across six hyperscale cloud platforms — **AWS, Azure, Google Cloud, Oracle, DigitalOcean, and Alibaba Cloud** — in a single side-by-side dashboard. View infrastructure coverage for **Vultr** and **Hetzner** on the [Datacenters](https://comparecloudcosts.com/datacenters) page (no pricing data). Explore specialized providers alongside the hyperscalers: AI model vendors (OpenAI, Anthropic), vector databases (Pinecone, Milvus, Qdrant, Weaviate, Chroma), and edge/security (Cloudflare). **Live at [comparecloudcosts.com](https://comparecloudcosts.com)**
 
 ---
 
@@ -42,24 +42,26 @@ CCC solves this by:
 
 ### 🗺️ Provider Coverage by Category
 
-The six hyperscale providers (AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba) are available across all pricing categories. Specialized providers support specific categories only:
+Providers are classified by `providerType` in `src/config/index.ts`: **hyperscaler** (AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba — general-purpose platforms, available across all pricing categories) vs. **specialized** (OpenAI, Anthropic, Pinecone, Milvus, Qdrant, Weaviate, Chroma, Cloudflare — single-purpose providers scoped to specific categories via `PROVIDER_CATEGORY_SCOPE`). The UI renders these as two visually distinct groups (Cloud Platforms vs. Specialized Providers) in the provider filter and summary cards, so specialized providers never read as peers of the hyperscalers.
 
 | Category | Providers | Notes |
 |---|---|---|
-| Virtual Machines | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
-| Databases | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Pinecone, Milvus, Qdrant, Weaviate, Chroma | Main providers + vector databases |
-| Serverless | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
-| Containers | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
-| Networking | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Cloudflare | Main providers + Cloudflare |
-| Data & Analytics | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
-| AI | OpenAI, Anthropic | Specialized foundation models only |
-| Storage | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 main providers |
-| App Hosting | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Cloudflare | Main providers + Cloudflare |
+| Virtual Machines | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers |
+| Databases | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Pinecone, Milvus, Qdrant, Weaviate, Chroma | Hyperscalers + vector databases |
+| Serverless | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers |
+| Containers | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers |
+| Networking | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Cloudflare | Hyperscalers + Cloudflare |
+| Data & Analytics | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers |
+| AI | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** OpenAI, Anthropic | Hyperscalers sell foundation model access (Bedrock, Azure AI Foundry, Vertex AI, OCI GenAI, etc.) alongside the model vendors themselves |
+| Storage | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers |
+| App Hosting | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Cloudflare | Hyperscalers + Cloudflare |
 | Workloads | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** AI providers | Multi-component templates |
 | Certifications | All providers | Compliance matrix (no pricing) |
 | Datacenters | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba, Cloudflare, Vultr, Hetzner | Infrastructure reference only |
 
 **Note:** Vultr and Hetzner are available for infrastructure and region planning on the Datacenters page, but pricing data is not available.
+
+**AI model coverage caveat:** `src/config/ai_models.ts` is a hand-maintained static list, not a live scraper pipeline (unlike every other category — see `src/services/ai_pipeline.ts`, which just reads the static file). It will drift as providers add/retire models. As of 2026-07, it covers OpenAI and Anthropic's own catalogs plus a representative subset of third-party models available via Bedrock (Amazon Nova, DeepSeek-R1, Mistral Large 2, Llama) and Azure AI Foundry (DeepSeek-R1, Llama) — not an exhaustive catalog. Building real per-provider ingestion (Bedrock model catalog + pricing API, Azure AI Foundry catalog, etc.) is an open follow-up, not yet scheduled.
 
 ### 📦 Workload Templates
 

@@ -31,6 +31,34 @@ const formatNumber = (n: number | string) => Number(n).toLocaleString();
 // and main pricing tables show providers in the same sequence and with the same names.
 const PROVIDER_IDS = ['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'] as const;
 
+// Small "also available from" line shown under a component's name when a
+// specialized provider (OpenAI, Anthropic, Cloudflare, …) offers a priced
+// alternative for that specific component. Kept out of the main provider
+// columns intentionally — see HYPERSCALERS comment in the API route.
+function SpecializedAlternativesNote({
+  alternatives,
+}: {
+  alternatives?: { provider: string; instanceType: string; monthlyPrice: number }[];
+}) {
+  if (!alternatives || alternatives.length === 0) return null;
+  const sorted = [...alternatives].sort((a, b) => a.monthlyPrice - b.monthlyPrice);
+  return (
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
+      <span className="text-[9px] text-[#a3a3a3] dark:text-[#525252]">Also:</span>
+      {sorted.map(alt => (
+        <span
+          key={alt.provider}
+          title={`${providerName(alt.provider)} — ${alt.instanceType}`}
+          className="text-[9px] font-bold"
+          style={{ color: providerColor(alt.provider) }}
+        >
+          {providerName(alt.provider)} ${alt.monthlyPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}/mo
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function ProviderTh({ id }: { id: string }) {
   // Match the colored pill used in PricingTable's provider column so workload
   // comparison cells and main-catalog rows share the same provider grammar.
@@ -180,6 +208,12 @@ export default function WorkloadDetails() {
 
   const [priorities, setPriorities] = useState<WorkloadPriorities>(DEFAULT_PRIORITIES);
   const [results, setResults] = useState<any>(null);
+  // Per-component "also available from" pricing for specialized providers
+  // (OpenAI, Anthropic, Cloudflare, …) that can't fill a whole workload stack
+  // but do offer a priced alternative for specific components — see the
+  // HYPERSCALERS comment in /api/workloads/route.ts for why these aren't
+  // full comparison columns.
+  const [specializedAlternatives, setSpecializedAlternatives] = useState<Record<string, { provider: string; instanceType: string; monthlyPrice: number }[]>>({});
   const [loading, setLoading] = useState(true);
   const [region, setRegion] = useState('Global');
   const [pricingModel, setPricingModel] = useState<'PAYG' | 'Yearly'>('PAYG');
@@ -295,6 +329,7 @@ export default function WorkloadDetails() {
         });
         const data = await res.json();
         setResults(data.results);
+        setSpecializedAlternatives(data.specializedAlternatives ?? {});
       } catch (err) {
         console.error(err);
       } finally {
@@ -636,10 +671,13 @@ export default function WorkloadDetails() {
                               ? new URLSearchParams({ product: catalogProductType(reqs.productType), provider, search: comp.instanceType })
                               : null;
                             return (
-                              <div key={c.id} className="flex items-center justify-between gap-3 px-4 py-2.5">
-                                <div className="flex items-center gap-2 min-w-0">
-                                  <span className="shrink-0">{c.icon}</span>
-                                  <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{c.name}</span>
+                              <div key={c.id} className="flex items-start justify-between gap-3 px-4 py-2.5">
+                                <div className="flex flex-col min-w-0">
+                                  <div className="flex items-center gap-2 min-w-0">
+                                    <span className="shrink-0">{c.icon}</span>
+                                    <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{c.name}</span>
+                                  </div>
+                                  <SpecializedAlternativesNote alternatives={specializedAlternatives[c.id]} />
                                 </div>
                                 {has ? (
                                   <Link
@@ -708,9 +746,12 @@ export default function WorkloadDetails() {
                       return (
                       <tr key={c.id} className={`transition-colors group ${index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
                         <td className="py-3 px-4 align-middle whitespace-nowrap text-center">
-                          <div className="flex items-center gap-2 justify-center">
-                            <span>{c.icon}</span>
-                            <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{c.name}</span>
+                          <div className="flex flex-col items-center gap-0.5">
+                            <div className="flex items-center gap-2 justify-center">
+                              <span>{c.icon}</span>
+                              <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{c.name}</span>
+                            </div>
+                            <SpecializedAlternativesNote alternatives={specializedAlternatives[c.id]} />
                           </div>
                         </td>
                         {PROVIDER_IDS.filter(p => selectedProviders.has(p)).map(provider => {

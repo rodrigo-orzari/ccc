@@ -107,10 +107,9 @@ CREATE INDEX IF NOT EXISTS idx_pricing_attributes_gin ON pricing_records USING G
 CREATE INDEX IF NOT EXISTS idx_pricing_attr_engine_lower ON pricing_records (LOWER(attributes->>'engine'));
 
 -- Initial Data
--- Only pricing providers are seeded here. Vultr and Hetzner are infrastructure-reference-only
--- (available on the Datacenters page via datacenter_data.ts) and should NEVER be added to this list.
--- Other providers (Cloudflare, OpenAI, vector DBs) are auto-created via ensureProviderId() when
--- their pipelines first run, so they don't need to be seeded.
+-- Only pricing providers are seeded here. Other providers (Cloudflare, OpenAI,
+-- vector DBs) are auto-created via ensureProviderId() when their pipelines
+-- first run, so they don't need to be seeded.
 INSERT INTO providers (slug, name) VALUES
 ('aws', 'AWS'),
 ('azure', 'Azure'),
