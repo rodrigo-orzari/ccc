@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 
 const SITE_URL = 'https://comparecloudcosts.com';
-const SHARE_TEXT = 'Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba. #FinOps #CCC';
+const SHARE_TEXT = 'Compare Cloud Costs lets you compare pricing across AWS, Azure, Google Cloud, and 11 more providers — free, no signup. #FinOps';
 
 function LinkedInIcon() {
   return (
@@ -101,6 +101,9 @@ export default function Footer() {
           >
             <XIcon />
           </button>
+        </div>
+        <div className="text-[9px] text-[#a3a3a3] dark:text-[#737373]">
+          &copy; {new Date().getFullYear()} Co-Sell Plus LLC. Compare Cloud Costs is a Co-Sell Plus LLC product.
         </div>
       </div>
     </footer>

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ChevronDown, Info } from 'lucide-react';
 import type { ProductType } from '@/types';
 import { RangeSlider } from './RangeSlider';
@@ -274,7 +274,7 @@ interface FilterSidebarProps {
   selectedCpu: string[];
   selectedCategory: string[];
   selectedPricingModels: string[];
-  selectedGpu: string[];
+  selectedGpuModels: string[];
   selectedDbFamilies: string[];
   selectedEngines: string[];
   selectedDeploymentTypes: string[];
@@ -334,8 +334,8 @@ interface FilterSidebarProps {
   onSetCategory: (items: string[]) => void;
   onPricingModelToggle: (pm: string) => void;
   onSetPricingModels: (items: string[]) => void;
-  onGpuToggle: (value: string) => void;
-  onSetGpu: (items: string[]) => void;
+  onGpuModelToggle: (value: string) => void;
+  onSetGpuModel: (items: string[]) => void;
   onDbFamilyToggle: (fam: string) => void;
   onEngineToggle: (eng: string) => void;
   onDeploymentTypeToggle: (dt: string) => void;
@@ -459,7 +459,8 @@ interface FilterSidebarProps {
 // One-line intro shown at the top of the sidebar for each product category,
 // explaining what the page compares (~250–280 chars). Keyed by ProductType.
 const PRODUCT_TYPE_DESCRIPTIONS: Record<ProductType, string> = {
-  vm: 'Compare virtual machine pricing across clouds — general-purpose, compute-, memory-, and storage-optimized instances. Filter by vCPU, RAM, CPU vendor, architecture, GPU, and OS to find the cheapest equivalent instance for your workload in each region.',
+  vm: 'Compare virtual machine pricing across clouds — general-purpose, compute-, memory-, and storage-optimized instances. Filter by vCPU, RAM, CPU vendor, architecture, and OS to find the cheapest equivalent instance for your workload in each region.',
+  gpu: 'Compare GPU instance pricing across clouds — NVIDIA H100/H200/A100/L40S/L4, AMD MI300X, and more. Filter by GPU model, GPU count, vCPU, and RAM to find the cheapest way to get a given accelerator in each region.',
   database: 'Compare managed database pricing across clouds — relational, NoSQL, in-memory, and vector engines. Filter by engine, deployment type, high-availability mode, vCPU, and RAM to line up equivalent offerings and find the lowest cost per configuration.',
   serverless: 'Compare serverless function pricing across clouds — per-request and per-GB-second billing for event-driven workloads. Filter by runtime, memory, timeout, architecture, cold-start behavior, and free tier to estimate real function costs across providers.',
   containers: 'Compare managed container and Kubernetes pricing across clouds — control planes, node pools, and serverless container runtimes. Filter by orchestrator, compute type, architecture, GPU, and billing granularity to compare equivalent platforms side by side.',
@@ -480,7 +481,7 @@ export default function FilterSidebar({
   selectedCpu,
   selectedCategory,
   selectedPricingModels,
-  selectedGpu,
+  selectedGpuModels,
   selectedDbFamilies,
   selectedEngines,
   selectedDeploymentTypes,
@@ -544,8 +545,8 @@ export default function FilterSidebar({
   onSetCategory,
   onPricingModelToggle,
   onSetPricingModels,
-  onGpuToggle,
-  onSetGpu,
+  onGpuModelToggle,
+  onSetGpuModel,
   onDbFamilyToggle,
   onEngineToggle,
   onDeploymentTypeToggle,
@@ -673,10 +674,18 @@ export default function FilterSidebar({
     activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_VCPU_RANGE : 
     activeProductType === 'containers' ? config.DEFAULT_CONTAINERS_VCPU_RANGE : 
     config.DEFAULT_VCPU_RANGE;
-  const currentMemoryDefault = 
-    activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_MEMORY_RANGE : 
-    activeProductType === 'containers' ? config.DEFAULT_CONTAINERS_MEMORY_RANGE : 
+  const currentMemoryDefault =
+    activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_MEMORY_RANGE :
+    activeProductType === 'containers' ? config.DEFAULT_CONTAINERS_MEMORY_RANGE :
     config.DEFAULT_MEMORY_RANGE;
+
+  // Scroll the filter panel back to the top whenever the active category
+  // changes, so switching categories from the left nav doesn't leave you
+  // scrolled deep into the previous category's filter options.
+  const scrollRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0 });
+  }, [activeProductType]);
 
   return (
     <>
@@ -689,6 +698,7 @@ export default function FilterSidebar({
       />
     )}
     <aside
+      ref={scrollRef}
       className={`
         w-72 border-r border-[#dde0f0] dark:border-[#1e1e38] flex flex-col overflow-y-auto bg-[#f7f8ff] dark:bg-[#06060f] custom-scrollbar pb-10
         fixed inset-y-0 left-0 z-50 max-w-[85vw] transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -792,16 +802,69 @@ export default function FilterSidebar({
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
+          </>
+        )}
+
+        {activeProductType === 'gpu' && (
+          <>
             <FilterSection
-              title="GPU"
-              tooltip="GPU accelerator options."
-              options={['GPU', 'No GPU']}
-              getLabel={(id) => id === 'GPU' ? 'Yes' : 'No'}
-              selected={selectedGpu}
-              onToggle={onGpuToggle}
-              onSetAll={onSetGpu}
-              isExpanded={expanded.gpu ?? true}
-              onToggleExpand={() => onToggleSection('gpu')}
+              title="Geography"
+              tooltip="Geographic region where the instance runs."
+              options={config.GEOGRAPHIES}
+              selected={selectedGeographies}
+              onToggle={onGeographyToggle}
+              onSetAll={onSetGeographies}
+              isExpanded={expanded.geography ?? true}
+              onToggleExpand={() => onToggleSection('geography')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
+              title="Pricing Model"
+              tooltip="Select between standard on-demand pricing and discounted spare capacity (Spot / Preemptible) instances."
+              options={config.PRICING_MODELS}
+              selected={selectedPricingModels}
+              onToggle={onPricingModelToggle}
+              onSetAll={onSetPricingModels}
+              isExpanded={expanded.pricingModel ?? true}
+              onToggleExpand={() => onToggleSection('pricingModel')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
+              title="Operating System"
+              tooltip="The operating system running on the instance."
+              options={config.OS_TYPES}
+              selected={selectedOS}
+              onToggle={onOsToggle}
+              onSetAll={onSetOS}
+              isExpanded={expanded.os ?? true}
+              onToggleExpand={() => onToggleSection('os')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
+              title="CPU"
+              tooltip="Processor vendor and architecture of the host instance."
+              options={config.CPU_PROFILES.map(p => p.id)}
+              getLabel={(id) => config.CPU_PROFILES.find(p => p.id === id)?.label || id}
+              selected={selectedCpu}
+              onToggle={onCpuToggle}
+              onSetAll={onSetCpu}
+              isExpanded={expanded.cpu ?? true}
+              onToggleExpand={() => onToggleSection('cpu')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
+              title="GPU Model"
+              tooltip="The accelerator chip itself — H100, A100, L4, MI300X, etc. Derived from each provider's instance-type naming, not a field the pricing APIs expose directly."
+              options={config.GPU_MODELS}
+              selected={selectedGpuModels}
+              onToggle={onGpuModelToggle}
+              onSetAll={onSetGpuModel}
+              isExpanded={expanded.gpuModel ?? true}
+              onToggleExpand={() => onToggleSection('gpuModel')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>

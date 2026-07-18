@@ -44,6 +44,10 @@ export function useDynamicFilters() {
     GEOGRAPHIES_ANALYTICS: merge([], dynamicData?.geographies_analytics),
     OS_TYPES: merge(config.OS_TYPES, dynamicData?.os_types),
     CATEGORIES: merge(config.CATEGORIES, dynamicData?.categories),
+    // No static fallback — the GPU model list is entirely ingestion-derived
+    // (src/config/gpu_models.ts classifiers), so it should only ever show
+    // models we actually have priced data for.
+    GPU_MODELS: merge([], dynamicData?.gpu_models),
     PRICING_MODELS: config.PRICING_MODELS,
     DB_ENGINES: merge(config.DB_ENGINES, dynamicData?.engines),
     DEPLOYMENT_TYPES: merge(config.DEPLOYMENT_TYPES, dynamicData?.deployment_types),

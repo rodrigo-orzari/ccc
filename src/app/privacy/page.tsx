@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Footer, ProductTypeSelector } from '@/components';
+import { Footer, Sidebar } from '@/components';
 
 const PrivacyPolicyPage: React.FC = () => {
   return (
@@ -29,7 +29,6 @@ const PrivacyPolicyPage: React.FC = () => {
         }
         .privacy-wrapper {
           display: flex;
-          flex-direction: column;
           min-height: 100vh;
           background-color: var(--bg-color);
         }
@@ -57,8 +56,8 @@ const PrivacyPolicyPage: React.FC = () => {
           border-right: 1px solid var(--border-color);
           padding: 2rem 1.5rem;
           position: fixed;
-          top: 44px;
-          height: calc(100vh - 44px - 48px);
+          top: 0;
+          height: calc(100vh - 48px);
           overflow-y: auto;
           background-color: var(--sidebar-bg);
           flex-shrink: 0;
@@ -115,7 +114,7 @@ const PrivacyPolicyPage: React.FC = () => {
           color: var(--muted-text);
           margin-bottom: 2.5rem;
         }
-        .privacy-wrapper > footer {
+        .privacy-wrapper footer {
           position: fixed;
           bottom: 0;
           left: 0;
@@ -129,8 +128,8 @@ const PrivacyPolicyPage: React.FC = () => {
       `}</style>
 
       <div className="privacy-wrapper">
-        <ProductTypeSelector activeProductType={"" as any} />
-
+        <Sidebar activeProductType={"" as any} />
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
         <div className="privacy-body" id="privacy-policy">
           {/* Sidebar */}
           <aside className="privacy-sidebar">
@@ -246,12 +245,13 @@ const PrivacyPolicyPage: React.FC = () => {
               {' · '}
               <a href="mailto:hello@comparecloudcosts.com">Contact Us</a>
               {' · '}
-              © 2026 Co-Sell Plus LLC. All rights reserved.
+              Compare Cloud Costs is operated by Co-Sell Plus LLC. © 2026 Co-Sell Plus LLC. All rights reserved.
             </p>
           </main>
         </div>
 
         <Footer />
+        </div>
       </div>
     </>
   );

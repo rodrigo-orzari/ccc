@@ -1,4 +1,4 @@
-export type ProductType = 'vm' | 'database' | 'serverless' | 'containers' | 'networking' | 'storage' | 'data-analytics' | 'ai' | 'app-hosting' | 'security' | 'integration';
+export type ProductType = 'vm' | 'gpu' | 'database' | 'serverless' | 'containers' | 'networking' | 'storage' | 'data-analytics' | 'ai' | 'app-hosting' | 'security' | 'integration';
 
 export interface PricingRecord {
   provider: string;
@@ -63,6 +63,11 @@ export interface PricingRecord {
     // Integration comparability (see src/config/integration.ts):
     pricing_model?: 'usage' | 'data' | 'flat';
     normalized_price_per_1m?: number | null;
+    // GPU Compute (see src/config/gpu_models.ts) — model name is derived from
+    // instance-type naming (no pricing API exposes it directly); vram_gb is
+    // per-GPU, preferring a provider's live memory field when available.
+    gpu_model?: string;
+    gpu_vram_gb?: number | string;
   };
 }
 

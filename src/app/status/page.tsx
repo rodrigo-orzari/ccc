@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Footer, ProductTypeSelector } from '@/components';
+import { Footer, Sidebar, PRODUCT_TYPE_ICONS } from '@/components';
+import { HelpCircle } from 'lucide-react';
 import { STATUS_SPONSOR } from '@/config';
 
 interface PipelineStatus {
@@ -68,7 +69,7 @@ const PROVIDER_URLS: Record<string, string> = {
 };
 
 const SITE_URL = 'https://comparecloudcosts.com';
-const SHARE_TEXT = 'Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba. #FinOps #CCC';
+const SHARE_TEXT = 'Compare Cloud Costs lets you compare pricing across AWS, Azure, Google Cloud, and 11 more providers — free, no signup. #FinOps';
 
 function LinkedInIcon() {
   return (
@@ -200,7 +201,7 @@ export default function StatusPage() {
         .status-body {
           padding: 2rem 2.5rem 5rem;
         }
-        .status-wrapper > footer {
+        .status-wrapper footer {
           position: fixed;
           bottom: 0;
           left: 0;
@@ -313,9 +314,10 @@ export default function StatusPage() {
         }
       `}</style>
 
-      <div className="status-wrapper flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
-        <ProductTypeSelector activeProductType={"status" as any} />
+      <div className="status-wrapper flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+        <Sidebar activeProductType={"status" as any} />
 
+        <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
         <div className="flex-1 overflow-auto flex flex-col">
           <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
             {/* Constrained layout for header */}
@@ -324,7 +326,7 @@ export default function StatusPage() {
                 Status
               </h1>
               <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                Learn the number of prices we gathered, how we fetch that information (API or Static), and the latest update.
+                See how many prices we've gathered, whether each came from a live API or a static fallback, and when data last updated.
               </p>
             </div>
 
@@ -352,10 +354,10 @@ export default function StatusPage() {
                 <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
                   <div>
                     <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
-                      <span className="text-2xl">🤝</span> Sponsor This Page
+                      Sponsor This Page
                     </h3>
                     <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                      Have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link> or contact hello@comparecloudcosts.com.
+                      Sponsor this page. Your brand in front of engineers and architects comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link>, or email hello@comparecloudcosts.com.
                     </p>
                     <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
                       Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
@@ -492,21 +494,21 @@ export default function StatusPage() {
                   return PIPELINE_DISPLAY[category] ?? (category.charAt(0).toUpperCase() + category.slice(1));
                 };
 
-                const getCategoryEmoji = (category: string) => {
-                  const PIPELINE_EMOJI: Record<string, string> = {
-                    compute: '🖥️',
-                    database: '🗄️',
-                    serverless: '⚡',
-                    containers: '📦',
-                    networking: '🌐',
-                    data_warehouse: '📊',
-                    ai: '🧠',
-                    storage: '💾',
-                    'app-hosting': '🚀',
-                    integration: '🔗',
-                    security: '🛡️',
+                const getCategoryIcon = (category: string) => {
+                  const PIPELINE_ICON: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number }>> = {
+                    compute: PRODUCT_TYPE_ICONS.vm,
+                    database: PRODUCT_TYPE_ICONS.database,
+                    serverless: PRODUCT_TYPE_ICONS.serverless,
+                    containers: PRODUCT_TYPE_ICONS.containers,
+                    networking: PRODUCT_TYPE_ICONS.networking,
+                    data_warehouse: PRODUCT_TYPE_ICONS['data-analytics'],
+                    ai: PRODUCT_TYPE_ICONS.ai,
+                    storage: PRODUCT_TYPE_ICONS.storage,
+                    'app-hosting': PRODUCT_TYPE_ICONS['app-hosting'],
+                    integration: PRODUCT_TYPE_ICONS.integration,
+                    security: PRODUCT_TYPE_ICONS.security,
                   };
-                  return PIPELINE_EMOJI[category] ?? '📁';
+                  return PIPELINE_ICON[category] ?? HelpCircle;
                 };
 
                 // Unique categories sorted alphabetically by display name
@@ -555,7 +557,9 @@ export default function StatusPage() {
                         </tr>
                       </thead>
                       <tbody>
-                        {categories.map((category, index) => (
+                        {categories.map((category, index) => {
+                          const CategoryIcon = getCategoryIcon(category);
+                          return (
                           <tr
                             key={category}
                             className={`transition-colors ${
@@ -566,7 +570,7 @@ export default function StatusPage() {
                           >
                             <td style={{ fontWeight: 600, textAlign: 'center' }}>
                               <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                                <span aria-hidden="true">{getCategoryEmoji(category)}</span>
+                                <CategoryIcon size={14} aria-hidden="true" />
                                 {getCategoryDisplayName(category)}
                               </span>
                             </td>
@@ -598,8 +602,9 @@ export default function StatusPage() {
                               );
                             })}
                           </tr>
-                        ))}
-                        
+                          );
+                        })}
+
                         {/* Table Footer / Summary Rows */}
                         <tr style={{ background: 'var(--border)', height: '1px' }}>
                           <td colSpan={sortedProviders.length + 1} style={{ padding: 0, height: '1px' }}></td>
@@ -689,6 +694,7 @@ export default function StatusPage() {
           </main>
         </div>
         <Footer />
+        </div>
       </div>
     </>
   );

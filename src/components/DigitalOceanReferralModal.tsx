@@ -43,19 +43,19 @@ export function DigitalOceanReferralModal() {
 
         <div className="mb-4">
           <h2 className="text-[15px] font-bold text-[#1a1a2e] dark:text-[#f7f8ff] leading-tight">
-            Here's a way to support CCC — for free
+            Support Compare Cloud Costs for free
           </h2>
           <p className="text-[10px] text-[#737373] mt-0.5">DigitalOcean referral · no credit card required to explore</p>
         </div>
 
         <p className="text-[13px] text-[#404040] dark:text-[#a3a3a3] mb-3 leading-relaxed">
-          Since you're exploring cloud infrastructure — here's something worth knowing.
+          You're already exploring cloud infrastructure — here's a way to get credit for it.
         </p>
 
         <p className="text-[13px] text-[#404040] dark:text-[#a3a3a3] mb-4 leading-relaxed">
-          If you sign up for a DigitalOcean free trial through our link,{' '}
-          <strong className="text-[#1a1a2e] dark:text-[#f7f8ff]">you get $200 in free credits</strong>{' '}
-          to explore their platform. You don't need to spend a cent.
+          Sign up for a DigitalOcean free trial through our link and get{' '}
+          <strong className="text-[#1a1a2e] dark:text-[#f7f8ff]">$200 in credit</strong>{' '}
+          to try their platform. No cost to you.
         </p>
 
         {/* Highlight box */}
@@ -65,10 +65,10 @@ export function DigitalOceanReferralModal() {
         >
           <p className="text-[12px] leading-relaxed" style={{ color: '#004dbf' }}>
             <span className="dark:hidden">
-              We also receive <strong>$25 in hosting credit</strong> — which keeps comparecloudcosts.com running for at least another day. This project runs on DigitalOcean, and every referral genuinely helps us stay online.
+              We receive <strong>$25 in hosting credit</strong> in return. Compare Cloud Costs runs on DigitalOcean, and every referral helps keep it online.
             </span>
             <span className="hidden dark:inline" style={{ color: '#60a5fa' }}>
-              We also receive <strong>$25 in hosting credit</strong> — which keeps comparecloudcosts.com running for at least another day. This project runs on DigitalOcean, and every referral genuinely helps us stay online.
+              We receive <strong>$25 in hosting credit</strong> in return. Compare Cloud Costs runs on DigitalOcean, and every referral helps keep it online.
             </span>
           </p>
         </div>

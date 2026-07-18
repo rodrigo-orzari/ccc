@@ -23,4 +23,12 @@ export const ALIBABA_INSTANCES = [
 
   // GPU Instances (gn7i - A10)
   { type: 'ecs.gn7i-c8g1.2xlarge', vcpus: 8, memory: 30, price: 1.15, cpuVendor: 'Intel', gpuCount: 1 },
+
+  // NOTE (2026-07-17 GPU-coverage audit): Alibaba's gn7e family (NVIDIA A100
+  // 80GB) is a confirmed real gap — we only track the gn7i (A10) shape above.
+  // Not adding a static entry here: found a CNY hourly rate for
+  // ecs.gn7e-c16g1.4xlarge but could not independently confirm its memory_gb
+  // spec, and a wrong spec is worse than a missing row. See audit notes for
+  // follow-up — needs either a verified spec sheet or (better) wiring gn7e
+  // into the same BSS live-pricing call the gn7i row already uses.
 ];

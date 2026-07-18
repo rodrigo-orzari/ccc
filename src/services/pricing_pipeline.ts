@@ -9,6 +9,27 @@ import { DigitalOceanDropletsScraper } from '../scrapers/digitalocean_droplets.t
 import { GCP_INSTANCES, GCP_REGION, GCP_GEOGRAPHY } from '../config/gcp_instances.ts';
 import { fetchGcpComputeRates, gcpFamilyOf, gcpGpuModelOf } from './gcp_compute_rates';
 import { PROVIDERS } from '../config/index.ts';
+import {
+  classifyAwsGpu, classifyAzureGpu, classifyGcpGpu, classifyOracleGpu,
+  classifyAlibabaGpu, classifyDigitalOceanGpu,
+} from '../config/gpu_models.ts';
+
+// Merges a GPU classification into an attributes object (or returns the
+// object unchanged when there's no match / no attributes to begin with).
+// vramGbOverride lets a provider's own live data (e.g. AWS's gpuMemory field)
+// win over the static catalog fallback.
+function withGpuAttrs<T extends Record<string, any> | undefined>(
+  attrs: T,
+  classification: { model: string; vramGb: number } | null,
+  vramGbOverride?: number,
+): T | { gpu_model: string; gpu_vram_gb: number } {
+  if (!classification) return attrs as T;
+  return {
+    ...(attrs ?? {}),
+    gpu_model: classification.model,
+    gpu_vram_gb: vramGbOverride ?? classification.vramGb,
+  };
+}
 
 export interface PricingRecord {
   provider: string;
@@ -323,9 +344,7 @@ export class AzureAdapter extends BaseAdapter {
         price: item.retailPrice,
         unit: '1 Hour',
         dataSource: 'live_api' as const,
-        attributes: {
-          purchaseOption
-        }
+        attributes: withGpuAttrs({ purchaseOption }, this.getGpuCount(sku) > 0 ? classifyAzureGpu(sku) : null),
       });
     }
 
@@ -385,6 +404,16 @@ export class AWSAdapter extends BaseAdapter {
         || /arm64|aarch64/i.test(attr.processorArchitecture || '')
         || attr.architecture === 'arm64';
 
+      const gpuCount = attr.gpu ? parseInt(attr.gpu) : 0;
+      // AWS's own gpuMemory field ("640 GB HBM3") is the TOTAL across all GPUs
+      // on the instance — divide by gpuCount for per-GPU VRAM, which is what
+      // GPU_MODEL_SPECS and every other provider's classifier report.
+      let awsVramOverride: number | undefined;
+      if (gpuCount > 0 && attr.gpuMemory) {
+        const totalGb = parseFloat(attr.gpuMemory);
+        if (!isNaN(totalGb) && totalGb > 0) awsVramOverride = totalGb / gpuCount;
+      }
+
       records.push({
         provider: 'aws',
         service: 'EC2',
@@ -395,12 +424,13 @@ export class AWSAdapter extends BaseAdapter {
         arch: isArm ? 'ARM' : 'x86 64',
         os,
         cpuVendor: this.getCpuVendor(attr.physicalProcessor || ''),
-        gpuCount: attr.gpu ? parseInt(attr.gpu) : 0,
+        gpuCount,
         geography: this.getGeography(attr.location || ''),
         category: this.classifyAws(attr.instanceType, vcpus, memoryGb),
         price,
         unit: priceDim.unit,
         dataSource: 'live_api' as const,
+        attributes: withGpuAttrs(undefined, gpuCount > 0 ? classifyAwsGpu(attr.instanceType) : null, awsVramOverride),
       });
     }
     return records;
@@ -469,6 +499,7 @@ export class GCPAdapter extends BaseAdapter {
         price,
         unit: 'Hour',
         dataSource,
+        attributes: withGpuAttrs(undefined, (inst.gpuCount ?? 0) > 0 ? classifyGcpGpu(inst.type) : null),
       };
     });
 
@@ -494,6 +525,7 @@ export class GCPAdapter extends BaseAdapter {
       price: inst.price,
       unit: 'Hour',
       dataSource: 'static_config' as const,
+      attributes: withGpuAttrs(undefined, (inst.gpuCount ?? 0) > 0 ? classifyGcpGpu(inst.type) : null),
     }));
   }
 
@@ -616,6 +648,7 @@ export class OracleAdapter extends BaseAdapter {
         price,
         unit: 'Hour',
         dataSource,
+        attributes: withGpuAttrs(undefined, gpuCount > 0 ? classifyOracleGpu(inst.type) : null),
       };
     });
 
@@ -703,6 +736,7 @@ export class DigitalOceanAdapter extends BaseAdapter {
           price: Number(s.price_hourly),
           unit: 'Hour',
           dataSource: 'live_api' as const,
+          attributes: withGpuAttrs(undefined, gpuCount > 0 ? classifyDigitalOceanGpu(slug) : null),
         } as PricingRecord;
       });
 
@@ -740,6 +774,7 @@ export class DigitalOceanAdapter extends BaseAdapter {
       price: s.price,
       unit: 'Hour',
       dataSource: 'playwright_scraper' as any,
+      attributes: withGpuAttrs(undefined, ((s as any).gpuCount || 0) > 0 ? classifyDigitalOceanGpu(s.slug) : null),
     }));
   }
 }
@@ -859,6 +894,7 @@ async function fetchAlibabaEcsLiveRecords(): Promise<PricingRecord[] | null> {
         price,
         unit: 'Hour',
         dataSource: 'live_api' as const,
+        attributes: withGpuAttrs(undefined, gpuCount > 0 ? classifyAlibabaGpu(inst.type) : null),
       });
     } catch (err: any) {
       // Axios throws on non-2xx before our own status check runs, so the
@@ -915,6 +951,7 @@ export class AlibabaAdapter extends BaseAdapter {
         price: inst.price,
         unit: 'Hour',
         dataSource: 'static_config' as const,
+        attributes: withGpuAttrs(undefined, gpuCount > 0 ? classifyAlibabaGpu(inst.type) : null),
       };
     });
   }

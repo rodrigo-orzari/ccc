@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Footer, ProductTypeSelector, DonationModal } from '@/components';
+import { Footer, Sidebar, DonationModal } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { DEFAULT_PRIORITIES } from '@/config/workload_priorities';
 import { WORKLOADS_LISTING_SPONSOR, PROVIDERS } from '@/config';
@@ -11,6 +11,7 @@ import type { ProductType } from '@/types';
 
 const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
   vm: 'Virtual Machines',
+  gpu: 'GPU',
   database: 'Databases',
   serverless: 'Serverless',
   containers: 'Containers',
@@ -26,20 +27,6 @@ const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
 const PRODUCT_TYPE_ORDER: ProductType[] = ['ai', 'app-hosting', 'containers', 'data-analytics', 'database', 'integration', 'networking', 'security', 'serverless', 'storage', 'vm'];
 
 const HYPERSCALERS = PROVIDERS.slice(0, 6);
-
-const PRODUCT_TYPE_EMOJIS: Record<ProductType, string> = {
-  vm: '🖥️',
-  database: '🗄️',
-  serverless: '⚡',
-  containers: '📦',
-  networking: '🌐',
-  'data-analytics': '📊',
-  storage: '💾',
-  ai: '🤖',
-  'app-hosting': '🚀',
-  security: '🔒',
-  integration: '🔗',
-};
 
 export default function WorkloadsCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -66,7 +53,7 @@ export default function WorkloadsCatalog() {
   }, []);
 
   return (
-    <div className="wl-page flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+    <div className="wl-page flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
       <style>{`
         .wl-page {
           --bg: #ffffff;
@@ -131,8 +118,9 @@ export default function WorkloadsCatalog() {
         }
       `}</style>
       <DonationModal showOn="workloads" />
-      <ProductTypeSelector activeProductType={"workloads" as any} />
+      <Sidebar activeProductType={"workloads" as any} />
 
+      <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-auto flex flex-col">
         <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           <div className="mb-6">
@@ -140,7 +128,7 @@ export default function WorkloadsCatalog() {
               Cloud Workloads
             </h1>
             <p className="text-[var(--muted)] text-sm leading-relaxed">
-              Choose a conceptual architecture below to calculate the total cross-cloud cost based on your specific scale and requirements. If you'd like us to create a workload template for a specific architecture or use case, we'd love to hear from you. Tell us what you need to compare.{' '}
+              Pick an architecture below to see its total cost across every provider, scaled to your requirements. Need a template we don't have? Tell us what to build.{' '}
               <a href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Request" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">
                 📧 hello@comparecloudcosts.com
               </a>
@@ -171,10 +159,10 @@ export default function WorkloadsCatalog() {
             <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
               <div>
                 <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
-                  <span className="text-2xl">🤝</span> Sponsor a Workload
+                  Sponsor a Workload
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                  Have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link> or contact hello@comparecloudcosts.com.
+                  Sponsor a workload page. Your brand in front of engineers comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link>, or email hello@comparecloudcosts.com.
                 </p>
                 <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
                   Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
@@ -320,6 +308,7 @@ export default function WorkloadsCatalog() {
       </div>
 
       <Footer />
+      </div>
     </div>
   );
 }

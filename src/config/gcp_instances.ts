@@ -208,4 +208,18 @@ export const GCP_INSTANCES: GcpInstanceConfig[] = [
   { type: 'g2-standard-24', vcpus: 24, memory: 96,  price: 2.7823,  cpuVendor: 'Intel', gpuCount: 2 },
   { type: 'g2-standard-48', vcpus: 48, memory: 192, price: 5.5646,  cpuVendor: 'Intel', gpuCount: 4 },
   { type: 'g2-standard-96', vcpus: 96, memory: 384, price: 11.1292, cpuVendor: 'Intel', gpuCount: 8 },
+
+  // ── A3 (NVIDIA H100 80GB + Intel Sapphire Rapids) ─────────────────────────
+  // Added 2026-07-17 GPU-coverage audit: the a3 family (H100) was missing
+  // entirely — only a2 (A100) and g2 (L4) were tracked. a3-highgpu-8g specs
+  // (208 vCPU / 1872 GB / $87.8325/hr on-demand, us-central1) confirmed via
+  // Google's published pricing; 1g/2g/4g scaled linearly by GPU count, same
+  // proportional pattern already verified correct for the a2 family above.
+  // a3-megagpu/a3-ultragpu (H200) intentionally NOT added yet — couldn't
+  // confirm exact specs/pricing with enough confidence; flagged as a
+  // follow-up rather than guessed.
+  { type: 'a3-highgpu-1g',  vcpus: 26,  memory: 234,  price: 10.9791, cpuVendor: 'Intel', gpuCount: 1 },
+  { type: 'a3-highgpu-2g',  vcpus: 52,  memory: 468,  price: 21.9581, cpuVendor: 'Intel', gpuCount: 2 },
+  { type: 'a3-highgpu-4g',  vcpus: 104, memory: 936,  price: 43.9163, cpuVendor: 'Intel', gpuCount: 4 },
+  { type: 'a3-highgpu-8g',  vcpus: 208, memory: 1872, price: 87.8325, cpuVendor: 'Intel', gpuCount: 8 },
 ];

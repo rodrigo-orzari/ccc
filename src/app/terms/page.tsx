@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Footer, ProductTypeSelector } from '@/components';
+import { Footer, Sidebar } from '@/components';
 
 const headingToId = (children: React.ReactNode): string => {
   const collect = (node: any): string => {
@@ -75,7 +75,7 @@ These terms and conditions are governed by and construed in accordance with the 
 
 CCC functions as an aggregator of publicly available information, designed to provide a **directional indicator** of cloud costs rather than official pricing quotes. For providers with flexible pricing models (such as custom CPU/RAM configurations), our data represents a curated **sample** of popular instances to enable apples-to-apples comparisons. 
 
-While we refresh data frequently (at least weekly), cloud providers update their pricing, introduce new instances, and offer private negotiated discounts that are not reflected here.
+We refresh pricing data automatically on a weekly basis, with manual updates when a live fetch fails. Even so, cloud providers update their pricing, introduce new instances, and offer private negotiated discounts that are not reflected here.
 
 ### Comprehensive Coverage & Missing Services
 
@@ -175,7 +175,6 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
 
           .terms-wrapper {
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
             background-color: var(--bg-color);
           }
@@ -207,8 +206,8 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             border-right: 1px solid var(--border-color);
             padding: 2rem 1.5rem;
             position: fixed;
-            top: 44px;
-            height: calc(100vh - 44px - 48px);
+            top: 0;
+            height: calc(100vh - 48px);
             overflow-y: auto;
             background-color: var(--sidebar-bg);
           }
@@ -266,7 +265,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             }
           }
 
-          .terms-wrapper > footer {
+          .terms-wrapper footer {
             position: fixed;
             bottom: 0;
             left: 0;
@@ -282,7 +281,8 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
       </style>
 
       <div className="terms-wrapper">
-        <ProductTypeSelector activeProductType={"" as any} />
+        <Sidebar activeProductType={"" as any} />
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
       <div className="terms-container" id="terms-of-use">
         <aside className="sidebar">
 
@@ -334,6 +334,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
         </main>
       </div>
       <Footer />
+      </div>
       </div>
     </>
   );

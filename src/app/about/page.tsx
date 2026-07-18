@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Footer, ProductTypeSelector } from "@/components";
+import { Footer, Sidebar } from "@/components";
 
 function LinkedInIcon() {
   return (
@@ -86,7 +86,6 @@ const AboutPage: React.FC = () => {
 
           .about-wrapper {
             display: flex;
-            flex-direction: column;
             min-height: 100vh;
             background-color: var(--bg-color);
           }
@@ -118,8 +117,8 @@ const AboutPage: React.FC = () => {
             border-right: 1px solid var(--border-color);
             padding: 2rem 1.5rem;
             position: fixed;
-            top: 44px;
-            height: calc(100vh - 44px - 48px);
+            top: 0;
+            height: calc(100vh - 48px);
             overflow-y: auto;
             background-color: var(--sidebar-bg);
           }
@@ -223,7 +222,7 @@ const AboutPage: React.FC = () => {
             }
           }
 
-          .about-wrapper > footer {
+          .about-wrapper footer {
             position: fixed;
             bottom: 0;
             left: 0;
@@ -239,7 +238,8 @@ const AboutPage: React.FC = () => {
       </style>
 
       <div className="about-wrapper">
-        <ProductTypeSelector />
+        <Sidebar activeProductType={'about' as any} />
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
         <div className="about-container" id="top">
           <aside className="sidebar">
             <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
@@ -257,14 +257,14 @@ const AboutPage: React.FC = () => {
           </aside>
 
           <main className="main-content">
-            <h1>What is CompareCloudCosts.com?</h1>
+            <h1>About Compare Cloud Costs</h1>
             <div className="prose max-w-none">
 
               {/* About CCC */}
               <div className="about-section">
                 <CopyHeading id="about-compare-cloud-costs-ccc">About Compare Cloud Costs (CCC)</CopyHeading>
                 <p>
-                  comparecloudcosts.com (CCC) is a comprehensive cloud pricing intelligence platform that makes
+                  Compare Cloud Costs (CCC) is a comprehensive cloud pricing intelligence platform that makes
                   comparing infrastructure costs effortless. CCC tracks two distinct kinds of providers: six
                   general-purpose **cloud platforms** (AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean,
                   and Alibaba Cloud) that offer the compute, storage, database, and networking primitives you build
@@ -273,7 +273,7 @@ const AboutPage: React.FC = () => {
                   rather than a full platform. By normalizing and aggregating pricing data across both groups, CCC
                   enables teams to perform side-by-side **AWS vs Azure vs Google Cloud pricing calculator**
                   comparisons, helping you make confident, data-driven architectural decisions and optimize cloud
-                  spend before deployment.
+                  spend before deployment. Compare Cloud Costs is a Co-Sell Plus LLC product.
                 </p>
                 <BackToTop />
               </div>
@@ -282,29 +282,26 @@ const AboutPage: React.FC = () => {
               <div className="about-section">
                 <CopyHeading id="why-we-built-this">Why we built this</CopyHeading>
                 <p>
-                  Cloud computing has revolutionized how we build and scale technology, but it has also introduced
-                  a new challenge: pricing complexity. While cloud providers offer individual calculators and
-                  purchase agreements, calculating the True Cost of Ownership (TCO) for a modern infrastructure
-                  remains a monumental task. If you've ever tried building a **cloud provider price comparison** spreadsheet, you know how quickly details like regional variances and compute tier differences become overwhelming.
+                  Every cloud provider publishes its own calculator. None of them talk to each other. If you've
+                  tried to build a **cloud provider price comparison** spreadsheet, you know how fast regional
+                  variance and instance-tier differences turn a simple comparison into a research project.
                 </p>
 
                 <h3 id="the-cloud-pricing-maze">The Cloud Pricing Maze</h3>
                 <p>
-                  Users can find exact pricing for one provider in isolation, but comparing those costs
-                  side-by-side requires navigating disparate calculators and performing exhaustive individual
-                  studies. Data is scattered across different rate cards and service models, making an
+                  You can find exact pricing for one provider without much trouble. Comparing several requires
+                  navigating separate calculators, rate cards, and service models that don't map cleanly onto
+                  each other. Data is scattered across different rate cards and service models, making an
                   "apples-to-apples" comparison nearly impossible without manual normalization. CCC solves this by providing a unified **cloud cost comparison table** covering VMs, database instances, and storage fees in one view.
                 </p>
                 <p>
-                  Many organizations rely on traditional FinOps solutions that provide an "after-the-fact" view of
-                  spending. While these help optimize existing spend, they don't provide the proactive,
-                  comparative clarity needed before a workload is deployed.
+                  Most FinOps tools look backward — they tell you what you already spent. They don't help you
+                  compare options before you deploy.
                 </p>
                 <p>
-                  Furthermore, the modern landscape is increasingly multi-cloud. Companies run workloads across
-                  different cloud providers simultaneously to achieve specific performance, redundancy, or
-                  strategic goals. Many organizations find themselves overpaying because they lacked a unified,
-                  cross-provider view during the planning phase. CCC provides **multi-cloud cost optimization** visibility directly at the design phase.
+                  More teams run multi-cloud today — different providers for different performance, redundancy,
+                  or contract reasons. Without a shared view across providers during planning, it's easy to
+                  overpay without knowing it. CCC provides **multi-cloud cost optimization** visibility directly at the design phase.
                 </p>
                 <BackToTop />
               </div>
@@ -313,54 +310,48 @@ const AboutPage: React.FC = () => {
               <div className="about-section">
                 <CopyHeading id="key-capabilities">Key Capabilities</CopyHeading>
                 <p>
-                  comparecloudcosts.com (CCC) was built to bridge the gap between fragmented provider pricing data
-                  and actionable architectural intelligence.
+                  Here's what Compare Cloud Costs does.
                 </p>
 
                 <h3 id="comprehensive-product-coverage">Comprehensive Product Coverage</h3>
                 <p>
-                  Access pricing for 10+ product categories spanning compute (VMs, containers, serverless,
-                  Kubernetes), databases (relational, NoSQL, data warehouses), networking, storage, security, app
-                  hosting, and AI/ML services. Compare how workload composition and architecture choices impact
-                  total cost across providers.
+                  We track 11 product categories: virtual machines, containers, serverless, databases, data &amp;
+                  analytics, networking, storage, security, app hosting, integration, and AI. Compare how a change
+                  in one category shifts total cost across providers.
                 </p>
 
                 <h3 id="multi-cloud-analysis-at-scale">Multi-Cloud Analysis at Scale</h3>
                 <p>
-                  Compare identical configurations across AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba
-                  Cloud, Cloudflare, and specialized providers (AI models, vector databases) in a single normalized view. Adjust specs, region, and
-                  commitment options to see how costs shift across the entire provider ecosystem.
+                  Compare identical configurations across all 14 providers we track — six general-purpose clouds
+                  plus eight specialized providers — in one normalized view. Adjust specs, region, and commitment
+                  options to see how cost shifts.
                 </p>
 
                 <h3 id="global-infrastructure-intelligence">Global Infrastructure Intelligence</h3>
                 <p>
-                  Explore the <Link href="/datacenters">Datacenters</Link> page to understand each provider's
-                  physical footprint — region availability, edge presence, redundancy posture, and government
-                  cloud offerings — independent of pricing. Make architectural decisions based on both cost{' '}
-                  <em>and</em> geographic reach.
+                  The <Link href="/datacenters">Datacenters</Link> page shows each provider's physical footprint —
+                  regions, edge presence, redundancy, and government cloud options — separate from pricing, so you
+                  can weigh cost and geography together.
                 </p>
 
                 <h3 id="frequently-updated-pricing">Frequently Updated Pricing</h3>
                 <p>
-                  Our automated pricing pipelines (spanning live APIs, static configs, and manual verification)
-                  refresh data on a weekly basis. Each record is timestamped so you know exactly when it was last
-                  ingested. The <Link href="/status">Status</Link> page shows current coverage, data freshness,
-                  and pipeline health.
+                  Pricing refreshes weekly through a mix of live provider APIs and manually verified fallback
+                  data. Every record is timestamped so you know when it was last checked. Coverage and freshness
+                  are visible on the <Link href="/status">Status</Link> page.
                 </p>
 
                 <h3 id="granular-cost-breakdown">Granular Cost Breakdown</h3>
                 <p>
-                  Drill into compute, storage, networking, and licensing costs independently. See exactly how
-                  vCPU count, memory, region, commitment level, and workload type impact price — so architectural
-                  trade-offs are financially transparent.
+                  Break a workload down into compute, storage, networking, and licensing. See how vCPU count,
+                  memory, region, and commitment level each move the price.
                 </p>
 
                 <h3 id="proactive-workload-planning">Proactive Workload Planning</h3>
                 <p>
-                  Model complete workloads before deployment. Pre-built workload templates (e.g., "High-Traffic
-                  Web App", "RAG / AI Knowledge Base", "Compliance-Ready Database") show you the total cost of
-                  all components together across providers. Complement reactive FinOps tools with pre-purchase
-                  architectural cost modeling.
+                  Model a full architecture before you deploy it. Workload templates — a high-traffic web app, a
+                  RAG knowledge base, a compliance-ready database, and more — show the combined cost of every
+                  component, across providers, before you buy anything.
                 </p>
                 <BackToTop />
               </div>
@@ -379,10 +370,8 @@ const AboutPage: React.FC = () => {
 
                 <h3 id="cloud-provider-sales">Cloud Provider Sales</h3>
                 <p>
-                  Cloud sales professionals leverage CCC as an independent, third-party benchmark to demonstrate
-                  the competitive pricing of their offerings. For example, a sales representative can quickly show
-                  a prospective client how their pricing for a specific database or compute instance stacks up
-                  against competitors, helping to close deals based on transparent cost advantages.
+                  Cloud sales teams use Compare Cloud Costs as an independent benchmark. A rep can show a prospect
+                  exactly how their database or compute pricing compares to competitors — no spreadsheet required.
                 </p>
 
                 <h3 id="product-owners">Product Owners</h3>
@@ -431,17 +420,14 @@ const AboutPage: React.FC = () => {
                   </a>.
                 </p>
                 <p>
-                  I built comparecloudcosts.com as a passion project to deepen my understanding of modern tech
-                  stacks and artificial intelligence—transitioning from "vibe-coding" to actively integrating AI
-                  into production-grade applications.
+                  I built Compare Cloud Costs to get hands-on with modern tech stacks and AI — moving from
+                  prototyping with AI tools to shipping a production application built on them. Compare Cloud
+                  Costs is a Co-Sell Plus LLC product.
                 </p>
                 <p>
-                  The core motivation behind this tool was to solve a very specific, painful problem for the
-                  professionals mentioned above. Instead of forcing IT leaders, sales reps, and consultants to
-                  manually hunt down prices across every individual cloud provider's rate card, I wanted to
-                  provide a seamless, "apples-to-apples" comparison. CCC makes it significantly easier to navigate
-                  complex pricing models and make informed architectural choices without the headache of manual
-                  spreadsheet normalization.
+                  The problem was specific: IT leaders, sales reps, and consultants were manually hunting down
+                  prices across a dozen rate cards. Compare Cloud Costs does that normalization for them, so the
+                  "apples-to-apples" comparison takes minutes instead of hours.
                 </p>
                 <p style={{ fontSize: '0.875rem', color: 'var(--muted-text)' }}>
                   For notes on data accuracy, coverage, and official provider calculators, see{' '}
@@ -454,6 +440,7 @@ const AboutPage: React.FC = () => {
           </main>
         </div>
         <Footer />
+        </div>
       </div>
     </>
   );

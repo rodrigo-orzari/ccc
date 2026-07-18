@@ -435,6 +435,12 @@ export default function PricingTable({
                 </>) : activeProductType === 'integration' ? (<>
                   <Th colKey="engine_category"    sortKey="attributes.service_type" label="Service Type" />
                   <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"         label="Tier" />
+                </>) : activeProductType === 'gpu' ? (<>
+                  <Th colKey="engine_category"    sortKey="attributes.gpu_model"   label="GPU Model" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.gpu_vram_gb" label="VRAM/GPU (GB)" />
+                  <Th colKey="deployment_arch"    sortKey="arch"       label="Arch" />
+                  <Th colKey="ha_mode_os"         sortKey="os"         label="OS" />
+                  <Th colKey="gpu"                sortKey="gpu_count"  label="GPU Count" />
                 </>) : (<>
                   {/* vm (default) */}
                   <Th colKey="engine_category"    sortKey="category"   label="Category" />
@@ -612,6 +618,12 @@ function TableRow({
       </>) : activeProductType === 'integration' ? (<>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.service_type || '—'}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
+      </>) : activeProductType === 'gpu' ? (<>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.gpu_model || '—'}</span></td>
+        <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.gpu_vram_gb ? `${record.attributes.gpu_vram_gb} GB` : '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.gpu_count > 0 ? `${record.gpu_count}×` : '—'}</span></td>
       </>) : (<>
         {/* vm (default) */}
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.category || 'General purpose'}</span></td>

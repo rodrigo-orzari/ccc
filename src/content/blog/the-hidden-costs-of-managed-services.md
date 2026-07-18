@@ -14,7 +14,7 @@ Your managed database costs are double what you expected. Your serverless worklo
 
 The answer? Both.
 
-Cloud pricing isn't broken—it's just multidimensional. Managed services on AWS, Azure, Google Cloud, Oracle, and DigitalOcean all price differently, measure capacity differently, and add surcharges in different places. Without a systematic way to compare, you're flying blind.
+Cloud pricing isn't broken. It's multidimensional. Managed services on AWS, Azure, Google Cloud, Oracle, and DigitalOcean all price differently, measure capacity differently, and add surcharges in different places. Without a systematic way to compare, you're flying blind.
 
 Let's talk about the hidden costs that blindside most teams, and why normalization matters more than you think.
 
@@ -26,7 +26,7 @@ When you move a database to the cloud, redundancy feels automatic. It's not.
 
 Adding High Availability (HA) to a <a href="https://comparecloudcosts.com/databases?provider=gcp" target="_blank">Google Cloud SQL</a> instance doubles your costs. You read that right—the same instance, with HA enabled, costs 2x as much. Oracle MySQL HeatWave takes it further: a 3-node HA cluster triples the cost compared to a single-node deployment.
 
-This catches founders and finance teams off guard. You've budgeted for a managed PostgreSQL instance. You've checked the pricing. Then during architecture review, your team recommends HA for production workloads, and suddenly your database bill is multiply higher.
+This catches founders and finance teams off guard. You've budgeted for a managed PostgreSQL instance at list price. Then during architecture review, your team recommends HA for production workloads, and the bill doubles or triples overnight.
 
 ![High Availability Cost Multipliers](/blog/high-availability-cost-multipliers.svg)
 
@@ -94,7 +94,7 @@ When you compare a workload across providers manually, you're not comparing like
 
 This is why systematic normalization exists.
 
-At <a href="https://comparecloudcosts.com" target="_blank">CompareCloudCosts.com</a>, we aggregate and normalize pricing data across AWS, Azure, Google Cloud, Oracle, DigitalOcean, and Alibaba Cloud (<a href="https://comparecloudcosts.com/status" target="_blank">see our status page</a>). We translate every provider's naming convention into a standard unit: actual compute capacity, actual memory, actual throughput. We then price the same workload against each provider and show you the real comparison.
+At <a href="https://comparecloudcosts.com" target="_blank">Compare Cloud Costs</a>, we aggregate and normalize pricing data across AWS, Azure, Google Cloud, Oracle, DigitalOcean, and Alibaba Cloud (<a href="https://comparecloudcosts.com/status" target="_blank">see our status page</a>). We translate every provider's naming convention into a standard unit: actual compute capacity, actual memory, actual throughput. We then price the same workload against each provider and show you the real comparison.
 
 ![Same Workload, Different Names](/blog/same-workload-different-names.svg)
 
@@ -132,7 +132,7 @@ The teams that manage cloud costs well don't try to guess. They systematize. The
 
 **The first step? Seeing the real costs clearly.**
 
-That's what <a href="https://comparecloudcosts.com" target="_blank">CompareCloudCosts.com</a> does. Run a <a href="https://comparecloudcosts.com" target="_blank">benchmark of your database, compute, or storage workload</a>. See how it prices across AWS, Azure, Google Cloud, and other providers. Download the comparison CSV. Share it with your team. Then decide—consciously, with data—which provider offers the best value for your specific workload.
+That's what <a href="https://comparecloudcosts.com" target="_blank">Compare Cloud Costs</a> does. Run a <a href="https://comparecloudcosts.com" target="_blank">benchmark of your database, compute, or storage workload</a>. See how it prices across AWS, Azure, Google Cloud, and other providers. Download the comparison CSV. Share it with your team. Then decide—consciously, with data—which provider offers the best value for your specific workload.
 
 Because cloud cost optimization isn't about picking the cheapest provider. It's about picking the right provider for the right workload, and knowing exactly what it will cost.
 
@@ -140,6 +140,6 @@ Because cloud cost optimization isn't about picking the cheapest provider. It's 
 
 ## 🚀 See for yourself
 
-[Start your free cloud cost benchmark →](https://comparecloudcosts.com) No signup required. Compare your workload across AWS, Azure, Google Cloud, Oracle, and more in minutes. Download the results as CSV. Share with your team.
+[Run the comparison yourself →](https://comparecloudcosts.com) No signup. Compare a workload across AWS, Azure, Google Cloud, Oracle, DigitalOcean, and Alibaba Cloud in minutes, and download the results as a CSV.
 
 **For tech consulting firms and ISVs:** If you're helping your customers navigate cloud partnerships—or building your own co-sell strategy with AWS, GCP, or Azure—this benchmark becomes a tool you can offer them. [Learn how Co-Sell Plus helps tech firms scale their cloud GTM →](https://cosellplus.com) and contact us at [hello@cosellplus.com](mailto:hello@cosellplus.com). 

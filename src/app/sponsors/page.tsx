@@ -2,14 +2,14 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Footer, ProductTypeSelector } from '@/components';
+import { Footer, Sidebar } from '@/components';
 
 // Define the dummy sponsor data
 const SPONSORS = [
   {
     id: 'acme-cloud',
-    name: 'Acme Cloud Consulting (Example)',
-    description: 'Expert cloud migration and FinOps services to optimize your architecture and reduce spend across all major providers. (Note: This is a fictitious dummy sponsor for demonstration purposes.)',
+    name: 'Acme Cloud Consulting (example placeholder — not a real sponsor)',
+    description: 'Cloud migration and FinOps consulting to reduce spend across every major provider.',
     logoUrl: 'https://placehold.co/400x400/2563eb/ffffff?text=ACME',
     linkUrl: '/workloads/three-tier-web-app',
     sponsoredPage: '3-Tier Web Application Workload',
@@ -18,7 +18,7 @@ const SPONSORS = [
 
 export default function SponsorsPage() {
   return (
-    <div className="wl-page flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+    <div className="wl-page flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
       <style>{`
         .wl-page {
           --bg: #ffffff;
@@ -81,8 +81,9 @@ export default function SponsorsPage() {
         }
       `}</style>
       
-      <ProductTypeSelector activeProductType={'' as any} />
+      <Sidebar activeProductType={'' as any} />
 
+      <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-auto flex flex-col">
         <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           <div className="mb-6">
@@ -91,8 +92,10 @@ export default function SponsorsPage() {
             </h1>
             <div className="text-[var(--muted)] text-sm leading-relaxed">
               <p className="mb-4">
-                CompareCloudCosts.com remains free and unbiased thanks to the support of our sponsors. 
-                These companies help cover our infrastructure costs so we can continue providing transparent cloud pricing data to IT Managers, Product Owners, and other tech professionals seeking ways to streamline their cloud investments. Please take a moment to explore our sponsors' offerings, and if you reach out to them, let them know you discovered them through CompareCloudCosts.com. Interested in becoming a sponsor? Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising with Us</Link> in the Documentation or contact <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
+                Compare Cloud Costs stays free and independent because of sponsor support. Sponsors cover our
+                infrastructure costs so pricing data stays free for IT managers, product owners, and engineers
+                comparing cloud spend. If you reach out to a sponsor, tell them you found them here. Want to
+                sponsor a page? See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Advertising with Us</Link> in the docs, or email <a href="mailto:hello@comparecloudcosts.com" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">hello@comparecloudcosts.com</a>.
               </p>
             </div>
           </div>
@@ -219,7 +222,7 @@ export default function SponsorsPage() {
                 </div>
                 <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">92% Scroll Depth</h3>
                 <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
-                  Users thoroughly explore pricing data, averaging 4.6 pages per session with high scroll engagement.
+                  Visitors average 4.6 pages per session with deep scroll depth on pricing tables.
                 </p>
                 <div className="flex flex-wrap gap-1 mb-3">
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#06b6d440] bg-[#06b6d412] text-[#06b6d4]">ACTIVE READING</span>
@@ -242,7 +245,7 @@ export default function SponsorsPage() {
                 </div>
                 <h3 className="text-[15px] font-bold mb-1 text-[var(--text)]">US & Global Reach</h3>
                 <p className="text-[var(--muted)] text-[11px] mb-3 flex-1 leading-relaxed">
-                  While heavily concentrated in the United States, our traffic spans cloud hubs globally.
+                  Most traffic is in the United States, with meaningful reach in the EU and India.
                 </p>
                 <div className="flex flex-wrap gap-1 mb-3">
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#3b82f640] bg-[#3b82f612] text-[#3b82f6]">US</span>
@@ -355,6 +358,7 @@ export default function SponsorsPage() {
       </div>
 
       <Footer />
+      </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@ const PRODUCT_TYPES: { id: ProductType; label: string; emoji: string; soon?: boo
   { id: 'containers', label: 'Containers', emoji: '📦' },
   { id: 'data-analytics', label: 'Data & Analytics', emoji: '📊' },
   { id: 'database', label: 'Databases', emoji: '🗄️' },
+  { id: 'gpu', label: 'GPU', emoji: '🎮' },
   { id: 'integration', label: 'Integration', emoji: '🔌' },
   { id: 'networking', label: 'Networking', emoji: '🌐' },
   { id: 'security', label: 'Security & Identity', emoji: '🛡️' },
@@ -18,7 +19,7 @@ const PRODUCT_TYPES: { id: ProductType; label: string; emoji: string; soon?: boo
 ];
 
 const SITE_URL = 'https://comparecloudcosts.com';
-const SHARE_TEXT = 'Check this out, comparecloudcosts.com is a tool that helps you compare prices of services across AWS, Microsoft, Google, Oracle, DigitalOcean, and Alibaba. #FinOps #CCC';
+const SHARE_TEXT = 'Compare Cloud Costs lets you compare pricing across AWS, Azure, Google Cloud, and 11 more providers — free, no signup. #FinOps';
 
 function LinkedInIcon() {
   return (

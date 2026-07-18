@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Cell } from 'recharts';
 import { Download, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Footer, ProductTypeSelector } from '@/components';
+import { Footer, Sidebar } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { WorkloadDefinition, WorkloadPriorities, PriorityLevel } from '@/types';
 import { DEFAULT_PRIORITIES, PRIORITY_PILLARS, PRIORITY_LEVELS } from '@/config/workload_priorities';
@@ -413,12 +413,14 @@ export default function WorkloadDetails() {
 
   if (!workload) {
     return (
-      <div className="flex flex-col min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb]">
-        <ProductTypeSelector activeProductType={"workloads" as any} />
+      <div className="flex min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb]">
+        <Sidebar activeProductType={"workloads" as any} />
+        <div className="flex-1 min-w-0 flex flex-col">
         <div className="flex-1 flex items-center justify-center text-[11px] uppercase tracking-widest text-[#737373]">
           Workload not found
         </div>
         <Footer />
+        </div>
       </div>
     );
   }
@@ -428,10 +430,11 @@ export default function WorkloadDetails() {
   const maxTotalPrice = validTotals.length > 0 ? Math.max(...validTotals) : 0;
 
   return (
-    <div className="flex flex-col h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
+    <div className="flex h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
       <style>{scrollbarStyles}</style>
-      <ProductTypeSelector activeProductType={"workloads" as any} />
+      <Sidebar activeProductType={"workloads" as any} />
 
+      <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-auto flex flex-col">
       {/* Workload identity strip — content aligns with the main grid's max-width
           so the title sits flush with the architecture/comparison boxes below. */}
@@ -518,10 +521,10 @@ export default function WorkloadDetails() {
           <div className="border-2 border-dashed border-[#d1d5db] dark:border-[#404040] rounded bg-gradient-to-br from-[#f9fafb] dark:from-[#0f1117] to-[#f3f4f6] dark:to-[#161b22] p-6 flex flex-col items-center gap-3 text-center">
             <div>
               <h3 className="text-sm font-bold text-[#171717] dark:text-[#f1f5f9] mb-1 flex items-center justify-center gap-2">
-                <span className="text-2xl">🤝</span> Sponsor This Workload
+                Sponsor This Workload
               </h3>
               <p className="text-[13px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                Have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link> or contact hello@comparecloudcosts.com.
+                Sponsor this workload. Your brand in front of engineers comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link>, or email hello@comparecloudcosts.com.
               </p>
               <p className="text-[11px] text-[#737373] dark:text-[#a3a3a3] mt-1.5 opacity-80">
                 Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-black dark:hover:text-white">Docs</Link> for detailed instructions.
@@ -1071,6 +1074,7 @@ export default function WorkloadDetails() {
       </div>
 
       <Footer />
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Footer, ProductTypeSelector, DigitalOceanReferralModal } from '@/components';
+import { Footer, Sidebar, DigitalOceanReferralModal } from '@/components';
 import { PROVIDER_INFRA, GEOGRAPHIES, type ProviderInfrastructure, type DatacenterRegion } from '@/config/datacenter_data';
 import { DATACENTERS_SPONSOR } from '@/config';
 import { ChevronDown, ExternalLink, Info } from 'lucide-react';
@@ -250,7 +250,7 @@ export default function DatacentersPage() {
   }), []);
 
   return (
-    <div className="dc-page flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+    <div className="dc-page flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
       <style>{`
         .dc-page {
           --bg: #ffffff;
@@ -273,8 +273,9 @@ export default function DatacentersPage() {
           }
         }
       `}</style>
-      <ProductTypeSelector activeProductType={'datacenters' as any} />
+      <Sidebar activeProductType={'datacenters' as any} />
 
+      <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-auto flex flex-col">
 
           {/* Main */}
@@ -314,10 +315,10 @@ export default function DatacentersPage() {
             <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
               <div>
                 <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
-                  <span className="text-2xl">🤝</span> Sponsor This Page
+                  Sponsor This Page
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                  Have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link> or contact hello@comparecloudcosts.com.
+                  Sponsor this page. Your brand in front of engineers and architects comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link>, or email hello@comparecloudcosts.com.
                 </p>
                 <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
                   Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
@@ -518,7 +519,7 @@ export default function DatacentersPage() {
             <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* Data sources */}
-            <div id="data-sources" className="mt-10 scroll-mt-6">
+            <div id="data-sources" className="scroll-mt-6">
               <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources</h2>
               <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
@@ -544,7 +545,7 @@ export default function DatacentersPage() {
                   </div>
                 ))}
               </div>
-              <p className="text-[9px] text-[#a3a3a3] mt-4">Last verified: June 2026 · Data may not reflect real-time changes.</p>
+              <p className="text-[9px] text-[#a3a3a3] mt-4">Last verified: June 2026. Updated manually — not real-time.</p>
             </div>
 
             {/* Disclaimer */}
@@ -559,6 +560,7 @@ export default function DatacentersPage() {
       </div>
 
       <Footer />
+      </div>
       <DigitalOceanReferralModal />
     </div>
   );

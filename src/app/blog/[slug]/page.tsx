@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { Footer, ProductTypeSelector } from '@/components';
+import { Footer, Sidebar } from '@/components';
 import { getPostBySlug, getPostSlugs } from '@/lib/blog';
 
 // Generate static routes for all posts at build time
@@ -46,7 +46,7 @@ export default async function BlogPostPage(props: Props) {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans">
+    <div className="flex min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans">
       <style>{`
         :root {
           --bg: #ffffff;
@@ -68,8 +68,9 @@ export default async function BlogPostPage(props: Props) {
         }
       `}</style>
       
-      <ProductTypeSelector activeProductType={'' as any} />
+      <Sidebar activeProductType={'' as any} />
 
+      <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
       <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           
           <div className="mb-8 pb-8 border-b border-[var(--border)]">
@@ -113,6 +114,7 @@ export default async function BlogPostPage(props: Props) {
 
       <div className="fixed bottom-0 left-0 right-0 z-50">
         <Footer />
+      </div>
       </div>
     </div>
   );

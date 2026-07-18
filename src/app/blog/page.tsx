@@ -1,19 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Footer, ProductTypeSelector } from '@/components';
+import { Footer, Sidebar } from '@/components';
 import { getAllPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
-  title: 'Blog | CompareCloudCosts',
-  description: 'Latest insights on cloud pricing, FinOps, and architecture from the CompareCloudCosts team.',
+  title: 'Blog | Compare Cloud Costs',
+  description: 'Cloud pricing analysis, provider comparisons, and FinOps guidance from Compare Cloud Costs.',
 };
 
 export default function BlogIndexPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="flex flex-col min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans">
+    <div className="flex min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans">
       <style>{`
         :root {
           --bg: #ffffff;
@@ -35,15 +35,16 @@ export default function BlogIndexPage() {
         }
       `}</style>
       
-      <ProductTypeSelector activeProductType={'' as any} />
+      <Sidebar activeProductType={'' as any} />
 
+      <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
       <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">
               Blog
             </h1>
             <p className="text-[var(--muted)] text-sm leading-relaxed max-w-3xl">
-              Insights, analysis, and news on cloud pricing, architecture showdowns, and FinOps strategies.
+              Pricing breakdowns, provider comparisons, and FinOps guidance.
             </p>
           </div>
 
@@ -54,10 +55,10 @@ export default function BlogIndexPage() {
           <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
             <div>
               <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
-                <span className="text-2xl">🤝</span> Sponsor this page
+                Sponsor this page
               </h3>
               <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                Have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link> or contact hello@comparecloudcosts.com.
+                Sponsor this page. Your brand in front of engineers and architects comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link>, or email hello@comparecloudcosts.com.
               </p>
               <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
                 Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
@@ -93,13 +94,14 @@ export default function BlogIndexPage() {
             
             {posts.length === 0 && (
               <div className="col-span-full py-12 text-[var(--muted)] text-sm">
-                No blog posts found. Stay tuned!
+                No posts yet. Check back soon.
               </div>
             )}
           </div>
         </main>
 
       <Footer />
+      </div>
     </div>
   );
 }

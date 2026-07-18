@@ -5,13 +5,14 @@ import { useSearchParams } from "next/navigation";
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import type { ProductType, PricingRecord } from '@/types';
 import {
-  ProductTypeSelector,
+  Sidebar,
   ProviderCards,
   TableToolbar,
   PricingTable,
   FilterSidebar,
   Footer,
   ChartsView,
+  CategorySummaryTable,
 } from '@/components';
 import { useDynamicFilters } from '@/hooks/useDynamicFilters';
 import * as staticConfig from '@/config';
@@ -47,6 +48,7 @@ export default function Dashboard() {
       [selectedOS, setSelectedOS, staticConfig.OS_TYPES.length, () => [...config.OS_TYPES]],
       [selectedCpu, setSelectedCpu, staticConfig.CPU_PROFILES.length, () => [...config.CPU_PROFILES.map(p => p.id)]],
       [selectedCategory, setSelectedCategory, staticConfig.CATEGORIES.length, () => [...config.CATEGORIES]],
+      [selectedGpuModels, setSelectedGpuModels, staticConfig.GPU_MODELS.length, () => [...config.GPU_MODELS]],
       [selectedPricingModels, setSelectedPricingModels, staticConfig.PRICING_MODELS.length, () => ['On-Demand']],
       [selectedDbFamilies, setSelectedDbFamilies, staticConfig.DB_FAMILIES.length, () => [...config.DB_FAMILIES]],
       [selectedEngines, setSelectedEngines, staticConfig.DB_ENGINES.length, () => [...config.DB_ENGINES]],
@@ -116,7 +118,7 @@ export default function Dashboard() {
   const [selectedCpu, setSelectedCpu] = useState<string[]>(config.CPU_PROFILES.map(p => p.id));
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...config.CATEGORIES]);
   const [selectedPricingModels, setSelectedPricingModels] = useState<string[]>(['On-Demand']);
-  const [selectedGpu, setSelectedGpu] = useState<string[]>(['GPU', 'No GPU']);
+  const [selectedGpuModels, setSelectedGpuModels] = useState<string[]>([...config.GPU_MODELS]);
 
   const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...config.DB_FAMILIES]);
   const [selectedEngines, setSelectedEngines] = useState<string[]>([...config.DB_ENGINES]);
@@ -252,7 +254,7 @@ export default function Dashboard() {
     geography: true,
     os: true,
     cpu: true,
-    gpu: true,
+    gpuModel: true,
     specs: true,
     dbFamily: true,
     engine: true,
@@ -324,7 +326,7 @@ export default function Dashboard() {
     subset('cpuVendor', selectedVendors, allVendors);
     subset('category', selectedCategory, config.CATEGORIES);
     subset('pricing_model', selectedPricingModels, config.PRICING_MODELS);
-    subset('gpu', selectedGpu, ['GPU', 'No GPU']);
+    subset('gpuModel', selectedGpuModels, config.GPU_MODELS);
     subset('dbFamilies', selectedDbFamilies, config.DB_FAMILIES);
     subset('engines', selectedEngines, config.DB_ENGINES);
     subset('deploymentTypes', selectedDeploymentTypes, config.DEPLOYMENT_TYPES);
@@ -408,7 +410,7 @@ export default function Dashboard() {
     params.append('search', search);
     return params;
   }, [
-    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedGpu, selectedCategory, selectedPricingModels,
+    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedGpuModels, selectedCategory, selectedPricingModels,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
@@ -435,9 +437,17 @@ export default function Dashboard() {
 
     if (activeProductType === 'vm' && (
       selectedOS.length === 0 ||
-      // CPU and GPU are a combined section — block only when both are completely empty
-      (selectedCpu.length === 0 && selectedGpu.length === 0) ||
+      selectedCpu.length === 0 ||
       selectedCategory.length === 0 ||
+      selectedPricingModels.length === 0
+    )) return false;
+
+    // GPU_MODELS has no static default — it's populated only once ingested data
+    // arrives, so an empty selectedGpuModels means "not loaded yet" / "no
+    // filter", not "user deselected everything". Don't block fetch on it.
+    if (activeProductType === 'gpu' && (
+      selectedOS.length === 0 ||
+      selectedCpu.length === 0 ||
       selectedPricingModels.length === 0
     )) return false;
 
@@ -520,7 +530,7 @@ export default function Dashboard() {
   }, [
     activeProductType,
     selectedProviders, selectedGeographies,
-    selectedOS, selectedCpu, selectedGpu, selectedCategory, selectedPricingModels,
+    selectedOS, selectedCpu, selectedGpuModels, selectedCategory, selectedPricingModels,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout,
@@ -669,7 +679,7 @@ export default function Dashboard() {
   // Export logic
   const handleExport = () => {
     if (data.length === 0) {
-      alert('No data to export');
+      alert('No rows match your current filters. Adjust a filter and try again.');
       return;
     }
 
@@ -691,6 +701,8 @@ export default function Dashboard() {
       headers = ['Provider', 'Product', 'Tier', 'Compute Type', 'OS', 'Geography', 'vCPU', 'Memory (GB)', 'Price (USD)', 'Source'];
     } else if (activeProductType === 'ai') {
       headers = ['Provider', 'Product', 'Service', 'Model Tier', 'Context Window', 'Multimodal', 'Geography', 'Input Price (/1M)', 'Output Price (/1M)', 'Source'];
+    } else if (activeProductType === 'gpu') {
+      headers = ['Provider', 'Product', 'GPU Model', 'GPU Count', 'VRAM per GPU (GB)', 'vCPU', 'Memory (GB)', 'OS', 'Geography', 'Price (USD)', 'Source'];
     } else {
       headers = ['Provider', 'Product', 'Category', 'CPU Vendor', 'Architecture', 'OS', 'GPU', 'vCPU', 'Memory (GB)', 'Geography', 'Price (USD)', 'Source'];
     }
@@ -717,6 +729,8 @@ export default function Dashboard() {
         return [record.provider, record.instance_type, record.attributes?.storage_type || '', record.attributes?.tier || '', record.attributes?.redundancy || '', record.attributes?.media || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else if (activeProductType === 'app-hosting') {
         return [record.provider, record.instance_type, record.attributes?.tier || '', record.attributes?.compute_type || '', record.os || '', record.geography, record.vcpus || '', record.memory_gb || '', priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
+      } else if (activeProductType === 'gpu') {
+        return [record.provider, record.instance_type, record.attributes?.gpu_model || '', record.gpu_count || '', record.attributes?.gpu_vram_gb || '', record.vcpus || '', record.memory_gb || '', record.os || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       } else {
         return [record.provider, record.instance_type, record.category || '', record.cpu_vendor || '', record.arch === 'x86 64' ? 'x86' : (record.arch || ''), record.os || '', record.gpu_count > 0 ? 'Yes' : 'No', record.vcpus || '', record.memory_gb || '', record.geography, priceDisplay, record.data_source === 'static_config' ? 'Static' : 'API'];
       }
@@ -736,10 +750,11 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="flex flex-col min-h-[100dvh] lg:h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans lg:overflow-hidden transition-colors duration-300">
+    <div className="flex min-h-[100dvh] lg:h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans lg:overflow-hidden transition-colors duration-300">
       <h1 className="sr-only">Compare Cloud Costs - AWS, Azure, Google Cloud Pricing</h1>
-      <ProductTypeSelector activeProductType={activeProductType} onProductTypeChange={setActiveProductType} />
+      <Sidebar activeProductType={activeProductType} onProductTypeChange={setActiveProductType} />
 
+      <div className="flex flex-1 min-w-0 flex-col lg:overflow-hidden">
       <div className="flex flex-1 lg:overflow-hidden">
         <FilterSidebar
           isOpen={filtersOpen}
@@ -751,7 +766,7 @@ export default function Dashboard() {
           selectedCpu={selectedCpu}
           selectedCategory={selectedCategory}
           selectedPricingModels={selectedPricingModels}
-          selectedGpu={selectedGpu}
+          selectedGpuModels={selectedGpuModels}
           selectedDbFamilies={selectedDbFamilies}
           selectedEngines={selectedEngines}
           selectedDeploymentTypes={selectedDeploymentTypes}
@@ -815,8 +830,8 @@ export default function Dashboard() {
           onSetCategory={setSelectedCategory}
           onPricingModelToggle={(pm) => toggleFilter(selectedPricingModels, setSelectedPricingModels, pm)}
           onSetPricingModels={setSelectedPricingModels}
-          onGpuToggle={(v) => toggleFilter(selectedGpu, setSelectedGpu, v)}
-          onSetGpu={setSelectedGpu}
+          onGpuModelToggle={(v) => toggleFilter(selectedGpuModels, setSelectedGpuModels, v)}
+          onSetGpuModel={setSelectedGpuModels}
           onDbFamilyToggle={(f) => toggleFilter(selectedDbFamilies, setSelectedDbFamilies, f)}
           onEngineToggle={(e) => toggleFilter(selectedEngines, setSelectedEngines, e)}
           onDeploymentTypeToggle={(d) => toggleFilter(selectedDeploymentTypes, setSelectedDeploymentTypes, d)}
@@ -945,6 +960,12 @@ export default function Dashboard() {
             }}
           />
 
+          <CategorySummaryTable
+            data={data}
+            activeProductType={activeProductType}
+            loading={loading}
+          />
+
           <TableToolbar
             totalFilteredCount={totalFilteredCount}
             dataLength={data.length}
@@ -980,6 +1001,7 @@ export default function Dashboard() {
       </div>
 
       <Footer />
+      </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
         @supports not selector(::-webkit-scrollbar) {
@@ -1097,6 +1119,6 @@ export default function Dashboard() {
           z-index: 20;
         }
       `}} />
-    </main>
+    </div>
   );
 }

@@ -104,7 +104,7 @@ export const initDb = async () => {
 
 const MAX_FILTER_ITEMS = 50;
 const MAX_SEARCH_LENGTH = 200;
-const VALID_PRODUCT_TYPES = ['compute', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting', 'security', 'integration'];
+const VALID_PRODUCT_TYPES = ['compute', 'gpu', 'database', 'serverless', 'networking', 'containers', 'data-analytics', 'ai', 'storage', 'app-hosting', 'security', 'integration'];
 
 function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS): string[] {
   if (!input) return [];
@@ -130,7 +130,7 @@ function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS)
 export function buildPricingFilters(query: any) {
   try {
     const {
-      provider, geography, os, arch, cpuVendor, gpu, category, pricing_model,
+      provider, geography, os, arch, cpuVendor, gpu, gpuModel, category, pricing_model,
       minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
       product,
       dbFamilies, engines, deploymentTypes, haModes,
@@ -178,8 +178,19 @@ export function buildPricingFilters(query: any) {
         ? (product as string)
         : 'compute';
         
+    // GPU Compute is its own product-type LENS, not its own services.category —
+    // GPU instances are ingested as part of each provider's regular VM/compute
+    // service (same EC2/Droplets/etc. rows as everything else), distinguished
+    // only by gpu_count. So 'gpu' resolves to the same underlying service
+    // category with gpu_count > 0, and 'compute' (VM) explicitly excludes
+    // those rows so a GPU instance isn't shown — and priced — twice.
     conditions.push(`s.category = $${paramCount++}`);
-    values.push(resolvedProductType === 'data-analytics' ? 'data_warehouse' : resolvedProductType);
+    values.push(resolvedProductType === 'data-analytics' ? 'data_warehouse' : resolvedProductType === 'gpu' ? 'compute' : resolvedProductType);
+    if (resolvedProductType === 'gpu') {
+      conditions.push(`pr.gpu_count > 0`);
+    } else if (resolvedProductType === 'compute') {
+      conditions.push(`pr.gpu_count = 0`);
+    }
 
     const providers = parseFilterList(provider as string);
     if (providers.length > 0) {
@@ -210,7 +221,10 @@ export function buildPricingFilters(query: any) {
       values.push(geographies);
     }
 
-    if (resolvedProductType === 'compute') {
+    // Shared shape filters (OS/arch/CPU vendor) apply to both VM and GPU —
+    // GPU rows are still real VM/Droplet/etc. instances underneath, just with
+    // gpu_count > 0, so they carry the same os/arch/cpu_vendor columns.
+    if (resolvedProductType === 'compute' || resolvedProductType === 'gpu') {
       addInFilter(os, 'LOWER(pr.os)');
 
       // arch has a special x86 -> 'x86 64' normalization, so it stays hand-written.
@@ -224,28 +238,11 @@ export function buildPricingFilters(query: any) {
 
       addInFilter(cpuVendor, 'LOWER(pr.cpu_vendor)');
 
-      // gpu is a comma-separated list: 'GPU', 'No GPU', or both.
-      // 'GPU' only    → gpu_count > 0 (GPU instances only)
-      // 'No GPU' only → gpu_count = 0 (non-GPU instances only)
-      // both or empty → no filter (show all)
-      if (gpu) {
-        const gpuValues = (gpu as string).split(',').map((s: string) => s.trim());
-        const wantsGpu = gpuValues.includes('GPU');
-        const wantsNoGpu = gpuValues.includes('No GPU');
-        if (wantsGpu && !wantsNoGpu) conditions.push(`pr.gpu_count > 0`);
-        else if (wantsNoGpu && !wantsGpu) conditions.push(`pr.gpu_count = 0`);
-        // both selected → no filter
-      }
-    }
-
-    if (resolvedProductType === 'compute') {
-      addInFilter(category, 'LOWER(pr.category)');
-
       const pricingModels = parseFilterList(pricing_model as string).map((s: string) => s.toLowerCase());
       if (pricingModels.length > 0) {
         const wantsOnDemand = pricingModels.includes('on-demand');
         const wantsSpot = pricingModels.includes('spot / preemptible');
-        
+
         if (wantsSpot && !wantsOnDemand) {
           conditions.push(`pr.attributes->>'purchaseOption' = 'Spot'`);
         } else if (wantsOnDemand && !wantsSpot) {
@@ -253,6 +250,20 @@ export function buildPricingFilters(query: any) {
         }
         // If both or neither, no filter
       }
+    }
+
+    // VM-only: the compute-optimized/memory-optimized/etc. category chip.
+    // GPU rows carry a category value too (inherited from the same
+    // classifier), but it's not a meaningful facet for GPU shopping — GPU
+    // Model (below) is the equivalent lens there.
+    if (resolvedProductType === 'compute') {
+      addInFilter(category, 'LOWER(pr.category)');
+    }
+
+    // GPU-only: filter by chip model (H100, A100 80GB, L4, …), read from the
+    // attributes.gpu_model tag set at ingestion time (src/config/gpu_models.ts).
+    if (resolvedProductType === 'gpu') {
+      addInFilter(gpuModel, "LOWER(pr.attributes->>'gpu_model')");
     }
 
     // Database & Analytics product type filters

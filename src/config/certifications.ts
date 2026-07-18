@@ -248,9 +248,9 @@ export interface ComplianceSource {
 export const COMPLIANCE_PROVIDERS: ComplianceSource[] = [
   { id: 'aws', name: 'AWS', color: '#FF9900', sourceUrl: 'https://aws.amazon.com/compliance/programs/', sourceLabel: 'AWS Compliance Programs', lastVerified: '2026-07-09' },
   { id: 'azure', name: 'Azure', color: '#00BCFF', sourceUrl: 'https://learn.microsoft.com/en-us/azure/compliance/offerings/', sourceLabel: 'Azure Compliance Offerings', lastVerified: '2026-07-09' },
-  { id: 'gcp', name: 'Google Cloud', color: '#34A853', sourceUrl: 'https://cloud.google.com/security/compliance/offerings', sourceLabel: 'Google Cloud Compliance', lastVerified: '2026-07-09' },
+  { id: 'gcp', name: 'Google', color: '#34A853', sourceUrl: 'https://cloud.google.com/security/compliance/offerings', sourceLabel: 'Google Compliance', lastVerified: '2026-07-09' },
   { id: 'oracle', name: 'Oracle', color: '#F80000', sourceUrl: 'https://www.oracle.com/corporate/cloud-compliance/', sourceLabel: 'Oracle Cloud Compliance', lastVerified: '2026-07-09' },
-  { id: 'alibaba', name: 'Alibaba Cloud', color: '#FF6A00', sourceUrl: 'https://www.alibabacloud.com/en/trust-center', sourceLabel: 'Alibaba Cloud Trust Center', lastVerified: '2026-07-09' },
+  { id: 'alibaba', name: 'Alibaba', color: '#FF6A00', sourceUrl: 'https://www.alibabacloud.com/en/trust-center', sourceLabel: 'Alibaba Trust Center', lastVerified: '2026-07-09' },
   { id: 'cloudflare', name: 'Cloudflare', color: '#F38020', sourceUrl: 'https://www.cloudflare.com/trust-hub/compliance-resources/', sourceLabel: 'Cloudflare Trust Hub', lastVerified: '2026-07-09' },
   { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF', sourceUrl: 'https://www.digitalocean.com/trust/certification-reports', sourceLabel: 'DigitalOcean Trust Platform', lastVerified: '2026-07-09' },
   { id: 'openai', name: 'OpenAI', color: '#10A37F', sourceUrl: 'https://openai.com/security/', sourceLabel: 'OpenAI Security & Trust', lastVerified: '2026-07-10' },

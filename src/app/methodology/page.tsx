@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 
 const MethodologyPage: React.FC = () => {
   const content = `
-Our goal is to provide the most accurate and up-to-date cloud pricing data available.
+This page explains how we collect, refresh, and normalize pricing data.
 
 ## Data Sourcing
 We fetch pricing data directly from official cloud provider APIs:
@@ -14,9 +14,10 @@ We fetch pricing data directly from official cloud provider APIs:
 - **Google Cloud**: Cloud Billing Catalog API
 - **Oracle Cloud**: Usage and Billing APIs
 - **DigitalOcean**: API v2
+- **Alibaba Cloud**: OpenAPI pricing catalog
 
 ## Update Frequency
-The database is refreshed every week to capture any changes in regional pricing or new instance launches.
+Pricing data is fetched automatically on a weekly basis. When a live fetch fails, the tool falls back to a curated static configuration that is updated manually.
 
 ## Pricing Calculations
 - **PAYG**: Standard On-Demand hourly rates.

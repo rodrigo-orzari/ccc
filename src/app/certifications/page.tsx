@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Footer, ProductTypeSelector, DigitalOceanReferralModal } from '@/components';
+import { Footer, Sidebar, DigitalOceanReferralModal } from '@/components';
 import { GEOGRAPHIES, CERTIFICATIONS_SPONSOR } from '@/config';
 import {
   CERTIFICATIONS,
@@ -105,7 +105,7 @@ export default function CertificationsPage() {
   };
 
   return (
-    <div className="cc-page flex flex-col h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+    <div className="cc-page flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
       <style>{`
         .cc-page {
           --bg: #ffffff;
@@ -126,8 +126,9 @@ export default function CertificationsPage() {
           }
         }
       `}</style>
-      <ProductTypeSelector activeProductType={'certifications' as any} />
+      <Sidebar activeProductType={'certifications' as any} />
 
+      <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
       <div className="flex-1 overflow-auto flex flex-col">
         <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
 
@@ -166,10 +167,10 @@ export default function CertificationsPage() {
             <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
               <div>
                 <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
-                  <span className="text-2xl">🤝</span> Sponsor This Page
+                  Sponsor This Page
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                  Have your company featured as a sponsor of this page. Reach thousands of cloud decision-makers exploring pricing strategies. Visit <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link> or contact hello@comparecloudcosts.com.
+                  Sponsor this page. Your brand in front of engineers and architects comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link>, or email hello@comparecloudcosts.com.
                 </p>
                 <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
                   Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
@@ -423,7 +424,7 @@ export default function CertificationsPage() {
               ))}
             </div>
             <p className="text-[9px] text-[#a3a3a3] mt-4">
-              Last update, July 2026.
+              Last verified: July 2026. Re-verified roughly every six months.
             </p>
           </div>
 
@@ -442,6 +443,7 @@ export default function CertificationsPage() {
       </div>
 
       <Footer />
+      </div>
       <DigitalOceanReferralModal />
     </div>
   );

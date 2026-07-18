@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Find the Best Cloud Value',
+  title: 'Compare Cloud Costs in Minutes, Not Days',
   description:
-    'Stop guessing your infrastructure bills. Compare accurate directional pricing for compute, databases, and serverless across the world’s top cloud providers.',
+    'See what compute, databases, and serverless actually cost on AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, and 8 specialized providers — side by side, updated weekly.',
   alternates: { canonical: '/dashboard' },
 };
 

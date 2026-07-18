@@ -30,7 +30,7 @@ const MarkdownPage: React.FC<MarkdownPageProps> = ({ title, content }) => {
     >
       <Link href="/" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors mb-8 group">
         <ArrowLeft className="w-4 h-4 mr-2 transform group-hover:-translate-x-1 transition-transform" />
-        comparecloudcosts.com
+        Compare Cloud Costs
       </Link>
 
       <h1 className="text-4xl font-bold mb-8 text-black dark:text-white tracking-tight">{title}</h1>

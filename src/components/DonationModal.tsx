@@ -53,7 +53,7 @@ export function DonationModal({ showOn = 'workloads' }: DonationModalProps) {
         </div>
 
         <p className="text-[13px] text-[#404040] dark:text-[#a3a3a3] mb-4 leading-relaxed">
-          comparecloudcosts.com is a free, open-source project. If it's helped you compare cloud costs, consider supporting its development and server costs with a voluntary donation.
+          Compare Cloud Costs is free and open source. If it's saved you time, a small donation helps cover development and server costs.
         </p>
 
         {/* Highlight box */}
@@ -63,10 +63,10 @@ export function DonationModal({ showOn = 'workloads' }: DonationModalProps) {
         >
           <p className="text-[12px] leading-relaxed" style={{ color: '#B45309' }}>
             <span className="dark:hidden">
-              A $3.99 contribution goes directly toward keeping this project running, maintaining accurate pricing data, and adding new cloud providers.
+              $3.99 covers a meaningful share of a day's server costs and goes straight back into keeping pricing data current.
             </span>
             <span className="hidden dark:inline" style={{ color: '#FCD34D' }}>
-              A $3.99 contribution goes directly toward keeping this project running, maintaining accurate pricing data, and adding new cloud providers.
+              $3.99 covers a meaningful share of a day's server costs and goes straight back into keeping pricing data current.
             </span>
           </p>
         </div>

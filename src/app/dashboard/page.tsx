@@ -63,7 +63,7 @@ export default function DashboardPreviewPage() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Cloud className="w-6 h-6 text-blue-500" />
-            <span className="font-bold text-lg tracking-tight">CompareCloudCosts</span>
+            <span className="font-bold text-lg tracking-tight">Compare Cloud Costs</span>
           </div>
           <Link href="/" className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg font-medium text-sm hover:from-blue-500 hover:to-indigo-500 transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]">
             Open Dashboard
@@ -80,10 +80,10 @@ export default function DashboardPreviewPage() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-br from-white via-gray-200 to-gray-500">
-            Find the Best Cloud Value.<br className="hidden md:block" /> Instantly.
+            Compare Cloud Costs in Minutes, Not Days.
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Stop guessing your infrastructure bills. Compare highly accurate directional pricing for compute, databases, and serverless across the world's top cloud providers.
+            See what compute, databases, and serverless actually cost on AWS, Azure, Google Cloud, Oracle, DigitalOcean, Alibaba Cloud, and 8 specialized providers — side by side, updated weekly.
           </p>
           
           <div className="flex items-center justify-center gap-4">
@@ -139,11 +139,11 @@ export default function DashboardPreviewPage() {
       {/* LIVE TICKER */}
       <div className="w-full border-y border-white/5 bg-white/[0.02] py-3 overflow-hidden flex whitespace-nowrap mb-20">
         <div className="animate-[ticker_30s_linear_infinite] flex gap-12 items-center text-sm font-medium text-gray-400">
-          <span className="flex items-center gap-2"><Activity className="w-4 h-4 text-blue-400" /> Over 15,000 instances tracked</span>
+          <Link href="/status" className="flex items-center gap-2 hover:text-white transition-colors"><Activity className="w-4 h-4 text-blue-400" /> See live pricing data coverage on our Status page →</Link>
           <span className="flex items-center gap-2"><TrendingDown className="w-4 h-4 text-emerald-400" /> Azure Synapse is 15% cheaper than BigQuery for 100 CU</span>
-          <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-purple-400" /> Serverless execution times normalized across 5 providers</span>
+          <span className="flex items-center gap-2"><Zap className="w-4 h-4 text-purple-400" /> Serverless pricing normalized across every provider we track</span>
           <span className="flex items-center gap-2"><Database className="w-4 h-4 text-orange-400" /> Oracle Cloud databases offer competitive IOPS rates</span>
-          <span className="flex items-center gap-2"><Activity className="w-4 h-4 text-blue-400" /> Over 15,000 instances tracked</span>
+          <Link href="/status" className="flex items-center gap-2 hover:text-white transition-colors"><Activity className="w-4 h-4 text-blue-400" /> See live pricing data coverage on our Status page →</Link>
           <span className="flex items-center gap-2"><TrendingDown className="w-4 h-4 text-emerald-400" /> Azure Synapse is 15% cheaper than BigQuery for 100 CU</span>
         </div>
       </div>

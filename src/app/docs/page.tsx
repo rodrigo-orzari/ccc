@@ -1,7 +1,12 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { Footer, ProductTypeSelector } from "@/components";
+import { Footer, Sidebar, PRODUCT_TYPE_ICONS, EXTRA_LINK_ICONS } from "@/components";
+
+// JSX tag names can't be computed/bracket member expressions, so alias the
+// hyphenated-key icons to plain identifiers for use as <Icon /> in headings below.
+const AppHostingIcon = PRODUCT_TYPE_ICONS['app-hosting'];
+const DataAnalyticsIcon = PRODUCT_TYPE_ICONS['data-analytics'];
 
 const BackToTop = () => (
   <p style={{ marginTop: '1.5rem' }}>
@@ -97,8 +102,8 @@ const DocsPage: React.FC = () => {
           border-right: 1px solid var(--border-color);
           padding: 2rem 1.5rem;
           position: fixed;
-          top: 44px;
-          height: calc(100vh - 44px - 48px);
+          top: 0;
+          height: calc(100vh - 48px);
           overflow-y: auto;
           background-color: var(--sidebar-bg);
           flex-shrink: 0;
@@ -230,7 +235,7 @@ const DocsPage: React.FC = () => {
           border-top: none;
           padding-top: 0;
         }
-        .docs-wrapper > footer {
+        .docs-wrapper footer {
           position: fixed;
           bottom: 0;
           left: 0;
@@ -244,8 +249,9 @@ const DocsPage: React.FC = () => {
         }
       `}</style>
 
-      <div className="docs-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <ProductTypeSelector />
+      <div className="docs-wrapper" style={{ display: 'flex', minHeight: '100vh' }}>
+        <Sidebar activeProductType={'docs' as any} />
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
       <div className="docs-container" id="top" style={{ flex: 1 }}>
         <aside className="docs-sidebar">
             <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
@@ -334,9 +340,9 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="getting-started">Getting Started</CopyHeading>
             <p>
-              comparecloudcosts.com is a free, open-source tool that aggregates and normalizes on-demand
+              Compare Cloud Costs is a free, open-source tool. It aggregates and normalizes on-demand
               (pay-as-you-go) pricing across AWS, Microsoft Azure, Google Cloud, Oracle Cloud,
-              DigitalOcean, and Alibaba in a single side-by-side view. Our goal is to make **cloud cost comparison** simple and transparent.
+              DigitalOcean, and Alibaba Cloud, plus 8 specialized providers, into one **cloud cost comparison** side-by-side view.
             </p>
             <p>
               Use the <strong>product tabs</strong> at the top to switch between categories: AI &amp; Machine Learning,
@@ -353,54 +359,54 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="product-categories">Product Categories</CopyHeading>
 
-            <h3 id="ai-machine-learning">🧠 <Link href="/?product=ai">AI &amp; Machine Learning</Link></h3>
+            <h3 id="ai-machine-learning"><PRODUCT_TYPE_ICONS.ai size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=ai">AI &amp; Machine Learning</Link></h3>
             <p>
               Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window size, multimodal capabilities, and compare input/output pricing per 1M tokens to optimize your **AI API costs**.
             </p>
 
-            <h3 id="app-hosting">🚀 <Link href="/?product=app-hosting">App Hosting</Link></h3>
+            <h3 id="app-hosting"><AppHostingIcon size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=app-hosting">App Hosting</Link></h3>
             <p>
               Covers managed application hosting and Platform-as-a-Service offerings (App Service, App Engine, Heroku, etc.). Compare by compute tier, operating system, and architecture.
             </p>
 
-            <h3 id="containers">📦 <Link href="/?product=containers">Containers</Link></h3>
+            <h3 id="containers"><PRODUCT_TYPE_ICONS.containers size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=containers">Containers</Link></h3>
             <p>
               Covers managed container runtimes including Kubernetes node pools (**AWS EKS vs Azure AKS vs GCP GKE** node cost comparisons) and serverless container platforms (Fargate, Cloud Run, ACI). Filter by
               orchestrator, architecture (x86 or ARM), and billing granularity.
             </p>
 
-            <h3 id="databases">🗄️ <Link href="/?product=database">Databases</Link></h3>
+            <h3 id="databases"><PRODUCT_TYPE_ICONS.database size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=database">Databases</Link></h3>
             <p>
               Covers managed relational, NoSQL, and In-memory database services (**AWS RDS vs Azure SQL vs Google Cloud SQL** PostgreSQL/MySQL pricing). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
               Serverless), and HA mode.
             </p>
 
-            <h3 id="data--analytics">📊 <Link href="/?product=data-analytics">Data &amp; Analytics</Link></h3>
+            <h3 id="data--analytics"><DataAnalyticsIcon size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=data-analytics">Data &amp; Analytics</Link></h3>
             <p>
               Covers managed data warehouse and analytics services (Redshift, BigQuery, Synapse,
               Snowflake, Databricks, and native cloud-provider offerings). Filter by engine,
               deployment type, and service tier.
             </p>
 
-            <h3 id="networking">🌐 <Link href="/?product=networking">Networking</Link></h3>
+            <h3 id="networking"><PRODUCT_TYPE_ICONS.networking size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=networking">Networking</Link></h3>
             <p>
               Compares data transfer, VPC, load balancing, VPN, NAT gateway, and dedicated connection
               pricing. Supports filtering by service type, connection type, routing, and direction
               (egress/ingress).
             </p>
 
-            <h3 id="serverless">⚡ <Link href="/?product=serverless">Serverless</Link></h3>
+            <h3 id="serverless"><PRODUCT_TYPE_ICONS.serverless size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=serverless">Serverless</Link></h3>
             <p>
               Compares function-as-a-service pricing (AWS Lambda, Azure Functions, Google Cloud
               Functions, etc.) alongside integration services like API Gateways, Messaging Queues, Event Buses, and Workflows. Key attributes include supported runtimes, cold start behavior, billing granularity, and memory configuration.
             </p>
 
-            <h3 id="storage">💾 <Link href="/?product=storage">Storage</Link></h3>
+            <h3 id="storage"><PRODUCT_TYPE_ICONS.storage size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=storage">Storage</Link></h3>
             <p>
               Compares object, block, and file storage pricing (**AWS S3 vs Azure Blob vs GCP Cloud Storage price per GB**). Filter by storage type, performance tier, redundancy (LRS, ZRS, GRS), and media type.
             </p>
 
-            <h3 id="virtual-machines">🖥️ <Link href="/?product=compute">Virtual Machines</Link></h3>
+            <h3 id="virtual-machines"><PRODUCT_TYPE_ICONS.vm size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=compute">Virtual Machines</Link></h3>
             <p>
               Compares compute instances across providers (**AWS EC2 vs Azure VM vs GCP Compute Engine**). Filter by operating system, CPU
               vendor/architecture, GPU support, and instance category (General Purpose, Compute
@@ -415,7 +421,7 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="workloads">Workloads</CopyHeading>
             <p>
-              The <Link href="/workloads">📦 Workloads</Link> page lets you price end-to-end cloud architectures instead of just individual components. We've defined common application patterns and their component requirements. By adjusting scale parameters, the tool automatically calculates necessary resource specs and queries the cheapest matching instances across all providers.
+              The <Link href="/workloads"><EXTRA_LINK_ICONS.workloads size={16} className="inline align-text-bottom mr-1" />Workloads</Link> page lets you price end-to-end cloud architectures instead of just individual components. We've defined common application patterns and their component requirements. By adjusting scale parameters, the tool automatically calculates necessary resource specs and queries the cheapest matching instances across all providers.
             </p>
             <p><strong>Available workloads:</strong></p>
             <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1.5rem' }}>
@@ -630,7 +636,7 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="certifications">Certifications &amp; Regulations</CopyHeading>
             <p>
-              The <Link href="/certifications">📜 Certifications &amp; Regulations</Link> page compares the compliance posture of each cloud provider side by side — which security, privacy, industry, and government certifications they hold — independently of pricing. It covers standards such as ISO&nbsp;27001/27017/27018/27701/22301/20000-1/42001, SOC&nbsp;1/2/3, PCI&nbsp;DSS, HIPAA, FedRAMP High/Moderate, CSA&nbsp;STAR, FIPS&nbsp;140-2, HITRUST, NIST&nbsp;800-171, GDPR, IRAP, C5, ENS, MTCS, and ISMAP.
+              The <Link href="/certifications"><EXTRA_LINK_ICONS.certifications size={16} className="inline align-text-bottom mr-1" />Certifications &amp; Regulations</Link> page compares the compliance posture of each cloud provider side by side — which security, privacy, industry, and government certifications they hold — independently of pricing. It covers standards such as ISO&nbsp;27001/27017/27018/27701/22301/20000-1/42001, SOC&nbsp;1/2/3, PCI&nbsp;DSS, HIPAA, FedRAMP High/Moderate, CSA&nbsp;STAR, FIPS&nbsp;140-2, HITRUST, NIST&nbsp;800-171, GDPR, IRAP, C5, ENS, MTCS, and ISMAP.
             </p>
             <p>
               Like the Datacenters page, this data is curated manually from each provider's official compliance documentation rather than a live database — a missing certification means "not found in that provider's published docs at verification time," not necessarily that it is unavailable.
@@ -804,9 +810,8 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="advertising">Advertising with Us</CopyHeading>
             <p>
-              comparecloudcosts.com puts your brand in front of engineers, architects, and technical
-              decision-makers actively comparing cloud pricing and evaluating infrastructure choices — a
-              highly qualified audience at the exact moment they're making buying decisions.
+              Compare Cloud Costs puts your brand in front of engineers and architects who are actively
+              comparing cloud pricing — the moment they're deciding what to buy.
             </p>
             <p>
               Sponsorship slots are available on individual workload pages. Additionally, your brand is displayed across the
@@ -1239,6 +1244,7 @@ const DocsPage: React.FC = () => {
         </main>
       </div>
       <Footer />
+        </div>
       </div>
     </>
   );

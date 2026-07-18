@@ -28,6 +28,7 @@ CCC solves this by:
 | Category | Description | Live API | Static Fallback | Regional Coverage |
 |---|---|---|---|---|
 | 🖥️ Virtual Machines | General compute instances | AWS, Azure, GCP, Oracle, DO | All 9 providers | By provider (native regions) |
+| 🎮 GPU Compute | GPU-accelerated instances, by chip model (H100, A100, L4, MI300X, …) | AWS, Azure, GCP, Oracle, DO, Alibaba | All 6 hyperscalers | By provider (native regions) |
 | 🗄️ Databases | Managed relational, NoSQL, in-memory, caching | AWS, Azure | All 9 providers | By provider (native regions) |
 | ⚡ Serverless | Functions, API Gateways, event brokers | AWS Lambda | All 9 providers | By provider (native regions) |
 | 📦 Containers | Managed Kubernetes, container instances | — | All 9 providers | By provider (native regions) |
@@ -46,7 +47,8 @@ Providers are classified by `providerType` in `src/config/index.ts`: **hyperscal
 
 | Category | Providers | Notes |
 |---|---|---|
-| Virtual Machines | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers |
+| Virtual Machines | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers. Excludes any instance with `gpu_count > 0` — those live under GPU Compute instead, so a GPU box is never priced/shown twice. |
+| GPU Compute | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | Not a separate ingested category — same underlying VM/Droplet/etc. rows as above, filtered to `gpu_count > 0`. GPU model (H100, A100 80GB, L4, …) is derived from each provider's instance-type naming convention (`src/config/gpu_models.ts`), since no pricing API returns the chip name directly. |
 | Databases | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Pinecone, Milvus, Qdrant, Weaviate, Chroma | Hyperscalers + vector databases |
 | Serverless | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers |
 | Containers | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba | All 6 hyperscalers |
@@ -57,9 +59,9 @@ Providers are classified by `providerType` in `src/config/index.ts`: **hyperscal
 | App Hosting | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** Cloudflare | Hyperscalers + Cloudflare |
 | Workloads | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba **+** AI providers | Multi-component templates |
 | Certifications | All providers | Compliance matrix (no pricing) |
-| Datacenters | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba, Cloudflare, Vultr, Hetzner | Infrastructure reference only |
+| Datacenters | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba, Cloudflare | Infrastructure reference only |
 
-**Note:** Vultr and Hetzner are available for infrastructure and region planning on the Datacenters page, but pricing data is not available.
+**GPU model coverage caveat (added 2026-07-17):** GPU chip identity (H100 vs. A100 vs. L4, etc.) is not a field any provider's pricing API exposes — it's inferred from instance-type naming via `src/config/gpu_models.ts`. AWS and Azure are comprehensive (their live pricing APIs return every GPU SKU they sell). GCP, Oracle, Alibaba, and DigitalOcean rely on hand-maintained static shape lists, same reliability tier as Networking/Security below — audited 2026-07-17: added GCP's a3 family (H100, previously missing entirely). Two known gaps found but NOT filled, to avoid publishing unverified specs: Alibaba's gn7e (A100 80GB) family, and DigitalOcean's newer GPU Droplet tiers (L40S, MI300X, H200, RTX 6000 Ada) — pricing was found but vCPU/memory bundle specs couldn't be confirmed with enough confidence.
 
 **AI model coverage caveat:** `src/config/ai_models.ts` is a hand-maintained static list, not a live scraper pipeline (unlike every other category — see `src/services/ai_pipeline.ts`, which just reads the static file). It will drift as providers add/retire models. As of 2026-07, it covers OpenAI and Anthropic's own catalogs plus a representative subset of third-party models available via Bedrock (Amazon Nova, DeepSeek-R1, Mistral Large 2, Llama) and Azure AI Foundry (DeepSeek-R1, Llama) — not an exhaustive catalog. Building real per-provider ingestion (Bedrock model catalog + pricing API, Azure AI Foundry catalog, etc.) is an open follow-up, not yet scheduled.
 
