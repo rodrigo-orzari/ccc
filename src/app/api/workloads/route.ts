@@ -4,6 +4,7 @@ import { WORKLOADS } from '@/config/workloads';
 import { DEFAULT_PRIORITIES } from '@/config/workload_priorities';
 import { isNotOffered } from '@/config/not_offered';
 import { PROVIDER_CATEGORY_SCOPE } from '@/config';
+import { HYPERSCALER_IDS, specializedProviderIdsForWorkload } from '@/config/workload_providers';
 
 // Integration SKUs are consumption-priced in heterogeneous units ("per 1M
 // Requests", "per 1M Events", "per 1k Actions", "per TB", flat "Mo", …). To
@@ -31,7 +32,7 @@ function integrationMonthlyCost(unit: string, price: number, quantity: number): 
 // misleading. Instead, for any component whose productType a specialized
 // provider is scoped into (see PROVIDER_CATEGORY_SCOPE), we surface it as a
 // per-component "also available from" annotation instead of a full column.
-const HYPERSCALERS = ['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'];
+const HYPERSCALERS = HYPERSCALER_IDS as unknown as string[];
 
 interface PriceResult {
   chosen: any;
@@ -174,13 +175,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Workload not found' }, { status: 404 });
     }
 
-    const results: Record<string, { total: number; components: any[] }> = {};
-    HYPERSCALERS.forEach(p => results[p] = { total: 0, components: [] });
+    // Specialized providers (OpenAI, Anthropic, Cloudflare, vector DBs, …)
+    // scoped into at least one product type this workload uses — they get a
+    // real column too, honestly partial: priced where they participate,
+    // "Not offered" (structural, from PROVIDER_CATEGORY_SCOPE) elsewhere.
+    const specializedProviderIds = specializedProviderIdsForWorkload(workload);
+    const ALL_PROVIDERS = [...HYPERSCALERS, ...specializedProviderIds];
 
-    // Per-component "also available from" annotations for specialized
-    // providers (OpenAI, Anthropic, Cloudflare, vector DBs, …) — see the
-    // HYPERSCALERS comment above for why these aren't full-stack columns.
-    const specializedAlternatives: Record<string, { provider: string; instanceType: string; monthlyPrice: number }[]> = {};
+    const results: Record<string, { total: number; components: any[] }> = {};
+    ALL_PROVIDERS.forEach(p => results[p] = { total: 0, components: [] });
 
     for (const component of workload.components) {
       const reqs = component.getRequirements(activePriorities);
@@ -189,8 +192,15 @@ export async function POST(request: Request) {
       if (!reqs) continue;
       const dbCategory = reqs.productType === 'vm' ? 'compute' : reqs.productType === 'data-analytics' ? 'data_warehouse' : reqs.productType;
 
-      for (const provider of HYPERSCALERS) {
-        const result = await priceComponent(provider, reqs, dbCategory, region);
+      for (const provider of ALL_PROVIDERS) {
+        const isSpecialized = specializedProviderIds.includes(provider);
+        // Specialized providers structurally don't sell products outside
+        // their PROVIDER_CATEGORY_SCOPE — that's known deterministically, so
+        // skip the query entirely and mark "Not offered" rather than asking
+        // the DB and getting a false N/A.
+        const outOfScope = isSpecialized && !(PROVIDER_CATEGORY_SCOPE[provider] ?? []).includes(reqs.productType);
+
+        const result = outOfScope ? null : await priceComponent(provider, reqs, dbCategory, region);
         if (result) {
           results[provider].components.push({
             componentId: component.id,
@@ -208,37 +218,19 @@ export async function POST(request: Request) {
             name: component.name,
             // 'N/A' stays the sentinel every consumer keys on; notOffered
             // distinguishes "provider has no such product" (honest gap, from
-            // config/not_offered.ts) from "we have no matching data" so the UI
-            // can label them differently.
+            // config/not_offered.ts, or structurally out of scope for a
+            // specialized provider) from "we have no matching data" so the
+            // UI can label them differently.
             instanceType: 'N/A',
-            notOffered: isNotOffered(provider, reqs.productType, reqs.category),
+            notOffered: outOfScope || isNotOffered(provider, reqs.productType, reqs.category),
             monthlyPrice: 0,
             quantity: reqs.quantity,
           });
         }
       }
-
-      // Specialized providers scoped into this component's productType (e.g.
-      // openai/anthropic for 'ai', cloudflare for 'networking'/'security') —
-      // look up a price and surface it as an annotation, not a column.
-      const specializedProviders = Object.entries(PROVIDER_CATEGORY_SCOPE)
-        .filter(([, scope]) => scope.includes(reqs.productType))
-        .map(([id]) => id);
-
-      for (const provider of specializedProviders) {
-        const result = await priceComponent(provider, reqs, dbCategory, region);
-        if (result) {
-          if (!specializedAlternatives[component.id]) specializedAlternatives[component.id] = [];
-          specializedAlternatives[component.id].push({
-            provider,
-            instanceType: result.chosen.instance_type,
-            monthlyPrice: result.monthlyPrice,
-          });
-        }
-      }
     }
 
-    return NextResponse.json({ workloadId, results, specializedAlternatives });
+    return NextResponse.json({ workloadId, results, specializedProviderIds });
   } catch (error) {
     console.error('Workloads API Error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

@@ -11,6 +11,7 @@ import { WorkloadDefinition, WorkloadPriorities, PriorityLevel } from '@/types';
 import { DEFAULT_PRIORITIES, PRIORITY_PILLARS, PRIORITY_LEVELS } from '@/config/workload_priorities';
 import { PROVIDERS, GEOGRAPHIES } from '@/config';
 import { formatInstanceName } from '@/lib/formatInstanceName';
+import { HYPERSCALER_IDS, providerIdsForWorkload } from '@/config/workload_providers';
 
 // Map a workload component's productType to the URL ?product= value the main
 // catalog page expects. Most match 1:1; vm is a special case (catalog uses 'vm'
@@ -26,38 +27,6 @@ const providerColor = (slug: string) =>
   PROVIDERS.find(p => p.id === slug)?.color ?? '#525252';
 const providerName = (slug: string) => PROVIDERS.find(p => p.id === slug)?.name ?? slug;
 const formatNumber = (n: number | string) => Number(n).toLocaleString();
-
-// Provider order — pulled from the canonical PROVIDERS config so workload comparisons
-// and main pricing tables show providers in the same sequence and with the same names.
-const PROVIDER_IDS = ['aws', 'azure', 'gcp', 'digitalocean', 'oracle', 'alibaba'] as const;
-
-// Small "also available from" line shown under a component's name when a
-// specialized provider (OpenAI, Anthropic, Cloudflare, …) offers a priced
-// alternative for that specific component. Kept out of the main provider
-// columns intentionally — see HYPERSCALERS comment in the API route.
-function SpecializedAlternativesNote({
-  alternatives,
-}: {
-  alternatives?: { provider: string; instanceType: string; monthlyPrice: number }[];
-}) {
-  if (!alternatives || alternatives.length === 0) return null;
-  const sorted = [...alternatives].sort((a, b) => a.monthlyPrice - b.monthlyPrice);
-  return (
-    <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
-      <span className="text-[9px] text-[#a3a3a3] dark:text-[#525252]">Also:</span>
-      {sorted.map(alt => (
-        <span
-          key={alt.provider}
-          title={`${providerName(alt.provider)} — ${alt.instanceType}`}
-          className="text-[9px] font-bold"
-          style={{ color: providerColor(alt.provider) }}
-        >
-          {providerName(alt.provider)} ${alt.monthlyPrice.toLocaleString('en-US', { maximumFractionDigits: 0 })}/mo
-        </span>
-      ))}
-    </div>
-  );
-}
 
 function ProviderTh({ id }: { id: string }) {
   // Match the colored pill used in PricingTable's provider column so workload
@@ -114,6 +83,16 @@ export default function WorkloadDetails() {
   const params = useParams();
   const id = params.id as string;
   const workload = WORKLOADS.find((w) => w.id === id);
+
+  // Provider column list for this workload: the six hyperscalers, plus any
+  // specialized providers (OpenAI, Anthropic, Cloudflare, vector DBs, …)
+  // scoped into at least one component this workload actually uses. These
+  // extra columns are honestly partial — priced where in scope, "Not
+  // offered" elsewhere — same "N of M tracked" treatment already used for
+  // hyperscaler data gaps, so no separate UI pattern is needed.
+  const PROVIDER_IDS = workload
+    ? (providerIdsForWorkload(workload) as unknown as readonly string[])
+    : (HYPERSCALER_IDS as unknown as readonly string[]);
 
   const scrollbarStyles = `
     .always-show-scrollbar {
@@ -208,18 +187,21 @@ export default function WorkloadDetails() {
 
   const [priorities, setPriorities] = useState<WorkloadPriorities>(DEFAULT_PRIORITIES);
   const [results, setResults] = useState<any>(null);
-  // Per-component "also available from" pricing for specialized providers
-  // (OpenAI, Anthropic, Cloudflare, …) that can't fill a whole workload stack
-  // but do offer a priced alternative for specific components — see the
-  // HYPERSCALERS comment in /api/workloads/route.ts for why these aren't
-  // full comparison columns.
-  const [specializedAlternatives, setSpecializedAlternatives] = useState<Record<string, { provider: string; instanceType: string; monthlyPrice: number }[]>>({});
   const [loading, setLoading] = useState(true);
   const [region, setRegion] = useState('Global');
   const [pricingModel, setPricingModel] = useState<'PAYG' | 'Yearly'>('PAYG');
   const [viewMode, setViewMode] = useState<'table' | 'charts'>('table');
   const [diagramExpanded, setDiagramExpanded] = useState(false);
   const [selectedProviders, setSelectedProviders] = useState<Set<string>>(new Set(PROVIDER_IDS));
+
+  // Re-seed selected providers when navigating between workloads (e.g. via the
+  // carousel) — Next.js reuses this component across route params, so without
+  // this a workload with specialized columns (RAG → OpenAI/Anthropic) loaded
+  // after one without them would start with those columns hidden.
+  useEffect(() => {
+    setSelectedProviders(new Set(PROVIDER_IDS));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [workload?.id]);
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLDivElement>(null);
@@ -329,7 +311,6 @@ export default function WorkloadDetails() {
         });
         const data = await res.json();
         setResults(data.results);
-        setSpecializedAlternatives(data.specializedAlternatives ?? {});
       } catch (err) {
         console.error(err);
       } finally {
@@ -677,7 +658,6 @@ export default function WorkloadDetails() {
                                     <span className="shrink-0">{c.icon}</span>
                                     <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb] truncate">{c.name}</span>
                                   </div>
-                                  <SpecializedAlternativesNote alternatives={specializedAlternatives[c.id]} />
                                 </div>
                                 {has ? (
                                   <Link
@@ -751,7 +731,6 @@ export default function WorkloadDetails() {
                               <span>{c.icon}</span>
                               <span className="text-[11px] font-bold text-[#171717] dark:text-[#e5e7eb]">{c.name}</span>
                             </div>
-                            <SpecializedAlternativesNote alternatives={specializedAlternatives[c.id]} />
                           </div>
                         </td>
                         {PROVIDER_IDS.filter(p => selectedProviders.has(p)).map(provider => {
@@ -901,14 +880,22 @@ export default function WorkloadDetails() {
                 <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Providers</h3>
               </div>
               <div className="flex flex-wrap gap-2">
-                {/* Button order (not the table's): Oracle before DigitalOcean, plus a
-                    forced line break so DigitalOcean + Alibaba sit on the second row. */}
-                {(['aws', 'azure', 'gcp', 'oracle', 'digitalocean', 'alibaba'] as const).map(providerId => {
+                {/* Button order: Oracle before DigitalOcean, with forced line breaks
+                    so DigitalOcean + Alibaba start the second row and any specialized
+                    providers (OpenAI, Anthropic, Cloudflare, …) scoped into this
+                    workload start a third row. */}
+                {(() => {
+                  const hyperscalerOrder = ['aws', 'azure', 'gcp', 'oracle', 'digitalocean', 'alibaba'];
+                  const isHyperscaler = (p: string) => (HYPERSCALER_IDS as unknown as string[]).includes(p);
+                  const specialized = PROVIDER_IDS.filter(p => !isHyperscaler(p));
+                  const firstSpecialized = specialized[0];
+                  return [...hyperscalerOrder, ...specialized].map(providerId => {
                   const provName = providerName(providerId);
                   const isSelected = selectedProviders.has(providerId);
                   return (
                     <React.Fragment key={providerId}>
                       {providerId === 'digitalocean' && <div className="basis-full h-0" aria-hidden="true" />}
+                      {providerId === firstSpecialized && <div className="basis-full h-0" aria-hidden="true" />}
                     <button
                       onClick={() => {
                         const newProviders = new Set(selectedProviders);
@@ -933,7 +920,8 @@ export default function WorkloadDetails() {
                     </button>
                     </React.Fragment>
                   );
-                })}
+                  });
+                })()}
               </div>
             </section>
 
@@ -1075,7 +1063,7 @@ export default function WorkloadDetails() {
       {/* Disclaimer — plain text, no box, so it reads as fine-print not a feature panel. */}
       <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-8 text-[11px] text-[#737373] leading-relaxed">
         <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
-        This calculator is conceptual and designed for comparison purposes. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for workload sizing. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+        The price results are conceptual and intended for comparison purposes only. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for workload sizing. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
       </div>
 
       </div>
