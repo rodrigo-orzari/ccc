@@ -118,21 +118,28 @@ export const DEFAULT_PRICE_RANGE = { min: 0, max: 100 };
 // and should never appear in pricing comparisons or the main dashboard.
 // To add a new pricing provider, add it here, create a config file (src/config/<provider>_*.ts),
 // and register a pipeline adapter in the appropriate src/services/*_pipeline.ts file.
-export const PROVIDERS: { id: string; name: string; color: string; soon?: boolean; isAIOnly?: boolean }[] = [
-  { id: 'aws', name: 'AWS', color: '#FF9900' },
-  { id: 'azure', name: 'Azure', color: '#00BCFF' },
-  { id: 'gcp', name: 'Google', color: '#34A853' },
-  { id: 'oracle', name: 'Oracle', color: '#F80000' },
-  { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF' },
-  { id: 'alibaba', name: 'Alibaba', color: '#FF6A00' },
-  { id: 'openai', name: 'OpenAI', color: '#10A37F', isAIOnly: true },
-  { id: 'anthropic', name: 'Anthropic', color: '#CC9D87', isAIOnly: true },
-  { id: 'pinecone', name: 'Pinecone', color: '#3B1CFF' },
-  { id: 'milvus', name: 'Milvus', color: '#00D2D3' },
-  { id: 'qdrant', name: 'Qdrant', color: '#FF004E' },
-  { id: 'weaviate', name: 'Weaviate', color: '#2DCA73' },
-  { id: 'chroma', name: 'Chroma', color: '#FF4F00' },
-  { id: 'cloudflare', name: 'Cloudflare', color: '#F38020' },
+// providerType distinguishes the six general-purpose hyperscalers (offer
+// compute/storage/networking primitives you build on) from specialized
+// providers (single-purpose services: AI model vendors, vector databases,
+// edge/security). Used to group provider filter buttons and summary cards
+// in the UI so users don't see e.g. OpenAI presented as a peer of AWS.
+export type ProviderType = 'hyperscaler' | 'specialized';
+
+export const PROVIDERS: { id: string; name: string; color: string; soon?: boolean; providerType: ProviderType }[] = [
+  { id: 'aws', name: 'AWS', color: '#FF9900', providerType: 'hyperscaler' },
+  { id: 'azure', name: 'Azure', color: '#00BCFF', providerType: 'hyperscaler' },
+  { id: 'gcp', name: 'Google', color: '#34A853', providerType: 'hyperscaler' },
+  { id: 'oracle', name: 'Oracle', color: '#F80000', providerType: 'hyperscaler' },
+  { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF', providerType: 'hyperscaler' },
+  { id: 'alibaba', name: 'Alibaba', color: '#FF6A00', providerType: 'hyperscaler' },
+  { id: 'openai', name: 'OpenAI', color: '#10A37F', providerType: 'specialized' },
+  { id: 'anthropic', name: 'Anthropic', color: '#CC9D87', providerType: 'specialized' },
+  { id: 'pinecone', name: 'Pinecone', color: '#3B1CFF', providerType: 'specialized' },
+  { id: 'milvus', name: 'Milvus', color: '#00D2D3', providerType: 'specialized' },
+  { id: 'qdrant', name: 'Qdrant', color: '#FF004E', providerType: 'specialized' },
+  { id: 'weaviate', name: 'Weaviate', color: '#2DCA73', providerType: 'specialized' },
+  { id: 'chroma', name: 'Chroma', color: '#FF4F00', providerType: 'specialized' },
+  { id: 'cloudflare', name: 'Cloudflare', color: '#F38020', providerType: 'specialized' },
 ];
 
 // Providers that only belong to specific product categories. The six hyperscalers

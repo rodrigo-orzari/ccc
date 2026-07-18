@@ -265,10 +265,15 @@ const AboutPage: React.FC = () => {
                 <CopyHeading id="about-compare-cloud-costs-ccc">About Compare Cloud Costs (CCC)</CopyHeading>
                 <p>
                   comparecloudcosts.com (CCC) is a comprehensive cloud pricing intelligence platform that makes
-                  comparing infrastructure costs across multiple cloud providers effortless. By normalizing and
-                  aggregating pricing data from AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean,
-                  Alibaba Cloud, Cloudflare, and specialized providers (AI models, vector databases), CCC enables teams to perform side-by-side **AWS vs Azure vs Google Cloud pricing calculator** comparisons, helping you make confident, data-driven
-                  architectural decisions and optimize cloud spend before deployment.
+                  comparing infrastructure costs effortless. CCC tracks two distinct kinds of providers: six
+                  general-purpose **cloud platforms** (AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean,
+                  and Alibaba Cloud) that offer the compute, storage, database, and networking primitives you build
+                  on, and a set of **specialized providers** (AI model vendors like OpenAI and Anthropic, vector
+                  databases, and edge/security services like Cloudflare) that offer a single category of service
+                  rather than a full platform. By normalizing and aggregating pricing data across both groups, CCC
+                  enables teams to perform side-by-side **AWS vs Azure vs Google Cloud pricing calculator**
+                  comparisons, helping you make confident, data-driven architectural decisions and optimize cloud
+                  spend before deployment.
                 </p>
                 <BackToTop />
               </div>

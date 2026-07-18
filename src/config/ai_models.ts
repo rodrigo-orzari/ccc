@@ -13,12 +13,22 @@ export interface AIModelConfig {
 }
 
 // All prices are on-demand (pay-as-you-go) in USD per 1M tokens.
-// Sources (fetched June 2026):
+//
+// IMPORTANT — this file is a hand-maintained static list, not a scraped/live
+// pipeline (see src/services/ai_pipeline.ts). Every other category on this
+// site (VMs, storage, containers, etc.) pulls from a real scraper hitting the
+// provider's API; AI model pricing does not, which means this list will
+// silently drift as providers add/retire models. Treat additions here as a
+// stopgap — the durable fix is a real ingestion pipeline per provider
+// (Bedrock model catalog + pricing API, Azure AI Foundry catalog, etc.).
+//
+// Sources (fetched June 2026, updated July 2026 to add previously-missing
+// third-party models on Bedrock and Azure AI Foundry — see CCC/Web/MEMORY.md):
 //   OpenAI    — developers.openai.com/api/docs/models
 //   Anthropic — platform.claude.com/docs/en/about-claude/pricing
 //   GCP       — cloud.google.com/vertex-ai/generative-ai/pricing
-//   Bedrock   — aws.amazon.com/bedrock/pricing/
-//   Azure     — azure.microsoft.com/pricing/details/azure-openai/ (via Microsoft Foundry)
+//   Bedrock   — aws.amazon.com/bedrock/pricing/ (Nova, DeepSeek-R1, Mistral Large 2 added Jul 2026)
+//   Azure     — azure.microsoft.com/pricing/details/ai-foundry-models/ (DeepSeek-R1, Llama added Jul 2026 — Azure AI Foundry sells far more than OpenAI models)
 
 export const AI_MODELS: AIModelConfig[] = [
 
@@ -186,6 +196,65 @@ export const AI_MODELS: AIModelConfig[] = [
     modelTier: 'Standard',
     multimodal: 'No',
   },
+  // Amazon's own Nova family, added to close the gap where only third-party
+  // models were represented for Bedrock.
+  {
+    providerSlug: 'aws',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Amazon Nova Pro (Bedrock)',
+    inputPricePer1M: 0.80,
+    outputPricePer1M: 3.20,
+    contextWindowK: 300,
+    modelTier: 'Standard',
+    multimodal: 'Yes',
+  },
+  {
+    providerSlug: 'aws',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Amazon Nova Lite (Bedrock)',
+    inputPricePer1M: 0.06,
+    outputPricePer1M: 0.24,
+    contextWindowK: 300,
+    modelTier: 'Efficient',
+    multimodal: 'Yes',
+  },
+  {
+    providerSlug: 'aws',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Amazon Nova Micro (Bedrock)',
+    inputPricePer1M: 0.035,
+    outputPricePer1M: 0.14,
+    contextWindowK: 128,
+    modelTier: 'Efficient',
+    multimodal: 'No',
+  },
+  // DeepSeek — flagged by Rodrigo as a known gap; DeepSeek-R1 is available
+  // via Bedrock Marketplace.
+  {
+    providerSlug: 'aws',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'DeepSeek-R1 (Bedrock)',
+    inputPricePer1M: 1.35,
+    outputPricePer1M: 5.40,
+    contextWindowK: 128,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
+  {
+    providerSlug: 'aws',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Mistral Large 2 (Bedrock)',
+    inputPricePer1M: 3.00,
+    outputPricePer1M: 9.00,
+    contextWindowK: 128,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
 
   // ── Azure (Microsoft Foundry) ─────────────────────────────────────────
   {
@@ -236,6 +305,42 @@ export const AI_MODELS: AIModelConfig[] = [
     geography: 'Global',
     modelName: 'text-embedding-3-small (Azure)',
     inputPricePer1M: 0.02,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
+  // Azure AI Foundry's model catalog goes well beyond OpenAI — DeepSeek,
+  // Llama, and Mistral are all sold directly by Azure. Previously missing
+  // entirely, which made Azure look like an OpenAI-only reseller.
+  {
+    providerSlug: 'azure',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'DeepSeek-R1 (Azure AI Foundry)',
+    inputPricePer1M: 1.14,
+    outputPricePer1M: 4.56,
+    contextWindowK: 128,
+    modelTier: 'Standard',
+    multimodal: 'No',
+  },
+  {
+    providerSlug: 'azure',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Llama 4 Maverick (Azure AI Foundry)',
+    inputPricePer1M: 0.15,
+    outputPricePer1M: 0.60,
+    contextWindowK: 1000,
+    modelTier: 'Efficient',
+    multimodal: 'Yes',
+  },
+  {
+    providerSlug: 'azure',
+    serviceName: 'Foundational Models',
+    geography: 'Global',
+    modelName: 'Llama 3.3 70B (Azure AI Foundry)',
+    inputPricePer1M: 0.59,
+    outputPricePer1M: 0.79,
+    contextWindowK: 128,
     modelTier: 'Standard',
     multimodal: 'No',
   },

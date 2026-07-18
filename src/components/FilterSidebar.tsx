@@ -661,6 +661,13 @@ export default function FilterSidebar({
   // Only the providers applicable to the active category (e.g. no OpenAI on VMs).
   const applicableProviders = staticConfig.providersForType(activeProductType);
   const activeNonSoon = applicableProviders.filter(p => !p.soon).map(p => p.id);
+  // Group provider chips by type so hyperscalers (AWS, Azure, GCP...) and
+  // specialized providers (OpenAI, Anthropic, vector DBs...) render as
+  // visually distinct groups rather than an undifferentiated flat list.
+  const providerGroups = [
+    { label: 'Cloud Platforms', services: applicableProviders.filter(p => !p.soon && p.providerType === 'hyperscaler').map(p => p.id) },
+    { label: 'Specialized Providers', services: applicableProviders.filter(p => !p.soon && p.providerType === 'specialized').map(p => p.id) },
+  ].filter(g => g.services.length > 0);
   
   const currentVCpuDefault = 
     activeProductType === 'serverless' ? config.DEFAULT_SERVERLESS_VCPU_RANGE : 
@@ -705,11 +712,14 @@ export default function FilterSidebar({
           {PRODUCT_TYPE_DESCRIPTIONS[activeProductType]} Double-click to isolate one.
         </p>
 
-        {/* Providers Section */}
-        <FilterSection
+        {/* Providers Section — grouped into Cloud Platforms (hyperscalers) vs
+            Specialized Providers (AI model vendors, vector DBs, edge/security)
+            so users don't read e.g. OpenAI as a peer of AWS. */}
+        <GroupedFilterSection
           title="Provider"
-          tooltip="Cloud providers offering virtual machine pricing. Click a provider tile or chip to filter."
-          options={applicableProviders.filter(p => !p.soon).map(p => p.id)}
+          tooltip="Cloud platforms and specialized providers offering pricing in this category. Click a provider tile or chip to filter."
+          groups={providerGroups}
+          allOptions={activeNonSoon}
           getLabel={(id) => config.PROVIDERS.find(p => p.id === id)?.name || id}
           selected={selectedProviders}
           onToggle={onProviderToggle}
