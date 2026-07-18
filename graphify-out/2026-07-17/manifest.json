@@ -190,8 +190,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1784320742.7327762,
-    "ast_hash": "d6670f1b84755ff551f17b559bb2661d",
+    "mtime": 1784321299.4083269,
+    "ast_hash": "8f9165df8ee0e2ba932e746f6d4e715a",
     "semantic_hash": ""
   },
   "SECURITY_AUDIT.md": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "src/app/docs/page.tsx": {
-    "mtime": 1784248777.7407053,
-    "ast_hash": "06d86183aed0668aa896050f161931ca",
+    "mtime": 1784321433.3576806,
+    "ast_hash": "b4cd8008a72cf9621507993f1efe008d",
     "semantic_hash": ""
   },
   "src/components/ChartsView.tsx": {
@@ -605,18 +605,18 @@
     "semantic_hash": ""
   },
   "src/app/datacenters/page.tsx": {
-    "mtime": 1784320772.54337,
-    "ast_hash": "ef1e581287120f7310eb29aab3769938",
+    "mtime": 1784321307.2207108,
+    "ast_hash": "375d61fba7555a4511aadd3ec3738cf9",
     "semantic_hash": ""
   },
   "src/config/datacenter_data.ts": {
-    "mtime": 1782787959.1487734,
-    "ast_hash": "c981392e596e4886a22176afea79a9dc",
+    "mtime": 1784321378.5935018,
+    "ast_hash": "d16ecfa541049bf3eb33638112db8a4a",
     "semantic_hash": ""
   },
   "src/app/datacenters/WorldMap.tsx": {
-    "mtime": 1783633042.0863016,
-    "ast_hash": "8f1542229cad68067aa81375dcbff21d",
+    "mtime": 1784321343.8031228,
+    "ast_hash": "36e6fe431e784e934e552c2c28e3e7f4",
     "semantic_hash": ""
   },
   "src/components/DigitalOceanReferralModal.tsx": {
@@ -875,8 +875,8 @@
     "semantic_hash": ""
   },
   "src/content/blog/the-hidden-costs-of-managed-services.md": {
-    "mtime": 1784320704.662072,
-    "ast_hash": "49a1b9ad1a127a30006910d03970010d",
+    "mtime": 1784323863.3573031,
+    "ast_hash": "8f66c72441b480e64f746494cba0fb60",
     "semantic_hash": ""
   },
   "src/content/blog/welcome.md": {
