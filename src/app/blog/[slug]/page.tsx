@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import { Footer, ProductTypeSelector } from '@/components';
 import { getPostBySlug, getPostSlugs } from '@/lib/blog';
 
@@ -95,7 +96,7 @@ export default async function BlogPostPage(props: Props) {
           </div>
 
           <article className="prose prose-slate dark:prose-invert text-[0.9375rem] leading-[1.7] max-w-none prose-a:text-[#2563eb] dark:prose-a:text-[#818cf8] prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl">
-            <ReactMarkdown>{post.content}</ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>{post.content}</ReactMarkdown>
           </article>
           
           {/* Divider */}
