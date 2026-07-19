@@ -17,6 +17,13 @@ const ENGINE_CATEGORIES: Record<string, string[]> = {
   'Streaming & Search': ['Kafka', 'Kinesis Data Streams', 'Pub/Sub', 'Event Hubs', 'OpenSearch']
 };
 
+const ANALYTICS_ENGINE_CATEGORIES: Record<string, string[]> = {
+  'Cloud Data Warehouses': ['BigQuery', 'Redshift', 'Synapse', 'Microsoft Fabric', 'Snowflake'],
+  'Provisioned Platforms': ['Databricks', 'Oracle Analytics Cloud', 'Oracle Autonomous Data Warehouse'],
+  'Open-Source & Other': ['Hologres', 'AnalyticDB for MySQL', 'MaxCompute', 'E-MapReduce', 'OpenSearch'],
+  'Streaming Platforms': ['Kafka', 'ApsaraMQ for Kafka', 'Event Hubs', 'Kinesis Data Streams', 'OCI Streaming', 'Pub/Sub']
+};
+
 const groupEngines = (engines: string[]) => {
   const groups: { label: string; services: string[] }[] = [
     { label: 'Relational', services: [] },
@@ -30,6 +37,32 @@ const groupEngines = (engines: string[]) => {
   engines.forEach(eng => {
     let matched = false;
     for (const [category, list] of Object.entries(ENGINE_CATEGORIES)) {
+      if (list.includes(eng)) {
+        groups.find(g => g.label === category)?.services.push(eng);
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) {
+      groups.find(g => g.label === 'Other')?.services.push(eng);
+    }
+  });
+
+  return groups.filter(g => g.services.length > 0);
+};
+
+const groupAnalyticsEngines = (engines: string[]) => {
+  const groups: { label: string; services: string[] }[] = [
+    { label: 'Cloud Data Warehouses', services: [] },
+    { label: 'Provisioned Platforms', services: [] },
+    { label: 'Open-Source & Other', services: [] },
+    { label: 'Streaming Platforms', services: [] },
+    { label: 'Other', services: [] }
+  ];
+
+  engines.forEach(eng => {
+    let matched = false;
+    for (const [category, list] of Object.entries(ANALYTICS_ENGINE_CATEGORIES)) {
       if (list.includes(eng)) {
         groups.find(g => g.label === category)?.services.push(eng);
         matched = true;
@@ -1537,10 +1570,11 @@ export default function FilterSidebar({
               onToggleExpand={() => onToggleSection('geography')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
+            <GroupedFilterSection
               title="Engine"
-              tooltip="Analytics Engine."
-              options={config.ANALYTICS_ENGINES}
+              tooltip="Analytics Engine, grouped by type: Cloud Data Warehouses, Provisioned Platforms, Open-Source solutions, and Streaming services."
+              groups={groupAnalyticsEngines(config.ANALYTICS_ENGINES)}
+              allOptions={config.ANALYTICS_ENGINES}
               selected={selectedAnalyticsEngines}
               onToggle={onAnalyticsEngineToggle}
               onSetAll={onSetAnalyticsEngines}

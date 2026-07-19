@@ -268,6 +268,7 @@ const DocsPage: React.FC = () => {
                   <li><a href="#containers" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Containers</a></li>
                   <li><a href="#databases" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Databases</a></li>
                   <li><a href="#data--analytics" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Data &amp; Analytics</a></li>
+                  <li><a href="#gpu" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>GPU</a></li>
                   <li><a href="#networking" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Networking</a></li>
                   <li><a href="#serverless" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Serverless</a></li>
                   <li><a href="#storage" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Storage</a></li>
@@ -346,7 +347,7 @@ const DocsPage: React.FC = () => {
             </p>
             <p>
               Use the <strong>product tabs</strong> at the top to switch between categories: AI &amp; Machine Learning,
-              App Hosting, Containers, Databases, Data &amp; Analytics, Networking, Serverless, Storage, and Virtual Machines.
+              App Hosting, Containers, Databases, Data &amp; Analytics, GPU, Networking, Serverless, Storage, and Virtual Machines.
             </p>
             <p>
               Use the <strong>filter sidebar</strong> on the left to narrow results by provider,
@@ -386,6 +387,11 @@ const DocsPage: React.FC = () => {
               Covers managed data warehouse and analytics services (Redshift, BigQuery, Synapse,
               Snowflake, Databricks, and native cloud-provider offerings). Filter by engine,
               deployment type, and service tier.
+            </p>
+
+            <h3 id="gpu"><PRODUCT_TYPE_ICONS.gpu size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=gpu">GPU</Link></h3>
+            <p>
+              Compares GPU accelerator pricing for machine learning training, scientific computing, and rendering workloads. Covers single and multi-GPU instance configurations across providers. Filter by GPU model (A100, H100, RTX, V100, L4, etc.), GPU count, and system specs (vCPU, memory) to find the most cost-effective GPU infrastructure for your workload.
             </p>
 
             <h3 id="networking"><PRODUCT_TYPE_ICONS.networking size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=networking">Networking</Link></h3>
@@ -1094,7 +1100,36 @@ const DocsPage: React.FC = () => {
               </tbody>
             </table>
 
-            <h3 style={{ marginTop: '2rem' }}>7. Storage</h3>
+            <h3 style={{ marginTop: '2rem' }}>7. GPU</h3>
+            <p>Dedicated GPU accelerator instances for machine learning, scientific computing, graphics rendering, and high-performance computing.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>GPU Model</strong></td>
+                  <td>The specific GPU accelerator type: <strong>NVIDIA</strong> (A100, H100, V100, L4, T4, RTX series) vs. <strong>AMD</strong> (MI300, MI250) vs. <strong>Google TPU</strong> (TPU v3, TPU v4). Each has different performance characteristics, memory, and pricing.</td>
+                </tr>
+                <tr>
+                  <td><strong>GPU Count</strong></td>
+                  <td>The number of GPUs attached to the instance (1–8 GPUs per instance, depending on provider and instance type). Pricing scales with GPU count.</td>
+                </tr>
+                <tr>
+                  <td><strong>vCPUs &amp; Memory</strong></td>
+                  <td>The host system's virtual processing cores and RAM capacity (in GB). GPU instances include both the GPU accelerators and the host CPU/memory for data I/O and orchestration.</td>
+                </tr>
+                <tr>
+                  <td><strong>Operating System</strong></td>
+                  <td>The OS configuration: <strong>Linux</strong> (standard license-free base pricing) vs. <strong>Windows</strong> (includes the developer OS licensing surcharge). Most GPU workloads run Linux.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>8. Storage</h3>
             <p>Object buckets, VM block storage volumes, shared file systems, and archive tiers.</p>
             <table className="docs-table">
               <thead>
@@ -1129,7 +1164,7 @@ const DocsPage: React.FC = () => {
               </tbody>
             </table>
 
-            <h3 style={{ marginTop: '2rem' }}>8. Artificial Intelligence (AI)</h3>
+            <h3 style={{ marginTop: '2rem' }}>9. Artificial Intelligence (AI)</h3>
             <p>GenAI LLM endpoints, custom model training nodes, and vector search operations.</p>
             <table className="docs-table">
               <thead>
@@ -1150,7 +1185,7 @@ const DocsPage: React.FC = () => {
               </tbody>
             </table>
 
-            <h3 style={{ marginTop: '2rem' }}>9. App Hosting</h3>
+            <h3 style={{ marginTop: '2rem' }}>10. App Hosting</h3>
             <p>Fully managed Platform-as-a-Service (PaaS) app runners and app engines.</p>
             <table className="docs-table">
               <thead>
@@ -1167,7 +1202,7 @@ const DocsPage: React.FC = () => {
               </tbody>
             </table>
 
-            <h3 style={{ marginTop: '2rem' }}>10. Security &amp; Identity</h3>
+            <h3 style={{ marginTop: '2rem' }}>11. Security &amp; Identity</h3>
             <p>Firewalls, IAM policies, secret managers, and runtime threat detection.</p>
             <table className="docs-table">
               <thead>
@@ -1188,7 +1223,7 @@ const DocsPage: React.FC = () => {
               </tbody>
             </table>
 
-            <h3 style={{ marginTop: '2rem' }}>11. Integration</h3>
+            <h3 style={{ marginTop: '2rem' }}>12. Integration</h3>
             <p>Managed message queues, publish-subscribe brokers, gateways, and workflows.</p>
             <table className="docs-table">
               <thead>
