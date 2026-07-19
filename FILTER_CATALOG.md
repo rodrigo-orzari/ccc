@@ -178,7 +178,7 @@ Filters are dynamically available based on the selected product category. The fr
 |---|---|---|---|
 | **Providers** | AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba, Cloudflare | ✅ | Hyperscalers + Cloudflare |
 | **Geographies** | N. America, S. America, W. Europe, N. Europe, Asia Pacific, Australia | ✅ | Mapped per provider |
-| **Service** | Web Application Firewall (WAF), Identity & Access Management (IAM), Key Management Service (KMS), DDoS Protection, Threat Detection, Bot Management, SSL/TLS Encryption, Zero Trust Network Access | ✅ | Security service type. **Fixed 2026-07-19**: Backend had zero handling for security product type; added SQL block. **Expanded**: Added Bot Management, SSL/TLS Encryption, Zero Trust Network Access (Cloudflare services that were priced but unfilterable). |
+| **Service** | Web Application Firewall, Identity & Access Management (IAM), Key Management Service (KMS), DDoS Protection, Threat Detection, Bot Management, SSL/TLS, Zero Trust | ✅ | Security service type. **Fixed 2026-07-19**: Backend had zero handling for security product type; added SQL block. **Expanded**: Added Bot Management, SSL/TLS, Zero Trust (Cloudflare services that were priced but unfilterable). |
 
 ---
 

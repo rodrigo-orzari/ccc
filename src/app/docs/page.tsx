@@ -277,6 +277,9 @@ const DocsPage: React.FC = () => {
               </li>
               <li>
                 <a href="#workloads" style={{ padding: '3px 0' }}>Workloads</a>
+                <ul style={{ listStyle: 'none', paddingLeft: '0.875rem', margin: '2px 0', display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <li><a href="#architecture-priorities" style={{ fontSize: '0.8125rem', padding: '2px 0' }}>Architecture Priorities</a></li>
+                </ul>
               </li>
               <li>
                 <a href="#use-cases" style={{ padding: '3px 0' }}>Use Cases</a>
@@ -476,6 +479,25 @@ const DocsPage: React.FC = () => {
                 </Link> — A decoupled, highly available architecture for product catalogs and transactions. Built for fast lookups and fault tolerance.
               </li>
             </ul>
+            <h3 id="architecture-priorities">Architecture Priorities</h3>
+            <p>
+              When evaluating a workload, you can dynamically shape its infrastructure by adjusting four key <strong>Architecture Priorities</strong> based on cloud best practices:
+            </p>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1.5rem' }}>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <strong>Capacity:</strong> Adjust the baseline compute and storage scale (e.g., from dev-sized environments to high-traffic production clusters).
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <strong>Performance:</strong> Control the latency and throughput requirements. Higher performance may provision premium caching layers (like Redis or Memcached) and high-IOPS storage.
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <strong>Reliability:</strong> Enhance fault tolerance. Moving this slider up will automatically provision load balancers, multi-AZ database deployments, and automated backup storage.
+              </li>
+              <li style={{ marginBottom: '0.5rem' }}>
+                <strong>Security:</strong> Strengthen the architecture's security posture. Increasing this priority injects services like Web Application Firewalls, Key Management Service (KMS), and Threat Detection into the cost estimate.
+              </li>
+            </ul>
+
             <p style={{ fontSize: '0.875rem', color: 'var(--muted-text)' }}>
               See the full list and build your own configuration on the <Link href="/workloads">Workloads page</Link>.
             </p>
