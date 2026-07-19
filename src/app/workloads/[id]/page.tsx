@@ -545,7 +545,7 @@ export default function WorkloadDetails() {
               Workload Costs Comparison
             </h2>
             <p className="text-sm text-[#737373]">
-              Prices by provider and services that enable users to run this workload. Shape the architecture with the four <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Well-Architected</span> controls below — <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Capacity</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Performance</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Reliability</span>, and <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Security</span>. Components and prices recompute as you adjust each priority (e.g. higher Security adds a WAF, KMS, and threat monitoring), and you can switch region or pricing model to compare like-for-like.
+              Prices by provider and services that enable users to run this workload. Shape the architecture based on cloud best practices (e.g., AWS Well-Architected, Azure Cloud Adoption) using the four <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Architecture Priorities</span> below — <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Capacity</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Performance</span>, <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Reliability</span>, and <span className="font-semibold text-[#171717] dark:text-[#e5e7eb]">Security</span>. Components and prices recompute as you adjust each priority (e.g. higher Security adds a WAF, KMS, and threat monitoring), and you can switch region or pricing model to compare like-for-like.
             </p>
           </div>
 
@@ -956,7 +956,7 @@ export default function WorkloadDetails() {
             {/* Well-Architected priorities — four universal intent sliders.
                 Cost is the output; the table recomputes as these change. */}
             <section className="space-y-4">
-              <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Well-Architected Priorities</h3>
+              <h3 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest">Architecture Priorities</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
                 {PRIORITY_PILLARS.map((pillar) => (
                   <div key={pillar.key}>
