@@ -74,11 +74,11 @@ export const REGISTRY_SERVICE_TYPES = ['Storage', 'Data Transfer', 'Operations']
 export const REGISTRY_PRICING_COMPONENTS = ['Storage (per GB/month)', 'Data Transfer (per GB)', 'API Operations'];
 
 // Networking-specific constants
-export const NETWORKING_SERVICES = ['Data Transfer', 'Content Delivery Network (CDN)', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway', 'API Gateway'];
+export const NETWORKING_SERVICES = ['Data Transfer', 'Content Delivery Network (CDN)', 'Virtual Private Cloud', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway', 'API Gateway'];
 // Display-only grouping for the Service filter chips. Every NETWORKING_SERVICES
 // entry must appear in exactly one group. Filtering logic still uses the flat list.
 export const NETWORKING_SERVICE_GROUPS: { label: string; services: string[] }[] = [
-  { label: 'Core & Transfer', services: ['Data Transfer', 'Virtual Private Cloud (VPC)'] },
+  { label: 'Core & Transfer', services: ['Data Transfer', 'Virtual Private Cloud'] },
   { label: 'Connectivity & Gateways', services: ['VPN Gateway', 'NAT Gateway', 'Dedicated Connection', 'API Gateway'] },
   { label: 'Delivery & Addressing', services: ['Load Balancing', 'Public IPv4', 'Content Delivery Network (CDN)'] },
 ];
@@ -87,7 +87,7 @@ export const NETWORKING_ROUTING_TYPES = ['Dynamic', 'Fixed'];
 export const NETWORKING_HA_SUPPORT = ['Yes', 'No'];
 export const NETWORKING_VPC_SUPPORT = ['Yes', 'No'];
 export const NETWORKING_DIRECTIONS = ['Egress', 'Ingress', 'Intra-Cloud'];
-export const NETWORKING_BILLING_MODELS = ['Hourly Uptime', 'Data Processed (per GB)', 'Per Endpoint/Tunnel', 'Included'];
+export const NETWORKING_BILLING_MODELS = ['Hourly Uptime', 'Data Processed (GB)', 'Per Endpoint/Tunnel', 'Included'];
 // 'Unlimited' / 'Unlimited (+$20/mo)' cover Cloudflare's CDN tiers.
 export const NETWORKING_USAGE_TIERS = ['Flat Rate', 'First 10TB', '10TB - 50TB', 'Over 10TB', 'Over Allowance', 'Included', 'Unlimited', 'Unlimited (+$20/mo)'];
 // Verified against live data (2026-07-19): '> 10 Gbps' is never written.

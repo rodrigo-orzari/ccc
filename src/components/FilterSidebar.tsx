@@ -925,10 +925,32 @@ export default function FilterSidebar({
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
-            <FilterSection
+            <GroupedFilterSection
               title="GPU Model"
               tooltip="The accelerator chip itself — H100, A100, L4, MI300X, etc. Derived from each provider's instance-type naming, not a field the pricing APIs expose directly."
-              options={config.GPU_MODELS}
+              groups={(() => {
+                const groups: { label: string; services: string[] }[] = [];
+                config.GPU_MODELS.forEach(m => {
+                  const spec = GPU_MODEL_SPECS[m];
+                  const vendor = spec ? spec.vendor : 'Other';
+                  let group = groups.find(g => g.label === vendor);
+                  if (!group) {
+                    group = { label: vendor, services: [] };
+                    groups.push(group);
+                  }
+                  group.services.push(m);
+                });
+                groups.sort((a, b) => {
+                  // Keep NVIDIA first, then AMD, then alphabetical
+                  if (a.label === 'NVIDIA') return -1;
+                  if (b.label === 'NVIDIA') return 1;
+                  if (a.label === 'AMD') return -1;
+                  if (b.label === 'AMD') return 1;
+                  return a.label.localeCompare(b.label);
+                });
+                return groups;
+              })()}
+              allOptions={config.GPU_MODELS}
               selected={selectedGpuModels}
               onToggle={onGpuModelToggle}
               onSetAll={onSetGpuModel}

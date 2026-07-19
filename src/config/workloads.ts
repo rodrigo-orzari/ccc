@@ -653,9 +653,9 @@ export const WORKLOADS: WorkloadDefinition[] = [
     capacityLabel: 'Network Throughput',
     components: [
       {
-        id: 'vpc', name: 'Virtual Private Cloud (VPC)', icon: '☁️',
+        id: 'vpc', name: 'Virtual Private Cloud', icon: '☁️',
         description: 'Isolated private network for cloud resources',
-        getRequirements: () => ({ productType: 'networking', category: 'Virtual Private Cloud (VPC)', quantity: 1 }),
+        getRequirements: () => ({ productType: 'networking', category: 'Virtual Private Cloud', quantity: 1 }),
       },
       {
         id: 'vpn-gateway', name: 'VPN Gateway', icon: '🔐',
