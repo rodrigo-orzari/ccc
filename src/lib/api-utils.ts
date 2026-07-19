@@ -138,6 +138,7 @@ export function buildPricingFilters(query: any) {
       serverlessGranularity, serverlessExecutionModel, serverlessProvisionedConcurrency, serverlessEphemeralStorage,
       serverlessMemory, serverlessArchitecture,
       containersOrchestrators, containersComputeTypes, containersArchitectures, containersBillingGranularity,
+      containersServiceTypes, registryPricingComponent,
       analyticsEngines, analyticsDeploymentTypes, analyticsTiers,
       aiServiceTypes, aiModelTiers, aiContextWindows, aiMultimodalOptions,
       networkingService, networkingConnectionTypes, networkingRoutingTypes, networkingHaSupport, networkingVpcSupport, networkingTransferDirections,
@@ -599,6 +600,20 @@ export function buildPricingFilters(query: any) {
       if (containersBillingGranularity) {
         conditions.push(`LOWER(pr.attributes->>'billing_granularity') = ANY($${paramCount++})`);
         values.push((containersBillingGranularity as string).split(',').map((s: string) => s.toLowerCase()));
+      }
+      // Service Type distinguishes orchestration rows (category='containers') from
+      // registry rows (category='registry') — the UI labels don't match the DB
+      // category values directly, so translate before filtering.
+      if (containersServiceTypes) {
+        const categoryValues = (containersServiceTypes as string).split(',').map((s: string) =>
+          s.trim() === 'Container Registry' ? 'registry' : 'containers'
+        );
+        conditions.push(`LOWER(pr.category) = ANY($${paramCount++})`);
+        values.push(categoryValues);
+      }
+      if (registryPricingComponent) {
+        conditions.push(`LOWER(pr.attributes->>'pricing_component') = ANY($${paramCount++})`);
+        values.push((registryPricingComponent as string).split(',').map((s: string) => s.toLowerCase()));
       }
     }
 

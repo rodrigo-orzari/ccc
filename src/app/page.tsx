@@ -159,6 +159,7 @@ export default function Dashboard() {
   const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...config.CONTAINERS_ARCHITECTURES]);
   const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...config.CONTAINERS_BILLING_GRANULARITY]);
   const [selectedContainersServiceTypes, setSelectedContainersServiceTypes] = useState<string[]>(['Orchestration', 'Container Registry']);
+  const [selectedRegistryPricingComponent, setSelectedRegistryPricingComponent] = useState<string[]>([...config.REGISTRY_PRICING_COMPONENTS]);
 
   const [selectedAnalyticsEngines, setSelectedAnalyticsEngines] = useState<string[]>([...config.ANALYTICS_ENGINES]);
   const [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes] = useState<string[]>([...config.ANALYTICS_DEPLOYMENT_TYPES]);
@@ -347,6 +348,8 @@ export default function Dashboard() {
     subset('containersComputeTypes', selectedContainersComputeTypes, config.CONTAINERS_COMPUTE_TYPES);
     subset('containersArchitectures', selectedContainersArchitectures, config.CONTAINERS_ARCHITECTURES);
     subset('containersBillingGranularity', selectedContainersBillingGranularity, config.CONTAINERS_BILLING_GRANULARITY);
+    subset('containersServiceTypes', selectedContainersServiceTypes, ['Orchestration', 'Container Registry']);
+    subset('registryPricingComponent', selectedRegistryPricingComponent, config.REGISTRY_PRICING_COMPONENTS);
     subset('analyticsEngines', selectedAnalyticsEngines, config.ANALYTICS_ENGINES);
     subset('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes, config.ANALYTICS_DEPLOYMENT_TYPES);
     subset('analyticsTiers', selectedAnalyticsTiers, config.ANALYTICS_TIERS);
@@ -417,12 +420,14 @@ export default function Dashboard() {
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     selectedServerlessMemory, selectedServerlessArchitectures, selectedServerlessServiceTypes,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity,
+    selectedContainersServiceTypes, selectedRegistryPricingComponent,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
     selectedNetworkingBillingModels, selectedNetworkingUsageTiers, selectedNetworkingPortCapacities, selectedNetworkingTransferScopes,
     selectedSecurityServices,
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
+    selectedAppHostingTiers, selectedAppHostingComputeTypes,
     selectedIntegrationServices, selectedIntegrationTiers, selectedIntegrationPricingModels,
     selectedIntegrationSizes, selectedIntegrationProtocols,
     vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, gpuCountRange, search
@@ -491,7 +496,9 @@ export default function Dashboard() {
       selectedContainersOrchestrators.length === 0 ||
       selectedContainersComputeTypes.length === 0 ||
       selectedContainersArchitectures.length === 0 ||
-      selectedContainersBillingGranularity.length === 0
+      selectedContainersBillingGranularity.length === 0 ||
+      selectedContainersServiceTypes.length === 0 ||
+      selectedRegistryPricingComponent.length === 0
     )) return false;
 
     if (activeProductType === 'networking' && (
@@ -534,12 +541,13 @@ export default function Dashboard() {
     selectedOS, selectedCpu, selectedGpuModels, selectedCategory, selectedPricingModels,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
+    selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout,
     selectedServerlessMemoryConfig, selectedServerlessFreeTier, selectedServerlessGranularity,
     selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     selectedServerlessMemory, selectedServerlessArchitectures, selectedServerlessServiceTypes,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures,
-    selectedContainersBillingGranularity,
+    selectedContainersBillingGranularity, selectedContainersServiceTypes, selectedRegistryPricingComponent,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes,
     selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
     selectedSecurityServices,
@@ -751,7 +759,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex min-h-[100dvh] lg:h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans lg:overflow-hidden transition-colors duration-300">
+    <div className="flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-[#f7f8ff] dark:bg-[#06060f] text-[#1e1e38] dark:text-[#e5e7eb] font-sans lg:overflow-hidden transition-colors duration-300">
       <h1 className="sr-only">Compare Cloud Costs - AWS, Azure, Google Cloud Pricing</h1>
       <Sidebar activeProductType={activeProductType} onProductTypeChange={setActiveProductType} />
 
@@ -788,6 +796,7 @@ export default function Dashboard() {
           selectedContainersArchitectures={selectedContainersArchitectures}
           selectedContainersBillingGranularity={selectedContainersBillingGranularity}
           selectedContainersServiceTypes={selectedContainersServiceTypes}
+          selectedRegistryPricingComponent={selectedRegistryPricingComponent}
           selectedAnalyticsEngines={selectedAnalyticsEngines}
           selectedAnalyticsDeploymentTypes={selectedAnalyticsDeploymentTypes}
           selectedAnalyticsTiers={selectedAnalyticsTiers}
@@ -854,6 +863,7 @@ export default function Dashboard() {
           onContainersArchitectureToggle={(a) => toggleFilter(selectedContainersArchitectures, setSelectedContainersArchitectures, a)}
           onContainersBillingGranularityToggle={(b) => toggleFilter(selectedContainersBillingGranularity, setSelectedContainersBillingGranularity, b)}
           onContainersServiceTypeToggle={(s) => toggleFilter(selectedContainersServiceTypes, setSelectedContainersServiceTypes, s)}
+          onRegistryPricingComponentToggle={(p) => toggleFilter(selectedRegistryPricingComponent, setSelectedRegistryPricingComponent, p)}
           onAnalyticsEngineToggle={(e) => toggleFilter(selectedAnalyticsEngines, setSelectedAnalyticsEngines, e)}
           onAnalyticsDeploymentTypeToggle={(d) => toggleFilter(selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes, d)}
           onAnalyticsTierToggle={(t) => toggleFilter(selectedAnalyticsTiers, setSelectedAnalyticsTiers, t)}
@@ -909,6 +919,7 @@ export default function Dashboard() {
           onSetContainersArchitectures={setSelectedContainersArchitectures}
           onSetContainersBillingGranularity={setSelectedContainersBillingGranularity}
           onSetContainersServiceTypes={setSelectedContainersServiceTypes}
+          onSetRegistryPricingComponent={setSelectedRegistryPricingComponent}
           onSetAnalyticsEngines={setSelectedAnalyticsEngines}
           onSetAnalyticsDeploymentTypes={setSelectedAnalyticsDeploymentTypes}
           onSetAnalyticsTiers={setSelectedAnalyticsTiers}
