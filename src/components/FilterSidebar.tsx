@@ -766,18 +766,6 @@ export default function FilterSidebar({
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
             <FilterSection
-              title="Pricing Model"
-              tooltip="Select between standard on-demand pricing and discounted spare capacity (Spot / Preemptible) instances."
-              options={config.PRICING_MODELS}
-              selected={selectedPricingModels}
-              onToggle={onPricingModelToggle}
-              onSetAll={onSetPricingModels}
-              isExpanded={expanded.pricingModel ?? true}
-              onToggleExpand={() => onToggleSection('pricingModel')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-
-            <FilterSection
               title="Operating System"
               tooltip="The operating system running on the VM."
               options={config.OS_TYPES}
@@ -786,19 +774,6 @@ export default function FilterSidebar({
               onSetAll={onSetOS}
               isExpanded={expanded.os ?? true}
               onToggleExpand={() => onToggleSection('os')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-
-            <FilterSection
-              title="CPU"
-              tooltip="Processor vendor and architecture."
-              options={config.CPU_PROFILES.map(p => p.id)}
-              getLabel={(id) => config.CPU_PROFILES.find(p => p.id === id)?.label || id}
-              selected={selectedCpu}
-              onToggle={onCpuToggle}
-              onSetAll={onSetCpu}
-              isExpanded={expanded.cpu ?? true}
-              onToggleExpand={() => onToggleSection('cpu')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
@@ -820,18 +795,6 @@ export default function FilterSidebar({
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
             <FilterSection
-              title="Pricing Model"
-              tooltip="Select between standard on-demand pricing and discounted spare capacity (Spot / Preemptible) instances."
-              options={config.PRICING_MODELS}
-              selected={selectedPricingModels}
-              onToggle={onPricingModelToggle}
-              onSetAll={onSetPricingModels}
-              isExpanded={expanded.pricingModel ?? true}
-              onToggleExpand={() => onToggleSection('pricingModel')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-
-            <FilterSection
               title="Operating System"
               tooltip="The operating system running on the instance."
               options={config.OS_TYPES}
@@ -840,19 +803,6 @@ export default function FilterSidebar({
               onSetAll={onSetOS}
               isExpanded={expanded.os ?? true}
               onToggleExpand={() => onToggleSection('os')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-
-            <FilterSection
-              title="CPU"
-              tooltip="Processor vendor and architecture of the host instance."
-              options={config.CPU_PROFILES.map(p => p.id)}
-              getLabel={(id) => config.CPU_PROFILES.find(p => p.id === id)?.label || id}
-              selected={selectedCpu}
-              onToggle={onCpuToggle}
-              onSetAll={onSetCpu}
-              isExpanded={expanded.cpu ?? true}
-              onToggleExpand={() => onToggleSection('cpu')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
