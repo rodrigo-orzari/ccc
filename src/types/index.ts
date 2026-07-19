@@ -67,6 +67,7 @@ export interface PricingRecord {
     // instance-type naming (no pricing API exposes it directly); vram_gb is
     // per-GPU, preferring a provider's live memory field when available.
     gpu_model?: string;
+    gpu_vendor?: string;
     gpu_vram_gb?: number | string;
   };
 }

@@ -10,7 +10,7 @@ import {
   PROVIDER_CERTIFICATIONS,
   type CertCategory,
 } from '@/config/certifications';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Link as LinkIcon } from 'lucide-react';
 
 const CATEGORY_ORDER: CertCategory[] = ['Security', 'Privacy', 'Industry', 'Government'];
 
@@ -184,9 +184,12 @@ export default function CertificationsPage() {
 
           {/* Summary — certifications held per provider (respects active filters),
               connected-card grid mirroring the provider summary on other pages. */}
-          <div className="mb-2">
-            <h2 className="text-xl font-bold mb-1 text-[var(--text)]">
+          <div id="tracked-certifications" className="mb-2 scroll-mt-6">
+            <h2 className="text-xl font-bold mb-1 text-[var(--text)] group flex items-center gap-2">
               Tracked certifications by provider
+              <a href="#tracked-certifications" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to this section">
+                <LinkIcon size={18} />
+              </a>
             </h2>
             <span className="text-[10px] text-[var(--muted)]">
               {`Counts reflect the ${CERTIFICATIONS.length} standards tracked here — not each provider's full catalog. See the trust centers below for the complete list.`}
@@ -394,7 +397,12 @@ export default function CertificationsPage() {
           <div id="data-sources" className="mt-12 scroll-mt-6">
             {/* Divider */}
             <div className="h-px bg-[var(--border)] mb-8" />
-            <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources</h2>
+            <h2 className="text-xl font-bold mb-1 text-[var(--text)] group flex items-center gap-2">
+              Sources
+              <a href="#data-sources" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Sources section">
+                <LinkIcon size={18} />
+              </a>
+            </h2>
             <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
               The links below are each provider&apos;s official compliance hub / trust center — the complete,
               authoritative list of certifications, which for the largest clouds runs to 100+ (AWS alone

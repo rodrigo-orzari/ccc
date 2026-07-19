@@ -55,11 +55,12 @@ const COL_STOR       = C('max_storage',           110);
 const COL_INV        = C('inv_price',             140);
 const COL_UNIT       = C('unit',                  140);
 const COL_NORM       = C('norm_price',            170);
+const COL_GPU_VENDOR = C('gpu_vendor',            120);
 
 const ALL_DEFS: ColDef[] = [
   COL_PROVIDER, COL_SKU, COL_GEO, COL_VCPU, COL_MEM, COL_PRICE, COL_SOURCE,
   COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, COL_CPU_VENDOR,
-  COL_SVC_TYPE, COL_ARCH, COL_LANG, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, COL_UNIT, COL_NORM,
+  COL_SVC_TYPE, COL_ARCH, COL_LANG, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, COL_UNIT, COL_NORM, COL_GPU_VENDOR,
 ];
 
 const DEFAULT_WIDTHS: Record<string, number> =
@@ -74,7 +75,7 @@ function getColDefs(pt: ProductType): ColDef[] {
   const tailWithSpecs = [COL_GEO, ...specs, COL_PRICE, COL_SOURCE];
 
   if (pt === 'vm')           return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GPU, ...tailWithSpecs];
-  if (pt === 'gpu')          return [...start, COL_MID1, COL_MID2, COL_CPU_VENDOR, COL_MID3, COL_MID4, COL_GPU, ...tailWithSpecs];
+  if (pt === 'gpu')          return [...start, COL_MID1, COL_GPU_VENDOR, COL_MID2, COL_MID4, COL_GPU, ...tailWithSpecs];
   if (pt === 'database')     return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, ...tailWithSpecs];
   if (pt === 'serverless')   return [...start, COL_SVC_TYPE, COL_ARCH, COL_LANG, COL_MID1, COL_MID2, COL_MID3, COL_MID4, COL_GRAN, COL_EXEC, COL_PROV, COL_STOR, COL_INV, COL_GEO, ...specs, COL_UNIT, COL_PRICE, COL_SOURCE];
   if (pt === 'containers')   return [...start, COL_MID1, COL_MID2, COL_MID3, COL_MID4, ...tailWithSpecs];
@@ -384,7 +385,7 @@ export default function PricingTable({
                 {/* ── Product-type-specific middle columns ── */}
                 {activeProductType === 'database' ? (<>
                   <Th colKey="engine_category"    sortKey="attributes.engine"          label="Engine" />
-                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"          label="Tier" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="category"                 label="Database Family" />
                   <Th colKey="deployment_arch"    sortKey="attributes.deployment_type" label="Deployment" />
                   <Th colKey="ha_mode_os"         sortKey="attributes.ha_mode"         label="HA Mode" />
                 </>) : activeProductType === 'data-analytics' ? (<>
@@ -438,9 +439,8 @@ export default function PricingTable({
                   <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"         label="Tier" />
                 </>) : activeProductType === 'gpu' ? (<>
                   <Th colKey="engine_category"    sortKey="attributes.gpu_model"   label="GPU Model" />
+                  <Th colKey="gpu_vendor"         sortKey="attributes.gpu_vendor"  label="GPU Vendor" />
                   <Th colKey="db_family_cpu_vendor" sortKey="attributes.gpu_vram_gb" label="VRAM/GPU (GB)" />
-                  <Th colKey="cpu_vendor_gpu"     sortKey="cpu_vendor" label="CPU Vendor" />
-                  <Th colKey="deployment_arch"    sortKey="arch"       label="Arch" />
                   <Th colKey="ha_mode_os"         sortKey="os"         label="OS" />
                   <Th colKey="gpu"                sortKey="gpu_count"  label="GPU Count" />
                 </>) : (<>
@@ -621,9 +621,8 @@ function TableRow({
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
       </>) : activeProductType === 'gpu' ? (<>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.gpu_model || '—'}</span></td>
+        <td data-col="gpu_vendor"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.gpu_vendor || '—'}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.gpu_vram_gb ? `${record.attributes.gpu_vram_gb} GB` : '—'}</span></td>
-        <td data-col="cpu_vendor_gpu"       className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373] dark:text-[#a3a3a3]">{cpuVendorLabel(record.cpu_vendor)}</span></td>
-        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.arch === 'x86 64' ? 'x86' : (record.arch || '—')}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden font-bold text-[#737373] text-[10px] uppercase">{record.os || '—'}</td>
         <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.gpu_count > 0 ? `${record.gpu_count}×` : '—'}</span></td>
       </>) : (<>

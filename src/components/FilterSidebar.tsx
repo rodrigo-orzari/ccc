@@ -8,6 +8,7 @@ import { RangeSlider } from './RangeSlider';
 // Import all filter constants from config
 import { useDynamicFilters } from '@/hooks/useDynamicFilters';
 import * as staticConfig from '@/config';
+import { GPU_MODEL_SPECS } from '@/config/gpu_models';
 
 const ENGINE_CATEGORIES: Record<string, string[]> = {
   'Relational': ['MySQL', 'PostgreSQL', 'SQL Server', 'Oracle DB', 'MariaDB', 'DB2', 'Db2', 'MySQL (on-premise for Outpost)', 'PostgreSQL (on-premise for Outpost)', 'SQL Server (on-premise for Outpost)', 'Oracle (on-premises for Outposts)'],
@@ -933,6 +934,14 @@ export default function FilterSidebar({
               onSetAll={onSetGpuModel}
               isExpanded={expanded.gpuModel ?? true}
               onToggleExpand={() => onToggleSection('gpuModel')}
+              disabledOptions={
+                selectedGpuVendors.length > 0
+                  ? config.GPU_MODELS.filter(m => {
+                      const spec = GPU_MODEL_SPECS[m];
+                      return spec && !selectedGpuVendors.includes(spec.vendor);
+                    })
+                  : []
+              }
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>

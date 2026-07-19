@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Footer, Sidebar, DigitalOceanReferralModal } from '@/components';
 import { PROVIDER_INFRA, GEOGRAPHIES, type ProviderInfrastructure, type DatacenterRegion } from '@/config/datacenter_data';
 import { DATACENTERS_SPONSOR } from '@/config';
-import { ChevronDown, ExternalLink, Info } from 'lucide-react';
+import { ChevronDown, ExternalLink, Info, Link as LinkIcon } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, Cell } from 'recharts';
 import WorldMap from './WorldMap';
 
@@ -341,7 +341,12 @@ export default function DatacentersPage() {
             {/* Infrastructure Overview */}
             <div id="infra-table" className="scroll-mt-6">
               <div className="flex items-center justify-between mb-1">
-                <h2 className="text-xl font-bold text-[var(--text)]">Infrastructure Overview</h2>
+                <h2 className="text-xl font-bold text-[var(--text)] group flex items-center gap-2">
+                  Infrastructure Overview
+                  <a href="#infra-table" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Infrastructure Overview section">
+                    <LinkIcon size={18} />
+                  </a>
+                </h2>
                 <ViewToggle view={infraView} onChange={setInfraView} />
               </div>
               <p className="text-sm text-[var(--muted)] mb-3">
@@ -410,8 +415,11 @@ export default function DatacentersPage() {
 
             {/* Availability Zones per Region — stat cards grid */}
             <div id="az-detail" className="scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[var(--text)]">
+              <h2 className="text-xl font-bold mb-1 text-[var(--text)] group flex items-center gap-2">
                 Availability Zones per Region
+                <a href="#az-detail" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Availability Zones section">
+                  <LinkIcon size={18} />
+                </a>
               </h2>
               <p className="text-sm text-[var(--muted)] mb-4">Total and average Availability Zones per region, per provider.</p>
               <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[var(--border)]" style={{ background: 'var(--border)' }}>
@@ -443,7 +451,12 @@ export default function DatacentersPage() {
             {/* Regional Coverage Matrix */}
             <div id="coverage-matrix" className="scroll-mt-6">
               <div className="flex items-center justify-between mb-1">
-                <h2 className="text-xl font-bold text-[var(--text)]">Regional Coverage Matrix</h2>
+                <h2 className="text-xl font-bold text-[var(--text)] group flex items-center gap-2">
+                  Regional Coverage Matrix
+                  <a href="#coverage-matrix" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Regional Coverage Matrix section">
+                    <LinkIcon size={18} />
+                  </a>
+                </h2>
                 <ViewToggle view={matrixView} onChange={setMatrixView} />
               </div>
               <p className="text-sm text-[var(--muted)] mb-4">Number of available regions per provider per geography.</p>
@@ -520,7 +533,12 @@ export default function DatacentersPage() {
 
             {/* Data sources */}
             <div id="data-sources" className="scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Sources</h2>
+              <h2 className="text-xl font-bold mb-1 text-[var(--text)] group flex items-center gap-2">
+                Sources
+                <a href="#data-sources" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Sources section">
+                  <LinkIcon size={18} />
+                </a>
+              </h2>
               <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
               </p>
