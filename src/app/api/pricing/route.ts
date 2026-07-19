@@ -95,7 +95,7 @@ export async function GET(req: NextRequest) {
     let result = await sql.unsafe(dbQuery, values);
 
     // Normalize tier in attributes for consistent filtering
-    result = result.map((row: any) => ({
+    const normalizedResult = result.map((row: any) => ({
       ...row,
       attributes: row.attributes ? {
         ...row.attributes,
@@ -103,8 +103,8 @@ export async function GET(req: NextRequest) {
       } : row.attributes
     }));
 
-    setCached(cacheKey, result);
-    return NextResponse.json(result);
+    setCached(cacheKey, normalizedResult);
+    return NextResponse.json(normalizedResult);
   } catch (err: any) {
     console.error('API Error:', err);
     return NextResponse.json({ error: 'Failed to fetch pricing data', details: err.message }, { status: 500 });
