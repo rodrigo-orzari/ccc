@@ -23,7 +23,17 @@ async function main() {
     process.exit(1);
   }
 
-  const sql = postgres(dbUrl, { ssl: { rejectUnauthorized: false } });
+  // ✅ FIXED: Enable TLS certificate validation with CA support
+  const ssl = process.env.DATABASE_CA_CERT
+    ? {
+        rejectUnauthorized: true,
+        ca: Buffer.from(process.env.DATABASE_CA_CERT, 'base64'),
+      }
+    : process.env.NODE_ENV === 'production'
+      ? { rejectUnauthorized: true } // Production: enforce validation, use built-in CAs
+      : false; // Development: skip TLS validation only for local connections
+
+  const sql = postgres(dbUrl, { ssl });
 
   try {
     console.log('🚀 Starting pricing data ingestion...\n');

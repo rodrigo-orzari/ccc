@@ -28,7 +28,9 @@ const sql = postgres(process.env.DATABASE_URL, {
     // Verify the server cert against the provided CA (prevents MITM on the DB link).
     rejectUnauthorized: true,
     ca: Buffer.from(process.env.DATABASE_CA_CERT, 'base64')
-  } : process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  } : process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : false,
+  // ✅ FIXED: Production now enforces TLS validation (was: { rejectUnauthorized: false })
+  // If production deployment fails with certificate errors, ensure DATABASE_CA_CERT is set
 });
 
 async function checkSparseData() {
