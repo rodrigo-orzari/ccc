@@ -104,15 +104,6 @@ export async function fetchWithRetry(url: string, config: any = {}, retries = 3,
   }
 }
 
-export interface PriceDriftResult {
-  provider: string;
-  service: string;
-  instanceType: string;
-  oldPrice: number;
-  newPrice: number;
-  pctChange: number;
-}
-
 export abstract class BaseAdapter {
   abstract providerSlug: string;
   abstract fetchPricing(): Promise<PricingRecord[]>;
@@ -979,13 +970,13 @@ export class PricingPipeline {
     ];
   }
 
-  async run(): Promise<{ provider: string; status: string; count?: number; message?: string; driftAlerts?: PriceDriftResult[] }[]> {
+  async run(): Promise<{ provider: string; status: string; count?: number; message?: string }[]> {
     const results = [];
     for (const adapter of this.adapters) {
       try {
         const records = await adapter.fetchPricing();
-        const driftAlerts = await this.saveRecords(records);
-        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
+        await this.saveRecords(records);
+        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length });
       } catch (error: any) {
         console.error(`Error running ${adapter.providerSlug} pipeline:`, error);
         results.push({ provider: adapter.providerSlug, status: 'error', message: error.message });
@@ -995,11 +986,10 @@ export class PricingPipeline {
   }
 
   
-  protected async saveRecords(records: PricingRecord[], serviceCategory = 'compute'): Promise<PriceDriftResult[]> {
-    if (records.length === 0) return [];
+  protected async saveRecords(records: PricingRecord[], serviceCategory = 'compute'): Promise<void> {
+    if (records.length === 0) return;
 
     const dataSource = records[0].dataSource ?? 'live_api';
-    let driftAlerts: PriceDriftResult[] = [];
 
     await this.sql.begin(async (sql) => {
       const providerSlug = records[0].provider;
@@ -1044,16 +1034,13 @@ export class PricingPipeline {
       `;
       const serviceId = serviceRes[0].id;
 
-      // 3. Fetch old prices for drift detection BEFORE deleting
+      // 3. Fetch old prices (for the previous_price_per_unit trend column) BEFORE deleting
       // Keyed by region+instance_type+os+arch+engine+ha_mode — matching the same
       // dimensions as the insert dedupe key below. instance_type alone is NOT
       // unique: RDS instance types (e.g. db.r5.large) are shared across up to 6
       // engines and 2 HA modes with very different prices, so omitting
-      // engine/ha_mode collapses distinct products into one arbitrary "old
-      // price" and produces massive false-positive drift (confirmed 2026-07-17:
-      // ~60% of AWS RDS rows falsely flagged as >20% drift because they were
-      // being compared against a different engine/HA variant's price, not
-      // their own previous price).
+      // engine/ha_mode would collapse distinct products into one arbitrary "old
+      // price" (confirmed 2026-07-17 against AWS RDS rows).
       const oldPriceRes = await sql`
         SELECT reg.slug AS region_slug, pr.instance_type, pr.os, pr.arch,
                pr.attributes->>'engine' AS engine, pr.attributes->>'ha_mode' AS ha_mode,
@@ -1069,27 +1056,10 @@ export class PricingPipeline {
         oldPriceMap.set(oldPriceKey(row.region_slug, row.instance_type, row.os, row.arch, row.engine, row.ha_mode), parseFloat(row.price_per_unit));
       }
 
-      // 4. Detect price drift (>20% change)
-      if (oldPriceMap.size > 0) {
-        for (const r of records) {
-          const rAttrs = (r.attributes ?? {}) as any;
-          const oldPrice = oldPriceMap.get(oldPriceKey(r.region, r.instanceType, r.os, r.arch, rAttrs.engine, rAttrs.ha_mode));
-          if (oldPrice !== undefined && oldPrice > 0) {
-            const pctChange = ((r.price - oldPrice) / oldPrice) * 100;
-            if (Math.abs(pctChange) > 20) {
-              driftAlerts.push({ provider: providerSlug, service: serviceName, instanceType: r.instanceType, oldPrice, newPrice: r.price, pctChange });
-            }
-          }
-        }
-        if (driftAlerts.length > 0) {
-          console.warn(`⚠️  Price drift detected for ${providerSlug} / ${serviceName}: ${driftAlerts.length} instance(s) changed >20%`);
-        }
-      }
-
-      // 5. Delete old records
+      // 4. Delete old records
       await sql`DELETE FROM pricing_records WHERE service_id = ${serviceId}`;
 
-      // 6. Batch Insert Pricing Records
+      // 5. Batch Insert Pricing Records
       // Dedupe against the DB's unique constraint key (service_id, region_id,
       // instance_type, os, arch, engine, ha_mode) before inserting. Some
       // provider feeds (e.g. Azure Retail Prices, which mixes tiers/SKUs that
@@ -1151,7 +1121,5 @@ export class PricingPipeline {
       const logSource = (hasLive && hasStatic) ? 'mixed' : (hasLive ? 'live_api' : 'static_config');
       console.log(`✅ Saved ${rowsToInsert.length} records for ${providerSlug} (${serviceCategory}, source: ${logSource})`);
     });
-
-    return driftAlerts;
   }
 }

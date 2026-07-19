@@ -1,5 +1,5 @@
 import type { Sql } from 'postgres';
-import { PriceDriftResult, ensureProviderId } from './pricing_pipeline.ts';
+import { ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_TIME_SERIES_PRICING = [
   // --- AWS Timestream (Database subcategory: Time-Series) ---

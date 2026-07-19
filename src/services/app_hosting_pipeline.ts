@@ -60,13 +60,12 @@ export class AppHostingPricingPipeline extends PricingPipeline {
       console.log(`⏳ App Hosting: ${p.slug} (${totalRows} entries across ${p.regions.length} regions)...`);
       try {
         const records = p.regions.flatMap(r => mapRegion(r.rows, p.slug, r.region, r.geography));
-        const driftAlerts = await this.saveRecords(records, 'app-hosting');
+        await this.saveRecords(records, 'app-hosting');
         results.push({
           provider: p.slug,
           service: 'App Hosting',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: 'static_config',
           note: `${p.slug} App Hosting - ${p.regions.length} regions`,
         });

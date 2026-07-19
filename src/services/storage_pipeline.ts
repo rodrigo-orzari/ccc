@@ -214,13 +214,12 @@ export class StoragePricingPipeline extends PricingPipeline {
     try {
       const { rows, liveTypes } = await getAwsStorageRows();
       const records = mapStaticRows(rows, 'aws', AWS_STORAGE_REGION, AWS_STORAGE_GEOGRAPHY, liveTypes);
-      const driftAlerts = await this.saveRecords(records, 'storage');
+      await this.saveRecords(records, 'storage');
       results.push({
         provider: 'aws',
         service: 'Storage',
         status: 'success',
         count: records.length,
-        driftAlerts,
         dataSource: liveTypes.size > 0 ? (liveTypes.size === records.length ? 'live_api' : 'mixed') : 'static_config',
         note: `aws Storage - ${liveTypes.size}/${records.length} live`,
       });
@@ -234,13 +233,12 @@ export class StoragePricingPipeline extends PricingPipeline {
     try {
       const { rows, liveTypes } = await getAzureStorageRows();
       const records = mapStaticRows(rows, 'azure', AZURE_STORAGE_REGION, AZURE_STORAGE_GEOGRAPHY, liveTypes);
-      const driftAlerts = await this.saveRecords(records, 'storage');
+      await this.saveRecords(records, 'storage');
       results.push({
         provider: 'azure',
         service: 'Storage',
         status: 'success',
         count: records.length,
-        driftAlerts,
         dataSource: liveTypes.size > 0 ? (liveTypes.size === records.length ? 'live_api' : 'mixed') : 'static_config',
         note: `azure Storage - ${liveTypes.size}/${records.length} live`,
       });
@@ -253,13 +251,12 @@ export class StoragePricingPipeline extends PricingPipeline {
       console.log(`⏳ Storage: ${p.slug} (${p.rows.length} entries from static config)...`);
       try {
         const records = mapStaticRows(p.rows, p.slug, p.region, p.geography);
-        const driftAlerts = await this.saveRecords(records, 'storage');
+        await this.saveRecords(records, 'storage');
         results.push({
           provider: p.slug,
           service: 'Storage',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: 'static_config',
           note: `${p.slug} Storage - static config`,
         });
@@ -273,13 +270,12 @@ export class StoragePricingPipeline extends PricingPipeline {
     try {
       const { rows, liveTypes } = await getOracleStorageRows();
       const records = mapStaticRows(rows, 'oracle', ORACLE_STORAGE_REGION, ORACLE_STORAGE_GEOGRAPHY, liveTypes);
-      const driftAlerts = await this.saveRecords(records, 'storage');
+      await this.saveRecords(records, 'storage');
       results.push({
         provider: 'oracle',
         service: 'Storage',
         status: 'success',
         count: records.length,
-        driftAlerts,
         dataSource: liveTypes.size > 0 ? 'mixed' : 'static_config',
         note: `oracle Storage - ${liveTypes.size}/${records.length} live`,
       });

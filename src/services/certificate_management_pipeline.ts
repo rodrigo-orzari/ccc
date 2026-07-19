@@ -1,5 +1,5 @@
 import type { Sql } from 'postgres';
-import { PriceDriftResult, ensureProviderId } from './pricing_pipeline.ts';
+import { ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_CERTIFICATE_PRICING = [
   // --- AWS Certificate Manager (Security subcategory) ---

@@ -113,7 +113,7 @@ Filters dynamically adapt per product category to reduce clutter and highlight r
 | Data fetching | `@tanstack/react-query` |
 | Pipelines | `tsx` (TypeScript runner) · `playwright` (web scrapers) |
 | Scheduling | `node-cron` (background worker process) |
-| Email | `nodemailer` (price drift + staleness alerts) |
+| Email | `nodemailer` (staleness + data-quality alerts) |
 
 ---
 
@@ -265,7 +265,7 @@ ccc/
 │   │   ├── app_hosting_pipeline.ts   # App Hosting pipeline (App Engine, App Runner, etc.)
 │   │   ├── serverless_adapters_live.ts  # Live API adapters for serverless providers
 │   │   ├── containers_adapters_live.ts  # Live API adapters for containers providers
-│   │   ├── mailer.ts                 # Email alerts (price drift >20%, data staleness)
+│   │   ├── mailer.ts                 # Email alerts (data staleness, data quality)
 │   │   ├── ingest.ts                 # CLI entry point for manual pipeline runs
 │   │   ├── populate_ai.ts            # One-time AI model seed script
 │   │   └── populate_containers.ts    # One-time containers seed script

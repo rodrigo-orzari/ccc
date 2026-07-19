@@ -1084,12 +1084,12 @@ export class DatabasePricingPipeline extends PricingPipeline {
           }
 
           for (const [providerSlug, providerRecords] of Object.entries(recordsByProvider)) {
-            const driftAlerts = await this.saveRecords(providerRecords, 'database');
-            results.push({ provider: providerSlug, status: 'success', count: providerRecords.length, driftAlerts });
+            await this.saveRecords(providerRecords, 'database');
+            results.push({ provider: providerSlug, status: 'success', count: providerRecords.length });
           }
         } else {
-          const driftAlerts = await this.saveRecords(records, 'database');
-          results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
+          await this.saveRecords(records, 'database');
+          results.push({ provider: adapter.providerSlug, status: 'success', count: records.length });
         }
       } catch (error: any) {
         console.error(`Error running DB pipeline for ${adapter.providerSlug}:`, error);

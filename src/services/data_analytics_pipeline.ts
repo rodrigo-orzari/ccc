@@ -502,11 +502,10 @@ export class DataAnalyticsPricingPipeline extends PricingPipeline {
           byService.set(rec.service, group);
         }
 
-        const driftAlerts: any[] = [];
         for (const group of byService.values()) {
-          driftAlerts.push(...await this.saveRecords(group, 'data_warehouse'));
+          await this.saveRecords(group, 'data_warehouse');
         }
-        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length, driftAlerts });
+        results.push({ provider: adapter.providerSlug, status: 'success', count: records.length });
       } catch (error: any) {
         console.error(`❌ Error running ${adapter.providerSlug} adapter:`, error);
         results.push({ provider: adapter.providerSlug, status: 'error', message: error.message });

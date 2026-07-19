@@ -269,26 +269,24 @@ export class ServerlessPricingPipeline extends PricingPipeline {
         records = await this.getAWSServerlessStaticRecords();
       }
 
-      const driftAlerts = await this.saveRecords(records, 'serverless');
+      await this.saveRecords(records, 'serverless');
       results.push({
         provider: 'aws',
         service: 'Lambda',
         status: 'success',
         count: records.length,
-        driftAlerts,
         dataSource: records[0]?.dataSource || 'static_config'
       });
     } catch (error: any) {
       console.warn(`⚠️  AWS Lambda live API failed (${error.message}), falling back to static config...`);
       try {
         const records = await this.getAWSServerlessStaticRecords();
-        const driftAlerts = await this.saveRecords(records, 'serverless');
+        await this.saveRecords(records, 'serverless');
         results.push({
           provider: 'aws',
           service: 'Lambda',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: 'static_config',
           note: 'Using static config fallback due to API failure'
         });
@@ -315,26 +313,24 @@ export class ServerlessPricingPipeline extends PricingPipeline {
         records = await this.getGCPServerlessStaticRecords();
       }
 
-      const driftAlerts = await this.saveRecords(records, 'serverless');
+      await this.saveRecords(records, 'serverless');
       results.push({
         provider: 'gcp',
         service: 'Cloud Run',
         status: 'success',
         count: records.length,
-        driftAlerts,
         dataSource: records[0]?.dataSource || 'static_config'
       });
     } catch (error: any) {
       console.warn(`⚠️  GCP Cloud Run live API failed (${error.message}), falling back to static config...`);
       try {
         const records = await this.getGCPServerlessStaticRecords();
-        const driftAlerts = await this.saveRecords(records, 'serverless');
+        await this.saveRecords(records, 'serverless');
         results.push({
           provider: 'gcp',
           service: 'Cloud Run',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: 'static_config',
           note: 'Using static config fallback due to API failure'
         });
@@ -364,26 +360,24 @@ export class ServerlessPricingPipeline extends PricingPipeline {
         records = [...records, ...(await this.getAzureContainerAppsStaticRecords())];
       }
 
-      const driftAlerts = await this.saveRecords(records, 'serverless');
+      await this.saveRecords(records, 'serverless');
       results.push({
         provider: 'azure',
         service: 'Azure Functions',
         status: 'success',
         count: records.length,
-        driftAlerts,
         dataSource: records[0]?.dataSource || 'static_config'
       });
     } catch (error: any) {
       console.warn(`⚠️  Azure Functions live API failed (${error.message}), falling back to static config...`);
       try {
         const records = await this.getAzureServerlessStaticRecords();
-        const driftAlerts = await this.saveRecords(records, 'serverless');
+        await this.saveRecords(records, 'serverless');
         results.push({
           provider: 'azure',
           service: 'Azure Functions',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: 'static_config',
           note: 'Using static config fallback due to API failure'
         });
@@ -403,13 +397,12 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       console.log('⏳ DigitalOcean App Platform Functions...');
       const records = await this.getDigitalOceanServerlessStaticRecords();
       if (records.length > 0) {
-        const driftAlerts = await this.saveRecords(records, 'serverless');
+        await this.saveRecords(records, 'serverless');
         results.push({
           provider: 'digitalocean',
           service: 'App Platform Functions',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: 'static_config',
           note: 'DigitalOcean App Platform Functions - static config'
         });
@@ -429,13 +422,12 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       console.log('⏳ Oracle OCI Functions...');
       const records = await this.getOracleServerlessStaticRecords();
       if (records.length > 0) {
-        const driftAlerts = await this.saveRecords(records, 'serverless');
+        await this.saveRecords(records, 'serverless');
         results.push({
           provider: 'oracle',
           service: 'OCI Functions',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: 'static_config',
           note: 'Oracle OCI Functions - static config'
         });
@@ -456,13 +448,12 @@ export class ServerlessPricingPipeline extends PricingPipeline {
       const adapter = new AlibabaServerlessAdapter();
       const records = await adapter.fetchPricing();
       if (records.length > 0) {
-        const driftAlerts = await this.saveRecords(records, 'serverless');
+        await this.saveRecords(records, 'serverless');
         results.push({
           provider: 'alibaba',
           service: 'Function Compute',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: 'static_config',
           note: 'Alibaba Function Compute - static config'
         });

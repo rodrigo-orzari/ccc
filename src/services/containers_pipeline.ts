@@ -202,13 +202,12 @@ export class ContainersPricingPipeline extends PricingPipeline {
           records = await staticAdapter.fetchPricing();
         }
 
-        const driftAlerts = await this.saveRecords(records, 'containers');
+        await this.saveRecords(records, 'containers');
         results.push({
           provider: provider.name,
           service: 'Containers',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: records[0]?.dataSource || 'static_config'
         });
       } catch (error: any) {
@@ -216,13 +215,12 @@ export class ContainersPricingPipeline extends PricingPipeline {
         try {
           const staticAdapter = new provider.StaticAdapter();
           const records = await staticAdapter.fetchPricing();
-          const driftAlerts = await this.saveRecords(records, 'containers');
+          await this.saveRecords(records, 'containers');
           results.push({
             provider: provider.name,
             service: 'Containers',
             status: 'success',
             count: records.length,
-            driftAlerts,
             dataSource: 'static_config',
             note: 'Using static config fallback due to API failure'
           });

@@ -220,7 +220,7 @@ export default function CertificationsPage() {
               {/* Provider */}
               <div className="px-5 py-4 flex items-start gap-2">
                 <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Provider</span>
-                <div className="flex flex-wrap gap-2 flex-1">
+                <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-1.5 flex-1 pb-1">
                   {COMPLIANCE_PROVIDERS.map((p) => {
                     const active = selProviders.has(p.id);
                     return (
@@ -229,7 +229,7 @@ export default function CertificationsPage() {
                         onClick={() => toggleProvider(p.id)}
                         onDoubleClick={() => isolateProvider(p.id)}
                         title={`Click to toggle · Double-click to show only ${p.name}`}
-                        className={`px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
+                        className={`px-2 py-1 shrink-0 rounded text-[9px] font-bold border transition-all ${
                           active
                             ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
                             : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'

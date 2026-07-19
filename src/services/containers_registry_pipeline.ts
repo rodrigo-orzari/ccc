@@ -1,11 +1,24 @@
 import type { Sql } from 'postgres';
-import type { PriceDriftResult } from './pricing_pipeline';
+import { PricingPipeline, type PricingRecord } from './pricing_pipeline';
 
-export class ContainersRegistryPricingPipeline {
-  constructor(private sql: Sql) {}
+export class ContainersRegistryPricingPipeline extends PricingPipeline {
+  constructor(sql: Sql) {
+    super(sql);
+  }
 
-  async run(): Promise<{ provider: string; status: string; count?: number; message?: string; driftAlerts?: PriceDriftResult[] }[]> {
-    const results: { provider: string; status: string; count?: number; message?: string; driftAlerts?: PriceDriftResult[] }[] = [];
+  private getGeography(region: string): string {
+    const r = region.toLowerCase();
+    if (r.includes('us-') || r.includes('us') || r.includes('america') || r.includes('canada') || r.includes('centralus') || r.includes('eastus') || r.includes('westus')) return 'N. America';
+    if (r.includes('brazil') || r.includes('southamerica') || r.includes('sao') || r.includes('chile')) return 'S. America';
+    if (r.includes('europe') || r.includes('uk-') || r.includes('france') || r.includes('germany') || r.includes('westcore') || r.includes('switzerland') || r.includes('northeurope') || r.includes('westeurope')) return 'W. Europe';
+    if (r.includes('asia') || r.includes('japan') || r.includes('korea') || r.includes('india') || r.includes('singapore') || r.includes('tokyo')) return 'Asia Pacific';
+    if (r.includes('australia')) return 'Australia';
+    if (r.includes('me-') || r.includes('africa') || r.includes('uae') || r.includes('dubai')) return 'Mid East & Africa';
+    return 'N. America';
+  }
+
+  async run(): Promise<{ provider: string; status: string; count?: number; message?: string }[]> {
+    const results: { provider: string; status: string; count?: number; message?: string }[] = [];
 
     // AWS ECR - Elastic Container Registry
     try {
@@ -16,19 +29,14 @@ export class ContainersRegistryPricingPipeline {
         { instance_type: 'ECR API Calls', pricing_component: 'API Operations', region: 'us-east-1', price: 0.0000005 },
       ];
 
-      for (const pricing of awsEcrPricing) {
-        await this.sql`
-          INSERT INTO pricing_records (
-            provider, service, region, instance_type, category,
-            price_per_unit, unit, data_source, attributes
-          ) VALUES (
-            'aws', 'registry', ${pricing.region}, ${pricing.instance_type}, 'registry',
-            ${pricing.price.toString()}, 'per unit/month', 'static_config',
-            ${JSON.stringify({ pricing_component: pricing.pricing_component })}
-          )
-          ON CONFLICT DO NOTHING;
-        `;
-      }
+      const records: PricingRecord[] = awsEcrPricing.map(p => ({
+        provider: 'aws', service: 'registry', region: p.region, instanceType: p.instance_type,
+        vcpus: 0, memoryGb: 0, arch: 'N/A', os: 'N/A', cpuVendor: 'N/A', gpuCount: 0,
+        geography: this.getGeography(p.region), category: 'registry', price: p.price, unit: 'per unit/month',
+        dataSource: 'static_config', attributes: { pricing_component: p.pricing_component }
+      }));
+      await this.saveRecords(records, 'registry');
+      
       console.log('✅ AWS ECR: 3 pricing tiers configured');
       results.push({ provider: 'aws', status: 'success', count: 3 });
     } catch (err) {
@@ -45,19 +53,13 @@ export class ContainersRegistryPricingPipeline {
         { instance_type: 'ACR Webhook Calls', pricing_component: 'API Operations', region: 'eastus', price: 0.00001 },
       ];
 
-      for (const pricing of azureAcrPricing) {
-        await this.sql`
-          INSERT INTO pricing_records (
-            provider, service, region, instance_type, category,
-            price_per_unit, unit, data_source, attributes
-          ) VALUES (
-            'azure', 'registry', ${pricing.region}, ${pricing.instance_type}, 'registry',
-            ${pricing.price.toString()}, 'per unit/month', 'static_config',
-            ${JSON.stringify({ pricing_component: pricing.pricing_component })}
-          )
-          ON CONFLICT DO NOTHING;
-        `;
-      }
+      const records: PricingRecord[] = azureAcrPricing.map(p => ({
+        provider: 'azure', service: 'registry', region: p.region, instanceType: p.instance_type,
+        vcpus: 0, memoryGb: 0, arch: 'N/A', os: 'N/A', cpuVendor: 'N/A', gpuCount: 0,
+        geography: this.getGeography(p.region), category: 'registry', price: p.price, unit: 'per unit/month',
+        dataSource: 'static_config', attributes: { pricing_component: p.pricing_component }
+      }));
+      await this.saveRecords(records, 'registry');
       console.log('✅ Azure ACR: 3 pricing tiers configured');
       results.push({ provider: 'azure', status: 'success', count: 3 });
     } catch (err) {
@@ -73,19 +75,13 @@ export class ContainersRegistryPricingPipeline {
         { instance_type: 'Artifact Registry Data Transfer Out', pricing_component: 'Data Transfer (per GB)', region: 'us-central1', price: 0.12 },
       ];
 
-      for (const pricing of gcpRegistryPricing) {
-        await this.sql`
-          INSERT INTO pricing_records (
-            provider, service, region, instance_type, category,
-            price_per_unit, unit, data_source, attributes
-          ) VALUES (
-            'gcp', 'registry', ${pricing.region}, ${pricing.instance_type}, 'registry',
-            ${pricing.price.toString()}, 'per unit/month', 'static_config',
-            ${JSON.stringify({ pricing_component: pricing.pricing_component })}
-          )
-          ON CONFLICT DO NOTHING;
-        `;
-      }
+      const records: PricingRecord[] = gcpRegistryPricing.map(p => ({
+        provider: 'gcp', service: 'registry', region: p.region, instanceType: p.instance_type,
+        vcpus: 0, memoryGb: 0, arch: 'N/A', os: 'N/A', cpuVendor: 'N/A', gpuCount: 0,
+        geography: this.getGeography(p.region), category: 'registry', price: p.price, unit: 'per unit/month',
+        dataSource: 'static_config', attributes: { pricing_component: p.pricing_component }
+      }));
+      await this.saveRecords(records, 'registry');
       console.log('✅ Google Artifact Registry: 2 pricing tiers configured');
       results.push({ provider: 'gcp', status: 'success', count: 2 });
     } catch (err) {
@@ -101,19 +97,13 @@ export class ContainersRegistryPricingPipeline {
         { instance_type: 'OCR Data Transfer Out', pricing_component: 'Data Transfer (per GB)', region: 'us-ashburn-1', price: 0.02 },
       ];
 
-      for (const pricing of oracleRegistryPricing) {
-        await this.sql`
-          INSERT INTO pricing_records (
-            provider, service, region, instance_type, category,
-            price_per_unit, unit, data_source, attributes
-          ) VALUES (
-            'oracle', 'registry', ${pricing.region}, ${pricing.instance_type}, 'registry',
-            ${pricing.price.toString()}, 'per unit/month', 'static_config',
-            ${JSON.stringify({ pricing_component: pricing.pricing_component })}
-          )
-          ON CONFLICT DO NOTHING;
-        `;
-      }
+      const records: PricingRecord[] = oracleRegistryPricing.map(p => ({
+        provider: 'oracle', service: 'registry', region: p.region, instanceType: p.instance_type,
+        vcpus: 0, memoryGb: 0, arch: 'N/A', os: 'N/A', cpuVendor: 'N/A', gpuCount: 0,
+        geography: this.getGeography(p.region), category: 'registry', price: p.price, unit: 'per unit/month',
+        dataSource: 'static_config', attributes: { pricing_component: p.pricing_component }
+      }));
+      await this.saveRecords(records, 'registry');
       console.log('✅ Oracle Container Registry: 2 pricing tiers configured');
       results.push({ provider: 'oracle', status: 'success', count: 2 });
     } catch (err) {
@@ -129,19 +119,13 @@ export class ContainersRegistryPricingPipeline {
         { instance_type: 'DOCR Data Transfer Out', pricing_component: 'Data Transfer (per GB)', region: 'nyc', price: 0.05, description: 'Per GB after 1TB included' },
       ];
 
-      for (const pricing of doRegistryPricing) {
-        await this.sql`
-          INSERT INTO pricing_records (
-            provider, service, region, instance_type, category,
-            price_per_unit, unit, data_source, attributes
-          ) VALUES (
-            'digitalocean', 'registry', ${pricing.region}, ${pricing.instance_type}, 'registry',
-            ${pricing.price.toString()}, 'per unit/month', 'static_config',
-            ${JSON.stringify({ pricing_component: pricing.pricing_component, description: pricing.description })}
-          )
-          ON CONFLICT DO NOTHING;
-        `;
-      }
+      const records: PricingRecord[] = doRegistryPricing.map(p => ({
+        provider: 'digitalocean', service: 'registry', region: p.region, instanceType: p.instance_type,
+        vcpus: 0, memoryGb: 0, arch: 'N/A', os: 'N/A', cpuVendor: 'N/A', gpuCount: 0,
+        geography: this.getGeography(p.region), category: 'registry', price: p.price, unit: 'per unit/month',
+        dataSource: 'static_config', attributes: { pricing_component: p.pricing_component, description: p.description }
+      }));
+      await this.saveRecords(records, 'registry');
       console.log('✅ DigitalOcean Container Registry: 2 pricing tiers configured');
       results.push({ provider: 'digitalocean', status: 'success', count: 2 });
     } catch (err) {
@@ -157,19 +141,13 @@ export class ContainersRegistryPricingPipeline {
         { instance_type: 'ACR Data Transfer Out', pricing_component: 'Data Transfer (per GB)', region: 'cn-hangzhou', price: 0.50 },
       ];
 
-      for (const pricing of alibabaRegistryPricing) {
-        await this.sql`
-          INSERT INTO pricing_records (
-            provider, service, region, instance_type, category,
-            price_per_unit, unit, data_source, attributes
-          ) VALUES (
-            'alibaba', 'registry', ${pricing.region}, ${pricing.instance_type}, 'registry',
-            ${pricing.price.toString()}, 'per unit/month', 'static_config',
-            ${JSON.stringify({ pricing_component: pricing.pricing_component })}
-          )
-          ON CONFLICT DO NOTHING;
-        `;
-      }
+      const records: PricingRecord[] = alibabaRegistryPricing.map(p => ({
+        provider: 'alibaba', service: 'registry', region: p.region, instanceType: p.instance_type,
+        vcpus: 0, memoryGb: 0, arch: 'N/A', os: 'N/A', cpuVendor: 'N/A', gpuCount: 0,
+        geography: this.getGeography(p.region), category: 'registry', price: p.price, unit: 'per unit/month',
+        dataSource: 'static_config', attributes: { pricing_component: p.pricing_component }
+      }));
+      await this.saveRecords(records, 'registry');
       console.log('✅ Alibaba Container Registry: 2 pricing tiers configured');
       results.push({ provider: 'alibaba', status: 'success', count: 2 });
     } catch (err) {

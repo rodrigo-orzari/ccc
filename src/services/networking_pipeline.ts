@@ -1,5 +1,5 @@
 import type { Sql } from 'postgres';
-import { PriceDriftResult, ensureProviderId } from './pricing_pipeline.ts';
+import { ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_NETWORKING_PRICING = [
   // --- AWS ---
@@ -93,7 +93,6 @@ export class NetworkingPricingPipeline {
   async run() {
     console.log('🚀 Starting Networking Pricing Pipeline...');
     const results: any[] = [];
-    const driftAlerts: PriceDriftResult[] = [];
 
     // Ensure services exist
     await this.setupNetworkingServices();
@@ -140,7 +139,7 @@ export class NetworkingPricingPipeline {
       }
     });
 
-    results.push({ provider: 'all_networking', status: 'success', recordsProcessed: recordsAdded, driftAlerts });
+    results.push({ provider: 'all_networking', status: 'success', recordsProcessed: recordsAdded });
     console.log(`✅ Networking Pricing Pipeline Completed. Inserted ${recordsAdded} records.`);
     return results;
   }

@@ -88,33 +88,57 @@ const formatAnalyticsTierLabel = (tier: string): string => {
   return tier;
 };
 
-// Groups the flat Data & Analytics tier list into logical sub-groups. Tier strings
-// are shared across engines (Snowflake and Databricks both use "Standard"/"Enterprise"),
-// so grouping is by tier *concept* rather than by engine: editions (capability tiers),
-// Synapse capacity units (Capacity F*), Redshift compute nodes (DC2/RA3 Node), and
-// billing models. Unknown/new dynamic values fall into "Other".
-const groupAnalyticsTiers = (tiers: string[]) => {
-  const groups: { label: string; services: string[] }[] = [
-    { label: 'Editions', services: [] },
-    { label: 'Capacity Units', services: [] },
-    { label: 'Compute Nodes', services: [] },
-    { label: 'Billing Model', services: [] },
-    { label: 'Other', services: [] },
-  ];
-  const push = (label: string, t: string) => groups.find(g => g.label === label)!.services.push(t);
+// Canonical edition buckets for Data & Analytics tiers. Vendors name equivalent
+// capability tiers differently — Snowflake "Enterprise", BigQuery "Enterprise
+// Edition" / "Enterprise Plus", Databricks "Premium" — which produced a wall of
+// near-duplicate buttons. We collapse the raw values into one canonical button per
+// concept; the results table still shows each product's exact tier string.
+const ANALYTICS_TIER_CANONICAL: { canonical: string; matches: RegExp }[] = [
+  { canonical: 'Standard',          matches: /^standard(\s+edition)?$/i },
+  { canonical: 'Premium',           matches: /^premium$/i },
+  { canonical: 'Enterprise',        matches: /^enterprise(\s+(edition|plus))?$/i },
+  { canonical: 'Business Critical', matches: /^business critical$/i },
+];
+const ANALYTICS_TIER_EDITION_ORDER = ['Standard', 'Premium', 'Enterprise', 'Business Critical'];
 
-  tiers.forEach(t => {
-    if (/^capacity\s+f\d+/i.test(t)) push('Capacity Units', t);
-    else if (/\bnode\b/i.test(t)) push('Compute Nodes', t);
-    else if (/^(on-demand|provisioned|serverless)$/i.test(t)) push('Billing Model', t);
-    else if (/(standard|premium|enterprise|business critical|edition|plus)/i.test(t)) push('Editions', t);
-    else push('Other', t);
+// Builds the grouped button model for the Tier filter. Editions are shown as
+// canonical buttons that each control one or more raw tier values (returned in
+// `optionValues`); capacity units, compute nodes and billing models pass through
+// unchanged (one button per raw value). Selection state stays as raw tier strings
+// so the API/DB query and client-side filtering are untouched.
+const buildAnalyticsTierModel = (rawTiers: string[]) => {
+  const optionValues: Record<string, string[]> = {};
+  const editions: string[] = [];
+  const capacity: string[] = [];
+  const nodes: string[] = [];
+  const billing: string[] = [];
+  const other: string[] = [];
+
+  rawTiers.forEach(t => {
+    if (/^capacity\s+f\d+/i.test(t)) { capacity.push(t); optionValues[t] = [t]; }
+    else if (/\bnode\b/i.test(t)) { nodes.push(t); optionValues[t] = [t]; }
+    else if (/^(on-demand|provisioned|serverless)$/i.test(t)) { billing.push(t); optionValues[t] = [t]; }
+    else {
+      const c = ANALYTICS_TIER_CANONICAL.find(x => x.matches.test(t));
+      if (c) {
+        (optionValues[c.canonical] ||= []).push(t);
+        if (!editions.includes(c.canonical)) editions.push(c.canonical);
+      } else { other.push(t); optionValues[t] = [t]; }
+    }
   });
 
-  // Order capacity units numerically (F2 < F4 < … < F64) rather than alphabetically.
-  groups[1].services.sort((a, b) => (parseInt(a.replace(/\D/g, ''), 10) || 0) - (parseInt(b.replace(/\D/g, ''), 10) || 0));
+  capacity.sort((a, b) => (parseInt(a.replace(/\D/g, ''), 10) || 0) - (parseInt(b.replace(/\D/g, ''), 10) || 0));
+  editions.sort((a, b) => ANALYTICS_TIER_EDITION_ORDER.indexOf(a) - ANALYTICS_TIER_EDITION_ORDER.indexOf(b));
 
-  return groups.filter(g => g.services.length > 0);
+  const groups = [
+    { label: 'Editions', services: editions },
+    { label: 'Capacity Units', services: capacity },
+    { label: 'Compute Nodes', services: nodes },
+    { label: 'Billing Model', services: billing },
+    { label: 'Other', services: other },
+  ].filter(g => g.services.length > 0);
+
+  return { groups, optionValues };
 };
 
 const Tooltip = ({ text, children }: { text: string; children: React.ReactNode }) => {
@@ -225,6 +249,10 @@ interface GroupedFilterSectionProps {
   onToggleExpand: () => void;
   disabledOptions?: string[];
   getLabel?: (option: string) => string;
+  // When provided, each rendered option is a canonical button controlling the mapped
+  // set of raw values. Selection state/toggles operate on those raw values via onSetAll,
+  // so one "Enterprise" button can cover Enterprise / Enterprise Edition / Enterprise Plus.
+  optionValues?: Record<string, string[]>;
 }
 
 // Like FilterSection, but renders chips organized under labeled sub-groups.
@@ -241,8 +269,22 @@ const GroupedFilterSection = ({
   onToggleExpand,
   disabledOptions = [],
   getLabel,
+  optionValues,
 }: GroupedFilterSectionProps) => {
   const allSelected = selected.length === allOptions.length;
+  // Raw values a button controls (itself, unless it's a canonical group button).
+  const valuesFor = (option: string) => optionValues?.[option] ?? [option];
+  const isOn = (option: string) => {
+    const vs = valuesFor(option);
+    return vs.length > 0 && vs.every(v => selected.includes(v));
+  };
+  const handleClick = (option: string) => {
+    if (!optionValues) { onToggle(option); return; }
+    const vs = valuesFor(option);
+    if (isOn(option)) onSetAll(selected.filter(v => !vs.includes(v)));
+    else onSetAll(Array.from(new Set([...selected, ...vs])));
+  };
+  const handleIsolate = (option: string) => onSetAll(valuesFor(option));
   return (
     <section className="space-y-3">
       <div className="flex items-center justify-between">
@@ -277,12 +319,12 @@ const GroupedFilterSection = ({
                   return (
                   <button
                     key={option}
-                    onClick={() => !isDisabled && onToggle(option)}
-                    onDoubleClick={() => !isDisabled && onSetAll([option])}
+                    onClick={() => !isDisabled && handleClick(option)}
+                    onDoubleClick={() => !isDisabled && handleIsolate(option)}
                     title="Click to toggle · Double-click to isolate"
                     disabled={isDisabled}
                     className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      selected.includes(option)
+                      isOn(option)
                         ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
                         : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
                     } ${isDisabled ? 'opacity-30 cursor-not-allowed hover:border-[#dde0f0] dark:hover:border-[#1e1e38]' : ''}`}
@@ -1627,18 +1669,24 @@ export default function FilterSidebar({
               onToggleExpand={() => onToggleSection('deploymentType')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <GroupedFilterSection
-              title="Tier"
-              tooltip="Performance / capacity tier, grouped by type: editions, Synapse capacity units, Redshift compute nodes, and billing models."
-              groups={groupAnalyticsTiers(config.ANALYTICS_TIERS)}
-              allOptions={config.ANALYTICS_TIERS}
-              selected={selectedAnalyticsTiers}
-              onToggle={onAnalyticsTierToggle}
-              onSetAll={onSetAnalyticsTiers}
-              isExpanded={expanded.tier ?? true}
-              onToggleExpand={() => onToggleSection('tier')}
-              getLabel={formatAnalyticsTierLabel}
-            />
+            {(() => {
+              const tierModel = buildAnalyticsTierModel(config.ANALYTICS_TIERS);
+              return (
+                <GroupedFilterSection
+                  title="Tier"
+                  tooltip="Performance / capacity tier. Edition buttons are grouped across vendors (e.g. Enterprise covers Enterprise, Enterprise Edition and Enterprise Plus); the table always shows each product's exact tier."
+                  groups={tierModel.groups}
+                  allOptions={config.ANALYTICS_TIERS}
+                  optionValues={tierModel.optionValues}
+                  selected={selectedAnalyticsTiers}
+                  onToggle={onAnalyticsTierToggle}
+                  onSetAll={onSetAnalyticsTiers}
+                  isExpanded={expanded.tier ?? true}
+                  onToggleExpand={() => onToggleSection('tier')}
+                  getLabel={formatAnalyticsTierLabel}
+                />
+              );
+            })()}
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}

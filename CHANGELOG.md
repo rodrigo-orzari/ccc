@@ -6,6 +6,13 @@ All notable changes to Compare Cloud Costs are documented here. This changelog s
 
 ## [Unreleased]
 
+### Removed
+- **Price Drift Email Alerts:** Removed the >20% price-change email notification feature entirely
+  - Deleted `PriceDriftResult` interface, `sendPriceDriftEmail()`, and the drift-detection/threshold logic in `src/services/pricing_pipeline.ts` `saveRecords()`
+  - Removed `driftAlerts` accumulation and propagation from all pricing pipelines (compute, database, serverless, containers, networking, storage, data-analytics, AI, app-hosting, security, integration) and from `/api/admin/fetch-pricing` and `src/workers/scheduler.ts`
+  - Kept the underlying old-price lookup that feeds the `previous_price_per_unit` column (still powers the price-trend indicator in the pricing table UI) — only the >20% alert/email logic was removed
+  - Staleness alerts (`sendStalenessEmail`) and data-quality alerts (`sendDataQualityEmail`) in `src/services/mailer.ts` are unaffected
+
 ### Features
 - **5 Specialized Product Categories Added:** Filled critical market gaps with clean subcategory structure
   - **Time-Series Databases:** Category `Time-Series` with `database_type: 'Time-Series'` attribute

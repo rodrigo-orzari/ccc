@@ -1,7 +1,7 @@
 import postgres from 'postgres';
 import dotenv from 'dotenv';
 import cron from 'node-cron';
-import { PricingPipeline, PriceDriftResult } from '../services/pricing_pipeline.ts';
+import { PricingPipeline } from '../services/pricing_pipeline.ts';
 import { DatabasePricingPipeline } from '../services/database_pipeline.ts';
 import { ServerlessPricingPipeline } from '../services/serverless_pipeline.ts';
 import { ContainersPricingPipeline } from '../services/containers_pipeline.ts';
@@ -11,7 +11,7 @@ import { StoragePricingPipeline } from '../services/storage_pipeline.ts';
 import { AIPricingPipeline } from '../services/ai_pipeline.ts';
 import { AppHostingPricingPipeline } from '../services/app_hosting_pipeline.ts';
 import { SecurityPricingPipeline } from '../services/security_pipeline.ts';
-import { sendPriceDriftEmail, sendStalenessEmail, sendDataQualityEmail, StaleDataAlert } from '../services/mailer.ts';
+import { sendStalenessEmail, sendDataQualityEmail, StaleDataAlert } from '../services/mailer.ts';
 import { runDataQualityChecks } from '../services/data_quality.ts';
 
 dotenv.config();
@@ -70,7 +70,6 @@ if (process.env.NODE_ENV !== 'production') {
 cron.schedule('0 0 * * 0', async () => {
   console.log('🕒 Starting scheduled pricing pipeline update...');
   try {
-    const allDriftAlerts: PriceDriftResult[] = [];
     const pipelines = [
       new PricingPipeline(sql as any),
       new DatabasePricingPipeline(sql as any),
@@ -85,18 +84,10 @@ cron.schedule('0 0 * * 0', async () => {
     ];
 
     for (const pipeline of pipelines) {
-      const results = await pipeline.run();
-      for (const r of results) {
-        if (r.driftAlerts) allDriftAlerts.push(...r.driftAlerts);
-      }
+      await pipeline.run();
       console.log(`✅ Scheduled pipeline ${pipeline.constructor.name} completed.`);
     }
 
-    if (allDriftAlerts.length > 0) {
-      await sendPriceDriftEmail(allDriftAlerts).catch(err =>
-        console.error('❌ Failed to send price drift email:', err)
-      );
-    }
     console.log('✅ All Scheduled pipelines completed successfully.');
   } catch (err) {
     console.error('❌ Scheduled pipeline failed:', err);

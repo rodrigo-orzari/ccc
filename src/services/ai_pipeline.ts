@@ -64,13 +64,12 @@ export class AIPricingPipeline extends PricingPipeline {
       for (const groupRecords of Object.values(recordsByGroup)) {
         const providerSlug = groupRecords[0].provider;
         const serviceName = groupRecords[0].service;
-        const driftAlerts = await this.saveRecords(groupRecords, 'ai');
+        await this.saveRecords(groupRecords, 'ai');
         results.push({
           provider: providerSlug,
           service: serviceName,
           status: 'success',
           count: groupRecords.length,
-          driftAlerts,
           dataSource: 'static_config',
         });
       }

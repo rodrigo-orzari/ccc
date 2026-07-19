@@ -49,22 +49,22 @@ const PRODUCT_TYPES: { id: ProductType; label: string; icon: React.ComponentType
 ];
 
 const EXTRA_LINKS: { id: string; label: string; href: string; icon: React.ComponentType<{ size?: number }> }[] = [
-  { id: 'workloads', label: 'Workloads', href: '/workloads', icon: Package },
   { id: 'certifications', label: 'Compliance', href: '/certifications', icon: ScrollText },
   { id: 'datacenters', label: 'Datacenters', href: '/datacenters', icon: Building2 },
+  { id: 'workloads', label: 'Workloads', href: '/workloads', icon: Package },
 ];
 
 // Secondary site links, shown below the Workloads/Compliance/Datacenters group
 // behind their own divider. Same set already in the Footer (minus copyright and
 // the Buy Me a Coffee link, which stay footer-only).
 const SITE_LINKS: { id: string; label: string; href: string; icon: React.ComponentType<{ size?: number }>; external?: boolean }[] = [
+  { id: 'contact', label: 'Contact', href: 'mailto:hello@comparecloudcosts.com', icon: Mail, external: true },
   { id: 'docs', label: 'Documentation', href: '/docs', icon: BookOpen },
-  { id: 'status', label: 'Status', href: '/status', icon: Activity },
-  { id: 'terms', label: 'Terms', href: '/terms', icon: Scale },
+  { id: 'github', label: 'GitHub', href: 'https://github.com/rodrigo-orzari/ccc', icon: Github, external: true },
   { id: 'privacy', label: 'Privacy', href: '/privacy', icon: Lock },
   { id: 'sponsors', label: 'Sponsors', href: '/sponsors', icon: Handshake },
-  { id: 'contact', label: 'Contact', href: 'mailto:hello@comparecloudcosts.com', icon: Mail, external: true },
-  { id: 'github', label: 'GitHub', href: 'https://github.com/rodrigo-orzari/ccc', icon: Github, external: true },
+  { id: 'status', label: 'Status', href: '/status', icon: Activity },
+  { id: 'terms', label: 'Terms', href: '/terms', icon: Scale },
 ];
 
 // Shared icon set so every page that used to show the old emoji per category/link

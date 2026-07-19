@@ -38,7 +38,7 @@ npm run worker     # Background cron worker (tsx src/workers/scheduler.ts)
 | src/middleware.ts | Per-IP rate limiting for public API routes |
 | src/db/schema.sql | PostgreSQL schema + performance indexes |
 | src/services/*_pipeline.ts | Per-product pricing aggregation across providers |
-| src/services/mailer.ts | Email alerts for price drift, staleness, data quality |
+| src/services/mailer.ts | Email alerts for data staleness, data quality |
 | src/workers/scheduler.ts | node-cron worker; weekly refresh + alert checks |
 | src/config/ | Hardcoded fallback pricing configs per provider |
 
@@ -51,7 +51,6 @@ npm run worker     # Background cron worker (tsx src/workers/scheduler.ts)
 - Ingestion runs out-of-band: the `worker` (`src/workers/scheduler.ts`, node-cron)
   refreshes all pipelines every Sunday at midnight, or an admin can trigger
   `POST /api/admin/fetch-pricing` manually.
-- Price drift alert fires if any price changes more than 20% between runs.
 
 ## Database Schema
 - `providers` — AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba Cloud

@@ -1,5 +1,5 @@
 import type { Sql } from 'postgres';
-import { PriceDriftResult, ensureProviderId } from './pricing_pipeline.ts';
+import { ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_SECURITY_PRICING = [
   // --- AWS ---
@@ -83,7 +83,6 @@ export class SecurityPricingPipeline {
   async run() {
     console.log('🚀 Starting Security & Identity Pricing Pipeline...');
     const results: any[] = [];
-    const driftAlerts: PriceDriftResult[] = [];
 
     let recordsAdded = 0;
 
@@ -127,7 +126,7 @@ export class SecurityPricingPipeline {
       }
     });
 
-    results.push({ provider: 'all_security', status: 'success', recordsProcessed: recordsAdded, driftAlerts });
+    results.push({ provider: 'all_security', status: 'success', recordsProcessed: recordsAdded });
     console.log(`✅ Security & Identity Pricing Pipeline Completed. Inserted ${recordsAdded} records.`);
     return results;
   }

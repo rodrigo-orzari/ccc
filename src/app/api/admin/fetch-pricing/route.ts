@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, initDb } from '@/lib/api-utils';
 import sql from '@/lib/db';
-import { PricingPipeline, PriceDriftResult } from '@/services/pricing_pipeline';
+import { PricingPipeline } from '@/services/pricing_pipeline';
 import { DatabasePricingPipeline } from '@/services/database_pipeline';
 import { ServerlessPricingPipeline } from '@/services/serverless_pipeline';
 import { ContainersPricingPipeline } from '@/services/containers_pipeline';
@@ -12,7 +12,6 @@ import { DataAnalyticsPricingPipeline } from '@/services/data_analytics_pipeline
 import { AppHostingPricingPipeline } from '@/services/app_hosting_pipeline';
 import { SecurityPricingPipeline } from '@/services/security_pipeline';
 import { IntegrationPricingPipeline } from '@/services/integration_pipeline';
-import { sendPriceDriftEmail } from '@/services/mailer';
 import { clearCache } from '@/lib/cache';
 
 // Pipeline registry: `type` is both the query-param selector (?type=compute) and
@@ -41,7 +40,6 @@ export async function POST(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const type = searchParams.get('type') || 'all';
     const results: any[] = [];
-    const allDriftAlerts: PriceDriftResult[] = [];
 
     for (const { type: pipelineType, Pipeline } of PIPELINE_REGISTRY) {
       if (type !== 'all' && type !== pipelineType) continue;
@@ -49,7 +47,6 @@ export async function POST(req: NextRequest) {
       const pipeline = new Pipeline(sql as any);
       const pipelineResults = await pipeline.run();
       for (const r of pipelineResults) {
-        if ((r as any).driftAlerts) allDriftAlerts.push(...(r as any).driftAlerts);
         results.push({ ...r, pipeline: pipelineType });
       }
     }
@@ -60,14 +57,7 @@ export async function POST(req: NextRequest) {
     // Prices just changed — drop cached API responses so users see fresh data now.
     clearCache();
 
-    // Send drift email if any significant price changes were detected
-    if (allDriftAlerts.length > 0) {
-      sendPriceDriftEmail(allDriftAlerts).catch(err =>
-        console.error('❌ Failed to send price drift email:', err)
-      );
-    }
-
-    return NextResponse.json({ message: 'Pipeline run completed and data migrated', results, driftAlerts: allDriftAlerts });
+    return NextResponse.json({ message: 'Pipeline run completed and data migrated', results });
   } catch (err: any) {
     return NextResponse.json({ error: 'Pipeline failed', details: err.message }, { status: 500 });
   }

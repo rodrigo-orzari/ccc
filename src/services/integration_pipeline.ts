@@ -130,13 +130,12 @@ export class IntegrationPricingPipeline extends PricingPipeline {
           };
         });
 
-        const driftAlerts = await this.saveRecords(records, 'integration');
+        await this.saveRecords(records, 'integration');
         results.push({
           provider: p.slug,
           service: 'Integration',
           status: 'success',
           count: records.length,
-          driftAlerts,
           dataSource: isLiveFetched ? 'live_api' : 'static_config',
           note: `${p.slug} Integration - ${isLiveFetched ? 'live API fetch' : 'static config'}`,
         });
