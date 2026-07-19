@@ -6,6 +6,37 @@ All notable changes to Compare Cloud Costs are documented here. This changelog s
 
 ## [Unreleased]
 
+### Features
+- **Secrets Management Services:** Added missing security capability across all providers
+  - AWS Secrets Manager: Per-secret ($0.40/month) + API calls ($0.05 per 10K)
+  - Azure Key Vault Secrets: Per-secret + operations ($0.03 per 10K operations)
+  - GCP Secret Manager: Per-active-version ($0.06/month) + access operations ($0.06 per 10K)
+  - Oracle Vault: Per-secret (free/month)
+  - Alibaba Secrets Manager: Per-secret (free/month)
+  - Distinct from KMS: Secrets Manager stores & rotates application secrets, API keys, database credentials
+  - Updated Security & Identity documentation to distinguish KMS vs. Secrets Management
+
+- **Tier Normalization:** Consolidated provider-specific tier names into canonical categories
+  - Created `src/utils/tier_normalization.ts` with comprehensive tier mapping across all providers
+  - Maps Azure (Business Critical, Enterprise Edition, Enterprise Plus) → canonical "Enterprise"
+  - Maps AWS instance families (db.r*, db.x*, db.m*, db.t*) to tier categories
+  - Maps GCP, Oracle, DigitalOcean, and Alibaba provider-specific tiers to standards
+  - Updated `/api/filters` endpoint to return normalized tier categories
+  - Updated `/api/pricing` endpoint to normalize tier in attributes for consistent filtering
+  - Reduces filter dropdown from 5–7 tier options to 4–5 canonical categories across all products
+  - Provides pattern matching fallback for unmapped provider tiers
+  - Table display now shows normalized tier for cleaner cross-provider comparisons
+
+- **Container Registry Services:** Added major new subsection to Containers product category
+  - New pricing pipeline for container image repositories across all 6 providers (AWS ECR, Azure ACR, Google Artifact Registry, Oracle Container Registry, DigitalOcean Container Registry, Alibaba Container Registry)
+  - New Service Type filter distinguishing between Orchestration and Container Registry services
+  - New Registry Pricing Component filter for Storage, Data Transfer, and API Operations
+  - Created `src/services/containers_registry_pipeline.ts` with complete pricing data for all providers
+  - Updated `src/services/ingest.ts` to run registry pricing pipeline with proper logging
+  - Updated filter sidebar with registry-specific filters and categorization
+  - Updated `/docs` page with registry documentation and data dictionary entries
+  - Includes pricing components: Storage ($0.003–$0.10/GB/month), Data Transfer ($0.02–$0.50/GB), API Operations (provider-specific)
+
 ### Security
 - **CRITICAL FIX:** Enabled TLS certificate validation across all database connections
   - Fixed `src/services/ingest.ts` — Added proper CA certificate validation with `DATABASE_CA_CERT` env var support

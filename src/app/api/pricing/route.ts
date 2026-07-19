@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import sql from '@/lib/db';
 import { buildPricingFilters } from '@/lib/api-utils';
 import { getCached, setCached } from '@/lib/cache';
+import { normalizeTier } from '@/utils/tier_normalization';
 
 export const dynamic = 'force-dynamic';
 
@@ -91,7 +92,17 @@ export async function GET(req: NextRequest) {
       dbQuery += ` ORDER BY pr.price_per_unit ASC LIMIT ${limit}`;
     }
 
-    const result = await sql.unsafe(dbQuery, values);
+    let result = await sql.unsafe(dbQuery, values);
+
+    // Normalize tier in attributes for consistent filtering
+    result = result.map((row: any) => ({
+      ...row,
+      attributes: row.attributes ? {
+        ...row.attributes,
+        tier: row.attributes.tier ? normalizeTier(row.attributes.tier) : row.attributes.tier
+      } : row.attributes
+    }));
+
     setCached(cacheKey, result);
     return NextResponse.json(result);
   } catch (err: any) {

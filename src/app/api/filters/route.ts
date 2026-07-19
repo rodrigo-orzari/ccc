@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import sql from '@/lib/db';
+import { normalizeTier } from '@/utils/tier_normalization';
 
 export const dynamic = 'force-dynamic';
 // Cache for 10 minutes to balance freshness with performance
@@ -55,8 +56,17 @@ export async function GET() {
     const [mainResult] = await sql.unsafe(query);
     const [langResult] = await sql.unsafe(langQuery);
 
+    // Normalize tier values across all tier arrays
+    const normalizeArray = (arr: string[] | null): string[] => {
+      if (!arr) return [];
+      return [...new Set(arr.map(tier => normalizeTier(tier) as string))].sort();
+    };
+
     const mergedResult = {
       ...mainResult,
+      storage_tiers: normalizeArray(mainResult.storage_tiers),
+      app_hosting_tiers: normalizeArray(mainResult.app_hosting_tiers),
+      tiers: normalizeArray(mainResult.tiers),
       serverless_languages: langResult?.serverless_languages || []
     };
 

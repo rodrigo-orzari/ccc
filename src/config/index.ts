@@ -67,6 +67,11 @@ export const CONTAINERS_ARCHITECTURES = ['x86', 'ARM'];
 // '100ms' covers sub-second-billed serverless container platforms (e.g. Cloud Run).
 export const CONTAINERS_BILLING_GRANULARITY = ['100ms', 'Second', 'Hour'];
 
+// Container Registry-specific constants (subsection within Containers)
+export const REGISTRY_SERVICE_TYPES = ['Storage', 'Data Transfer', 'Operations'];
+// Pricing component breakdown: what gets billed and how (per GB/month for storage, per GB for transfer, per operation for API calls)
+export const REGISTRY_PRICING_COMPONENTS = ['Storage (per GB/month)', 'Data Transfer (per GB)', 'API Operations'];
+
 // Networking-specific constants
 export const NETWORKING_SERVICES = ['Data Transfer', 'Content Delivery Network (CDN)', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway', 'API Gateway'];
 // Display-only grouping for the Service filter chips. Every NETWORKING_SERVICES

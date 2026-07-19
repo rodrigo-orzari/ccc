@@ -1148,6 +1148,17 @@ export default function FilterSidebar({
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
+              title="Service Type"
+              tooltip="Orchestration (Kubernetes, serverless platforms) vs. Container Registry (image storage and management)."
+              options={['Orchestration', 'Container Registry']}
+              selected={selectedServiceType || ['Orchestration', 'Container Registry']}
+              onToggle={(st) => onServiceTypeToggle?.(st)}
+              onSetAll={(st) => onSetServiceType?.(st)}
+              isExpanded={expanded.serviceType ?? true}
+              onToggleExpand={() => onToggleSection('serviceType')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
               title="Orchestrator"
               tooltip="Underlying orchestration platform."
               options={config.CONTAINERS_ORCHESTRATORS}
@@ -1195,6 +1206,17 @@ export default function FilterSidebar({
               onSetAll={onSetContainersBillingGranularity}
               isExpanded={expanded.containersBillingGranularity ?? true}
               onToggleExpand={() => onToggleSection('containersBillingGranularity')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+            <FilterSection
+              title="Registry Pricing Component"
+              tooltip="What you're being charged for: storage (per GB/month), data transfer (per GB), or API operations."
+              options={config.REGISTRY_PRICING_COMPONENTS}
+              selected={selectedRegistryPricingComponent || []}
+              onToggle={(pc) => onRegistryPricingComponentToggle?.(pc)}
+              onSetAll={(pc) => onSetRegistryPricingComponent?.(pc)}
+              isExpanded={expanded.registryPricingComponent ?? true}
+              onToggleExpand={() => onToggleSection('registryPricingComponent')}
             />
           </>
         )}

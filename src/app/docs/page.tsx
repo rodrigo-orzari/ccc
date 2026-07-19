@@ -372,8 +372,7 @@ const DocsPage: React.FC = () => {
 
             <h3 id="containers"><PRODUCT_TYPE_ICONS.containers size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=containers">Containers</Link></h3>
             <p>
-              Covers managed container runtimes including Kubernetes node pools (**AWS EKS vs Azure AKS vs GCP GKE** node cost comparisons) and serverless container platforms (Fargate, Cloud Run, ACI). Filter by
-              orchestrator, architecture (x86 or ARM), and billing granularity.
+              Covers container infrastructure across two subsections: (1) **Orchestration**: managed container runtimes including Kubernetes node pools (**AWS EKS vs Azure AKS vs GCP GKE** node cost comparisons) and serverless container platforms (Fargate, Cloud Run, ACI). (2) **Container Registries**: private image repositories for storing, managing, and deploying container images (**AWS ECR vs Azure ACR vs Google Artifact Registry**). Filter by service type, orchestrator, architecture (x86 or ARM), and billing granularity.
             </p>
 
             <h3 id="databases"><PRODUCT_TYPE_ICONS.database size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=database">Databases</Link></h3>
@@ -1030,7 +1029,7 @@ const DocsPage: React.FC = () => {
             </table>
 
             <h3 style={{ marginTop: '2rem' }}>4. Containers</h3>
-            <p>Managed container control planes (Kubernetes) and serverless container runners.</p>
+            <p>Managed container control planes (Kubernetes), serverless container runners, and container image registries (repositories for storing and managing container images).</p>
             <table className="docs-table">
               <thead>
                 <tr>
@@ -1040,16 +1039,33 @@ const DocsPage: React.FC = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Pricing Model</strong></td>
+                  <td><strong>Service Type</strong></td>
+                  <td>
+                    The container infrastructure function:<br />
+                    • <strong>Orchestration:</strong> Managed container runtimes including Kubernetes node pools (AWS EKS, Azure AKS, GCP GKE) and serverless container platforms (AWS Fargate, GCP Cloud Run, Azure Container Apps).<br />
+                    • <strong>Container Registry:</strong> Private image repositories for storing, managing, and deploying container images (AWS ECR, Azure ACR, Google Artifact Registry, Oracle Container Registry, DigitalOcean Container Registry, Alibaba Container Registry).
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Pricing Model (Orchestration)</strong></td>
                   <td>
                     Compute allocation model:<br />
                     • <strong>Managed Nodes:</strong> Billed by the provisioned nodes/VMs that form the Kubernetes cluster.<br />
-                    • <strong>Serverless Containers:</strong> Billed purely per vCPU-second and RAM-second consumed by active container replicas (e.g., AWS Fargate, GCP Cloud Run, Azure Container Apps).
+                    • <strong>Serverless Containers:</strong> Billed purely per vCPU-second and RAM-second consumed by active container replicas.
                   </td>
                 </tr>
                 <tr>
                   <td><strong>Orchestrator</strong></td>
                   <td>The control plane mechanism: <strong>Kubernetes</strong> (standard K8s clusters) vs. <strong>PaaS Container Runner</strong> (simplified orchestrators, hosting isolated containers without cluster nodes management).</td>
+                </tr>
+                <tr>
+                  <td><strong>Registry Pricing Component</strong></td>
+                  <td>
+                    What you're being charged for in a container registry:<br />
+                    • <strong>Storage (per GB/month):</strong> Cost for storing container images in the repository.<br />
+                    • <strong>Data Transfer (per GB):</strong> Cost for pulling/pushing images across regions or to external systems.<br />
+                    • <strong>API Operations:</strong> Cost per webhook call, registry scan, or API request (provider-specific).
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -1203,7 +1219,7 @@ const DocsPage: React.FC = () => {
             </table>
 
             <h3 style={{ marginTop: '2rem' }}>11. Security &amp; Identity</h3>
-            <p>Firewalls, IAM policies, secret managers, and runtime threat detection.</p>
+            <p>Firewalls, IAM policies, encryption key management, secrets management, and runtime threat detection.</p>
             <table className="docs-table">
               <thead>
                 <tr>
@@ -1214,11 +1230,11 @@ const DocsPage: React.FC = () => {
               <tbody>
                 <tr>
                   <td><strong>Security Type</strong></td>
-                  <td>The protection layer: <strong>WAF</strong> (Web Application Firewall rules), <strong>IAM</strong> (Identity &amp; Access Management users), <strong>KMS</strong> (Key Management secrets/certificates), <strong>DDoS Protection</strong> (mitigation shielding), or <strong>Threat Detection</strong> (active system monitoring).</td>
+                  <td>The protection layer: <strong>WAF</strong> (Web Application Firewall rules), <strong>IAM</strong> (Identity &amp; Access Management users), <strong>KMS</strong> (encryption key management and cryptographic operations), <strong>Secrets Management</strong> (API keys, database passwords, certificates storage &amp; rotation), <strong>DDoS Protection</strong> (mitigation shielding), or <strong>Threat Detection</strong> (active system monitoring).</td>
                 </tr>
                 <tr>
                   <td><strong>Billing Metric</strong></td>
-                  <td>The billing dimensions: <strong>Per Rule/Policy</strong> (WAF rules), <strong>Per Key/Month</strong> (KMS active keys), <strong>Per GB Scanned</strong> (Threat Detection checking CloudTrail/System logs), or <strong>Per Host/Month</strong> (continuous server threat protection).</td>
+                  <td>The billing dimensions: <strong>Per Rule/Policy</strong> (WAF rules), <strong>Per Key/Month</strong> (KMS active keys), <strong>Per Secret + Operations</strong> (Secrets Manager active secrets + API calls), <strong>Per GB Scanned</strong> (Threat Detection checking CloudTrail/System logs), or <strong>Per Host/Month</strong> (continuous server threat protection).</td>
                 </tr>
               </tbody>
             </table>

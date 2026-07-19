@@ -6,6 +6,7 @@ import { PricingPipeline } from './pricing_pipeline';
 import { DatabasePricingPipeline } from './database_pipeline';
 import { ServerlessPricingPipeline } from './serverless_pipeline';
 import { ContainersPricingPipeline } from './containers_pipeline';
+import { ContainersRegistryPricingPipeline } from './containers_registry_pipeline';
 import { DataAnalyticsPricingPipeline } from './data_analytics_pipeline';
 import { NetworkingPricingPipeline } from './networking_pipeline';
 import { StoragePricingPipeline } from './storage_pipeline';
@@ -81,6 +82,18 @@ async function main() {
     containersResults.forEach((result: any) => {
       if (result.status === 'success') {
         console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} Containers configurations`);
+      } else {
+        console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Container Registry Pricing...');
+    // Run container registry pricing pipeline
+    const registryPipeline = new ContainersRegistryPricingPipeline(sql as any);
+    const registryResults = await registryPipeline.run();
+    registryResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ ${result.provider.toUpperCase()}: ${result.count} Registry configurations`);
       } else {
         console.log(`  ❌ ${result.provider.toUpperCase()}: ${result.message}`);
       }

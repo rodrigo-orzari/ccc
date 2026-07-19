@@ -53,6 +53,24 @@ const STATIC_SECURITY_PRICING = [
   { provider: 'cloudflare', service: 'Zero Trust Network Access', category: 'Identity & Encryption', instance_type: 'Access / Zero Trust (Per User)', price_per_unit: 7.00, unit: 'User/Month', geography: 'Global', attributes: { security_type: 'Zero Trust', scope: 'Global' } },
   { provider: 'cloudflare', service: 'SSL/TLS Encryption', category: 'Identity & Encryption', instance_type: 'Universal SSL (Free)', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'SSL/TLS', scope: 'Global' } },
   { provider: 'cloudflare', service: 'Bot Management', category: 'Threat & Compliance', instance_type: 'Bot Management (Enterprise)', price_per_unit: 0.00, unit: 'Custom', geography: 'Global', attributes: { security_type: 'Bot Management', scope: 'Global' } },
+
+  // --- Secrets Management ---
+  // AWS Secrets Manager
+  { provider: 'aws', service: 'Secrets Manager', category: 'Secrets Management', instance_type: 'Per Secret', price_per_unit: 0.40, unit: 'Month', geography: 'Global', attributes: { security_type: 'Secrets Management', scope: 'Regional' } },
+  { provider: 'aws', service: 'Secrets Manager', category: 'Secrets Management', instance_type: 'Per 10K API Calls', price_per_unit: 0.05, unit: '10K Calls', geography: 'Global', attributes: { security_type: 'Secrets Management', scope: 'Regional' } },
+
+  // Azure Key Vault (Secrets capability)
+  { provider: 'azure', service: 'Key Vault (Secrets)', category: 'Secrets Management', instance_type: 'Per Secret + Operations', price_per_unit: 0.03, unit: '10K Operations', geography: 'Global', attributes: { security_type: 'Secrets Management', scope: 'Regional' } },
+
+  // GCP Secret Manager
+  { provider: 'gcp', service: 'Secret Manager', category: 'Secrets Management', instance_type: 'Per Secret Active Version', price_per_unit: 0.06, unit: 'Month', geography: 'Global', attributes: { security_type: 'Secrets Management', scope: 'Regional' } },
+  { provider: 'gcp', service: 'Secret Manager', category: 'Secrets Management', instance_type: 'Per 10K Access Operations', price_per_unit: 0.06, unit: '10K Operations', geography: 'Global', attributes: { security_type: 'Secrets Management', scope: 'Regional' } },
+
+  // Oracle Vault (Secrets)
+  { provider: 'oracle', service: 'Vault (Secrets)', category: 'Secrets Management', instance_type: 'Per Secret', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Secrets Management', scope: 'Regional' } },
+
+  // Alibaba Secret Manager
+  { provider: 'alibaba', service: 'Secrets Manager', category: 'Secrets Management', instance_type: 'Per Secret', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Secrets Management', scope: 'Regional' } },
 ];
 
 export class SecurityPricingPipeline {
