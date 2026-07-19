@@ -158,6 +158,7 @@ export default function Dashboard() {
   const [selectedContainersComputeTypes, setSelectedContainersComputeTypes] = useState<string[]>([...config.CONTAINERS_COMPUTE_TYPES]);
   const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...config.CONTAINERS_ARCHITECTURES]);
   const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...config.CONTAINERS_BILLING_GRANULARITY]);
+  const [selectedContainersServiceTypes, setSelectedContainersServiceTypes] = useState<string[]>(['Orchestration', 'Container Registry']);
 
   const [selectedAnalyticsEngines, setSelectedAnalyticsEngines] = useState<string[]>([...config.ANALYTICS_ENGINES]);
   const [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes] = useState<string[]>([...config.ANALYTICS_DEPLOYMENT_TYPES]);
@@ -786,6 +787,7 @@ export default function Dashboard() {
           selectedContainersComputeTypes={selectedContainersComputeTypes}
           selectedContainersArchitectures={selectedContainersArchitectures}
           selectedContainersBillingGranularity={selectedContainersBillingGranularity}
+          selectedContainersServiceTypes={selectedContainersServiceTypes}
           selectedAnalyticsEngines={selectedAnalyticsEngines}
           selectedAnalyticsDeploymentTypes={selectedAnalyticsDeploymentTypes}
           selectedAnalyticsTiers={selectedAnalyticsTiers}
@@ -851,6 +853,7 @@ export default function Dashboard() {
           onContainersComputeTypeToggle={(c) => toggleFilter(selectedContainersComputeTypes, setSelectedContainersComputeTypes, c)}
           onContainersArchitectureToggle={(a) => toggleFilter(selectedContainersArchitectures, setSelectedContainersArchitectures, a)}
           onContainersBillingGranularityToggle={(b) => toggleFilter(selectedContainersBillingGranularity, setSelectedContainersBillingGranularity, b)}
+          onContainersServiceTypeToggle={(s) => toggleFilter(selectedContainersServiceTypes, setSelectedContainersServiceTypes, s)}
           onAnalyticsEngineToggle={(e) => toggleFilter(selectedAnalyticsEngines, setSelectedAnalyticsEngines, e)}
           onAnalyticsDeploymentTypeToggle={(d) => toggleFilter(selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes, d)}
           onAnalyticsTierToggle={(t) => toggleFilter(selectedAnalyticsTiers, setSelectedAnalyticsTiers, t)}
@@ -905,6 +908,7 @@ export default function Dashboard() {
           onSetContainersComputeTypes={setSelectedContainersComputeTypes}
           onSetContainersArchitectures={setSelectedContainersArchitectures}
           onSetContainersBillingGranularity={setSelectedContainersBillingGranularity}
+          onSetContainersServiceTypes={setSelectedContainersServiceTypes}
           onSetAnalyticsEngines={setSelectedAnalyticsEngines}
           onSetAnalyticsDeploymentTypes={setSelectedAnalyticsDeploymentTypes}
           onSetAnalyticsTiers={setSelectedAnalyticsTiers}
