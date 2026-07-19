@@ -469,6 +469,9 @@ interface FilterSidebarProps {
   selectedIntegrationTiers: string[];
   selectedIntegrationSizes: string[];
   selectedIntegrationProtocols: string[];
+  selectedRegistryPricingComponent?: string[];
+  onRegistryPricingComponentToggle?: (opt: string) => void;
+  onSetRegistryPricingComponent?: (items: string[]) => void;
   onIntegrationServiceToggle: (item: string) => void;
   onIntegrationPricingModelToggle: (item: string) => void;
   onIntegrationTierToggle: (item: string) => void;
@@ -568,6 +571,9 @@ export default function FilterSidebar({
   selectedIntegrationTiers,
   selectedIntegrationSizes,
   selectedIntegrationProtocols,
+  selectedRegistryPricingComponent,
+  onRegistryPricingComponentToggle,
+  onSetRegistryPricingComponent,
   vCpuRange,
   memoryRange,
   priceRange,

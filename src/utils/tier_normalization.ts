@@ -54,14 +54,14 @@ const TIER_MAPPING: Record<string, TierCategory> = {
   'Autonomous Standard': TIER_CATEGORIES.STANDARD,
 
   // DigitalOcean Database tiers
-  'Basic': TIER_CATEGORIES.BASIC,
-  'Professional': TIER_CATEGORIES.PREMIUM,
-  'Premium': TIER_CATEGORIES.ENTERPRISE,
+  // 'Basic' is already mapped
+  // 'Professional' is already mapped below
+  // 'Premium' conflicts with Azure, defaulting to PREMIUM
 
   // Alibaba Cloud Database tiers
-  'Enterprise': TIER_CATEGORIES.ENTERPRISE,
+  // 'Enterprise' is already mapped
   'High-availability': TIER_CATEGORIES.PREMIUM,
-  'Basic': TIER_CATEGORIES.BASIC,
+  // 'Basic' is already mapped
 
   // Redis/Cache tiers (Azure)
   'Basic Cache': TIER_CATEGORIES.BASIC,

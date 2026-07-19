@@ -4,8 +4,8 @@ import type { PriceDriftResult } from './pricing_pipeline';
 export class ContainersRegistryPricingPipeline {
   constructor(private sql: Sql) {}
 
-  async run(): Promise<PriceDriftResult[]> {
-    const results: PriceDriftResult[] = [];
+  async run(): Promise<{ provider: string; status: string; count?: number; message?: string; driftAlerts?: PriceDriftResult[] }[]> {
+    const results: { provider: string; status: string; count?: number; message?: string; driftAlerts?: PriceDriftResult[] }[] = [];
 
     // AWS ECR - Elastic Container Registry
     try {

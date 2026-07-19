@@ -111,5 +111,8 @@ export function useDynamicFilters() {
     
     // Serverless service-type (Compute / API Gateway / Messaging / Eventing / Workflow)
     SERVERLESS_SERVICE_TYPES: merge(config.SERVERLESS_SERVICE_TYPES, dynamicData?.serverless_service_types),
+    
+    // Registry Pricing Component
+    REGISTRY_PRICING_COMPONENTS: config.REGISTRY_PRICING_COMPONENTS,
   };
 }

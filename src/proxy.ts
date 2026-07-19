@@ -39,7 +39,7 @@ setInterval(() => {
   }
 }, WINDOW_SIZE_MS * 5);
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // Apply rate limiting only to API routes that are public and heavy
   if (req.nextUrl.pathname.startsWith('/api/pricing') || req.nextUrl.pathname.startsWith('/api/status')) {
     const ip = req.headers.get('x-forwarded-for') || 'unknown';
