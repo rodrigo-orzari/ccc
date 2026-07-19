@@ -14,7 +14,11 @@ import { AppHostingPricingPipeline } from './app_hosting_pipeline';
 import { IntegrationPricingPipeline } from './integration_pipeline';
 import { SecurityPricingPipeline } from './security_pipeline';
 import { AIPricingPipeline } from './ai_pipeline';
-
+import { TimeSeriesPricingPipeline } from './time_series_pipeline';
+import { GraphDatabasePricingPipeline } from './graph_database_pipeline';
+import { SearchEnginePricingPipeline } from './search_engine_pipeline';
+import { CertificateManagementPricingPipeline } from './certificate_management_pipeline';
+import { InferenceEndpointsPricingPipeline } from './inference_endpoints_pipeline';
 
 async function main() {
   const dbUrl = process.env.DATABASE_URL;
@@ -180,6 +184,66 @@ async function main() {
         console.log(`  ✅ AI: ${result.count || 0} configurations inserted`);
       } else {
         console.log(`  ❌ AI: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Time-Series Database Pricing...');
+    // Run time-series database pipeline
+    const timeSeriesPipeline = new TimeSeriesPricingPipeline(sql as any);
+    const timeSeriesResults = await timeSeriesPipeline.run();
+    timeSeriesResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ TIME-SERIES: ${result.recordsProcessed} configurations inserted`);
+      } else {
+        console.log(`  ❌ TIME-SERIES: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Graph Database Pricing...');
+    // Run graph database pipeline
+    const graphPipeline = new GraphDatabasePricingPipeline(sql as any);
+    const graphResults = await graphPipeline.run();
+    graphResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ GRAPH: ${result.recordsProcessed} configurations inserted`);
+      } else {
+        console.log(`  ❌ GRAPH: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Search Engine Pricing...');
+    // Run search engine pipeline
+    const searchPipeline = new SearchEnginePricingPipeline(sql as any);
+    const searchResults = await searchPipeline.run();
+    searchResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ SEARCH: ${result.recordsProcessed} configurations inserted`);
+      } else {
+        console.log(`  ❌ SEARCH: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Certificate Management Pricing...');
+    // Run certificate management pipeline
+    const certPipeline = new CertificateManagementPricingPipeline(sql as any);
+    const certResults = await certPipeline.run();
+    certResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ CERTIFICATE: ${result.recordsProcessed} configurations inserted`);
+      } else {
+        console.log(`  ❌ CERTIFICATE: ${result.message}`);
+      }
+    });
+
+    console.log('\n📊 Computing Inference Endpoints Pricing...');
+    // Run inference endpoints pipeline
+    const inferencePipeline = new InferenceEndpointsPricingPipeline(sql as any);
+    const inferenceResults = await inferencePipeline.run();
+    inferenceResults.forEach((result: any) => {
+      if (result.status === 'success') {
+        console.log(`  ✅ INFERENCE: ${result.recordsProcessed} configurations inserted`);
+      } else {
+        console.log(`  ❌ INFERENCE: ${result.message}`);
       }
     });
 

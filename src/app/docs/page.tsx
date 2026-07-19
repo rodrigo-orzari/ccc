@@ -347,7 +347,7 @@ const DocsPage: React.FC = () => {
             </p>
             <p>
               Use the <strong>product tabs</strong> at the top to switch between categories: AI &amp; Machine Learning,
-              App Hosting, Containers, Databases, Data &amp; Analytics, GPU, Networking, Serverless, Storage, and Virtual Machines.
+              App Hosting, Certificates, Containers, Databases, Data &amp; Analytics, GPU, Inference, Networking, Search, Storage, Time-Series, Graph, and more.
             </p>
             <p>
               Use the <strong>filter sidebar</strong> on the left to narrow results by provider,
@@ -417,6 +417,31 @@ const DocsPage: React.FC = () => {
               vendor/architecture, GPU support, and instance category (General Purpose, Compute
               Optimized, Memory Optimized, etc.). All prices are hourly, on-demand, Linux-based
               unless otherwise noted.
+            </p>
+
+            <h3 id="time-series-databases">⏱️ Time-Series Databases</h3>
+            <p>
+              Specialized databases for time-stamped, sequential data (metrics, sensors, financial ticks, logs). Compare **AWS Timestream vs Azure Data Explorer vs GCP Bigtable** with pricing models for writes, reads, and storage tiers. Optimized for real-time analytics and retention policies.
+            </p>
+
+            <h3 id="graph-databases">🔗 Graph Databases</h3>
+            <p>
+              Databases optimized for relationships, networks, and complex queries. Compare **AWS Neptune vs Azure Cosmos DB (Gremlin) vs Oracle Graph** for social graphs, recommendation engines, identity graphs, and knowledge bases. Pricing varies by instance size and storage.
+            </p>
+
+            <h3 id="search-engines">🔍 Search Engines</h3>
+            <p>
+              Full-text search, analytics, and log aggregation. Compare **AWS OpenSearch vs Azure Cognitive Search vs GCP Cloud Search** for indexing, querying, and scaling distributed search clusters across providers.
+            </p>
+
+            <h3 id="certificate-management">🔐 Certificate Management</h3>
+            <p>
+              Public and private certificate authorities, SSL/TLS management, and lifecycle automation. Compare **AWS Certificate Manager vs Azure Key Vault vs GCP Certificate Authority** for managed certificates, private CAs, and auto-renewal features.
+            </p>
+
+            <h3 id="inference-endpoints">🤖 Inference Endpoints</h3>
+            <p>
+              Model serving platforms for deploying trained ML models to production. Compare **AWS SageMaker vs Azure Machine Learning vs GCP Vertex AI** for real-time and batch inference, with pricing for compute instances (CPU/GPU) and storage. Separate from model training.
             </p>
 
             <BackToTop />
@@ -1256,6 +1281,115 @@ const DocsPage: React.FC = () => {
                 <tr>
                   <td><strong>Billing Unit</strong></td>
                   <td>Performance metrics: <strong>Per Million Messages</strong> (event traffic volume) vs. <strong>Connection Hour</strong> (persistent web sockets billing).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>13. Time-Series Databases</h3>
+            <p>Optimized databases for timestamped, sequential data at scale (metrics, sensors, financial data).</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Engine</strong></td>
+                  <td>The time-series database engine: <strong>Timestream</strong> (AWS), <strong>Kusto</strong> (Azure Data Explorer), <strong>Bigtable</strong> (GCP NoSQL), <strong>TimescaleDB</strong> (PostgreSQL extension), or proprietary offerings.</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Model</strong></td>
+                  <td>Pricing structure: <strong>Capacity Units</strong> (write/read units per hour), <strong>Hourly Cluster</strong> (cluster node hours), <strong>Serverless</strong> (pay-per-use based on operations), or <strong>Storage + Compute</strong> (separate tiers for hot/cold data).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>14. Graph Databases</h3>
+            <p>Specialized for relationships, networks, and complex traversal queries (social graphs, recommendations, knowledge bases).</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Engine</strong></td>
+                  <td>The graph database: <strong>Neptune</strong> (AWS property graph + RDF), <strong>Cosmos DB Gremlin</strong> (Azure), <strong>Memgraph</strong> (GCP), or <strong>Oracle Graph</strong>.</td>
+                </tr>
+                <tr>
+                  <td><strong>Instance Tier</strong></td>
+                  <td>Resource allocation: <strong>Small</strong> (development), <strong>Medium</strong> (production read-heavy), <strong>Large</strong> (high-throughput traversals), with corresponding memory and vCPU caps.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>15. Search Engines</h3>
+            <p>Full-text search, log aggregation, and analytics (Elasticsearch/OpenSearch clusters or managed search).</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Engine</strong></td>
+                  <td>The search platform: <strong>OpenSearch</strong> (AWS/Oracle), <strong>Cognitive Search</strong> (Azure), <strong>Cloud Search</strong> (GCP), or managed distributions.</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Model</strong></td>
+                  <td>Pricing structure: <strong>Node Hours</strong> (provisioned cluster instances), <strong>Tiered Plans</strong> (Basic/Standard/High Density with index/storage limits), <strong>API Calls</strong> (per-query), or <strong>Storage + Compute</strong> (separate dimensions).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>16. Certificate Management</h3>
+            <p>Public and private SSL/TLS certificate lifecycle management, CAs, and auto-renewal.</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Certificate Type</strong></td>
+                  <td>Service offering: <strong>Public SSL/TLS</strong> (free, auto-managed), <strong>Private CA</strong> (root/subordinate certificate authority for internal PKI), <strong>Managed Certificates</strong> (auto-renewing with ACME), or <strong>API-issued Certificates</strong> (custom validity, constraints).</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Metric</strong></td>
+                  <td>Pricing dimensions: <strong>Free</strong> (public certs), <strong>Per Month</strong> (CA authority or managed cert), <strong>Per Certificate</strong> (issued certs), or <strong>Per 10K Operations</strong> (API calls/signing operations).</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 style={{ marginTop: '2rem' }}>17. Inference Endpoints</h3>
+            <p>Model serving platforms for deploying trained ML models to production (real-time and batch predictions).</p>
+            <table className="docs-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '25%' }}>Element / Parameter</th>
+                  <th style={{ width: '75%' }}>Definition &amp; Value Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Service Type</strong></td>
+                  <td>Deployment mode: <strong>Real-time Endpoints</strong> (always-on prediction servers), <strong>Batch Inference</strong> (scheduled jobs over datasets), <strong>Serverless</strong> (pay-per-request, scale-to-zero), or <strong>Container-based</strong> (custom Docker containers).</td>
+                </tr>
+                <tr>
+                  <td><strong>Instance Family</strong></td>
+                  <td>Compute type: <strong>CPU</strong> (cost-effective for latency-tolerant models), <strong>GPU</strong> (V100, A100, H100 for ML inference), <strong>TPU</strong> (GCP tensor processors), or <strong>Accelerators</strong> (Inferentia, Trainium).</td>
+                </tr>
+                <tr>
+                  <td><strong>Billing Dimension</strong></td>
+                  <td>Pricing structure: <strong>Hourly Instance</strong> (provisioned endpoint), <strong>Core Hours</strong> (vCPU-based), <strong>Node Hours</strong> (cluster nodes), or <strong>Per Prediction</strong> (serverless/API-based).</td>
                 </tr>
               </tbody>
             </table>

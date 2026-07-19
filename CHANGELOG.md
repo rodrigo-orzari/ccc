@@ -7,6 +7,16 @@ All notable changes to Compare Cloud Costs are documented here. This changelog s
 ## [Unreleased]
 
 ### Features
+- **5 Major Product Categories Added:** Filled critical market gaps identified in product completeness audit
+  - **Time-Series Databases:** AWS Timestream, Azure Data Explorer, GCP Bigtable, Oracle, DigitalOcean, Alibaba (16 pricing entries)
+  - **Graph Databases:** AWS Neptune, Azure Cosmos DB (Gremlin), GCP Memgraph, Oracle, DigitalOcean, Alibaba (18 pricing entries)
+  - **Search Engines:** AWS OpenSearch, Azure Cognitive Search, GCP Cloud Search, Oracle, Alibaba (19 pricing entries)
+  - **Certificate Management:** AWS ACM, Azure Key Vault Certs, GCP CA Service, Oracle, DigitalOcean, Alibaba (17 pricing entries)
+  - **Inference Endpoints:** AWS SageMaker, Azure ML, GCP Vertex AI, Oracle PAI, DigitalOcean, Alibaba (16 pricing entries)
+  - Created 5 new pricing pipeline classes: `time_series_pipeline.ts`, `graph_database_pipeline.ts`, `search_engine_pipeline.ts`, `certificate_management_pipeline.ts`, `inference_endpoints_pipeline.ts`
+  - Integrated all pipelines into main ingest flow
+  - Total new records: 86 pricing configurations across all providers
+
 - **Secrets Management Services:** Added missing security capability across all providers
   - AWS Secrets Manager: Per-secret ($0.40/month) + API calls ($0.05 per 10K)
   - Azure Key Vault Secrets: Per-secret + operations ($0.03 per 10K operations)
