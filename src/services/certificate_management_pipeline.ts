@@ -2,30 +2,30 @@ import type { Sql } from 'postgres';
 import { PriceDriftResult, ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_CERTIFICATE_PRICING = [
-  // --- AWS Certificate Manager ---
-  { provider: 'aws', service: 'AWS Certificate Manager', category: 'Certificate Management', instance_type: 'Public SSL/TLS Certificate', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Public SSL/TLS', cost: 'Free' } },
-  { provider: 'aws', service: 'AWS Certificate Manager', category: 'Certificate Management', instance_type: 'Private Certificate Authority (per month)', price_per_unit: 400.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Private CA', billing_model: 'Monthly' } },
-  { provider: 'aws', service: 'AWS Certificate Manager', category: 'Certificate Management', instance_type: 'Private Certificate (per certificate)', price_per_unit: 0.75, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Private Certificate', billing_model: 'Per Certificate' } },
+  // --- AWS Certificate Manager (Security subcategory) ---
+  { provider: 'aws', service: 'AWS Certificate Manager', category: 'Certificates', instance_type: 'Public SSL/TLS Certificate', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Public SSL/TLS', cost: 'Free' } },
+  { provider: 'aws', service: 'AWS Certificate Manager', category: 'Certificates', instance_type: 'Private Certificate Authority (per month)', price_per_unit: 400.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Private CA', billing_model: 'Monthly' } },
+  { provider: 'aws', service: 'AWS Certificate Manager', category: 'Certificates', instance_type: 'Private Certificate (per certificate)', price_per_unit: 0.75, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Private Certificate', billing_model: 'Per Certificate' } },
 
   // --- Azure Key Vault (Certificate Management capability) ---
-  { provider: 'azure', service: 'Azure Key Vault (Certificate Management)', category: 'Certificate Management', instance_type: 'Certificate Operations (10K)', price_per_unit: 0.34, unit: '10K Operations', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Managed Certificates', billing_model: 'Operations' } },
-  { provider: 'azure', service: 'Azure Key Vault (Certificate Management)', category: 'Certificate Management', instance_type: 'Managed Certificate (per month)', price_per_unit: 1.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Auto-renewal', billing_model: 'Monthly' } },
+  { provider: 'azure', service: 'Azure Key Vault (Certificate Management)', category: 'Certificates', instance_type: 'Certificate Operations (10K)', price_per_unit: 0.34, unit: '10K Operations', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Managed Certificates', billing_model: 'Operations' } },
+  { provider: 'azure', service: 'Azure Key Vault (Certificate Management)', category: 'Certificates', instance_type: 'Managed Certificate (per month)', price_per_unit: 1.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Auto-renewal', billing_model: 'Monthly' } },
 
   // --- Google Cloud Certificate Authority Service ---
-  { provider: 'gcp', service: 'Google Cloud Certificate Authority Service', category: 'Certificate Management', instance_type: 'Certificate Authority (per month)', price_per_unit: 600.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Root/Subordinate CA', billing_model: 'Monthly' } },
-  { provider: 'gcp', service: 'Google Cloud Certificate Authority Service', category: 'Certificate Management', instance_type: 'Certificate Issued (per certificate)', price_per_unit: 1.00, unit: 'Certificate', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Issued Certificate', billing_model: 'Per Certificate' } },
-  { provider: 'gcp', service: 'Google Cloud Managed Certificates', category: 'Certificate Management', instance_type: 'SSL Certificate (auto-managed)', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Public Managed', cost: 'Free' } },
+  { provider: 'gcp', service: 'Google Cloud Certificate Authority Service', category: 'Certificates', instance_type: 'Certificate Authority (per month)', price_per_unit: 600.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Root/Subordinate CA', billing_model: 'Monthly' } },
+  { provider: 'gcp', service: 'Google Cloud Certificate Authority Service', category: 'Certificates', instance_type: 'Certificate Issued (per certificate)', price_per_unit: 1.00, unit: 'Certificate', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Issued Certificate', billing_model: 'Per Certificate' } },
+  { provider: 'gcp', service: 'Google Cloud Managed Certificates', category: 'Certificates', instance_type: 'SSL Certificate (auto-managed)', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Public Managed', cost: 'Free' } },
 
   // --- Oracle Certificate Authority ---
-  { provider: 'oracle', service: 'Oracle Certificate Authority', category: 'Certificate Management', instance_type: 'CA Authority (per month)', price_per_unit: 500.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Root/Subordinate CA', billing_model: 'Monthly' } },
-  { provider: 'oracle', service: 'Oracle Certificate Authority', category: 'Certificate Management', instance_type: 'Certificate (per certificate/month)', price_per_unit: 5.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Managed Certificate', billing_model: 'Per Certificate' } },
+  { provider: 'oracle', service: 'Oracle Certificate Authority', category: 'Certificates', instance_type: 'CA Authority (per month)', price_per_unit: 500.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Root/Subordinate CA', billing_model: 'Monthly' } },
+  { provider: 'oracle', service: 'Oracle Certificate Authority', category: 'Certificates', instance_type: 'Certificate (per certificate/month)', price_per_unit: 5.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Managed Certificate', billing_model: 'Per Certificate' } },
 
   // --- Alibaba Certificate Authority ---
-  { provider: 'alibaba', service: 'Alibaba Certificate Authority', category: 'Certificate Management', instance_type: 'CA Instance (per month)', price_per_unit: 300.00, unit: 'Month', geography: 'cn-hangzhou', attributes: { service_type: 'Certificate Management', cert_type: 'Root/Subordinate CA', billing_model: 'Monthly' } },
-  { provider: 'alibaba', service: 'Alibaba Certificate Authority', category: 'Certificate Management', instance_type: 'Certificate (per month)', price_per_unit: 3.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Issued Certificate', billing_model: 'Per Certificate' } },
+  { provider: 'alibaba', service: 'Alibaba Certificate Authority', category: 'Certificates', instance_type: 'CA Instance (per month)', price_per_unit: 300.00, unit: 'Month', geography: 'cn-hangzhou', attributes: { security_type: 'Certificate Management', cert_type: 'Root/Subordinate CA', billing_model: 'Monthly' } },
+  { provider: 'alibaba', service: 'Alibaba Certificate Authority', category: 'Certificates', instance_type: 'Certificate (per month)', price_per_unit: 3.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Issued Certificate', billing_model: 'Per Certificate' } },
 
   // --- DigitalOcean Managed Certificates (App Platform) ---
-  { provider: 'digitalocean', service: 'DigitalOcean Managed Certificates', category: 'Certificate Management', instance_type: 'Managed Certificate', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { service_type: 'Certificate Management', cert_type: 'Auto-renewed', cost: 'Free' } },
+  { provider: 'digitalocean', service: 'DigitalOcean Managed Certificates', category: 'Certificates', instance_type: 'Managed Certificate', price_per_unit: 0.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Auto-renewed', cost: 'Free' } },
 ];
 
 export class CertificateManagementPricingPipeline {
@@ -46,19 +46,19 @@ export class CertificateManagementPricingPipeline {
         DELETE FROM pricing_records
         WHERE data_source = 'static_config'
         AND service_id IN (
-          SELECT id FROM services WHERE category = 'certificate_management'
+          SELECT id FROM services WHERE category = 'Certificates'
         )
       `;
 
       for (const record of STATIC_CERTIFICATE_PRICING) {
         const providerId = await ensureProviderId(sql, record.provider);
 
-        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerId} AND name = ${record.service} AND category = 'certificate_management'`;
+        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerId} AND name = ${record.service} AND category = 'Certificates'`;
         let serviceId: string;
 
         if (serviceRes.length === 0) {
           const insertService = await sql`
-            INSERT INTO services (provider_id, name, category) VALUES (${providerId}, ${record.service}, 'certificate_management') RETURNING id
+            INSERT INTO services (provider_id, name, category) VALUES (${providerId}, ${record.service}, 'Certificates') RETURNING id
           `;
           serviceId = insertService[0].id;
         } else {

@@ -2,33 +2,33 @@ import type { Sql } from 'postgres';
 import { PriceDriftResult, ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_TIME_SERIES_PRICING = [
-  // --- AWS Timestream ---
-  { provider: 'aws', service: 'Amazon Timestream', category: 'Time-Series Database', instance_type: 'Write Capacity Unit', price_per_unit: 0.50, unit: 'Hour', geography: 'Global', attributes: { engine: 'Timestream', service_type: 'Serverless Time-Series', billing_model: 'Capacity Units' } },
-  { provider: 'aws', service: 'Amazon Timestream', category: 'Time-Series Database', instance_type: 'Read Capacity Unit', price_per_unit: 0.50, unit: 'Hour', geography: 'Global', attributes: { engine: 'Timestream', service_type: 'Serverless Time-Series', billing_model: 'Capacity Units' } },
-  { provider: 'aws', service: 'Amazon Timestream', category: 'Time-Series Database', instance_type: 'Storage (Recent)', price_per_unit: 0.02, unit: 'GB/Hour', geography: 'Global', attributes: { engine: 'Timestream', service_type: 'Serverless Time-Series', billing_model: 'Storage', tier: 'Recent' } },
-  { provider: 'aws', service: 'Amazon Timestream', category: 'Time-Series Database', instance_type: 'Storage (Historical)', price_per_unit: 0.03, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Timestream', service_type: 'Serverless Time-Series', billing_model: 'Storage', tier: 'Historical' } },
+  // --- AWS Timestream (Database subcategory: Time-Series) ---
+  { provider: 'aws', service: 'Amazon Timestream', category: 'Time-Series', instance_type: 'Write Capacity Unit', price_per_unit: 0.50, unit: 'Hour', geography: 'Global', attributes: { engine: 'Timestream', database_type: 'Time-Series', billing_model: 'Capacity Units' } },
+  { provider: 'aws', service: 'Amazon Timestream', category: 'Time-Series', instance_type: 'Read Capacity Unit', price_per_unit: 0.50, unit: 'Hour', geography: 'Global', attributes: { engine: 'Timestream', database_type: 'Time-Series', billing_model: 'Capacity Units' } },
+  { provider: 'aws', service: 'Amazon Timestream', category: 'Time-Series', instance_type: 'Storage (Recent)', price_per_unit: 0.02, unit: 'GB/Hour', geography: 'Global', attributes: { engine: 'Timestream', database_type: 'Time-Series', billing_model: 'Storage', tier: 'Recent' } },
+  { provider: 'aws', service: 'Amazon Timestream', category: 'Time-Series', instance_type: 'Storage (Historical)', price_per_unit: 0.03, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Timestream', database_type: 'Time-Series', billing_model: 'Storage', tier: 'Historical' } },
 
   // --- Azure Data Explorer (Kusto) ---
-  { provider: 'azure', service: 'Azure Data Explorer', category: 'Time-Series Database', instance_type: 'Dev/Test (1 node)', price_per_unit: 0.14, unit: 'Hour', geography: 'Global', attributes: { engine: 'Kusto', service_type: 'Analytics + Time-Series', billing_model: 'Cluster Hourly' } },
-  { provider: 'azure', service: 'Azure Data Explorer', category: 'Time-Series Database', instance_type: 'Standard (D13_v2)', price_per_unit: 3.34, unit: 'Hour', geography: 'Global', attributes: { engine: 'Kusto', service_type: 'Analytics + Time-Series', billing_model: 'Cluster Hourly' } },
-  { provider: 'azure', service: 'Azure Data Explorer', category: 'Time-Series Database', instance_type: 'Storage (Cold)', price_per_unit: 0.02, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Kusto', service_type: 'Analytics + Time-Series', billing_model: 'Storage', tier: 'Cold' } },
+  { provider: 'azure', service: 'Azure Data Explorer', category: 'Time-Series', instance_type: 'Dev/Test (1 node)', price_per_unit: 0.14, unit: 'Hour', geography: 'Global', attributes: { engine: 'Kusto', database_type: 'Time-Series', billing_model: 'Cluster Hourly' } },
+  { provider: 'azure', service: 'Azure Data Explorer', category: 'Time-Series', instance_type: 'Standard (D13_v2)', price_per_unit: 3.34, unit: 'Hour', geography: 'Global', attributes: { engine: 'Kusto', database_type: 'Time-Series', billing_model: 'Cluster Hourly' } },
+  { provider: 'azure', service: 'Azure Data Explorer', category: 'Time-Series', instance_type: 'Storage (Cold)', price_per_unit: 0.02, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Kusto', database_type: 'Time-Series', billing_model: 'Storage', tier: 'Cold' } },
 
   // --- GCP Bigtable (Time-Series workload) ---
-  { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series Database', instance_type: 'Per Node (Production)', price_per_unit: 1.50, unit: 'Hour', geography: 'us-central1', attributes: { engine: 'Bigtable', service_type: 'NoSQL Time-Series', billing_model: 'Node Hour' } },
-  { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series Database', instance_type: 'Storage (Standard)', price_per_unit: 0.18, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Bigtable', service_type: 'NoSQL Time-Series', billing_model: 'Storage' } },
-  { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series Database', instance_type: 'Replication (per GB)', price_per_unit: 0.25, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Bigtable', service_type: 'NoSQL Time-Series', billing_model: 'Replication' } },
+  { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series', instance_type: 'Per Node (Production)', price_per_unit: 1.50, unit: 'Hour', geography: 'us-central1', attributes: { engine: 'Bigtable', database_type: 'Time-Series', billing_model: 'Node Hour' } },
+  { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series', instance_type: 'Storage (Standard)', price_per_unit: 0.18, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Bigtable', database_type: 'Time-Series', billing_model: 'Storage' } },
+  { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series', instance_type: 'Replication (per GB)', price_per_unit: 0.25, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Bigtable', database_type: 'Time-Series', billing_model: 'Replication' } },
 
   // --- Oracle Time Series (via Autonomous Database) ---
-  { provider: 'oracle', service: 'Autonomous Database (Time Series)', category: 'Time-Series Database', instance_type: 'Per OCPU/Month', price_per_unit: 2.80, unit: 'Month', geography: 'Global', attributes: { engine: 'Oracle Database', service_type: 'Time-Series Extension', billing_model: 'OCPU' } },
-  { provider: 'oracle', service: 'Autonomous Database (Time Series)', category: 'Time-Series Database', instance_type: 'Storage (per TB/Month)', price_per_unit: 200.00, unit: 'TB/Month', geography: 'Global', attributes: { engine: 'Oracle Database', service_type: 'Time-Series Extension', billing_model: 'Storage' } },
+  { provider: 'oracle', service: 'Autonomous Database (Time Series)', category: 'Time-Series', instance_type: 'Per OCPU/Month', price_per_unit: 2.80, unit: 'Month', geography: 'Global', attributes: { engine: 'Oracle Database', database_type: 'Time-Series', billing_model: 'OCPU' } },
+  { provider: 'oracle', service: 'Autonomous Database (Time Series)', category: 'Time-Series', instance_type: 'Storage (per TB/Month)', price_per_unit: 200.00, unit: 'TB/Month', geography: 'Global', attributes: { engine: 'Oracle Database', database_type: 'Time-Series', billing_model: 'Storage' } },
 
   // --- DigitalOcean Managed Database (PostgreSQL for Time-Series) ---
-  { provider: 'digitalocean', service: 'Managed PostgreSQL (Time-Series)', category: 'Time-Series Database', instance_type: 'Basic (1GB RAM)', price_per_unit: 15.00, unit: 'Month', geography: 'Global', attributes: { engine: 'PostgreSQL with TimescaleDB', service_type: 'Managed Time-Series', billing_model: 'Plan' } },
-  { provider: 'digitalocean', service: 'Managed PostgreSQL (Time-Series)', category: 'Time-Series Database', instance_type: 'Pro (4GB RAM)', price_per_unit: 60.00, unit: 'Month', geography: 'Global', attributes: { engine: 'PostgreSQL with TimescaleDB', service_type: 'Managed Time-Series', billing_model: 'Plan' } },
+  { provider: 'digitalocean', service: 'Managed PostgreSQL (Time-Series)', category: 'Time-Series', instance_type: 'Basic (1GB RAM)', price_per_unit: 15.00, unit: 'Month', geography: 'Global', attributes: { engine: 'PostgreSQL with TimescaleDB', database_type: 'Time-Series', billing_model: 'Plan' } },
+  { provider: 'digitalocean', service: 'Managed PostgreSQL (Time-Series)', category: 'Time-Series', instance_type: 'Pro (4GB RAM)', price_per_unit: 60.00, unit: 'Month', geography: 'Global', attributes: { engine: 'PostgreSQL with TimescaleDB', database_type: 'Time-Series', billing_model: 'Plan' } },
 
   // --- Alibaba Time Series Database ---
-  { provider: 'alibaba', service: 'Time Series Database (TSDB)', category: 'Time-Series Database', instance_type: 'Basic (4 vCPU, 8GB)', price_per_unit: 0.15, unit: 'Hour', geography: 'cn-hangzhou', attributes: { engine: 'TSDB', service_type: 'Serverless Time-Series', billing_model: 'Hourly' } },
-  { provider: 'alibaba', service: 'Time Series Database (TSDB)', category: 'Time-Series Database', instance_type: 'Storage', price_per_unit: 0.02, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'TSDB', service_type: 'Serverless Time-Series', billing_model: 'Storage' } },
+  { provider: 'alibaba', service: 'Time Series Database (TSDB)', category: 'Time-Series', instance_type: 'Basic (4 vCPU, 8GB)', price_per_unit: 0.15, unit: 'Hour', geography: 'cn-hangzhou', attributes: { engine: 'TSDB', database_type: 'Time-Series', billing_model: 'Hourly' } },
+  { provider: 'alibaba', service: 'Time Series Database (TSDB)', category: 'Time-Series', instance_type: 'Storage', price_per_unit: 0.02, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'TSDB', database_type: 'Time-Series', billing_model: 'Storage' } },
 ];
 
 export class TimeSeriesPricingPipeline {
@@ -44,24 +44,24 @@ export class TimeSeriesPricingPipeline {
     let recordsAdded = 0;
 
     await this.sql.begin(async (sql) => {
-      // Clear existing time-series data
+      // Clear existing time-series data (now under 'Time-Series' category)
       await sql`
         DELETE FROM pricing_records
         WHERE data_source = 'static_config'
         AND service_id IN (
-          SELECT id FROM services WHERE category = 'time_series'
+          SELECT id FROM services WHERE category = 'Time-Series'
         )
       `;
 
       for (const record of STATIC_TIME_SERIES_PRICING) {
         const providerId = await ensureProviderId(sql, record.provider);
 
-        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerId} AND name = ${record.service} AND category = 'time_series'`;
+        let serviceRes = await sql`SELECT id FROM services WHERE provider_id = ${providerId} AND name = ${record.service} AND category = 'Time-Series'`;
         let serviceId: string;
 
         if (serviceRes.length === 0) {
           const insertService = await sql`
-            INSERT INTO services (provider_id, name, category) VALUES (${providerId}, ${record.service}, 'time_series') RETURNING id
+            INSERT INTO services (provider_id, name, category) VALUES (${providerId}, ${record.service}, 'Time-Series') RETURNING id
           `;
           serviceId = insertService[0].id;
         } else {
