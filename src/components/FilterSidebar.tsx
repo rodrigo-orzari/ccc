@@ -324,6 +324,7 @@ interface FilterSidebarProps {
   selectedServerlessMemory: string[];
   selectedServerlessArchitectures: string[];
   selectedContainersOrchestrators: string[];
+  selectedContainersServiceTypes: string[];
   selectedContainersComputeTypes: string[];
   selectedContainersArchitectures: string[];
   selectedContainersBillingGranularity: string[];
@@ -384,6 +385,7 @@ interface FilterSidebarProps {
   onServerlessMemoryToggle: (opt: string) => void;
   onServerlessArchitectureToggle: (opt: string) => void;
   onContainersOrchestratorToggle: (opt: string) => void;
+  onContainersServiceTypeToggle: (opt: string) => void;
   onContainersComputeTypeToggle: (opt: string) => void;
   onContainersArchitectureToggle: (opt: string) => void;
   onContainersBillingGranularityToggle: (opt: string) => void;
@@ -434,6 +436,7 @@ interface FilterSidebarProps {
   onSetServerlessMemory: (items: string[]) => void;
   onSetServerlessArchitectures: (items: string[]) => void;
   onSetContainersOrchestrators: (items: string[]) => void;
+  onSetContainersServiceTypes: (items: string[]) => void;
   onSetContainersComputeTypes: (items: string[]) => void;
   onSetContainersArchitectures: (items: string[]) => void;
   onSetContainersBillingGranularity: (items: string[]) => void;
@@ -1151,11 +1154,11 @@ export default function FilterSidebar({
               title="Service Type"
               tooltip="Orchestration (Kubernetes, serverless platforms) vs. Container Registry (image storage and management)."
               options={['Orchestration', 'Container Registry']}
-              selected={selectedServiceType || ['Orchestration', 'Container Registry']}
-              onToggle={(st) => onServiceTypeToggle?.(st)}
-              onSetAll={(st) => onSetServiceType?.(st)}
-              isExpanded={expanded.serviceType ?? true}
-              onToggleExpand={() => onToggleSection('serviceType')}
+              selected={selectedContainersServiceTypes || ['Orchestration', 'Container Registry']}
+              onToggle={(st) => onContainersServiceTypeToggle?.(st)}
+              onSetAll={(st) => onSetContainersServiceTypes?.(st)}
+              isExpanded={expanded.containersServiceType ?? true}
+              onToggleExpand={() => onToggleSection('containersServiceType')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
