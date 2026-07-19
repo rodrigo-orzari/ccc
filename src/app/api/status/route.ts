@@ -4,17 +4,18 @@ import sql from '@/lib/db';
 export const dynamic = 'force-dynamic';
 
 const PIPELINE_DISPLAY: Record<string, string> = {
-  compute: 'Virtual Machines',
+  vm: 'Virtual Machines',
+  gpu: 'GPUs',
   database: 'Databases',
   serverless: 'Serverless',
   containers: 'Containers',
   networking: 'Networking',
-  data_warehouse: 'Data & Analytics',
+  'data-analytics': 'Data & Analytics',
   ai: 'AI & Machine Learning',
   storage: 'Storage',
   'app-hosting': 'App Hosting',
   integration: 'Integration',
-  security: 'Security',
+  security: 'Security & Identity',
 };
 
 export async function GET() {
@@ -24,7 +25,11 @@ export async function GET() {
       SELECT
         p.name            AS provider_name,
         p.slug,
-        s.category        AS pipeline,
+        CASE
+          WHEN s.category = 'compute' THEN 'vm'
+          WHEN s.category = 'data_warehouse' THEN 'data-analytics'
+          ELSE s.category
+        END AS pipeline,
         COUNT(pr.id)::int AS record_count,
         MAX(pr.updated_at) AS last_updated,
         SUM(CASE WHEN pr.data_source = 'static_config' THEN 1 ELSE 0 END)::int AS static_count,
@@ -32,8 +37,13 @@ export async function GET() {
       FROM providers p
       LEFT JOIN services s ON s.provider_id = p.id
       LEFT JOIN pricing_records pr ON pr.service_id = s.id
-      GROUP BY p.name, p.slug, s.category
-      ORDER BY p.name, COALESCE(s.category, 'zzz')
+      GROUP BY p.name, p.slug, 
+        CASE
+          WHEN s.category = 'compute' THEN 'vm'
+          WHEN s.category = 'data_warehouse' THEN 'data-analytics'
+          ELSE s.category
+        END
+      ORDER BY p.name, pipeline
     `;
 
     // Global totals

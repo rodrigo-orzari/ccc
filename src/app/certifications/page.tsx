@@ -223,7 +223,7 @@ export default function CertificationsPage() {
               {/* Provider */}
               <div className="px-5 py-4 flex items-start gap-2">
                 <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Provider</span>
-                <div className="flex flex-nowrap overflow-x-auto no-scrollbar gap-1.5 flex-1 pb-1">
+                <div className="flex flex-wrap gap-2 flex-1">
                   {COMPLIANCE_PROVIDERS.map((p) => {
                     const active = selProviders.has(p.id);
                     return (

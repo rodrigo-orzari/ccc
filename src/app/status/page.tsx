@@ -474,29 +474,31 @@ export default function StatusPage() {
 
                 const getCategoryDisplayName = (category: string) => {
                   const PIPELINE_DISPLAY: Record<string, string> = {
-                    compute: 'Virtual Machines',
+                    vm: 'Virtual Machines',
+                    gpu: 'GPUs',
                     database: 'Databases',
                     serverless: 'Serverless',
                     containers: 'Containers',
                     networking: 'Networking',
-                    data_warehouse: 'Data & Analytics',
+                    'data-analytics': 'Data & Analytics',
                     ai: 'AI & Machine Learning',
                     storage: 'Storage',
                     'app-hosting': 'App Hosting',
                     integration: 'Integration',
-                    security: 'Security',
+                    security: 'Security & Identity',
                   };
                   return PIPELINE_DISPLAY[category] ?? (category.charAt(0).toUpperCase() + category.slice(1));
                 };
 
                 const getCategoryIcon = (category: string) => {
                   const PIPELINE_ICON: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number }>> = {
-                    compute: PRODUCT_TYPE_ICONS.vm,
+                    vm: PRODUCT_TYPE_ICONS.vm,
+                    gpu: PRODUCT_TYPE_ICONS.gpu,
                     database: PRODUCT_TYPE_ICONS.database,
                     serverless: PRODUCT_TYPE_ICONS.serverless,
                     containers: PRODUCT_TYPE_ICONS.containers,
                     networking: PRODUCT_TYPE_ICONS.networking,
-                    data_warehouse: PRODUCT_TYPE_ICONS['data-analytics'],
+                    'data-analytics': PRODUCT_TYPE_ICONS['data-analytics'],
                     ai: PRODUCT_TYPE_ICONS.ai,
                     storage: PRODUCT_TYPE_ICONS.storage,
                     'app-hosting': PRODUCT_TYPE_ICONS['app-hosting'],
