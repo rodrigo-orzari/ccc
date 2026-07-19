@@ -92,6 +92,43 @@ export const initDb = async () => {
       -- Tag remaining data_warehouse rows (Redshift, BigQuery, Synapse, Snowflake, MaxCompute, etc.)
       -- as 'Warehouse' so the Data Warehouse workload component doesn't accidentally match Streaming rows.
       UPDATE pricing_records SET category = 'Warehouse' WHERE service_id IN (SELECT id FROM services WHERE category='data_warehouse') AND category != 'Streaming';
+
+      -- Normalize stale raw region slugs (eastus, us-east-1, cn-hangzhou, etc.) left over
+      -- from before a pipeline was fixed to call getGeography() — a DELETE+INSERT only
+      -- touches rows for the category it just ingested, so un-refreshed categories can
+      -- carry old un-normalized values indefinitely. Mirrors the same substring rules as
+      -- BaseAdapter.getGeography() in src/services/pricing_pipeline.ts; only rows that
+      -- aren't already one of the canonical buckets (or 'Global') are touched.
+      UPDATE pricing_records SET geography =
+        CASE
+          WHEN geography ILIKE '%us-%' OR geography ILIKE '%us%' OR geography ILIKE '%america%' OR geography ILIKE '%canada%' OR geography ILIKE '%centralus%' OR geography ILIKE '%eastus%' OR geography ILIKE '%westus%' THEN 'N. America'
+          WHEN geography ILIKE '%brazil%' OR geography ILIKE '%southamerica%' OR geography ILIKE '%sao%' OR geography ILIKE '%chile%' THEN 'S. America'
+          WHEN geography ILIKE '%europe%' OR geography ILIKE '%uk-%' OR geography ILIKE '%france%' OR geography ILIKE '%germany%' OR geography ILIKE '%westcore%' OR geography ILIKE '%switzerland%' OR geography ILIKE '%northeurope%' OR geography ILIKE '%westeurope%' THEN 'W. Europe'
+          WHEN geography ILIKE '%asia%' OR geography ILIKE '%japan%' OR geography ILIKE '%korea%' OR geography ILIKE '%india%' OR geography ILIKE '%singapore%' OR geography ILIKE '%tokyo%' OR geography ILIKE '%cn-%' OR geography ILIKE '%china%' OR geography ILIKE '%hangzhou%' THEN 'Asia Pacific'
+          WHEN geography ILIKE '%australia%' THEN 'Australia'
+          WHEN geography ILIKE '%me-%' OR geography ILIKE '%africa%' OR geography ILIKE '%uae%' OR geography ILIKE '%dubai%' THEN 'Mid East & Africa'
+          ELSE 'N. America'
+        END
+      WHERE geography IS NOT NULL
+        AND geography NOT IN ('N. America', 'S. America', 'W. Europe', 'N. Europe', 'Mid East & Africa', 'Asia Pacific', 'Australia', 'Global');
+
+      -- Backfill gpu_vendor for GPU rows ingested before withGpuAttrs() started
+      -- stamping it (src/services/pricing_pipeline.ts). Mirrors GPU_MODEL_SPECS
+      -- in src/config/gpu_models.ts — NVIDIA is the default since it covers all
+      -- but the AMD/Google/AWS/Intel accelerators listed explicitly below.
+      UPDATE pricing_records SET attributes = attributes || jsonb_build_object('gpu_vendor',
+        CASE attributes->>'gpu_model'
+          WHEN 'MI300X' THEN 'AMD'
+          WHEN 'MI325X' THEN 'AMD'
+          WHEN 'TPU v5e' THEN 'Google'
+          WHEN 'TPU v5p' THEN 'Google'
+          WHEN 'Trainium2' THEN 'AWS'
+          WHEN 'Inferentia2' THEN 'AWS'
+          WHEN 'Gaudi3' THEN 'Intel'
+          ELSE 'NVIDIA'
+        END
+      )
+      WHERE attributes->>'gpu_model' IS NOT NULL AND attributes->>'gpu_vendor' IS NULL;
     `);
 
     console.log('✅ Database schema initialized successfully.');
@@ -130,7 +167,7 @@ function parseFilterList(input: string | undefined, maxItems = MAX_FILTER_ITEMS)
 export function buildPricingFilters(query: any) {
   try {
     const {
-      provider, geography, os, arch, cpuVendor, gpu, gpuModel, category, pricing_model,
+      provider, geography, os, arch, cpuVendor, gpu, gpuModel, gpuVendor, category, pricing_model,
       minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, minGpuCount, maxGpuCount, search,
       product,
       dbFamilies, engines, deploymentTypes, haModes,
@@ -262,10 +299,12 @@ export function buildPricingFilters(query: any) {
       addInFilter(category, 'LOWER(pr.category)');
     }
 
-    // GPU-only: filter by chip model (H100, A100 80GB, L4, …), read from the
-    // attributes.gpu_model tag set at ingestion time (src/config/gpu_models.ts).
+    // GPU-only: filter by chip model (H100, A100 80GB, L4, …) and/or chip vendor
+    // (NVIDIA, AMD, Google, AWS, Intel), both read from the attributes.gpu_model /
+    // attributes.gpu_vendor tags set at ingestion time (src/config/gpu_models.ts).
     if (resolvedProductType === 'gpu') {
       addInFilter(gpuModel, "LOWER(pr.attributes->>'gpu_model')");
+      addInFilter(gpuVendor, "LOWER(pr.attributes->>'gpu_vendor')");
     }
 
     // Database & Analytics product type filters

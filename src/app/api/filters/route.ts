@@ -18,6 +18,7 @@ export async function GET() {
         ARRAY_AGG(DISTINCT pr.cpu_vendor) FILTER (WHERE pr.cpu_vendor IS NOT NULL AND pr.cpu_vendor != '' AND pr.cpu_vendor != 'N/A' AND pr.cpu_vendor != 'n/a') as cpu_vendors,
         ARRAY_AGG(DISTINCT pr.category) FILTER (WHERE pr.category IS NOT NULL AND pr.category != '' AND s.category = 'compute' AND pr.gpu_count = 0) as categories,
         ARRAY_AGG(DISTINCT pr.attributes->>'gpu_model') FILTER (WHERE pr.attributes->>'gpu_model' IS NOT NULL AND s.category = 'compute' AND pr.gpu_count > 0) as gpu_models,
+        ARRAY_AGG(DISTINCT pr.attributes->>'gpu_vendor') FILTER (WHERE pr.attributes->>'gpu_vendor' IS NOT NULL AND s.category = 'compute' AND pr.gpu_count > 0) as gpu_vendors,
         ARRAY_AGG(DISTINCT pr.category) FILTER (WHERE pr.category IS NOT NULL AND pr.category != '' AND s.category = 'database') as db_families,
         ARRAY_AGG(DISTINCT pr.category) FILTER (WHERE pr.category IS NOT NULL AND pr.category != '' AND s.category = 'networking') as networking_services,
         ARRAY_AGG(DISTINCT pr.category) FILTER (WHERE pr.category IS NOT NULL AND pr.category != '' AND s.category = 'storage') as storage_categories,

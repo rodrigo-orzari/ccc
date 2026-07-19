@@ -17,11 +17,12 @@ export const CPU_PROFILES = [
 export const CATEGORIES = ['General purpose', 'Compute optimized', 'Memory optimized', 'Storage optimized', 'Burstable', 'HPC'];
 export const PRICING_MODELS = ['On-Demand', 'Spot / Preemptible'];
 
-// GPU Compute-specific constants. No static default list — GPU_MODELS is
-// entirely derived from ingested data (see gpu_models facet in
-// useDynamicFilters / src/config/gpu_models.ts classifiers) so the filter
-// only ever offers models we actually have priced.
+// GPU Compute-specific constants. No static default list — GPU_MODELS and
+// GPU_VENDORS are entirely derived from ingested data (see gpu_models/
+// gpu_vendors facets in useDynamicFilters / src/config/gpu_models.ts
+// classifiers) so the filters only ever offer values we actually have priced.
 export const GPU_MODELS: string[] = [];
+export const GPU_VENDORS: string[] = [];
 
 // Database-specific constants
 export const DB_FAMILIES = ['Relational', 'NoSQL', 'Vector'];

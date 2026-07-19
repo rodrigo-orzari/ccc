@@ -33,7 +33,7 @@ import type { ProductType } from '@/types';
 
 const STORAGE_KEY = 'ccc-sidebar-collapsed';
 
-const PRODUCT_TYPES: { id: ProductType; label: string; icon: React.ComponentType<{ size?: number }>; soon?: boolean }[] = [
+const PRODUCT_TYPES: { id: ProductType | 'workloads'; label: string; icon: React.ComponentType<{ size?: number }>; soon?: boolean; href?: string }[] = [
   { id: 'ai', label: 'Artificial Intelligence', icon: Brain },
   { id: 'app-hosting', label: 'App Hosting', icon: Rocket },
   { id: 'containers', label: 'Containers', icon: Package },
@@ -46,12 +46,12 @@ const PRODUCT_TYPES: { id: ProductType; label: string; icon: React.ComponentType
   { id: 'serverless', label: 'Serverless', icon: Zap },
   { id: 'storage', label: 'Storage', icon: HardDrive },
   { id: 'vm', label: 'Virtual Machines', icon: Server },
+  { id: 'workloads', label: 'Workloads', icon: Package, href: '/workloads' },
 ];
 
 const EXTRA_LINKS: { id: string; label: string; href: string; icon: React.ComponentType<{ size?: number }> }[] = [
   { id: 'certifications', label: 'Compliance', href: '/certifications', icon: ScrollText },
   { id: 'datacenters', label: 'Datacenters', href: '/datacenters', icon: Building2 },
-  { id: 'workloads', label: 'Workloads', href: '/workloads', icon: Package },
 ];
 
 // Secondary site links, shown below the Workloads/Compliance/Datacenters group
@@ -207,17 +207,17 @@ export default function Sidebar({ activeProductType, onProductTypeChange }: Side
 
       <nav className="flex flex-col gap-1 px-2 pb-2 overflow-y-auto no-scrollbar">
         {PRODUCT_TYPES.map(product => {
-          const href = `/?product=${product.id === 'vm' ? 'compute' : product.id}`;
+          const href = product.href || `/?product=${product.id === 'vm' ? 'compute' : product.id}`;
           return renderLink(
             product.id,
             product.label,
             href,
             product.icon,
-            activeProductType === product.id,
-            (e) => {
+            activeProductType === product.id as any,
+            product.href ? undefined : (e) => {
               if (onProductTypeChange) {
                 e.preventDefault();
-                onProductTypeChange(product.id);
+                onProductTypeChange(product.id as ProductType);
                 window.history.pushState({}, '', href);
               }
             },

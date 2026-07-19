@@ -11,7 +11,7 @@ import { fetchGcpComputeRates, gcpFamilyOf, gcpGpuModelOf } from './gcp_compute_
 import { PROVIDERS } from '../config/index.ts';
 import {
   classifyAwsGpu, classifyAzureGpu, classifyGcpGpu, classifyOracleGpu,
-  classifyAlibabaGpu, classifyDigitalOceanGpu,
+  classifyAlibabaGpu, classifyDigitalOceanGpu, GPU_MODEL_SPECS,
 } from '../config/gpu_models.ts';
 
 // Merges a GPU classification into an attributes object (or returns the
@@ -22,12 +22,13 @@ function withGpuAttrs<T extends Record<string, any> | undefined>(
   attrs: T,
   classification: { model: string; vramGb: number } | null,
   vramGbOverride?: number,
-): T | { gpu_model: string; gpu_vram_gb: number } {
+): T | { gpu_model: string; gpu_vram_gb: number; gpu_vendor?: string } {
   if (!classification) return attrs as T;
   return {
     ...(attrs ?? {}),
     gpu_model: classification.model,
     gpu_vram_gb: vramGbOverride ?? classification.vramGb,
+    gpu_vendor: GPU_MODEL_SPECS[classification.model]?.vendor,
   };
 }
 

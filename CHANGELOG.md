@@ -6,7 +6,21 @@ All notable changes to Compare Cloud Costs are documented here. This changelog s
 
 ## [Unreleased]
 
+### Features
+- **GPU Vendor filter:** GPU chip vendor (NVIDIA, AMD, Google, AWS, Intel) is now a filterable facet on the GPU product category, alongside the existing GPU Model filter
+  - `src/config/gpu_models.ts` already had a `vendor` field on every entry in `GPU_MODEL_SPECS`, but it was never written to the database — `withGpuAttrs()` in `src/services/pricing_pipeline.ts` now stamps `attributes.gpu_vendor` at ingestion time alongside the existing `gpu_model`/`gpu_vram_gb`
+  - Added a one-time backfill in `initDb()` (`src/lib/api-utils.ts`) so existing GPU rows get `gpu_vendor` without needing a full re-ingestion
+  - Wired the new `gpuVendor` filter end-to-end: `/api/filters` aggregation, `buildPricingFilters()`, `useDynamicFilters`, `FilterSidebar`, and `page.tsx` — cross-checked occurrence counts against the existing `gpuModel` filter at every layer to confirm nothing was missed
+
 ### Fixed
+- **Containers "Service Type" and "Registry Pricing Component" filters were no-ops:** clicking "Container Registry" (or any Service Type option) under the Containers category changed local UI state but was never included in the query sent to `/api/pricing`, and `Registry Pricing Component` had no wired state at all
+  - Added the missing `subset()` calls, `canFetch`/`searchParams` `useMemo` dependencies, and backend handling in `buildPricingFilters()` (maps the UI's "Orchestration"/"Container Registry" labels to the DB's `category` column)
+- **App Hosting's Tiers and Compute Type filters were no-ops** for the same reason — present in `subset()` but missing from the `searchParams` `useMemo` dependency array, so React never recomputed the query URL when they changed
+- **AI category's Service Type/Model Tier/Context Window/Multimodal filters** referenced in `canFetch`'s body but missing from its dependency array — the "all deselected" fetch-blocking edge case went stale for those four filters
+- Systematically cross-checked all 58 filter groups across every category (query-param builder, both `useMemo` dependency arrays, `FilterSidebar` prop wiring, and backend param handling) after finding the above — no further gaps found at the time
+- **Stale raw region slugs in the Geography filter (e.g. `eastus`/`westus`, `us-east-1`, `cn-hangzhou`):** audited every current `geography` write path (all literal assignments in `src/services/*.ts` and `src/config/*.ts`, plus every `getGeography()` call site) and confirmed the ingestion code is fully normalized — the leftover raw values users still saw in the Geography filter were historical rows from before those adapters were fixed, persisting because a pipeline's DELETE+INSERT only touches the category it's currently re-ingesting
+  - Added a bulk normalization pass to `initDb()` in `src/lib/api-utils.ts` that rewrites any `pricing_records.geography` value not already one of the canonical buckets (or `Global`), using the same substring rules as `BaseAdapter.getGeography()`
+  - Runs automatically on every `POST /api/admin/init-db` and after every `POST /api/admin/fetch-pricing` (which calls `initDb()` post-pipeline) — no full re-ingestion needed, just a schema-init call
 - **Workload Well-Architected pillar composition:** audited all 19 workload definitions (`src/config/workloads.ts`) and found that 3 of the 4 shared pillar-modifier helpers (`perfWantsCache`, `reliabilityWantsLoadBalancer`, `reliabilityWantsBackup`) were imported but never called — meaning Performance/Reliability sliders had documented-but-nonexistent effects on caching, load balancers, and backups
   - Added shared `cacheComponent()` and `backupStorageComponent()` factories; wired `perfWantsCache` into 5 workloads (Serverless Web App, 3-Tier Web, Kubernetes App Platform, SaaS on Managed Platform, Compliance-Ready Web App) and `reliabilityWantsBackup` into 13 workloads
   - Wired `reliabilityWantsLoadBalancer` into 5 workloads' existing load-balancer components (3-Tier Web, E-Commerce Microservices, Kubernetes App Platform, Content & Media Platform, Compliance-Ready Web App) — previously static/always-on regardless of the Reliability slider

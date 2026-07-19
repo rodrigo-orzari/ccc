@@ -49,6 +49,7 @@ export default function Dashboard() {
       [selectedCpu, setSelectedCpu, staticConfig.CPU_PROFILES.length, () => [...config.CPU_PROFILES.map(p => p.id)]],
       [selectedCategory, setSelectedCategory, staticConfig.CATEGORIES.length, () => [...config.CATEGORIES]],
       [selectedGpuModels, setSelectedGpuModels, staticConfig.GPU_MODELS.length, () => [...config.GPU_MODELS]],
+      [selectedGpuVendors, setSelectedGpuVendors, staticConfig.GPU_VENDORS.length, () => [...config.GPU_VENDORS]],
       [selectedPricingModels, setSelectedPricingModels, staticConfig.PRICING_MODELS.length, () => ['On-Demand']],
       [selectedDbFamilies, setSelectedDbFamilies, staticConfig.DB_FAMILIES.length, () => [...config.DB_FAMILIES]],
       [selectedEngines, setSelectedEngines, staticConfig.DB_ENGINES.length, () => [...config.DB_ENGINES]],
@@ -119,6 +120,7 @@ export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([...config.CATEGORIES]);
   const [selectedPricingModels, setSelectedPricingModels] = useState<string[]>(['On-Demand']);
   const [selectedGpuModels, setSelectedGpuModels] = useState<string[]>([...config.GPU_MODELS]);
+  const [selectedGpuVendors, setSelectedGpuVendors] = useState<string[]>([...config.GPU_VENDORS]);
 
   const [selectedDbFamilies, setSelectedDbFamilies] = useState<string[]>([...config.DB_FAMILIES]);
   const [selectedEngines, setSelectedEngines] = useState<string[]>([...config.DB_ENGINES]);
@@ -257,6 +259,7 @@ export default function Dashboard() {
     os: true,
     cpu: true,
     gpuModel: true,
+    gpuVendor: true,
     specs: true,
     dbFamily: true,
     engine: true,
@@ -329,6 +332,7 @@ export default function Dashboard() {
     subset('category', selectedCategory, config.CATEGORIES);
     subset('pricing_model', selectedPricingModels, config.PRICING_MODELS);
     subset('gpuModel', selectedGpuModels, config.GPU_MODELS);
+    subset('gpuVendor', selectedGpuVendors, config.GPU_VENDORS);
     subset('dbFamilies', selectedDbFamilies, config.DB_FAMILIES);
     subset('engines', selectedEngines, config.DB_ENGINES);
     subset('deploymentTypes', selectedDeploymentTypes, config.DEPLOYMENT_TYPES);
@@ -414,7 +418,7 @@ export default function Dashboard() {
     params.append('search', search);
     return params;
   }, [
-    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedGpuModels, selectedCategory, selectedPricingModels,
+    activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedGpuModels, selectedGpuVendors, selectedCategory, selectedPricingModels,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
@@ -448,9 +452,9 @@ export default function Dashboard() {
       selectedPricingModels.length === 0
     )) return false;
 
-    // GPU_MODELS has no static default — it's populated only once ingested data
-    // arrives, so an empty selectedGpuModels means "not loaded yet" / "no
-    // filter", not "user deselected everything". Don't block fetch on it.
+    // GPU_MODELS/GPU_VENDORS have no static default — they're populated only
+    // once ingested data arrives, so an empty selection means "not loaded yet"
+    // / "no filter", not "user deselected everything". Don't block fetch on them.
     if (activeProductType === 'gpu' && (
       selectedOS.length === 0 ||
       selectedCpu.length === 0 ||
@@ -538,7 +542,7 @@ export default function Dashboard() {
   }, [
     activeProductType,
     selectedProviders, selectedGeographies,
-    selectedOS, selectedCpu, selectedGpuModels, selectedCategory, selectedPricingModels,
+    selectedOS, selectedCpu, selectedGpuModels, selectedGpuVendors, selectedCategory, selectedPricingModels,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
@@ -776,6 +780,7 @@ export default function Dashboard() {
           selectedCategory={selectedCategory}
           selectedPricingModels={selectedPricingModels}
           selectedGpuModels={selectedGpuModels}
+          selectedGpuVendors={selectedGpuVendors}
           selectedDbFamilies={selectedDbFamilies}
           selectedEngines={selectedEngines}
           selectedDeploymentTypes={selectedDeploymentTypes}
@@ -843,6 +848,8 @@ export default function Dashboard() {
           onSetPricingModels={setSelectedPricingModels}
           onGpuModelToggle={(v) => toggleFilter(selectedGpuModels, setSelectedGpuModels, v)}
           onSetGpuModel={setSelectedGpuModels}
+          onGpuVendorToggle={(v) => toggleFilter(selectedGpuVendors, setSelectedGpuVendors, v)}
+          onSetGpuVendor={setSelectedGpuVendors}
           onDbFamilyToggle={(f) => toggleFilter(selectedDbFamilies, setSelectedDbFamilies, f)}
           onEngineToggle={(e) => toggleFilter(selectedEngines, setSelectedEngines, e)}
           onDeploymentTypeToggle={(d) => toggleFilter(selectedDeploymentTypes, setSelectedDeploymentTypes, d)}

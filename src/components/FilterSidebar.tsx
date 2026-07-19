@@ -350,6 +350,7 @@ interface FilterSidebarProps {
   selectedCategory: string[];
   selectedPricingModels: string[];
   selectedGpuModels: string[];
+  selectedGpuVendors: string[];
   selectedDbFamilies: string[];
   selectedEngines: string[];
   selectedDeploymentTypes: string[];
@@ -411,6 +412,8 @@ interface FilterSidebarProps {
   onSetPricingModels: (items: string[]) => void;
   onGpuModelToggle: (value: string) => void;
   onSetGpuModel: (items: string[]) => void;
+  onGpuVendorToggle: (value: string) => void;
+  onSetGpuVendor: (items: string[]) => void;
   onDbFamilyToggle: (fam: string) => void;
   onEngineToggle: (eng: string) => void;
   onDeploymentTypeToggle: (dt: string) => void;
@@ -563,6 +566,7 @@ export default function FilterSidebar({
   selectedCategory,
   selectedPricingModels,
   selectedGpuModels,
+  selectedGpuVendors,
   selectedDbFamilies,
   selectedEngines,
   selectedDeploymentTypes,
@@ -632,6 +636,8 @@ export default function FilterSidebar({
   onSetPricingModels,
   onGpuModelToggle,
   onSetGpuModel,
+  onGpuVendorToggle,
+  onSetGpuVendor,
   onDbFamilyToggle,
   onEngineToggle,
   onDeploymentTypeToggle,
@@ -903,6 +909,18 @@ export default function FilterSidebar({
               onSetAll={onSetOS}
               isExpanded={expanded.os ?? true}
               onToggleExpand={() => onToggleSection('os')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
+              title="GPU Vendor"
+              tooltip="The chip vendor — NVIDIA, AMD, Google (TPU), AWS (Trainium/Inferentia), or Intel (Gaudi). Derived from the GPU model classification, same source as GPU Model below."
+              options={config.GPU_VENDORS}
+              selected={selectedGpuVendors}
+              onToggle={onGpuVendorToggle}
+              onSetAll={onSetGpuVendor}
+              isExpanded={expanded.gpuVendor ?? true}
+              onToggleExpand={() => onToggleSection('gpuVendor')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
