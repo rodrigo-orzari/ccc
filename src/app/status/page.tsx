@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Footer, Sidebar, PRODUCT_TYPE_ICONS } from '@/components';
-import { HelpCircle } from 'lucide-react';
+import { HelpCircle, Link as LinkIcon } from 'lucide-react';
 import { STATUS_SPONSOR } from '@/config';
 
 interface PipelineStatus {
@@ -384,6 +384,17 @@ export default function StatusPage() {
 
             {status && !loading && (
               <>
+                {/* Summary Section Header */}
+                <div id="summary" className="max-w-[1600px] mx-auto mb-4 scroll-mt-6">
+                  <h2 className="text-xl font-bold text-[var(--text)] mb-1 group flex items-center gap-2">
+                    Summary
+                    <a href="#summary" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Summary section">
+                      <LinkIcon size={18} />
+                    </a>
+                  </h2>
+                  <p className="text-sm text-[var(--muted)]">A high-level look at the total number of pricing records across all providers.</p>
+                </div>
+
                 {/* Summary cards */}
                 <div className="max-w-[1600px] mx-auto">
                   <div className="summary-cards">
@@ -436,32 +447,16 @@ export default function StatusPage() {
                 {/* Divider */}
                 <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
 
-                {/* Data source legend */}
-                <div className="max-w-[1600px] mx-auto">
-                  <div
-                    style={{
-                      border: '1px solid var(--border)',
-                      borderRadius: 8,
-                      background: 'var(--surface)',
-                      padding: '1rem 1.25rem',
-                      marginBottom: '2.5rem',
-                    }}
-                  >
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: 12.5, color: 'var(--text)' }}>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                        <span style={{ flexShrink: 0 }}><SourceBadge source="api" apiCount={0} staticCount={0} /></span>
-                        <span>Pricing fetched live from the provider's pricing API during the most recent ingestion run. Most current and authoritative.</span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-                        <span style={{ flexShrink: 0 }}><SourceBadge source="static" apiCount={0} staticCount={0} /></span>
-                        <span>Manual fallback pricing used when a live fetch fails. Not auto-refreshed.</span>
-                      </div>
-                    </div>
-                  </div>
+                {/* Table Section Header */}
+                <div id="coverage-matrix" className="max-w-[1600px] mx-auto mb-4 scroll-mt-6">
+                  <h2 className="text-xl font-bold text-[var(--text)] mb-1 group flex items-center gap-2">
+                    Coverage Matrix
+                    <a href="#coverage-matrix" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Coverage Matrix section">
+                      <LinkIcon size={18} />
+                    </a>
+                  </h2>
+                  <p className="text-sm text-[var(--muted)]">Detailed breakdown of product categories and the volume of pricing data gathered for each provider.</p>
                 </div>
-
-                {/* Divider */}
-                <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
 
               {/* Status Matrix Table */}
               {(() => {
@@ -676,6 +671,20 @@ export default function StatusPage() {
                   </div>
                 );
               })()}
+
+              {/* Data source legend (Moved below table and unboxed) */}
+              <div className="max-w-[1600px] mx-auto mb-8 mt-2 pl-2">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: 12.5, color: 'var(--text)' }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                    <span style={{ flexShrink: 0 }}><SourceBadge source="api" apiCount={0} staticCount={0} /></span>
+                    <span>Pricing fetched live from the provider's pricing API during the most recent ingestion run. Most current and authoritative.</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
+                    <span style={{ flexShrink: 0 }}><SourceBadge source="static" apiCount={0} staticCount={0} /></span>
+                    <span>Manual fallback pricing used when a live fetch fails. Not auto-refreshed.</span>
+                  </div>
+                </div>
+              </div>
 
               <div className="max-w-[1600px] mx-auto mt-6">
                 <BackToTop />
