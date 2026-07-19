@@ -49,10 +49,13 @@ export const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1', '1 - 5', '> 5'];
 export const SERVERLESS_MEMORY_TIERS = ['<= 512 MB', '512 MB - 2 GB', '2 - 4 GB', '> 4 GB'];
 // CPU architecture. AWS Lambda is split x86 (Intel/AMD) vs ARM (Graviton); maps to pr.arch.
 export const SERVERLESS_ARCHITECTURES = ['x86', 'ARM'];
-// Service-type categorization for the Serverless tab. 'Compute' covers Lambda/Functions/Run
-// (the historical Serverless contents); the rest were the standalone Integration category,
-// folded in here so messaging/event/API/workflow services are evaluated alongside compute.
-export const SERVERLESS_SERVICE_TYPES = ['Compute', 'API Gateway', 'Messaging', 'Eventing', 'Workflow'];
+// Service-type categorization for the Serverless tab. Every serverless data source
+// (all static configs + live adapters) only ever tags rows 'Compute' — API Gateway,
+// Messaging, Eventing, and Workflow live under the separate Integration category
+// (src/config/integration.ts) with their own INTEGRATION_SERVICES filter, and were
+// never actually merged into the serverless query. Kept to just the real value so
+// the filter doesn't offer options that always return zero rows. See OPEN_DECISIONS.md.
+export const SERVERLESS_SERVICE_TYPES = ['Compute'];
 
 // Containers-specific constants
 export const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
@@ -109,14 +112,16 @@ export const ANALYTICS_TIERS = [
   'On-Demand',
 ];
 
-// Range defaults
+// Range defaults. Maxes are set with headroom above the largest real vCPU/memory
+// values found across the static config + live-adapter data (checked 2026-07-18).
 export const DEFAULT_VCPU_RANGE = { min: 0, max: 320 };
-export const DEFAULT_MEMORY_RANGE = { min: 0, max: 3200 };
+export const DEFAULT_MEMORY_RANGE = { min: 0, max: 4000 }; // real max 3844 GB
 export const DEFAULT_SERVERLESS_VCPU_RANGE = { min: 0, max: 16 };
 export const DEFAULT_SERVERLESS_MEMORY_RANGE = { min: 0, max: 32 };
-export const DEFAULT_CONTAINERS_VCPU_RANGE = { min: 0, max: 64 };
-export const DEFAULT_CONTAINERS_MEMORY_RANGE = { min: 0, max: 256 };
+export const DEFAULT_CONTAINERS_VCPU_RANGE = { min: 0, max: 256 }; // real max 208 vcpus
+export const DEFAULT_CONTAINERS_MEMORY_RANGE = { min: 0, max: 6000 }; // real max 5888 GB
 export const DEFAULT_PRICE_RANGE = { min: 0, max: 100 };
+export const DEFAULT_GPU_COUNT_RANGE = { min: 0, max: 16 };
 
 // Cloud providers with pricing data pipelines.
 // To add a new pricing provider, add it here, create a config file (src/config/<provider>_*.ts),

@@ -131,13 +131,13 @@ export function buildPricingFilters(query: any) {
   try {
     const {
       provider, geography, os, arch, cpuVendor, gpu, gpuModel, category, pricing_model,
-      minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, search,
+      minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, minGpuCount, maxGpuCount, search,
       product,
       dbFamilies, engines, deploymentTypes, haModes,
       serverlessLanguages, serverlessColdStart, serverlessTimeout, serverlessMemoryConfig, serverlessFreeTier,
       serverlessGranularity, serverlessExecutionModel, serverlessProvisionedConcurrency, serverlessEphemeralStorage,
       serverlessMemory, serverlessArchitecture,
-      containersOrchestrators, containersComputeTypes, containersArchitectures, containersBillingGranularity, containersGpuIncluded,
+      containersOrchestrators, containersComputeTypes, containersArchitectures, containersBillingGranularity,
       analyticsEngines, analyticsDeploymentTypes, analyticsTiers,
       aiServiceTypes, aiModelTiers, aiContextWindows, aiMultimodalOptions,
       networkingService, networkingConnectionTypes, networkingRoutingTypes, networkingHaSupport, networkingVpcSupport, networkingTransferDirections,
@@ -592,13 +592,6 @@ export function buildPricingFilters(query: any) {
         conditions.push(`LOWER(pr.attributes->>'billing_granularity') = ANY($${paramCount++})`);
         values.push((containersBillingGranularity as string).split(',').map((s: string) => s.toLowerCase()));
       }
-
-      // Containers GPU filtering
-      // true  → no condition (show all containers, including GPU-capable ones)
-      // false → exclude GPU containers (only non-GPU instances)
-      if (containersGpuIncluded === 'false') {
-        conditions.push(`pr.gpu_count = 0`);
-      }
     }
 
     // Storage product type filters (Object/Block/File/Archive). All driven by
@@ -670,6 +663,14 @@ export function buildPricingFilters(query: any) {
     if (maxMemory && !noComputeSliders.includes(resolvedProductType)) {
       conditions.push(`pr.memory_gb <= $${paramCount++}`);
       values.push(maxMemory);
+    }
+    if (minGpuCount && resolvedProductType === 'gpu') {
+      conditions.push(`pr.gpu_count >= $${paramCount++}`);
+      values.push(minGpuCount);
+    }
+    if (maxGpuCount && resolvedProductType === 'gpu') {
+      conditions.push(`pr.gpu_count <= $${paramCount++}`);
+      values.push(maxGpuCount);
     }
     if (minPrice) {
       conditions.push(`pr.price_per_unit >= $${paramCount++}`);

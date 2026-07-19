@@ -38,3 +38,33 @@ change, not a quick tweak — worth doing once, deliberately, ideally in the sam
 adding Mongo/Aiven rather than twice.
 
 **Status:** Not decided. Revisit when Mongo/Aiven are actually being added.
+
+---
+
+## Should Integration services (API Gateway/Messaging/Eventing/Workflow) actually merge into Serverless?
+
+**Raised:** 2026-07-18
+
+**Context:** The Serverless page's "Service Type" filter used to offer `Compute`,
+`API Gateway`, `Messaging`, `Eventing`, `Workflow` — but every serverless data source
+(all static configs + all live adapters) only ever tags rows `service_type: 'Compute'`.
+The other four values genuinely exist as real, priced data, but under the separate
+**Integration** product category (`src/config/integration.ts`, `IntegrationPricingPipeline`,
+`service.category = 'integration'`), with its own `INTEGRATION_SERVICES` filter. A code
+comment on the old `SERVERLESS_SERVICE_TYPES` constant suggested the intent was to fold
+Integration into Serverless, but the query layer for `product=serverless` was never wired
+to actually include `category='integration'` rows — so those four options always returned
+zero results on the Serverless page. Trimmed the constant to just `['Compute']` and removed
+the now-single-option filter section (see FilterSidebar.tsx, config/index.ts).
+
+**The question:** Should Integration & Messaging genuinely become part of the Serverless
+category (one merged product type, one query), or should it stay a separate top-level
+category as it is today? Both are legitimate products; this is a taxonomy call, not a bug.
+
+**Scope if merged:** `api-utils.ts` would need `product=serverless` to union in
+`category='integration'` rows; `PricingTable.tsx` would need columns that work for both
+compute functions and Integration services (different attribute shapes); the sidebar's
+"Serverless" nav entry effectively absorbs "Integration".
+
+**Status:** Not decided. Left as two separate categories for now (current behavior is
+consistent, just no longer has a filter that lies about coverage).

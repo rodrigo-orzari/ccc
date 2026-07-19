@@ -415,7 +415,6 @@ export default function PricingTable({
                   <Th colKey="db_family_cpu_vendor" label="Compute Type" />
                   <Th colKey="deployment_arch"    label="Architecture" />
                   <Th colKey="ha_mode_os"         label="Granularity" />
-                  <Th colKey="gpu"                label="GPU" />
                 </>) : activeProductType === 'networking' ? (<>
                   <Th colKey="engine_category"    label="Service" />
                   <Th colKey="db_family_cpu_vendor" label="Billing Model" />
@@ -599,7 +598,6 @@ function TableRow({
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.compute_type || '—'}</span></td>
         <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.architecture || '—'}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity || '—'}</span></td>
-        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.gpu_count > 0 ? <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">GPU</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
       </>) : activeProductType === 'networking' ? (<>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_model || '—'}</span></td>

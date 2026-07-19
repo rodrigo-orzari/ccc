@@ -158,7 +158,6 @@ export default function Dashboard() {
   const [selectedContainersComputeTypes, setSelectedContainersComputeTypes] = useState<string[]>([...config.CONTAINERS_COMPUTE_TYPES]);
   const [selectedContainersArchitectures, setSelectedContainersArchitectures] = useState<string[]>([...config.CONTAINERS_ARCHITECTURES]);
   const [selectedContainersBillingGranularity, setSelectedContainersBillingGranularity] = useState<string[]>([...config.CONTAINERS_BILLING_GRANULARITY]);
-  const [containersGpuIncluded, setContainersGpuIncluded] = useState(true);
 
   const [selectedAnalyticsEngines, setSelectedAnalyticsEngines] = useState<string[]>([...config.ANALYTICS_ENGINES]);
   const [selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes] = useState<string[]>([...config.ANALYTICS_DEPLOYMENT_TYPES]);
@@ -209,6 +208,7 @@ export default function Dashboard() {
   const [containersVCpuRange, setContainersVCpuRange] = useState({ ...config.DEFAULT_CONTAINERS_VCPU_RANGE });
   const [containersMemoryRange, setContainersMemoryRange] = useState({ ...config.DEFAULT_CONTAINERS_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...config.DEFAULT_PRICE_RANGE });
+  const [gpuCountRange, setGpuCountRange] = useState({ ...config.DEFAULT_GPU_COUNT_RANGE });
   const [search, setSearch] = useState('');
 
   // Seed product type / provider / search from URL params so deep links from the
@@ -346,8 +346,6 @@ export default function Dashboard() {
     subset('containersComputeTypes', selectedContainersComputeTypes, config.CONTAINERS_COMPUTE_TYPES);
     subset('containersArchitectures', selectedContainersArchitectures, config.CONTAINERS_ARCHITECTURES);
     subset('containersBillingGranularity', selectedContainersBillingGranularity, config.CONTAINERS_BILLING_GRANULARITY);
-    // Boolean toggle: only constrain when GPU containers are excluded.
-    if (!containersGpuIncluded) params.append('containersGpuIncluded', 'false');
     subset('analyticsEngines', selectedAnalyticsEngines, config.ANALYTICS_ENGINES);
     subset('analyticsDeploymentTypes', selectedAnalyticsDeploymentTypes, config.ANALYTICS_DEPLOYMENT_TYPES);
     subset('analyticsTiers', selectedAnalyticsTiers, config.ANALYTICS_TIERS);
@@ -407,6 +405,8 @@ export default function Dashboard() {
     if (currentMemoryRange.max < currentMemoryDefault.max) params.append('maxMemory', currentMemoryRange.max.toString());
     if (priceRange.min > config.DEFAULT_PRICE_RANGE.min) params.append('minPrice', priceRange.min.toString());
     if (priceRange.max < config.DEFAULT_PRICE_RANGE.max) params.append('maxPrice', priceRange.max.toString());
+    if (activeProductType === 'gpu' && gpuCountRange.min > config.DEFAULT_GPU_COUNT_RANGE.min) params.append('minGpuCount', gpuCountRange.min.toString());
+    if (activeProductType === 'gpu' && gpuCountRange.max < config.DEFAULT_GPU_COUNT_RANGE.max) params.append('maxGpuCount', gpuCountRange.max.toString());
     params.append('search', search);
     return params;
   }, [
@@ -415,7 +415,7 @@ export default function Dashboard() {
     selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
     selectedServerlessMemory, selectedServerlessArchitectures, selectedServerlessServiceTypes,
-    selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity, containersGpuIncluded,
+    selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes, selectedNetworkingHaSupport, selectedNetworkingVpcSupport, selectedNetworkingDirections,
@@ -424,7 +424,7 @@ export default function Dashboard() {
     selectedStorageCategories, selectedStorageTiers, selectedStorageRedundancies, selectedStorageMedia,
     selectedIntegrationServices, selectedIntegrationTiers, selectedIntegrationPricingModels,
     selectedIntegrationSizes, selectedIntegrationProtocols,
-    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, search
+    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, gpuCountRange, search
   ]);
 
   const debouncedParamsString = useDeferredValue(searchParams.toString());
@@ -786,7 +786,6 @@ export default function Dashboard() {
           selectedContainersComputeTypes={selectedContainersComputeTypes}
           selectedContainersArchitectures={selectedContainersArchitectures}
           selectedContainersBillingGranularity={selectedContainersBillingGranularity}
-          containersGpuIncluded={containersGpuIncluded}
           selectedAnalyticsEngines={selectedAnalyticsEngines}
           selectedAnalyticsDeploymentTypes={selectedAnalyticsDeploymentTypes}
           selectedAnalyticsTiers={selectedAnalyticsTiers}
@@ -820,6 +819,7 @@ export default function Dashboard() {
           vCpuRange={activeProductType === 'serverless' ? serverlessVCpuRange : activeProductType === 'containers' ? containersVCpuRange : vCpuRange}
           memoryRange={activeProductType === 'serverless' ? serverlessMemoryRange : activeProductType === 'containers' ? containersMemoryRange : memoryRange}
           priceRange={priceRange}
+          gpuCountRange={gpuCountRange}
           showAggregation={showAggregation}
           expanded={expanded}
           onProviderToggle={(p) => toggleFilter(selectedProviders, setSelectedProviders, p)}
@@ -851,7 +851,6 @@ export default function Dashboard() {
           onContainersComputeTypeToggle={(c) => toggleFilter(selectedContainersComputeTypes, setSelectedContainersComputeTypes, c)}
           onContainersArchitectureToggle={(a) => toggleFilter(selectedContainersArchitectures, setSelectedContainersArchitectures, a)}
           onContainersBillingGranularityToggle={(b) => toggleFilter(selectedContainersBillingGranularity, setSelectedContainersBillingGranularity, b)}
-          onContainersGpuToggle={setContainersGpuIncluded}
           onAnalyticsEngineToggle={(e) => toggleFilter(selectedAnalyticsEngines, setSelectedAnalyticsEngines, e)}
           onAnalyticsDeploymentTypeToggle={(d) => toggleFilter(selectedAnalyticsDeploymentTypes, setSelectedAnalyticsDeploymentTypes, d)}
           onAnalyticsTierToggle={(t) => toggleFilter(selectedAnalyticsTiers, setSelectedAnalyticsTiers, t)}
@@ -938,6 +937,7 @@ export default function Dashboard() {
           onVCpuRangeChange={activeProductType === 'serverless' ? setServerlessVCpuRange : activeProductType === 'containers' ? setContainersVCpuRange : setVCpuRange}
           onMemoryRangeChange={activeProductType === 'serverless' ? setServerlessMemoryRange : activeProductType === 'containers' ? setContainersMemoryRange : setMemoryRange}
           onPriceRangeChange={setPriceRange}
+          onGpuCountRangeChange={setGpuCountRange}
           onShowAggregationChange={setShowAggregation}
           onToggleSection={toggleSection}
         />

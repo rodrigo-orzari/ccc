@@ -294,7 +294,6 @@ interface FilterSidebarProps {
   selectedContainersComputeTypes: string[];
   selectedContainersArchitectures: string[];
   selectedContainersBillingGranularity: string[];
-  containersGpuIncluded: boolean;
   selectedAnalyticsEngines: string[];
   selectedAnalyticsDeploymentTypes: string[];
   selectedAnalyticsTiers: string[];
@@ -355,7 +354,6 @@ interface FilterSidebarProps {
   onContainersComputeTypeToggle: (opt: string) => void;
   onContainersArchitectureToggle: (opt: string) => void;
   onContainersBillingGranularityToggle: (opt: string) => void;
-  onContainersGpuToggle: (value: boolean) => void;
   onAnalyticsEngineToggle: (eng: string) => void;
   onAnalyticsDeploymentTypeToggle: (dt: string) => void;
   onAnalyticsTierToggle: (tier: string) => void;
@@ -448,6 +446,8 @@ interface FilterSidebarProps {
   onVCpuRangeChange: (range: { min: number; max: number }) => void;
   onMemoryRangeChange: (range: { min: number; max: number }) => void;
   onPriceRangeChange: (range: { min: number; max: number }) => void;
+  gpuCountRange: { min: number; max: number };
+  onGpuCountRangeChange: (range: { min: number; max: number }) => void;
   onShowAggregationChange: (value: boolean) => void;
   onToggleSection: (key: string) => void;
   /** Mobile drawer: whether the sidebar is open (ignored on lg+ where it's always visible). */
@@ -501,7 +501,6 @@ export default function FilterSidebar({
   selectedContainersComputeTypes,
   selectedContainersArchitectures,
   selectedContainersBillingGranularity,
-  containersGpuIncluded,
   selectedAnalyticsEngines,
   selectedAnalyticsDeploymentTypes,
   selectedAnalyticsTiers,
@@ -535,6 +534,7 @@ export default function FilterSidebar({
   vCpuRange,
   memoryRange,
   priceRange,
+  gpuCountRange,
   showAggregation,
   expanded,
   onProviderToggle,
@@ -566,7 +566,6 @@ export default function FilterSidebar({
   onContainersComputeTypeToggle,
   onContainersArchitectureToggle,
   onContainersBillingGranularityToggle,
-  onContainersGpuToggle,
   onAnalyticsEngineToggle,
   onAnalyticsDeploymentTypeToggle,
   onAnalyticsTierToggle,
@@ -653,6 +652,7 @@ export default function FilterSidebar({
   onVCpuRangeChange,
   onMemoryRangeChange,
   onPriceRangeChange,
+  onGpuCountRangeChange,
   onShowAggregationChange,
   onToggleSection,
   isOpen = false,
@@ -774,6 +774,19 @@ export default function FilterSidebar({
               onSetAll={onSetOS}
               isExpanded={expanded.os ?? true}
               onToggleExpand={() => onToggleSection('os')}
+            />
+            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
+
+            <FilterSection
+              title="CPU"
+              tooltip="Processor vendor and architecture. ARM covers both AWS Graviton and Ampere Altra — the table shows the specific chip."
+              options={config.CPU_PROFILES.map(p => p.id)}
+              getLabel={(id) => config.CPU_PROFILES.find(p => p.id === id)?.label || id}
+              selected={selectedCpu}
+              onToggle={onCpuToggle}
+              onSetAll={onSetCpu}
+              isExpanded={expanded.cpu ?? true}
+              onToggleExpand={() => onToggleSection('cpu')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
 
@@ -965,16 +978,6 @@ export default function FilterSidebar({
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
-              title="Service Type"
-              tooltip="Compute (Lambda/Functions/Run) plus the API Gateway, Messaging, Eventing, and Workflow services that pair with them."
-              options={config.SERVERLESS_SERVICE_TYPES}
-              selected={selectedServerlessServiceTypes}
-              onToggle={onServerlessServiceTypeToggle}
-              onSetAll={onSetServerlessServiceTypes}
-              isExpanded={expanded.serverlessServiceType ?? true}
-              onToggleExpand={() => onToggleSection('serverlessServiceType')}
-            />
-            <FilterSection
               title="Architecture"
               tooltip="CPU architecture: x86 (Intel/AMD) or ARM (e.g. AWS Graviton). ARM is typically cheaper."
               options={config.SERVERLESS_ARCHITECTURES}
@@ -1150,53 +1153,6 @@ export default function FilterSidebar({
               isExpanded={expanded.containersBillingGranularity ?? true}
               onToggleExpand={() => onToggleSection('containersBillingGranularity')}
             />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <section className="space-y-3">
-              <div className="flex justify-between items-center">
-                <h2 className="m-0">
-                  <button
-                    onClick={() => onToggleSection('containersGpu')}
-                    className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
-                  >
-                    <ChevronDown size={10} className={`transition-transform ${expanded.containersGpu ?? true ? '' : '-rotate-90'}`} />
-                    GPU Support
-                  </button>
-                </h2>
-                <button
-                  onClick={() => onContainersGpuToggle(false)}
-                  className={`text-[10px] font-bold uppercase transition-colors ${
-                    !containersGpuIncluded ? 'text-black dark:text-[#f7f8ff]' : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
-                  }`}
-                >
-                  {!containersGpuIncluded ? 'Clear All' : 'Select All'}
-                </button>
-              </div>
-              {(expanded.containersGpu ?? true) && (
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={() => onContainersGpuToggle(true)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      containersGpuIncluded
-                        ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                        : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    onClick={() => onContainersGpuToggle(false)}
-                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                      !containersGpuIncluded
-                        ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                        : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                    }`}
-                  >
-                    No
-                  </button>
-                </div>
-              )}
-            </section>
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
         )}
 
@@ -1618,7 +1574,7 @@ export default function FilterSidebar({
                 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
               >
                 <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
-                {['vm', 'database', 'containers', 'serverless'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'serverless' ? "Filter by memory size, price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
+                {['vm', 'database', 'containers', 'serverless', 'gpu'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'gpu' ? "Filter by memory size (GB), GPU count, and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'serverless' ? "Filter by memory size, price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
               </button>
             </h2>
             <button
@@ -1626,6 +1582,9 @@ export default function FilterSidebar({
                 onVCpuRangeChange({ ...currentVCpuDefault });
                 onMemoryRangeChange({ ...currentMemoryDefault });
                 onPriceRangeChange({ ...config.DEFAULT_PRICE_RANGE });
+                if (activeProductType === 'gpu') {
+                  onGpuCountRangeChange({ ...config.DEFAULT_GPU_COUNT_RANGE });
+                }
                 if (activeProductType === 'serverless') {
                   onSetServerlessMemory(config.SERVERLESS_MEMORY_TIERS);
                 }
@@ -1637,6 +1596,7 @@ export default function FilterSidebar({
                 memoryRange.max !== currentMemoryDefault.max ||
                 priceRange.min !== config.DEFAULT_PRICE_RANGE.min ||
                 priceRange.max !== config.DEFAULT_PRICE_RANGE.max ||
+                (activeProductType === 'gpu' && (gpuCountRange.min !== config.DEFAULT_GPU_COUNT_RANGE.min || gpuCountRange.max !== config.DEFAULT_GPU_COUNT_RANGE.max)) ||
                 (activeProductType === 'serverless' && selectedServerlessMemory.length !== config.SERVERLESS_MEMORY_TIERS.length)
                   ? 'text-black dark:text-[#f7f8ff]'
                   : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
@@ -1665,6 +1625,28 @@ export default function FilterSidebar({
                       max={currentMemoryDefault.max}
                       value={memoryRange}
                       onChange={onMemoryRangeChange}
+                    />
+                  </div>
+                </>
+              )}
+              {activeProductType === 'gpu' && (
+                <>
+                  <div className="space-y-2">
+                    <div className="text-[10px] font-bold text-[#737373]">Memory (GB)</div>
+                    <RangeSlider
+                      min={currentMemoryDefault.min}
+                      max={currentMemoryDefault.max}
+                      value={memoryRange}
+                      onChange={onMemoryRangeChange}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-[10px] font-bold text-[#737373]">GPU Count</div>
+                    <RangeSlider
+                      min={config.DEFAULT_GPU_COUNT_RANGE.min}
+                      max={config.DEFAULT_GPU_COUNT_RANGE.max}
+                      value={gpuCountRange}
+                      onChange={onGpuCountRangeChange}
                     />
                   </div>
                 </>
