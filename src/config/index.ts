@@ -241,16 +241,15 @@ export const INTEGRATION_SIZES = ['256 KB', '1 MB', '4 MB', '10 MB', '100 MB'];
 export const INTEGRATION_PROTOCOLS = ['REST', 'HTTP', 'SOAP', 'GraphQL'];
 
 // --- SECURITY & IDENTITY ---
-// Verified against live data (2026-07-19): Bot Management, SSL/TLS Encryption, and
-// Zero Trust Network Access (Cloudflare) were real, priced rows with no filter option
+// Verified against live data (2026-07-19): Bot Management, SSL/TLS, and
+// Zero Trust (Cloudflare) were real, priced rows with no filter option
 // to find them — added below. Also: buildPricingFilters had no 'security' block at
 // all, so the Security Service filter was a no-op regardless of options (fixed in
 // api-utils.ts).
-export const SECURITY_SERVICES = ['Web Application Firewall (WAF)', 'Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'DDoS Protection', 'Threat Detection', 'Bot Management', 'SSL/TLS Encryption', 'Zero Trust Network Access'];
+export const SECURITY_SERVICES = ['Web Application Firewall', 'Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'DDoS Protection', 'Threat Detection', 'Bot Management', 'SSL/TLS', 'Zero Trust'];
 export const SECURITY_SERVICE_GROUPS: { label: string; services: string[] }[] = [
-  { label: 'Network Security', services: ['Web Application Firewall (WAF)', 'DDoS Protection', 'Bot Management', 'Zero Trust Network Access'] },
-  { label: 'Identity & Encryption', services: ['Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'SSL/TLS Encryption'] },
-  { label: 'Threat & Compliance', services: ['Threat Detection'] },
+  { label: 'Network Security', services: ['Web Application Firewall', 'DDoS Protection', 'Bot Management', 'Zero Trust', 'Threat Detection'] },
+  { label: 'Identity & Encryption', services: ['Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'SSL/TLS'] },
 ];
 
 // --- SPONSORSHIP ---

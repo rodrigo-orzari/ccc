@@ -616,7 +616,7 @@ export function buildPricingFilters(query: any) {
     }
 
     // Security product type filters. securityService matches the real service
-    // name (e.g. "Web Application Firewall (WAF)"), same pattern as networkingService —
+    // name (e.g. "Web Application Firewall"), same pattern as networkingService —
     // this block was previously missing entirely, making the Security Service filter a no-op.
     if (resolvedProductType === 'security') {
       addInFilter(securityService, 's.name', { lower: false });

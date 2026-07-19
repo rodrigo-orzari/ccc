@@ -24,8 +24,6 @@ export const NOT_OFFERED: Record<string, NotOfferedEntry[]> = {
     { productType: 'integration', category: 'Eventing' },
     // No customer-facing key-management service.
     { productType: 'security', category: 'Identity & Encryption' },
-    // No managed threat-detection service (no GuardDuty / Defender equivalent).
-    { productType: 'security', category: 'Threat & Compliance' },
   ],
   oracle: [
     // No direct Step Functions-style serverless workflow. (Oracle Integration

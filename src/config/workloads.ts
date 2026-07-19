@@ -514,7 +514,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
       {
         id: 'threat-detection', name: 'Threat Detection & Monitoring', icon: '🚨',
         description: 'Continuous monitoring for compliance and anomalies (Security = high)',
-        getRequirements: (p) => securityIncludes(p.security, 'threat') ? ({ productType: 'security', category: 'Threat & Compliance', quantity: 1 }) : null,
+        getRequirements: (p) => securityIncludes(p.security, 'threat') ? ({ productType: 'security', category: 'Network Security', quantity: 1 }) : null,
       },
       {
         id: 'audit-archive', name: 'Audit Log Archive', icon: '🪣',
@@ -692,7 +692,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         getRequirements: (p) => ({ productType: 'networking', category: 'Content Delivery Network (CDN)', quantity: egressGb(p, 10240) }),
       },
       {
-        id: 'ztna', name: 'Zero Trust Network Access', icon: '🚪',
+        id: 'ztna', name: 'Zero Trust', icon: '🚪',
         description: 'Identity-aware application access',
         getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
       },
@@ -707,7 +707,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
       },
       {
-        id: 'ssl-tls', name: 'SSL/TLS Encryption', icon: '🔒',
+        id: 'ssl-tls', name: 'SSL/TLS', icon: '🔒',
         description: 'Edge certificate management',
         getRequirements: () => ({ productType: 'security', category: 'Identity & Encryption', quantity: 1 }),
       },
