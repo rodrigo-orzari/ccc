@@ -713,7 +713,7 @@ export default function WorkloadDetails() {
                   <table className="w-full min-w-[900px] h-full text-left border-collapse">
                   <thead className="bg-[#f5f5f5] dark:bg-[#171717]">
                     <tr className="border-b border-[#e5e5e5] dark:border-[#262626]">
-                      <th className="py-3 px-4 text-center">
+                      <th className="py-3 px-4 text-center sticky left-0 z-20 bg-[#f5f5f5] dark:bg-[#171717] border-r border-[#e5e5e5] dark:border-[#262626]">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">Service</span>
                       </th>
                       {PROVIDER_IDS.filter(p => selectedProviders.has(p)).map(p => <ProviderTh key={p} id={p} />)}
@@ -730,7 +730,7 @@ export default function WorkloadDetails() {
                       
                       return (
                       <tr key={c.id} className={`transition-colors group ${index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'} hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}>
-                        <td className="py-3 px-4 align-middle whitespace-nowrap text-center">
+                        <td className={`py-3 px-4 align-middle whitespace-nowrap text-center sticky left-0 z-10 border-r border-[#e5e5e5] dark:border-[#262626] group-hover:bg-[#eef2ff] dark:group-hover:bg-[#111827] ${index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'}`}>
                           <div className="flex flex-col items-center gap-0.5">
                             <div className="flex items-center gap-2 justify-center">
                               <span>{c.icon}</span>

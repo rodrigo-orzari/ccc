@@ -6,6 +6,19 @@ All notable changes to Compare Cloud Costs are documented here. This changelog s
 
 ## [Unreleased]
 
+### Fixed
+- **Workload Well-Architected pillar composition:** audited all 19 workload definitions (`src/config/workloads.ts`) and found that 3 of the 4 shared pillar-modifier helpers (`perfWantsCache`, `reliabilityWantsLoadBalancer`, `reliabilityWantsBackup`) were imported but never called — meaning Performance/Reliability sliders had documented-but-nonexistent effects on caching, load balancers, and backups
+  - Added shared `cacheComponent()` and `backupStorageComponent()` factories; wired `perfWantsCache` into 5 workloads (Serverless Web App, 3-Tier Web, Kubernetes App Platform, SaaS on Managed Platform, Compliance-Ready Web App) and `reliabilityWantsBackup` into 13 workloads
+  - Wired `reliabilityWantsLoadBalancer` into 5 workloads' existing load-balancer components (3-Tier Web, E-Commerce Microservices, Kubernetes App Platform, Content & Media Platform, Compliance-Ready Web App) — previously static/always-on regardless of the Reliability slider
+  - Extended the Security-slider-conditional pattern (previously only on Compliance-Ready Web App) to E-Commerce Microservices' WAF and SaaS-on-Managed-Platform's DDoS Protection
+  - Fixed HPC/Scientific Computing, the only workload where the Reliability slider had zero effect on any component — compute node count now scales with `reliabilityReplicas`
+  - Added a new Secrets Management component to Compliance-Ready Web App (Security ≥ medium), using the `security_pipeline.ts` category added for API keys/credential rotation that no workload previously referenced
+  - Verified via a standalone script calling `getRequirements()` directly (bypassing the DB) across priority combinations — confirmed correct add/remove behavior in every tested case
+  - Zero-Trust Enterprise Edge and Hybrid Cloud Network Backbone intentionally kept their security components static — security *is* those workloads' purpose, so gating it off at low Security would defeat them
+
+### UI
+- **Frozen first column on workload comparison tables:** the Service/component-name column now stays pinned (`sticky left-0`) while provider price columns scroll horizontally, so long workloads no longer lose context when scrolled — `src/app/workloads/[id]/page.tsx`
+
 ### Removed
 - **Price Drift Email Alerts:** Removed the >20% price-change email notification feature entirely
   - Deleted `PriceDriftResult` interface, `sendPriceDriftEmail()`, and the drift-detection/threshold logic in `src/services/pricing_pipeline.ts` `saveRecords()`

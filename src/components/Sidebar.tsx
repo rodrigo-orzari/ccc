@@ -193,8 +193,8 @@ export default function Sidebar({ activeProductType, onProductTypeChange }: Side
 
   const navContent = (
     <>
-      <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'} px-2 py-3`}>
-        {!collapsed && <span className="text-xs font-bold uppercase tracking-widest text-[#737373]">Categories</span>}
+      <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-end'} px-2 py-3 relative`}>
+        {!collapsed && <span className="absolute left-1/2 -translate-x-1/2 text-xs font-bold uppercase tracking-widest text-[#737373]">Categories</span>}
         <button
           onClick={toggleCollapsed}
           aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}

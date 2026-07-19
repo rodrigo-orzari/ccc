@@ -33,6 +33,31 @@ const containerNodes = (p: WorkloadPriorities, baseVcpus: number) => ({
   quantity: Math.max(2, Math.round(capacityNodes(p.capacity) * reliabilityReplicas(p.reliability))),
 });
 
+// Shared optional component factories — both gate on a pillar via the
+// modifiers above and disappear entirely (return null) below the threshold,
+// so "what this builds" only shows them once the user has actually asked for
+// that tradeoff.
+
+// A caching layer, warranted once Performance is maxed (perfWantsCache).
+// Workloads where caching is already a load-bearing, always-on part of the
+// architecture (e.g. E-Commerce, Event-Driven API) keep their own static
+// cache component instead of this optional one.
+const cacheComponent = (baseGb: number) => ({
+  id: 'cache', name: 'Distributed Cache', icon: '⚡',
+  description: 'In-memory datastore for hot-path reads (Performance = high)',
+  getRequirements: (p: WorkloadPriorities) => perfWantsCache(p.performance) ? dbReqs(p, baseGb, 'In-memory') : null,
+});
+
+// Backup/snapshot storage for the workload's primary datastore, warranted
+// above the lowest Reliability tier (reliabilityWantsBackup). Workloads whose
+// entire purpose is backup/DR (e.g. Disaster Recovery) keep their backup
+// storage as a static, always-on component instead of this optional one.
+const backupStorageComponent = (baseGb: number) => ({
+  id: 'backup-storage', name: 'Backup Storage', icon: '🗄️',
+  description: 'Snapshots and backups of the primary datastore (Reliability ≥ medium)',
+  getRequirements: (p: WorkloadPriorities) => reliabilityWantsBackup(p.reliability) ? storageReqs(p, baseGb, { category: 'Object' }) : null,
+});
+
 export const WORKLOADS: WorkloadDefinition[] = [
   {
     id: 'rag-ai-app',
@@ -66,6 +91,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Generates the final response from query and retrieved context',
         getRequirements: (p) => ({ productType: 'ai', category: 'Foundational Models', quantity: aiTokensQty(p, 0.8) }),
       },
+      backupStorageComponent(16),
     ],
   },
   {
@@ -100,6 +126,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'User uploads, static assets, and files served by the backend',
         getRequirements: (p) => storageReqs(p, 50, { category: 'Object' }),
       },
+      cacheComponent(2),
+      backupStorageComponent(4),
     ],
   },
   {
@@ -111,8 +139,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
     components: [
       {
         id: 'load-balancer', name: 'Load Balancer', icon: '⚖️',
-        description: 'Distributes incoming traffic',
-        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+        description: 'Distributes incoming traffic (Reliability ≥ medium)',
+        getRequirements: (p) => reliabilityWantsLoadBalancer(p.reliability) ? ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }) : null,
       },
       {
         id: 'web-tier', name: 'Web / App Tier', icon: '🖥️',
@@ -129,6 +157,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Outbound internet access for private tier instances',
         getRequirements: () => ({ productType: 'networking', category: 'NAT Gateway', quantity: 1 }),
       },
+      cacheComponent(2),
+      backupStorageComponent(8),
     ],
   },
   {
@@ -158,6 +188,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Long-term data lake',
         getRequirements: (p) => storageReqs(p, 1024, { category: 'Object' }),
       },
+      backupStorageComponent(4),
     ],
   },
   {
@@ -169,13 +200,13 @@ export const WORKLOADS: WorkloadDefinition[] = [
     components: [
       {
         id: 'load-balancer', name: 'Ingress / Load Balancer', icon: '⚖️',
-        description: 'Fronts the microservices with a single entry point and traffic distribution',
-        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+        description: 'Fronts the microservices with a single entry point and traffic distribution (Reliability ≥ medium)',
+        getRequirements: (p) => reliabilityWantsLoadBalancer(p.reliability) ? ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }) : null,
       },
       {
         id: 'waf', name: 'WAF & Bot Management', icon: '🛡️',
-        description: 'Protects the storefront from malicious traffic and scraping',
-        getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
+        description: 'Protects the storefront from malicious traffic and scraping (Security ≥ medium)',
+        getRequirements: (p) => securityIncludes(p.security, 'waf') ? ({ productType: 'security', category: 'Network Security', quantity: 1 }) : null,
       },
       {
         id: 'cdn', name: 'Content Delivery (CDN)', icon: '🌍',
@@ -217,6 +248,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Fans "order-placed" events out to inventory, shipping, and analytics',
         getRequirements: () => ({ productType: 'integration', category: 'Eventing', quantity: 1 }),
       },
+      backupStorageComponent(8),
     ],
   },
   {
@@ -277,9 +309,11 @@ export const WORKLOADS: WorkloadDefinition[] = [
       },
       {
         id: 'load-balancer', name: 'Load Balancer', icon: '⚖️',
-        description: 'Ingress traffic distribution',
-        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+        description: 'Ingress traffic distribution (Reliability ≥ medium)',
+        getRequirements: (p) => reliabilityWantsLoadBalancer(p.reliability) ? ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }) : null,
       },
+      cacheComponent(2),
+      backupStorageComponent(8),
     ],
   },
   {
@@ -296,8 +330,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
       },
       {
         id: 'compute-nodes', name: 'Compute Nodes', icon: '⚡',
-        description: 'Parallel compute-optimized worker fleet',
-        getRequirements: (p) => ({ productType: 'vm', category: 'Compute optimized', minVcpus: Math.max(8, Math.round(8 * capacitySize(p.capacity))), quantity: Math.max(2, Math.round(capacityScale(p.capacity) * 2)) }),
+        description: 'Parallel compute-optimized worker fleet — extra nodes at higher Reliability tolerate node failure mid-job',
+        getRequirements: (p) => ({ productType: 'vm', category: 'Compute optimized', minVcpus: Math.max(8, Math.round(8 * capacitySize(p.capacity))), quantity: Math.max(2, Math.round(capacityScale(p.capacity) * 2 * reliabilityReplicas(p.reliability))) }),
       },
       {
         id: 'scratch-storage', name: 'Scratch Storage', icon: '📁',
@@ -330,8 +364,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
       },
       {
         id: 'ddos-protection', name: 'DDoS Protection', icon: '🛡️',
-        description: 'Shields the multi-tenant SaaS application from volumetric attacks',
-        getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
+        description: 'Shields the multi-tenant SaaS application from volumetric attacks (Security ≥ medium)',
+        getRequirements: (p) => securityIncludes(p.security, 'waf') ? ({ productType: 'security', category: 'Network Security', quantity: 1 }) : null,
       },
       {
         id: 'database', name: 'Relational Database', icon: '🗃️',
@@ -343,6 +377,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Tenant assets and uploads',
         getRequirements: (p) => storageReqs(p, 50, { category: 'Object' }),
       },
+      cacheComponent(2),
+      backupStorageComponent(8),
     ],
   },
   {
@@ -432,9 +468,10 @@ export const WORKLOADS: WorkloadDefinition[] = [
       },
       {
         id: 'load-balancer', name: 'Load Balancer', icon: '⚖️',
-        description: 'Distributes API/control-plane traffic',
-        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+        description: 'Distributes API/control-plane traffic (Reliability ≥ medium)',
+        getRequirements: (p) => reliabilityWantsLoadBalancer(p.reliability) ? ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }) : null,
       },
+      backupStorageComponent(4),
     ],
   },
   {
@@ -446,8 +483,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
     components: [
       {
         id: 'load-balancer', name: 'Load Balancer', icon: '⚖️',
-        description: 'Distributes incoming traffic',
-        getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
+        description: 'Distributes incoming traffic (Reliability ≥ medium)',
+        getRequirements: (p) => reliabilityWantsLoadBalancer(p.reliability) ? ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }) : null,
       },
       {
         id: 'web-tier', name: 'Web / App Tier', icon: '🖥️',
@@ -470,6 +507,11 @@ export const WORKLOADS: WorkloadDefinition[] = [
         getRequirements: (p) => securityIncludes(p.security, 'kms') ? ({ productType: 'security', category: 'Identity & Encryption', quantity: 1 }) : null,
       },
       {
+        id: 'secrets-management', name: 'Secrets Management', icon: '🗝️',
+        description: 'Stores and rotates database credentials, API keys, and certificates (Security ≥ medium)',
+        getRequirements: (p) => securityIncludes(p.security, 'kms') ? ({ productType: 'security', category: 'Secrets Management', quantity: 1 }) : null,
+      },
+      {
         id: 'threat-detection', name: 'Threat Detection & Monitoring', icon: '🚨',
         description: 'Continuous monitoring for compliance and anomalies (Security = high)',
         getRequirements: (p) => securityIncludes(p.security, 'threat') ? ({ productType: 'security', category: 'Threat & Compliance', quantity: 1 }) : null,
@@ -479,6 +521,8 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Immutable (WORM) object storage for retained audit logs',
         getRequirements: (p) => storageReqs(p, 250, { category: 'Object' }),
       },
+      cacheComponent(2),
+      backupStorageComponent(8),
     ],
   },
   {
@@ -518,6 +562,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Generates responses from retrieved context',
         getRequirements: () => ({ productType: 'ai', category: 'Inference', quantity: 1 }),
       },
+      backupStorageComponent(4),
     ],
   },
   {
@@ -562,6 +607,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'ML inference for anomaly / failure prediction',
         getRequirements: () => ({ productType: 'ai', category: 'Inference', quantity: 1 }),
       },
+      backupStorageComponent(4),
     ],
   },
   {
@@ -596,6 +642,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Stores the extracted metadata and processing results',
         getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
       },
+      backupStorageComponent(4),
     ],
   },
   {
@@ -698,6 +745,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Flexible document storage for user data',
         getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
       },
+      backupStorageComponent(4),
     ],
   },
 ];
