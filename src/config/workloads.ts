@@ -124,6 +124,11 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Primary transactional datastore',
         getRequirements: (p) => dbReqs(p, 8, 'Relational'),
       },
+      {
+        id: 'nat-gateway', name: 'NAT Gateway', icon: '🌐',
+        description: 'Outbound internet access for private tier instances',
+        getRequirements: () => ({ productType: 'networking', category: 'NAT Gateway', quantity: 1 }),
+      },
     ],
   },
   {
@@ -168,9 +173,24 @@ export const WORKLOADS: WorkloadDefinition[] = [
         getRequirements: () => ({ productType: 'networking', category: 'Load Balancer', quantity: 1 }),
       },
       {
+        id: 'waf', name: 'WAF & Bot Management', icon: '🛡️',
+        description: 'Protects the storefront from malicious traffic and scraping',
+        getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
+      },
+      {
+        id: 'cdn', name: 'Content Delivery (CDN)', icon: '🌍',
+        description: 'Global asset distribution for fast page loads',
+        getRequirements: (p) => ({ productType: 'networking', category: 'Content Delivery Network (CDN)', quantity: egressGb(p, 5120) }),
+      },
+      {
         id: 'kubernetes', name: 'Managed Kubernetes', icon: '☸️',
         description: 'Container orchestration cluster',
         getRequirements: (p) => containerNodes(p, 4),
+      },
+      {
+        id: 'container-registry', name: 'Container Registry', icon: '📦',
+        description: 'Stores microservice container images securely',
+        getRequirements: (p) => storageReqs(p, 50, { category: 'Object' }),
       },
       {
         id: 'cache', name: 'Distributed Cache', icon: '⚡',
@@ -241,6 +261,11 @@ export const WORKLOADS: WorkloadDefinition[] = [
         getRequirements: (p) => containerNodes(p, 4),
       },
       {
+        id: 'container-registry', name: 'Container Registry', icon: '📦',
+        description: 'Private registry for application container images',
+        getRequirements: (p) => storageReqs(p, 100, { category: 'Object' }),
+      },
+      {
         id: 'block-storage', name: 'Persistent Volumes', icon: '💾',
         description: 'Block storage for stateful workloads',
         getRequirements: (p) => storageReqs(p, 100, { category: 'Block' }),
@@ -284,6 +309,11 @@ export const WORKLOADS: WorkloadDefinition[] = [
         description: 'Long-term object storage for results',
         getRequirements: (p) => storageReqs(p, 1024, { category: 'Object' }),
       },
+      {
+        id: 'dedicated-connection', name: 'Dedicated Connection', icon: '🔌',
+        description: 'High-bandwidth private link for uploading large scientific datasets',
+        getRequirements: () => ({ productType: 'networking', category: 'Dedicated Connection', quantity: 1 }),
+      },
     ],
   },
   {
@@ -297,6 +327,11 @@ export const WORKLOADS: WorkloadDefinition[] = [
         id: 'app-hosting', name: 'Managed App Hosting', icon: '🚀',
         description: 'Platform-as-a-Service application tier',
         getRequirements: (p) => ({ productType: 'app-hosting', quantity: Math.max(1, Math.round(capacityNodes(p.capacity) * reliabilityReplicas(p.reliability))) }),
+      },
+      {
+        id: 'ddos-protection', name: 'DDoS Protection', icon: '🛡️',
+        description: 'Shields the multi-tenant SaaS application from volumetric attacks',
+        getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
       },
       {
         id: 'database', name: 'Relational Database', icon: '🗃️',
@@ -559,6 +594,108 @@ export const WORKLOADS: WorkloadDefinition[] = [
       {
         id: 'metadata-db', name: 'Metadata DB', icon: '🗄️',
         description: 'Stores the extracted metadata and processing results',
+        getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
+      },
+    ],
+  },
+  {
+    id: 'hybrid-cloud-network',
+    name: 'Hybrid Cloud Network Backbone',
+    description: 'A robust networking architecture connecting on-premises data centers to cloud resources via dedicated connections and secure gateways.',
+    icon: '🌐',
+    capacityLabel: 'Network Throughput',
+    components: [
+      {
+        id: 'vpc', name: 'Virtual Private Cloud (VPC)', icon: '☁️',
+        description: 'Isolated private network for cloud resources',
+        getRequirements: () => ({ productType: 'networking', category: 'Virtual Private Cloud (VPC)', quantity: 1 }),
+      },
+      {
+        id: 'vpn-gateway', name: 'VPN Gateway', icon: '🔐',
+        description: 'Secure site-to-site IPsec tunnels',
+        getRequirements: () => ({ productType: 'networking', category: 'VPN Gateway', quantity: 1 }),
+      },
+      {
+        id: 'dedicated-connection', name: 'Dedicated Connection', icon: '🔌',
+        description: 'High-speed, dedicated on-premises link',
+        getRequirements: () => ({ productType: 'networking', category: 'Dedicated Connection', quantity: 1 }),
+      },
+      {
+        id: 'nat-gateway', name: 'NAT Gateway', icon: '🌍',
+        description: 'Outbound internet access for private subnets',
+        getRequirements: () => ({ productType: 'networking', category: 'NAT Gateway', quantity: 1 }),
+      },
+      {
+        id: 'network-security', name: 'Network Security', icon: '🛡️',
+        description: 'Perimeter firewall and threat protection',
+        getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
+      },
+    ],
+  },
+  {
+    id: 'zero-trust-edge',
+    name: 'Zero-Trust Enterprise Edge',
+    description: 'A secure, global entry point that strictly authenticates all users and devices, mitigating bots and edge threats before traffic hits the application.',
+    icon: '🛂',
+    capacityLabel: 'Monthly Edge Requests',
+    components: [
+      {
+        id: 'cdn', name: 'Content Delivery (CDN)', icon: '🌍',
+        description: 'Global edge delivery network',
+        getRequirements: (p) => ({ productType: 'networking', category: 'Content Delivery Network (CDN)', quantity: egressGb(p, 10240) }),
+      },
+      {
+        id: 'ztna', name: 'Zero Trust Network Access', icon: '🚪',
+        description: 'Identity-aware application access',
+        getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
+      },
+      {
+        id: 'iam', name: 'Identity & Access (IAM)', icon: '🔑',
+        description: 'User authentication and authorization directory',
+        getRequirements: () => ({ productType: 'security', category: 'Identity & Encryption', quantity: 1 }),
+      },
+      {
+        id: 'bot-management', name: 'Bot Management', icon: '🤖',
+        description: 'Malicious bot mitigation at the edge',
+        getRequirements: () => ({ productType: 'security', category: 'Network Security', quantity: 1 }),
+      },
+      {
+        id: 'ssl-tls', name: 'SSL/TLS Encryption', icon: '🔒',
+        description: 'Edge certificate management',
+        getRequirements: () => ({ productType: 'security', category: 'Identity & Encryption', quantity: 1 }),
+      },
+    ],
+  },
+  {
+    id: 'event-driven-api',
+    name: 'Event-Driven API Backend',
+    description: 'An agile, fully serverless microservices backend combining managed API gateways, message queues, and rapid cache lookups.',
+    icon: '⚡',
+    capacityLabel: 'API Request Volume',
+    components: [
+      {
+        id: 'api-gateway', name: 'API Gateway', icon: '🚪',
+        description: 'Managed REST/GraphQL endpoint router',
+        getRequirements: () => ({ productType: 'integration', category: 'API Gateway', quantity: 1 }),
+      },
+      {
+        id: 'serverless-compute', name: 'Serverless Compute', icon: '⚙️',
+        description: 'Event-driven functions executing business logic',
+        getRequirements: () => ({ productType: 'serverless', category: 'Compute', quantity: 1 }),
+      },
+      {
+        id: 'messaging', name: 'Message Queue', icon: '📨',
+        description: 'Asynchronous task queuing',
+        getRequirements: () => ({ productType: 'integration', category: 'Messaging', quantity: 1 }),
+      },
+      {
+        id: 'distributed-cache', name: 'Distributed Cache', icon: '💨',
+        description: 'Low-latency in-memory data store for fast lookups',
+        getRequirements: (p) => dbReqs(p, 2, 'In-memory'),
+      },
+      {
+        id: 'nosql-db', name: 'NoSQL Database', icon: '🗄️',
+        description: 'Flexible document storage for user data',
         getRequirements: (p) => dbReqs(p, 4, 'NoSQL'),
       },
     ],
