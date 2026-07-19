@@ -568,8 +568,8 @@ export default function StatusPage() {
                                 : 'bg-[#e8eaf8] dark:bg-[#10102a]'
                             } hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}
                           >
-                            <td style={{ fontWeight: 600, textAlign: 'center' }}>
-                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                            <td style={{ fontWeight: 600, textAlign: 'left' }}>
+                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px' }}>
                                 <CategoryIcon size={14} aria-hidden="true" />
                                 {getCategoryDisplayName(category)}
                               </span>

@@ -27,6 +27,7 @@ import {
   Handshake,
   Mail,
   Github,
+  Activity,
 } from 'lucide-react';
 import type { ProductType } from '@/types';
 
@@ -58,6 +59,7 @@ const EXTRA_LINKS: { id: string; label: string; href: string; icon: React.Compon
 // the Buy Me a Coffee link, which stay footer-only).
 const SITE_LINKS: { id: string; label: string; href: string; icon: React.ComponentType<{ size?: number }>; external?: boolean }[] = [
   { id: 'docs', label: 'Documentation', href: '/docs', icon: BookOpen },
+  { id: 'status', label: 'Status', href: '/status', icon: Activity },
   { id: 'terms', label: 'Terms', href: '/terms', icon: Scale },
   { id: 'privacy', label: 'Privacy', href: '/privacy', icon: Lock },
   { id: 'sponsors', label: 'Sponsors', href: '/sponsors', icon: Handshake },
