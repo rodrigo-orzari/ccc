@@ -3,8 +3,8 @@ import { ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_GRAPH_PRICING = [
   // --- AWS Neptune (Database subcategory: Graph) ---
-  { provider: 'aws', service: 'Amazon Neptune', category: 'Graph', instance_type: 'db.r6g.large (2 vCPU, 16GB)', price_per_unit: 2.469, unit: 'Hour', geography: 'us-east-1', attributes: { engine: 'Neptune', database_type: 'Graph', deployment_type: 'Cluster', instance_family: 'Memory Optimized' } },
-  { provider: 'aws', service: 'Amazon Neptune', category: 'Graph', instance_type: 'db.r6g.xlarge (4 vCPU, 32GB)', price_per_unit: 4.938, unit: 'Hour', geography: 'us-east-1', attributes: { engine: 'Neptune', database_type: 'Graph', deployment_type: 'Cluster', instance_family: 'Memory Optimized' } },
+  { provider: 'aws', service: 'Amazon Neptune', category: 'Graph', instance_type: 'db.r6g.large (2 vCPU, 16GB)', price_per_unit: 2.469, unit: 'Hour', geography: 'N. America', attributes: { engine: 'Neptune', database_type: 'Graph', deployment_type: 'Cluster', instance_family: 'Memory Optimized' } },
+  { provider: 'aws', service: 'Amazon Neptune', category: 'Graph', instance_type: 'db.r6g.xlarge (4 vCPU, 32GB)', price_per_unit: 4.938, unit: 'Hour', geography: 'N. America', attributes: { engine: 'Neptune', database_type: 'Graph', deployment_type: 'Cluster', instance_family: 'Memory Optimized' } },
   { provider: 'aws', service: 'Amazon Neptune', category: 'Graph', instance_type: 'Storage (per GB/month)', price_per_unit: 1.00, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Neptune', database_type: 'Graph', billing_model: 'Storage' } },
   { provider: 'aws', service: 'Amazon Neptune', category: 'Graph', instance_type: 'Data Transfer Out (per GB)', price_per_unit: 0.02, unit: 'GB', geography: 'Global', attributes: { engine: 'Neptune', database_type: 'Graph', billing_model: 'Data Transfer' } },
 
@@ -28,7 +28,7 @@ const STATIC_GRAPH_PRICING = [
   { provider: 'digitalocean', service: 'Managed PostgreSQL (with PostGIS Graph)', category: 'Graph', instance_type: 'Pro (4GB RAM)', price_per_unit: 60.00, unit: 'Month', geography: 'Global', attributes: { engine: 'PostgreSQL', database_type: 'Graph', deployment_type: 'Managed', extension: 'PostGIS/AGE' } },
 
   // --- Alibaba Graph Database ---
-  { provider: 'alibaba', service: 'Alibaba Graph Compute', category: 'Graph', instance_type: 'Basic (4 vCPU, 8GB)', price_per_unit: 0.20, unit: 'Hour', geography: 'cn-hangzhou', attributes: { engine: 'GDB', database_type: 'Graph', deployment_type: 'Managed', tier: 'Basic' } },
+  { provider: 'alibaba', service: 'Alibaba Graph Compute', category: 'Graph', instance_type: 'Basic (4 vCPU, 8GB)', price_per_unit: 0.20, unit: 'Hour', geography: 'Asia Pacific', attributes: { engine: 'GDB', database_type: 'Graph', deployment_type: 'Managed', tier: 'Basic' } },
   { provider: 'alibaba', service: 'Alibaba Graph Compute', category: 'Graph', instance_type: 'Storage', price_per_unit: 0.05, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'GDB', database_type: 'Graph', billing_model: 'Storage' } },
 ];
 

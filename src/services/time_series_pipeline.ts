@@ -14,7 +14,7 @@ const STATIC_TIME_SERIES_PRICING = [
   { provider: 'azure', service: 'Azure Data Explorer', category: 'Time-Series', instance_type: 'Storage (Cold)', price_per_unit: 0.02, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Kusto', database_type: 'Time-Series', billing_model: 'Storage', tier: 'Cold' } },
 
   // --- GCP Bigtable (Time-Series workload) ---
-  { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series', instance_type: 'Per Node (Production)', price_per_unit: 1.50, unit: 'Hour', geography: 'us-central1', attributes: { engine: 'Bigtable', database_type: 'Time-Series', billing_model: 'Node Hour' } },
+  { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series', instance_type: 'Per Node (Production)', price_per_unit: 1.50, unit: 'Hour', geography: 'N. America', attributes: { engine: 'Bigtable', database_type: 'Time-Series', billing_model: 'Node Hour' } },
   { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series', instance_type: 'Storage (Standard)', price_per_unit: 0.18, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Bigtable', database_type: 'Time-Series', billing_model: 'Storage' } },
   { provider: 'gcp', service: 'Google Cloud Bigtable', category: 'Time-Series', instance_type: 'Replication (per GB)', price_per_unit: 0.25, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'Bigtable', database_type: 'Time-Series', billing_model: 'Replication' } },
 
@@ -27,7 +27,7 @@ const STATIC_TIME_SERIES_PRICING = [
   { provider: 'digitalocean', service: 'Managed PostgreSQL (Time-Series)', category: 'Time-Series', instance_type: 'Pro (4GB RAM)', price_per_unit: 60.00, unit: 'Month', geography: 'Global', attributes: { engine: 'PostgreSQL with TimescaleDB', database_type: 'Time-Series', billing_model: 'Plan' } },
 
   // --- Alibaba Time Series Database ---
-  { provider: 'alibaba', service: 'Time Series Database (TSDB)', category: 'Time-Series', instance_type: 'Basic (4 vCPU, 8GB)', price_per_unit: 0.15, unit: 'Hour', geography: 'cn-hangzhou', attributes: { engine: 'TSDB', database_type: 'Time-Series', billing_model: 'Hourly' } },
+  { provider: 'alibaba', service: 'Time Series Database (TSDB)', category: 'Time-Series', instance_type: 'Basic (4 vCPU, 8GB)', price_per_unit: 0.15, unit: 'Hour', geography: 'Asia Pacific', attributes: { engine: 'TSDB', database_type: 'Time-Series', billing_model: 'Hourly' } },
   { provider: 'alibaba', service: 'Time Series Database (TSDB)', category: 'Time-Series', instance_type: 'Storage', price_per_unit: 0.02, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'TSDB', database_type: 'Time-Series', billing_model: 'Storage' } },
 ];
 

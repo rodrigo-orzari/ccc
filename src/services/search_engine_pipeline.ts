@@ -3,9 +3,9 @@ import { ensureProviderId } from './pricing_pipeline.ts';
 
 const STATIC_SEARCH_PRICING = [
   // --- AWS OpenSearch Service ---
-  { provider: 'aws', service: 'Amazon OpenSearch Service', category: 'Search', instance_type: 't3.small.search (2GB RAM)', price_per_unit: 0.072, unit: 'Hour', geography: 'us-east-1', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', instance_family: 'Burstable' } },
-  { provider: 'aws', service: 'Amazon OpenSearch Service', category: 'Search', instance_type: 't3.medium.search (4GB RAM)', price_per_unit: 0.145, unit: 'Hour', geography: 'us-east-1', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', instance_family: 'Burstable' } },
-  { provider: 'aws', service: 'Amazon OpenSearch Service', category: 'Search', instance_type: 'r7g.large.search (16GB RAM)', price_per_unit: 0.393, unit: 'Hour', geography: 'us-east-1', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', instance_family: 'Memory Optimized' } },
+  { provider: 'aws', service: 'Amazon OpenSearch Service', category: 'Search', instance_type: 't3.small.search (2GB RAM)', price_per_unit: 0.072, unit: 'Hour', geography: 'N. America', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', instance_family: 'Burstable' } },
+  { provider: 'aws', service: 'Amazon OpenSearch Service', category: 'Search', instance_type: 't3.medium.search (4GB RAM)', price_per_unit: 0.145, unit: 'Hour', geography: 'N. America', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', instance_family: 'Burstable' } },
+  { provider: 'aws', service: 'Amazon OpenSearch Service', category: 'Search', instance_type: 'r7g.large.search (16GB RAM)', price_per_unit: 0.393, unit: 'Hour', geography: 'N. America', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', instance_family: 'Memory Optimized' } },
   { provider: 'aws', service: 'Amazon OpenSearch Service', category: 'Search', instance_type: 'Storage (per GB/month)', price_per_unit: 0.23, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', billing_model: 'Storage' } },
 
   // --- Azure Cognitive Search ---
@@ -23,8 +23,8 @@ const STATIC_SEARCH_PRICING = [
   { provider: 'oracle', service: 'Oracle OpenSearch Service', category: 'Search', instance_type: 'Storage (per GB/month)', price_per_unit: 0.10, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', billing_model: 'Storage' } },
 
   // --- Alibaba OpenSearch ---
-  { provider: 'alibaba', service: 'Alibaba OpenSearch', category: 'Search', instance_type: 'Basic (2 nodes)', price_per_unit: 0.40, unit: 'Hour', geography: 'cn-hangzhou', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', deployment_type: 'Managed', tier: 'Basic' } },
-  { provider: 'alibaba', service: 'Alibaba OpenSearch', category: 'Search', instance_type: 'Standard (3+ nodes)', price_per_unit: 0.60, unit: 'Hour', geography: 'cn-hangzhou', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', deployment_type: 'Managed', tier: 'Standard' } },
+  { provider: 'alibaba', service: 'Alibaba OpenSearch', category: 'Search', instance_type: 'Basic (2 nodes)', price_per_unit: 0.40, unit: 'Hour', geography: 'Asia Pacific', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', deployment_type: 'Managed', tier: 'Basic' } },
+  { provider: 'alibaba', service: 'Alibaba OpenSearch', category: 'Search', instance_type: 'Standard (3+ nodes)', price_per_unit: 0.60, unit: 'Hour', geography: 'Asia Pacific', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', deployment_type: 'Managed', tier: 'Standard' } },
   { provider: 'alibaba', service: 'Alibaba OpenSearch', category: 'Search', instance_type: 'Storage (per GB/month)', price_per_unit: 0.15, unit: 'GB/Month', geography: 'Global', attributes: { engine: 'OpenSearch', search_type: 'Full-Text Search', billing_model: 'Storage' } },
 
   // --- DigitalOcean App Platform (for Elasticsearch/OpenSearch) ---

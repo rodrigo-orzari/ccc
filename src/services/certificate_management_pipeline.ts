@@ -21,7 +21,7 @@ const STATIC_CERTIFICATE_PRICING = [
   { provider: 'oracle', service: 'Oracle Certificate Authority', category: 'Certificates', instance_type: 'Certificate (per certificate/month)', price_per_unit: 5.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Managed Certificate', billing_model: 'Per Certificate' } },
 
   // --- Alibaba Certificate Authority ---
-  { provider: 'alibaba', service: 'Alibaba Certificate Authority', category: 'Certificates', instance_type: 'CA Instance (per month)', price_per_unit: 300.00, unit: 'Month', geography: 'cn-hangzhou', attributes: { security_type: 'Certificate Management', cert_type: 'Root/Subordinate CA', billing_model: 'Monthly' } },
+  { provider: 'alibaba', service: 'Alibaba Certificate Authority', category: 'Certificates', instance_type: 'CA Instance (per month)', price_per_unit: 300.00, unit: 'Month', geography: 'Asia Pacific', attributes: { security_type: 'Certificate Management', cert_type: 'Root/Subordinate CA', billing_model: 'Monthly' } },
   { provider: 'alibaba', service: 'Alibaba Certificate Authority', category: 'Certificates', instance_type: 'Certificate (per month)', price_per_unit: 3.00, unit: 'Month', geography: 'Global', attributes: { security_type: 'Certificate Management', cert_type: 'Issued Certificate', billing_model: 'Per Certificate' } },
 
   // --- DigitalOcean Managed Certificates (App Platform) ---

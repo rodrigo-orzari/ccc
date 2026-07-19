@@ -235,7 +235,7 @@ export class NativeAnalyticsStaticAdapter extends BaseAdapter {
       provider: this.providerSlug,
       service: inst.engine,
       region: this.region,
-      instanceType: `${inst.engine} ${inst.tier}`,
+      instanceType: `${inst.engine} ${inst.tier} (${inst.deploymentType})`,
       vcpus: 1, // Normalized Compute Unit (1 RPU, 1 Node, or 100 Slots)
       memoryGb: 0,
       arch: 'x86 64',
