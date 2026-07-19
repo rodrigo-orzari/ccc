@@ -46,16 +46,17 @@ adding Mongo/Aiven rather than twice.
 **Raised:** 2026-07-18
 
 **Context:** The Serverless page's "Service Type" filter used to offer `Compute`,
-`API Gateway`, `Messaging`, `Eventing`, `Workflow` — but every serverless data source
-(all static configs + all live adapters) only ever tags rows `service_type: 'Compute'`.
-The other four values genuinely exist as real, priced data, but under the separate
-**Integration** product category (`src/config/integration.ts`, `IntegrationPricingPipeline`,
-`service.category = 'integration'`), with its own `INTEGRATION_SERVICES` filter. A code
-comment on the old `SERVERLESS_SERVICE_TYPES` constant suggested the intent was to fold
-Integration into Serverless, but the query layer for `product=serverless` was never wired
-to actually include `category='integration'` rows — so those four options always returned
-zero results on the Serverless page. Trimmed the constant to just `['Compute']` and removed
-the now-single-option filter section (see FilterSidebar.tsx, config/index.ts).
+`API Gateway`, `Messaging`, `Eventing`, `Workflow`. Checked against live data
+(2026-07-19): serverless rows are only ever tagged `Compute` or `Container` (Azure
+Container Apps) — never the other four. Those four genuinely exist as real, priced
+data, but under the separate **Integration** product category
+(`src/config/integration.ts`, `IntegrationPricingPipeline`, `service.category =
+'integration'`), with its own `INTEGRATION_SERVICES` filter. A code comment on the old
+`SERVERLESS_SERVICE_TYPES` constant suggested the intent was to fold Integration into
+Serverless, but the query layer for `product=serverless` was never wired to actually
+include `category='integration'` rows — so those four options always returned zero
+results on the Serverless page. Trimmed the constant to `['Compute', 'Container']`
+(see FilterSidebar.tsx, config/index.ts).
 
 **The question:** Should Integration & Messaging genuinely become part of the Serverless
 category (one merged product type, one query), or should it stay a separate top-level

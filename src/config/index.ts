@@ -32,7 +32,9 @@ export const DB_FAMILY_MAPPINGS: Record<string, string[]> = {
 };
 export const DB_ENGINES = ['PostgreSQL', 'MySQL', 'MariaDB', 'SQL Server', 'Oracle DB', 'Cosmos DB', 'MongoDB', 'Redis', 'Valkey', 'DB2', 'Pinecone', 'Milvus', 'Qdrant', 'Weaviate', 'Chroma'];
 export const DEPLOYMENT_TYPES = ['Provisioned', 'Serverless'];
-export const HA_MODES = ['Single AZ', 'Multi AZ', 'Zone Redundant', 'Multi Region', 'Geo Redundant'];
+// Verified against live data (2026-07-19): only Single AZ / Multi AZ are ever written.
+// Zone Redundant / Multi Region / Geo Redundant were never produced by any pipeline.
+export const HA_MODES = ['Single AZ', 'Multi AZ'];
 
 // Serverless-specific constants
 export const SERVERLESS_LANGUAGES = ['Python', 'Node', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'TypeScript', 'Any'];
@@ -49,19 +51,21 @@ export const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1', '1 - 5', '> 5'];
 export const SERVERLESS_MEMORY_TIERS = ['<= 512 MB', '512 MB - 2 GB', '2 - 4 GB', '> 4 GB'];
 // CPU architecture. AWS Lambda is split x86 (Intel/AMD) vs ARM (Graviton); maps to pr.arch.
 export const SERVERLESS_ARCHITECTURES = ['x86', 'ARM'];
-// Service-type categorization for the Serverless tab. Every serverless data source
-// (all static configs + live adapters) only ever tags rows 'Compute' — API Gateway,
-// Messaging, Eventing, and Workflow live under the separate Integration category
-// (src/config/integration.ts) with their own INTEGRATION_SERVICES filter, and were
-// never actually merged into the serverless query. Kept to just the real value so
-// the filter doesn't offer options that always return zero rows. See OPEN_DECISIONS.md.
-export const SERVERLESS_SERVICE_TYPES = ['Compute'];
+// Service-type categorization for the Serverless tab. Verified against live data
+// (2026-07-19): rows are tagged 'Compute' (the vast majority) or 'Container' (Azure
+// Container Apps). API Gateway, Messaging, Eventing, and Workflow live under the
+// separate Integration category (src/config/integration.ts) with their own
+// INTEGRATION_SERVICES filter and were never actually merged into the serverless
+// query, so those four were removed as dead options. See OPEN_DECISIONS.md.
+export const SERVERLESS_SERVICE_TYPES = ['Compute', 'Container'];
 
 // Containers-specific constants
-export const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless', 'Docker'];
+// Verified against live data (2026-07-19): 'Docker' is never written as an orchestrator.
+export const CONTAINERS_ORCHESTRATORS = ['Kubernetes', 'Serverless'];
 export const CONTAINERS_COMPUTE_TYPES = ['Serverless', 'Provisioned', 'Managed Kubernetes'];
 export const CONTAINERS_ARCHITECTURES = ['x86', 'ARM'];
-export const CONTAINERS_BILLING_GRANULARITY = ['Second', 'Hour'];
+// '100ms' covers sub-second-billed serverless container platforms (e.g. Cloud Run).
+export const CONTAINERS_BILLING_GRANULARITY = ['100ms', 'Second', 'Hour'];
 
 // Networking-specific constants
 export const NETWORKING_SERVICES = ['Data Transfer', 'Content Delivery Network (CDN)', 'Virtual Private Cloud (VPC)', 'Load Balancing', 'Dedicated Connection', 'Public IPv4', 'NAT Gateway', 'VPN Gateway', 'API Gateway'];
@@ -78,27 +82,41 @@ export const NETWORKING_HA_SUPPORT = ['Yes', 'No'];
 export const NETWORKING_VPC_SUPPORT = ['Yes', 'No'];
 export const NETWORKING_DIRECTIONS = ['Egress', 'Ingress', 'Intra-Cloud'];
 export const NETWORKING_BILLING_MODELS = ['Hourly Uptime', 'Data Processed (per GB)', 'Per Endpoint/Tunnel', 'Included'];
-export const NETWORKING_USAGE_TIERS = ['Flat Rate', 'First 10TB', '10TB - 50TB', 'Over 10TB', 'Over Allowance', 'Included'];
-export const NETWORKING_PORT_CAPACITIES = ['< 1 Gbps', '1 Gbps - 10 Gbps', '> 10 Gbps', 'N/A'];
+// 'Unlimited' / 'Unlimited (+$20/mo)' cover Cloudflare's CDN tiers.
+export const NETWORKING_USAGE_TIERS = ['Flat Rate', 'First 10TB', '10TB - 50TB', 'Over 10TB', 'Over Allowance', 'Included', 'Unlimited', 'Unlimited (+$20/mo)'];
+// Verified against live data (2026-07-19): '> 10 Gbps' is never written.
+export const NETWORKING_PORT_CAPACITIES = ['< 1 Gbps', '1 Gbps - 10 Gbps', 'N/A'];
 export const NETWORKING_TRANSFER_SCOPES = ['Same Region', 'Cross-AZ', 'Cross-Region', 'Internet', 'On-Premises', 'N/A'];
 
 
 
-// Data Analytics-specific constants
+// Data Analytics-specific constants. Verified against live data (2026-07-19) — 'Native'
+// was never written by any pipeline (dead), and several real engines were missing
+// entirely (warehouse: BigQuery, Redshift, Synapse, Microsoft Fabric; streaming:
+// ApsaraMQ for Kafka, Event Hubs, Kinesis Data Streams, OCI Streaming, Pub/Sub).
 export const ANALYTICS_ENGINES = [
-  'Databricks', 
-  'Snowflake', 
-  'Native',
+  'Databricks',
+  'Snowflake',
+  'BigQuery',
+  'Redshift',
+  'Synapse',
+  'Microsoft Fabric',
   'Oracle Analytics Cloud',
   'Oracle Autonomous Data Warehouse',
   'OpenSearch',
   'Kafka',
+  'ApsaraMQ for Kafka',
+  'Event Hubs',
+  'Kinesis Data Streams',
+  'OCI Streaming',
+  'Pub/Sub',
   'MaxCompute',
   'E-MapReduce',
   'Hologres',
-  'AnalyticDB for MySQL'
+  'AnalyticDB for MySQL',
 ];
 export const ANALYTICS_DEPLOYMENT_TYPES = ['Serverless', 'Provisioned'];
+// 'Capacity F*' tiers cover Microsoft Fabric's capacity-based pricing.
 export const ANALYTICS_TIERS = [
   'Standard',
   'Standard Edition',
@@ -110,6 +128,12 @@ export const ANALYTICS_TIERS = [
   'DC2 Node',
   'RA3 Node',
   'On-Demand',
+  'Capacity F2',
+  'Capacity F4',
+  'Capacity F8',
+  'Capacity F16',
+  'Capacity F32',
+  'Capacity F64',
 ];
 
 // Range defaults. Maxes are set with headroom above the largest real vCPU/memory
@@ -184,17 +208,20 @@ export const AI_MULTIMODAL_OPTIONS = ['Yes', 'No'];
 
 // --- STORAGE ---
 export const STORAGE_CATEGORIES: string[] = ['Object', 'Block', 'File', 'Archive'];
-export const STORAGE_TIERS: string[] = ['Standard', 'Infrequent', 'Cold'];
+// 'High Performance' covers DigitalOcean's premium block storage tier.
+export const STORAGE_TIERS: string[] = ['Standard', 'Infrequent', 'Cold', 'High Performance'];
 export const STORAGE_REDUNDANCIES: string[] = ['Single-Zone', 'Zone-Redundant', 'Geo-Redundant'];
 export const STORAGE_MEDIA: string[] = ['SSD', 'HDD'];
 
 // --- APP HOSTING ---
 export const APP_HOSTING_TIERS: string[] = ['Free', 'Basic', 'Standard', 'Premium', 'Professional'];
-export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated'];
+// 'Serverless' covers Cloudflare Workers-style compute (no dedicated/shared instance).
+export const APP_HOSTING_COMPUTE_TYPES: string[] = ['Shared', 'Dedicated', 'Serverless'];
 
 // --- INTEGRATION ---
 export const INTEGRATION_SERVICES = ['Messaging', 'Eventing', 'API Gateway', 'Workflow'];
-export const INTEGRATION_TIERS = ['Standard', 'Premium', 'Consumption', 'FIFO'];
+// 'Basic' covers DigitalOcean's entry-tier Managed Kafka SKU.
+export const INTEGRATION_TIERS = ['Standard', 'Premium', 'Consumption', 'FIFO', 'Basic'];
 // Billing model of an integration SKU (stored per record as attributes.pricing_model).
 // usage = per-operation (per 1k/1M requests/events/ops/steps); data = per-GB/TB;
 // flat = fixed monthly instance ('/mo'). Filter values are the stored lowercase keys.
@@ -208,10 +235,15 @@ export const INTEGRATION_SIZES = ['256 KB', '1 MB', '4 MB', '10 MB', '100 MB'];
 export const INTEGRATION_PROTOCOLS = ['REST', 'HTTP', 'SOAP', 'GraphQL'];
 
 // --- SECURITY & IDENTITY ---
-export const SECURITY_SERVICES = ['Web Application Firewall (WAF)', 'Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'DDoS Protection', 'Threat Detection'];
+// Verified against live data (2026-07-19): Bot Management, SSL/TLS Encryption, and
+// Zero Trust Network Access (Cloudflare) were real, priced rows with no filter option
+// to find them — added below. Also: buildPricingFilters had no 'security' block at
+// all, so the Security Service filter was a no-op regardless of options (fixed in
+// api-utils.ts).
+export const SECURITY_SERVICES = ['Web Application Firewall (WAF)', 'Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'DDoS Protection', 'Threat Detection', 'Bot Management', 'SSL/TLS Encryption', 'Zero Trust Network Access'];
 export const SECURITY_SERVICE_GROUPS: { label: string; services: string[] }[] = [
-  { label: 'Network Security', services: ['Web Application Firewall (WAF)', 'DDoS Protection'] },
-  { label: 'Identity & Encryption', services: ['Identity & Access Management (IAM)', 'Key Management Service (KMS)'] },
+  { label: 'Network Security', services: ['Web Application Firewall (WAF)', 'DDoS Protection', 'Bot Management', 'Zero Trust Network Access'] },
+  { label: 'Identity & Encryption', services: ['Identity & Access Management (IAM)', 'Key Management Service (KMS)', 'SSL/TLS Encryption'] },
   { label: 'Threat & Compliance', services: ['Threat Detection'] },
 ];
 

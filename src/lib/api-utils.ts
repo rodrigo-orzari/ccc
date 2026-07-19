@@ -142,7 +142,8 @@ export function buildPricingFilters(query: any) {
       aiServiceTypes, aiModelTiers, aiContextWindows, aiMultimodalOptions,
       networkingService, networkingConnectionTypes, networkingRoutingTypes, networkingHaSupport, networkingVpcSupport, networkingTransferDirections,
       networkingBillingModels, networkingUsageTiers, networkingPortCapacities, networkingTransferScopes,
-      storageTypes, storageTiers, storageRedundancy,
+      storageTypes, storageTiers, storageRedundancy, storageMedia,
+      securityService,
       appHostingTiers, appHostingComputeTypes,
       serverlessServiceTypes,
       integrationServices, integrationTiers,
@@ -574,6 +575,13 @@ export function buildPricingFilters(query: any) {
       addInFilter(networkingTransferScopes, `LOWER(pr.attributes->>'transfer_scope')`);
     }
 
+    // Security product type filters. securityService matches the real service
+    // name (e.g. "Web Application Firewall (WAF)"), same pattern as networkingService —
+    // this block was previously missing entirely, making the Security Service filter a no-op.
+    if (resolvedProductType === 'security') {
+      addInFilter(securityService, 's.name', { lower: false });
+    }
+
     // Containers product type filters
     if (resolvedProductType === 'containers') {
       if (containersOrchestrators) {
@@ -600,6 +608,7 @@ export function buildPricingFilters(query: any) {
       addInFilter(storageTypes, `LOWER(pr.attributes->>'storage_type')`);
       addInFilter(storageTiers, `LOWER(pr.attributes->>'tier')`);
       addInFilter(storageRedundancy, `LOWER(pr.attributes->>'redundancy')`);
+      addInFilter(storageMedia, `LOWER(pr.attributes->>'media')`);
     }
 
     if (resolvedProductType === 'app-hosting') {

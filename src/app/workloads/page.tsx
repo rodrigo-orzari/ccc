@@ -1,30 +1,12 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Footer, Sidebar, DonationModal } from '@/components';
 import { WORKLOADS } from '@/config/workloads';
 import { DEFAULT_PRIORITIES } from '@/config/workload_priorities';
 import { WORKLOADS_LISTING_SPONSOR, PROVIDERS } from '@/config';
 import { isNotOffered } from '@/config/not_offered';
-import type { ProductType } from '@/types';
-
-const PRODUCT_TYPE_LABELS: Record<ProductType, string> = {
-  vm: 'Virtual Machines',
-  gpu: 'GPU',
-  database: 'Databases',
-  serverless: 'Serverless',
-  containers: 'Containers',
-  networking: 'Networking',
-  'data-analytics': 'Data & Analytics',
-  storage: 'Storage',
-  ai: 'Artificial Intelligence',
-  'app-hosting': 'App Hosting',
-  security: 'Security & Identity',
-  integration: 'Integration',
-};
-
-const PRODUCT_TYPE_ORDER: ProductType[] = ['ai', 'app-hosting', 'containers', 'data-analytics', 'database', 'integration', 'networking', 'security', 'serverless', 'storage', 'vm'];
 
 const HYPERSCALERS = PROVIDERS.slice(0, 6);
 
@@ -35,22 +17,6 @@ export default function WorkloadsCatalog() {
     w.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     w.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const categoryCounts = useMemo(() => {
-    const counts: Partial<Record<ProductType, number>> = {};
-    WORKLOADS.forEach(w => {
-      const categoriesInWorkload = new Set(
-        w.components
-          .map(c => c.getRequirements(DEFAULT_PRIORITIES))
-          .filter(Boolean)
-          .map(r => r!.productType)
-      );
-      categoriesInWorkload.forEach(cat => {
-        counts[cat] = (counts[cat] || 0) + 1;
-      });
-    });
-    return counts;
-  }, []);
 
   return (
     <div className="wl-page flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
@@ -72,49 +38,6 @@ export default function WorkloadsCatalog() {
             --muted: #a3a3a3;
             --row-hover: #0a0a0a;
           }
-        }
-        .summary-cards {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-          gap: 1px;
-          background: var(--border);
-          border: 1px solid var(--border);
-          border-radius: 8px;
-          overflow: hidden;
-          margin-bottom: 2rem;
-        }
-        .summary-card {
-          background: var(--surface);
-          padding: 1rem 0.85rem;
-          text-align: center;
-        }
-        .summary-card-label {
-          font-size: 8.5px;
-          text-transform: uppercase;
-          letter-spacing: 0.04em;
-          font-weight: 600;
-          color: var(--muted);
-          margin-bottom: 0.3rem;
-          /* Wrap long category names onto multiple lines instead of truncating.
-             min-height reserves ~2 lines so the numbers align across all cards. */
-          white-space: normal;
-          overflow-wrap: anywhere;
-          line-height: 1.25;
-          min-height: 2.1em;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .summary-card-value {
-          font-size: 1.4rem;
-          font-weight: 800;
-          color: var(--text);
-          line-height: 1;
-        }
-        .summary-card-sub {
-          font-size: 9px;
-          color: var(--muted);
-          margin-top: 0.2rem;
         }
       `}</style>
       <DonationModal showOn="workloads" />
@@ -170,37 +93,6 @@ export default function WorkloadsCatalog() {
               </div>
             </div>
           )}
-
-          {/* Divider */}
-          <div className="h-px bg-[var(--border)] mb-8" />
-
-          {/* Component Distribution Summary Block */}
-          <div className="mb-8 w-full">
-            <h2 className="text-xl font-bold text-[var(--text)] mb-1">
-              Component Distribution
-            </h2>
-            <p className="text-sm text-[var(--muted)] mb-4">
-              The number of workload templates that feature each product category in their architecture.
-            </p>
-            <div className="summary-cards">
-              {PRODUCT_TYPE_ORDER.map((cat) => {
-                const count = categoryCounts[cat] ?? 0;
-                return (
-                  <div key={cat} className="summary-card">
-                    <div className="summary-card-label" title={PRODUCT_TYPE_LABELS[cat]}>
-                      {PRODUCT_TYPE_LABELS[cat]}
-                    </div>
-                    <div className="summary-card-value">
-                      {count}
-                    </div>
-                    <div className="summary-card-sub">
-                      workloads
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
 
           {/* Divider */}
           <div className="h-px bg-[var(--border)] mb-8" />

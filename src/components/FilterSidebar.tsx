@@ -978,6 +978,16 @@ export default function FilterSidebar({
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
+              title="Service Type"
+              tooltip="Compute (Lambda/Functions/Run) or Container (e.g. Azure Container Apps)."
+              options={config.SERVERLESS_SERVICE_TYPES}
+              selected={selectedServerlessServiceTypes}
+              onToggle={onServerlessServiceTypeToggle}
+              onSetAll={onSetServerlessServiceTypes}
+              isExpanded={expanded.serverlessServiceType ?? true}
+              onToggleExpand={() => onToggleSection('serverlessServiceType')}
+            />
+            <FilterSection
               title="Architecture"
               tooltip="CPU architecture: x86 (Intel/AMD) or ARM (e.g. AWS Graviton). ARM is typically cheaper."
               options={config.SERVERLESS_ARCHITECTURES}
