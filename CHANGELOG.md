@@ -6,6 +6,9 @@ All notable changes to Compare Cloud Costs are documented here. This changelog s
 
 ## [Unreleased]
 
+### UI
+- **Removed "Global" as a selectable Geography option:** `buildPricingFilters()` in `src/lib/api-utils.ts` already force-includes `global` rows alongside any region filter (many services — data transfer, WAF, etc. — aren't tied to a region), so the checkbox never actually excluded Global rows when unchecked — it only let you *isolate* them via double-click. Excluded `'Global'` from all three geography aggregations in `/api/filters/route.ts` (general, security, analytics) and fixed the Security category's loading-state fallback (`FilterSidebar.tsx`) which still hardcoded `['Global', 'N. America']`. Query results are unchanged — Global rows still show exactly as before; there's just one fewer non-functional chip per category.
+
 ### Features
 - **GPU Vendor filter:** GPU chip vendor (NVIDIA, AMD, Google, AWS, Intel) is now a filterable facet on the GPU product category, alongside the existing GPU Model filter
   - `src/config/gpu_models.ts` already had a `vendor` field on every entry in `GPU_MODEL_SPECS`, but it was never written to the database — `withGpuAttrs()` in `src/services/pricing_pipeline.ts` now stamps `attributes.gpu_vendor` at ingestion time alongside the existing `gpu_model`/`gpu_vram_gb`

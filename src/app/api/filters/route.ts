@@ -10,9 +10,14 @@ export async function GET() {
   try {
     const query = `
       SELECT
-        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a') as geographies,
-        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a' AND s.category = 'security') as geographies_security,
-        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a' AND s.category = 'data_warehouse') as geographies_analytics,
+        -- 'Global' is deliberately excluded from the selectable options: the query
+        -- builder (buildPricingFilters in src/lib/api-utils.ts) always force-includes
+        -- 'global' rows alongside whatever region is selected (many services — data
+        -- transfer, WAF, etc. — aren't tied to a region), so it's never actually
+        -- excludable via this checkbox and only adds a non-functional option to the list.
+        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a' AND pr.geography != 'Global') as geographies,
+        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a' AND pr.geography != 'Global' AND s.category = 'security') as geographies_security,
+        ARRAY_AGG(DISTINCT pr.geography) FILTER (WHERE pr.geography IS NOT NULL AND pr.geography != '' AND pr.geography != 'N/A' AND pr.geography != 'n/a' AND pr.geography != 'Global' AND s.category = 'data_warehouse') as geographies_analytics,
         ARRAY_AGG(DISTINCT pr.os) FILTER (WHERE pr.os IS NOT NULL AND pr.os != '' AND pr.os != 'N/A' AND pr.os != 'n/a') as os_types,
         ARRAY_AGG(DISTINCT pr.arch) FILTER (WHERE pr.arch IS NOT NULL AND pr.arch != '' AND pr.arch != 'N/A' AND pr.arch != 'n/a') as architectures,
         ARRAY_AGG(DISTINCT pr.cpu_vendor) FILTER (WHERE pr.cpu_vendor IS NOT NULL AND pr.cpu_vendor != '' AND pr.cpu_vendor != 'N/A' AND pr.cpu_vendor != 'n/a') as cpu_vendors,
