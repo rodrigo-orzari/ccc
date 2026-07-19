@@ -983,9 +983,7 @@ const DocsPage: React.FC = () => {
                   <td>
                     High-Availability cluster configuration:<br />
                     • <strong>Single AZ:</strong> A single active database node in one Availability Zone.<br />
-                    • <strong>Multi-AZ:</strong> An active primary database with a hot standby node synchronously replicated in a second zone.<br />
-                    • <strong>Zone Redundant:</strong> Active multi-master nodes distributed across zones.<br />
-                    • <strong>Geo-Redundant / Multi-Region:</strong> Read/write replicas asynchronously synced to a separate geographic region.
+                    • <strong>Multi AZ:</strong> An active primary database with a hot standby node synchronously replicated in a second zone.
                   </td>
                 </tr>
               </tbody>
