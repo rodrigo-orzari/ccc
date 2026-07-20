@@ -4,15 +4,36 @@ import React from 'react';
 import Link from 'next/link';
 import { Footer, Sidebar } from '@/components';
 
-// Define the dummy sponsor data
-const SPONSORS = [
+interface Sponsor {
+  id: string;
+  name: string;
+  description: string;
+  logoLight: string;
+  logoDark: string;
+  website: string;
+  websiteDisplay: string;
+  email: string;
+  phone: string;
+  // Omitted until the sponsor has chosen a workload to attach to (see Mytech below).
+  linkUrl?: string;
+  sponsoredPage?: string;
+}
+
+// Active sponsors.
+const SPONSORS: Sponsor[] = [
   {
-    id: 'acme-cloud',
-    name: 'Acme Cloud Consulting (example placeholder — not a real sponsor)',
-    description: 'Cloud migration and FinOps consulting to reduce spend across every major provider.',
-    logoUrl: 'https://placehold.co/400x400/2563eb/ffffff?text=ACME',
-    linkUrl: '/workloads/three-tier-web-app',
-    sponsoredPage: '3-Tier Web Application Workload',
+    id: 'mytech',
+    name: 'Mytech',
+    description: 'Mytech is an AWS Partner that delivers more than technology — they deliver governance, predictability, and sustainable results. They combine automation, artificial intelligence, and cost optimization (FinOps) into a unified strategy tailored to your business. From high-growth startups to enterprises modernizing legacy systems, Mytech brings proven expertise in complex, mission-critical projects.',
+    // Two color variants of the same logo — the wordmark's "my" is dark text
+    // (readable on the light-mode tile) in one and white text (readable on
+    // the dark-mode tile) in the other. Swapped via the dark: variant below.
+    logoLight: '/sponsors/mytech-light.png',
+    logoDark: '/sponsors/mytech-dark.png',
+    website: 'https://mytech.com.br',
+    websiteDisplay: 'mytech.com.br',
+    email: 'comercial@mytech.com.br',
+    phone: '+55 31 99419-0028',
   },
 ];
 
@@ -116,35 +137,57 @@ export default function SponsorsPage() {
               {SPONSORS.map((sponsor, index) => (
                 <div
                   key={sponsor.id}
-                  className={`border border-[var(--border)] rounded p-4 flex flex-col group ${
+                  className={`h-full border border-[var(--border)] rounded p-5 flex flex-col items-center text-center group ${
                     index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'
                   }`}
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <img 
-                      src={sponsor.logoUrl} 
-                      alt={`${sponsor.name} logo`} 
-                      className="w-10 h-10 rounded-md border border-[var(--border)] object-cover"
-                    />
-                    <h3 className="text-sm font-bold text-[var(--text)] truncate" title={sponsor.name}>
-                      {sponsor.name}
-                    </h3>
-                  </div>
+                  <h3 className="sr-only">{sponsor.name}</h3>
+                  <img
+                    src={sponsor.logoLight}
+                    alt={`${sponsor.name} logo`}
+                    className="max-w-[170px] w-full h-auto mb-4 dark:hidden"
+                  />
+                  <img
+                    src={sponsor.logoDark}
+                    alt={`${sponsor.name} logo`}
+                    className="max-w-[170px] w-full h-auto mb-4 hidden dark:block"
+                  />
                   <p className="text-[var(--muted)] text-[11px] mb-4 flex-1 leading-relaxed">
                     {sponsor.description}
                   </p>
-                  <div className="mt-auto pt-3 border-t border-[var(--border)] flex justify-between items-center">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-[var(--muted)]">
-                      Sponsoring:
-                    </span>
-                    <Link 
-                      href={sponsor.linkUrl}
-                      className="text-[10px] text-[#2563eb] dark:text-[#818cf8] hover:underline truncate ml-2"
-                      title={sponsor.sponsoredPage}
+                  <div className="mt-auto pt-3 border-t border-[var(--border)] w-full flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[10px] text-[var(--muted)]">
+                    <a
+                      href={sponsor.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#2563eb] dark:text-[#818cf8] hover:underline"
                     >
-                      {sponsor.sponsoredPage}
-                    </Link>
+                      {sponsor.websiteDisplay}
+                    </a>
+                    <span>|</span>
+                    <a
+                      href={`mailto:${sponsor.email}`}
+                      className="text-[#2563eb] dark:text-[#818cf8] hover:underline"
+                    >
+                      {sponsor.email}
+                    </a>
+                    <span>|</span>
+                    <span>{sponsor.phone}</span>
                   </div>
+                  {sponsor.linkUrl && sponsor.sponsoredPage && (
+                    <div className="mt-3 pt-3 border-t border-[var(--border)] w-full flex justify-center items-center gap-2">
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-[var(--muted)]">
+                        Sponsoring:
+                      </span>
+                      <Link
+                        href={sponsor.linkUrl}
+                        className="text-[10px] text-[#2563eb] dark:text-[#818cf8] hover:underline truncate"
+                        title={sponsor.sponsoredPage}
+                      >
+                        {sponsor.sponsoredPage}
+                      </Link>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -181,9 +224,6 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#2563eb40] bg-[#2563eb12] text-[#2563eb]">ORGANIC</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#16a34a40] bg-[#16a34a12] text-[#16a34a]">LINKEDIN</span>
                 </div>
-                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
-                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
 
               {/* Roles Card */}
@@ -205,9 +245,6 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#ef444440] bg-[#ef444412] text-[#ef4444]">CTO</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#06b6d440] bg-[#06b6d412] text-[#06b6d4]">SRE</span>
                 </div>
-                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
-                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
 
               {/* Engagement Depth Card */}
@@ -228,9 +265,6 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#06b6d440] bg-[#06b6d412] text-[#06b6d4]">ACTIVE READING</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#3b82f640] bg-[#3b82f612] text-[#3b82f6]">HIGH-INTENT</span>
                 </div>
-                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
-                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
 
               {/* Geo Card */}
@@ -252,9 +286,6 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#f9731640] bg-[#f9731612] text-[#f97316]">EU</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#8b5cf640] bg-[#8b5cf612] text-[#8b5cf6]">IN</span>
                 </div>
-                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
-                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
 
               {/* Device Card */}
@@ -276,9 +307,6 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#64748b40] bg-[#64748b12] text-[#64748b]">MAC</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#ec489940] bg-[#ec489912] text-[#ec4899]">LINUX</span>
                 </div>
-                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
-                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
 
               {/* Traffic Quality Card */}
@@ -299,9 +327,6 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#8b5cf640] bg-[#8b5cf612] text-[#8b5cf6]">QUALIFIED</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#ec489940] bg-[#ec489912] text-[#ec4899]">REPEAT</span>
                 </div>
-                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
-                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
 
               {/* Performance Card */}
@@ -322,9 +347,6 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#10b98140] bg-[#10b98112] text-[#10b981]">FAST LOAD</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#3b82f640] bg-[#3b82f612] text-[#3b82f6]">SMOOTH</span>
                 </div>
-                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
-                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
 
               {/* Traffic Sources Card */}
@@ -346,9 +368,6 @@ export default function SponsorsPage() {
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#3b82f640] bg-[#3b82f612] text-[#3b82f6]">LINKEDIN</span>
                   <span className="px-1.5 py-0.5 rounded-full text-[7px] font-bold uppercase tracking-widest border shrink-0 border-[#06b6d440] bg-[#06b6d412] text-[#06b6d4]">DIRECT</span>
                 </div>
-                <a href="/docs#advertising" className="mt-auto pt-2 border-t border-[var(--border)] text-[9px] font-bold uppercase tracking-widest text-[var(--muted)] hover:text-[#2563eb] transition-colors flex justify-between items-center">
-                  Learn more <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
               </div>
 
             </div>
