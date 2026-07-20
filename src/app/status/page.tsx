@@ -100,8 +100,8 @@ function SourceBadge({ source, apiCount, staticCount }: { source: string; apiCou
     gap: 4,
     padding: '1px 6.5px',
     borderRadius: '9999px',
-    fontSize: 8,
-    fontWeight: 700,
+    fontSize: 7,
+    fontWeight: 400,
     textTransform: 'uppercase',
     letterSpacing: '0.06em',
     border: '1px solid',
@@ -280,23 +280,23 @@ export default function StatusPage() {
         .pipeline-table {
           width: 100%;
           border-collapse: collapse;
-          font-size: 12.5px;
+          font-size: 11px;
           table-layout: fixed;
         }
         .pipeline-table th {
           text-align: center;
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.07em;
           color: var(--muted);
-          padding: 0.8rem 1rem;
+          padding: 0.6rem 0.6rem;
           border-bottom: 1px solid var(--border);
           background: var(--surface);
         }
         .pipeline-table th:first-child { text-align: left; }
         .pipeline-table td {
-          padding: 0.8rem 1rem;
+          padding: 0.6rem 0.6rem;
           border-bottom: 1px solid var(--divider);
           vertical-align: middle;
           text-align: center;
@@ -535,17 +535,17 @@ export default function StatusPage() {
 
                 return (
                   <div id="status-matrix" className="max-w-[1600px] mx-auto" style={{ overflowX: 'auto', border: '1px solid var(--border)', borderRadius: 8, background: 'var(--surface)', marginBottom: '2.5rem' }}>
-                    <table className="pipeline-table" style={{ minWidth: 160 + categories.length * 92 }}>
+                    <table className="pipeline-table" style={{ minWidth: 130 + categories.length * 74 }}>
                       <thead>
                         <tr>
-                          <th style={{ width: 160, textAlign: 'center' }}>Provider</th>
+                          <th style={{ width: 130, textAlign: 'center' }}>Provider</th>
                           {categories.map(category => {
                             const CategoryIcon = getCategoryIcon(category);
                             return (
-                              <th key={category} style={{ width: 92, textAlign: 'center', padding: '0.75rem 0.4rem' }}>
-                                <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
-                                  <CategoryIcon size={14} aria-hidden="true" />
-                                  <span style={{ fontSize: '10px', lineHeight: 1.2 }}>{getCategoryDisplayName(category)}</span>
+                              <th key={category} style={{ width: 74, textAlign: 'center', padding: '0.6rem 0.3rem' }}>
+                                <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '3px' }}>
+                                  <CategoryIcon size={13} aria-hidden="true" />
+                                  <span style={{ fontSize: '9px', lineHeight: 1.15 }}>{getCategoryDisplayName(category)}</span>
                                 </span>
                               </th>
                             );
@@ -564,7 +564,7 @@ export default function StatusPage() {
                                 : 'bg-[#e8eaf8] dark:bg-[#10102a]'
                             } hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}
                           >
-                            <td style={{ fontWeight: 600, textAlign: 'left' }}>
+                            <td style={{ fontWeight: 600, textAlign: 'center' }}>
                               <a
                                 href={PROVIDER_URLS[provider.slug] ?? '#'}
                                 target="_blank"
@@ -636,7 +636,7 @@ export default function StatusPage() {
                         </tr>
 
                         {/* Live API Percentage Row */}
-                        <tr style={{ fontSize: '11px', color: 'var(--muted)' }}>
+                        <tr style={{ fontSize: '10px', color: 'var(--muted)' }}>
                           <td style={{ textAlign: 'left', fontWeight: 600 }}>Live API Records</td>
                           {categoryTotals.map(({ category, apiCount, staticCount }) => {
                             const total = apiCount + staticCount;
@@ -645,7 +645,7 @@ export default function StatusPage() {
                               <td key={category} style={{ fontVariantNumeric: 'tabular-nums' }}>
                                 {apiCount > 0 ? (
                                   <span style={{ color: '#16a34a', fontWeight: 600 }}>
-                                    {percent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({apiCount.toLocaleString()})</span>
+                                    {percent}% <span style={{ fontSize: '8px', fontWeight: 400, opacity: 0.8 }}>({apiCount.toLocaleString()})</span>
                                   </span>
                                 ) : (
                                   '—'
@@ -656,7 +656,7 @@ export default function StatusPage() {
                         </tr>
 
                         {/* Static Config Percentage Row */}
-                        <tr style={{ fontSize: '11px', color: 'var(--muted)' }}>
+                        <tr style={{ fontSize: '10px', color: 'var(--muted)' }}>
                           <td style={{ textAlign: 'left', fontWeight: 600 }}>Static Config Records</td>
                           {categoryTotals.map(({ category, apiCount, staticCount }) => {
                             const total = apiCount + staticCount;
@@ -665,7 +665,7 @@ export default function StatusPage() {
                               <td key={category} style={{ fontVariantNumeric: 'tabular-nums' }}>
                                 {staticCount > 0 ? (
                                   <span style={{ color: '#d97706', fontWeight: 600 }}>
-                                    {percent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({staticCount.toLocaleString()})</span>
+                                    {percent}% <span style={{ fontSize: '8px', fontWeight: 400, opacity: 0.8 }}>({staticCount.toLocaleString()})</span>
                                   </span>
                                 ) : (
                                   '—'

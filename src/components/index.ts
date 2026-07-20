@@ -11,3 +11,4 @@ export { default as CategorySummaryTable } from './CategorySummaryTable';
 
 export { DigitalOceanReferralModal } from './DigitalOceanReferralModal';
 export { DonationModal } from './DonationModal';
+export { CopyHeading } from './CopyHeading';

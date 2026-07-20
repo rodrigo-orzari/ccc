@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Footer, Sidebar } from '@/components';
+import { Footer, Sidebar, CopyHeading } from '@/components';
 
 interface Sponsor {
   id: string;
@@ -126,14 +126,14 @@ export default function SponsorsPage() {
 
           {/* Sponsors Grid Section */}
           <div className="mb-12">
-            <h2 className="text-xl font-bold text-[var(--text)] mb-1">
+            <CopyHeading id="active-sponsors" className="text-xl font-bold text-[var(--text)] mb-1 scroll-mt-6">
               Active Sponsors
-            </h2>
+            </CopyHeading>
             <p className="text-sm text-[var(--muted)] mb-6">
               Discover the sponsors that make this project possible.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {SPONSORS.map((sponsor, index) => (
                 <div
                   key={sponsor.id}
@@ -198,9 +198,9 @@ export default function SponsorsPage() {
 
           {/* Audience Stats Placeholder Section */}
           <div className="mb-8 w-full">
-            <h2 className="text-xl font-bold text-[var(--text)] mb-1">
+            <CopyHeading id="audience-reach" className="text-xl font-bold text-[var(--text)] mb-1 scroll-mt-6">
               Audience & Reach
-            </h2>
+            </CopyHeading>
             <p className="text-sm text-[var(--muted)] mb-4">
               A snapshot of our global reach and the highly-qualified technical audience you can connect with by sponsoring. Last update July 16, 2026.
             </p>

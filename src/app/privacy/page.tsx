@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Footer, Sidebar } from '@/components';
+import { Footer, Sidebar, CopyHeading } from '@/components';
 
 const PrivacyPolicyPage: React.FC = () => {
   return (
@@ -156,14 +156,14 @@ const PrivacyPolicyPage: React.FC = () => {
             <h1>Privacy</h1>
             <p className="privacy-meta">Last updated: 15 June 2026.</p>
 
-            <h2 id="overview">Overview</h2>
+            <CopyHeading id="overview">Overview</CopyHeading>
             <p>
               comparecloudcosts.com ("we," "us," "our," or "Company") is committed to protecting your privacy.
               This Privacy Policy explains how we collect, use, disclose, and otherwise handle your information
               when you use our website and services.
             </p>
 
-            <h2 id="information-we-collect">Information We Collect</h2>
+            <CopyHeading id="information-we-collect">Information We Collect</CopyHeading>
             <h3>Usage Data</h3>
             <p>When you use comparecloudcosts.com, we automatically collect certain information about your interactions:</p>
             <ul>
@@ -182,7 +182,7 @@ const PrivacyPolicyPage: React.FC = () => {
             <h3>Cookies and Tracking</h3>
             <p>We use cookies for essential functionality, as well as tracking technologies for analytics and advertising as described below.</p>
 
-            <h2 id="how-we-use-your-information">How We Use Your Information</h2>
+            <CopyHeading id="how-we-use-your-information">How We Use Your Information</CopyHeading>
             <p>We use collected information to:</p>
             <ul>
               <li>Improve and optimize our pricing data and user experience</li>
@@ -191,21 +191,21 @@ const PrivacyPolicyPage: React.FC = () => {
               <li>Generate aggregated analytics (never identifying individuals)</li>
             </ul>
 
-            <h2 id="data-sharing-and-disclosure">Data Sharing and Disclosure</h2>
+            <CopyHeading id="data-sharing-and-disclosure">Data Sharing and Disclosure</CopyHeading>
             <p>
               We do not sell, trade, or rent your personal information to third parties. We may share
               aggregated, anonymized data with partners to improve our services, but this data cannot identify you.
             </p>
             <p>We may disclose information when required by law, regulation, or legitimate legal process.</p>
 
-            <h2 id="data-security">Data Security</h2>
+            <CopyHeading id="data-security">Data Security</CopyHeading>
             <p>
               We take reasonable measures to protect information from unauthorized access, alteration,
               disclosure, or destruction. However, no method of transmission over the internet is 100% secure.
               You use our service at your own risk.
             </p>
 
-            <h2 id="third-party-services">Third-Party Services</h2>
+            <CopyHeading id="third-party-services">Third-Party Services</CopyHeading>
             <p>Our platform uses the following services:</p>
             <ul>
               <li><strong>Cloud Providers</strong>: AWS, Azure, Google Cloud, Oracle Cloud APIs (for pricing data only)</li>
@@ -214,7 +214,7 @@ const PrivacyPolicyPage: React.FC = () => {
             </ul>
             <p>These services have their own privacy policies, and we encourage you to review them.</p>
 
-            <h2 id="advertising">Advertising</h2>
+            <CopyHeading id="advertising">Advertising</CopyHeading>
             <p>
               We partner with Microsoft Clarity and Microsoft Advertising to capture how you use and interact with our website through behavioral metrics, heatmaps, and session replay to improve and market our products/services. Website usage data is captured using first and third-party cookies and other tracking technologies to determine the popularity of products/services and online activity. Additionally, we use this information for site optimization, fraud/security purposes, and advertising. For more information about how Microsoft collects and uses your data, visit the <a href="https://www.microsoft.com/privacy/privacystatement" target="_blank" rel="noopener noreferrer">Microsoft Privacy Statement</a>.
             </p>
@@ -225,13 +225,13 @@ const PrivacyPolicyPage: React.FC = () => {
               the tracking mechanisms used by third-party sponsors when you click on their advertisements.
             </p>
 
-            <h2 id="changes">Changes to This Policy</h2>
+            <CopyHeading id="changes">Changes to This Policy</CopyHeading>
             <p>
               We may update this Privacy Policy from time to time. We will notify you of significant changes
               by updating the "Last updated" date above.
             </p>
 
-            <h2 id="contact-us">Contact Us</h2>
+            <CopyHeading id="contact-us">Contact Us</CopyHeading>
             <p>
               For questions about this Privacy Policy or our privacy practices, please email us at{' '}
               <a href="mailto:hello@comparecloudcosts.com">hello@comparecloudcosts.com</a>.

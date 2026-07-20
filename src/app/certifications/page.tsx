@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Footer, Sidebar, DigitalOceanReferralModal } from '@/components';
+import { Footer, Sidebar, DigitalOceanReferralModal, CopyHeading } from '@/components';
 import { GEOGRAPHIES, CERTIFICATIONS_SPONSOR } from '@/config';
 import {
   CERTIFICATIONS,
@@ -10,7 +10,7 @@ import {
   PROVIDER_CERTIFICATIONS,
   type CertCategory,
 } from '@/config/certifications';
-import { ExternalLink, Link as LinkIcon } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 
 const CATEGORY_ORDER: CertCategory[] = ['Security', 'Privacy', 'Industry', 'Government'];
 
@@ -170,7 +170,7 @@ export default function CertificationsPage() {
                   Sponsor This Page
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                  Sponsor this page. Your brand in front of engineers and architects comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link>, or email hello@comparecloudcosts.com.
+                  Sponsor this page. Your brand in front of engineers and architects comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with us</Link>, or email hello@comparecloudcosts.com.
                 </p>
                 <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
                   Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
@@ -184,13 +184,10 @@ export default function CertificationsPage() {
 
           {/* Summary — certifications held per provider (respects active filters),
               connected-card grid mirroring the provider summary on other pages. */}
-          <div id="tracked-certifications" className="mb-2 scroll-mt-6">
-            <h2 className="text-xl font-bold mb-1 text-[var(--text)] group flex items-center gap-2">
+          <div className="mb-2">
+            <CopyHeading id="tracked-certifications" className="text-xl font-bold mb-1 text-[var(--text)] scroll-mt-6">
               Tracked certifications by provider
-              <a href="#tracked-certifications" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to this section">
-                <LinkIcon size={18} />
-              </a>
-            </h2>
+            </CopyHeading>
             <span className="text-[10px] text-[var(--muted)]">
               {`Counts reflect the ${CERTIFICATIONS.length} standards tracked here — not each provider's full catalog. See the trust centers below for the complete list.`}
             </span>
@@ -394,15 +391,12 @@ export default function CertificationsPage() {
           )}
 
           {/* Data sources */}
-          <div id="data-sources" className="mt-12 scroll-mt-6">
+          <div className="mt-12">
             {/* Divider */}
             <div className="h-px bg-[var(--border)] mb-8" />
-            <h2 className="text-xl font-bold mb-1 text-[var(--text)] group flex items-center gap-2">
+            <CopyHeading id="data-sources" className="text-xl font-bold mb-1 text-[var(--text)] scroll-mt-6">
               Sources
-              <a href="#data-sources" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Sources section">
-                <LinkIcon size={18} />
-              </a>
-            </h2>
+            </CopyHeading>
             <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
               The links below are each provider&apos;s official compliance hub / trust center — the complete,
               authoritative list of certifications, which for the largest clouds runs to 100+ (AWS alone

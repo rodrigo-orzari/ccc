@@ -85,7 +85,7 @@ export default function WorkloadsCatalog() {
                   Sponsor a Workload
                 </h3>
                 <p className="text-[13px] text-[var(--muted)] leading-relaxed">
-                  Sponsor a workload page. Your brand in front of engineers comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with Us in the Documentation</Link>, or email hello@comparecloudcosts.com.
+                  Sponsor a workload page. Your brand in front of engineers comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with us</Link>, or email hello@comparecloudcosts.com.
                 </p>
                 <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
                   Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.

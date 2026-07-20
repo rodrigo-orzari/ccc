@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Footer, Sidebar } from '@/components';
+import { Footer, Sidebar, CopyHeading } from '@/components';
 
 const headingToId = (children: React.ReactNode): string => {
   const collect = (node: any): string => {
@@ -324,8 +324,8 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
           <div className="prose prose-slate dark:prose-invert max-w-none text-black dark:text-white">
             <ReactMarkdown
               components={{
-                h2: ({ children }) => <h2 id={headingToId(children)}>{children}</h2>,
-                h3: ({ children }) => <h3 id={headingToId(children)}>{children}</h3>,
+                h2: ({ children }) => <CopyHeading id={headingToId(children)} as="h2">{children}</CopyHeading>,
+                h3: ({ children }) => <CopyHeading id={headingToId(children)} as="h3">{children}</CopyHeading>,
               }}
             >
               {content}
