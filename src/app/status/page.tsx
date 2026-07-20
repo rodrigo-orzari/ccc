@@ -515,9 +515,27 @@ export default function StatusPage() {
                   return nameA.localeCompare(nameB);
                 });
 
+                // Per-category totals across every provider, for the summary rows
+                // at the bottom of the table (mirrors the per-provider totals the
+                // pre-transpose table used to show, just aggregated along the other axis).
+                const categoryTotals = categories.map(category => {
+                  let recordCount = 0;
+                  let apiCount = 0;
+                  let staticCount = 0;
+                  sortedProviders.forEach(provider => {
+                    const pl = provider.pipelines.find(p => p.category === category);
+                    if (pl) {
+                      recordCount += pl.record_count || 0;
+                      apiCount += pl.api_count || 0;
+                      staticCount += pl.static_count || 0;
+                    }
+                  });
+                  return { category, recordCount, apiCount, staticCount };
+                });
+
                 return (
                   <div id="status-matrix" className="max-w-[1600px] mx-auto" style={{ overflowX: 'auto', border: '1px solid var(--border)', borderRadius: 8, background: 'var(--surface)', marginBottom: '2.5rem' }}>
-                    <table className="pipeline-table" style={{ minWidth: 160 + categories.length * 92 + 3 * 110 }}>
+                    <table className="pipeline-table" style={{ minWidth: 160 + categories.length * 92 }}>
                       <thead>
                         <tr>
                           <th style={{ width: 160, textAlign: 'center' }}>Provider</th>
@@ -532,23 +550,11 @@ export default function StatusPage() {
                               </th>
                             );
                           })}
-                          <th style={{ width: 110, textAlign: 'center' }}>Total Records</th>
-                          <th style={{ width: 110, textAlign: 'center' }}>Live API</th>
-                          <th style={{ width: 110, textAlign: 'center' }}>Static Config</th>
                         </tr>
                       </thead>
                       <tbody>
                         {sortedProviders.map((provider, index) => {
                           const color = PROVIDER_COLORS[provider.slug] ?? '#888';
-                          let apiCount = 0;
-                          let staticCount = 0;
-                          provider.pipelines.forEach(pl => {
-                            apiCount += pl.api_count || 0;
-                            staticCount += pl.static_count || 0;
-                          });
-                          const total = apiCount + staticCount;
-                          const livePercent = total > 0 ? Math.round((apiCount / total) * 100) : 0;
-                          const staticPercent = total > 0 ? Math.round((staticCount / total) * 100) : 0;
                           return (
                           <tr
                             key={provider.slug}
@@ -610,30 +616,64 @@ export default function StatusPage() {
                                 </td>
                               );
                             })}
-                            <td style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 700 }}>
-                              {provider.total_records.toLocaleString()}
-                            </td>
-                            <td style={{ fontVariantNumeric: 'tabular-nums', fontSize: '11px' }}>
-                              {apiCount > 0 ? (
-                                <span style={{ color: '#16a34a', fontWeight: 600 }}>
-                                  {livePercent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({apiCount.toLocaleString()})</span>
-                                </span>
-                              ) : (
-                                '—'
-                              )}
-                            </td>
-                            <td style={{ fontVariantNumeric: 'tabular-nums', fontSize: '11px' }}>
-                              {staticCount > 0 ? (
-                                <span style={{ color: '#d97706', fontWeight: 600 }}>
-                                  {staticPercent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({staticCount.toLocaleString()})</span>
-                                </span>
-                              ) : (
-                                '—'
-                              )}
-                            </td>
                           </tr>
                           );
                         })}
+
+                        {/* Table Footer / Summary Rows */}
+                        <tr style={{ background: 'var(--border)', height: '1px' }}>
+                          <td colSpan={categories.length + 1} style={{ padding: 0, height: '1px' }}></td>
+                        </tr>
+
+                        {/* Total Records Row */}
+                        <tr style={{ fontWeight: 700, background: 'var(--row-hover)' }}>
+                          <td style={{ textAlign: 'left' }}>Total Records</td>
+                          {categoryTotals.map(({ category, recordCount }) => (
+                            <td key={category} style={{ fontVariantNumeric: 'tabular-nums' }}>
+                              {recordCount.toLocaleString()}
+                            </td>
+                          ))}
+                        </tr>
+
+                        {/* Live API Percentage Row */}
+                        <tr style={{ fontSize: '11px', color: 'var(--muted)' }}>
+                          <td style={{ textAlign: 'left', fontWeight: 600 }}>Live API Records</td>
+                          {categoryTotals.map(({ category, apiCount, staticCount }) => {
+                            const total = apiCount + staticCount;
+                            const percent = total > 0 ? Math.round((apiCount / total) * 100) : 0;
+                            return (
+                              <td key={category} style={{ fontVariantNumeric: 'tabular-nums' }}>
+                                {apiCount > 0 ? (
+                                  <span style={{ color: '#16a34a', fontWeight: 600 }}>
+                                    {percent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({apiCount.toLocaleString()})</span>
+                                  </span>
+                                ) : (
+                                  '—'
+                                )}
+                              </td>
+                            );
+                          })}
+                        </tr>
+
+                        {/* Static Config Percentage Row */}
+                        <tr style={{ fontSize: '11px', color: 'var(--muted)' }}>
+                          <td style={{ textAlign: 'left', fontWeight: 600 }}>Static Config Records</td>
+                          {categoryTotals.map(({ category, apiCount, staticCount }) => {
+                            const total = apiCount + staticCount;
+                            const percent = total > 0 ? Math.round((staticCount / total) * 100) : 0;
+                            return (
+                              <td key={category} style={{ fontVariantNumeric: 'tabular-nums' }}>
+                                {staticCount > 0 ? (
+                                  <span style={{ color: '#d97706', fontWeight: 600 }}>
+                                    {percent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({staticCount.toLocaleString()})</span>
+                                  </span>
+                                ) : (
+                                  '—'
+                                )}
+                              </td>
+                            );
+                          })}
+                        </tr>
                       </tbody>
                     </table>
                   </div>
