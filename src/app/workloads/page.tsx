@@ -51,7 +51,7 @@ export default function WorkloadsCatalog() {
               Cloud Workloads
             </h1>
             <p className="text-[var(--muted)] text-sm leading-relaxed">
-              Pick an architecture below to see its total cost across every provider, scaled to your requirements. Need a template we don't have? Tell us what to build.{' '}
+              Pick an architecture below to see its total cost across different providers, scaled to your requirements. Need a template we don't have? Tell us what to build.{' '}
               <a href="mailto:hello@comparecloudcosts.com?subject=New%20Workload%20Request" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">
                 📧 hello@comparecloudcosts.com
               </a>

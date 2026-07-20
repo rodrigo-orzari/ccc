@@ -517,48 +517,41 @@ export default function StatusPage() {
 
                 return (
                   <div id="status-matrix" className="max-w-[1600px] mx-auto" style={{ overflowX: 'auto', border: '1px solid var(--border)', borderRadius: 8, background: 'var(--surface)', marginBottom: '2.5rem' }}>
-                    <table className="pipeline-table" style={{ minWidth: 800 }}>
+                    <table className="pipeline-table" style={{ minWidth: 160 + categories.length * 92 + 3 * 110 }}>
                       <thead>
                         <tr>
-                          <th style={{ width: '16%', textAlign: 'center' }}>Product Category</th>
-                          {sortedProviders.map(provider => {
-                            const color = PROVIDER_COLORS[provider.slug] ?? '#888';
+                          <th style={{ width: 160, textAlign: 'center' }}>Provider</th>
+                          {categories.map(category => {
+                            const CategoryIcon = getCategoryIcon(category);
                             return (
-                              <th key={provider.slug} style={{ width: '10.5%', textAlign: 'center', padding: '0.75rem 0.5rem' }}>
-                                <a
-                                  href={PROVIDER_URLS[provider.slug] ?? '#'}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border transition-all duration-200"
-                                  style={{
-                                    color,
-                                    borderColor: `${color}40`,
-                                    backgroundColor: `${color}12`,
-                                    textDecoration: 'none',
-                                    whiteSpace: 'nowrap'
-                                  }}
-                                  onMouseEnter={e => {
-                                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = `${color}25`;
-                                    (e.currentTarget as HTMLAnchorElement).style.borderColor = color;
-                                  }}
-                                  onMouseLeave={e => {
-                                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = `${color}12`;
-                                    (e.currentTarget as HTMLAnchorElement).style.borderColor = `${color}40`;
-                                  }}
-                                >
-                                  {provider.name}
-                                </a>
+                              <th key={category} style={{ width: 92, textAlign: 'center', padding: '0.75rem 0.4rem' }}>
+                                <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                                  <CategoryIcon size={14} aria-hidden="true" />
+                                  <span style={{ fontSize: '10px', lineHeight: 1.2 }}>{getCategoryDisplayName(category)}</span>
+                                </span>
                               </th>
                             );
                           })}
+                          <th style={{ width: 110, textAlign: 'center' }}>Total Records</th>
+                          <th style={{ width: 110, textAlign: 'center' }}>Live API</th>
+                          <th style={{ width: 110, textAlign: 'center' }}>Static Config</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {categories.map((category, index) => {
-                          const CategoryIcon = getCategoryIcon(category);
+                        {sortedProviders.map((provider, index) => {
+                          const color = PROVIDER_COLORS[provider.slug] ?? '#888';
+                          let apiCount = 0;
+                          let staticCount = 0;
+                          provider.pipelines.forEach(pl => {
+                            apiCount += pl.api_count || 0;
+                            staticCount += pl.static_count || 0;
+                          });
+                          const total = apiCount + staticCount;
+                          const livePercent = total > 0 ? Math.round((apiCount / total) * 100) : 0;
+                          const staticPercent = total > 0 ? Math.round((staticCount / total) * 100) : 0;
                           return (
                           <tr
-                            key={category}
+                            key={provider.slug}
                             className={`transition-colors ${
                               index % 2 === 0
                                 ? 'bg-[#f7f8ff] dark:bg-[#06060f]'
@@ -566,23 +559,42 @@ export default function StatusPage() {
                             } hover:bg-[#eef2ff] dark:hover:bg-[#111827]`}
                           >
                             <td style={{ fontWeight: 600, textAlign: 'left' }}>
-                              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'flex-start', gap: '6px' }}>
-                                <CategoryIcon size={14} aria-hidden="true" />
-                                {getCategoryDisplayName(category)}
-                              </span>
+                              <a
+                                href={PROVIDER_URLS[provider.slug] ?? '#'}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-widest border transition-all duration-200"
+                                style={{
+                                  color,
+                                  borderColor: `${color}40`,
+                                  backgroundColor: `${color}12`,
+                                  textDecoration: 'none',
+                                  whiteSpace: 'nowrap'
+                                }}
+                                onMouseEnter={e => {
+                                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = `${color}25`;
+                                  (e.currentTarget as HTMLAnchorElement).style.borderColor = color;
+                                }}
+                                onMouseLeave={e => {
+                                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = `${color}12`;
+                                  (e.currentTarget as HTMLAnchorElement).style.borderColor = `${color}40`;
+                                }}
+                              >
+                                {provider.name}
+                              </a>
                             </td>
-                            {sortedProviders.map(provider => {
+                            {categories.map(category => {
                               const pl = provider.pipelines.find(p => p.category === category);
                               if (!pl) {
                                 return (
-                                  <td key={provider.slug} style={{ color: 'var(--muted)' }}>
+                                  <td key={category} style={{ color: 'var(--muted)' }}>
                                     —
                                   </td>
                                 );
                               }
                               return (
                                 <td
-                                  key={provider.slug}
+                                  key={category}
                                   title={pl.last_updated ? `Last updated: ${new Date(pl.last_updated).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}` : undefined}
                                 >
                                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
@@ -598,76 +610,30 @@ export default function StatusPage() {
                                 </td>
                               );
                             })}
+                            <td style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 700 }}>
+                              {provider.total_records.toLocaleString()}
+                            </td>
+                            <td style={{ fontVariantNumeric: 'tabular-nums', fontSize: '11px' }}>
+                              {apiCount > 0 ? (
+                                <span style={{ color: '#16a34a', fontWeight: 600 }}>
+                                  {livePercent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({apiCount.toLocaleString()})</span>
+                                </span>
+                              ) : (
+                                '—'
+                              )}
+                            </td>
+                            <td style={{ fontVariantNumeric: 'tabular-nums', fontSize: '11px' }}>
+                              {staticCount > 0 ? (
+                                <span style={{ color: '#d97706', fontWeight: 600 }}>
+                                  {staticPercent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({staticCount.toLocaleString()})</span>
+                                </span>
+                              ) : (
+                                '—'
+                              )}
+                            </td>
                           </tr>
                           );
                         })}
-
-                        {/* Table Footer / Summary Rows */}
-                        <tr style={{ background: 'var(--border)', height: '1px' }}>
-                          <td colSpan={sortedProviders.length + 1} style={{ padding: 0, height: '1px' }}></td>
-                        </tr>
-                        
-                        {/* Total Records Row */}
-                        <tr style={{ fontWeight: 700, background: 'var(--row-hover)' }}>
-                          <td style={{ textAlign: 'left' }}>Total Records</td>
-                          {sortedProviders.map(provider => (
-                            <td key={provider.slug} style={{ fontVariantNumeric: 'tabular-nums' }}>
-                              {provider.total_records.toLocaleString()}
-                            </td>
-                          ))}
-                        </tr>
-
-                        {/* Live API Percentage Row */}
-                        <tr style={{ fontSize: '11px', color: 'var(--muted)' }}>
-                          <td style={{ textAlign: 'left', fontWeight: 600 }}>Live API Records</td>
-                          {sortedProviders.map(provider => {
-                            let apiCount = 0;
-                            let staticCount = 0;
-                            provider.pipelines.forEach(pl => {
-                              apiCount += pl.api_count || 0;
-                              staticCount += pl.static_count || 0;
-                            });
-                            const total = apiCount + staticCount;
-                            const percent = total > 0 ? Math.round((apiCount / total) * 100) : 0;
-                            return (
-                              <td key={provider.slug} style={{ fontVariantNumeric: 'tabular-nums' }}>
-                                {apiCount > 0 ? (
-                                  <span style={{ color: '#16a34a', fontWeight: 600 }}>
-                                    {percent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({apiCount.toLocaleString()})</span>
-                                  </span>
-                                ) : (
-                                  '—'
-                                )}
-                              </td>
-                            );
-                          })}
-                        </tr>
-
-                        {/* Static Config Percentage Row */}
-                        <tr style={{ fontSize: '11px', color: 'var(--muted)' }}>
-                          <td style={{ textAlign: 'left', fontWeight: 600 }}>Static Config Records</td>
-                          {sortedProviders.map(provider => {
-                            let apiCount = 0;
-                            let staticCount = 0;
-                            provider.pipelines.forEach(pl => {
-                              apiCount += pl.api_count || 0;
-                              staticCount += pl.static_count || 0;
-                            });
-                            const total = apiCount + staticCount;
-                            const percent = total > 0 ? Math.round((staticCount / total) * 100) : 0;
-                            return (
-                              <td key={provider.slug} style={{ fontVariantNumeric: 'tabular-nums' }}>
-                                {staticCount > 0 ? (
-                                  <span style={{ color: '#d97706', fontWeight: 600 }}>
-                                    {percent}% <span style={{ fontSize: '9px', fontWeight: 400, opacity: 0.8 }}>({staticCount.toLocaleString()})</span>
-                                  </span>
-                                ) : (
-                                  '—'
-                                )}
-                              </td>
-                            );
-                          })}
-                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -695,10 +661,12 @@ export default function StatusPage() {
               {/* Divider */}
               <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] my-8" />
 
-              <div className="max-w-[1600px] mx-auto pb-8 text-[11px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-                <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
-                Price data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
-                <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+              <div className="max-w-[1600px] mx-auto pb-8">
+                <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
+                  <strong>Disclaimer:</strong>{' '}
+                  Price data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
+                  <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+                </blockquote>
               </div>
             </>
           )}

@@ -443,10 +443,12 @@ export default function CertificationsPage() {
           <div className="h-px bg-[var(--border)]" />
         </div>
 
-        {/* Disclaimer — plain text, no box, so it reads as fine-print not a feature panel. */}
-        <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8 text-[11px] text-[#737373] dark:text-[#a3a3a3] leading-relaxed">
-          <strong className="text-[#171717] dark:text-[#e5e7eb] uppercase tracking-widest text-[10px]">Disclaimer:</strong>{' '}
-          This compliance standards matrix is curated for comparison purposes. Mappings reflect each provider&apos;s publicly documented status at the last verification date. It does not constitute legal or compliance advice. Always consult the provider&apos;s official trust center and legal agreements for authoritative compliance audits and reports. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness.
+        {/* Disclaimer */}
+        <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8">
+          <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
+            <strong>Disclaimer:</strong>{' '}
+            This compliance standards matrix is curated for comparison purposes. Mappings reflect each provider&apos;s publicly documented status at the last verification date. It does not constitute legal or compliance advice. Always consult the provider&apos;s official trust center and legal agreements for authoritative compliance audits and reports. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness.
+          </blockquote>
         </div>
       </div>
 

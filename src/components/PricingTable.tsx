@@ -270,6 +270,26 @@ export default function PricingTable({
     ? "Provider instance/model identifier — searchable in the provider's catalog."
     : "Normalized configuration for cross-provider comparison — not an official provider SKU. Verify exact pricing on the provider's pricing page.";
 
+  // Two-word headers ("CPU Vendor", "GPU Model", "HA Mode", ...) stack onto two
+  // lines instead of staying on one — reads cleaner than truncating/widening the
+  // column, at the cost of a slightly taller header row (applies uniformly across
+  // every product category's table since Th is the single shared header renderer).
+  // Single-word and 3+-word labels ("Provider", "Cold Start (ms)") are unaffected.
+  const renderHeaderLabel = (label: React.ReactNode) => {
+    if (typeof label === 'string') {
+      const words = label.split(' ');
+      if (words.length === 2) {
+        return (
+          <span className="flex flex-col leading-tight">
+            <span>{words[0]}</span>
+            <span>{words[1]}</span>
+          </span>
+        );
+      }
+    }
+    return label;
+  };
+
   // Helper: build a <th> with sort + resize handle
   const Th = ({
     colKey, sortKey, label, className = '',
@@ -281,7 +301,7 @@ export default function PricingTable({
       style={{ width: colWidths[colKey] ?? DEFAULT_WIDTHS[colKey] }}
     >
       <div className="flex items-center justify-center h-full w-full">
-        {label}
+        {renderHeaderLabel(label)}
         {sortKey && <SortIcon sortKey={sortKey} sortConfig={sortConfig} />}
       </div>
       <ResizeHandle
