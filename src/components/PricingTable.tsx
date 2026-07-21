@@ -456,7 +456,10 @@ export default function PricingTable({
                   <Th colKey="engine_category"    sortKey="category"   label="Service" />
                 </>) : activeProductType === 'integration' ? (<>
                   <Th colKey="engine_category"    sortKey="attributes.service_type" label="Service Type" />
+                  <Th colKey="deployment_arch"    sortKey="attributes.pricing_model"  label="Pricing Model" />
                   <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"         label="Tier" />
+                  <Th colKey="ha_mode_os"         sortKey="attributes.max_message_size_kb" label="Max Msg Size" />
+                  <Th colKey="gpu"                sortKey="attributes.protocols"      label="Protocols" />
                 </>) : activeProductType === 'gpu' ? (<>
                   <Th colKey="engine_category"    sortKey="attributes.gpu_model"   label="GPU Model" />
                   <Th colKey="gpu_vendor"         sortKey="attributes.gpu_vendor"  label="GPU Vendor" />
@@ -605,7 +608,7 @@ function TableRow({
         <td data-col="deployment_arch"     className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.memory_configuration ? (String(record.attributes.memory_configuration).toLowerCase().includes('configurable') ? 'Configurable' : String(record.attributes.memory_configuration).toLowerCase().includes('tier') ? 'Tiers' : String(record.attributes.memory_configuration).toLowerCase().includes('auto') ? 'Automatic' : record.attributes.memory_configuration) : '—'}</span></td>
         <td data-col="ha_mode_os"          className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.attributes?.service_type && record.attributes.service_type !== 'Compute' ? <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span> : <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.free_invocations_per_month && Number(record.attributes.free_invocations_per_month) > 0 ? 'Yes' : 'No'}</span>}</td>
         <td data-col="granularity"         className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.billing_granularity_ms || '—'}</span></td>
-        <td data-col="exec_model"          className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model || '—'}</span></td>
+        <td data-col="exec_model"          className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.execution_model === 'Both' ? 'Code (ZIP), Container Image' : (record.attributes?.execution_model || '—')}</span></td>
         <td data-col="prov_concurrency"    className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">{record.attributes?.provisioned_concurrency_support ? <span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes.provisioned_concurrency_support}</span> : <span className="text-[10px] font-bold text-[#d4d4d4] dark:text-[#404040]">—</span>}</td>
         <td data-col="max_storage"         className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_ephemeral_storage_gb || '—'}</span></td>
         <td data-col="inv_price"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden">
@@ -638,7 +641,10 @@ function TableRow({
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.service || '—'}</span></td>
       </>) : activeProductType === 'integration' ? (<>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.service_type || '—'}</span></td>
+        <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.pricing_model === 'usage' ? 'Usage' : record.attributes?.pricing_model === 'data' ? 'Data' : record.attributes?.pricing_model === 'flat' ? 'Flat' : (record.attributes?.pricing_model || '—')}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
+        <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.max_message_size_kb ? (Number(record.attributes.max_message_size_kb) >= 1024 ? `${Number(record.attributes.max_message_size_kb) / 1024} MB` : `${record.attributes.max_message_size_kb} KB`) : '—'}</span></td>
+        <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]" title={record.attributes?.protocols || ''}>{record.attributes?.protocols ? (record.attributes.protocols.length > 20 ? `${record.attributes.protocols.substring(0, 20)}...` : record.attributes.protocols) : '—'}</span></td>
       </>) : activeProductType === 'gpu' ? (<>
         <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.gpu_model || '—'}</span></td>
         <td data-col="gpu_vendor"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.gpu_vendor || '—'}</span></td>
@@ -778,9 +784,13 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
       { label: 'Languages', value: a.supportedLanguages ? (Array.isArray(a.supportedLanguages) ? a.supportedLanguages.join(', ') : a.supportedLanguages) : '—' },
       { label: 'Cold Start (ms)', value: dash(a.cold_start_overhead_ms) },
       { label: 'Timeout (sec)', value: dash(a.timeout_seconds) },
-      { label: 'Memory Config', value: dash(a.memory_configuration) },
+      { label: 'Memory Config', value: dash(a.memory_configuration ? (String(a.memory_configuration).toLowerCase().includes('configurable') ? 'Configurable' : String(a.memory_configuration).toLowerCase().includes('tier') ? 'Tiers' : String(a.memory_configuration).toLowerCase().includes('auto') ? 'Automatic' : a.memory_configuration) : null) },
+      { label: 'Free Tier', value: a.service_type && a.service_type !== 'Compute' ? '—' : (a.free_invocations_per_month && Number(a.free_invocations_per_month) > 0 ? 'Yes' : 'No') },
       { label: 'Granularity (ms)', value: dash(a.billing_granularity_ms) },
-      { label: 'Exec. Model', value: dash(a.execution_model) },
+      { label: 'Exec. Model', value: dash(a.execution_model === 'Both' ? 'Code (ZIP), Container Image' : a.execution_model) },
+      { label: 'Prov. Concurrency', value: a.provisioned_concurrency_support ? String(a.provisioned_concurrency_support) : '—' },
+      { label: 'Max Storage (GB)', value: dash(a.max_ephemeral_storage_gb) },
+      { label: 'Inv. Price ($/1M)', value: a.invocation_price_per_1m ? `$${Number(a.invocation_price_per_1m).toFixed(2)}` : '—' },
       { label: 'Geo', value: dash(record.geography) },
       { label: 'Pricing Unit', value: dash(prettyUnit(record.unit)) },
       { label: 'Source', value: record.data_source === 'static_config' ? 'Static' : 'API' },
@@ -825,8 +835,12 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
     ];
     case 'integration': return [
       { label: 'Service Type', value: dash(a.service_type) },
+      { label: 'Pricing Model', value: dash(a.pricing_model === 'usage' ? 'Usage' : a.pricing_model === 'data' ? 'Data' : a.pricing_model === 'flat' ? 'Flat' : a.pricing_model) },
       { label: 'Tier', value: dash(a.tier) },
+      { label: 'Max Msg Size', value: a.max_message_size_kb ? (Number(a.max_message_size_kb) >= 1024 ? `${Number(a.max_message_size_kb) / 1024} MB` : `${a.max_message_size_kb} KB`) : '—' },
+      { label: 'Protocols', value: dash(a.protocols) },
       { label: 'Geo', value: dash(record.geography) },
+      { label: 'Pricing Unit', value: dash(prettyUnit(record.unit)) },
     ];
     default: return [ // vm
       { label: 'Category', value: record.category || 'General purpose' },
