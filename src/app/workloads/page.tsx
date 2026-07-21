@@ -197,6 +197,19 @@ export default function WorkloadsCatalog() {
             </div>
           )}
         </main>
+
+        {/* Divider */}
+        <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 mb-8">
+          <div className="h-px bg-[var(--border)]" />
+        </div>
+
+        {/* Disclaimer */}
+        <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8">
+          <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
+            <strong>Disclaimer:</strong>{' '}
+            Workload configurations and pricing calculations are conceptual and intended for comparison purposes. Sizing estimates reflect minimum requirements and auto-select matching infrastructure components. Consult official provider documentation for workload sizing. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+          </blockquote>
+        </div>
       </div>
 
       <Footer />

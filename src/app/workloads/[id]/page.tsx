@@ -1065,6 +1065,11 @@ export default function WorkloadDetails() {
         </div>
       </div>
 
+      {/* Divider */}
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-10 mb-8">
+        <div className="h-px bg-[#e5e5e5] dark:bg-[#262626]" />
+      </div>
+
       {/* Disclaimer */}
       <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-8">
         <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">

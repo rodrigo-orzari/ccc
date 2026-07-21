@@ -554,15 +554,21 @@ export default function DatacentersPage() {
               <p className="text-[9px] text-[#a3a3a3] mt-4">Last verified: June 2026. Updated manually — not real-time.</p>
             </div>
 
-            {/* Disclaimer */}
-            <div className="max-w-[1600px] mx-auto mt-6">
-              <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
-                <strong>Disclaimer:</strong> Infrastructure data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
-                <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
-              </blockquote>
-            </div>
-
           </main>
+
+        {/* Divider */}
+        <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 mb-8">
+          <div className="h-px bg-[var(--border)]" />
+        </div>
+
+        {/* Disclaimer */}
+        <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8">
+          <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
+            <strong>Disclaimer:</strong>{' '}
+            Infrastructure data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
+            <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+          </blockquote>
+        </div>
       </div>
 
       <Footer />

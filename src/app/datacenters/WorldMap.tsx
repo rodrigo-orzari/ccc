@@ -284,13 +284,20 @@ interface Tooltip {
 export default function WorldMap() {
   const allProviderIds = PROVIDER_INFRA.map(p => p.id);
   const [selected, setSelected] = useState<Set<string>>(new Set(allProviderIds));
-  const [selectedGeos, setSelectedGeos] = useState<string[]>([...GEOGRAPHIES]);
+  const [selectedGeos, setSelectedGeos] = useState<Set<string>>(new Set(GEOGRAPHIES));
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
 
   const toggleGeo = (geo: string) => {
-    setSelectedGeos(prev =>
-      prev.includes(geo) ? prev.filter(g => g !== geo) : [...prev, geo]
-    );
+    setSelectedGeos(prev => {
+      const next = new Set(prev);
+      if (next.has(geo)) next.delete(geo);
+      else next.add(geo);
+      return next;
+    });
+  };
+
+  const isolateGeo = (geo: string) => {
+    setSelectedGeos(new Set([geo]));
   };
 
   function toggle(id: string) {
@@ -317,7 +324,7 @@ export default function WorldMap() {
     const color = DOT_COLORS[pid] ?? '#888';
     for (const [lat, lng, code, name] of coords) {
       const geo = GEO_BY_CODE[code];
-      if (!geo || !selectedGeos.includes(geo)) continue;
+      if (!geo || !selectedGeos.has(geo)) continue;
       const [x, y] = toXY(lat, lng);
       dots.push({ x, y, providerId: pid, color, code, name });
     }
@@ -327,52 +334,64 @@ export default function WorldMap() {
     <div className="mt-8">
       {/* Header — outside the box */}
       <h2 className="text-xl font-bold mb-1 text-[var(--text)]">Global Region Map</h2>
-      <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers and region. Double-click to isolate one.</p>
+      <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers or region. Double-click to isolate one.</p>
 
-      <div className="border border-[var(--border)] rounded overflow-hidden bg-[var(--surface)]">
-      {/* Provider + Geography filters — single row */}
-      <div className="px-5 py-3 border-b border-[var(--border)] flex flex-col items-center lg:flex-row lg:justify-center lg:items-center gap-4">
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 shrink-0">Provider</span>
-          {PROVIDER_INFRA.map(p => {
-            const active = selected.has(p.id);
-            return (
-              <button
-                key={p.id}
-                onClick={() => toggle(p.id)}
-                onDoubleClick={() => selectOnly(p.id)}
-                title={`Click to toggle · Double-click to show only ${p.name}`}
-                className={`flex items-center px-3 py-1.5 rounded text-[10px] font-bold border transition-all ${
-                  active
-                    ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
-                    : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
-                }`}
-              >
-                {p.nameShort}
-              </button>
-            );
-          })}
-        </div>
+      {/* Filter box matching Compliance page */}
+      <div className="border border-[var(--border)] rounded bg-[var(--surface)] mb-8">
+        <div className="flex flex-col divide-y divide-[var(--border)]">
+          {/* Provider */}
+          <div className="px-5 py-4 flex items-start gap-2">
+            <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Provider</span>
+            <div className="flex flex-wrap gap-2 flex-1">
+              {PROVIDER_INFRA.map(p => {
+                const active = selected.has(p.id);
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => toggle(p.id)}
+                    onDoubleClick={() => selectOnly(p.id)}
+                    title={`Click to toggle · Double-click to show only ${p.nameShort}`}
+                    className={`px-3 py-1.5 shrink-0 rounded text-[10px] font-bold border transition-all ${
+                      active
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
+                    }`}
+                  >
+                    {p.nameShort}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-        <div className="hidden lg:block w-px h-6 bg-[var(--border)] shrink-0" />
-
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 shrink-0">Geography</span>
-          {GEOGRAPHIES.map(geo => (
-            <button
-              key={geo}
-              onClick={() => toggleGeo(geo)}
-              className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
-                selectedGeos.includes(geo)
-                  ? 'bg-[var(--text)] text-[var(--bg)] border-[var(--text)]'
-                  : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] hover:border-[var(--muted)]'
-              }`}
-            >
-              {geo}
-            </button>
-          ))}
+          {/* Region */}
+          <div className="px-5 py-4 flex items-start gap-2">
+            <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Region</span>
+            <div className="flex flex-wrap gap-2 flex-1">
+              {GEOGRAPHIES.map(geo => {
+                const active = selectedGeos.has(geo);
+                return (
+                  <button
+                    key={geo}
+                    onClick={() => toggleGeo(geo)}
+                    onDoubleClick={() => isolateGeo(geo)}
+                    title={`Click to toggle · Double-click to show only ${geo}`}
+                    className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border ${
+                      active
+                        ? 'bg-black dark:bg-white text-white dark:text-black border-black dark:border-white shadow-sm'
+                        : 'bg-[var(--row-hover)] text-[var(--muted)] border-[var(--border)] opacity-60 hover:opacity-90'
+                    }`}
+                  >
+                    {geo}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
+
+      <div className="border border-[var(--border)] rounded overflow-hidden bg-[var(--surface)]">
 
       {/* Map */}
       <div className="relative w-full" style={{ paddingBottom: `${(H / W) * 100}%` }}>

@@ -14,7 +14,7 @@ Cloud providers structure, name, and publish pricing data in completely differen
 
 CCC solves this by:
 
-1. **Aggregating** pricing from live APIs and static fallback configs across 10 product categories
+1. **Aggregating** pricing from live APIs and static fallback configs across 17 product categories
 2. **Normalizing** proprietary terminology into a common schema (CPU vendor, geography, HA mode, etc.)
 3. **Comparing** configurations side-by-side with filters, sorting, and in-table visualizations
 4. **Simulating** full workload costs — e.g. "what does a 3-tier web app cost on each cloud for 1,000 concurrent users?" — via the Workloads catalog
@@ -29,17 +29,21 @@ CCC solves this by:
 |---|---|---|---|---|
 | 🖥️ Virtual Machines | General compute instances | AWS, Azure, GCP, Oracle, DO | All 9 providers | By provider (native regions) |
 | 🎮 GPU Compute | GPU-accelerated instances, by chip model (H100, A100, L4, MI300X, …) | AWS, Azure, GCP, Oracle, DO, Alibaba | All 6 hyperscalers | By provider (native regions) |
-| 🗄️ Databases | Managed relational, NoSQL, in-memory, caching | AWS, Azure | All 9 providers | By provider (native regions) |
+| 🗄️ Databases | Managed relational, NoSQL, in-memory, caching (incl. **Time-Series** and **Graph** subcategories) | AWS, Azure | All 9 providers | By provider (native regions) |
 | ⚡ Serverless | Functions, API Gateways, event brokers | AWS Lambda | All 9 providers | By provider (native regions) |
-| 📦 Containers | Managed Kubernetes, container instances | — | All 9 providers | By provider (native regions) |
+| 📦 Containers | Managed Kubernetes, container instances, **Container Registry** | — | All 9 providers | By provider (native regions) |
 | 🌐 Networking | Load balancers, VPN, CDN, data transfer | — | All 9 providers | By provider (native regions) |
-| 📊 Data & Analytics | Data warehouses, streaming, Spark/Databricks | — | All 9 providers | Regional multipliers (1.00–1.32) |
-| 🧠 AI | Foundation models, inference endpoints | — | All 9 providers | By provider (native regions) |
+| 📊 Data & Analytics | Data warehouses, streaming, Spark/Databricks, **Search Engines** | — | All 9 providers | Regional multipliers (1.00–1.32) |
+| 🧠 AI | Foundation models, **Inference Endpoints** | — | All 9 providers | By provider (native regions) |
 | 💾 Storage | Object, block, file, archive | — | All 9 providers | By provider (native regions) |
 | 🚀 App Hosting | PaaS platforms (App Engine, App Runner, etc.) | — | All 9 providers | By provider (native regions) |
+| 🔐 Security & Identity | KMS, IAM, WAF, DDoS protection, **Secrets Management**, **Certificate Management** | — | All 9 providers | By provider (native regions) |
+| 🔌 Integration | API gateways, message queues, event brokers | — | All 9 providers | By provider (native regions) |
 | 📦 Workloads | Pre-built templates for multi-service architectures | — | Derived | Multi-cloud cost simulation |
 | 📜 Certifications | Provider compliance & regulation matrix (not priced) | — | Curated | By standard jurisdiction |
 | 🏢 Datacenters | Global region & infrastructure footprint (not priced) | — | Curated | Worldwide |
+
+**Recently added (see [CHANGELOG.md](./CHANGELOG.md)):** Time-Series Databases, Graph Databases, Search Engines, Certificate Management, and Inference Endpoints were added as dedicated attribute-tagged subcategories, alongside Container Registry (under Containers) and Secrets Management (under Security & Identity).
 
 ### 🗺️ Provider Coverage by Category
 
@@ -69,13 +73,13 @@ Providers are classified by `providerType` in `src/config/index.ts`: **hyperscal
 
 Pre-built cost estimation templates that model complete multi-service architectures across all providers. Each template lets you adjust key parameters (concurrency, data volume, retention, etc.) and see total cost impact across compute, storage, networking, and data services.
 
-Available templates (16 total):
+Available templates (19 total):
 - **High-Traffic Web App** — API servers, databases, load balancing, CDN
 - **RAG / AI Knowledge Base** — Embedding generation, vector storage, inference, retrieval pipelines
 - **Compliance-Ready Database** — Managed relational DB with HA, automated backups, compliance tiers
 - **Smart Manufacturing / Industrial IoT** — Edge gateways, stream processing, hot metrics storage, analytics warehouse, cold archive, predictive maintenance AI
 - **Event-Driven Image Processing** — Serverless KYC / ID verification pipelines with Vision AI
-- *And 11 more covering HPC, streaming analytics, disaster recovery, etc.*
+- *And 14 more covering HPC, streaming analytics, disaster recovery, zero-trust edge, hybrid cloud networking, etc.*
 
 ### 📊 Regional Pricing for Data & Analytics
 
@@ -106,12 +110,13 @@ Filters dynamically adapt per product category to reduce clutter and highlight r
 
 | Layer | Technology |
 |---|---|
-| Framework | Next.js 14 (App Router) · React · TypeScript |
-| Styling | Tailwind CSS · Motion (animations) |
+| Framework | Next.js 16 (App Router) · React 19 · TypeScript |
+| Styling | Tailwind CSS 4 · Motion (animations) |
 | Charts | Recharts |
-| Database | PostgreSQL |
-| Data fetching | `@tanstack/react-query` |
-| Pipelines | `tsx` (TypeScript runner) · `playwright` (web scrapers) |
+| State | `react-redux` + `reselect` |
+| Database | PostgreSQL (`postgres.js`, no ORM) |
+| Data fetching | `@tanstack/react-query` · `axios` |
+| Pipelines | `tsx` (TypeScript runner) · `playwright` (web scrapers) · `@aws-sdk/client-pricing` · `@google/genai` |
 | Scheduling | `node-cron` (background worker process) |
 | Email | `nodemailer` (staleness + data-quality alerts) |
 
@@ -204,12 +209,13 @@ ccc/
 │   │   ├── providers.tsx             # React Query provider wrapper
 │   │   ├── sitemap.ts                # SEO: sitemap.xml (all routes + 14 workload pages from WORKLOADS)
 │   │   ├── robots.ts                 # SEO: robots.txt (allows all except /api/)
-│   │   ├── dashboard/page.tsx        # New graphical landing page preview
+│   │   ├── dashboard/page.tsx        # Graphical landing page
 │   │   ├── datacenters/page.tsx      # Datacenter/region world map
 │   │   ├── certifications/page.tsx   # Certifications & Regulations (provider compliance matrix + filters)
 │   │   ├── about/page.tsx            # About page (solution overview, key capabilities, use cases)
 │   │   ├── docs/page.tsx             # Documentation hub (Datacenters, pricing methodology, FAQ)
 │   │   ├── status/page.tsx           # Status page (pipeline health, data freshness, coverage)
+│   │   ├── sponsors/page.tsx         # Sponsorship program page (banner/slot sponsorship)
 │   │   ├── blog/
 │   │   │   ├── page.tsx              # Blog index page
 │   │   │   └── [slug]/page.tsx       # Individual blog post renderer
@@ -232,7 +238,8 @@ ccc/
 │   │   │   ├── ping/route.ts         # GET /api/ping — liveness probe
 │   │   │   └── admin/
 │   │   │       ├── fetch-pricing/route.ts  # POST /api/admin/fetch-pricing — trigger pipelines
-│   │   │       └── init-db/route.ts        # POST /api/admin/init-db — schema migration
+│   │   │       ├── init-db/route.ts        # POST /api/admin/init-db — schema migration
+│   │   │       └── data-quality/route.ts   # GET /api/admin/data-quality — data-quality report
 │   │   ├── about/page.tsx
 │   │   ├── docs/page.tsx
 │   │   ├── methodology/page.tsx
@@ -251,6 +258,10 @@ ccc/
 │   │   ├── Footer.tsx                # Footer with social share buttons
 │   │   ├── MarkdownPage.tsx          # Generic markdown renderer for static pages
 │   │   ├── DigitalOceanReferralModal.tsx # DO affiliate promo
+│   │   ├── DonationModal.tsx         # "Buy me a coffee" donation prompt
+│   │   ├── CategorySummaryTable.tsx  # Per-category provider price summary table
+│   │   ├── CopyHeading.tsx           # Heading with copy-link-to-section button
+│   │   ├── Sidebar.tsx               # Collapsible left navigation sidebar
 │   │   └── index.ts                  # Barrel export
 │   │
 │   ├── services/                     # Pricing ingestion pipelines
@@ -308,7 +319,8 @@ ccc/
 │   │   ├── api-utils.ts              # SQL query builder, filter parsing, initDb() migration runner
 │   │   ├── db.ts                     # postgres.js connection singleton
 │   │   ├── formatInstanceName.ts     # Display-name cleaner (Azure armSkuName → readable labels)
-│   │   └── blog.ts                   # Markdown parser for blog content
+│   │   ├── blog.ts                   # Markdown parser for blog content
+│   │   └── cache.ts                  # In-memory response caching helpers
 │   │
 │   ├── content/
 │   │   └── blog/                     # Markdown files for blog posts (*.md)
@@ -319,27 +331,33 @@ ccc/
 │   ├── types/
 │   │   └── index.ts                  # Shared TypeScript types (PricingRecord, ProductType, etc.)
 │   │
-│   ├── middleware.ts                 # Next.js middleware (request logging, CORS)
-│   │
 │   └── workers/
 │       └── scheduler.ts              # node-cron background worker (VM pipeline, Sunday midnight)
 │
 ├── public/                           # Static assets (logo, favicon, QR code, etc.)
 ├── .env.example                      # Environment variable template
 ├── .gitignore
-├── next.config.js
+├── next.config.mjs
 ├── package.json
 ├── playwright.config.ts
 ├── tsconfig.json
 │
 └── 📖 Documentation
     ├── README.md                     # ← You are here
+    ├── CHANGELOG.md                  # Dated log of shipped features/fixes
     ├── OPERATIONS_RUNBOOK.md         # Deployment, security, admin operations
     ├── SECURITY_AUDIT.md             # Security findings and risk ratings
     ├── SECURITY_FIXES.md             # Applied security fixes
-    ├── ARCHITECTURE_DIAGRAMS.md      # ASCII system diagrams
-    ├── PROJECT_ANALYSIS.md           # In-depth technical analysis
-    └── DATA_POPULATION_GUIDE.md      # Guide to populating pricing data
+    ├── SECURITY_STATUS_2026_07_19.md # Point-in-time security audit snapshot
+    ├── ARCHITECTURE_DIAGRAMS.md      # ASCII system diagrams (stale — see note below)
+    ├── PROJECT_ANALYSIS.md           # In-depth technical analysis (stale — see note below)
+    ├── DATA_POPULATION_GUIDE.md      # Guide to populating pricing data
+    ├── FILTER_CATALOG.md             # Per-category filter audit (working/removed/added)
+    ├── IMPLEMENTATION_SUMMARY.md     # Point-in-time implementation summary
+    ├── OPEN_DECISIONS.md             # Open product/engineering decisions
+    ├── PRODUCT_CATEGORY_AUDIT.md     # Product category coverage audit
+    ├── SERVERLESS_IMPLEMENTATION_PLAN.md # Serverless pipeline design notes
+    └── CERTIFICATIONS_REFRESH.md     # Prompt/process for refreshing the compliance matrix
 ```
 
 ---
@@ -379,6 +397,7 @@ All `/api/admin/*` endpoints require `X-Admin-Token: <ADMIN_API_KEY>` header.
 | `/api/filters` | GET | Dynamic filter options for active product category (geography, tier groups, etc.) |
 | `/api/health` | GET | Data freshness check — shows last ingestion time per category |
 | `/api/status` | GET | Pipeline health, coverage stats, and last-run timestamps |
+| `/api/admin/data-quality` | GET | Data-quality report (nulls, outliers, stale rows) across categories |
 | `/api/admin/init-db` | POST | Run schema migrations, create missing columns, re-apply category tags |
 | `/api/admin/fetch-pricing?type=all` | POST | Trigger all pricing pipelines (compute, database, serverless, etc.) |
 | `/api/admin/fetch-pricing?type=compute` | POST | VM / compute pipeline only |
@@ -460,7 +479,7 @@ Static curated data — **no live pipeline**. Compliance changes rarely and a wr
 
 The About page (`/about`) is the authoritative reference for users on what CCC does and who it's for. It emphasizes:
 
-- **Comprehensive Product Coverage** — 10+ categories across 9+ cloud providers
+- **Comprehensive Product Coverage** — 17 categories across 9+ cloud providers
 - **Multi-Cloud Analysis at Scale** — normalized, side-by-side comparisons
 - **Global Infrastructure Intelligence** — Datacenters page for geographic reach independent of pricing
 - **Compliance & Certification Comparison** — Certifications & Regulations page showing which standards each provider holds, independent of pricing
@@ -498,7 +517,11 @@ See [PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md) § 4.3 for a step-by-step walkt
 | View system diagrams | [ARCHITECTURE_DIAGRAMS.md](./ARCHITECTURE_DIAGRAMS.md) |
 | Review security posture | [SECURITY_AUDIT.md](./SECURITY_AUDIT.md) |
 | Understand applied security fixes | [SECURITY_FIXES.md](./SECURITY_FIXES.md) |
+| Latest security audit snapshot | [SECURITY_STATUS_2026_07_19.md](./SECURITY_STATUS_2026_07_19.md) |
 | Populate pricing data | [DATA_POPULATION_GUIDE.md](./DATA_POPULATION_GUIDE.md) |
+| Per-category filter audit | [FILTER_CATALOG.md](./FILTER_CATALOG.md) |
+| See what shipped recently | [CHANGELOG.md](./CHANGELOG.md) |
+| Open product/engineering decisions | [OPEN_DECISIONS.md](./OPEN_DECISIONS.md) |
 
 > **Note:** `PROJECT_ANALYSIS.md` and `ARCHITECTURE_DIAGRAMS.md` reflect an earlier version of the architecture (Express-based). The README above and in-app About/Status pages are the most current reference for the Next.js App Router version with regional analytics, filter consolidation, and workload templates.
 
