@@ -630,7 +630,14 @@ export default function Dashboard() {
         valB = b[key as keyof PricingRecord] ?? '';
       }
 
-      const numericKeys = ['vcpus', 'memory_gb', 'price_per_unit', 'avg_price', 'min_price', 'max_price'];
+      const numericKeys = [
+        'vcpus', 'memory_gb', 'price_per_unit', 'avg_price', 'min_price', 'max_price',
+        'gpu_count', 'attributes.contextWindowK', 'attributes.gpu_vram_gb',
+        'attributes.timeout_seconds', 'attributes.billing_granularity_ms',
+        'attributes.max_ephemeral_storage_gb', 'attributes.invocation_price_per_1m',
+        'attributes.free_invocations_per_month', 'attributes.normalized_price_per_1m',
+        'attributes.outputPricePer1M'
+      ];
       if (numericKeys.includes(key)) {
         valA = parseFloat(valA.toString().replace(/[^0-9.-]+/g, "")) || 0;
         valB = parseFloat(valB.toString().replace(/[^0-9.-]+/g, "")) || 0;

@@ -421,27 +421,27 @@ export default function PricingTable({
                 </>) : activeProductType === 'serverless' ? (<>
                   <Th colKey="svc_type"           sortKey="attributes.service_type" label="Service Type" />
                   <Th colKey="arch"               sortKey="arch"      label="Arch" />
-                  <Th colKey="languages"          label="Languages" />
-                  <Th colKey="engine_category"    label="Cold Start (ms)" />
-                  <Th colKey="db_family_cpu_vendor" label="Timeout (sec)" />
-                  <Th colKey="deployment_arch"    label="Memory Config" />
-                  <Th colKey="ha_mode_os"         label="Free Tier" />
-                  <Th colKey="granularity"        label="Granularity (ms)" />
-                  <Th colKey="exec_model"         label="Exec. Model" />
-                  <Th colKey="prov_concurrency"   label="Prov. Concurrency" />
-                  <Th colKey="max_storage"        label="Max Storage (GB)" />
-                  <Th colKey="inv_price"          label="Inv. Price ($/1M)" />
+                  <Th colKey="languages"          sortKey="attributes.supportedLanguages"           label="Languages" />
+                  <Th colKey="engine_category"    sortKey="attributes.cold_start_overhead_ms"       label="Cold Start (ms)" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.timeout_seconds"              label="Timeout (sec)" />
+                  <Th colKey="deployment_arch"    sortKey="attributes.memory_configuration"         label="Memory Config" />
+                  <Th colKey="ha_mode_os"         sortKey="attributes.free_invocations_per_month"   label="Free Tier" />
+                  <Th colKey="granularity"        sortKey="attributes.billing_granularity_ms"       label="Granularity (ms)" />
+                  <Th colKey="exec_model"         sortKey="attributes.execution_model"              label="Exec. Model" />
+                  <Th colKey="prov_concurrency"   sortKey="attributes.provisioned_concurrency_support" label="Prov. Concurrency" />
+                  <Th colKey="max_storage"        sortKey="attributes.max_ephemeral_storage_gb"     label="Max Storage (GB)" />
+                  <Th colKey="inv_price"          sortKey="attributes.invocation_price_per_1m"      label="Inv. Price ($/1M)" />
                 </>) : activeProductType === 'containers' ? (<>
-                  <Th colKey="engine_category"    label="Orchestrator" />
-                  <Th colKey="db_family_cpu_vendor" label="Compute Type" />
-                  <Th colKey="deployment_arch"    label="Architecture" />
-                  <Th colKey="ha_mode_os"         label="Granularity" />
+                  <Th colKey="engine_category"    sortKey="attributes.orchestrator"      label="Orchestrator" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.compute_type"      label="Compute Type" />
+                  <Th colKey="deployment_arch"    sortKey="attributes.architecture"      label="Architecture" />
+                  <Th colKey="ha_mode_os"         sortKey="attributes.billing_granularity" label="Granularity" />
                 </>) : activeProductType === 'networking' ? (<>
-                  <Th colKey="engine_category"    label="Service" />
-                  <Th colKey="db_family_cpu_vendor" label="Billing Model" />
-                  <Th colKey="deployment_arch"    label="Usage Tier" />
-                  <Th colKey="ha_mode_os"         label="Port Capacity" />
-                  <Th colKey="gpu"                label="Transfer Scope" />
+                  <Th colKey="engine_category"    sortKey="service"                  label="Service" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.billing_model" label="Billing Model" />
+                  <Th colKey="deployment_arch"    sortKey="attributes.usage_tier"    label="Usage Tier" />
+                  <Th colKey="ha_mode_os"         sortKey="attributes.port_capacity" label="Port Capacity" />
+                  <Th colKey="gpu"                sortKey="attributes.transfer_scope" label="Transfer Scope" />
                 </>) : activeProductType === 'storage' ? (<>
                   <Th colKey="engine_category"    sortKey="attributes.storage_type" label="Type" />
                   <Th colKey="db_family_cpu_vendor" sortKey="attributes.tier"        label="Tier" />
