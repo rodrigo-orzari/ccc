@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Footer, Sidebar, PRODUCT_TYPE_ICONS } from '@/components';
-import { HelpCircle, Link as LinkIcon } from 'lucide-react';
+import { Footer, Sidebar, PRODUCT_TYPE_ICONS, CopyHeading } from '@/components';
+import { HelpCircle } from 'lucide-react';
 import { STATUS_SPONSOR } from '@/config';
 
 interface PipelineStatus {
@@ -314,7 +314,7 @@ export default function StatusPage() {
         }
       `}</style>
 
-      <div className="status-wrapper flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+      <div className="status-wrapper flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-[var(--bg)] text-[var(--text)] font-sans lg:overflow-hidden">
         <Sidebar activeProductType={"status" as any} />
 
         <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
@@ -385,13 +385,10 @@ export default function StatusPage() {
             {status && !loading && (
               <>
                 {/* Summary Section Header */}
-                <div id="summary" className="max-w-[1600px] mx-auto mb-4 scroll-mt-6">
-                  <h2 className="text-xl font-bold text-[var(--text)] mb-1 group flex items-center gap-2">
+                <div className="max-w-[1600px] mx-auto mb-4">
+                  <CopyHeading id="summary" className="text-xl font-bold text-[var(--text)] mb-1 scroll-mt-6">
                     Summary
-                    <a href="#summary" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Summary section">
-                      <LinkIcon size={18} />
-                    </a>
-                  </h2>
+                  </CopyHeading>
                   <p className="text-sm text-[var(--muted)]">A high-level look at the total number of pricing records across all providers.</p>
                 </div>
 
@@ -448,13 +445,10 @@ export default function StatusPage() {
                 <div className="max-w-[1600px] mx-auto h-px bg-[var(--border)] mb-8" />
 
                 {/* Table Section Header */}
-                <div id="coverage-matrix" className="max-w-[1600px] mx-auto mb-4 scroll-mt-6">
-                  <h2 className="text-xl font-bold text-[var(--text)] mb-1 group flex items-center gap-2">
+                <div className="max-w-[1600px] mx-auto mb-4">
+                  <CopyHeading id="coverage-matrix" className="text-xl font-bold text-[var(--text)] mb-1 scroll-mt-6">
                     Coverage Matrix
-                    <a href="#coverage-matrix" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Coverage Matrix section">
-                      <LinkIcon size={18} />
-                    </a>
-                  </h2>
+                  </CopyHeading>
                   <p className="text-sm text-[var(--muted)]">Detailed breakdown of product categories and the volume of pricing data gathered for each provider.</p>
                 </div>
 
@@ -486,6 +480,11 @@ export default function StatusPage() {
                     'app-hosting': 'App Hosting',
                     integration: 'Integration',
                     security: 'Security & Identity',
+                    'time-series': 'Time-Series',
+                    graph: 'Graph',
+                    search: 'Search',
+                    certificates: 'Certificates',
+                    inference: 'Inference',
                   };
                   return PIPELINE_DISPLAY[category] ?? (category.charAt(0).toUpperCase() + category.slice(1));
                 };
@@ -504,6 +503,11 @@ export default function StatusPage() {
                     'app-hosting': PRODUCT_TYPE_ICONS['app-hosting'],
                     integration: PRODUCT_TYPE_ICONS.integration,
                     security: PRODUCT_TYPE_ICONS.security,
+                    'time-series': PRODUCT_TYPE_ICONS.database,
+                    graph: PRODUCT_TYPE_ICONS.database,
+                    search: PRODUCT_TYPE_ICONS.database,
+                    certificates: PRODUCT_TYPE_ICONS.security,
+                    inference: PRODUCT_TYPE_ICONS.ai,
                   };
                   return PIPELINE_ICON[category] ?? HelpCircle;
                 };

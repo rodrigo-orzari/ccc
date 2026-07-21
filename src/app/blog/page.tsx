@@ -13,7 +13,7 @@ export default function BlogIndexPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="flex min-h-screen bg-[var(--bg)] text-[var(--text)] font-sans">
+    <div className="flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-[var(--bg)] text-[var(--text)] font-sans lg:overflow-hidden">
       <style>{`
         :root {
           --bg: #ffffff;

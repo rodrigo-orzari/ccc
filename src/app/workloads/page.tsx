@@ -19,7 +19,7 @@ export default function WorkloadsCatalog() {
   );
 
   return (
-    <div className="wl-page flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+    <div className="wl-page flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-[var(--bg)] text-[var(--text)] font-sans lg:overflow-hidden">
       <style>{`
         .wl-page {
           --bg: #ffffff;

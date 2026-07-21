@@ -105,7 +105,7 @@ export default function CertificationsPage() {
   };
 
   return (
-    <div className="cc-page flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+    <div className="cc-page flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-[var(--bg)] text-[var(--text)] font-sans lg:overflow-hidden">
       <style>{`
         .cc-page {
           --bg: #ffffff;
@@ -216,7 +216,7 @@ export default function CertificationsPage() {
           <p className="text-sm text-[var(--muted)] mb-4">Click to toggle providers, region, or certification categories. Double-click to isolate one.</p>
 
           <div className="border border-[var(--border)] rounded bg-[var(--surface)] mb-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-[var(--border)]">
+            <div className="flex flex-col divide-y divide-[var(--border)]">
               {/* Provider */}
               <div className="px-5 py-4 flex items-start gap-2">
                 <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Provider</span>
@@ -242,7 +242,8 @@ export default function CertificationsPage() {
                 </div>
               </div>
 
-              {/* Region */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-[var(--border)]">
+                {/* Region */}
               <div className="px-5 py-4 flex items-start gap-2">
                 <span className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mr-1 w-20 shrink-0 mt-1.5">Region</span>
                 <div className="flex flex-wrap gap-2 flex-1">
@@ -293,6 +294,7 @@ export default function CertificationsPage() {
               </div>
             </div>
           </div>
+        </div>
 
           {/* Divider */}
           <div className="h-px bg-[var(--border)] mb-8" />

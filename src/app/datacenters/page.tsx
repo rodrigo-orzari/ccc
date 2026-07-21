@@ -2,10 +2,10 @@
 
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { Footer, Sidebar, DigitalOceanReferralModal } from '@/components';
+import { Footer, Sidebar, DigitalOceanReferralModal, CopyHeading } from '@/components';
 import { PROVIDER_INFRA, GEOGRAPHIES, type ProviderInfrastructure, type DatacenterRegion } from '@/config/datacenter_data';
 import { DATACENTERS_SPONSOR } from '@/config';
-import { ChevronDown, ExternalLink, Info, Link as LinkIcon } from 'lucide-react';
+import { ChevronDown, ExternalLink, Info } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend, Cell } from 'recharts';
 import WorldMap from './WorldMap';
 
@@ -250,7 +250,7 @@ export default function DatacentersPage() {
   }), []);
 
   return (
-    <div className="dc-page flex h-screen bg-[var(--bg)] text-[var(--text)] font-sans overflow-hidden">
+    <div className="dc-page flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-[var(--bg)] text-[var(--text)] font-sans lg:overflow-hidden">
       <style>{`
         .dc-page {
           --bg: #ffffff;
@@ -339,14 +339,11 @@ export default function DatacentersPage() {
             <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* Infrastructure Overview */}
-            <div id="infra-table" className="scroll-mt-6">
+            <div>
               <div className="flex items-center justify-between mb-1">
-                <h2 className="text-xl font-bold text-[var(--text)] group flex items-center gap-2">
+                <CopyHeading id="infra-table" className="text-xl font-bold text-[var(--text)] scroll-mt-6">
                   Infrastructure Overview
-                  <a href="#infra-table" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Infrastructure Overview section">
-                    <LinkIcon size={18} />
-                  </a>
-                </h2>
+                </CopyHeading>
                 <ViewToggle view={infraView} onChange={setInfraView} />
               </div>
               <p className="text-sm text-[var(--muted)] mb-3">
@@ -414,13 +411,10 @@ export default function DatacentersPage() {
             <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* Availability Zones per Region — stat cards grid */}
-            <div id="az-detail" className="scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[var(--text)] group flex items-center gap-2">
+            <div>
+              <CopyHeading id="az-detail" className="text-xl font-bold mb-1 text-[var(--text)] scroll-mt-6">
                 Availability Zones per Region
-                <a href="#az-detail" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Availability Zones section">
-                  <LinkIcon size={18} />
-                </a>
-              </h2>
+              </CopyHeading>
               <p className="text-sm text-[var(--muted)] mb-4">Total and average Availability Zones per region, per provider.</p>
               <div className="flex flex-wrap gap-px rounded overflow-hidden border border-[var(--border)]" style={{ background: 'var(--border)' }}>
                 {PROVIDER_INFRA.map(p => (
@@ -449,14 +443,11 @@ export default function DatacentersPage() {
             <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* Regional Coverage Matrix */}
-            <div id="coverage-matrix" className="scroll-mt-6">
+            <div>
               <div className="flex items-center justify-between mb-1">
-                <h2 className="text-xl font-bold text-[var(--text)] group flex items-center gap-2">
+                <CopyHeading id="coverage-matrix" className="text-xl font-bold text-[var(--text)] scroll-mt-6">
                   Regional Coverage Matrix
-                  <a href="#coverage-matrix" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Regional Coverage Matrix section">
-                    <LinkIcon size={18} />
-                  </a>
-                </h2>
+                </CopyHeading>
                 <ViewToggle view={matrixView} onChange={setMatrixView} />
               </div>
               <p className="text-sm text-[var(--muted)] mb-4">Number of available regions per provider per geography.</p>
@@ -532,13 +523,10 @@ export default function DatacentersPage() {
             <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* Data sources */}
-            <div id="data-sources" className="scroll-mt-6">
-              <h2 className="text-xl font-bold mb-1 text-[var(--text)] group flex items-center gap-2">
+            <div>
+              <CopyHeading id="data-sources" className="text-xl font-bold mb-1 text-[var(--text)] scroll-mt-6">
                 Sources
-                <a href="#data-sources" className="opacity-0 group-hover:opacity-100 text-[var(--muted)] hover:text-[#2563eb] transition-opacity" aria-label="Link to Sources section">
-                  <LinkIcon size={18} />
-                </a>
-              </h2>
+              </CopyHeading>
               <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
                 All infrastructure data is sourced from each provider's official public documentation. Figures reflect available regions at the time of last verification. Announced regions may not yet be generally available.
               </p>

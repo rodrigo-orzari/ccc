@@ -237,7 +237,7 @@ const AboutPage: React.FC = () => {
         `}
       </style>
 
-      <div className="about-wrapper">
+      <div className="about-wrapper flex-col lg:flex-row lg:overflow-hidden">
         <Sidebar activeProductType={'about' as any} />
         <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
         <div className="about-container" id="top">

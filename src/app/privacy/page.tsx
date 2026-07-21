@@ -127,7 +127,7 @@ const PrivacyPolicyPage: React.FC = () => {
         }
       `}</style>
 
-      <div className="privacy-wrapper">
+      <div className="privacy-wrapper flex-col lg:flex-row lg:overflow-hidden">
         <Sidebar activeProductType={"" as any} />
         <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
         <div className="privacy-body" id="privacy-policy">

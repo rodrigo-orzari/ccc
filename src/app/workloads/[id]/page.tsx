@@ -413,7 +413,7 @@ export default function WorkloadDetails() {
 
   if (!workload) {
     return (
-      <div className="flex min-h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb]">
+      <div className="flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] lg:overflow-hidden">
         <Sidebar activeProductType={"workloads" as any} />
         <div className="flex-1 min-w-0 flex flex-col">
         <div className="flex-1 flex items-center justify-center text-[11px] uppercase tracking-widest text-[#737373]">
@@ -430,7 +430,7 @@ export default function WorkloadDetails() {
   const maxTotalPrice = validTotals.length > 0 ? Math.max(...validTotals) : 0;
 
   return (
-    <div className="flex h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans overflow-hidden">
+    <div className="flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-white dark:bg-[#000000] text-[#171717] dark:text-[#e5e7eb] font-sans lg:overflow-hidden">
       <style>{scrollbarStyles}</style>
       <Sidebar activeProductType={"workloads" as any} />
 

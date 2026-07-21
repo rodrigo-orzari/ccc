@@ -280,7 +280,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
         `}
       </style>
 
-      <div className="terms-wrapper">
+      <div className="terms-wrapper flex-col lg:flex-row lg:overflow-hidden">
         <Sidebar activeProductType={"" as any} />
         <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
       <div className="terms-container" id="terms-of-use">

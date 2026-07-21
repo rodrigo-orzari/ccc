@@ -249,7 +249,7 @@ const DocsPage: React.FC = () => {
         }
       `}</style>
 
-      <div className="docs-wrapper" style={{ display: 'flex', minHeight: '100vh' }}>
+      <div className="docs-wrapper flex-col lg:flex-row lg:overflow-hidden" style={{ display: 'flex', minHeight: '100vh' }}>
         <Sidebar activeProductType={'docs' as any} />
         <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
       <div className="docs-container" id="top" style={{ flex: 1 }}>

@@ -932,22 +932,23 @@ export default function FilterSidebar({
                 const groups: { label: string; services: string[] }[] = [];
                 config.GPU_MODELS.forEach(m => {
                   const spec = GPU_MODEL_SPECS[m];
-                  const vendor = spec ? spec.vendor : 'Other';
-                  let group = groups.find(g => g.label === vendor);
+                  const vram = spec ? spec.vramGb : 0;
+                  let bucket = 'Other';
+                  if (vram >= 80) bucket = '80GB+ (Training & Large Models)';
+                  else if (vram >= 32) bucket = '32-48GB (Mid-Range)';
+                  else if (vram >= 16) bucket = '16-24GB (Inference & Standard)';
+                  else if (vram > 0) bucket = '< 16GB (Entry Level)';
+                  
+                  let group = groups.find(g => g.label === bucket);
                   if (!group) {
-                    group = { label: vendor, services: [] };
+                    group = { label: bucket, services: [] };
                     groups.push(group);
                   }
                   group.services.push(m);
                 });
-                groups.sort((a, b) => {
-                  // Keep NVIDIA first, then AMD, then alphabetical
-                  if (a.label === 'NVIDIA') return -1;
-                  if (b.label === 'NVIDIA') return 1;
-                  if (a.label === 'AMD') return -1;
-                  if (b.label === 'AMD') return 1;
-                  return a.label.localeCompare(b.label);
-                });
+                
+                const order = ['80GB+ (Training & Large Models)', '32-48GB (Mid-Range)', '16-24GB (Inference & Standard)', '< 16GB (Entry Level)', 'Other'];
+                groups.sort((a, b) => order.indexOf(a.label) - order.indexOf(b.label));
                 return groups;
               })()}
               allOptions={config.GPU_MODELS}
@@ -964,6 +965,10 @@ export default function FilterSidebar({
                     })
                   : []
               }
+              getLabel={(m) => {
+                const spec = GPU_MODEL_SPECS[m];
+                return spec ? `${m} (${spec.vramGb}GB)` : m;
+              }}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>
