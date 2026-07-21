@@ -934,10 +934,10 @@ export default function FilterSidebar({
                   const spec = GPU_MODEL_SPECS[m];
                   const vram = spec ? spec.vramGb : 0;
                   let bucket = 'Other';
-                  if (vram >= 80) bucket = '80GB+ (Training & Large Models)';
-                  else if (vram >= 32) bucket = '32-48GB (Mid-Range)';
-                  else if (vram >= 16) bucket = '16-24GB (Inference & Standard)';
-                  else if (vram > 0) bucket = '< 16GB (Entry Level)';
+                  if (vram >= 80) bucket = 'Training & Large Models';
+                  else if (vram >= 32) bucket = 'Mid-Range';
+                  else if (vram >= 16) bucket = 'Inference & Standard';
+                  else if (vram > 0) bucket = 'Entry Level';
                   
                   let group = groups.find(g => g.label === bucket);
                   if (!group) {
@@ -947,7 +947,7 @@ export default function FilterSidebar({
                   group.services.push(m);
                 });
                 
-                const order = ['80GB+ (Training & Large Models)', '32-48GB (Mid-Range)', '16-24GB (Inference & Standard)', '< 16GB (Entry Level)', 'Other'];
+                const order = ['Training & Large Models', 'Mid-Range', 'Inference & Standard', 'Entry Level', 'Other'];
                 groups.sort((a, b) => order.indexOf(a.label) - order.indexOf(b.label));
                 return groups;
               })()}
@@ -965,10 +965,6 @@ export default function FilterSidebar({
                     })
                   : []
               }
-              getLabel={(m) => {
-                const spec = GPU_MODEL_SPECS[m];
-                return spec ? `${m} (${spec.vramGb}GB)` : m;
-              }}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
           </>

@@ -211,7 +211,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
       {
         id: 'cdn', name: 'Content Delivery (CDN)', icon: '🌍',
         description: 'Global asset distribution for fast page loads',
-        getRequirements: (p) => ({ productType: 'networking', category: 'Content Delivery Network (CDN)', quantity: egressGb(p, 5120) }),
+        getRequirements: (p) => ({ productType: 'networking', category: 'Content Delivery Network', quantity: egressGb(p, 5120) }),
       },
       {
         id: 'kubernetes', name: 'Managed Kubernetes', icon: '☸️',
@@ -689,7 +689,7 @@ export const WORKLOADS: WorkloadDefinition[] = [
       {
         id: 'cdn', name: 'Content Delivery (CDN)', icon: '🌍',
         description: 'Global edge delivery network',
-        getRequirements: (p) => ({ productType: 'networking', category: 'Content Delivery Network (CDN)', quantity: egressGb(p, 10240) }),
+        getRequirements: (p) => ({ productType: 'networking', category: 'Content Delivery Network', quantity: egressGb(p, 10240) }),
       },
       {
         id: 'ztna', name: 'Zero Trust', icon: '🚪',
