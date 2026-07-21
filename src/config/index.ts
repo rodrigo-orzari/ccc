@@ -40,7 +40,7 @@ export const HA_MODES = ['Single AZ', 'Multi AZ'];
 // Serverless-specific constants
 export const SERVERLESS_LANGUAGES = ['Python', 'Node', 'Go', 'Java', 'C#', 'Ruby', 'JavaScript', 'PHP', 'Rust', 'PowerShell', 'TypeScript', 'Any'];
 export const SERVERLESS_COLD_START_OPTIONS = ['<100 ms', '100-200 ms', '>200 ms'];
-export const SERVERLESS_TIMEOUT_OPTIONS = ['Short (5)', 'Medium (10)', 'Long (15+)'];
+export const DEFAULT_SERVERLESS_TIMEOUT_RANGE = { min: 0, max: 3600 };
 export const SERVERLESS_MEMORY_CONFIG_OPTIONS = ['Configurable', 'Tiers', 'Automatic'];
 export const SERVERLESS_FREE_TIER_OPTIONS = ['Yes', 'No'];
 export const SERVERLESS_GRANULARITY_OPTIONS = ['1', '100'];
@@ -49,7 +49,7 @@ export const SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS = ['Yes', 'No'];
 export const SERVERLESS_EPHEMERAL_STORAGE_OPTIONS = ['< 1', '1 - 5', '> 5'];
 // Memory-size buckets (GB). Serverless rows span ~0.125 GB → 10 GB, so the shared
 // 0–3200 GB spec slider is useless here; these buckets map to memory_gb ranges in api-utils.
-export const SERVERLESS_MEMORY_TIERS = ['<= 512 MB', '512 MB - 2 GB', '2 - 4 GB', '> 4 GB'];
+
 // CPU architecture. AWS Lambda is split x86 (Intel/AMD) vs ARM (Graviton); maps to pr.arch.
 export const SERVERLESS_ARCHITECTURES = ['x86', 'ARM'];
 // Service-type categorization for the Serverless tab. Verified against live data

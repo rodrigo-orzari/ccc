@@ -57,14 +57,12 @@ export default function Dashboard() {
       [selectedHaModes, setSelectedHaModes, staticConfig.HA_MODES.length, () => [...config.HA_MODES]],
       [selectedServerlessLanguages, setSelectedServerlessLanguages, staticConfig.SERVERLESS_LANGUAGES.length, () => [...config.SERVERLESS_LANGUAGES]],
       [selectedServerlessColdStart, setSelectedServerlessColdStart, staticConfig.SERVERLESS_COLD_START_OPTIONS.length, () => [...config.SERVERLESS_COLD_START_OPTIONS]],
-      [selectedServerlessTimeout, setSelectedServerlessTimeout, staticConfig.SERVERLESS_TIMEOUT_OPTIONS.length, () => [...config.SERVERLESS_TIMEOUT_OPTIONS]],
       [selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig, staticConfig.SERVERLESS_MEMORY_CONFIG_OPTIONS.length, () => [...config.SERVERLESS_MEMORY_CONFIG_OPTIONS]],
       [selectedServerlessFreeTier, setSelectedServerlessFreeTier, staticConfig.SERVERLESS_FREE_TIER_OPTIONS.length, () => [...config.SERVERLESS_FREE_TIER_OPTIONS]],
       [selectedServerlessGranularity, setSelectedServerlessGranularity, staticConfig.SERVERLESS_GRANULARITY_OPTIONS.length, () => [...config.SERVERLESS_GRANULARITY_OPTIONS]],
       [selectedServerlessExecutionModel, setSelectedServerlessExecutionModel, staticConfig.SERVERLESS_EXECUTION_MODEL_OPTIONS.length, () => [...config.SERVERLESS_EXECUTION_MODEL_OPTIONS]],
       [selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency, staticConfig.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS.length, () => [...config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]],
       [selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage, staticConfig.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS.length, () => [...config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]],
-      [selectedServerlessMemory, setSelectedServerlessMemory, staticConfig.SERVERLESS_MEMORY_TIERS.length, () => [...config.SERVERLESS_MEMORY_TIERS]],
       [selectedServerlessArchitectures, setSelectedServerlessArchitectures, staticConfig.SERVERLESS_ARCHITECTURES.length, () => [...config.SERVERLESS_ARCHITECTURES]],
       [selectedContainersOrchestrators, setSelectedContainersOrchestrators, staticConfig.CONTAINERS_ORCHESTRATORS.length, () => [...config.CONTAINERS_ORCHESTRATORS]],
       [selectedContainersComputeTypes, setSelectedContainersComputeTypes, staticConfig.CONTAINERS_COMPUTE_TYPES.length, () => [...config.CONTAINERS_COMPUTE_TYPES]],
@@ -146,14 +144,12 @@ export default function Dashboard() {
 
   const [selectedServerlessLanguages, setSelectedServerlessLanguages] = useState<string[]>([...config.SERVERLESS_LANGUAGES]);
   const [selectedServerlessColdStart, setSelectedServerlessColdStart] = useState<string[]>([...config.SERVERLESS_COLD_START_OPTIONS]);
-  const [selectedServerlessTimeout, setSelectedServerlessTimeout] = useState<string[]>([...config.SERVERLESS_TIMEOUT_OPTIONS]);
   const [selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig] = useState<string[]>([...config.SERVERLESS_MEMORY_CONFIG_OPTIONS]);
   const [selectedServerlessFreeTier, setSelectedServerlessFreeTier] = useState<string[]>([...config.SERVERLESS_FREE_TIER_OPTIONS]);
   const [selectedServerlessGranularity, setSelectedServerlessGranularity] = useState<string[]>([...config.SERVERLESS_GRANULARITY_OPTIONS]);
   const [selectedServerlessExecutionModel, setSelectedServerlessExecutionModel] = useState<string[]>([...config.SERVERLESS_EXECUTION_MODEL_OPTIONS]);
   const [selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency] = useState<string[]>([...config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS]);
   const [selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage] = useState<string[]>([...config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS]);
-  const [selectedServerlessMemory, setSelectedServerlessMemory] = useState<string[]>([...config.SERVERLESS_MEMORY_TIERS]);
   const [selectedServerlessArchitectures, setSelectedServerlessArchitectures] = useState<string[]>([...config.SERVERLESS_ARCHITECTURES]);
 
   const [selectedContainersOrchestrators, setSelectedContainersOrchestrators] = useState<string[]>([...config.CONTAINERS_ORCHESTRATORS]);
@@ -209,6 +205,7 @@ export default function Dashboard() {
   const [memoryRange, setMemoryRange] = useState({ ...config.DEFAULT_MEMORY_RANGE });
   const [serverlessVCpuRange, setServerlessVCpuRange] = useState({ ...config.DEFAULT_SERVERLESS_VCPU_RANGE });
   const [serverlessMemoryRange, setServerlessMemoryRange] = useState({ ...config.DEFAULT_SERVERLESS_MEMORY_RANGE });
+  const [serverlessTimeoutRange, setServerlessTimeoutRange] = useState({ ...config.DEFAULT_SERVERLESS_TIMEOUT_RANGE });
   const [containersVCpuRange, setContainersVCpuRange] = useState({ ...config.DEFAULT_CONTAINERS_VCPU_RANGE });
   const [containersMemoryRange, setContainersMemoryRange] = useState({ ...config.DEFAULT_CONTAINERS_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...config.DEFAULT_PRICE_RANGE });
@@ -340,14 +337,12 @@ export default function Dashboard() {
     subset('haModes', selectedHaModes, config.HA_MODES);
     subset('serverlessLanguages', selectedServerlessLanguages, config.SERVERLESS_LANGUAGES);
     subset('serverlessColdStart', selectedServerlessColdStart, config.SERVERLESS_COLD_START_OPTIONS);
-    subset('serverlessTimeout', selectedServerlessTimeout, config.SERVERLESS_TIMEOUT_OPTIONS);
     subset('serverlessMemoryConfig', selectedServerlessMemoryConfig, config.SERVERLESS_MEMORY_CONFIG_OPTIONS);
     subset('serverlessFreeTier', selectedServerlessFreeTier, config.SERVERLESS_FREE_TIER_OPTIONS);
     subset('serverlessGranularity', selectedServerlessGranularity, config.SERVERLESS_GRANULARITY_OPTIONS);
     subset('serverlessExecutionModel', selectedServerlessExecutionModel, config.SERVERLESS_EXECUTION_MODEL_OPTIONS);
     subset('serverlessProvisionedConcurrency', selectedServerlessProvisionedConcurrency, config.SERVERLESS_PROVISIONED_CONCURRENCY_OPTIONS);
     subset('serverlessEphemeralStorage', selectedServerlessEphemeralStorage, config.SERVERLESS_EPHEMERAL_STORAGE_OPTIONS);
-    subset('serverlessMemory', selectedServerlessMemory, config.SERVERLESS_MEMORY_TIERS);
     subset('serverlessArchitecture', selectedServerlessArchitectures, config.SERVERLESS_ARCHITECTURES);
     subset('containersOrchestrators', selectedContainersOrchestrators, config.CONTAINERS_ORCHESTRATORS);
     subset('containersComputeTypes', selectedContainersComputeTypes, config.CONTAINERS_COMPUTE_TYPES);
@@ -414,6 +409,8 @@ export default function Dashboard() {
     if (currentMemoryRange.max < currentMemoryDefault.max) params.append('maxMemory', currentMemoryRange.max.toString());
     if (priceRange.min > config.DEFAULT_PRICE_RANGE.min) params.append('minPrice', priceRange.min.toString());
     if (priceRange.max < config.DEFAULT_PRICE_RANGE.max) params.append('maxPrice', priceRange.max.toString());
+    if (activeProductType === 'serverless' && serverlessTimeoutRange.min > config.DEFAULT_SERVERLESS_TIMEOUT_RANGE.min) params.append('minTimeout', serverlessTimeoutRange.min.toString());
+    if (activeProductType === 'serverless' && serverlessTimeoutRange.max < config.DEFAULT_SERVERLESS_TIMEOUT_RANGE.max) params.append('maxTimeout', serverlessTimeoutRange.max.toString());
     if (activeProductType === 'ai' && outputPriceRange.min > config.DEFAULT_PRICE_RANGE.min) params.append('minOutputPrice', outputPriceRange.min.toString());
     if (activeProductType === 'ai' && outputPriceRange.max < config.DEFAULT_PRICE_RANGE.max) params.append('maxOutputPrice', outputPriceRange.max.toString());
     if (activeProductType === 'gpu' && gpuCountRange.min > config.DEFAULT_GPU_COUNT_RANGE.min) params.append('minGpuCount', gpuCountRange.min.toString());
@@ -423,9 +420,9 @@ export default function Dashboard() {
   }, [
     activeProductType, selectedGeographies, selectedOS, selectedCpu, selectedGpuModels, selectedGpuVendors, selectedCategory, selectedPricingModels,
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
-    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
+    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessMemoryConfig, selectedServerlessFreeTier,
     selectedServerlessGranularity, selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
-    selectedServerlessMemory, selectedServerlessArchitectures, selectedServerlessServiceTypes,
+    selectedServerlessArchitectures, selectedServerlessServiceTypes,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures, selectedContainersBillingGranularity,
     selectedContainersServiceTypes, selectedRegistryPricingComponent,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
@@ -437,7 +434,7 @@ export default function Dashboard() {
     selectedAppHostingTiers, selectedAppHostingComputeTypes,
     selectedIntegrationServices, selectedIntegrationTiers, selectedIntegrationPricingModels,
     selectedIntegrationSizes, selectedIntegrationProtocols,
-    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, outputPriceRange, gpuCountRange, search
+    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, serverlessTimeoutRange, containersVCpuRange, containersMemoryRange, priceRange, outputPriceRange, gpuCountRange, search
   ]);
 
   const debouncedParamsString = useDeferredValue(searchParams.toString());
@@ -487,14 +484,12 @@ export default function Dashboard() {
     if (activeProductType === 'serverless' && (
       selectedServerlessLanguages.length === 0 ||
       selectedServerlessColdStart.length === 0 ||
-      selectedServerlessTimeout.length === 0 ||
       selectedServerlessMemoryConfig.length === 0 ||
       selectedServerlessFreeTier.length === 0 ||
       selectedServerlessGranularity.length === 0 ||
       selectedServerlessExecutionModel.length === 0 ||
       selectedServerlessProvisionedConcurrency.length === 0 ||
       selectedServerlessEphemeralStorage.length === 0 ||
-      selectedServerlessMemory.length === 0 ||
       selectedServerlessArchitectures.length === 0 ||
       selectedServerlessServiceTypes.length === 0
     )) return false;
@@ -549,10 +544,10 @@ export default function Dashboard() {
     selectedDbFamilies, selectedEngines, selectedDeploymentTypes, selectedHaModes,
     selectedAnalyticsEngines, selectedAnalyticsDeploymentTypes, selectedAnalyticsTiers,
     selectedAiServiceTypes, selectedAiModelTiers, selectedAiContextWindows, selectedAiMultimodalOptions,
-    selectedServerlessLanguages, selectedServerlessColdStart, selectedServerlessTimeout,
+    selectedServerlessLanguages, selectedServerlessColdStart,
     selectedServerlessMemoryConfig, selectedServerlessFreeTier, selectedServerlessGranularity,
     selectedServerlessExecutionModel, selectedServerlessProvisionedConcurrency, selectedServerlessEphemeralStorage,
-    selectedServerlessMemory, selectedServerlessArchitectures, selectedServerlessServiceTypes,
+    selectedServerlessArchitectures, selectedServerlessServiceTypes,
     selectedContainersOrchestrators, selectedContainersComputeTypes, selectedContainersArchitectures,
     selectedContainersBillingGranularity, selectedContainersServiceTypes, selectedRegistryPricingComponent,
     selectedNetworkingServices, selectedNetworkingConnectionTypes, selectedNetworkingRoutingTypes,
@@ -790,14 +785,12 @@ export default function Dashboard() {
           selectedHaModes={selectedHaModes}
           selectedServerlessLanguages={selectedServerlessLanguages}
           selectedServerlessColdStart={selectedServerlessColdStart}
-          selectedServerlessTimeout={selectedServerlessTimeout}
           selectedServerlessMemoryConfig={selectedServerlessMemoryConfig}
           selectedServerlessFreeTier={selectedServerlessFreeTier}
           selectedServerlessGranularity={selectedServerlessGranularity}
           selectedServerlessExecutionModel={selectedServerlessExecutionModel}
           selectedServerlessProvisionedConcurrency={selectedServerlessProvisionedConcurrency}
           selectedServerlessEphemeralStorage={selectedServerlessEphemeralStorage}
-          selectedServerlessMemory={selectedServerlessMemory}
           selectedServerlessArchitectures={selectedServerlessArchitectures}
           selectedContainersOrchestrators={selectedContainersOrchestrators}
           selectedContainersComputeTypes={selectedContainersComputeTypes}
@@ -837,6 +830,7 @@ export default function Dashboard() {
           selectedIntegrationProtocols={selectedIntegrationProtocols}
           vCpuRange={activeProductType === 'serverless' ? serverlessVCpuRange : activeProductType === 'containers' ? containersVCpuRange : vCpuRange}
           memoryRange={activeProductType === 'serverless' ? serverlessMemoryRange : activeProductType === 'containers' ? containersMemoryRange : memoryRange}
+          serverlessTimeoutRange={serverlessTimeoutRange}
           priceRange={priceRange}
           outputPriceRange={outputPriceRange}
           gpuCountRange={gpuCountRange}
@@ -860,14 +854,12 @@ export default function Dashboard() {
           onHaModeToggle={(h) => toggleFilter(selectedHaModes, setSelectedHaModes, h)}
           onServerlessLanguageToggle={(l) => toggleFilter(selectedServerlessLanguages, setSelectedServerlessLanguages, l)}
           onServerlessColdStartToggle={(o) => toggleFilter(selectedServerlessColdStart, setSelectedServerlessColdStart, o)}
-          onServerlessTimeoutToggle={(t) => toggleFilter(selectedServerlessTimeout, setSelectedServerlessTimeout, t)}
           onServerlessMemoryConfigToggle={(m) => toggleFilter(selectedServerlessMemoryConfig, setSelectedServerlessMemoryConfig, m)}
           onServerlessFreeTierToggle={(f) => toggleFilter(selectedServerlessFreeTier, setSelectedServerlessFreeTier, f)}
           onServerlessGranularityToggle={(g) => toggleFilter(selectedServerlessGranularity, setSelectedServerlessGranularity, g)}
           onServerlessExecutionModelToggle={(e) => toggleFilter(selectedServerlessExecutionModel, setSelectedServerlessExecutionModel, e)}
           onServerlessProvisionedConcurrencyToggle={(p) => toggleFilter(selectedServerlessProvisionedConcurrency, setSelectedServerlessProvisionedConcurrency, p)}
           onServerlessEphemeralStorageToggle={(e) => toggleFilter(selectedServerlessEphemeralStorage, setSelectedServerlessEphemeralStorage, e)}
-          onServerlessMemoryToggle={(m) => toggleFilter(selectedServerlessMemory, setSelectedServerlessMemory, m)}
           onServerlessArchitectureToggle={(a) => toggleFilter(selectedServerlessArchitectures, setSelectedServerlessArchitectures, a)}
           onContainersOrchestratorToggle={(o) => toggleFilter(selectedContainersOrchestrators, setSelectedContainersOrchestrators, o)}
           onContainersComputeTypeToggle={(c) => toggleFilter(selectedContainersComputeTypes, setSelectedContainersComputeTypes, c)}
@@ -916,14 +908,12 @@ export default function Dashboard() {
           onSetHaModes={setSelectedHaModes}
           onSetServerlessLanguages={setSelectedServerlessLanguages}
           onSetServerlessColdStart={setSelectedServerlessColdStart}
-          onSetServerlessTimeout={setSelectedServerlessTimeout}
           onSetServerlessMemoryConfig={setSelectedServerlessMemoryConfig}
           onSetServerlessFreeTier={setSelectedServerlessFreeTier}
           onSetServerlessGranularity={setSelectedServerlessGranularity}
           onSetServerlessExecutionModel={setSelectedServerlessExecutionModel}
           onSetServerlessProvisionedConcurrency={setSelectedServerlessProvisionedConcurrency}
           onSetServerlessEphemeralStorage={setSelectedServerlessEphemeralStorage}
-          onSetServerlessMemory={setSelectedServerlessMemory}
           onSetServerlessArchitectures={setSelectedServerlessArchitectures}
           onSetContainersOrchestrators={setSelectedContainersOrchestrators}
           onSetContainersComputeTypes={setSelectedContainersComputeTypes}
@@ -962,6 +952,7 @@ export default function Dashboard() {
           onSetIntegrationProtocols={setSelectedIntegrationProtocols}
           onVCpuRangeChange={activeProductType === 'serverless' ? setServerlessVCpuRange : activeProductType === 'containers' ? setContainersVCpuRange : setVCpuRange}
           onMemoryRangeChange={activeProductType === 'serverless' ? setServerlessMemoryRange : activeProductType === 'containers' ? setContainersMemoryRange : setMemoryRange}
+          onServerlessTimeoutRangeChange={setServerlessTimeoutRange}
           onPriceRangeChange={setPriceRange}
           onOutputPriceRangeChange={setOutputPriceRange}
           onGpuCountRangeChange={setGpuCountRange}

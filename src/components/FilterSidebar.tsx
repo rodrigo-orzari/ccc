@@ -358,14 +358,12 @@ interface FilterSidebarProps {
   selectedHaModes: string[];
   selectedServerlessLanguages: string[];
   selectedServerlessColdStart: string[];
-  selectedServerlessTimeout: string[];
   selectedServerlessMemoryConfig: string[];
   selectedServerlessFreeTier: string[];
   selectedServerlessGranularity: string[];
   selectedServerlessExecutionModel: string[];
   selectedServerlessProvisionedConcurrency: string[];
   selectedServerlessEphemeralStorage: string[];
-  selectedServerlessMemory: string[];
   selectedServerlessArchitectures: string[];
   selectedContainersOrchestrators: string[];
   selectedContainersServiceTypes: string[];
@@ -400,6 +398,7 @@ interface FilterSidebarProps {
   vCpuRange: { min: number; max: number };
   memoryRange: { min: number; max: number };
   priceRange: { min: number; max: number };
+  outputPriceRange: { min: number; max: number };
   showAggregation: boolean;
   expanded: Record<string, boolean>;
   // Handlers
@@ -421,14 +420,12 @@ interface FilterSidebarProps {
   onHaModeToggle: (hm: string) => void;
   onServerlessLanguageToggle: (lang: string) => void;
   onServerlessColdStartToggle: (opt: string) => void;
-  onServerlessTimeoutToggle: (opt: string) => void;
   onServerlessMemoryConfigToggle: (opt: string) => void;
   onServerlessFreeTierToggle: (opt: string) => void;
   onServerlessGranularityToggle: (opt: string) => void;
   onServerlessExecutionModelToggle: (opt: string) => void;
   onServerlessProvisionedConcurrencyToggle: (opt: string) => void;
   onServerlessEphemeralStorageToggle: (opt: string) => void;
-  onServerlessMemoryToggle: (opt: string) => void;
   onServerlessArchitectureToggle: (opt: string) => void;
   onContainersOrchestratorToggle: (opt: string) => void;
   onContainersServiceTypeToggle: (opt: string) => void;
@@ -472,14 +469,12 @@ interface FilterSidebarProps {
   onSetHaModes: (items: string[]) => void;
   onSetServerlessLanguages: (items: string[]) => void;
   onSetServerlessColdStart: (items: string[]) => void;
-  onSetServerlessTimeout: (items: string[]) => void;
   onSetServerlessMemoryConfig: (items: string[]) => void;
   onSetServerlessFreeTier: (items: string[]) => void;
   onSetServerlessGranularity: (items: string[]) => void;
   onSetServerlessExecutionModel: (items: string[]) => void;
   onSetServerlessProvisionedConcurrency: (items: string[]) => void;
   onSetServerlessEphemeralStorage: (items: string[]) => void;
-  onSetServerlessMemory: (items: string[]) => void;
   onSetServerlessArchitectures: (items: string[]) => void;
   onSetContainersOrchestrators: (items: string[]) => void;
   onSetContainersServiceTypes: (items: string[]) => void;
@@ -530,7 +525,10 @@ interface FilterSidebarProps {
   onSetIntegrationProtocols: (items: string[]) => void;
   onVCpuRangeChange: (range: { min: number; max: number }) => void;
   onMemoryRangeChange: (range: { min: number; max: number }) => void;
+  serverlessTimeoutRange: { min: number; max: number };
+  onServerlessTimeoutRangeChange: (range: { min: number; max: number }) => void;
   onPriceRangeChange: (range: { min: number; max: number }) => void;
+  onOutputPriceRangeChange: (range: { min: number; max: number }) => void;
   gpuCountRange: { min: number; max: number };
   onGpuCountRangeChange: (range: { min: number; max: number }) => void;
   onShowAggregationChange: (value: boolean) => void;
@@ -574,14 +572,12 @@ export default function FilterSidebar({
   selectedHaModes,
   selectedServerlessLanguages,
   selectedServerlessColdStart,
-  selectedServerlessTimeout,
   selectedServerlessMemoryConfig,
   selectedServerlessFreeTier,
   selectedServerlessGranularity,
   selectedServerlessExecutionModel,
   selectedServerlessProvisionedConcurrency,
   selectedServerlessEphemeralStorage,
-  selectedServerlessMemory,
   selectedServerlessArchitectures,
   selectedContainersOrchestrators,
   selectedContainersServiceTypes,
@@ -623,7 +619,9 @@ export default function FilterSidebar({
   onSetRegistryPricingComponent,
   vCpuRange,
   memoryRange,
+  serverlessTimeoutRange,
   priceRange,
+  outputPriceRange,
   gpuCountRange,
   showAggregation,
   expanded,
@@ -645,14 +643,12 @@ export default function FilterSidebar({
   onHaModeToggle,
   onServerlessLanguageToggle,
   onServerlessColdStartToggle,
-  onServerlessTimeoutToggle,
   onServerlessMemoryConfigToggle,
   onServerlessFreeTierToggle,
   onServerlessGranularityToggle,
   onServerlessExecutionModelToggle,
   onServerlessProvisionedConcurrencyToggle,
   onServerlessEphemeralStorageToggle,
-  onServerlessMemoryToggle,
   onServerlessArchitectureToggle,
   onContainersOrchestratorToggle,
   onContainersServiceTypeToggle,
@@ -701,14 +697,12 @@ export default function FilterSidebar({
   onSetHaModes,
   onSetServerlessLanguages,
   onSetServerlessColdStart,
-  onSetServerlessTimeout,
   onSetServerlessMemoryConfig,
   onSetServerlessFreeTier,
   onSetServerlessGranularity,
   onSetServerlessExecutionModel,
   onSetServerlessProvisionedConcurrency,
   onSetServerlessEphemeralStorage,
-  onSetServerlessMemory,
   onSetServerlessArchitectures,
   onSetContainersOrchestrators,
   onSetContainersServiceTypes,
@@ -745,7 +739,9 @@ export default function FilterSidebar({
   onSetIntegrationProtocols,
   onVCpuRangeChange,
   onMemoryRangeChange,
+  onServerlessTimeoutRangeChange,
   onPriceRangeChange,
+  onOutputPriceRangeChange,
   onGpuCountRangeChange,
   onShowAggregationChange,
   onToggleSection,
@@ -1155,17 +1151,6 @@ export default function FilterSidebar({
               onSetAll={onSetServerlessColdStart}
               isExpanded={expanded.coldStart ?? true}
               onToggleExpand={() => onToggleSection('coldStart')}
-            />
-            <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
-            <FilterSection
-              title="Timeout"
-              tooltip="Maximum execution time."
-              options={config.SERVERLESS_TIMEOUT_OPTIONS}
-              selected={selectedServerlessTimeout}
-              onToggle={onServerlessTimeoutToggle}
-              onSetAll={onSetServerlessTimeout}
-              isExpanded={expanded.timeout ?? true}
-              onToggleExpand={() => onToggleSection('timeout')}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
@@ -1751,7 +1736,7 @@ export default function FilterSidebar({
                 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
               >
                 <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
-                {['vm', 'database', 'containers', 'serverless', 'gpu', 'app-hosting'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers', 'app-hosting'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'gpu' ? "Filter by memory size (GB), GPU count, and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'serverless' ? "Filter by memory size, price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
+                {['vm', 'database', 'containers', 'serverless', 'gpu', 'app-hosting'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers', 'app-hosting'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'gpu' ? "Filter by memory size (GB), GPU count, and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'serverless' ? "Filter by vCPU count, memory size (GB), timeout (sec), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
               </button>
             </h2>
             <button
@@ -1763,7 +1748,7 @@ export default function FilterSidebar({
                   onGpuCountRangeChange({ ...config.DEFAULT_GPU_COUNT_RANGE });
                 }
                 if (activeProductType === 'serverless') {
-                  onSetServerlessMemory(config.SERVERLESS_MEMORY_TIERS);
+                  onServerlessTimeoutRangeChange({ ...config.DEFAULT_SERVERLESS_TIMEOUT_RANGE });
                 }
               }}
               className={`text-[10px] font-bold uppercase transition-colors ${
@@ -1774,7 +1759,7 @@ export default function FilterSidebar({
                 priceRange.min !== config.DEFAULT_PRICE_RANGE.min ||
                 priceRange.max !== config.DEFAULT_PRICE_RANGE.max ||
                 (activeProductType === 'gpu' && (gpuCountRange.min !== config.DEFAULT_GPU_COUNT_RANGE.min || gpuCountRange.max !== config.DEFAULT_GPU_COUNT_RANGE.max)) ||
-                (activeProductType === 'serverless' && selectedServerlessMemory.length !== config.SERVERLESS_MEMORY_TIERS.length)
+                (activeProductType === 'serverless' && (serverlessTimeoutRange.min !== config.DEFAULT_SERVERLESS_TIMEOUT_RANGE.min || serverlessTimeoutRange.max !== config.DEFAULT_SERVERLESS_TIMEOUT_RANGE.max))
                   ? 'text-black dark:text-[#f7f8ff]'
                   : 'text-[#737373] hover:text-black dark:hover:text-[#f7f8ff]'
               }`}
@@ -1784,7 +1769,7 @@ export default function FilterSidebar({
           </div>
           {expanded.specs && (
             <div className="space-y-8 px-1">
-              {['vm', 'database', 'containers', 'app-hosting'].includes(activeProductType) && (
+              {['vm', 'database', 'containers', 'app-hosting', 'serverless'].includes(activeProductType) && (
                 <>
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-[#737373]">vCPU</div>
@@ -1830,22 +1815,13 @@ export default function FilterSidebar({
               )}
               {activeProductType === 'serverless' && (
                 <div className="space-y-2">
-                  <div className="text-[10px] font-bold text-[#737373]">Memory Size</div>
-                  <div className="flex flex-wrap gap-2">
-                    {config.SERVERLESS_MEMORY_TIERS.map(tier => (
-                      <button
-                        key={tier}
-                        onClick={() => onServerlessMemoryToggle(tier)}
-                        className={`px-3 py-1.5 rounded text-[10px] font-bold transition-all border whitespace-nowrap ${
-                          selectedServerlessMemory.includes(tier)
-                            ? 'bg-black dark:bg-[#f7f8ff] text-[#f7f8ff] dark:text-black border-black dark:border-[#f7f8ff]'
-                            : 'bg-[#dde0f0] dark:bg-[#1e1e38] text-[#737373] border-[#dde0f0] dark:border-[#1e1e38] hover:border-[#a3a3a3] dark:hover:border-[#404040]'
-                        }`}
-                      >
-                        {tier}
-                      </button>
-                    ))}
-                  </div>
+                  <div className="text-[10px] font-bold text-[#737373]">Timeout (sec)</div>
+                  <RangeSlider
+                    min={config.DEFAULT_SERVERLESS_TIMEOUT_RANGE.min}
+                    max={config.DEFAULT_SERVERLESS_TIMEOUT_RANGE.max}
+                    value={serverlessTimeoutRange}
+                    onChange={onServerlessTimeoutRangeChange}
+                  />
                 </div>
               )}
               <div className="space-y-2">
@@ -1861,6 +1837,19 @@ export default function FilterSidebar({
                   onChange={onPriceRangeChange}
                 />
               </div>
+              {activeProductType === 'ai' && (
+                <div className="space-y-2">
+                  <div className="text-[10px] font-bold text-[#737373]">Output Price ($/1M Tokens)</div>
+                  <RangeSlider
+                    min={config.DEFAULT_PRICE_RANGE.min}
+                    max={config.DEFAULT_PRICE_RANGE.max}
+                    step={0.1}
+                    unit="$"
+                    value={outputPriceRange}
+                    onChange={onOutputPriceRangeChange}
+                  />
+                </div>
+              )}
               {activeProductType !== 'ai' && (
                 <div className="space-y-2">
                   <div className="text-[10px] font-bold text-[#737373]">PAYG or Yearly</div>
