@@ -212,6 +212,7 @@ export default function Dashboard() {
   const [containersVCpuRange, setContainersVCpuRange] = useState({ ...config.DEFAULT_CONTAINERS_VCPU_RANGE });
   const [containersMemoryRange, setContainersMemoryRange] = useState({ ...config.DEFAULT_CONTAINERS_MEMORY_RANGE });
   const [priceRange, setPriceRange] = useState({ ...config.DEFAULT_PRICE_RANGE });
+  const [outputPriceRange, setOutputPriceRange] = useState({ ...config.DEFAULT_PRICE_RANGE });
   const [gpuCountRange, setGpuCountRange] = useState({ ...config.DEFAULT_GPU_COUNT_RANGE });
   const [search, setSearch] = useState('');
 
@@ -413,6 +414,8 @@ export default function Dashboard() {
     if (currentMemoryRange.max < currentMemoryDefault.max) params.append('maxMemory', currentMemoryRange.max.toString());
     if (priceRange.min > config.DEFAULT_PRICE_RANGE.min) params.append('minPrice', priceRange.min.toString());
     if (priceRange.max < config.DEFAULT_PRICE_RANGE.max) params.append('maxPrice', priceRange.max.toString());
+    if (activeProductType === 'ai' && outputPriceRange.min > config.DEFAULT_PRICE_RANGE.min) params.append('minOutputPrice', outputPriceRange.min.toString());
+    if (activeProductType === 'ai' && outputPriceRange.max < config.DEFAULT_PRICE_RANGE.max) params.append('maxOutputPrice', outputPriceRange.max.toString());
     if (activeProductType === 'gpu' && gpuCountRange.min > config.DEFAULT_GPU_COUNT_RANGE.min) params.append('minGpuCount', gpuCountRange.min.toString());
     if (activeProductType === 'gpu' && gpuCountRange.max < config.DEFAULT_GPU_COUNT_RANGE.max) params.append('maxGpuCount', gpuCountRange.max.toString());
     params.append('search', search);
@@ -434,7 +437,7 @@ export default function Dashboard() {
     selectedAppHostingTiers, selectedAppHostingComputeTypes,
     selectedIntegrationServices, selectedIntegrationTiers, selectedIntegrationPricingModels,
     selectedIntegrationSizes, selectedIntegrationProtocols,
-    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, gpuCountRange, search
+    vCpuRange, memoryRange, serverlessVCpuRange, serverlessMemoryRange, containersVCpuRange, containersMemoryRange, priceRange, outputPriceRange, gpuCountRange, search
   ]);
 
   const debouncedParamsString = useDeferredValue(searchParams.toString());
@@ -835,6 +838,7 @@ export default function Dashboard() {
           vCpuRange={activeProductType === 'serverless' ? serverlessVCpuRange : activeProductType === 'containers' ? containersVCpuRange : vCpuRange}
           memoryRange={activeProductType === 'serverless' ? serverlessMemoryRange : activeProductType === 'containers' ? containersMemoryRange : memoryRange}
           priceRange={priceRange}
+          outputPriceRange={outputPriceRange}
           gpuCountRange={gpuCountRange}
           showAggregation={showAggregation}
           expanded={expanded}
@@ -959,6 +963,7 @@ export default function Dashboard() {
           onVCpuRangeChange={activeProductType === 'serverless' ? setServerlessVCpuRange : activeProductType === 'containers' ? setContainersVCpuRange : setVCpuRange}
           onMemoryRangeChange={activeProductType === 'serverless' ? setServerlessMemoryRange : activeProductType === 'containers' ? setContainersMemoryRange : setMemoryRange}
           onPriceRangeChange={setPriceRange}
+          onOutputPriceRangeChange={setOutputPriceRange}
           onGpuCountRangeChange={setGpuCountRange}
           onShowAggregationChange={setShowAggregation}
           onToggleSection={toggleSection}

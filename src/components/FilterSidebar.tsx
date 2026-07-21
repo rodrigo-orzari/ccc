@@ -1510,13 +1510,14 @@ export default function FilterSidebar({
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
               title="Storage Type"
-              tooltip="Object (S3-like), Block (disks), File (shared), or Archive (cold)."
+              tooltip="Object/Blob (S3-like), Block (disks), File (shared), or Archive (cold)."
               options={config.STORAGE_CATEGORIES}
               selected={selectedStorageCategories}
               onToggle={onStorageCategoryToggle}
               onSetAll={onSetStorageCategories}
               isExpanded={expanded.storageCategory ?? true}
               onToggleExpand={() => onToggleSection('storageCategory')}
+              getLabel={(val) => val === 'Object' ? 'Object (Blob)' : val}
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
@@ -1570,7 +1571,7 @@ export default function FilterSidebar({
             />
             <div className="h-px bg-[#dde0f0] dark:bg-[#1f1f1f] mx-1" />
             <FilterSection
-              title="App Hosting Tiers"
+              title="Tiers"
               tooltip="Pricing and capability tier of the hosting service"
               options={config.APP_HOSTING_TIERS}
               selected={selectedAppHostingTiers}
@@ -1750,7 +1751,7 @@ export default function FilterSidebar({
                 className="text-[10px] font-bold text-[#737373] uppercase tracking-widest flex items-center gap-1.5 hover:text-black dark:hover:text-[#f7f8ff] transition-colors"
               >
                 <ChevronDown size={10} className={`transition-transform ${expanded.specs ? '' : '-rotate-90'}`} />
-                {['vm', 'database', 'containers', 'serverless', 'gpu'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'gpu' ? "Filter by memory size (GB), GPU count, and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'serverless' ? "Filter by memory size, price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
+                {['vm', 'database', 'containers', 'serverless', 'gpu', 'app-hosting'].includes(activeProductType) ? 'Specs & Price' : 'Price'} <Tooltip text={activeProductType === 'ai' ? "Filter by input price ($/1M tokens). Prices are on-demand USD." : ['vm', 'database', 'containers', 'app-hosting'].includes(activeProductType) ? "Filter by vCPU count, memory size (GB), and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'gpu' ? "Filter by memory size (GB), GPU count, and price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : activeProductType === 'serverless' ? "Filter by memory size, price ($). Toggle PAYG or Yearly. Prices are on-demand USD." : "Filter by price ($). Toggle PAYG or Yearly. Prices are on-demand USD."}><Info size={10} className="cursor-help" /></Tooltip>
               </button>
             </h2>
             <button
@@ -1783,7 +1784,7 @@ export default function FilterSidebar({
           </div>
           {expanded.specs && (
             <div className="space-y-8 px-1">
-              {['vm', 'database', 'containers'].includes(activeProductType) && (
+              {['vm', 'database', 'containers', 'app-hosting'].includes(activeProductType) && (
                 <>
                   <div className="space-y-2">
                     <div className="text-[10px] font-bold text-[#737373]">vCPU</div>

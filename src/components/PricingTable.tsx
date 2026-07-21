@@ -416,7 +416,7 @@ export default function PricingTable({
                 </>) : activeProductType === 'ai' ? (<>
                   <Th colKey="engine_category"    sortKey="service"                    label="Service" />
                   <Th colKey="deployment_arch"    sortKey="attributes.modelTier"       label="Model Tier" />
-                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.contextWindowK" label="Context Window (K)" />
+                  <Th colKey="db_family_cpu_vendor" sortKey="attributes.contextWindowK" label={<>Context<br/>Window</>} />
                   <Th colKey="ha_mode_os"         sortKey="attributes.multimodal"      label="Multimodal" />
                 </>) : activeProductType === 'serverless' ? (<>
                   <Th colKey="svc_type"           sortKey="attributes.service_type" label="Service Type" />
@@ -484,14 +484,14 @@ export default function PricingTable({
                 <Th
                   colKey="price_per_unit"
                   sortKey="price_per_unit"
-                  label={activeProductType === 'ai' ? 'Input Price (/1M)' : activeProductType === 'integration' ? 'Native Price ($)' : activeProductType === 'serverless' ? 'Price ($)' : (showAggregation ? 'Yearly price ($)' : 'Hourly price ($)')}
+                  label={activeProductType === 'ai' ? <>Input<br/>Price</> : activeProductType === 'integration' ? 'Native Price ($)' : activeProductType === 'serverless' ? 'Price ($)' : (showAggregation ? 'Yearly price ($)' : 'Hourly price ($)')}
                   className="text-black dark:text-[#f7f8ff] hover:opacity-80"
                 />
 
                 {activeProductType === 'integration' && <Th colKey="norm_price" sortKey="attributes.normalized_price_per_1m" label="Comparable ($/1M ops)" />}
 
                 {activeProductType === 'serverless' && <Th colKey="source" sortKey="data_source" label="Source" />}
-                {activeProductType === 'ai' && <Th colKey="inv_price" sortKey="attributes.outputPricePer1M" label="Output Price (/1M)" />}
+                {activeProductType === 'ai' && <Th colKey="inv_price" sortKey="attributes.outputPricePer1M" label={<>Output<br/>Price</>} />}
                 {activeProductType !== 'serverless' && activeProductType !== 'ai' && <Th colKey="source" sortKey="data_source" label="Source" />}
               </tr>
             </thead>
@@ -625,7 +625,7 @@ function TableRow({
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.port_capacity || '—'}</span></td>
         <td data-col="gpu"                  className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.transfer_scope || '—'}</span></td>
       </>) : activeProductType === 'storage' ? (<>
-        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.storage_type || '—'}</span></td>
+        <td data-col="engine_category"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.storage_type === 'Object' ? 'Object (Blob)' : (record.attributes?.storage_type || '—')}</span></td>
         <td data-col="db_family_cpu_vendor" className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.tier || '—'}</span></td>
         <td data-col="deployment_arch"      className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.redundancy || '—'}</span></td>
         <td data-col="ha_mode_os"           className="px-6 py-4 whitespace-nowrap text-center align-middle overflow-hidden"><span className="text-[10px] font-bold uppercase tracking-widest text-[#737373]">{record.attributes?.media || '—'}</span></td>
@@ -746,7 +746,7 @@ function TableRow({
 // phones in a stacked, readable card instead of a wide horizontal-scroll table.
 function getMobileFields(record: PricingRecord, pt: ProductType): { label: string; value: string }[] {
   const a: any = record.attributes || {};
-  const dash = (v: any) => (v === undefined || v === null || v === '' ? '—' : String(v));
+  const dash = (v: any) => (v === undefined || v === null || v === '' || v === 0 ? '—' : String(v));
   const arch = record.arch === 'x86 64' ? 'x86' : (record.arch || '—');
   switch (pt) {
     case 'database': return [
@@ -768,9 +768,9 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
     case 'ai': return [
       { label: 'Service', value: dash(record.service) },
       { label: 'Model Tier', value: dash(a.modelTier) },
-      { label: 'Context Window (K)', value: dash(a.contextWindowK) },
+      { label: 'Context Window', value: dash(a.contextWindowK) },
       { label: 'Multimodal', value: dash(a.multimodal) },
-      { label: 'Output Price (/1M)', value: a.outputPricePer1M ? `$${Number(a.outputPricePer1M).toFixed(4)}` : '—' },
+      { label: 'Output Price', value: a.outputPricePer1M ? `$${Number(a.outputPricePer1M).toFixed(4)}` : '—' },
     ];
     case 'serverless': return [
       { label: 'Service Type', value: a.service_type || 'Compute' },
@@ -804,7 +804,7 @@ function getMobileFields(record: PricingRecord, pt: ProductType): { label: strin
       { label: 'Geo', value: dash(record.geography) },
     ];
     case 'storage': return [
-      { label: 'Storage Type', value: dash(a.storage_type) },
+      { label: 'Storage Type', value: dash(a.storage_type === 'Object' ? 'Object (Blob)' : a.storage_type) },
       { label: 'Tier', value: dash(a.tier) },
       { label: 'Redundancy', value: dash(a.redundancy) },
       { label: 'Media', value: dash(a.media) },

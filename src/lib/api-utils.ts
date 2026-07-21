@@ -168,7 +168,7 @@ export function buildPricingFilters(query: any) {
   try {
     const {
       provider, geography, os, arch, cpuVendor, gpu, gpuModel, gpuVendor, category, pricing_model,
-      minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, minGpuCount, maxGpuCount, search,
+      minVcpu, maxVcpu, minMemory, maxMemory, minPrice, maxPrice, minOutputPrice, maxOutputPrice, minGpuCount, maxGpuCount, search,
       product,
       dbFamilies, engines, deploymentTypes, haModes,
       serverlessLanguages, serverlessColdStart, serverlessTimeout, serverlessMemoryConfig, serverlessFreeTier,
@@ -742,6 +742,14 @@ export function buildPricingFilters(query: any) {
     if (maxPrice) {
       conditions.push(`pr.price_per_unit <= $${paramCount++}`);
       values.push(maxPrice);
+    }
+    if (minOutputPrice && resolvedProductType === 'ai') {
+      conditions.push(`(pr.attributes->>'outputPricePer1M')::numeric >= $${paramCount++}`);
+      values.push(minOutputPrice);
+    }
+    if (maxOutputPrice && resolvedProductType === 'ai') {
+      conditions.push(`(pr.attributes->>'outputPricePer1M')::numeric <= $${paramCount++}`);
+      values.push(maxOutputPrice);
     }
 
     return {
