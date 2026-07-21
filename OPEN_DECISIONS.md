@@ -41,6 +41,20 @@ adding Mongo/Aiven rather than twice.
 
 ---
 
+## BUG: Provider filter appears to no-op on the main pricing table, causing a ~5,000-row virtualized table to render blank
+
+**Raised:** 2026-07-21 (found while capturing documentation screenshots of the live site)
+
+**Symptom:** On the main catalog page (`/`), selecting a single provider (e.g. AWS under Virtual Machines) leaves the pricing table area visibly blank on screen. Inspecting the DOM shows the `<table>` element (`PricingTable.tsx`) with a `getBoundingClientRect()` height of ~265,185px.
+
+**Root cause (traced, not yet fixed):** `PricingTable.tsx` virtualizes any result set over `VIRTUALIZE_THRESHOLD = 80` rows using `ROW_ESTIMATE_PX = 53` (line ~152-153). 265,185 / 53 ≈ 5,003 rows — which matches the `limit = 5000` default/cap in `src/app/api/pricing/route.ts` (line ~80-81). So the table isn't actually receiving the AWS-filtered result set; it's receiving the full ~5,000-row unfiltered (LIMIT-capped) set, while the separate `/api/pricing/counts` call (used only for the on-page "X results" text) correctly reflects the filtered count. The two endpoints appear to diverge on how they parse/apply the `provider` param — worth comparing the actual `provider` query param + resulting SQL `WHERE` clause built by `buildPricingFilters()`/`parseFilterList()` in `src/lib/api-utils.ts` (~line 170, 234-237) for `/api/pricing` vs. `/api/pricing/counts` on an identical filtered request. Also worth checking whether `page.tsx`'s initial `selectedProviders` state (~line 115) ever gets seeded with a provider slug invalid for the active product type, which could make the `IN (...)` filter silently no-op.
+
+**Impact:** The main pricing table is effectively unusable once any provider filter narrows the result set on a category with >5,000 unfiltered rows — the table renders as a giant blank void instead of the filtered rows.
+
+**Status:** Not fixed. Needs a repro + comparison of the two endpoints' generated SQL before patching.
+
+---
+
 ## Should Integration services (API Gateway/Messaging/Eventing/Workflow) actually merge into Serverless?
 
 **Raised:** 2026-07-18

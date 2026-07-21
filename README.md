@@ -71,15 +71,9 @@ Providers are classified by `providerType` in `src/config/index.ts`: **hyperscal
 
 ### 📦 Workload Templates
 
-Pre-built cost estimation templates that model complete multi-service architectures across all providers. Each template lets you adjust key parameters (concurrency, data volume, retention, etc.) and see total cost impact across compute, storage, networking, and data services.
+Pre-built cost estimation templates (19 total) that model complete multi-service architectures — RAG AI apps, 3-tier web, streaming analytics, HPC, disaster recovery, zero-trust edge, and more. Adjust concurrency, data volume, and retention to see total cost impact across compute, storage, networking, and data services.
 
-Available templates (19 total):
-- **High-Traffic Web App** — API servers, databases, load balancing, CDN
-- **RAG / AI Knowledge Base** — Embedding generation, vector storage, inference, retrieval pipelines
-- **Compliance-Ready Database** — Managed relational DB with HA, automated backups, compliance tiers
-- **Smart Manufacturing / Industrial IoT** — Edge gateways, stream processing, hot metrics storage, analytics warehouse, cold archive, predictive maintenance AI
-- **Event-Driven Image Processing** — Serverless KYC / ID verification pipelines with Vision AI
-- *And 14 more covering HPC, streaming analytics, disaster recovery, zero-trust edge, hybrid cloud networking, etc.*
+**→ [See it live](https://comparecloudcosts.com/workloads)** for the full catalog. Definitions live in `src/config/workloads.ts`.
 
 ### 📊 Regional Pricing for Data & Analytics
 
@@ -436,13 +430,9 @@ All `/api/admin/*` endpoints require `X-Admin-Token: <ADMIN_API_KEY>` header.
 ## 📈 Status & Monitoring
 
 ### 🩺 Status Page (`/status`)
-Real-time visibility into pipeline health and data freshness. Shows:
-- Last ingestion timestamp for each product category
-- Record counts per provider and category
-- Pipeline failure alerts and retry status
-- Data staleness warnings (if last refresh exceeds expected interval)
+Real-time visibility into pipeline health, per-category/provider record counts, and data staleness.
 
-Access at `/status` or via the main navigation footer.
+**→ [See it live](https://comparecloudcosts.com/status)**
 
 ### 💓 Health Check (`/api/health`)
 Lightweight endpoint that returns JSON:
@@ -460,16 +450,14 @@ Lightweight endpoint that returns JSON:
 Use this to monitor data freshness in external dashboards or alerting systems.
 
 ### 🏢 Datacenters Page (`/datacenters`)
-Infrastructure intelligence independent of pricing. Shows:
-- Cloud provider geographic footprint (regions, edges, data centers)
-- Government cloud offerings and compliance posture
-- Redundancy and availability zone coverage per provider
-- References: AWS regions, Azure geographies, GCP zones, Oracle regions, DigitalOcean, Alibaba, Cloudflare, Vultr, Hetzner
+Infrastructure intelligence independent of pricing — geographic footprint, government cloud offerings, and AZ/redundancy coverage per provider (AWS, Azure, GCP, Oracle, DigitalOcean, Alibaba, Cloudflare, Vultr, Hetzner). Use it to confirm your target geography is supported before running cost estimates.
 
-No pricing on this page — pure infrastructure comparison. Use it to validate that your target geography is supported before running cost estimates.
+**→ [See it live](https://comparecloudcosts.com/datacenters)**
 
 ### 📜 Certifications & Regulations Page (`/certifications`)
-Compliance posture independent of pricing. Shows which security, privacy, industry, and government certifications each provider holds (ISO 27001/27017/27018/27701/22301/20000-1/42001, SOC 1/2/3, PCI DSS, HIPAA, FedRAMP High/Moderate, CSA STAR, FIPS 140-2, HITRUST, NIST 800-171, GDPR, IRAP, C5, ENS, MTCS, ISMAP). Provider-centric tiles with three filters — provider, region (same `GEOGRAPHIES` buckets as the pricing pages), and certification. Selecting a certification disables providers that lack it ("who qualifies for FedRAMP High?"). Certification names link to a definition of the standard; each provider's official compliance page is linked at the bottom as the source of truth.
+Compliance posture independent of pricing — which security, privacy, industry, and government standards (ISO, SOC, PCI DSS, HIPAA, FedRAMP, GDPR, etc.) each provider holds. Filter by provider, region, or certification; selecting a certification disables providers that lack it ("who qualifies for FedRAMP High?").
+
+**→ [See it live](https://comparecloudcosts.com/certifications)**
 
 Static curated data — **no live pipeline**. Compliance changes rarely and a wrong claim carries real risk, so the matrix lives in `src/config/certifications.ts` and is refreshed roughly every 6 months via a human-reviewed Claude Code prompt. See [CERTIFICATIONS_REFRESH.md](./CERTIFICATIONS_REFRESH.md) for the ready-to-paste refresh prompt and review process.
 

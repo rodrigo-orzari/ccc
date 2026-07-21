@@ -521,7 +521,7 @@ export default function PricingTable({
                     const index = rowStart + i;
                     return (
                       <TableRow
-                        key={index}
+                        key={`${record.provider}-${record.instance_type}-${record.geography}-${index}`}
                         record={record}
                         index={index}
                         activeProductType={activeProductType}
