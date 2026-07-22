@@ -140,7 +140,9 @@ const PrivacyPolicyPage: React.FC = () => {
             <nav>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <li><a href="#overview" style={{ padding: '3px 0' }}>Overview</a></li>
+                <li><a href="#data-retention" style={{ padding: '3px 0' }}>Data Retention &amp; Ephemeral Processing</a></li>
                 <li><a href="#information-we-collect" style={{ padding: '3px 0' }}>Information We Collect</a></li>
+                <li><a href="#authentication-security" style={{ padding: '3px 0' }}>Authentication &amp; User Accounts</a></li>
                 <li><a href="#how-we-use-your-information" style={{ padding: '3px 0' }}>How We Use It</a></li>
                 <li><a href="#data-sharing-and-disclosure" style={{ padding: '3px 0' }}>Data Sharing</a></li>
                 <li><a href="#data-security" style={{ padding: '3px 0' }}>Data Security</a></li>
@@ -153,14 +155,22 @@ const PrivacyPolicyPage: React.FC = () => {
 
           {/* Main content */}
           <main className="privacy-main">
-            <h1>Privacy</h1>
-            <p className="privacy-meta">Last updated: 15 June 2026.</p>
+            <h1>Privacy Policy</h1>
+            <p className="privacy-meta">Last updated: July 22, 2026.</p>
 
             <CopyHeading id="overview">Overview</CopyHeading>
             <p>
               comparecloudcosts.com ("we," "us," "our," or "Company") is committed to protecting your privacy.
               This Privacy Policy explains how we collect, use, disclose, and otherwise handle your information
               when you use our website and services.
+            </p>
+
+            <CopyHeading id="data-retention">Data Retention &amp; Ephemeral Processing Policy</CopyHeading>
+            <p>
+              comparecloudcosts.com is strictly engineered around the <strong>Data Minimization Principle</strong>. Our systems are built to process and retain only the absolute minimum amount of information required to perform your requested comparative actions.
+            </p>
+            <p>
+              For features involving document parsing or bill analysis (such as the <em>Bring Your Bill</em> tool), uploaded files (including PDF invoices, CSV reports, and JSON cost exports) are parsed ephemerally in volatile memory. <strong>We do not retain raw invoice documents or persistent financial records. All temporary processing files, session buffers, and cached document states are automatically purged and permanently deleted in less than 4 hours of usage.</strong>
             </p>
 
             <CopyHeading id="information-we-collect">Information We Collect</CopyHeading>
@@ -175,12 +185,16 @@ const PrivacyPolicyPage: React.FC = () => {
             </ul>
             <h3>Information You Provide</h3>
             <p>
-              We do not require you to create an account or provide personal information to use our service.
-              Any information you voluntarily provide (such as through contact forms or emails) will be used
-              only for the purpose you provided it.
+              Basic browsing of our public pricing tables does not require creating an account or submitting personal information. Any information you voluntarily provide (such as through contact forms, feedback emails, or document uploads) is handled according to our strict data minimization standards.
             </p>
-            <h3>Cookies and Tracking</h3>
-            <p>We use cookies for essential functionality, as well as tracking technologies for analytics and advertising as described below.</p>
+
+            <CopyHeading id="authentication-security">Authentication &amp; User Account Security</CopyHeading>
+            <p>
+              To enhance information security, protect user data privacy, and maintain operational integrity across advanced tools (such as bill analysis exports or multi-user workspace features), we may require users to authenticate or log in.
+            </p>
+            <p>
+              Requiring user authentication serves specifically to <strong>safeguard your information against unauthorized access</strong>, protect uploaded session data, isolate report outputs to authorized account holders, prevent automated platform abuse, and ensure strict end-to-end security control over your environment.
+            </p>
 
             <CopyHeading id="how-we-use-your-information">How We Use Your Information</CopyHeading>
             <p>We use collected information to:</p>
@@ -200,9 +214,7 @@ const PrivacyPolicyPage: React.FC = () => {
 
             <CopyHeading id="data-security">Data Security</CopyHeading>
             <p>
-              We take reasonable measures to protect information from unauthorized access, alteration,
-              disclosure, or destruction. However, no method of transmission over the internet is 100% secure.
-              You use our service at your own risk.
+              We enforce strict technical and organizational safeguards to protect information from unauthorized access, alteration, disclosure, or destruction. All temporary files are automatically destroyed within 4 hours, and all transmitted data is encrypted using standard TLS protocols.
             </p>
 
             <CopyHeading id="third-party-services">Third-Party Services</CopyHeading>

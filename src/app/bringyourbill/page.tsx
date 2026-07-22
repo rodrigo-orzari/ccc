@@ -123,14 +123,17 @@ export default function BringYourBillPage() {
           <main className="flex-1 p-8 lg:p-10 pb-20 w-full max-w-[1600px] mx-auto">
             {/* Header — Compliance & Datacenters style rich intro paragraph */}
             <div className="mb-6">
-              <div className="flex items-center gap-3 mb-2 flex-wrap">
+              <div className="flex items-center gap-2 mb-2 flex-wrap">
                 <h1 className="text-3xl font-bold text-[var(--text)]">Bring Your Bill</h1>
                 <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] border border-[#2563eb]/20">
                   Feature Preview
                 </span>
+                <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-[#f59e0b]/10 text-[#d97706] dark:text-[#fbbf24] border border-[#f59e0b]/20">
+                  Soon
+                </span>
               </div>
               <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed max-w-5xl">
-                We are building an automated <strong>Cloud Provider Bill Analyzer &amp; Cross-Cloud Optimization Engine</strong> for Compare Cloud Costs users. Upload your official PDF, CSV, or JSON invoice from <strong>AWS, Azure, Google Cloud, DigitalOcean, or Oracle Cloud</strong> and receive instant best-match infrastructure alternatives cross-referenced against our live 10,000+ SKU database. Analyze line items, identify optimization gaps, and evaluate equivalent compute, storage, and database configurations with zero data retention. Comparing global physical presence instead? Visit{' '}
+                We are building an automated <strong>Cloud Provider Bill Analyzer &amp; Cross-Cloud Optimization Engine</strong> for Compare Cloud Costs users. Whether you have committed to a primary cloud provider or are seeking fresh perspectives to optimize your infrastructure spend, our engine provides instant best-match alternatives cross-referenced against our live 10,000+ SKU database. Simply upload your official PDF, CSV, or JSON invoice from <strong>AWS, Azure, Google Cloud, DigitalOcean, or Oracle Cloud</strong> to evaluate equivalent compute, storage, and database configurations with zero persistent data retention. Comparing global physical presence instead? Visit{' '}
                 <Link href="/datacenters" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Datacenters</Link>{' '}
                 to explore regions, or check{' '}
                 <Link href="/certifications" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Compliance</Link>{' '}
@@ -187,14 +190,14 @@ export default function BringYourBillPage() {
             </div>
             <div
               className="grid gap-px rounded-lg overflow-x-auto border border-[var(--border)] bg-[var(--border)] mb-8 scrollbar-thin"
-              style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(90px, 1fr)' }}
+              style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(140px, 1fr)' }}
             >
               {EVALUATED_BILLS_PROVIDERS.map((p) => (
-                <div key={p.id} className="px-2.5 py-2.5 bg-[#f7f8ff] dark:bg-[#06060f]">
-                  <div className="text-[9px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
+                <div key={p.id} className="px-4 py-3.5 bg-[#f7f8ff] dark:bg-[#06060f]">
+                  <div className="text-xs sm:text-sm font-bold uppercase tracking-wider mb-1.5 truncate" style={{ color: p.color }}>
                     {p.name}
                   </div>
-                  <div className="text-xl font-black leading-none text-[var(--text)] tabular-nums">{p.count.toLocaleString()}</div>
+                  <div className="text-2xl sm:text-3xl font-black leading-none text-[var(--text)] tabular-nums">{p.count.toLocaleString()}</div>
                 </div>
               ))}
             </div>
@@ -204,15 +207,15 @@ export default function BringYourBillPage() {
 
             {/* Hero Cross-Reference Feature Box */}
             <div className="mb-8 p-6 lg:p-8 rounded-xl bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] shadow-sm relative overflow-hidden">
-              <div className="max-w-5xl">
+              <div className="w-full">
                 <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] text-xs font-bold mb-3 border border-[#2563eb]/20">
                   <Sparkles size={14} /> Free While In Preview
                 </div>
                 <h2 className="text-2xl lg:text-3xl font-extrabold mb-3 text-[var(--text)] tracking-tight">
                   Cross-Reference Invoices Across Cloud Providers
                 </h2>
-                <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed max-w-5xl">
-                  Cloud Invoices are notoriously difficult to decipher, hiding instance types behind complex provider codes. Our upcoming parser extracts vCPU counts, RAM allocations, storage media classes, database deployment topology, and network egress bandwidth, matching every line item against equivalent offerings from competing providers.
+                <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed w-full">
+                  Even when committed to a primary cloud provider, exploring new perspectives helps engineering and finance teams maximize the ROI of their cloud investments. Our upcoming engine extracts vCPU allocations, RAM specs, storage tiers, database topologies, and network egress bandwidth from your existing invoice, matching every line item against equivalent infrastructure offerings across competing cloud platforms.
                 </p>
               </div>
 
