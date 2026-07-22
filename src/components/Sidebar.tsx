@@ -230,7 +230,7 @@ export default function Sidebar({ activeProductType, onProductTypeChange }: Side
 
         <div className="h-px bg-[#dde0f0] dark:bg-[#1e1e38] my-2 mx-1" />
 
-        {renderLink('bill', 'Bring your Bill', '/bill', Receipt, activeProductType === ('bill' as any), undefined, true)}
+        {renderLink('bill', 'Bring your Bill', '/bringyourbill', Receipt, activeProductType === ('bill' as any), undefined, true)}
 
         <div className="h-px bg-[#dde0f0] dark:bg-[#1e1e38] my-2 mx-1" />
 
