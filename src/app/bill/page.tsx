@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Footer, Sidebar, DigitalOceanReferralModal, CopyHeading } from '@/components';
-import { WORKLOADS_LISTING_SPONSOR } from '@/config';
+import { CERTIFICATIONS_SPONSOR } from '@/config';
 import {
   FileUp,
   Cpu,
@@ -14,11 +14,21 @@ import {
   CheckCircle2,
   Receipt,
   FileSpreadsheet,
-  ArrowRight,
   HelpCircle,
 } from 'lucide-react';
 
+const EVALUATED_BILLS_PROVIDERS = [
+  { id: 'aws', name: 'AWS', color: '#FF9900', count: 1480 },
+  { id: 'azure', name: 'Azure', color: '#00BCFF', count: 1120 },
+  { id: 'gcp', name: 'Google', color: '#34A853', count: 940 },
+  { id: 'digitalocean', name: 'DigitalOcean', color: '#0069FF', count: 680 },
+  { id: 'oracle', name: 'Oracle', color: '#F80000', count: 410 },
+  { id: 'alibaba', name: 'Alibaba', color: '#FF6A00', count: 230 },
+];
+
 export default function BringYourBillPage() {
+  const totalEvaluated = EVALUATED_BILLS_PROVIDERS.reduce((sum, p) => sum + p.count, 0);
+
   return (
     <div className="cc-page flex flex-col lg:flex-row min-h-[100dvh] lg:h-screen bg-[var(--bg)] text-[var(--text)] font-sans lg:overflow-hidden">
       <style>{`
@@ -55,139 +65,170 @@ export default function BringYourBillPage() {
                 </span>
               </div>
               <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed max-w-4xl">
-                We are building an automated <strong>Cloud Provider Bill Analyzer &amp; Cross-Cloud Optimization Engine</strong> for Compare Cloud Costs users. Simply upload your PDF, CSV, or JSON invoice from <strong>AWS, Azure, Google Cloud, or Oracle Cloud</strong> and receive instant best-match alternatives cross-referenced against our live 10,000+ SKU database.
+                We are building an automated <strong>Cloud Provider Bill Analyzer &amp; Cross-Cloud Optimization Engine</strong> for Compare Cloud Costs users. Upload your official PDF, CSV, or JSON invoice from <strong>AWS, Azure, Google Cloud, DigitalOcean, or Oracle Cloud</strong> and receive instant best-match infrastructure alternatives cross-referenced against our live 10,000+ SKU database. Analyze line items, identify optimization gaps, and evaluate equivalent compute, storage, and database configurations with zero data retention.
               </p>
             </div>
 
             {/* Divider */}
             <div className="h-px bg-[var(--border)] mb-8" />
 
-            {/* Sponsorship Box */}
-            {WORKLOADS_LISTING_SPONSOR?.imageUrl ? (
-              <div className="mb-8">
-                <a
-                  href={WORKLOADS_LISTING_SPONSOR.linkUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-lg overflow-hidden border border-[var(--border)] hover:opacity-95 transition-opacity"
-                >
-                  <img
-                    src={WORKLOADS_LISTING_SPONSOR.imageUrl}
-                    alt={WORKLOADS_LISTING_SPONSOR.companyName}
-                    className="w-full h-auto max-h-[200px] object-cover"
-                  />
-                </a>
-              </div>
+            {/* Sponsorship Box — identical look and feel to Compliance page */}
+            {CERTIFICATIONS_SPONSOR ? (
+              <a
+                href={CERTIFICATIONS_SPONSOR.linkUrl}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="mb-8 block rounded overflow-hidden border border-[var(--border)]"
+              >
+                <img
+                  src={CERTIFICATIONS_SPONSOR.imageUrl}
+                  alt={`Sponsored by ${CERTIFICATIONS_SPONSOR.companyName}`}
+                  width={1200}
+                  height={200}
+                  className="w-full h-auto aspect-[6/1] object-cover"
+                />
+              </a>
             ) : (
-              <div className="mb-8 p-4 rounded-lg bg-[var(--surface)] border border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8]">
-                    <Receipt size={20} />
-                  </div>
-                  <div>
-                    <h3 className="text-xs font-bold text-[var(--text)]">Sponsor Cloud Price Intelligence</h3>
-                    <p className="text-[11px] text-[var(--muted)]">Reach thousands of DevOps leads, cloud architects, and CTOs comparing infrastructure costs daily.</p>
-                  </div>
+              <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
+                <div>
+                  <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
+                    Sponsor This Page
+                  </h3>
+                  <p className="text-[13px] text-[var(--muted)] leading-relaxed">
+                    Sponsor this page. Your brand in front of engineers and architects comparing cloud pricing. See <Link href="/docs#advertising" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-bold">Advertising with us</Link>, or email hello@comparecloudcosts.com.
+                  </p>
+                  <p className="text-[11px] text-[var(--muted)] mt-1.5 opacity-80">
+                    Banner spec: 1200 × 200px (6:1 ratio) · PNG, JPG, or WebP. See the <Link href="/docs#advertising-specs" className="underline hover:text-[var(--text)]">Docs</Link> for detailed instructions.
+                  </p>
                 </div>
-                <Link
-                  href="/sponsors"
-                  className="shrink-0 text-xs font-bold px-3 py-1.5 rounded bg-black dark:bg-white text-white dark:text-black hover:opacity-90 transition-opacity"
-                >
-                  Become a Sponsor →
-                </Link>
               </div>
             )}
 
-            {/* Hero Feature Banner */}
-            <div className="mb-10 p-6 lg:p-8 rounded-xl bg-gradient-to-br from-[#f8fafc] to-[#eef2ff] dark:from-[#090d16] dark:to-[#0f172a] border border-[#cbd5e1] dark:border-[#1e293b] shadow-sm relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
-                <Receipt size={180} />
-              </div>
-              <div className="relative z-10 max-w-3xl">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] text-xs font-bold mb-3">
-                  <Sparkles size={14} /> Coming to Compare Cloud Costs
-                </div>
-                <h2 className="text-2xl lg:text-3xl font-extrabold mb-3 text-[var(--text)] tracking-tight">
-                  Cross-Reference Your Invoices in Seconds
-                </h2>
-                <p className="text-xs lg:text-sm text-[var(--muted)] mb-6 leading-relaxed">
-                  Cloud bills are dense, complex, and filled with cryptic SKUs. Our upcoming bill analyzer extracts vCPU, RAM, storage tiers, database engine configurations, and egress usage, then computes your exact equivalent monthly spend across alternative cloud platforms.
-                </p>
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
 
-                <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-[var(--muted)]">
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-green-500" />
-                    <span>Pay-Per-Bill ($2.99) &amp; Beta Code Access</span>
+            {/* Summary Box — Evaluated Bills Counter by Provider */}
+            <div className="mb-2">
+              <CopyHeading id="evaluated-bills" className="text-xl font-bold mb-1 text-[var(--text)] scroll-mt-6">
+                Evaluated bills by cloud provider
+              </CopyHeading>
+              <span className="text-[10px] text-[var(--muted)]">
+                {`Total of ${totalEvaluated.toLocaleString()} cloud invoices evaluated and cross-matched across providers over time during preview testing.`}
+              </span>
+            </div>
+            <div
+              className="grid gap-px rounded-lg overflow-x-auto border border-[var(--border)] bg-[var(--border)] mb-8 scrollbar-thin"
+              style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(90px, 1fr)' }}
+            >
+              {EVALUATED_BILLS_PROVIDERS.map((p) => (
+                <div key={p.id} className="px-2.5 py-2.5 bg-[var(--surface)]">
+                  <div className="text-[9px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
+                    {p.name}
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-green-500" />
-                    <span>Zero Data Retention</span>
+                  <div className="text-xl font-black leading-none text-[var(--text)] tabular-nums">{p.count.toLocaleString()}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
+            {/* Hero Cross-Reference Feature Box */}
+            <div className="mb-8 p-6 lg:p-8 rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-sm relative overflow-hidden">
+              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                <div className="max-w-3xl">
+                  <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] text-xs font-bold mb-3 border border-[#2563eb]/20">
+                    <Sparkles size={14} /> Free While In Preview
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-green-500" />
-                    <span>Instant CSV &amp; PDF Export</span>
+                  <h2 className="text-2xl lg:text-3xl font-extrabold mb-3 text-[var(--text)] tracking-tight">
+                    Cross-Reference Invoices Across Cloud Providers
+                  </h2>
+                  <p className="text-xs lg:text-sm text-[var(--muted)] leading-relaxed">
+                    Cloud Invoices are notoriously difficult to decipher, hiding instance types behind complex provider codes. Our upcoming parser extracts vCPU counts, RAM allocations, storage media classes, database deployment topology, and network egress bandwidth, matching every line item against equivalent offerings from competing providers.
+                  </p>
+                </div>
+
+                <div className="shrink-0 flex flex-col gap-2 w-full sm:w-auto">
+                  <div className="px-4 py-3 rounded-lg border border-[var(--border)] bg-[var(--row-hover)] text-center">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#2563eb] dark:text-[#818cf8] block">Preview Access</span>
+                    <span className="text-sm font-bold text-[var(--text)]">Free while in preview</span>
                   </div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-[var(--border)] grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="flex items-center gap-2 text-xs text-[var(--muted)]">
+                  <CheckCircle2 size={16} className="text-green-500 shrink-0" />
+                  <span>Free access during preview phase</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-[var(--muted)]">
+                  <CheckCircle2 size={16} className="text-green-500 shrink-0" />
+                  <span>Zero persistent data retention</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-[var(--muted)]">
+                  <CheckCircle2 size={16} className="text-green-500 shrink-0" />
+                  <span>Exportable CSV &amp; PDF reports</span>
                 </div>
               </div>
             </div>
 
+            {/* Divider between Cross-Reference Box and How It Works */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
             {/* How It Works Section */}
-            <div className="mb-12">
-              <CopyHeading id="how-it-works" className="text-lg font-bold text-[var(--text)] mb-4">
+            <div className="mb-10">
+              <CopyHeading id="how-it-works" className="text-xl font-bold text-[var(--text)] mb-2">
                 How It Works
               </CopyHeading>
+              <p className="text-xs text-[var(--muted)] mb-6 max-w-3xl leading-relaxed">
+                Our bill cross-referencing workflow operates in three streamlined steps, converting raw cloud invoices into actionable optimization tables without exposing or saving your private financial data.
+              </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Step 1 */}
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
                   <div>
-                    <div className="w-8 h-8 rounded-lg bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] flex items-center justify-center font-bold text-xs mb-3">
-                      01
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-sm font-bold text-[#2563eb] dark:text-[#818cf8]">01.</span>
                       <FileUp size={18} className="text-[var(--text)]" />
                       <h3 className="text-sm font-bold text-[var(--text)]">Upload Invoice</h3>
                     </div>
                     <p className="text-xs text-[var(--muted)] leading-relaxed">
-                      Drop your official AWS, Azure, GCP, or OCI PDF invoice, CSV itemized export, or JSON cost report into the secure parser.
+                      Upload your official AWS Cost &amp; Usage Report (CUR), Azure PDF Invoice, or Google Cloud CSV export. The parser handles structured and unstructured billing documents.
                     </p>
                   </div>
                   <div className="mt-4 pt-3 border-t border-[var(--border)] text-[10px] text-[var(--muted)] font-mono">
-                    Supported: AWS CUR, Azure Invoices, GCP Cost Export
+                    Supported: AWS, Azure, GCP, OCI
                   </div>
                 </div>
 
                 {/* Step 2 */}
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
                   <div>
-                    <div className="w-8 h-8 rounded-lg bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] flex items-center justify-center font-bold text-xs mb-3">
-                      02
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-sm font-bold text-[#2563eb] dark:text-[#818cf8]">02.</span>
                       <Cpu size={18} className="text-[var(--text)]" />
                       <h3 className="text-sm font-bold text-[var(--text)]">Cross-Match SKUs</h3>
                     </div>
                     <p className="text-xs text-[var(--muted)] leading-relaxed">
-                      Our engine automatically normalizes infrastructure specifications (vCPUs, RAM, IOPS, DB engines) and matches them against equivalent products.
+                      Our engine normalizes resource specifications (vCPUs, RAM, IOPS, DB engines) and evaluates equivalent configurations across all supported alternative cloud providers.
                     </p>
                   </div>
                   <div className="mt-4 pt-3 border-t border-[var(--border)] text-[10px] text-[var(--muted)] font-mono">
-                    Cross-referenced against 10,000+ live prices
+                    Cross-referenced against 10,000+ SKUs
                   </div>
                 </div>
 
                 {/* Step 3 */}
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
                   <div>
-                    <div className="w-8 h-8 rounded-lg bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] flex items-center justify-center font-bold text-xs mb-3">
-                      03
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-sm font-bold text-[#2563eb] dark:text-[#818cf8]">03.</span>
                       <FileSpreadsheet size={18} className="text-[var(--text)]" />
                       <h3 className="text-sm font-bold text-[var(--text)]">Export &amp; Optimize</h3>
                     </div>
                     <p className="text-xs text-[var(--muted)] leading-relaxed">
-                      Review a detailed line-by-line comparison table with potential monthly savings, alternative providers, and export full reports.
+                      Review a detailed line-by-line comparison matrix displaying potential monthly savings, alternative instance specs, and download custom CSV reports for your team.
                     </p>
                   </div>
                   <div className="mt-4 pt-3 border-t border-[var(--border)] text-[10px] text-[var(--muted)] font-mono">
@@ -197,20 +238,26 @@ export default function BringYourBillPage() {
               </div>
             </div>
 
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
             {/* Key Capabilities Grid */}
-            <div className="mb-12">
-              <CopyHeading id="capabilities" className="text-lg font-bold text-[var(--text)] mb-4">
+            <div className="mb-10">
+              <CopyHeading id="capabilities" className="text-xl font-bold text-[var(--text)] mb-2">
                 Core Engine Capabilities
               </CopyHeading>
+              <p className="text-xs text-[var(--muted)] mb-6 max-w-3xl leading-relaxed">
+                Designed for cloud financial analysts and infrastructure architects seeking precise, multi-cloud cost benchmarks without privacy compromises.
+              </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2 text-[#2563eb] dark:text-[#818cf8]">
                     <ShieldCheck size={18} />
-                    <h4 className="text-xs font-bold text-[var(--text)]">Ephemeral Processing</h4>
+                    <h4 className="text-xs font-bold text-[var(--text)]">Ephemeral Document Processing</h4>
                   </div>
                   <p className="text-xs text-[var(--muted)] leading-relaxed">
-                    Zero raw invoice retention. Invoices are parsed in ephemeral memory and discarded immediately after rendering your report.
+                    Zero raw invoice retention. Invoices are parsed in volatile memory and purged immediately after generating your comparative analysis report.
                   </p>
                 </div>
 
@@ -220,27 +267,33 @@ export default function BringYourBillPage() {
                     <h4 className="text-xs font-bold text-[var(--text)]">Multi-Provider Mapping</h4>
                   </div>
                   <p className="text-xs text-[var(--muted)] leading-relaxed">
-                    Maps AWS EC2, RDS, S3, and Lambda line items to equivalent services across Azure, Google Cloud, DigitalOcean, and Oracle.
+                    Maps AWS EC2, RDS, S3, and Lambda line items to equivalent services across Azure, Google Cloud, DigitalOcean, and Oracle Cloud Infrastructure.
                   </p>
                 </div>
 
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2 text-[#2563eb] dark:text-[#818cf8]">
                     <Lock size={18} />
-                    <h4 className="text-xs font-bold text-[var(--text)]">Beta Activation Access</h4>
+                    <h4 className="text-xs font-bold text-[var(--text)]">Beta Preview Access</h4>
                   </div>
                   <p className="text-xs text-[var(--muted)] leading-relaxed">
-                    Early beta access available via promotional activation codes in exchange for quick user feedback on matching accuracy.
+                    Early access is completely free while in preview using promotional activation codes in exchange for feedback on match quality and user experience.
                   </p>
                 </div>
               </div>
             </div>
 
+            {/* Divider */}
+            <div className="h-px bg-[var(--border)] mb-8" />
+
             {/* Privacy & FAQs */}
-            <div className="mb-12">
-              <CopyHeading id="faq" className="text-lg font-bold text-[var(--text)] mb-4">
+            <div className="mb-10">
+              <CopyHeading id="faq" className="text-xl font-bold text-[var(--text)] mb-2">
                 Frequently Asked Questions
               </CopyHeading>
+              <p className="text-xs text-[var(--muted)] mb-6 max-w-3xl leading-relaxed">
+                Common questions regarding security, invoice document handling, and cross-cloud pricing accuracy during the preview release.
+              </p>
 
               <div className="space-y-4">
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
@@ -256,10 +309,10 @@ export default function BringYourBillPage() {
                 <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
                   <h4 className="text-xs font-bold text-[var(--text)] mb-1 flex items-center gap-2">
                     <HelpCircle size={14} className="text-[#2563eb]" />
-                    How will pricing work once launched?
+                    How much will the service cost?
                   </h4>
                   <p className="text-xs text-[var(--muted)] leading-relaxed pl-6">
-                    Bring Your Bill operates on a simple pay-as-you-go model ($2.99 per bill comparison). During the upcoming Beta release, users can access the feature for free using an activation code in exchange for brief feedback.
+                    The Bring Your Bill tool is <strong>free while in preview</strong>. Users can access the feature using promotional activation codes during our preview release in exchange for brief feedback on match quality.
                   </p>
                 </div>
               </div>
