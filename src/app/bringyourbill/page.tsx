@@ -308,7 +308,7 @@ export default function BringYourBillPage() {
             {/* Key Capabilities Grid */}
             <div className="mb-10">
               <CopyHeading id="capabilities" className="text-xl font-bold text-[var(--text)] mb-2">
-                Core Engine Capabilities
+                Capabilities
               </CopyHeading>
               <p className="text-sm text-[#737373] dark:text-[#a3a3a3] mb-6 w-full leading-relaxed">
                 Designed for cloud financial analysts and infrastructure architects seeking directional multi-cloud cost benchmarks and fresh perspectives without privacy compromises.
