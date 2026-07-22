@@ -204,25 +204,16 @@ export default function BringYourBillPage() {
 
             {/* Hero Cross-Reference Feature Box */}
             <div className="mb-8 p-6 lg:p-8 rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-sm relative overflow-hidden">
-              <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-                <div className="max-w-3xl">
-                  <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] text-xs font-bold mb-3 border border-[#2563eb]/20">
-                    <Sparkles size={14} /> Free While In Preview
-                  </div>
-                  <h2 className="text-2xl lg:text-3xl font-extrabold mb-3 text-[var(--text)] tracking-tight">
-                    Cross-Reference Invoices Across Cloud Providers
-                  </h2>
-                  <p className="text-xs lg:text-sm text-[var(--muted)] leading-relaxed">
-                    Cloud Invoices are notoriously difficult to decipher, hiding instance types behind complex provider codes. Our upcoming parser extracts vCPU counts, RAM allocations, storage media classes, database deployment topology, and network egress bandwidth, matching every line item against equivalent offerings from competing providers.
-                  </p>
+              <div className="max-w-5xl">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] text-xs font-bold mb-3 border border-[#2563eb]/20">
+                  <Sparkles size={14} /> Free While In Preview
                 </div>
-
-                <div className="shrink-0 flex flex-col gap-2 w-full sm:w-auto">
-                  <div className="px-4 py-3 rounded-lg border border-[var(--border)] bg-[var(--row-hover)] text-center">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#2563eb] dark:text-[#818cf8] block">Preview Access</span>
-                    <span className="text-sm font-bold text-[var(--text)]">Free while in preview</span>
-                  </div>
-                </div>
+                <h2 className="text-2xl lg:text-3xl font-extrabold mb-3 text-[var(--text)] tracking-tight">
+                  Cross-Reference Invoices Across Cloud Providers
+                </h2>
+                <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed max-w-5xl">
+                  Cloud Invoices are notoriously difficult to decipher, hiding instance types behind complex provider codes. Our upcoming parser extracts vCPU counts, RAM allocations, storage media classes, database deployment topology, and network egress bandwidth, matching every line item against equivalent offerings from competing providers.
+                </p>
               </div>
 
               <div className="mt-6 pt-6 border-t border-[var(--border)] grid grid-cols-1 sm:grid-cols-3 gap-4">

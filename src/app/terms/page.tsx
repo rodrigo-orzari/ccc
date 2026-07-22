@@ -93,7 +93,11 @@ This abstraction means the data you see is an approximation designed to match "l
 
 ### Workloads Catalog and Architecture Calculator
 
-The Workloads section provides hypothetical architectures to illustrate relative multi-cloud deployment costs for common scenarios (e.g., Serverless Web Apps, Machine Learning). The provided architectural components and generated cost estimates are conceptual. Real-world implementation costs will vary greatly based on bandwidth consumption, unlisted service dependencies, storage I/O, and architectural variations not represented in the catalog.
+The Workloads section provides conceptual architectures and multi-cloud deployment benchmarks to illustrate common industry patterns (e.g., Microservices, AI RAG Pipelines, Serverless Web Apps). These pre-configured workloads and architectural blueprints represent general industry best practices across cloud providers and **do not constitute architectural guarantees, formal SLAs, engineering advice, or binding technical specifications**. Real-world deployment costs and performance will vary significantly based on your specific traffic patterns, unlisted service dependencies, storage I/O, security configurations, regional availability, and custom architectural variations. Users are responsible for evaluating and validating their own deployment architectures.
+
+### Bring Your Bill & Invoice Cross-Matching
+
+The Bring Your Bill feature allows users to upload cloud invoices (PDF, CSV, JSON) from providers such as AWS, Azure, Google Cloud, DigitalOcean, and Oracle Cloud for automated cross-cloud comparison. **All bill analysis, SKU extraction, resource normalization, and cross-cloud pricing matches serve strictly as directional indicators and approximations derived from public pricing APIs.** comparecloudcosts.com makes **no guarantees, warranties, or representations regarding price matching accuracy, line-item completeness, or financial savings.** Results do not account for custom enterprise discount agreements (e.g., AWS EDP, Azure EA), private negotiated pricing, unlisted egress/tax surcharges, or contractual minimum commitments. Uploaded billing documents are processed ephemerally in memory without long-term raw data persistence. You must independently verify all cost comparisons with official provider pricing calculators and account representatives before making any migration or purchasing decisions.
 
 ### Infrastructure & Datacenter Data
 
