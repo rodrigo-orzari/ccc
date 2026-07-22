@@ -58,7 +58,7 @@ function FaqAccordion() {
   };
 
   return (
-    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg overflow-hidden divide-y divide-[var(--border)]">
+    <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] rounded-lg overflow-hidden divide-y divide-[var(--border)]">
       {FAQ_ITEMS.map((item, idx) => {
         const isOpen = openIndex === idx;
         return (
@@ -158,7 +158,7 @@ export default function BringYourBillPage() {
                 />
               </a>
             ) : (
-              <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[var(--row-hover)] p-6 flex flex-col items-center gap-3 text-center">
+              <div className="mb-8 border-2 border-dashed border-[var(--border)] rounded bg-[#f7f8ff] dark:bg-[#06060f] p-6 flex flex-col items-center gap-3 text-center">
                 <div>
                   <h3 className="text-sm font-bold text-[var(--text)] mb-1 flex items-center justify-center gap-2">
                     Sponsor This Page
@@ -182,7 +182,7 @@ export default function BringYourBillPage() {
                 Evaluated bills by cloud provider
               </CopyHeading>
               <span className="text-[10px] text-[var(--muted)]">
-                {`Total of ${totalEvaluated.toLocaleString()} cloud invoices evaluated and cross-matched across providers over time during preview testing.`}
+                {`Total of ${totalEvaluated.toLocaleString()} cloud invoices evaluated and cross-matched across providers over time during preview.`}
               </span>
             </div>
             <div
@@ -190,7 +190,7 @@ export default function BringYourBillPage() {
               style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(90px, 1fr)' }}
             >
               {EVALUATED_BILLS_PROVIDERS.map((p) => (
-                <div key={p.id} className="px-2.5 py-2.5 bg-[var(--surface)]">
+                <div key={p.id} className="px-2.5 py-2.5 bg-[#f7f8ff] dark:bg-[#06060f]">
                   <div className="text-[9px] font-bold uppercase tracking-widest mb-1 truncate" style={{ color: p.color }}>
                     {p.name}
                   </div>
@@ -203,7 +203,7 @@ export default function BringYourBillPage() {
             <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* Hero Cross-Reference Feature Box */}
-            <div className="mb-8 p-6 lg:p-8 rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-sm relative overflow-hidden">
+            <div className="mb-8 p-6 lg:p-8 rounded-xl bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] shadow-sm relative overflow-hidden">
               <div className="max-w-5xl">
                 <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] text-xs font-bold mb-3 border border-[#2563eb]/20">
                   <Sparkles size={14} /> Free While In Preview
@@ -246,7 +246,7 @@ export default function BringYourBillPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Step 1 */}
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
+                <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-sm font-bold text-[#2563eb] dark:text-[#818cf8]">01.</span>
@@ -263,7 +263,7 @@ export default function BringYourBillPage() {
                 </div>
 
                 {/* Step 2 */}
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
+                <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-sm font-bold text-[#2563eb] dark:text-[#818cf8]">02.</span>
@@ -280,7 +280,7 @@ export default function BringYourBillPage() {
                 </div>
 
                 {/* Step 3 */}
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
+                <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] rounded-lg p-5 flex flex-col justify-between">
                   <div>
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-sm font-bold text-[#2563eb] dark:text-[#818cf8]">03.</span>
@@ -311,7 +311,7 @@ export default function BringYourBillPage() {
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2 text-[#2563eb] dark:text-[#818cf8]">
                     <ShieldCheck size={18} />
                     <h4 className="text-xs font-bold text-[var(--text)]">Ephemeral Document Processing</h4>
@@ -321,7 +321,7 @@ export default function BringYourBillPage() {
                   </p>
                 </div>
 
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2 text-[#2563eb] dark:text-[#818cf8]">
                     <Zap size={18} />
                     <h4 className="text-xs font-bold text-[var(--text)]">Multi-Provider Mapping</h4>
@@ -331,7 +331,7 @@ export default function BringYourBillPage() {
                   </p>
                 </div>
 
-                <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                <div className="bg-[#f7f8ff] dark:bg-[#06060f] border border-[var(--border)] rounded-lg p-4">
                   <div className="flex items-center gap-2 mb-2 text-[#2563eb] dark:text-[#818cf8]">
                     <Lock size={18} />
                     <h4 className="text-xs font-bold text-[var(--text)]">Preview Access</h4>
