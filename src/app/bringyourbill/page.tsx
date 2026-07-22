@@ -182,7 +182,7 @@ export default function BringYourBillPage() {
             {/* Summary Box — Evaluated Bills Counter by Provider (All zeroes for initial state) */}
             <div className="mb-2">
               <CopyHeading id="evaluated-bills" className="text-xl font-bold mb-1 text-[var(--text)] scroll-mt-6">
-                Evaluated bills by cloud provider
+                Bills by cloud provider
               </CopyHeading>
               <span className="text-[10px] text-[var(--muted)]">
                 {`Total of ${totalEvaluated.toLocaleString()} cloud invoices evaluated and cross-matched across providers over time during preview.`}

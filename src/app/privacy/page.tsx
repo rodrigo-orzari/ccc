@@ -29,8 +29,18 @@ const PrivacyPolicyPage: React.FC = () => {
         }
         .privacy-wrapper {
           display: flex;
-          min-height: 100vh;
+          height: 100vh;
+          min-height: 100dvh;
+          max-height: 100vh;
+          overflow: hidden;
           background-color: var(--bg-color);
+        }
+        @media (max-width: 1024px) {
+          .privacy-wrapper {
+            height: auto;
+            max-height: none;
+            overflow: visible;
+          }
         }
         .privacy-topnav {
           display: flex;
@@ -127,9 +137,9 @@ const PrivacyPolicyPage: React.FC = () => {
         }
       `}</style>
 
-      <div className="privacy-wrapper flex-col lg:flex-row lg:overflow-hidden">
+      <div className="privacy-wrapper flex flex-col lg:flex-row h-screen min-h-[100dvh] lg:h-screen lg:overflow-hidden">
         <Sidebar activeProductType={"" as any} />
-        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col h-full">
         <div className="privacy-body" id="privacy-policy">
           {/* Sidebar */}
           <aside className="privacy-sidebar">

@@ -179,8 +179,18 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
 
           .terms-wrapper {
             display: flex;
-            min-height: 100vh;
+            height: 100vh;
+            min-height: 100dvh;
+            max-height: 100vh;
+            overflow: hidden;
             background-color: var(--bg-color);
+          }
+          @media (max-width: 1024px) {
+            .terms-wrapper {
+              height: auto;
+              max-height: none;
+              overflow: visible;
+            }
           }
 
           .terms-container {
@@ -284,9 +294,9 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
         `}
       </style>
 
-      <div className="terms-wrapper flex-col lg:flex-row lg:overflow-hidden">
+      <div className="terms-wrapper flex flex-col lg:flex-row h-screen min-h-[100dvh] lg:h-screen lg:overflow-hidden">
         <Sidebar activeProductType={"" as any} />
-        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col h-full">
       <div className="terms-container" id="terms-of-use">
         <aside className="sidebar">
 
