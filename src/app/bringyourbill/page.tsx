@@ -133,7 +133,7 @@ export default function BringYourBillPage() {
                 </span>
               </div>
               <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed max-w-5xl">
-                We are building an automated <strong>Cloud Provider Bill Analyzer &amp; Cross-Cloud Optimization Engine</strong> for Compare Cloud Costs users. Whether you have committed to a primary cloud provider or are seeking fresh perspectives to optimize your infrastructure spend, our engine provides instant best-match alternatives cross-referenced against our live 10,000+ SKU database. Simply upload your official PDF, CSV, or JSON invoice from <strong>AWS, Azure, Google Cloud, DigitalOcean, or Oracle Cloud</strong> to evaluate equivalent compute, storage, and database configurations with zero persistent data retention. Comparing global physical presence instead? Visit{' '}
+                We are building an automated <strong>Cloud Provider Bill Analyzer &amp; Cross-Cloud Optimization Engine</strong> for Compare Cloud Costs users. Whether you have committed to a primary cloud provider or are seeking fresh perspectives to optimize your infrastructure spend, our engine provides instant best-match alternatives cross-referenced against our live 10,000+ SKU database (check sync state on our <Link href="/status" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Status</Link> page). Simply upload your official PDF, CSV, or JSON invoice from <strong>AWS, Azure, Google Cloud, DigitalOcean, or Oracle Cloud</strong> to evaluate equivalent compute, storage, and database configurations with zero persistent data retention. Comparing global physical presence instead? Visit{' '}
                 <Link href="/datacenters" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Datacenters</Link>{' '}
                 to explore regions, or check{' '}
                 <Link href="/certifications" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Compliance</Link>{' '}
@@ -277,8 +277,9 @@ export default function BringYourBillPage() {
                       Our engine normalizes resource specifications (vCPUs, RAM, IOPS, DB engines) and evaluates equivalent configurations across all supported alternative cloud providers.
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-[var(--border)] text-[10px] text-[var(--muted)] font-mono">
-                    Cross-referenced against 10,000+ SKUs
+                  <div className="mt-4 pt-3 border-t border-[var(--border)] text-[10px] text-[var(--muted)] font-mono flex items-center justify-between">
+                    <span>10,000+ SKUs</span>
+                    <Link href="/status" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-sans font-semibold">View Status →</Link>
                   </div>
                 </div>
 
@@ -310,7 +311,7 @@ export default function BringYourBillPage() {
                 Core Engine Capabilities
               </CopyHeading>
               <p className="text-sm text-[#737373] dark:text-[#a3a3a3] mb-6 max-w-5xl leading-relaxed">
-                Designed for cloud financial analysts and infrastructure architects seeking precise, multi-cloud cost benchmarks without privacy compromises.
+                Designed for cloud financial analysts and infrastructure architects seeking directional multi-cloud cost benchmarks and fresh perspectives without privacy compromises.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -355,7 +356,7 @@ export default function BringYourBillPage() {
                 Frequently Asked Questions
               </CopyHeading>
               <p className="text-sm text-[#737373] dark:text-[#a3a3a3] mb-6 max-w-5xl leading-relaxed">
-                Common questions regarding security, invoice document handling, and cross-cloud pricing accuracy during the preview release.
+                Common questions regarding security, invoice document handling, and directional cross-cloud pricing benchmarks during the preview release.
               </p>
 
               <FaqAccordion />
