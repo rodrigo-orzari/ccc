@@ -936,11 +936,41 @@ const DocsPage: React.FC = () => {
             <p>
               We offer flexible pricing options designed to fit different goals and budgets. Choose the tier that best suits your needs:
             </p>
-            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
-              <li style={{ marginBottom: '0.4rem' }}><strong>$9.99/month or $99/year</strong> to have your brand in a workload page + sponsors page</li>
-              <li style={{ marginBottom: '0.4rem' }}><strong>$12.99/month or $119/year</strong> to have your brand in a workload page + sponsors page + a carousel in the main workload page</li>
-              <li style={{ marginBottom: '0.4rem' }}><strong>$15.99/month or $149/year</strong> to have your brand in a workload page + sponsors page + a carousel in the main workload, compliance, and datacenter page</li>
-              <li style={{ marginBottom: '0.4rem' }}><strong>$19.99/month or $189/year</strong> to have your brand in a workload page + premium placement in the sponsors page + a carousel in the main workload, compliance, datacenter, and main blog post pages + a yearly sponsored blog post in <a href="https://comparecloudcosts.com/blog" target="_blank" rel="noopener noreferrer">https://comparecloudcosts.com/blog</a></li>
+            <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <li>
+                <strong>$9.99/month or $99/year</strong>
+                <ul style={{ paddingLeft: '1.25rem', marginTop: '0.25rem', listStyleType: 'disc' }}>
+                  <li>Have your brand in a workload page</li>
+                  <li>Inclusion on the sponsors page</li>
+                </ul>
+              </li>
+              <li>
+                <strong>$12.99/month or $119/year</strong>
+                <ul style={{ paddingLeft: '1.25rem', marginTop: '0.25rem', listStyleType: 'disc' }}>
+                  <li>Have your brand in a workload page</li>
+                  <li>Inclusion on the sponsors page</li>
+                  <li>Ad carousel placement on the main workload page</li>
+                </ul>
+              </li>
+              <li>
+                <strong>$15.99/month or $149/year</strong>
+                <ul style={{ paddingLeft: '1.25rem', marginTop: '0.25rem', listStyleType: 'disc' }}>
+                  <li>Have your brand in a workload page</li>
+                  <li>Inclusion on the sponsors page</li>
+                  <li>Ad carousel placement across the main workload, compliance, and datacenter pages</li>
+                  <li>Access to premium capabilities for 1 user</li>
+                </ul>
+              </li>
+              <li>
+                <strong>$19.99/month or $189/year</strong>
+                <ul style={{ paddingLeft: '1.25rem', marginTop: '0.25rem', listStyleType: 'disc' }}>
+                  <li>Have your brand in a workload page</li>
+                  <li>Premium placement on the sponsors page</li>
+                  <li>Ad carousel placement across the main workload, compliance, datacenter, and main blog post pages</li>
+                  <li>A yearly sponsored blog post in <a href="https://comparecloudcosts.com/blog" target="_blank" rel="noopener noreferrer">https://comparecloudcosts.com/blog</a></li>
+                  <li>Access to premium capabilities for up to 2 users</li>
+                </ul>
+              </li>
             </ul>
 
             <p style={{ marginTop: '1.5rem' }}>

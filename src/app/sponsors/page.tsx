@@ -137,9 +137,7 @@ export default function SponsorsPage() {
               {SPONSORS.map((sponsor, index) => (
                 <div
                   key={sponsor.id}
-                  className={`h-full border border-[var(--border)] rounded p-5 flex flex-col items-center text-center group ${
-                    index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'
-                  }`}
+                  className="h-full border border-[var(--border)] rounded p-5 flex flex-col items-center text-center group bg-[#f7f8ff] dark:bg-[#06060f]"
                 >
                   <h3 className="sr-only">{sponsor.name}</h3>
                   <img
@@ -207,7 +205,7 @@ export default function SponsorsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
               {/* Traffic Card */}
-              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-[#f7f8ff] dark:bg-[#06060f] hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                   <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#2563eb1a', color: '#2563eb' }}>
                     TRAFFIC
@@ -227,7 +225,7 @@ export default function SponsorsPage() {
               </div>
 
               {/* Roles Card */}
-              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-[#f7f8ff] dark:bg-[#06060f] hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                   <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#9333ea1a', color: '#9333ea' }}>
                     AUDIENCE
@@ -248,7 +246,7 @@ export default function SponsorsPage() {
               </div>
 
               {/* Engagement Depth Card */}
-              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-[#f7f8ff] dark:bg-[#06060f] hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                   <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#06b6d41a', color: '#06b6d4' }}>
                     ENGAGEMENT
@@ -268,7 +266,7 @@ export default function SponsorsPage() {
               </div>
 
               {/* Geo Card */}
-              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-[#f7f8ff] dark:bg-[#06060f] hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                   <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#16a34a1a', color: '#16a34a' }}>
                     DEMOGRAPHICS
@@ -289,7 +287,7 @@ export default function SponsorsPage() {
               </div>
 
               {/* Device Card */}
-              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-[#f7f8ff] dark:bg-[#06060f] hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                   <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#f59e0b1a', color: '#f59e0b' }}>
                     PLATFORM
@@ -310,7 +308,7 @@ export default function SponsorsPage() {
               </div>
 
               {/* Traffic Quality Card */}
-              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-[#f7f8ff] dark:bg-[#06060f] hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                   <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#8b5cf61a', color: '#8b5cf6' }}>
                     QUALITY
@@ -330,7 +328,7 @@ export default function SponsorsPage() {
               </div>
 
               {/* Performance Card */}
-              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-[#f7f8ff] dark:bg-[#06060f] hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                   <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#10b9811a', color: '#10b981' }}>
                     PERFORMANCE
@@ -350,7 +348,7 @@ export default function SponsorsPage() {
               </div>
 
               {/* Traffic Sources Card */}
-              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-transparent hover:border-[var(--text)] transition-colors">
+              <div className="border border-[var(--border)] rounded p-4 flex flex-col group bg-[#f7f8ff] dark:bg-[#06060f] hover:border-[var(--text)] transition-colors">
                 <div className="flex items-center gap-1.5 mb-2 flex-wrap">
                   <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style={{ backgroundColor: '#f59e0b1a', color: '#f59e0b' }}>
                     SOURCES

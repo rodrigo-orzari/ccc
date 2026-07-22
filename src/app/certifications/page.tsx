@@ -340,9 +340,7 @@ export default function CertificationsPage() {
                 return (
                   <div
                     key={c.id}
-                    className={`border border-[var(--border)] rounded p-4 flex flex-col hover:border-[var(--text)] transition-colors ${
-                      index % 2 === 0 ? 'bg-[#f7f8ff] dark:bg-[#06060f]' : 'bg-[#e8eaf8] dark:bg-[#10102a]'
-                    }`}
+                    className="border border-[var(--border)] rounded p-4 flex flex-col hover:border-[var(--text)] transition-colors bg-[#f7f8ff] dark:bg-[#06060f]"
                   >
                     {/* badges */}
                     <div className="flex items-center gap-1.5 mb-2 flex-wrap">
