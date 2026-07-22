@@ -159,7 +159,7 @@ export default function BringYourBillPage() {
               <div className="mt-6 pt-6 border-t border-[var(--border)] grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex items-center gap-2 text-xs text-[var(--muted)]">
                   <CheckCircle2 size={16} className="text-green-500 shrink-0" />
-                  <span>Free access during preview phase</span>
+                  <span>Free access during preview</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-[var(--muted)]">
                   <CheckCircle2 size={16} className="text-green-500 shrink-0" />
