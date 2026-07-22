@@ -45,8 +45,8 @@ const FAQ_ITEMS = [
     answer: 'Our parsing engine normalizes complex provider line items into standardized compute, database, storage, and networking requirements. It then queries our live 10,000+ SKU pricing database to identify equivalent or higher-performing instance configurations across alternative providers.',
   },
   {
-    question: 'How can I access the preview during the beta phase?',
-    answer: 'During the preview phase, early access is granted using promotional beta activation codes. Simply enter your code on the upload screen to unlock full bill analysis and CSV report exports.',
+    question: 'How can I access the feature preview?',
+    answer: 'During the preview phase, early access is granted using promotional activation codes. Simply enter your code on the upload screen to unlock full bill analysis and CSV report exports.',
   },
 ];
 
