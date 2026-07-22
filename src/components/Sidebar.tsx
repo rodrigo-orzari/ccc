@@ -28,6 +28,7 @@ import {
   Mail,
   Github,
   Activity,
+  Receipt,
 } from 'lucide-react';
 import type { ProductType } from '@/types';
 
@@ -139,14 +140,14 @@ export default function Sidebar({ activeProductType, onProductTypeChange }: Side
       isActive
         ? 'bg-[#f7f8ff] dark:bg-[#1e1e38] shadow-sm border-[#dde0f0] dark:border-[#1e1e38]'
         : 'border-transparent text-[#737373] hover:text-black dark:hover:text-[#f7f8ff] opacity-70 hover:opacity-100'
-    } ${collapsed ? 'justify-center' : ''} ${soon ? 'cursor-not-allowed opacity-50' : ''}`;
+    } ${collapsed ? 'justify-center' : ''}`;
 
     const content = (
       <>
         <Icon size={16} />
         {!collapsed && <span className="whitespace-nowrap overflow-hidden text-ellipsis">{label}</span>}
         {!collapsed && soon && (
-          <span className="ml-auto text-[8px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] px-1 rounded uppercase tracking-tighter">
+          <span className="ml-auto text-[8px] font-bold bg-[#dde0f0] dark:bg-[#1e1e38] border border-[#dde0f0] dark:border-[#1e1e38] px-1 rounded uppercase tracking-tighter text-[#2563eb] dark:text-[#818cf8]">
             Soon
           </span>
         )}
@@ -173,12 +174,8 @@ export default function Sidebar({ activeProductType, onProductTypeChange }: Side
     return (
       <Link
         key={id}
-        href={soon ? '#' : href}
+        href={href}
         onClick={(e) => {
-          if (soon) {
-            e.preventDefault();
-            return;
-          }
           onClick?.(e);
           setMobileOpen(false);
         }}
@@ -230,6 +227,10 @@ export default function Sidebar({ activeProductType, onProductTypeChange }: Side
         {EXTRA_LINKS.map(link =>
           renderLink(link.id, link.label, link.href, link.icon, activeProductType === (link.id as any))
         )}
+
+        <div className="h-px bg-[#dde0f0] dark:bg-[#1e1e38] my-2 mx-1" />
+
+        {renderLink('bill', 'Bring your Bill', '/bill', Receipt, activeProductType === ('bill' as any), undefined, true)}
 
         <div className="h-px bg-[#dde0f0] dark:bg-[#1e1e38] my-2 mx-1" />
 

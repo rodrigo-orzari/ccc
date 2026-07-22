@@ -20,7 +20,7 @@ test.describe('Dashboard Filter Validation', () => {
 
   test('Serverless: Clearing all languages forces 0 results', async ({ page }) => {
     // Click Serverless tab
-    await page.getByRole('button', { name: /Serverless/ }).click();
+    await page.locator('nav a', { hasText: 'Serverless' }).click();
     await page.waitForFunction(() => !document.querySelector('.animate-spin'));
 
     const awsTile = page.locator('div:has-text("AWS")').filter({ has: page.locator('span:has-text("OF")') }).first();
@@ -54,7 +54,7 @@ test.describe('Dashboard Filter Validation', () => {
 
   test('Database: Provider selection updates total items', async ({ page }) => {
     // Click Databases tab
-    await page.getByRole('button', { name: /Databases/ }).click();
+    await page.locator('nav a', { hasText: 'Databases' }).click();
     await page.waitForFunction(() => !document.querySelector('.animate-spin'));
 
     // Check table has rows
@@ -74,7 +74,7 @@ test.describe('Dashboard Filter Validation', () => {
 
   test('Networking: Loads successfully without empty state', async ({ page }) => {
     // Click Networking tab
-    await page.getByRole('button', { name: /Networking/ }).click();
+    await page.locator('nav a', { hasText: 'Networking' }).click();
     await page.waitForFunction(() => !document.querySelector('.animate-spin'));
 
     // The table should have rows, not "No matches for your filters"
@@ -87,7 +87,7 @@ test.describe('Dashboard Filter Validation', () => {
 
   test('Data & Analytics: Loads successfully without database empty warning', async ({ page }) => {
     // Click Data & Analytics tab
-    await page.getByRole('button', { name: /Data & Analytics/ }).click();
+    await page.locator('nav a', { hasText: 'Data & Analytics' }).click();
     await page.waitForFunction(() => !document.querySelector('.animate-spin'));
 
     // Should NOT show the Database is empty warning box
