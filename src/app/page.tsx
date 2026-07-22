@@ -676,6 +676,13 @@ export default function Dashboard() {
     };
   }, [data.length, activeProductType]);
 
+  useEffect(() => {
+    if (tableScrollRef.current) {
+      tableScrollRef.current.scrollTop = 0;
+      tableScrollRef.current.scrollLeft = 0;
+    }
+  }, [activeProductType]);
+
   const lastUpdated = useMemo(() => {
     if (!rawData || rawData.length === 0) return undefined;
     const maxUpdated = rawData.reduce((max, record) => {

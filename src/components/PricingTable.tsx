@@ -160,6 +160,11 @@ function useVirtualRows(
 ) {
   const [range, setRange] = useState<{ start: number; end: number }>({ start: 0, end: rowCount });
 
+  // Reset range state whenever rowCount or virtualization status changes
+  useEffect(() => {
+    setRange({ start: 0, end: rowCount });
+  }, [rowCount, enabled]);
+
   useEffect(() => {
     const el = scrollRef.current;
     if (!enabled || !el) {
@@ -167,7 +172,7 @@ function useVirtualRows(
       return;
     }
     const compute = () => {
-      const viewport = el.clientHeight || 0;
+      const viewport = el.clientHeight || 800;
       const visibleCount = Math.ceil(viewport / ROW_ESTIMATE_PX) + ROW_OVERSCAN * 2;
       const maxStart = Math.max(0, rowCount - visibleCount);
       const start = Math.min(Math.max(0, Math.floor(el.scrollTop / ROW_ESTIMATE_PX) - ROW_OVERSCAN), maxStart);
@@ -213,7 +218,11 @@ export default function PricingTable({
   // distributes any extra space, so the table grows/shrinks with the browser.
   useEffect(() => {
     setColWidths(loadWidths(activeProductType));
-  }, [activeProductType]);
+    if (tableScrollRef?.current) {
+      tableScrollRef.current.scrollTop = 0;
+      tableScrollRef.current.scrollLeft = 0;
+    }
+  }, [activeProductType, tableScrollRef]);
 
   const startResize = useCallback((e: React.PointerEvent, colKey: string) => {
     e.preventDefault();
