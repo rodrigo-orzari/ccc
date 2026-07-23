@@ -133,11 +133,10 @@ export default function BringYourBillPage() {
                 </span>
               </div>
               <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed w-full">
-                We are building an automated <strong>Cloud Provider Bill Analyzer &amp; Cross-Cloud Optimization Engine</strong> for Compare Cloud Costs users. Whether you have committed to a primary cloud provider or are seeking fresh perspectives to optimize your infrastructure spend, our engine provides instant best-match alternatives cross-referenced against our live 10,000+ SKU database (check sync state on our <Link href="/status" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Status</Link> page). Simply upload your official PDF, CSV, or JSON invoice from <strong>AWS, Azure, Google Cloud, DigitalOcean, or Oracle Cloud</strong> to evaluate equivalent compute, storage, and database configurations with zero persistent data retention. Comparing global physical presence instead? Visit{' '}
+                We are building an automated <strong>Cloud Provider Bill Analyzer</strong> for Compare Cloud Costs users. Upload an invoice from <strong>AWS, Azure, Google Cloud, DigitalOcean, or Oracle Cloud</strong> to see comparable compute, storage, and database options across providers, with no persistent data retention. Comparing global presence or compliance instead? Visit{' '}
                 <Link href="/datacenters" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Datacenters</Link>{' '}
-                to explore regions, or check{' '}
-                <Link href="/certifications" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Compliance</Link>{' '}
-                to review regulatory security standards across providers.
+                or{' '}
+                <Link href="/certifications" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Compliance</Link>.
               </p>
             </div>
 
@@ -193,7 +192,7 @@ export default function BringYourBillPage() {
               style={{ gridAutoFlow: 'column', gridAutoColumns: 'minmax(140px, 1fr)' }}
             >
               {EVALUATED_BILLS_PROVIDERS.map((p) => (
-                <div key={p.id} className="px-4 py-3.5 bg-[#e8eaf8] dark:bg-[#10102a]">
+                <div key={p.id} className="px-4 py-3.5 bg-[#f5f5f5] dark:bg-[#0a0a0a]">
                   <div className="text-xs sm:text-sm font-bold uppercase tracking-wider mb-1.5 truncate" style={{ color: p.color }}>
                     {p.name}
                   </div>
@@ -206,16 +205,16 @@ export default function BringYourBillPage() {
             <div className="h-px bg-[var(--border)] mb-8" />
 
             {/* Hero Cross-Reference Feature Box */}
-            <div className="mb-8 p-6 lg:p-8 rounded-xl bg-[#e8eaf8] dark:bg-[#10102a] border border-[var(--border)] shadow-sm relative overflow-hidden">
+            <div className="mb-8 p-6 lg:p-8 rounded-xl bg-[#f5f5f5] dark:bg-[#0a0a0a] border border-[var(--border)] shadow-sm relative overflow-hidden">
               <div className="w-full">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#2563eb]/10 text-[#2563eb] dark:text-[#818cf8] text-xs font-bold mb-3 border border-[#2563eb]/20">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[var(--text)]/5 dark:bg-[var(--text)]/10 text-[var(--text)] text-xs font-bold mb-3 border border-[var(--border)]">
                   <Sparkles size={14} /> Free While In Preview
                 </div>
                 <h2 className="text-2xl lg:text-3xl font-extrabold mb-3 text-[var(--text)] tracking-tight">
                   Cross-Reference Invoices Across Cloud Providers
                 </h2>
                 <p className="text-sm text-[#737373] dark:text-[#a3a3a3] leading-relaxed w-full">
-                  Even when committed to a primary cloud provider, exploring new perspectives helps engineering and finance teams maximize the ROI of their cloud investments. Our upcoming engine extracts vCPU allocations, RAM specs, storage tiers, database topologies, and network egress bandwidth from your existing invoice, matching every line item against equivalent infrastructure offerings across competing cloud platforms.
+                  Even when committed to a primary cloud provider, exploring new perspectives helps engineering and finance teams maximize the ROI of their cloud investments.
                 </p>
               </div>
 
@@ -373,7 +372,7 @@ export default function BringYourBillPage() {
           <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8">
             <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
               <strong>Disclaimer:</strong>{' '}
-              Bring Your Bill analysis estimates and cross-cloud cost comparisons serve as directional indicators derived from public pricing APIs. Uploaded invoices are processed ephemerally without persistent storage. Compare Cloud Costs makes no warranties regarding billing accuracy or provider-specific enterprise discounts. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+              Bring Your Bill estimates are directional, derived from public pricing APIs. Uploaded invoices are processed ephemerally, without persistent storage. Compare Cloud Costs makes no warranties on billing accuracy or provider-specific discounts. Visit our <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for data coverage details.
             </blockquote>
           </div>
         </div>

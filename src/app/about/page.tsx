@@ -116,9 +116,10 @@ const AboutPage: React.FC = () => {
             width: 280px;
             border-right: 1px solid var(--border-color);
             padding: 2rem 1.5rem;
-            position: fixed;
+            position: sticky;
             top: 0;
-            height: calc(100vh - 48px);
+            align-self: flex-start;
+            height: 100vh;
             overflow-y: auto;
             background-color: var(--sidebar-bg);
           }
@@ -137,7 +138,6 @@ const AboutPage: React.FC = () => {
           }
 
           .main-content {
-            margin-left: 280px;
             flex: 1;
             padding: 3rem 4rem 5rem;
             max-width: 1200px;
@@ -264,16 +264,13 @@ const AboutPage: React.FC = () => {
               <div className="about-section">
                 <CopyHeading id="about-compare-cloud-costs-ccc">About Compare Cloud Costs (CCC)</CopyHeading>
                 <p>
-                  Compare Cloud Costs (CCC) is a comprehensive cloud pricing intelligence platform that makes
-                  comparing infrastructure costs effortless. CCC tracks two distinct kinds of providers: six
-                  general-purpose **cloud platforms** (AWS, Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean,
-                  and Alibaba Cloud) that offer the compute, storage, database, and networking primitives you build
-                  on, and a set of **specialized providers** (AI model vendors like OpenAI and Anthropic, vector
-                  databases, and edge/security services like Cloudflare) that offer a single category of service
-                  rather than a full platform. By normalizing and aggregating pricing data across both groups, CCC
-                  enables teams to perform side-by-side **AWS vs Azure vs Google Cloud pricing calculator**
-                  comparisons, helping you make confident, data-driven architectural decisions and optimize cloud
-                  spend before deployment. Compare Cloud Costs is a Co-Sell Plus LLC product.
+                  Compare Cloud Costs (CCC) is a cloud pricing intelligence platform that makes comparing
+                  infrastructure costs effortless. It tracks six general-purpose <strong>cloud platforms</strong> (AWS,
+                  Microsoft Azure, Google Cloud, Oracle Cloud, DigitalOcean, and Alibaba Cloud), plus a set of
+                  <strong> specialized providers</strong> (AI model vendors like OpenAI and Anthropic, vector databases,
+                  and edge/security services like Cloudflare) that each cover a single category of service. Normalizing
+                  and aggregating pricing across both groups lets teams compare providers side by side and make
+                  data-driven architectural decisions before deployment. Compare Cloud Costs is a Co-Sell Plus LLC product.
                 </p>
                 <BackToTop />
               </div>
@@ -282,26 +279,26 @@ const AboutPage: React.FC = () => {
               <div className="about-section">
                 <CopyHeading id="why-we-built-this">Why we built this</CopyHeading>
                 <p>
-                  Every cloud provider publishes its own calculator. None of them talk to each other. If you've
-                  tried to build a **cloud provider price comparison** spreadsheet, you know how fast regional
-                  variance and instance-tier differences turn a simple comparison into a research project.
+                  Every cloud provider publishes its own calculator, and none of them talk to each other. If
+                  you've tried building a cloud price comparison spreadsheet, you know how fast regional variance
+                  and instance-tier differences turn it into a research project.
                 </p>
 
                 <h3 id="the-cloud-pricing-maze">The Cloud Pricing Maze</h3>
                 <p>
-                  You can find exact pricing for one provider without much trouble. Comparing several requires
-                  navigating separate calculators, rate cards, and service models that don't map cleanly onto
-                  each other. Data is scattered across different rate cards and service models, making an
-                  "apples-to-apples" comparison nearly impossible without manual normalization. CCC solves this by providing a unified **cloud cost comparison table** covering VMs, database instances, and storage fees in one view.
+                  Finding exact pricing for one provider is easy. Comparing several means navigating separate
+                  calculators, rate cards, and service models that don't map cleanly onto each other, making an
+                  "apples-to-apples" comparison nearly impossible without manual normalization. CCC solves this
+                  with a unified comparison table covering VMs, database instances, and storage fees in one view.
                 </p>
                 <p>
-                  Most FinOps tools look backward — they tell you what you already spent. They don't help you
+                  Most FinOps tools look backward, telling you what you already spent instead of helping you
                   compare options before you deploy.
                 </p>
                 <p>
-                  More teams run multi-cloud today — different providers for different performance, redundancy,
-                  or contract reasons. Without a shared view across providers during planning, it's easy to
-                  overpay without knowing it. CCC provides **multi-cloud cost optimization** visibility directly at the design phase.
+                  More teams run multi-cloud today, across providers chosen for performance, redundancy, or
+                  contract reasons. Without a shared view during planning, it's easy to overpay without knowing
+                  it. CCC brings that visibility to the design phase.
                 </p>
                 <BackToTop />
               </div>
@@ -362,40 +359,36 @@ const AboutPage: React.FC = () => {
 
                 <h3 id="it-managers-and-ctos">IT Managers and CTOs</h3>
                 <p>
-                  IT leaders use CCC during the architectural planning phase to estimate the total cost of
-                  ownership (TCO) for new workloads. By seeing "apples-to-apples" cost comparisons for compute,
-                  databases, and networking, they can justify budget requests, avoid vendor lock-in, and select
-                  the most cost-effective cloud provider for their specific performance needs.
+                  IT leaders use CCC during architectural planning to estimate total cost of ownership for new
+                  workloads. Apples-to-apples comparisons for compute, databases, and networking help them
+                  justify budget requests, avoid vendor lock-in, and pick the most cost-effective provider.
                 </p>
 
                 <h3 id="cloud-provider-sales">Cloud Provider Sales</h3>
                 <p>
                   Cloud sales teams use Compare Cloud Costs as an independent benchmark. A rep can show a prospect
-                  exactly how their database or compute pricing compares to competitors — no spreadsheet required.
+                  exactly how their database or compute pricing compares to competitors, no spreadsheet required.
                 </p>
 
                 <h3 id="product-owners">Product Owners</h3>
                 <p>
-                  Product Owners use CCC to align product roadmaps with infrastructure budgets. By easily
-                  comparing the cost implications of introducing new features (e.g., adding an AI inference
-                  endpoint or switching to a NoSQL database), Product Owners can make data-backed decisions that
-                  balance product innovation with operational profitability.
+                  Product Owners use CCC to align roadmaps with infrastructure budgets, comparing the cost of
+                  new features (e.g., an AI inference endpoint or a switch to NoSQL) to balance innovation with
+                  operational profitability.
                 </p>
 
                 <h3 id="managed-service-providers-msps">Managed Service Providers (MSPs)</h3>
                 <p>
-                  MSPs managing infrastructure for multiple clients use CCC to design optimized, cost-effective
-                  environments. Whether migrating a client from on-premises to the cloud or optimizing an existing
-                  cloud footprint, CCC allows MSPs to rapidly evaluate different providers and present compelling,
-                  cost-optimized proposals to their clients, thereby increasing their margins and value-add.
+                  MSPs managing infrastructure for multiple clients use CCC to design cost-effective environments.
+                  Whether migrating a client to the cloud or optimizing an existing footprint, CCC lets MSPs
+                  rapidly compare providers and present cost-optimized proposals.
                 </p>
 
                 <h3 id="consulting-companies-cloud-deployment-specialists">Consulting Companies (Cloud Deployment Specialists)</h3>
                 <p>
-                  Cloud consultants and architects use CCC as a foundational tool during the discovery and design
-                  phases of a digital transformation project. It allows them to quickly model out multi-cloud
-                  scenarios, provide clients with accurate directional estimates, and design architectures that
-                  balance performance requirements with strict budget constraints.
+                  Cloud consultants and architects use CCC during discovery and design to model multi-cloud
+                  scenarios, give clients accurate directional estimates, and design architectures that balance
+                  performance with budget.
                 </p>
                 <BackToTop />
               </div>
@@ -420,14 +413,14 @@ const AboutPage: React.FC = () => {
                   </a>.
                 </p>
                 <p>
-                  I built Compare Cloud Costs to get hands-on with modern tech stacks and AI — moving from
-                  prototyping with AI tools to shipping a production application built on them. Compare Cloud
-                  Costs is a Co-Sell Plus LLC product.
+                  I built Compare Cloud Costs to get hands-on with modern tech stacks and AI, moving from
+                  prototyping with AI tools to shipping a production application built on them. It's a Co-Sell
+                  Plus LLC product.
                 </p>
                 <p>
                   The problem was specific: IT leaders, sales reps, and consultants were manually hunting down
-                  prices across a dozen rate cards. Compare Cloud Costs does that normalization for them, so the
-                  "apples-to-apples" comparison takes minutes instead of hours.
+                  prices across a dozen rate cards. Compare Cloud Costs does that normalization for them, turning
+                  an apples-to-apples comparison into minutes instead of hours.
                 </p>
                 <p style={{ fontSize: '0.875rem', color: 'var(--muted-text)' }}>
                   For notes on data accuracy, coverage, and official provider calculators, see{' '}

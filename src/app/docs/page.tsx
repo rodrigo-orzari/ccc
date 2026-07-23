@@ -101,9 +101,10 @@ const DocsPage: React.FC = () => {
           width: 260px;
           border-right: 1px solid var(--border-color);
           padding: 2rem 1.5rem;
-          position: fixed;
+          position: sticky;
           top: 0;
-          height: calc(100vh - 48px);
+          align-self: flex-start;
+          height: 100vh;
           overflow-y: auto;
           background-color: var(--sidebar-bg);
           flex-shrink: 0;
@@ -121,7 +122,6 @@ const DocsPage: React.FC = () => {
           .docs-sidebar a { color: #ffffff; }
         }
         .docs-main {
-          margin-left: 260px;
           flex: 1;
           padding: 3rem 4rem 6rem;
           max-width: 1200px;
@@ -336,8 +336,7 @@ const DocsPage: React.FC = () => {
           <h1>Documentation</h1>
           <p className="docs-meta">Last updated: June 2026.</p>
           <p>
-            Welcome to the comparecloudcosts.com documentation. This page covers how the tool works,
-            how pricing data is collected, and how to interpret results. Content will be expanded gradually.
+            Welcome to the comparecloudcosts.com documentation, covering how the tool works, how pricing data is collected, and how to interpret results.
           </p>
 
           {/* Getting Started */}
@@ -346,7 +345,7 @@ const DocsPage: React.FC = () => {
             <p>
               Compare Cloud Costs is a free, open-source tool. It aggregates and normalizes on-demand
               (pay-as-you-go) pricing across AWS, Microsoft Azure, Google Cloud, Oracle Cloud,
-              DigitalOcean, and Alibaba Cloud, plus 8 specialized providers, into one **cloud cost comparison** side-by-side view.
+              DigitalOcean, and Alibaba Cloud, plus 8 specialized providers, into one side-by-side view.
             </p>
             <p>
               Use the <strong>product tabs</strong> at the top to switch between categories: AI &amp; Machine Learning,
@@ -354,7 +353,7 @@ const DocsPage: React.FC = () => {
             </p>
             <p>
               Use the <strong>filter sidebar</strong> on the left to narrow results by provider,
-              geography, instance specs, and product-specific attributes. This allows you to generate a tailored **cloud server pricing comparison** in seconds.
+              geography, instance specs, and product-specific attributes.
             </p>
             <BackToTop />
           </div>
@@ -365,7 +364,7 @@ const DocsPage: React.FC = () => {
 
             <h3 id="ai-machine-learning"><PRODUCT_TYPE_ICONS.ai size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=ai">AI &amp; Machine Learning</Link></h3>
             <p>
-              Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window size, multimodal capabilities, and compare input/output pricing per 1M tokens to optimize your **AI API costs**.
+              Compares managed AI foundation models and APIs (e.g., GPT-4, Claude 3, Gemini 1.5, Llama 3). Filter by context window, multimodal support, and input/output price per 1M tokens.
             </p>
 
             <h3 id="app-hosting"><AppHostingIcon size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=app-hosting">App Hosting</Link></h3>
@@ -375,13 +374,12 @@ const DocsPage: React.FC = () => {
 
             <h3 id="containers"><PRODUCT_TYPE_ICONS.containers size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=containers">Containers</Link></h3>
             <p>
-              Covers container infrastructure across two subsections: (1) **Orchestration**: managed container runtimes including Kubernetes node pools (**AWS EKS vs Azure AKS vs GCP GKE** node cost comparisons) and serverless container platforms (Fargate, Cloud Run, ACI). (2) **Container Registries**: private image repositories for storing, managing, and deploying container images (**AWS ECR vs Azure ACR vs Google Artifact Registry**). Filter by service type, orchestrator, architecture (x86 or ARM), and billing granularity.
+              Covers two areas: managed container runtimes, including Kubernetes node pools (EKS, AKS, GKE) and serverless container platforms (Fargate, Cloud Run, ACI); and container registries (ECR, ACR, Google Artifact Registry). Filter by service type, orchestrator, architecture (x86 or ARM), and billing granularity.
             </p>
 
             <h3 id="databases"><PRODUCT_TYPE_ICONS.database size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=database">Databases</Link></h3>
             <p>
-              Covers managed relational, NoSQL, and In-memory database services (**AWS RDS vs Azure SQL vs Google Cloud SQL** PostgreSQL/MySQL pricing). Filter by database family, engine, deployment type (Single AZ, Multi-AZ,
-              Serverless), and HA mode.
+              Covers managed relational, NoSQL, and in-memory database services (RDS, Azure SQL, Cloud SQL). Filter by database family, engine, deployment type (Single AZ, Multi-AZ, Serverless), and HA mode.
             </p>
 
             <h3 id="data--analytics"><DataAnalyticsIcon size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=data-analytics">Data &amp; Analytics</Link></h3>
@@ -393,7 +391,7 @@ const DocsPage: React.FC = () => {
 
             <h3 id="gpu"><PRODUCT_TYPE_ICONS.gpu size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=gpu">GPU</Link></h3>
             <p>
-              Compares GPU accelerator pricing for machine learning training, scientific computing, and rendering workloads. Covers single and multi-GPU instance configurations across providers. Filter by GPU model (A100, H100, RTX, V100, L4, etc.), GPU count, and system specs (vCPU, memory) to find the most cost-effective GPU infrastructure for your workload.
+              Compares GPU accelerator pricing for ML training, scientific computing, and rendering, covering single and multi-GPU configurations. Filter by GPU model (A100, H100, RTX, V100, L4, etc.), GPU count, and system specs (vCPU, memory).
             </p>
 
             <h3 id="networking"><PRODUCT_TYPE_ICONS.networking size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=networking">Networking</Link></h3>
@@ -405,46 +403,42 @@ const DocsPage: React.FC = () => {
 
             <h3 id="serverless"><PRODUCT_TYPE_ICONS.serverless size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=serverless">Serverless</Link></h3>
             <p>
-              Compares function-as-a-service pricing (AWS Lambda, Azure Functions, Google Cloud
-              Functions, etc.) alongside integration services like API Gateways, Messaging Queues, Event Buses, and Workflows. Key attributes include supported runtimes, cold start behavior, billing granularity, and memory configuration.
+              Compares function-as-a-service pricing (AWS Lambda, Azure Functions, Google Cloud Functions) alongside integration services like API Gateways, Messaging Queues, Event Buses, and Workflows. Key attributes: supported runtimes, cold start behavior, billing granularity, and memory configuration.
             </p>
 
             <h3 id="storage"><PRODUCT_TYPE_ICONS.storage size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=storage">Storage</Link></h3>
             <p>
-              Compares object, block, and file storage pricing (**AWS S3 vs Azure Blob vs GCP Cloud Storage price per GB**). Filter by storage type, performance tier, redundancy (LRS, ZRS, GRS), and media type.
+              Compares object, block, and file storage pricing (S3, Azure Blob, GCP Cloud Storage). Filter by storage type, performance tier, redundancy (LRS, ZRS, GRS), and media type.
             </p>
 
             <h3 id="virtual-machines"><PRODUCT_TYPE_ICONS.vm size={18} className="inline align-text-bottom mr-1" /> <Link href="/?product=compute">Virtual Machines</Link></h3>
             <p>
-              Compares compute instances across providers (**AWS EC2 vs Azure VM vs GCP Compute Engine**). Filter by operating system, CPU
-              vendor/architecture, GPU support, and instance category (General Purpose, Compute
-              Optimized, Memory Optimized, etc.). All prices are hourly, on-demand, Linux-based
-              unless otherwise noted.
+              Compares compute instances across providers (EC2, Azure VM, Compute Engine). Filter by operating system, CPU vendor/architecture, GPU support, and instance category (General Purpose, Compute Optimized, Memory Optimized, etc.). Prices are hourly, on-demand, Linux-based unless noted.
             </p>
 
             <h3 id="time-series-databases">⏱️ Time-Series Databases</h3>
             <p>
-              Specialized databases for time-stamped, sequential data (metrics, sensors, financial ticks, logs). Compare **AWS Timestream vs Azure Data Explorer vs GCP Bigtable** with pricing models for writes, reads, and storage tiers. Optimized for real-time analytics and retention policies.
+              Specialized databases for time-stamped, sequential data (metrics, sensors, financial ticks, logs). Compare Timestream, Azure Data Explorer, and Bigtable pricing for writes, reads, and storage tiers.
             </p>
 
             <h3 id="graph-databases">🔗 Graph Databases</h3>
             <p>
-              Databases optimized for relationships, networks, and complex queries. Compare **AWS Neptune vs Azure Cosmos DB (Gremlin) vs Oracle Graph** for social graphs, recommendation engines, identity graphs, and knowledge bases. Pricing varies by instance size and storage.
+              Databases optimized for relationships, networks, and complex queries. Compare Neptune, Cosmos DB (Gremlin), and Oracle Graph for social graphs, recommendation engines, and knowledge bases.
             </p>
 
             <h3 id="search-engines">🔍 Search Engines</h3>
             <p>
-              Full-text search, analytics, and log aggregation. Compare **AWS OpenSearch vs Azure Cognitive Search vs GCP Cloud Search** for indexing, querying, and scaling distributed search clusters across providers.
+              Full-text search, analytics, and log aggregation. Compare OpenSearch, Azure Cognitive Search, and GCP Cloud Search for indexing, querying, and scaling distributed clusters.
             </p>
 
             <h3 id="certificate-management">🔐 Certificate Management</h3>
             <p>
-              Public and private certificate authorities, SSL/TLS management, and lifecycle automation. Compare **AWS Certificate Manager vs Azure Key Vault vs GCP Certificate Authority** for managed certificates, private CAs, and auto-renewal features.
+              Public and private certificate authorities, SSL/TLS management, and lifecycle automation. Compare AWS Certificate Manager, Azure Key Vault, and GCP Certificate Authority for managed certificates, private CAs, and auto-renewal.
             </p>
 
             <h3 id="inference-endpoints">🤖 Inference Endpoints</h3>
             <p>
-              Model serving platforms for deploying trained ML models to production. Compare **AWS SageMaker vs Azure Machine Learning vs GCP Vertex AI** for real-time and batch inference, with pricing for compute instances (CPU/GPU) and storage. Separate from model training.
+              Model serving platforms for deploying trained ML models to production. Compare SageMaker, Azure Machine Learning, and Vertex AI for real-time and batch inference pricing (CPU/GPU compute and storage), separate from model training.
             </p>
 
             <BackToTop />
@@ -454,7 +448,7 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="workloads">Workloads</CopyHeading>
             <p>
-              The <Link href="/workloads"><EXTRA_LINK_ICONS.workloads size={16} className="inline align-text-bottom mr-1" />Workloads</Link> page lets you price end-to-end cloud architectures instead of just individual components. We've defined common application patterns and their component requirements. By adjusting scale parameters, the tool automatically calculates necessary resource specs and queries the cheapest matching instances across all providers.
+              The <Link href="/workloads"><EXTRA_LINK_ICONS.workloads size={16} className="inline align-text-bottom mr-1" />Workloads</Link> page prices end-to-end cloud architectures instead of individual components. Adjust scale parameters and the tool calculates resource specs and queries the cheapest matching instances across providers.
             </p>
             <p><strong>Available workloads:</strong></p>
             <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1.5rem' }}>
@@ -509,7 +503,7 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="use-cases">Use Cases & Step-by-Step Comparisons</CopyHeading>
             <p>
-              The following real-world scenarios demonstrate how to use comparecloudcosts.com to compare pricing across multiple product categories, apply filters, and export results for decision-making.
+              These real-world scenarios show how to compare pricing across multiple product categories, apply filters, and export results for decision-making.
             </p>
 
             <h3 id="use-case-1">Use Case 1: Evaluating Database + Compute for a Scaling Startup</h3>
@@ -644,10 +638,10 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="datacenters">Datacenters</CopyHeading>
             <p>
-              The <strong>Datacenters</strong> page is a dedicated infrastructure reference that lets you compare the global physical footprint of each cloud provider side by side — independently of pricing. It is designed to help teams evaluate geographic reach, redundancy posture, and regulatory coverage before committing to a cloud strategy.
+              The <strong>Datacenters</strong> page compares the global physical footprint of each cloud provider side by side, independent of pricing, to help teams evaluate geographic reach, redundancy, and regulatory coverage.
             </p>
             <p>
-              Unlike the pricing categories, this page does not connect to a live database. All data is sourced manually from each provider's official public infrastructure pages and verified periodically.
+              Unlike the pricing categories, this page does not connect to a live database; data is sourced manually from each provider's official infrastructure pages and verified periodically.
             </p>
 
             <h3 id="datacenter-data-sources">Data sources</h3>
@@ -688,13 +682,13 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="certifications">Certifications &amp; Regulations</CopyHeading>
             <p>
-              The <Link href="/certifications"><EXTRA_LINK_ICONS.certifications size={16} className="inline align-text-bottom mr-1" />Certifications &amp; Regulations</Link> page compares the compliance posture of each cloud provider side by side — which security, privacy, industry, and government certifications they hold — independently of pricing. It covers standards such as ISO&nbsp;27001/27017/27018/27701/22301/20000-1/42001, SOC&nbsp;1/2/3, PCI&nbsp;DSS, HIPAA, FedRAMP High/Moderate, CSA&nbsp;STAR, FIPS&nbsp;140-2, HITRUST, NIST&nbsp;800-171, GDPR, IRAP, C5, ENS, MTCS, and ISMAP.
+              The <Link href="/certifications"><EXTRA_LINK_ICONS.certifications size={16} className="inline align-text-bottom mr-1" />Certifications &amp; Regulations</Link> page compares each provider's security, privacy, industry, and government certifications side by side, independent of pricing. It covers standards such as ISO&nbsp;27001/27017/27018/27701/22301/20000-1/42001, SOC&nbsp;1/2/3, PCI&nbsp;DSS, HIPAA, FedRAMP High/Moderate, CSA&nbsp;STAR, FIPS&nbsp;140-2, HITRUST, NIST&nbsp;800-171, GDPR, IRAP, C5, ENS, MTCS, and ISMAP.
             </p>
             <p>
-              Like the Datacenters page, this data is curated manually from each provider's official compliance documentation rather than a live database — a missing certification means "not found in that provider's published docs at verification time," not necessarily that it is unavailable.
+              Like the Datacenters page, this data is curated manually from each provider's official compliance documentation rather than a live database. A missing certification means it wasn't found in that provider's published docs at verification time, not that it's unavailable.
             </p>
             <p>
-              Importantly, the page tracks a <strong>curated set of widely-recognized standards</strong> chosen so providers can be compared side by side — it is <strong>not</strong> an exhaustive list. The largest clouds hold far more (AWS advertises 140+ certifications and attestations, Azure 100+). For a provider's complete, authoritative catalog, use its <strong>trust center</strong> — every provider's is linked at the bottom of the Certifications page.
+              The page tracks a <strong>curated set of widely-recognized standards</strong> for side-by-side comparison; it is <strong>not</strong> exhaustive. The largest clouds hold far more (AWS advertises 140+ certifications, Azure 100+). For a provider's complete catalog, use its <strong>trust center</strong>, linked at the bottom of the Certifications page.
             </p>
 
             <h3 id="certifications-filters">Filters</h3>
@@ -755,12 +749,12 @@ const DocsPage: React.FC = () => {
               pricing on the official provider calculator before making purchasing decisions.
             </p>
             <p>
-              <strong>Comprehensive Coverage & Missing Services:</strong> This application is not meant to be a comprehensive catalog of all offerings across all cloud providers. We consolidate data in good faith based on publicly available pricing pages and APIs, but we may inadvertently omit certain services, instance types, or product categories that cloud providers currently offer. If you represent a cloud provider or are a user who detects that a specific service or offering is missing or misrepresented, we welcome your feedback. Please reach out to us so we can continuously improve the accuracy and completeness of our platform.
+              <strong>Comprehensive Coverage & Missing Services:</strong> This is not a comprehensive catalog of every provider offering. We consolidate data in good faith from public pricing pages and APIs, but may omit some services, instance types, or categories. If you spot something missing or misrepresented, reach out and we'll fix it.
             </p>
             <p>
-              The data on this platform serves as a <strong>directional indicator</strong> — a sample of popular
-              instances designed to highlight architectural cost differences across clouds — not a substitute for
-              an official quote. Always verify your final estimates using the official calculators or pricing pages:
+              The data here is a <strong>directional indicator</strong> — a sample of popular
+              instances to highlight architectural cost differences — not a substitute for
+              an official quote. Verify final estimates with the official calculators or pricing pages:
             </p>
             <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
               <li style={{ marginBottom: '0.4rem' }}><a href="https://calculator.aws/" target="_blank" rel="noopener noreferrer">AWS Pricing Calculator</a></li>
@@ -862,13 +856,12 @@ const DocsPage: React.FC = () => {
           <div className="docs-section">
             <CopyHeading id="advertising">Advertising with Us</CopyHeading>
             <p>
-              Compare Cloud Costs puts your brand in front of engineers and architects who are actively
-              comparing cloud pricing — the moment they're deciding what to buy.
+              Compare Cloud Costs puts your brand in front of engineers and architects actively
+              comparing cloud pricing, at the moment they're deciding what to buy.
             </p>
             <p>
-              Sponsorship slots are available on individual workload pages. Additionally, your brand is displayed across the
-              <Link href="/datacenters"> Datacenters</Link> page, the <Link href="/workloads">Workloads</Link> catalog, and inside the CSV file when a user downloads the workload comparison from a page your company sponsors. As a fifth place of brand visibility, all active sponsors are featured on our dedicated <Link href="/sponsors">Sponsors</Link> page.
-              This inclusion gives you a dedicated card featuring your company logo, a brief description (up to 500 characters), and a direct link to your sponsored page or product.
+              Sponsorship slots are available on individual workload pages, and your brand also appears on the
+              <Link href="/datacenters"> Datacenters</Link> page, the <Link href="/workloads">Workloads</Link> catalog, inside the CSV export for your sponsored page, and on our <Link href="/sponsors">Sponsors</Link> page. Each placement includes your logo, a short description (up to 500 characters), and a link to your page or product.
             </p>
             <h3 id="advertising-specs">Image Specs</h3>
             <p>
@@ -881,60 +874,54 @@ const DocsPage: React.FC = () => {
               <li style={{ marginBottom: '0.4rem' }}>Images render responsively (scaled to the container width, aspect ratio preserved), so avoid placing critical text near the edges.</li>
             </ul>
             <p>
-              For reference, this is close to LinkedIn's Company Page cover image ratio (1128 × 191px,
-              ~5.9:1) — if you already have a LinkedIn banner asset, it will likely need only minor
-              cropping to fit.
+              This is close to LinkedIn's Company Page cover image ratio (1128 × 191px, ~5.9:1), so an
+              existing LinkedIn banner will likely need only minor cropping.
             </p>
             <blockquote>
-              <strong>💡 Tip:</strong> Your banner can include a call to action tailored to your goal —
-              whether that's driving traffic to a landing page or to your company's main site. You can
-              also swap your banner for a new one at least once a month; just send us the replacement
-              asset and we'll have it live within 3 business days.
+              <strong>💡 Tip:</strong> Your banner can include a call to action toward a landing page or
+              your main site. You can swap it for a new one at least once a month; send us the
+              replacement asset and we'll have it live within 3 business days.
             </blockquote>
             <h3 id="advertising-tracking">Link Tracking</h3>
             <p>
-              Please note that we do not offer native click-through rate (CTR) tracking or analytics on our end.
-              Sponsors are responsible for providing their own trackable destination links (e.g., using UTM parameters,
-              Bitly, or other custom redirect services) to measure the performance of their campaigns.
+              We do not offer native click-through rate (CTR) tracking. Sponsors provide their own trackable
+              destination links (UTM parameters, Bitly, or other redirect services) to measure campaign performance.
             </p>
             <h3 id="advertising-exclusivity">Sponsorship Exclusivity</h3>
             <p>
-              We want to ensure that our sponsors get high-quality visibility without competing offerings cluttering their space.
-              To achieve this, we apply different levels of exclusivity depending on the page you choose to sponsor:
+              We apply different levels of exclusivity depending on the page you sponsor, so your visibility
+              isn't cluttered by competing offerings:
             </p>
             <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1rem' }}>
               <li style={{ marginBottom: '0.4rem' }}>
-                <strong>Individual Workload Pages (Exclusive):</strong> If you sponsor a specific workload (e.g., a three-tier web application), that space is <strong>exclusive</strong> to you. We will not allow a direct competitor (e.g., another consulting company offering the same services) to advertise on that same page.
+                <strong>Individual Workload Pages (Exclusive):</strong> Sponsoring a specific workload (e.g., a three-tier web application) makes that space <strong>exclusive</strong> to you; we won't allow a direct competitor on the same page.
               </li>
               <li style={{ marginBottom: '0.4rem' }}>
-                <strong>Global Pages (Shared / Carousel):</strong> On high-traffic aggregator pages such as the main <strong>Workloads</strong> page, the <strong>Compliance</strong> page, and the <strong>Datacenters</strong> page, sponsor banners are displayed in a rotating carousel. These spaces are non-exclusive and may feature multiple sponsors.
+                <strong>Global Pages (Shared / Carousel):</strong> On high-traffic pages like <strong>Workloads</strong>, <strong>Compliance</strong>, and <strong>Datacenters</strong>, sponsor banners rotate in a carousel and may feature multiple sponsors.
               </li>
             </ul>
 
             <h3 id="advertising-csv-downloads">Sponsorship in CSV Downloads</h3>
             <p>
-              When users download a pricing comparison CSV from a workload page, the file includes a header section with the workload name, generation timestamp, and pricing model used. If the workload has an active sponsor, the CSV header displays the sponsor company name and a link to learn more. If the workload is unsponsored, the header includes information about sponsorship opportunities and how to get involved.
+              CSV downloads from a workload page include a header with the workload name, timestamp, and pricing model. Sponsored workloads show the sponsor's name and a link; unsponsored ones show sponsorship info instead.
             </p>
             <p>
-              This ensures that sponsors receive brand exposure at download time — reaching users who are actively exporting and analyzing cloud cost data — while unsponsored workloads serve as a soft call-to-action for potential sponsors.
+              This gives sponsors brand exposure at download time, while unsponsored workloads serve as a soft call-to-action for potential sponsors.
             </p>
 
             <h3 id="advertising-analytics">Site Analytics & Tracking</h3>
             <p>
               We use <a href="https://clarity.microsoft.com/" target="_blank" rel="noopener noreferrer">Microsoft Clarity</a> to track
-              how users interact with the site — including page views, engagement metrics, click patterns, and device/browser data.
-              This helps us understand audience behavior and measure the effectiveness of sponsor placements.
+              page views, engagement, click patterns, and device/browser data, helping us understand audience behavior and sponsor placement performance.
               All analytics are anonymized and aggregated; individual user data is never shared with sponsors.
             </p>
             <p>
-              When evaluating a sponsorship opportunity, you can review our <Link href="/sponsors">Sponsors</Link> page,
-              which features high-level audience metrics including traffic volume, user roles, geographic distribution,
-              engagement depth, and platform breakdown — allowing you to make an informed decision about sponsorship ROI.
+              Our <Link href="/sponsors">Sponsors</Link> page shows high-level audience metrics, traffic volume, user roles, geographic distribution, engagement depth, and platform breakdown to help you evaluate sponsorship ROI.
             </p>
 
             <h3 id="advertising-prices">Prices</h3>
             <p>
-              We offer flexible pricing options designed to fit different goals and budgets. Choose the tier that best suits your needs:
+              Choose the tier that fits your goals and budget:
             </p>
             <ul style={{ paddingLeft: '1.25rem', margin: '0.5rem 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <li>

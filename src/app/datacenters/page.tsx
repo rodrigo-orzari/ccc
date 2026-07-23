@@ -565,8 +565,8 @@ export default function DatacentersPage() {
         <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8">
           <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
             <strong>Disclaimer:</strong>{' '}
-            Infrastructure data may be delayed, incomplete, or imprecise. The data on this platform serves as a directional indicator, and comparecloudcosts.com makes no warranties regarding accuracy. Please consult the{' '}
-            <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+            Infrastructure data may be delayed, incomplete, or imprecise, and comparecloudcosts.com makes no accuracy warranties. Visit our{' '}
+            <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for data coverage details.
           </blockquote>
         </div>
       </div>

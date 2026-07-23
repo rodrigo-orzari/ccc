@@ -136,10 +136,10 @@ export default function CertificationsPage() {
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2 text-[var(--text)]">Certifications &amp; Regulations</h1>
             <p className="text-[#737373] dark:text-[#a3a3a3] text-sm leading-relaxed">
-              Compare <strong>security, privacy, and compliance standards</strong> across cloud providers, databases, and AI vendors. 
-              Use the filters to align configurations, verify regulatory certifications, and access official trust centers. Curious where these providers actually run? Explore{' '}
+              Compare <strong>security, privacy, and compliance standards</strong> across cloud providers, databases, and AI vendors.
+              Filter to verify certifications and reach official trust centers. Curious where these providers actually run? Explore{' '}
               <Link href="/datacenters" className="text-[#2563eb] dark:text-[#818cf8] hover:underline font-semibold">Datacenters</Link>{' '}
-              for each cloud's global region and infrastructure footprint.
+              for each cloud's global footprint.
             </p>
           </div>
 
@@ -398,11 +398,9 @@ export default function CertificationsPage() {
               Sources
             </CopyHeading>
             <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
-              The links below are each provider&apos;s official compliance hub / trust center — the complete,
-              authoritative list of certifications, which for the largest clouds runs to 100+ (AWS alone
-              advertises 140+). We track a curated, comparable subset above; standard names link to a
-              definition of each. This information may not reflect real-time changes and is not legal or
-              compliance advice — verify directly with the provider before relying on it.
+              The links below go to each provider&apos;s official trust center, the authoritative certification
+              list (100+ for the largest clouds; AWS alone advertises 140+). We track a curated, comparable
+              subset above. This is not legal or compliance advice; verify directly with the provider.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
               {COMPLIANCE_PROVIDERS.map((p) => (
@@ -441,7 +439,7 @@ export default function CertificationsPage() {
         <div className="w-full max-w-[1600px] mx-auto px-8 lg:px-10 pb-8">
           <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
             <strong>Disclaimer:</strong>{' '}
-            This compliance standards matrix is curated for comparison purposes. Mappings reflect each provider&apos;s publicly documented status at the last verification date. It does not constitute legal or compliance advice. Always consult the provider&apos;s official trust center and legal agreements for authoritative compliance audits and reports. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness.
+            This compliance matrix is curated for comparison and reflects each provider&apos;s publicly documented status as of the last verification date. It is not legal or compliance advice; check each provider&apos;s trust center and legal agreements for authoritative audits. Visit our <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for data coverage details.
           </blockquote>
         </div>
       </div>

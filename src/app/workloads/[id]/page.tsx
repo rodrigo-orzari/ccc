@@ -1074,7 +1074,7 @@ export default function WorkloadDetails() {
       <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 pb-8">
         <blockquote className="border-l-4 border-[#e5e5e5] dark:border-[#262626] pl-4 my-6 text-[12px] text-[#737373] dark:text-[#a3a3a3] italic">
           <strong>Disclaimer:</strong>{' '}
-          The price results are conceptual and intended for comparison purposes only. The algorithm auto-selects the cheapest matching general-purpose infrastructure components available in our database that satisfy the raw memory and compute minimums derived from your scale parameters. It does not account for licensing, egress fees, custom integrations, or platform limitations. Consult official provider documentation for workload sizing. Please consult the <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for more information regarding data completeness and coverage.
+          These price results are conceptual, for comparison only. The algorithm auto-selects the cheapest matching infrastructure that meets the memory and compute minimums from your scale parameters, without accounting for licensing, egress fees, custom integrations, or platform limitations. Check official provider documentation for real-world sizing. Visit our <Link href="/terms" className="underline hover:text-[#171717] dark:hover:text-[#e5e7eb]">Terms of Use</Link> for data coverage details.
         </blockquote>
       </div>
 
