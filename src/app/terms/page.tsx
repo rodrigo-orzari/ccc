@@ -211,12 +211,10 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             width: 280px;
             border-right: 1px solid var(--border-color);
             padding: 2rem 1.5rem;
-            position: sticky;
-            top: 0;
-            align-self: flex-start;
-            height: 100vh;
+            height: 100%;
             overflow-y: auto;
             background-color: var(--sidebar-bg);
+            flex-shrink: 0;
           }
 
           .sidebar a {

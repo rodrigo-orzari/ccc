@@ -86,8 +86,18 @@ const AboutPage: React.FC = () => {
 
           .about-wrapper {
             display: flex;
-            min-height: 100vh;
+            height: 100vh;
+            min-height: 100dvh;
+            max-height: 100vh;
+            overflow: hidden;
             background-color: var(--bg-color);
+          }
+          @media (max-width: 1024px) {
+            .about-wrapper {
+              height: auto;
+              max-height: none;
+              overflow: visible;
+            }
           }
 
           .about-topnav {
@@ -108,12 +118,10 @@ const AboutPage: React.FC = () => {
             width: 280px;
             border-right: 1px solid var(--border-color);
             padding: 2rem 1.5rem;
-            position: sticky;
-            top: 0;
-            align-self: flex-start;
-            height: 100vh;
+            height: 100%;
             overflow-y: auto;
             background-color: var(--sidebar-bg);
+            flex-shrink: 0;
           }
 
           .sidebar a {
@@ -229,7 +237,7 @@ const AboutPage: React.FC = () => {
         `}
       </style>
 
-      <div className="about-wrapper flex-col lg:flex-row lg:overflow-hidden">
+      <div className="about-wrapper flex-col lg:flex-row">
         <Sidebar activeProductType={'about' as any} />
           <aside className="sidebar">
             <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
@@ -246,7 +254,7 @@ const AboutPage: React.FC = () => {
             </nav>
           </aside>
 
-        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col" id="top">
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col h-full" id="top">
           <main className="main-content">
             <h1>About Compare Cloud Costs</h1>
             <div className="prose max-w-none">

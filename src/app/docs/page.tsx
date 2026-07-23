@@ -77,6 +77,19 @@ const DocsPage: React.FC = () => {
             --divider-color: #1e1e38;
           }
         }
+        .docs-wrapper {
+          height: 100vh;
+          min-height: 100dvh;
+          max-height: 100vh;
+          overflow: hidden;
+        }
+        @media (max-width: 1024px) {
+          .docs-wrapper {
+            height: auto;
+            max-height: none;
+            overflow: visible;
+          }
+        }
         .docs-topnav {
           display: flex;
           align-items: center;
@@ -94,10 +107,7 @@ const DocsPage: React.FC = () => {
           width: 260px;
           border-right: 1px solid var(--border-color);
           padding: 2rem 1.5rem;
-          position: sticky;
-          top: 0;
-          align-self: flex-start;
-          height: 100vh;
+          height: 100%;
           overflow-y: auto;
           background-color: var(--sidebar-bg);
           flex-shrink: 0;
@@ -242,7 +252,7 @@ const DocsPage: React.FC = () => {
         }
       `}</style>
 
-      <div className="docs-wrapper flex-col lg:flex-row lg:overflow-hidden" style={{ display: 'flex', minHeight: '100vh' }}>
+      <div className="docs-wrapper flex flex-col lg:flex-row">
         <Sidebar activeProductType={'docs' as any} />
         <aside className="docs-sidebar">
             <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
@@ -323,7 +333,7 @@ const DocsPage: React.FC = () => {
           </nav>
         </aside>
 
-        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col" id="top">
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col h-full" id="top">
         <main className="docs-main">
           <h1>Documentation</h1>
           <p className="docs-meta">Last updated: June 2026.</p>
