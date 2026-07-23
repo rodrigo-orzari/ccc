@@ -55,19 +55,14 @@ const PrivacyPolicyPage: React.FC = () => {
           z-index: 50;
           flex-shrink: 0;
         }
-        .privacy-body {
-          display: flex;
-          flex: 1;
-          background-color: var(--bg-color);
-          color: var(--text-color);
-        }
         .privacy-sidebar {
           width: 280px;
           border-right: 1px solid var(--border-color);
           padding: 2rem 1.5rem;
-          position: fixed;
+          position: sticky;
           top: 0;
-          height: calc(100vh - 48px);
+          align-self: flex-start;
+          height: 100vh;
           overflow-y: auto;
           background-color: var(--sidebar-bg);
           flex-shrink: 0;
@@ -82,12 +77,12 @@ const PrivacyPolicyPage: React.FC = () => {
         }
         .privacy-sidebar a:hover { color: var(--link-color); }
         .privacy-main {
-          margin-left: 280px;
           flex: 1;
           padding: 3rem 4rem 5rem;
           max-width: 1200px;
           line-height: 1.7;
           font-size: 0.9375rem;
+          color: var(--text-color);
         }
         .privacy-main h1 {
           font-size: 2.25rem;
@@ -139,10 +134,8 @@ const PrivacyPolicyPage: React.FC = () => {
 
       <div className="privacy-wrapper flex flex-col lg:flex-row h-screen min-h-[100dvh] lg:h-screen lg:overflow-hidden">
         <Sidebar activeProductType={"" as any} />
-        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col h-full">
-        <div className="privacy-body" id="privacy-policy">
-          {/* Sidebar */}
-          <aside className="privacy-sidebar">
+        {/* Sidebar */}
+        <aside className="privacy-sidebar">
 
             <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
               Content
@@ -163,6 +156,7 @@ const PrivacyPolicyPage: React.FC = () => {
             </nav>
           </aside>
 
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col h-full" id="privacy-policy">
           {/* Main content */}
           <main className="privacy-main">
             <h1>Privacy Policy</h1>
@@ -270,7 +264,6 @@ const PrivacyPolicyPage: React.FC = () => {
               Compare Cloud Costs is operated by Co-Sell Plus LLC. © 2026 Co-Sell Plus LLC. All rights reserved.
             </p>
           </main>
-        </div>
 
         <Footer />
         </div>

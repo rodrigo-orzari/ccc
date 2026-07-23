@@ -193,14 +193,6 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             }
           }
 
-          .terms-container {
-            display: flex;
-            flex: 1;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-          }
-
           .terms-topnav {
             display: flex;
             align-items: center;
@@ -219,9 +211,10 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             width: 280px;
             border-right: 1px solid var(--border-color);
             padding: 2rem 1.5rem;
-            position: fixed;
+            position: sticky;
             top: 0;
-            height: calc(100vh - 48px);
+            align-self: flex-start;
+            height: 100vh;
             overflow-y: auto;
             background-color: var(--sidebar-bg);
           }
@@ -240,10 +233,10 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
           }
 
           .main-content {
-            margin-left: 280px;
             flex: 1;
             padding: 3rem 4rem 5rem;
             max-width: 1200px;
+            color: var(--text-color);
           }
 
           .prose h2, .prose h3 {
@@ -296,8 +289,6 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
 
       <div className="terms-wrapper flex flex-col lg:flex-row h-screen min-h-[100dvh] lg:h-screen lg:overflow-hidden">
         <Sidebar activeProductType={"" as any} />
-        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col h-full">
-      <div className="terms-container" id="terms-of-use">
         <aside className="sidebar">
 
           <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
@@ -330,6 +321,7 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
           </nav>
         </aside>
 
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col h-full" id="terms-of-use">
         <main className="main-content">
           <h1 style={{ fontSize: '2.25rem', fontWeight: '800', margin: '0 0 0.5rem', letterSpacing: '-0.02em' }}>
             Terms of Use
@@ -346,7 +338,6 @@ For questions about these Terms of Use, please email us at [hello@comparecloudco
             </ReactMarkdown>
           </div>
         </main>
-      </div>
       <Footer />
       </div>
       </div>

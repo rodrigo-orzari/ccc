@@ -90,14 +90,6 @@ const AboutPage: React.FC = () => {
             background-color: var(--bg-color);
           }
 
-          .about-container {
-            display: flex;
-            flex: 1;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s, color 0.3s;
-          }
-
           .about-topnav {
             display: flex;
             align-items: center;
@@ -239,8 +231,6 @@ const AboutPage: React.FC = () => {
 
       <div className="about-wrapper flex-col lg:flex-row lg:overflow-hidden">
         <Sidebar activeProductType={'about' as any} />
-        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
-        <div className="about-container" id="top">
           <aside className="sidebar">
             <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
               Content
@@ -256,6 +246,7 @@ const AboutPage: React.FC = () => {
             </nav>
           </aside>
 
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col" id="top">
           <main className="main-content">
             <h1>About Compare Cloud Costs</h1>
             <div className="prose max-w-none">
@@ -431,7 +422,6 @@ const AboutPage: React.FC = () => {
 
             </div>
           </main>
-        </div>
         <Footer />
         </div>
       </div>

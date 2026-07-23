@@ -126,11 +126,11 @@ export const CERTIFICATIONS: Certification[] = [
   },
   {
     id: 'fips-140-2',
-    name: 'FIPS 140-2',
+    name: 'FIPS 140-3',
     category: 'Security',
     scope: 'N. America',
-    description: 'US government standard for cryptographic module validation.',
-    definitionUrl: 'https://en.wikipedia.org/wiki/FIPS_140-2',
+    description: 'US/Canadian government standard for cryptographic module validation (successor to FIPS 140-2, which the CMVP retires to historical status on Sept 21, 2026).',
+    definitionUrl: 'https://en.wikipedia.org/wiki/FIPS_140-3',
   },
   {
     id: 'hitrust',

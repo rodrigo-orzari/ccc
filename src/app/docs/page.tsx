@@ -77,13 +77,6 @@ const DocsPage: React.FC = () => {
             --divider-color: #1e1e38;
           }
         }
-        .docs-container {
-          display: flex;
-          flex: 1;
-          background-color: var(--bg-color);
-          color: var(--text-color);
-          transition: background-color 0.3s, color 0.3s;
-        }
         .docs-topnav {
           display: flex;
           align-items: center;
@@ -251,8 +244,6 @@ const DocsPage: React.FC = () => {
 
       <div className="docs-wrapper flex-col lg:flex-row lg:overflow-hidden" style={{ display: 'flex', minHeight: '100vh' }}>
         <Sidebar activeProductType={'docs' as any} />
-        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col">
-      <div className="docs-container" id="top" style={{ flex: 1 }}>
         <aside className="docs-sidebar">
             <h4 style={{ fontSize: '0.6875rem', fontWeight: 700, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: '0.08em', lineHeight: 1, margin: 0, marginBottom: '1rem' }}>
               Content
@@ -332,6 +323,7 @@ const DocsPage: React.FC = () => {
           </nav>
         </aside>
 
+        <div className="flex-1 min-w-0 overflow-y-auto flex flex-col" id="top">
         <main className="docs-main">
           <h1>Documentation</h1>
           <p className="docs-meta">Last updated: June 2026.</p>
@@ -1464,8 +1456,7 @@ const DocsPage: React.FC = () => {
           </div>
 
         </main>
-      </div>
-      <Footer />
+        <Footer />
         </div>
       </div>
     </>

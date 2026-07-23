@@ -6,6 +6,13 @@ All notable changes to Compare Cloud Costs are documented here. This changelog s
 
 ## [Unreleased]
 
+### Data
+- **Certifications page — monthly refresh (2026-07-23):** re-verified AWS, Azure, and Google Cloud holdings against their official compliance pages (`src/config/certifications.ts`)
+  - **Updated:** `FIPS 140-2` renamed to **`FIPS 140-3`** (id unchanged) across the shared cert definition — AWS's compliance page (aws.amazon.com/compliance/fips/), Microsoft's Key Vault/Managed HSM docs, and Google's BoringCrypto/FIPS docs all confirm the industry-wide move to 140-3; NIST retires all FIPS 140-2 certificates to historical status on Sept 21, 2026. Description and definition link updated accordingly.
+  - **No additions or removals** to AWS's, Azure's, or Google's certification holdings — spot-checked AWS's full compliance program list directly (aws.amazon.com/compliance/programs/) and cross-checked Azure/Google via search against their compliance offering docs; every cert currently marked as held remains supported.
+  - **Unverifiable this run (left as-is, flagged for next refresh):** AWS's `NIST SP 800-171` — AWS's current "Alignment/Framework" listing shows NIST 800-53, 800-172, 800-162, 800-34, and CSF/RMF, but doesn't explicitly name 800-171. Not removed since alignment-only listings are often incomplete on the marketing page vs. AWS's compliance mapping docs; worth a direct check against AWS Artifact next time.
+  - `lastVerified` dates for AWS, Azure, and Google bumped to `2026-07-23` (already reflected in a same-day local commit prior to this run).
+
 ### UI
 - **Removed "Global" as a selectable Geography option:** `buildPricingFilters()` in `src/lib/api-utils.ts` already force-includes `global` rows alongside any region filter (many services — data transfer, WAF, etc. — aren't tied to a region), so the checkbox never actually excluded Global rows when unchecked — it only let you *isolate* them via double-click. Excluded `'Global'` from all three geography aggregations in `/api/filters/route.ts` (general, security, analytics) and fixed the Security category's loading-state fallback (`FilterSidebar.tsx`) which still hardcoded `['Global', 'N. America']`. Query results are unchanged — Global rows still show exactly as before; there's just one fewer non-functional chip per category.
 
